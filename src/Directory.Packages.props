@@ -1,0 +1,14 @@
+<Project>
+    <PropertyGroup>
+      <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+      <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageVersion Include="Bluesky.Net" Version="0.4.0-alpha" />
+      <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+      <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+      <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
+      <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+      <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+    </ItemGroup>
+</Project>
