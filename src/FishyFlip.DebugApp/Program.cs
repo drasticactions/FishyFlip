@@ -5,13 +5,12 @@
 using System.Net.NetworkInformation;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using FishyFlip;
 using Microsoft.Extensions.DependencyInjection;
 
 Console.WriteLine("Hello, World!");
 
-var serviceCollection = new ServiceCollection();
-
-Ioc.Default.ConfigureServices(serviceCollection
-       .BuildServiceProvider());
+var atProtocolBuilder = new ATProtocolBuilder();
+var atProtocol = atProtocolBuilder.Build();
 
 Console.WriteLine("Press any key to exit...");
