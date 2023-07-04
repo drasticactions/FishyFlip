@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\FishyFlip.Core\FishyFlip.Core.csproj" />
+		<ProjectReference Include="..\FishyFlip\FishyFlip.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
