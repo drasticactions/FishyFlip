@@ -1,10 +1,14 @@
-﻿using FishyFlip.Exceptions;
+﻿// <copyright file="DIDValidator.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using FishyFlip.Exceptions;
 
 namespace FishyFlip.Tools;
 

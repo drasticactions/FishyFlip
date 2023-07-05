@@ -1,5 +1,9 @@
-﻿using FishyFlip.Exceptions;
+﻿// <copyright file="HandleValidator.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 using System.Text.RegularExpressions;
+using FishyFlip.Exceptions;
 
 namespace FishyFlip.Tools;
 

@@ -1,4 +1,8 @@
-﻿using FishyFlip.Exceptions;
+﻿// <copyright file="AtIdentifier.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using FishyFlip.Exceptions;
 using FishyFlip.Tools;
 
 namespace FishyFlip.Models;
@@ -17,6 +21,11 @@ public class AtIdentifier
     public bool IsHandle { get; }
 
     public string Value { get; }
+
+    public override string ToString()
+    {
+        return this.Value;
+    }
 
     internal static AtIdentifier? Create(AtUri uri)
     {
@@ -44,10 +53,5 @@ public class AtIdentifier
         }
 
         return null;
-    }
-
-    public override string ToString()
-    {
-        return this.Value;
     }
 }

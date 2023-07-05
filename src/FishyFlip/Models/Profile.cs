@@ -15,5 +15,4 @@ public record Profile(string Did,
     int PostsCount,
     DateTime IndexedAt,
     Viewer Viewer,
-    IReadOnlyList<Label> Labels
-);
+    IReadOnlyList<Label> Labels);

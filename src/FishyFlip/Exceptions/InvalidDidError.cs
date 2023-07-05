@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="InvalidDidError.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +12,8 @@ namespace FishyFlip.Exceptions;
 
 public class InvalidDidError : Exception
 {
-    public InvalidDidError(string message) : base(message)
+    public InvalidDidError(string message)
+        : base(message)
     {
     }
 }

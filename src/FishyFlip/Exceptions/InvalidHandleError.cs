@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="InvalidHandleError.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +12,8 @@ namespace FishyFlip.Exceptions;
 
 public class InvalidHandleError : Exception
 {
-    public InvalidHandleError(string message) : base(message)
+    public InvalidHandleError(string message)
+        : base(message)
     {
     }
 }
