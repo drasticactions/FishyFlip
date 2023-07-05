@@ -1,3 +1,7 @@
+// <copyright file="AtDid.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 using FishyFlip.Exceptions;
 using FishyFlip.Tools;
 
@@ -11,6 +15,17 @@ public class AtDid
     }
 
     public string Handler { get; }
+
+    public static AtDid Create(string uri)
+    {
+        if (string.IsNullOrEmpty(uri))
+        {
+            throw new ArgumentNullException(nameof(uri));
+        }
+
+        DIDValidator.EnsureValidDid(uri);
+        return new AtDid(uri);
+    }
 
     public override string ToString()
     {

@@ -13,4 +13,4 @@ namespace FishyFlip.Models;
 public record Viewer(
     bool Muted,
     bool BlockedBy,
-    string Following);
+    AtUri Following);

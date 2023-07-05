@@ -38,6 +38,7 @@ internal static class Constants
         {
             internal const string GetAuthorFeed = "/xrpc/app.bsky.feed.getAuthorFeed";
             internal const string GetTimeline = "/xrpc/app.bsky.feed.getTimeline";
+            internal const string GetPostThread = "/xrpc/app.bsky.feed.getPostThread";
             internal const string GetPosts = "/xrpc/app.bsky.feed.getPosts";
             internal const string GetLikes = "/xrpc/app.bsky.feed.getLikes";
             internal const string GetRepostedBy = "/xrpc/app.bsky.feed.getRepostedBy";
@@ -54,6 +55,7 @@ internal static class Constants
     internal static class FeedType
     {
         internal const string Like = "app.bsky.feed.like";
+        internal const string Repost = "app.bsky.feed.repost";
         internal const string Post = "app.bsky.feed.post";
     }
 

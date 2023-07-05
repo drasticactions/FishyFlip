@@ -21,7 +21,7 @@ public class AtDidJsonConverter : JsonConverter<AtDid>
         try
         {
             var atUri = new AtUri(value);
-            return atUri.Identifier?.Did;
+            return atUri.Did;
         }
         catch (Exception)
         {

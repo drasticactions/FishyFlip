@@ -51,7 +51,7 @@ namespace FishyFlip
         public Session? Session => this.session;
 
         public void Dispose() => this.Dispose(true);
-        
+
         internal void UpdateBearerToken(Session session)
         {
             this.protocol.Client

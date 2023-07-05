@@ -21,7 +21,7 @@ public class AtHandlerJsonConverter : JsonConverter<AtHandler>
         try
         {
             var atUri = new AtUri(value);
-            return atUri.Identifier?.Handler;
+            return atUri.Handler;
         }
         catch (Exception)
         {

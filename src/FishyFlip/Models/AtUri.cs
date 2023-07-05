@@ -26,7 +26,8 @@ public class AtUri
         this.host = match.Groups[2].Value ?? string.Empty;
         this.Pathname = match.Groups[3].Value ?? string.Empty;
         this.Hash = match.Groups[5].Value ?? string.Empty;
-        this.Identifier = AtIdentifier.Create(this);
+        this.Did = AtDid.Create(this);
+        this.Handler = AtHandler.Create(this);
     }
 
     public string Hash { get; private set; }
@@ -39,7 +40,9 @@ public class AtUri
 
     public string Hostname => this.host;
 
-    public AtIdentifier? Identifier { get; }
+    public AtDid? Did { get; }
+
+    public AtHandler? Handler { get; }
 
     public string Collection => this.Pathname.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
 
@@ -47,7 +50,7 @@ public class AtUri
 
     public string Href => this.ToString();
 
-    public string ToString()
+    public override string ToString()
     {
         var buffer = new System.Text.StringBuilder();
         buffer.Append("at://");

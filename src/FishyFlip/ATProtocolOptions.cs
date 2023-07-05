@@ -25,6 +25,7 @@ public class ATProtocolOptions
                 new AtUriJsonConverter(),
                 new AtHandlerJsonConverter(),
                 new AtDidJsonConverter(),
+                new FacetJsonConverter(),
             },
         };
     }
@@ -36,7 +37,7 @@ public class ATProtocolOptions
     public string Url { get; internal set; } = "https://bsky.social";
 
     public string UserAgent { get; internal set; } = "FishyFlip";
-    
+
     public bool AutoRenewSession { get; internal set; } = false;
 
     public TimeSpan? SessionRefreshInterval { get; internal set; }
