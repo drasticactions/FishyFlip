@@ -40,13 +40,7 @@ public class ATProtocolBuilder
         this.atProtocolOptions.UserAgent = userAgent;
         return this;
     }
-
-    public ATProtocolBuilder EnableTrackSession(bool trackSession)
-    {
-        this.atProtocolOptions.TrackSession = trackSession;
-        return this;
-    }
-
+    
     public ATProtocolBuilder EnableAutoRenewSession(bool autoRenewSession)
     {
         this.atProtocolOptions.AutoRenewSession = autoRenewSession;

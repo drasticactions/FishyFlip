@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Timers;
 using FishyFlip.Models;
 using FishyFlip.Tools;
@@ -50,10 +51,20 @@ namespace FishyFlip
         public Session? Session => this.session;
 
         public void Dispose() => this.Dispose(true);
+        
+        internal void UpdateBearerToken(Session session)
+        {
+            this.protocol.Client
+                    .DefaultRequestHeaders
+                    .Authorization =
+                new AuthenticationHeaderValue("Bearer", session.AccessJwt);
+        }
 
         internal void SetSession(Session session)
         {
             this.session = session;
+            this.UpdateBearerToken(session);
+
             this.logger?.LogDebug($"Session set, {session.Did}");
             if (!this.protocol.Options.AutoRenewSession)
             {
@@ -125,11 +136,6 @@ namespace FishyFlip
                     .Switch(
                     s =>
                     {
-                        if (!this.protocol.Options.TrackSession)
-                        {
-                            return;
-                        }
-
                         this.SetSession(s);
                     },
                     e =>

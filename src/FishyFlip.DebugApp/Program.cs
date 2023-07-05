@@ -18,7 +18,7 @@ Console.WriteLine("Hello, ATProtocol!");
 var debugLog = new DebugLoggerProvider();
 var atProtocolBuilder = new ATProtocolBuilder()
     .EnableAutoRenewSession(true)
-    .WithSessionRefreshInterval(TimeSpan.FromSeconds(30))
+    // .WithSessionRefreshInterval(TimeSpan.FromSeconds(30))
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
 
@@ -44,7 +44,7 @@ await result.SwitchAsync(
         {
             case Menu.GetProfile:
                 // Get the logged in user's profile
-                Result<Profile?> profileResult = await atProtocol.GetProfileAsync(CancellationToken.None);
+                Result<Profile?> profileResult = await atProtocol.GetProfileAsync(session.Did!, CancellationToken.None);
 
                 profileResult.Switch(
                     profile =>
@@ -55,8 +55,9 @@ await result.SwitchAsync(
                     _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
                 break;
             case Menu.ResolveHandle:
-                // Resolve a user's DID
-                Result<HandleResolution?> resolvedHandle = await atProtocol.ResolveHandleAsync(session.Handle!.Identifier!, CancellationToken.None);
+                // Resolve a user's DID via their handle.
+                var handler = session.Handle!;
+                Result<HandleResolution?> resolvedHandle = await atProtocol.ResolveHandleAsync(handler, CancellationToken.None);
                 resolvedHandle.Switch(
                     handleResolved =>
                 {

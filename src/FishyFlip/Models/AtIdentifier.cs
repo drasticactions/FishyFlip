@@ -9,22 +9,23 @@ namespace FishyFlip.Models;
 
 public class AtIdentifier
 {
-    protected AtIdentifier(string value, bool isDid)
+    protected AtIdentifier(AtHandler handler)
     {
-        this.Value = value;
-        this.IsDid = isDid;
-        this.IsHandle = !isDid;
+        this.Handler = handler;
     }
 
-    public bool IsDid { get; }
+    protected AtIdentifier(AtDid did)
+    {
+        this.Did = did;
+    }
 
-    public bool IsHandle { get; }
+    public AtHandler? Handler { get; }
 
-    public string Value { get; }
+    public AtDid? Did { get; }
 
     public override string ToString()
     {
-        return this.Value;
+        return this.Handler?.ToString() ?? this.Did?.ToString() ?? string.Empty;
     }
 
     internal static AtIdentifier? Create(AtUri uri)
@@ -34,22 +35,15 @@ public class AtIdentifier
             throw new ArgumentNullException(nameof(uri));
         }
 
-        try
+        var handler = AtHandler.Create(uri);
+        var did = AtDid.Create(uri);
+        if (handler != null)
         {
-            HandleValidator.EnsureValidHandle(uri.Hostname);
-            return new AtIdentifier(uri.Hostname, false);
+            return new AtIdentifier(handler);
         }
-        catch (InvalidHandleError)
+        else if (did != null)
         {
-        }
-
-        try
-        {
-            DIDValidator.EnsureValidDid(uri.Hostname);
-            return new AtIdentifier(uri.Hostname, true);
-        }
-        catch (InvalidDidError)
-        {
+            return new AtIdentifier(did);
         }
 
         return null;

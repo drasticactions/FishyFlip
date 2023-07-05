@@ -24,6 +24,8 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
     }
 
+    internal HttpClient Client => this.client;
+
     public ATProtocolOptions Options => this.options;
 
     public async Task<Result<Session>> LoginAsync(Login command, CancellationToken cancellationToken)
@@ -36,11 +38,6 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 .Match(
                 s =>
                 {
-                    if (!this.options.TrackSession)
-                    {
-                        return result;
-                    }
-
                     this.OnUserLoggedIn(s);
                     return result;
                 },
@@ -61,52 +58,25 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 .Match(
                 s =>
                 {
-                    if (!this.Options.TrackSession)
-                    {
-                        return result;
-                    }
-
+                    this.sessionManager?.SetSession(s);
                     return result;
                 },
                 error => error!);
     }
 
-    public async Task<Result<HandleResolution?>> ResolveHandleAsync(string identifier, CancellationToken cancellationToken)
+    public async Task<Result<HandleResolution?>> ResolveHandleAsync(AtHandler handler, CancellationToken cancellationToken)
     {
-        var atIdentifier = new AtUri(identifier);
-        if (atIdentifier is null)
-        {
-            throw new ArgumentException($"Cannot resolve identifier: {identifier}");
-        }
-
-        return await this.ResolveHandleAsync(atIdentifier.Identifier!, cancellationToken);
-    }
-
-    public async Task<Result<HandleResolution?>> ResolveHandleAsync(AtIdentifier identifier, CancellationToken cancellationToken)
-    {
-        if (identifier.IsDid)
-        {
-            throw new ArgumentException("Cannot resolve a DID, must be a handle.");
-        }
-
-        string url = $"{Constants.Urls.AtProtoIdentity.ResolveHandle}?handle={identifier}";
+        string url = $"{Constants.Urls.AtProtoIdentity.ResolveHandle}?handle={handler}";
         return await this.client.Get<HandleResolution>(url, this.options.JsonSerializerOptions, cancellationToken);
     }
 
-    public Task<Result<Profile?>> GetProfileAsync(CancellationToken cancellationToken)
+    public Task<Result<Profile?>> GetProfileAsync(AtDid identifier, CancellationToken cancellationToken)
     {
-        var did = this.sessionManager?.Session?.Did;
-        if (did?.Identifier is null)
-        {
-            // TODO: Return proper error.
-            this.options.Logger?.LogError("GetProfileAsync: Missing Did for default user.");
-            return Task.FromResult(new Result<Profile?>(new Error(0, new ErrorDetail("Null Reference Exception", "Missing Did for default user."))));
-        }
-
-        return this.GetProfileAsync(did.Identifier, cancellationToken);
+        string url = $"{Constants.Urls.Bluesky.GetActorProfile}?actor={identifier}";
+        return this.client.Get<Profile>(url, this.options.JsonSerializerOptions, cancellationToken);
     }
 
-    public Task<Result<Profile?>> GetProfileAsync(AtIdentifier identifier, CancellationToken cancellationToken)
+    public Task<Result<Profile?>> GetProfileAsync(AtHandler identifier, CancellationToken cancellationToken)
     {
         string url = $"{Constants.Urls.Bluesky.GetActorProfile}?actor={identifier}";
         return this.client.Get<Profile>(url, this.options.JsonSerializerOptions, cancellationToken);
@@ -125,23 +95,8 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
         this.Dispose();
     }
 
-    private void UpdateBearerToken(Session session)
-    {
-        this.client
-                .DefaultRequestHeaders
-                .Authorization =
-            new AuthenticationHeaderValue("Bearer", session.AccessJwt);
-    }
-
     private void OnUserLoggedIn(Session session)
     {
-        this.UpdateBearerToken(session);
-
-        if (!this.Options.TrackSession)
-        {
-            return;
-        }
-
         if (this.sessionManager is null)
         {
             this.sessionManager = new SessionManager(this, session);
