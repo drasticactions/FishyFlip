@@ -10,5 +10,7 @@
       <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
       <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
       <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+      <PackageVersion Include="Sharprompt" Version="2.4.5" />
+      <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
     </ItemGroup>
 </Project>

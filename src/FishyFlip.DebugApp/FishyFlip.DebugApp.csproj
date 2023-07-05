@@ -8,7 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\FishyFlip.Core\FishyFlip.Core.csproj" />
 		<ProjectReference Include="..\FishyFlip\FishyFlip.csproj" />
 	</ItemGroup>
 
@@ -17,5 +16,6 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+		<PackageReference Include="Sharprompt" />
 	</ItemGroup>
 </Project>

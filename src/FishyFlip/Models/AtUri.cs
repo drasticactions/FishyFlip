@@ -8,14 +8,15 @@ namespace FishyFlip.Models;
 
 public class AtUri
 {
-    private static readonly Regex atpUriRegex = new Regex(
+    private static readonly Regex AtpUriRegex = new Regex(
         @"^(at:\/\/)?((?:did:[a-z0-9:%-]+)|(?:[a-z][a-z0-9.:-]*))(\/[^?#\s]*)?(\?[^#\s]+)?(#[^\s]+)?$",
         RegexOptions.IgnoreCase);
+
     private string host;
 
     public AtUri(string uri)
     {
-        Match match = atpUriRegex.Match(uri);
+        Match match = AtpUriRegex.Match(uri);
 
         if (match == null || !match.Success)
         {
@@ -25,6 +26,7 @@ public class AtUri
         this.host = match.Groups[2].Value ?? string.Empty;
         this.Pathname = match.Groups[3].Value ?? string.Empty;
         this.Hash = match.Groups[5].Value ?? string.Empty;
+        this.Identifier = AtIdentifier.Create(this);
     }
 
     public string Hash { get; private set; }
@@ -36,6 +38,8 @@ public class AtUri
     public string Origin => $"at://{this.host}";
 
     public string Hostname => this.host;
+
+    public AtIdentifier? Identifier { get; }
 
     public string Collection => this.Pathname.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
 
