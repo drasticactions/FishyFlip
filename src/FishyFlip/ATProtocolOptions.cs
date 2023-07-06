@@ -4,6 +4,7 @@
 
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using FishyFlip.Tools;
 using FishyFlip.Tools.Json;
 using Microsoft.Extensions.Logging;
@@ -20,6 +21,7 @@ public class ATProtocolOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
             Converters =
             {
                 new AtUriJsonConverter(),

@@ -37,6 +37,7 @@
 		<!-- Add default suffix if there is no InternalsVisibleTo or InternalsVisibleToSuffix defined -->
 		<ItemGroup Condition="@(InternalsVisibleToSuffix->Count()) == 0 AND @(InternalsVisibleTo->Count()) == 0">
 			<InternalsVisibleToSuffix Include=".Tests" />
+			<InternalsVisibleToSuffix Include=".DebugApp" />
 		</ItemGroup>
 
 		<!-- Handle InternalsVisibleTo -->

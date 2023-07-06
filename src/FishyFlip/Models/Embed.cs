@@ -31,3 +31,18 @@ public class EmbedImages
     
     public string FullSize { get; set; }
 }
+
+public class EmbedRecord
+{
+    [JsonPropertyName("$type")]
+    public string Type { get; set; }
+
+    public EmbedRecordImage[] Images { get; set; }
+}
+
+public class EmbedRecordImage
+{
+    public BlobRecord Image { get; set; }
+
+    public string Alt { get; set; } = string.Empty;
+}

@@ -54,13 +54,26 @@ await result.SwitchAsync(
                     var content = new StreamContent(file);
                     content.Headers.ContentType = new MediaTypeHeaderValue(MimeTypes.GetMimeType(fileLocation));
                     Result<UploadBlobResponse> uploadResult = await atProtocol.UploadBlobAsync(content, CancellationToken.None);
-                    uploadResult.Switch(
-                                               upload =>
-                                               {
+                    uploadResult.SwitchAsync(
+                    async upload =>
+                    {
                         Console.WriteLine("Upload successful");
                         Console.WriteLine(JsonSerializer.Serialize(upload, atProtocol.Options.JsonSerializerOptions));
+                        var postResponse = Prompt.Input<bool>("Post to feed?");
+                        if (postResponse)
+                        {
+                            var newPostText = Prompt.Input<string>("Post text", "Upload Test");
+                            var imageEmbeds = new EmbedRecordImage[] { new EmbedRecordImage() { Image = upload.blob } };
+                            var embed = new EmbedRecord() { Type = FishyFlip.Tools.Constants.EmbedTypes.Images, Images = imageEmbeds };
+                            Result<CreatePostResponse> created2 = await atProtocol.CreatePostAsync(newPostText, embed: embed);
+                            created2.Switch(x =>
+                            {
+                                Console.WriteLine(JsonSerializer.Serialize(x, atProtocol.Options.JsonSerializerOptions));
+                            }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                        }
+
                     },
-                      _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                     async _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
                 }
                 break;
             case Menu.GetProfile:

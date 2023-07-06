@@ -14,6 +14,8 @@ public class PostRecord : Record
 
     public string[] Langs { get; set; } = Array.Empty<string>();
     
+    public EmbedRecord? Embed { get; set; }
+
     public Reply Reply { get; set; }
 
     public DateTime CreatedAt { get; set; }

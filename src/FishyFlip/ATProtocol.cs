@@ -67,7 +67,8 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
 
     public Task<Result<CreatePostResponse>> CreatePostAsync(
         string Text,
-        Facet[]? Facets,
+        Facet[]? Facets = null,
+        EmbedRecord? embed = default,
         DateTime? CreatedAt = null,
         CancellationToken cancellationToken = default)
     {
@@ -79,7 +80,8 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 Text = Text,
                 Type = Constants.FeedType.Post,
                 CreatedAt = CreatedAt ?? DateTime.UtcNow,
-                Facets = Facets
+                Facets = Facets,
+                Embed = embed,
             });
 
         return
