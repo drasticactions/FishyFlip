@@ -101,7 +101,7 @@ namespace FishyFlip
             TimeSpan timeToNextRenewal = this.protocol.Options.SessionRefreshInterval ?? this.GetTimeToNextRenewal(this.session.ThrowIfNull());
             this.logger?.LogDebug($"Next renewal in {timeToNextRenewal.TotalSeconds}.");
             this.timer!.Elapsed += this.RefreshToken;
-            this.timer.Interval = timeToNextRenewal.TotalMilliseconds;
+            this.timer.Interval = timeToNextRenewal.TotalMilliseconds >= Int32.MaxValue ? Int32.MaxValue : timeToNextRenewal.TotalMilliseconds;
             this.timer.Enabled = true;
             this.timer.Start();
         }
