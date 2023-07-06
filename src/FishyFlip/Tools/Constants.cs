@@ -134,6 +134,14 @@ internal static class Constants
         internal const string Mention = "app.bsky.richtext.facet#mention";
     }
 
+    internal static class EmbedTypes
+    {
+        internal const string External = "app.bsky.embed.external";
+        internal const string Images = "app.bsky.embed.images";
+        internal const string Record = "app.bsky.embed.record";
+        internal const string RecordWithMedia = "app.bsky.embed.recordWithMedia";
+    }
+
     internal static class FeedType
     {
         internal const string Like = "app.bsky.feed.like";

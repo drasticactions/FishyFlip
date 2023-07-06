@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,6 +10,7 @@ using System.Text.Json;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using FishyFlip;
 using FishyFlip.Commands;
+using FishyFlip.DebugApp;
 using FishyFlip.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Debug;
@@ -44,6 +46,23 @@ await result.SwitchAsync(
 
         switch (option)
         {
+            case Menu.UploadBlob:
+                var fileLocation = Prompt.Input<string>("File Location");
+                if (File.Exists(fileLocation))
+                {
+                    var file = System.IO.File.OpenRead(fileLocation);
+                    var content = new StreamContent(file);
+                    content.Headers.ContentType = new MediaTypeHeaderValue(MimeTypes.GetMimeType(fileLocation));
+                    Result<UploadBlobResponse> uploadResult = await atProtocol.UploadBlobAsync(content, CancellationToken.None);
+                    uploadResult.Switch(
+                                               upload =>
+                                               {
+                        Console.WriteLine("Upload successful");
+                        Console.WriteLine(JsonSerializer.Serialize(upload, atProtocol.Options.JsonSerializerOptions));
+                    },
+                      _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                }
+                break;
             case Menu.GetProfile:
                 // Get the logged in user's profile
                 Result<Profile?> profileResult = await atProtocol.GetProfileAsync(session.Did!, CancellationToken.None);
@@ -207,6 +226,7 @@ await result.SwitchAsync(
 
 internal enum Menu
 {
+    UploadBlob,
     GetPostThread,
     GetProfile,
     ResolveHandle,

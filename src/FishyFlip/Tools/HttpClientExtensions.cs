@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using FishyFlip.Models;
@@ -23,6 +24,28 @@ internal static class HttpClientExtensions
         StringContent content = new(jsonContent, Encoding.UTF8, "application/json");
         logger?.LogDebug($"POST {url}: {jsonContent}");
         var message = await client.PostAsync(url, content, cancellationToken);
+        if (!message.IsSuccessStatusCode)
+        {
+            Error error = await CreateError(message!, options, cancellationToken, logger);
+            return error!;
+        }
+
+        string response = await message.Content.ReadAsStringAsync(cancellationToken);
+        logger?.LogDebug($"POST {url}: {response}");
+        TK? result = JsonSerializer.Deserialize<TK>(response, options);
+        return result!;
+    }
+
+    internal static async Task<Result<TK>> Post<TK>(
+       this HttpClient client,
+       string url,
+       JsonSerializerOptions options,
+       StreamContent body,
+       CancellationToken cancellationToken,
+       ILogger? logger = default)
+    {
+        logger?.LogDebug($"POST STREAM {url}: {body.Headers.ContentType}");
+        var message = await client.PostAsync(url, body, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             Error error = await CreateError(message!, options, cancellationToken, logger);

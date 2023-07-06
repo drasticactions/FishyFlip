@@ -4,6 +4,7 @@
 
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
+using System.Threading;
 using FishyFlip.Commands;
 using FishyFlip.Models;
 using FishyFlip.Tools;
@@ -55,6 +56,15 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 error => error!);
     }
     
+    public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
+    {
+        return
+            this.client
+                .Post<UploadBlobResponse>(
+                    Constants.Urls.AtProtoRepo.UploadBlob, this.options.JsonSerializerOptions, content,
+                    cancellationToken, this.options.Logger);
+    }
+
     public Task<Result<CreatePostResponse>> CreatePostAsync(
         string Text,
         Facet[]? Facets,
