@@ -56,6 +56,23 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 error => error!);
     }
     
+    public Task<Result<InviteCodes?>> GetAccountInviteCodesAsync(GetAccountInviteCodes? query = null, CancellationToken cancellationToken = default)
+    {
+        query ??= new GetAccountInviteCodes();
+        var url = $"{Constants.Urls.AtProtoServer.GetAccountInviteCodes}?includeUsed={query.IncludeUsed.ToString().ToLowerInvariant()}&createAvailable={query.CreateAvailable.ToString().ToLowerInvariant()}";
+        return this.client.Get<InviteCodes>(url, this.options.JsonSerializerOptions, cancellationToken);
+    }
+    
+    public Task<Result<SessionInfo?>> GetSessionAsync(CancellationToken cancellationToken = default)
+    {
+        return this.client.Get<SessionInfo>(Constants.Urls.AtProtoServer.GetSession, this.options.JsonSerializerOptions, cancellationToken);
+    }
+    
+    public Task<Result<AppPasswords?>> ListAppPasswordsAsync(CancellationToken cancellationToken = default)
+    {
+        return this.client.Get<AppPasswords>(Constants.Urls.AtProtoServer.ListAppPasswords, this.options.JsonSerializerOptions, cancellationToken);
+    }
+    
     public Task<Result<DescribeServer?>> DescribeServerAsync(CancellationToken cancellationToken = default)
     {
         return this.client.Get<DescribeServer>(Constants.Urls.AtProtoServer.DescribeServer, this.options.JsonSerializerOptions, cancellationToken);

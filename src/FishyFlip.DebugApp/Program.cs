@@ -46,6 +46,27 @@ await result.SwitchAsync(
 
         switch (option)
         {
+            case Menu.GetAccountInviteCodes:
+                var inviteCodes = await atProtocol.GetAccountInviteCodesAsync(new GetAccountInviteCodes(), CancellationToken.None);
+                inviteCodes.Switch(x =>
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(x, atProtocol.Options.JsonSerializerOptions));
+                }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                break;
+            case Menu.GetSession:
+                var getSession = await atProtocol.GetSessionAsync(CancellationToken.None);
+                getSession.Switch(x =>
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(x, atProtocol.Options.JsonSerializerOptions));
+                }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                break;
+            case Menu.ListAppPasswords:
+                var listAppPasswords = await atProtocol.ListAppPasswordsAsync(CancellationToken.None);
+                listAppPasswords.Switch(x =>
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(x, atProtocol.Options.JsonSerializerOptions));
+                }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                break;
             case Menu.DescribeServer:
                 var describeServer = await atProtocol.DescribeServerAsync(CancellationToken.None);
                 describeServer.Switch(x =>
@@ -246,6 +267,9 @@ await result.SwitchAsync(
 
 internal enum Menu
 {
+    GetAccountInviteCodes,
+    GetSession,
+    ListAppPasswords,
     DescribeServer,
     UploadBlob,
     GetPostThread,
