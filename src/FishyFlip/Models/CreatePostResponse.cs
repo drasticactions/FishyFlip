@@ -19,3 +19,17 @@ public class CreatePostResponse
 
     public AtUri Uri { get; }
 }
+
+public class PutPostResponse
+{
+    [JsonConstructor]
+    public PutPostResponse(AtUri uri, string cid)
+    {
+        this.Cid = cid;
+        this.Uri = uri;
+    }
+
+    public string Cid { get; }
+
+    public AtUri Uri { get; }
+}

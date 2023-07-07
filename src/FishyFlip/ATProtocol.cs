@@ -56,10 +56,9 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 error => error!);
     }
     
-    public Task<Result<InviteCodes?>> GetAccountInviteCodesAsync(GetAccountInviteCodes? query = null, CancellationToken cancellationToken = default)
+    public Task<Result<InviteCodes?>> GetAccountInviteCodesAsync(bool IncludeUsed = true, bool CreateAvailable = true, CancellationToken cancellationToken = default)
     {
-        query ??= new GetAccountInviteCodes();
-        var url = $"{Constants.Urls.AtProtoServer.GetAccountInviteCodes}?includeUsed={query.IncludeUsed.ToString().ToLowerInvariant()}&createAvailable={query.CreateAvailable.ToString().ToLowerInvariant()}";
+        var url = $"{Constants.Urls.AtProtoServer.GetAccountInviteCodes}?includeUsed={IncludeUsed.ToString().ToLowerInvariant()}&createAvailable={CreateAvailable.ToString().ToLowerInvariant()}";
         return this.client.Get<InviteCodes>(url, this.options.JsonSerializerOptions, cancellationToken);
     }
     
@@ -72,7 +71,7 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
     {
         return this.client.Get<AppPasswords>(Constants.Urls.AtProtoServer.ListAppPasswords, this.options.JsonSerializerOptions, cancellationToken);
     }
-    
+
     public Task<Result<DescribeServer?>> DescribeServerAsync(CancellationToken cancellationToken = default)
     {
         return this.client.Get<DescribeServer>(Constants.Urls.AtProtoServer.DescribeServer, this.options.JsonSerializerOptions, cancellationToken);
@@ -86,12 +85,46 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                     Constants.Urls.AtProtoRepo.UploadBlob, this.options.JsonSerializerOptions, content,
                     cancellationToken, this.options.Logger);
     }
+    
+    public Task<Result<PutPostResponse>> PutPostAsync(
+        string Text,
+        Facet[]? Facets = null,
+        EmbedRecord? embed = default,
+        DateTime? CreatedAt = null,
+        string? rkey = null,
+        string? swapRecord = null,
+        string? swapCommit = null,
+        CancellationToken cancellationToken = default)
+    {
+        PutPostRecord record = new(
+            Constants.FeedType.Post,
+            this.sessionManager!.Session!.Did.ToString()!,
+            new PostRecord()
+            {
+                Text = Text,
+                Type = Constants.FeedType.Post,
+                CreatedAt = CreatedAt ?? DateTime.UtcNow,
+                Facets = Facets,
+                Embed = embed,
+            },
+            rkey,
+            swapRecord,
+            swapCommit);
+
+        return
+            this.client
+                .Post<PutPostRecord, PutPostResponse>(
+                    Constants.Urls.AtProtoRepo.PutRecord, this.options.JsonSerializerOptions, record,
+                    cancellationToken, this.options.Logger);
+    }
 
     public Task<Result<CreatePostResponse>> CreatePostAsync(
         string Text,
         Facet[]? Facets = null,
         EmbedRecord? embed = default,
         DateTime? CreatedAt = null,
+        string? rkey = null,
+        string? swapCommit = null,
         CancellationToken cancellationToken = default)
     {
         CreatePostRecord record = new(
@@ -104,7 +137,9 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 CreatedAt = CreatedAt ?? DateTime.UtcNow,
                 Facets = Facets,
                 Embed = embed,
-            });
+            },
+            rkey,
+            swapCommit);
 
         return
             this.client

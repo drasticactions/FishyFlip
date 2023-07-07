@@ -47,7 +47,7 @@ await result.SwitchAsync(
         switch (option)
         {
             case Menu.GetAccountInviteCodes:
-                var inviteCodes = await atProtocol.GetAccountInviteCodesAsync(new GetAccountInviteCodes(), CancellationToken.None);
+                var inviteCodes = await atProtocol.GetAccountInviteCodesAsync();
                 inviteCodes.Switch(x =>
                 {
                     Console.WriteLine(JsonSerializer.Serialize(x, atProtocol.Options.JsonSerializerOptions));
@@ -202,6 +202,18 @@ await result.SwitchAsync(
                     Console.WriteLine(JsonSerializer.Serialize(refresh, atProtocol.Options.JsonSerializerOptions));
                 }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
                 break;
+            case Menu.UpdatePost:
+                var existingRecordId = Prompt.Input<string>("Enter existing record cid",
+                    defaultValue: "bafyreicp22mx5l3z7kfzzzykfeodjlkm4kzsgsrdf6iqkwzrpciobcc4ky");
+                
+                var postPrompt = Prompt.Input<string>("Enter post text", "New post text, maybe?");
+                var putRecordResponse = await atProtocol.PutPostAsync(postPrompt, rkey: "test", swapRecord: existingRecordId);
+                putRecordResponse.Switch(
+                    refresh =>
+                    {
+                        Console.WriteLine(JsonSerializer.Serialize(refresh, atProtocol.Options.JsonSerializerOptions));
+                    }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                break;
             case Menu.CreatePost:
                 var prompt = Prompt.Input<string>("Enter post text", "Testing in Production, ignore me.");
                 if (!string.IsNullOrEmpty(prompt))
@@ -232,13 +244,27 @@ await result.SwitchAsync(
                         facet.AddFeature(new Mention(session.Did));
                         facetList.Add(facet);
                     }
+
+                    string? rkey = null;
+                    var addRKey = Prompt.Input<bool>("Add addRKey?");
+                    if (addRKey)
+                    {
+                        rkey = Prompt.Input<string>("Enter rkey", "test");
+                    }
+                    
+                    string? swapCommitKey = null;
+                    var swapCommitKeyTest = Prompt.Input<bool>("Add swapCommit?");
+                    if (swapCommitKeyTest)
+                    {
+                        swapCommitKey = Prompt.Input<string>("Enter Commit");
+                    }
                     
                     var test = JsonSerializer.Serialize(facetList.ToArray(), atProtocol.Options.JsonSerializerOptions);
-                    Result<CreatePostResponse> created = await atProtocol.CreatePostAsync(prompt, facetList.ToArray());
-                    created.Switch(x =>
+                    Result<CreatePostResponse> created = await atProtocol.CreatePostAsync(prompt, facetList.ToArray(), rkey: rkey, swapCommit: swapCommitKey);
+                    created.SwitchAsync(async x =>
                     {
                         Console.WriteLine(JsonSerializer.Serialize(x, atProtocol.Options.JsonSerializerOptions));
-                    }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                    },async _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
                 }
                 break;
             case Menu.RefreshToken:
@@ -267,6 +293,7 @@ await result.SwitchAsync(
 
 internal enum Menu
 {
+    UpdatePost,
     GetAccountInviteCodes,
     GetSession,
     ListAppPasswords,
