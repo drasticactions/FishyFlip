@@ -46,6 +46,13 @@ await result.SwitchAsync(
 
         switch (option)
         {
+            case Menu.DescribeServer:
+                var describeServer = await atProtocol.DescribeServerAsync(CancellationToken.None);
+                describeServer.Switch(x =>
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(x, atProtocol.Options.JsonSerializerOptions));
+                }, _ => Console.WriteLine(JsonSerializer.Serialize(_, atProtocol.Options.JsonSerializerOptions)));
+                break;
             case Menu.UploadBlob:
                 var fileLocation = Prompt.Input<string>("File Location");
                 if (File.Exists(fileLocation))
@@ -239,6 +246,7 @@ await result.SwitchAsync(
 
 internal enum Menu
 {
+    DescribeServer,
     UploadBlob,
     GetPostThread,
     GetProfile,

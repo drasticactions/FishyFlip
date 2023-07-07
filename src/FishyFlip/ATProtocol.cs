@@ -56,6 +56,11 @@ public sealed class ATProtocol : IAsyncDisposable, IDisposable
                 error => error!);
     }
     
+    public Task<Result<DescribeServer?>> DescribeServerAsync(CancellationToken cancellationToken = default)
+    {
+        return this.client.Get<DescribeServer>(Constants.Urls.AtProtoServer.DescribeServer, this.options.JsonSerializerOptions, cancellationToken);
+    }
+    
     public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
     {
         return
