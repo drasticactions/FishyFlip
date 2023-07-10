@@ -41,7 +41,10 @@ public sealed class ATProtocol : IDisposable
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task StopSubscribeReposAsync(CancellationToken? token = default)
-        => this.webSocketProtocol.CloseAsync(token: token);
+    {
+        this.webSocketProtocol.CloseAsync(token: token).FireAndForgetSafeAsync();
+        return Task.CompletedTask;
+    }
 
     void IDisposable.Dispose()
     {

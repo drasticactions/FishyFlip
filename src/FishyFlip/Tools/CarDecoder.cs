@@ -1,9 +1,13 @@
+// <copyright file="CarDecoder.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 namespace FishyFlip.Tools;
 
 /// <summary>
 /// Decode CAR byte arrays.
 /// </summary>
-internal class CarDecoder
+internal static class CarDecoder
 {
     private const int CidV1BytesLength = 36;
 
@@ -12,18 +16,18 @@ internal class CarDecoder
     /// </summary>
     /// <param name="bytes">Byte Array.</param>
     /// <returns>Dictionary of CID and byte array.</returns>
-    public Dictionary<Cid, byte[]> DecodeCar(byte[] bytes)
+    public static Dictionary<Cid, byte[]> DecodeCar(byte[] bytes)
     {
         var blocks = new Dictionary<Cid, byte[]>();
 
         int bytesLength = bytes.Length;
-        var header = this.DecodeReader(bytes);
+        var header = DecodeReader(bytes);
 
         int start = header.Length + header.Value;
 
         while (start < bytesLength)
         {
-            var body = this.DecodeReader(bytes[start..]);
+            var body = DecodeReader(bytes[start..]);
             start += body.Length;
 
             var cidBytes = bytes[start..(start + CidV1BytesLength)];
@@ -37,7 +41,7 @@ internal class CarDecoder
         return blocks;
     }
 
-    private DecodedBlock DecodeReader(byte[] bytes)
+    private static DecodedBlock DecodeReader(byte[] bytes)
     {
         var a = new List<byte>();
 
@@ -54,22 +58,10 @@ internal class CarDecoder
             }
         }
 
-        return new DecodedBlock(this.Decode(a), a.Count);
+        return new DecodedBlock(Decode(a), a.Count);
     }
 
-    private class DecodedBlock
-    {
-        public DecodedBlock(int value, int length)
-        {
-            Value = value;
-            Length = length;
-        }
-
-        public int Value { get; }
-        public int Length { get; }
-    }
-
-    private int Decode(List<byte> b)
+    private static int Decode(List<byte> b)
     {
         int r = 0;
         for (int i = 0; i < b.Count; i++)
@@ -79,5 +71,18 @@ internal class CarDecoder
         }
 
         return r;
+    }
+
+    private class DecodedBlock
+    {
+        public DecodedBlock(int value, int length)
+        {
+            this.Value = value;
+            this.Length = length;
+        }
+
+        public int Value { get; }
+
+        public int Length { get; }
     }
 }

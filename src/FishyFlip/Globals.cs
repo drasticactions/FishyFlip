@@ -3,7 +3,8 @@
 // </copyright>
 
 global using System.Net.WebSockets;
-global using FishyFlip.Models.Cbor;
+global using System.Text.RegularExpressions;
+global using FishyFlip.Models;
 global using FishyFlip.Tools;
 global using FishyFlip.Tools.Cbor;
 global using Ipfs;

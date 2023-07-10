@@ -122,6 +122,18 @@ internal static class Constants
         }
     }
 
+    internal static class ActorTypes
+    {
+        internal const string Profile = "app.bsky.actor.profile";
+    }
+
+    internal static class GraphTypes
+    {
+        internal const string List = "app.bsky.graph.list";
+        internal const string Follow = "app.bsky.graph.follow";
+        internal const string Block = "app.bsky.graph.block";
+    }
+
     internal static class FacetTypes
     {
         internal const string Link = "app.bsky.richtext.facet#link";

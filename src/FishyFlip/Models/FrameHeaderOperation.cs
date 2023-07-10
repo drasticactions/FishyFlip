@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-namespace FishyFlip.Models.Cbor;
+namespace FishyFlip.Models;
 
 /// <summary>
 /// The operation of the frame header.

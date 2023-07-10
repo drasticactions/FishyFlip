@@ -20,6 +20,6 @@ string password = Environment.GetEnvironmentVariable("BLUESKY_PASSWORD")!;
 
 await atProtocol.StartSubscribeReposAsync();
 
-while (true)
-{
-}
+var key = Console.ReadKey();
+
+await atProtocol.StopSubscribeReposAsync();
