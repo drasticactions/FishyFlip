@@ -13,17 +13,35 @@ public sealed class ATProtocol : IDisposable
 {
     private ATProtocolOptions options;
     private HttpClient client;
+    private ATWebSocketProtocol webSocketProtocol;
     private bool disposedValue;
 
     public ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
+        this.webSocketProtocol = new ATWebSocketProtocol(this);
     }
 
     public ATProtocolOptions Options => this.options;
 
     internal HttpClient Client => this.client;
+
+    /// <summary>
+    /// Start the ATProtocol SubscribeRepos sync session.
+    /// </summary>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public Task StartSubscribeReposAsync(CancellationToken? token = default)
+        => this.webSocketProtocol.ConnectAsync(token);
+
+    /// <summary>
+    /// Stops the ATProtocol SubscribeRepos sync session.
+    /// </summary>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public Task StopSubscribeReposAsync(CancellationToken? token = default)
+        => this.webSocketProtocol.CloseAsync(token: token);
 
     void IDisposable.Dispose()
     {

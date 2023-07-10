@@ -17,3 +17,9 @@ var atProtocol = atProtocolBuilder.Build();
 
 string userName = Environment.GetEnvironmentVariable("BLUESKY_USERNAME")!;
 string password = Environment.GetEnvironmentVariable("BLUESKY_PASSWORD")!;
+
+await atProtocol.StartSubscribeReposAsync();
+
+while (true)
+{
+}

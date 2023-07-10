@@ -10,5 +10,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+		<PackageReference Include="IpfsShipyard.Ipfs.Core" />
+		<PackageReference Include="PeterO.Cbor" />
 	</ItemGroup>
 </Project>
