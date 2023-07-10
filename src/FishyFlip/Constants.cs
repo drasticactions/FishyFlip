@@ -2,13 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FishyFlip.Tools;
+namespace FishyFlip;
 
 internal static class Constants
 {

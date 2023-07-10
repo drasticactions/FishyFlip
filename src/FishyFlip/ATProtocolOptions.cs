@@ -2,13 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using FishyFlip.Tools;
-using FishyFlip.Tools.Json;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace FishyFlip;
 
@@ -22,21 +18,15 @@ public class ATProtocolOptions
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new FacetJsonConverter(),
-            },
         };
+        this.Url = new Uri("https://bsky.social");
     }
 
     public HttpClient HttpClient { get; internal set; }
 
     public ILogger? Logger { get; internal set; }
 
-    public string Url { get; internal set; } = "https://bsky.social";
+    public Uri Url { get; internal set; }
 
     public string UserAgent { get; internal set; } = "FishyFlip";
 

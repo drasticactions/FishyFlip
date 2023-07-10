@@ -2,7 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Tools;
 using Microsoft.Extensions.Logging;
 
 namespace FishyFlip;
@@ -30,6 +29,12 @@ public class ATProtocolBuilder
     }
 
     public ATProtocolBuilder WithUrl(string url)
+    {
+        this.atProtocolOptions.Url = new Uri(url);
+        return this;
+    }
+
+    public ATProtocolBuilder WithUrl(Uri url)
     {
         this.atProtocolOptions.Url = url;
         return this;
@@ -69,7 +74,7 @@ public class ATProtocolBuilder
         {
             this.atProtocolOptions.HttpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.atProtocolOptions.UserAgent);
             this.atProtocolOptions.HttpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
-            this.atProtocolOptions.HttpClient.BaseAddress = new Uri(this.atProtocolOptions.Url.TrimEnd('/'));
+            this.atProtocolOptions.HttpClient.BaseAddress = this.atProtocolOptions.Url;
         }
 
         return new ATProtocol(this.atProtocolOptions);
