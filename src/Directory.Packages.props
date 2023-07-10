@@ -14,5 +14,7 @@
       <PackageVersion Include="MimeTypes" Version="2.4.1" />
       <PackageVersion Include="IpfsShipyard.Ipfs.Core" Version="0.0.5" />
       <PackageVersion Include="PeterO.Cbor" Version="4.5.2" />
+      <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.5" />
+      <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.5" />
     </ItemGroup>
 </Project>
