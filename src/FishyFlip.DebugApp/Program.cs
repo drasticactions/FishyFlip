@@ -4,6 +4,7 @@
 
 using FishyFlip;
 using Microsoft.Extensions.Logging.Debug;
+using PeterO.Cbor;
 
 Console.WriteLine("Hello, ATProtocol!");
 
