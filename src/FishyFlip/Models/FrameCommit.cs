@@ -4,9 +4,9 @@
 
 namespace FishyFlip.Models;
 
-public class FrameBody
+public class FrameCommit
 {
-    public FrameBody(CBORObject obj)
+    public FrameCommit(CBORObject obj)
     {
         this.Ops = obj["ops"]?.Values.Select(n => new Ops(n)).ToArray();
         this.Seq = obj["seq"].AsInt32();

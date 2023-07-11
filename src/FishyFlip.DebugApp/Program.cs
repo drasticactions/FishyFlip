@@ -14,9 +14,10 @@ var atProtocolBuilder = new ATProtocolBuilder()
     // .WithSessionRefreshInterval(TimeSpan.FromSeconds(30))
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
-
-string userName = Environment.GetEnvironmentVariable("BLUESKY_USERNAME")!;
-string password = Environment.GetEnvironmentVariable("BLUESKY_PASSWORD")!;
+atProtocol.OnSubscribedRepoMessage += (sender, args) =>
+{
+    Console.WriteLine($"New Message: {args.Message.Record?.Type}");
+};
 
 await atProtocol.StartSubscribeReposAsync();
 

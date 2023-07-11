@@ -129,6 +129,7 @@ internal static class Constants
 
     internal static class GraphTypes
     {
+        internal const string ListItem = "app.bsky.graph.listitem";
         internal const string List = "app.bsky.graph.list";
         internal const string Follow = "app.bsky.graph.follow";
         internal const string Block = "app.bsky.graph.block";
@@ -150,6 +151,7 @@ internal static class Constants
 
     internal static class FeedType
     {
+        internal const string Generator = "app.bsky.feed.generator";
         internal const string Like = "app.bsky.feed.like";
         internal const string Repost = "app.bsky.feed.repost";
         internal const string Post = "app.bsky.feed.post";

@@ -24,14 +24,20 @@ public class Post : ATRecord
 
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Text = obj["text"].AsString();
+        this.Langs = obj["langs"]?.Values.Select(n => n.AsString()).ToArray();
+        this.Facets = obj["facets"]?.Values.Select(n => new Facet(n)).ToArray();
     }
 
     /// <summary>
     /// Gets the Embed.
     /// </summary>
-    public Embed? Embed { get; internal set; }
+    public Embed? Embed { get; }
+
+    public Facet[]? Facets { get; }
 
     public DateTime? CreatedAt { get; }
 
     public string Text { get; }
+
+    public string[]? Langs { get; }
 }

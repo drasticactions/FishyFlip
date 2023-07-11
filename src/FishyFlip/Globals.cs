@@ -4,6 +4,7 @@
 
 global using System.Net.WebSockets;
 global using System.Text.RegularExpressions;
+global using FishyFlip.Events;
 global using FishyFlip.Models;
 global using FishyFlip.Tools;
 global using FishyFlip.Tools.Cbor;

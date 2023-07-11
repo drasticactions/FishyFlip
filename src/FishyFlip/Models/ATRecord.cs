@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// AT Record.
 /// </summary>
-public class ATRecord
+public abstract class ATRecord
 {
     /// <summary>
     /// Gets the Record Type.

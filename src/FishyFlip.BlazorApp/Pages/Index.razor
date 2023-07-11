@@ -1,3 +1,64 @@
 ﻿@page "/"
+@using System.Collections.ObjectModel;
+@using FishyFlip.Models;
 
-<h1>Hello, world!</h1>
+<div id="controls">
+    <button class="btn btn-primary" @onclick="StartSubscribe">Start Feed</button>
+
+    <button class="btn btn-primary" @onclick="StopSubscribe">Stop Feed</button>
+</div>
+
+<div id="list">
+    @foreach(var item in Posts)
+    {
+        <div class="post">
+            <p class="postText">@item.Text</p>
+            <sub class="postTextSub">@item.CreatedAt</sub>
+        </div>
+    }
+</div>
+
+@code {
+    ATProtocol? atProtocol;
+    ObservableCollection<Post> Posts = new ObservableCollection<Post>();
+
+    protected override Task OnInitializedAsync()
+    {
+        this.Posts.CollectionChanged += (sender, args) =>
+        {
+            this.StateHasChanged();
+        };
+
+        var atProtocolBuilder = new ATProtocolBuilder().EnableAutoRenewSession(true);
+        this.atProtocol = atProtocolBuilder.Build();
+        this.atProtocol.OnSubscribedRepoMessage += async (sender, args) =>
+        {
+            if (args.Message.Record is Post post)
+            {
+                if (this.Posts.Count > 100)
+                {
+                    this.Posts.RemoveAt(this.Posts.Count - 1);
+                }
+
+                this.Posts.Insert(0, post);
+            }
+        };
+        return base.OnInitializedAsync();
+    }
+
+    private async Task StartSubscribe()
+    {
+        if (this.atProtocol is not null)
+        {
+            await this.atProtocol.StartSubscribeReposAsync();
+        }
+    }
+
+    private async Task StopSubscribe()
+    {
+        if (this.atProtocol is not null)
+        {
+            await this.atProtocol.StopSubscribeReposAsync();
+        }
+    }
+}

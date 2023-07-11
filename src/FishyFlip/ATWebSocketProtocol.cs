@@ -2,8 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Models;
-using System.IO;
+using Google.Protobuf;
 
 namespace FishyFlip;
 
@@ -88,11 +87,6 @@ internal class ATWebSocketProtocol : IDisposable
         }
     }
 
-    private async Task HandleMessage(WebSocketReceiveResult result)
-    {
-
-    }
-
     private async Task HandleMessage(byte[] byteArray)
     {
         using var stream = new MemoryStream(byteArray);
@@ -103,79 +97,105 @@ internal class ATWebSocketProtocol : IDisposable
             return;
         }
 
-        //this.logger?.LogDebug($"WSS: {objects[0].ToJSONString()}");
-        //this.logger?.LogDebug($"WSS: {objects[1].ToJSONString()}");
+        var message = new SubscribeRepoMessage();
 
         var frameHeader = new FrameHeader(objects[0]);
+        //this.logger?.LogDebug($"FrameHeader: {objects[0].ToJSONString()}");
+        message.Header = frameHeader;
 
         switch (frameHeader.Operation)
         {
             case FrameHeaderOperation.Unknown:
                 break;
             case FrameHeaderOperation.Frame:
-                var frameBody = new FrameBody(objects[1]);
-                if (frameBody.Blocks is null)
+                var frameType = frameHeader.Type;
+                switch (frameType)
                 {
-                    break;
-                }
-
-                var blocks = CarDecoder.DecodeCar(frameBody.Blocks);
-                foreach (var block in blocks)
-                {
-                    using var blockStream = new MemoryStream(block.Value);
-                    var blockObj = CBORObject.Read(blockStream);
-                    if (blockObj["$type"] is not null)
-                    {
-                        //this.logger?.LogDebug($"WSS: Type Obj: {blockObj.ToJSONString()}");
-                        switch (blockObj["$type"].AsString())
+                    case "#commit":
+                        var frameCommit = new FrameCommit(objects[1]);
+                       // this.logger?.LogDebug($"FrameBody: {objects[1].ToJSONString()}");
+                        message.Commit = frameCommit;
+                        if (frameCommit.Blocks is null)
                         {
-                            case Constants.FeedType.Post:
-                                var post = new Post(blockObj);
-                                break;
-                            case Constants.FeedType.Like:
-                                var like = new Like(blockObj);
-                                break;
-                            case Constants.FeedType.Repost:
-                                var repost = new Repost(blockObj);
-                                break;
-                            case Constants.GraphTypes.Follow:
-                                var follow = new Follow(blockObj);
-                                break;
-                            case Constants.GraphTypes.List:
-                                var list = new BSList(blockObj);
-                                break;
-                            case Constants.GraphTypes.Block:
-                                var blockG = new Block(blockObj);
-                                break;
-                            case Constants.ActorTypes.Profile:
-                                var profile = new Profile(blockObj);
-                                break;
-                            default:
-                                this.logger?.LogDebug($"WSS: Unknown Obj: {blockObj.ToJSONString()}");
-                                break;
+                            break;
                         }
-                    }
-                    else if (blockObj["sig"] is not null)
-                    {
-                        //this.logger?.LogDebug($"WSS: Footer: {blockObj.ToJSONString()}");
-                        var footer = new FrameFooter(blockObj);
-                    }
-                    else
-                    {
-                       // this.logger?.LogDebug($"WSS: Node: {blockObj.ToJSONString()}");
-                        var node = new FrameNode(blockObj);
-                    }
-                }
 
+                        var blocks = CarDecoder.DecodeCar(frameCommit.Blocks);
+                        foreach (var block in blocks)
+                        {
+                            using var blockStream = new MemoryStream(block.Value);
+                            var blockObj = CBORObject.Read(blockStream);
+                            if (blockObj["$type"] is not null)
+                            {
+                                switch (blockObj["$type"].AsString())
+                                {
+                                    case Constants.FeedType.Post:
+                                        message.Record = new Post(blockObj);
+                                        break;
+                                    case Constants.FeedType.Like:
+                                        message.Record = new Like(blockObj);
+                                        break;
+                                    case Constants.FeedType.Generator:
+                                        message.Record = new FeedGenerator(blockObj);
+                                        break;
+                                    case Constants.FeedType.Repost:
+                                        message.Record = new Repost(blockObj);
+                                        break;
+                                    case Constants.GraphTypes.Follow:
+                                        message.Record = new Follow(blockObj);
+                                        break;
+                                    case Constants.GraphTypes.List:
+                                        message.Record = new BSList(blockObj);
+                                        break;
+                                    case Constants.GraphTypes.ListItem:
+                                        message.Record = new BSListItem(blockObj);
+                                        break;
+                                    case Constants.GraphTypes.Block:
+                                        message.Record = new Block(blockObj);
+                                        break;
+                                    case Constants.ActorTypes.Profile:
+                                        message.Record = new Profile(blockObj);
+                                        break;
+                                    default:
+                                        this.logger?.LogDebug($"WSS: Unknown Obj: {blockObj.ToJSONString()}");
+                                        break;
+                                }
+                                //this.logger?.LogDebug($"FrameRecord: {blockObj.ToJSONString()}");
+                            }
+                            else if (blockObj["sig"] is not null)
+                            {
+                                var footer = new FrameFooter(blockObj);
+                                message.Footer = footer;
+                                //this.logger?.LogDebug($"FrameFooter: {blockObj.ToJSONString()}");
+                            }
+                            else
+                            {
+                                var node = new FrameNode(blockObj);
+                                //this.logger?.LogDebug($"FrameNode: {blockObj.ToJSONString()}");
+                            }
+                        }
+
+                        break;
+                    case "#handle":
+                        var frameHandle = new FrameHandle(objects[1]);
+                        message.Handle = frameHandle;
+                        break;
+                    default:
+                        this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
+                        break;
+                }
                 break;
             case FrameHeaderOperation.Error:
                 var frameError = new FrameError(objects[1]);
+                message.Error = frameError;
                 this.logger?.LogError($"WSS: Error: {frameError.Message}");
                 this.CloseAsync(WebSocketCloseStatus.InternalServerError, frameError.Message ?? string.Empty).FireAndForgetSafeAsync(this.logger);
                 break;
             default:
                 break;
         }
+
+        this.protocol.OnSubscribedRepoMessageInternal(new SubscribedRepoEventArgs(message));
     }
 
     private async Task ReceiveMessages(ClientWebSocket webSocket, CancellationToken token)

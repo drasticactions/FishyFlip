@@ -23,6 +23,8 @@ public sealed class ATProtocol : IDisposable
         this.webSocketProtocol = new ATWebSocketProtocol(this);
     }
 
+    public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
+
     public ATProtocolOptions Options => this.options;
 
     internal HttpClient Client => this.client;
@@ -45,6 +47,9 @@ public sealed class ATProtocol : IDisposable
         this.webSocketProtocol.CloseAsync(token: token).FireAndForgetSafeAsync();
         return Task.CompletedTask;
     }
+
+    internal void OnSubscribedRepoMessageInternal(SubscribedRepoEventArgs e)
+        => this.OnSubscribedRepoMessage?.Invoke(this, e);
 
     void IDisposable.Dispose()
     {

@@ -1,5 +1,15 @@
 ﻿@inherits LayoutComponentBase
 
-<main>
-    @Body
-</main>
+<div class="container">
+    <header>
+        <h2>FishyFlip.BlazorApp - ATProtocol in Blazor.WASM</h2>
+    </header>
+
+    <main>
+        @Body
+    </main>
+
+    <footer>
+        <p>© @DateTime.UtcNow.Year - drasticactions</p>
+    </footer>
+</div>
