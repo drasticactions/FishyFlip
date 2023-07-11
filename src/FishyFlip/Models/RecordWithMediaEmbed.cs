@@ -9,6 +9,13 @@ namespace FishyFlip.Models;
 /// </summary>
 public class RecordWithMediaEmbed : Embed
 {
+    [JsonConstructor]
+    public RecordWithMediaEmbed(RecordEmbed? record, ImagesEmbed? images)
+    {
+        this.Record = record;
+        this.Images = images;
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RecordWithMediaEmbed"/> class.
     /// </summary>
@@ -26,7 +33,7 @@ public class RecordWithMediaEmbed : Embed
         }
     }
 
-    public RecordEmbed Record { get; }
+    public RecordEmbed? Record { get; }
 
     public ImagesEmbed? Images { get; }
 }

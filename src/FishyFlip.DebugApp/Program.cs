@@ -3,6 +3,7 @@
 // </copyright>
 
 using FishyFlip;
+using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
 using PeterO.Cbor;
 
@@ -15,6 +16,7 @@ var atProtocolBuilder = new ATProtocolBuilder()
     // .WithSessionRefreshInterval(TimeSpan.FromSeconds(30))
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
+
 atProtocol.OnSubscribedRepoMessage += (sender, args) =>
 {
     if (args.Message.Record is not null)

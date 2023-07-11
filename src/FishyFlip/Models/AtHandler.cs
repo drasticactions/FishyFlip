@@ -4,7 +4,7 @@
 
 namespace FishyFlip.Models;
 
-public class AtHandler
+public class AtHandler : ATIdentifier
 {
     protected AtHandler(string ident)
     {

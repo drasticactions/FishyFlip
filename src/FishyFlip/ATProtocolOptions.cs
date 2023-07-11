@@ -20,6 +20,21 @@ public class ATProtocolOptions
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
         };
         this.Url = new Uri("https://bsky.social");
+        this.JsonSerializerOptions = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            Converters =
+            {
+                new AtUriJsonConverter(),
+                new AtHandlerJsonConverter(),
+                new AtDidJsonConverter(),
+                new EmbedConverter(),
+                //new FacetJsonConverter(),
+                new CidConverter(),
+            },
+        };
     }
 
     public HttpClient HttpClient { get; internal set; }

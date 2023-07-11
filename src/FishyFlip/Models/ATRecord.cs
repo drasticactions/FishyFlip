@@ -9,8 +9,19 @@ namespace FishyFlip.Models;
 /// </summary>
 public abstract class ATRecord
 {
+    [JsonConstructor]
+    public ATRecord(string? type)
+    {
+        this.Type = type;
+    }
+
+    public ATRecord()
+    {
+    }
+
     /// <summary>
     /// Gets the Record Type.
     /// </summary>
+    [JsonPropertyName("$type")]
     public string? Type { get; internal set; }
 }

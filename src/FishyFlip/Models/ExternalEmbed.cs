@@ -6,6 +6,16 @@ namespace FishyFlip.Models;
 
 public class ExternalEmbed : Embed
 {
+    [JsonConstructor]
+    public ExternalEmbed(Image? thumb, string? title, string? description, string? uri, string? type)
+        : base (type)
+    {
+        this.Thumb = thumb;
+        this.Title = title;
+        this.Description = description;
+        this.Uri = uri;
+    }
+
     public ExternalEmbed(CBORObject obj)
     {
         this.Type = Constants.EmbedTypes.External;

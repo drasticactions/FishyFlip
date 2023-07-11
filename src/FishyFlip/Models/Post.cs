@@ -11,6 +11,18 @@ namespace FishyFlip.Models;
 /// </summary>
 public class Post : ATRecord
 {
+    [JsonConstructor]
+    public Post(Embed? embed, Facet[]? facets, DateTime? createdAt, Reply? reply, string text, string[] langs, string? type)
+        : base(type)
+    {
+        this.Embed = embed;
+        this.Facets = facets;
+        this.CreatedAt = createdAt;
+        this.Reply = reply;
+        this.Text = text;
+        this.Langs = langs;
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Post"/> class.
     /// </summary>
@@ -36,6 +48,8 @@ public class Post : ATRecord
     public Facet[]? Facets { get; }
 
     public DateTime? CreatedAt { get; }
+
+    public Reply? Reply { get; set; }
 
     public string Text { get; }
 

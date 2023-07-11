@@ -6,6 +6,13 @@ namespace FishyFlip.Models;
 
 public class ImagesEmbed : Embed
 {
+    [JsonConstructor]
+    public ImagesEmbed(ImageEmbed[]? images, string? type)
+        : base(type)
+    {
+        this.Images = images;
+    }
+
     public ImagesEmbed(CBORObject obj)
     {
         this.Type = Constants.EmbedTypes.Images;
@@ -15,8 +22,15 @@ public class ImagesEmbed : Embed
     public ImageEmbed[]? Images { get; }
 }
 
-public class ImageEmbed : ATRecord
+public class ImageEmbed
 {
+    [JsonConstructor]
+    public ImageEmbed(Image? image, string? alt)
+    {
+        this.Image = image;
+        this.Alt = alt;
+    }
+
     public ImageEmbed(CBORObject obj)
     {
         this.Alt = obj["alt"]?.AsString() ?? string.Empty;
@@ -24,13 +38,21 @@ public class ImageEmbed : ATRecord
         this.Image = image is not null ? new Image(image) : null;
     }
 
-    public string Alt { get; }
+    public string? Alt { get; }
 
     public Image? Image { get; }
 }
 
 public class Image : ATRecord
 {
+    [JsonConstructor]
+    public Image(string? mimeType, int size, string? type)
+        : base(type)
+    {
+        this.MimeType = mimeType;
+        this.Size = size;
+    }
+
     public Image(CBORObject image)
     {
         this.Type = image["$type"]?.AsString() ?? string.Empty;
@@ -47,5 +69,6 @@ public class Image : ATRecord
 
     public int Size { get; }
 
-    public Cid? Ref { get; }
+    [JsonPropertyName("ref")]
+    public Cid? Ref { get; set; }
 }

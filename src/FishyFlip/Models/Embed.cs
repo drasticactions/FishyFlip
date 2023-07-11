@@ -6,4 +6,12 @@ namespace FishyFlip.Models;
 
 public abstract class Embed : ATRecord
 {
+    public Embed(string? type)
+        : base(type)
+    {
+    }
+
+    public Embed()
+    {
+    }
 }

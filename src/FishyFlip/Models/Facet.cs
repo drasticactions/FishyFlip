@@ -6,6 +6,13 @@ namespace FishyFlip.Models;
 
 public class Facet : ATRecord
 {
+    [JsonConstructor]
+    public Facet(FacetIndex? index, FacetFeature[] features)
+    {
+        this.Index = index;
+        this.Features = features;
+    }
+
     public Facet(CBORObject obj)
     {
         this.Index = obj["index"] is not null ? new FacetIndex(obj["index"]) : null;
@@ -19,6 +26,13 @@ public class Facet : ATRecord
 
 public class FacetIndex
 {
+    [JsonConstructor]
+    public FacetIndex(int byteStart, int byteEnd)
+    {
+        this.ByteStart = byteStart;
+        this.ByteEnd = byteEnd;
+    }
+
     public FacetIndex(CBORObject obj)
     {
         this.ByteStart = obj["byteStart"].AsInt32();
@@ -32,13 +46,28 @@ public class FacetIndex
 
 public class FacetFeature
 {
+    [JsonConstructor]
+    public FacetFeature(string? type, string? uri, AtDid? did)
+    {
+        this.Type = type;
+        this.Uri = uri;
+        this.Did = did;
+    }
+
     public FacetFeature(CBORObject obj)
     {
         this.Type = obj["$type"].AsString();
         this.Uri = obj["uri"]?.AsString();
+        this.Did = obj["did"] is not null ? AtDid.Create(obj["did"].AsString()) : null;
     }
 
-    public string Type { get; }
+    [JsonPropertyName("$type")]
+    public string? Type { get; }
 
     public string? Uri { get; }
+
+    /// <summary>
+    /// Gets a <see cref="Did"/> of the actor.
+    /// </summary>
+    public AtDid? Did { get; }
 }
