@@ -42,6 +42,11 @@ internal class ATWebSocketProtocol : IDisposable
             return;
         }
 
+        if (this.client.State == WebSocketState.Aborted || this.client.State == WebSocketState.Closed)
+        {
+            this.client = new ClientWebSocket();
+        }
+
         var baselineUrl = new Uri($"{this.protocol.Options.Url}");
         var endToken = token ?? CancellationToken.None;
         await this.client.ConnectAsync(new Uri($"wss://{baselineUrl.Host}{Constants.Urls.AtProtoSync.SubscribeRepos}"), endToken);
