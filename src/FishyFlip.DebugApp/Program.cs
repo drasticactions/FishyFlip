@@ -16,7 +16,10 @@ var atProtocolBuilder = new ATProtocolBuilder()
 var atProtocol = atProtocolBuilder.Build();
 atProtocol.OnSubscribedRepoMessage += (sender, args) =>
 {
-    Console.WriteLine($"New Message: {args.Message.Record?.Type}");
+    if (args.Message.Record is not null)
+    {
+        Console.WriteLine($"Record: {args.Message.Record.Type}");
+    }
 };
 
 await atProtocol.StartSubscribeReposAsync();

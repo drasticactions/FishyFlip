@@ -92,7 +92,7 @@ internal class ATWebSocketProtocol : IDisposable
         }
     }
 
-    private async Task HandleMessage(byte[] byteArray)
+    private void HandleMessage(byte[] byteArray)
     {
         using var stream = new MemoryStream(byteArray);
         var objects = CBORObject.ReadSequence(stream);
@@ -169,13 +169,12 @@ internal class ATWebSocketProtocol : IDisposable
                             }
                             else if (blockObj["sig"] is not null)
                             {
-                                var footer = new FrameFooter(blockObj);
-                                message.Footer = footer;
+                                message.Footer = new FrameFooter(blockObj);
                                 //this.logger?.LogDebug($"FrameFooter: {blockObj.ToJSONString()}");
                             }
                             else
                             {
-                                var node = new FrameNode(blockObj);
+                                message.Nodes.Add(new FrameNode(blockObj));
                                 //this.logger?.LogDebug($"FrameNode: {blockObj.ToJSONString()}");
                             }
                         }
@@ -184,6 +183,18 @@ internal class ATWebSocketProtocol : IDisposable
                     case "#handle":
                         var frameHandle = new FrameHandle(objects[1]);
                         message.Handle = frameHandle;
+                        break;
+                    case "#repoOp":
+                        message.RepoOp = new FrameRepoOp(objects[1]);
+                        break;
+                    case "#info":
+                        message.Info = new FrameInfo(objects[1]);
+                        break;
+                    case "#tombstone":
+                        message.Tombstone = new FrameTombstone(objects[1]);
+                        break;
+                    case "#migrate":
+                        message.Migrate = new FrameMigrate(objects[1]);
                         break;
                     default:
                         this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
@@ -220,7 +231,7 @@ internal class ATWebSocketProtocol : IDisposable
                 byte[] newArray = new byte[result.Count];
                 Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
 
-                Task.Run(() => this.HandleMessage(newArray)).FireAndForgetSafeAsync(this.logger);
+                Task.Run(() => this.HandleMessage(newArray));
             }
             catch (OperationCanceledException canceledException)
             {

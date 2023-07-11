@@ -17,4 +17,14 @@ public class SubscribeRepoMessage
     public ATRecord? Record { get; internal set; }
 
     public FrameError? Error { get; internal set; }
+    
+    public FrameInfo? Info { get; internal set; }
+    
+    public FrameMigrate? Migrate { get; internal set; }
+    
+    public FrameRepoOp? RepoOp { get; internal set; }
+    
+    public FrameTombstone? Tombstone { get; internal set; }
+
+    public List<FrameNode> Nodes { get; } = new List<FrameNode>();
 }
