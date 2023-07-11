@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Models;
 using FishyFlip.Tools;
 using System.Collections.Generic;
 
@@ -45,10 +46,55 @@ public sealed class ATProtocol : IDisposable
                 error => error!);
     }
 
+    public Task<Result<RecordRef>> CreateLikeAsync(
+       Cid cid,
+       AtUri uri,
+       DateTime? createdAt = null,
+       CancellationToken cancellationToken = default)
+    {
+        CreateLikeRecord record = new(
+            Constants.FeedType.Like,
+            this.sessionManager!.Session!.Did.ToString()!,
+            new LikeRecord(new Subject(cid, uri), createdAt ?? DateTime.UtcNow));
+
+        return
+            this.client
+                .Post<CreateLikeRecord, RecordRef>(
+                    Constants.Urls.AtProtoRepo.CreateRecord, this.options.JsonSerializerOptions, record,
+                    cancellationToken, this.options.Logger);
+    }
+
+    public Task<Result<RecordRef>> CreateRepostAsync(
+       Cid cid,
+       AtUri uri,
+       DateTime? createdAt = null,
+       CancellationToken cancellationToken = default)
+    {
+        CreateRepostRecord record = new(
+            Constants.FeedType.Repost,
+            this.sessionManager!.Session!.Did.ToString()!,
+            new RepostRecord(new Subject(cid, uri), createdAt ?? DateTime.UtcNow));
+
+        return
+            this.client
+                .Post<CreateRepostRecord, RecordRef>(
+                    Constants.Urls.AtProtoRepo.CreateRecord, this.options.JsonSerializerOptions, record,
+                    cancellationToken, this.options.Logger);
+    }
+
     public async Task<Result<Blob?>> GetBlobAsync(AtDid did, Cid cid, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.AtProtoSync.GetBlob}?did={did}&cid={cid}";
         return await this.client.GetBlob(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+    }
+
+    public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
+    {
+        return
+            this.client
+                .Post<UploadBlobResponse>(
+                    Constants.Urls.AtProtoRepo.UploadBlob, this.options.JsonSerializerOptions, content,
+                    cancellationToken, this.options.Logger);
     }
 
     public async Task<Result<Session>> RefreshSessionAsync(
@@ -69,6 +115,38 @@ public sealed class ATProtocol : IDisposable
                     return result;
                 },
                 error => error!);
+    }
+
+    public Task<Result<AppPasswords?>> ListAppPasswordsAsync(CancellationToken cancellationToken = default)
+    {
+        return this.client.Get<AppPasswords>(Constants.Urls.AtProtoServer.ListAppPasswords, this.options.JsonSerializerOptions, cancellationToken);
+    }
+
+    public Task<Result<DescribeServer?>> DescribeServerAsync(CancellationToken cancellationToken = default)
+    {
+        return this.client.Get<DescribeServer>(Constants.Urls.AtProtoServer.DescribeServer, this.options.JsonSerializerOptions, cancellationToken);
+    }
+
+    public async Task<Result<PostCollection>> GetPostsAsync(IEnumerable<AtUri> query, CancellationToken cancellationToken = default)
+    {
+        var answer = string.Join(",", query.Select(n => n.ToString()));
+        string url = $"{Constants.Urls.Bluesky.GetPosts}?uris={answer}";
+        Multiple<PostCollection?, Error> result = await this.client.Get<PostCollection>(url, this.options.JsonSerializerOptions, cancellationToken);
+        return result
+            .Match<Result<PostCollection>>(
+                timeline => (timeline ?? new PostCollection(new PostView[0]))!,
+                error => error!);
+    }
+
+    public Task<Result<SessionInfo?>> GetSessionAsync(CancellationToken cancellationToken = default)
+    {
+        return this.client.Get<SessionInfo>(Constants.Urls.AtProtoServer.GetSession, this.options.JsonSerializerOptions, cancellationToken);
+    }
+
+    public Task<Result<InviteCodes?>> GetAccountInviteCodesAsync(bool includeUsed = true, bool createAvailable = true, CancellationToken cancellationToken = default)
+    {
+        var url = $"{Constants.Urls.AtProtoServer.GetAccountInviteCodes}?includeUsed={includeUsed.ToString().ToLowerInvariant()}&createAvailable={createAvailable.ToString().ToLowerInvariant()}";
+        return this.client.Get<InviteCodes>(url, this.options.JsonSerializerOptions, cancellationToken);
     }
 
     public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
