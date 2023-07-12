@@ -47,7 +47,7 @@ public class FacetIndex
 public class FacetFeature
 {
     [JsonConstructor]
-    public FacetFeature(string? type, string? uri, AtDid? did)
+    public FacetFeature(string? type, string? uri, ATDid? did)
     {
         this.Type = type;
         this.Uri = uri;
@@ -58,7 +58,7 @@ public class FacetFeature
     {
         this.Type = obj["$type"].AsString();
         this.Uri = obj["uri"]?.AsString();
-        this.Did = obj["did"] is not null ? AtDid.Create(obj["did"].AsString()) : null;
+        this.Did = obj["did"] is not null ? ATDid.Create(obj["did"].AsString()) : null;
     }
 
     [JsonPropertyName("$type")]
@@ -69,5 +69,5 @@ public class FacetFeature
     /// <summary>
     /// Gets a <see cref="Did"/> of the actor.
     /// </summary>
-    public AtDid? Did { get; }
+    public ATDid? Did { get; }
 }

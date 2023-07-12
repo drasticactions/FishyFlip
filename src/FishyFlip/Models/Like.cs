@@ -6,7 +6,7 @@ namespace FishyFlip.Models;
 
 public class Like : ATRecord
 {
-    public Like(Cid cid, AtUri uri, DateTime createdAt)
+    public Like(Cid cid, ATUri uri, DateTime createdAt)
     {
         this.Cid = cid;
         this.Uri = uri;
@@ -17,14 +17,14 @@ public class Like : ATRecord
     public Like(CBORObject obj)
     {
         this.Cid = obj["subject"]["cid"].ToCid();
-        this.Uri = new AtUri(obj["subject"]["uri"].AsString());
+        this.Uri = new ATUri(obj["subject"]["uri"].AsString());
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Type = Constants.FeedType.Like;
     }
 
     public Cid? Cid { get; }
 
-    public AtUri Uri { get; }
+    public ATUri Uri { get; }
 
     public DateTime? CreatedAt { get; }
 }

@@ -10,10 +10,10 @@ namespace FishyFlip.Models
         {
             this.CreatedAt = obj["createdAt"].ToDateTime();
             this.Type = Constants.GraphTypes.Follow;
-            this.Did = AtDid.Create(obj["subject"].AsString());
+            this.Did = ATDid.Create(obj["subject"].AsString());
         }
 
-        public AtDid Did { get; }
+        public ATDid Did { get; }
 
         public DateTime? CreatedAt { get; }
     }

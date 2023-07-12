@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 public class PostRecord : ATFeedTypeAPI
 {
     [JsonConstructor]
-    public PostRecord(Post? value, AtUri? uri, Cid? cid)
+    public PostRecord(Post? value, ATUri? uri, Cid? cid)
         : base(uri, cid)
     {
         this.Value = value;

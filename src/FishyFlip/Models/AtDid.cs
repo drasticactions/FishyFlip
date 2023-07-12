@@ -1,19 +1,19 @@
-﻿// <copyright file="AtDid.cs" company="Drastic Actions">
+﻿// <copyright file="ATDid.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
 namespace FishyFlip.Models;
 
-public class AtDid : ATIdentifier
+public class ATDid : ATIdentifier
 {
-    protected AtDid(string ident)
+    protected ATDid(string ident)
     {
         this.Handler = ident;
     }
 
     public string Handler { get; }
 
-    public static AtDid Create(string uri)
+    public static ATDid Create(string uri)
     {
         if (string.IsNullOrEmpty(uri))
         {
@@ -21,7 +21,7 @@ public class AtDid : ATIdentifier
         }
 
         DIDValidator.EnsureValidDid(uri);
-        return new AtDid(uri);
+        return new ATDid(uri);
     }
 
     public override string ToString()
@@ -29,7 +29,7 @@ public class AtDid : ATIdentifier
         return this.Handler.ToString();
     }
 
-    internal static AtDid? Create(AtUri uri)
+    internal static ATDid? Create(ATUri uri)
     {
         if (uri == null)
         {
@@ -39,7 +39,7 @@ public class AtDid : ATIdentifier
         var valid = DIDValidator.EnsureValidDid(uri.Hostname);
         if (valid)
         {
-            return new AtDid(uri.Hostname);
+            return new ATDid(uri.Hostname);
         }
 
         return null;

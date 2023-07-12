@@ -12,7 +12,7 @@ namespace FishyFlip.Models;
 public class Post : ATRecord
 {
     [JsonConstructor]
-    public Post(Embed? embed, Facet[]? facets, DateTime? createdAt, Reply? reply, string text, string[] langs, string? type)
+    public Post(Embed? embed, Facet[]? facets, DateTime? createdAt, Reply? reply, string? text, string[]? langs, string? type)
         : base(type)
     {
         this.Embed = embed;
@@ -51,7 +51,7 @@ public class Post : ATRecord
 
     public Reply? Reply { get; set; }
 
-    public string Text { get; }
+    public string? Text { get; }
 
     public string[]? Langs { get; }
 }

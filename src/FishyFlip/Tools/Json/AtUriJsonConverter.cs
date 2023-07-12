@@ -4,9 +4,9 @@
 
 namespace FishyFlip.Tools.Json;
 
-public class AtUriJsonConverter : JsonConverter<AtUri>
+public class AtUriJsonConverter : JsonConverter<ATUri>
 {
-    public override AtUri? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ATUri? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         string? value = reader.GetString();
         if (value is null)
@@ -16,7 +16,7 @@ public class AtUriJsonConverter : JsonConverter<AtUri>
 
         try
         {
-            return new AtUri(value);
+            return new ATUri(value);
         }
         catch (Exception)
         {
@@ -24,7 +24,7 @@ public class AtUriJsonConverter : JsonConverter<AtUri>
         }
     }
 
-    public override void Write(Utf8JsonWriter writer, AtUri? value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, ATUri? value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value?.ToString());
     }

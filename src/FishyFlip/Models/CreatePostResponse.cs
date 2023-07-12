@@ -1,13 +1,13 @@
-﻿// <copyright file="Subject.cs" company="Drastic Actions">
+﻿// <copyright file="CreatePostResponse.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
 namespace FishyFlip.Models;
 
-public class Subject
+public class CreatePostResponse
 {
     [JsonConstructor]
-    public Subject(Cid? cid, ATUri? uri)
+    public CreatePostResponse(ATUri? uri, Cid? cid)
     {
         this.Cid = cid;
         this.Uri = uri;

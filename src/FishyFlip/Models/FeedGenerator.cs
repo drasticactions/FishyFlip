@@ -9,14 +9,14 @@ public class FeedGenerator : ATRecord
     public FeedGenerator(CBORObject obj)
     {
         this.Type = Constants.FeedType.Generator;
-        this.Did = obj["did"] is not null ? AtDid.Create(obj["did"].AsString()) : null;
+        this.Did = obj["did"] is not null ? ATDid.Create(obj["did"].AsString()) : null;
         this.Avatar = obj["avatar"] is not null ? new Image(obj["avatar"]) : null;
         this.CreatedAt = obj["createdAt"] is not null ? obj["createdAt"].ToDateTime() : null;
         this.Description = obj["description"]?.AsString();
         this.DisplayName = obj["displayName"]?.AsString();
     }
 
-    public AtDid? Did { get; }
+    public ATDid? Did { get; }
 
     public Image? Avatar { get; }
 

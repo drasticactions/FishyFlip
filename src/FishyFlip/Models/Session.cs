@@ -8,8 +8,8 @@ public class Session
 {
     [JsonConstructor]
     public Session(
-        AtDid did,
-        AtHandler handle,
+        ATDid did,
+        ATHandler handle,
         string email,
         string accessJwt,
         string refreshJwt)
@@ -21,9 +21,9 @@ public class Session
         this.RefreshJwt = refreshJwt;
     }
 
-    public AtDid Did { get; }
+    public ATDid Did { get; }
 
-    public AtHandler Handle { get; }
+    public ATHandler Handle { get; }
 
     public string Email { get; }
 

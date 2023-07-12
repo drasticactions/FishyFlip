@@ -2,9 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Tools;
-using System.Collections.Generic;
-
 namespace FishyFlip;
 
 public sealed class ATProtocol : IDisposable
@@ -47,7 +44,7 @@ public sealed class ATProtocol : IDisposable
 
     public Task<Result<RecordRef>> CreateLikeAsync(
        Cid cid,
-       AtUri uri,
+       ATUri uri,
        DateTime? createdAt = null,
        CancellationToken cancellationToken = default)
     {
@@ -65,7 +62,7 @@ public sealed class ATProtocol : IDisposable
 
     public Task<Result<RecordRef>> CreateRepostAsync(
        Cid cid,
-       AtUri uri,
+       ATUri uri,
        DateTime? createdAt = null,
        CancellationToken cancellationToken = default)
     {
@@ -81,7 +78,7 @@ public sealed class ATProtocol : IDisposable
                     cancellationToken, this.options.Logger);
     }
 
-    public async Task<Result<Blob?>> GetBlobAsync(AtDid did, Cid cid, CancellationToken cancellationToken = default)
+    public async Task<Result<Blob?>> GetBlobAsync(ATDid did, Cid cid, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.AtProtoSync.GetBlob}?did={did}&cid={cid}";
         return await this.client.GetBlob(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
@@ -116,17 +113,96 @@ public sealed class ATProtocol : IDisposable
                 error => error!);
     }
 
-    public Task<Result<AppPasswords?>> ListAppPasswordsAsync(CancellationToken cancellationToken = default)
+    public async Task<Result<ThreadPostViewFeed>> GetPostThreadAsync(
+        ATUri uri,
+        int depth = 0,
+        CancellationToken cancellationToken = default)
     {
-        return this.client.Get<AppPasswords>(Constants.Urls.AtProtoServer.ListAppPasswords, this.options.JsonSerializerOptions, cancellationToken);
+        string url = $"{Constants.Urls.Bluesky.GetPostThread}?uri={uri}";
+        if (depth > 0)
+        {
+            url += $"&depth={depth}";
+        }
+
+        Multiple<ThreadPostViewFeed?, Error> result = await this.client.Get<ThreadPostViewFeed>(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+        return result
+            .Match<Result<ThreadPostViewFeed>>(
+                timeline => timeline!,
+                error => error!);
     }
+
+    public Task<Result<CreatePostResponse>> CreatePostAsync(
+        string text,
+        Facet[]? facets = null,
+        Embed? embed = default,
+        string[]? langs = null,
+        DateTime? createdAt = null,
+        string? rkey = null,
+        string? swapCommit = null,
+        CancellationToken cancellationToken = default)
+    {
+        CreatePostRecord record = new(
+            Constants.FeedType.Post,
+            this.sessionManager!.Session!.Did.ToString()!,
+            new Post(embed, facets, createdAt, null, text, langs, Constants.FeedType.Post),
+            rkey,
+            swapCommit);
+
+        return
+            this.client
+                .Post<CreatePostRecord, CreatePostResponse>(
+                    Constants.Urls.AtProtoRepo.CreateRecord, this.options.JsonSerializerOptions, record,
+                    cancellationToken, this.options.Logger);
+    }
+
+    public async Task<Result<RepostedFeed>> GetRepostedByAsync(
+        ATUri uri,
+        int limit = 50,
+        Cid? cid = default,
+        string? cursor = default,
+        CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.GetRepostedBy}?uri={uri.ToString()}&limit={limit}";
+
+        if (cid is not null)
+        {
+            url += $"&cid={cid}";
+        }
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        Multiple<RepostedFeed?, Error> result = await this.client.Get<RepostedFeed>(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+        return result
+            .Match<Result<RepostedFeed>>(
+                timeline => (timeline ?? new RepostedFeed(Array.Empty<FeedProfile>(), null))!,
+                error => error!);
+    }
+
+    public async Task<Result<Timeline>> GetAuthorFeedAsync(ATIdentifier handle, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.GetAuthorFeed}?actor={handle.ToString()}&limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        Multiple<Timeline?, Error> result = await this.client.Get<Timeline>(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+        return result
+            .Match<Result<Timeline>>(
+                authorFeed => (authorFeed ?? new Timeline(Array.Empty<FeedViewPost>(), null))!,
+                error => error!);
+    }
+
+    public Task<Result<AppPasswords?>> ListAppPasswordsAsync(CancellationToken cancellationToken = default)
+        => this.client.Get<AppPasswords>(Constants.Urls.AtProtoServer.ListAppPasswords, this.options.JsonSerializerOptions, cancellationToken);
 
     public Task<Result<DescribeServer?>> DescribeServerAsync(CancellationToken cancellationToken = default)
-    {
-        return this.client.Get<DescribeServer>(Constants.Urls.AtProtoServer.DescribeServer, this.options.JsonSerializerOptions, cancellationToken);
-    }
+        => this.client.Get<DescribeServer>(Constants.Urls.AtProtoServer.DescribeServer, this.options.JsonSerializerOptions, cancellationToken);
 
-    public async Task<Result<PostCollection>> GetPostsAsync(IEnumerable<AtUri> query, CancellationToken cancellationToken = default)
+    public async Task<Result<PostCollection>> GetPostsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
     {
         var answer = string.Join(",", query.Select(n => n.ToString()));
         string url = $"{Constants.Urls.Bluesky.GetPosts}?uris={answer}";
@@ -137,10 +213,35 @@ public sealed class ATProtocol : IDisposable
                 error => error!);
     }
 
-    public Task<Result<SessionInfo?>> GetSessionAsync(CancellationToken cancellationToken = default)
+    public async Task<Result<Timeline>> GetTimelineAsync(int limit = 50, string? cursor = default, string algorithm = "reverse-chronological", CancellationToken cancellationToken = default)
     {
-        return this.client.Get<SessionInfo>(Constants.Urls.AtProtoServer.GetSession, this.options.JsonSerializerOptions, cancellationToken);
+        string url = $"{Constants.Urls.Bluesky.GetTimeline}?algorithm={algorithm}&limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        Multiple<Timeline?, Error> result = await this.client.Get<Timeline>(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+        return result
+            .Match<Result<Timeline>>(
+                timeline => (timeline ?? new Timeline(Array.Empty<FeedViewPost>(), null))!,
+                error => error!);
     }
+
+    public async Task<Result<HandleResolution?>> ResolveHandleAsync(ATHandler handler, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.AtProtoIdentity.ResolveHandle}?handle={handler}";
+        return await this.client.Get<HandleResolution>(url, this.options.JsonSerializerOptions, cancellationToken);
+    }
+
+    public Task<Result<FeedProfile?>> GetProfileAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.GetActorProfile}?actor={identifier}";
+        return this.client.Get<FeedProfile>(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+    }
+
+    public Task<Result<SessionInfo?>> GetSessionAsync(CancellationToken cancellationToken = default)
+        => this.client.Get<SessionInfo>(Constants.Urls.AtProtoServer.GetSession, this.options.JsonSerializerOptions, cancellationToken);
 
     public Task<Result<InviteCodes?>> GetAccountInviteCodesAsync(bool includeUsed = true, bool createAvailable = true, CancellationToken cancellationToken = default)
     {
@@ -161,6 +262,27 @@ public sealed class ATProtocol : IDisposable
         }
 
         return await this.client.Get<T>(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+    }
+
+    public async Task<Result<LikesFeed>> GetLikesAsync(ATUri uri, int limit = 50, Cid? cid = default, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.GetLikes}?uri={uri.ToString()}&limit={limit}";
+
+        if (cid is not null)
+        {
+            url += $"&cid={cid}";
+        }
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        Multiple<LikesFeed?, Error> result = await this.Client.Get<LikesFeed>(url, this.options.JsonSerializerOptions, cancellationToken, this.options.Logger);
+        return result
+            .Match<Result<LikesFeed>>(
+                timeline => (timeline ?? new LikesFeed(Array.Empty<Like>(), null))!,
+                error => error!);
     }
 
     /// <summary>

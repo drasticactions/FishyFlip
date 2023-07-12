@@ -4,4 +4,4 @@
 
 namespace FishyFlip.Models;
 
-public record RecordRef(Cid Cid, AtUri Uri);
+public record RecordRef(Cid Cid, ATUri Uri);

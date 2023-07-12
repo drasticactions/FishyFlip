@@ -1,3 +1,3 @@
 ﻿namespace FishyFlip.Models;
 
-public record InviteCode(string Code, int Available, bool Disabled, AtDid ForAccount, AtDid CreatedAt, Used[] Uses);
+public record InviteCode(string Code, int Available, bool Disabled, ATDid ForAccount, ATDid CreatedAt, Used[] Uses);

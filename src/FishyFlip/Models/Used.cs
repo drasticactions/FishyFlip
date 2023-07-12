@@ -1,3 +1,3 @@
 ﻿namespace FishyFlip.Models;
 
-public record Used(AtDid UsedBy, DateTime UsedAt);
+public record Used(ATDid UsedBy, DateTime UsedAt);

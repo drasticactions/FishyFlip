@@ -1,10 +1,10 @@
-﻿// <copyright file="AtUri.cs" company="Drastic Actions">
+﻿// <copyright file="ATUri.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
 namespace FishyFlip.Models;
 
-public class AtUri
+public class ATUri
 {
     private static readonly Regex AtpUriRegex = new Regex(
         @"^(at:\/\/)?((?:did:[a-z0-9:%-]+)|(?:[a-z][a-z0-9.:-]*))(\/[^?#\s]*)?(\?[^#\s]+)?(#[^\s]+)?$",
@@ -12,7 +12,7 @@ public class AtUri
 
     private string host;
 
-    public AtUri(string uri)
+    public ATUri(string uri)
     {
         Match match = AtpUriRegex.Match(uri);
 
@@ -24,8 +24,8 @@ public class AtUri
         this.host = match.Groups[2].Value ?? string.Empty;
         this.Pathname = match.Groups[3].Value ?? string.Empty;
         this.Hash = match.Groups[5].Value ?? string.Empty;
-        this.Did = AtDid.Create(this);
-        this.Handler = AtHandler.Create(this);
+        this.Did = ATDid.Create(this);
+        this.Handler = ATHandler.Create(this);
     }
 
     public string Hash { get; private set; }
@@ -38,9 +38,9 @@ public class AtUri
 
     public string Hostname => this.host;
 
-    public AtDid? Did { get; }
+    public ATDid? Did { get; }
 
-    public AtHandler? Handler { get; }
+    public ATHandler? Handler { get; }
 
     public string Collection => this.Pathname.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
 

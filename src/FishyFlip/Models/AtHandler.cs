@@ -1,19 +1,19 @@
-﻿// <copyright file="AtHandler.cs" company="Drastic Actions">
+﻿// <copyright file="ATHandler.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
 namespace FishyFlip.Models;
 
-public class AtHandler : ATIdentifier
+public class ATHandler : ATIdentifier
 {
-    protected AtHandler(string ident)
+    protected ATHandler(string ident)
     {
         this.Handler = ident;
     }
 
     public string Handler { get; }
 
-    public static AtHandler Create(string uri)
+    public static ATHandler Create(string uri)
     {
         if (string.IsNullOrEmpty(uri))
         {
@@ -21,7 +21,7 @@ public class AtHandler : ATIdentifier
         }
 
         HandleValidator.EnsureValidHandle(uri);
-        return new AtHandler(uri);
+        return new ATHandler(uri);
     }
 
     public override string ToString()
@@ -29,7 +29,7 @@ public class AtHandler : ATIdentifier
         return this.Handler.ToString();
     }
 
-    internal static AtHandler? Create(AtUri uri)
+    internal static ATHandler? Create(ATUri uri)
     {
         if (uri == null)
         {
@@ -39,7 +39,7 @@ public class AtHandler : ATIdentifier
         var valid = HandleValidator.EnsureValidHandle(uri.Hostname);
         if (valid)
         {
-            return new AtHandler(uri.Hostname);
+            return new ATHandler(uri.Hostname);
         }
 
         return null;

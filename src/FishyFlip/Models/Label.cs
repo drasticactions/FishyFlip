@@ -4,4 +4,4 @@
 
 namespace FishyFlip.Models;
 
-public record Label(AtUri Src, string Uri, Cid Cid, string Val, bool Neg, DateTime Cts);
+public record Label(ATUri Src, string Uri, Cid Cid, string Val, bool Neg, DateTime Cts);

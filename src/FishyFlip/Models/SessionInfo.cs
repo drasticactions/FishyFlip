@@ -1,3 +1,3 @@
 ﻿namespace FishyFlip.Models;
 
-public record SessionInfo(string Handle, AtDid Did, string? Email);
+public record SessionInfo(string Handle, ATDid Did, string? Email);
