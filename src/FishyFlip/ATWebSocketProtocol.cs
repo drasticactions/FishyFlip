@@ -2,7 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Models;
 using Google.Protobuf;
+using static FishyFlip.Tools.CarDecoder;
 
 namespace FishyFlip;
 
@@ -127,10 +129,9 @@ internal class ATWebSocketProtocol : IDisposable
                             break;
                         }
 
-                        var blocks = CarDecoder.DecodeCar(frameCommit.Blocks);
-                        foreach (var block in blocks)
+                        void HandleProgressStatus(CarProgressStatusEvent e)
                         {
-                            using var blockStream = new MemoryStream(block.Value);
+                            using var blockStream = new MemoryStream(e.Bytes);
                             var blockObj = CBORObject.Read(blockStream);
                             if (blockObj["$type"] is not null)
                             {
@@ -167,22 +168,20 @@ internal class ATWebSocketProtocol : IDisposable
                                         this.logger?.LogDebug($"WSS: Unknown Obj: {blockObj.ToJSONString()}");
                                         break;
                                 }
-
-                                // this.logger?.LogDebug($"FrameRecord: {blockObj.ToJSONString()}");
                             }
                             else if (blockObj["sig"] is not null)
                             {
                                 message.Footer = new FrameFooter(blockObj);
-
-                                // this.logger?.LogDebug($"FrameFooter: {blockObj.ToJSONString()}");
                             }
                             else
                             {
                                 message.Nodes.Add(new FrameNode(blockObj));
-
-                                // this.logger?.LogDebug($"FrameNode: {blockObj.ToJSONString()}");
                             }
+
+
                         }
+
+                        CarDecoder.DecodeCar(frameCommit.Blocks, HandleProgressStatus);
 
                         break;
                     case "#handle":

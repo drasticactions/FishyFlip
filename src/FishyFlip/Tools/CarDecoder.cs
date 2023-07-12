@@ -2,12 +2,14 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System;
+
 namespace FishyFlip.Tools;
 
 /// <summary>
 /// Decode CAR byte arrays.
 /// </summary>
-internal static class CarDecoder
+public static class CarDecoder
 {
     private const int CidV1BytesLength = 36;
 
@@ -15,11 +17,8 @@ internal static class CarDecoder
     /// Decodes CAR Byte Array.
     /// </summary>
     /// <param name="bytes">Byte Array.</param>
-    /// <returns>Dictionary of CID and byte array.</returns>
-    public static Dictionary<Cid, byte[]> DecodeCar(byte[] bytes)
+    internal static void DecodeCar(byte[] bytes, OnCarDecoded? progress = null)
     {
-        var blocks = new Dictionary<Cid, byte[]>();
-
         int bytesLength = bytes.Length;
         var header = DecodeReader(bytes);
 
@@ -34,11 +33,10 @@ internal static class CarDecoder
             var cid = Cid.Read(cidBytes);
 
             start += CidV1BytesLength;
-            blocks[cid] = bytes[start..(start + body.Value - CidV1BytesLength)];
+            var bs = bytes[start..(start + body.Value - CidV1BytesLength)];
             start += body.Value - CidV1BytesLength;
+            progress?.Invoke(new CarProgressStatusEvent(cid, bs));
         }
-
-        return blocks;
     }
 
     private static DecodedBlock DecodeReader(byte[] bytes)
@@ -84,5 +82,20 @@ internal static class CarDecoder
         public int Value { get; }
 
         public int Length { get; }
+    }
+
+    public delegate void OnCarDecoded(CarProgressStatusEvent e);
+
+    public class CarProgressStatusEvent
+    {
+        public CarProgressStatusEvent(Cid cid, byte[] bytes)
+        {
+            this.Cid = cid;
+            this.Bytes = bytes;
+        }
+
+        public byte[] Bytes { get; }
+
+        public Cid Cid { get; }
     }
 }

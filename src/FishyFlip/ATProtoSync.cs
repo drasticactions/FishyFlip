@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using static FishyFlip.Tools.CarDecoder;
+
 namespace FishyFlip;
 
 public sealed class ATProtoSync
@@ -42,10 +44,12 @@ public sealed class ATProtoSync
     public Task<Result<Success?>> RequestCrawlAsync(string hostname, CancellationToken cancellationToken = default)
         => this.Client.Get<Success>($"{Constants.Urls.ATProtoSync.RequestCrawl}?hostname={hostname}", this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
-    public Task<Result<Dictionary<Cid, byte[]>?>> GetRepoAsync(ATDid repo,
+    public Task<Result<Success>> GetRepoAsync(ATDid repo, OnCarDecoded onDecoded,
         CancellationToken cancellationToken = default)
-        => this.Client.GetCarAsync($"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}",
-            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    {
+        return this.Client.GetCarAsync($"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}",
+            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
+    }
 
     public async Task<Result<CommitPath?>> GetCommitPathAsync(ATDid did, Cid? latest = default, Cid? earliest = default, CancellationToken cancellationToken = default)
     {
@@ -63,17 +67,17 @@ public sealed class ATProtoSync
         return await this.Client.Get<CommitPath>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
     
-    public Task<Result<Dictionary<Cid, byte[]>?>> GetBlocksAsync(ATDid did, Cid[] commits,
+    public Task<Result<Success>> GetBlocksAsync(ATDid did, Cid[] commits, OnCarDecoded onDecoded,
         CancellationToken cancellationToken = default)
     {
         var commitList = string.Join(",", commits.Select(n => n.ToString()));
         var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&commits={commitList}";
 
         return this.Client.GetCarAsync(url,
-            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
     }
     
-    public Task<Result<Dictionary<Cid, byte[]>?>> GetCheckoutAsync(ATDid did, Cid? commit = default,
+    public Task<Result<Success>> GetCheckoutAsync(ATDid did, OnCarDecoded onDecoded, Cid? commit = default,
         CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={did}";
@@ -81,12 +85,12 @@ public sealed class ATProtoSync
         {
             url += $"&commit={commit}";
         }
-        
+
         return this.Client.GetCarAsync(url,
-            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
     }
     
-    public Task<Result<Dictionary<Cid, byte[]>?>> GetRecordAsync(string collection, ATDid repo, string rkey, Cid? commit = default,
+    public Task<Result<Success>> GetRecordAsync(string collection, ATDid repo, string rkey, OnCarDecoded onDecoded, Cid? commit = default,
         CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={repo}&rkey={rkey}";
@@ -96,7 +100,7 @@ public sealed class ATProtoSync
         }
         
         return this.Client.GetCarAsync(url,
-            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
     }
     
     public async Task<Result<RepoList?>> ListReposAsync(

@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using static FishyFlip.Tools.CarDecoder;
+
 namespace FishyFlip;
 
 public sealed class ATProtoDebug
@@ -20,9 +22,9 @@ public sealed class ATProtoDebug
     public Task<Result<dynamic?>> GetAsync(string path, CancellationToken cancellationToken = default)
         => this.Client.Get<dynamic?>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
-    public Task<Result<Dictionary<Cid, byte[]>?>> GetCarAsync(string path,
+    public Task<Result<Success>> GetCarAsync(string path, OnCarDecoded decode,
         CancellationToken cancellationToken = default)
-        => this.Client.GetCarAsync(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        => this.Client.GetCarAsync(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, decode);
 
     public Task<Result<dynamic?>> PostAsync(string path, CancellationToken cancellationToken = default)
         => this.Client.Post<dynamic?>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);

@@ -11,7 +11,7 @@ public record PostView(
     int RepostCount,
     int LikeCount,
     Embed Embed,
-    Profile Author,
-    PostRecord Record,
+    FeedProfile Author,
+    Post Record,
     DateTime IndexedAt,
     IReadOnlyList<Label> Labels);

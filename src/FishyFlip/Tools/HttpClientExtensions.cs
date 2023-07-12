@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using static FishyFlip.Tools.CarDecoder;
+
 namespace FishyFlip.Tools;
 
 internal static class HttpClientExtensions
@@ -100,12 +102,13 @@ internal static class HttpClientExtensions
         return new Blob(blob);
     }
     
-    internal static async Task<Result<Dictionary<Cid, byte[]>?>> GetCarAsync(
+    internal static async Task<Result<Success>> GetCarAsync(
         this HttpClient client,
         string url,
         JsonSerializerOptions options,
         CancellationToken cancellationToken,
-        ILogger? logger = default)
+        ILogger? logger = default,
+        OnCarDecoded? progress = null)
     {
         logger?.LogDebug($"GET {url}");
         var message = await client.GetAsync(url, cancellationToken);
@@ -116,7 +119,8 @@ internal static class HttpClientExtensions
         }
         
         var byteArray = await message.Content.ReadAsByteArrayAsync(cancellationToken);
-        return CarDecoder.DecodeCar(byteArray);
+        CarDecoder.DecodeCar(byteArray, progress);
+        return new Success();
     }
 
     internal static async Task<Result<T?>> Get<T>(
