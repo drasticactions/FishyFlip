@@ -7,33 +7,22 @@ namespace FishyFlip.Models;
 public class ExternalEmbed : Embed
 {
     [JsonConstructor]
-    public ExternalEmbed(Image? thumb, string? title, string? description, string? uri, string? type)
+    public ExternalEmbed(External external, string? type)
         : base(type)
     {
-        this.Thumb = thumb;
-        this.Title = title;
-        this.Description = description;
-        this.Uri = uri;
+        this.External = external;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RecordEmbed"/> class.
+    /// </summary>
+    /// <param name="obj">CBORObject.</param>
     public ExternalEmbed(CBORObject obj)
     {
-        this.Type = Constants.EmbedTypes.External;
-        if (obj["thumb"] is not null)
-        {
-            this.Thumb = new Image(obj["thumb"]);
-        }
-
-        this.Uri = obj["uri"].AsString();
-        this.Title = obj["title"].AsString();
-        this.Description = obj["description"].AsString();
+        this.Type = Constants.EmbedTypes.Record;
+        this.External = new External(obj);
     }
 
-    public Image? Thumb { get; }
 
-    public string? Title { get; }
-
-    public string? Description { get; }
-
-    public string? Uri { get; }
+    public External? External { get; }
 }

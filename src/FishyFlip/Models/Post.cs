@@ -32,6 +32,12 @@ public class Post : ATRecord
         if (!obj["embed"]?.IsNull ?? false)
         {
             this.Embed = obj["embed"].ToEmbed();
+#if DEBUG
+            if (this.Embed is null)
+            {
+                System.Diagnostics.Debugger.Break();
+            }
+#endif
         }
 
         this.CreatedAt = obj["createdAt"].ToDateTime();

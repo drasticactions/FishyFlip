@@ -9,7 +9,7 @@ public class Session
     [JsonConstructor]
     public Session(
         ATDid did,
-        ATHandler handle,
+        ATHandle handle,
         string email,
         string accessJwt,
         string refreshJwt)
@@ -23,7 +23,7 @@ public class Session
 
     public ATDid Did { get; }
 
-    public ATHandler Handle { get; }
+    public ATHandle Handle { get; }
 
     public string Email { get; }
 

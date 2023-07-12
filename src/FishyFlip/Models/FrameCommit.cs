@@ -14,7 +14,7 @@ public class FrameCommit
         this.Prev = obj["prev"].ToCid();
         this.Commit = obj["commit"].ToCid();
         this.Repo = obj["repo"] is not null ? ATDid.Create(obj["repo"].AsString()) : null;
-        this.Handle = obj["handle"] is not null ? ATHandler.Create(obj["handle"].AsString()) : null;
+        this.Handle = obj["handle"] is not null ? ATHandle.Create(obj["handle"].AsString()) : null;
         this.Rebase = obj["rebase"]?.AsBoolean() ?? false;
         this.TooBig = obj["tooBig"]?.AsBoolean() ?? false;
         this.Time = DateTime.Parse(obj["time"].AsString());
@@ -33,7 +33,7 @@ public class FrameCommit
     /// <summary>
     /// Gets the handle.
     /// </summary>
-    public ATHandler? Handle { get; }
+    public ATHandle? Handle { get; }
 
     /// <summary>
     /// Gets the previous id.

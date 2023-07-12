@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip", "FishyFlip\Fish
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip.BlazorApp", "FishyFlip.BlazorApp\FishyFlip.BlazorApp.csproj", "{11B67637-DA4F-4B5F-B828-912C9DC6E52E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip.Tests", "FishyFlip.Tests\FishyFlip.Tests.csproj", "{718EED01-74D0-4D4B-B104-34F28A505D74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{11B67637-DA4F-4B5F-B828-912C9DC6E52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11B67637-DA4F-4B5F-B828-912C9DC6E52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11B67637-DA4F-4B5F-B828-912C9DC6E52E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718EED01-74D0-4D4B-B104-34F28A505D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718EED01-74D0-4D4B-B104-34F28A505D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718EED01-74D0-4D4B-B104-34F28A505D74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718EED01-74D0-4D4B-B104-34F28A505D74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

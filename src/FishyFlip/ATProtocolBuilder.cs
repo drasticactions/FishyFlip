@@ -28,9 +28,9 @@ public class ATProtocolBuilder
         return this;
     }
 
-    public ATProtocolBuilder WithUrl(string url)
+    public ATProtocolBuilder WithInstanceUrl(Uri url)
     {
-        this.atProtocolOptions.Url = new Uri(url);
+        this.atProtocolOptions.Url = url;
         return this;
     }
 

@@ -14,6 +14,7 @@ public class RecordWithMediaEmbed : Embed
     {
         this.Record = record;
         this.Images = images;
+        this.Type = Constants.EmbedTypes.RecordWithMedia;
     }
 
     /// <summary>

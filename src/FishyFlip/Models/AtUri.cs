@@ -12,7 +12,7 @@ public class ATUri
 
     private string host;
 
-    public ATUri(string uri)
+    internal ATUri(string uri)
     {
         Match match = AtpUriRegex.Match(uri);
 
@@ -25,8 +25,11 @@ public class ATUri
         this.Pathname = match.Groups[3].Value ?? string.Empty;
         this.Hash = match.Groups[5].Value ?? string.Empty;
         this.Did = ATDid.Create(this);
-        this.Handler = ATHandler.Create(this);
+        this.Handle = ATHandle.Create(this);
     }
+
+    public static ATUri Create(string uri)
+        => new ATUri(uri);
 
     public string Hash { get; private set; }
 
@@ -40,7 +43,9 @@ public class ATUri
 
     public ATDid? Did { get; }
 
-    public ATHandler? Handler { get; }
+    public ATHandle? Handle { get; }
+
+    public string? Identity => this.Did?.ToString() ?? this.Handle?.ToString();
 
     public string Collection => this.Pathname.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
 

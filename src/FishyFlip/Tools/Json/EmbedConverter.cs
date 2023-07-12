@@ -15,11 +15,19 @@ public class EmbedConverter : JsonConverter<Embed>
                 var text = type.GetString()?.Trim() ?? string.Empty;
                 switch (text)
                 {
+                    case Constants.EmbedTypes.Images:
+                        if (doc.RootElement.TryGetProperty("images", out var img))
+                        {
+                            var item = JsonSerializer.Deserialize<ImagesEmbed>(doc.RootElement.GetRawText(), options);
+                            return item;
+                        }
+
+                        break;
                     case Constants.EmbedTypes.External:
                         if (doc.RootElement.TryGetProperty("external", out var ext))
                         {
                             var test = ext.GetRawText();
-                            var item = JsonSerializer.Deserialize<ExternalEmbed>(ext.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ExternalEmbed>(doc.RootElement.GetRawText(), options);
                             return item;
                         }
 
@@ -27,7 +35,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.Record:
                         if (doc.RootElement.TryGetProperty("record", out var value))
                         {
-                            var item = JsonSerializer.Deserialize<RecordEmbed>(value.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<RecordEmbed>(doc.RootElement.GetRawText(), options);
                             return item;
                         }
 

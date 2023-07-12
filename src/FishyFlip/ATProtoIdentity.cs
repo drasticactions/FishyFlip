@@ -17,7 +17,7 @@ public sealed class ATProtoIdentity
 
     private HttpClient Client => this.proto.Client;
 
-    public async Task<Result<HandleResolution?>> ResolveHandleAsync(ATHandler handler, CancellationToken cancellationToken = default)
+    public async Task<Result<HandleResolution?>> ResolveHandleAsync(ATHandle handler, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.ATProtoIdentity.ResolveHandle}?handle={handler}";
         return await this.Client.Get<HandleResolution>(url, this.Options.JsonSerializerOptions, cancellationToken);

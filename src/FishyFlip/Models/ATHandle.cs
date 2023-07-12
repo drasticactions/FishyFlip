@@ -4,16 +4,16 @@
 
 namespace FishyFlip.Models;
 
-public class ATHandler : ATIdentifier
+public class ATHandle : ATIdentifier
 {
-    protected ATHandler(string ident)
+    protected ATHandle(string ident)
     {
         this.Handler = ident;
     }
 
     public string Handler { get; }
 
-    public static ATHandler Create(string uri)
+    public static ATHandle Create(string uri)
     {
         if (string.IsNullOrEmpty(uri))
         {
@@ -21,7 +21,7 @@ public class ATHandler : ATIdentifier
         }
 
         HandleValidator.EnsureValidHandle(uri);
-        return new ATHandler(uri);
+        return new ATHandle(uri);
     }
 
     public override string ToString()
@@ -29,7 +29,7 @@ public class ATHandler : ATIdentifier
         return this.Handler.ToString();
     }
 
-    internal static ATHandler? Create(ATUri uri)
+    internal static ATHandle? Create(ATUri uri)
     {
         if (uri == null)
         {
@@ -39,7 +39,7 @@ public class ATHandler : ATIdentifier
         var valid = HandleValidator.EnsureValidHandle(uri.Hostname);
         if (valid)
         {
-            return new ATHandler(uri.Hostname);
+            return new ATHandle(uri.Hostname);
         }
 
         return null;
