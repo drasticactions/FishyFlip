@@ -8,7 +8,7 @@ public sealed class ATProtoLabel
 {
     private ATProtocol proto;
 
-    public ATProtoLabel(ATProtocol proto)
+    internal ATProtoLabel(ATProtocol proto)
     {
         this.proto = proto;
     }

@@ -36,6 +36,12 @@ public sealed class ATProtocol : IDisposable
 
     public BlueskyActor Actor => new(this);
 
+    public ATProtoLabel Label => new(this);
+
+    public ATProtoModeration Moderation => new(this);
+
+    public ATProtoDebug Debug => new(this);
+
     public BlueskyFeed Feed => new(this);
 
     public BlueskyGraph Graph => new(this);

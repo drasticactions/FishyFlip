@@ -8,7 +8,7 @@ public sealed class BlueskyNotification
 {
     private ATProtocol proto;
 
-    public BlueskyNotification(ATProtocol proto)
+    internal BlueskyNotification(ATProtocol proto)
     {
         this.proto = proto;
     }

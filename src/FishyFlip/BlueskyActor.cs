@@ -8,7 +8,7 @@ public sealed class BlueskyActor
 {
     private ATProtocol proto;
 
-    public BlueskyActor(ATProtocol proto)
+    internal BlueskyActor(ATProtocol proto)
     {
         this.proto = proto;
     }

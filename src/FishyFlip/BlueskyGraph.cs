@@ -8,7 +8,7 @@ public sealed class BlueskyGraph
 {
     private ATProtocol proto;
 
-    public BlueskyGraph(ATProtocol proto)
+    internal BlueskyGraph(ATProtocol proto)
     {
         this.proto = proto;
     }

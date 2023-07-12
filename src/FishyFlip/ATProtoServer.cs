@@ -8,7 +8,7 @@ public sealed class ATProtoServer
 {
     private ATProtocol proto;
 
-    public ATProtoServer(ATProtocol proto)
+    internal ATProtoServer(ATProtocol proto)
     {
         this.proto = proto;
     }

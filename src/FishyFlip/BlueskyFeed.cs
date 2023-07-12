@@ -8,7 +8,7 @@ public sealed class BlueskyFeed
 {
     private ATProtocol proto;
 
-    public BlueskyFeed(ATProtocol proto)
+    internal BlueskyFeed(ATProtocol proto)
     {
         this.proto = proto;
     }

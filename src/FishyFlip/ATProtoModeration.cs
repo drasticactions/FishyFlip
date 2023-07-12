@@ -8,7 +8,7 @@ public sealed class ATProtoModeration
 {
     private ATProtocol proto;
 
-    public ATProtoModeration(ATProtocol proto)
+    internal ATProtoModeration(ATProtocol proto)
     {
         this.proto = proto;
     }
