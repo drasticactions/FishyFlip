@@ -99,6 +99,25 @@ internal static class HttpClientExtensions
         logger?.LogDebug($"GET BLOB {url}: {response}");
         return new Blob(blob);
     }
+    
+    internal static async Task<Result<Dictionary<Cid, byte[]>?>> GetCarAsync(
+        this HttpClient client,
+        string url,
+        JsonSerializerOptions options,
+        CancellationToken cancellationToken,
+        ILogger? logger = default)
+    {
+        logger?.LogDebug($"GET {url}");
+        var message = await client.GetAsync(url, cancellationToken);
+        if (!message.IsSuccessStatusCode)
+        {
+            Error error = await CreateError(message!, options, cancellationToken, logger);
+            return error!;
+        }
+        
+        var byteArray = await message.Content.ReadAsByteArrayAsync(cancellationToken);
+        return CarDecoder.DecodeCar(byteArray);
+    }
 
     internal static async Task<Result<T?>> Get<T>(
         this HttpClient client,
@@ -114,7 +133,7 @@ internal static class HttpClientExtensions
             Error error = await CreateError(message!, options, cancellationToken, logger);
             return error!;
         }
-
+        
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
         logger?.LogDebug($"GET {url}: {response}");
         return JsonSerializer.Deserialize<T>(response, options);

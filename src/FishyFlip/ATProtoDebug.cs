@@ -20,6 +20,10 @@ public sealed class ATProtoDebug
     public Task<Result<dynamic?>> GetAsync(string path, CancellationToken cancellationToken = default)
         => this.Client.Get<dynamic?>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
+    public Task<Result<Dictionary<Cid, byte[]>?>> GetCarAsync(string path,
+        CancellationToken cancellationToken = default)
+        => this.Client.GetCarAsync(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+
     public Task<Result<dynamic?>> PostAsync(string path, CancellationToken cancellationToken = default)
         => this.Client.Post<dynamic?>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
