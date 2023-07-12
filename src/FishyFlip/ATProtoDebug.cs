@@ -17,12 +17,12 @@ public sealed class ATProtoDebug
 
     private HttpClient Client => this.proto.Client;
 
-    public async Task<Result<dynamic>> GetAsync(string path, CancellationToken cancellationToken = default)
-        => this.Client.Get<dynamic>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger).ConfigureAwait(false);
+    public Task<Result<dynamic?>> GetAsync(string path, CancellationToken cancellationToken = default)
+        => this.Client.Get<dynamic?>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
-    public async Task<Result<dynamic>> PostAsync(string path, CancellationToken cancellationToken = default)
-        => this.Client.Post<dynamic>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger).ConfigureAwait(false);
+    public Task<Result<dynamic?>> PostAsync(string path, CancellationToken cancellationToken = default)
+        => this.Client.Post<dynamic?>(path, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
-    public async Task<Result<dynamic>> PostAsync(string path, StreamContent content, CancellationToken cancellationToken = default)
-        => this.Client.Post<dynamic>(path, this.Options.JsonSerializerOptions, content, cancellationToken, this.Options.Logger).ConfigureAwait(false);
+    public Task<Result<dynamic?>> PostAsync(string path, StreamContent content, CancellationToken cancellationToken = default)
+        => this.Client.Post<dynamic?>(path, this.Options.JsonSerializerOptions, content, cancellationToken, this.Options.Logger);
 }
