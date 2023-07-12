@@ -1,3 +1,7 @@
+// <copyright file="FrameRepoOp.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -11,10 +15,10 @@ public class FrameRepoOp
         this.Path = obj["path"]?.AsString();
         this.Action = obj["action"]?.AsString();
     }
-    
+
     public Cid? Cid { get; }
-    
+
     public string? Path { get; }
-    
+
     public string? Action { get; }
 }

@@ -2,11 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip;
+using FishyFlip.BlazorApp;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using FishyFlip.BlazorApp;
 using Microsoft.Extensions.Logging.Debug;
-using FishyFlip;
 
 var debugLog = new DebugLoggerProvider();
 var atProtocolBuilder = new ATProtocolBuilder()

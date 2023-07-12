@@ -18,14 +18,14 @@ public class CidConverter : JsonConverter<Cid?>
                     return string.IsNullOrEmpty(typeString) ? null : Cid.Decode(typeString);
                 }
             }
-            
+
             if (doc.RootElement.ValueKind is JsonValueKind.String)
             {
                 var typeString = doc.RootElement.GetString()?.Trim() ?? string.Empty;
                 return string.IsNullOrEmpty(typeString) ? null : Cid.Decode(typeString);
             }
         }
-        
+
         string? value = reader.GetString();
         if (value is null)
         {

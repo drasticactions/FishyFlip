@@ -48,10 +48,10 @@ public class EmbedConverter : JsonConverter<Embed>
                                 var mediaText = mediaType.GetString()?.Trim() ?? string.Empty;
                                 switch (mediaText)
                                 {
-                                        case Constants.EmbedTypes.Images:
-                                            media = JsonSerializer.Deserialize<ImagesEmbed>(mediaVal.GetRawText(), options);
-                                            break;
-                                    }
+                                    case Constants.EmbedTypes.Images:
+                                        media = JsonSerializer.Deserialize<ImagesEmbed>(mediaVal.GetRawText(), options);
+                                        break;
+                                }
                             }
                         }
 

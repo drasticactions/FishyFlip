@@ -1,3 +1,7 @@
+// <copyright file="FrameTombstone.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -11,7 +15,7 @@ public class FrameTombstone
         this.Seq = obj["seq"].AsInt32();
         this.Time = obj["time"] is not null ? obj["time"].ToDateTime() : null;
     }
-    
+
     public ATDid? Did { get; }
 
     public int Seq { get; }

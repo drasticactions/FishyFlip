@@ -8,7 +8,7 @@ public class ExternalEmbed : Embed
 {
     [JsonConstructor]
     public ExternalEmbed(Image? thumb, string? title, string? description, string? uri, string? type)
-        : base (type)
+        : base(type)
     {
         this.Thumb = thumb;
         this.Title = title;

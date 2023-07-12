@@ -107,7 +107,7 @@ internal class SessionManager : IDisposable
         TimeSpan timeToNextRenewal = this.protocol.Options.SessionRefreshInterval ?? this.GetTimeToNextRenewal(this.session.ThrowIfNull());
         this.logger?.LogDebug($"Next renewal in {timeToNextRenewal.TotalSeconds}.");
         this.timer!.Elapsed += this.RefreshToken;
-        this.timer.Interval = timeToNextRenewal.TotalMilliseconds >= Int32.MaxValue ? Int32.MaxValue : timeToNextRenewal.TotalMilliseconds;
+        this.timer.Interval = timeToNextRenewal.TotalMilliseconds >= int.MaxValue ? int.MaxValue : timeToNextRenewal.TotalMilliseconds;
         this.timer.Enabled = true;
         this.timer.Start();
     }
@@ -138,7 +138,7 @@ internal class SessionManager : IDisposable
             if (this.session is not null)
             {
                 Multiple<Session, Error> result =
-                await this.protocol.ThrowIfNull().RefreshSessionAsync(this.session, CancellationToken.None);
+                await this.protocol.ThrowIfNull().Server.RefreshSessionAsync(this.session, CancellationToken.None);
 
                 result
                     .Switch(

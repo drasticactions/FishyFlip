@@ -1,4 +1,4 @@
-// <copyright file="FrameBody.cs" company="Drastic Actions">
+// <copyright file="FrameCommit.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -13,8 +13,8 @@ public class FrameCommit
         this.Blocks = obj["blocks"]?.GetByteString();
         this.Prev = obj["prev"].ToCid();
         this.Commit = obj["commit"].ToCid();
-        this.Repo = obj["repo"]?.AsString();
-        this.Handle = obj["handle"]?.AsString();
+        this.Repo = obj["repo"] is not null ? ATDid.Create(obj["repo"].AsString()) : null;
+        this.Handle = obj["handle"] is not null ? ATHandler.Create(obj["handle"].AsString()) : null;
         this.Rebase = obj["rebase"]?.AsBoolean() ?? false;
         this.TooBig = obj["tooBig"]?.AsBoolean() ?? false;
         this.Time = DateTime.Parse(obj["time"].AsString());
@@ -33,7 +33,7 @@ public class FrameCommit
     /// <summary>
     /// Gets the handle.
     /// </summary>
-    public string? Handle { get; }
+    public ATHandler? Handle { get; }
 
     /// <summary>
     /// Gets the previous id.
@@ -43,7 +43,7 @@ public class FrameCommit
     /// <summary>
     /// Gets the repo.
     /// </summary>
-    public string? Repo { get; }
+    public ATDid? Repo { get; }
 
     /// <summary>
     /// Gets the date time of the frame.

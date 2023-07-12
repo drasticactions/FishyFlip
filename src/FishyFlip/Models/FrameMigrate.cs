@@ -1,3 +1,7 @@
+// <copyright file="FrameMigrate.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -12,7 +16,7 @@ public class FrameMigrate
         this.MigrateTo = obj["migrateTo"]?.AsString();
         this.Time = obj["time"] is not null ? obj["time"].ToDateTime() : null;
     }
-    
+
     public ATDid? Did { get; }
 
     public int Seq { get; }

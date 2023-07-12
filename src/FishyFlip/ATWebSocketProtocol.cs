@@ -49,7 +49,7 @@ internal class ATWebSocketProtocol : IDisposable
 
         var baselineUrl = new Uri($"{this.protocol.Options.Url}");
         var endToken = token ?? CancellationToken.None;
-        await this.client.ConnectAsync(new Uri($"wss://{baselineUrl.Host}{Constants.Urls.AtProtoSync.SubscribeRepos}"), endToken);
+        await this.client.ConnectAsync(new Uri($"wss://{baselineUrl.Host}{Constants.Urls.ATProtoSync.SubscribeRepos}"), endToken);
         this.logger?.LogInformation($"WSS: Connected to {baselineUrl}");
         this.ReceiveMessages(this.client, endToken).FireAndForgetSafeAsync(this.logger);
     }
@@ -105,7 +105,8 @@ internal class ATWebSocketProtocol : IDisposable
         var message = new SubscribeRepoMessage();
 
         var frameHeader = new FrameHeader(objects[0]);
-        //this.logger?.LogDebug($"FrameHeader: {objects[0].ToJSONString()}");
+
+        // this.logger?.LogDebug($"FrameHeader: {objects[0].ToJSONString()}");
         message.Header = frameHeader;
 
         switch (frameHeader.Operation)
@@ -118,7 +119,8 @@ internal class ATWebSocketProtocol : IDisposable
                 {
                     case "#commit":
                         var frameCommit = new FrameCommit(objects[1]);
-                       // this.logger?.LogDebug($"FrameBody: {objects[1].ToJSONString()}");
+
+                        // this.logger?.LogDebug($"FrameBody: {objects[1].ToJSONString()}");
                         message.Commit = frameCommit;
                         if (frameCommit.Blocks is null)
                         {
@@ -165,17 +167,20 @@ internal class ATWebSocketProtocol : IDisposable
                                         this.logger?.LogDebug($"WSS: Unknown Obj: {blockObj.ToJSONString()}");
                                         break;
                                 }
-                                //this.logger?.LogDebug($"FrameRecord: {blockObj.ToJSONString()}");
+
+                                // this.logger?.LogDebug($"FrameRecord: {blockObj.ToJSONString()}");
                             }
                             else if (blockObj["sig"] is not null)
                             {
                                 message.Footer = new FrameFooter(blockObj);
-                                //this.logger?.LogDebug($"FrameFooter: {blockObj.ToJSONString()}");
+
+                                // this.logger?.LogDebug($"FrameFooter: {blockObj.ToJSONString()}");
                             }
                             else
                             {
                                 message.Nodes.Add(new FrameNode(blockObj));
-                                //this.logger?.LogDebug($"FrameNode: {blockObj.ToJSONString()}");
+
+                                // this.logger?.LogDebug($"FrameNode: {blockObj.ToJSONString()}");
                             }
                         }
 
@@ -200,6 +205,7 @@ internal class ATWebSocketProtocol : IDisposable
                         this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
                         break;
                 }
+
                 break;
             case FrameHeaderOperation.Error:
                 var frameError = new FrameError(objects[1]);

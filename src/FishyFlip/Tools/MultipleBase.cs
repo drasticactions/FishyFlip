@@ -1,3 +1,7 @@
+// <copyright file="MultipleBase.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 using static FishyFlip.Tools.StringExtensions;
 
 namespace FishyFlip.Tools;

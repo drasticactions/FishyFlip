@@ -4,4 +4,4 @@
 
 namespace FishyFlip.Models;
 
-public record ThreadPostViewFeed(ThreadView thread);
+public record ThreadPostViewFeed(ThreadView Thread);

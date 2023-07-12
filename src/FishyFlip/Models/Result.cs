@@ -1,3 +1,7 @@
+// <copyright file="Result.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 namespace FishyFlip.Models;
 
 public class Result<T> : Multiple<T, Error>

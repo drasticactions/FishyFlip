@@ -4,8 +4,8 @@
 
 using FishyFlip;
 using FishyFlip.Models;
+using FishyFlip.Tools;
 using Microsoft.Extensions.Logging.Debug;
-using PeterO.Cbor;
 
 Console.WriteLine("Hello, ATProtocol!");
 
@@ -19,10 +19,7 @@ var atProtocol = atProtocolBuilder.Build();
 
 atProtocol.OnSubscribedRepoMessage += (sender, args) =>
 {
-    if (args.Message.Record is not null)
-    {
-        Console.WriteLine($"Record: {args.Message.Record.Type}");
-    }
+    Task.Run(() => HandleMessageAsync(args.Message)).FireAndForgetSafeAsync();
 };
 
 await atProtocol.StartSubscribeReposAsync();
@@ -30,3 +27,29 @@ await atProtocol.StartSubscribeReposAsync();
 var key = Console.ReadKey();
 
 await atProtocol.StopSubscribeReposAsync();
+
+async Task HandleMessageAsync(SubscribeRepoMessage message)
+{
+    if (message.Commit is null)
+    {
+        return;
+    }
+
+    var orgId = message.Commit.Repo;
+
+    if (orgId is null)
+    {
+        return;
+    }
+
+    if (message.Record is not null)
+    {
+        switch (message.Record.Type)
+        {
+            case Constants.FeedType.Like:
+                break;
+        }
+
+        Console.WriteLine($"Record: {message.Record.Type}");
+    }
+}

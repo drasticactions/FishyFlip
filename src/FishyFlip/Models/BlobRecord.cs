@@ -16,7 +16,7 @@ public class BlobRecord : ATRecord
 
     public string? MimeType { get; }
 
-    public int Size { get;  }
+    public int Size { get; }
 
     [JsonPropertyName("ref")]
     public Cid? Ref { get; set; }
