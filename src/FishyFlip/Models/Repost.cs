@@ -6,12 +6,13 @@ namespace FishyFlip.Models;
 
 public class Repost : ATRecord
 {
-    public Repost(Cid cid, ATUri uri, DateTime createdAt)
+    [JsonConstructor]
+    public Repost(Cid? cid, ATUri? uri, DateTime? createdAt, string? type)
+        : base(type)
     {
         this.Cid = cid;
         this.Uri = uri;
         this.CreatedAt = createdAt;
-        this.Type = Constants.FeedType.Repost;
     }
 
     public Repost(CBORObject obj)

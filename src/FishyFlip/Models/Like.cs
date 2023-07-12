@@ -6,25 +6,24 @@ namespace FishyFlip.Models;
 
 public class Like : ATRecord
 {
-    public Like(Cid cid, ATUri uri, DateTime createdAt)
+    [JsonConstructor]
+    public Like(Subject? subject, DateTime? createdAt, string? type)
+        : base(type)
     {
-        this.Cid = cid;
-        this.Uri = uri;
+        this.Subject = subject;
         this.CreatedAt = createdAt;
-        this.Type = Constants.FeedType.Like;
     }
 
     public Like(CBORObject obj)
     {
-        this.Cid = obj["subject"]["cid"].ToCid();
-        this.Uri = new ATUri(obj["subject"]["uri"].AsString());
+        var cid = obj["subject"]["cid"].ToCid();
+        var uri = new ATUri(obj["subject"]["uri"].AsString());
+        this.Subject = new Subject(cid, uri);
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Type = Constants.FeedType.Like;
     }
 
-    public Cid? Cid { get; }
-
-    public ATUri Uri { get; }
+    public Subject? Subject { get; }
 
     public DateTime? CreatedAt { get; }
 }

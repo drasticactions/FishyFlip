@@ -25,6 +25,12 @@ internal static class HttpClientExtensions
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+        if (string.IsNullOrEmpty(response))
+        {
+            logger?.LogDebug($"POST {url}: No Response");
+            return Activator.CreateInstance<TK>();
+        }
+
         logger?.LogDebug($"POST {url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, options);
         return result!;
