@@ -71,7 +71,7 @@ public sealed class ATProtoRepo
         CreatePostRecord record = new(
             Constants.FeedType.Post,
             this.proto.SessionManager!.Session!.Did.ToString()!,
-            new Post(embed, facets, createdAt, null, text, langs, Constants.FeedType.Post),
+            new Post(embed, facets, createdAt ?? DateTime.UtcNow, null, text, langs, Constants.FeedType.Post),
             rkey,
             swapCommit);
         return this.CreateRecord<CreatePostRecord, CreatePostResponse>(record, cancellationToken);

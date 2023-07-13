@@ -73,6 +73,19 @@ public class EmbedConverter : JsonConverter<Embed>
 
     public override void Write(Utf8JsonWriter writer, Embed value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        JsonSerializer.Serialize(writer, value, value.GetType(), new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            Converters =
+            {
+                new AtUriJsonConverter(),
+                new AtHandlerJsonConverter(),
+                new AtDidJsonConverter(),
+                new ATRecordJsonConverter(),
+                new CidConverter(),
+            },
+        });
     }
 }

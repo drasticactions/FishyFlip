@@ -61,7 +61,7 @@ public class Image : ATRecord
         var refObj = image["ref"];
         if (refObj is not null)
         {
-            this.Ref = Cid.Read(refObj.GetByteString());
+            this.Ref = new ImageRef(image["ref"]);
         }
     }
 
@@ -70,5 +70,22 @@ public class Image : ATRecord
     public int Size { get; }
 
     [JsonPropertyName("ref")]
-    public Cid? Ref { get; set; }
+    public ImageRef? Ref { get; set; }
+}
+
+public class ImageRef
+{
+    [JsonConstructor]
+    public ImageRef(Cid? link)
+    {
+        Link = link;
+    }
+
+    public ImageRef(CBORObject image)
+    {
+        this.Link = Cid.Read(image.GetByteString());
+    }
+
+    [JsonPropertyName("$link")]
+    public Cid? Link { get; set; }
 }
