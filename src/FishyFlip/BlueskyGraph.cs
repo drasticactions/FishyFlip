@@ -31,7 +31,7 @@ public sealed class BlueskyGraph
 
         return await this.Client.Get<ActorBlocks>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
-    
+
     public async Task<Result<ActorMutes?>> GetMutesAsync(
         int limit = 50,
         string? cursor = default,
@@ -68,7 +68,7 @@ public sealed class BlueskyGraph
         var muteRecord = new CreateMuteRecord(did);
         return this.Client.Post<CreateMuteRecord, Success>(Constants.Urls.Bluesky.Graph.MuteActor, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
     }
-    
+
     public Task<Result<Success>> UnmuteActorAsync(ATDid did, CancellationToken cancellationToken = default)
     {
         var muteRecord = new CreateMuteRecord(did);

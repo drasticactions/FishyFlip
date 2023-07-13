@@ -101,7 +101,7 @@ internal static class HttpClientExtensions
         logger?.LogDebug($"GET BLOB {url}: {response}");
         return new Blob(blob);
     }
-    
+
     internal static async Task<Result<Success>> GetCarAsync(
         this HttpClient client,
         string url,
@@ -137,7 +137,7 @@ internal static class HttpClientExtensions
             Error error = await CreateError(message!, options, cancellationToken, logger);
             return error!;
         }
-        
+
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
         logger?.LogDebug($"GET {url}: {response}");
         return JsonSerializer.Deserialize<T>(response, options);

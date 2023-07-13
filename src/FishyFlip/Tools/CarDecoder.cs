@@ -7,6 +7,8 @@ using static FishyFlip.Tools.CarDecoder;
 
 namespace FishyFlip.Tools;
 
+public delegate void OnCarDecoded(CarProgressStatusEvent e);
+
 /// <summary>
 /// Decode CAR byte arrays.
 /// </summary>
@@ -33,6 +35,7 @@ public static class CarDecoder
             {
                 break;
             }
+
             start += body.Length;
 
             var cidBytes = bytes[start..(start + CidV1BytesLength)];
@@ -51,8 +54,8 @@ public static class CarDecoder
         var header = DecodeReader(stream);
         totalBytesRead += header.Length + header.Value;
         int start = header.Length + header.Value;
-        //System.Diagnostics.Debug.WriteLine($"Header: Value: {header.Value} - Length: {header.Length} - Start: {start}");
 
+        // System.Diagnostics.Debug.WriteLine($"Header: Value: {header.Value} - Length: {header.Length} - Start: {start}");
         await ScanStream(stream, start - 1);
         byte[] receiveBuffer = new byte[BufferSize];
 
@@ -66,18 +69,19 @@ public static class CarDecoder
 
             totalBytesRead += body.Length;
             start += body.Length;
-            //System.Diagnostics.Debug.WriteLine($"body: Value: {body.Value} - Length: {body.Length} - Start: {start}");
 
+            // System.Diagnostics.Debug.WriteLine($"body: Value: {body.Value} - Length: {body.Length} - Start: {start}");
             byte[] cidBuffer = new byte[CidV1BytesLength];
             await stream.ReadExactlyAsync(cidBuffer, 0, CidV1BytesLength);
             var cid = Cid.Read(cidBuffer);
             totalBytesRead += CidV1BytesLength;
-            //System.Diagnostics.Debug.WriteLine($"cidBytes: {cidBuffer.Length}  - total: {totalBytesRead}");
 
+            // System.Diagnostics.Debug.WriteLine($"cidBytes: {cidBuffer.Length}  - total: {totalBytesRead}");
             byte[] bodyBuffer = new byte[body.Value - CidV1BytesLength];
             await stream.ReadExactlyAsync(bodyBuffer, 0, body.Value - CidV1BytesLength);
             totalBytesRead += bodyBuffer.Length;
-            //System.Diagnostics.Debug.WriteLine($"bs: {bodyBuffer.Length}  - total: {totalBytesRead}");
+
+            // System.Diagnostics.Debug.WriteLine($"bs: {bodyBuffer.Length}  - total: {totalBytesRead}");
             progress?.Invoke(new CarProgressStatusEvent(cid, bodyBuffer));
         }
     }
@@ -100,6 +104,7 @@ public static class CarDecoder
             {
                 return new DecodedBlock(-1, -1);
             }
+
             i++;
             a.Add((byte)b);
             if ((b & 0x80) == 0)
@@ -156,8 +161,6 @@ public static class CarDecoder
         public int Length { get; }
     }
 }
-
-public delegate void OnCarDecoded(CarProgressStatusEvent e);
 
 public class CarProgressStatusEvent
 {

@@ -28,12 +28,12 @@ public class ATUri
         this.Handle = ATHandle.Create(this);
     }
 
-    public static ATUri Create(string uri)
-        => new ATUri(uri);
-
     public string Hash { get; private set; }
 
     public string Pathname { get; private set; }
+
+    public static ATUri Create(string uri)
+        => new ATUri(uri);
 
     public string Protocol => "at:";
 

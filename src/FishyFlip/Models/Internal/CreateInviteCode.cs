@@ -10,4 +10,4 @@ using System.Threading.Tasks;
 
 namespace FishyFlip.Models.Internal;
 
-public record CreateInviteCode (int UseCount, ATDid? ForAccount);
+public record CreateInviteCode(int UseCount, ATDid? ForAccount);

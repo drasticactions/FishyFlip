@@ -33,6 +33,7 @@ public class ATProtocolOptions
                 new AtDidJsonConverter(),
                 new EmbedConverter(),
                 new ATRecordJsonConverter(),
+
                 // new FacetJsonConverter(),
                 new CidConverter(),
             },

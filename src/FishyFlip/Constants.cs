@@ -172,6 +172,16 @@ public static class Constants
         public const string Post = "app.bsky.feed.post";
     }
 
+    internal static class ModerationReasons
+    {
+        public const string ReasonSpam = "com.atproto.moderation.defs#reasonSpam";
+        public const string ReasonViolation = "com.atproto.moderation.defs#reasonViolation";
+        public const string ReasonMisleading = "com.atproto.moderation.defs#reasonMisleading";
+        public const string ReasonSexual = "com.atproto.moderation.defs#reasonSexual";
+        public const string ReasonRude = "com.atproto.moderation.defs#reasonRude";
+        public const string ReasonOther = "com.atproto.moderation.defs#reasonOther";
+    }
+
     internal class HeaderNames
     {
         public const string UserAgent = "user-agent";

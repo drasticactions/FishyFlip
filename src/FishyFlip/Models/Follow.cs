@@ -7,8 +7,8 @@ namespace FishyFlip.Models
     public class Follow : ATRecord
     {
         [JsonConstructor]
-        public Follow(ATDid? subject, DateTime? createdAt, string? type) :
-            base(type)
+        public Follow(ATDid? subject, DateTime? createdAt, string? type)
+            : base(type)
         {
             this.Subject = subject;
             this.CreatedAt = createdAt;

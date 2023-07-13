@@ -32,12 +32,12 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
                        {
-                Assert.Equal(postCid, success!.Thread.Post.Cid);
-            },
+                           Assert.Equal(postCid, success!.Thread.Post.Cid);
+                       },
             failed =>
                                   {
-                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
-            });
+                                      Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+                                  });
     }
 
     [Fact]
@@ -107,7 +107,6 @@ public class AuthorizedTests
                 Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
             });
     }
-
 
     [Fact]
     public async Task GetRepliesPostThreadAsyncTest()

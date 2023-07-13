@@ -2,8 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Tools;
 using System.Globalization;
+using FishyFlip.Tools;
 
 namespace FishyFlip;
 

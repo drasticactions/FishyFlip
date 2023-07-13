@@ -4,4 +4,4 @@
 
 namespace FishyFlip.Models;
 
-public record InviteCodes (string Account, string[] Codes);
+public record InviteCodes(string Account, string[] Codes);

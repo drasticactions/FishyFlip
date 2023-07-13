@@ -27,4 +27,14 @@ public class FrameFooter
     public Cid? Data { get; }
 
     public byte[] Sig { get; }
+
+    public static FrameFooter? FromCBORObject(CBORObject blockObj)
+    {
+        if (blockObj["sig"] is not null)
+        {
+            return new FrameFooter(blockObj);
+        }
+
+        return null;
+    }
 }

@@ -26,13 +26,13 @@ public sealed class ATProtocol : IDisposable
 
     public ATProtoServer Server => new(this);
 
-    internal HttpClient Client => this.client;
-
-    internal SessionManager SessionManager => this.sessionManager;
-
     public Session? Session => this.sessionManager?.Session;
 
     public ATProtoAdmin Admin => new(this);
+
+    internal HttpClient Client => this.client;
+
+    internal SessionManager SessionManager => this.sessionManager;
 
     public ATProtoSync Sync => new(this);
 
@@ -58,14 +58,22 @@ public sealed class ATProtocol : IDisposable
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task StartSubscribeReposAsync(CancellationToken? token = default)
-        => this.webSocketProtocol.ConnectAsync(token);
+        => this.webSocketProtocol.ConnectAsync(Constants.Urls.ATProtoSync.SubscribeRepos, token);
 
     /// <summary>
-    /// Stops the ATProtocol SubscribeRepos sync session.
+    /// Start the ATProtocol SubscribeRepos sync session.
     /// </summary>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public Task StopSubscribeReposAsync(CancellationToken? token = default)
+    public Task StartSubscribeLabelsAsync(CancellationToken? token = default)
+        => this.webSocketProtocol.ConnectAsync(Constants.Urls.ATProtoLabel.SubscribeLabels, token);
+
+    /// <summary>
+    /// Stops the ATProtocol Subscription session.
+    /// </summary>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public Task StopSubscriptionAsync(CancellationToken? token = default)
     {
         this.webSocketProtocol.CloseAsync(token: token).FireAndForgetSafeAsync();
         return Task.CompletedTask;

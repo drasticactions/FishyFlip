@@ -37,7 +37,7 @@ internal class ATWebSocketProtocol : IDisposable
     /// </summary>
     /// <param name="token">CancellationToken.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public async Task ConnectAsync(CancellationToken? token = default)
+    public async Task ConnectAsync(string connection, CancellationToken? token = default)
     {
         if (this.client.State == WebSocketState.Open)
         {
@@ -51,7 +51,7 @@ internal class ATWebSocketProtocol : IDisposable
 
         var baselineUrl = new Uri($"{this.protocol.Options.Url}");
         var endToken = token ?? CancellationToken.None;
-        await this.client.ConnectAsync(new Uri($"wss://{baselineUrl.Host}{Constants.Urls.ATProtoSync.SubscribeRepos}"), endToken);
+        await this.client.ConnectAsync(new Uri($"wss://{baselineUrl.Host}{connection}"), endToken);
         this.logger?.LogInformation($"WSS: Connected to {baselineUrl}");
         this.ReceiveMessages(this.client, endToken).FireAndForgetSafeAsync(this.logger);
     }
@@ -135,50 +135,16 @@ internal class ATWebSocketProtocol : IDisposable
                             var blockObj = CBORObject.Read(blockStream);
                             if (blockObj["$type"] is not null)
                             {
-                                switch (blockObj["$type"].AsString())
-                                {
-                                    case Constants.FeedType.Post:
-                                        message.Record = new Post(blockObj);
-                                        break;
-                                    case Constants.FeedType.Like:
-                                        message.Record = new Like(blockObj);
-                                        break;
-                                    case Constants.FeedType.Generator:
-                                        message.Record = new FeedGenerator(blockObj);
-                                        break;
-                                    case Constants.FeedType.Repost:
-                                        message.Record = new Repost(blockObj);
-                                        break;
-                                    case Constants.GraphTypes.Follow:
-                                        message.Record = new Follow(blockObj);
-                                        break;
-                                    case Constants.GraphTypes.List:
-                                        message.Record = new BSList(blockObj);
-                                        break;
-                                    case Constants.GraphTypes.ListItem:
-                                        message.Record = new BSListItem(blockObj);
-                                        break;
-                                    case Constants.GraphTypes.Block:
-                                        message.Record = new Block(blockObj);
-                                        break;
-                                    case Constants.ActorTypes.Profile:
-                                        message.Record = new Profile(blockObj);
-                                        break;
-                                    default:
-                                        this.logger?.LogDebug($"WSS: Unknown Obj: {blockObj.ToJSONString()}");
-                                        break;
-                                }
+                                message.Record = ATRecord.FromCBORObject(blockObj);
                             }
                             else if (blockObj["sig"] is not null)
                             {
-                                message.Footer = new FrameFooter(blockObj);
+                                message.Footer = FrameFooter.FromCBORObject(blockObj);
                             }
                             else
                             {
                                 message.Nodes.Add(new FrameNode(blockObj));
                             }
-
-
                         }
 
                         CarDecoder.DecodeCar(frameCommit.Blocks, HandleProgressStatus);

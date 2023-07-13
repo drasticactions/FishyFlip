@@ -26,7 +26,7 @@ await atProtocol.StartSubscribeReposAsync();
 
 var key = Console.ReadKey();
 
-await atProtocol.StopSubscribeReposAsync();
+await atProtocol.StopSubscriptionAsync();
 
 async Task HandleMessageAsync(SubscribeRepoMessage message)
 {

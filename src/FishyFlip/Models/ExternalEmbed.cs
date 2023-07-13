@@ -14,7 +14,7 @@ public class ExternalEmbed : Embed
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecordEmbed"/> class.
+    /// Initializes a new instance of the <see cref="ExternalEmbed"/> class.
     /// </summary>
     /// <param name="obj">CBORObject.</param>
     public ExternalEmbed(CBORObject obj)
@@ -22,7 +22,6 @@ public class ExternalEmbed : Embed
         this.Type = Constants.EmbedTypes.Record;
         this.External = new External(obj);
     }
-
 
     public External? External { get; }
 }

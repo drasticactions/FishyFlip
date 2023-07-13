@@ -157,7 +157,7 @@ public class AnonymousTests
         blob.Switch(
            success =>
            {
-              // Assert.True(success!.Any());
+               // Assert.True(success!.Any());
            },
            failed =>
            {
@@ -173,7 +173,7 @@ public class AnonymousTests
         blob.Switch(
            success =>
            {
-              // Assert.True(success!.Any());
+               // Assert.True(success!.Any());
            },
            failed =>
            {
@@ -181,7 +181,7 @@ public class AnonymousTests
            });
     }
 
-    static void HandleProgressStatus(CarProgressStatusEvent e)
+    private static void HandleProgressStatus(CarProgressStatusEvent e)
     {
         var cid = e.Cid;
         var bytes = e.Bytes;
