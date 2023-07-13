@@ -9,7 +9,7 @@ namespace FishyFlip.Models
         public Block(CBORObject obj)
         {
             this.CreatedAt = obj["createdAt"].ToDateTime();
-            this.Type = Constants.GraphTypes.Follow;
+            this.Type = Constants.GraphTypes.Block;
             this.Did = ATDid.Create(obj["subject"].AsString());
         }
 

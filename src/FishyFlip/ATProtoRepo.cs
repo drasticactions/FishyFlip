@@ -127,6 +127,12 @@ public sealed class ATProtoRepo
         return await this.Client.Get<T>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    public async Task<Result<DescribeRepo>> DescribeRepoAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.ATProtoRepo.DescribeRepo}?repo={identifier}";
+        return await this.Client.Get<DescribeRepo?>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
     public Task<Result<Success>> DeleteFollowAsync(ATIdentifier repo, string rkey,
         Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.Follow, repo, rkey, swapRecord, swapCommit, cancellationToken);
