@@ -19,7 +19,7 @@ internal static class HttpClientExtensions
         var jsonContent = JsonSerializer.Serialize(body, options);
         StringContent content = new(jsonContent, Encoding.UTF8, "application/json");
         logger?.LogDebug($"POST {url}: {jsonContent}");
-        var message = await client.PostAsync(url, content, cancellationToken);
+        using var message = await client.PostAsync(url, content, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             Error error = await CreateError(message!, options, cancellationToken, logger);
@@ -47,7 +47,7 @@ internal static class HttpClientExtensions
        ILogger? logger = default)
     {
         logger?.LogDebug($"POST STREAM {url}: {body.Headers.ContentType}");
-        var message = await client.PostAsync(url, body, cancellationToken);
+        using var message = await client.PostAsync(url, body, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             Error error = await CreateError(message!, options, cancellationToken, logger);
@@ -68,7 +68,7 @@ internal static class HttpClientExtensions
         ILogger? logger = default)
     {
         logger?.LogDebug($"POST {url}");
-        var message = await client.PostAsync(url, null, cancellationToken: cancellationToken);
+        using var message = await client.PostAsync(url, null, cancellationToken: cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             Error error = await CreateError(message!, options, cancellationToken, logger);
@@ -89,7 +89,7 @@ internal static class HttpClientExtensions
        ILogger? logger = default)
     {
         logger?.LogDebug($"GET {url}");
-        var message = await client.GetAsync(url, cancellationToken);
+        using var message = await client.GetAsync(url, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             Error error = await CreateError(message!, options, cancellationToken, logger);
@@ -111,15 +111,15 @@ internal static class HttpClientExtensions
         OnCarDecoded? progress = null)
     {
         logger?.LogDebug($"GET {url}");
-        var message = await client.GetAsync(url, cancellationToken);
+        using var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             Error error = await CreateError(message!, options, cancellationToken, logger);
             return error!;
         }
-        
-        var byteArray = await message.Content.ReadAsByteArrayAsync(cancellationToken);
-        CarDecoder.DecodeCar(byteArray, progress);
+
+        using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
+        await CarDecoder.DecodeCarAsync(stream, progress);
         return new Success();
     }
 
@@ -131,7 +131,7 @@ internal static class HttpClientExtensions
         ILogger? logger = default)
     {
         logger?.LogDebug($"GET {url}");
-        var message = await client.GetAsync(url, cancellationToken);
+        using var message = await client.GetAsync(url, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             Error error = await CreateError(message!, options, cancellationToken, logger);

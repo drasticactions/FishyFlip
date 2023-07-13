@@ -12,6 +12,7 @@ public class ATProtocolOptions
 {
     public ATProtocolOptions()
     {
+        Cid.Decode("bafyreiezjt5bqt2xpcdfvisud7jrd4zuxygz4ssnuge3ddjcoptanvcnsa");
         this.HttpClient = new HttpClient();
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {
