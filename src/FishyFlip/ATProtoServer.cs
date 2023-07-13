@@ -53,13 +53,18 @@ public sealed class ATProtoServer
                 error => error!);
     }
 
+    public async Task<Result<InviteCode>> CreateInviteCodeAsync(int useCount, ATDid? forAccount = default, CancellationToken cancellationToken = default)
+    {
+       return await this.Client.Post<CreateInviteCode, InviteCode>(Constants.Urls.ATProtoServer.CreateInviteCode, this.Options.JsonSerializerOptions, new CreateInviteCode(useCount, forAccount), cancellationToken);
+    }
+
     public Task<Result<SessionInfo?>> GetSessionAsync(CancellationToken cancellationToken = default)
       => this.Client.Get<SessionInfo>(Constants.Urls.ATProtoServer.GetSession, this.Options.JsonSerializerOptions, cancellationToken);
 
-    public Task<Result<InviteCodes?>> GetAccountInviteCodesAsync(bool includeUsed = true, bool createAvailable = true, CancellationToken cancellationToken = default)
+    public Task<Result<AccountInviteCodes?>> GetAccountInviteCodesAsync(bool includeUsed = true, bool createAvailable = true, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoServer.GetAccountInviteCodes}?includeUsed={includeUsed.ToString().ToLowerInvariant()}&createAvailable={createAvailable.ToString().ToLowerInvariant()}";
-        return this.Client.Get<InviteCodes>(url, this.Options.JsonSerializerOptions, cancellationToken);
+        return this.Client.Get<AccountInviteCodes>(url, this.Options.JsonSerializerOptions, cancellationToken);
     }
 
     public Task<Result<AppPasswords?>> ListAppPasswordsAsync(CancellationToken cancellationToken = default)

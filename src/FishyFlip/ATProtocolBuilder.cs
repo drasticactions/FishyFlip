@@ -64,6 +64,13 @@ public class ATProtocolBuilder
         return this;
     }
 
+    public ATProtocolBuilder AsAdmin(string password, string username = "admin")
+    {
+        string base64Credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
+        this.atProtocolOptions.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64Credentials);
+        return this;
+    }
+
     /// <summary>
     /// Builds the Protocol.
     /// </summary>

@@ -1,4 +1,4 @@
-﻿// <copyright file="InviteCode.cs" company="Drastic Actions">
+﻿// <copyright file="CreateInviteCode.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -8,6 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FishyFlip.Models;
+namespace FishyFlip.Models.Internal;
 
-public record InviteCode(string Code);
+public record CreateInviteCode (int UseCount, ATDid? ForAccount);

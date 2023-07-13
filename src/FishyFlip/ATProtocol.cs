@@ -30,6 +30,10 @@ public sealed class ATProtocol : IDisposable
 
     internal SessionManager SessionManager => this.sessionManager;
 
+    public Session? Session => this.sessionManager?.Session;
+
+    public ATProtoAdmin Admin => new(this);
+
     public ATProtoSync Sync => new(this);
 
     public ATProtoRepo Repo => new(this);
