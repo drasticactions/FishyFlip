@@ -25,15 +25,6 @@ public sealed class ATProtoSync
         return await this.Client.GetBlob(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
-    public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
-    {
-        return
-            this.Client
-                .Post<UploadBlobResponse>(
-                    Constants.Urls.ATProtoRepo.UploadBlob, this.Options.JsonSerializerOptions, content,
-                    cancellationToken, this.Options.Logger);
-    }
-
     public Task<Result<Head?>> GetHeadAsync(ATDid did, CancellationToken cancellationToken = default)
         => this.Client.Get<Head>($"{Constants.Urls.ATProtoSync.GetHead}?did={did}", this.Options.JsonSerializerOptions,
             cancellationToken, this.Options.Logger);

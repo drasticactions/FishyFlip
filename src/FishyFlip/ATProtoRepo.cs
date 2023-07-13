@@ -115,6 +115,15 @@ public sealed class ATProtoRepo
                     cancellationToken, this.Options.Logger);
     }
 
+    public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
+    {
+        return
+            this.Client
+                .Post<UploadBlobResponse>(
+                    Constants.Urls.ATProtoRepo.UploadBlob, this.Options.JsonSerializerOptions, content,
+                    cancellationToken, this.Options.Logger);
+    }
+
     public async Task<Result<T?>> GetRecordAsync<T>(string collection, ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
         where T : ATFeedTypeAPI
     {
