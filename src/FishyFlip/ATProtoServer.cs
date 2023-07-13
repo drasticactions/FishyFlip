@@ -58,6 +58,11 @@ public sealed class ATProtoServer
        return await this.Client.Post<CreateInviteCode, InviteCode>(Constants.Urls.ATProtoServer.CreateInviteCode, this.Options.JsonSerializerOptions, new CreateInviteCode(useCount, forAccount), cancellationToken);
     }
 
+    public async Task<Result<InviteCodes>> CreateInviteCodesAsync(int useCount, int codeCount = 1, ATDid[]? forAccounts = default, CancellationToken cancellationToken = default)
+    {
+        return await this.Client.Post<CreateInviteCodes, InviteCodes>(Constants.Urls.ATProtoServer.CreateInviteCode, this.Options.JsonSerializerOptions, new CreateInviteCodes(codeCount, useCount, forAccounts), cancellationToken);
+    }
+
     public Task<Result<SessionInfo?>> GetSessionAsync(CancellationToken cancellationToken = default)
       => this.Client.Get<SessionInfo>(Constants.Urls.ATProtoServer.GetSession, this.Options.JsonSerializerOptions, cancellationToken);
 
