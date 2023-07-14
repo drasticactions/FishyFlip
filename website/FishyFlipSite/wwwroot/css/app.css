@@ -1,3 +1,7 @@
+:root {
+    color-scheme: light dark;
+}
+
 h1:focus {
     outline: none;
 }
