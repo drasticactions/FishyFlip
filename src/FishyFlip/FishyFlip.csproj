@@ -12,5 +12,6 @@
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 		<PackageReference Include="IpfsShipyard.Ipfs.Core" />
 		<PackageReference Include="PeterO.Cbor" />
+		<PackageReference Include="MimeTypes" />
 	</ItemGroup>
 </Project>
