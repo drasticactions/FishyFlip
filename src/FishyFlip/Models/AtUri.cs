@@ -32,10 +32,10 @@ public class ATUri
 
     public string Pathname { get; private set; }
 
+    public string Protocol => "at:";
+
     public static ATUri Create(string uri)
         => new ATUri(uri);
-
-    public string Protocol => "at:";
 
     public string Origin => $"at://{this.host}";
 

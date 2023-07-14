@@ -97,6 +97,15 @@ public sealed class ATProtoRepo
     public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
       => await this.GetRecordAsync<PostRecord>(Constants.FeedType.Post, repo, rkey, cid, cancellationToken);
 
+    public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
+    {
+        return
+            this.Client
+                .Post<UploadBlobResponse>(
+                    Constants.Urls.ATProtoRepo.UploadBlob, this.Options.JsonSerializerOptions, content,
+                    cancellationToken, this.Options.Logger);
+    }
+
     private Task<Result<Y>> CreateRecord<X, Y>(X record, CancellationToken cancellationToken = default)
     {
         return
@@ -112,15 +121,6 @@ public sealed class ATProtoRepo
             this.Client
                 .Post<X, Y>(
                     Constants.Urls.ATProtoRepo.PutRecord, this.Options.JsonSerializerOptions, record,
-                    cancellationToken, this.Options.Logger);
-    }
-
-    public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
-    {
-        return
-            this.Client
-                .Post<UploadBlobResponse>(
-                    Constants.Urls.ATProtoRepo.UploadBlob, this.Options.JsonSerializerOptions, content,
                     cancellationToken, this.Options.Logger);
     }
 

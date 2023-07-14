@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip.DebugApp", "FishyFlip.DebugApp\FishyFlip.DebugApp.csproj", "{FEFC5C5A-999E-407A-8E56-9EEC1C08F071}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip", "FishyFlip\FishyFlip.csproj", "{55FF025E-C24E-489A-85BA-370306BF522B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip.BlazorApp", "FishyFlip.BlazorApp\FishyFlip.BlazorApp.csproj", "{11B67637-DA4F-4B5F-B828-912C9DC6E52E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip.Tests", "FishyFlip.Tests\FishyFlip.Tests.csproj", "{718EED01-74D0-4D4B-B104-34F28A505D74}"
 EndProject
@@ -17,18 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FEFC5C5A-999E-407A-8E56-9EEC1C08F071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEFC5C5A-999E-407A-8E56-9EEC1C08F071}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEFC5C5A-999E-407A-8E56-9EEC1C08F071}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEFC5C5A-999E-407A-8E56-9EEC1C08F071}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55FF025E-C24E-489A-85BA-370306BF522B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55FF025E-C24E-489A-85BA-370306BF522B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55FF025E-C24E-489A-85BA-370306BF522B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55FF025E-C24E-489A-85BA-370306BF522B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11B67637-DA4F-4B5F-B828-912C9DC6E52E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11B67637-DA4F-4B5F-B828-912C9DC6E52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11B67637-DA4F-4B5F-B828-912C9DC6E52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11B67637-DA4F-4B5F-B828-912C9DC6E52E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{718EED01-74D0-4D4B-B104-34F28A505D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{718EED01-74D0-4D4B-B104-34F28A505D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{718EED01-74D0-4D4B-B104-34F28A505D74}.Release|Any CPU.ActiveCfg = Release|Any CPU

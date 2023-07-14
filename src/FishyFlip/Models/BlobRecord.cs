@@ -20,4 +20,10 @@ public class BlobRecord : ATRecord
 
     [JsonPropertyName("ref")]
     public Cid? Ref { get; set; }
+
+    public Image ToImage()
+        => new(this.MimeType, this.Size, "blob")
+        {
+            Ref = new ImageRef(this.Ref),
+        };
 }

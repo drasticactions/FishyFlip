@@ -30,11 +30,11 @@ public sealed class ATProtocol : IDisposable
 
     public ATProtoAdmin Admin => new(this);
 
+    public ATProtoSync Sync => new(this);
+
     internal HttpClient Client => this.client;
 
     internal SessionManager SessionManager => this.sessionManager;
-
-    public ATProtoSync Sync => new(this);
 
     public ATProtoRepo Repo => new(this);
 

@@ -15,6 +15,14 @@ public class EmbedConverter : JsonConverter<Embed>
                 var text = type.GetString()?.Trim() ?? string.Empty;
                 switch (text)
                 {
+                    case Constants.EmbedTypes.ImageView:
+                        if (doc.RootElement.TryGetProperty("images", out var t))
+                        {
+                            var item = JsonSerializer.Deserialize<ImageViewEmbed>(doc.RootElement.GetRawText(), options);
+                            return item;
+                        }
+
+                        break;
                     case Constants.EmbedTypes.Images:
                         if (doc.RootElement.TryGetProperty("images", out var img))
                         {

@@ -22,52 +22,10 @@ public class Facet : ATRecord
     public FacetIndex? Index { get; }
 
     public FacetFeature[]? Features { get; }
-}
 
-public class FacetIndex
-{
-    [JsonConstructor]
-    public FacetIndex(int byteStart, int byteEnd)
-    {
-        this.ByteStart = byteStart;
-        this.ByteEnd = byteEnd;
-    }
+    public static Facet CreateFacetLink(int start, int end, string uri)
+        => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateLink(uri) });
 
-    public FacetIndex(CBORObject obj)
-    {
-        this.ByteStart = obj["byteStart"].AsInt32();
-        this.ByteEnd = obj["byteEnd"].AsInt32();
-    }
-
-    public int ByteEnd { get; }
-
-    public int ByteStart { get; }
-}
-
-public class FacetFeature
-{
-    [JsonConstructor]
-    public FacetFeature(string? type, string? uri, ATDid? did)
-    {
-        this.Type = type;
-        this.Uri = uri;
-        this.Did = did;
-    }
-
-    public FacetFeature(CBORObject obj)
-    {
-        this.Type = obj["$type"].AsString();
-        this.Uri = obj["uri"]?.AsString();
-        this.Did = obj["did"] is not null ? ATDid.Create(obj["did"].AsString()) : null;
-    }
-
-    [JsonPropertyName("$type")]
-    public string? Type { get; }
-
-    public string? Uri { get; }
-
-    /// <summary>
-    /// Gets a <see cref="Did"/> of the actor.
-    /// </summary>
-    public ATDid? Did { get; }
+    public static Facet CreateFacetMention(int start, int end, ATDid mention)
+        => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateMention(mention) });
 }

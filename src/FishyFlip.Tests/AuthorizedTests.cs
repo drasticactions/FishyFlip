@@ -125,4 +125,72 @@ public class AuthorizedTests
                 Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
             });
     }
+
+    [Fact]
+    public async Task CreatePostAsyncTest()
+    {
+        var test = await this.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, null, new[] { "en" });
+        test.Switch(
+            success =>
+                       {
+                Assert.True(success!.Cid is not null);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task CreatePostWithImageAsyncTest()
+    {
+        var byteArray = Convert.FromBase64String(Samples.Base64Image);
+        using var streamContent = new StreamContent(new MemoryStream(byteArray), byteArray.Length);
+        streamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+
+        var upload = await this.proto.Repo.UploadBlobAsync(streamContent);
+
+        await upload.SwitchAsync(
+            async success =>
+            {
+            Assert.True(success!.Blob is not null);
+            var imagesEmbed = new ImagesEmbed(success.Blob.ToImage(), "CreatePostWithImageAsyncTest");
+            var test = await this.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, imagesEmbed, new[] { "en" });
+            test.Switch(
+                    success2 =>
+                    {
+                        Assert.True(success2!.Cid is not null);
+                        Assert.True(success2!.Uri is not null);
+                    },
+                    failed2 =>
+                    {
+                        Assert.Fail($"{failed2.StatusCode}: {failed2.Detail}");
+                    });
+            },
+            async failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task CreatePostWithFacetAsyncTest()
+    {
+        var prompt = "Link Text: ";
+        var linkText = "CreatePostWithFacetAsyncTest";
+        prompt = $"{prompt} {linkText}";
+        int promptStart = prompt.IndexOf(linkText, StringComparison.InvariantCulture);
+        int promptEnd = promptStart + Encoding.Default.GetBytes(linkText).Length;
+        var facet = Facet.CreateFacetLink(promptStart, promptEnd, "https://drasticactions.ninja");
+        var test = await this.proto.Repo.CreatePostAsync(prompt, new[] { facet }, null, new[] { "en" });
+        test.Switch(
+            success =>
+                       {
+                Assert.True(success!.Cid is not null);
+            },
+            failed =>
+                                  {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
 }

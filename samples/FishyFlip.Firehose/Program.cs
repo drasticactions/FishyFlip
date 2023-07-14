@@ -2,18 +2,17 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using Drastic.Tools;
 using FishyFlip;
 using FishyFlip.Models;
 using FishyFlip.Tools;
 using Microsoft.Extensions.Logging.Debug;
 
-Console.WriteLine("Hello, ATProtocol!");
+Console.WriteLine("Hello, ATProtocol Firehose!");
 
 var debugLog = new DebugLoggerProvider();
 var atProtocolBuilder = new ATProtocolBuilder()
     .EnableAutoRenewSession(true)
-
-    // .WithSessionRefreshInterval(TimeSpan.FromSeconds(30))
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
 
@@ -44,12 +43,6 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
 
     if (message.Record is not null)
     {
-        switch (message.Record.Type)
-        {
-            case Constants.FeedType.Like:
-                break;
-        }
-
         Console.WriteLine($"Record: {message.Record.Type}");
     }
 }

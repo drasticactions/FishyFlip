@@ -156,15 +156,16 @@ public static class Constants
         public const string Mention = "app.bsky.richtext.facet#mention";
     }
 
-    internal static class EmbedTypes
+    public static class EmbedTypes
     {
         public const string External = "app.bsky.embed.external";
         public const string Images = "app.bsky.embed.images";
+        public const string ImageView = "app.bsky.embed.images#view";
         public const string Record = "app.bsky.embed.record";
         public const string RecordWithMedia = "app.bsky.embed.recordWithMedia";
     }
 
-    internal static class FeedType
+    public static class FeedType
     {
         public const string Generator = "app.bsky.feed.generator";
         public const string Like = "app.bsky.feed.like";
@@ -172,7 +173,7 @@ public static class Constants
         public const string Post = "app.bsky.feed.post";
     }
 
-    internal static class ModerationReasons
+    public static class ModerationReasons
     {
         public const string ReasonSpam = "com.atproto.moderation.defs#reasonSpam";
         public const string ReasonViolation = "com.atproto.moderation.defs#reasonViolation";
