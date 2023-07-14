@@ -30,6 +30,8 @@ public sealed class ATProtocol : IDisposable
 
     public ATProtoAdmin Admin => new(this);
 
+    public ATProtoIdentity Identity => new(this);
+
     public ATProtoSync Sync => new(this);
 
     internal HttpClient Client => this.client;
@@ -51,6 +53,8 @@ public sealed class ATProtocol : IDisposable
     public BlueskyGraph Graph => new(this);
 
     public BlueskyNotification Notification => new(this);
+
+    public bool IsSubscriptionActive => this.webSocketProtocol.IsConnected;
 
     /// <summary>
     /// Start the ATProtocol SubscribeRepos sync session.
@@ -75,11 +79,15 @@ public sealed class ATProtocol : IDisposable
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task StopSubscriptionAsync(CancellationToken? token = default)
     {
-        this.webSocketProtocol.CloseAsync(token: token).FireAndForgetSafeAsync();
+        if (this.IsSubscriptionActive)
+        {
+            return this.webSocketProtocol.CloseAsync(token: token);
+        }
+
         return Task.CompletedTask;
     }
 
-    void IDisposable.Dispose()
+    public void Dispose()
     {
         this.Dispose(disposing: true);
         GC.SuppressFinalize(this);

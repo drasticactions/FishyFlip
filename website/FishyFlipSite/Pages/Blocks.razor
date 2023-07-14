@@ -1,0 +1,169 @@
+﻿@page "/blocks"
+@using Drastic.Tools;
+@using FishyFlip;
+@using FishyFlip.Events;
+@using FishyFlip.Models;
+@using FishyFlip.Tools;
+@using Microsoft.Extensions.Logging.Debug;
+@using System.Collections.ObjectModel;
+@using PeterO.Cbor;
+
+
+<h3>Blocks</h3>
+
+<p>
+    On Bluesky, <a target="_blank" href="https://atproto.com/blog/block-implementation">Blocks are public</a>. While they are not exposed directly to you,
+    you can piece it together with enough knowledge of the underlying protocol.
+</p>
+
+<p>
+    This example shows this in action. Here we connect to the given Bluesky instance,
+    requesting the user <a target="_blank" href="https://atproto.com/specs/did">"Did,"</a> (TL;DR the account identifier) followed by checkout.
+    <a target="_blank" href="https://atproto.com/lexicons/com-atproto-sync#comatprotosyncgetcheckout">This checkout</a> contains the user's events on Bluesky, including the <a target="_blank" href="https://atproto.com/lexicons/app-bsky-graph#appbskygraphblock">block</a> types.
+    The block request includes the Did of whom they blocked.
+    With this, we can again ask Bluesky to give us the <a target="_blank" href="https://atproto.com/lexicons/com-atproto-repo#comatprotorepodescriberepo">user's handle</a>.
+</p>
+
+<div>
+    <label for="inputBox">Instance:</label>
+    <input type="text" @bind="instance" name="inputBox">
+</div>
+
+<div>
+    <label for="inputBox">Handle:</label>
+    <input type="text" @bind="handle" name="inputBox">
+</div>
+
+<div>
+    <button disabled="@isRunning" @onclick="GetBlocks">Get Blocks</button>
+</div>
+
+<div style="border-style: dotted; border-color: red; border-width: 10px; width: 400px; height: 400px; overflow-y:auto;">
+    @foreach (var item in blockItems)
+    {
+        <div class="post">
+            <sub class="postTextSub">@item.Did</sub>
+            <a target="_blank" href="https://bsky.app/profile/@item.Did"><p class="postText">@item.Handle</p></a>
+            <sub class="postTextSub">@item.CreatedAt</sub>
+        </div>
+    }
+</div>
+
+@code {
+    private string instance = "bsky.social";
+    private string handle = "";
+    private ATProtocol? protocol;
+    private ILogger? logger;
+    private List<Block> blocks = new List<Block>();
+    private ObservableCollection<BlockItem> blockItems = new ObservableCollection<BlockItem>();
+    private bool isRunning = false;
+    private async Task GetBlocks()
+    {
+        this.isRunning = true;
+        this.blocks.Clear();
+        this.blockItems.Clear();
+        if (protocol is not null)
+        {
+            // Dispose the existing protocol.
+            protocol.Dispose();
+            protocol = null;
+        }
+
+        var host = instance ?? "bsky.social";
+
+        if (!Uri.TryCreate(host, UriKind.Absolute, out Uri? uri))
+        {
+            uri = new Uri($"https://{host}");
+        }
+
+        if (uri is not null)
+        {
+            try
+            {
+                var atProtocolBuilder = new ATProtocolBuilder()
+                    .WithInstanceUrl(uri)
+                    .WithLogger(logger);
+                protocol = atProtocolBuilder.Build();
+
+                var handle = await protocol.Identity.ResolveHandleAsync(ATHandle.Create(this.handle));
+                await handle.SwitchAsync(
+                    async success =>
+                    {
+                        if (success.Did is not null)
+                        {
+                            var result = await protocol.Sync.GetCheckoutAsync(success.Did, HandleProgressStatus);
+                            foreach (var block in blocks)
+                            {
+                                var repo = (await protocol.Repo.DescribeRepoAsync(block.Did));
+                                repo.Switch(
+                            actor =>
+                            {
+                                Console.WriteLine($"Block: {block.Did} {actor.Handle}");
+                                this.blockItems.Add(new BlockItem(block.Did, actor.Handle, block.CreatedAt));
+                            },
+                            error =>
+                            {
+                                Console.WriteLine($"Error: {error.Detail}");
+                            }
+                            );
+                            }
+
+                            if (!this.blockItems.Any())
+                            {
+                                this.blockItems.Add(new BlockItem(null, "No blocks found", null));
+                            }
+                        }
+                    },
+                    async error =>
+                    {
+                        this.logger?.LogError($"Error: {error.StatusCode} {error.Detail}");
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                this.logger?.LogError(ex, ex.Message);
+            }
+        }
+
+        this.isRunning = false;
+    }
+
+    protected override void OnInitialized()
+    {
+        var debugLog = new DebugLoggerProvider();
+        this.logger = debugLog.CreateLogger("FishyFlipDebugBlocks");
+        this.blockItems.CollectionChanged += (sender, args) =>
+        {
+            this.StateHasChanged();
+        };
+    }
+
+    async void HandleProgressStatus(CarProgressStatusEvent e)
+    {
+        var cid = e.Cid;
+        var bytes = e.Bytes;
+        var test = CBORObject.DecodeFromBytes(bytes);
+        var record = ATRecord.FromCBORObject(test);
+        if (record is Block block)
+        {
+            blocks.Add(block);
+        }
+    }
+
+    public class BlockItem
+    {
+        public BlockItem(ATDid? did, string? handle, DateTime? createdAt)
+        {
+            Did = did;
+            Handle = handle;
+            CreatedAt = createdAt;
+        }
+
+        public ATDid? Did { get; }
+
+        public string? Handle { get; }
+
+        public DateTime? CreatedAt { get; }
+    }
+}

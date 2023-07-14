@@ -23,7 +23,7 @@ public sealed class ATProtoIdentity
         return await this.Client.Get<HandleResolution>(url, this.Options.JsonSerializerOptions, cancellationToken);
     }
 
-    public async Task<Result<Success>> UpdateHandleAsyncc(string handle, CancellationToken cancellationToken = default)
+    public async Task<Result<Success>> UpdateHandleAsync(string handle, CancellationToken cancellationToken = default)
     {
         return await this.Client.Post<UpdateHandle, Success>(Constants.Urls.ATProtoIdentity.UpdateHandle, this.Options.JsonSerializerOptions, new UpdateHandle(handle), cancellationToken);
     }

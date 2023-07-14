@@ -32,6 +32,10 @@ internal class ATWebSocketProtocol : IDisposable
         this.client = new ClientWebSocket();
     }
 
+    public bool IsDisposed => this.disposedValue;
+
+    public bool IsConnected => this.client.State == WebSocketState.Open;
+
     /// <summary>
     /// Connect to the BlueSky instance via a WebSocket connection.
     /// </summary>
@@ -67,7 +71,15 @@ internal class ATWebSocketProtocol : IDisposable
     {
         var endToken = token ?? CancellationToken.None;
         this.logger?.LogInformation($"WSS: Disconnecting");
-        return this.client.CloseAsync(status, disconnectReason, endToken);
+        try
+        {
+            return this.client.CloseAsync(status, disconnectReason, endToken);
+        }
+        catch (Exception ex)
+        {
+            this.logger?.LogError(ex, "Failed to Close WebSocket connection.");
+            return Task.CompletedTask;
+        }
     }
 
     /// <inheritdoc/>

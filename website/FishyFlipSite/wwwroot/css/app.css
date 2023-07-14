@@ -34,3 +34,19 @@ h1:focus {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.post {
+    border-radius: 5px;
+    border-style: double;
+    border-color: #333333;
+    border-width: 4px;
+}
+
+.postText {
+    margin: 15px;
+}
+
+.postTextSub {
+    margin: 15px;
+}

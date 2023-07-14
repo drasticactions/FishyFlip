@@ -11,6 +11,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
 		<PackageReference Include="PublishSPAforGitHubPages.Build" />
+		<PackageReference Include="Drastic.Utilities" />
 	</ItemGroup>
 
 	<ItemGroup>

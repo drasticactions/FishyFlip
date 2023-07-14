@@ -52,7 +52,7 @@ public class ATProtocolBuilder
         return this;
     }
 
-    public ATProtocolBuilder WithLogger(ILogger logger)
+    public ATProtocolBuilder WithLogger(ILogger? logger)
     {
         this.atProtocolOptions.Logger = logger;
         return this;
