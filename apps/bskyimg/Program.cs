@@ -7,15 +7,12 @@ using FishyFlip;
 using FishyFlip.Models;
 using FishyFlip.Tools;
 using Microsoft.Extensions.Logging.Debug;
-using Error = CommandLine.Error;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
-        Parser.Default.ParseArguments<Options>(args)
-            .WithParsed(async (options) => await RunOptions(options))
-            .WithNotParsed(HandleParseError);
+        await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(RunOptions);
     }
 
     static async Task RunOptions(Options options)
@@ -111,10 +108,6 @@ internal class Program
                 Console.WriteLine($"{postError.StatusCode}, {postError.Detail}");
             }
         );
-    }
-
-    static void HandleParseError(IEnumerable<Error> errs)
-    {
     }
 }
 
