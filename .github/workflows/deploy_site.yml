@@ -24,12 +24,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of commits
 
       # Install .NET Core SDK
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 7.0.x
+
+      - uses: dotnet/nbgv@master
 
       # Publish the site
       - name: Build and Publish Site Artifacts
