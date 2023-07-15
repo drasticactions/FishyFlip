@@ -23,5 +23,6 @@
       <PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
       <PackageVersion Include="CommandLineParser" Version="2.9.1" />
       <PackageVersion Include="PublishSPAforGitHubPages.Build" Version="2.1.0" />
+      <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
     </ItemGroup>
 </Project>
