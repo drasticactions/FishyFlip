@@ -13,6 +13,8 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<DebugType>embedded</DebugType>
+    <RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
     <PackageProjectUrl>https://github.com/drasticactions/FishyFlip</PackageProjectUrl>
   </PropertyGroup>
 
