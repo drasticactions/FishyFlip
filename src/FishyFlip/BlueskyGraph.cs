@@ -4,10 +4,17 @@
 
 namespace FishyFlip;
 
+/// <summary>
+/// Bluesky Graph.
+/// </summary>
 public sealed class BlueskyGraph
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BlueskyGraph"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal BlueskyGraph(ATProtocol proto)
     {
         this.proto = proto;

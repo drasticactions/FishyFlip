@@ -2,14 +2,19 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Ipfs;
-
 namespace FishyFlip;
 
+/// <summary>
+/// AT Proto Repo.
+/// </summary>
 public sealed class ATProtoRepo
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATProtoRepo"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal ATProtoRepo(ATProtocol proto)
     {
         this.proto = proto;

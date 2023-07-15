@@ -8,10 +8,10 @@ public class ATHandle : ATIdentifier
 {
     protected ATHandle(string ident)
     {
-        this.Handler = ident;
+        this.Handle = ident;
     }
 
-    public string Handler { get; }
+    public string Handle { get; }
 
     public static ATHandle Create(string uri)
     {
@@ -26,7 +26,7 @@ public class ATHandle : ATIdentifier
 
     public override string ToString()
     {
-        return this.Handler.ToString();
+        return this.Handle.ToString();
     }
 
     internal static ATHandle? Create(ATUri uri)

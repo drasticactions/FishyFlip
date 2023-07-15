@@ -8,6 +8,10 @@ public sealed class BlueskyFeed
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BlueskyFeed"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal BlueskyFeed(ATProtocol proto)
     {
         this.proto = proto;

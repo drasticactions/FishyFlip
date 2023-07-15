@@ -4,10 +4,17 @@
 
 namespace FishyFlip;
 
+/// <summary>
+/// Bluesky Actor.
+/// </summary>
 public sealed class BlueskyActor
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BlueskyActor"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal BlueskyActor(ATProtocol proto)
     {
         this.proto = proto;

@@ -4,10 +4,17 @@
 
 namespace FishyFlip;
 
+/// <summary>
+/// AT Proto Moderation.
+/// </summary>
 public sealed class ATProtoModeration
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATProtoModeration"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal ATProtoModeration(ATProtocol proto)
     {
         this.proto = proto;
@@ -22,7 +29,7 @@ public sealed class ATProtoModeration
         return this.Client.Post<CreateModerationReportPost, ModerationRecord?>(
                        Constants.Urls.ATProtoModeration.CreateReport,
                        this.Options.JsonSerializerOptions,
-                       new CreateModerationReportPost(reasonType.ToFriendlyString(), new RepoStrongRef(uri, cid), reason),
+                       new CreateModerationReportPost(reasonType.ToEndpointString(), new RepoStrongRef(uri, cid), reason),
                        cancellationToken,
                        this.Options.Logger);
     }
@@ -32,7 +39,7 @@ public sealed class ATProtoModeration
         return this.Client.Post<CreateModerationReportRepo, ModerationRecord?>(
                        Constants.Urls.ATProtoModeration.CreateReport,
                        this.Options.JsonSerializerOptions,
-                       new CreateModerationReportRepo(reasonType.ToFriendlyString(), new AdminRepoRef(subject), reason),
+                       new CreateModerationReportRepo(reasonType.ToEndpointString(), new AdminRepoRef(subject), reason),
                        cancellationToken,
                        this.Options.Logger);
     }

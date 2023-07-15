@@ -2,14 +2,19 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using static FishyFlip.Tools.CarDecoder;
-
 namespace FishyFlip;
 
+/// <summary>
+/// AT Proto Sync.
+/// </summary>
 public sealed class ATProtoSync
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATProtoSync"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal ATProtoSync(ATProtocol proto)
     {
         this.proto = proto;

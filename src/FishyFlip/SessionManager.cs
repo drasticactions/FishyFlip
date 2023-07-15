@@ -4,6 +4,9 @@
 
 namespace FishyFlip;
 
+/// <summary>
+/// Bluesky Session Manager.
+/// </summary>
 internal class SessionManager : IDisposable
 {
     private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
@@ -33,12 +36,21 @@ internal class SessionManager : IDisposable
     private int refreshing;
     private ILogger? logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SessionManager"/> class.
+    /// </summary>
+    /// <param name="protocol"><see cref="ATProtocol"/>.</param>
     public SessionManager(ATProtocol protocol)
     {
         this.protocol = protocol;
         this.logger = this.protocol.Options.Logger;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SessionManager"/> class.
+    /// </summary>
+    /// <param name="protocol"><see cref="ATProtocol"/>.</param>
+    /// <param name="session">Existing Session.</param>
     public SessionManager(ATProtocol protocol, Session session)
     {
         this.protocol = protocol;
@@ -48,16 +60,21 @@ internal class SessionManager : IDisposable
 
     /// <summary>
     /// Gets a value indicating whether the user is authenticated.
-    /// This will change which APIs are called and what data is returned.
-    /// For example, if you are unauthorized, it will use "com.atproto" instead of "app.bsky"
-    /// for endpoints that exist in both places.
     /// </summary>
     public bool IsAuthenticated => this.session is not null;
 
+    /// <summary>
+    /// Gets the current session. Can be null if no session.
+    /// </summary>
     public Session? Session => this.session;
 
+    /// <inheritdoc/>
     public void Dispose() => this.Dispose(true);
 
+    /// <summary>
+    /// Updates the bearer token for the session.
+    /// </summary>
+    /// <param name="session">The updated session.</param>
     internal void UpdateBearerToken(Session session)
     {
         this.protocol.Client
@@ -66,6 +83,10 @@ internal class SessionManager : IDisposable
             new AuthenticationHeaderValue("Bearer", session.AccessJwt);
     }
 
+    /// <summary>
+    /// Sets the given session.
+    /// </summary>
+    /// <param name="session"><see cref="Session"/>.</param>
     internal void SetSession(Session session)
     {
         this.session = session;
@@ -84,6 +105,10 @@ internal class SessionManager : IDisposable
         this.ConfigureRefreshTokenTimer();
     }
 
+    /// <summary>
+    /// Dispose.
+    /// </summary>
+    /// <param name="disposing">Is disposing.</param>
     protected virtual void Dispose(bool disposing)
     {
         if (this.disposed || this.timer is null)

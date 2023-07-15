@@ -4,9 +4,17 @@
 
 namespace FishyFlip.Tools;
 
+/// <summary>
+/// Enum Extensions.
+/// </summary>
 public static class EnumExtensions
 {
-    public static string ToFriendlyString(this ModerationReasonType me)
+    /// <summary>
+    /// Returns the endpoint string for the enum.
+    /// </summary>
+    /// <param name="me"><see cref="ModerationReasonType"/>.</param>
+    /// <returns>String.</returns>
+    public static string ToEndpointString(this ModerationReasonType me)
     {
         switch (me)
         {

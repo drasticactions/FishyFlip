@@ -4,8 +4,17 @@
 
 namespace FishyFlip.Tools;
 
+/// <summary>
+/// Handle Validator.
+/// </summary>
 internal static class HandleValidator
 {
+    /// <summary>
+    /// Ensure Valid Handle.
+    /// </summary>
+    /// <param name="handle">String handle.</param>
+    /// <param name="logger">Optional Logger for why a handle was not valid.</param>
+    /// <returns>Returns a bool indicating if the handle is valid.</returns>
     internal static bool EnsureValidHandle(string handle, ILogger? logger = default)
     {
         if (!Regex.IsMatch(handle, "^[a-zA-Z0-9.-]*$"))
@@ -59,6 +68,12 @@ internal static class HandleValidator
         return true;
     }
 
+    /// <summary>
+    /// Ensure Valid Handle Regex.
+    /// </summary>
+    /// <param name="handle">String handle.</param>
+    /// <param name="logger">Optional Logger for why a handle was not valid.</param>
+    /// <returns>Returns a bool indicating if the handle is valid.</returns>
     internal static bool EnsureValidHandleRegex(string handle, ILogger? logger = default)
     {
         if (!Regex.IsMatch(handle, "^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$"))

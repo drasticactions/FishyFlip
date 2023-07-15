@@ -4,10 +4,17 @@
 
 namespace FishyFlip;
 
+/// <summary>
+/// AT Proto Server.
+/// </summary>
 public sealed class ATProtoServer
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATProtoServer"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal ATProtoServer(ATProtocol proto)
     {
         this.proto = proto;

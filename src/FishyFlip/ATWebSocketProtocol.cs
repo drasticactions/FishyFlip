@@ -2,10 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Models;
-using Google.Protobuf;
-using static FishyFlip.Tools.CarDecoder;
-
 namespace FishyFlip;
 
 /// <summary>
@@ -18,7 +14,6 @@ internal class ATWebSocketProtocol : IDisposable
     private ATProtocol protocol;
     private CancellationToken? token;
     private bool disposedValue;
-    private Task? recieveTask;
     private ILogger? logger;
 
     /// <summary>
@@ -39,6 +34,7 @@ internal class ATWebSocketProtocol : IDisposable
     /// <summary>
     /// Connect to the BlueSky instance via a WebSocket connection.
     /// </summary>
+    /// <param name="connection">Connection string.</param>
     /// <param name="token">CancellationToken.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task ConnectAsync(string connection, CancellationToken? token = default)

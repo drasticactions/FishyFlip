@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Tools;
 
+/// <summary>
+/// Extension Methods for Exceptions.
+/// </summary>
 internal static class ExceptionExtensions
 {
     internal static T ThrowIfNull<T>(this T? t)

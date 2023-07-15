@@ -13,6 +13,12 @@ public class Facet : ATRecord
         this.Features = features;
     }
 
+    public Facet(FacetIndex index, FacetFeature feature)
+    {
+        this.Index = index;
+        this.Features = new FacetFeature[] { feature };
+    }
+
     public Facet(CBORObject obj)
     {
         this.Index = obj["index"] is not null ? new FacetIndex(obj["index"]) : null;

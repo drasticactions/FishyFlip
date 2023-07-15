@@ -2,10 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using static FishyFlip.Tools.CarDecoder;
-
 namespace FishyFlip.Tools;
 
+/// <summary>
+/// HttpClient Extensions.
+/// </summary>
 internal static class HttpClientExtensions
 {
     internal static async Task<Result<TK>> Post<T, TK>(

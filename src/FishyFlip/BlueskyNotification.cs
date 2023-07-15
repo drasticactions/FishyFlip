@@ -3,14 +3,20 @@
 // </copyright>
 
 using System.Globalization;
-using FishyFlip.Tools;
 
 namespace FishyFlip;
 
+/// <summary>
+/// Bluesky Notification.
+/// </summary>
 public sealed class BlueskyNotification
 {
     private ATProtocol proto;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BlueskyNotification"/> class.
+    /// </summary>
+    /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal BlueskyNotification(ATProtocol proto)
     {
         this.proto = proto;

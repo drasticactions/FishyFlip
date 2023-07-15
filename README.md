@@ -8,9 +8,227 @@ FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, f
 
 It is currently under construction.
 
-❌ - Unsupported
+### Third-Party Libraries
+
+- [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning)
+
+FishyFlip
+
+- Forked from [bluesky-net](https://github.com/dariogriffo/bluesky-net).
+- [CBOR](https://github.com/peteroupc/CBOR)
+- [net-ipfs-core](https://github.com/ipfs-shipyard/net-ipfs-core)
+- [OneOf](https://github.com/mcintyre321/OneOf)
+
+bskycli
+
+- [CommandLineParser](https://github.com/commandlineparser/commandline)
+
+
+## How To Use
+
+- Use `ATProtocolBuilder` to build a new instance of `ATProtocol`
+
+```csharp
+// Include a ILogger if you want additional logging from the base library.
+var debugLog = new DebugLoggerProvider();
+var atProtocolBuilder = new ATProtocolBuilder()
+    .EnableAutoRenewSession(true)
+// Set the instance URL for the PDS you wish to connect to.
+// Defaults to bsky.social.
+// If you don't know what a PDS is, you 99% don't need to set this, use the default.
+    .WithInstanceUrl(new Uri("https://drasticactions.ninja"))
+    .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
+var atProtocol = atProtocolBuilder.Build();
+```
+
+- Once created, you can now access unauthenticated APIs. For example, to get a list of posts from a user...
+
+```csharp
+// Calls com.atproto.repo.listRecords for da-admin.drasticactions.ninja.
+// ATHandle and ATDid are identifiers and can be used for most endpoints,
+// such as for ListRecord points like below.
+var listRecords = await atProtocol.Repo.ListPostAsync(ATHandle.Create("da-admin.drasticactions.ninja"));
+
+// Each endpoint returns a Result<T>.
+// This was originally taken from bluesky-net, which itself took it from OneOf.
+// This is a pattern match object which can either be the "Success" object, 
+// or an "Error" object. The "Error" object will always be the type of "Error" and always be from the Bluesky API.
+// This would be where you would handle things like authentication errors and the like.
+// You can get around this by using `.AsT0` to ignore the error object, but I would handle it where possible.
+listRecords.Switch(
+    success => { 
+        foreach(var post in success!.Records)
+        {
+            // Prints the CID and ATURI of each post.
+            Console.WriteLine($"CID: {post.Cid} Uri: {post.Uri}");
+            // Value is `ATRecord`, a base type.
+            // We can check if it's a Post and get its true value.
+            if (post.Value is Post atPost)
+            {
+                Console.WriteLine(atPost.Text);
+            }
+        }
+    },
+    error =>
+    {
+        Console.WriteLine($"Error: {error.StatusCode} {error.Detail}");
+    }
+);
+```
+
+- To log in, we need to create a session. This is applied to all `ATProtocol` calls once applied. If you need to create calls from a non-auth user session, create a new `ATProtocol` or destroy the existing session.
+
+```csharp
+// While this accepts normal passwords, you should ask users
+// to create an app password from their accounts to use it instead.
+Result<Session> result = await atProtocol.Server.CreateSessionAsync(userName, password, CancellationToken.None);
+
+result.Switch(
+    success =>
+    {
+        // Contains the session information and tokens used internally.
+        Console.WriteLine($"Session: {success.Did}");
+    },
+    error =>
+    {
+        Console.WriteLine($"Error: {error.StatusCode} {error.Detail}");
+    }
+);
+```
+
+```csharp
+// Creates a text post of "Hello, World!" to the signed in users account.
+var postResult = await atProtocol.Repo.CreatePostAsync("Hello, World!");
+postResult.Switch(
+    success =>
+    {
+        // Contains the ATUri and CID.
+        Console.WriteLine($"Post: {success.Uri} {success.Cid}");
+    },
+    error =>
+    {
+        Console.WriteLine($"Error: {error.StatusCode} {error.Detail}");
+    }
+);
+```
+
+- To upload an image, you need to first upload it as a blob, and then attach it to a post. You can also embed links in text by setting a "Link" Facet.
+
+```csharp
+var stream = File.OpenRead("path/to/image.png");
+var content = new StreamContent(stream);
+content.Headers.ContentLength = stream.Length;
+// Bluesky uses the content type header for setting the blob type.
+// As of this writing, it does not verify what kind of blob gets uploaded.
+// But you should be careful about setting generic types or using the wrong one.
+// If you do not set a type, it will return an error.
+content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+var blobResult = await atProtocol.Repo.UploadBlobAsync(content);
+await blobResult.SwitchAsync(
+       async success =>
+       {
+           // Blob is uploaded.
+           Console.WriteLine($"Blob: {success.Blob.Type}");
+           // Converts the blob to an image.
+           Image? image = success.Blob.ToImage();
+
+           var prompt = "Hello, Image! Link Goes Here!";
+
+           // To insert a link, we need to find the start and end of the link text.
+           // This is done as a "ByteSlice."
+           int promptStart = prompt.IndexOf("Link Goes Here!", StringComparison.InvariantCulture);
+           int promptEnd = promptStart + Encoding.Default.GetBytes("Link Goes Here!").Length;
+           var index = new FacetIndex(promptStart, promptEnd);
+           var link = FacetFeature.CreateLink("https://drasticactions.dev");
+           var facet = new Facet(index, link);
+
+           // Create a post with the image and the link.
+           var postResult = await atProtocol.Repo.CreatePostAsync(prompt, new[] { facet }, new ImagesEmbed(image, "Optional Alt Text, you should have your users set this when possible"));
+       },
+       async error =>
+       {
+            Console.WriteLine($"Error: {error.StatusCode} {error.Detail}");
+       }
+);
+```
+
+You should then see your image and link.
+
+<img src="https://github.com/drasticactions/FishyFlip/assets/898335/ab5309ef-8d95-4c0d-8e0a-8c75159b770d" width=400 />
+
+- You can access the "Firehose" by using `SubscribeRepos`. This can be seen in the `FishyFlip.Firehose` sample. SubscribeRepos uses Websockets to connect to a given instead and get messages whenever a new one is posted. Messages need to be handled outside of the general WebSocket stream; if anything blocks the stream from returning messages, you may see errors from the protocol saying your connection is too slow.
+
+```csharp
+var debugLog = new DebugLoggerProvider();
+var atProtocolBuilder = new ATProtocolBuilder()
+    .EnableAutoRenewSession(true)
+    .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
+var atProtocol = atProtocolBuilder.Build();
+
+atProtocol.OnSubscribedRepoMessage += (sender, args) =>
+{
+    Task.Run(() => HandleMessageAsync(args.Message)).FireAndForgetSafeAsync();
+};
+
+await atProtocol.StartSubscribeReposAsync();
+
+var key = Console.ReadKey();
+
+await atProtocol.StopSubscriptionAsync();
+
+async Task HandleMessageAsync(SubscribeRepoMessage message)
+{
+    if (message.Commit is null)
+    {
+        return;
+    }
+
+    var orgId = message.Commit.Repo;
+
+    if (orgId is null)
+    {
+        return;
+    }
+
+    if (message.Record is not null)
+    {
+        Console.WriteLine($"Record: {message.Record.Type}");
+    }
+}
+```
+
+- `Sync` endpoints generally encode their output as [IPFS Car](https://car.ipfs.io/) files. Here, we can process them as they are streaming so instead of needing to download a whole file to process it, we can do it as it is downloading. This is done by using the `OnCarDecoded` delegate.
+
+```csharp
+var debugLog = new DebugLoggerProvider();
+var atProtocolBuilder = new ATProtocolBuilder()
+    .EnableAutoRenewSession(true)
+    .WithInstanceUrl(new Uri("https://drasticactions.ninja"))
+    .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
+var atProtocol = atProtocolBuilder.Build();
+
+var checkoutResult = await atProtocol.Sync.GetCheckoutAsync(ATDid.Create("did:plc:yhgc5rlqhoezrx6fbawajxlh"), HandleProgressStatus);
+
+async void HandleProgressStatus(CarProgressStatusEvent e)
+{
+    var cid = e.Cid;
+    var bytes = e.Bytes;
+    var test = CBORObject.DecodeFromBytes(bytes);
+    var record = ATRecord.FromCBORObject(test);
+    // Prints the type of the record.
+    Console.WriteLine(record?.Type);
+}
+```
+
+For more samples, check the `apps`, `samples`, and `website` directory.
+
+## Endpoints
+
+As a general rule of thumb, `com.atproto` endpoints (such as `com.atproto.sync`) do not require authentication, where `app.bsky` ones do.
+
+❌ - Not Implemented
 ⚠️ - Partial support, untested
-✅ - Should be working
+✅ - Should be "working"
 
 ### Sync
 
@@ -114,8 +332,8 @@ It is currently under construction.
 
 | Endpoint | Implemented
 |----------|----------|
-| [com.atproto.label.queryLabels](https://atproto.com/lexicons/com-atproto-label#comatprotolabelquerylabels)  | ⚠️  |
-| [com.atproto.label.subscribeLabels](https://atproto.com/lexicons/com-atproto-label#comatprotolabelsubscribelabels)  | ⚠️  |
+| [com.atproto.label.queryLabels](https://atproto.com/lexicons/com-atproto-label#comatprotolabelquerylabels)  | ❌  |
+| [com.atproto.label.subscribeLabels](https://atproto.com/lexicons/com-atproto-label#comatprotolabelsubscribelabels)  | ❌  |
 
 ### Identity
 

@@ -9,8 +9,8 @@ namespace FishyFlip.Tools;
 /// <summary>
 /// Minimalistic https://github.com/mcintyre321/OneOf.
 /// </summary>
-/// <typeparam name="T0"></typeparam>
-/// <typeparam name="T1"></typeparam>
+/// <typeparam name="T0">First type.</typeparam>
+/// <typeparam name="T1">Second Type.</typeparam>
 public class Multiple<T0, T1>
 {
     private readonly T0? value0;
