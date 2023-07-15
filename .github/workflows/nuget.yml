@@ -37,7 +37,7 @@ jobs:
 
       # Pack Nuget
       - name: Build and Pack nuget
-        run: dotnet pack .\src\FishyFlip\FishyFlip.csproj --configuration Release --output nupkg
+        run: dotnet pack src/FishyFlip/FishyFlip.csproj --configuration Release --output nupkg
         
       - name: Upload Nuget
         uses: actions/upload-artifact@v3
