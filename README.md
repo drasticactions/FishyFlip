@@ -35,7 +35,6 @@ var atProtocolBuilder = new ATProtocolBuilder()
     .EnableAutoRenewSession(true)
 // Set the instance URL for the PDS you wish to connect to.
 // Defaults to bsky.social.
-// If you don't know what a PDS is, you 99% don't need to set this, use the default.
     .WithInstanceUrl(new Uri("https://drasticactions.ninja"))
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
