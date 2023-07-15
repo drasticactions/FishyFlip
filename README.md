@@ -8,6 +8,8 @@ FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, f
 
 It is currently under construction.
 
+For a Blazor WASM demo, check out https://drasticactions.github.io/FishyFlip
+
 ### Third-Party Libraries
 
 - [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning)
@@ -365,3 +367,9 @@ As a general rule of thumb, `com.atproto` endpoints (such as `com.atproto.sync`)
 | Endpoint | Implemented
 |----------|----------|
 |   |   | -->
+
+## Why "FishyFlip?"
+
+"FishyFlip" is a reference to the [Your Kickstarter Sucks](https://open.spotify.com/episode/5upEtr0tHBf6SoXjJwG5UJ) episode of the same name.
+
+<img alt="Discord" src="https://github.com/dotnet/Nerdbank.GitVersioning/assets/898335/c6127d97-bd4a-44a6-9c95-5e0db5ce9e23" width=250 />
