@@ -4,4 +4,4 @@
 
 namespace FishyFlip.Models;
 
-public record ActorFollows(FeedProfile? Subject, FeedProfile[]? Followers, string? Cursor);
+public record ActorFollows(FeedProfile? Subject, FeedProfile[]? Follows, string? Cursor);

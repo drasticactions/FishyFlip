@@ -53,7 +53,7 @@ public sealed class BlueskyGraph
         string? cursor = default,
         CancellationToken cancellationToken = default)
     {
-        var url = Constants.Urls.Bluesky.Graph.GetFollowers + $"?actor={identifier}&limit={limit}";
+        var url = Constants.Urls.Bluesky.Graph.GetFollows + $"?actor={identifier}&limit={limit}";
 
         if (cursor is not null)
         {
@@ -61,6 +61,22 @@ public sealed class BlueskyGraph
         }
 
         return await this.Client.Get<ActorFollows>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+    
+    public async Task<Result<ActorFollowers?>> GetFollowersAsync(
+        ATIdentifier identifier,
+        int limit = 50,
+        string? cursor = default,
+        CancellationToken cancellationToken = default)
+    {
+        var url = Constants.Urls.Bluesky.Graph.GetFollowers + $"?actor={identifier}&limit={limit}";
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<ActorFollowers>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<Success>> MuteActorAsync(ATDid did, CancellationToken cancellationToken = default)
