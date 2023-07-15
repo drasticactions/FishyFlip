@@ -2,11 +2,26 @@
   <PropertyGroup>
     <LangVersion>preview</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <PackageIcon>favicon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Access the ATProtocol and Bluesky through .NET.</Description>
+    <PackageTags>atproto atprotocol bluesky</PackageTags>
     <Company>Drastic Actions</Company>
     <Copyright>Copyright (C) Drastic Actions</Copyright>
-    <IsPackable>false</IsPackable>
-    <Version>1.2.2</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<DebugType>embedded</DebugType>
+    <PackageProjectUrl>https://github.com/drasticactions/FishyFlip</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup Condition=" '$(IsPackable)' == 'true' ">
+		<None Include="$(MSBuildThisFileDirectory)favicon.png" Pack="true" PackagePath="" Visible="false" />
+		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
+	</ItemGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
