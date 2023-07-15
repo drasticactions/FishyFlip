@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using Ipfs;
+
 namespace FishyFlip;
 
 public sealed class ATProtoRepo
@@ -106,24 +108,6 @@ public sealed class ATProtoRepo
                     cancellationToken, this.Options.Logger);
     }
 
-    private Task<Result<Y>> CreateRecord<X, Y>(X record, CancellationToken cancellationToken = default)
-    {
-        return
-            this.Client
-                .Post<X, Y>(
-                    Constants.Urls.ATProtoRepo.CreateRecord, this.Options.JsonSerializerOptions, record,
-                    cancellationToken, this.Options.Logger);
-    }
-
-    private Task<Result<Y>> PutRecord<X, Y>(X record, CancellationToken cancellationToken = default)
-    {
-        return
-            this.Client
-                .Post<X, Y>(
-                    Constants.Urls.ATProtoRepo.PutRecord, this.Options.JsonSerializerOptions, record,
-                    cancellationToken, this.Options.Logger);
-    }
-
     public async Task<Result<T?>> GetRecordAsync<T>(string collection, ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
         where T : ATFeedTypeAPI
     {
@@ -140,6 +124,24 @@ public sealed class ATProtoRepo
     {
         string url = $"{Constants.Urls.ATProtoRepo.DescribeRepo}?repo={identifier}";
         return await this.Client.Get<DescribeRepo?>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
+    private Task<Result<Y>> CreateRecord<X, Y>(X record, CancellationToken cancellationToken = default)
+    {
+        return
+            this.Client
+                .Post<X, Y>(
+                    Constants.Urls.ATProtoRepo.CreateRecord, this.Options.JsonSerializerOptions, record,
+                    cancellationToken, this.Options.Logger);
+    }
+
+    private Task<Result<Y>> PutRecord<X, Y>(X record, CancellationToken cancellationToken = default)
+    {
+        return
+            this.Client
+                .Post<X, Y>(
+                    Constants.Urls.ATProtoRepo.PutRecord, this.Options.JsonSerializerOptions, record,
+                    cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<Success>> DeleteFollowAsync(ATIdentifier repo, string rkey,
@@ -167,5 +169,33 @@ public sealed class ATProtoRepo
             swapRecord,
             swapCommit);
         return await this.Client.Post<Success>(Constants.Urls.ATProtoRepo.DeleteRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
+    public Task<Result<ListRecords?>> ListFollowAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        => this.ListRecordsAsync(Constants.GraphTypes.Follow, repo, limit, cursor, reverse, cancellationToken);
+
+    public Task<Result<ListRecords?>> ListBlockAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        => this.ListRecordsAsync(Constants.GraphTypes.Block, repo, limit, cursor, reverse, cancellationToken);
+
+    public Task<Result<ListRecords?>> ListLikeAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        => this.ListRecordsAsync(Constants.FeedType.Like, repo, limit, cursor, reverse, cancellationToken);
+
+    public Task<Result<ListRecords?>> ListPostAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
+
+    public async Task<Result<ListRecords?>> ListRecordsAsync(string collection, ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={collection}&repo={repo}&limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        if (reverse is not null)
+        {
+            url += $"&reverse={reverse}";
+        }
+
+        return await this.Client.Get<ListRecords>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 }

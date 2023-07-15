@@ -133,8 +133,8 @@ public class AuthorizedTests
         test.Switch(
             success =>
                        {
-                Assert.True(success!.Cid is not null);
-            },
+                           Assert.True(success!.Cid is not null);
+                       },
             failed =>
             {
                 Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
@@ -153,19 +153,19 @@ public class AuthorizedTests
         await upload.SwitchAsync(
             async success =>
             {
-            Assert.True(success!.Blob is not null);
-            var imagesEmbed = new ImagesEmbed(success.Blob.ToImage(), "CreatePostWithImageAsyncTest");
-            var test = await this.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, imagesEmbed, new[] { "en" });
-            test.Switch(
-                    success2 =>
-                    {
-                        Assert.True(success2!.Cid is not null);
-                        Assert.True(success2!.Uri is not null);
-                    },
-                    failed2 =>
-                    {
-                        Assert.Fail($"{failed2.StatusCode}: {failed2.Detail}");
-                    });
+                Assert.True(success!.Blob is not null);
+                var imagesEmbed = new ImagesEmbed(success.Blob.ToImage(), "CreatePostWithImageAsyncTest");
+                var test = await this.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, imagesEmbed, new[] { "en" });
+                test.Switch(
+                        success2 =>
+                        {
+                            Assert.True(success2!.Cid is not null);
+                            Assert.True(success2!.Uri is not null);
+                        },
+                        failed2 =>
+                        {
+                            Assert.Fail($"{failed2.StatusCode}: {failed2.Detail}");
+                        });
             },
             async failed =>
             {
@@ -186,11 +186,11 @@ public class AuthorizedTests
         test.Switch(
             success =>
                        {
-                Assert.True(success!.Cid is not null);
-            },
+                           Assert.True(success!.Cid is not null);
+                       },
             failed =>
                                   {
-                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
-            });
+                                      Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+                                  });
     }
 }

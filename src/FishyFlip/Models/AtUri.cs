@@ -34,12 +34,12 @@ public class ATUri
 
     public string Protocol => "at:";
 
-    public static ATUri Create(string uri)
-        => new ATUri(uri);
-
     public string Origin => $"at://{this.host}";
 
     public string Hostname => this.host;
+
+    public static ATUri Create(string uri)
+        => new ATUri(uri);
 
     public ATDid? Did { get; }
 

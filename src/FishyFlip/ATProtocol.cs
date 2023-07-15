@@ -34,13 +34,13 @@ public sealed class ATProtocol : IDisposable
 
     public ATProtoSync Sync => new(this);
 
-    internal HttpClient Client => this.client;
-
-    internal SessionManager SessionManager => this.sessionManager;
-
     public ATProtoRepo Repo => new(this);
 
     public BlueskyActor Actor => new(this);
+
+    internal HttpClient Client => this.client;
+
+    internal SessionManager SessionManager => this.sessionManager;
 
     public ATProtoLabel Label => new(this);
 
