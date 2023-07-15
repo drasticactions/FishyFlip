@@ -2,7 +2,6 @@
   <PropertyGroup>
     <LangVersion>preview</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
-    <IsPackable>false</IsPackable>
     <PackageIcon>favicon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Access the ATProtocol and Bluesky through .NET.</Description>
@@ -17,15 +16,11 @@
     <PackageProjectUrl>https://github.com/drasticactions/FishyFlip</PackageProjectUrl>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(IsPackable)' == 'true' ">
+  <ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)favicon.png" Pack="true" PackagePath="" Visible="false" />
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
 	</ItemGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <PublishSingleFile>true</PublishSingleFile>
-    <SelfContained>true</SelfContained>
-  </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
   </ItemGroup>

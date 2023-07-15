@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip", "..\..\src\FishyFlip\FishyFlip.csproj", "{B0D2F1BB-25CD-4547-8CFA-5ED685A9C6C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bskycli", "bskycli.csproj", "{64A9D872-C9EA-468D-89C4-40D6B3441073}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0D2F1BB-25CD-4547-8CFA-5ED685A9C6C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D2F1BB-25CD-4547-8CFA-5ED685A9C6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D2F1BB-25CD-4547-8CFA-5ED685A9C6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D2F1BB-25CD-4547-8CFA-5ED685A9C6C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A9D872-C9EA-468D-89C4-40D6B3441073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A9D872-C9EA-468D-89C4-40D6B3441073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A9D872-C9EA-468D-89C4-40D6B3441073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A9D872-C9EA-468D-89C4-40D6B3441073}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
