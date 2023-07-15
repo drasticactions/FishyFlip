@@ -2,7 +2,7 @@
 
 [![NuGet Version](https://img.shields.io/nuget/v/FishyFlip.svg)](https://www.nuget.org/packages/FishyFlip/) ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
-![FishyFlip Logo](https://github-production-user-asset-6210df.s3.amazonaws.com/898335/253740405-4b0ae177-cc49-4c26-b6b0-ab8e835a0e62.png)
+![FishyFlip Logo](https://user-images.githubusercontent.com/898335/253740405-4b0ae177-cc49-4c26-b6b0-ab8e835a0e62.png)
 
 ![1444070256569233](https://user-images.githubusercontent.com/898335/167266846-1ad2648f-91c1-4a04-a18d-6dd4d6c7d21c.gif)
 
@@ -157,7 +157,7 @@ await blobResult.SwitchAsync(
 
 You should then see your image and link.
 
-![Post Sample](https://github-production-user-asset-6210df.s3.amazonaws.com/898335/253740484-57addcb6-523c-4b65-914d-495ddf8e1474.png)
+![Post Sample](https://user-images.githubusercontent.com/898335/253740484-57addcb6-523c-4b65-914d-495ddf8e1474.png)
 
 - You can access the "Firehose" by using `SubscribeRepos`. This can be seen in the `FishyFlip.Firehose` sample. SubscribeRepos uses Websockets to connect to a given instead and get messages whenever a new one is posted. Messages need to be handled outside of the general WebSocket stream; if anything blocks the stream from returning messages, you may see errors from the protocol saying your connection is too slow.
 
@@ -374,4 +374,4 @@ As a general rule of thumb, `com.atproto` endpoints (such as `com.atproto.sync`)
 
 "FishyFlip" is a reference to the [Your Kickstarter Sucks](https://open.spotify.com/episode/5upEtr0tHBf6SoXjJwG5UJ) episode of the same name.
 
-![Discord Image](https://github-production-user-asset-6210df.s3.amazonaws.com/898335/253739935-c6127d97-bd4a-44a6-9c95-5e0db5ce9e23.png)
+![Discord Image](https://user-images.githubusercontent.com/898335/253739935-c6127d97-bd4a-44a6-9c95-5e0db5ce9e23.png)
