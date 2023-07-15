@@ -7,3 +7,12 @@
 FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, forked from [bluesky-net](https://github.com/dariogriffo/bluesky-net).
 
 It is currently under construction.
+
+❌ - Unsupported
+⚠️ - Partial support, untested
+✅ - Should be working
+
+| Endpoint | Implemented
+|----------|----------|
+| [com.atproto.admin.disableInviteCodes](https://atproto.com/lexicons/com-atproto-admin#comatprotoadmindisableinvitecodes)    | ❌   |
+| [com.atproto.admin.getInviteCodes](https://atproto.com/lexicons/com-atproto-admin#comatprotoadmingetinvitecodes)   | ❌   |
