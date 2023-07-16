@@ -38,7 +38,7 @@ internal static class ProgramHelpers
         }
     }
 
-    internal static async Task<Session> AuthAsync(ATProtocol protocol, BaseOptions options)
+    internal static async Task<Session?> AuthAsync(ATProtocol protocol, BaseOptions options, bool authRequired = true)
     {
         if (string.IsNullOrEmpty(options.Username))
         {
@@ -50,14 +50,22 @@ internal static class ProgramHelpers
             options.Password = Environment.GetEnvironmentVariable(Program.Constants.BlueskyPassword);
         }
 
-        if (string.IsNullOrEmpty(options.Username))
+        if (authRequired)
         {
-            throw new Exception("Username is required.");
+            if (string.IsNullOrEmpty(options.Username))
+            {
+                throw new Exception("Username is required.");
+            }
+
+            if (string.IsNullOrEmpty(options.Password))
+            {
+                throw new Exception("Password is required.");
+            }
         }
 
-        if (string.IsNullOrEmpty(options.Password))
+        if (string.IsNullOrEmpty(options.Username) || string.IsNullOrEmpty(options.Password))
         {
-            throw new Exception("Password is required.");
+            return null;
         }
 
         var result = await protocol.Server.CreateSessionAsync(options.Username, options.Password);

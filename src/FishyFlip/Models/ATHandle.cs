@@ -13,15 +13,30 @@ public class ATHandle : ATIdentifier
 
     public string Handle { get; }
 
-    public static ATHandle Create(string uri)
+    public static ATHandle? Create(string uri)
     {
         if (string.IsNullOrEmpty(uri))
         {
             throw new ArgumentNullException(nameof(uri));
         }
 
-        HandleValidator.EnsureValidHandle(uri);
-        return new ATHandle(uri);
+        var valid = HandleValidator.EnsureValidHandle(uri);
+        if (valid)
+        {
+            return new ATHandle(uri);
+        }
+
+        return null;
+    }
+
+    public static bool IsValid(string uri)
+    {
+        if (string.IsNullOrEmpty(uri))
+        {
+            throw new ArgumentNullException(nameof(uri));
+        }
+
+        return HandleValidator.EnsureValidHandle(uri);
     }
 
     public override string ToString()

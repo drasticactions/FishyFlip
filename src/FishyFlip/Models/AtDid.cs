@@ -13,15 +13,30 @@ public class ATDid : ATIdentifier
 
     public string Handler { get; }
 
-    public static ATDid Create(string uri)
+    public static ATDid? Create(string uri)
     {
         if (string.IsNullOrEmpty(uri))
         {
             throw new ArgumentNullException(nameof(uri));
         }
 
-        DIDValidator.EnsureValidDid(uri);
+        var valid = DIDValidator.EnsureValidDid(uri);
+        if (!valid)
+        {
+            return null;
+        }
+
         return new ATDid(uri);
+    }
+
+    public static bool IsValid(string uri)
+    {
+        if (string.IsNullOrEmpty(uri))
+        {
+            throw new ArgumentNullException(nameof(uri));
+        }
+
+        return DIDValidator.EnsureValidDid(uri);
     }
 
     public override string ToString()

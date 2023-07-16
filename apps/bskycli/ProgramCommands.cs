@@ -2,12 +2,43 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Text.Json;
 using CommandLine;
+using FishyFlip.Models;
 
 internal static class ProgramCommands
 {
-    internal static async Task GetRecordAsync(GetRecordOptions options)
+    internal static async Task ViewPostAsync(ViewPostOptions options)
     {
+        if (string.IsNullOrEmpty(options.Repo))
+        {
+            throw new Exception("Repo is required.");
+        }
+
+        if (string.IsNullOrEmpty(options.Rkey))
+        {
+            throw new Exception("Rkey is required.");
+        }
+
+        var ident = ATIdentifier.Create(options.Repo);
+        if (ident is null)
+        {
+            throw new Exception("Repo is not valid.");
+        }
+
+        var protocol = ProgramHelpers.GetProtocol(options);
+        await ProgramHelpers.AuthAsync(protocol, options, false);
+
+        var result = await protocol.Repo.GetPostAsync(ident, options.Rkey);
+        var feed = ProgramHelpers.HandleResult(result);
+        if (feed?.Value is null)
+        {
+            Console.WriteLine("No Post Found.");
+            return;
+        }
+
+        Console.WriteLine($"Post: {feed.Value.Text}");
+        Console.WriteLine($"Post: {feed.Uri}");
     }
 
     internal static async Task PostAsync(PostOptions options)
@@ -26,9 +57,14 @@ internal static class ProgramCommands
         Console.WriteLine($"Post Created: {post.Uri}");
     }
 
-    [Verb("record", HelpText = "Get record from Bluesky.")]
-    internal class GetRecordOptions : BaseOptions
+    [Verb("view-post", HelpText = "Get post from Bluesky.")]
+    internal class ViewPostOptions : BaseOptions
     {
+        [Option('r', "repo", Required = true, HelpText = "The ATIdentifier (Handle or Did)")]
+        public string? Repo { get; set; }
+
+        [Option('i', "rkey", Required = true, HelpText = "The Rkey (Identifier) of the record")]
+        public string Rkey { get; set; }
     }
 
     [Verb("post", HelpText = "Post to Bluesky.")]

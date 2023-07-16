@@ -15,9 +15,9 @@ internal class Program
 
     internal static Task RunParser(string[] args)
     {
-        return Parser.Default.ParseArguments<GetRecordOptions, PostOptions>(args)
+        return Parser.Default.ParseArguments<ViewPostOptions, PostOptions>(args)
         .MapResult(
-          (GetRecordOptions options) => ProgramHelpers.AppDispatcher(ProgramCommands.GetRecordAsync(options)),
+          (ViewPostOptions options) => ProgramHelpers.AppDispatcher(ProgramCommands.ViewPostAsync(options)),
           (PostOptions options) => ProgramHelpers.AppDispatcher(ProgramCommands.PostAsync(options)),
           errs => Task.FromResult(-1));
     }
