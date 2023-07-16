@@ -24,5 +24,7 @@
       <PackageVersion Include="CommandLineParser" Version="2.9.1" />
       <PackageVersion Include="PublishSPAforGitHubPages.Build" Version="2.1.0" />
       <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
+      <PackageVersion Include="EasyTestFile.XUnit" Version="2.0.6" />
+      <PackageVersion Include="EasyTestFile" Version="2.0.6" />
     </ItemGroup>
 </Project>

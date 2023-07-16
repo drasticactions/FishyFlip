@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip", "..\..\src\Fish
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bskycli", "bskycli.csproj", "{64A9D872-C9EA-468D-89C4-40D6B3441073}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bskycli.Tests", "..\..\tests\bskycli.Tests\bskycli.Tests.csproj", "{B9E49D59-BBDC-4CBE-875D-E2630D41A8EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +23,15 @@ Global
 		{64A9D872-C9EA-468D-89C4-40D6B3441073}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64A9D872-C9EA-468D-89C4-40D6B3441073}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64A9D872-C9EA-468D-89C4-40D6B3441073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E49D59-BBDC-4CBE-875D-E2630D41A8EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E49D59-BBDC-4CBE-875D-E2630D41A8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E49D59-BBDC-4CBE-875D-E2630D41A8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E49D59-BBDC-4CBE-875D-E2630D41A8EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0466FB3-5FC6-4328-B152-62E1C8B24E10}
 	EndGlobalSection
 EndGlobal

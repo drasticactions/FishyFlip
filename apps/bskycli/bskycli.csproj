@@ -16,5 +16,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommandLineParser" />
+		<PackageReference Include="MimeTypes" />
 	</ItemGroup>
 </Project>
