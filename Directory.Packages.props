@@ -26,5 +26,8 @@
       <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
       <PackageVersion Include="EasyTestFile.XUnit" Version="2.0.6" />
       <PackageVersion Include="EasyTestFile" Version="2.0.6" />
+      <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8" />
+      <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+      <PackageVersion Include="Handlebars.Net" Version="2.1.4" />
     </ItemGroup>
 </Project>
