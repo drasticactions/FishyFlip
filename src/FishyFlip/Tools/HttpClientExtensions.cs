@@ -124,6 +124,34 @@ internal static class HttpClientExtensions
         return new Success();
     }
 
+    internal static async Task<Result<Success>> DownloadCarAsync(
+        this HttpClient client,
+        string url,
+        string filePath,
+        string fileName,
+        JsonSerializerOptions options,
+        CancellationToken cancellationToken,
+        ILogger? logger = default)
+    {
+        logger?.LogDebug($"GET {url}");
+
+        using var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        if (!message.IsSuccessStatusCode)
+        {
+            Error error = await CreateError(message!, options, cancellationToken, logger);
+            return error!;
+        }
+
+        var fileDownload = Path.Combine(filePath, StringExtensions.GenerateValidFilename(fileName));
+        using (var content = File.Create(fileDownload))
+        {
+            using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
+            await stream.CopyToAsync(content, cancellationToken);
+        }
+
+        return new Success();
+    }
+
     internal static async Task<Result<T?>> Get<T>(
         this HttpClient client,
         string url,

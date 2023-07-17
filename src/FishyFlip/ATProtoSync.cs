@@ -48,6 +48,16 @@ public sealed class ATProtoSync
             this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
     }
 
+    public Task<Result<Success>> DownloadRepoAsync(ATDid repo, string? path = default, string? filename = default,
+        CancellationToken cancellationToken = default)
+    {
+        filename ??= $"{repo}-repo.car";
+        return this.Client.DownloadCarAsync(
+            $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}",
+            path ?? Directory.GetCurrentDirectory(), filename,
+            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
     public async Task<Result<CommitPath?>> GetCommitPathAsync(ATDid did, Cid? latest = default, Cid? earliest = default, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetCommitPath}&did={did}";
@@ -75,6 +85,18 @@ public sealed class ATProtoSync
             this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
     }
 
+    public Task<Result<Success>> DownloadBlocksAsync(ATDid did, Cid[] commits, string? path = default, string? filename = default,
+        CancellationToken cancellationToken = default)
+    {
+        var commitList = string.Join(",", commits.Select(n => n.ToString()));
+        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&commits={commitList}";
+        filename ??= $"{did}-blocks.car";
+        return this.Client.DownloadCarAsync(
+            url,
+            path ?? Directory.GetCurrentDirectory(), filename,
+            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
     public Task<Result<Success>> GetCheckoutAsync(ATDid did, OnCarDecoded onDecoded, Cid? commit = default,
         CancellationToken cancellationToken = default)
     {
@@ -89,6 +111,20 @@ public sealed class ATProtoSync
             this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
     }
 
+    public Task<Result<Success>> DownloadCheckoutAsync(ATDid did, Cid? commit = default, string? path = default, string? filename = default,
+               CancellationToken cancellationToken = default)
+    {
+        var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={did}";
+        if (commit is not null)
+        {
+            url += $"&commit={commit}";
+        }
+
+        filename ??= $"{did}-checkout.car";
+
+        return this.Client.DownloadCarAsync(url, path ?? Directory.GetCurrentDirectory(), filename, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
     public Task<Result<Success>> GetRecordAsync(string collection, ATDid repo, string rkey, OnCarDecoded onDecoded, Cid? commit = default,
         CancellationToken cancellationToken = default)
     {
@@ -101,6 +137,24 @@ public sealed class ATProtoSync
         return this.Client.GetCarAsync(
             url,
             this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
+    }
+
+    public Task<Result<Success>> DownloadRecordAsync(string collection, ATDid repo, string rkey, Cid? commit = default,
+        string? path = default, string? filename = default,
+        CancellationToken cancellationToken = default)
+    {
+        var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={repo}&rkey={rkey}";
+        if (commit is not null)
+        {
+            url += $"&commit={commit}";
+        }
+
+        filename ??= $"{repo}-{rkey}.car";
+
+        return this.Client.DownloadCarAsync(
+            url,
+            path ?? Directory.GetCurrentDirectory(), filename,
+            this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<RepoList?>> ListReposAsync(

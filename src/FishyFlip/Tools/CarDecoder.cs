@@ -2,11 +2,12 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using static FishyFlip.Tools.CarDecoder;
-
 namespace FishyFlip.Tools;
 
+/// <summary>
+/// Fires when a car file is decoded.
+/// </summary>
+/// <param name="e">Car Progress Status Event.</param>
 public delegate void OnCarDecoded(CarProgressStatusEvent e);
 
 /// <summary>
@@ -21,7 +22,8 @@ public static class CarDecoder
     /// Decodes CAR Byte Array.
     /// </summary>
     /// <param name="bytes">Byte Array.</param>
-    internal static void DecodeCar(byte[] bytes, OnCarDecoded? progress = null)
+    /// <param name="progress">Fires when a car file is decoded.</param>
+    public static void DecodeCar(byte[] bytes, OnCarDecoded? progress = null)
     {
         int bytesLength = bytes.Length;
         var header = DecodeReader(bytes);
@@ -48,7 +50,13 @@ public static class CarDecoder
         }
     }
 
-    internal static async Task DecodeCarAsync(Stream stream, OnCarDecoded? progress = null)
+    /// <summary>
+    /// Decodes CAR Stream.
+    /// </summary>
+    /// <param name="stream">Stream containing CAR file.</param>
+    /// <param name="progress">Fires when a car file is decoded.</param>
+    /// <returns>Task.</returns>
+    public static async Task DecodeCarAsync(Stream stream, OnCarDecoded? progress = null)
     {
         var totalBytesRead = 0;
         var header = DecodeReader(stream);

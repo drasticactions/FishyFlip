@@ -16,7 +16,7 @@ public class ATProtocolOptions
     {
         // HACK: Decodes a message to load the default Cid protocols.
         Cid.Decode("bafyreiezjt5bqt2xpcdfvisud7jrd4zuxygz4ssnuge3ddjcoptanvcnsa");
-        this.HttpClient = new HttpClient();
+        this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
