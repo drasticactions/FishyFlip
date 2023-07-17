@@ -5,6 +5,16 @@
 namespace FishyFlip.Models;
 public class Profile : ATRecord
 {
+    [JsonConstructor]
+    public Profile(string? displayName, string description, Image? avatar, Image? banner)
+    {
+        this.Type = Constants.ActorTypes.Profile;
+        this.Description = description;
+        this.DisplayName = displayName;
+        this.Banner = banner;
+        this.Avatar = avatar;
+    }
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="Profile"/> class.
     /// </summary>

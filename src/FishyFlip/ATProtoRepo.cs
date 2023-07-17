@@ -103,6 +103,9 @@ public sealed class ATProtoRepo
 
     public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
       => await this.GetRecordAsync<PostRecord>(Constants.FeedType.Post, repo, rkey, cid, cancellationToken);
+    
+    public async Task<Result<ActorRecord?>> GetActorAsync(ATIdentifier repo, Cid? cid = null, CancellationToken cancellationToken = default)
+        => await this.GetRecordAsync<ActorRecord>(Constants.ActorTypes.Profile, repo, "self", cid, cancellationToken);
 
     public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
     {
