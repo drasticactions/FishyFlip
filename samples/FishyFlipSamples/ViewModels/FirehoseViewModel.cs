@@ -2,13 +2,13 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Collections.ObjectModel;
 using Drastic.Tools;
 using Drastic.ViewModels;
 using FishyFlip;
 using FishyFlip.Models;
 using FishyFlip.Tools;
-using System;
-using System.Collections.ObjectModel;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FishyFlipMaui.ViewModels;
 
@@ -72,32 +72,51 @@ public class FirehoseViewModel : BaseViewModel
 
     private async Task HandlePost(ATIdentifier ident, Post post)
     {
-        var actor = (await this.atProtocol.Repo.GetActorAsync(ident)).HandleResult();
-        this.AddItem(new FirehoseItem(ident, post, actor.Value));
+        var actor = await this.atProtocol.Repo.GetActorAsync(ident);
+        if (actor.IsT1)
+        {
+            return;
+        }
+
+        byte[] imageArray = null;
+        if (actor.AsT0?.Value?.Avatar?.Ref is not null && ident is ATDid did)
+        {
+            //var blob = (await this.atProtocol.Sync.GetBlobAsync(did, actor.Value.Avatar.Ref.Link)).HandleResult();
+            //if (blob is not null)
+            //{
+            //    imageArray = blob.Data;
+            //}
+        }
+
+        this.AddItem(new FirehoseItem(ident, post, actor.AsT0.Value, imageArray));
     }
 
     private void AddItem(FirehoseItem item)
     {
-        lock (this.Items)
-        {
-            this.Items.Insert(0, item);
-            if (this.Items.Count > 100)
-            {
-                this.Items.Remove(this.Items.LastOrDefault());
-            }
-        }
+            // NOTE for later.
+           this.Dispatcher.Dispatch(() => {
+               lock (this.Items)
+               {
+                   this.Items.Insert(0, item);
+                   if (this.Items.Count > 100)
+                   {
+                       this.Items.Remove(this.Items.LastOrDefault());
+                   }
+               }
+           });
     }
 }
 
 public class FirehoseItem
 {
-    public FirehoseItem(ATIdentifier ident, Post post, Profile profile)
+    public FirehoseItem(ATIdentifier ident, Post post, Profile profile, byte[]? imageData = default)
     {
         this.Post = post;
         this.Profile = profile;
+        this.Image = imageData;
         if (profile.Avatar?.Ref is not null)
         {
-           this.Image = $"https://bsky.social{Constants.Urls.ATProtoSync.GetBlob}?did={ident!}&cid={profile.Avatar.Ref.Link}";
+           this.ImageUrl = $"https://bsky.social{Constants.Urls.ATProtoSync.GetBlob}?did={ident!}&cid={profile.Avatar.Ref.Link}";
         }
     }
 
@@ -106,5 +125,7 @@ public class FirehoseItem
 
     public ATIdentifier Ident { get; }
 
-    public string Image { get; }
+    public byte[] Image { get; }
+
+    public string ImageUrl { get; }
 }

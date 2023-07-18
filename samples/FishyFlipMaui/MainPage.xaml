@@ -1,8 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="FishyFlipMaui.MainPage">
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <Grid RowSpacing="5" RowDefinitions="Auto, *, Auto">
         <Grid Grid.Row="0" ColumnDefinitions="*, *" ColumnSpacing="20">
             <Button Text="Connect" Grid.Column="0" Command="{Binding ConnectCommand}" />
@@ -12,7 +18,8 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid ColumnDefinitions="100, *" ColumnSpacing="5" Margin="5">
-                        <Image HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="60" HeightRequest="60" Source="{Binding Image}"/>
+                        <!--<Image HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="60" HeightRequest="60" Source="{Binding Image, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>-->
+                        <Image HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="60" HeightRequest="60" Source="{Binding ImageUrl}"/>
                         <Grid Grid.Column="1" RowDefinitions="Auto, *">
                             <Grid ColumnSpacing="5" ColumnDefinitions="Auto, *">
                                 <Label LineBreakMode="TailTruncation" Grid.Column="0" Text="{Binding Profile.DisplayName}" FontAttributes="Bold"/>

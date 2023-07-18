@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using CommunityToolkit.Maui;
 using Drastic.Services;
 using FishyFlip;
 using FishyFlipMaui.Services;
@@ -19,9 +20,11 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var debugLog = new DebugLoggerProvider();
+        //var atProtocolBuilder = new ATProtocolBuilder()
+        //    .EnableAutoRenewSession(true)
+        //    .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
         var atProtocolBuilder = new ATProtocolBuilder()
-            .EnableAutoRenewSession(true)
-            .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
+            .EnableAutoRenewSession(true);
         var atProtocol = atProtocolBuilder.Build();
         var builder = MauiApp.CreateBuilder();
 
@@ -38,6 +41,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
 #if !WINDOWS && !ANDROID
             .UseNuke(showDebugLogs: false)
 #endif

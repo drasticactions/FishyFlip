@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FishyFlipWinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FishyFlipWinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
