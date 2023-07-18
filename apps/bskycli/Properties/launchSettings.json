@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "bskycli": {
+      "commandName": "Project",
+      "commandLineArgs": "view-post -r \"test1.drasticactions.ninja\" -i \"3k2mntys5ac22\""
+    }
+  }
+}

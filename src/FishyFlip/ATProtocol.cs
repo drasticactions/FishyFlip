@@ -25,6 +25,7 @@ public sealed class ATProtocol : IDisposable
         this.options = options;
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
         this.webSocketProtocol = new ATWebSocketProtocol(this);
+        this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
         this.sessionManager = new SessionManager(this);
     }
 
@@ -32,6 +33,11 @@ public sealed class ATProtocol : IDisposable
     /// Event for when a subscribed repo message is received.
     /// </summary>
     public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
+
+    /// <summary>
+    /// Event for when a subscribed repo message is received.
+    /// </summary>
+    public event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated;
 
     /// <summary>
     /// Gets the ATProtocol Options.
@@ -193,10 +199,14 @@ public sealed class ATProtocol : IDisposable
         {
             if (disposing)
             {
+                this.webSocketProtocol.OnConnectionUpdated -= this.WebSocketProtocolOnConnectionUpdated;
                 this.client.Dispose();
             }
 
             this.disposedValue = true;
         }
     }
+
+    private void WebSocketProtocolOnConnectionUpdated(object? sender, SubscriptionConnectionStatusEventArgs e)
+        => this.OnConnectionUpdated?.Invoke(this, e);
 }

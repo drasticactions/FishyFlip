@@ -31,6 +31,8 @@ internal class ATWebSocketProtocol : IDisposable
 
     public bool IsConnected => this.client.State == WebSocketState.Open;
 
+    internal event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated;
+
     /// <summary>
     /// Connect to the BlueSky instance via a WebSocket connection.
     /// </summary>
@@ -54,6 +56,7 @@ internal class ATWebSocketProtocol : IDisposable
         await this.client.ConnectAsync(new Uri($"wss://{baselineUrl.Host}{connection}"), endToken);
         this.logger?.LogInformation($"WSS: Connected to {baselineUrl}");
         this.ReceiveMessages(this.client, endToken).FireAndForgetSafeAsync(this.logger);
+        this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.client.State));
     }
 
     /// <summary>
@@ -63,19 +66,20 @@ internal class ATWebSocketProtocol : IDisposable
     /// <param name="disconnectReason">Reason for the shutdown.</param>
     /// <param name="token">CancellationToken.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public Task CloseAsync(WebSocketCloseStatus status = WebSocketCloseStatus.NormalClosure, string disconnectReason = "Client disconnecting", CancellationToken? token = default)
+    public async Task CloseAsync(WebSocketCloseStatus status = WebSocketCloseStatus.NormalClosure, string disconnectReason = "Client disconnecting", CancellationToken? token = default)
     {
         var endToken = token ?? CancellationToken.None;
         this.logger?.LogInformation($"WSS: Disconnecting");
         try
         {
-            return this.client.CloseAsync(status, disconnectReason, endToken);
+            await this.client.CloseAsync(status, disconnectReason, endToken);
         }
         catch (Exception ex)
         {
             this.logger?.LogError(ex, "Failed to Close WebSocket connection.");
-            return Task.CompletedTask;
         }
+
+        this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.client.State));
     }
 
     /// <inheritdoc/>

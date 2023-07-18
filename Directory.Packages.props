@@ -29,5 +29,6 @@
       <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8" />
       <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
       <PackageVersion Include="Handlebars.Net" Version="2.1.4" />
+      <PackageVersion Include="Sharpnado.Maui.Nuke" Version="10.11.2" />
     </ItemGroup>
 </Project>
