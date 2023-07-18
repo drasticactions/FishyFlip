@@ -7,9 +7,6 @@ using Drastic.Services;
 using FishyFlip;
 using FishyFlipMaui.Services;
 using FishyFlipMaui.ViewModels;
-#if !WINDOWS && !ANDROID
-using Maui.Nuke;
-#endif
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
 
@@ -42,9 +39,6 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-#if !WINDOWS && !ANDROID
-            .UseNuke(showDebugLogs: false)
-#endif
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

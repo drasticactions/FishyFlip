@@ -57,10 +57,6 @@
 		<PackageReference Include="CommunityToolkit.Maui" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
-		<PackageReference Include="Sharpnado.Maui.Nuke" />
-	</ItemGroup>
-
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\FishyFlip\FishyFlip.csproj" />
 	  <ProjectReference Include="..\FishyFlipSamples\FishyFlipSamples.csproj" />
