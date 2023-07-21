@@ -89,6 +89,12 @@ internal class ATWebSocketProtocol : IDisposable
         GC.SuppressFinalize(this);
     }
 
+    internal void Dispose()
+    {
+        this.Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
     /// <summary>
     /// Dispose.
     /// </summary>

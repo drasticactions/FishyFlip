@@ -156,6 +156,23 @@ public sealed class ATProtocol : IDisposable
         return Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Update options for ATProto.
+    /// This will log out the current session and dispose of the current session manager.
+    /// </summary>
+    /// <param name="options">Options.</param>
+    /// <exception cref="NullReferenceException">Thrown if missing options.</exception>
+    public void UpdateOptions(ATProtocolOptions options)
+    {
+        this.options = options;
+        this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
+        this.webSocketProtocol.Dispose();
+        this.sessionManager.Dispose();
+        this.webSocketProtocol = new ATWebSocketProtocol(this);
+        this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
+        this.sessionManager = new SessionManager(this);
+    }
+
     /// <inheritdoc/>
     public void Dispose()
     {
