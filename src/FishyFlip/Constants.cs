@@ -159,6 +159,7 @@ public static class Constants
     public static class EmbedTypes
     {
         public const string External = "app.bsky.embed.external";
+        public const string ExternalView = "app.bsky.embed.external#view";
         public const string Images = "app.bsky.embed.images";
         public const string ImageView = "app.bsky.embed.images#view";
         public const string Record = "app.bsky.embed.record";

@@ -23,6 +23,14 @@ public class EmbedConverter : JsonConverter<Embed>
                         }
 
                         break;
+                    case Constants.EmbedTypes.ExternalView:
+                        if (doc.RootElement.TryGetProperty("external", out var evm))
+                        {
+                            var item = JsonSerializer.Deserialize<ExternalViewEmbed>(doc.RootElement.GetRawText(), options);
+                            return item;
+                        }
+
+                        break;
                     case Constants.EmbedTypes.Images:
                         if (doc.RootElement.TryGetProperty("images", out var img))
                         {
