@@ -4,4 +4,17 @@
 
 namespace FishyFlip.Models;
 
-public record ReasonRepost();
+public class ReasonRepost : ATRecord
+{
+    [JsonConstructor]
+    public ReasonRepost(ActorProfile? by, DateTime? indexedAt, string? type)
+        : base(type)
+    {
+        this.By = by;
+        this.IndexedAt = indexedAt;
+    }
+
+    public ActorProfile? By { get; }
+
+    public DateTime? IndexedAt { get; }
+}

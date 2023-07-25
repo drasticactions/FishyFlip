@@ -162,6 +162,7 @@ public static class Constants
         public const string ExternalView = "app.bsky.embed.external#view";
         public const string Images = "app.bsky.embed.images";
         public const string ImageView = "app.bsky.embed.images#view";
+        public const string RecordView = "app.bsky.embed.record#view";
         public const string Record = "app.bsky.embed.record";
         public const string RecordWithMedia = "app.bsky.embed.recordWithMedia";
     }

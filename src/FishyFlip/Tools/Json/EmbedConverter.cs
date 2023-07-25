@@ -56,6 +56,14 @@ public class EmbedConverter : JsonConverter<Embed>
                         }
 
                         break;
+                    case Constants.EmbedTypes.RecordView:
+                        if (doc.RootElement.TryGetProperty("record", out var rec))
+                        {
+                            var item = JsonSerializer.Deserialize<RecordViewEmbed>(doc.RootElement.GetRawText(), options);
+                            return item;
+                        }
+
+                        break;
                     case Constants.EmbedTypes.RecordWithMedia:
                         RecordEmbed? record = null;
                         ImagesEmbed? media = null;
