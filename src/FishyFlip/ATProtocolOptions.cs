@@ -39,6 +39,8 @@ public class ATProtocolOptions
                 new CidConverter(),
             },
         };
+
+        this.UserAgent = $"FishyFlip {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
     }
 
     /// <summary>
@@ -59,7 +61,7 @@ public class ATProtocolOptions
     /// <summary>
     /// Gets the user agent. Defaults to FishyFlip.
     /// </summary>
-    public string UserAgent { get; internal set; } = "FishyFlip";
+    public string UserAgent { get; internal set; }
 
     /// <summary>
     /// Gets a value indicating whether to auto renew sessions.
