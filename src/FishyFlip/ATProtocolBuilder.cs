@@ -21,6 +21,15 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="ATProtocolBuilder"/> class.
+    /// </summary>
+    /// <param name="options">ATProtocolOptions.</param>
+    public ATProtocolBuilder(ATProtocolOptions options)
+    {
+        this.atProtocolOptions = options;
+    }
+
+    /// <summary>
     /// Set a custom HttpClient.
     /// </summary>
     /// <param name="client">HttpClient.</param>
@@ -100,11 +109,7 @@ public class ATProtocolBuilder
         return this;
     }
 
-    /// <summary>
-    /// Builds the Protocol.
-    /// </summary>
-    /// <returns>The <seealso cref="ATProtocol"/> build with these configs.</returns>
-    public ATProtocol Build()
+    public ATProtocolOptions BuildOptions()
     {
         if (this.setHttpClientDefaults)
         {
@@ -113,6 +118,17 @@ public class ATProtocolBuilder
             this.atProtocolOptions.HttpClient.BaseAddress = this.atProtocolOptions.Url;
         }
 
-        return new ATProtocol(this.atProtocolOptions);
+        return this.atProtocolOptions;
+    }
+
+    /// <summary>
+    /// Builds the Protocol.
+    /// </summary>
+    /// <returns>The <seealso cref="ATProtocol"/> build with these configs.</returns>
+    public ATProtocol Build()
+    {
+        var options = this.BuildOptions();
+
+        return new ATProtocol(options);
     }
 }
