@@ -23,6 +23,48 @@ public class AnonymousTests
     }
 
     [Fact]
+    public async Task GetBlocksAsyncTest()
+    {
+        var atDid = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
+        var postCid1 = Cid.Decode("bafyreibby2anauk6ef2ntmeyebeb3yosncathvohhjrb7jmxfpyljyeq2e");
+        var postCid2 = Cid.Decode("bafyreiausj2iabpfs2mbmp2qtaszd2jokmsogto7z6zrz3pkncx3emyx4m");
+
+        var oncardecoded = new OnCarDecoded((e) => { 
+        
+        });
+
+        var result = await this.proto.Sync.GetBlocksAsync(atDid, new[] { postCid1, postCid2 }, oncardecoded);
+
+        result.Switch(
+            success =>
+            {
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task DownloadBlocksAsyncTest()
+    {
+        var atDid = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
+        var postCid1 = Cid.Decode("bafyreibby2anauk6ef2ntmeyebeb3yosncathvohhjrb7jmxfpyljyeq2e");
+        var postCid2 = Cid.Decode("bafyreiausj2iabpfs2mbmp2qtaszd2jokmsogto7z6zrz3pkncx3emyx4m");
+
+        var result = await this.proto.Sync.DownloadBlocksAsync(atDid, new[] { postCid1, postCid2 });
+
+        result.Switch(
+            success =>
+            {
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
     public async Task GetPostRecordTest()
     {
         var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k237aznn4k22");

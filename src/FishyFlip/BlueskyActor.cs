@@ -32,8 +32,8 @@ public sealed class BlueskyActor
 
     public Task<Result<FeedProfiles?>> GetProfilesAsync(ATIdentifier[] identifiers, CancellationToken cancellationToken = default)
     {
-        var identList = string.Join(",", identifiers.Select(n => n.ToString()));
-        string url = $"{Constants.Urls.Bluesky.Actor.GetActorProfiles}?actors={identList}";
+        var identList = string.Join("&", identifiers.Select(n => $"actors={n}"));
+        string url = $"{Constants.Urls.Bluesky.Actor.GetActorProfiles}?{identList}";
         return this.Client.Get<FeedProfiles>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 

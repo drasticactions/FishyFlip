@@ -24,6 +24,78 @@ public class AuthorizedTests
     }
 
     [Fact]
+    public async Task GetProfileAsyncTest()
+    {
+        var test1did = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
+        var result = await this.proto.Actor.GetProfileAsync(ATHandle.Create("test1.drasticactions.ninja"));
+        result.Switch(
+            success =>
+            {
+                Assert.Equal(test1did!.ToString(), success!.Did);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task GetProfilesAsyncWithHandlesTest()
+    {
+        var test1did = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
+        var test2did = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
+        var result = await this.proto.Actor.GetProfilesAsync(new[] { ATHandle.Create("test1.drasticactions.ninja"), ATHandle.Create("test2.drasticactions.ninja") });
+        result.Switch(
+            success =>
+            {
+                Assert.Equal(test1did!.ToString(), success!.Profiles[0]!.Did);
+                Assert.Equal(test2did!.ToString(), success!.Profiles[1]!.Did);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task GetProfilesAsyncWithDidTest()
+    {
+        var test1did = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
+        var test2did = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
+        var result = await this.proto.Actor.GetProfilesAsync(new[] { test1did, test2did });
+        result.Switch(
+            success =>
+            {
+                Assert.Equal(test1did!.ToString(), success!.Profiles[0]!.Did);
+                Assert.Equal(test2did!.ToString(), success!.Profiles[1]!.Did);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task GetPostsAsyncTest()
+    {
+        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k237aznn4k22");
+        var postUri2 = ATUri.Create("at://did:plc:wrrbtigjwpykuwzqsypnpazr/app.bsky.feed.post/3k3djyvu54222");
+        var postCid = Cid.Decode("bafyreih4jqh2l5xnp5q6xqfxyqx73weiauuj2s2baoym4a6b3huxt4ynza");
+        var postCid2 = Cid.Decode("bafyreibby2anauk6ef2ntmeyebeb3yosncathvohhjrb7jmxfpyljyeq2e");
+        var postThreadResult = await this.proto.Feed.GetPostsAsync(new[] { postUri, postUri2 });
+        postThreadResult.Switch(
+            success =>
+            {
+                Assert.Equal(postCid, success!.Posts[0].Cid);
+                Assert.Equal(postCid2, success!.Posts[1].Cid);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
     public async Task GetPostThreadAsyncTest()
     {
         var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k237aznn4k22");

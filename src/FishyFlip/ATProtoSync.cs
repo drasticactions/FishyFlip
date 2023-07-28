@@ -77,8 +77,8 @@ public sealed class ATProtoSync
     public Task<Result<Success>> GetBlocksAsync(ATDid did, Cid[] commits, OnCarDecoded onDecoded,
         CancellationToken cancellationToken = default)
     {
-        var commitList = string.Join(",", commits.Select(n => n.ToString()));
-        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&commits={commitList}";
+        var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
+        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&{commitList}";
 
         return this.Client.GetCarAsync(
             url,
@@ -88,8 +88,8 @@ public sealed class ATProtoSync
     public Task<Result<Success>> DownloadBlocksAsync(ATDid did, Cid[] commits, string? path = default, string? filename = default,
         CancellationToken cancellationToken = default)
     {
-        var commitList = string.Join(",", commits.Select(n => n.ToString()));
-        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&commits={commitList}";
+        var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
+        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&{commitList}";
         filename ??= $"{did}-blocks.car";
         return this.Client.DownloadCarAsync(
             url,

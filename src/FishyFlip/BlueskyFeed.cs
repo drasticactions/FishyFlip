@@ -103,8 +103,8 @@ public sealed class BlueskyFeed
 
     public async Task<Result<PostCollection>> GetPostsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
     {
-        var answer = string.Join(",", query.Select(n => n.ToString()));
-        string url = $"{Constants.Urls.Bluesky.Feed.GetPosts}?uris={answer}";
+        var answer = string.Join("&", query.Select(n => $"uris={n}"));
+        string url = $"{Constants.Urls.Bluesky.Feed.GetPosts}?{answer}";
         Multiple<PostCollection?, Error> result = await this.Client.Get<PostCollection>(url, this.Options.JsonSerializerOptions, cancellationToken);
         return result
             .Match<Result<PostCollection>>(
