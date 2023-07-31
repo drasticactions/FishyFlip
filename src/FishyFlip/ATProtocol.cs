@@ -207,7 +207,7 @@ public sealed class ATProtocol : IDisposable
     /// Sets the current session.
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
-    internal void SetSession(Session session)
+    public void SetSession(Session session)
         => this.sessionManager?.SetSession(session);
 
     private void Dispose(bool disposing)
