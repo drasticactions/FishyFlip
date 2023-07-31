@@ -26,7 +26,14 @@ public sealed class ATProtocol : IDisposable
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
         this.webSocketProtocol = new ATWebSocketProtocol(this);
         this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
-        this.sessionManager = new SessionManager(this);
+        if (options.Session is not null)
+        {
+            this.sessionManager = new SessionManager(this, options.Session);
+        }
+        else
+        {
+            this.sessionManager = new SessionManager(this);
+        }
     }
 
     /// <summary>
@@ -38,6 +45,11 @@ public sealed class ATProtocol : IDisposable
     /// Event for when a subscribed repo message is received.
     /// </summary>
     public event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated;
+
+    /// <summary>
+    /// Event for when a session is updated.
+    /// </summary>
+    public event EventHandler<SessionUpdatedEventArgs>? OnSessionUpdated;
 
     /// <summary>
     /// Gets the ATProtocol Options.
@@ -207,12 +219,10 @@ public sealed class ATProtocol : IDisposable
     {
         if (this.sessionManager is null)
         {
-            this.sessionManager = new SessionManager(this, session);
+            this.sessionManager = new SessionManager(this);
         }
-        else
-        {
-            this.sessionManager.SetSession(session);
-        }
+
+        this.SetSession(session);
     }
 
     /// <summary>
@@ -220,7 +230,10 @@ public sealed class ATProtocol : IDisposable
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
     internal void SetSession(Session session)
-        => this.sessionManager?.SetSession(session);
+    {
+        this.sessionManager?.SetSession(session);
+        this.OnSessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(session, this.BaseAddress));
+    }
 
     private void Dispose(bool disposing)
     {
