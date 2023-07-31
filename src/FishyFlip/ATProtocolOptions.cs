@@ -54,6 +54,11 @@ public class ATProtocolOptions
     public ILogger? Logger { get; internal set; }
 
     /// <summary>
+    /// Gets the initial session.
+    /// </summary>
+    public Session? Session { get; internal set; }
+
+    /// <summary>
     /// Gets the instance Url.
     /// </summary>
     public Uri Url { get; internal set; }

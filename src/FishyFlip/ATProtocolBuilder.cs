@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Security.Cryptography.X509Certificates;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -93,6 +95,17 @@ public class ATProtocolBuilder
     public ATProtocolBuilder WithSessionRefreshInterval(TimeSpan interval)
     {
         this.atProtocolOptions.SessionRefreshInterval = interval;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets an initial session to use.
+    /// </summary>
+    /// <param name="session"><see cref="Session"/>.</param>
+    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    public ATProtocolBuilder WithInitialSession(Session session)
+    {
+        this.atProtocolOptions.Session = session;
         return this;
     }
 

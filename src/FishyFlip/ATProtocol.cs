@@ -116,6 +116,11 @@ public sealed class ATProtocol : IDisposable
     public bool IsSubscriptionActive => this.webSocketProtocol.IsConnected;
 
     /// <summary>
+    /// Gets the base address for the underlying HttpClient.
+    /// </summary>
+    public Uri? BaseAddress => this.client.BaseAddress;
+
+    /// <summary>
     /// Gets the Internal HttpClient.
     /// </summary>
     internal HttpClient Client => this.client;
@@ -170,7 +175,14 @@ public sealed class ATProtocol : IDisposable
         this.sessionManager.Dispose();
         this.webSocketProtocol = new ATWebSocketProtocol(this);
         this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
-        this.sessionManager = new SessionManager(this);
+        if (options.Session is not null)
+        {
+            this.sessionManager = new SessionManager(this, options.Session);
+        }
+        else
+        {
+            this.sessionManager = new SessionManager(this);
+        }
     }
 
     /// <inheritdoc/>
@@ -207,7 +219,7 @@ public sealed class ATProtocol : IDisposable
     /// Sets the current session.
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
-    public void SetSession(Session session)
+    internal void SetSession(Session session)
         => this.sessionManager?.SetSession(session);
 
     private void Dispose(bool disposing)
