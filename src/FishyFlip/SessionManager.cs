@@ -126,28 +126,11 @@ internal class SessionManager : IDisposable
         this.disposed = true;
     }
 
-    private void ConfigureRefreshTokenTimer()
-    {
-        this.timer.ThrowIfNull();
-        TimeSpan timeToNextRenewal = this.protocol.Options.SessionRefreshInterval ?? this.GetTimeToNextRenewal(this.session.ThrowIfNull());
-        this.logger?.LogDebug($"Next renewal in {timeToNextRenewal.TotalSeconds}.");
-        this.timer!.Elapsed += this.RefreshToken;
-        this.timer.Interval = timeToNextRenewal.TotalMilliseconds >= int.MaxValue ? int.MaxValue : timeToNextRenewal.TotalMilliseconds;
-        this.timer.Enabled = true;
-        this.timer.Start();
-    }
-
-    private TimeSpan GetTimeToNextRenewal(Session session)
-    {
-        this.jwtSecurityTokenHandler
-            .ValidateToken(
-                session.RefreshJwt,
-                this.defaultTokenValidationParameters,
-                out SecurityToken token);
-        return token.ValidTo.ToUniversalTime() - DateTime.UtcNow;
-    }
-
-    private async void RefreshToken(object? sender, ElapsedEventArgs e)
+    /// <summary>
+    /// Refresh session token.
+    /// </summary>
+    /// <returns>Task.</returns>
+    internal async Task RefreshTokenAsync()
     {
         if (Interlocked.Increment(ref this.refreshing) > 1)
         {
@@ -157,7 +140,11 @@ internal class SessionManager : IDisposable
         }
 
         this.logger?.LogDebug("Refreshing session.");
-        this.timer.ThrowIfNull().Enabled = false;
+        if (this.timer is not null)
+        {
+            this.timer.Enabled = false;
+        }
+
         try
         {
             if (this.session is not null)
@@ -187,4 +174,31 @@ internal class SessionManager : IDisposable
             this.logger?.LogDebug("Session refreshed.");
         }
     }
+
+    private void ConfigureRefreshTokenTimer()
+    {
+        this.timer.ThrowIfNull();
+        TimeSpan timeToNextRenewal = this.protocol.Options.SessionRefreshInterval ?? this.GetTimeToNextRenewal(this.session.ThrowIfNull());
+        this.logger?.LogDebug($"Next renewal in {timeToNextRenewal.TotalSeconds}.");
+        if (this.timer is not null)
+        {
+            this.timer.Elapsed += this.RefreshToken;
+            this.timer.Interval = timeToNextRenewal.TotalMilliseconds >= int.MaxValue ? int.MaxValue : timeToNextRenewal.TotalMilliseconds;
+            this.timer.Enabled = true;
+            this.timer.Start();
+        }
+    }
+
+    private TimeSpan GetTimeToNextRenewal(Session session)
+    {
+        this.jwtSecurityTokenHandler
+            .ValidateToken(
+                session.RefreshJwt,
+                this.defaultTokenValidationParameters,
+                out SecurityToken token);
+        return token.ValidTo.ToUniversalTime() - DateTime.UtcNow;
+    }
+
+    private async void RefreshToken(object? sender, ElapsedEventArgs e)
+        => await this.RefreshTokenAsync();
 }

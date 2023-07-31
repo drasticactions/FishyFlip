@@ -197,6 +197,9 @@ public sealed class ATProtocol : IDisposable
         }
     }
 
+    public Task RefreshSessionAsync()
+        => this.sessionManager?.RefreshTokenAsync() ?? Task.CompletedTask;
+
     /// <inheritdoc/>
     public void Dispose()
     {

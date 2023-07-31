@@ -10,7 +10,7 @@ public class Session
     public Session(
         ATDid did,
         ATHandle handle,
-        string email,
+        string? email,
         string accessJwt,
         string refreshJwt)
     {
@@ -25,7 +25,7 @@ public class Session
 
     public ATHandle Handle { get; }
 
-    public string Email { get; }
+    public string? Email { get; }
 
     public string AccessJwt { get; }
 
