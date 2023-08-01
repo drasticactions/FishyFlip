@@ -152,4 +152,16 @@ public sealed class BlueskyFeed
                 timeline => timeline!,
                 error => error!);
     }
+
+    public async Task<Result<FeedCollection>> GetFeedGeneratorsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
+    {
+        var answer = string.Join("&", query.Select(n => $"feeds={n}"));
+        string url = $"{Constants.Urls.Bluesky.Feed.GetFeedGenerators}?{answer}";
+
+        Multiple<FeedCollection?, Error> result = await this.Client.Get<FeedCollection>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return result
+            .Match<Result<FeedCollection>>(
+                timeline => timeline!,
+                error => error!);
+    }
 }

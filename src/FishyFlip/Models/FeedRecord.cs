@@ -14,6 +14,8 @@ public record FeedPostList(FeedPost[] Feed, string? Cursor);
 
 public record FeedPost(PostView Post);
 
+public record FeedCollection(FeedRecord[] Feeds);
+
 public record FeedResultList(FeedRecord[] Feeds, string? Cursor);
 
 public record FeedCreator(string Did,
