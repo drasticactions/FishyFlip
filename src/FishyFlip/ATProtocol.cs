@@ -108,6 +108,11 @@ public sealed class ATProtocol : IDisposable
     public ATProtoDebug Debug => new(this);
 
     /// <summary>
+    /// Gets the ATProto Unspecced Protocol.
+    /// </summary>
+    public BlueskyUnspecced Unspecced => new(this);
+
+    /// <summary>
     /// Gets the ATProto Feed Protocol.
     /// </summary>
     public BlueskyFeed Feed => new(this);

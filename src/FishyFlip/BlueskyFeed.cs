@@ -126,4 +126,30 @@ public sealed class BlueskyFeed
                 timeline => (timeline ?? new Timeline(Array.Empty<FeedViewPost>(), null))!,
                 error => error!);
     }
+
+    public async Task<Result<FeedPostList>> GetFeedAsync(ATUri uri, int limit = 30, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.Feed.GetFeed}?feed={uri}&limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        Multiple<FeedPostList?, Error> result = await this.Client.Get<FeedPostList>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return result
+            .Match<Result<FeedPostList>>(
+                timeline => (timeline ?? new FeedPostList(Array.Empty<FeedPost>(), null))!,
+                error => error!);
+    }
+
+    public async Task<Result<FeedGeneratorRecord>> GetFeedGeneratorAsync(ATUri uri, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.Feed.GetFeedGenerator}?feed={uri}";
+
+        Multiple<FeedGeneratorRecord?, Error> result = await this.Client.Get<FeedGeneratorRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return result
+            .Match<Result<FeedGeneratorRecord>>(
+                timeline => timeline!,
+                error => error!);
+    }
 }

@@ -102,6 +102,8 @@ public static class Constants
                 public const string GetTimeline = "/xrpc/app.bsky.feed.getTimeline";
                 public const string GetFeedSkeleton = "/xrpc/app.bsky.feed.getFeedSkeleton";
                 public const string GetPostThread = "/xrpc/app.bsky.feed.getPostThread";
+                public const string GetFeedGenerator = "/xrpc/app.bsky.feed.getFeedGenerator";
+                public const string GetFeed = "/xrpc/app.bsky.feed.getFeed";
                 public const string GetPosts = "/xrpc/app.bsky.feed.getPosts";
                 public const string GetLikes = "/xrpc/app.bsky.feed.getLikes";
                 public const string GetRepostedBy = "/xrpc/app.bsky.feed.getRepostedBy";
@@ -133,6 +135,11 @@ public static class Constants
                 public const string NotificationUpdateSeen = "/xrpc/app.bsky.notification.updateSeen";
                 public const string NotificationListNotifications = "/xrpc/app.bsky.notification.listNotifications";
                 public const string NotificationGetUnreadCount = "/xrpc/app.bsky.notification.getUnreadCount";
+            }
+
+            public static class Unspecced
+            {
+                public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
             }
         }
     }
