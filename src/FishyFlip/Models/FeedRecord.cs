@@ -10,9 +10,7 @@ public record FeedRecord(ATUri Uri, ATDid Did, string Avatar, FeedCreator Creato
 
 public record FeedGeneratorRecord(bool IsOnline, bool IsValid, FeedRecord View);
 
-public record FeedPostList(FeedPost[] Feed, string? Cursor);
-
-public record FeedPost(PostView Post);
+public record FeedPostList(FeedViewPost[] Feed, string? Cursor);
 
 public record FeedCollection(FeedRecord[] Feeds);
 

@@ -138,7 +138,7 @@ public sealed class BlueskyFeed
         Multiple<FeedPostList?, Error> result = await this.Client.Get<FeedPostList>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<FeedPostList>>(
-                timeline => (timeline ?? new FeedPostList(Array.Empty<FeedPost>(), null))!,
+                timeline => (timeline ?? new FeedPostList(Array.Empty<FeedViewPost>(), null))!,
                 error => error!);
     }
 
