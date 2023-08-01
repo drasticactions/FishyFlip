@@ -4,4 +4,4 @@
 
 namespace FishyFlip.Models;
 
-public record FeedViewPost(PostView Post, ReplyRef? Ref, ReasonRepost? Reason);
+public record FeedViewPost(PostView Post, FeedViewPostReply? Reply, ReplyRef? Ref, ReasonRepost? Reason);

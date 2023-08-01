@@ -4,7 +4,7 @@
 
 namespace FishyFlip.Models;
 
-public record FeedProfile(string Did,
+public record FeedProfile(ATDid Did,
     string Handle,
     string DisplayName,
     string Description,
