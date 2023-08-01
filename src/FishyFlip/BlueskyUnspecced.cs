@@ -24,12 +24,17 @@ public sealed class BlueskyUnspecced
 
     private HttpClient Client => this.proto.Client;
 
-    public async Task<Result<FeedResultList>> GetPopularFeedGeneratorsAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    public async Task<Result<FeedResultList>> GetPopularFeedGeneratorsAsync(int limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Unspecced.GetPopularFeedGenerators}?limit={limit}";
         if (cursor is not null)
         {
             url += $"&cursor={cursor}";
+        }
+
+        if (query is not null)
+        {
+            url += $"&query={query}";
         }
 
         Multiple<FeedResultList?, Error> result = await this.Client.Get<FeedResultList>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
