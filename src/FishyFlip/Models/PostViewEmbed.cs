@@ -5,7 +5,7 @@
 namespace FishyFlip.Models;
 
 public record PostViewEmbed(
-    string Uri,
+    ATUri Uri,
     Cid Cid,
     int ReplyCount,
     int RepostCount,
