@@ -179,17 +179,33 @@ public sealed class ATProtoRepo
         return await this.Client.Post<Success>(Constants.Urls.ATProtoRepo.DeleteRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    [Obsolete("Use ListFollowsAsync instead")]
     public Task<Result<ListRecords?>> ListFollowAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Follow, repo, limit, cursor, reverse, cancellationToken);
 
+    public Task<Result<ListRecords?>> ListFollowsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        => this.ListRecordsAsync(Constants.GraphTypes.Follow, repo, limit, cursor, reverse, cancellationToken);
+
+    [Obsolete("Use ListBlocksAsync instead")]
     public Task<Result<ListRecords?>> ListBlockAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Block, repo, limit, cursor, reverse, cancellationToken);
 
+    public Task<Result<ListRecords?>> ListBlocksAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        => this.ListRecordsAsync(Constants.GraphTypes.Block, repo, limit, cursor, reverse, cancellationToken);
+
+    [Obsolete("Use ListLikesAsync instead")]
     public Task<Result<ListRecords?>> ListLikeAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Like, repo, limit, cursor, reverse, cancellationToken);
 
+    public Task<Result<ListRecords?>> ListLikesAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        => this.ListRecordsAsync(Constants.FeedType.Like, repo, limit, cursor, reverse, cancellationToken);
+
+    [Obsolete("Use ListPostsAsync instead")]
     public Task<Result<ListRecords?>> ListPostAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
+
+    public Task<Result<ListRecords?>> ListPostsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+       => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
 
     public async Task<Result<ListRecords?>> ListRecordsAsync(string collection, ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
     {
