@@ -31,7 +31,7 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.Equal(test1did!.ToString(), success!.Did);
+                Assert.Equal(test1did!.ToString(), success!.Did.ToString());
             },
             failed =>
             {
@@ -48,8 +48,8 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.Equal(test1did!.ToString(), success!.Profiles[0]!.Did);
-                Assert.Equal(test2did!.ToString(), success!.Profiles[1]!.Did);
+                Assert.Equal(test1did!.ToString(), success!.Profiles[0]!.Did.ToString());
+                Assert.Equal(test2did!.ToString(), success!.Profiles[1]!.Did.ToString());
             },
             failed =>
             {
@@ -66,8 +66,8 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.Equal(test1did!.ToString(), success!.Profiles[0]!.Did);
-                Assert.Equal(test2did!.ToString(), success!.Profiles[1]!.Did);
+                Assert.Equal(test1did!.ToString(), success!.Profiles[0]!.Did.ToString());
+                Assert.Equal(test2did!.ToString(), success!.Profiles[1]!.Did.ToString());
             },
             failed =>
             {
