@@ -85,6 +85,7 @@ public static class Constants
             public const string GetCheckout = "/xrpc/com.atproto.sync.getCheckout";
             public const string GetCommitPath = "/xrpc/com.atproto.sync.getCommitPath";
             public const string GetHead = "/xrpc/com.atproto.sync.getHead";
+            public const string GetLatestCommit = "/xrpc/com.atproto.sync.getLatestCommit";
             public const string GetRecord = "/xrpc/com.atproto.sync.getRecord";
             public const string GetRepo = "/xrpc/com.atproto.sync.getRepo";
             public const string ListBlobs = "/xrpc/com.atproto.sync.listBlobs";

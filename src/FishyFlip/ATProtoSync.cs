@@ -30,9 +30,14 @@ public sealed class ATProtoSync
         return await this.Client.GetBlob(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    [Obsolete("Deprecated in favor of GetLatestCommitAsync")]
     public Task<Result<Head?>> GetHeadAsync(ATDid did, CancellationToken cancellationToken = default)
         => this.Client.Get<Head>($"{Constants.Urls.ATProtoSync.GetHead}?did={did}", this.Options.JsonSerializerOptions,
             cancellationToken, this.Options.Logger);
+
+    public Task<Result<LatestCommit?>> GetLatestCommitAsync(ATDid did, CancellationToken cancellationToken = default)
+    => this.Client.Get<LatestCommit>($"{Constants.Urls.ATProtoSync.GetLatestCommit}?did={did}", this.Options.JsonSerializerOptions,
+        cancellationToken, this.Options.Logger);
 
     public Task<Result<Success?>> NotifyOfUpdateAsync(string hostname, CancellationToken cancellationToken = default)
         => this.Client.Get<Success>($"{Constants.Urls.ATProtoSync.NotifyOfUpdate}?hostname={hostname}", this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
@@ -40,11 +45,13 @@ public sealed class ATProtoSync
     public Task<Result<Success?>> RequestCrawlAsync(string hostname, CancellationToken cancellationToken = default)
         => this.Client.Get<Success>($"{Constants.Urls.ATProtoSync.RequestCrawl}?hostname={hostname}", this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
-    public Task<Result<Success>> GetRepoAsync(ATDid repo, OnCarDecoded onDecoded,
-        CancellationToken cancellationToken = default)
+    public Task<Result<Success>> GetRepoAsync(ATDid repo, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
     {
+        var url = since is not null
+            ? $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}&since={since}"
+            : $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}";
         return this.Client.GetCarAsync(
-            $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}",
+            url,
             this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
     }
 
@@ -58,6 +65,7 @@ public sealed class ATProtoSync
             this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    [Obsolete("Deprecated in Repo V3. This should no longer work.")]
     public async Task<Result<CommitPath?>> GetCommitPathAsync(ATDid did, Cid? latest = default, Cid? earliest = default, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetCommitPath}&did={did}";
@@ -97,6 +105,7 @@ public sealed class ATProtoSync
             this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    [Obsolete("Deprecated in favor of GetRepo")]
     public Task<Result<Success>> GetCheckoutAsync(ATDid did, OnCarDecoded onDecoded, Cid? commit = default,
         CancellationToken cancellationToken = default)
     {
