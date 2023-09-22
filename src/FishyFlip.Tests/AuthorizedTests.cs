@@ -26,8 +26,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetProfileAsyncTest()
     {
-        var test1did = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
-        var result = await this.proto.Actor.GetProfileAsync(ATHandle.Create("test1.drasticactions.ninja"));
+        var test1did = ATDid.Create("did:plc:ix37rgpewy5wtl5qzhunsldu");
+        var result = await this.proto.Actor.GetProfileAsync(ATHandle.Create("test3.drasticactions.ninja"));
         result.Switch(
             success =>
             {
@@ -42,9 +42,9 @@ public class AuthorizedTests
     [Fact]
     public async Task GetProfilesAsyncWithHandlesTest()
     {
-        var test1did = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
-        var test2did = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
-        var result = await this.proto.Actor.GetProfilesAsync(new[] { ATHandle.Create("test1.drasticactions.ninja"), ATHandle.Create("test2.drasticactions.ninja") });
+        var test1did = ATDid.Create("did:plc:ix37rgpewy5wtl5qzhunsldu");
+        var test2did = ATDid.Create("did:plc:ljmpd62v6nzcm4gff4ovbbdt");
+        var result = await this.proto.Actor.GetProfilesAsync(new[] { ATHandle.Create("test3.drasticactions.ninja"), ATHandle.Create("l-tan.bsky-v3.dolciss.net") });
         result.Switch(
             success =>
             {
@@ -78,10 +78,10 @@ public class AuthorizedTests
     [Fact]
     public async Task GetPostsAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k237aznn4k22");
-        var postUri2 = ATUri.Create("at://did:plc:wrrbtigjwpykuwzqsypnpazr/app.bsky.feed.post/3k3djyvu54222");
-        var postCid = Cid.Decode("bafyreih4jqh2l5xnp5q6xqfxyqx73weiauuj2s2baoym4a6b3huxt4ynza");
-        var postCid2 = Cid.Decode("bafyreibby2anauk6ef2ntmeyebeb3yosncathvohhjrb7jmxfpyljyeq2e");
+        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postUri2 = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7yddkqyzk2j");
+        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
+        var postCid2 = Cid.Decode("bafyreig4ncon6rhnbr5gglmvuduegnk3wnvcxcepk4g3tlohhcpuzayb5m");
         var postThreadResult = await this.proto.Feed.GetPostsAsync(new[] { postUri, postUri2 });
         postThreadResult.Switch(
             success =>
@@ -98,8 +98,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k237aznn4k22");
-        var postCid = Cid.Decode("bafyreih4jqh2l5xnp5q6xqfxyqx73weiauuj2s2baoym4a6b3huxt4ynza");
+        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -115,8 +115,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetQuotePostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcdnc55k22");
-        var postCid = Cid.Decode("bafyreiha4uutsovlvm3xisgzaendfyfhcr7p2xpuzc7an7xu5jeyrrifji");
+        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -132,8 +132,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetExternalPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcwgl62222");
-        var postCid = Cid.Decode("bafyreih26rnjlty7gxvdmq3m5wyb4im72irtdsfsiktdy3duvbo4hpo4l4");
+        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -149,8 +149,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetImagesPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcwgl62222");
-        var postCid = Cid.Decode("bafyreih26rnjlty7gxvdmq3m5wyb4im72irtdsfsiktdy3duvbo4hpo4l4");
+        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7yddkqyzk2j");
+        var postCid = Cid.Decode("bafyreig4ncon6rhnbr5gglmvuduegnk3wnvcxcepk4g3tlohhcpuzayb5m");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -166,8 +166,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetRecordWithMediaPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcee6joc22");
-        var postCid = Cid.Decode("bafyreiezjt5bqt2xpcdfvisud7jrd4zuxygz4ssnuge3ddjcoptanvcnsa");
+        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -183,8 +183,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetRepliesPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k233apjyxk2c");
-        var postCid = Cid.Decode("bafyreidaauhr3wsdximedjc3agkwbwdu3bbupci7urrop6tz6xqputugt4");
+        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>

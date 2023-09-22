@@ -11,7 +11,11 @@ public class FrameCommit
         this.Ops = obj["ops"]?.Values.Select(n => new Ops(n)).ToArray();
         this.Seq = obj["seq"].AsInt32();
         this.Blocks = obj["blocks"]?.GetByteString();
+#pragma warning disable CS0618 // Œ^‚Ü‚½‚Íƒƒ“ƒo[‚ª‹ŒŒ^®‚Å‚·
         this.Prev = obj["prev"].ToCid();
+#pragma warning restore CS0618 // Œ^‚Ü‚½‚Íƒƒ“ƒo[‚ª‹ŒŒ^®‚Å‚·
+        this.Rev = obj["rev"]?.AsString();
+        this.Since = obj["since"]?.AsString();
         this.Commit = obj["commit"].ToCid();
         this.Repo = obj["repo"] is not null ? ATDid.Create(obj["repo"].AsString()) : null;
         this.Handle = obj["handle"] is not null ? ATHandle.Create(obj["handle"].AsString()) : null;
@@ -35,10 +39,21 @@ public class FrameCommit
     /// </summary>
     public ATHandle? Handle { get; }
 
+    [Obsolete("Obsolete in the V3 Spec, use Rev instead.")]
     /// <summary>
     /// Gets the previous id.
     /// </summary>
     public Cid? Prev { get; }
+
+    /// <summary>
+    /// Gets the rev.
+    /// </summary>
+    public string? Rev { get; }
+
+    /// <summary>
+    /// Gets the previous rev.
+    /// </summary>
+    public string? Since { get; }
 
     /// <summary>
     /// Gets the repo.
