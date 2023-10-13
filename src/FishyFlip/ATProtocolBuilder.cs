@@ -90,10 +90,15 @@ public class ATProtocolBuilder
     /// <summary>
     /// Sets the session refresh interval.
     /// </summary>
-    /// <param name="interval"></param>
+    /// <param name="interval">Interval to refresh at.</param>
     /// <returns><see cref="ATProtocolBuilder"/></returns>
     public ATProtocolBuilder WithSessionRefreshInterval(TimeSpan interval)
     {
+        if (interval.TotalMinutes < 1)
+        {
+            throw new ArgumentException("Session refresh interval must be at least 1 minute.");
+        }
+
         this.atProtocolOptions.SessionRefreshInterval = interval;
         return this;
     }

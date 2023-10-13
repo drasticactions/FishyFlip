@@ -179,11 +179,20 @@ internal class SessionManager : IDisposable
     {
         this.timer.ThrowIfNull();
         TimeSpan timeToNextRenewal = this.protocol.Options.SessionRefreshInterval ?? this.GetTimeToNextRenewal(this.session.ThrowIfNull());
-        this.logger?.LogDebug($"Next renewal in {timeToNextRenewal.TotalSeconds}.");
+
+        // If less than 10,000 Milliseconds or negative, force refresh. Once it does, it should then set the timer.
+        if (timeToNextRenewal.TotalMilliseconds < 10000)
+        {
+            this.RefreshTokenAsync().FireAndForgetSafeAsync(this.logger);
+            return;
+        }
+
+        var seconds = timeToNextRenewal.TotalMilliseconds >= int.MaxValue ? int.MaxValue : timeToNextRenewal.TotalMilliseconds;
+        this.logger?.LogDebug($"Next renewal in {seconds}.");
         if (this.timer is not null)
         {
             this.timer.Elapsed += this.RefreshToken;
-            this.timer.Interval = timeToNextRenewal.TotalMilliseconds >= int.MaxValue ? int.MaxValue : timeToNextRenewal.TotalMilliseconds;
+            this.timer.Interval = seconds;
             this.timer.Enabled = true;
             this.timer.Start();
         }
@@ -193,12 +202,12 @@ internal class SessionManager : IDisposable
     {
         this.jwtSecurityTokenHandler
             .ValidateToken(
-                session.RefreshJwt,
+                session.AccessJwt,
                 this.defaultTokenValidationParameters,
                 out SecurityToken token);
         return token.ValidTo.ToUniversalTime() - DateTime.UtcNow;
     }
 
-    private async void RefreshToken(object? sender, ElapsedEventArgs e)
-        => await this.RefreshTokenAsync();
+    private void RefreshToken(object? sender, ElapsedEventArgs e)
+        => this.RefreshTokenAsync().FireAndForgetSafeAsync(this.logger);
 }
