@@ -6,9 +6,10 @@ namespace FishyFlip.Models;
 
 public class ATHandle : ATIdentifier
 {
-    protected ATHandle(string ident)
+    [JsonConstructor]
+    protected ATHandle(string Handle)
     {
-        this.Handle = ident;
+        this.Handle = Handle;
     }
 
     public string Handle { get; }
