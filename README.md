@@ -159,12 +159,14 @@ You should then see your image and link.
 
 ![Post Sample](https://user-images.githubusercontent.com/898335/253740484-57addcb6-523c-4b65-914d-495ddf8e1474.png)
 
+
 - You can access the "Firehose" by using `SubscribeRepos`. This can be seen in the `FishyFlip.Firehose` sample. SubscribeRepos uses Websockets to connect to a given instead and get messages whenever a new one is posted. Messages need to be handled outside of the general WebSocket stream; if anything blocks the stream from returning messages, you may see errors from the protocol saying your connection is too slow.
 
 ```csharp
 var debugLog = new DebugLoggerProvider();
-var atProtocolBuilder = new ATProtocolBuilder()
-    .EnableAutoRenewSession(true)
+var atProtocolBuilder = new ATWebSocketProtocolBuilder()
+// Defaults to bsky.network.
+    .WithInstanceUrl(new Uri("https://drasticactions.ninja"))
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
 
