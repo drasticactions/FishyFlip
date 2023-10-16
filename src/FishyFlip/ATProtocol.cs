@@ -20,7 +20,7 @@ public sealed class ATProtocol : IDisposable
     /// Initializes a new instance of the <see cref="ATProtocol"/> class.
     /// </summary>
     /// <param name="options">Configuration options for ATProto. <see cref="ATProtocolOptions"/>.</param>
-    public ATProtocol(ATProtocolOptions options)
+    internal ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
@@ -39,11 +39,13 @@ public sealed class ATProtocol : IDisposable
     /// <summary>
     /// Event for when a subscribed repo message is received.
     /// </summary>
+    [Obsolete("Use ATWebSocketProtocol directly.")]
     public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
 
     /// <summary>
     /// Event for when a subscribed repo message is received.
     /// </summary>
+    [Obsolete("Use ATWebSocketProtocol directly.")]
     public event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated;
 
     /// <summary>
@@ -152,6 +154,7 @@ public sealed class ATProtocol : IDisposable
     /// </summary>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    [Obsolete("Use ATWebSocketProtocol directly.")]
     public Task StartSubscribeReposAsync(CancellationToken? token = default)
         => this.webSocketProtocol.ConnectAsync(Constants.Urls.ATProtoSync.SubscribeRepos, token);
 
@@ -160,6 +163,7 @@ public sealed class ATProtocol : IDisposable
     /// </summary>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    [Obsolete("Use ATWebSocketProtocol directly.")]
     public Task StartSubscribeLabelsAsync(CancellationToken? token = default)
         => this.webSocketProtocol.ConnectAsync(Constants.Urls.ATProtoLabel.SubscribeLabels, token);
 
@@ -168,6 +172,7 @@ public sealed class ATProtocol : IDisposable
     /// </summary>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    [Obsolete("Use ATWebSocketProtocol directly.")]
     public Task StopSubscriptionAsync(CancellationToken? token = default)
     {
         if (this.IsSubscriptionActive)

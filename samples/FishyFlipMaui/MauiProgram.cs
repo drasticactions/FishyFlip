@@ -20,8 +20,7 @@ public static class MauiProgram
         //var atProtocolBuilder = new ATProtocolBuilder()
         //    .EnableAutoRenewSession(true)
         //    .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
-        var atProtocolBuilder = new ATProtocolBuilder()
-            .EnableAutoRenewSession(true);
+        var atProtocolBuilder = new ATWebSocketProtocolBuilder();
         var atProtocol = atProtocolBuilder.Build();
         var builder = MauiApp.CreateBuilder();
 
@@ -33,7 +32,7 @@ public static class MauiProgram
             })
             .AddSingleton<IAppDispatcher, MauiAppDispatcher>()
             .AddSingleton<IErrorHandlerService, MauiErrorHandler>()
-            .AddSingleton<ATProtocol>(atProtocol)
+            .AddSingleton<ATWebSocketProtocol>(atProtocol)
             .AddSingleton<FirehoseViewModel>();
 
         builder

@@ -7,31 +7,58 @@ namespace FishyFlip;
 /// <summary>
 /// AT WebSocket Protocol.
 /// </summary>
-internal class ATWebSocketProtocol : IDisposable
+public sealed class ATWebSocketProtocol : IDisposable
 {
     private const int ReceiveBufferSize = 32768;
     private ClientWebSocket client;
-    private ATProtocol protocol;
     private CancellationToken? token;
     private bool disposedValue;
     private ILogger? logger;
+    private Uri instanceUri;
+    private ATProtocol? protocol;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
     /// </summary>
     /// <param name="options"><see cref="ATProtocolOptions"/>.</param>
-    public ATWebSocketProtocol(ATProtocol protocol)
+    internal ATWebSocketProtocol(ATProtocol protocol)
     {
         this.protocol = protocol;
+        this.instanceUri = protocol.Options.Url;
         this.logger = protocol.Options.Logger;
         this.client = new ClientWebSocket();
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
+    /// </summary>
+    /// <param name="options"><see cref="ATWebSocketProtocolOptions"/>.</param>
+    internal ATWebSocketProtocol(ATWebSocketProtocolOptions options)
+    {
+        this.logger = options.Logger;
+        this.instanceUri = options.Url;
+        this.client = new ClientWebSocket();
+    }
+
+    /// <summary>
+    /// On Connection Updated.
+    /// </summary>
+    public event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated;
+
+    /// <summary>
+    /// Event for when a subscribed repo message is received.
+    /// </summary>
+    public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
+
+    /// <summary>
+    /// Gets a value indicating whether the object is disposed.
+    /// </summary>
     public bool IsDisposed => this.disposedValue;
 
+    /// <summary>
+    /// Gets a value indicating whether ATProtocol is connected.
+    /// </summary>
     public bool IsConnected => this.client.State == WebSocketState.Open;
-
-    internal event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated;
 
     /// <summary>
     /// Connect to the BlueSky instance via a WebSocket connection.
@@ -51,10 +78,9 @@ internal class ATWebSocketProtocol : IDisposable
             this.client = new ClientWebSocket();
         }
 
-        var baselineUrl = new Uri($"{this.protocol.Options.Url}");
         var endToken = token ?? CancellationToken.None;
-        await this.client.ConnectAsync(new Uri($"wss://{baselineUrl.Host}{connection}"), endToken);
-        this.logger?.LogInformation($"WSS: Connected to {baselineUrl}");
+        await this.client.ConnectAsync(new Uri($"wss://{this.instanceUri.Host}{connection}"), endToken);
+        this.logger?.LogInformation($"WSS: Connected to {this.instanceUri}");
         this.ReceiveMessages(this.client, endToken).FireAndForgetSafeAsync(this.logger);
         this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.client.State));
     }
@@ -82,6 +108,37 @@ internal class ATWebSocketProtocol : IDisposable
         this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.client.State));
     }
 
+    /// <summary>
+    /// Start the ATProtocol SubscribeRepos sync session.
+    /// </summary>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public Task StartSubscribeReposAsync(CancellationToken? token = default)
+        => this.ConnectAsync(Constants.Urls.ATProtoSync.SubscribeRepos, token);
+
+    /// <summary>
+    /// Start the ATProtocol SubscribeRepos sync session.
+    /// </summary>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public Task StartSubscribeLabelsAsync(CancellationToken? token = default)
+        => this.ConnectAsync(Constants.Urls.ATProtoLabel.SubscribeLabels, token);
+
+    /// <summary>
+    /// Stops the ATProtocol Subscription session.
+    /// </summary>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public Task StopSubscriptionAsync(CancellationToken? token = default)
+    {
+        if (this.IsConnected)
+        {
+            return this.CloseAsync(token: token);
+        }
+
+        return Task.CompletedTask;
+    }
+
     /// <inheritdoc/>
     void IDisposable.Dispose()
     {
@@ -89,7 +146,10 @@ internal class ATWebSocketProtocol : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    internal void Dispose()
+    /// <summary>
+    /// Dispose.
+    /// </summary>
+    public void Dispose()
     {
         this.Dispose(disposing: true);
         GC.SuppressFinalize(this);
@@ -99,7 +159,7 @@ internal class ATWebSocketProtocol : IDisposable
     /// Dispose.
     /// </summary>
     /// <param name="disposing">Is Disposing.</param>
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
         if (!this.disposedValue)
         {
@@ -200,7 +260,8 @@ internal class ATWebSocketProtocol : IDisposable
                 break;
         }
 
-        this.protocol.OnSubscribedRepoMessageInternal(new SubscribedRepoEventArgs(message));
+        this.protocol?.OnSubscribedRepoMessageInternal(new SubscribedRepoEventArgs(message));
+        this.OnSubscribedRepoMessage?.Invoke(this, new SubscribedRepoEventArgs(message));
     }
 
     private async Task ReceiveMessages(ClientWebSocket webSocket, CancellationToken token)
@@ -220,9 +281,9 @@ internal class ATWebSocketProtocol : IDisposable
                 byte[] newArray = new byte[result.Count];
                 Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
 
-                Task.Run(() => this.HandleMessage(newArray));
+                Task.Run(() => this.HandleMessage(newArray)).FireAndForgetSafeAsync(this.logger);
             }
-            catch (OperationCanceledException canceledException)
+            catch (OperationCanceledException)
             {
                 this.logger?.LogDebug("WSS: Operation Canceled.");
             }

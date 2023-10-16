@@ -14,6 +14,7 @@ namespace FishyFlipMaui.ViewModels;
 
 public class FirehoseViewModel : BaseViewModel
 {
+    ATWebSocketProtocol atWebProtocol;
     ATProtocol atProtocol;
     AsyncCommand connectCommand;
     AsyncCommand disconnectCommand;
@@ -22,6 +23,7 @@ public class FirehoseViewModel : BaseViewModel
         : base(services)
     {
         this.atProtocol = services.GetRequiredService<ATProtocol>();
+        this.atWebProtocol = services.GetRequiredService<ATWebSocketProtocol>();
         this.atProtocol.OnConnectionUpdated += OnConnectionUpdated;
         this.atProtocol.OnSubscribedRepoMessage += OnSubscribedRepoMessage;
         this.Items.CollectionChanged += (s, e) => this.OnPropertyChanged(nameof(this.Count));
@@ -37,12 +39,12 @@ public class FirehoseViewModel : BaseViewModel
 
     public async Task ConnectAsync()
     {
-        await this.atProtocol.StartSubscribeReposAsync();
+        await this.atWebProtocol.StartSubscribeReposAsync();
     }
 
     public async Task DisconnectAsync()
     {
-        await this.atProtocol.StopSubscriptionAsync();
+        await this.atWebProtocol.StopSubscriptionAsync();
     }
 
     public override void RaiseCanExecuteChanged()

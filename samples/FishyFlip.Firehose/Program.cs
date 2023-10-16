@@ -11,8 +11,9 @@ using Microsoft.Extensions.Logging.Debug;
 Console.WriteLine("Hello, ATProtocol Firehose!");
 
 var debugLog = new DebugLoggerProvider();
-var atProtocolBuilder = new ATProtocolBuilder()
-    .EnableAutoRenewSession(true)
+
+// You can set a custom url with WithInstanceUrl
+var atProtocolBuilder = new ATWebSocketProtocolBuilder()
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
 

@@ -40,8 +40,8 @@ else
 </div>
 
 @code {
-    private string instance = "bsky.social";
-    private ATProtocol? protocol;
+    private string instance = "bsky.network";
+    private ATWebSocketProtocol? protocol;
     private ILogger? logger;
     private bool isSubscribed = false;
     ObservableCollection<FirehoseItem> Posts = new ObservableCollection<FirehoseItem>();
@@ -50,7 +50,7 @@ else
     {
         await Disconnect();
 
-        var host = instance ?? "bsky.social";
+        var host = instance ?? "bsky.network";
 
         if (!Uri.TryCreate(host, UriKind.Absolute, out Uri? uri))
         {
@@ -64,7 +64,7 @@ else
 
         try
         {
-            var atProtocolBuilder = new ATProtocolBuilder()
+            var atProtocolBuilder = new ATWebSocketProtocolBuilder()
                 .WithInstanceUrl(uri)
                 .WithLogger(logger);
             protocol = atProtocolBuilder.Build();

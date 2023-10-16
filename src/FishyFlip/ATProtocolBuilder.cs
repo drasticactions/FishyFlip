@@ -57,7 +57,7 @@ public class ATProtocolBuilder
     /// <summary>
     /// Sets the user agent.
     /// </summary>
-    /// <param name="userAgent"></param>
+    /// <param name="userAgent">User Agent.</param>
     /// <returns><see cref="ATProtocolBuilder"/></returns>
     public ATProtocolBuilder WithUserAgent(string userAgent)
     {
@@ -68,7 +68,7 @@ public class ATProtocolBuilder
     /// <summary>
     /// Enable auto renewing sessions.
     /// </summary>
-    /// <param name="autoRenewSession"></param>
+    /// <param name="autoRenewSession">Auto Renew Session.</param>
     /// <returns><see cref="ATProtocolBuilder"/></returns>
     public ATProtocolBuilder EnableAutoRenewSession(bool autoRenewSession)
     {
@@ -79,7 +79,7 @@ public class ATProtocolBuilder
     /// <summary>
     /// Adds a logger.
     /// </summary>
-    /// <param name="logger"></param>
+    /// <param name="logger">Logger.</param>
     /// <returns><see cref="ATProtocolBuilder"/></returns>
     public ATProtocolBuilder WithLogger(ILogger? logger)
     {
@@ -127,6 +127,10 @@ public class ATProtocolBuilder
         return this;
     }
 
+    /// <summary>
+    /// Returns the ATProtocolOptions.
+    /// </summary>
+    /// <returns>ATProtocolOptions.</returns>
     public ATProtocolOptions BuildOptions()
     {
         if (this.setHttpClientDefaults)
