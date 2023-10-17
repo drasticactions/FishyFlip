@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
 
 namespace FishyFlip.Tests;
@@ -264,5 +265,18 @@ public class AuthorizedTests
                                   {
                                       Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
                                   });
+    }
+
+    [Fact]
+    public async Task CreatePostWithTagAsyncTest()
+    {
+        var prompt = "Hashtag Text: ";
+        var linkText = "FishyFlipTest";
+        prompt = $"{prompt} {linkText}";
+        int promptStart = prompt.IndexOf(linkText, StringComparison.InvariantCulture);
+        int promptEnd = promptStart + Encoding.Default.GetBytes(linkText).Length;
+        var facet = Facet.CreateFacetHashtag(promptStart, promptEnd, "FishyFlipTest");
+        var test = (await this.proto.Repo.CreatePostAsync(prompt, new[] { facet }, null, new[] { "en" })).HandleResult();
+        Assert.True(test!.Cid is not null);
     }
 }

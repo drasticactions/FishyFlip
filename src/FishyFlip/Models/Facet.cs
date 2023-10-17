@@ -32,6 +32,9 @@ public class Facet : ATRecord
     public static Facet CreateFacetLink(int start, int end, string uri)
         => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateLink(uri) });
 
+    public static Facet CreateFacetHashtag(int start, int end, string hashtag)
+        => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateHashtag(hashtag) });
+
     public static Facet CreateFacetMention(int start, int end, ATDid mention)
         => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateMention(mention) });
 }

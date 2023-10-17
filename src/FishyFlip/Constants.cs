@@ -161,6 +161,7 @@ public static class Constants
 
     public static class FacetTypes
     {
+        public const string Tag = "app.bsky.richtext.facet#tag";
         public const string Link = "app.bsky.richtext.facet#link";
         public const string Mention = "app.bsky.richtext.facet#mention";
     }
