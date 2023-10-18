@@ -57,7 +57,6 @@ var listRecords = await atProtocol.Repo.ListPostAsync(ATHandle.Create("da-admin.
 // This is a pattern match object which can either be the "Success" object, 
 // or an "Error" object. The "Error" object will always be the type of "Error" and always be from the Bluesky API.
 // This would be where you would handle things like authentication errors and the like.
-// You can get around this by using `.AsT0` to ignore the error object, but I would handle it where possible.
 listRecords.Switch(
     success => { 
         foreach(var post in success!.Records)
@@ -77,6 +76,12 @@ listRecords.Switch(
         Console.WriteLine($"Error: {error.StatusCode} {error.Detail}");
     }
 );
+```
+
+- Instead of pattern matching, you can also use `.HandleResult()` to return the `success` object, and throw an exception upon an `error`.
+
+```csharp
+var listRecords = (await atProtocol.Repo.ListPostAsync(ATHandle.Create("da-admin.drasticactions.ninja"))).HandleResult();
 ```
 
 - To log in, we need to create a session. This is applied to all `ATProtocol` calls once applied. If you need to create calls from a non-auth user session, create a new `ATProtocol` or destroy the existing session.
