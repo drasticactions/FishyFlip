@@ -175,6 +175,7 @@ public static class Constants
         public const string RecordView = "app.bsky.embed.record#view";
         public const string Record = "app.bsky.embed.record";
         public const string RecordWithMedia = "app.bsky.embed.recordWithMedia";
+        public const string RecordWithMediaView = "app.bsky.embed.recordWithMedia#view";
     }
 
     public static class FeedType

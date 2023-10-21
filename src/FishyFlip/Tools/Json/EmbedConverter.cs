@@ -64,6 +64,30 @@ public class EmbedConverter : JsonConverter<Embed>
                         }
 
                         break;
+                    case Constants.EmbedTypes.RecordWithMediaView:
+                        RecordViewEmbed? record1 = null;
+                        ImageViewEmbed? media1 = null;
+
+                        if (doc.RootElement.TryGetProperty("record", out var recordVal2))
+                        {
+                            record1 = JsonSerializer.Deserialize<RecordViewEmbed>(recordVal2.GetRawText(), options);
+                        }
+
+                        if (doc.RootElement.TryGetProperty("media", out var mediaVal2))
+                        {
+                            if (mediaVal2.TryGetProperty("$type", out var mediaType2))
+                            {
+                                var mediaText = mediaType2.GetString()?.Trim() ?? string.Empty;
+                                switch (mediaText)
+                                {
+                                    case Constants.EmbedTypes.ImageView:
+                                        media1 = JsonSerializer.Deserialize<ImageViewEmbed>(mediaVal2.GetRawText(), options);
+                                        break;
+                                }
+                            }
+                        }
+
+                        return new RecordWithMediaViewEmbed(record1, media1);
                     case Constants.EmbedTypes.RecordWithMedia:
                         RecordEmbed? record = null;
                         ImagesEmbed? media = null;
