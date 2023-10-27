@@ -2,7 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
 
 namespace FishyFlip.Tests;
@@ -22,6 +21,53 @@ public class AuthorizedTests
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
         this.proto = atProtocolBuilder.Build();
         this.proto.Server.CreateSessionAsync(handle, password).Wait();
+    }
+
+    [Fact]
+    public async Task GetPopularFeedGeneratorsAsync()
+    {
+        var result = await this.proto.Unspecced.GetPopularFeedGeneratorsAsync();
+        result.Switch(
+            success =>
+            {
+                Assert.True(success!.Feeds.Count() > 0);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task GetFeedAsyncTest()
+    {
+        var atUri = ATUri.Create("at://did:plc:hqmafuxb77d6cepxvqwlcekl/app.bsky.feed.generator/sandsky");
+        var result = await this.proto.Feed.GetFeedAsync(atUri);
+        result.Switch(
+            success =>
+            {
+                Assert.True(success!.Feed.Count() > 0);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [Fact]
+    public async Task GetFeedGeneratorAsyncTest()
+    {
+        var atUri = ATUri.Create("at://did:plc:hqmafuxb77d6cepxvqwlcekl/app.bsky.feed.generator/sandsky");
+        var result = await this.proto.Feed.GetFeedGeneratorAsync(atUri);
+        result.Switch(
+            success =>
+            {
+                Assert.Equal(atUri.ToString(), success!.View.Uri.ToString());
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
     }
 
     [Fact]
@@ -61,8 +107,8 @@ public class AuthorizedTests
     [Fact]
     public async Task GetProfilesAsyncWithDidTest()
     {
-        var test1did = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
-        var test2did = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
+        var test1did = ATDid.Create("did:plc:ix37rgpewy5wtl5qzhunsldu");
+        var test2did = ATDid.Create("did:plc:adrmwce3psv74fm7p4tzf64k");
         var result = await this.proto.Actor.GetProfilesAsync(new[] { test1did, test2did });
         result.Switch(
             success =>
