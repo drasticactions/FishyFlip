@@ -35,6 +35,16 @@ internal static class CborExtensions
         return null;
     }
 
+    public static string? ToString(this CBORObject obj)
+    {
+        if (obj.IsNull)
+        {
+            return null;
+        }
+
+        return obj.AsString();
+    }
+
     public static DateTime? ToDateTime(this CBORObject obj)
     {
         if (obj.IsNull)
