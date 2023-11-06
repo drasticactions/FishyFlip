@@ -11,9 +11,9 @@ public class FrameCommit
         this.Ops = obj["ops"]?.Values.Select(n => new Ops(n)).ToArray();
         this.Seq = obj["seq"].AsInt32();
         this.Blocks = obj["blocks"]?.GetByteString();
-#pragma warning disable CS0618 // Œ^‚Ü‚½‚Íƒƒ“ƒo[‚ª‹ŒŒ^®‚Å‚·
-        this.Prev = obj["prev"].ToCid();
-#pragma warning restore CS0618 // Œ^‚Ü‚½‚Íƒƒ“ƒo[‚ª‹ŒŒ^®‚Å‚·
+#pragma warning disable CS0618
+        this.Prev = obj["prev"]?.ToCid();
+#pragma warning restore CS0618
         this.Rev = obj["rev"]?.AsString();
         this.Since = obj["since"]?.AsString();
         this.Commit = obj["commit"].ToCid();
@@ -21,7 +21,11 @@ public class FrameCommit
         this.Handle = obj["handle"] is not null ? ATHandle.Create(obj["handle"].AsString()) : null;
         this.Rebase = obj["rebase"]?.AsBoolean() ?? false;
         this.TooBig = obj["tooBig"]?.AsBoolean() ?? false;
-        this.Time = DateTime.Parse(obj["time"].AsString());
+        var time = obj["time"]?.AsString();
+        if (!string.IsNullOrEmpty(time))
+        {
+            this.Time = DateTime.Parse(time);
+        }
     }
 
     /// <summary>
@@ -63,7 +67,7 @@ public class FrameCommit
     /// <summary>
     /// Gets the date time of the frame.
     /// </summary>
-    public DateTime Time { get; }
+    public DateTime? Time { get; }
 
     /// <summary>
     /// Gets the CBOR blocks.
