@@ -43,7 +43,7 @@ internal static class CborExtensions
     /// </summary>
     /// <param name="obj">CBORObject.</param>
     /// <returns>string.</returns>
-    public static string? ToString(this CBORObject obj)
+    public static string? ToRawString(this CBORObject obj)
     {
         if (obj.IsNull)
         {
@@ -77,17 +77,11 @@ internal static class CborExtensions
             return null;
         }
 
-        var time = obj.ToString();
-        if (time is null)
-        {
-            return null;
-        }
-
         try
         {
-            return DateTime.Parse(time);
+            return DateTime.Parse(obj.AsString());
         }
-        catch
+        catch (Exception ex)
         {
             return null;
         }

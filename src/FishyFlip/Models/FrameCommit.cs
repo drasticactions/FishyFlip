@@ -14,8 +14,8 @@ public class FrameCommit
 #pragma warning disable CS0618
         this.Prev = obj["prev"]?.ToCid();
 #pragma warning restore CS0618
-        this.Rev = obj["rev"]?.ToString();
-        this.Since = obj["since"]?.ToString();
+        this.Rev = obj["rev"]?.ToRawString();
+        this.Since = obj["since"]?.ToRawString();
         this.Commit = obj["commit"].ToCid();
         this.Repo = obj["repo"] is not null ? ATDid.Create(obj["repo"].AsString()) : null;
         this.Handle = obj["handle"] is not null ? ATHandle.Create(obj["handle"].AsString()) : null;
