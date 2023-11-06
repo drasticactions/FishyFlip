@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Tools.Cbor;
 
+/// <summary>
+/// CBOR Extensions.
+/// </summary>
 internal static class CborExtensions
 {
     /// <summary>
@@ -35,6 +38,11 @@ internal static class CborExtensions
         return null;
     }
 
+    /// <summary>
+    /// Cast CBOR to string.
+    /// </summary>
+    /// <param name="obj">CBORObject.</param>
+    /// <returns>string.</returns>
     public static string? ToString(this CBORObject obj)
     {
         if (obj.IsNull)
@@ -42,9 +50,21 @@ internal static class CborExtensions
             return null;
         }
 
-        return obj.AsString();
+        try
+        {
+            return obj.AsString();
+        }
+        catch
+        {
+            return null;
+        }
     }
 
+    /// <summary>
+    /// Cast CBOR to DateTime.
+    /// </summary>
+    /// <param name="obj">CBORObject.</param>
+    /// <returns>DateTime.</returns>
     public static DateTime? ToDateTime(this CBORObject obj)
     {
         if (obj.IsNull)
@@ -57,12 +77,30 @@ internal static class CborExtensions
             return null;
         }
 
-        return DateTime.Parse(obj.AsString());
+        var time = obj.ToString();
+        if (time is null)
+        {
+            return null;
+        }
+
+        try
+        {
+            return DateTime.Parse(time);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
+    /// <summary>
+    /// Cast CBOR to Embed.
+    /// </summary>
+    /// <param name="obj">CBORObject.</param>
+    /// <returns>Embed.</returns>
     public static Embed ToEmbed(this CBORObject obj)
     {
-        var type = obj["$type"].AsString();
+        var type = obj["$type"].ToString() ?? string.Empty;
         switch (type)
         {
             case Constants.EmbedTypes.Record:
