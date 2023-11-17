@@ -99,6 +99,28 @@ internal class SessionManager : IDisposable
             return;
         }
 
+        if (this.protocol.Options.UseServiceEndpointUponLogin)
+        {
+            var serviceUrl = session.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
+            if (!string.IsNullOrEmpty(serviceUrl))
+            {
+                this.logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
+            }
+            else
+            {
+                var result = Uri.TryCreate(serviceUrl, UriKind.Absolute, out Uri? uriResult);
+                if (!result || uriResult is null)
+                {
+                    this.logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
+                }
+                else
+                {
+                    this.protocol.Options.Url = uriResult;
+                    this.logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
+                }
+            }
+        }
+
         this.logger?.LogDebug("AutoRenewSession is enabled.");
         this.timer ??= new System.Timers.Timer();
 

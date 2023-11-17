@@ -47,7 +47,7 @@ public class ATProtocolBuilder
     /// Set the instance url to connect to.
     /// </summary>
     /// <param name="url">Instance Url.</param>
-    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder WithInstanceUrl(Uri url)
     {
         this.atProtocolOptions.Url = url;
@@ -58,7 +58,7 @@ public class ATProtocolBuilder
     /// Sets the user agent.
     /// </summary>
     /// <param name="userAgent">User Agent.</param>
-    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder WithUserAgent(string userAgent)
     {
         this.atProtocolOptions.UserAgent = userAgent;
@@ -66,10 +66,21 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Sets UseServiceEndpointUponLogin.
+    /// </summary>
+    /// <param name="serviceEndpointUponLogin">Value for UseServiceEndpointUponLogin.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.s</returns>
+    public ATProtocolBuilder WithServiceEndpointUponLogin(bool serviceEndpointUponLogin)
+    {
+        this.atProtocolOptions.UseServiceEndpointUponLogin = serviceEndpointUponLogin;
+        return this;
+    }
+
+    /// <summary>
     /// Enable auto renewing sessions.
     /// </summary>
     /// <param name="autoRenewSession">Auto Renew Session.</param>
-    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder EnableAutoRenewSession(bool autoRenewSession)
     {
         this.atProtocolOptions.AutoRenewSession = autoRenewSession;
@@ -80,7 +91,7 @@ public class ATProtocolBuilder
     /// Adds a logger.
     /// </summary>
     /// <param name="logger">Logger.</param>
-    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder WithLogger(ILogger? logger)
     {
         this.atProtocolOptions.Logger = logger;
@@ -91,7 +102,7 @@ public class ATProtocolBuilder
     /// Sets the session refresh interval.
     /// </summary>
     /// <param name="interval">Interval to refresh at.</param>
-    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder WithSessionRefreshInterval(TimeSpan interval)
     {
         if (interval.TotalMinutes < 1)
@@ -107,7 +118,7 @@ public class ATProtocolBuilder
     /// Sets an initial session to use.
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
-    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder WithInitialSession(Session session)
     {
         this.atProtocolOptions.Session = session;
@@ -119,7 +130,7 @@ public class ATProtocolBuilder
     /// </summary>
     /// <param name="password">Admin password.</param>
     /// <param name="username">Admin username. Defaults to "admin".</param>
-    /// <returns><see cref="ATProtocolBuilder"/></returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder AsAdmin(string password, string username = "admin")
     {
         string base64Credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
@@ -135,9 +146,7 @@ public class ATProtocolBuilder
     {
         if (this.setHttpClientDefaults)
         {
-            this.atProtocolOptions.HttpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.atProtocolOptions.UserAgent);
-            this.atProtocolOptions.HttpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
-            this.atProtocolOptions.HttpClient.BaseAddress = this.atProtocolOptions.Url;
+            this.atProtocolOptions.UpdateHttpClient(this.atProtocolOptions.Url);
         }
 
         return this.atProtocolOptions;

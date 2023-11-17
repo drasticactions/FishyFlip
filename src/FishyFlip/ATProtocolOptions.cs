@@ -82,4 +82,25 @@ public class ATProtocolOptions
     /// Gets the JsonSerializerOptions.
     /// </summary>
     public JsonSerializerOptions JsonSerializerOptions { get; internal set; }
+
+    /// <summary>
+    /// Gets a value indicating whether to switch to the service endpoint upon login, if available.
+    /// If it's not available, the original instance URL will be used.
+    /// </summary>
+    public bool UseServiceEndpointUponLogin { get; internal set; } = true;
+
+    /// <summary>
+    /// Update the existing HttpClient with a new URI endpoint.
+    /// </summary>
+    /// <param name="serviceUri">Uri Endpoint.</param>
+    internal void UpdateHttpClient(Uri serviceUri)
+    {
+        // Remove existing HttpClient.
+        this.HttpClient.Dispose();
+        this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
+        this.HttpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
+        this.HttpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
+        this.HttpClient.BaseAddress = serviceUri;
+        this.Url = serviceUri;
+    }
 }

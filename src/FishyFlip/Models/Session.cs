@@ -9,12 +9,14 @@ public class Session
     [JsonConstructor]
     public Session(
         ATDid did,
+        DidDoc? didDoc,
         ATHandle handle,
         string? email,
         string accessJwt,
         string refreshJwt)
     {
         this.Did = did;
+        this.DidDoc = didDoc;
         this.Handle = handle;
         this.Email = email;
         this.AccessJwt = accessJwt;
@@ -22,6 +24,8 @@ public class Session
     }
 
     public ATDid Did { get; }
+
+    public DidDoc? DidDoc { get; }
 
     public ATHandle Handle { get; }
 
