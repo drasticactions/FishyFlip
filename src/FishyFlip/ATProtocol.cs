@@ -230,6 +230,32 @@ public sealed class ATProtocol : IDisposable
     /// <param name="session"><see cref="Session"/>.</param>
     internal void OnUserLoggedIn(Session session)
     {
+        if (this.options.UseServiceEndpointUponLogin)
+        {
+            var logger = this.options?.Logger;
+            var serviceUrl = session.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
+            if (string.IsNullOrEmpty(serviceUrl))
+            {
+                logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
+            }
+            else
+            {
+                var result = Uri.TryCreate(serviceUrl, UriKind.Absolute, out Uri? uriResult);
+                if (!result || uriResult is null)
+                {
+                    logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
+                }
+                else
+                {
+                    this.Options.Url = uriResult;
+                    logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
+                    this.Options.Session = session;
+                    this.UpdateOptions(this.Options);
+                    return;
+                }
+            }
+        }
+
         if (this.sessionManager is null)
         {
             this.sessionManager = new SessionManager(this);
