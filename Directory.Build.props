@@ -16,11 +16,13 @@
     <RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <PackageProjectUrl>https://github.com/drasticactions/FishyFlip</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/drasticactions/FishyFlip/blob/main/CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)favicon.png" Pack="true" PackagePath="" Visible="false" />
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)CHANGELOG.md" Pack="true" PackagePath="" Visible="false" />
 	</ItemGroup>
 
   <ItemGroup>
