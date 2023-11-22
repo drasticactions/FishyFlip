@@ -192,6 +192,7 @@ public sealed class ATProtocol : IDisposable
     public void UpdateOptions(ATProtocolOptions options)
     {
         this.options = options;
+        this.options.UpdateHttpClient(options.Url);
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
         this.webSocketProtocol.Dispose();
         this.sessionManager.Dispose();
@@ -248,8 +249,8 @@ public sealed class ATProtocol : IDisposable
                 else
                 {
                     this.Options.Url = uriResult;
-                    logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
                     this.Options.Session = session;
+                    logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
                     this.UpdateOptions(this.Options);
                     return;
                 }
