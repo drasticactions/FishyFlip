@@ -95,6 +95,7 @@ internal static class CborExtensions
     public static Embed ToEmbed(this CBORObject obj)
     {
         var type = obj["$type"].ToString() ?? string.Empty;
+        type = type.Replace("\"", string.Empty);
         switch (type)
         {
             case Constants.EmbedTypes.Record:
