@@ -7,6 +7,7 @@ using FishyFlip.Models;
 using FishyFlip.Tools;
 using Sharprompt;
 using System.ComponentModel.DataAnnotations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 Console.WriteLine("FishyFlipSamplesApp");
 
@@ -99,6 +100,10 @@ async Task GetAvatarForProfile(ATProtocol protocol)
     // The avatar is a byte array, so we can save it to disk.
     File.WriteAllBytes($"avatar.jpg", avatar.Data);
     Console.WriteLine("Avatar saved to disk.");
+
+    // We can also call on the BlueSky instance to get the avatar via a URL
+    var imageUri = $"https://{protocol.Options.Url.Host}{Constants.Urls.ATProtoSync.GetBlob}?did={actorRecord.Uri.Did!}&cid={actorRecord.Value.Avatar.Ref.Link}";
+    Console.WriteLine($"Avatar URL: {imageUri}");
 }
 
 async Task<ActorRecord?> GetProfileViaHandle(ATProtocol protocol)
