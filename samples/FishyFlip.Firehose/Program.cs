@@ -45,5 +45,16 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
     if (message.Record is not null)
     {
         Console.WriteLine($"Record: {message.Record.Type}");
+
+        if (message.Record is Post post)
+        {
+            // The Actor Did.
+            var did = message.Commit.Repo;
+            // Commit.Ops are the actions used when creating the message.
+            // In this case, it's a create record for the post.
+            // The path contains the post action and path, we need the path, so we split to get it.
+            var url = $"https://bsky.app/profile/{did}/post/{message.Commit.Ops![0]!.Path!.Split("/").Last()}";
+            Console.WriteLine($"Post URL: {url}");
+        }
     }
 }
