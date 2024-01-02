@@ -25,7 +25,7 @@ public abstract class ATRecord
     [JsonPropertyName("$type")]
     public string? Type { get; internal set; }
 
-    public static ATRecord? FromCBORObject(CBORObject blockObj)
+    public static ATRecord? FromCBORObject(CBORObject blockObj, ILogger? logger = default)
     {
         if (blockObj["$type"] is not null)
         {
@@ -34,11 +34,11 @@ public abstract class ATRecord
                 case Constants.FeedType.Post:
                     return new Post(blockObj);
                 case Constants.FeedType.Like:
-                    return new Like(blockObj);
+                    return new Like(blockObj, logger);
                 case Constants.FeedType.Generator:
                     return new FeedGenerator(blockObj);
                 case Constants.FeedType.Repost:
-                    return new Repost(blockObj);
+                    return new Repost(blockObj, logger);
                 case Constants.GraphTypes.Follow:
                     return new Follow(blockObj);
                 case Constants.GraphTypes.List:

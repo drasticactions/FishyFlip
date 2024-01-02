@@ -14,9 +14,9 @@ public class Like : ATRecord
         this.CreatedAt = createdAt;
     }
 
-    public Like(CBORObject obj)
+    public Like(CBORObject obj, ILogger? logger = default)
     {
-        var cid = obj["subject"]["cid"].ToCid();
+        var cid = obj["subject"]["cid"].ToCid(logger);
         var uri = new ATUri(obj["subject"]["uri"].AsString());
         this.Subject = new Subject(cid, uri);
         this.CreatedAt = obj["createdAt"].ToDateTime();

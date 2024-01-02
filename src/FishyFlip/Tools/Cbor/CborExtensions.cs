@@ -13,8 +13,9 @@ internal static class CborExtensions
     /// CBOR to Cid.
     /// </summary>
     /// <param name="obj">Nullable CBORobject.</param>
+    /// <param name="logger">ILogger.</param>
     /// <returns>Cid.</returns>
-    public static Cid? ToCid(this CBORObject? obj)
+    public static Cid? ToCid(this CBORObject? obj, ILogger? logger = default)
     {
         if (obj is null)
         {
@@ -26,13 +27,20 @@ internal static class CborExtensions
             return null;
         }
 
-        switch (obj.Type)
+        try
         {
-            case CBORType.ByteString:
-                var cid = obj.GetByteString();
-                return Cid.Read(cid);
-            case CBORType.TextString:
-                return Cid.Decode(obj.AsString());
+            switch (obj.Type)
+            {
+                case CBORType.ByteString:
+                    var cid = obj.GetByteString();
+                    return Cid.Read(cid);
+                case CBORType.TextString:
+                    return Cid.Decode(obj.AsString());
+            }
+        }
+        catch (Exception ex)
+        {
+            logger?.LogError(ex, "Failed to convert to Cid.");
         }
 
         return null;

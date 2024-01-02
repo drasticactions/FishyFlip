@@ -15,9 +15,9 @@ public class Repost : ATRecord
         this.CreatedAt = createdAt;
     }
 
-    public Repost(CBORObject obj)
+    public Repost(CBORObject obj, ILogger? logger = default)
     {
-        this.Cid = obj["subject"]["cid"].ToCid();
+        this.Cid = obj["subject"]["cid"].ToCid(logger);
         this.Uri = new ATUri(obj["subject"]["uri"].AsString());
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Type = Constants.FeedType.Repost;

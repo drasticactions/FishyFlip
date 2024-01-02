@@ -6,12 +6,12 @@ namespace FishyFlip.Models;
 
 public class FrameFooter
 {
-    public FrameFooter(CBORObject obj)
+    public FrameFooter(CBORObject obj, ILogger? logger = default)
     {
         this.Did = ATDid.Create(obj["did"].AsString());
         this.Version = obj["version"].AsInt32();
-        this.Prev = obj["prev"].ToCid();
-        this.Data = obj["data"].ToCid();
+        this.Prev = obj["prev"].ToCid(logger);
+        this.Data = obj["data"].ToCid(logger);
         this.Sig = obj["sig"].GetByteString();
     }
 
@@ -28,11 +28,11 @@ public class FrameFooter
 
     public byte[] Sig { get; }
 
-    public static FrameFooter? FromCBORObject(CBORObject blockObj)
+    public static FrameFooter? FromCBORObject(CBORObject blockObj, ILogger? logger = default)
     {
         if (blockObj["sig"] is not null)
         {
-            return new FrameFooter(blockObj);
+            return new FrameFooter(blockObj, logger);
         }
 
         return null;

@@ -6,17 +6,17 @@ namespace FishyFlip.Models;
 
 public class FrameCommit
 {
-    public FrameCommit(CBORObject obj)
+    public FrameCommit(CBORObject obj, ILogger? logger = default)
     {
         this.Ops = obj["ops"]?.Values.Select(n => new Ops(n)).ToArray();
         this.Seq = obj["seq"].AsInt32();
         this.Blocks = obj["blocks"]?.GetByteString();
 #pragma warning disable CS0618
-        this.Prev = obj["prev"]?.ToCid();
+        this.Prev = obj["prev"]?.ToCid(logger);
 #pragma warning restore CS0618
         this.Rev = obj["rev"]?.ToRawString();
         this.Since = obj["since"]?.ToRawString();
-        this.Commit = obj["commit"].ToCid();
+        this.Commit = obj["commit"].ToCid(logger);
         this.Repo = obj["repo"] is not null ? ATDid.Create(obj["repo"].AsString()) : null;
         this.Handle = obj["handle"] is not null ? ATHandle.Create(obj["handle"].AsString()) : null;
         this.Rebase = obj["rebase"]?.AsBoolean() ?? false;

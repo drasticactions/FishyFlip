@@ -198,7 +198,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                 switch (frameType)
                 {
                     case "#commit":
-                        var frameCommit = new FrameCommit(objects[1]);
+                        var frameCommit = new FrameCommit(objects[1], this.logger);
 
                         // this.logger?.LogDebug($"FrameBody: {objects[1].ToJSONString()}");
                         message.Commit = frameCommit;
@@ -217,7 +217,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             }
                             else if (blockObj["sig"] is not null)
                             {
-                                message.Footer = FrameFooter.FromCBORObject(blockObj);
+                                message.Footer = FrameFooter.FromCBORObject(blockObj, this.logger);
                             }
                             else
                             {
