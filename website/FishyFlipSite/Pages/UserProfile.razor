@@ -1,0 +1,131 @@
+﻿@page "/profile"
+@inject ILogger<UserProfile> logger;
+@using Drastic.Tools;
+@using FishyFlip;
+@using FishyFlip.Events;
+@using FishyFlip.Models;
+@using FishyFlip.Tools;
+@using Microsoft.Extensions.Logging.Debug;
+@using System.Collections.ObjectModel;
+
+@* Error Block *@
+@if (!string.IsNullOrEmpty(error))
+{
+    <div style="border-style: dotted; border-color: red; border-width: 10px;">
+        <p style="color: red;">@error</p>
+    </div>
+}
+
+<div>
+    <label for="handleBox">Handle:</label>
+    <input type="text" @bind="handle" name="handleBox">
+</div>
+
+<div>
+    <label for="inputBox">Instance:</label>
+    <input type="text" @bind="instance" name="inputBox">
+</div>
+
+<div>
+    <button disabled="@isLoading" @onclick="Load">Load</button>
+</div>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+
+@if (profile is not null)
+{
+    <div style="border-style: dotted; border-color: blue; border-width: 10px;">
+        <p style="color: green;">Did: @did</p>
+        <p style="color: green;">Display Name: @profile.Value?.DisplayName</p>
+        <p style="color: green;">Uri: @profile.Uri</p>
+        <p style="color: green;">Description: @profile.Value?.Description</p>
+        <p style="color: green;">Avatar: @ImageUrl</p>
+    </div>
+}
+
+@if (posts.Count > 0)
+{
+    <div style="border-style: dotted; border-color: blue; border-width: 10px;">
+        @foreach (var item in posts)
+        {
+            <div class="post">
+                <sub class="postTextSub">@item.Type</sub>
+                <p class="postText">@item.Text</p>
+                <sub class="postTextSub">@item.CreatedAt</sub>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private string? error;
+    private string? handle = "drasticactions.dev";
+    private string? instance = "bsky.social";
+    private ATProtocol? protocol;
+    private bool isLoading = false;
+    private ActorRecord? profile;
+    private ATDid? did;
+    private List<Post> posts = new();
+
+    private string? ImageUrl {
+        get {
+            if (protocol is null || profile is null || profile.Uri is null || profile.Value?.Avatar is null || profile.Value?.Avatar.Ref is null || profile.Value?.Avatar.Ref.Link is null)
+            {
+                return null;
+            }
+
+            return $"https://{protocol.Options.Url.Host}{Constants.Urls.ATProtoSync.GetBlob}?did={profile.Uri.Did!}&cid={profile.Value.Avatar.Ref.Link}";
+        }
+    }
+    private async Task Load()
+    {
+        this.Unload();
+
+        try
+        {
+            var host = instance ?? "bsky.social";
+
+            if (!Uri.TryCreate(host, UriKind.Absolute, out Uri? uri))
+            {
+                uri = new Uri($"https://{host}");
+            }
+
+            if (uri is null)
+            {
+                return;
+            }
+
+            var builder = new ATProtocolBuilder();
+            protocol = builder.WithInstanceUrl(uri)
+            .WithLogger(this.logger).Build();
+
+            this.isLoading = true;
+
+            var handleResolution = (await protocol.Identity.ResolveHandleAsync(ATHandle.Create(handle))).HandleResult();
+            this.did = handleResolution?.Did;
+            this.profile = (await protocol.Repo.GetActorAsync(handleResolution.Did)).HandleResult();
+            
+            var posts = (await protocol.Repo.ListPostsAsync(handleResolution.Did)).HandleResult();
+            this.posts.AddRange(posts?.Records.Select(n => (Post)n.Value));
+        }
+        catch (Exception ex)
+        {
+            this.error = ex.Message;
+            this.logger.LogError(ex, ex.Message);
+        }
+
+        this.isLoading = false;
+        this.StateHasChanged();
+    }
+
+    private void Unload()
+    {
+        this.error = null;
+        this.protocol?.Dispose();
+        this.protocol = null;
+        this.posts.Clear();
+    }
+}
