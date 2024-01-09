@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
 
 namespace FishyFlip.Tests;
@@ -324,5 +325,13 @@ public class AuthorizedTests
         var facet = Facet.CreateFacetHashtag(promptStart, promptEnd, "FishyFlipTest");
         var test = (await this.proto.Repo.CreatePostAsync(prompt, new[] { facet }, null, new[] { "en" })).HandleResult();
         Assert.True(test!.Cid is not null);
+    }
+
+    [Fact]
+    public async Task CreateFollowAsyncTest()
+    {
+        // Did is for follow1.drasticactions.ninja.
+        var response = (await this.proto.Repo.CreateFollowAsync(ATDid.Create("did:plc:up76ybimufzledmmhbv25wse"))).HandleResult();
+        Assert.True(response!.Cid is not null);
     }
 }

@@ -11,7 +11,7 @@ public class FollowRecord : ATRecord
     {
         this.Subject = subject;
         this.CreatedAt = createdAt ?? DateTime.Now;
-        this.Type = Constants.GraphTypes.Block;
+        this.Type = Constants.GraphTypes.Follow;
     }
 
     public ATDid? Subject { get; }
