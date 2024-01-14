@@ -268,7 +268,6 @@ As a general rule of thumb, `com.atproto` endpoints (such as `com.atproto.sync`)
 | [app.bsky.actor.searchActors](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/actor/searchActors.json)  | ✅  |
 | [app.bsky.actor.getProfiles](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/actor/getProfiles.json)  | ✅  |
 | [app.bsky.actor.getPreferences](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/actor/getPreferences.json)  | ❌  |
-| [app.bsky.actor.profile](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/actor/profile.json)  | ❌  |
 
 ### Feed
 
