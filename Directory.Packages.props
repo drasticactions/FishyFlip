@@ -10,7 +10,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     <PackageVersion Include="Sharprompt" Version="2.4.5" />
-    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.0.2" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
     <PackageVersion Include="MimeTypes" Version="2.4.1" />
     <PackageVersion Include="IpfsShipyard.Ipfs.Core" Version="0.0.5" />
     <PackageVersion Include="PeterO.Cbor" Version="4.5.2" />
