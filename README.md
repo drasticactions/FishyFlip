@@ -381,23 +381,23 @@ As a general rule of thumb, `com.atproto` endpoints (such as `com.atproto.sync`)
 
 | Endpoint | Implemented
 |----------|----------|
-| [com.atproto.admin.getRepo](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getRepo.json)  | ✅  |
-| [com.atproto.admin.updateAccountEmail](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/updateAccountEmail.json)  | ✅  |
+| [com.atproto.admin.getRepo](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getRepo.json)  | ❌  |
+| [com.atproto.admin.updateAccountEmail](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/updateAccountEmail.json)  | ❌  |
 | [com.atproto.admin.getAccountInfo](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getAccountInfo.json)  | ❌  |
 | [com.atproto.admin.getSubjectStatus](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getSubjectStatus.json)  | ❌  |
 | [com.atproto.admin.queryModerationStatuses](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/queryModerationStatuses.json)  | ❌  |
-| [com.atproto.admin.updateAccountHandle](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/updateAccountHandle.json)  | ✅  |
-| [com.atproto.admin.getInviteCodes](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getInviteCodes.json)  | ✅  |
+| [com.atproto.admin.updateAccountHandle](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/updateAccountHandle.json)  | ❌  |
+| [com.atproto.admin.getInviteCodes](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getInviteCodes.json)  | ❌  |
 | [com.atproto.admin.enableAccountInvites](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/enableAccountInvites.json)  | ❌  |
 | [com.atproto.admin.disableAccountInvites](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/disableAccountInvites.json)  | ❌  |
 | [com.atproto.admin.disableInviteCodes](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/disableInviteCodes.json)  | ❌  |
 | [com.atproto.admin.updateSubjectStatus](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/updateSubjectStatus.json)  | ❌  |
 | [com.atproto.admin.emitModerationEvent](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/emitModerationEvent.json)  | ❌  |
 | [com.atproto.admin.getModerationEvent](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getModerationEvent.json)  | ❌  |
-| [com.atproto.admin.getRecord](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getRecord.json)  | ✅  |
+| [com.atproto.admin.getRecord](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getRecord.json)  | ❌  |
 | [com.atproto.admin.queryModerationEvents](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/queryModerationEvents.json)  | ❌  |
 | [com.atproto.admin.sendEmail](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/sendEmail.json)  | ❌  |
-| [com.atproto.admin.searchRepos](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/searchRepos.json)  | ✅  |
+| [com.atproto.admin.searchRepos](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/searchRepos.json)  | ❌  |
 | [com.atproto.admin.getAccountInfos](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/getAccountInfos.json)  | ❌  |
 | [com.atproto.admin.deleteAccount](https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/admin/deleteAccount.json)  | ❌  |
 
