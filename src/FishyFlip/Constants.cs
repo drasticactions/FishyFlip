@@ -166,6 +166,12 @@ public static class Constants
         public const string Block = "app.bsky.graph.block";
     }
 
+    public static class ListReasons
+    {
+        public const string ModList = "app.bsky.graph.defs#modlist";
+        public const string CurateList = "app.bsky.graph.defs#curatelist";
+    }
+
     public static class FacetTypes
     {
         public const string Tag = "app.bsky.richtext.facet#tag";
@@ -201,6 +207,13 @@ public static class Constants
         public const string ReasonSexual = "com.atproto.moderation.defs#reasonSexual";
         public const string ReasonRude = "com.atproto.moderation.defs#reasonRude";
         public const string ReasonOther = "com.atproto.moderation.defs#reasonOther";
+    }
+
+    public static class ApplyWriteTypes
+    {
+        public const string Create = "com.atproto.repo.applyWrites#create";
+        public const string Update = "com.atproto.repo.applyWrites#update";
+        public const string Delete = "com.atproto.repo.applyWrites#delete";
     }
 
     internal class HeaderNames

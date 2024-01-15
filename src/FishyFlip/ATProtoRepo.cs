@@ -2,6 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Threading;
+using static FishyFlip.Constants;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -104,6 +107,31 @@ public sealed class ATProtoRepo
                     this.Options.Logger);
     }
 
+    public Task<Result<RecordRef>> CreateCurateListAsync(
+        string name,
+        string description,
+        DateTime? createdAt = null,
+        string? rkey = null,
+        string? swapCommit = null,
+        CancellationToken cancellationToken = default)
+    {
+        var listRecord = new ListRecordInternal(name, description, ListReasons.CurateList);
+
+        CreateListRecord record = new(
+            Constants.GraphTypes.List,
+            this.proto.SessionManager!.Session!.Did.ToString(),
+            listRecord);
+
+        return
+            this.Client
+                .Post<CreateListRecord, RecordRef>(
+                    Constants.Urls.ATProtoRepo.CreateRecord,
+                    this.Options.JsonSerializerOptions,
+                    record,
+                    cancellationToken,
+                    this.Options.Logger);
+    }
+
     public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
       => await this.GetRecordAsync<PostRecord>(Constants.FeedType.Post, repo, rkey, cid, cancellationToken);
 
@@ -172,16 +200,13 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Post, repo, rkey, swapRecord, swapCommit, cancellationToken);
 
-    public async Task<Result<Success>> DeleteRecordAsync(string collection, ATIdentifier repo, string rkey, Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
-    {
-        DeleteRecord record = new(
-            collection,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
-            rkey,
-            swapRecord,
-            swapCommit);
-        return await this.Client.Post<Success>(Constants.Urls.ATProtoRepo.DeleteRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
-    }
+    public Task<Result<Success>> DeleteListAsync(
+        ATIdentifier repo,
+        string rkey,
+        Cid? swapRecord = null,
+        Cid? swapCommit = null,
+        CancellationToken cancellationToken = default)
+        => this.DeleteRecordAsync(Constants.GraphTypes.List, repo, rkey, swapRecord, swapCommit, cancellationToken);
 
     [Obsolete("Use ListFollowsAsync instead")]
     public Task<Result<ListRecords?>> ListFollowAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
@@ -249,5 +274,16 @@ public sealed class ATProtoRepo
                     record,
                     cancellationToken,
                     this.Options.Logger);
+    }
+
+    private async Task<Result<Success>> DeleteRecordAsync(string collection, ATIdentifier repo, string rkey, Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    {
+        DeleteRecord record = new(
+            collection,
+            this.proto.SessionManager!.Session!.Did.ToString()!,
+            rkey,
+            swapRecord,
+            swapCommit);
+        return await this.Client.Post<DeleteRecord, Success>(Constants.Urls.ATProtoRepo.DeleteRecord, this.Options.JsonSerializerOptions, record, cancellationToken, this.Options.Logger);
     }
 }

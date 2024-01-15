@@ -328,10 +328,72 @@ public class AuthorizedTests
     }
 
     [Fact]
-    public async Task CreateFollowAsyncTest()
+    public async Task CreateAndRemoveListTest()
     {
-        // Did is for follow1.drasticactions.ninja.
-        var response = (await this.proto.Repo.CreateFollowAsync(ATDid.Create("did:plc:up76ybimufzledmmhbv25wse"))).HandleResult();
-        Assert.True(response!.Cid is not null);
+        var randomName = Guid.NewGuid().ToString();
+        var createList = (await this.proto.Repo.CreateCurateListAsync(randomName, "Test List", DateTime.UtcNow)).HandleResult();
+        Assert.True(createList!.Cid is not null);
+        Assert.True(createList!.Uri is not null);
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var removeList = (await this.proto.Repo.DeleteListAsync(repo, createList.Uri.Rkey)).HandleResult();
+        Assert.True(removeList is not null);
+    }
+
+    [Fact]
+    public async Task CreateAndRemovePostTest()
+    {
+        var randomName = Guid.NewGuid().ToString();
+        var create = (await this.proto.Repo.CreatePostAsync(randomName)).HandleResult();
+        Assert.True(create!.Cid is not null);
+        Assert.True(create!.Uri is not null);
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var remove = (await this.proto.Repo.DeletePostAsync(repo, create.Uri.Rkey)).HandleResult();
+        Assert.True(remove is not null);
+    }
+
+    [Fact]
+    public async Task CreateAndRemoveLikeTest()
+    {
+        var randomName = Guid.NewGuid().ToString();
+        var create = (await this.proto.Repo.CreatePostAsync(randomName)).HandleResult();
+        Assert.True(create!.Cid is not null);
+        Assert.True(create!.Uri is not null);
+
+        var like = (await this.proto.Repo.CreateLikeAsync(create.Cid, create.Uri)).HandleResult();
+        Assert.True(like!.Cid is not null);
+        Assert.True(like!.Uri is not null);
+
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var removeLike = (await this.proto.Repo.DeleteLikeAsync(repo, like.Uri.Rkey)).HandleResult();
+        Assert.True(removeLike is not null);
+
+        var remove = (await this.proto.Repo.DeletePostAsync(repo, create.Uri.Rkey)).HandleResult();
+        Assert.True(remove is not null);
+    }
+
+    [Fact]
+    public async Task CreateAndRemoveFollowTest()
+    {
+        var follow1 = ATDid.Create("did:plc:up76ybimufzledmmhbv25wse");
+        var follow = (await this.proto.Repo.CreateFollowAsync(follow1)).HandleResult();
+        Assert.True(follow!.Cid is not null);
+        Assert.True(follow!.Uri is not null);
+
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var remove = (await this.proto.Repo.DeleteFollowAsync(repo, follow.Uri.Rkey)).HandleResult();
+        Assert.True(remove is not null);
+    }
+
+    [Fact]
+    public async Task CreateAndRemoveBlockTest()
+    {
+        var follow2 = ATDid.Create("did:plc:5x7vqoe5l3qbh3koqizdipst");
+        var follow = (await this.proto.Repo.CreateBlockAsync(follow2)).HandleResult();
+        Assert.True(follow!.Cid is not null);
+        Assert.True(follow!.Uri is not null);
+
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var remove = (await this.proto.Repo.DeleteBlockAsync(repo, follow.Uri.Rkey)).HandleResult();
+        Assert.True(remove is not null);
     }
 }
