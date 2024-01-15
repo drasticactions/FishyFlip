@@ -280,7 +280,7 @@ public sealed class ATProtoRepo
     {
         DeleteRecord record = new(
             collection,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            repo.ToString()!,
             rkey,
             swapRecord,
             swapCommit);
