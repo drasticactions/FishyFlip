@@ -222,6 +222,17 @@ public class AnonymousTests
            });
     }
 
+    [Fact]
+    public async Task DescribeRepoTest()
+    {
+        var repo = ATDid.Create("did:plc:up76ybimufzledmmhbv25wse");
+        var describe = (await this.proto.Repo.DescribeRepoAsync(repo)).HandleResult();
+        Assert.True(describe is not null);
+        Assert.True(describe.HandleIsCorrect);
+        Assert.True(describe.Did is not null);
+        Assert.True(describe.Did!.ToString() == repo.ToString());
+    }
+
     private static void HandleProgressStatus(CarProgressStatusEvent e)
     {
         var cid = e.Cid;

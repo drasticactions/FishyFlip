@@ -11,7 +11,7 @@ public class RepostRecord : ATRecord
     {
         this.Subject = subject;
         this.CreatedAt = createdAt ?? DateTime.Now;
-        this.Type = Constants.FeedType.Like;
+        this.Type = Constants.FeedType.Repost;
     }
 
     public Subject? Subject { get; }

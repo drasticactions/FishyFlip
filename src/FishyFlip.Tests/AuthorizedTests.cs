@@ -352,6 +352,26 @@ public class AuthorizedTests
     }
 
     [Fact]
+    public async Task CreateAndRemoveRepostTest()
+    {
+        var randomName = Guid.NewGuid().ToString();
+        var create = (await this.proto.Repo.CreatePostAsync(randomName)).HandleResult();
+        Assert.True(create!.Cid is not null);
+        Assert.True(create!.Uri is not null);
+
+        var repost = (await this.proto.Repo.CreateRepostAsync(create.Cid, create.Uri)).HandleResult();
+        Assert.True(repost!.Cid is not null);
+        Assert.True(repost!.Uri is not null);
+
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var removeRepost = (await this.proto.Repo.DeleteRepostAsync(repo, repost.Uri.Rkey)).HandleResult();
+        Assert.True(removeRepost is not null);
+
+        var remove = (await this.proto.Repo.DeletePostAsync(repo, create.Uri.Rkey)).HandleResult();
+        Assert.True(remove is not null);
+    }
+
+    [Fact]
     public async Task CreateAndRemoveLikeTest()
     {
         var randomName = Guid.NewGuid().ToString();
@@ -395,5 +415,16 @@ public class AuthorizedTests
         var repo = this.proto.SessionManager!.Session!.Did;
         var remove = (await this.proto.Repo.DeleteBlockAsync(repo, follow.Uri.Rkey)).HandleResult();
         Assert.True(remove is not null);
+    }
+
+    [Fact]
+    public async Task DescribeRepoTest()
+    {
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var describe = (await this.proto.Repo.DescribeRepoAsync(repo)).HandleResult();
+        Assert.True(describe is not null);
+        Assert.True(describe.HandleIsCorrect);
+        Assert.True(describe.Did is not null);
+        Assert.True(describe.Did!.ToString() == repo.ToString());
     }
 }
