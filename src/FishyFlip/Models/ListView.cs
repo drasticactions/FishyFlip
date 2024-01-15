@@ -6,4 +6,4 @@ public record ListViewRecord(ListView[] Lists, string? Cursor);
 
 public record ListItemView(ATUri Uri, ActorProfile Subject);
 
-public record ListItemViewRecord(ListItemView[] Items, string? Cursor);
+public record ListItemViewRecord(ListItemView[] Items, ListView List, string? Cursor);
