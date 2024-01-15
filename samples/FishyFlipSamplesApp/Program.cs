@@ -173,6 +173,7 @@ async Task GetListViaATUri(ATProtocol protocol)
         defaultValue: "at://did:plc:yhgc5rlqhoezrx6fbawajxlh/app.bsky.graph.list/3kiwyqwydde2x",
         validators: new[] { Validators.Required() });
     var lists = (await protocol.Graph.GetListAsync(ATUri.Create(uri))).HandleResult();
+    var feed = (await protocol.Feed.GetListFeedAsync(ATUri.Create(uri))).HandleResult();
     if (lists is null)
     {
         Console.WriteLine("No lists found.");
@@ -183,6 +184,19 @@ async Task GetListViaATUri(ATProtocol protocol)
     {
         Console.WriteLine(item.Uri);
         Console.WriteLine(item.Subject.Handle);
+        Console.WriteLine("-----");
+    }
+
+    if (feed is null)
+    {
+        Console.WriteLine("No feed found.");
+        return;
+    }
+
+    foreach (var item in feed.Feed)
+    {
+        Console.WriteLine(item.Post.Author);
+        Console.WriteLine(item.Post.IndexedAt);
         Console.WriteLine("-----");
     }
 }

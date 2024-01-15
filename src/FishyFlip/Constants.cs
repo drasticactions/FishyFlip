@@ -106,6 +106,7 @@ public static class Constants
                 public const string GetFeedGenerator = "/xrpc/app.bsky.feed.getFeedGenerator";
                 public const string GetFeedGenerators = "/xrpc/app.bsky.feed.getFeedGenerators";
                 public const string GetFeed = "/xrpc/app.bsky.feed.getFeed";
+                public const string GetListFeed = "/xrpc/app.bsky.feed.getListFeed";
                 public const string GetPosts = "/xrpc/app.bsky.feed.getPosts";
                 public const string GetLikes = "/xrpc/app.bsky.feed.getLikes";
                 public const string GetRepostedBy = "/xrpc/app.bsky.feed.getRepostedBy";
