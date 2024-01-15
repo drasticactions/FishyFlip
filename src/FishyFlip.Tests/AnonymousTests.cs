@@ -29,8 +29,7 @@ public class AnonymousTests
         var postCid1 = Cid.Decode("bafyreibby2anauk6ef2ntmeyebeb3yosncathvohhjrb7jmxfpyljyeq2e");
         var postCid2 = Cid.Decode("bafyreiausj2iabpfs2mbmp2qtaszd2jokmsogto7z6zrz3pkncx3emyx4m");
 
-        var oncardecoded = new OnCarDecoded((e) => { 
-        
+        var oncardecoded = new OnCarDecoded((e) => {
         });
 
         var result = await this.proto.Sync.GetBlocksAsync(atDid, new[] { postCid1, postCid2 }, oncardecoded);

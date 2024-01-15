@@ -11,7 +11,6 @@ public sealed class ATWebSocketProtocol : IDisposable
 {
     private const int ReceiveBufferSize = 32768;
     private ClientWebSocket client;
-    private CancellationToken? token;
     private bool disposedValue;
     private ILogger? logger;
     private Uri instanceUri;
@@ -20,7 +19,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
     /// </summary>
-    /// <param name="options"><see cref="ATProtocolOptions"/>.</param>
+    /// <param name="protocol"><see cref="ATProtocolOptions"/>.</param>
     internal ATWebSocketProtocol(ATProtocol protocol)
     {
         this.protocol = protocol;

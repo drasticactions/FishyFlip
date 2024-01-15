@@ -97,13 +97,16 @@ public sealed class ATProtoRepo
         return
             this.Client
                 .Post<CreateBlockRecord, RecordRef>(
-                    Constants.Urls.ATProtoRepo.CreateRecord, this.Options.JsonSerializerOptions, record,
-                    cancellationToken, this.Options.Logger);
+                    Constants.Urls.ATProtoRepo.CreateRecord,
+                    this.Options.JsonSerializerOptions,
+                    record,
+                    cancellationToken,
+                    this.Options.Logger);
     }
 
     public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
       => await this.GetRecordAsync<PostRecord>(Constants.FeedType.Post, repo, rkey, cid, cancellationToken);
-    
+
     public async Task<Result<ActorRecord?>> GetActorAsync(ATIdentifier repo, Cid? cid = null, CancellationToken cancellationToken = default)
         => await this.GetRecordAsync<ActorRecord>(Constants.ActorTypes.Profile, repo, "self", cid, cancellationToken);
 
@@ -112,8 +115,11 @@ public sealed class ATProtoRepo
         return
             this.Client
                 .Post<UploadBlobResponse>(
-                    Constants.Urls.ATProtoRepo.UploadBlob, this.Options.JsonSerializerOptions, content,
-                    cancellationToken, this.Options.Logger);
+                    Constants.Urls.ATProtoRepo.UploadBlob,
+                    this.Options.JsonSerializerOptions,
+                    content,
+                    cancellationToken,
+                    this.Options.Logger);
     }
 
     public async Task<Result<T?>> GetRecordAsync<T>(string collection, ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
@@ -128,44 +134,42 @@ public sealed class ATProtoRepo
         return await this.Client.Get<T>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
-    public async Task<Result<DescribeRepo>> DescribeRepoAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
+    public async Task<Result<DescribeRepo?>> DescribeRepoAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.ATProtoRepo.DescribeRepo}?repo={identifier}";
         return await this.Client.Get<DescribeRepo?>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
-    private Task<Result<Y>> CreateRecord<X, Y>(X record, CancellationToken cancellationToken = default)
-    {
-        return
-            this.Client
-                .Post<X, Y>(
-                    Constants.Urls.ATProtoRepo.CreateRecord, this.Options.JsonSerializerOptions, record,
-                    cancellationToken, this.Options.Logger);
-    }
-
-    private Task<Result<Y>> PutRecord<X, Y>(X record, CancellationToken cancellationToken = default)
-    {
-        return
-            this.Client
-                .Post<X, Y>(
-                    Constants.Urls.ATProtoRepo.PutRecord, this.Options.JsonSerializerOptions, record,
-                    cancellationToken, this.Options.Logger);
-    }
-
-    public Task<Result<Success>> DeleteFollowAsync(ATIdentifier repo, string rkey,
-        Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    public Task<Result<Success>> DeleteFollowAsync(
+        ATIdentifier repo,
+        string rkey,
+        Cid? swapRecord = null,
+        Cid? swapCommit = null,
+        CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.Follow, repo, rkey, swapRecord, swapCommit, cancellationToken);
 
-    public Task<Result<Success>> DeleteBlockAsync(ATIdentifier repo, string rkey,
-        Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    public Task<Result<Success>> DeleteBlockAsync(
+        ATIdentifier repo,
+        string rkey,
+        Cid? swapRecord = null,
+        Cid? swapCommit = null,
+        CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.Block, repo, rkey, swapRecord, swapCommit, cancellationToken);
 
-    public Task<Result<Success>> DeleteLikeAsync(ATIdentifier repo, string rkey,
-        Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    public Task<Result<Success>> DeleteLikeAsync(
+        ATIdentifier repo,
+        string rkey,
+        Cid? swapRecord = null,
+        Cid? swapCommit = null,
+        CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Like, repo, rkey, swapRecord, swapCommit, cancellationToken);
 
-    public Task<Result<Success>> DeletePostAsync(ATIdentifier repo, string rkey,
-        Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    public Task<Result<Success>> DeletePostAsync(
+        ATIdentifier repo,
+        string rkey,
+        Cid? swapRecord = null,
+        Cid? swapCommit = null,
+        CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Post, repo, rkey, swapRecord, swapCommit, cancellationToken);
 
     public async Task<Result<Success>> DeleteRecordAsync(string collection, ATIdentifier repo, string rkey, Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
@@ -221,5 +225,29 @@ public sealed class ATProtoRepo
         }
 
         return await this.Client.Get<ListRecords>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
+    private Task<Result<T2>> PutRecord<T, T2>(T record, CancellationToken cancellationToken = default)
+    {
+        return
+            this.Client
+                .Post<T, T2>(
+                    Constants.Urls.ATProtoRepo.PutRecord,
+                    this.Options.JsonSerializerOptions,
+                    record,
+                    cancellationToken,
+                    this.Options.Logger);
+    }
+
+    private Task<Result<T2>> CreateRecord<T, T2>(T record, CancellationToken cancellationToken = default)
+    {
+        return
+            this.Client
+                .Post<T, T2>(
+                    Constants.Urls.ATProtoRepo.CreateRecord,
+                    this.Options.JsonSerializerOptions,
+                    record,
+                    cancellationToken,
+                    this.Options.Logger);
     }
 }
