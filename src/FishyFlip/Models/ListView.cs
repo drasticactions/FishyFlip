@@ -1,6 +1,6 @@
 namespace FishyFlip.Models;
 
-public record ListView(ATUri Uri, Cid Cid, string Name, string Purpose, string Description, Facet[]? DescriptionFacets, ActorProfile Creator, Viewer Viewer, DateTime IndexedAt);
+public record ListView(ATUri Uri, Cid Cid, string Name, string Purpose, string Description, ActorProfile Creator, Viewer Viewer, DateTime IndexedAt);
 
 public record ListViewRecord(ListView[] Lists, string? Cursor);
 

@@ -440,4 +440,23 @@ public class AuthorizedTests
         Assert.True(describe.Did is not null);
         Assert.True(describe.Did!.ToString() == repo.ToString());
     }
+
+    [Fact]
+    public async Task GetListsTest()
+    {
+        var repo = this.proto.SessionManager!.Session!.Did;
+        var lists = (await this.proto.Graph.GetListsAsync(repo)).HandleResult();
+        Assert.True(lists is not null);
+        Assert.True(lists!.Lists.Count() > 0);
+    }
+
+    [Fact]
+    public async Task GetListTest()
+    {
+        var repo = ATUri.Create(@"at://did:plc:le7hm5ckuofqv7bd2t2hys2j/app.bsky.graph.list/3kizmyqkiq22h");
+        var lists = (await this.proto.Graph.GetListAsync(repo)).HandleResult();
+        Assert.True(lists is not null);
+        Assert.True(lists!.Cursor is not null);
+        Assert.True(lists!.Items.Count() > 0);
+    }
 }
