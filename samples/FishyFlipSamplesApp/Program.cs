@@ -7,6 +7,7 @@ using FishyFlip.Models;
 using FishyFlip.Tools;
 using Sharprompt;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 Console.WriteLine("FishyFlipSamplesApp");
@@ -24,7 +25,17 @@ var builder = new FishyFlip.ATProtocolBuilder()
 
 var authAsk = Prompt.Confirm("Do you want to authenticate?", defaultValue: false);
 
-var atProtocol = builder.Build();
+// Add Debug Logger
+var loggerFactory = LoggerFactory.Create(
+    builder => builder
+        .AddConsole()
+        .AddDebug()
+        .SetMinimumLevel(LogLevel.Debug)
+);
+
+var atProtocol = builder
+    .WithLogger(loggerFactory.CreateLogger("FishyFlipSamplesApp"))
+    .Build();
 
 if (authAsk)
 {
@@ -38,7 +49,11 @@ if (authAsk)
     }
 }
 
-string[] authMenuChoices = ["Exit"];
+string[] authMenuChoices =
+[
+    "Exit", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
+    "Get Lists Via ATIdentifier", "Get List Via ATUri"
+];
 
 string[] noAuthMenuChoices = ["Exit", "Get Profile Via AtDID", "Get Profile Via Handle", "Get Avatar for Profile"];
 
@@ -47,6 +62,27 @@ if (authAsk)
     while (true)
     {
         var menuChoice = Prompt.Select("Menu", authMenuChoices);
+        switch (menuChoice)
+        {
+            case "Get List Blocks for Actor":
+                await GetListBlocksForActor(atProtocol);
+                break;
+            case "Get List Mutes for Actor":
+                await GetListMutesForActor(atProtocol);
+                break;
+            case "Get Suggestion Follows":
+                await GetSuggestionFollows(atProtocol);
+                break;
+            case "Get List Via ATUri":
+                await GetListViaATUri(atProtocol);
+                break;
+            case "Get Lists Via ATIdentifier":
+                await GetListsViaATIdent(atProtocol);
+                break;
+            case "Exit":
+                return;
+        }
+
         if (menuChoice == "Exit")
         {
             break;
@@ -75,6 +111,103 @@ else
     }
 }
 
+async Task GetListBlocksForActor(ATProtocol protocol)
+{
+    var blocks = (await protocol.Graph.GetListBlocksAsync()).HandleResult();
+    if (blocks is null)
+    {
+        Console.WriteLine("No blocks found.");
+        return;
+    }
+    
+    foreach(var block in blocks.Lists)
+    {
+        Console.WriteLine(block.Name);
+        Console.WriteLine(block.Description);
+        Console.WriteLine(block.Purpose);
+        Console.WriteLine("-----");
+    }
+}
+
+async Task GetListMutesForActor(ATProtocol protocol)
+{
+    var blocks = (await protocol.Graph.GetListMutesAsync()).HandleResult();
+    if (blocks is null)
+    {
+        Console.WriteLine("No mutes found.");
+        return;
+    }
+    
+    foreach(var block in blocks.Lists)
+    {
+        Console.WriteLine(block.Name);
+        Console.WriteLine(block.Description);
+        Console.WriteLine(block.Purpose);
+        Console.WriteLine("-----");
+    }
+}
+
+async Task GetSuggestionFollows(ATProtocol protocol)
+{
+    var handle = Prompt.Input<string>("Handle", defaultValue: "drasticactions.dev",
+        validators: new[] { Validators.Required() });
+    var profile = (await protocol.Identity.ResolveHandleAsync(ATHandle.Create(handle)!)).HandleResult();
+    var suggestions = (await protocol.Graph.GetSuggestedFollowsByActorAsync(profile.Did)).HandleResult();
+    if (suggestions is null)
+    {
+        Console.WriteLine("No suggestions found.");
+        return;
+    }
+
+    foreach (var item in suggestions.Suggestions)
+    {
+        Console.WriteLine(item.Did);
+        Console.WriteLine(item.Handle);
+        Console.WriteLine("-----");
+    }
+}
+
+async Task GetListViaATUri(ATProtocol protocol)
+{
+    var uri = Prompt.Input<string>("ATUri",
+        defaultValue: "at://did:plc:yhgc5rlqhoezrx6fbawajxlh/app.bsky.graph.list/3kiwyqwydde2x",
+        validators: new[] { Validators.Required() });
+    var lists = (await protocol.Graph.GetListAsync(ATUri.Create(uri))).HandleResult();
+    if (lists is null)
+    {
+        Console.WriteLine("No lists found.");
+        return;
+    }
+
+    foreach (var item in lists.Items)
+    {
+        Console.WriteLine(item.Uri);
+        Console.WriteLine(item.Subject.Handle);
+        Console.WriteLine("-----");
+    }
+}
+
+async Task GetListsViaATIdent(ATProtocol protocol)
+{
+    var handle = Prompt.Input<string>("Handle", defaultValue: "drasticactions.dev",
+        validators: new[] { Validators.Required() });
+    var profile = (await protocol.Identity.ResolveHandleAsync(ATHandle.Create(handle)!)).HandleResult();
+    var lists = (await protocol.Graph.GetListsAsync(profile.Did)).HandleResult();
+    if (lists is null)
+    {
+        Console.WriteLine("No lists found.");
+        return;
+    }
+
+    foreach (var item in lists.Lists)
+    {
+        Console.WriteLine(item.Name);
+        Console.WriteLine(item.Description);
+        Console.WriteLine(item.Purpose);
+        Console.WriteLine("-----");
+    }
+}
+
 async Task GetAvatarForProfile(ATProtocol protocol)
 {
     var actorRecord = await GetProfileViaHandle(protocol);
@@ -90,7 +223,8 @@ async Task GetAvatarForProfile(ATProtocol protocol)
     }
 
     // Once we have the profile record, we can get the image by using GetBlob, the actors ATDid, and the ImageRef link.
-    var avatar = (await protocol.Sync.GetBlobAsync(actorRecord.Uri.Did, actorRecord.Value.Avatar.Ref.Link)).HandleResult();
+    var avatar =
+        (await protocol.Sync.GetBlobAsync(actorRecord.Uri.Did, actorRecord.Value.Avatar.Ref.Link)).HandleResult();
     if (avatar is null)
     {
         Console.WriteLine("Could not get avatar.");
@@ -102,13 +236,15 @@ async Task GetAvatarForProfile(ATProtocol protocol)
     Console.WriteLine("Avatar saved to disk.");
 
     // We can also call on the BlueSky instance to get the avatar via a URL
-    var imageUri = $"https://{protocol.Options.Url.Host}{Constants.Urls.ATProtoSync.GetBlob}?did={actorRecord.Uri.Did!}&cid={actorRecord.Value.Avatar.Ref.Link}";
+    var imageUri =
+        $"https://{protocol.Options.Url.Host}{Constants.Urls.ATProtoSync.GetBlob}?did={actorRecord.Uri.Did!}&cid={actorRecord.Value.Avatar.Ref.Link}";
     Console.WriteLine($"Avatar URL: {imageUri}");
 }
 
 async Task<ActorRecord?> GetProfileViaHandle(ATProtocol protocol)
 {
-    var handle = Prompt.Input<string>("Handle", defaultValue: "drasticactions.dev", validators: new[] { Validators.Required() });
+    var handle = Prompt.Input<string>("Handle", defaultValue: "drasticactions.dev",
+        validators: new[] { Validators.Required() });
     var profile = (await protocol.Identity.ResolveHandleAsync(ATHandle.Create(handle)!)).HandleResult();
     return await GetProfileViaATDID(protocol, profile?.Did!);
 }
@@ -132,14 +268,16 @@ public static class ProtocolValidators
 {
     public static Func<object, ValidationResult> IsATDid()
     {
-        return delegate (object input)
+        return delegate(object input)
         {
             if (input == null)
             {
                 return new ValidationResult("ATDid is invalid.");
             }
 
-            return (input is string value && !ATDid.IsValid(value)) ? new ValidationResult("ATDid is invalid.") : ValidationResult.Success;
+            return (input is string value && !ATDid.IsValid(value))
+                ? new ValidationResult("ATDid is invalid.")
+                : ValidationResult.Success;
         };
     }
 }

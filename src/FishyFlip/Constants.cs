@@ -122,7 +122,12 @@ public static class Constants
 
             public static class Graph
             {
+                public const string GetSuggestedFollowsByActor = "/xrpc/app.bsky.graph.getSuggestedFollowsByActor";
                 public const string GetBlocks = "/xrpc/app.bsky.graph.getBlocks";
+                public const string GetLists = "/xrpc/app.bsky.graph.getLists";
+                public const string GetListMutes = "/xrpc/app.bsky.graph.getListMutes";
+                public const string GetListBlocks = "/xrpc/app.bsky.graph.getListBlocks";
+                public const string GetList = "/xrpc/app.bsky.graph.getList";
                 public const string GetFollowers = "/xrpc/app.bsky.graph.getFollowers";
                 public const string GetFollows = "/xrpc/app.bsky.graph.getFollows";
                 public const string GetMutes = "/xrpc/app.bsky.graph.getMutes";

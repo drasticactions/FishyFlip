@@ -295,19 +295,19 @@ As a general rule of thumb, `com.atproto` endpoints (such as `com.atproto.sync`)
 
 | Endpoint | Implemented
 |----------|----------|
-| [app.bsky.graph.getSuggestedFollowsByActor](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getSuggestedFollowsByActor.json)  | ❌  |
+| [app.bsky.graph.getSuggestedFollowsByActor](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getSuggestedFollowsByActor.json)  | ✅  |
 | [app.bsky.graph.unmuteActorList](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/unmuteActorList.json)  | ❌  |
-| [app.bsky.graph.getListBlocks](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getListBlocks.json)  | ❌  |
+| [app.bsky.graph.getListBlocks](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getListBlocks.json)  | ✅  |
 | [app.bsky.graph.muteActorList](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/muteActorList.json)  | ❌  |
-| [app.bsky.graph.getLists](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getLists.json)  | ❌  |
+| [app.bsky.graph.getLists](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getLists.json)  | ✅  |
 | [app.bsky.graph.getFollowers](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getFollowers.json)  | ✅  |
 | [app.bsky.graph.muteActor](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/muteActor.json)  | ✅  |
 | [app.bsky.graph.getMutes](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getMutes.json)  | ✅  |
-| [app.bsky.graph.getListMutes](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getListMutes.json)  | ❌  |
+| [app.bsky.graph.getListMutes](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getListMutes.json)  | ✅  |
 | [app.bsky.graph.getFollows](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getFollows.json)  | ✅  |
 | [app.bsky.graph.getBlocks](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getBlocks.json)  | ✅  |
 | [app.bsky.graph.unmuteActor](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/unmuteActor.json)  | ✅  |
-| [app.bsky.graph.getList](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getList.json)  | ❌  |
+| [app.bsky.graph.getList](https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/graph/getList.json)  | ✅  |
 
 ### Notification
 

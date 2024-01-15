@@ -97,4 +97,58 @@ public sealed class BlueskyGraph
         var muteRecord = new CreateMuteRecord(did);
         return this.Client.Post<CreateMuteRecord, Success>(Constants.Urls.Bluesky.Graph.UnmuteActor, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
     }
+
+    public async Task<Result<ListViewRecord?>> GetListsAsync(ATIdentifier identifier, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        var url = Constants.Urls.Bluesky.Graph.GetLists + $"?actor={identifier}&limit={limit}";
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<ListViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
+    public async Task<Result<ListViewRecord?>> GetListMutesAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        var url = Constants.Urls.Bluesky.Graph.GetListMutes + $"?limit={limit}";
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<ListViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+    
+    public async Task<Result<ListViewRecord?>> GetListBlocksAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        var url = Constants.Urls.Bluesky.Graph.GetListBlocks + $"?limit={limit}";
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<ListViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
+    public async Task<Result<ListItemViewRecord?>> GetListAsync(ATUri list, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        var url = Constants.Urls.Bluesky.Graph.GetList + $"?list={list}&limit={limit}";
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<ListItemViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
+    public async Task<Result<SuggestionsRecord?>> GetSuggestedFollowsByActorAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
+    {
+        var url = Constants.Urls.Bluesky.Graph.GetSuggestedFollowsByActor + $"?actor={identifier}";
+        return await this.Client.Get<SuggestionsRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
 }
