@@ -133,6 +133,8 @@ public static class Constants
                 public const string GetMutes = "/xrpc/app.bsky.graph.getMutes";
                 public const string MuteActor = "/xrpc/app.bsky.graph.muteActor";
                 public const string UnmuteActor = "/xrpc/app.bsky.graph.unmuteActor";
+                public const string MuteActorList = "/xrpc/app.bsky.graph.muteActorList";
+                public const string UnmuteActorList = "/xrpc/app.bsky.graph.unmuteActorList";
                 public const string Block = "/xrpc/app.bsky.graph.block";
                 public const string Follow = "/xrpc/app.bsky.graph.follow";
             }

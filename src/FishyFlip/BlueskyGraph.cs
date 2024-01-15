@@ -69,7 +69,7 @@ public sealed class BlueskyGraph
 
         return await this.Client.Get<ActorFollows>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
-    
+
     public async Task<Result<ActorFollowers?>> GetFollowersAsync(
         ATIdentifier identifier,
         int limit = 50,
@@ -98,6 +98,18 @@ public sealed class BlueskyGraph
         return this.Client.Post<CreateMuteRecord, Success>(Constants.Urls.Bluesky.Graph.UnmuteActor, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
     }
 
+    public Task<Result<Success>> MuteActorListAsync(ATUri list, CancellationToken cancellationToken = default)
+    {
+        var muteRecord = new CreateMuteListRecord(list);
+        return this.Client.Post<CreateMuteListRecord, Success>(Constants.Urls.Bluesky.Graph.MuteActorList, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
+    }
+
+    public Task<Result<Success>> UnmuteActorListAsync(ATUri list, CancellationToken cancellationToken = default)
+    {
+        var muteRecord = new CreateMuteListRecord(list);
+        return this.Client.Post<CreateMuteListRecord, Success>(Constants.Urls.Bluesky.Graph.UnmuteActorList, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
+    }
+
     public async Task<Result<ListViewRecord?>> GetListsAsync(ATIdentifier identifier, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
         var url = Constants.Urls.Bluesky.Graph.GetLists + $"?actor={identifier}&limit={limit}";
@@ -121,7 +133,7 @@ public sealed class BlueskyGraph
 
         return await this.Client.Get<ListViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
-    
+
     public async Task<Result<ListViewRecord?>> GetListBlocksAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
         var url = Constants.Urls.Bluesky.Graph.GetListBlocks + $"?limit={limit}";
