@@ -86,6 +86,17 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    public async Task<Result<ListFeed>> GetListFeedAsync(ATUri uri, int limit = 30, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.Feed.GetListFeed}?list={uri.ToString()}&limit={limit}";
+
+        Multiple<ListFeed?, Error> result = await this.Client.Get<ListFeed>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return result
+            .Match<Result<ListFeed>>(
+                timeline => (timeline ?? new ListFeed(Array.Empty<FeedViewPost>(), null))!,
+                error => error!);
+    }
+
     public async Task<Result<Timeline>> GetAuthorFeedAsync(ATIdentifier handle, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetAuthorFeed}?actor={handle.ToString()}&limit={limit}";
