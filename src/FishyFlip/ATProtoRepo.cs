@@ -68,6 +68,20 @@ public sealed class ATProtoRepo
         return this.CreateRecord<CreateFollowRecord, RecordRef>(record, cancellationToken);
     }
 
+    public Task<Result<RecordRef>> CreateListItemAsync(
+    ATDid subject,
+    ATUri list,
+    DateTime? createdAt = null,
+    CancellationToken cancellationToken = default)
+    {
+        CreateListItemRecord record = new(
+            Constants.GraphTypes.ListItem,
+            this.proto.SessionManager!.Session!.Did.ToString()!,
+            new ListItemRecord(subject, list, createdAt ?? DateTime.UtcNow));
+
+        return this.CreateRecord<CreateListItemRecord, RecordRef>(record, cancellationToken);
+    }
+
     public Task<Result<CreatePostResponse>> CreatePostAsync(
         string text,
         Facet[]? facets = null,
@@ -166,52 +180,53 @@ public sealed class ATProtoRepo
     }
 
     public Task<Result<Success>> DeleteFollowAsync(
-        ATIdentifier repo,
         string rkey,
         Cid? swapRecord = null,
         Cid? swapCommit = null,
         CancellationToken cancellationToken = default)
-        => this.DeleteRecordAsync(Constants.GraphTypes.Follow, repo, rkey, swapRecord, swapCommit, cancellationToken);
+        => this.DeleteRecordAsync(Constants.GraphTypes.Follow, rkey, swapRecord, swapCommit, cancellationToken);
 
     public Task<Result<Success>> DeleteBlockAsync(
-        ATIdentifier repo,
         string rkey,
         Cid? swapRecord = null,
         Cid? swapCommit = null,
         CancellationToken cancellationToken = default)
-        => this.DeleteRecordAsync(Constants.GraphTypes.Block, repo, rkey, swapRecord, swapCommit, cancellationToken);
+        => this.DeleteRecordAsync(Constants.GraphTypes.Block, rkey, swapRecord, swapCommit, cancellationToken);
 
     public Task<Result<Success>> DeleteLikeAsync(
-        ATIdentifier repo,
         string rkey,
         Cid? swapRecord = null,
         Cid? swapCommit = null,
         CancellationToken cancellationToken = default)
-        => this.DeleteRecordAsync(Constants.FeedType.Like, repo, rkey, swapRecord, swapCommit, cancellationToken);
+        => this.DeleteRecordAsync(Constants.FeedType.Like, rkey, swapRecord, swapCommit, cancellationToken);
 
     public Task<Result<Success>> DeletePostAsync(
-        ATIdentifier repo,
         string rkey,
         Cid? swapRecord = null,
         Cid? swapCommit = null,
         CancellationToken cancellationToken = default)
-        => this.DeleteRecordAsync(Constants.FeedType.Post, repo, rkey, swapRecord, swapCommit, cancellationToken);
+        => this.DeleteRecordAsync(Constants.FeedType.Post, rkey, swapRecord, swapCommit, cancellationToken);
 
     public Task<Result<Success>> DeleteRepostAsync(
-        ATIdentifier repo,
         string rkey,
         Cid? swapRecord = null,
         Cid? swapCommit = null,
         CancellationToken cancellationToken = default)
-        => this.DeleteRecordAsync(Constants.FeedType.Repost, repo, rkey, swapRecord, swapCommit, cancellationToken);
+        => this.DeleteRecordAsync(Constants.FeedType.Repost, rkey, swapRecord, swapCommit, cancellationToken);
 
     public Task<Result<Success>> DeleteListAsync(
-        ATIdentifier repo,
         string rkey,
         Cid? swapRecord = null,
         Cid? swapCommit = null,
         CancellationToken cancellationToken = default)
-        => this.DeleteRecordAsync(Constants.GraphTypes.List, repo, rkey, swapRecord, swapCommit, cancellationToken);
+        => this.DeleteRecordAsync(Constants.GraphTypes.List, rkey, swapRecord, swapCommit, cancellationToken);
+
+    public Task<Result<Success>> DeleteListItemAsync(
+        string rkey,
+        Cid? swapRecord = null,
+        Cid? swapCommit = null,
+        CancellationToken cancellationToken = default)
+        => this.DeleteRecordAsync(Constants.GraphTypes.ListItem, rkey, swapRecord, swapCommit, cancellationToken);
 
     [Obsolete("Use ListFollowsAsync instead")]
     public Task<Result<ListRecords?>> ListFollowAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
@@ -281,11 +296,11 @@ public sealed class ATProtoRepo
                     this.Options.Logger);
     }
 
-    private async Task<Result<Success>> DeleteRecordAsync(string collection, ATIdentifier repo, string rkey, Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    private async Task<Result<Success>> DeleteRecordAsync(string collection, string rkey, Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
     {
         DeleteRecord record = new(
             collection,
-            repo.ToString()!,
+            this.proto.SessionManager!.Session!.Did.ToString()!,
             rkey,
             swapRecord,
             swapCommit);

@@ -334,8 +334,24 @@ public class AuthorizedTests
         var createList = (await this.proto.Repo.CreateCurateListAsync(randomName, "Test List", DateTime.UtcNow)).HandleResult();
         Assert.True(createList!.Cid is not null);
         Assert.True(createList!.Uri is not null);
-        var repo = this.proto.SessionManager!.Session!.Did;
-        var removeList = (await this.proto.Repo.DeleteListAsync(repo, createList.Uri.Rkey)).HandleResult();
+        var removeList = (await this.proto.Repo.DeleteListAsync(createList.Uri.Rkey)).HandleResult();
+        Assert.True(removeList is not null);
+    }
+
+    [Fact]
+    public async Task CreateAndRemoveListItemTest()
+    {
+        var randomName = Guid.NewGuid().ToString();
+        var createList = (await this.proto.Repo.CreateCurateListAsync(randomName, "Test List", DateTime.UtcNow)).HandleResult();
+        Assert.True(createList!.Cid is not null);
+        Assert.True(createList!.Uri is not null);
+        var follow1 = ATDid.Create("did:plc:up76ybimufzledmmhbv25wse");
+        var follow = (await this.proto.Repo.CreateListItemAsync(follow1, createList.Uri)).HandleResult();
+        Assert.True(follow!.Cid is not null);
+        Assert.True(follow!.Uri is not null);
+        var removeListItem = (await this.proto.Repo.DeleteListItemAsync(follow.Uri.Rkey)).HandleResult();
+        Assert.True(removeListItem is not null);
+        var removeList = (await this.proto.Repo.DeleteListAsync(createList.Uri.Rkey)).HandleResult();
         Assert.True(removeList is not null);
     }
 
@@ -347,7 +363,7 @@ public class AuthorizedTests
         Assert.True(create!.Cid is not null);
         Assert.True(create!.Uri is not null);
         var repo = this.proto.SessionManager!.Session!.Did;
-        var remove = (await this.proto.Repo.DeletePostAsync(repo, create.Uri.Rkey)).HandleResult();
+        var remove = (await this.proto.Repo.DeletePostAsync(create.Uri.Rkey)).HandleResult();
         Assert.True(remove is not null);
     }
 
@@ -364,10 +380,10 @@ public class AuthorizedTests
         Assert.True(repost!.Uri is not null);
 
         var repo = this.proto.SessionManager!.Session!.Did;
-        var removeRepost = (await this.proto.Repo.DeleteRepostAsync(repo, repost.Uri.Rkey)).HandleResult();
+        var removeRepost = (await this.proto.Repo.DeleteRepostAsync(repost.Uri.Rkey)).HandleResult();
         Assert.True(removeRepost is not null);
 
-        var remove = (await this.proto.Repo.DeletePostAsync(repo, create.Uri.Rkey)).HandleResult();
+        var remove = (await this.proto.Repo.DeletePostAsync(create.Uri.Rkey)).HandleResult();
         Assert.True(remove is not null);
     }
 
@@ -383,11 +399,10 @@ public class AuthorizedTests
         Assert.True(like!.Cid is not null);
         Assert.True(like!.Uri is not null);
 
-        var repo = this.proto.SessionManager!.Session!.Did;
-        var removeLike = (await this.proto.Repo.DeleteLikeAsync(repo, like.Uri.Rkey)).HandleResult();
+        var removeLike = (await this.proto.Repo.DeleteLikeAsync(like.Uri.Rkey)).HandleResult();
         Assert.True(removeLike is not null);
 
-        var remove = (await this.proto.Repo.DeletePostAsync(repo, create.Uri.Rkey)).HandleResult();
+        var remove = (await this.proto.Repo.DeletePostAsync(create.Uri.Rkey)).HandleResult();
         Assert.True(remove is not null);
     }
 
@@ -399,8 +414,7 @@ public class AuthorizedTests
         Assert.True(follow!.Cid is not null);
         Assert.True(follow!.Uri is not null);
 
-        var repo = this.proto.SessionManager!.Session!.Did;
-        var remove = (await this.proto.Repo.DeleteFollowAsync(repo, follow.Uri.Rkey)).HandleResult();
+        var remove = (await this.proto.Repo.DeleteFollowAsync(follow.Uri.Rkey)).HandleResult();
         Assert.True(remove is not null);
     }
 
@@ -412,8 +426,7 @@ public class AuthorizedTests
         Assert.True(follow!.Cid is not null);
         Assert.True(follow!.Uri is not null);
 
-        var repo = this.proto.SessionManager!.Session!.Did;
-        var remove = (await this.proto.Repo.DeleteBlockAsync(repo, follow.Uri.Rkey)).HandleResult();
+        var remove = (await this.proto.Repo.DeleteBlockAsync(follow.Uri.Rkey)).HandleResult();
         Assert.True(remove is not null);
     }
 
