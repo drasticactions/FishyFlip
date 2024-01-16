@@ -2,7 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-
 namespace FishyFlip;
 
 /// <summary>

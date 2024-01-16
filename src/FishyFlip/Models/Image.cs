@@ -26,7 +26,7 @@ public class Image : ATRecord
         }
     }
 
-    public string MimeType { get; }
+    public string? MimeType { get; }
 
     public int Size { get; }
 

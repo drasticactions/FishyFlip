@@ -10,7 +10,7 @@ public record PostView(
     int ReplyCount,
     int RepostCount,
     int LikeCount,
-    Embed Embed,
+    Embed? Embed,
     FeedProfile Author,
     Post? Record,
     DateTime IndexedAt,

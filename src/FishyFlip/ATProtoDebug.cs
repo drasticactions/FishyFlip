@@ -43,7 +43,7 @@ public sealed class ATProtoDebug
     /// <param name="decode">Delegate to decode the CAR response.</param>
     /// <param name="cancellationToken">Cancellation Token. Defaults to null.</param>
     /// <returns>Result of <see cref="Success"/>. Use <see cref="OnCarDecoded"/> to read response.</returns>
-    public Task<Result<Success>> GetCarAsync(
+    public Task<Result<Success?>> GetCarAsync(
         string path,
         OnCarDecoded decode,
         CancellationToken cancellationToken = default)

@@ -49,7 +49,7 @@ public class ATUri
 
     public string Collection => this.Pathname.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
 
-    public string Rkey => this.Pathname.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).ElementAtOrDefault(1);
+    public string Rkey => this.Pathname?.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).ElementAtOrDefault(1) ?? string.Empty;
 
     public string Href => this.ToString();
 

@@ -33,30 +33,6 @@ public class DescribeRepo
     public bool HandleIsCorrect { get; }
 }
 
-public class DidDoc
-{
-    [JsonConstructor]
-    public DidDoc(List<string> context, string id, List<string> alsoKnownAs,
-                  List<VerificationMethod> verificationMethod, List<Service> service)
-    {
-        this.Context = context;
-        this.Id = id;
-        this.AlsoKnownAs = alsoKnownAs;
-        this.VerificationMethod = verificationMethod;
-        this.Service = service;
-    }
-
-    public List<string> Context { get; }
-
-    public string Id { get; }
-
-    public List<string> AlsoKnownAs { get; }
-
-    public List<VerificationMethod> VerificationMethod { get; }
-
-    public List<Service> Service { get; }
-}
-
 public class VerificationMethod
 {
     [JsonConstructor]

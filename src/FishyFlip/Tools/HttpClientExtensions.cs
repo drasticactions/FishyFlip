@@ -28,11 +28,6 @@ internal static class HttpClientExtensions
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
-        if (string.IsNullOrEmpty(response))
-        {
-            logger?.LogDebug($"POST {url}: No Response");
-            return Activator.CreateInstance<TK>();
-        }
 
         logger?.LogDebug($"POST {url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, options);
@@ -103,7 +98,7 @@ internal static class HttpClientExtensions
         return new Blob(blob);
     }
 
-    internal static async Task<Result<Success>> GetCarAsync(
+    internal static async Task<Result<Success?>> GetCarAsync(
         this HttpClient client,
         string url,
         JsonSerializerOptions options,
@@ -124,7 +119,7 @@ internal static class HttpClientExtensions
         return new Success();
     }
 
-    internal static async Task<Result<Success>> DownloadCarAsync(
+    internal static async Task<Result<Success?>> DownloadCarAsync(
         this HttpClient client,
         string url,
         string filePath,

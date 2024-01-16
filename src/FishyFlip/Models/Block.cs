@@ -4,8 +4,15 @@
 
 namespace FishyFlip.Models
 {
+    /// <summary>
+    /// Firehose Block.
+    /// </summary>
     public class Block : ATRecord
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Block"/> class.
+        /// </summary>
+        /// <param name="obj">CBorObject.</param>
         public Block(CBORObject obj)
         {
             this.CreatedAt = obj["createdAt"].ToDateTime();
@@ -13,8 +20,14 @@ namespace FishyFlip.Models
             this.Did = ATDid.Create(obj["subject"].AsString());
         }
 
-        public ATDid Did { get; }
+        /// <summary>
+        /// Gets the ATDid.
+        /// </summary>
+        public ATDid? Did { get; }
 
+        /// <summary>
+        /// Gets the Created At Date.
+        /// </summary>
         public DateTime? CreatedAt { get; }
     }
 }

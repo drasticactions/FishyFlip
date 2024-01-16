@@ -102,7 +102,7 @@ public class MultipleBase<T0, T1>
     }
 
     /// <inheritdoc/>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj))
         {

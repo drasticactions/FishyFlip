@@ -18,7 +18,7 @@ public class FrameFooter
     /// <summary>
     /// Gets the Did.
     /// </summary>
-    public ATDid Did { get; }
+    public ATDid? Did { get; }
 
     public int Version { get; }
 

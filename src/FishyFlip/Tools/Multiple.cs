@@ -48,9 +48,11 @@ public class Multiple<T0, T1>
 
     public static implicit operator Multiple<T0, T1?>(T1? t) => new Multiple<T0, T1?>(1, value1: t);
 
+#nullable disable
     public static Multiple<T0, T1> FromT0(T0 input) => input;
 
     public static Multiple<T0, T1> FromT1(T1 input) => input;
+#nullable enable
 
     public async Task SwitchAsync(Func<T0, Task> f0, Func<T1, Task> f1)
     {
@@ -152,7 +154,7 @@ public class Multiple<T0, T1>
     }
 
     /// <inheritdoc/>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj))
         {

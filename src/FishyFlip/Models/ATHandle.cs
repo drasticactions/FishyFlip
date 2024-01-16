@@ -4,17 +4,33 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// ATHandle.
+/// </summary>
 public class ATHandle : ATIdentifier
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATHandle"/> class.
+    /// </summary>
+    /// <param name="handle">Handle.</param>
     [JsonConstructor]
-    protected ATHandle(string Handle)
+    protected ATHandle(string handle)
     {
-        this.Handle = Handle;
+        this.Handle = handle;
     }
 
+    /// <summary>
+    /// Gets the handle.
+    /// </summary>
     public string Handle { get; }
 
-    public static ATHandle? Create(string uri)
+    /// <summary>
+    /// Creates an ATHandle from a string.
+    /// </summary>
+    /// <param name="uri">The URI as string.</param>
+    /// <returns>ATHandle.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if uri is null or empty.</exception>
+    public static new ATHandle? Create(string uri)
     {
         if (string.IsNullOrEmpty(uri))
         {
@@ -30,6 +46,12 @@ public class ATHandle : ATIdentifier
         return null;
     }
 
+    /// <summary>
+    /// Is the given string a valid ATHandle.
+    /// </summary>
+    /// <param name="uri">The uri as string.</param>
+    /// <returns>Bool.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if uri is null or empty.</exception>
     public static bool IsValid(string uri)
     {
         if (string.IsNullOrEmpty(uri))
@@ -40,11 +62,18 @@ public class ATHandle : ATIdentifier
         return HandleValidator.EnsureValidHandle(uri);
     }
 
+    /// <inheritdoc/>
     public override string ToString()
     {
         return this.Handle.ToString();
     }
 
+    /// <summary>
+    /// Create an ATHandle from a ATURI.
+    /// </summary>
+    /// <param name="uri">ATUri.</param>
+    /// <returns>ATHandle.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if uri is null.</exception>
     internal static ATHandle? Create(ATUri uri)
     {
         if (uri == null)

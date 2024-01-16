@@ -25,7 +25,7 @@ public class Repost : ATRecord
 
     public Cid? Cid { get; }
 
-    public ATUri Uri { get; }
+    public ATUri? Uri { get; }
 
     public DateTime? CreatedAt { get; }
 }

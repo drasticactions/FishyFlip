@@ -14,7 +14,7 @@ public class ThreadView : ATRecord
         this.Type = type;
     }
 
-    public PostView Post { get; }
+    public PostView? Post { get; }
 
     public ThreadView[]? Replies { get; }
 }
