@@ -100,6 +100,7 @@ public static class Constants
             public static class Feed
             {
                 public const string GetAuthorFeed = "/xrpc/app.bsky.feed.getAuthorFeed";
+                public const string GetActorLikes = "/xrpc/app.bsky.feed.getActorLikes";
                 public const string GetTimeline = "/xrpc/app.bsky.feed.getTimeline";
                 public const string GetFeedSkeleton = "/xrpc/app.bsky.feed.getFeedSkeleton";
                 public const string GetPostThread = "/xrpc/app.bsky.feed.getPostThread";

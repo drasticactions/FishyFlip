@@ -112,6 +112,21 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    public async Task<Result<Timeline>> GetActorLikesAsync(ATIdentifier handle, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.Feed.GetActorLikes}?actor={handle.ToString()}&limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        Multiple<Timeline?, Error> result = await this.Client.Get<Timeline>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return result
+            .Match<Result<Timeline>>(
+                authorFeed => (authorFeed ?? new Timeline(Array.Empty<FeedViewPost>(), null))!,
+                error => error!);
+    }
+
     public async Task<Result<PostCollection>> GetPostsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
     {
         var answer = string.Join("&", query.Select(n => $"uris={n}"));

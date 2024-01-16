@@ -51,7 +51,7 @@ if (authAsk)
 
 string[] authMenuChoices =
 [
-    "Exit", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
+    "Exit", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
     "Get Lists Via ATIdentifier", "Get List Via ATUri"
 ];
 
@@ -64,6 +64,9 @@ if (authAsk)
         var menuChoice = Prompt.Select("Menu", authMenuChoices);
         switch (menuChoice)
         {
+            case "Get Actor Likes":
+                await GetActorLikes(atProtocol);
+                break;
             case "Get List Blocks for Actor":
                 await GetListBlocksForActor(atProtocol);
                 break;
@@ -108,6 +111,28 @@ else
             case "Exit":
                 return;
         }
+    }
+}
+
+async Task GetActorLikes(ATProtocol protocol)
+{
+    var handle = Prompt.Input<string>("Handle", defaultValue: "drasticactions.dev",
+        validators: new[] { Validators.Required() });
+    var profile = (await protocol.Identity.ResolveHandleAsync(ATHandle.Create(handle)!)).HandleResult();
+    var likes = (await protocol.Feed.GetActorLikesAsync(profile.Did)).HandleResult();
+    if (likes is null)
+    {
+        Console.WriteLine("No likes found.");
+        return;
+    }
+
+    foreach (var item in likes.Feed)
+    {
+        Console.WriteLine(item.Post.Author);
+        Console.WriteLine(item.Post.IndexedAt);
+        Console.WriteLine(item.Post.Record?.Text);
+        Console.WriteLine("-----");
+    
     }
 }
 
