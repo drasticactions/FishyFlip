@@ -259,6 +259,19 @@ public sealed class ATProtoRepo
     public Task<Result<ListRecords?>> ListPostsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
        => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
 
+    public Task<Result<Success>> ApplyWritesAsync(ApplyWriteRecord[] writes, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    {
+        var applyWrites = new ApplyWrites(this.proto.SessionManager!.Session!.Did, writes, true, swapCommit?.ToString());
+        return
+            this.Client
+                .Post<ApplyWrites, Success>(
+                    Constants.Urls.ATProtoRepo.ApplyWrites,
+                    this.Options.JsonSerializerOptions,
+                    applyWrites,
+                    cancellationToken,
+                    this.Options.Logger);
+    }
+
     public async Task<Result<ListRecords?>> ListRecordsAsync(string collection, ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={collection}&repo={repo}&limit={limit}";
@@ -301,12 +314,12 @@ public sealed class ATProtoRepo
 
     private async Task<Result<Success>> DeleteRecordAsync(string collection, string rkey, Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
     {
-        DeleteRecord record = new(
+        Models.Internal.DeleteRecord record = new(
             collection,
             this.proto.SessionManager!.Session!.Did.ToString()!,
             rkey,
             swapRecord,
             swapCommit);
-        return await this.Client.Post<DeleteRecord, Success>(Constants.Urls.ATProtoRepo.DeleteRecord, this.Options.JsonSerializerOptions, record, cancellationToken, this.Options.Logger);
+        return await this.Client.Post<Models.Internal.DeleteRecord, Success>(Constants.Urls.ATProtoRepo.DeleteRecord, this.Options.JsonSerializerOptions, record, cancellationToken, this.Options.Logger);
     }
 }
