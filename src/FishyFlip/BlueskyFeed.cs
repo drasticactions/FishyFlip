@@ -190,4 +190,18 @@ public sealed class BlueskyFeed
                 timeline => timeline!,
                 error => error!);
     }
+
+    // public async Task<Result<SkeletonFeed>> GetFeedSkeletonAsync(ATUri feed, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    // {
+    //     string url = $"{Constants.Urls.Bluesky.Feed.GetFeedSkeleton}?feed={feed}&limit={limit}";
+    //     if (cursor is not null)
+    //     {
+    //         url += $"&cursor={cursor}";
+    //     }
+    //     Multiple<SkeletonFeed?, Error> result = await this.Client.Get<SkeletonFeed>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    //     return result
+    //         .Match<Result<SkeletonFeed>>(
+    //             timeline => timeline!,
+    //             error => error!);
+    // }
 }
