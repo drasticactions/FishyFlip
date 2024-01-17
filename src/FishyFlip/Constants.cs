@@ -110,6 +110,7 @@ public static class Constants
                 public const string GetPosts = "/xrpc/app.bsky.feed.getPosts";
                 public const string GetLikes = "/xrpc/app.bsky.feed.getLikes";
                 public const string GetRepostedBy = "/xrpc/app.bsky.feed.getRepostedBy";
+                public const string GetSuggestedFeeds = "/xrpc/app.bsky.feed.getSuggestedFeeds";
             }
 
             public static class Actor

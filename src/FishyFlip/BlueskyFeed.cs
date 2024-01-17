@@ -179,15 +179,22 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
-    public async Task<Result<FeedCollection>> GetFeedGeneratorsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
+    public async Task<Result<FeedCollection?>> GetFeedGeneratorsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
     {
         var answer = string.Join("&", query.Select(n => $"feeds={n}"));
         string url = $"{Constants.Urls.Bluesky.Feed.GetFeedGenerators}?{answer}";
 
-        Multiple<FeedCollection?, Error> result = await this.Client.Get<FeedCollection>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
-        return result
-            .Match<Result<FeedCollection>>(
-                timeline => timeline!,
-                error => error!);
+        return await this.Client.Get<FeedCollection?>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
+    public async Task<Result<GeneratorFeed?>> GetSuggestedFeedsAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.Feed.GetSuggestedFeeds}?limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<GeneratorFeed>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 }

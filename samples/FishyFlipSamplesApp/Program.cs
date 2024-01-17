@@ -51,7 +51,7 @@ if (authAsk)
 
 string[] authMenuChoices =
 [
-    "Exit", "List Blobs for ATDid Repo", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
+    "Exit", "Get Suggested Feeds", "List Blobs for ATDid Repo", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
     "Get Lists Via ATIdentifier", "Get List Via ATUri"
 ];
 
@@ -64,6 +64,9 @@ if (authAsk)
         var menuChoice = Prompt.Select("Menu", authMenuChoices);
         switch (menuChoice)
         {
+            case "Get Suggested Feeds":
+                await GetSuggestedFeeds(atProtocol);
+                break;
             case "List Blobs for ATDid Repo":
                 await GetBlobList(atProtocol);
                 break;
@@ -117,6 +120,24 @@ else
             case "Exit":
                 return;
         }
+    }
+}
+
+async Task GetSuggestedFeeds(ATProtocol protocol)
+{
+    var feeds = (await protocol.Feed.GetSuggestedFeedsAsync()).HandleResult();
+    if (feeds is null)
+    {
+        Console.WriteLine("No feeds found.");
+        return;
+    }
+
+    foreach(var feed in feeds.Feeds)
+    {
+        Console.WriteLine(feed.Uri);
+        Console.WriteLine(feed.DisplayName);
+        Console.WriteLine(feed.Description);
+        Console.WriteLine("-----");
     }
 }
 

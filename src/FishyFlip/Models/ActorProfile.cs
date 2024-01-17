@@ -4,4 +4,4 @@
 
 namespace FishyFlip.Models;
 
-public record ActorProfile(ATDid? Did, string? Handle, string? DisplayName, string? Description, string? Avatar, DateTime? IndexedAt, Viewer? Viewer, string[]? Labels);
+public record ActorProfile(ATDid? Did, string? Handle, string? DisplayName, string? Description, string? Avatar, DateTime? IndexedAt, Viewer? Viewer, Label[]? Labels);
