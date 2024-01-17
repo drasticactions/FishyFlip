@@ -51,7 +51,7 @@ if (authAsk)
 
 string[] authMenuChoices =
 [
-    "Exit", "Get Search Results", "Get Suggested Feeds", "List Blobs for ATDid Repo", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
+    "Exit", "Get Actor Feeds", "Get Search Results", "Get Suggested Feeds", "List Blobs for ATDid Repo", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
     "Get Lists Via ATIdentifier", "Get List Via ATUri"
 ];
 
@@ -64,6 +64,9 @@ if (authAsk)
         var menuChoice = Prompt.Select("Menu", authMenuChoices);
         switch (menuChoice)
         {
+            case "Get Actor Feeds":
+                await GetActorFeeds(atProtocol);
+                break;
             case "Get Search Results":
                 await GetSearchResults(atProtocol);
                 break;
@@ -157,6 +160,28 @@ async Task GetSuggestedFeeds(ATProtocol protocol)
     }
 
     foreach(var feed in feeds.Feeds)
+    {
+        Console.WriteLine(feed.Uri);
+        Console.WriteLine(feed.DisplayName);
+        Console.WriteLine(feed.Description);
+        Console.WriteLine("-----");
+    }
+}
+
+async Task GetActorFeeds(ATProtocol protocol)
+{
+    var handle = Prompt.Input<string>("Handle", defaultValue: "bsky.app",
+        validators: new[] { Validators.Required() });
+    var profile = (await protocol.Identity.ResolveHandleAsync(ATHandle.Create(handle)!)).HandleResult();
+    var feeds = (await protocol.Feed.GetActorFeedsAsync(profile.Did)).HandleResult();
+
+    if (feeds is null)
+    {
+        Console.WriteLine("No feeds found.");
+        return;
+    }
+
+    foreach (var feed in feeds.Feeds)
     {
         Console.WriteLine(feed.Uri);
         Console.WriteLine(feed.DisplayName);

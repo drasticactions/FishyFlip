@@ -198,6 +198,17 @@ public sealed class BlueskyFeed
         return await this.Client.Get<GeneratorFeed>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    public async Task<Result<GeneratorFeed?>> GetActorFeedsAsync(ATIdentifier actor, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.Feed.GetActorFeeds}?actor={actor}&limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<GeneratorFeed>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
+
     /// <summary>
     /// Find posts matching search criteria.
     /// </summary>
