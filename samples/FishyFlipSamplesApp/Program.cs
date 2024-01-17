@@ -120,25 +120,6 @@ else
     }
 }
 
-async Task GetFeedSkeleton(ATProtocol protocol)
-{
-    var handle = Prompt.Input<string>("Feed ATUri", defaultValue: "at://did:plc:jdkvwye2lf4mingzk7qdebzc/app.bsky.feed.generator/furry-art",
-        validators: new[] { Validators.Required() });
-    var feed = (await protocol.Feed.GetFeedSkeletonAsync(ATUri.Create(handle))).HandleResult();
-    if (feed is null)
-    {
-        Console.WriteLine("No feed found.");
-        return;
-    }
-
-    foreach (var item in feed.Feed)
-    {
-        Console.WriteLine(item.Post);
-        Console.WriteLine($"Reason: {item.Reason?.Repost}");
-        Console.WriteLine("-----");
-    }
-}
-
 async Task GetBlobList(ATProtocol protocol)
 {
     var handle = Prompt.Input<string>("Handle", defaultValue: "drasticactions.dev",
