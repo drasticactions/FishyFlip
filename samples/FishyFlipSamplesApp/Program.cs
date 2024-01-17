@@ -51,7 +51,7 @@ if (authAsk)
 
 string[] authMenuChoices =
 [
-    "Exit", "Get Suggested Feeds", "List Blobs for ATDid Repo", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
+    "Exit", "Get Search Results", "Get Suggested Feeds", "List Blobs for ATDid Repo", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
     "Get Lists Via ATIdentifier", "Get List Via ATUri"
 ];
 
@@ -64,6 +64,9 @@ if (authAsk)
         var menuChoice = Prompt.Select("Menu", authMenuChoices);
         switch (menuChoice)
         {
+            case "Get Search Results":
+                await GetSearchResults(atProtocol);
+                break;
             case "Get Suggested Feeds":
                 await GetSuggestedFeeds(atProtocol);
                 break;
@@ -120,6 +123,27 @@ else
             case "Exit":
                 return;
         }
+    }
+}
+
+async Task GetSearchResults(ATProtocol protocol)
+{
+    var q = Prompt.Input<string>("Query", defaultValue: "fishyflip",
+        validators: new[] { Validators.Required() });
+    var results = (await protocol.Feed.SearchPostsAsync(q)).HandleResult();
+
+    if (results is null)
+    {
+        Console.WriteLine("No results found.");
+        return;
+    }
+
+    foreach (var item in results.Posts)
+    {
+        Console.WriteLine(item.Author);
+        Console.WriteLine(item.IndexedAt);
+        Console.WriteLine(item.Record?.Text);
+        Console.WriteLine("-----");
     }
 }
 

@@ -197,4 +197,27 @@ public sealed class BlueskyFeed
 
         return await this.Client.Get<GeneratorFeed>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
+
+    /// <summary>
+    /// Find posts matching search criteria.
+    /// </summary>
+    /// <param name="query">Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
+    /// <param name="limit">Limit Output, defaults to 25.</param>
+    /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
+    /// <param name="cancellationToken">Optional Cancellation Token.</param>
+    /// <returns>Result of Search Results.</returns>
+    public async Task<Result<SearchResults?>> SearchPostsAsync(
+        string query,
+        int limit = 25,
+        string? cursor = default,
+        CancellationToken cancellationToken = default)
+    {
+        string url = $"{Constants.Urls.Bluesky.Feed.SearchPosts}?q={query}&limit={limit}";
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        return await this.Client.Get<SearchResults>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
 }
