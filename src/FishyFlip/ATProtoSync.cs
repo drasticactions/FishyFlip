@@ -326,4 +326,30 @@ public sealed class ATProtoSync
 
         return await this.Client.Get<RepoList>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
+
+    /// <summary>
+    /// List Blobs for a given Did.
+    /// </summary>
+    /// <param name="repo">Repo Did.</param>
+    /// <param name="limit">Limit, defaults to 500.</param>
+    /// <param name="since">Optional revision of the repo to list blobs since.</param>
+    /// <param name="cursor">Optional Cursor. Used to continue response.</param>
+    /// <param name="cancellationToken">Optional Cancellation Token.</param>
+    /// <returns>Result of Cids.</returns>
+    public async Task<Result<ListBlobs?>> ListBlobsAsync(ATDid repo, int limit = 500, string? since = default, string? cursor = default, CancellationToken cancellationToken = default)
+    {
+        var url = Constants.Urls.ATProtoSync.ListBlobs + $"?did={repo}&limit={limit}";
+
+        if (cursor is not null)
+        {
+            url += $"&cursor={cursor}";
+        }
+
+        if (since is not null)
+        {
+            url += $"&since={since}";
+        }
+
+        return await this.Client.Get<ListBlobs>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+    }
 }

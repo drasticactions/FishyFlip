@@ -51,11 +51,11 @@ if (authAsk)
 
 string[] authMenuChoices =
 [
-    "Exit", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
+    "Exit", "List Blobs for ATDid Repo", "Get Actor Likes", "Get List Blocks for Actor", "Get List Mutes for Actor", "Get Suggestion Follows",
     "Get Lists Via ATIdentifier", "Get List Via ATUri"
 ];
 
-string[] noAuthMenuChoices = ["Exit", "Get Profile Via AtDID", "Get Profile Via Handle", "Get Avatar for Profile"];
+string[] noAuthMenuChoices = ["Exit", "List Blobs for ATDid Repo", "Get Profile Via AtDID", "Get Profile Via Handle", "Get Avatar for Profile"];
 
 if (authAsk)
 {
@@ -64,6 +64,9 @@ if (authAsk)
         var menuChoice = Prompt.Select("Menu", authMenuChoices);
         switch (menuChoice)
         {
+            case "List Blobs for ATDid Repo":
+                await GetBlobList(atProtocol);
+                break;
             case "Get Actor Likes":
                 await GetActorLikes(atProtocol);
                 break;
@@ -99,6 +102,9 @@ else
         var menuChoice = Prompt.Select("Menu", noAuthMenuChoices);
         switch (menuChoice)
         {
+            case "List Blobs for ATDid Repo":
+                await GetBlobList(atProtocol);
+                break;
             case "Get Avatar for Profile":
                 await GetAvatarForProfile(atProtocol);
                 break;
@@ -111,6 +117,24 @@ else
             case "Exit":
                 return;
         }
+    }
+}
+
+async Task GetBlobList(ATProtocol protocol)
+{
+    var handle = Prompt.Input<string>("Handle", defaultValue: "drasticactions.dev",
+        validators: new[] { Validators.Required() });
+    var profile = (await protocol.Identity.ResolveHandleAsync(ATHandle.Create(handle)!)).HandleResult();
+    var blobs = (await protocol.Sync.ListBlobsAsync(profile.Did)).HandleResult();
+    if (blobs is null)
+    {
+        Console.WriteLine("No blobs found.");
+        return;
+    }
+
+    foreach(var blob in blobs.Cids)
+    {
+        Console.WriteLine(blob);
     }
 }
 
