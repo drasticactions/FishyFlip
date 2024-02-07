@@ -48,10 +48,7 @@ jobs:
       with:
         # Upload entire repository
         path: 'website/_site'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-      
+
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
