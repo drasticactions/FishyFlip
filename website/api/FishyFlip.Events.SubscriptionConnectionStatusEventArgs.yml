@@ -1,0 +1,71 @@
+### YamlMime:ApiPage
+title: Class SubscriptionConnectionStatusEventArgs
+body:
+- api1: Class SubscriptionConnectionStatusEventArgs
+  id: FishyFlip_Events_SubscriptionConnectionStatusEventArgs
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Events/SubscriptionConnectionStatusEventArgs.cs#L7
+  metadata:
+    uid: FishyFlip.Events.SubscriptionConnectionStatusEventArgs
+    commentId: T:FishyFlip.Events.SubscriptionConnectionStatusEventArgs
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Events
+      url: FishyFlip.Events.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class SubscriptionConnectionStatusEventArgs : EventArgs'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: EventArgs
+    url: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - text: SubscriptionConnectionStatusEventArgs
+    url: FishyFlip.Events.SubscriptionConnectionStatusEventArgs.html
+- h4: Inherited Members
+- list:
+  - text: EventArgs.Empty
+    url: https://learn.microsoft.com/dotnet/api/system.eventargs.empty
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: SubscriptionConnectionStatusEventArgs(WebSocketState)
+  id: FishyFlip_Events_SubscriptionConnectionStatusEventArgs__ctor_System_Net_WebSockets_WebSocketState_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Events/SubscriptionConnectionStatusEventArgs.cs#L9
+  metadata:
+    uid: FishyFlip.Events.SubscriptionConnectionStatusEventArgs.#ctor(System.Net.WebSockets.WebSocketState)
+    commentId: M:FishyFlip.Events.SubscriptionConnectionStatusEventArgs.#ctor(System.Net.WebSockets.WebSocketState)
+- code: public SubscriptionConnectionStatusEventArgs(WebSocketState connected)
+- h4: Parameters
+- parameters:
+  - name: connected
+    type:
+    - text: WebSocketState
+      url: https://learn.microsoft.com/dotnet/api/system.net.websockets.websocketstate
+- h2: Properties
+- api3: State
+  id: FishyFlip_Events_SubscriptionConnectionStatusEventArgs_State
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Events/SubscriptionConnectionStatusEventArgs.cs#L14
+  metadata:
+    uid: FishyFlip.Events.SubscriptionConnectionStatusEventArgs.State
+    commentId: P:FishyFlip.Events.SubscriptionConnectionStatusEventArgs.State
+- code: public WebSocketState State { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: WebSocketState
+      url: https://learn.microsoft.com/dotnet/api/system.net.websockets.websocketstate
+languageId: csharp

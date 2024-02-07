@@ -1,0 +1,67 @@
+### YamlMime:ApiPage
+title: Class ErrorBody
+body:
+- api1: Class ErrorBody
+  id: FishyFlip_Models_ErrorBody
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ErrorBody.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ErrorBody
+    commentId: T:FishyFlip.Models.ErrorBody
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class ErrorBody
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ErrorBody
+    url: FishyFlip.Models.ErrorBody.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: Error
+  id: FishyFlip_Models_ErrorBody_Error
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ErrorBody.cs#L9
+  metadata:
+    uid: FishyFlip.Models.ErrorBody.Error
+    commentId: P:FishyFlip.Models.ErrorBody.Error
+- code: public string? Error { get; set; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Message
+  id: FishyFlip_Models_ErrorBody_Message
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ErrorBody.cs#L11
+  metadata:
+    uid: FishyFlip.Models.ErrorBody.Message
+    commentId: P:FishyFlip.Models.ErrorBody.Message
+- code: public string? Message { get; set; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+languageId: csharp

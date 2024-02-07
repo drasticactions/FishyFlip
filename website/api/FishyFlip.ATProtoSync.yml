@@ -1,0 +1,831 @@
+### YamlMime:ApiPage
+title: Class ATProtoSync
+body:
+- api1: Class ATProtoSync
+  id: FishyFlip_ATProtoSync
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L10
+  metadata:
+    uid: FishyFlip.ATProtoSync
+    commentId: T:FishyFlip.ATProtoSync
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: AT Proto Sync.
+- code: public sealed class ATProtoSync
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATProtoSync
+    url: FishyFlip.ATProtoSync.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: DownloadBlocksAsync(ATDid, Cid[], string?, string?, CancellationToken)
+  id: FishyFlip_ATProtoSync_DownloadBlocksAsync_FishyFlip_Models_ATDid_Ipfs_Cid___System_String_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L182
+  metadata:
+    uid: FishyFlip.ATProtoSync.DownloadBlocksAsync(FishyFlip.Models.ATDid,Ipfs.Cid[],System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.DownloadBlocksAsync(FishyFlip.Models.ATDid,Ipfs.Cid[],System.String,System.String,System.Threading.CancellationToken)
+- markdown: Download Blocks as CAR file.
+- code: public Task<Result<Success?>> DownloadBlocksAsync(ATDid did, Cid[] commits, string? path = null, string? filename = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Actor ATDid.
+  - name: commits
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '['
+    - ']'
+    description: Array of Cid Commits.
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Path to file.
+    optional: true
+  - name: filename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Filename.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Blocks.
+- api3: DownloadCheckoutAsync(ATDid, Cid?, string?, string?, CancellationToken)
+  id: FishyFlip_ATProtoSync_DownloadCheckoutAsync_FishyFlip_Models_ATDid_Ipfs_Cid_System_String_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L231
+  metadata:
+    uid: FishyFlip.ATProtoSync.DownloadCheckoutAsync(FishyFlip.Models.ATDid,Ipfs.Cid,System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.DownloadCheckoutAsync(FishyFlip.Models.ATDid,Ipfs.Cid,System.String,System.String,System.Threading.CancellationToken)
+- markdown: Download Checkout as CAR file.
+- code: public Task<Result<Success?>> DownloadCheckoutAsync(ATDid did, Cid? commit = null, string? path = null, string? filename = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Actor ATDid.
+  - name: commit
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+    description: CID Commit.
+    optional: true
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Path for file.
+    optional: true
+  - name: filename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Filename.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of success.
+- api3: DownloadRecordAsync(string, ATDid, string, Cid?, string?, string?, CancellationToken)
+  id: FishyFlip_ATProtoSync_DownloadRecordAsync_System_String_FishyFlip_Models_ATDid_System_String_Ipfs_Cid_System_String_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L282
+  metadata:
+    uid: FishyFlip.ATProtoSync.DownloadRecordAsync(System.String,FishyFlip.Models.ATDid,System.String,Ipfs.Cid,System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.DownloadRecordAsync(System.String,FishyFlip.Models.ATDid,System.String,Ipfs.Cid,System.String,System.String,System.Threading.CancellationToken)
+- markdown: Download Record as CAR file.
+- code: public Task<Result<Success?>> DownloadRecordAsync(string collection, ATDid repo, string rkey, Cid? commit = null, string? path = null, string? filename = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: collection
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Collection name.
+  - name: repo
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Repo.
+  - name: rkey
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Rkey.
+  - name: commit
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+    description: Commit.
+    optional: true
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: File path.
+    optional: true
+  - name: filename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: File name.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of success.
+- api3: DownloadRepoAsync(ATDid, string?, string?, CancellationToken)
+  id: FishyFlip_ATProtoSync_DownloadRepoAsync_FishyFlip_Models_ATDid_System_String_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L115
+  metadata:
+    uid: FishyFlip.ATProtoSync.DownloadRepoAsync(FishyFlip.Models.ATDid,System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.DownloadRepoAsync(FishyFlip.Models.ATDid,System.String,System.String,System.Threading.CancellationToken)
+- markdown: Download Repo as CAR file.
+- code: public Task<Result<Success?>> DownloadRepoAsync(ATDid repo, string? path = null, string? filename = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: repo
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Repo.
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Path to file.
+    optional: true
+  - name: filename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Filename.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of Success.
+- api3: GetBlobAsync(ATDid, Cid, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetBlobAsync_FishyFlip_Models_ATDid_Ipfs_Cid_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L34
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetBlobAsync(FishyFlip.Models.ATDid,Ipfs.Cid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetBlobAsync(FishyFlip.Models.ATDid,Ipfs.Cid,System.Threading.CancellationToken)
+- markdown: Get a Blob.
+- code: public Task<Result<Blob?>> GetBlobAsync(ATDid did, Cid cid, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: <xref href="FishyFlip.Models.ATDid" data-throw-if-not-resolved="false"></xref>.
+  - name: cid
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    description: <xref href="Ipfs.Cid" data-throw-if-not-resolved="false"></xref>.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Blob
+      url: FishyFlip.Models.Blob.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of Blob.
+- api3: GetBlocksAsync(ATDid, Cid[], OnCarDecoded, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetBlocksAsync_FishyFlip_Models_ATDid_Ipfs_Cid___FishyFlip_Tools_OnCarDecoded_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L160
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetBlocksAsync(FishyFlip.Models.ATDid,Ipfs.Cid[],FishyFlip.Tools.OnCarDecoded,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetBlocksAsync(FishyFlip.Models.ATDid,Ipfs.Cid[],FishyFlip.Tools.OnCarDecoded,System.Threading.CancellationToken)
+- markdown: Get Blocks.
+- code: public Task<Result<Success?>> GetBlocksAsync(ATDid did, Cid[] commits, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Actor ATDid.
+  - name: commits
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '['
+    - ']'
+    description: Array of Cid Commits.
+  - name: onDecoded
+    type:
+    - text: OnCarDecoded
+      url: FishyFlip.Tools.OnCarDecoded.html
+    description: OnCarDecoded callback.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Blocks.
+- api3: GetCheckoutAsync(ATDid, OnCarDecoded, Cid?, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetCheckoutAsync_FishyFlip_Models_ATDid_FishyFlip_Tools_OnCarDecoded_Ipfs_Cid_System_Threading_CancellationToken_
+  deprecated: Deprecated in favor of GetRepo
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L205
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetCheckoutAsync(FishyFlip.Models.ATDid,FishyFlip.Tools.OnCarDecoded,Ipfs.Cid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetCheckoutAsync(FishyFlip.Models.ATDid,FishyFlip.Tools.OnCarDecoded,Ipfs.Cid,System.Threading.CancellationToken)
+- markdown: >-
+    Get Checkout.
+
+    Uses OnCarDecoded to decode CAR file while downloading.
+- code: >-
+    [Obsolete("Deprecated in favor of GetRepo")]
+
+    public Task<Result<Success?>> GetCheckoutAsync(ATDid did, OnCarDecoded onDecoded, Cid? commit = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Actor ATDid.
+  - name: onDecoded
+    type:
+    - text: OnCarDecoded
+      url: FishyFlip.Tools.OnCarDecoded.html
+    description: OnCarDecoded callback.
+  - name: commit
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+    description: Cid Commit.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of success.
+- api3: GetCommitPathAsync(ATDid, Cid?, Cid?, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetCommitPathAsync_FishyFlip_Models_ATDid_Ipfs_Cid_Ipfs_Cid_System_Threading_CancellationToken_
+  deprecated: Deprecated in Repo V3. This should no longer work.
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L135
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetCommitPathAsync(FishyFlip.Models.ATDid,Ipfs.Cid,Ipfs.Cid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetCommitPathAsync(FishyFlip.Models.ATDid,Ipfs.Cid,Ipfs.Cid,System.Threading.CancellationToken)
+- markdown: Get Commit Path.
+- code: >-
+    [Obsolete("Deprecated in Repo V3. This should no longer work.")]
+
+    public Task<Result<CommitPath?>> GetCommitPathAsync(ATDid did, Cid? latest = null, Cid? earliest = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Actor ATDid.
+  - name: latest
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+    description: Latest Cid Commit.
+    optional: true
+  - name: earliest
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+    description: Earliest Cid Commit.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: CommitPath
+      url: FishyFlip.Models.CommitPath.html
+    - '?'
+    - '>'
+    - '>'
+    description: result of CommitPath.
+- api3: GetHeadAsync(ATDid, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetHeadAsync_FishyFlip_Models_ATDid_System_Threading_CancellationToken_
+  deprecated: Deprecated in favor of GetLatestCommitAsync
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L46
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetHeadAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetHeadAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+- markdown: Get Head of Repo.
+- code: >-
+    [Obsolete("Deprecated in favor of GetLatestCommitAsync")]
+
+    public Task<Result<Head?>> GetHeadAsync(ATDid did, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: <xref href="FishyFlip.Models.ATDid" data-throw-if-not-resolved="false"></xref>.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Head
+      url: FishyFlip.Models.Head.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of Head.
+- api3: GetLatestCommitAsync(ATDid, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetLatestCommitAsync_FishyFlip_Models_ATDid_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L60
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetLatestCommitAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetLatestCommitAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+- markdown: Get latest commit for a repo.
+- code: public Task<Result<LatestCommit?>> GetLatestCommitAsync(ATDid did, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: <xref href="FishyFlip.Models.ATDid" data-throw-if-not-resolved="false"></xref>.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: LatestCommit
+      url: FishyFlip.Models.LatestCommit.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of LatestCommit.
+- api3: GetRecordAsync(string, ATDid, string, OnCarDecoded, Cid?, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetRecordAsync_System_String_FishyFlip_Models_ATDid_System_String_FishyFlip_Tools_OnCarDecoded_Ipfs_Cid_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L255
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetRecordAsync(System.String,FishyFlip.Models.ATDid,System.String,FishyFlip.Tools.OnCarDecoded,Ipfs.Cid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetRecordAsync(System.String,FishyFlip.Models.ATDid,System.String,FishyFlip.Tools.OnCarDecoded,Ipfs.Cid,System.Threading.CancellationToken)
+- markdown: >-
+    Get Record.
+
+    Uses OnCarDecoded to decode CAR file while downloading.
+- code: public Task<Result<Success?>> GetRecordAsync(string collection, ATDid repo, string rkey, OnCarDecoded onDecoded, Cid? commit = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: collection
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Collection name.
+  - name: repo
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Repo.
+  - name: rkey
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Rkey.
+  - name: onDecoded
+    type:
+    - text: OnCarDecoded
+      url: FishyFlip.Tools.OnCarDecoded.html
+    description: On decoded callback.
+  - name: commit
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+    description: Commit.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of success.
+- api3: GetRepoAsync(ATDid, OnCarDecoded, string?, CancellationToken)
+  id: FishyFlip_ATProtoSync_GetRepoAsync_FishyFlip_Models_ATDid_FishyFlip_Tools_OnCarDecoded_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L94
+  metadata:
+    uid: FishyFlip.ATProtoSync.GetRepoAsync(FishyFlip.Models.ATDid,FishyFlip.Tools.OnCarDecoded,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.GetRepoAsync(FishyFlip.Models.ATDid,FishyFlip.Tools.OnCarDecoded,System.String,System.Threading.CancellationToken)
+- markdown: >-
+    Get Repo.
+
+    Uses OnCarDecoded to decode CAR file while downloading.
+- code: public Task<Result<Success?>> GetRepoAsync(ATDid repo, OnCarDecoded onDecoded, string? since = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: repo
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: <xref href="FishyFlip.Models.ATDid" data-throw-if-not-resolved="false"></xref> of repo.
+  - name: onDecoded
+    type:
+    - text: OnCarDecoded
+      url: FishyFlip.Tools.OnCarDecoded.html
+    description: Callback method for decoding CAR file.
+  - name: since
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Optional Since value.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of Success.
+- api3: ListBlobsAsync(ATDid, int, string?, string?, CancellationToken)
+  id: FishyFlip_ATProtoSync_ListBlobsAsync_FishyFlip_Models_ATDid_System_Int32_System_String_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L339
+  metadata:
+    uid: FishyFlip.ATProtoSync.ListBlobsAsync(FishyFlip.Models.ATDid,System.Int32,System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.ListBlobsAsync(FishyFlip.Models.ATDid,System.Int32,System.String,System.String,System.Threading.CancellationToken)
+- markdown: List Blobs for a given Did.
+- code: public Task<Result<ListBlobs?>> ListBlobsAsync(ATDid repo, int limit = 500, string? since = null, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: repo
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    description: Repo Did.
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: Limit, defaults to 500.
+    optional: true
+  - name: since
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Optional revision of the repo to list blobs since.
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Optional Cursor. Used to continue response.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ListBlobs
+      url: FishyFlip.Models.ListBlobs.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of Cids.
+- api3: ListReposAsync(int, string?, CancellationToken)
+  id: FishyFlip_ATProtoSync_ListReposAsync_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L315
+  metadata:
+    uid: FishyFlip.ATProtoSync.ListReposAsync(System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.ListReposAsync(System.Int32,System.String,System.Threading.CancellationToken)
+- markdown: List Repos.
+- code: public Task<Result<RepoList?>> ListReposAsync(int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: Limit, defaults to 50.
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: Optional Cursor. Used to continue response.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: RepoList
+      url: FishyFlip.Models.RepoList.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of RepoList.
+- api3: NotifyOfUpdateAsync(string, CancellationToken)
+  id: FishyFlip_ATProtoSync_NotifyOfUpdateAsync_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L73
+  metadata:
+    uid: FishyFlip.ATProtoSync.NotifyOfUpdateAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.NotifyOfUpdateAsync(System.String,System.Threading.CancellationToken)
+- markdown: Notify of update for given hostname.
+- code: public Task<Result<Success?>> NotifyOfUpdateAsync(string hostname, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: hostname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Hostname.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of Success.
+- api3: RequestCrawlAsync(string, CancellationToken)
+  id: FishyFlip_ATProtoSync_RequestCrawlAsync_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoSync.cs#L82
+  metadata:
+    uid: FishyFlip.ATProtoSync.RequestCrawlAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoSync.RequestCrawlAsync(System.String,System.Threading.CancellationToken)
+- markdown: Request crawl for given hostname.
+- code: public Task<Result<Success?>> RequestCrawlAsync(string hostname, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: hostname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Hostname.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Optional cancellation token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+    description: Result of Success.
+languageId: csharp
+metadata:
+  description: AT Proto Sync.

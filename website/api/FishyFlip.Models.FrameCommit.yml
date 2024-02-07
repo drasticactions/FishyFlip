@@ -1,0 +1,235 @@
+### YamlMime:ApiPage
+title: Class FrameCommit
+body:
+- api1: Class FrameCommit
+  id: FishyFlip_Models_FrameCommit
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L7
+  metadata:
+    uid: FishyFlip.Models.FrameCommit
+    commentId: T:FishyFlip.Models.FrameCommit
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class FrameCommit
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: FrameCommit
+    url: FishyFlip.Models.FrameCommit.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: FrameCommit(CBORObject, ILogger?)
+  id: FishyFlip_Models_FrameCommit__ctor_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L9
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.#ctor(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+    commentId: M:FishyFlip.Models.FrameCommit.#ctor(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+- code: public FrameCommit(CBORObject obj, ILogger? logger = null)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+  - name: logger
+    type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+    optional: true
+- h2: Properties
+- api3: Blocks
+  id: FishyFlip_Models_FrameCommit_Blocks
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L71
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Blocks
+    commentId: P:FishyFlip.Models.FrameCommit.Blocks
+- markdown: Gets the CBOR blocks.
+- code: public byte[]? Blocks { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '['
+    - ']'
+    - '?'
+- api3: Commit
+  id: FishyFlip_Models_FrameCommit_Commit
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L76
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Commit
+    commentId: P:FishyFlip.Models.FrameCommit.Commit
+- markdown: Gets the commit.
+- code: public Cid? Commit { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- api3: Handle
+  id: FishyFlip_Models_FrameCommit_Handle
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L40
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Handle
+    commentId: P:FishyFlip.Models.FrameCommit.Handle
+- markdown: Gets the handle.
+- code: public ATHandle? Handle { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATHandle
+      url: FishyFlip.Models.ATHandle.html
+    - '?'
+- api3: Ops
+  id: FishyFlip_Models_FrameCommit_Ops
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L30
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Ops
+    commentId: P:FishyFlip.Models.FrameCommit.Ops
+- markdown: Gets the list of operations.
+- code: public Ops[]? Ops { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Ops
+      url: FishyFlip.Models.Ops.html
+    - '['
+    - ']'
+    - '?'
+- api3: Prev
+  id: FishyFlip_Models_FrameCommit_Prev
+  deprecated: Obsolete in the V3 Spec, use Rev instead.
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L42
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Prev
+    commentId: P:FishyFlip.Models.FrameCommit.Prev
+- code: >-
+    [Obsolete("Obsolete in the V3 Spec, use Rev instead.")]
+
+    public Cid? Prev { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- api3: Rebase
+  id: FishyFlip_Models_FrameCommit_Rebase
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L81
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Rebase
+    commentId: P:FishyFlip.Models.FrameCommit.Rebase
+- markdown: Gets a value indicating whether this is a rebase.
+- code: public bool Rebase { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Repo
+  id: FishyFlip_Models_FrameCommit_Repo
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L61
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Repo
+    commentId: P:FishyFlip.Models.FrameCommit.Repo
+- markdown: Gets the repo.
+- code: public ATDid? Repo { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: Rev
+  id: FishyFlip_Models_FrameCommit_Rev
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L51
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Rev
+    commentId: P:FishyFlip.Models.FrameCommit.Rev
+- markdown: Gets the rev.
+- code: public string? Rev { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Seq
+  id: FishyFlip_Models_FrameCommit_Seq
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L35
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Seq
+    commentId: P:FishyFlip.Models.FrameCommit.Seq
+- markdown: Gets the sequence.
+- code: public int Seq { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Since
+  id: FishyFlip_Models_FrameCommit_Since
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L56
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Since
+    commentId: P:FishyFlip.Models.FrameCommit.Since
+- markdown: Gets the previous rev.
+- code: public string? Since { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Time
+  id: FishyFlip_Models_FrameCommit_Time
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L66
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.Time
+    commentId: P:FishyFlip.Models.FrameCommit.Time
+- markdown: Gets the date time of the frame.
+- code: public DateTime? Time { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+- api3: TooBig
+  id: FishyFlip_Models_FrameCommit_TooBig
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameCommit.cs#L87
+  metadata:
+    uid: FishyFlip.Models.FrameCommit.TooBig
+    commentId: P:FishyFlip.Models.FrameCommit.TooBig
+- markdown: >-
+    Gets a value indicating whether this is too big.
+
+    I have no idea what that means.
+- code: public bool TooBig { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+languageId: csharp

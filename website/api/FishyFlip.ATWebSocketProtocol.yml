@@ -1,0 +1,249 @@
+### YamlMime:ApiPage
+title: Class ATWebSocketProtocol
+body:
+- api1: Class ATWebSocketProtocol
+  id: FishyFlip_ATWebSocketProtocol
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L10
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol
+    commentId: T:FishyFlip.ATWebSocketProtocol
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: AT WebSocket Protocol.
+- code: 'public sealed class ATWebSocketProtocol : IDisposable'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATWebSocketProtocol
+    url: FishyFlip.ATWebSocketProtocol.html
+- h4: Implements
+- list:
+  - text: IDisposable
+    url: https://learn.microsoft.com/dotnet/api/system.idisposable
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: IsConnected
+  id: FishyFlip_ATWebSocketProtocol_IsConnected
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L60
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.IsConnected
+    commentId: P:FishyFlip.ATWebSocketProtocol.IsConnected
+- markdown: Gets a value indicating whether ATProtocol is connected.
+- code: public bool IsConnected { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: IsDisposed
+  id: FishyFlip_ATWebSocketProtocol_IsDisposed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L55
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.IsDisposed
+    commentId: P:FishyFlip.ATWebSocketProtocol.IsDisposed
+- markdown: Gets a value indicating whether the object is disposed.
+- code: public bool IsDisposed { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- h2: Methods
+- api3: CloseAsync(WebSocketCloseStatus, string, CancellationToken?)
+  id: FishyFlip_ATWebSocketProtocol_CloseAsync_System_Net_WebSockets_WebSocketCloseStatus_System_String_System_Nullable_System_Threading_CancellationToken__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L94
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.CloseAsync(System.Net.WebSockets.WebSocketCloseStatus,System.String,System.Nullable{System.Threading.CancellationToken})
+    commentId: M:FishyFlip.ATWebSocketProtocol.CloseAsync(System.Net.WebSockets.WebSocketCloseStatus,System.String,System.Nullable{System.Threading.CancellationToken})
+- markdown: Close the existing WebSocket connection.
+- code: public Task CloseAsync(WebSocketCloseStatus status = WebSocketCloseStatus.NormalClosure, string disconnectReason = "Client disconnecting", CancellationToken? token = null)
+- h4: Parameters
+- parameters:
+  - name: status
+    type:
+    - text: WebSocketCloseStatus
+      url: https://learn.microsoft.com/dotnet/api/system.net.websockets.websocketclosestatus
+    description: Status for the shutdown. Defaults to <xref href="System.Net.WebSockets.WebSocketCloseStatus.NormalClosure" data-throw-if-not-resolved="false"></xref>.
+    optional: true
+  - name: disconnectReason
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Reason for the shutdown.
+    optional: true
+  - name: token
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    - '?'
+    description: CancellationToken.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+    description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> representing the asynchronous operation.
+- api3: ConnectAsync(string, CancellationToken?)
+  id: FishyFlip_ATWebSocketProtocol_ConnectAsync_System_String_System_Nullable_System_Threading_CancellationToken__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L68
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.ConnectAsync(System.String,System.Nullable{System.Threading.CancellationToken})
+    commentId: M:FishyFlip.ATWebSocketProtocol.ConnectAsync(System.String,System.Nullable{System.Threading.CancellationToken})
+- markdown: Connect to the BlueSky instance via a WebSocket connection.
+- code: public Task ConnectAsync(string connection, CancellationToken? token = null)
+- h4: Parameters
+- parameters:
+  - name: connection
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Connection string.
+  - name: token
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    - '?'
+    description: CancellationToken.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+    description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> representing the asynchronous operation.
+- api3: Dispose()
+  id: FishyFlip_ATWebSocketProtocol_Dispose
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L151
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.Dispose
+    commentId: M:FishyFlip.ATWebSocketProtocol.Dispose
+- markdown: Dispose.
+- code: public void Dispose()
+- api3: StartSubscribeLabelsAsync(CancellationToken?)
+  id: FishyFlip_ATWebSocketProtocol_StartSubscribeLabelsAsync_System_Nullable_System_Threading_CancellationToken__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L123
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.StartSubscribeLabelsAsync(System.Nullable{System.Threading.CancellationToken})
+    commentId: M:FishyFlip.ATWebSocketProtocol.StartSubscribeLabelsAsync(System.Nullable{System.Threading.CancellationToken})
+- markdown: Start the ATProtocol SubscribeRepos sync session.
+- code: public Task StartSubscribeLabelsAsync(CancellationToken? token = null)
+- h4: Parameters
+- parameters:
+  - name: token
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    - '?'
+    description: Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+    description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> representing the asynchronous operation.
+- api3: StartSubscribeReposAsync(CancellationToken?)
+  id: FishyFlip_ATWebSocketProtocol_StartSubscribeReposAsync_System_Nullable_System_Threading_CancellationToken__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L115
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.StartSubscribeReposAsync(System.Nullable{System.Threading.CancellationToken})
+    commentId: M:FishyFlip.ATWebSocketProtocol.StartSubscribeReposAsync(System.Nullable{System.Threading.CancellationToken})
+- markdown: Start the ATProtocol SubscribeRepos sync session.
+- code: public Task StartSubscribeReposAsync(CancellationToken? token = null)
+- h4: Parameters
+- parameters:
+  - name: token
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    - '?'
+    description: Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+    description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> representing the asynchronous operation.
+- api3: StopSubscriptionAsync(CancellationToken?)
+  id: FishyFlip_ATWebSocketProtocol_StopSubscriptionAsync_System_Nullable_System_Threading_CancellationToken__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L131
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.StopSubscriptionAsync(System.Nullable{System.Threading.CancellationToken})
+    commentId: M:FishyFlip.ATWebSocketProtocol.StopSubscriptionAsync(System.Nullable{System.Threading.CancellationToken})
+- markdown: Stops the ATProtocol Subscription session.
+- code: public Task StopSubscriptionAsync(CancellationToken? token = null)
+- h4: Parameters
+- parameters:
+  - name: token
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    - '?'
+    description: Cancellation Token.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+    description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> representing the asynchronous operation.
+- api3: OnConnectionUpdated
+  id: FishyFlip_ATWebSocketProtocol_OnConnectionUpdated
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L45
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.OnConnectionUpdated
+    commentId: E:FishyFlip.ATWebSocketProtocol.OnConnectionUpdated
+- markdown: On Connection Updated.
+- code: public event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated
+- h4: Event Type
+- parameters:
+  - type:
+    - text: EventHandler
+      url: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+    - <
+    - text: SubscriptionConnectionStatusEventArgs
+      url: FishyFlip.Events.SubscriptionConnectionStatusEventArgs.html
+    - '>'
+    - '?'
+- api3: OnSubscribedRepoMessage
+  id: FishyFlip_ATWebSocketProtocol_OnSubscribedRepoMessage
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocol.cs#L50
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocol.OnSubscribedRepoMessage
+    commentId: E:FishyFlip.ATWebSocketProtocol.OnSubscribedRepoMessage
+- markdown: Event for when a subscribed repo message is received.
+- code: public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage
+- h4: Event Type
+- parameters:
+  - type:
+    - text: EventHandler
+      url: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+    - <
+    - text: SubscribedRepoEventArgs
+      url: FishyFlip.Events.SubscribedRepoEventArgs.html
+    - '>'
+    - '?'
+languageId: csharp
+metadata:
+  description: AT WebSocket Protocol.

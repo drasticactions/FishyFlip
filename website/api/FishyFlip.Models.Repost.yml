@@ -1,0 +1,137 @@
+### YamlMime:ApiPage
+title: Class Repost
+body:
+- api1: Class Repost
+  id: FishyFlip_Models_Repost
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Repost.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Repost
+    commentId: T:FishyFlip.Models.Repost
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class Repost : ATRecord'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Repost
+    url: FishyFlip.Models.Repost.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Repost(Cid?, ATUri?, DateTime?, string?)
+  id: FishyFlip_Models_Repost__ctor_Ipfs_Cid_FishyFlip_Models_ATUri_System_Nullable_System_DateTime__System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Repost.cs#L9
+  metadata:
+    uid: FishyFlip.Models.Repost.#ctor(Ipfs.Cid,FishyFlip.Models.ATUri,System.Nullable{System.DateTime},System.String)
+    commentId: M:FishyFlip.Models.Repost.#ctor(Ipfs.Cid,FishyFlip.Models.ATUri,System.Nullable{System.DateTime},System.String)
+- code: >-
+    [JsonConstructor]
+
+    public Repost(Cid? cid, ATUri? uri, DateTime? createdAt, string? type)
+- h4: Parameters
+- parameters:
+  - name: cid
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+  - name: uri
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+    - '?'
+  - name: createdAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Repost(CBORObject, ILogger?)
+  id: FishyFlip_Models_Repost__ctor_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Repost.cs#L18
+  metadata:
+    uid: FishyFlip.Models.Repost.#ctor(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+    commentId: M:FishyFlip.Models.Repost.#ctor(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+- code: public Repost(CBORObject obj, ILogger? logger = null)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+  - name: logger
+    type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+    optional: true
+- h2: Properties
+- api3: Cid
+  id: FishyFlip_Models_Repost_Cid
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Repost.cs#L26
+  metadata:
+    uid: FishyFlip.Models.Repost.Cid
+    commentId: P:FishyFlip.Models.Repost.Cid
+- code: public Cid? Cid { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- api3: CreatedAt
+  id: FishyFlip_Models_Repost_CreatedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Repost.cs#L30
+  metadata:
+    uid: FishyFlip.Models.Repost.CreatedAt
+    commentId: P:FishyFlip.Models.Repost.CreatedAt
+- code: public DateTime? CreatedAt { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+- api3: Uri
+  id: FishyFlip_Models_Repost_Uri
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Repost.cs#L28
+  metadata:
+    uid: FishyFlip.Models.Repost.Uri
+    commentId: P:FishyFlip.Models.Repost.Uri
+- code: public ATUri? Uri { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+    - '?'
+languageId: csharp

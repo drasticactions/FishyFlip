@@ -1,0 +1,111 @@
+### YamlMime:ApiPage
+title: Class CreateInviteCodes
+body:
+- api1: Class CreateInviteCodes
+  id: FishyFlip_Models_Internal_CreateInviteCodes
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCodes.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCodes
+    commentId: T:FishyFlip.Models.Internal.CreateInviteCodes
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models.Internal
+      url: FishyFlip.Models.Internal.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record CreateInviteCodes : IEquatable<CreateInviteCodes>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CreateInviteCodes
+    url: FishyFlip.Models.Internal.CreateInviteCodes.html
+- h4: Implements
+- list:
+  - text: IEquatable<CreateInviteCodes>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: CreateInviteCodes(int, int, ATDid[]?)
+  id: FishyFlip_Models_Internal_CreateInviteCodes__ctor_System_Int32_System_Int32_FishyFlip_Models_ATDid___
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCodes.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCodes.#ctor(System.Int32,System.Int32,FishyFlip.Models.ATDid[])
+    commentId: M:FishyFlip.Models.Internal.CreateInviteCodes.#ctor(System.Int32,System.Int32,FishyFlip.Models.ATDid[])
+- code: public CreateInviteCodes(int CodeCount, int UseCount = 1, ATDid[]? ForAccounts = null)
+- h4: Parameters
+- parameters:
+  - name: CodeCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: UseCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: ForAccounts
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '['
+    - ']'
+    - '?'
+    optional: true
+- h2: Properties
+- api3: CodeCount
+  id: FishyFlip_Models_Internal_CreateInviteCodes_CodeCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCodes.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCodes.CodeCount
+    commentId: P:FishyFlip.Models.Internal.CreateInviteCodes.CodeCount
+- code: public int CodeCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ForAccounts
+  id: FishyFlip_Models_Internal_CreateInviteCodes_ForAccounts
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCodes.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCodes.ForAccounts
+    commentId: P:FishyFlip.Models.Internal.CreateInviteCodes.ForAccounts
+- code: public ATDid[]? ForAccounts { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '['
+    - ']'
+    - '?'
+- api3: UseCount
+  id: FishyFlip_Models_Internal_CreateInviteCodes_UseCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCodes.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCodes.UseCount
+    commentId: P:FishyFlip.Models.Internal.CreateInviteCodes.UseCount
+- code: public int UseCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+languageId: csharp

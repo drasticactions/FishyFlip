@@ -1,0 +1,77 @@
+### YamlMime:ApiPage
+title: Class ResultExtensions
+body:
+- api1: Class ResultExtensions
+  id: FishyFlip_Tools_ResultExtensions
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/ResultExtensions.cs#L10
+  metadata:
+    uid: FishyFlip.Tools.ResultExtensions
+    commentId: T:FishyFlip.Tools.ResultExtensions
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Tools
+      url: FishyFlip.Tools.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Result Extensions.
+- code: public static class ResultExtensions
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ResultExtensions
+    url: FishyFlip.Tools.ResultExtensions.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: HandleResult<T>(Result<T>)
+  id: FishyFlip_Tools_ResultExtensions_HandleResult__1_FishyFlip_Models_Result___0__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/ResultExtensions.cs#L19
+  metadata:
+    uid: FishyFlip.Tools.ResultExtensions.HandleResult``1(FishyFlip.Models.Result{``0})
+    commentId: M:FishyFlip.Tools.ResultExtensions.HandleResult``1(FishyFlip.Models.Result{``0})
+- markdown: Throw ATNetworkErrorException if Result is an Error object..
+- code: public static T HandleResult<T>(this Result<T> result)
+- h4: Parameters
+- parameters:
+  - name: result
+    type:
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - T
+    - '>'
+    description: Result object.
+- h4: Returns
+- parameters:
+  - type:
+    - T
+    description: Result object if success.
+- h4: Type Parameters
+- parameters:
+  - name: T
+    description: Base object.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ATNetworkErrorException
+      url: FishyFlip.Tools.ATNetworkErrorException.html
+    description: Thrown if the result is an error object.
+languageId: csharp
+metadata:
+  description: Result Extensions.

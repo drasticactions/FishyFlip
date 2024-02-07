@@ -1,0 +1,151 @@
+### YamlMime:ApiPage
+title: Class FrameFooter
+body:
+- api1: Class FrameFooter
+  id: FishyFlip_Models_FrameFooter
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L7
+  metadata:
+    uid: FishyFlip.Models.FrameFooter
+    commentId: T:FishyFlip.Models.FrameFooter
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class FrameFooter
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: FrameFooter
+    url: FishyFlip.Models.FrameFooter.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: FrameFooter(CBORObject, ILogger?)
+  id: FishyFlip_Models_FrameFooter__ctor_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L9
+  metadata:
+    uid: FishyFlip.Models.FrameFooter.#ctor(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+    commentId: M:FishyFlip.Models.FrameFooter.#ctor(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+- code: public FrameFooter(CBORObject obj, ILogger? logger = null)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+  - name: logger
+    type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+    optional: true
+- h2: Properties
+- api3: Data
+  id: FishyFlip_Models_FrameFooter_Data
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L27
+  metadata:
+    uid: FishyFlip.Models.FrameFooter.Data
+    commentId: P:FishyFlip.Models.FrameFooter.Data
+- code: public Cid? Data { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- api3: Did
+  id: FishyFlip_Models_FrameFooter_Did
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L21
+  metadata:
+    uid: FishyFlip.Models.FrameFooter.Did
+    commentId: P:FishyFlip.Models.FrameFooter.Did
+- markdown: Gets the Did.
+- code: public ATDid? Did { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: Prev
+  id: FishyFlip_Models_FrameFooter_Prev
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L25
+  metadata:
+    uid: FishyFlip.Models.FrameFooter.Prev
+    commentId: P:FishyFlip.Models.FrameFooter.Prev
+- code: public Cid? Prev { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- api3: Sig
+  id: FishyFlip_Models_FrameFooter_Sig
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L29
+  metadata:
+    uid: FishyFlip.Models.FrameFooter.Sig
+    commentId: P:FishyFlip.Models.FrameFooter.Sig
+- code: public byte[] Sig { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '['
+    - ']'
+- api3: Version
+  id: FishyFlip_Models_FrameFooter_Version
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L23
+  metadata:
+    uid: FishyFlip.Models.FrameFooter.Version
+    commentId: P:FishyFlip.Models.FrameFooter.Version
+- code: public int Version { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- h2: Methods
+- api3: FromCBORObject(CBORObject, ILogger?)
+  id: FishyFlip_Models_FrameFooter_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameFooter.cs#L31
+  metadata:
+    uid: FishyFlip.Models.FrameFooter.FromCBORObject(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+    commentId: M:FishyFlip.Models.FrameFooter.FromCBORObject(PeterO.Cbor.CBORObject,Microsoft.Extensions.Logging.ILogger)
+- code: public static FrameFooter? FromCBORObject(CBORObject blockObj, ILogger? logger = null)
+- h4: Parameters
+- parameters:
+  - name: blockObj
+    type:
+    - CBORObject
+  - name: logger
+    type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: FrameFooter
+      url: FishyFlip.Models.FrameFooter.html
+    - '?'
+languageId: csharp

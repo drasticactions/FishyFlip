@@ -1,0 +1,98 @@
+### YamlMime:ApiPage
+title: Class ExternalEmbed
+body:
+- api1: Class ExternalEmbed
+  id: FishyFlip_Models_ExternalEmbed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ExternalEmbed.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ExternalEmbed
+    commentId: T:FishyFlip.Models.ExternalEmbed
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class ExternalEmbed : Embed'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Embed
+    url: FishyFlip.Models.Embed.html
+  - text: ExternalEmbed
+    url: FishyFlip.Models.ExternalEmbed.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ExternalEmbed(External, string?)
+  id: FishyFlip_Models_ExternalEmbed__ctor_FishyFlip_Models_External_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ExternalEmbed.cs#L9
+  metadata:
+    uid: FishyFlip.Models.ExternalEmbed.#ctor(FishyFlip.Models.External,System.String)
+    commentId: M:FishyFlip.Models.ExternalEmbed.#ctor(FishyFlip.Models.External,System.String)
+- code: >-
+    [JsonConstructor]
+
+    public ExternalEmbed(External external, string? type)
+- h4: Parameters
+- parameters:
+  - name: external
+    type:
+    - text: External
+      url: FishyFlip.Models.External.html
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: ExternalEmbed(CBORObject)
+  id: FishyFlip_Models_ExternalEmbed__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ExternalEmbed.cs#L20
+  metadata:
+    uid: FishyFlip.Models.ExternalEmbed.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.ExternalEmbed.#ctor(PeterO.Cbor.CBORObject)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.Models.ExternalEmbed" data-throw-if-not-resolved="false"></xref> class.
+- code: public ExternalEmbed(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+    description: CBORObject.
+- h2: Properties
+- api3: External
+  id: FishyFlip_Models_ExternalEmbed_External
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ExternalEmbed.cs#L26
+  metadata:
+    uid: FishyFlip.Models.ExternalEmbed.External
+    commentId: P:FishyFlip.Models.ExternalEmbed.External
+- code: public External? External { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: External
+      url: FishyFlip.Models.External.html
+    - '?'
+languageId: csharp

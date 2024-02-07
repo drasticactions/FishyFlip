@@ -1,0 +1,40 @@
+### YamlMime:ApiPage
+title: Class Constants.Urls
+body:
+- api1: Class Constants.Urls
+  id: FishyFlip_Constants_Urls
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L13
+  metadata:
+    uid: FishyFlip.Constants.Urls
+    commentId: T:FishyFlip.Constants.Urls
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public static class Constants.Urls
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Constants.Urls
+    url: FishyFlip.Constants.Urls.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+languageId: csharp

@@ -1,0 +1,144 @@
+### YamlMime:ApiPage
+title: Class Profile
+body:
+- api1: Class Profile
+  id: FishyFlip_Models_Profile
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Profile.cs#L6
+  metadata:
+    uid: FishyFlip.Models.Profile
+    commentId: T:FishyFlip.Models.Profile
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class Profile : ATRecord'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Profile
+    url: FishyFlip.Models.Profile.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Profile(string?, string, Image?, Image?)
+  id: FishyFlip_Models_Profile__ctor_System_String_System_String_FishyFlip_Models_Image_FishyFlip_Models_Image_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Profile.cs#L8
+  metadata:
+    uid: FishyFlip.Models.Profile.#ctor(System.String,System.String,FishyFlip.Models.Image,FishyFlip.Models.Image)
+    commentId: M:FishyFlip.Models.Profile.#ctor(System.String,System.String,FishyFlip.Models.Image,FishyFlip.Models.Image)
+- code: >-
+    [JsonConstructor]
+
+    public Profile(string? displayName, string description, Image? avatar, Image? banner)
+- h4: Parameters
+- parameters:
+  - name: displayName
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: description
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: avatar
+    type:
+    - text: Image
+      url: FishyFlip.Models.Image.html
+    - '?'
+  - name: banner
+    type:
+    - text: Image
+      url: FishyFlip.Models.Image.html
+    - '?'
+- api3: Profile(CBORObject)
+  id: FishyFlip_Models_Profile__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Profile.cs#L21
+  metadata:
+    uid: FishyFlip.Models.Profile.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.Profile.#ctor(PeterO.Cbor.CBORObject)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.Models.Profile" data-throw-if-not-resolved="false"></xref> class.
+- code: public Profile(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+- h2: Properties
+- api3: Avatar
+  id: FishyFlip_Models_Profile_Avatar
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Profile.cs#L30
+  metadata:
+    uid: FishyFlip.Models.Profile.Avatar
+    commentId: P:FishyFlip.Models.Profile.Avatar
+- code: public Image? Avatar { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Image
+      url: FishyFlip.Models.Image.html
+    - '?'
+- api3: Banner
+  id: FishyFlip_Models_Profile_Banner
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Profile.cs#L32
+  metadata:
+    uid: FishyFlip.Models.Profile.Banner
+    commentId: P:FishyFlip.Models.Profile.Banner
+- code: public Image? Banner { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Image
+      url: FishyFlip.Models.Image.html
+    - '?'
+- api3: Description
+  id: FishyFlip_Models_Profile_Description
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Profile.cs#L36
+  metadata:
+    uid: FishyFlip.Models.Profile.Description
+    commentId: P:FishyFlip.Models.Profile.Description
+- code: public string? Description { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: DisplayName
+  id: FishyFlip_Models_Profile_DisplayName
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Profile.cs#L34
+  metadata:
+    uid: FishyFlip.Models.Profile.DisplayName
+    commentId: P:FishyFlip.Models.Profile.DisplayName
+- code: public string? DisplayName { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+languageId: csharp

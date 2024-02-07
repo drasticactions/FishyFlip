@@ -1,0 +1,197 @@
+### YamlMime:ApiPage
+title: Class Constants.Urls.ATProtoAdmin
+body:
+- api1: Class Constants.Urls.ATProtoAdmin
+  id: FishyFlip_Constants_Urls_ATProtoAdmin
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L40
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin
+    commentId: T:FishyFlip.Constants.Urls.ATProtoAdmin
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public static class Constants.Urls.ATProtoAdmin
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Constants.Urls.ATProtoAdmin
+    url: FishyFlip.Constants.Urls.ATProtoAdmin.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: GetInviteCodes
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_GetInviteCodes
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L42
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.GetInviteCodes
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.GetInviteCodes
+- code: public const string GetInviteCodes = "/xrpc/com.atproto.admin.getInviteCodes"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetModerationAction
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_GetModerationAction
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L43
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationAction
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationAction
+- code: public const string GetModerationAction = "/xrpc/com.atproto.admin.getModerationAction"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetModerationActions
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_GetModerationActions
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L44
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationActions
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationActions
+- code: public const string GetModerationActions = "/xrpc/com.atproto.admin.getModerationActions"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetModerationReport
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_GetModerationReport
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L45
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationReport
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationReport
+- code: public const string GetModerationReport = "/xrpc/com.atproto.admin.getModerationReport"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetModerationReports
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_GetModerationReports
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L46
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationReports
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.GetModerationReports
+- code: public const string GetModerationReports = "/xrpc/com.atproto.admin.getModerationReports"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetRecord
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_GetRecord
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L47
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.GetRecord
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.GetRecord
+- code: public const string GetRecord = "/xrpc/com.atproto.admin.getRecord"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetRepo
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_GetRepo
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L48
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.GetRepo
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.GetRepo
+- code: public const string GetRepo = "/xrpc/com.atproto.admin.getRepo"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: ResolveModerationReports
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_ResolveModerationReports
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L50
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.ResolveModerationReports
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.ResolveModerationReports
+- code: public const string ResolveModerationReports = "/xrpc/com.atproto.admin.resolveModerationReports"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: ReverseModerationAction
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_ReverseModerationAction
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L51
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.ReverseModerationAction
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.ReverseModerationAction
+- code: public const string ReverseModerationAction = "/xrpc/com.atproto.admin.reverseModerationAction"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: SearchRepos
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_SearchRepos
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L49
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.SearchRepos
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.SearchRepos
+- code: public const string SearchRepos = "/xrpc/com.atproto.admin.searchRepos"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: TakeModerationAction
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_TakeModerationAction
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L52
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.TakeModerationAction
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.TakeModerationAction
+- code: public const string TakeModerationAction = "/xrpc/com.atproto.admin.takeModerationAction"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: UpdateAccountEmail
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_UpdateAccountEmail
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L53
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.UpdateAccountEmail
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.UpdateAccountEmail
+- code: public const string UpdateAccountEmail = "/xrpc/com.atproto.admin.updateAccountEmail"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: UpdateAccountHandle
+  id: FishyFlip_Constants_Urls_ATProtoAdmin_UpdateAccountHandle
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L54
+  metadata:
+    uid: FishyFlip.Constants.Urls.ATProtoAdmin.UpdateAccountHandle
+    commentId: F:FishyFlip.Constants.Urls.ATProtoAdmin.UpdateAccountHandle
+- code: public const string UpdateAccountHandle = "/xrpc/com.atproto.admin.updateAccountHandle"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

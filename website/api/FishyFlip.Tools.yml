@@ -1,0 +1,52 @@
+### YamlMime:ApiPage
+title: Namespace FishyFlip.Tools
+body:
+- api1: Namespace FishyFlip.Tools
+  id: FishyFlip_Tools
+  metadata:
+    uid: FishyFlip.Tools
+    commentId: N:FishyFlip.Tools
+- h3: Namespaces
+- parameters:
+  - type:
+      text: FishyFlip.Tools.Json
+      url: FishyFlip.Tools.Json.html
+- h3: Classes
+- parameters:
+  - type:
+      text: ATNetworkErrorException
+      url: FishyFlip.Tools.ATNetworkErrorException.html
+    description: >-
+      AT Network Error Exception.
+
+      Thrown if given a failed result from ATProtocol.
+  - type:
+      text: CarDecoder
+      url: FishyFlip.Tools.CarDecoder.html
+    description: Decode CAR byte arrays.
+  - type:
+      text: CarProgressStatusEvent
+      url: FishyFlip.Tools.CarProgressStatusEvent.html
+  - type:
+      text: EnumExtensions
+      url: FishyFlip.Tools.EnumExtensions.html
+    description: Enum Extensions.
+  - type:
+      text: Multiple<T0, T1>
+      url: FishyFlip.Tools.Multiple-2.html
+    description: Minimalistic https://github.com/mcintyre321/OneOf.
+  - type:
+      text: MultipleBase<T0, T1>
+      url: FishyFlip.Tools.MultipleBase-2.html
+    description: Minimalistic https://github.com/mcintyre321/OneOf.
+  - type:
+      text: ResultExtensions
+      url: FishyFlip.Tools.ResultExtensions.html
+    description: Result Extensions.
+- h3: Delegates
+- parameters:
+  - type:
+      text: OnCarDecoded
+      url: FishyFlip.Tools.OnCarDecoded.html
+    description: Fires when a car file is decoded.
+languageId: csharp

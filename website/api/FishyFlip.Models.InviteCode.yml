@@ -1,0 +1,71 @@
+### YamlMime:ApiPage
+title: Class InviteCode
+body:
+- api1: Class InviteCode
+  id: FishyFlip_Models_InviteCode
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/InviteCode.cs#L13
+  metadata:
+    uid: FishyFlip.Models.InviteCode
+    commentId: T:FishyFlip.Models.InviteCode
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record InviteCode : IEquatable<InviteCode>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: InviteCode
+    url: FishyFlip.Models.InviteCode.html
+- h4: Implements
+- list:
+  - text: IEquatable<InviteCode>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: InviteCode(string)
+  id: FishyFlip_Models_InviteCode__ctor_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/InviteCode.cs#L13
+  metadata:
+    uid: FishyFlip.Models.InviteCode.#ctor(System.String)
+    commentId: M:FishyFlip.Models.InviteCode.#ctor(System.String)
+- code: public InviteCode(string Code)
+- h4: Parameters
+- parameters:
+  - name: Code
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h2: Properties
+- api3: Code
+  id: FishyFlip_Models_InviteCode_Code
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/InviteCode.cs#L13
+  metadata:
+    uid: FishyFlip.Models.InviteCode.Code
+    commentId: P:FishyFlip.Models.InviteCode.Code
+- code: public string Code { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

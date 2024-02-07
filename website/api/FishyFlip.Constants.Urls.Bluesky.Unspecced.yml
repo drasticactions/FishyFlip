@@ -1,0 +1,53 @@
+### YamlMime:ApiPage
+title: Class Constants.Urls.Bluesky.Unspecced
+body:
+- api1: Class Constants.Urls.Bluesky.Unspecced
+  id: FishyFlip_Constants_Urls_Bluesky_Unspecced
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L153
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Unspecced
+    commentId: T:FishyFlip.Constants.Urls.Bluesky.Unspecced
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public static class Constants.Urls.Bluesky.Unspecced
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Constants.Urls.Bluesky.Unspecced
+    url: FishyFlip.Constants.Urls.Bluesky.Unspecced.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: GetPopularFeedGenerators
+  id: FishyFlip_Constants_Urls_Bluesky_Unspecced_GetPopularFeedGenerators
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L155
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Unspecced.GetPopularFeedGenerators
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Unspecced.GetPopularFeedGenerators
+- code: public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

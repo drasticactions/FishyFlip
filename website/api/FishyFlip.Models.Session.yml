@@ -1,0 +1,154 @@
+### YamlMime:ApiPage
+title: Class Session
+body:
+- api1: Class Session
+  id: FishyFlip_Models_Session
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Session
+    commentId: T:FishyFlip.Models.Session
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class Session
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Session
+    url: FishyFlip.Models.Session.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Session(ATDid, DidDoc?, ATHandle, string?, string, string)
+  id: FishyFlip_Models_Session__ctor_FishyFlip_Models_ATDid_FishyFlip_Models_DidDoc_FishyFlip_Models_ATHandle_System_String_System_String_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L9
+  metadata:
+    uid: FishyFlip.Models.Session.#ctor(FishyFlip.Models.ATDid,FishyFlip.Models.DidDoc,FishyFlip.Models.ATHandle,System.String,System.String,System.String)
+    commentId: M:FishyFlip.Models.Session.#ctor(FishyFlip.Models.ATDid,FishyFlip.Models.DidDoc,FishyFlip.Models.ATHandle,System.String,System.String,System.String)
+- code: >-
+    [JsonConstructor]
+
+    public Session(ATDid did, DidDoc? didDoc, ATHandle handle, string? email, string accessJwt, string refreshJwt)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+  - name: didDoc
+    type:
+    - text: DidDoc
+      url: FishyFlip.Models.DidDoc.html
+    - '?'
+  - name: handle
+    type:
+    - text: ATHandle
+      url: FishyFlip.Models.ATHandle.html
+  - name: email
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: accessJwt
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: refreshJwt
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h2: Properties
+- api3: AccessJwt
+  id: FishyFlip_Models_Session_AccessJwt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L34
+  metadata:
+    uid: FishyFlip.Models.Session.AccessJwt
+    commentId: P:FishyFlip.Models.Session.AccessJwt
+- code: public string AccessJwt { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Did
+  id: FishyFlip_Models_Session_Did
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L26
+  metadata:
+    uid: FishyFlip.Models.Session.Did
+    commentId: P:FishyFlip.Models.Session.Did
+- code: public ATDid Did { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+- api3: DidDoc
+  id: FishyFlip_Models_Session_DidDoc
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L28
+  metadata:
+    uid: FishyFlip.Models.Session.DidDoc
+    commentId: P:FishyFlip.Models.Session.DidDoc
+- code: public DidDoc? DidDoc { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DidDoc
+      url: FishyFlip.Models.DidDoc.html
+    - '?'
+- api3: Email
+  id: FishyFlip_Models_Session_Email
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L32
+  metadata:
+    uid: FishyFlip.Models.Session.Email
+    commentId: P:FishyFlip.Models.Session.Email
+- code: public string? Email { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Handle
+  id: FishyFlip_Models_Session_Handle
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L30
+  metadata:
+    uid: FishyFlip.Models.Session.Handle
+    commentId: P:FishyFlip.Models.Session.Handle
+- code: public ATHandle Handle { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATHandle
+      url: FishyFlip.Models.ATHandle.html
+- api3: RefreshJwt
+  id: FishyFlip_Models_Session_RefreshJwt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Session.cs#L36
+  metadata:
+    uid: FishyFlip.Models.Session.RefreshJwt
+    commentId: P:FishyFlip.Models.Session.RefreshJwt
+- code: public string RefreshJwt { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

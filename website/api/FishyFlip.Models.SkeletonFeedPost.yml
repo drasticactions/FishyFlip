@@ -1,0 +1,89 @@
+### YamlMime:ApiPage
+title: Class SkeletonFeedPost
+body:
+- api1: Class SkeletonFeedPost
+  id: FishyFlip_Models_SkeletonFeedPost
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L5
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeedPost
+    commentId: T:FishyFlip.Models.SkeletonFeedPost
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record SkeletonFeedPost : IEquatable<SkeletonFeedPost>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: SkeletonFeedPost
+    url: FishyFlip.Models.SkeletonFeedPost.html
+- h4: Implements
+- list:
+  - text: IEquatable<SkeletonFeedPost>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: SkeletonFeedPost(ATUri, SkeletonReasonRepost?)
+  id: FishyFlip_Models_SkeletonFeedPost__ctor_FishyFlip_Models_ATUri_FishyFlip_Models_SkeletonReasonRepost_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L5
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeedPost.#ctor(FishyFlip.Models.ATUri,FishyFlip.Models.SkeletonReasonRepost)
+    commentId: M:FishyFlip.Models.SkeletonFeedPost.#ctor(FishyFlip.Models.ATUri,FishyFlip.Models.SkeletonReasonRepost)
+- code: public SkeletonFeedPost(ATUri Post, SkeletonReasonRepost? Reason)
+- h4: Parameters
+- parameters:
+  - name: Post
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: Reason
+    type:
+    - text: SkeletonReasonRepost
+      url: FishyFlip.Models.SkeletonReasonRepost.html
+    - '?'
+- h2: Properties
+- api3: Post
+  id: FishyFlip_Models_SkeletonFeedPost_Post
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L5
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeedPost.Post
+    commentId: P:FishyFlip.Models.SkeletonFeedPost.Post
+- code: public ATUri Post { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+- api3: Reason
+  id: FishyFlip_Models_SkeletonFeedPost_Reason
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L5
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeedPost.Reason
+    commentId: P:FishyFlip.Models.SkeletonFeedPost.Reason
+- code: public SkeletonReasonRepost? Reason { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: SkeletonReasonRepost
+      url: FishyFlip.Models.SkeletonReasonRepost.html
+    - '?'
+languageId: csharp

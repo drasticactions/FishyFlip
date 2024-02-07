@@ -1,0 +1,93 @@
+### YamlMime:ApiPage
+title: Class SkeletonFeed
+body:
+- api1: Class SkeletonFeed
+  id: FishyFlip_Models_SkeletonFeed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L3
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeed
+    commentId: T:FishyFlip.Models.SkeletonFeed
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record SkeletonFeed : IEquatable<SkeletonFeed>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: SkeletonFeed
+    url: FishyFlip.Models.SkeletonFeed.html
+- h4: Implements
+- list:
+  - text: IEquatable<SkeletonFeed>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: SkeletonFeed(SkeletonFeedPost[], string?)
+  id: FishyFlip_Models_SkeletonFeed__ctor_FishyFlip_Models_SkeletonFeedPost___System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L3
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeed.#ctor(FishyFlip.Models.SkeletonFeedPost[],System.String)
+    commentId: M:FishyFlip.Models.SkeletonFeed.#ctor(FishyFlip.Models.SkeletonFeedPost[],System.String)
+- code: public SkeletonFeed(SkeletonFeedPost[] Feed, string? Cursor)
+- h4: Parameters
+- parameters:
+  - name: Feed
+    type:
+    - text: SkeletonFeedPost
+      url: FishyFlip.Models.SkeletonFeedPost.html
+    - '['
+    - ']'
+  - name: Cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- h2: Properties
+- api3: Cursor
+  id: FishyFlip_Models_SkeletonFeed_Cursor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L3
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeed.Cursor
+    commentId: P:FishyFlip.Models.SkeletonFeed.Cursor
+- code: public string? Cursor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Feed
+  id: FishyFlip_Models_SkeletonFeed_Feed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/SkeletonFeedPost.cs#L3
+  metadata:
+    uid: FishyFlip.Models.SkeletonFeed.Feed
+    commentId: P:FishyFlip.Models.SkeletonFeed.Feed
+- code: public SkeletonFeedPost[] Feed { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: SkeletonFeedPost
+      url: FishyFlip.Models.SkeletonFeedPost.html
+    - '['
+    - ']'
+languageId: csharp

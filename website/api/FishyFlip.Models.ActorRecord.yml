@@ -1,0 +1,88 @@
+### YamlMime:ApiPage
+title: Class ActorRecord
+body:
+- api1: Class ActorRecord
+  id: FishyFlip_Models_ActorRecord
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorRecord
+    commentId: T:FishyFlip.Models.ActorRecord
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class ActorRecord : ATFeedTypeAPI'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATFeedTypeAPI
+    url: FishyFlip.Models.ATFeedTypeAPI.html
+  - text: ActorRecord
+    url: FishyFlip.Models.ActorRecord.html
+- h4: Inherited Members
+- list:
+  - text: ATFeedTypeAPI.Uri
+    url: FishyFlip.Models.ATFeedTypeAPI.html#FishyFlip_Models_ATFeedTypeAPI_Uri
+  - text: ATFeedTypeAPI.Cid
+    url: FishyFlip.Models.ATFeedTypeAPI.html#FishyFlip_Models_ATFeedTypeAPI_Cid
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ActorRecord(Profile?, ATUri?, Cid?)
+  id: FishyFlip_Models_ActorRecord__ctor_FishyFlip_Models_Profile_FishyFlip_Models_ATUri_Ipfs_Cid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorRecord.cs#L9
+  metadata:
+    uid: FishyFlip.Models.ActorRecord.#ctor(FishyFlip.Models.Profile,FishyFlip.Models.ATUri,Ipfs.Cid)
+    commentId: M:FishyFlip.Models.ActorRecord.#ctor(FishyFlip.Models.Profile,FishyFlip.Models.ATUri,Ipfs.Cid)
+- code: >-
+    [JsonConstructor]
+
+    public ActorRecord(Profile? value, ATUri? uri, Cid? cid)
+- h4: Parameters
+- parameters:
+  - name: value
+    type:
+    - text: Profile
+      url: FishyFlip.Models.Profile.html
+    - '?'
+  - name: uri
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+    - '?'
+  - name: cid
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- h2: Properties
+- api3: Value
+  id: FishyFlip_Models_ActorRecord_Value
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorRecord.cs#L16
+  metadata:
+    uid: FishyFlip.Models.ActorRecord.Value
+    commentId: P:FishyFlip.Models.ActorRecord.Value
+- code: public Profile? Value { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Profile
+      url: FishyFlip.Models.Profile.html
+    - '?'
+languageId: csharp

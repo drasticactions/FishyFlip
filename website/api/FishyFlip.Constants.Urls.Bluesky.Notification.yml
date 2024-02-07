@@ -1,0 +1,77 @@
+### YamlMime:ApiPage
+title: Class Constants.Urls.Bluesky.Notification
+body:
+- api1: Class Constants.Urls.Bluesky.Notification
+  id: FishyFlip_Constants_Urls_Bluesky_Notification
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L146
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Notification
+    commentId: T:FishyFlip.Constants.Urls.Bluesky.Notification
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public static class Constants.Urls.Bluesky.Notification
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Constants.Urls.Bluesky.Notification
+    url: FishyFlip.Constants.Urls.Bluesky.Notification.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: NotificationGetUnreadCount
+  id: FishyFlip_Constants_Urls_Bluesky_Notification_NotificationGetUnreadCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L150
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Notification.NotificationGetUnreadCount
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Notification.NotificationGetUnreadCount
+- code: public const string NotificationGetUnreadCount = "/xrpc/app.bsky.notification.getUnreadCount"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: NotificationListNotifications
+  id: FishyFlip_Constants_Urls_Bluesky_Notification_NotificationListNotifications
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L149
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Notification.NotificationListNotifications
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Notification.NotificationListNotifications
+- code: public const string NotificationListNotifications = "/xrpc/app.bsky.notification.listNotifications"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: NotificationUpdateSeen
+  id: FishyFlip_Constants_Urls_Bluesky_Notification_NotificationUpdateSeen
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L148
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Notification.NotificationUpdateSeen
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Notification.NotificationUpdateSeen
+- code: public const string NotificationUpdateSeen = "/xrpc/app.bsky.notification.updateSeen"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

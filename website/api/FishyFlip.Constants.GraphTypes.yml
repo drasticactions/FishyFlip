@@ -1,0 +1,89 @@
+### YamlMime:ApiPage
+title: Class Constants.GraphTypes
+body:
+- api1: Class Constants.GraphTypes
+  id: FishyFlip_Constants_GraphTypes
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L165
+  metadata:
+    uid: FishyFlip.Constants.GraphTypes
+    commentId: T:FishyFlip.Constants.GraphTypes
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public static class Constants.GraphTypes
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Constants.GraphTypes
+    url: FishyFlip.Constants.GraphTypes.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: Block
+  id: FishyFlip_Constants_GraphTypes_Block
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L170
+  metadata:
+    uid: FishyFlip.Constants.GraphTypes.Block
+    commentId: F:FishyFlip.Constants.GraphTypes.Block
+- code: public const string Block = "app.bsky.graph.block"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Follow
+  id: FishyFlip_Constants_GraphTypes_Follow
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L169
+  metadata:
+    uid: FishyFlip.Constants.GraphTypes.Follow
+    commentId: F:FishyFlip.Constants.GraphTypes.Follow
+- code: public const string Follow = "app.bsky.graph.follow"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: List
+  id: FishyFlip_Constants_GraphTypes_List
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L168
+  metadata:
+    uid: FishyFlip.Constants.GraphTypes.List
+    commentId: F:FishyFlip.Constants.GraphTypes.List
+- code: public const string List = "app.bsky.graph.list"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: ListItem
+  id: FishyFlip_Constants_GraphTypes_ListItem
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L167
+  metadata:
+    uid: FishyFlip.Constants.GraphTypes.ListItem
+    commentId: F:FishyFlip.Constants.GraphTypes.ListItem
+- code: public const string ListItem = "app.bsky.graph.listitem"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

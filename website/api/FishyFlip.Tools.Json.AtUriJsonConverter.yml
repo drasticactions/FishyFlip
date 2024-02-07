@@ -1,0 +1,117 @@
+### YamlMime:ApiPage
+title: Class AtUriJsonConverter
+body:
+- api1: Class AtUriJsonConverter
+  id: FishyFlip_Tools_Json_AtUriJsonConverter
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/Json/AtUriJsonConverter.cs#L7
+  metadata:
+    uid: FishyFlip.Tools.Json.AtUriJsonConverter
+    commentId: T:FishyFlip.Tools.Json.AtUriJsonConverter
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Tools.Json
+      url: FishyFlip.Tools.Json.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class AtUriJsonConverter : JsonConverter<ATUri>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: JsonConverter
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter
+  - text: JsonConverter<ATUri>
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1
+  - text: AtUriJsonConverter
+    url: FishyFlip.Tools.Json.AtUriJsonConverter.html
+- h4: Inherited Members
+- list:
+  - text: JsonConverter<ATUri>.CanConvert(Type)
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.canconvert
+  - text: JsonConverter<ATUri>.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.read
+  - text: JsonConverter<ATUri>.ReadAsPropertyName(ref Utf8JsonReader, Type, JsonSerializerOptions)
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.readaspropertyname
+  - text: JsonConverter<ATUri>.Write(Utf8JsonWriter, ATUri, JsonSerializerOptions)
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.write
+  - text: JsonConverter<ATUri>.WriteAsPropertyName(Utf8JsonWriter, ATUri, JsonSerializerOptions)
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.writeaspropertyname
+  - text: JsonConverter<ATUri>.HandleNull
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.handlenull
+  - text: JsonConverter.CanConvert(Type)
+    url: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter.canconvert
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  id: FishyFlip_Tools_Json_AtUriJsonConverter_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/Json/AtUriJsonConverter.cs#L9
+  metadata:
+    uid: FishyFlip.Tools.Json.AtUriJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+    commentId: M:FishyFlip.Tools.Json.AtUriJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+- markdown: Reads and converts the JSON to type <xref href="FishyFlip.Models.ATUri" data-throw-if-not-resolved="false"></xref>.
+- code: public override ATUri? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+- h4: Parameters
+- parameters:
+  - name: reader
+    type:
+    - text: Utf8JsonReader
+      url: https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonreader
+    description: The reader.
+  - name: typeToConvert
+    type:
+    - text: Type
+      url: https://learn.microsoft.com/dotnet/api/system.type
+    description: The type to convert.
+  - name: options
+    type:
+    - text: JsonSerializerOptions
+      url: https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions
+    description: An object that specifies serialization options to use.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+    - '?'
+    description: The converted value.
+- api3: Write(Utf8JsonWriter, ATUri?, JsonSerializerOptions)
+  id: FishyFlip_Tools_Json_AtUriJsonConverter_Write_System_Text_Json_Utf8JsonWriter_FishyFlip_Models_ATUri_System_Text_Json_JsonSerializerOptions_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/Json/AtUriJsonConverter.cs#L27
+  metadata:
+    uid: FishyFlip.Tools.Json.AtUriJsonConverter.Write(System.Text.Json.Utf8JsonWriter,FishyFlip.Models.ATUri,System.Text.Json.JsonSerializerOptions)
+    commentId: M:FishyFlip.Tools.Json.AtUriJsonConverter.Write(System.Text.Json.Utf8JsonWriter,FishyFlip.Models.ATUri,System.Text.Json.JsonSerializerOptions)
+- markdown: Writes a specified value as JSON.
+- code: public override void Write(Utf8JsonWriter writer, ATUri? value, JsonSerializerOptions options)
+- h4: Parameters
+- parameters:
+  - name: writer
+    type:
+    - text: Utf8JsonWriter
+      url: https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter
+    description: The writer to write to.
+  - name: value
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+    - '?'
+    description: The value to convert to JSON.
+  - name: options
+    type:
+    - text: JsonSerializerOptions
+      url: https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions
+    description: An object that specifies serialization options to use.
+languageId: csharp

@@ -1,0 +1,38 @@
+### YamlMime:ApiPage
+title: Enum FrameHeaderOperation
+body:
+- api1: Enum FrameHeaderOperation
+  id: FishyFlip_Models_FrameHeaderOperation
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameHeaderOperation.cs#L10
+  metadata:
+    uid: FishyFlip.Models.FrameHeaderOperation
+    commentId: T:FishyFlip.Models.FrameHeaderOperation
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: The operation of the frame header.
+- code: public enum FrameHeaderOperation
+- h2: Fields
+- parameters:
+  - name: Error
+    default: "-1"
+    description: >+
+      Error frame.
+
+  - name: Frame
+    default: "1"
+    description: >+
+      Regular frame.
+
+  - name: Unknown
+    default: "0"
+    description: >+
+      Unknown frame header.
+
+languageId: csharp
+metadata:
+  description: The operation of the frame header.

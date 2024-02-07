@@ -1,0 +1,221 @@
+### YamlMime:ApiPage
+title: Class Constants.Urls.Bluesky.Graph
+body:
+- api1: Class Constants.Urls.Bluesky.Graph
+  id: FishyFlip_Constants_Urls_Bluesky_Graph
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L127
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph
+    commentId: T:FishyFlip.Constants.Urls.Bluesky.Graph
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public static class Constants.Urls.Bluesky.Graph
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Constants.Urls.Bluesky.Graph
+    url: FishyFlip.Constants.Urls.Bluesky.Graph.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: Block
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_Block
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L142
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.Block
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.Block
+- code: public const string Block = "/xrpc/app.bsky.graph.block"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Follow
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_Follow
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L143
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.Follow
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.Follow
+- code: public const string Follow = "/xrpc/app.bsky.graph.follow"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetBlocks
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetBlocks
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L130
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetBlocks
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetBlocks
+- code: public const string GetBlocks = "/xrpc/app.bsky.graph.getBlocks"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetFollowers
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetFollowers
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L135
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetFollowers
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetFollowers
+- code: public const string GetFollowers = "/xrpc/app.bsky.graph.getFollowers"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetFollows
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetFollows
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L136
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetFollows
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetFollows
+- code: public const string GetFollows = "/xrpc/app.bsky.graph.getFollows"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetList
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetList
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L134
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetList
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetList
+- code: public const string GetList = "/xrpc/app.bsky.graph.getList"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetListBlocks
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetListBlocks
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L133
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetListBlocks
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetListBlocks
+- code: public const string GetListBlocks = "/xrpc/app.bsky.graph.getListBlocks"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetListMutes
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetListMutes
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L132
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetListMutes
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetListMutes
+- code: public const string GetListMutes = "/xrpc/app.bsky.graph.getListMutes"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetLists
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetLists
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L131
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetLists
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetLists
+- code: public const string GetLists = "/xrpc/app.bsky.graph.getLists"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetMutes
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetMutes
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L137
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetMutes
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetMutes
+- code: public const string GetMutes = "/xrpc/app.bsky.graph.getMutes"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: GetSuggestedFollowsByActor
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_GetSuggestedFollowsByActor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L129
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.GetSuggestedFollowsByActor
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.GetSuggestedFollowsByActor
+- code: public const string GetSuggestedFollowsByActor = "/xrpc/app.bsky.graph.getSuggestedFollowsByActor"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: MuteActor
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_MuteActor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L138
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.MuteActor
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.MuteActor
+- code: public const string MuteActor = "/xrpc/app.bsky.graph.muteActor"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: MuteActorList
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_MuteActorList
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L140
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.MuteActorList
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.MuteActorList
+- code: public const string MuteActorList = "/xrpc/app.bsky.graph.muteActorList"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: UnmuteActor
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_UnmuteActor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L139
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.UnmuteActor
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.UnmuteActor
+- code: public const string UnmuteActor = "/xrpc/app.bsky.graph.unmuteActor"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: UnmuteActorList
+  id: FishyFlip_Constants_Urls_Bluesky_Graph_UnmuteActorList
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Constants.cs#L141
+  metadata:
+    uid: FishyFlip.Constants.Urls.Bluesky.Graph.UnmuteActorList
+    commentId: F:FishyFlip.Constants.Urls.Bluesky.Graph.UnmuteActorList
+- code: public const string UnmuteActorList = "/xrpc/app.bsky.graph.unmuteActorList"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

@@ -1,0 +1,108 @@
+### YamlMime:ApiPage
+title: Class FrameMigrate
+body:
+- api1: Class FrameMigrate
+  id: FishyFlip_Models_FrameMigrate
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameMigrate.cs#L10
+  metadata:
+    uid: FishyFlip.Models.FrameMigrate
+    commentId: T:FishyFlip.Models.FrameMigrate
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Frame Migrate.
+- code: public class FrameMigrate
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: FrameMigrate
+    url: FishyFlip.Models.FrameMigrate.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: FrameMigrate(CBORObject)
+  id: FishyFlip_Models_FrameMigrate__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameMigrate.cs#L12
+  metadata:
+    uid: FishyFlip.Models.FrameMigrate.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.FrameMigrate.#ctor(PeterO.Cbor.CBORObject)
+- code: public FrameMigrate(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+- h2: Properties
+- api3: Did
+  id: FishyFlip_Models_FrameMigrate_Did
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameMigrate.cs#L20
+  metadata:
+    uid: FishyFlip.Models.FrameMigrate.Did
+    commentId: P:FishyFlip.Models.FrameMigrate.Did
+- code: public ATDid? Did { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: MigrateTo
+  id: FishyFlip_Models_FrameMigrate_MigrateTo
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameMigrate.cs#L24
+  metadata:
+    uid: FishyFlip.Models.FrameMigrate.MigrateTo
+    commentId: P:FishyFlip.Models.FrameMigrate.MigrateTo
+- code: public string? MigrateTo { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Seq
+  id: FishyFlip_Models_FrameMigrate_Seq
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameMigrate.cs#L22
+  metadata:
+    uid: FishyFlip.Models.FrameMigrate.Seq
+    commentId: P:FishyFlip.Models.FrameMigrate.Seq
+- code: public int Seq { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Time
+  id: FishyFlip_Models_FrameMigrate_Time
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameMigrate.cs#L26
+  metadata:
+    uid: FishyFlip.Models.FrameMigrate.Time
+    commentId: P:FishyFlip.Models.FrameMigrate.Time
+- code: public DateTime? Time { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+languageId: csharp
+metadata:
+  description: Frame Migrate.

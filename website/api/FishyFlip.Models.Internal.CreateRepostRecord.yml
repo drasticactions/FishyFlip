@@ -1,0 +1,103 @@
+### YamlMime:ApiPage
+title: Class CreateRepostRecord
+body:
+- api1: Class CreateRepostRecord
+  id: FishyFlip_Models_Internal_CreateRepostRecord
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateRepostRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateRepostRecord
+    commentId: T:FishyFlip.Models.Internal.CreateRepostRecord
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models.Internal
+      url: FishyFlip.Models.Internal.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record CreateRepostRecord : IEquatable<CreateRepostRecord>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CreateRepostRecord
+    url: FishyFlip.Models.Internal.CreateRepostRecord.html
+- h4: Implements
+- list:
+  - text: IEquatable<CreateRepostRecord>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: CreateRepostRecord(string, string, RepostRecord)
+  id: FishyFlip_Models_Internal_CreateRepostRecord__ctor_System_String_System_String_FishyFlip_Models_RepostRecord_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateRepostRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateRepostRecord.#ctor(System.String,System.String,FishyFlip.Models.RepostRecord)
+    commentId: M:FishyFlip.Models.Internal.CreateRepostRecord.#ctor(System.String,System.String,FishyFlip.Models.RepostRecord)
+- code: public CreateRepostRecord(string Collection, string Repo, RepostRecord Record)
+- h4: Parameters
+- parameters:
+  - name: Collection
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: Repo
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: Record
+    type:
+    - text: RepostRecord
+      url: FishyFlip.Models.RepostRecord.html
+- h2: Properties
+- api3: Collection
+  id: FishyFlip_Models_Internal_CreateRepostRecord_Collection
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateRepostRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateRepostRecord.Collection
+    commentId: P:FishyFlip.Models.Internal.CreateRepostRecord.Collection
+- code: public string Collection { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Record
+  id: FishyFlip_Models_Internal_CreateRepostRecord_Record
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateRepostRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateRepostRecord.Record
+    commentId: P:FishyFlip.Models.Internal.CreateRepostRecord.Record
+- code: public RepostRecord Record { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: RepostRecord
+      url: FishyFlip.Models.RepostRecord.html
+- api3: Repo
+  id: FishyFlip_Models_Internal_CreateRepostRecord_Repo
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateRepostRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateRepostRecord.Repo
+    commentId: P:FishyFlip.Models.Internal.CreateRepostRecord.Repo
+- code: public string Repo { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

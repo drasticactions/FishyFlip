@@ -1,0 +1,95 @@
+### YamlMime:ApiPage
+title: Class ActorResponse
+body:
+- api1: Class ActorResponse
+  id: FishyFlip_Models_ActorResponse
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorResponse.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorResponse
+    commentId: T:FishyFlip.Models.ActorResponse
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record ActorResponse : IEquatable<ActorResponse>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ActorResponse
+    url: FishyFlip.Models.ActorResponse.html
+- h4: Implements
+- list:
+  - text: IEquatable<ActorResponse>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ActorResponse(ActorProfile[]?, string?)
+  id: FishyFlip_Models_ActorResponse__ctor_FishyFlip_Models_ActorProfile___System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorResponse.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorResponse.#ctor(FishyFlip.Models.ActorProfile[],System.String)
+    commentId: M:FishyFlip.Models.ActorResponse.#ctor(FishyFlip.Models.ActorProfile[],System.String)
+- code: public ActorResponse(ActorProfile[]? Actors, string? Cursor)
+- h4: Parameters
+- parameters:
+  - name: Actors
+    type:
+    - text: ActorProfile
+      url: FishyFlip.Models.ActorProfile.html
+    - '['
+    - ']'
+    - '?'
+  - name: Cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- h2: Properties
+- api3: Actors
+  id: FishyFlip_Models_ActorResponse_Actors
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorResponse.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorResponse.Actors
+    commentId: P:FishyFlip.Models.ActorResponse.Actors
+- code: public ActorProfile[]? Actors { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ActorProfile
+      url: FishyFlip.Models.ActorProfile.html
+    - '['
+    - ']'
+    - '?'
+- api3: Cursor
+  id: FishyFlip_Models_ActorResponse_Cursor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorResponse.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorResponse.Cursor
+    commentId: P:FishyFlip.Models.ActorResponse.Cursor
+- code: public string? Cursor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+languageId: csharp

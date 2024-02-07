@@ -1,0 +1,28 @@
+### YamlMime:ApiPage
+title: Namespace FishyFlip.Events
+body:
+- api1: Namespace FishyFlip.Events
+  id: FishyFlip_Events
+  metadata:
+    uid: FishyFlip.Events
+    commentId: N:FishyFlip.Events
+- h3: Classes
+- parameters:
+  - type:
+      text: SessionUpdatedEventArgs
+      url: FishyFlip.Events.SessionUpdatedEventArgs.html
+    description: >-
+      Session Updated Event Args.
+
+      Fires when a session updates.
+  - type:
+      text: SubscribedRepoEventArgs
+      url: FishyFlip.Events.SubscribedRepoEventArgs.html
+    description: >-
+      Subscribed Repo Event Args.
+
+      Fires when a repo sends an update.
+  - type:
+      text: SubscriptionConnectionStatusEventArgs
+      url: FishyFlip.Events.SubscriptionConnectionStatusEventArgs.html
+languageId: csharp

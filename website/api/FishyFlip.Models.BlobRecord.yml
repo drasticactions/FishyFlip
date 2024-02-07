@@ -1,0 +1,128 @@
+### YamlMime:ApiPage
+title: Class BlobRecord
+body:
+- api1: Class BlobRecord
+  id: FishyFlip_Models_BlobRecord
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/BlobRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.BlobRecord
+    commentId: T:FishyFlip.Models.BlobRecord
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class BlobRecord : ATRecord'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: BlobRecord
+    url: FishyFlip.Models.BlobRecord.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: BlobRecord(string?, int, string?)
+  id: FishyFlip_Models_BlobRecord__ctor_System_String_System_Int32_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/BlobRecord.cs#L9
+  metadata:
+    uid: FishyFlip.Models.BlobRecord.#ctor(System.String,System.Int32,System.String)
+    commentId: M:FishyFlip.Models.BlobRecord.#ctor(System.String,System.Int32,System.String)
+- code: >-
+    [JsonConstructor]
+
+    public BlobRecord(string? mimeType, int size, string? type)
+- h4: Parameters
+- parameters:
+  - name: mimeType
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: size
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- h2: Properties
+- api3: MimeType
+  id: FishyFlip_Models_BlobRecord_MimeType
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/BlobRecord.cs#L17
+  metadata:
+    uid: FishyFlip.Models.BlobRecord.MimeType
+    commentId: P:FishyFlip.Models.BlobRecord.MimeType
+- code: public string? MimeType { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Ref
+  id: FishyFlip_Models_BlobRecord_Ref
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/BlobRecord.cs#L21
+  metadata:
+    uid: FishyFlip.Models.BlobRecord.Ref
+    commentId: P:FishyFlip.Models.BlobRecord.Ref
+- code: >-
+    [JsonPropertyName("ref")]
+
+    public Cid? Ref { get; set; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- api3: Size
+  id: FishyFlip_Models_BlobRecord_Size
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/BlobRecord.cs#L19
+  metadata:
+    uid: FishyFlip.Models.BlobRecord.Size
+    commentId: P:FishyFlip.Models.BlobRecord.Size
+- code: public int Size { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- h2: Methods
+- api3: ToImage()
+  id: FishyFlip_Models_BlobRecord_ToImage
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/BlobRecord.cs#L24
+  metadata:
+    uid: FishyFlip.Models.BlobRecord.ToImage
+    commentId: M:FishyFlip.Models.BlobRecord.ToImage
+- code: public Image ToImage()
+- h4: Returns
+- parameters:
+  - type:
+    - text: Image
+      url: FishyFlip.Models.Image.html
+languageId: csharp

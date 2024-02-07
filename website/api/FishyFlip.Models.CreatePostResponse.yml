@@ -1,0 +1,90 @@
+### YamlMime:ApiPage
+title: Class CreatePostResponse
+body:
+- api1: Class CreatePostResponse
+  id: FishyFlip_Models_CreatePostResponse
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/CreatePostResponse.cs#L7
+  metadata:
+    uid: FishyFlip.Models.CreatePostResponse
+    commentId: T:FishyFlip.Models.CreatePostResponse
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class CreatePostResponse
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CreatePostResponse
+    url: FishyFlip.Models.CreatePostResponse.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: CreatePostResponse(ATUri?, Cid?)
+  id: FishyFlip_Models_CreatePostResponse__ctor_FishyFlip_Models_ATUri_Ipfs_Cid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/CreatePostResponse.cs#L9
+  metadata:
+    uid: FishyFlip.Models.CreatePostResponse.#ctor(FishyFlip.Models.ATUri,Ipfs.Cid)
+    commentId: M:FishyFlip.Models.CreatePostResponse.#ctor(FishyFlip.Models.ATUri,Ipfs.Cid)
+- code: >-
+    [JsonConstructor]
+
+    public CreatePostResponse(ATUri? uri, Cid? cid)
+- h4: Parameters
+- parameters:
+  - name: uri
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+    - '?'
+  - name: cid
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- h2: Properties
+- api3: Cid
+  id: FishyFlip_Models_CreatePostResponse_Cid
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/CreatePostResponse.cs#L16
+  metadata:
+    uid: FishyFlip.Models.CreatePostResponse.Cid
+    commentId: P:FishyFlip.Models.CreatePostResponse.Cid
+- code: public Cid? Cid { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- api3: Uri
+  id: FishyFlip_Models_CreatePostResponse_Uri
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/CreatePostResponse.cs#L18
+  metadata:
+    uid: FishyFlip.Models.CreatePostResponse.Uri
+    commentId: P:FishyFlip.Models.CreatePostResponse.Uri
+- code: public ATUri? Uri { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+    - '?'
+languageId: csharp

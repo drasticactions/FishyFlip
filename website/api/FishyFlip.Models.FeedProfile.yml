@@ -1,0 +1,255 @@
+### YamlMime:ApiPage
+title: Class FeedProfile
+body:
+- api1: Class FeedProfile
+  id: FishyFlip_Models_FeedProfile
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.FeedProfile
+    commentId: T:FishyFlip.Models.FeedProfile
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record FeedProfile : IEquatable<FeedProfile>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: FeedProfile
+    url: FishyFlip.Models.FeedProfile.html
+- h4: Implements
+- list:
+  - text: IEquatable<FeedProfile>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: FeedProfile(ATDid, string, string, string, string, string, int, int, int, DateTime, Viewer, IReadOnlyList<Label>)
+  id: FishyFlip_Models_FeedProfile__ctor_FishyFlip_Models_ATDid_System_String_System_String_System_String_System_String_System_String_System_Int32_System_Int32_System_Int32_System_DateTime_FishyFlip_Models_Viewer_System_Collections_Generic_IReadOnlyList_FishyFlip_Models_Label__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.#ctor(FishyFlip.Models.ATDid,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.DateTime,FishyFlip.Models.Viewer,System.Collections.Generic.IReadOnlyList{FishyFlip.Models.Label})
+    commentId: M:FishyFlip.Models.FeedProfile.#ctor(FishyFlip.Models.ATDid,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.DateTime,FishyFlip.Models.Viewer,System.Collections.Generic.IReadOnlyList{FishyFlip.Models.Label})
+- code: public FeedProfile(ATDid Did, string Handle, string DisplayName, string Description, string Avatar, string Banner, int FollowsCount, int FollowersCount, int PostsCount, DateTime IndexedAt, Viewer Viewer, IReadOnlyList<Label> Labels)
+- h4: Parameters
+- parameters:
+  - name: Did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+  - name: Handle
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: DisplayName
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: Description
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: Avatar
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: Banner
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: FollowsCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: FollowersCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: PostsCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: IndexedAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: Viewer
+    type:
+    - text: Viewer
+      url: FishyFlip.Models.Viewer.html
+  - name: Labels
+    type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '>'
+- h2: Properties
+- api3: Avatar
+  id: FishyFlip_Models_FeedProfile_Avatar
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L11
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.Avatar
+    commentId: P:FishyFlip.Models.FeedProfile.Avatar
+- code: public string Avatar { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Banner
+  id: FishyFlip_Models_FeedProfile_Banner
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L12
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.Banner
+    commentId: P:FishyFlip.Models.FeedProfile.Banner
+- code: public string Banner { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Description
+  id: FishyFlip_Models_FeedProfile_Description
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L10
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.Description
+    commentId: P:FishyFlip.Models.FeedProfile.Description
+- code: public string Description { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Did
+  id: FishyFlip_Models_FeedProfile_Did
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.Did
+    commentId: P:FishyFlip.Models.FeedProfile.Did
+- code: public ATDid Did { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+- api3: DisplayName
+  id: FishyFlip_Models_FeedProfile_DisplayName
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L9
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.DisplayName
+    commentId: P:FishyFlip.Models.FeedProfile.DisplayName
+- code: public string DisplayName { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: FollowersCount
+  id: FishyFlip_Models_FeedProfile_FollowersCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L14
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.FollowersCount
+    commentId: P:FishyFlip.Models.FeedProfile.FollowersCount
+- code: public int FollowersCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: FollowsCount
+  id: FishyFlip_Models_FeedProfile_FollowsCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L13
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.FollowsCount
+    commentId: P:FishyFlip.Models.FeedProfile.FollowsCount
+- code: public int FollowsCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Handle
+  id: FishyFlip_Models_FeedProfile_Handle
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L8
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.Handle
+    commentId: P:FishyFlip.Models.FeedProfile.Handle
+- code: public string Handle { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: IndexedAt
+  id: FishyFlip_Models_FeedProfile_IndexedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L16
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.IndexedAt
+    commentId: P:FishyFlip.Models.FeedProfile.IndexedAt
+- code: public DateTime IndexedAt { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+- api3: Labels
+  id: FishyFlip_Models_FeedProfile_Labels
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L18
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.Labels
+    commentId: P:FishyFlip.Models.FeedProfile.Labels
+- code: public IReadOnlyList<Label> Labels { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '>'
+- api3: PostsCount
+  id: FishyFlip_Models_FeedProfile_PostsCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L15
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.PostsCount
+    commentId: P:FishyFlip.Models.FeedProfile.PostsCount
+- code: public int PostsCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Viewer
+  id: FishyFlip_Models_FeedProfile_Viewer
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FeedProfile.cs#L17
+  metadata:
+    uid: FishyFlip.Models.FeedProfile.Viewer
+    commentId: P:FishyFlip.Models.FeedProfile.Viewer
+- code: public Viewer Viewer { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Viewer
+      url: FishyFlip.Models.Viewer.html
+languageId: csharp

@@ -1,0 +1,93 @@
+### YamlMime:ApiPage
+title: Class ListRecords
+body:
+- api1: Class ListRecords
+  id: FishyFlip_Models_ListRecords
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListRecords.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListRecords
+    commentId: T:FishyFlip.Models.ListRecords
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record ListRecords : IEquatable<ListRecords>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ListRecords
+    url: FishyFlip.Models.ListRecords.html
+- h4: Implements
+- list:
+  - text: IEquatable<ListRecords>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ListRecords(ListRecord[], string?)
+  id: FishyFlip_Models_ListRecords__ctor_FishyFlip_Models_ListRecord___System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListRecords.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListRecords.#ctor(FishyFlip.Models.ListRecord[],System.String)
+    commentId: M:FishyFlip.Models.ListRecords.#ctor(FishyFlip.Models.ListRecord[],System.String)
+- code: public ListRecords(ListRecord[] Records, string? Cursor)
+- h4: Parameters
+- parameters:
+  - name: Records
+    type:
+    - text: ListRecord
+      url: FishyFlip.Models.ListRecord.html
+    - '['
+    - ']'
+  - name: Cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- h2: Properties
+- api3: Cursor
+  id: FishyFlip_Models_ListRecords_Cursor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListRecords.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListRecords.Cursor
+    commentId: P:FishyFlip.Models.ListRecords.Cursor
+- code: public string? Cursor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Records
+  id: FishyFlip_Models_ListRecords_Records
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListRecords.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListRecords.Records
+    commentId: P:FishyFlip.Models.ListRecords.Records
+- code: public ListRecord[] Records { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ListRecord
+      url: FishyFlip.Models.ListRecord.html
+    - '['
+    - ']'
+languageId: csharp

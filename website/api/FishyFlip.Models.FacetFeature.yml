@@ -1,0 +1,197 @@
+### YamlMime:ApiPage
+title: Class FacetFeature
+body:
+- api1: Class FacetFeature
+  id: FishyFlip_Models_FacetFeature
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L7
+  metadata:
+    uid: FishyFlip.Models.FacetFeature
+    commentId: T:FishyFlip.Models.FacetFeature
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class FacetFeature
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: FacetFeature
+    url: FishyFlip.Models.FacetFeature.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: FacetFeature(string?, string?, string?, ATDid?)
+  id: FishyFlip_Models_FacetFeature__ctor_System_String_System_String_System_String_FishyFlip_Models_ATDid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L9
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.#ctor(System.String,System.String,System.String,FishyFlip.Models.ATDid)
+    commentId: M:FishyFlip.Models.FacetFeature.#ctor(System.String,System.String,System.String,FishyFlip.Models.ATDid)
+- code: >-
+    [JsonConstructor]
+
+    public FacetFeature(string? type, string? uri, string? tag, ATDid? did)
+- h4: Parameters
+- parameters:
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: uri
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: tag
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: FacetFeature(CBORObject)
+  id: FishyFlip_Models_FacetFeature__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L18
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.FacetFeature.#ctor(PeterO.Cbor.CBORObject)
+- code: public FacetFeature(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+- h2: Properties
+- api3: Did
+  id: FishyFlip_Models_FacetFeature_Did
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L36
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.Did
+    commentId: P:FishyFlip.Models.FacetFeature.Did
+- markdown: Gets a <xref href="FishyFlip.Models.FacetFeature.Did" data-throw-if-not-resolved="false"></xref> of the actor.
+- code: public ATDid? Did { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: Tag
+  id: FishyFlip_Models_FacetFeature_Tag
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L31
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.Tag
+    commentId: P:FishyFlip.Models.FacetFeature.Tag
+- code: public string? Tag { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Type
+  id: FishyFlip_Models_FacetFeature_Type
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L26
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.Type
+    commentId: P:FishyFlip.Models.FacetFeature.Type
+- code: >-
+    [JsonPropertyName("$type")]
+
+    public string? Type { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Uri
+  id: FishyFlip_Models_FacetFeature_Uri
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L29
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.Uri
+    commentId: P:FishyFlip.Models.FacetFeature.Uri
+- code: public string? Uri { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- h2: Methods
+- api3: CreateHashtag(string)
+  id: FishyFlip_Models_FacetFeature_CreateHashtag_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L44
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.CreateHashtag(System.String)
+    commentId: M:FishyFlip.Models.FacetFeature.CreateHashtag(System.String)
+- code: public static FacetFeature CreateHashtag(string tag)
+- h4: Parameters
+- parameters:
+  - name: tag
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h4: Returns
+- parameters:
+  - type:
+    - text: FacetFeature
+      url: FishyFlip.Models.FacetFeature.html
+- api3: CreateLink(string)
+  id: FishyFlip_Models_FacetFeature_CreateLink_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L38
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.CreateLink(System.String)
+    commentId: M:FishyFlip.Models.FacetFeature.CreateLink(System.String)
+- code: public static FacetFeature CreateLink(string uri)
+- h4: Parameters
+- parameters:
+  - name: uri
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h4: Returns
+- parameters:
+  - type:
+    - text: FacetFeature
+      url: FishyFlip.Models.FacetFeature.html
+- api3: CreateMention(ATDid)
+  id: FishyFlip_Models_FacetFeature_CreateMention_FishyFlip_Models_ATDid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetFeature.cs#L41
+  metadata:
+    uid: FishyFlip.Models.FacetFeature.CreateMention(FishyFlip.Models.ATDid)
+    commentId: M:FishyFlip.Models.FacetFeature.CreateMention(FishyFlip.Models.ATDid)
+- code: public static FacetFeature CreateMention(ATDid mention)
+- h4: Parameters
+- parameters:
+  - name: mention
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+- h4: Returns
+- parameters:
+  - type:
+    - text: FacetFeature
+      url: FishyFlip.Models.FacetFeature.html
+languageId: csharp

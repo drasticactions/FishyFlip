@@ -1,0 +1,198 @@
+### YamlMime:ApiPage
+title: Class Post
+body:
+- api1: Class Post
+  id: FishyFlip_Models_Post
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L12
+  metadata:
+    uid: FishyFlip.Models.Post
+    commentId: T:FishyFlip.Models.Post
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Post.
+- code: 'public class Post : ATRecord'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Post
+    url: FishyFlip.Models.Post.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Post(Embed?, Facet[]?, DateTime?, Reply?, string?, string[]?, string?)
+  id: FishyFlip_Models_Post__ctor_FishyFlip_Models_Embed_FishyFlip_Models_Facet___System_Nullable_System_DateTime__FishyFlip_Models_Reply_System_String_System_String___System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L14
+  metadata:
+    uid: FishyFlip.Models.Post.#ctor(FishyFlip.Models.Embed,FishyFlip.Models.Facet[],System.Nullable{System.DateTime},FishyFlip.Models.Reply,System.String,System.String[],System.String)
+    commentId: M:FishyFlip.Models.Post.#ctor(FishyFlip.Models.Embed,FishyFlip.Models.Facet[],System.Nullable{System.DateTime},FishyFlip.Models.Reply,System.String,System.String[],System.String)
+- code: >-
+    [JsonConstructor]
+
+    public Post(Embed? embed, Facet[]? facets, DateTime? createdAt, Reply? reply, string? text, string[]? langs, string? type)
+- h4: Parameters
+- parameters:
+  - name: embed
+    type:
+    - text: Embed
+      url: FishyFlip.Models.Embed.html
+    - '?'
+  - name: facets
+    type:
+    - text: Facet
+      url: FishyFlip.Models.Facet.html
+    - '['
+    - ']'
+    - '?'
+  - name: createdAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+  - name: reply
+    type:
+    - text: Reply
+      url: FishyFlip.Models.Reply.html
+    - '?'
+  - name: text
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: langs
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '['
+    - ']'
+    - '?'
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Post(CBORObject)
+  id: FishyFlip_Models_Post__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L29
+  metadata:
+    uid: FishyFlip.Models.Post.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.Post.#ctor(PeterO.Cbor.CBORObject)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.Models.Post" data-throw-if-not-resolved="false"></xref> class.
+- code: public Post(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+- h2: Properties
+- api3: CreatedAt
+  id: FishyFlip_Models_Post_CreatedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L56
+  metadata:
+    uid: FishyFlip.Models.Post.CreatedAt
+    commentId: P:FishyFlip.Models.Post.CreatedAt
+- code: public DateTime? CreatedAt { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+- api3: Embed
+  id: FishyFlip_Models_Post_Embed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L52
+  metadata:
+    uid: FishyFlip.Models.Post.Embed
+    commentId: P:FishyFlip.Models.Post.Embed
+- markdown: Gets the Embed.
+- code: public Embed? Embed { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Embed
+      url: FishyFlip.Models.Embed.html
+    - '?'
+- api3: Facets
+  id: FishyFlip_Models_Post_Facets
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L54
+  metadata:
+    uid: FishyFlip.Models.Post.Facets
+    commentId: P:FishyFlip.Models.Post.Facets
+- code: public Facet[]? Facets { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Facet
+      url: FishyFlip.Models.Facet.html
+    - '['
+    - ']'
+    - '?'
+- api3: Langs
+  id: FishyFlip_Models_Post_Langs
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L62
+  metadata:
+    uid: FishyFlip.Models.Post.Langs
+    commentId: P:FishyFlip.Models.Post.Langs
+- code: public string[]? Langs { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '['
+    - ']'
+    - '?'
+- api3: Reply
+  id: FishyFlip_Models_Post_Reply
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L58
+  metadata:
+    uid: FishyFlip.Models.Post.Reply
+    commentId: P:FishyFlip.Models.Post.Reply
+- code: public Reply? Reply { get; set; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Reply
+      url: FishyFlip.Models.Reply.html
+    - '?'
+- api3: Text
+  id: FishyFlip_Models_Post_Text
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Post.cs#L60
+  metadata:
+    uid: FishyFlip.Models.Post.Text
+    commentId: P:FishyFlip.Models.Post.Text
+- code: public string? Text { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+languageId: csharp
+metadata:
+  description: Post.

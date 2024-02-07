@@ -1,0 +1,297 @@
+### YamlMime:ApiPage
+title: Class ATProtocolBuilder
+body:
+- api1: Class ATProtocolBuilder
+  id: FishyFlip_ATProtocolBuilder
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L12
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder
+    commentId: T:FishyFlip.ATProtocolBuilder
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: AT Protocol Builder.
+- code: public class ATProtocolBuilder
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATProtocolBuilder
+    url: FishyFlip.ATProtocolBuilder.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ATProtocolBuilder()
+  id: FishyFlip_ATProtocolBuilder__ctor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L20
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.#ctor
+    commentId: M:FishyFlip.ATProtocolBuilder.#ctor
+- markdown: Initializes a new instance of the <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref> class.
+- code: public ATProtocolBuilder()
+- api3: ATProtocolBuilder(ATProtocolOptions)
+  id: FishyFlip_ATProtocolBuilder__ctor_FishyFlip_ATProtocolOptions_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L29
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.#ctor(FishyFlip.ATProtocolOptions)
+    commentId: M:FishyFlip.ATProtocolBuilder.#ctor(FishyFlip.ATProtocolOptions)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref> class.
+- code: public ATProtocolBuilder(ATProtocolOptions options)
+- h4: Parameters
+- parameters:
+  - name: options
+    type:
+    - text: ATProtocolOptions
+      url: FishyFlip.ATProtocolOptions.html
+    description: ATProtocolOptions.
+- h2: Methods
+- api3: AsAdmin(string, string)
+  id: FishyFlip_ATProtocolBuilder_AsAdmin_System_String_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L134
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.AsAdmin(System.String,System.String)
+    commentId: M:FishyFlip.ATProtocolBuilder.AsAdmin(System.String,System.String)
+- markdown: Set the ATProtocol to use admin credentials.
+- code: public ATProtocolBuilder AsAdmin(string password, string username = "admin")
+- h4: Parameters
+- parameters:
+  - name: password
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Admin password.
+  - name: username
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Admin username. Defaults to "admin".
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+- api3: Build()
+  id: FishyFlip_ATProtocolBuilder_Build
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L159
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.Build
+    commentId: M:FishyFlip.ATProtocolBuilder.Build
+- markdown: Builds the Protocol.
+- code: public ATProtocol Build()
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocol
+      url: FishyFlip.ATProtocol.html
+    description: The <xref href="FishyFlip.ATProtocol" data-throw-if-not-resolved="false"></xref> build with these configs.
+- api3: BuildOptions()
+  id: FishyFlip_ATProtocolBuilder_BuildOptions
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L145
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.BuildOptions
+    commentId: M:FishyFlip.ATProtocolBuilder.BuildOptions
+- markdown: Returns the ATProtocolOptions.
+- code: public ATProtocolOptions BuildOptions()
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolOptions
+      url: FishyFlip.ATProtocolOptions.html
+    description: ATProtocolOptions.
+- api3: EnableAutoRenewSession(bool)
+  id: FishyFlip_ATProtocolBuilder_EnableAutoRenewSession_System_Boolean_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L84
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.EnableAutoRenewSession(System.Boolean)
+    commentId: M:FishyFlip.ATProtocolBuilder.EnableAutoRenewSession(System.Boolean)
+- markdown: Enable auto renewing sessions.
+- code: public ATProtocolBuilder EnableAutoRenewSession(bool autoRenewSession)
+- h4: Parameters
+- parameters:
+  - name: autoRenewSession
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: Auto Renew Session.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+- api3: WithHttpClient(HttpClient, bool)
+  id: FishyFlip_ATProtocolBuilder_WithHttpClient_System_Net_Http_HttpClient_System_Boolean_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L39
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.WithHttpClient(System.Net.Http.HttpClient,System.Boolean)
+    commentId: M:FishyFlip.ATProtocolBuilder.WithHttpClient(System.Net.Http.HttpClient,System.Boolean)
+- markdown: Set a custom HttpClient.
+- code: public ATProtocolBuilder WithHttpClient(HttpClient client, bool setDefaults = true)
+- h4: Parameters
+- parameters:
+  - name: client
+    type:
+    - text: HttpClient
+      url: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient
+    description: HttpClient.
+  - name: setDefaults
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+- api3: WithInitialSession(Session)
+  id: FishyFlip_ATProtocolBuilder_WithInitialSession_FishyFlip_Models_Session_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L122
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.WithInitialSession(FishyFlip.Models.Session)
+    commentId: M:FishyFlip.ATProtocolBuilder.WithInitialSession(FishyFlip.Models.Session)
+- markdown: Sets an initial session to use.
+- code: public ATProtocolBuilder WithInitialSession(Session session)
+- h4: Parameters
+- parameters:
+  - name: session
+    type:
+    - text: Session
+      url: FishyFlip.Models.Session.html
+    description: <xref href="FishyFlip.Models.Session" data-throw-if-not-resolved="false"></xref>.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+- api3: WithInstanceUrl(Uri)
+  id: FishyFlip_ATProtocolBuilder_WithInstanceUrl_System_Uri_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L51
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.WithInstanceUrl(System.Uri)
+    commentId: M:FishyFlip.ATProtocolBuilder.WithInstanceUrl(System.Uri)
+- markdown: Set the instance url to connect to.
+- code: public ATProtocolBuilder WithInstanceUrl(Uri url)
+- h4: Parameters
+- parameters:
+  - name: url
+    type:
+    - text: Uri
+      url: https://learn.microsoft.com/dotnet/api/system.uri
+    description: Instance Url.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+- api3: WithLogger(ILogger?)
+  id: FishyFlip_ATProtocolBuilder_WithLogger_Microsoft_Extensions_Logging_ILogger_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L95
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.WithLogger(Microsoft.Extensions.Logging.ILogger)
+    commentId: M:FishyFlip.ATProtocolBuilder.WithLogger(Microsoft.Extensions.Logging.ILogger)
+- markdown: Adds a logger.
+- code: public ATProtocolBuilder WithLogger(ILogger? logger)
+- h4: Parameters
+- parameters:
+  - name: logger
+    type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+    description: Logger.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+- api3: WithServiceEndpointUponLogin(bool)
+  id: FishyFlip_ATProtocolBuilder_WithServiceEndpointUponLogin_System_Boolean_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L73
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.WithServiceEndpointUponLogin(System.Boolean)
+    commentId: M:FishyFlip.ATProtocolBuilder.WithServiceEndpointUponLogin(System.Boolean)
+- markdown: Sets UseServiceEndpointUponLogin.
+- code: public ATProtocolBuilder WithServiceEndpointUponLogin(bool serviceEndpointUponLogin)
+- h4: Parameters
+- parameters:
+  - name: serviceEndpointUponLogin
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: Value for UseServiceEndpointUponLogin.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.s
+- api3: WithSessionRefreshInterval(TimeSpan)
+  id: FishyFlip_ATProtocolBuilder_WithSessionRefreshInterval_System_TimeSpan_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L106
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.WithSessionRefreshInterval(System.TimeSpan)
+    commentId: M:FishyFlip.ATProtocolBuilder.WithSessionRefreshInterval(System.TimeSpan)
+- markdown: Sets the session refresh interval.
+- code: public ATProtocolBuilder WithSessionRefreshInterval(TimeSpan interval)
+- h4: Parameters
+- parameters:
+  - name: interval
+    type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+    description: Interval to refresh at.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+- api3: WithUserAgent(string)
+  id: FishyFlip_ATProtocolBuilder_WithUserAgent_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtocolBuilder.cs#L62
+  metadata:
+    uid: FishyFlip.ATProtocolBuilder.WithUserAgent(System.String)
+    commentId: M:FishyFlip.ATProtocolBuilder.WithUserAgent(System.String)
+- markdown: Sets the user agent.
+- code: public ATProtocolBuilder WithUserAgent(string userAgent)
+- h4: Parameters
+- parameters:
+  - name: userAgent
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: User Agent.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATProtocolBuilder
+      url: FishyFlip.ATProtocolBuilder.html
+    description: <xref href="FishyFlip.ATProtocolBuilder" data-throw-if-not-resolved="false"></xref>.
+languageId: csharp
+metadata:
+  description: AT Protocol Builder.

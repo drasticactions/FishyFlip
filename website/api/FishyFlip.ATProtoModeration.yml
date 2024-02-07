@@ -1,0 +1,130 @@
+### YamlMime:ApiPage
+title: Class ATProtoModeration
+body:
+- api1: Class ATProtoModeration
+  id: FishyFlip_ATProtoModeration
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoModeration.cs#L10
+  metadata:
+    uid: FishyFlip.ATProtoModeration
+    commentId: T:FishyFlip.ATProtoModeration
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: AT Proto Moderation.
+- code: public sealed class ATProtoModeration
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATProtoModeration
+    url: FishyFlip.ATProtoModeration.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: CreateModerationReportPostAsync(ModerationReasonType, ATUri, Cid, string?, CancellationToken)
+  id: FishyFlip_ATProtoModeration_CreateModerationReportPostAsync_FishyFlip_Models_ModerationReasonType_FishyFlip_Models_ATUri_Ipfs_Cid_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoModeration.cs#L27
+  metadata:
+    uid: FishyFlip.ATProtoModeration.CreateModerationReportPostAsync(FishyFlip.Models.ModerationReasonType,FishyFlip.Models.ATUri,Ipfs.Cid,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoModeration.CreateModerationReportPostAsync(FishyFlip.Models.ModerationReasonType,FishyFlip.Models.ATUri,Ipfs.Cid,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ModerationRecord?>> CreateModerationReportPostAsync(ModerationReasonType reasonType, ATUri uri, Cid cid, string? reason = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: reasonType
+    type:
+    - text: ModerationReasonType
+      url: FishyFlip.Models.ModerationReasonType.html
+  - name: uri
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: cid
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+  - name: reason
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ModerationRecord
+      url: FishyFlip.Models.ModerationRecord.html
+    - '?'
+    - '>'
+    - '>'
+- api3: CreateModerationReportRepoAsync(ModerationReasonType, ATDid, string?, CancellationToken)
+  id: FishyFlip_ATProtoModeration_CreateModerationReportRepoAsync_FishyFlip_Models_ModerationReasonType_FishyFlip_Models_ATDid_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoModeration.cs#L37
+  metadata:
+    uid: FishyFlip.ATProtoModeration.CreateModerationReportRepoAsync(FishyFlip.Models.ModerationReasonType,FishyFlip.Models.ATDid,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoModeration.CreateModerationReportRepoAsync(FishyFlip.Models.ModerationReasonType,FishyFlip.Models.ATDid,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ModerationRecord?>> CreateModerationReportRepoAsync(ModerationReasonType reasonType, ATDid subject, string? reason = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: reasonType
+    type:
+    - text: ModerationReasonType
+      url: FishyFlip.Models.ModerationReasonType.html
+  - name: subject
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+  - name: reason
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ModerationRecord
+      url: FishyFlip.Models.ModerationRecord.html
+    - '?'
+    - '>'
+    - '>'
+languageId: csharp
+metadata:
+  description: AT Proto Moderation.

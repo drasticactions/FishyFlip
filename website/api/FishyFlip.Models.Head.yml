@@ -1,0 +1,73 @@
+### YamlMime:ApiPage
+title: Class Head
+body:
+- api1: Class Head
+  id: FishyFlip_Models_Head
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Head.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Head
+    commentId: T:FishyFlip.Models.Head
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record Head : IEquatable<Head>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Head
+    url: FishyFlip.Models.Head.html
+- h4: Implements
+- list:
+  - text: IEquatable<Head>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Head(Cid?)
+  id: FishyFlip_Models_Head__ctor_Ipfs_Cid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Head.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Head.#ctor(Ipfs.Cid)
+    commentId: M:FishyFlip.Models.Head.#ctor(Ipfs.Cid)
+- code: public Head(Cid? Root)
+- h4: Parameters
+- parameters:
+  - name: Root
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+- h2: Properties
+- api3: Root
+  id: FishyFlip_Models_Head_Root
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Head.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Head.Root
+    commentId: P:FishyFlip.Models.Head.Root
+- code: public Cid? Root { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '?'
+languageId: csharp

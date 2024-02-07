@@ -1,0 +1,77 @@
+### YamlMime:ApiPage
+title: Class CommitPath
+body:
+- api1: Class CommitPath
+  id: FishyFlip_Models_CommitPath
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/CommitPath.cs#L7
+  metadata:
+    uid: FishyFlip.Models.CommitPath
+    commentId: T:FishyFlip.Models.CommitPath
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record CommitPath : IEquatable<CommitPath>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CommitPath
+    url: FishyFlip.Models.CommitPath.html
+- h4: Implements
+- list:
+  - text: IEquatable<CommitPath>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: CommitPath(Cid[]?)
+  id: FishyFlip_Models_CommitPath__ctor_Ipfs_Cid___
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/CommitPath.cs#L7
+  metadata:
+    uid: FishyFlip.Models.CommitPath.#ctor(Ipfs.Cid[])
+    commentId: M:FishyFlip.Models.CommitPath.#ctor(Ipfs.Cid[])
+- code: public CommitPath(Cid[]? Commits)
+- h4: Parameters
+- parameters:
+  - name: Commits
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '['
+    - ']'
+    - '?'
+- h2: Properties
+- api3: Commits
+  id: FishyFlip_Models_CommitPath_Commits
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/CommitPath.cs#L7
+  metadata:
+    uid: FishyFlip.Models.CommitPath.Commits
+    commentId: P:FishyFlip.Models.CommitPath.Commits
+- code: public Cid[]? Commits { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+    - '['
+    - ']'
+    - '?'
+languageId: csharp

@@ -1,0 +1,88 @@
+### YamlMime:ApiPage
+title: Class Embed
+body:
+- api1: Class Embed
+  id: FishyFlip_Models_Embed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Embed.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Embed
+    commentId: T:FishyFlip.Models.Embed
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public abstract class Embed : ATRecord'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Embed
+    url: FishyFlip.Models.Embed.html
+- h4: Derived
+- list:
+  - text: ExternalEmbed
+    url: FishyFlip.Models.ExternalEmbed.html
+  - text: ExternalViewEmbed
+    url: FishyFlip.Models.ExternalViewEmbed.html
+  - text: ImageViewEmbed
+    url: FishyFlip.Models.ImageViewEmbed.html
+  - text: ImagesEmbed
+    url: FishyFlip.Models.ImagesEmbed.html
+  - text: RecordEmbed
+    url: FishyFlip.Models.RecordEmbed.html
+  - text: RecordViewEmbed
+    url: FishyFlip.Models.RecordViewEmbed.html
+  - text: RecordWithMediaEmbed
+    url: FishyFlip.Models.RecordWithMediaEmbed.html
+  - text: RecordWithMediaViewEmbed
+    url: FishyFlip.Models.RecordWithMediaViewEmbed.html
+  - text: UnknownEmbed
+    url: FishyFlip.Models.UnknownEmbed.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Embed(string?)
+  id: FishyFlip_Models_Embed__ctor_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Embed.cs#L9
+  metadata:
+    uid: FishyFlip.Models.Embed.#ctor(System.String)
+    commentId: M:FishyFlip.Models.Embed.#ctor(System.String)
+- code: public Embed(string? type)
+- h4: Parameters
+- parameters:
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Embed()
+  id: FishyFlip_Models_Embed__ctor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Embed.cs#L14
+  metadata:
+    uid: FishyFlip.Models.Embed.#ctor
+    commentId: M:FishyFlip.Models.Embed.#ctor
+- code: public Embed()
+languageId: csharp

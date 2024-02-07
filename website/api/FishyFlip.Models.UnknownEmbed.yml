@@ -1,0 +1,67 @@
+### YamlMime:ApiPage
+title: Class UnknownEmbed
+body:
+- api1: Class UnknownEmbed
+  id: FishyFlip_Models_UnknownEmbed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/UnknownEmbed.cs#L10
+  metadata:
+    uid: FishyFlip.Models.UnknownEmbed
+    commentId: T:FishyFlip.Models.UnknownEmbed
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Unknown Embed.
+- code: 'public class UnknownEmbed : Embed'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Embed
+    url: FishyFlip.Models.Embed.html
+  - text: UnknownEmbed
+    url: FishyFlip.Models.UnknownEmbed.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: UnknownEmbed(string)
+  id: FishyFlip_Models_UnknownEmbed__ctor_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/UnknownEmbed.cs#L16
+  metadata:
+    uid: FishyFlip.Models.UnknownEmbed.#ctor(System.String)
+    commentId: M:FishyFlip.Models.UnknownEmbed.#ctor(System.String)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.Models.UnknownEmbed" data-throw-if-not-resolved="false"></xref> class.
+- code: public UnknownEmbed(string type)
+- h4: Parameters
+- parameters:
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Embed Type.
+languageId: csharp
+metadata:
+  description: Unknown Embed.

@@ -1,0 +1,56 @@
+### YamlMime:ApiPage
+title: Namespace FishyFlip.Models.Internal
+body:
+- api1: Namespace FishyFlip.Models.Internal
+  id: FishyFlip_Models_Internal
+  metadata:
+    uid: FishyFlip.Models.Internal
+    commentId: N:FishyFlip.Models.Internal
+- h3: Classes
+- parameters:
+  - type:
+      text: CreateBlockRecord
+      url: FishyFlip.Models.Internal.CreateBlockRecord.html
+  - type:
+      text: CreateFollowRecord
+      url: FishyFlip.Models.Internal.CreateFollowRecord.html
+  - type:
+      text: CreateInviteCode
+      url: FishyFlip.Models.Internal.CreateInviteCode.html
+  - type:
+      text: CreateInviteCodes
+      url: FishyFlip.Models.Internal.CreateInviteCodes.html
+  - type:
+      text: CreateLikeRecord
+      url: FishyFlip.Models.Internal.CreateLikeRecord.html
+  - type:
+      text: CreateListItemRecord
+      url: FishyFlip.Models.Internal.CreateListItemRecord.html
+  - type:
+      text: CreateModerationReportPost
+      url: FishyFlip.Models.Internal.CreateModerationReportPost.html
+  - type:
+      text: CreateModerationReportRepo
+      url: FishyFlip.Models.Internal.CreateModerationReportRepo.html
+  - type:
+      text: CreateMuteListRecord
+      url: FishyFlip.Models.Internal.CreateMuteListRecord.html
+  - type:
+      text: CreateMuteRecord
+      url: FishyFlip.Models.Internal.CreateMuteRecord.html
+  - type:
+      text: CreateRepostRecord
+      url: FishyFlip.Models.Internal.CreateRepostRecord.html
+  - type:
+      text: CreateSeenAtRecord
+      url: FishyFlip.Models.Internal.CreateSeenAtRecord.html
+  - type:
+      text: DeleteRecord
+      url: FishyFlip.Models.Internal.DeleteRecord.html
+  - type:
+      text: Login
+      url: FishyFlip.Models.Internal.Login.html
+  - type:
+      text: PutPostRecord
+      url: FishyFlip.Models.Internal.PutPostRecord.html
+languageId: csharp

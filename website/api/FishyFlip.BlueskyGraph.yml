@@ -1,0 +1,526 @@
+### YamlMime:ApiPage
+title: Class BlueskyGraph
+body:
+- api1: Class BlueskyGraph
+  id: FishyFlip_BlueskyGraph
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L10
+  metadata:
+    uid: FishyFlip.BlueskyGraph
+    commentId: T:FishyFlip.BlueskyGraph
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Bluesky Graph.
+- code: public sealed class BlueskyGraph
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: BlueskyGraph
+    url: FishyFlip.BlueskyGraph.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: GetBlocksAsync(int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetBlocksAsync_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L27
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetBlocksAsync(System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetBlocksAsync(System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ActorBlocks?>> GetBlocksAsync(int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ActorBlocks
+      url: FishyFlip.Models.ActorBlocks.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetFollowersAsync(ATIdentifier, int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetFollowersAsync_FishyFlip_Models_ATIdentifier_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L73
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetFollowersAsync(FishyFlip.Models.ATIdentifier,System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetFollowersAsync(FishyFlip.Models.ATIdentifier,System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ActorFollowers?>> GetFollowersAsync(ATIdentifier identifier, int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: identifier
+    type:
+    - text: ATIdentifier
+      url: FishyFlip.Models.ATIdentifier.html
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ActorFollowers
+      url: FishyFlip.Models.ActorFollowers.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetFollowsAsync(ATIdentifier, int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetFollowsAsync_FishyFlip_Models_ATIdentifier_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L57
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetFollowsAsync(FishyFlip.Models.ATIdentifier,System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetFollowsAsync(FishyFlip.Models.ATIdentifier,System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ActorFollows?>> GetFollowsAsync(ATIdentifier identifier, int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: identifier
+    type:
+    - text: ATIdentifier
+      url: FishyFlip.Models.ATIdentifier.html
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ActorFollows
+      url: FishyFlip.Models.ActorFollows.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetListAsync(ATUri, int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetListAsync_FishyFlip_Models_ATUri_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L149
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetListAsync(FishyFlip.Models.ATUri,System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetListAsync(FishyFlip.Models.ATUri,System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ListItemViewRecord?>> GetListAsync(ATUri list, int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: list
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ListItemViewRecord
+      url: FishyFlip.Models.ListItemViewRecord.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetListBlocksAsync(int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetListBlocksAsync_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L137
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetListBlocksAsync(System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetListBlocksAsync(System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ListViewRecord?>> GetListBlocksAsync(int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ListViewRecord
+      url: FishyFlip.Models.ListViewRecord.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetListMutesAsync(int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetListMutesAsync_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L125
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetListMutesAsync(System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetListMutesAsync(System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ListViewRecord?>> GetListMutesAsync(int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ListViewRecord
+      url: FishyFlip.Models.ListViewRecord.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetListsAsync(ATIdentifier, int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetListsAsync_FishyFlip_Models_ATIdentifier_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L113
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetListsAsync(FishyFlip.Models.ATIdentifier,System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetListsAsync(FishyFlip.Models.ATIdentifier,System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ListViewRecord?>> GetListsAsync(ATIdentifier identifier, int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: identifier
+    type:
+    - text: ATIdentifier
+      url: FishyFlip.Models.ATIdentifier.html
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ListViewRecord
+      url: FishyFlip.Models.ListViewRecord.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetMutesAsync(int, string?, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetMutesAsync_System_Int32_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L42
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetMutesAsync(System.Int32,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetMutesAsync(System.Int32,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<ActorMutes?>> GetMutesAsync(int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: ActorMutes
+      url: FishyFlip.Models.ActorMutes.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetSuggestedFollowsByActorAsync(ATIdentifier, CancellationToken)
+  id: FishyFlip_BlueskyGraph_GetSuggestedFollowsByActorAsync_FishyFlip_Models_ATIdentifier_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L161
+  metadata:
+    uid: FishyFlip.BlueskyGraph.GetSuggestedFollowsByActorAsync(FishyFlip.Models.ATIdentifier,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.GetSuggestedFollowsByActorAsync(FishyFlip.Models.ATIdentifier,System.Threading.CancellationToken)
+- code: public Task<Result<SuggestionsRecord?>> GetSuggestedFollowsByActorAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: identifier
+    type:
+    - text: ATIdentifier
+      url: FishyFlip.Models.ATIdentifier.html
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: SuggestionsRecord
+      url: FishyFlip.Models.SuggestionsRecord.html
+    - '?'
+    - '>'
+    - '>'
+- api3: MuteActorAsync(ATDid, CancellationToken)
+  id: FishyFlip_BlueskyGraph_MuteActorAsync_FishyFlip_Models_ATDid_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L89
+  metadata:
+    uid: FishyFlip.BlueskyGraph.MuteActorAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.MuteActorAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+- code: public Task<Result<Success>> MuteActorAsync(ATDid did, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '>'
+    - '>'
+- api3: MuteActorListAsync(ATUri, CancellationToken)
+  id: FishyFlip_BlueskyGraph_MuteActorListAsync_FishyFlip_Models_ATUri_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L101
+  metadata:
+    uid: FishyFlip.BlueskyGraph.MuteActorListAsync(FishyFlip.Models.ATUri,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.MuteActorListAsync(FishyFlip.Models.ATUri,System.Threading.CancellationToken)
+- code: public Task<Result<Success>> MuteActorListAsync(ATUri list, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: list
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '>'
+    - '>'
+- api3: UnmuteActorAsync(ATDid, CancellationToken)
+  id: FishyFlip_BlueskyGraph_UnmuteActorAsync_FishyFlip_Models_ATDid_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L95
+  metadata:
+    uid: FishyFlip.BlueskyGraph.UnmuteActorAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.UnmuteActorAsync(FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+- code: public Task<Result<Success>> UnmuteActorAsync(ATDid did, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '>'
+    - '>'
+- api3: UnmuteActorListAsync(ATUri, CancellationToken)
+  id: FishyFlip_BlueskyGraph_UnmuteActorListAsync_FishyFlip_Models_ATUri_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyGraph.cs#L107
+  metadata:
+    uid: FishyFlip.BlueskyGraph.UnmuteActorListAsync(FishyFlip.Models.ATUri,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyGraph.UnmuteActorListAsync(FishyFlip.Models.ATUri,System.Threading.CancellationToken)
+- code: public Task<Result<Success>> UnmuteActorListAsync(ATUri list, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: list
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '>'
+    - '>'
+languageId: csharp
+metadata:
+  description: Bluesky Graph.

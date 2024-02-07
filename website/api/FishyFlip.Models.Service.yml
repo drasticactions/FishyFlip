@@ -1,0 +1,102 @@
+### YamlMime:ApiPage
+title: Class Service
+body:
+- api1: Class Service
+  id: FishyFlip_Models_Service
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DescribeRepo.cs#L56
+  metadata:
+    uid: FishyFlip.Models.Service
+    commentId: T:FishyFlip.Models.Service
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class Service
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Service
+    url: FishyFlip.Models.Service.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Service(string, string, string)
+  id: FishyFlip_Models_Service__ctor_System_String_System_String_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DescribeRepo.cs#L58
+  metadata:
+    uid: FishyFlip.Models.Service.#ctor(System.String,System.String,System.String)
+    commentId: M:FishyFlip.Models.Service.#ctor(System.String,System.String,System.String)
+- code: >-
+    [JsonConstructor]
+
+    public Service(string id, string type, string serviceEndpoint)
+- h4: Parameters
+- parameters:
+  - name: id
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: type
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: serviceEndpoint
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h2: Properties
+- api3: Id
+  id: FishyFlip_Models_Service_Id
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DescribeRepo.cs#L66
+  metadata:
+    uid: FishyFlip.Models.Service.Id
+    commentId: P:FishyFlip.Models.Service.Id
+- code: public string Id { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: ServiceEndpoint
+  id: FishyFlip_Models_Service_ServiceEndpoint
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DescribeRepo.cs#L70
+  metadata:
+    uid: FishyFlip.Models.Service.ServiceEndpoint
+    commentId: P:FishyFlip.Models.Service.ServiceEndpoint
+- code: public string ServiceEndpoint { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Type
+  id: FishyFlip_Models_Service_Type
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DescribeRepo.cs#L68
+  metadata:
+    uid: FishyFlip.Models.Service.Type
+    commentId: P:FishyFlip.Models.Service.Type
+- code: public string Type { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp

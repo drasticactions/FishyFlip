@@ -1,0 +1,311 @@
+### YamlMime:ApiPage
+title: Class ATProtoServer
+body:
+- api1: Class ATProtoServer
+  id: FishyFlip_ATProtoServer
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L10
+  metadata:
+    uid: FishyFlip.ATProtoServer
+    commentId: T:FishyFlip.ATProtoServer
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: AT Proto Server.
+- code: public sealed class ATProtoServer
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATProtoServer
+    url: FishyFlip.ATProtoServer.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: CreateInviteCodeAsync(int, ATDid?, CancellationToken)
+  id: FishyFlip_ATProtoServer_CreateInviteCodeAsync_System_Int32_FishyFlip_Models_ATDid_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L63
+  metadata:
+    uid: FishyFlip.ATProtoServer.CreateInviteCodeAsync(System.Int32,FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.CreateInviteCodeAsync(System.Int32,FishyFlip.Models.ATDid,System.Threading.CancellationToken)
+- code: public Task<Result<InviteCode>> CreateInviteCodeAsync(int useCount, ATDid? forAccount = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: useCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: forAccount
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: InviteCode
+      url: FishyFlip.Models.InviteCode.html
+    - '>'
+    - '>'
+- api3: CreateInviteCodesAsync(int, int, ATDid[]?, CancellationToken)
+  id: FishyFlip_ATProtoServer_CreateInviteCodesAsync_System_Int32_System_Int32_FishyFlip_Models_ATDid___System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L68
+  metadata:
+    uid: FishyFlip.ATProtoServer.CreateInviteCodesAsync(System.Int32,System.Int32,FishyFlip.Models.ATDid[],System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.CreateInviteCodesAsync(System.Int32,System.Int32,FishyFlip.Models.ATDid[],System.Threading.CancellationToken)
+- code: public Task<Result<InviteCodes>> CreateInviteCodesAsync(int useCount, int codeCount = 1, ATDid[]? forAccounts = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: useCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: codeCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: forAccounts
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '['
+    - ']'
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: InviteCodes
+      url: FishyFlip.Models.InviteCodes.html
+    - '>'
+    - '>'
+- api3: CreateSessionAsync(string, string, CancellationToken)
+  id: FishyFlip_ATProtoServer_CreateSessionAsync_System_String_System_String_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L27
+  metadata:
+    uid: FishyFlip.ATProtoServer.CreateSessionAsync(System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.CreateSessionAsync(System.String,System.String,System.Threading.CancellationToken)
+- code: public Task<Result<Session>> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: identifier
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: password
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Session
+      url: FishyFlip.Models.Session.html
+    - '>'
+    - '>'
+- api3: DescribeServerAsync(CancellationToken)
+  id: FishyFlip_ATProtoServer_DescribeServerAsync_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L85
+  metadata:
+    uid: FishyFlip.ATProtoServer.DescribeServerAsync(System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.DescribeServerAsync(System.Threading.CancellationToken)
+- code: public Task<Result<DescribeServer?>> DescribeServerAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: DescribeServer
+      url: FishyFlip.Models.DescribeServer.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetAccountInviteCodesAsync(bool, bool, CancellationToken)
+  id: FishyFlip_ATProtoServer_GetAccountInviteCodesAsync_System_Boolean_System_Boolean_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L76
+  metadata:
+    uid: FishyFlip.ATProtoServer.GetAccountInviteCodesAsync(System.Boolean,System.Boolean,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.GetAccountInviteCodesAsync(System.Boolean,System.Boolean,System.Threading.CancellationToken)
+- code: public Task<Result<AccountInviteCodes?>> GetAccountInviteCodesAsync(bool includeUsed = true, bool createAvailable = true, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: includeUsed
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    optional: true
+  - name: createAvailable
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: AccountInviteCodes
+      url: FishyFlip.Models.AccountInviteCodes.html
+    - '?'
+    - '>'
+    - '>'
+- api3: GetSessionAsync(CancellationToken)
+  id: FishyFlip_ATProtoServer_GetSessionAsync_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L73
+  metadata:
+    uid: FishyFlip.ATProtoServer.GetSessionAsync(System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.GetSessionAsync(System.Threading.CancellationToken)
+- code: public Task<Result<SessionInfo?>> GetSessionAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: SessionInfo
+      url: FishyFlip.Models.SessionInfo.html
+    - '?'
+    - '>'
+    - '>'
+- api3: ListAppPasswordsAsync(CancellationToken)
+  id: FishyFlip_ATProtoServer_ListAppPasswordsAsync_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L82
+  metadata:
+    uid: FishyFlip.ATProtoServer.ListAppPasswordsAsync(System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.ListAppPasswordsAsync(System.Threading.CancellationToken)
+- code: public Task<Result<AppPasswords?>> ListAppPasswordsAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: AppPasswords
+      url: FishyFlip.Models.AppPasswords.html
+    - '?'
+    - '>'
+    - '>'
+- api3: RefreshSessionAsync(Session, CancellationToken)
+  id: FishyFlip_ATProtoServer_RefreshSessionAsync_FishyFlip_Models_Session_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATProtoServer.cs#L43
+  metadata:
+    uid: FishyFlip.ATProtoServer.RefreshSessionAsync(FishyFlip.Models.Session,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.ATProtoServer.RefreshSessionAsync(FishyFlip.Models.Session,System.Threading.CancellationToken)
+- code: public Task<Result<Session>> RefreshSessionAsync(Session session, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: session
+    type:
+    - text: Session
+      url: FishyFlip.Models.Session.html
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Session
+      url: FishyFlip.Models.Session.html
+    - '>'
+    - '>'
+languageId: csharp
+metadata:
+  description: AT Proto Server.

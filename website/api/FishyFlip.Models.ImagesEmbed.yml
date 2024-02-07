@@ -1,0 +1,115 @@
+### YamlMime:ApiPage
+title: Class ImagesEmbed
+body:
+- api1: Class ImagesEmbed
+  id: FishyFlip_Models_ImagesEmbed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ImagesEmbed.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ImagesEmbed
+    commentId: T:FishyFlip.Models.ImagesEmbed
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public class ImagesEmbed : Embed'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Embed
+    url: FishyFlip.Models.Embed.html
+  - text: ImagesEmbed
+    url: FishyFlip.Models.ImagesEmbed.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ImagesEmbed(ImageEmbed[]?)
+  id: FishyFlip_Models_ImagesEmbed__ctor_FishyFlip_Models_ImageEmbed___
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ImagesEmbed.cs#L9
+  metadata:
+    uid: FishyFlip.Models.ImagesEmbed.#ctor(FishyFlip.Models.ImageEmbed[])
+    commentId: M:FishyFlip.Models.ImagesEmbed.#ctor(FishyFlip.Models.ImageEmbed[])
+- code: >-
+    [JsonConstructor]
+
+    public ImagesEmbed(ImageEmbed[]? images)
+- h4: Parameters
+- parameters:
+  - name: images
+    type:
+    - text: ImageEmbed
+      url: FishyFlip.Models.ImageEmbed.html
+    - '['
+    - ']'
+    - '?'
+- api3: ImagesEmbed(Image, string?)
+  id: FishyFlip_Models_ImagesEmbed__ctor_FishyFlip_Models_Image_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ImagesEmbed.cs#L16
+  metadata:
+    uid: FishyFlip.Models.ImagesEmbed.#ctor(FishyFlip.Models.Image,System.String)
+    commentId: M:FishyFlip.Models.ImagesEmbed.#ctor(FishyFlip.Models.Image,System.String)
+- code: public ImagesEmbed(Image image, string? alt = null)
+- h4: Parameters
+- parameters:
+  - name: image
+    type:
+    - text: Image
+      url: FishyFlip.Models.Image.html
+  - name: alt
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+- api3: ImagesEmbed(CBORObject)
+  id: FishyFlip_Models_ImagesEmbed__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ImagesEmbed.cs#L22
+  metadata:
+    uid: FishyFlip.Models.ImagesEmbed.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.ImagesEmbed.#ctor(PeterO.Cbor.CBORObject)
+- code: public ImagesEmbed(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+- h2: Properties
+- api3: Images
+  id: FishyFlip_Models_ImagesEmbed_Images
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ImagesEmbed.cs#L28
+  metadata:
+    uid: FishyFlip.Models.ImagesEmbed.Images
+    commentId: P:FishyFlip.Models.ImagesEmbed.Images
+- code: public ImageEmbed[]? Images { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ImageEmbed
+      url: FishyFlip.Models.ImageEmbed.html
+    - '['
+    - ']'
+    - '?'
+languageId: csharp

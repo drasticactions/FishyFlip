@@ -1,0 +1,98 @@
+### YamlMime:ApiPage
+title: Class FacetIndex
+body:
+- api1: Class FacetIndex
+  id: FishyFlip_Models_FacetIndex
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetIndex.cs#L7
+  metadata:
+    uid: FishyFlip.Models.FacetIndex
+    commentId: T:FishyFlip.Models.FacetIndex
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class FacetIndex
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: FacetIndex
+    url: FishyFlip.Models.FacetIndex.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: FacetIndex(int, int)
+  id: FishyFlip_Models_FacetIndex__ctor_System_Int32_System_Int32_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetIndex.cs#L9
+  metadata:
+    uid: FishyFlip.Models.FacetIndex.#ctor(System.Int32,System.Int32)
+    commentId: M:FishyFlip.Models.FacetIndex.#ctor(System.Int32,System.Int32)
+- code: >-
+    [JsonConstructor]
+
+    public FacetIndex(int byteStart, int byteEnd)
+- h4: Parameters
+- parameters:
+  - name: byteStart
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: byteEnd
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: FacetIndex(CBORObject)
+  id: FishyFlip_Models_FacetIndex__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetIndex.cs#L16
+  metadata:
+    uid: FishyFlip.Models.FacetIndex.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.FacetIndex.#ctor(PeterO.Cbor.CBORObject)
+- code: public FacetIndex(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+- h2: Properties
+- api3: ByteEnd
+  id: FishyFlip_Models_FacetIndex_ByteEnd
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetIndex.cs#L22
+  metadata:
+    uid: FishyFlip.Models.FacetIndex.ByteEnd
+    commentId: P:FishyFlip.Models.FacetIndex.ByteEnd
+- code: public int ByteEnd { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ByteStart
+  id: FishyFlip_Models_FacetIndex_ByteStart
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FacetIndex.cs#L24
+  metadata:
+    uid: FishyFlip.Models.FacetIndex.ByteStart
+    commentId: P:FishyFlip.Models.FacetIndex.ByteStart
+- code: public int ByteStart { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+languageId: csharp

@@ -1,0 +1,111 @@
+### YamlMime:ApiPage
+title: Class ATNetworkErrorException
+body:
+- api1: Class ATNetworkErrorException
+  id: FishyFlip_Tools_ATNetworkErrorException
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/ATNetworkErrorException.cs#L11
+  metadata:
+    uid: FishyFlip.Tools.ATNetworkErrorException
+    commentId: T:FishyFlip.Tools.ATNetworkErrorException
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Tools
+      url: FishyFlip.Tools.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: >-
+    AT Network Error Exception.
+
+    Thrown if given a failed result from ATProtocol.
+- code: 'public class ATNetworkErrorException : Exception, ISerializable'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Exception
+    url: https://learn.microsoft.com/dotnet/api/system.exception
+  - text: ATNetworkErrorException
+    url: FishyFlip.Tools.ATNetworkErrorException.html
+- h4: Implements
+- list:
+  - text: ISerializable
+    url: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable
+- h4: Inherited Members
+- list:
+  - text: Exception.GetBaseException()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.getbaseexception
+  - text: Exception.GetObjectData(SerializationInfo, StreamingContext)
+    url: https://learn.microsoft.com/dotnet/api/system.exception.getobjectdata
+  - text: Exception.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.gettype
+  - text: Exception.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.tostring
+  - text: Exception.Data
+    url: https://learn.microsoft.com/dotnet/api/system.exception.data
+  - text: Exception.HelpLink
+    url: https://learn.microsoft.com/dotnet/api/system.exception.helplink
+  - text: Exception.HResult
+    url: https://learn.microsoft.com/dotnet/api/system.exception.hresult
+  - text: Exception.InnerException
+    url: https://learn.microsoft.com/dotnet/api/system.exception.innerexception
+  - text: Exception.Message
+    url: https://learn.microsoft.com/dotnet/api/system.exception.message
+  - text: Exception.Source
+    url: https://learn.microsoft.com/dotnet/api/system.exception.source
+  - text: Exception.StackTrace
+    url: https://learn.microsoft.com/dotnet/api/system.exception.stacktrace
+  - text: Exception.TargetSite
+    url: https://learn.microsoft.com/dotnet/api/system.exception.targetsite
+  - text: Exception.SerializeObjectState
+    url: https://learn.microsoft.com/dotnet/api/system.exception.serializeobjectstate
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ATNetworkErrorException(Error)
+  id: FishyFlip_Tools_ATNetworkErrorException__ctor_FishyFlip_Models_Error_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/ATNetworkErrorException.cs#L17
+  metadata:
+    uid: FishyFlip.Tools.ATNetworkErrorException.#ctor(FishyFlip.Models.Error)
+    commentId: M:FishyFlip.Tools.ATNetworkErrorException.#ctor(FishyFlip.Models.Error)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.Tools.ATNetworkErrorException" data-throw-if-not-resolved="false"></xref> class.
+- code: public ATNetworkErrorException(Error error)
+- h4: Parameters
+- parameters:
+  - name: error
+    type:
+    - text: Error
+      url: FishyFlip.Models.Error.html
+    description: Error message.
+- h2: Properties
+- api3: Error
+  id: FishyFlip_Tools_ATNetworkErrorException_Error
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/ATNetworkErrorException.cs#L26
+  metadata:
+    uid: FishyFlip.Tools.ATNetworkErrorException.Error
+    commentId: P:FishyFlip.Tools.ATNetworkErrorException.Error
+- markdown: Gets the base error.
+- code: public Error Error { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Error
+      url: FishyFlip.Models.Error.html
+languageId: csharp
+metadata:
+  description: >-
+    AT Network Error Exception.
+
+    Thrown if given a failed result from ATProtocol.

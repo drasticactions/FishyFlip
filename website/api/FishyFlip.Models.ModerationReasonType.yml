@@ -1,0 +1,36 @@
+### YamlMime:ApiPage
+title: Enum ModerationReasonType
+body:
+- api1: Enum ModerationReasonType
+  id: FishyFlip_Models_ModerationReasonType
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationReasonType.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ModerationReasonType
+    commentId: T:FishyFlip.Models.ModerationReasonType
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public enum ModerationReasonType
+- h4: Extension Methods
+- list:
+  - text: EnumExtensions.ToEndpointString(ModerationReasonType)
+    url: FishyFlip.Tools.EnumExtensions.html#FishyFlip_Tools_EnumExtensions_ToEndpointString_FishyFlip_Models_ModerationReasonType_
+- h2: Fields
+- parameters:
+  - name: ReasonMisleading
+    default: "2"
+  - name: ReasonOther
+    default: "5"
+  - name: ReasonRude
+    default: "4"
+  - name: ReasonSexual
+    default: "3"
+  - name: ReasonSpam
+    default: "0"
+  - name: ReasonViolation
+    default: "1"
+languageId: csharp

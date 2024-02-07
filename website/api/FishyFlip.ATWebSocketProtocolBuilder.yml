@@ -1,0 +1,139 @@
+### YamlMime:ApiPage
+title: Class ATWebSocketProtocolBuilder
+body:
+- api1: Class ATWebSocketProtocolBuilder
+  id: FishyFlip_ATWebSocketProtocolBuilder
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocolBuilder.cs#L10
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocolBuilder
+    commentId: T:FishyFlip.ATWebSocketProtocolBuilder
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: AT Protocol Builder.
+- code: public class ATWebSocketProtocolBuilder
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATWebSocketProtocolBuilder
+    url: FishyFlip.ATWebSocketProtocolBuilder.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ATWebSocketProtocolBuilder()
+  id: FishyFlip_ATWebSocketProtocolBuilder__ctor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocolBuilder.cs#L17
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocolBuilder.#ctor
+    commentId: M:FishyFlip.ATWebSocketProtocolBuilder.#ctor
+- markdown: Initializes a new instance of the <xref href="FishyFlip.ATWebSocketProtocolBuilder" data-throw-if-not-resolved="false"></xref> class.
+- code: public ATWebSocketProtocolBuilder()
+- api3: ATWebSocketProtocolBuilder(ATWebSocketProtocolOptions)
+  id: FishyFlip_ATWebSocketProtocolBuilder__ctor_FishyFlip_ATWebSocketProtocolOptions_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocolBuilder.cs#L26
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocolBuilder.#ctor(FishyFlip.ATWebSocketProtocolOptions)
+    commentId: M:FishyFlip.ATWebSocketProtocolBuilder.#ctor(FishyFlip.ATWebSocketProtocolOptions)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.ATWebSocketProtocolBuilder" data-throw-if-not-resolved="false"></xref> class.
+- code: public ATWebSocketProtocolBuilder(ATWebSocketProtocolOptions options)
+- h4: Parameters
+- parameters:
+  - name: options
+    type:
+    - text: ATWebSocketProtocolOptions
+      url: FishyFlip.ATWebSocketProtocolOptions.html
+    description: ATWebSocketProtocolOptions.
+- h2: Methods
+- api3: Build()
+  id: FishyFlip_ATWebSocketProtocolBuilder_Build
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocolBuilder.cs#L66
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocolBuilder.Build
+    commentId: M:FishyFlip.ATWebSocketProtocolBuilder.Build
+- markdown: Builds the Protocol.
+- code: public ATWebSocketProtocol Build()
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATWebSocketProtocol
+      url: FishyFlip.ATWebSocketProtocol.html
+    description: The <xref href="FishyFlip.ATProtocol" data-throw-if-not-resolved="false"></xref> build with these configs.
+- api3: BuildOptions()
+  id: FishyFlip_ATWebSocketProtocolBuilder_BuildOptions
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocolBuilder.cs#L57
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocolBuilder.BuildOptions
+    commentId: M:FishyFlip.ATWebSocketProtocolBuilder.BuildOptions
+- markdown: Returns the ATWebSocketProtocolOptions.
+- code: public ATWebSocketProtocolOptions BuildOptions()
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATWebSocketProtocolOptions
+      url: FishyFlip.ATWebSocketProtocolOptions.html
+    description: ATWebSocketProtocolOptions
+- api3: WithInstanceUrl(Uri)
+  id: FishyFlip_ATWebSocketProtocolBuilder_WithInstanceUrl_System_Uri_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocolBuilder.cs#L36
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocolBuilder.WithInstanceUrl(System.Uri)
+    commentId: M:FishyFlip.ATWebSocketProtocolBuilder.WithInstanceUrl(System.Uri)
+- markdown: Set the instance url to connect to.
+- code: public ATWebSocketProtocolBuilder WithInstanceUrl(Uri url)
+- h4: Parameters
+- parameters:
+  - name: url
+    type:
+    - text: Uri
+      url: https://learn.microsoft.com/dotnet/api/system.uri
+    description: Instance Url.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATWebSocketProtocolBuilder
+      url: FishyFlip.ATWebSocketProtocolBuilder.html
+    description: <xref href="FishyFlip.ATWebSocketProtocolBuilder" data-throw-if-not-resolved="false"></xref>
+- api3: WithLogger(ILogger?)
+  id: FishyFlip_ATWebSocketProtocolBuilder_WithLogger_Microsoft_Extensions_Logging_ILogger_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/ATWebSocketProtocolBuilder.cs#L47
+  metadata:
+    uid: FishyFlip.ATWebSocketProtocolBuilder.WithLogger(Microsoft.Extensions.Logging.ILogger)
+    commentId: M:FishyFlip.ATWebSocketProtocolBuilder.WithLogger(Microsoft.Extensions.Logging.ILogger)
+- markdown: Adds a logger.
+- code: public ATWebSocketProtocolBuilder WithLogger(ILogger? logger)
+- h4: Parameters
+- parameters:
+  - name: logger
+    type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+    description: Logger.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATWebSocketProtocolBuilder
+      url: FishyFlip.ATWebSocketProtocolBuilder.html
+    description: <xref href="FishyFlip.ATWebSocketProtocolBuilder" data-throw-if-not-resolved="false"></xref>
+languageId: csharp
+metadata:
+  description: AT Protocol Builder.

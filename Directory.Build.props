@@ -15,7 +15,7 @@
 		<DebugType>embedded</DebugType>
     <RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
-    <PackageProjectUrl>https://github.com/drasticactions/FishyFlip</PackageProjectUrl>
+    <PackageProjectUrl>https://drasticactions.github.io/FishyFlip</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/drasticactions/FishyFlip/blob/main/CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
 

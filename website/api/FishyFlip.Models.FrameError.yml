@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Class FrameError
+body:
+- api1: Class FrameError
+  id: FishyFlip_Models_FrameError
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameError.cs#L10
+  metadata:
+    uid: FishyFlip.Models.FrameError
+    commentId: T:FishyFlip.Models.FrameError
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Frame error.
+- code: public class FrameError
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: FrameError
+    url: FishyFlip.Models.FrameError.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: FrameError(CBORObject)
+  id: FishyFlip_Models_FrameError__ctor_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameError.cs#L12
+  metadata:
+    uid: FishyFlip.Models.FrameError.#ctor(PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.FrameError.#ctor(PeterO.Cbor.CBORObject)
+- code: public FrameError(CBORObject obj)
+- h4: Parameters
+- parameters:
+  - name: obj
+    type:
+    - CBORObject
+- h2: Properties
+- api3: Error
+  id: FishyFlip_Models_FrameError_Error
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameError.cs#L21
+  metadata:
+    uid: FishyFlip.Models.FrameError.Error
+    commentId: P:FishyFlip.Models.FrameError.Error
+- markdown: Gets the error.
+- code: public string? Error { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Message
+  id: FishyFlip_Models_FrameError_Message
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/FrameError.cs#L26
+  metadata:
+    uid: FishyFlip.Models.FrameError.Message
+    commentId: P:FishyFlip.Models.FrameError.Message
+- markdown: Gets the error.
+- code: public string? Message { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+languageId: csharp
+metadata:
+  description: Frame error.

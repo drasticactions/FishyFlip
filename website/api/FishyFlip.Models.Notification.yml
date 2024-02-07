@@ -1,0 +1,193 @@
+### YamlMime:ApiPage
+title: Class Notification
+body:
+- api1: Class Notification
+  id: FishyFlip_Models_Notification
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification
+    commentId: T:FishyFlip.Models.Notification
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record Notification : IEquatable<Notification>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Notification
+    url: FishyFlip.Models.Notification.html
+- h4: Implements
+- list:
+  - text: IEquatable<Notification>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Notification(ATUri, Cid, string, bool, DateTime, IReadOnlyList<Label>, ATRecord?, FeedProfile)
+  id: FishyFlip_Models_Notification__ctor_FishyFlip_Models_ATUri_Ipfs_Cid_System_String_System_Boolean_System_DateTime_System_Collections_Generic_IReadOnlyList_FishyFlip_Models_Label__FishyFlip_Models_ATRecord_FishyFlip_Models_FeedProfile_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.#ctor(FishyFlip.Models.ATUri,Ipfs.Cid,System.String,System.Boolean,System.DateTime,System.Collections.Generic.IReadOnlyList{FishyFlip.Models.Label},FishyFlip.Models.ATRecord,FishyFlip.Models.FeedProfile)
+    commentId: M:FishyFlip.Models.Notification.#ctor(FishyFlip.Models.ATUri,Ipfs.Cid,System.String,System.Boolean,System.DateTime,System.Collections.Generic.IReadOnlyList{FishyFlip.Models.Label},FishyFlip.Models.ATRecord,FishyFlip.Models.FeedProfile)
+- code: public Notification(ATUri Uri, Cid Cid, string Reason, bool IsRead, DateTime IndexedAt, IReadOnlyList<Label> Labels, ATRecord? Record, FeedProfile Author)
+- h4: Parameters
+- parameters:
+  - name: Uri
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: Cid
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+  - name: Reason
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: IsRead
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: IndexedAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: Labels
+    type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '>'
+  - name: Record
+    type:
+    - text: ATRecord
+      url: FishyFlip.Models.ATRecord.html
+    - '?'
+  - name: Author
+    type:
+    - text: FeedProfile
+      url: FishyFlip.Models.FeedProfile.html
+- h2: Properties
+- api3: Author
+  id: FishyFlip_Models_Notification_Author
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.Author
+    commentId: P:FishyFlip.Models.Notification.Author
+- code: public FeedProfile Author { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: FeedProfile
+      url: FishyFlip.Models.FeedProfile.html
+- api3: Cid
+  id: FishyFlip_Models_Notification_Cid
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.Cid
+    commentId: P:FishyFlip.Models.Notification.Cid
+- code: public Cid Cid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+- api3: IndexedAt
+  id: FishyFlip_Models_Notification_IndexedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.IndexedAt
+    commentId: P:FishyFlip.Models.Notification.IndexedAt
+- code: public DateTime IndexedAt { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+- api3: IsRead
+  id: FishyFlip_Models_Notification_IsRead
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.IsRead
+    commentId: P:FishyFlip.Models.Notification.IsRead
+- code: public bool IsRead { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Labels
+  id: FishyFlip_Models_Notification_Labels
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.Labels
+    commentId: P:FishyFlip.Models.Notification.Labels
+- code: public IReadOnlyList<Label> Labels { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '>'
+- api3: Reason
+  id: FishyFlip_Models_Notification_Reason
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.Reason
+    commentId: P:FishyFlip.Models.Notification.Reason
+- code: public string Reason { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Record
+  id: FishyFlip_Models_Notification_Record
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.Record
+    commentId: P:FishyFlip.Models.Notification.Record
+- code: public ATRecord? Record { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATRecord
+      url: FishyFlip.Models.ATRecord.html
+    - '?'
+- api3: Uri
+  id: FishyFlip_Models_Notification_Uri
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Notification.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Notification.Uri
+    commentId: P:FishyFlip.Models.Notification.Uri
+- code: public ATUri Uri { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+languageId: csharp

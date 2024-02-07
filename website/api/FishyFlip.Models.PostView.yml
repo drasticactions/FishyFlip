@@ -1,0 +1,227 @@
+### YamlMime:ApiPage
+title: Class PostView
+body:
+- api1: Class PostView
+  id: FishyFlip_Models_PostView
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L7
+  metadata:
+    uid: FishyFlip.Models.PostView
+    commentId: T:FishyFlip.Models.PostView
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record PostView : IEquatable<PostView>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: PostView
+    url: FishyFlip.Models.PostView.html
+- h4: Implements
+- list:
+  - text: IEquatable<PostView>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: PostView(ATUri, Cid, int, int, int, Embed?, FeedProfile, Post?, DateTime, IReadOnlyList<Label>)
+  id: FishyFlip_Models_PostView__ctor_FishyFlip_Models_ATUri_Ipfs_Cid_System_Int32_System_Int32_System_Int32_FishyFlip_Models_Embed_FishyFlip_Models_FeedProfile_FishyFlip_Models_Post_System_DateTime_System_Collections_Generic_IReadOnlyList_FishyFlip_Models_Label__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L7
+  metadata:
+    uid: FishyFlip.Models.PostView.#ctor(FishyFlip.Models.ATUri,Ipfs.Cid,System.Int32,System.Int32,System.Int32,FishyFlip.Models.Embed,FishyFlip.Models.FeedProfile,FishyFlip.Models.Post,System.DateTime,System.Collections.Generic.IReadOnlyList{FishyFlip.Models.Label})
+    commentId: M:FishyFlip.Models.PostView.#ctor(FishyFlip.Models.ATUri,Ipfs.Cid,System.Int32,System.Int32,System.Int32,FishyFlip.Models.Embed,FishyFlip.Models.FeedProfile,FishyFlip.Models.Post,System.DateTime,System.Collections.Generic.IReadOnlyList{FishyFlip.Models.Label})
+- code: public PostView(ATUri Uri, Cid Cid, int ReplyCount, int RepostCount, int LikeCount, Embed? Embed, FeedProfile Author, Post? Record, DateTime IndexedAt, IReadOnlyList<Label> Label)
+- h4: Parameters
+- parameters:
+  - name: Uri
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: Cid
+    type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+  - name: ReplyCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: RepostCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: LikeCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: Embed
+    type:
+    - text: Embed
+      url: FishyFlip.Models.Embed.html
+    - '?'
+  - name: Author
+    type:
+    - text: FeedProfile
+      url: FishyFlip.Models.FeedProfile.html
+  - name: Record
+    type:
+    - text: Post
+      url: FishyFlip.Models.Post.html
+    - '?'
+  - name: IndexedAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: Label
+    type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '>'
+- h2: Properties
+- api3: Author
+  id: FishyFlip_Models_PostView_Author
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L14
+  metadata:
+    uid: FishyFlip.Models.PostView.Author
+    commentId: P:FishyFlip.Models.PostView.Author
+- code: public FeedProfile Author { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: FeedProfile
+      url: FishyFlip.Models.FeedProfile.html
+- api3: Cid
+  id: FishyFlip_Models_PostView_Cid
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L9
+  metadata:
+    uid: FishyFlip.Models.PostView.Cid
+    commentId: P:FishyFlip.Models.PostView.Cid
+- code: public Cid Cid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Cid
+      url: https://github.com/ipfs-shipyard/net-ipfs-core/blob/f7cca48614e85eeb6fc7c4b0493bfb963a850aca/src/Cid.cs
+- api3: Embed
+  id: FishyFlip_Models_PostView_Embed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L13
+  metadata:
+    uid: FishyFlip.Models.PostView.Embed
+    commentId: P:FishyFlip.Models.PostView.Embed
+- code: public Embed? Embed { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Embed
+      url: FishyFlip.Models.Embed.html
+    - '?'
+- api3: IndexedAt
+  id: FishyFlip_Models_PostView_IndexedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L16
+  metadata:
+    uid: FishyFlip.Models.PostView.IndexedAt
+    commentId: P:FishyFlip.Models.PostView.IndexedAt
+- code: public DateTime IndexedAt { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+- api3: Label
+  id: FishyFlip_Models_PostView_Label
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L17
+  metadata:
+    uid: FishyFlip.Models.PostView.Label
+    commentId: P:FishyFlip.Models.PostView.Label
+- code: public IReadOnlyList<Label> Label { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '>'
+- api3: LikeCount
+  id: FishyFlip_Models_PostView_LikeCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L12
+  metadata:
+    uid: FishyFlip.Models.PostView.LikeCount
+    commentId: P:FishyFlip.Models.PostView.LikeCount
+- code: public int LikeCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Record
+  id: FishyFlip_Models_PostView_Record
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L15
+  metadata:
+    uid: FishyFlip.Models.PostView.Record
+    commentId: P:FishyFlip.Models.PostView.Record
+- code: public Post? Record { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Post
+      url: FishyFlip.Models.Post.html
+    - '?'
+- api3: ReplyCount
+  id: FishyFlip_Models_PostView_ReplyCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L10
+  metadata:
+    uid: FishyFlip.Models.PostView.ReplyCount
+    commentId: P:FishyFlip.Models.PostView.ReplyCount
+- code: public int ReplyCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: RepostCount
+  id: FishyFlip_Models_PostView_RepostCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L11
+  metadata:
+    uid: FishyFlip.Models.PostView.RepostCount
+    commentId: P:FishyFlip.Models.PostView.RepostCount
+- code: public int RepostCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Uri
+  id: FishyFlip_Models_PostView_Uri
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostView.cs#L8
+  metadata:
+    uid: FishyFlip.Models.PostView.Uri
+    commentId: P:FishyFlip.Models.PostView.Uri
+- code: public ATUri Uri { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+languageId: csharp

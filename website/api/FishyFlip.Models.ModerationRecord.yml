@@ -1,0 +1,142 @@
+### YamlMime:ApiPage
+title: Class ModerationRecord
+body:
+- api1: Class ModerationRecord
+  id: FishyFlip_Models_ModerationRecord
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationSubject.cs#L34
+  metadata:
+    uid: FishyFlip.Models.ModerationRecord
+    commentId: T:FishyFlip.Models.ModerationRecord
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public class ModerationRecord
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ModerationRecord
+    url: FishyFlip.Models.ModerationRecord.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ModerationRecord(ModerationSubject?, DateTime?, int, string?, ATDid?)
+  id: FishyFlip_Models_ModerationRecord__ctor_FishyFlip_Models_ModerationSubject_System_Nullable_System_DateTime__System_Int32_System_String_FishyFlip_Models_ATDid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationSubject.cs#L36
+  metadata:
+    uid: FishyFlip.Models.ModerationRecord.#ctor(FishyFlip.Models.ModerationSubject,System.Nullable{System.DateTime},System.Int32,System.String,FishyFlip.Models.ATDid)
+    commentId: M:FishyFlip.Models.ModerationRecord.#ctor(FishyFlip.Models.ModerationSubject,System.Nullable{System.DateTime},System.Int32,System.String,FishyFlip.Models.ATDid)
+- code: >-
+    [JsonConstructor]
+
+    public ModerationRecord(ModerationSubject? subject, DateTime? createdAt, int id, string? reason, ATDid? reportedBy)
+- h4: Parameters
+- parameters:
+  - name: subject
+    type:
+    - text: ModerationSubject
+      url: FishyFlip.Models.ModerationSubject.html
+    - '?'
+  - name: createdAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+  - name: id
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: reason
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: reportedBy
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- h2: Properties
+- api3: CreatedAt
+  id: FishyFlip_Models_ModerationRecord_CreatedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationSubject.cs#L54
+  metadata:
+    uid: FishyFlip.Models.ModerationRecord.CreatedAt
+    commentId: P:FishyFlip.Models.ModerationRecord.CreatedAt
+- code: public DateTime? CreatedAt { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+- api3: Id
+  id: FishyFlip_Models_ModerationRecord_Id
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationSubject.cs#L46
+  metadata:
+    uid: FishyFlip.Models.ModerationRecord.Id
+    commentId: P:FishyFlip.Models.ModerationRecord.Id
+- code: public int Id { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Reason
+  id: FishyFlip_Models_ModerationRecord_Reason
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationSubject.cs#L48
+  metadata:
+    uid: FishyFlip.Models.ModerationRecord.Reason
+    commentId: P:FishyFlip.Models.ModerationRecord.Reason
+- code: public string? Reason { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: ReportedBy
+  id: FishyFlip_Models_ModerationRecord_ReportedBy
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationSubject.cs#L50
+  metadata:
+    uid: FishyFlip.Models.ModerationRecord.ReportedBy
+    commentId: P:FishyFlip.Models.ModerationRecord.ReportedBy
+- code: public ATDid? ReportedBy { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: Subject
+  id: FishyFlip_Models_ModerationRecord_Subject
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ModerationSubject.cs#L52
+  metadata:
+    uid: FishyFlip.Models.ModerationRecord.Subject
+    commentId: P:FishyFlip.Models.ModerationRecord.Subject
+- code: public ModerationSubject? Subject { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ModerationSubject
+      url: FishyFlip.Models.ModerationSubject.html
+    - '?'
+languageId: csharp

@@ -1,0 +1,71 @@
+### YamlMime:ApiPage
+title: Class CreateMuteRecord
+body:
+- api1: Class CreateMuteRecord
+  id: FishyFlip_Models_Internal_CreateMuteRecord
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateMuteRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateMuteRecord
+    commentId: T:FishyFlip.Models.Internal.CreateMuteRecord
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models.Internal
+      url: FishyFlip.Models.Internal.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record CreateMuteRecord : IEquatable<CreateMuteRecord>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CreateMuteRecord
+    url: FishyFlip.Models.Internal.CreateMuteRecord.html
+- h4: Implements
+- list:
+  - text: IEquatable<CreateMuteRecord>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: CreateMuteRecord(ATDid)
+  id: FishyFlip_Models_Internal_CreateMuteRecord__ctor_FishyFlip_Models_ATDid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateMuteRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateMuteRecord.#ctor(FishyFlip.Models.ATDid)
+    commentId: M:FishyFlip.Models.Internal.CreateMuteRecord.#ctor(FishyFlip.Models.ATDid)
+- code: public CreateMuteRecord(ATDid Actor)
+- h4: Parameters
+- parameters:
+  - name: Actor
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+- h2: Properties
+- api3: Actor
+  id: FishyFlip_Models_Internal_CreateMuteRecord_Actor
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateMuteRecord.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateMuteRecord.Actor
+    commentId: P:FishyFlip.Models.Internal.CreateMuteRecord.Actor
+- code: public ATDid Actor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+languageId: csharp

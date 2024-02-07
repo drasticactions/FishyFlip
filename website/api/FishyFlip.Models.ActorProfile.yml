@@ -1,0 +1,203 @@
+### YamlMime:ApiPage
+title: Class ActorProfile
+body:
+- api1: Class ActorProfile
+  id: FishyFlip_Models_ActorProfile
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile
+    commentId: T:FishyFlip.Models.ActorProfile
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record ActorProfile : IEquatable<ActorProfile>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ActorProfile
+    url: FishyFlip.Models.ActorProfile.html
+- h4: Implements
+- list:
+  - text: IEquatable<ActorProfile>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ActorProfile(ATDid?, string?, string?, string?, string?, DateTime?, Viewer?, Label[]?)
+  id: FishyFlip_Models_ActorProfile__ctor_FishyFlip_Models_ATDid_System_String_System_String_System_String_System_String_System_Nullable_System_DateTime__FishyFlip_Models_Viewer_FishyFlip_Models_Label___
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.#ctor(FishyFlip.Models.ATDid,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},FishyFlip.Models.Viewer,FishyFlip.Models.Label[])
+    commentId: M:FishyFlip.Models.ActorProfile.#ctor(FishyFlip.Models.ATDid,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},FishyFlip.Models.Viewer,FishyFlip.Models.Label[])
+- code: public ActorProfile(ATDid? Did, string? Handle, string? DisplayName, string? Description, string? Avatar, DateTime? IndexedAt, Viewer? Viewer, Label[]? Labels)
+- h4: Parameters
+- parameters:
+  - name: Did
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+  - name: Handle
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: DisplayName
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: Description
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: Avatar
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+  - name: IndexedAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+  - name: Viewer
+    type:
+    - text: Viewer
+      url: FishyFlip.Models.Viewer.html
+    - '?'
+  - name: Labels
+    type:
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '['
+    - ']'
+    - '?'
+- h2: Properties
+- api3: Avatar
+  id: FishyFlip_Models_ActorProfile_Avatar
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.Avatar
+    commentId: P:FishyFlip.Models.ActorProfile.Avatar
+- code: public string? Avatar { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Description
+  id: FishyFlip_Models_ActorProfile_Description
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.Description
+    commentId: P:FishyFlip.Models.ActorProfile.Description
+- code: public string? Description { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Did
+  id: FishyFlip_Models_ActorProfile_Did
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.Did
+    commentId: P:FishyFlip.Models.ActorProfile.Did
+- code: public ATDid? Did { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: DisplayName
+  id: FishyFlip_Models_ActorProfile_DisplayName
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.DisplayName
+    commentId: P:FishyFlip.Models.ActorProfile.DisplayName
+- code: public string? DisplayName { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Handle
+  id: FishyFlip_Models_ActorProfile_Handle
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.Handle
+    commentId: P:FishyFlip.Models.ActorProfile.Handle
+- code: public string? Handle { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: IndexedAt
+  id: FishyFlip_Models_ActorProfile_IndexedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.IndexedAt
+    commentId: P:FishyFlip.Models.ActorProfile.IndexedAt
+- code: public DateTime? IndexedAt { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+- api3: Labels
+  id: FishyFlip_Models_ActorProfile_Labels
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.Labels
+    commentId: P:FishyFlip.Models.ActorProfile.Labels
+- code: public Label[]? Labels { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Label
+      url: FishyFlip.Models.Label.html
+    - '['
+    - ']'
+    - '?'
+- api3: Viewer
+  id: FishyFlip_Models_ActorProfile_Viewer
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ActorProfile.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ActorProfile.Viewer
+    commentId: P:FishyFlip.Models.ActorProfile.Viewer
+- code: public Viewer? Viewer { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Viewer
+      url: FishyFlip.Models.Viewer.html
+    - '?'
+languageId: csharp

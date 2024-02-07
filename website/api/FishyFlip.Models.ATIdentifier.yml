@@ -1,0 +1,66 @@
+### YamlMime:ApiPage
+title: Class ATIdentifier
+body:
+- api1: Class ATIdentifier
+  id: FishyFlip_Models_ATIdentifier
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ATIdentifier.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ATIdentifier
+    commentId: T:FishyFlip.Models.ATIdentifier
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: public abstract class ATIdentifier
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATIdentifier
+    url: FishyFlip.Models.ATIdentifier.html
+- h4: Derived
+- list:
+  - text: ATDid
+    url: FishyFlip.Models.ATDid.html
+  - text: ATHandle
+    url: FishyFlip.Models.ATHandle.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: Create(string)
+  id: FishyFlip_Models_ATIdentifier_Create_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ATIdentifier.cs#L9
+  metadata:
+    uid: FishyFlip.Models.ATIdentifier.Create(System.String)
+    commentId: M:FishyFlip.Models.ATIdentifier.Create(System.String)
+- code: public static ATIdentifier? Create(string id)
+- h4: Parameters
+- parameters:
+  - name: id
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h4: Returns
+- parameters:
+  - type:
+    - text: ATIdentifier
+      url: FishyFlip.Models.ATIdentifier.html
+    - '?'
+languageId: csharp

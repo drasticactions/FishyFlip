@@ -1,0 +1,75 @@
+### YamlMime:ApiPage
+title: Class PostCollection
+body:
+- api1: Class PostCollection
+  id: FishyFlip_Models_PostCollection
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostCollection.cs#L7
+  metadata:
+    uid: FishyFlip.Models.PostCollection
+    commentId: T:FishyFlip.Models.PostCollection
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record PostCollection : IEquatable<PostCollection>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: PostCollection
+    url: FishyFlip.Models.PostCollection.html
+- h4: Implements
+- list:
+  - text: IEquatable<PostCollection>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: PostCollection(PostView[])
+  id: FishyFlip_Models_PostCollection__ctor_FishyFlip_Models_PostView___
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostCollection.cs#L7
+  metadata:
+    uid: FishyFlip.Models.PostCollection.#ctor(FishyFlip.Models.PostView[])
+    commentId: M:FishyFlip.Models.PostCollection.#ctor(FishyFlip.Models.PostView[])
+- code: public PostCollection(PostView[] Posts)
+- h4: Parameters
+- parameters:
+  - name: Posts
+    type:
+    - text: PostView
+      url: FishyFlip.Models.PostView.html
+    - '['
+    - ']'
+- h2: Properties
+- api3: Posts
+  id: FishyFlip_Models_PostCollection_Posts
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/PostCollection.cs#L7
+  metadata:
+    uid: FishyFlip.Models.PostCollection.Posts
+    commentId: P:FishyFlip.Models.PostCollection.Posts
+- code: public PostView[] Posts { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: PostView
+      url: FishyFlip.Models.PostView.html
+    - '['
+    - ']'
+languageId: csharp

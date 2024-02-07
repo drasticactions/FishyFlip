@@ -1,0 +1,89 @@
+### YamlMime:ApiPage
+title: Class CreateInviteCode
+body:
+- api1: Class CreateInviteCode
+  id: FishyFlip_Models_Internal_CreateInviteCode
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCode.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCode
+    commentId: T:FishyFlip.Models.Internal.CreateInviteCode
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models.Internal
+      url: FishyFlip.Models.Internal.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record CreateInviteCode : IEquatable<CreateInviteCode>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CreateInviteCode
+    url: FishyFlip.Models.Internal.CreateInviteCode.html
+- h4: Implements
+- list:
+  - text: IEquatable<CreateInviteCode>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: CreateInviteCode(int, ATDid?)
+  id: FishyFlip_Models_Internal_CreateInviteCode__ctor_System_Int32_FishyFlip_Models_ATDid_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCode.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCode.#ctor(System.Int32,FishyFlip.Models.ATDid)
+    commentId: M:FishyFlip.Models.Internal.CreateInviteCode.#ctor(System.Int32,FishyFlip.Models.ATDid)
+- code: public CreateInviteCode(int UseCount, ATDid? ForAccount)
+- h4: Parameters
+- parameters:
+  - name: UseCount
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ForAccount
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- h2: Properties
+- api3: ForAccount
+  id: FishyFlip_Models_Internal_CreateInviteCode_ForAccount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCode.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCode.ForAccount
+    commentId: P:FishyFlip.Models.Internal.CreateInviteCode.ForAccount
+- code: public ATDid? ForAccount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+    - '?'
+- api3: UseCount
+  id: FishyFlip_Models_Internal_CreateInviteCode_UseCount
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateInviteCode.cs#L13
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateInviteCode.UseCount
+    commentId: P:FishyFlip.Models.Internal.CreateInviteCode.UseCount
+- code: public int UseCount { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+languageId: csharp

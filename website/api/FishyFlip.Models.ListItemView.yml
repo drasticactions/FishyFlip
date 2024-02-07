@@ -1,0 +1,87 @@
+### YamlMime:ApiPage
+title: Class ListItemView
+body:
+- api1: Class ListItemView
+  id: FishyFlip_Models_ListItemView
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListView.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListItemView
+    commentId: T:FishyFlip.Models.ListItemView
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record ListItemView : IEquatable<ListItemView>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ListItemView
+    url: FishyFlip.Models.ListItemView.html
+- h4: Implements
+- list:
+  - text: IEquatable<ListItemView>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: ListItemView(ATUri, ActorProfile)
+  id: FishyFlip_Models_ListItemView__ctor_FishyFlip_Models_ATUri_FishyFlip_Models_ActorProfile_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListView.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListItemView.#ctor(FishyFlip.Models.ATUri,FishyFlip.Models.ActorProfile)
+    commentId: M:FishyFlip.Models.ListItemView.#ctor(FishyFlip.Models.ATUri,FishyFlip.Models.ActorProfile)
+- code: public ListItemView(ATUri Uri, ActorProfile Subject)
+- h4: Parameters
+- parameters:
+  - name: Uri
+    type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+  - name: Subject
+    type:
+    - text: ActorProfile
+      url: FishyFlip.Models.ActorProfile.html
+- h2: Properties
+- api3: Subject
+  id: FishyFlip_Models_ListItemView_Subject
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListView.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListItemView.Subject
+    commentId: P:FishyFlip.Models.ListItemView.Subject
+- code: public ActorProfile Subject { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ActorProfile
+      url: FishyFlip.Models.ActorProfile.html
+- api3: Uri
+  id: FishyFlip_Models_ListItemView_Uri
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/ListView.cs#L7
+  metadata:
+    uid: FishyFlip.Models.ListItemView.Uri
+    commentId: P:FishyFlip.Models.ListItemView.Uri
+- code: public ATUri Uri { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATUri
+      url: FishyFlip.Models.ATUri.html
+languageId: csharp

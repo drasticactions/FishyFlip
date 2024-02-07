@@ -1,0 +1,153 @@
+### YamlMime:ApiPage
+title: Class BlueskyNotification
+body:
+- api1: Class BlueskyNotification
+  id: FishyFlip_BlueskyNotification
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyNotification.cs#L12
+  metadata:
+    uid: FishyFlip.BlueskyNotification
+    commentId: T:FishyFlip.BlueskyNotification
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip
+      url: FishyFlip.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Bluesky Notification.
+- code: public sealed class BlueskyNotification
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: BlueskyNotification
+    url: FishyFlip.BlueskyNotification.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: GetUnreadCountAsync(DateTime?, CancellationToken)
+  id: FishyFlip_BlueskyNotification_GetUnreadCountAsync_System_Nullable_System_DateTime__System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyNotification.cs#L29
+  metadata:
+    uid: FishyFlip.BlueskyNotification.GetUnreadCountAsync(System.Nullable{System.DateTime},System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyNotification.GetUnreadCountAsync(System.Nullable{System.DateTime},System.Threading.CancellationToken)
+- code: public Task<Result<UnreadCount?>> GetUnreadCountAsync(DateTime? seenAt = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: seenAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: UnreadCount
+      url: FishyFlip.Models.UnreadCount.html
+    - '?'
+    - '>'
+    - '>'
+- api3: ListNotificationsAsync(int, string?, DateTime?, CancellationToken)
+  id: FishyFlip_BlueskyNotification_ListNotificationsAsync_System_Int32_System_String_System_Nullable_System_DateTime__System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyNotification.cs#L48
+  metadata:
+    uid: FishyFlip.BlueskyNotification.ListNotificationsAsync(System.Int32,System.String,System.Nullable{System.DateTime},System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyNotification.ListNotificationsAsync(System.Int32,System.String,System.Nullable{System.DateTime},System.Threading.CancellationToken)
+- code: public Task<Result<NotificationCollection?>> ListNotificationsAsync(int limit = 50, string? cursor = null, DateTime? seenAt = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: limit
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    optional: true
+  - name: cursor
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+  - name: seenAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+    - '?'
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: NotificationCollection
+      url: FishyFlip.Models.NotificationCollection.html
+    - '?'
+    - '>'
+    - '>'
+- api3: UpdateSeenAsync(DateTime, CancellationToken)
+  id: FishyFlip_BlueskyNotification_UpdateSeenAsync_System_DateTime_System_Threading_CancellationToken_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/BlueskyNotification.cs#L40
+  metadata:
+    uid: FishyFlip.BlueskyNotification.UpdateSeenAsync(System.DateTime,System.Threading.CancellationToken)
+    commentId: M:FishyFlip.BlueskyNotification.UpdateSeenAsync(System.DateTime,System.Threading.CancellationToken)
+- code: public Task<Result<Success?>> UpdateSeenAsync(DateTime seenAt, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: seenAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+    - <
+    - text: Result
+      url: FishyFlip.Models.Result-1.html
+    - <
+    - text: Success
+      url: FishyFlip.Models.Success.html
+    - '?'
+    - '>'
+    - '>'
+languageId: csharp
+metadata:
+  description: Bluesky Notification.

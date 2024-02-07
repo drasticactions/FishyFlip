@@ -1,0 +1,29 @@
+### YamlMime:ApiPage
+title: Namespace FishyFlip.Tools.Json
+body:
+- api1: Namespace FishyFlip.Tools.Json
+  id: FishyFlip_Tools_Json
+  metadata:
+    uid: FishyFlip.Tools.Json
+    commentId: N:FishyFlip.Tools.Json
+- h3: Classes
+- parameters:
+  - type:
+      text: ATRecordJsonConverter
+      url: FishyFlip.Tools.Json.ATRecordJsonConverter.html
+  - type:
+      text: AtDidJsonConverter
+      url: FishyFlip.Tools.Json.AtDidJsonConverter.html
+  - type:
+      text: AtHandlerJsonConverter
+      url: FishyFlip.Tools.Json.AtHandlerJsonConverter.html
+  - type:
+      text: AtUriJsonConverter
+      url: FishyFlip.Tools.Json.AtUriJsonConverter.html
+  - type:
+      text: CidConverter
+      url: FishyFlip.Tools.Json.CidConverter.html
+  - type:
+      text: EmbedConverter
+      url: FishyFlip.Tools.Json.EmbedConverter.html
+languageId: csharp

@@ -1,0 +1,186 @@
+### YamlMime:ApiPage
+title: Class DidDoc
+body:
+- api1: Class DidDoc
+  id: FishyFlip_Models_DidDoc
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DidDoc.cs#L11
+  metadata:
+    uid: FishyFlip.Models.DidDoc
+    commentId: T:FishyFlip.Models.DidDoc
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: >-
+    DidDoc.
+
+    Represents a Decentralized Identifier Document upon login.
+- code: public class DidDoc
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: DidDoc
+    url: FishyFlip.Models.DidDoc.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: DidDoc(List<string>, string, List<string>, List<VerificationMethod>, List<Service>)
+  id: FishyFlip_Models_DidDoc__ctor_System_Collections_Generic_List_System_String__System_String_System_Collections_Generic_List_System_String__System_Collections_Generic_List_FishyFlip_Models_VerificationMethod__System_Collections_Generic_List_FishyFlip_Models_Service__
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DidDoc.cs#L21
+  metadata:
+    uid: FishyFlip.Models.DidDoc.#ctor(System.Collections.Generic.List{System.String},System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{FishyFlip.Models.VerificationMethod},System.Collections.Generic.List{FishyFlip.Models.Service})
+    commentId: M:FishyFlip.Models.DidDoc.#ctor(System.Collections.Generic.List{System.String},System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{FishyFlip.Models.VerificationMethod},System.Collections.Generic.List{FishyFlip.Models.Service})
+- markdown: Initializes a new instance of the <xref href="FishyFlip.Models.DidDoc" data-throw-if-not-resolved="false"></xref> class.
+- code: >-
+    [JsonConstructor]
+
+    public DidDoc(List<string> context, string id, List<string> alsoKnownAs, List<VerificationMethod> verificationMethod, List<Service> service)
+- h4: Parameters
+- parameters:
+  - name: context
+    type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+    description: Contexts.
+  - name: id
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Id.
+  - name: alsoKnownAs
+    type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+    description: Also known as values.
+  - name: verificationMethod
+    type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: VerificationMethod
+      url: FishyFlip.Models.VerificationMethod.html
+    - '>'
+    description: Verification methods.
+  - name: service
+    type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: Service
+      url: FishyFlip.Models.Service.html
+    - '>'
+    description: List of services.
+- h2: Properties
+- api3: AlsoKnownAs
+  id: FishyFlip_Models_DidDoc_AlsoKnownAs
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DidDoc.cs#L49
+  metadata:
+    uid: FishyFlip.Models.DidDoc.AlsoKnownAs
+    commentId: P:FishyFlip.Models.DidDoc.AlsoKnownAs
+- markdown: Gets the list of also known as for the given Did.
+- code: public List<string> AlsoKnownAs { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+- api3: Context
+  id: FishyFlip_Models_DidDoc_Context
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DidDoc.cs#L39
+  metadata:
+    uid: FishyFlip.Models.DidDoc.Context
+    commentId: P:FishyFlip.Models.DidDoc.Context
+- markdown: Gets the list of contexts.
+- code: public List<string> Context { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+- api3: Id
+  id: FishyFlip_Models_DidDoc_Id
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DidDoc.cs#L44
+  metadata:
+    uid: FishyFlip.Models.DidDoc.Id
+    commentId: P:FishyFlip.Models.DidDoc.Id
+- markdown: Gets the Id.
+- code: public string Id { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Service
+  id: FishyFlip_Models_DidDoc_Service
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DidDoc.cs#L59
+  metadata:
+    uid: FishyFlip.Models.DidDoc.Service
+    commentId: P:FishyFlip.Models.DidDoc.Service
+- markdown: Gets the list of services.
+- code: public List<Service> Service { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: Service
+      url: FishyFlip.Models.Service.html
+    - '>'
+- api3: VerificationMethod
+  id: FishyFlip_Models_DidDoc_VerificationMethod
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/DidDoc.cs#L54
+  metadata:
+    uid: FishyFlip.Models.DidDoc.VerificationMethod
+    commentId: P:FishyFlip.Models.DidDoc.VerificationMethod
+- markdown: Gets the list of verification methods.
+- code: public List<VerificationMethod> VerificationMethod { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: List
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+    - <
+    - text: VerificationMethod
+      url: FishyFlip.Models.VerificationMethod.html
+    - '>'
+languageId: csharp
+metadata:
+  description: >-
+    DidDoc.
+
+    Represents a Decentralized Identifier Document upon login.

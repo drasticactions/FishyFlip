@@ -1,0 +1,28 @@
+### YamlMime:ApiPage
+title: Delegate OnCarDecoded
+body:
+- api1: Delegate OnCarDecoded
+  id: FishyFlip_Tools_OnCarDecoded
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/CarDecoder.cs#L11
+  metadata:
+    uid: FishyFlip.Tools.OnCarDecoded
+    commentId: T:FishyFlip.Tools.OnCarDecoded
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Tools
+      url: FishyFlip.Tools.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Fires when a car file is decoded.
+- code: public delegate void OnCarDecoded(CarProgressStatusEvent e)
+- h4: Parameters
+- parameters:
+  - name: e
+    type:
+    - text: CarProgressStatusEvent
+      url: FishyFlip.Tools.CarProgressStatusEvent.html
+    description: Car Progress Status Event.
+languageId: csharp
+metadata:
+  description: Fires when a car file is decoded.

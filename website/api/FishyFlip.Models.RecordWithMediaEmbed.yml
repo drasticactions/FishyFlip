@@ -1,0 +1,117 @@
+### YamlMime:ApiPage
+title: Class RecordWithMediaEmbed
+body:
+- api1: Class RecordWithMediaEmbed
+  id: FishyFlip_Models_RecordWithMediaEmbed
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/RecordWithMediaEmbed.cs#L10
+  metadata:
+    uid: FishyFlip.Models.RecordWithMediaEmbed
+    commentId: T:FishyFlip.Models.RecordWithMediaEmbed
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Record with Media Embed.
+- code: 'public class RecordWithMediaEmbed : Embed'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ATRecord
+    url: FishyFlip.Models.ATRecord.html
+  - text: Embed
+    url: FishyFlip.Models.Embed.html
+  - text: RecordWithMediaEmbed
+    url: FishyFlip.Models.RecordWithMediaEmbed.html
+- h4: Inherited Members
+- list:
+  - text: ATRecord.Type
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_Type
+  - text: ATRecord.FromCBORObject(CBORObject, ILogger?)
+    url: FishyFlip.Models.ATRecord.html#FishyFlip_Models_ATRecord_FromCBORObject_PeterO_Cbor_CBORObject_Microsoft_Extensions_Logging_ILogger_
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: RecordWithMediaEmbed(RecordEmbed?, ImagesEmbed?)
+  id: FishyFlip_Models_RecordWithMediaEmbed__ctor_FishyFlip_Models_RecordEmbed_FishyFlip_Models_ImagesEmbed_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/RecordWithMediaEmbed.cs#L12
+  metadata:
+    uid: FishyFlip.Models.RecordWithMediaEmbed.#ctor(FishyFlip.Models.RecordEmbed,FishyFlip.Models.ImagesEmbed)
+    commentId: M:FishyFlip.Models.RecordWithMediaEmbed.#ctor(FishyFlip.Models.RecordEmbed,FishyFlip.Models.ImagesEmbed)
+- code: >-
+    [JsonConstructor]
+
+    public RecordWithMediaEmbed(RecordEmbed? record, ImagesEmbed? images)
+- h4: Parameters
+- parameters:
+  - name: record
+    type:
+    - text: RecordEmbed
+      url: FishyFlip.Models.RecordEmbed.html
+    - '?'
+  - name: images
+    type:
+    - text: ImagesEmbed
+      url: FishyFlip.Models.ImagesEmbed.html
+    - '?'
+- api3: RecordWithMediaEmbed(CBORObject, CBORObject)
+  id: FishyFlip_Models_RecordWithMediaEmbed__ctor_PeterO_Cbor_CBORObject_PeterO_Cbor_CBORObject_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/RecordWithMediaEmbed.cs#L24
+  metadata:
+    uid: FishyFlip.Models.RecordWithMediaEmbed.#ctor(PeterO.Cbor.CBORObject,PeterO.Cbor.CBORObject)
+    commentId: M:FishyFlip.Models.RecordWithMediaEmbed.#ctor(PeterO.Cbor.CBORObject,PeterO.Cbor.CBORObject)
+- markdown: Initializes a new instance of the <xref href="FishyFlip.Models.RecordWithMediaEmbed" data-throw-if-not-resolved="false"></xref> class.
+- code: public RecordWithMediaEmbed(CBORObject record, CBORObject media)
+- h4: Parameters
+- parameters:
+  - name: record
+    type:
+    - CBORObject
+  - name: media
+    type:
+    - CBORObject
+- h2: Properties
+- api3: Images
+  id: FishyFlip_Models_RecordWithMediaEmbed_Images
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/RecordWithMediaEmbed.cs#L39
+  metadata:
+    uid: FishyFlip.Models.RecordWithMediaEmbed.Images
+    commentId: P:FishyFlip.Models.RecordWithMediaEmbed.Images
+- code: public ImagesEmbed? Images { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ImagesEmbed
+      url: FishyFlip.Models.ImagesEmbed.html
+    - '?'
+- api3: Record
+  id: FishyFlip_Models_RecordWithMediaEmbed_Record
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/RecordWithMediaEmbed.cs#L37
+  metadata:
+    uid: FishyFlip.Models.RecordWithMediaEmbed.Record
+    commentId: P:FishyFlip.Models.RecordWithMediaEmbed.Record
+- code: public RecordEmbed? Record { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: RecordEmbed
+      url: FishyFlip.Models.RecordEmbed.html
+    - '?'
+languageId: csharp
+metadata:
+  description: Record with Media Embed.

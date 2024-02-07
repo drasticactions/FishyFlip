@@ -1,0 +1,87 @@
+### YamlMime:ApiPage
+title: Class Used
+body:
+- api1: Class Used
+  id: FishyFlip_Models_Used
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Used.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Used
+    commentId: T:FishyFlip.Models.Used
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models
+      url: FishyFlip.Models.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record Used : IEquatable<Used>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Used
+    url: FishyFlip.Models.Used.html
+- h4: Implements
+- list:
+  - text: IEquatable<Used>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Used(ATDid, DateTime)
+  id: FishyFlip_Models_Used__ctor_FishyFlip_Models_ATDid_System_DateTime_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Used.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Used.#ctor(FishyFlip.Models.ATDid,System.DateTime)
+    commentId: M:FishyFlip.Models.Used.#ctor(FishyFlip.Models.ATDid,System.DateTime)
+- code: public Used(ATDid UsedBy, DateTime UsedAt)
+- h4: Parameters
+- parameters:
+  - name: UsedBy
+    type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+  - name: UsedAt
+    type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+- h2: Properties
+- api3: UsedAt
+  id: FishyFlip_Models_Used_UsedAt
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Used.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Used.UsedAt
+    commentId: P:FishyFlip.Models.Used.UsedAt
+- code: public DateTime UsedAt { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DateTime
+      url: https://learn.microsoft.com/dotnet/api/system.datetime
+- api3: UsedBy
+  id: FishyFlip_Models_Used_UsedBy
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Used.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Used.UsedBy
+    commentId: P:FishyFlip.Models.Used.UsedBy
+- code: public ATDid UsedBy { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ATDid
+      url: FishyFlip.Models.ATDid.html
+languageId: csharp

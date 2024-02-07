@@ -1,0 +1,96 @@
+### YamlMime:ApiPage
+title: Class CarDecoder
+body:
+- api1: Class CarDecoder
+  id: FishyFlip_Tools_CarDecoder
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/CarDecoder.cs#L16
+  metadata:
+    uid: FishyFlip.Tools.CarDecoder
+    commentId: T:FishyFlip.Tools.CarDecoder
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Tools
+      url: FishyFlip.Tools.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Decode CAR byte arrays.
+- code: public static class CarDecoder
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CarDecoder
+    url: FishyFlip.Tools.CarDecoder.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: DecodeCar(byte[], OnCarDecoded?)
+  id: FishyFlip_Tools_CarDecoder_DecodeCar_System_Byte___FishyFlip_Tools_OnCarDecoded_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/CarDecoder.cs#L26
+  metadata:
+    uid: FishyFlip.Tools.CarDecoder.DecodeCar(System.Byte[],FishyFlip.Tools.OnCarDecoded)
+    commentId: M:FishyFlip.Tools.CarDecoder.DecodeCar(System.Byte[],FishyFlip.Tools.OnCarDecoded)
+- markdown: Decodes CAR Byte Array.
+- code: public static void DecodeCar(byte[] bytes, OnCarDecoded? progress = null)
+- h4: Parameters
+- parameters:
+  - name: bytes
+    type:
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '['
+    - ']'
+    description: Byte Array.
+  - name: progress
+    type:
+    - text: OnCarDecoded
+      url: FishyFlip.Tools.OnCarDecoded.html
+    - '?'
+    description: Fires when a car file is decoded.
+    optional: true
+- api3: DecodeCarAsync(Stream, OnCarDecoded?)
+  id: FishyFlip_Tools_CarDecoder_DecodeCarAsync_System_IO_Stream_FishyFlip_Tools_OnCarDecoded_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/CarDecoder.cs#L59
+  metadata:
+    uid: FishyFlip.Tools.CarDecoder.DecodeCarAsync(System.IO.Stream,FishyFlip.Tools.OnCarDecoded)
+    commentId: M:FishyFlip.Tools.CarDecoder.DecodeCarAsync(System.IO.Stream,FishyFlip.Tools.OnCarDecoded)
+- markdown: Decodes CAR Stream.
+- code: public static Task DecodeCarAsync(Stream stream, OnCarDecoded? progress = null)
+- h4: Parameters
+- parameters:
+  - name: stream
+    type:
+    - text: Stream
+      url: https://learn.microsoft.com/dotnet/api/system.io.stream
+    description: Stream containing CAR file.
+  - name: progress
+    type:
+    - text: OnCarDecoded
+      url: FishyFlip.Tools.OnCarDecoded.html
+    - '?'
+    description: Fires when a car file is decoded.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+    description: Task.
+languageId: csharp
+metadata:
+  description: Decode CAR byte arrays.

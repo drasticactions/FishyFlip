@@ -1,0 +1,65 @@
+### YamlMime:ApiPage
+title: Class EnumExtensions
+body:
+- api1: Class EnumExtensions
+  id: FishyFlip_Tools_EnumExtensions
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/EnumExtensions.cs#L10
+  metadata:
+    uid: FishyFlip.Tools.EnumExtensions
+    commentId: T:FishyFlip.Tools.EnumExtensions
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Tools
+      url: FishyFlip.Tools.html
+  - name: Assembly
+    value: FishyFlip.dll
+- markdown: Enum Extensions.
+- code: public static class EnumExtensions
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: EnumExtensions
+    url: FishyFlip.Tools.EnumExtensions.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: ToEndpointString(ModerationReasonType)
+  id: FishyFlip_Tools_EnumExtensions_ToEndpointString_FishyFlip_Models_ModerationReasonType_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Tools/EnumExtensions.cs#L17
+  metadata:
+    uid: FishyFlip.Tools.EnumExtensions.ToEndpointString(FishyFlip.Models.ModerationReasonType)
+    commentId: M:FishyFlip.Tools.EnumExtensions.ToEndpointString(FishyFlip.Models.ModerationReasonType)
+- markdown: Returns the endpoint string for the enum.
+- code: public static string ToEndpointString(this ModerationReasonType me)
+- h4: Parameters
+- parameters:
+  - name: me
+    type:
+    - text: ModerationReasonType
+      url: FishyFlip.Models.ModerationReasonType.html
+    description: <xref href="FishyFlip.Models.ModerationReasonType" data-throw-if-not-resolved="false"></xref>.
+- h4: Returns
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: String.
+languageId: csharp
+metadata:
+  description: Enum Extensions.

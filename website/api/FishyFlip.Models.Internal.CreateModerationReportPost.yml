@@ -1,0 +1,106 @@
+### YamlMime:ApiPage
+title: Class CreateModerationReportPost
+body:
+- api1: Class CreateModerationReportPost
+  id: FishyFlip_Models_Internal_CreateModerationReportPost
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateModerationReport.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateModerationReportPost
+    commentId: T:FishyFlip.Models.Internal.CreateModerationReportPost
+- facts:
+  - name: Namespace
+    value:
+      text: FishyFlip.Models.Internal
+      url: FishyFlip.Models.Internal.html
+  - name: Assembly
+    value: FishyFlip.dll
+- code: 'public record CreateModerationReportPost : IEquatable<CreateModerationReportPost>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CreateModerationReportPost
+    url: FishyFlip.Models.Internal.CreateModerationReportPost.html
+- h4: Implements
+- list:
+  - text: IEquatable<CreateModerationReportPost>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: CreateModerationReportPost(string, RepoStrongRef, string?)
+  id: FishyFlip_Models_Internal_CreateModerationReportPost__ctor_System_String_FishyFlip_Models_RepoStrongRef_System_String_
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateModerationReport.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateModerationReportPost.#ctor(System.String,FishyFlip.Models.RepoStrongRef,System.String)
+    commentId: M:FishyFlip.Models.Internal.CreateModerationReportPost.#ctor(System.String,FishyFlip.Models.RepoStrongRef,System.String)
+- code: public CreateModerationReportPost(string ReasonType, RepoStrongRef Subject, string? Reason = null)
+- h4: Parameters
+- parameters:
+  - name: ReasonType
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+  - name: Subject
+    type:
+    - text: RepoStrongRef
+      url: FishyFlip.Models.RepoStrongRef.html
+  - name: Reason
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    optional: true
+- h2: Properties
+- api3: Reason
+  id: FishyFlip_Models_Internal_CreateModerationReportPost_Reason
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateModerationReport.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateModerationReportPost.Reason
+    commentId: P:FishyFlip.Models.Internal.CreateModerationReportPost.Reason
+- code: public string? Reason { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: ReasonType
+  id: FishyFlip_Models_Internal_CreateModerationReportPost_ReasonType
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateModerationReport.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateModerationReportPost.ReasonType
+    commentId: P:FishyFlip.Models.Internal.CreateModerationReportPost.ReasonType
+- code: public string ReasonType { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Subject
+  id: FishyFlip_Models_Internal_CreateModerationReportPost_Subject
+  src: https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/Models/Internal/CreateModerationReport.cs#L7
+  metadata:
+    uid: FishyFlip.Models.Internal.CreateModerationReportPost.Subject
+    commentId: P:FishyFlip.Models.Internal.CreateModerationReportPost.Subject
+- code: public RepoStrongRef Subject { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: RepoStrongRef
+      url: FishyFlip.Models.RepoStrongRef.html
+languageId: csharp
