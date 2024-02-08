@@ -104,12 +104,6 @@ public sealed class ATProtocol : IDisposable
     public ATProtoModeration Moderation => new(this);
 
     /// <summary>
-    /// Gets a debug protocol handle for interacting with ATProto.
-    /// <see cref="ATProtoDebug"/>.
-    /// </summary>
-    public ATProtoDebug Debug => new(this);
-
-    /// <summary>
     /// Gets the ATProto Unspecced Protocol.
     /// </summary>
     public BlueskyUnspecced Unspecced => new(this);
