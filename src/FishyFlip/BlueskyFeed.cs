@@ -4,6 +4,9 @@
 
 namespace FishyFlip;
 
+/// <summary>
+/// Bluesky Feed.
+/// </summary>
 public sealed class BlueskyFeed
 {
     private ATProtocol proto;
@@ -21,6 +24,13 @@ public sealed class BlueskyFeed
 
     private HttpClient Client => this.proto.Client;
 
+    /// <summary>
+    /// Asynchronously retrieves the thread of a post.
+    /// </summary>
+    /// <param name="uri">The URI of the post whose thread is to be retrieved.</param>
+    /// <param name="depth">Optional. The depth of the thread. Default is 0.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the thread of the post, or null if the thread could not be retrieved.</returns>
     public async Task<Result<ThreadPostViewFeed>> GetPostThreadAsync(
        ATUri uri,
        int depth = 0,
@@ -39,6 +49,15 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves the reposts of a post.
+    /// </summary>
+    /// <param name="uri">The URI of the post whose reposts are to be retrieved.</param>
+    /// <param name="limit">Optional. The maximum number of reposts to retrieve. Default is 50.</param>
+    /// <param name="cid">Optional. A CID that can be used to paginate through reposts.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through reposts.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the reposts of the post, or null if no reposts were found.</returns>
     public async Task<Result<RepostedFeed>> GetRepostedByAsync(
     ATUri uri,
     int limit = 50,
@@ -65,6 +84,15 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves the likes of a post.
+    /// </summary>
+    /// <param name="uri">The URI of the post whose likes are to be retrieved.</param>
+    /// <param name="limit">Optional. The maximum number of likes to retrieve. Default is 50.</param>
+    /// <param name="cid">Optional. A CID that can be used to paginate through likes.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through likes.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the likes of the post, or null if no likes were found.</returns>
     public async Task<Result<LikesFeed>> GetLikesAsync(ATUri uri, int limit = 50, Cid? cid = default, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetLikes}?uri={uri.ToString()}&limit={limit}";
@@ -86,6 +114,13 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves the feed of a list.
+    /// </summary>
+    /// <param name="uri">The URI of the list whose feed is to be retrieved.</param>
+    /// <param name="limit">Optional. The maximum number of posts to retrieve. Default is 30.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the feed of the list, or null if no feed was found.</returns>
     public async Task<Result<ListFeed>> GetListFeedAsync(ATUri uri, int limit = 30, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetListFeed}?list={uri.ToString()}&limit={limit}";
@@ -97,6 +132,14 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves the feed of an author.
+    /// </summary>
+    /// <param name="handle">The handle of the author whose feed is to be retrieved.</param>
+    /// <param name="limit">Optional. The maximum number of posts to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through posts.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the feed of the author, or null if no feed was found.</returns>
     public async Task<Result<Timeline>> GetAuthorFeedAsync(ATIdentifier handle, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetAuthorFeed}?actor={handle.ToString()}&limit={limit}";
@@ -112,6 +155,14 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves the likes of an actor.
+    /// </summary>
+    /// <param name="handle">The handle of the actor whose likes are to be retrieved.</param>
+    /// <param name="limit">Optional. The maximum number of likes to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through likes.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the likes of the actor, or null if no likes were found.</returns>
     public async Task<Result<Timeline>> GetActorLikesAsync(ATIdentifier handle, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetActorLikes}?actor={handle.ToString()}&limit={limit}";
@@ -127,6 +178,12 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves posts based on a query.
+    /// </summary>
+    /// <param name="query">An array of URIs of the posts to be retrieved.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the posts, or null if no posts were found.</returns>
     public async Task<Result<PostCollection>> GetPostsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
     {
         var answer = string.Join("&", query.Select(n => $"uris={n}"));
@@ -138,6 +195,14 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves a timeline.
+    /// </summary>
+    /// <param name="limit">Optional. The maximum number of posts to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through posts.</param>
+    /// <param name="algorithm">Optional. The algorithm to use for retrieving the timeline. Default is "reverse-chronological".</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the timeline, or null if no timeline was found.</returns>
     public async Task<Result<Timeline>> GetTimelineAsync(int limit = 50, string? cursor = default, string algorithm = "reverse-chronological", CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetTimeline}?algorithm={algorithm}&limit={limit}";
@@ -153,6 +218,14 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves a feed.
+    /// </summary>
+    /// <param name="uri">The URI of the feed to be retrieved.</param>
+    /// <param name="limit">Optional. The maximum number of posts to retrieve. Default is 30.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through posts.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the feed, or null if no feed was found.</returns>
     public async Task<Result<FeedPostList>> GetFeedAsync(ATUri uri, int limit = 30, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetFeed}?feed={uri}&limit={limit}";
@@ -168,6 +241,12 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves a feed generator.
+    /// </summary>
+    /// <param name="uri">The URI of the feed generator to be retrieved.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the feed generator, or null if no feed generator was found.</returns>
     public async Task<Result<FeedGeneratorRecord>> GetFeedGeneratorAsync(ATUri uri, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetFeedGenerator}?feed={uri}";
@@ -179,6 +258,12 @@ public sealed class BlueskyFeed
                 error => error!);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves feed generators based on a query.
+    /// </summary>
+    /// <param name="query">An array of URIs of the feed generators to be retrieved.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the feed generators, or null if no feed generators were found.</returns>
     public async Task<Result<FeedCollection?>> GetFeedGeneratorsAsync(IEnumerable<ATUri> query, CancellationToken cancellationToken = default)
     {
         var answer = string.Join("&", query.Select(n => $"feeds={n}"));
@@ -187,6 +272,13 @@ public sealed class BlueskyFeed
         return await this.Client.Get<FeedCollection?>(url, this.Options.SourceGenerationContext.FeedCollection!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves suggested feeds.
+    /// </summary>
+    /// <param name="limit">Optional. The maximum number of suggested feeds to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through suggested feeds.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the suggested feeds, or null if no suggested feeds were found.</returns>
     public async Task<Result<GeneratorFeed?>> GetSuggestedFeedsAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetSuggestedFeeds}?limit={limit}";
@@ -198,6 +290,14 @@ public sealed class BlueskyFeed
         return await this.Client.Get<GeneratorFeed>(url, this.Options.SourceGenerationContext.GeneratorFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves the feeds of an actor.
+    /// </summary>
+    /// <param name="actor">The identifier of the actor whose feeds are to be retrieved.</param>
+    /// <param name="limit">Optional. The maximum number of feeds to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A cursor that can be used to paginate through feeds.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the feeds of the actor, or null if no feeds were found.</returns>
     public async Task<Result<GeneratorFeed?>> GetActorFeedsAsync(ATIdentifier actor, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetActorFeeds}?actor={actor}&limit={limit}";

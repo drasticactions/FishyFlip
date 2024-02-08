@@ -245,6 +245,17 @@ public sealed class ATProtoRepo
             this.Options.Logger);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves a record of type T from a specified repository.
+    /// </summary>
+    /// <typeparam name="T">The type of the record to retrieve. Must implement ATFeedTypeAPI.</typeparam>
+    /// <param name="collection">The name of the collection where the record is stored.</param>
+    /// <param name="type">The JsonTypeInfo of the record type T. Used for JSON serialization and deserialization.</param>
+    /// <param name="repo">The ATIdentifier of the repository where the record is stored.</param>
+    /// <param name="rkey">The key of the record to retrieve.</param>
+    /// <param name="cid">Optional. The CID (Content Identifier) of the record. If specified, the method retrieves the record with this CID.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the retrieved record of type T, or null if the record was not found.</returns>
     public async Task<Result<T?>> GetRecordAsync<T>(string collection, JsonTypeInfo<T> type, ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
         where T : ATFeedTypeAPI
     {
@@ -257,12 +268,26 @@ public sealed class ATProtoRepo
         return await this.Client.Get<T>(url, type, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    /// <summary>
+    /// Asynchronously retrieves the description of a repository.
+    /// </summary>
+    /// <param name="identifier">The ATIdentifier of the repository to describe.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the description of the repository, or null if the repository was not found.</returns>
     public async Task<Result<DescribeRepo?>> DescribeRepoAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.ATProtoRepo.DescribeRepo}?repo={identifier}";
         return await this.Client.Get<DescribeRepo?>(url, this.Options.SourceGenerationContext.DescribeRepo!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
+    /// <summary>
+    /// Asynchronously deletes a follow record.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteFollowAsync(
         string rkey,
         Cid? swapRecord = null,
@@ -270,6 +295,14 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.Follow, rkey, swapRecord, swapCommit, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously deletes a block record.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteBlockAsync(
         string rkey,
         Cid? swapRecord = null,
@@ -277,6 +310,14 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.Block, rkey, swapRecord, swapCommit, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously deletes a like record.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteLikeAsync(
         string rkey,
         Cid? swapRecord = null,
@@ -284,6 +325,14 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Like, rkey, swapRecord, swapCommit, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously deletes a post record.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeletePostAsync(
         string rkey,
         Cid? swapRecord = null,
@@ -291,6 +340,14 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Post, rkey, swapRecord, swapCommit, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously deletes a repost record.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteRepostAsync(
         string rkey,
         Cid? swapRecord = null,
@@ -298,6 +355,14 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Repost, rkey, swapRecord, swapCommit, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously deletes a list.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteListAsync(
         string rkey,
         Cid? swapRecord = null,
@@ -305,6 +370,14 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.List, rkey, swapRecord, swapCommit, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously deletes a list item.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteListItemAsync(
         string rkey,
         Cid? swapRecord = null,
@@ -312,34 +385,116 @@ public sealed class ATProtoRepo
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.ListItem, rkey, swapRecord, swapCommit, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of follow records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of follow records, or null if no records were found.</returns>
     [Obsolete("Use ListFollowsAsync instead")]
     public Task<Result<ListRecords?>> ListFollowAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Follow, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of follow records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of follow records, or null if no records were found.</returns>
     public Task<Result<ListRecords?>> ListFollowsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Follow, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of block records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of block records, or null if no records were found.</returns>
     [Obsolete("Use ListBlocksAsync instead")]
     public Task<Result<ListRecords?>> ListBlockAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Block, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of block records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of block records, or null if no records were found.</returns>
     public Task<Result<ListRecords?>> ListBlocksAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Block, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of like records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     [Obsolete("Use ListLikesAsync instead")]
     public Task<Result<ListRecords?>> ListLikeAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Like, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of like records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     public Task<Result<ListRecords?>> ListLikesAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Like, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of post records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     [Obsolete("Use ListPostsAsync instead")]
     public Task<Result<ListRecords?>> ListPostAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of post records from a specified repository.
+    /// </summary>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     public Task<Result<ListRecords?>> ListPostsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
        => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
 
+    /// <summary>
+    /// Asynchronously retrieves a list of records from a specified repository.
+    /// </summary>
+    /// <param name="collection">The name of the collection where the records are stored.</param>
+    /// <param name="repo">The ATIdentifier of the repository where the records are stored.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     public async Task<Result<ListRecords?>> ListRecordsAsync(string collection, ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={collection}&repo={repo}&limit={limit}";

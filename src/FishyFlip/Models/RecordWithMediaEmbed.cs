@@ -9,6 +9,11 @@ namespace FishyFlip.Models;
 /// </summary>
 public class RecordWithMediaEmbed : Embed
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RecordWithMediaEmbed"/> class.
+    /// </summary>
+    /// <param name="record">The record to be embedded. Can be null.</param>
+    /// <param name="images">The images to be embedded. Can be null.</param>
     [JsonConstructor]
     public RecordWithMediaEmbed(RecordEmbed? record, ImagesEmbed? images)
     {
@@ -20,7 +25,8 @@ public class RecordWithMediaEmbed : Embed
     /// <summary>
     /// Initializes a new instance of the <see cref="RecordWithMediaEmbed"/> class.
     /// </summary>
-    /// <param name="obj">CBORObject.</param>
+    /// <param name="record">The record to be embedded. Can be null.</param>
+    /// <param name="media">The media to be embedded. Can be null.</param>
     public RecordWithMediaEmbed(CBORObject record, CBORObject media)
     {
         this.Type = Constants.EmbedTypes.RecordWithMedia;
@@ -34,7 +40,13 @@ public class RecordWithMediaEmbed : Embed
         }
     }
 
+    /// <summary>
+    /// Gets the record to be embedded.
+    /// </summary>
     public RecordEmbed? Record { get; }
 
+    /// <summary>
+    /// Gets the images to be embedded.
+    /// </summary>
     public ImagesEmbed? Images { get; }
 }
