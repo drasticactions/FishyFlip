@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a collection of feed profiles.
+/// </summary>
 public record FeedProfiles(FeedProfile[]? Profiles);

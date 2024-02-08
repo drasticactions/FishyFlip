@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents the properties of a server link, including the terms of service and privacy policy.
+/// </summary>
 public record ServerLinkProperties(string TermsOfService, string PrivacyPolicy);

@@ -4,21 +4,19 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a feed record.
+/// </summary>
+/// <param name="Uri">The URI of the feed record.</param>
+/// <param name="Did">The DID of the feed record.</param>
+/// <param name="Avatar">The avatar of the feed record.</param>
+/// <param name="Creator">The creator of the feed record.</param>
+/// <param name="Cid">The CID of the feed record.</param>
+/// <param name="DisplayName">The display name of the feed record.</param>
+/// <param name="Viewer">The viewer of the feed record.</param>
+/// <param name="LikeCount">The number of likes of the feed record.</param>
+/// <param name="IndexedAt">The date and time when the feed record was indexed.</param>
+/// <param name="Description">The description of the feed record.</param>
 public record FeedRecord(ATUri Uri, ATDid Did, string Avatar, FeedCreator Creator, Cid Cid, string DisplayName, Viewer Viewer, int LikeCount, DateTime IndexedAt, string Description)
 {
 }
-
-public record FeedGeneratorRecord(bool IsOnline, bool IsValid, FeedRecord View);
-
-public record FeedPostList(FeedViewPost[] Feed, string? Cursor);
-
-public record FeedCollection(FeedRecord[] Feeds);
-
-public record FeedResultList(FeedRecord[] Feeds, string? Cursor);
-
-public record FeedCreator(string Did,
-    string Handle,
-    string DisplayName,
-    string Avatar,
-    Viewer Viewer,
-    IReadOnlyList<Label> Labels);

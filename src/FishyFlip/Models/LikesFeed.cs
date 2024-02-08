@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a feed of likes.
+/// </summary>
 public record LikesFeed(Like[] Likes, string? Cursor);

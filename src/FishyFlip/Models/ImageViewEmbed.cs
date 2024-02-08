@@ -4,15 +4,23 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents an embed containing multiple images.
+/// </summary>
 public class ImageViewEmbed : Embed
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ImageViewEmbed"/> class.
+    /// </summary>
+    /// <param name="images">The array of images to be embedded.</param>
     public ImageViewEmbed(ImageView[] images)
     {
         this.Images = images;
         this.Type = Constants.EmbedTypes.ImageView;
     }
 
+    /// <summary>
+    /// Gets the array of images embedded in the ImageViewEmbed.
+    /// </summary>
     public ImageView[] Images { get; }
 }
-
-public record ImageView(string Thumb, string Fullsize, string Alt);

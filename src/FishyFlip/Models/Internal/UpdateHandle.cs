@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models.Internal;
 
+/// <summary>
+/// Represents an update handle.
+/// </summary>
 internal record UpdateHandle(string Handle);

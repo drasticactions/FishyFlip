@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace FishyFlip.Tools.Json;
 
 public class EmbedConverter : JsonConverter<Embed>
@@ -94,7 +96,7 @@ public class EmbedConverter : JsonConverter<Embed>
 
                         if (doc.RootElement.TryGetProperty("record", out var recordVal))
                         {
-                            record = JsonSerializer.Deserialize<RecordEmbed>(recordVal.GetRawText(), options);
+                            record = JsonSerializer.Deserialize<RecordEmbed>(recordVal.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordEmbed);
                         }
 
                         if (doc.RootElement.TryGetProperty("media", out var mediaVal))
@@ -121,24 +123,6 @@ public class EmbedConverter : JsonConverter<Embed>
 
     public override void Write(Utf8JsonWriter writer, Embed value, JsonSerializerOptions options)
     {
-#pragma warning disable IL2026
-#pragma warning disable IL3050
-        JsonSerializer.Serialize(writer, value, value.GetType(), new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            TypeInfoResolver = SourceGenerationContext.Default,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new ATRecordJsonConverter(),
-                new CidConverter(),
-            },
-        });
-#pragma warning restore IL3050
-#pragma warning restore IL2026
+        throw new NotImplementedException();
     }
 }

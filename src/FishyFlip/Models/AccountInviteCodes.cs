@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a collection of account invite codes.
+/// </summary>
 public record AccountInviteCodes(AccountInviteCode[] Codes);

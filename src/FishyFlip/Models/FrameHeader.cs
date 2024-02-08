@@ -9,6 +9,10 @@ namespace FishyFlip.Models;
 /// </summary>
 public class FrameHeader
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FrameHeader"/> class.
+    /// </summary>
+    /// <param name="obj">The CBOR Object.</param>
     public FrameHeader(CBORObject obj)
     {
         this.Operation = (FrameHeaderOperation)(obj["op"]?.AsInt32() ?? 0);

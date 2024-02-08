@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a feed profile.
+/// </summary>
 public record FeedProfile(ATDid Did,
     string Handle,
     string DisplayName,

@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a collection of actor blocks.
+/// </summary>
 public record ActorBlocks(FeedProfile[]? Blocks, string? Cursor);

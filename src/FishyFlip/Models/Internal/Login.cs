@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Models.Internal;
 
+/// <summary>
+/// Represents a login information.
+/// </summary>
 public record Login(string Identifier, string Password)
 {
 }

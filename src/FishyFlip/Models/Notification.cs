@@ -10,4 +10,7 @@ using System.Threading.Tasks;
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a notification.
+/// </summary>
 public record Notification(ATUri Uri, Cid Cid, string Reason, bool IsRead, DateTime IndexedAt, IReadOnlyList<Label> Labels, ATRecord? Record, FeedProfile Author);

@@ -9,6 +9,10 @@ namespace FishyFlip.Models;
 /// </summary>
 public class FrameError
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FrameError"/> class.
+    /// </summary>
+    /// <param name="obj">The CBOR object containing the error information.</param>
     public FrameError(CBORObject obj)
     {
         this.Error = obj["error"].AsString();

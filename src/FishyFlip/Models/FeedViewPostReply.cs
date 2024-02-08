@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a reply to a post in a feed view.
+/// </summary>
 public record FeedViewPostReply(PostView? Root, PostView? Parent);

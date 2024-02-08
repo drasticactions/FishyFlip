@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a list of repositories.
+/// </summary>
 public record RepoList(RepoRef[] Repos, string? Cursor);

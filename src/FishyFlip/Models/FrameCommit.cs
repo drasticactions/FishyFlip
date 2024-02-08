@@ -4,8 +4,16 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a frame commit.
+/// </summary>
 public class FrameCommit
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FrameCommit"/> class.
+    /// </summary>
+    /// <param name="obj">The CBOR object.</param>
+    /// <param name="logger">The logger.</param>
     public FrameCommit(CBORObject obj, ILogger? logger = default)
     {
         this.Ops = obj["ops"]?.Values.Select(n => new Ops(n)).ToArray();
@@ -39,10 +47,10 @@ public class FrameCommit
     /// </summary>
     public ATHandle? Handle { get; }
 
-    [Obsolete("Obsolete in the V3 Spec, use Rev instead.")]
     /// <summary>
     /// Gets the previous id.
     /// </summary>
+    [Obsolete("Obsolete in the V3 Spec, use Rev instead.")]
     public Cid? Prev { get; }
 
     /// <summary>
@@ -82,7 +90,6 @@ public class FrameCommit
 
     /// <summary>
     /// Gets a value indicating whether this is too big.
-    /// I have no idea what that means.
     /// </summary>
     public bool TooBig { get; }
 }

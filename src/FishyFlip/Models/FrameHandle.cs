@@ -4,8 +4,15 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a handle for a frame.
+/// </summary>
 public class FrameHandle
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FrameHandle"/> class.
+    /// </summary>
+    /// <param name="obj">The CBOR object containing the frame handle data.</param>
     public FrameHandle(CBORObject obj)
     {
         this.Did = obj["did"] is not null ? ATDid.Create(obj["did"].AsString()) : null;
@@ -14,11 +21,23 @@ public class FrameHandle
         this.Time = obj["time"] is not null ? obj["time"].ToDateTime() : null;
     }
 
+    /// <summary>
+    /// Gets the DID (Decentralized Identifier) associated with the frame handle.
+    /// </summary>
     public ATDid? Did { get; }
 
+    /// <summary>
+    /// Gets the sequence number of the frame handle.
+    /// </summary>
     public int Seq { get; }
 
+    /// <summary>
+    /// Gets the handle string of the frame handle.
+    /// </summary>
     public string? Handle { get; }
 
+    /// <summary>
+    /// Gets the timestamp of the frame handle.
+    /// </summary>
     public DateTime? Time { get; }
 }

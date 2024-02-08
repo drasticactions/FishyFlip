@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models.Internal;
 
+/// <summary>
+/// Represents a record for creating a like.
+/// </summary>
 public record CreateLikeRecord(string Collection, string Repo, LikeRecord Record);

@@ -69,7 +69,7 @@ public class ATProtocolBuilder
     /// Sets UseServiceEndpointUponLogin.
     /// </summary>
     /// <param name="serviceEndpointUponLogin">Value for UseServiceEndpointUponLogin.</param>
-    /// <returns><see cref="ATProtocolBuilder"/>.s</returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.s.</returns>
     public ATProtocolBuilder WithServiceEndpointUponLogin(bool serviceEndpointUponLogin)
     {
         this.atProtocolOptions.UseServiceEndpointUponLogin = serviceEndpointUponLogin;

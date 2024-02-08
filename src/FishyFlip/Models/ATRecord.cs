@@ -9,12 +9,19 @@ namespace FishyFlip.Models;
 /// </summary>
 public abstract class ATRecord
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATRecord"/> class.
+    /// </summary>
+    /// <param name="type">The type.</param>
     [JsonConstructor]
     public ATRecord(string? type)
     {
         this.Type = type;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATRecord"/> class.
+    /// </summary>
     public ATRecord()
     {
     }

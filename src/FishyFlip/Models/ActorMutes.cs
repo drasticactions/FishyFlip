@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a collection of actor mutes.
+/// </summary>
 public record ActorMutes(FeedProfile[]? Mutes, string? Cursor);

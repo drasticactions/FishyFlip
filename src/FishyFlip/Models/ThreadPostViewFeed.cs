@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a view feed for a thread post.
+/// </summary>
 public record ThreadPostViewFeed(ThreadView Thread);

@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a collection of application passwords.
+/// </summary>
 public record AppPasswords(AppPassword[] Passwords);

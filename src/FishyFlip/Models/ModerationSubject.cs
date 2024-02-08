@@ -10,8 +10,18 @@ using System.Threading.Tasks;
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a moderation subject.
+/// </summary>
 public class ModerationSubject
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ModerationSubject"/> class.
+    /// </summary>
+    /// <param name="type">The type of the moderation subject.</param>
+    /// <param name="uri">The URI of the moderation subject.</param>
+    /// <param name="cid">The CID of the moderation subject.</param>
+    /// <param name="did">The ATDID of the moderation subject.</param>
     [JsonConstructor]
     public ModerationSubject(string type, string? uri, Cid? cid, ATDid? did)
     {
@@ -21,35 +31,24 @@ public class ModerationSubject
         this.Did = did;
     }
 
+    /// <summary>
+    /// Gets the ATDID of the moderation subject.
+    /// </summary>
     public ATDid? Did { get; }
 
+    /// <summary>
+    /// Gets the URI of the moderation subject.
+    /// </summary>
     public string? Uri { get; }
 
+    /// <summary>
+    /// Gets the CID of the moderation subject.
+    /// </summary>
     public Cid? Cid { get; }
 
+    /// <summary>
+    /// Gets the type of the moderation subject.
+    /// </summary>
     [JsonPropertyName("$type")]
     public string Type { get; }
-}
-
-public class ModerationRecord
-{
-    [JsonConstructor]
-    public ModerationRecord(ModerationSubject? subject, DateTime? createdAt, int id, string? reason, ATDid? reportedBy)
-    {
-        this.Id = id;
-        this.Reason = reason;
-        this.ReportedBy = reportedBy;
-        this.Subject = subject;
-        this.CreatedAt = createdAt ?? DateTime.Now;
-    }
-
-    public int Id { get; }
-
-    public string? Reason { get; }
-
-    public ATDid? ReportedBy { get; }
-
-    public ModerationSubject? Subject { get; }
-
-    public DateTime? CreatedAt { get; }
 }
