@@ -28,6 +28,14 @@ public sealed class ATProtoRepo
 
     private HttpClient Client => this.proto.Client;
 
+    /// <summary>
+    /// Creates a like asynchronously.
+    /// </summary>
+    /// <param name="cid">The CID of the like.</param>
+    /// <param name="uri">The URI of the like.</param>
+    /// <param name="createdAt">The creation date of the like. If not specified, the current UTC date and time will be used.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the reference to the created like record.</returns>
     public Task<Result<RecordRef>> CreateLikeAsync(
       Cid cid,
       ATUri uri,
@@ -42,6 +50,14 @@ public sealed class ATProtoRepo
         return this.CreateRecord<CreateLikeRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateLikeRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
     }
 
+    /// <summary>
+    /// Creates a repost asynchronously.
+    /// </summary>
+    /// <param name="cid">The CID of the repost.</param>
+    /// <param name="uri">The URI of the repost.</param>
+    /// <param name="createdAt">The creation date of the repost. If null, the current UTC date will be used.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the reference to the created repost.</returns>
     public Task<Result<RecordRef>> CreateRepostAsync(
        Cid cid,
        ATUri uri,
@@ -56,6 +72,13 @@ public sealed class ATProtoRepo
         return this.CreateRecord<CreateRepostRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateRepostRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
     }
 
+    /// <summary>
+    /// Creates a follow record asynchronously.
+    /// </summary>
+    /// <param name="did">The ATDid to create a follow record for.</param>
+    /// <param name="createdAt">The creation date of the follow record. If null, the current UTC date will be used.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the created record reference.</returns>
     public Task<Result<RecordRef>> CreateFollowAsync(
         ATDid did,
         DateTime? createdAt = null,
@@ -69,6 +92,14 @@ public sealed class ATProtoRepo
         return this.CreateRecord<CreateFollowRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateFollowRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
     }
 
+    /// <summary>
+    /// Creates a new list item asynchronously.
+    /// </summary>
+    /// <param name="subject">The ATDid of the subject.</param>
+    /// <param name="list">The ATUri of the list.</param>
+    /// <param name="createdAt">The optional creation date of the list item. If not provided, the current UTC date and time will be used.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the created list item's RecordRef.</returns>
     public Task<Result<RecordRef>> CreateListItemAsync(
     ATDid subject,
     ATUri list,
@@ -83,6 +114,18 @@ public sealed class ATProtoRepo
         return this.CreateRecord<CreateListItemRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateListItemRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
     }
 
+    /// <summary>
+    /// Creates a post asynchronously.
+    /// </summary>
+    /// <param name="text">The text of the post.</param>
+    /// <param name="facets">The facets associated with the post.</param>
+    /// <param name="embed">The embed associated with the post.</param>
+    /// <param name="langs">The languages associated with the post.</param>
+    /// <param name="createdAt">The creation date of the post.</param>
+    /// <param name="rkey">The rkey associated with the post.</param>
+    /// <param name="swapCommit">The swap commit associated with the post.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the result of creating the post.</returns>
     public Task<Result<CreatePostResponse>> CreatePostAsync(
         string text,
         Facet[]? facets = null,
@@ -102,6 +145,13 @@ public sealed class ATProtoRepo
         return this.CreateRecord<CreatePostRecord, CreatePostResponse>(record, this.Options.SourceGenerationContext.CreatePostRecord, this.Options.SourceGenerationContext.CreatePostResponse, cancellationToken);
     }
 
+    /// <summary>
+    /// Creates a block asynchronously.
+    /// </summary>
+    /// <param name="did">The ATDid.</param>
+    /// <param name="createdAt">The creation date of the block. If null, the current UTC date and time will be used.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the created block's record reference.</returns>
     public Task<Result<RecordRef>> CreateBlockAsync(
         ATDid did,
         DateTime? createdAt = null,
@@ -112,18 +162,26 @@ public sealed class ATProtoRepo
             this.proto.SessionManager!.Session!.Did.ToString()!,
             new BlockRecord(did, createdAt ?? DateTime.UtcNow));
 
-        return
-            this.Client
-                .Post<CreateBlockRecord, RecordRef>(
-                    Constants.Urls.ATProtoRepo.CreateRecord,
-                    this.Options.SourceGenerationContext.CreateBlockRecord,
-                    this.Options.SourceGenerationContext.RecordRef,
-                    this.Options.JsonSerializerOptions,
-                    record,
-                    cancellationToken,
-                    this.Options.Logger);
+        return this.Client.Post<CreateBlockRecord, RecordRef>(
+            Constants.Urls.ATProtoRepo.CreateRecord,
+            this.Options.SourceGenerationContext.CreateBlockRecord,
+            this.Options.SourceGenerationContext.RecordRef,
+            this.Options.JsonSerializerOptions,
+            record,
+            cancellationToken,
+            this.Options.Logger);
     }
 
+    /// <summary>
+    /// Creates a curate list asynchronously.
+    /// </summary>
+    /// <param name="name">The name of the list.</param>
+    /// <param name="description">The description of the list.</param>
+    /// <param name="createdAt">The creation date of the list. (optional).</param>
+    /// <param name="rkey">The rkey of the list. (optional).</param>
+    /// <param name="swapCommit">The swap commit of the list. (optional).</param>
+    /// <param name="cancellationToken">The cancellation token. (optional).</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the created record reference.</returns>
     public Task<Result<RecordRef>> CreateCurateListAsync(
         string name,
         string description,
@@ -139,35 +197,52 @@ public sealed class ATProtoRepo
             this.proto.SessionManager!.Session!.Did.ToString(),
             listRecord);
 
-        return
-            this.Client
-                .Post<CreateListRecord, RecordRef>(
-                    Constants.Urls.ATProtoRepo.CreateRecord,
-                    this.Options.SourceGenerationContext.CreateListRecord,
-                    this.Options.SourceGenerationContext.RecordRef,
-                    this.Options.JsonSerializerOptions,
-                    record,
-                    cancellationToken,
-                    this.Options.Logger);
+        return this.Client.Post<CreateListRecord, RecordRef>(
+            Constants.Urls.ATProtoRepo.CreateRecord,
+            this.Options.SourceGenerationContext.CreateListRecord,
+            this.Options.SourceGenerationContext.RecordRef,
+            this.Options.JsonSerializerOptions,
+            record,
+            cancellationToken,
+            this.Options.Logger);
     }
 
+    /// <summary>
+    /// Retrieves a post asynchronously.
+    /// </summary>
+    /// <param name="repo">The AT identifier.</param>
+    /// <param name="rkey">The record key.</param>
+    /// <param name="cid">The CID (Content Identifier) of the post.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved post record, or null if not found.</returns>
     public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
       => await this.GetRecordAsync<PostRecord>(Constants.FeedType.Post, this.Options.SourceGenerationContext.PostRecord, repo, rkey, cid, cancellationToken);
 
+    /// <summary>
+    /// Retrieves an actor asynchronously.
+    /// </summary>
+    /// <param name="repo">The AT identifier of the repository.</param>
+    /// <param name="cid">The CID of the actor record. If null, the latest record will be retrieved.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the actor record, or null if not found.</returns>
     public async Task<Result<ActorRecord?>> GetActorAsync(ATIdentifier repo, Cid? cid = null, CancellationToken cancellationToken = default)
         => await this.GetRecordAsync<ActorRecord>(Constants.ActorTypes.Profile, this.Options.SourceGenerationContext.ActorRecord, repo, "self", cid, cancellationToken);
 
+    /// <summary>
+    /// Uploads a blob asynchronously.
+    /// </summary>
+    /// <param name="content">The content of the blob as a stream.</param>
+    /// <param name="cancellationToken">A token that may be used to cancel the operation. This is optional.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the response from the blob upload operation.</returns>
     public Task<Result<UploadBlobResponse>> UploadBlobAsync(StreamContent content, CancellationToken cancellationToken = default)
     {
-        return
-            this.Client
-                .Post<UploadBlobResponse>(
-                    Constants.Urls.ATProtoRepo.UploadBlob,
-                    this.Options.SourceGenerationContext.UploadBlobResponse,
-                    this.Options.JsonSerializerOptions,
-                    content,
-                    cancellationToken,
-                    this.Options.Logger);
+        return this.Client.Post<UploadBlobResponse>(
+            Constants.Urls.ATProtoRepo.UploadBlob,
+            this.Options.SourceGenerationContext.UploadBlobResponse,
+            this.Options.JsonSerializerOptions,
+            content,
+            cancellationToken,
+            this.Options.Logger);
     }
 
     public async Task<Result<T?>> GetRecordAsync<T>(string collection, JsonTypeInfo<T> type, ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)

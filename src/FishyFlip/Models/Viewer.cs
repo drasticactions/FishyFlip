@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a viewer in the FishyFlip application.
+/// </summary>
 public record Viewer(
     bool Muted,
     bool BlockedBy,

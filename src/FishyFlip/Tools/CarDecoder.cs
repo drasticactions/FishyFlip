@@ -169,16 +169,3 @@ public static class CarDecoder
         public int Length { get; }
     }
 }
-
-public class CarProgressStatusEvent
-{
-    public CarProgressStatusEvent(Cid cid, byte[] bytes)
-    {
-        this.Cid = cid;
-        this.Bytes = bytes;
-    }
-
-    public byte[] Bytes { get; }
-
-    public Cid Cid { get; }
-}

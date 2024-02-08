@@ -7,10 +7,24 @@ using System.Text.Json.Serialization.Metadata;
 namespace FishyFlip.Tools;
 
 /// <summary>
-/// HttpClient Extensions.
+/// Provides extension methods for HttpClient.
 /// </summary>
 internal static class HttpClientExtensions
 {
+    /// <summary>
+    /// Sends a POST request to the specified Uri as an asynchronous operation.
+    /// </summary>
+    /// <typeparam name="T">The type of the request body.</typeparam>
+    /// <typeparam name="TK">The type of the response body.</typeparam>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="typeT">The JsonTypeInfo of the request body.</param>
+    /// <param name="typeTK">The JsonTypeInfo of the response body.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="body">The request body.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     internal static async Task<Result<TK>> Post<T, TK>(
        this HttpClient client,
        string url,
@@ -38,6 +52,18 @@ internal static class HttpClientExtensions
         return result!;
     }
 
+    /// <summary>
+    /// Sends a POST request with a StreamContent body to the specified Uri as an asynchronous operation.
+    /// </summary>
+    /// <typeparam name="TK">The type of the response body.</typeparam>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="type">The JsonTypeInfo of the response body.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="body">The StreamContent request body.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     internal static async Task<Result<TK>> Post<TK>(
        this HttpClient client,
        string url,
@@ -61,6 +87,17 @@ internal static class HttpClientExtensions
         return result!;
     }
 
+    /// <summary>
+    /// Sends a POST request with a StreamContent body to the specified Uri as an asynchronous operation.
+    /// </summary>
+    /// <typeparam name="TK">The type of the response body.</typeparam>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="type">The JsonTypeInfo of the response body.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     internal static async Task<Result<TK>> Post<TK>(
         this HttpClient client,
         string url,
@@ -83,6 +120,15 @@ internal static class HttpClientExtensions
         return result!;
     }
 
+    /// <summary>
+    /// Sends a GET request to the specified Uri and retrieves the response as a Blob.
+    /// </summary>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Blob response message as the result.</returns>
     internal static async Task<Result<Blob?>> GetBlob(
        this HttpClient client,
        string url,
@@ -104,6 +150,16 @@ internal static class HttpClientExtensions
         return new Blob(blob);
     }
 
+    /// <summary>
+    /// Sends a GET request to the specified Uri and decodes the response as a CAR (Content-Addressable Archive).
+    /// </summary>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <param name="progress">The progress reporter for the decoding process. This is optional and defaults to null.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Success response message as the result.</returns>
     internal static async Task<Result<Success?>> GetCarAsync(
         this HttpClient client,
         string url,
@@ -125,6 +181,17 @@ internal static class HttpClientExtensions
         return new Success();
     }
 
+    /// <summary>
+    /// Sends a GET request to the specified Uri and downloads the response as a CAR (Content-Addressable Archive) file.
+    /// </summary>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="filePath">The path where the file should be saved.</param>
+    /// <param name="fileName">The name of the file to be saved.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Success response message as the result.</returns>
     internal static async Task<Result<Success?>> DownloadCarAsync(
         this HttpClient client,
         string url,
@@ -153,6 +220,17 @@ internal static class HttpClientExtensions
         return new Success();
     }
 
+    /// <summary>
+    /// Sends a GET request to the specified Uri as an asynchronous operation and deserializes the response.
+    /// </summary>
+    /// <typeparam name="T">The type of the response body.</typeparam>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="type">The JsonTypeInfo of the response body.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     internal static async Task<Result<T?>> Get<T>(
         this HttpClient client,
         string url,

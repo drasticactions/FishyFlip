@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a view of a post.
+/// </summary>
 public record PostView(
     ATUri Uri,
     Cid Cid,

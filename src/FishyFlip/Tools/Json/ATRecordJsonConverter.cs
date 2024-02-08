@@ -4,8 +4,12 @@
 
 namespace FishyFlip.Tools.Json;
 
+/// <summary>
+/// Converts JSON to <see cref="ATRecord"/> and vice versa.
+/// </summary>
 public class ATRecordJsonConverter : JsonConverter<ATRecord>
 {
+    /// <inheritdoc/>
     public override ATRecord? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out var doc))
@@ -36,6 +40,7 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
         return null;
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, ATRecord value, JsonSerializerOptions options)
     {
         throw new NotImplementedException();

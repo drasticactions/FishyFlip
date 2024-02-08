@@ -202,6 +202,14 @@ public sealed class ATProtocol : IDisposable
         }
     }
 
+    /// <summary>
+    /// Refreshes the current session asynchronously.
+    /// </summary>
+    /// <returns>
+    /// A task that represents the asynchronous operation.
+    /// If the session manager is null, the task will complete immediately.
+    /// Otherwise, the task will complete when the session has been refreshed.
+    /// </returns>
     public Task RefreshSessionAsync()
         => this.sessionManager?.RefreshTokenAsync() ?? Task.CompletedTask;
 

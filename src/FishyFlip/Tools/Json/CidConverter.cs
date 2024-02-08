@@ -4,8 +4,12 @@
 
 namespace FishyFlip.Tools.Json;
 
+/// <summary>
+/// Converts a <see cref="Cid"/> object to and from JSON.
+/// </summary>
 public class CidConverter : JsonConverter<Cid?>
 {
+    /// <inheritdoc/>
     public override Cid? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out var doc))
@@ -42,6 +46,7 @@ public class CidConverter : JsonConverter<Cid?>
         }
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, Cid? value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value?.ToString());

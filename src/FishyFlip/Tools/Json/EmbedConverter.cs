@@ -6,8 +6,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FishyFlip.Tools.Json;
 
+/// <summary>
+/// Converts JSON to <see cref="Embed"/> objects and vice versa.
+/// </summary>
 public class EmbedConverter : JsonConverter<Embed>
 {
+    /// <inheritdoc/>
     public override Embed? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out var doc))
@@ -121,6 +125,7 @@ public class EmbedConverter : JsonConverter<Embed>
         return default;
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, Embed value, JsonSerializerOptions options)
     {
         throw new NotImplementedException();

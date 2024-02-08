@@ -32,6 +32,12 @@ public abstract class ATRecord
     [JsonPropertyName("$type")]
     public string? Type { get; internal set; }
 
+    /// <summary>
+    /// Creates an AT Record from a CBORObject.
+    /// </summary>
+    /// <param name="blockObj">The CBORObject to convert.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <returns>An AT Record if the conversion is successful; otherwise, null.</returns>
     public static ATRecord? FromCBORObject(CBORObject blockObj, ILogger? logger = default)
     {
         if (blockObj["$type"] is not null)

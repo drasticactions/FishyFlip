@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models.Internal;
 
+/// <summary>
+/// Represents a record for creating a mute record.
+/// </summary>
 public record CreateMuteRecord(ATDid Actor);

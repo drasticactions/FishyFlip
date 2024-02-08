@@ -62,14 +62,6 @@ public class ATUri
     public string Hostname => this.host;
 
     /// <summary>
-    /// Creates a new instance of the <see cref="ATUri"/> class.
-    /// </summary>
-    /// <param name="uri">The URI.</param>
-    /// <returns>A new instance of the <see cref="ATUri"/> class.</returns>
-    public static ATUri Create(string uri)
-        => new ATUri(uri);
-
-    /// <summary>
     /// Gets the associated AT DID.
     /// </summary>
     public ATDid? Did { get; }
@@ -98,6 +90,14 @@ public class ATUri
     /// Gets the href value.
     /// </summary>
     public string Href => this.ToString();
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="ATUri"/> class.
+    /// </summary>
+    /// <param name="uri">The URI.</param>
+    /// <returns>A new instance of the <see cref="ATUri"/> class.</returns>
+    public static ATUri Create(string uri)
+        => new ATUri(uri);
 
     /// <summary>
     /// Returns a string representation of the AT URI.
