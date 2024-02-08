@@ -14,7 +14,7 @@ public class ATDid : ATIdentifier
     /// </summary>
     /// <param name="handler">Actor Handler.</param>
     [JsonConstructor]
-    protected ATDid(string handler)
+    internal ATDid(string handler)
     {
         this.Handler = handler;
     }

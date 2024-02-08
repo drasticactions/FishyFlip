@@ -128,6 +128,6 @@ public class EmbedConverter : JsonConverter<Embed>
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, Embed value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        JsonSerializer.Serialize(writer, value, value.GetType(), (JsonSerializerContext)options.TypeInfoResolver!);
     }
 }

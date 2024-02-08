@@ -46,6 +46,10 @@ internal static class HttpClientExtensions
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
+        {
+            response = "{ }";
+        }
 
         logger?.LogDebug($"POST {url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, typeTK);
@@ -82,6 +86,11 @@ internal static class HttpClientExtensions
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
+        {
+            response = "{ }";
+        }
+
         logger?.LogDebug($"POST {url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, type);
         return result!;
@@ -115,6 +124,11 @@ internal static class HttpClientExtensions
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
+        {
+            response = "{ }";
+        }
+
         logger?.LogDebug($"POST {url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, type);
         return result!;
@@ -146,6 +160,7 @@ internal static class HttpClientExtensions
 
         var blob = await message.Content.ReadAsByteArrayAsync(cancellationToken);
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+
         logger?.LogDebug($"GET BLOB {url}: {response}");
         return new Blob(blob);
     }
@@ -176,7 +191,7 @@ internal static class HttpClientExtensions
             return error!;
         }
 
-        using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
+        await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
         await CarDecoder.DecodeCarAsync(stream, progress);
         return new Success();
     }
@@ -211,9 +226,9 @@ internal static class HttpClientExtensions
         }
 
         var fileDownload = Path.Combine(filePath, StringExtensions.GenerateValidFilename(fileName));
-        using (var content = File.Create(fileDownload))
+        await using (var content = File.Create(fileDownload))
         {
-            using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
+            await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
             await stream.CopyToAsync(content, cancellationToken);
         }
 
@@ -248,6 +263,11 @@ internal static class HttpClientExtensions
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
+        {
+            response = "{ }";
+        }
+
         logger?.LogDebug($"GET {url}: {response}");
         return JsonSerializer.Deserialize<T>(response, type);
     }
