@@ -36,7 +36,7 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ActorBlocks>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ActorBlocks>(url, this.Options.SourceGenerationContext.ActorBlocks, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<ActorMutes?>> GetMutesAsync(
@@ -51,7 +51,7 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ActorMutes>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ActorMutes>(url, this.Options.SourceGenerationContext.ActorMutes, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<ActorFollows?>> GetFollowsAsync(
@@ -67,7 +67,7 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ActorFollows>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ActorFollows>(url, this.Options.SourceGenerationContext.ActorFollows, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<ActorFollowers?>> GetFollowersAsync(
@@ -83,31 +83,31 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ActorFollowers>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ActorFollowers>(url, this.Options.SourceGenerationContext.ActorFollowers, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<Success>> MuteActorAsync(ATDid did, CancellationToken cancellationToken = default)
     {
         var muteRecord = new CreateMuteRecord(did);
-        return this.Client.Post<CreateMuteRecord, Success>(Constants.Urls.Bluesky.Graph.MuteActor, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
+        return this.Client.Post<CreateMuteRecord, Success>(Constants.Urls.Bluesky.Graph.MuteActor, this.Options.SourceGenerationContext.CreateMuteRecord, this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<Success>> UnmuteActorAsync(ATDid did, CancellationToken cancellationToken = default)
     {
         var muteRecord = new CreateMuteRecord(did);
-        return this.Client.Post<CreateMuteRecord, Success>(Constants.Urls.Bluesky.Graph.UnmuteActor, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
+        return this.Client.Post<CreateMuteRecord, Success>(Constants.Urls.Bluesky.Graph.UnmuteActor, this.Options.SourceGenerationContext.CreateMuteRecord, this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<Success>> MuteActorListAsync(ATUri list, CancellationToken cancellationToken = default)
     {
         var muteRecord = new CreateMuteListRecord(list);
-        return this.Client.Post<CreateMuteListRecord, Success>(Constants.Urls.Bluesky.Graph.MuteActorList, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
+        return this.Client.Post<CreateMuteListRecord, Success>(Constants.Urls.Bluesky.Graph.MuteActorList, this.Options.SourceGenerationContext.CreateMuteListRecord, this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<Success>> UnmuteActorListAsync(ATUri list, CancellationToken cancellationToken = default)
     {
         var muteRecord = new CreateMuteListRecord(list);
-        return this.Client.Post<CreateMuteListRecord, Success>(Constants.Urls.Bluesky.Graph.UnmuteActorList, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
+        return this.Client.Post<CreateMuteListRecord, Success>(Constants.Urls.Bluesky.Graph.UnmuteActorList, this.Options.SourceGenerationContext.CreateMuteListRecord, this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, muteRecord, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<ListViewRecord?>> GetListsAsync(ATIdentifier identifier, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
@@ -119,7 +119,7 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ListViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ListViewRecord>(url, this.Options.SourceGenerationContext.ListViewRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<ListViewRecord?>> GetListMutesAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
@@ -131,7 +131,7 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ListViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ListViewRecord>(url, this.Options.SourceGenerationContext.ListViewRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<ListViewRecord?>> GetListBlocksAsync(int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
@@ -143,7 +143,7 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ListViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ListViewRecord>(url, this.Options.SourceGenerationContext.ListViewRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<ListItemViewRecord?>> GetListAsync(ATUri list, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
@@ -155,12 +155,12 @@ public sealed class BlueskyGraph
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<ListItemViewRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ListItemViewRecord>(url, this.Options.SourceGenerationContext.ListItemViewRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<SuggestionsRecord?>> GetSuggestedFollowsByActorAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
     {
         var url = Constants.Urls.Bluesky.Graph.GetSuggestedFollowsByActor + $"?actor={identifier}";
-        return await this.Client.Get<SuggestionsRecord>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<SuggestionsRecord>(url, this.Options.SourceGenerationContext.SuggestionsRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 }

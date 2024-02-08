@@ -28,6 +28,8 @@ public sealed class ATProtoModeration
     {
         return this.Client.Post<CreateModerationReportPost, ModerationRecord?>(
                        Constants.Urls.ATProtoModeration.CreateReport,
+                       this.Options.SourceGenerationContext.CreateModerationReportPost,
+                       this.Options.SourceGenerationContext.ModerationRecord!,
                        this.Options.JsonSerializerOptions,
                        new CreateModerationReportPost(reasonType.ToEndpointString(), new RepoStrongRef(uri, cid), reason),
                        cancellationToken,
@@ -38,6 +40,8 @@ public sealed class ATProtoModeration
     {
         return this.Client.Post<CreateModerationReportRepo, ModerationRecord?>(
                        Constants.Urls.ATProtoModeration.CreateReport,
+                       this.Options.SourceGenerationContext.CreateModerationReportRepo,
+                       this.Options.SourceGenerationContext.ModerationRecord!,
                        this.Options.JsonSerializerOptions,
                        new CreateModerationReportRepo(reasonType.ToEndpointString(), new AdminRepoRef(subject), reason),
                        cancellationToken,

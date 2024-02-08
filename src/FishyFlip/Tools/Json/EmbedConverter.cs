@@ -18,7 +18,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.ImageView:
                         if (doc.RootElement.TryGetProperty("images", out var t))
                         {
-                            var item = JsonSerializer.Deserialize<ImageViewEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ImageViewEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImageViewEmbed);
                             return item;
                         }
 
@@ -26,7 +26,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.ExternalView:
                         if (doc.RootElement.TryGetProperty("external", out var evm))
                         {
-                            var item = JsonSerializer.Deserialize<ExternalViewEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ExternalViewEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ExternalViewEmbed);
                             return item;
                         }
 
@@ -34,7 +34,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.Images:
                         if (doc.RootElement.TryGetProperty("images", out var img))
                         {
-                            var item = JsonSerializer.Deserialize<ImagesEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ImagesEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImagesEmbed);
                             return item;
                         }
 
@@ -43,7 +43,7 @@ public class EmbedConverter : JsonConverter<Embed>
                         if (doc.RootElement.TryGetProperty("external", out var ext))
                         {
                             var test = ext.GetRawText();
-                            var item = JsonSerializer.Deserialize<ExternalEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ExternalEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ExternalEmbed);
                             return item;
                         }
 
@@ -51,7 +51,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.Record:
                         if (doc.RootElement.TryGetProperty("record", out var value))
                         {
-                            var item = JsonSerializer.Deserialize<RecordEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<RecordEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordEmbed);
                             return item;
                         }
 
@@ -59,7 +59,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.RecordView:
                         if (doc.RootElement.TryGetProperty("record", out var rec))
                         {
-                            var item = JsonSerializer.Deserialize<RecordViewEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<RecordViewEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordViewEmbed);
                             return item;
                         }
 
@@ -70,7 +70,7 @@ public class EmbedConverter : JsonConverter<Embed>
 
                         if (doc.RootElement.TryGetProperty("record", out var recordVal2))
                         {
-                            record1 = JsonSerializer.Deserialize<RecordViewEmbed>(recordVal2.GetRawText(), options);
+                            record1 = JsonSerializer.Deserialize<RecordViewEmbed>(recordVal2.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordViewEmbed);
                         }
 
                         if (doc.RootElement.TryGetProperty("media", out var mediaVal2))
@@ -81,7 +81,7 @@ public class EmbedConverter : JsonConverter<Embed>
                                 switch (mediaText)
                                 {
                                     case Constants.EmbedTypes.ImageView:
-                                        media1 = JsonSerializer.Deserialize<ImageViewEmbed>(mediaVal2.GetRawText(), options);
+                                        media1 = JsonSerializer.Deserialize<ImageViewEmbed>(mediaVal2.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImageViewEmbed);
                                         break;
                                 }
                             }
@@ -105,7 +105,7 @@ public class EmbedConverter : JsonConverter<Embed>
                                 switch (mediaText)
                                 {
                                     case Constants.EmbedTypes.Images:
-                                        media = JsonSerializer.Deserialize<ImagesEmbed>(mediaVal.GetRawText(), options);
+                                        media = JsonSerializer.Deserialize<ImagesEmbed>(mediaVal.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImagesEmbed);
                                         break;
                                 }
                             }
@@ -121,11 +121,14 @@ public class EmbedConverter : JsonConverter<Embed>
 
     public override void Write(Utf8JsonWriter writer, Embed value, JsonSerializerOptions options)
     {
+#pragma warning disable IL2026
+#pragma warning disable IL3050
         JsonSerializer.Serialize(writer, value, value.GetType(), new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            TypeInfoResolver = SourceGenerationContext.Default,
             Converters =
             {
                 new AtUriJsonConverter(),
@@ -135,5 +138,7 @@ public class EmbedConverter : JsonConverter<Embed>
                 new CidConverter(),
             },
         });
+#pragma warning restore IL3050
+#pragma warning restore IL2026
     }
 }

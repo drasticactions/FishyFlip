@@ -27,14 +27,14 @@ public sealed class BlueskyActor
     public Task<Result<FeedProfile?>> GetProfileAsync(ATIdentifier identifier, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Actor.GetActorProfile}?actor={identifier}";
-        return this.Client.Get<FeedProfile>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return this.Client.Get<FeedProfile>(url, this.Options.SourceGenerationContext.FeedProfile, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<FeedProfiles?>> GetProfilesAsync(ATIdentifier[] identifiers, CancellationToken cancellationToken = default)
     {
         var identList = string.Join("&", identifiers.Select(n => $"actors={n}"));
         string url = $"{Constants.Urls.Bluesky.Actor.GetActorProfiles}?{identList}";
-        return this.Client.Get<FeedProfiles>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return this.Client.Get<FeedProfiles>(url, this.Options.SourceGenerationContext.FeedProfiles, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<ActorResponse?>> GetSuggestionsAsync(int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
@@ -45,7 +45,7 @@ public sealed class BlueskyActor
             url += $"&cursor={cursor}";
         }
 
-        return this.Client.Get<ActorResponse>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return this.Client.Get<ActorResponse>(url, this.Options.SourceGenerationContext.ActorResponse, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<ActorResponse?>> SearchActorsAsync(string query, int limit = 50, string? cursor = null, CancellationToken cancellationToken = default)
@@ -56,13 +56,13 @@ public sealed class BlueskyActor
             url += $"&cursor={cursor}";
         }
 
-        return this.Client.Get<ActorResponse>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return this.Client.Get<ActorResponse>(url, this.Options.SourceGenerationContext.ActorResponse, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<ActorResponse?>> SearchActorsTypeaheadAsync(string query, int limit = 50, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Actor.SearchActorsTypeahead}?term={query}&limit={limit}";
 
-        return this.Client.Get<ActorResponse>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return this.Client.Get<ActorResponse>(url, this.Options.SourceGenerationContext.ActorResponse, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 }

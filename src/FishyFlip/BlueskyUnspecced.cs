@@ -37,7 +37,7 @@ public sealed class BlueskyUnspecced
             url += $"&query={query}";
         }
 
-        Multiple<FeedResultList?, Error> result = await this.Client.Get<FeedResultList>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<FeedResultList?, Error> result = await this.Client.Get<FeedResultList>(url, this.Options.SourceGenerationContext.FeedResultList, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<FeedResultList>>(
                 timeline => (timeline ?? new FeedResultList(Array.Empty<FeedRecord>(), null))!,

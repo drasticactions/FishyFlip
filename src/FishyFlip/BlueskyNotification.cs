@@ -34,7 +34,7 @@ public sealed class BlueskyNotification
             url += $"?seenAt={seenAt.Value.ToUniversalTime().ToString("o", CultureInfo.InvariantCulture)}";
         }
 
-        return this.Client.Get<UnreadCount>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return this.Client.Get<UnreadCount>(url, this.Options.SourceGenerationContext.UnreadCount, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     public Task<Result<Success?>> UpdateSeenAsync(DateTime seenAt, CancellationToken cancellationToken = default)
@@ -42,7 +42,7 @@ public sealed class BlueskyNotification
         var createSeenAtRecord = new CreateSeenAtRecord(seenAt.ToUniversalTime().ToString("o", CultureInfo.InvariantCulture));
         var url = Constants.Urls.Bluesky.Notification.NotificationUpdateSeen;
 
-        return this.Client.Post<CreateSeenAtRecord, Success?>(url, this.Options.JsonSerializerOptions, createSeenAtRecord, cancellationToken, this.Options.Logger);
+        return this.Client.Post<CreateSeenAtRecord, Success?>(url, this.Options.SourceGenerationContext.CreateSeenAtRecord, this.Options.SourceGenerationContext.Success!, this.Options.JsonSerializerOptions, createSeenAtRecord, cancellationToken, this.Options.Logger);
     }
 
     public async Task<Result<NotificationCollection?>> ListNotificationsAsync(
@@ -62,6 +62,6 @@ public sealed class BlueskyNotification
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<NotificationCollection>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<NotificationCollection>(url, this.Options.SourceGenerationContext.NotificationCollection, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 }

@@ -17,13 +17,13 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                 switch (text)
                 {
                     case Constants.FeedType.Like:
-                        return JsonSerializer.Deserialize<Like>(doc.RootElement.GetRawText(), options);
+                        return JsonSerializer.Deserialize<Like>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Like);
                     case Constants.FeedType.Post:
-                        return JsonSerializer.Deserialize<Post>(doc.RootElement.GetRawText(), options);
+                        return JsonSerializer.Deserialize<Post>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Post);
                     case Constants.FeedType.Repost:
-                        return JsonSerializer.Deserialize<Repost>(doc.RootElement.GetRawText(), options);
+                        return JsonSerializer.Deserialize<Repost>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Repost);
                     case Constants.GraphTypes.Follow:
-                        return JsonSerializer.Deserialize<Follow>(doc.RootElement.GetRawText(), options);
+                        return JsonSerializer.Deserialize<Follow>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Follow);
                     default:
 #if DEBUG
                         System.Diagnostics.Debugger.Break();

@@ -33,7 +33,7 @@ public sealed class ATProtoIdentity
     public async Task<Result<HandleResolution?>> ResolveHandleAsync(ATHandle handler, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.ATProtoIdentity.ResolveHandle}?handle={handler}";
-        return await this.Client.Get<HandleResolution>(url, this.Options.JsonSerializerOptions, cancellationToken);
+        return await this.Client.Get<HandleResolution>(url, this.Options.SourceGenerationContext.HandleResolution, this.Options.JsonSerializerOptions, cancellationToken);
     }
 
     /// <summary>
@@ -44,6 +44,6 @@ public sealed class ATProtoIdentity
     /// <returns>Result of <see cref="Success"/>.</returns>
     public async Task<Result<Success>> UpdateHandleAsync(ATHandle handle, CancellationToken cancellationToken = default)
     {
-        return await this.Client.Post<UpdateHandle, Success>(Constants.Urls.ATProtoIdentity.UpdateHandle, this.Options.JsonSerializerOptions, new UpdateHandle(handle.Handle.ToString()), cancellationToken);
+        return await this.Client.Post<UpdateHandle, Success>(Constants.Urls.ATProtoIdentity.UpdateHandle, this.Options.SourceGenerationContext.UpdateHandle, this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, new UpdateHandle(handle.Handle.ToString()), cancellationToken);
     }
 }

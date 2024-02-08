@@ -7,7 +7,10 @@ namespace FishyFlip;
 /// <summary>
 /// ATProtocol Message Source Generation Context.
 /// </summary>
-[JsonSourceGenerationOptions(WriteIndented = true)]
+[JsonSourceGenerationOptions(
+    WriteIndented = true,
+    PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]
 [JsonSerializable(typeof(Embed))]
 [JsonSerializable(typeof(CreateBlockRecord))]
 [JsonSerializable(typeof(CreateFollowRecord))]

@@ -47,6 +47,7 @@ public sealed class ATProtoSync
     public Task<Result<Head?>> GetHeadAsync(ATDid did, CancellationToken cancellationToken = default)
         => this.Client.Get<Head>(
             $"{Constants.Urls.ATProtoSync.GetHead}?did={did}",
+            this.Options.SourceGenerationContext.Head,
             this.Options.JsonSerializerOptions,
             cancellationToken,
             this.Options.Logger);
@@ -60,6 +61,7 @@ public sealed class ATProtoSync
     public Task<Result<LatestCommit?>> GetLatestCommitAsync(ATDid did, CancellationToken cancellationToken = default)
     => this.Client.Get<LatestCommit>(
         $"{Constants.Urls.ATProtoSync.GetLatestCommit}?did={did}",
+        this.Options.SourceGenerationContext.LatestCommit,
         this.Options.JsonSerializerOptions,
         cancellationToken,
         this.Options.Logger);
@@ -71,7 +73,7 @@ public sealed class ATProtoSync
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>Result of Success.</returns>
     public Task<Result<Success?>> NotifyOfUpdateAsync(string hostname, CancellationToken cancellationToken = default)
-        => this.Client.Get<Success>($"{Constants.Urls.ATProtoSync.NotifyOfUpdate}?hostname={hostname}", this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        => this.Client.Get<Success>($"{Constants.Urls.ATProtoSync.NotifyOfUpdate}?hostname={hostname}", this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
     /// <summary>
     /// Request crawl for given hostname.
@@ -80,7 +82,7 @@ public sealed class ATProtoSync
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>Result of Success.</returns>
     public Task<Result<Success?>> RequestCrawlAsync(string hostname, CancellationToken cancellationToken = default)
-        => this.Client.Get<Success>($"{Constants.Urls.ATProtoSync.RequestCrawl}?hostname={hostname}", this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        => this.Client.Get<Success>($"{Constants.Urls.ATProtoSync.RequestCrawl}?hostname={hostname}", this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 
     /// <summary>
     /// Get Repo.
@@ -146,7 +148,7 @@ public sealed class ATProtoSync
             url += $"&earliest={earliest}";
         }
 
-        return await this.Client.Get<CommitPath>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<CommitPath>(url, this.Options.SourceGenerationContext.CommitPath, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     /// <summary>
@@ -324,7 +326,7 @@ public sealed class ATProtoSync
             url += $"&cursor={cursor}";
         }
 
-        return await this.Client.Get<RepoList>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<RepoList>(url, this.Options.SourceGenerationContext.RepoList, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     /// <summary>
@@ -350,6 +352,6 @@ public sealed class ATProtoSync
             url += $"&since={since}";
         }
 
-        return await this.Client.Get<ListBlobs>(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.Client.Get<ListBlobs>(url, this.Options.SourceGenerationContext.ListBlobs, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 }

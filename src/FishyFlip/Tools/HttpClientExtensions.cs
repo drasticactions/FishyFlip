@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Text.Json.Serialization.Metadata;
+
 namespace FishyFlip.Tools;
 
 /// <summary>
@@ -12,12 +14,14 @@ internal static class HttpClientExtensions
     internal static async Task<Result<TK>> Post<T, TK>(
        this HttpClient client,
        string url,
+       JsonTypeInfo<T> typeT,
+       JsonTypeInfo<TK> typeTK,
        JsonSerializerOptions options,
        T body,
        CancellationToken cancellationToken,
        ILogger? logger = default)
     {
-        var jsonContent = JsonSerializer.Serialize(body, options);
+        var jsonContent = JsonSerializer.Serialize(body, typeT);
         StringContent content = new(jsonContent, Encoding.UTF8, "application/json");
         logger?.LogDebug($"POST {url}: {jsonContent}");
         using var message = await client.PostAsync(url, content, cancellationToken);
@@ -30,13 +34,14 @@ internal static class HttpClientExtensions
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
 
         logger?.LogDebug($"POST {url}: {response}");
-        TK? result = JsonSerializer.Deserialize<TK>(response, options);
+        TK? result = JsonSerializer.Deserialize<TK>(response, typeTK);
         return result!;
     }
 
     internal static async Task<Result<TK>> Post<TK>(
        this HttpClient client,
        string url,
+       JsonTypeInfo<TK> type,
        JsonSerializerOptions options,
        StreamContent body,
        CancellationToken cancellationToken,
@@ -52,13 +57,14 @@ internal static class HttpClientExtensions
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
         logger?.LogDebug($"POST {url}: {response}");
-        TK? result = JsonSerializer.Deserialize<TK>(response, options);
+        TK? result = JsonSerializer.Deserialize<TK>(response, type);
         return result!;
     }
 
     internal static async Task<Result<TK>> Post<TK>(
         this HttpClient client,
         string url,
+        JsonTypeInfo<TK> type,
         JsonSerializerOptions options,
         CancellationToken cancellationToken,
         ILogger? logger = default)
@@ -73,7 +79,7 @@ internal static class HttpClientExtensions
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
         logger?.LogDebug($"POST {url}: {response}");
-        TK? result = JsonSerializer.Deserialize<TK>(response, options);
+        TK? result = JsonSerializer.Deserialize<TK>(response, type);
         return result!;
     }
 
@@ -150,6 +156,7 @@ internal static class HttpClientExtensions
     internal static async Task<Result<T?>> Get<T>(
         this HttpClient client,
         string url,
+        JsonTypeInfo<T> type,
         JsonSerializerOptions options,
         CancellationToken cancellationToken,
         ILogger? logger = default)
@@ -164,7 +171,7 @@ internal static class HttpClientExtensions
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
         logger?.LogDebug($"GET {url}: {response}");
-        return JsonSerializer.Deserialize<T>(response, options);
+        return JsonSerializer.Deserialize<T>(response, type);
     }
 
     private static async Task<Error> CreateError(HttpResponseMessage message, JsonSerializerOptions options, CancellationToken cancellationToken, ILogger? logger = default)
@@ -180,7 +187,7 @@ internal static class HttpClientExtensions
         {
             try
             {
-                detail = JsonSerializer.Deserialize<ErrorDetail>(response, options);
+                detail = JsonSerializer.Deserialize<ErrorDetail>(response, ((SourceGenerationContext)options.TypeInfoResolver!).ErrorDetail);
                 error = new Error((int)message.StatusCode, detail);
             }
             catch (Exception)
