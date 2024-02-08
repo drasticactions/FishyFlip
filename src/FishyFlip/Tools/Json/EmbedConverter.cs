@@ -2,10 +2,16 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace FishyFlip.Tools.Json;
 
+/// <summary>
+/// Converts JSON to <see cref="Embed"/> objects and vice versa.
+/// </summary>
 public class EmbedConverter : JsonConverter<Embed>
 {
+    /// <inheritdoc/>
     public override Embed? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out var doc))
@@ -18,7 +24,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.ImageView:
                         if (doc.RootElement.TryGetProperty("images", out var t))
                         {
-                            var item = JsonSerializer.Deserialize<ImageViewEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ImageViewEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImageViewEmbed);
                             return item;
                         }
 
@@ -26,7 +32,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.ExternalView:
                         if (doc.RootElement.TryGetProperty("external", out var evm))
                         {
-                            var item = JsonSerializer.Deserialize<ExternalViewEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ExternalViewEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ExternalViewEmbed);
                             return item;
                         }
 
@@ -34,7 +40,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.Images:
                         if (doc.RootElement.TryGetProperty("images", out var img))
                         {
-                            var item = JsonSerializer.Deserialize<ImagesEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ImagesEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImagesEmbed);
                             return item;
                         }
 
@@ -43,7 +49,7 @@ public class EmbedConverter : JsonConverter<Embed>
                         if (doc.RootElement.TryGetProperty("external", out var ext))
                         {
                             var test = ext.GetRawText();
-                            var item = JsonSerializer.Deserialize<ExternalEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<ExternalEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ExternalEmbed);
                             return item;
                         }
 
@@ -51,7 +57,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.Record:
                         if (doc.RootElement.TryGetProperty("record", out var value))
                         {
-                            var item = JsonSerializer.Deserialize<RecordEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<RecordEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordEmbed);
                             return item;
                         }
 
@@ -59,7 +65,7 @@ public class EmbedConverter : JsonConverter<Embed>
                     case Constants.EmbedTypes.RecordView:
                         if (doc.RootElement.TryGetProperty("record", out var rec))
                         {
-                            var item = JsonSerializer.Deserialize<RecordViewEmbed>(doc.RootElement.GetRawText(), options);
+                            var item = JsonSerializer.Deserialize<RecordViewEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordViewEmbed);
                             return item;
                         }
 
@@ -70,7 +76,7 @@ public class EmbedConverter : JsonConverter<Embed>
 
                         if (doc.RootElement.TryGetProperty("record", out var recordVal2))
                         {
-                            record1 = JsonSerializer.Deserialize<RecordViewEmbed>(recordVal2.GetRawText(), options);
+                            record1 = JsonSerializer.Deserialize<RecordViewEmbed>(recordVal2.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordViewEmbed);
                         }
 
                         if (doc.RootElement.TryGetProperty("media", out var mediaVal2))
@@ -81,7 +87,7 @@ public class EmbedConverter : JsonConverter<Embed>
                                 switch (mediaText)
                                 {
                                     case Constants.EmbedTypes.ImageView:
-                                        media1 = JsonSerializer.Deserialize<ImageViewEmbed>(mediaVal2.GetRawText(), options);
+                                        media1 = JsonSerializer.Deserialize<ImageViewEmbed>(mediaVal2.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImageViewEmbed);
                                         break;
                                 }
                             }
@@ -94,7 +100,7 @@ public class EmbedConverter : JsonConverter<Embed>
 
                         if (doc.RootElement.TryGetProperty("record", out var recordVal))
                         {
-                            record = JsonSerializer.Deserialize<RecordEmbed>(recordVal.GetRawText(), options);
+                            record = JsonSerializer.Deserialize<RecordEmbed>(recordVal.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).RecordEmbed);
                         }
 
                         if (doc.RootElement.TryGetProperty("media", out var mediaVal))
@@ -105,7 +111,7 @@ public class EmbedConverter : JsonConverter<Embed>
                                 switch (mediaText)
                                 {
                                     case Constants.EmbedTypes.Images:
-                                        media = JsonSerializer.Deserialize<ImagesEmbed>(mediaVal.GetRawText(), options);
+                                        media = JsonSerializer.Deserialize<ImagesEmbed>(mediaVal.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImagesEmbed);
                                         break;
                                 }
                             }
@@ -119,21 +125,9 @@ public class EmbedConverter : JsonConverter<Embed>
         return default;
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, Embed value, JsonSerializerOptions options)
     {
-        JsonSerializer.Serialize(writer, value, value.GetType(), new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new ATRecordJsonConverter(),
-                new CidConverter(),
-            },
-        });
+        JsonSerializer.Serialize(writer, value, value.GetType(), (JsonSerializerContext)options.TypeInfoResolver!);
     }
 }

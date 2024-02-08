@@ -89,7 +89,7 @@ internal static class CborExtensions
         {
             return DateTime.Parse(obj.AsString());
         }
-        catch (Exception ex)
+        catch
         {
             return null;
         }

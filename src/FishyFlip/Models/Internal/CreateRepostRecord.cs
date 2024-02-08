@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models.Internal;
 
+/// <summary>
+/// Represents a record for creating a repost.
+/// </summary>
 public record CreateRepostRecord(string Collection, string Repo, RepostRecord Record);

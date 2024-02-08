@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents the response containing actor data.
+/// </summary>
 public record ActorResponse(ActorProfile[]? Actors, string? Cursor);

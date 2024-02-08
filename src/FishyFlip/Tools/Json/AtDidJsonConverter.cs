@@ -4,8 +4,12 @@
 
 namespace FishyFlip.Tools.Json;
 
+/// <summary>
+/// Provides a converter for the ATDid type for JSON serialization and deserialization.
+/// </summary>
 public class AtDidJsonConverter : JsonConverter<ATDid>
 {
+    /// <inheritdoc/>
     public override ATDid? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         string? value = reader.GetString();
@@ -25,6 +29,7 @@ public class AtDidJsonConverter : JsonConverter<ATDid>
         }
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, ATDid? value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value?.ToString());

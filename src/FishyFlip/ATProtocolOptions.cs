@@ -17,12 +17,6 @@ public class ATProtocolOptions
         // HACK: Decodes a message to load the default Cid protocols.
         Cid.Decode("bafyreiezjt5bqt2xpcdfvisud7jrd4zuxygz4ssnuge3ddjcoptanvcnsa");
         this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
-        this.JsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-        };
         this.Url = new Uri("https://bsky.social");
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {
@@ -40,6 +34,7 @@ public class ATProtocolOptions
             },
         };
 
+        this.SourceGenerationContext = new SourceGenerationContext(this.JsonSerializerOptions);
         this.UserAgent = $"FishyFlip {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
     }
 
@@ -88,6 +83,11 @@ public class ATProtocolOptions
     /// If it's not available, the original instance URL will be used.
     /// </summary>
     public bool UseServiceEndpointUponLogin { get; internal set; } = true;
+
+    /// <summary>
+    /// Gets the source generation context.
+    /// </summary>
+    internal SourceGenerationContext SourceGenerationContext { get; }
 
     /// <summary>
     /// Update the existing HttpClient with a new URI endpoint.

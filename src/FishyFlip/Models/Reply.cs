@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a reply to a post.
+/// </summary>
 public record Reply(ReplyRef Root, ReplyRef Parent);

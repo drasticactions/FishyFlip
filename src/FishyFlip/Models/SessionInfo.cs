@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents session information.
+/// </summary>
 public record SessionInfo(string Handle, ATDid Did, string? Email);

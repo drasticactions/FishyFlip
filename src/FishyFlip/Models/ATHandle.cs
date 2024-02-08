@@ -14,7 +14,7 @@ public class ATHandle : ATIdentifier
     /// </summary>
     /// <param name="handle">Handle.</param>
     [JsonConstructor]
-    protected ATHandle(string handle)
+    internal ATHandle(string handle)
     {
         this.Handle = handle;
     }

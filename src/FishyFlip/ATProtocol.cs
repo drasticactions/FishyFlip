@@ -104,12 +104,6 @@ public sealed class ATProtocol : IDisposable
     public ATProtoModeration Moderation => new(this);
 
     /// <summary>
-    /// Gets a debug protocol handle for interacting with ATProto.
-    /// <see cref="ATProtoDebug"/>.
-    /// </summary>
-    public ATProtoDebug Debug => new(this);
-
-    /// <summary>
     /// Gets the ATProto Unspecced Protocol.
     /// </summary>
     public BlueskyUnspecced Unspecced => new(this);
@@ -208,6 +202,14 @@ public sealed class ATProtocol : IDisposable
         }
     }
 
+    /// <summary>
+    /// Refreshes the current session asynchronously.
+    /// </summary>
+    /// <returns>
+    /// A task that represents the asynchronous operation.
+    /// If the session manager is null, the task will complete immediately.
+    /// Otherwise, the task will complete when the session has been refreshed.
+    /// </returns>
     public Task RefreshSessionAsync()
         => this.sessionManager?.RefreshTokenAsync() ?? Task.CompletedTask;
 

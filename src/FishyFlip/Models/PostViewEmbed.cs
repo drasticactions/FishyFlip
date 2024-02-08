@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a view embed of a post.
+/// </summary>
 public record PostViewEmbed(
     ATUri Uri,
     Cid Cid,

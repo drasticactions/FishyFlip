@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a reposted feed.
+/// </summary>
 public record RepostedFeed(FeedProfile[] RepostedBy, string? Cursor);

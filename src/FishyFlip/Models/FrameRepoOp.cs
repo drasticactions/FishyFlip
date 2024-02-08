@@ -5,10 +5,14 @@
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Frame Repo Op.
+/// Represents an operation on a frame repository.
 /// </summary>
 public class FrameRepoOp
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FrameRepoOp"/> class.
+    /// </summary>
+    /// <param name="obj">The CBOR object containing the operation data.</param>
     public FrameRepoOp(CBORObject obj)
     {
         this.Cid = obj["cid"] is not null ? Cid.Decode(obj["cid"].AsString()) : null;
@@ -16,9 +20,18 @@ public class FrameRepoOp
         this.Action = obj["action"]?.AsString();
     }
 
+    /// <summary>
+    /// Gets the CID associated with the operation.
+    /// </summary>
     public Cid? Cid { get; }
 
+    /// <summary>
+    /// Gets the path associated with the operation.
+    /// </summary>
     public string? Path { get; }
 
+    /// <summary>
+    /// Gets the action associated with the operation.
+    /// </summary>
     public string? Action { get; }
 }

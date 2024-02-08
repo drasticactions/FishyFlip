@@ -4,14 +4,27 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a result that can either contain a value of type <typeparamref name="T"/> or an error of type <see cref="Error"/>.
+/// </summary>
+/// <typeparam name="T">The type of the value.</typeparam>
 public class Result<T> : Multiple<T, Error>
 {
-    public Result(T value)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Result{T}"/> class.
+    /// </summary>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <param name="value">Represents the type of value.</param>
+    private Result(T value)
         : base(0, value, default)
     {
     }
 
-    public Result(Error? value)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Result{T}"/> class.
+    /// </summary>
+    /// <param name="value">Represents the type of value.</param>
+    private Result(Error? value)
         : base(1, default, value)
     {
     }

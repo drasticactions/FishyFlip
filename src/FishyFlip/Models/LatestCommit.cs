@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents the latest commit information.
+/// </summary>
 public record LatestCommit(Cid? Cid, string? Rev);

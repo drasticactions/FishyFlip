@@ -4,8 +4,12 @@
 
 namespace FishyFlip.Tools.Json;
 
+/// <summary>
+/// Converts an <see cref="ATUri"/> object to and from JSON.
+/// </summary>
 public class AtUriJsonConverter : JsonConverter<ATUri>
 {
+    /// <inheritdoc/>
     public override ATUri? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         string? value = reader.GetString();
@@ -24,6 +28,7 @@ public class AtUriJsonConverter : JsonConverter<ATUri>
         }
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, ATUri? value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value?.ToString());

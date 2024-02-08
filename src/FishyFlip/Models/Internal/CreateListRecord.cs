@@ -6,25 +6,7 @@ using static FishyFlip.Constants;
 
 namespace FishyFlip.Models.Internal;
 
+/// <summary>
+/// Represents a record used for creating a list.
+/// </summary>
 internal record CreateListRecord(string Collection, string Repo, ListRecordInternal Record, string? Rkey = null, string? SwapCommit = null);
-
-internal class ListRecordInternal : ATRecord
-{
-    [JsonConstructor]
-    public ListRecordInternal(string name, string description, string purpose, DateTime? createdAt = default)
-    {
-        this.Name = name;
-        this.Description = description;
-        this.Type = GraphTypes.List;
-        this.CreatedAt = createdAt ?? DateTime.UtcNow;
-        this.Purpose = purpose;
-    }
-
-    public DateTime CreatedAt { get; }
-
-    public string Name { get; }
-
-    public string Description { get; }
-
-    public string Purpose { get; }
-}

@@ -10,8 +10,19 @@ using System.Threading.Tasks;
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a description of a repository.
+/// </summary>
 public class DescribeRepo
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DescribeRepo"/> class.
+    /// </summary>
+    /// <param name="handle">The handle of the repository.</param>
+    /// <param name="did">The ATDid of the repository.</param>
+    /// <param name="didDoc">The DidDoc of the repository.</param>
+    /// <param name="collections">The collections of the repository.</param>
+    /// <param name="handleIsCorrect">A value indicating whether the handle is correct.</param>
     [JsonConstructor]
     public DescribeRepo(string handle, ATDid did, DidDoc didDoc, List<object> collections, bool handleIsCorrect)
     {
@@ -22,50 +33,28 @@ public class DescribeRepo
         this.HandleIsCorrect = handleIsCorrect;
     }
 
+    /// <summary>
+    /// Gets the handle of the repository.
+    /// </summary>
     public string Handle { get; }
 
+    /// <summary>
+    /// Gets the ATDid of the repository.
+    /// </summary>
     public ATDid Did { get; }
 
+    /// <summary>
+    /// Gets the DidDoc of the repository.
+    /// </summary>
     public DidDoc DidDoc { get; }
 
+    /// <summary>
+    /// Gets the collections of the repository.
+    /// </summary>
     public List<object> Collections { get; }
 
+    /// <summary>
+    /// Gets a value indicating whether the handle is correct.
+    /// </summary>
     public bool HandleIsCorrect { get; }
-}
-
-public class VerificationMethod
-{
-    [JsonConstructor]
-    public VerificationMethod(string id, string type, string controller, string publicKeyMultibase)
-    {
-        this.Id = id;
-        this.Type = type;
-        this.Controller = controller;
-        this.PublicKeyMultibase = publicKeyMultibase;
-    }
-
-    public string Id { get; }
-
-    public string Type { get; }
-
-    public string Controller { get; }
-
-    public string PublicKeyMultibase { get; }
-}
-
-public class Service
-{
-    [JsonConstructor]
-    public Service(string id, string type, string serviceEndpoint)
-    {
-        this.Id = id;
-        this.Type = type;
-        this.ServiceEndpoint = serviceEndpoint;
-    }
-
-    public string Id { get; }
-
-    public string Type { get; }
-
-    public string ServiceEndpoint { get; }
 }

@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a list feed containing an array of <see cref="FeedViewPost"/> and a cursor.
+/// </summary>
 public record ListFeed(FeedViewPost[] Feed, string? Cursor);

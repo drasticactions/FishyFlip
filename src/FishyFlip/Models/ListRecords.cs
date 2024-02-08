@@ -4,6 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a list of records.
+/// </summary>
 public record ListRecords(ListRecord[] Records, string? Cursor);
-
-public record ListRecord(ATUri? Uri, Cid? Cid, ATRecord? Value);

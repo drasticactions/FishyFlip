@@ -35,6 +35,7 @@ public class ATProtocolBuilder
     /// Set a custom HttpClient.
     /// </summary>
     /// <param name="client">HttpClient.</param>
+    /// <param name="setDefaults">Enables the default values to be set.</param>
     /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder WithHttpClient(HttpClient client, bool setDefaults = true)
     {
@@ -69,7 +70,7 @@ public class ATProtocolBuilder
     /// Sets UseServiceEndpointUponLogin.
     /// </summary>
     /// <param name="serviceEndpointUponLogin">Value for UseServiceEndpointUponLogin.</param>
-    /// <returns><see cref="ATProtocolBuilder"/>.s</returns>
+    /// <returns><see cref="ATProtocolBuilder"/>.s.</returns>
     public ATProtocolBuilder WithServiceEndpointUponLogin(bool serviceEndpointUponLogin)
     {
         this.atProtocolOptions.UseServiceEndpointUponLogin = serviceEndpointUponLogin;

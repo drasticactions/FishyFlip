@@ -11,6 +11,10 @@ namespace FishyFlip.Models;
 /// </summary>
 public class Ops
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Ops"/> class.
+    /// </summary>
+    /// <param name="obj">The CBOR Object Representation.</param>
     public Ops(CBORObject obj)
     {
         this.Action = obj["action"].AsString();

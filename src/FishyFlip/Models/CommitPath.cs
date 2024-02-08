@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents a commit path.
+/// </summary>
 public record CommitPath(Cid[]? Commits);

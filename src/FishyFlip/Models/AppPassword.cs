@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents an application password.
+/// </summary>
 public record AppPassword(string Name, DateTime CreatedAt);

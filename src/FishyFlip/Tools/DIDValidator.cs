@@ -4,8 +4,17 @@
 
 namespace FishyFlip.Tools;
 
+/// <summary>
+/// Validates a DID.
+/// </summary>
 internal static class DIDValidator
 {
+    /// <summary>
+    /// Ensures that the provided DID is valid.
+    /// </summary>
+    /// <param name="did">The DID to validate.</param>
+    /// <param name="logger">An optional logger to log validation errors.</param>
+    /// <returns><c>true</c> if the DID is valid; otherwise, <c>false</c>.</returns>
     internal static bool EnsureValidDid(string did, ILogger? logger = default)
     {
         if (!Regex.IsMatch(did, "^[a-zA-Z0-9._:%-]*$"))
@@ -48,6 +57,12 @@ internal static class DIDValidator
         return true;
     }
 
+    /// <summary>
+    /// Ensures that the provided DID matches the regular expression pattern for DIDs.
+    /// </summary>
+    /// <param name="did">The DID to validate.</param>
+    /// <param name="logger">An optional logger to log validation errors.</param>
+    /// <returns><c>true</c> if the DID matches the regular expression pattern; otherwise, <c>false</c>.</returns>
     internal static bool EnsureValidDidRegex(string did, ILogger? logger = default)
     {
         if (!Regex.IsMatch(did, "^did:[a-z]+:[a-zA-Z0-9._:%-]*[a-zA-Z0-9._-]$"))

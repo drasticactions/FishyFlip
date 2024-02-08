@@ -107,27 +107,6 @@ internal class SessionManager : IDisposable
     }
 
     /// <summary>
-    /// Dispose.
-    /// </summary>
-    /// <param name="disposing">Is disposing.</param>
-    protected virtual void Dispose(bool disposing)
-    {
-        if (this.disposed || this.timer is null)
-        {
-            return;
-        }
-
-        if (disposing)
-        {
-            this.timer.Enabled = false;
-            this.timer.Dispose();
-            this.timer = null;
-        }
-
-        this.disposed = true;
-    }
-
-    /// <summary>
     /// Refresh session token.
     /// </summary>
     /// <returns>Task.</returns>
@@ -174,6 +153,27 @@ internal class SessionManager : IDisposable
             Interlocked.Decrement(ref this.refreshing);
             this.logger?.LogDebug("Session refreshed.");
         }
+    }
+
+    /// <summary>
+    /// Dispose.
+    /// </summary>
+    /// <param name="disposing">Is disposing.</param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (this.disposed || this.timer is null)
+        {
+            return;
+        }
+
+        if (disposing)
+        {
+            this.timer.Enabled = false;
+            this.timer.Dispose();
+            this.timer = null;
+        }
+
+        this.disposed = true;
     }
 
     private void ConfigureRefreshTokenTimer()

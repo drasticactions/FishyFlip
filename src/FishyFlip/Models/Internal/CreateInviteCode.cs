@@ -10,4 +10,9 @@ using System.Threading.Tasks;
 
 namespace FishyFlip.Models.Internal;
 
+/// <summary>
+/// Represents the data for creating an invite code.
+/// </summary>
+/// <param name="UseCount">The number of times the invite code can be used.</param>
+/// <param name="ForAccount">The account for which the invite code is created.</param>
 public record CreateInviteCode(int UseCount, ATDid? ForAccount);

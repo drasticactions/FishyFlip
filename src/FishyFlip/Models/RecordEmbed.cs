@@ -5,10 +5,15 @@
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Record Embed.
+/// Represents an embed for a record.
 /// </summary>
 public class RecordEmbed : Embed
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RecordEmbed"/> class.
+    /// </summary>
+    /// <param name="record">The record object.</param>
+    /// <param name="type">The type of the embed.</param>
     [JsonConstructor]
     public RecordEmbed(Record? record, string? type)
         : base(type)
@@ -17,44 +22,17 @@ public class RecordEmbed : Embed
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecordEmbed"/> class.
+    /// Initializes a new instance of the <see cref="RecordEmbed"/> class from a CBORObject.
     /// </summary>
-    /// <param name="obj">CBORObject.</param>
+    /// <param name="obj">The CBORObject representing the record.</param>
     public RecordEmbed(CBORObject obj)
     {
         this.Type = Constants.EmbedTypes.Record;
         this.Record = new Record(obj);
     }
 
+    /// <summary>
+    /// Gets the record associated with the embed.
+    /// </summary>
     public Record? Record { get; }
-}
-
-public class Record
-{
-    [JsonConstructor]
-    public Record(Cid? cid, string? uri)
-    {
-        this.Cid = cid;
-        this.Uri = uri;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Record"/> class.
-    /// </summary>
-    /// <param name="obj">CBORObject.</param>
-    public Record(CBORObject obj)
-    {
-        this.Cid = obj["cid"].ToCid();
-        this.Uri = obj["uri"].AsString();
-    }
-
-    /// <summary>
-    /// Gets the Cid.
-    /// </summary>
-    public Cid? Cid { get; }
-
-    /// <summary>
-    /// Gets the Uri.
-    /// </summary>
-    public string? Uri { get; }
 }

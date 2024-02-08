@@ -32,7 +32,7 @@ public class ATWebSocketProtocolBuilder
     /// Set the instance url to connect to.
     /// </summary>
     /// <param name="url">Instance Url.</param>
-    /// <returns><see cref="ATWebSocketProtocolBuilder"/></returns>
+    /// <returns><see cref="ATWebSocketProtocolBuilder"/>.</returns>
     public ATWebSocketProtocolBuilder WithInstanceUrl(Uri url)
     {
         this.atProtocolOptions.Url = url;
@@ -43,7 +43,7 @@ public class ATWebSocketProtocolBuilder
     /// Adds a logger.
     /// </summary>
     /// <param name="logger">Logger.</param>
-    /// <returns><see cref="ATWebSocketProtocolBuilder"/></returns>
+    /// <returns><see cref="ATWebSocketProtocolBuilder"/>.</returns>
     public ATWebSocketProtocolBuilder WithLogger(ILogger? logger)
     {
         this.atProtocolOptions.Logger = logger;
@@ -53,7 +53,7 @@ public class ATWebSocketProtocolBuilder
     /// <summary>
     /// Returns the ATWebSocketProtocolOptions.
     /// </summary>
-    /// <returns>ATWebSocketProtocolOptions</returns>
+    /// <returns>ATWebSocketProtocolOptions.</returns>
     public ATWebSocketProtocolOptions BuildOptions()
     {
         return this.atProtocolOptions;

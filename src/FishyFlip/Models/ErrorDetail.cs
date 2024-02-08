@@ -4,6 +4,9 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents an error detail.
+/// </summary>
 public record ErrorDetail(string Error, string Message)
 {
 }

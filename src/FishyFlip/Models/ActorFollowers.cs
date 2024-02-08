@@ -4,4 +4,7 @@
 
 namespace FishyFlip.Models;
 
+/// <summary>
+/// Represents the followers of an actor in a feed.
+/// </summary>
 public record ActorFollowers(FeedProfile? Subject, FeedProfile[]? Followers, string? Cursor);
