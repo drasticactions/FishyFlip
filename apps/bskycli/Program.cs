@@ -3,7 +3,6 @@
 // </copyright>
 
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.RegularExpressions;
 using DotMake.CommandLine;
 using FishyFlip;
@@ -52,7 +51,9 @@ public class RootCommand
     /// Post Command.
     /// </summary>
     [CliCommand(Description = "Post a message with images")]
+#pragma warning disable CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
     public class ImagePostCommand(ILoggerFactory loggerFactory) : CredentialCommandBase(loggerFactory)
+#pragma warning restore CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
     {
         /// <summary>
         /// Gets or sets the message to post.
@@ -60,15 +61,36 @@ public class RootCommand
         [CliOption(Description = "Text to post", Required = false)]
         public string Text { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the images to post.
+        /// </summary>
+        /// <remarks>
+        /// The images should be existing files.
+        /// The maximum number of images that can be posted is 4.
+        /// </remarks>
         [CliOption(
             Description = "Images to post. Max of 4.",
             AllowMultipleArgumentsPerToken = true,
             ValidationRules = CliValidationRules.ExistingFile)]
         public required IEnumerable<FileInfo> Images { get; set; }
 
+        /// <summary>
+        /// Gets or sets the alternative text for the images.
+        /// </summary>
+        /// <remarks>
+        /// The alternative text is mapped to the images in the order of entry.
+        /// This is not a required field.
+        /// </remarks>
         [CliOption(Description = "Alt Text for images. Max of 4. Text is mapped to images in order of entry.", AllowMultipleArgumentsPerToken = true, Required = false)]
         public IEnumerable<string>? AltText { get; set; }
 
+        /// <summary>
+        /// Gets or sets the languages used in the post.
+        /// </summary>
+        /// <remarks>
+        /// The languages can be specified using two or four letter ISO codes (e.g., 'th', 'en-US').
+        /// This is not a required field.
+        /// </remarks>
         [CliOption(Description = "Languages used in post. Can use two or four letter ISO (Ex. 'th' 'en-US')", AllowMultipleArgumentsPerToken = true, Required = false)]
         public IEnumerable<string>? Languages { get; set; }
 
@@ -115,7 +137,7 @@ public class RootCommand
 
             // Log in and upload the images.
             await base.RunAsync();
-            ArgumentNullException.ThrowIfNull(this.ATProtocol);
+            ArgumentNullException.ThrowIfNull(this.AtProtocol);
 
             for (var i = 0; i < this.Images.Count(); i++)
             {
@@ -125,7 +147,7 @@ public class RootCommand
                 await using var fileStream = image.OpenRead();
                 var content = new StreamContent(fileStream);
                 content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-                var blobResult = (await this.ATProtocol!.Repo.UploadBlobAsync(content)).HandleResult();
+                var blobResult = (await this.AtProtocol!.Repo.UploadBlobAsync(content)).HandleResult();
                 logger.LogDebug($"Uploaded {image.Name} to {blobResult.Blob.Ref}");
                 var img = blobResult.Blob.ToImage() ?? throw new Exception($"Failed to convert blob {image.Name} to image.");
                 var imgEmbed = new ImageEmbed(img, altText);
@@ -133,7 +155,7 @@ public class RootCommand
                 imageEmbeds.Add(imgEmbed);
             }
 
-            var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(
+            var postResult = (await this.AtProtocol!.Repo.CreatePostAsync(
                 parsedText?.ModifiedString ?? string.Empty,
                 facets,
                 langs: this.Languages.ToArray(),
@@ -149,7 +171,9 @@ public class RootCommand
     /// Post Command.
     /// </summary>
     [CliCommand(Description = "Post a message")]
+#pragma warning disable CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
     public class PostCommand(ILoggerFactory loggerFactory) : CredentialCommandBase(loggerFactory)
+#pragma warning restore CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
     {
         /// <summary>
         /// Gets or sets the message to post.
@@ -163,6 +187,13 @@ public class RootCommand
         [CliOption(Description = "Link Card Url. Embed into the post as external.", Required = false)]
         public string LinkCardUrl { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the languages used in the post.
+        /// </summary>
+        /// <remarks>
+        /// The languages can be specified using two or four letter ISO codes (e.g., 'th', 'en-US').
+        /// This is not a required field.
+        /// </remarks>
         [CliOption(Description = "Languages used in post. Can use two or four letter ISO (Ex. 'th' 'en-US')", AllowMultipleArgumentsPerToken = true, Required = false)]
         public IEnumerable<string>? Languages { get; set; }
 
@@ -189,16 +220,16 @@ public class RootCommand
             }
 
             await base.RunAsync();
-            ArgumentNullException.ThrowIfNull(this.ATProtocol);
+            ArgumentNullException.ThrowIfNull(this.AtProtocol);
 
             ExternalEmbed? externalEmbed = null;
             if (!string.IsNullOrEmpty(this.LinkCardUrl))
             {
-                var parser = new OpenGraphParser(this.ATProtocol!, logger);
+                var parser = new OpenGraphParser(this.AtProtocol!, logger);
                 externalEmbed = await parser.GenerateExternalEmbed(this.LinkCardUrl);
             }
 
-            var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(
+            var postResult = (await this.AtProtocol!.Repo.CreatePostAsync(
                 parsedText.ModifiedString,
                 facets,
                 externalEmbed,
@@ -240,7 +271,7 @@ public class RootCommand
         /// <summary>
         /// Gets or sets the ATProtocol.
         /// </summary>
-        public ATProtocol? ATProtocol { get; set; }
+        public ATProtocol? AtProtocol { get; set; }
 
         /// <summary>
         /// Gets or sets the users session information.
@@ -261,10 +292,10 @@ public class RootCommand
                 throw new Exception("Invalid URL");
             }
 
-            this.ATProtocol = builder
+            this.AtProtocol = builder
                 .WithInstanceUrl(instance)
                 .Build();
-            this.Session = (await this.ATProtocol.Server.CreateSessionAsync(this.Identifier, this.Password)).HandleResult();
+            this.Session = (await this.AtProtocol.Server.CreateSessionAsync(this.Identifier, this.Password)).HandleResult();
             logger.LogInformation($"Authenticated as {this.Session.Handle}.");
             logger.LogDebug($"Session Did: {this.Session.Did}");
         }
@@ -459,9 +490,8 @@ public class RootCommand
             string? description = null;
             string? urlEmbed = null;
 
-            if (ogTags.ContainsKey("image"))
+            if (ogTags.TryGetValue("image", out var imageUrl))
             {
-                var imageUrl = ogTags["image"];
                 var imageResult = await this.httpClient.GetByteArrayAsync(imageUrl);
                 var contentType = this.fileContentTypeDetector.GetContentType(imageResult);
                 if (contentType == "unsupported")
@@ -478,19 +508,19 @@ public class RootCommand
                 }
             }
 
-            if (ogTags.ContainsKey("title"))
+            if (ogTags.TryGetValue("title", out var tag))
             {
-                title = ogTags["title"];
+                title = tag;
             }
 
-            if (ogTags.ContainsKey("description"))
+            if (ogTags.TryGetValue("description", out var ogTag))
             {
-                description = ogTags["description"];
+                description = ogTag;
             }
 
-            if (ogTags.ContainsKey("url"))
+            if (ogTags.TryGetValue("url", out var tag1))
             {
-                urlEmbed = ogTags["url"];
+                urlEmbed = tag1;
             }
 
             var external = new External(image, title, description, urlEmbed);
