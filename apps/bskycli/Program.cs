@@ -269,7 +269,7 @@ public class RootCommand
         public string Instance { get; set; } = "https://bsky.social";
 
         /// <summary>
-        /// Gets or sets the ATProtocol.
+        /// Gets or sets the AtProtocol.
         /// </summary>
         public ATProtocol? AtProtocol { get; set; }
 
@@ -465,11 +465,11 @@ public class RootCommand
         private readonly ILogger logger;
         private readonly Regex regex;
         private readonly FileContentTypeDetector fileContentTypeDetector;
-        private readonly ATProtocol ATProtocol;
+        private readonly ATProtocol atProtocol;
 
         public OpenGraphParser(ATProtocol protocol, ILogger logger)
         {
-            this.ATProtocol = protocol;
+            this.atProtocol = protocol;
             this.logger = logger;
             this.httpClient = new HttpClient();
             this.httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("FishyFlip");
@@ -502,7 +502,7 @@ public class RootCommand
                 {
                     var content = new StreamContent(new MemoryStream(imageResult));
                     content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-                    var blobResult = (await this.ATProtocol!.Repo.UploadBlobAsync(content)).HandleResult();
+                    var blobResult = (await this.atProtocol!.Repo.UploadBlobAsync(content)).HandleResult();
                     this.logger.LogDebug($"Uploaded {imageUrl} to {blobResult.Blob.Ref}");
                     image = blobResult.Blob.ToImage() ?? throw new Exception($"Failed to convert blob {imageUrl} to image.");
                 }
