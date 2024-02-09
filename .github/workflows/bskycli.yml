@@ -1,4 +1,4 @@
-name: Nuget
+name: bskycli
 
 on:
     workflow_dispatch:
