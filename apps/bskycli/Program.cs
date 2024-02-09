@@ -57,8 +57,8 @@ public class RootCommand
         /// <summary>
         /// Gets or sets the message to post.
         /// </summary>
-        [CliOption(Description = "Text to post")]
-        public string? Text { get; set; }
+        [CliOption(Description = "Text to post", Required = false)]
+        public string Text { get; set; } = string.Empty;
 
         [CliOption(
             Description = "Images to post. Max of 4.",
@@ -129,6 +129,9 @@ public class RootCommand
 
             var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(parsedText?.ModifiedString ?? string.Empty, facets, embed: new ImagesEmbed(imageEmbeds.ToArray()))).HandleResult();
             logger.LogInformation($"Post Created: {postResult.Uri} {postResult.Cid}");
+            var url = $"https://bsky.app/profile/{postResult.Uri!.Did}/post/{postResult.Uri!.Pathname.Split("/").Last()}";
+            Console.WriteLine($"Post: {postResult.Uri}");
+            Console.WriteLine($"Post URL: {url}");
         }
     }
 
@@ -167,6 +170,9 @@ public class RootCommand
             await base.RunAsync();
             var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(parsedText.ModifiedString, facets)).HandleResult();
             logger.LogInformation($"Post Created: {postResult.Uri} {postResult.Cid}");
+            var url = $"https://bsky.app/profile/{postResult.Uri!.Did}/post/{postResult.Uri!.Pathname.Split("/").Last()}";
+            Console.WriteLine($"Post: {postResult.Uri}");
+            Console.WriteLine($"Post URL: {url}");
         }
     }
 
