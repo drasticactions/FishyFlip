@@ -54,5 +54,5 @@ Options:
 
 - JSON result output
 - Handle at-mentions and resolving handles
-
+- Handle hashtags
 
