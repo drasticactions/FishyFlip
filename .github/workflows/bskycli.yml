@@ -1,0 +1,30 @@
+name: Nuget
+
+on:
+    workflow_dispatch:
+
+jobs:
+    linux:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                fetch-depth: 0
+            - name: Setup .NET Core
+              uses: actions/setup-dotnet@v2
+              with:
+                dotnet-version: 8.x
+
+            - uses: dotnet/nbgv@master
+
+            - name: Build and Publish bskycli for linux x64
+              run: dotnet publish -c Release -o publish -r publish/linux-x64
+
+            - name: Upload package
+              uses: actions/upload-artifact@v2
+              with:
+                name: linux-x64
+                path: publish/linux-x64
+            
+
+
