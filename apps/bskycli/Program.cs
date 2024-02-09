@@ -60,12 +60,6 @@ public class RootCommand
         [CliOption(Description = "Text to post", Required = false)]
         public string Text { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Gets or sets the message to the link card.
-        /// </summary>
-        [CliOption(Description = "Link Card Url. Embed into the post as external.", Required = false)]
-        public string LinkCardUrl { get; set; } = string.Empty;
-
         [CliOption(
             Description = "Images to post. Max of 4.",
             AllowMultipleArgumentsPerToken = true,
@@ -121,14 +115,7 @@ public class RootCommand
 
             // Log in and upload the images.
             await base.RunAsync();
-
             ArgumentNullException.ThrowIfNull(this.ATProtocol);
-            ExternalEmbed? externalEmbed = null;
-            if (!string.IsNullOrEmpty(this.LinkCardUrl))
-            {
-                var parser = new OpenGraphParser(this.ATProtocol!, logger);
-                externalEmbed = await parser.GenerateExternalEmbed(this.LinkCardUrl);
-            }
 
             for (var i = 0; i < this.Images.Count(); i++)
             {
@@ -283,7 +270,7 @@ public class RootCommand
         }
     }
 
-    internal class MarkdownLinkParser
+    private class MarkdownLinkParser
     {
         /// <summary>
         /// Generates an array of Facet objects from a ParsedMarkdown object.
@@ -350,6 +337,28 @@ public class RootCommand
 
                     // Update offset for future calculations
                     offset += match.Length - text.Length;
+                }
+            }
+
+            string httpPattern = @"\b(?:https?://|www\.)\S+\b";
+            matches = Regex.Matches(modifiedString, httpPattern);
+
+            foreach (Match match in matches)
+            {
+                if (match.Success)
+                {
+                    string url = match.Value;
+                    LinkInfo link = new LinkInfo
+                    {
+                        Text = url,
+                        Url = url,
+                        StartIndex = match.Index,
+                        EndIndex = match.Index + match.Length - 1,
+                        NewTextStartIndex = match.Index,
+                        NewTextEndIndex = match.Index + match.Length - 1,
+                    };
+
+                    links.Add(link);
                 }
             }
 
