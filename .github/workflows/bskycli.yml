@@ -18,7 +18,7 @@ jobs:
             - uses: dotnet/nbgv@master
 
             - name: Setup Native AOT prerequisites
-              run: sudo apt-get install clang zlib1g-dev
+              run: sudo apt-get install clang zlib1g-dev binutils-aarch64-linux-gnu libomp5 libomp-dev
               shell: bash
 
             - name: Build and Publish bskycli for linux x64
