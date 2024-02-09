@@ -18,7 +18,7 @@ jobs:
             - uses: dotnet/nbgv@master
 
             - name: Build and Publish bskycli for linux x64
-              run: dotnet publish -c Release -o publish -r publish/linux-x64
+              run: dotnet publish bskycli.csproj -c Release -o publish -r publish/linux-x64
 
             - name: Upload package
               uses: actions/upload-artifact@v2
