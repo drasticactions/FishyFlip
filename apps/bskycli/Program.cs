@@ -60,6 +60,12 @@ public class RootCommand
         [CliOption(Description = "Text to post", Required = false)]
         public string Text { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the message to the link card.
+        /// </summary>
+        [CliOption(Description = "Link Card Url. Embed into the post as external.", Required = false)]
+        public string LinkCardUrl { get; set; } = string.Empty;
+
         [CliOption(
             Description = "Images to post. Max of 4.",
             AllowMultipleArgumentsPerToken = true,
@@ -68,6 +74,9 @@ public class RootCommand
 
         [CliOption(Description = "Alt Text for images. Max of 4. Text is mapped to images in order of entry.", AllowMultipleArgumentsPerToken = true, Required = false)]
         public IEnumerable<string>? AltText { get; set; }
+
+        [CliOption(Description = "Languages used in post. Can use two or four letter ISO (Ex. 'th' 'en-US')", AllowMultipleArgumentsPerToken = true, Required = false)]
+        public IEnumerable<string>? Languages { get; set; }
 
         /// <summary>
         /// Run the command.
@@ -80,6 +89,8 @@ public class RootCommand
             {
                 throw new Exception("Images are required.");
             }
+
+            this.Languages ??= new List<string>();
 
             var parsedText = MarkdownLinkParser.ParseMarkdown(this.Text ?? string.Empty);
             var facets = MarkdownLinkParser.GenerateFacets(parsedText);
@@ -111,6 +122,14 @@ public class RootCommand
             // Log in and upload the images.
             await base.RunAsync();
 
+            ArgumentNullException.ThrowIfNull(this.ATProtocol);
+            ExternalEmbed? externalEmbed = null;
+            if (!string.IsNullOrEmpty(this.LinkCardUrl))
+            {
+                var parser = new OpenGraphParser(this.ATProtocol!, logger);
+                externalEmbed = await parser.GenerateExternalEmbed(this.LinkCardUrl);
+            }
+
             for (var i = 0; i < this.Images.Count(); i++)
             {
                 var image = images.ElementAt(i);
@@ -127,7 +146,11 @@ public class RootCommand
                 imageEmbeds.Add(imgEmbed);
             }
 
-            var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(parsedText?.ModifiedString ?? string.Empty, facets, embed: new ImagesEmbed(imageEmbeds.ToArray()))).HandleResult();
+            var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(
+                parsedText?.ModifiedString ?? string.Empty,
+                facets,
+                langs: this.Languages.ToArray(),
+                embed: new ImagesEmbed(imageEmbeds.ToArray()))).HandleResult();
             logger.LogInformation($"Post Created: {postResult.Uri} {postResult.Cid}");
             var url = $"https://bsky.app/profile/{postResult.Uri!.Did}/post/{postResult.Uri!.Pathname.Split("/").Last()}";
             Console.WriteLine($"Post: {postResult.Uri}");
@@ -148,6 +171,15 @@ public class RootCommand
         public required string Text { get; set; }
 
         /// <summary>
+        /// Gets or sets the message to the link card.
+        /// </summary>
+        [CliOption(Description = "Link Card Url. Embed into the post as external.", Required = false)]
+        public string LinkCardUrl { get; set; } = string.Empty;
+
+        [CliOption(Description = "Languages used in post. Can use two or four letter ISO (Ex. 'th' 'en-US')", AllowMultipleArgumentsPerToken = true, Required = false)]
+        public IEnumerable<string>? Languages { get; set; }
+
+        /// <summary>
         /// Run the command.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
@@ -159,6 +191,8 @@ public class RootCommand
                 throw new Exception("Text is required.");
             }
 
+            this.Languages ??= new List<string>();
+
             var parsedText = MarkdownLinkParser.ParseMarkdown(this.Text);
             var facets = MarkdownLinkParser.GenerateFacets(parsedText);
 
@@ -168,7 +202,20 @@ public class RootCommand
             }
 
             await base.RunAsync();
-            var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(parsedText.ModifiedString, facets)).HandleResult();
+            ArgumentNullException.ThrowIfNull(this.ATProtocol);
+
+            ExternalEmbed? externalEmbed = null;
+            if (!string.IsNullOrEmpty(this.LinkCardUrl))
+            {
+                var parser = new OpenGraphParser(this.ATProtocol!, logger);
+                externalEmbed = await parser.GenerateExternalEmbed(this.LinkCardUrl);
+            }
+
+            var postResult = (await this.ATProtocol!.Repo.CreatePostAsync(
+                parsedText.ModifiedString,
+                facets,
+                externalEmbed,
+                langs: this.Languages.ToArray())).HandleResult();
             logger.LogInformation($"Post Created: {postResult.Uri} {postResult.Cid}");
             var url = $"https://bsky.app/profile/{postResult.Uri!.Did}/post/{postResult.Uri!.Pathname.Split("/").Last()}";
             Console.WriteLine($"Post: {postResult.Uri}");
@@ -372,6 +419,107 @@ public class RootCommand
         }
     }
 
+    private class OpenGraphParser
+    {
+        private readonly HttpClient httpClient;
+        private readonly ILogger logger;
+        private readonly Regex regex;
+        private readonly FileContentTypeDetector fileContentTypeDetector;
+        private readonly ATProtocol ATProtocol;
+
+        public OpenGraphParser(ATProtocol protocol, ILogger logger)
+        {
+            this.ATProtocol = protocol;
+            this.logger = logger;
+            this.httpClient = new HttpClient();
+            this.httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("FishyFlip");
+            this.regex = new Regex("<meta property=\"og:([^\"]+)\" content=\"([^\"]+)\"");
+            this.fileContentTypeDetector = new FileContentTypeDetector(logger);
+        }
+
+        public async Task<ExternalEmbed?> GenerateExternalEmbed(string url)
+        {
+            var ogTags = await this.ParseAsync(url);
+            if (ogTags.Count == 0)
+            {
+                return null;
+            }
+
+            Image? image = null;
+            string? title = null;
+            string? description = null;
+            string? urlEmbed = null;
+
+            if (ogTags.ContainsKey("image"))
+            {
+                var imageUrl = ogTags["image"];
+                var imageResult = await this.httpClient.GetByteArrayAsync(imageUrl);
+                var contentType = this.fileContentTypeDetector.GetContentType(imageResult);
+                if (contentType == "unsupported")
+                {
+                    this.logger.LogWarning($"Unsupported file type for {imageUrl}");
+                }
+                else
+                {
+                    var content = new StreamContent(new MemoryStream(imageResult));
+                    content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+                    var blobResult = (await this.ATProtocol!.Repo.UploadBlobAsync(content)).HandleResult();
+                    this.logger.LogDebug($"Uploaded {imageUrl} to {blobResult.Blob.Ref}");
+                    image = blobResult.Blob.ToImage() ?? throw new Exception($"Failed to convert blob {imageUrl} to image.");
+                }
+            }
+
+            if (ogTags.ContainsKey("title"))
+            {
+                title = ogTags["title"];
+            }
+
+            if (ogTags.ContainsKey("description"))
+            {
+                description = ogTags["description"];
+            }
+
+            if (ogTags.ContainsKey("url"))
+            {
+                urlEmbed = ogTags["url"];
+            }
+
+            var external = new External(image, title, description, urlEmbed);
+            return new ExternalEmbed(external);
+        }
+
+        private async Task<Dictionary<string, string>> ParseAsync(string url)
+        {
+            try
+            {
+                var htmlContent = await this.httpClient.GetStringAsync(url);
+                return this.ParseOpenGraphTags(htmlContent);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Failed to parse OpenGraph tags.");
+                return new Dictionary<string, string>();
+            }
+        }
+
+        private Dictionary<string, string> ParseOpenGraphTags(string html)
+        {
+            var ogTags = new Dictionary<string, string>();
+
+            foreach (Match match in this.regex.Matches(html))
+            {
+                if (match.Groups.Count == 3)
+                {
+                    var property = match.Groups[1].Value.Trim();
+                    var content = match.Groups[2].Value.Trim();
+                    ogTags[property] = content;
+                }
+            }
+
+            return ogTags;
+        }
+    }
+
     private class FileContentTypeDetector
     {
         private (byte[], string)[] fileSignatures;
@@ -386,6 +534,16 @@ public class RootCommand
                 (new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A }, "image/png"), // PNG
                 ("GIF8"u8.ToArray(), "image/gif"), // GIF
             };
+        }
+
+        public string GetContentType(byte[]? bytes)
+        {
+            if (bytes == null || bytes.Length == 0)
+            {
+                return "unsupported";
+            }
+
+            return this.GetContentType(new MemoryStream(bytes));
         }
 
         public string GetContentType(Stream? fileStream)

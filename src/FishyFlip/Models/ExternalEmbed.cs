@@ -15,10 +15,10 @@ public class ExternalEmbed : Embed
     /// <param name="external">The external content.</param>
     /// <param name="type">The type of the embed.</param>
     [JsonConstructor]
-    public ExternalEmbed(External external, string? type)
-        : base(type)
+    public ExternalEmbed(External external)
     {
         this.External = external;
+        this.Type = Constants.EmbedTypes.External;
     }
 
     /// <summary>
