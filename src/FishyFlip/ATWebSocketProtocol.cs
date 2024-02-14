@@ -212,7 +212,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             var blockObj = CBORObject.Read(blockStream);
                             if (blockObj["$type"] is not null)
                             {
-                                message.Record = ATRecord.FromCBORObject(blockObj);
+                                message.Record = ATRecord.FromCBORObject(blockObj, this.logger);
                             }
                             else if (blockObj["sig"] is not null)
                             {

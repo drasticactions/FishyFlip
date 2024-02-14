@@ -118,4 +118,28 @@ internal static class CborExtensions
 
         return new UnknownEmbed(type);
     }
+
+    /// <summary>
+    /// Cast CBOR to Reply.
+    /// </summary>
+    /// <param name="obj">CBORObject.</param>
+    /// <returns>Reply.</returns>
+    public static Reply? ToReply(this CBORObject? obj)
+    {
+        if (obj is null)
+        {
+            return null;
+        }
+
+        var root = obj["root"];
+        var parent = obj["parent"];
+        if (root.IsNull || parent.IsNull)
+        {
+            return null;
+        }
+
+        var rootRef = new ReplyRef(root["cid"].ToCid()!, ATUri.Create(root["uri"].AsString()));
+        var parentRef = new ReplyRef(parent["cid"].ToCid()!, ATUri.Create(parent["uri"].AsString()));
+        return new Reply(rootRef, parentRef);
+    }
 }

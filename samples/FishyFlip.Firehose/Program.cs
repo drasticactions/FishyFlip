@@ -62,6 +62,12 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
             // The path contains the post action and path, we need the path, so we split to get it.
             var url = $"https://bsky.app/profile/{did}/post/{message.Commit.Ops![0]!.Path!.Split("/").Last()}";
             Console.WriteLine($"Post URL: {url}, from {repo.Handle}");
+
+            if (post.Reply is not null)
+            {
+               Console.WriteLine($"Reply Root: {post.Reply.Root.Uri}");
+               Console.WriteLine($"Reply Parent: {post.Reply.Parent.Uri}");
+            }
         }
     }
 }

@@ -55,6 +55,7 @@ public class Post : ATRecord
         this.Text = obj["text"].AsString();
         this.Langs = obj["langs"]?.Values.Select(n => n.AsString()).ToArray();
         this.Facets = obj["facets"]?.Values.Select(n => new Facet(n)).ToArray();
+        this.Reply = obj["reply"]?.IsNull ?? false ? null : obj["reply"].ToReply();
     }
 
     /// <summary>

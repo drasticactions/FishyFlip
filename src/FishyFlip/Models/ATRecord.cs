@@ -40,6 +40,11 @@ public abstract class ATRecord
     /// <returns>An AT Record if the conversion is successful; otherwise, null.</returns>
     public static ATRecord? FromCBORObject(CBORObject blockObj, ILogger? logger = default)
     {
+#if DEBUG
+        var rawObj = blockObj.ToJSONString();
+        logger?.LogDebug($"Raw Object: {rawObj}");
+#endif
+
         if (blockObj["$type"] is not null)
         {
             switch (blockObj["$type"].AsString())
@@ -63,6 +68,7 @@ public abstract class ATRecord
                 case Constants.ActorTypes.Profile:
                     return new Profile(blockObj);
                 default:
+                    logger?.LogDebug($"Unknown type: {blockObj["$type"].AsString()}");
                     return null;
             }
         }
