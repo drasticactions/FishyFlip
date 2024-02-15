@@ -20,7 +20,7 @@ public sealed class ATProtocol : IDisposable
     /// Initializes a new instance of the <see cref="ATProtocol"/> class.
     /// </summary>
     /// <param name="options">Configuration options for ATProto. <see cref="ATProtocolOptions"/>.</param>
-    internal ATProtocol(ATProtocolOptions options)
+    public ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));

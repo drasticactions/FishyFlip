@@ -127,14 +127,14 @@ public class AuthorizedTests
     {
         var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
         var postUri2 = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7yddkqyzk2j");
-        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
-        var postCid2 = Cid.Decode("bafyreig4ncon6rhnbr5gglmvuduegnk3wnvcxcepk4g3tlohhcpuzayb5m");
+        var postATCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
+        var postATCid2 = Cid.Decode("bafyreig4ncon6rhnbr5gglmvuduegnk3wnvcxcepk4g3tlohhcpuzayb5m");
         var postThreadResult = await this.proto.Feed.GetPostsAsync(new[] { postUri, postUri2 });
         postThreadResult.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Posts[0].Cid);
-                Assert.Equal(postCid2, success!.Posts[1].Cid);
+                Assert.Equal(postATCid, success!.Posts[0].Cid);
+                Assert.Equal(postATCid2, success!.Posts[1].Cid);
             },
             failed =>
             {
@@ -146,12 +146,12 @@ public class AuthorizedTests
     public async Task GetPostThreadAsyncTest()
     {
         var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
-        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
+        var postATCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
                        {
-                           Assert.Equal(postCid, success!.Thread.Post.Cid);
+                           Assert.Equal(postATCid, success!.Thread.Post.Cid);
                        },
             failed =>
                                   {
@@ -163,12 +163,12 @@ public class AuthorizedTests
     public async Task GetQuotePostThreadAsyncTest()
     {
         var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
-        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
+        var postATCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Thread.Post.Cid);
+                Assert.Equal(postATCid, success!.Thread.Post.Cid);
             },
             failed =>
             {
@@ -180,12 +180,12 @@ public class AuthorizedTests
     public async Task GetExternalPostThreadAsyncTest()
     {
         var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
-        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
+        var postATCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Thread.Post.Cid);
+                Assert.Equal(postATCid, success!.Thread.Post.Cid);
             },
             failed =>
             {
@@ -197,12 +197,12 @@ public class AuthorizedTests
     public async Task GetImagesPostThreadAsyncTest()
     {
         var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7yddkqyzk2j");
-        var postCid = Cid.Decode("bafyreig4ncon6rhnbr5gglmvuduegnk3wnvcxcepk4g3tlohhcpuzayb5m");
+        var postATCid = Cid.Decode("bafyreig4ncon6rhnbr5gglmvuduegnk3wnvcxcepk4g3tlohhcpuzayb5m");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Thread.Post.Cid);
+                Assert.Equal(postATCid, success!.Thread.Post.Cid);
             },
             failed =>
             {
@@ -214,12 +214,12 @@ public class AuthorizedTests
     public async Task GetRecordWithMediaPostThreadAsyncTest()
     {
         var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
-        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
+        var postATCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Thread.Post.Cid);
+                Assert.Equal(postATCid, success!.Thread.Post.Cid);
             },
             failed =>
             {
@@ -231,12 +231,12 @@ public class AuthorizedTests
     public async Task GetRepliesPostThreadAsyncTest()
     {
         var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
-        var postCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
+        var postATCid = Cid.Decode("bafyreifnqptq4svrpo6xohngz6v7cskvecf5tokcrwwkjm2urtzg5aptpe");
         var postThreadResult = await this.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Thread.Post.Cid);
+                Assert.Equal(postATCid, success!.Thread.Post.Cid);
                 Assert.True(success.Thread.Replies!.Count() > 0);
             },
             failed =>

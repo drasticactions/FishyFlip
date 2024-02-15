@@ -20,7 +20,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
     /// </summary>
     /// <param name="protocol"><see cref="ATProtocolOptions"/>.</param>
-    internal ATWebSocketProtocol(ATProtocol protocol)
+    public ATWebSocketProtocol(ATProtocol protocol)
     {
         this.protocol = protocol;
         this.instanceUri = protocol.Options.Url;
