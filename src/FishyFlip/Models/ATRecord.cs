@@ -38,7 +38,7 @@ public abstract class ATRecord
     /// <param name="blockObj">The CBORObject to convert.</param>
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
     /// <returns>An AT Record if the conversion is successful; otherwise, null.</returns>
-    public static ATRecord? FromCBORObject(CBORObject blockObj, ILogger? logger = default)
+    public static ATRecord FromCBORObject(CBORObject blockObj, ILogger? logger = default)
     {
 #if DEBUG
         var rawObj = blockObj.ToJSONString();
@@ -75,6 +75,6 @@ public abstract class ATRecord
             }
         }
 
-        return null;
+        return new UnknownRecord(string.Empty);
     }
 }

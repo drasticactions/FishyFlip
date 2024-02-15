@@ -32,12 +32,21 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
     /// </summary>
     /// <param name="options"><see cref="ATWebSocketProtocolOptions"/>.</param>
-    internal ATWebSocketProtocol(ATWebSocketProtocolOptions options)
+    public ATWebSocketProtocol(ATWebSocketProtocolOptions options)
     {
         this.logger = options.Logger;
         this.instanceUri = options.Url;
         this.client = new ClientWebSocket();
     }
+
+    /// <summary>
+    /// Event triggered when a record is received.
+    /// </summary>
+    /// <remarks>
+    /// This event is used to notify subscribers when a new record is received.
+    /// The subscribers can be any component that needs to perform an action when a new record arrives.
+    /// </remarks>
+    public event EventHandler<RecordMessageReceivedEventArgs>? OnRecordReceived;
 
     /// <summary>
     /// On Connection Updated.
@@ -213,6 +222,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             if (blockObj["$type"] is not null)
                             {
                                 message.Record = ATRecord.FromCBORObject(blockObj, this.logger);
+                                this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
                             }
                             else if (blockObj["sig"] is not null)
                             {
