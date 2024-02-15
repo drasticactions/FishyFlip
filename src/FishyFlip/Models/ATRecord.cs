@@ -67,9 +67,11 @@ public abstract class ATRecord
                     return new Block(blockObj);
                 case Constants.ActorTypes.Profile:
                     return new Profile(blockObj);
+                case Constants.FeedType.ThreadGate:
+                    return new ThreadGate(blockObj);
                 default:
                     logger?.LogDebug($"Unknown type: {blockObj["$type"].AsString()}");
-                    return null;
+                    return new UnknownRecord(blockObj["$type"].AsString());
             }
         }
 

@@ -202,6 +202,7 @@ public static class Constants
         public const string Like = "app.bsky.feed.like";
         public const string Repost = "app.bsky.feed.repost";
         public const string Post = "app.bsky.feed.post";
+        public const string ThreadGate = "app.bsky.feed.threadgate";
     }
 
     public static class ModerationReasons
