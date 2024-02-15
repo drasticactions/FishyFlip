@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip;
+namespace FishyFlip.Models;
 
 /// <summary>
 /// Represents a record for a list item.
@@ -17,6 +17,7 @@ public class ListItemRecord : ATRecord
     /// <param name="createdAt">The creation date and time of the list item.</param>
     [JsonConstructor]
     public ListItemRecord(ATDid subject, ATUri list, DateTime? createdAt)
+        : base(Constants.GraphTypes.ListItem)
     {
         this.Subject = subject;
         this.List = list;

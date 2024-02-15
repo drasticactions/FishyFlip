@@ -37,7 +37,7 @@ public class BlobRecord : ATRecord
     /// Gets or sets the reference to the blob.
     /// </summary>
     [JsonPropertyName("ref")]
-    public Cid? Ref { get; set; }
+    public ATCid? Ref { get; set; }
 
     /// <summary>
     /// Converts the blob record to an image.

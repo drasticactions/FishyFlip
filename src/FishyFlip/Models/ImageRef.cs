@@ -14,7 +14,7 @@ public class ImageRef
     /// </summary>
     /// <param name="link">The link to the image.</param>
     [JsonConstructor]
-    public ImageRef(Cid? link)
+    public ImageRef(ATCid? link)
     {
         this.Link = link;
     }
@@ -32,5 +32,5 @@ public class ImageRef
     /// Gets or sets the link to the image.
     /// </summary>
     [JsonPropertyName("$link")]
-    public Cid? Link { get; set; }
+    public ATCid? Link { get; set; }
 }

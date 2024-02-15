@@ -15,7 +15,7 @@ public class FrameRepoOp
     /// <param name="obj">The CBOR object containing the operation data.</param>
     public FrameRepoOp(CBORObject obj)
     {
-        this.Cid = obj["cid"] is not null ? Cid.Decode(obj["cid"].AsString()) : null;
+        this.Cid = obj["cid"] is not null ? Ipfs.Cid.Decode(obj["cid"].AsString()).ToString() : null;
         this.Path = obj["path"]?.AsString();
         this.Action = obj["action"]?.AsString();
     }
@@ -23,7 +23,7 @@ public class FrameRepoOp
     /// <summary>
     /// Gets the CID associated with the operation.
     /// </summary>
-    public Cid? Cid { get; }
+    public ATCid? Cid { get; }
 
     /// <summary>
     /// Gets the path associated with the operation.

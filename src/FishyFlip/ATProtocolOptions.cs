@@ -14,7 +14,7 @@ public class ATProtocolOptions
     /// </summary>
     public ATProtocolOptions()
     {
-        // HACK: Decodes a message to load the default Cid protocols.
+        // HACK: Decodes a message to load the default ATCid protocols.
         Cid.Decode("bafyreiezjt5bqt2xpcdfvisud7jrd4zuxygz4ssnuge3ddjcoptanvcnsa");
         this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
         this.Url = new Uri("https://bsky.social");
@@ -30,7 +30,7 @@ public class ATProtocolOptions
                 new AtDidJsonConverter(),
                 new EmbedConverter(),
                 new ATRecordJsonConverter(),
-                new CidConverter(),
+                new ATCidConverter(),
             },
         };
 

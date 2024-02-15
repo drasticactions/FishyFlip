@@ -5,10 +5,10 @@
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Represents a result that can either contain a value of type <typeparamref name="T"/> or an error of type <see cref="Error"/>.
+/// Represents a result that can either contain a value of type <typeparamref name="T"/> or an atError of type <see cref="ATError"/>.
 /// </summary>
 /// <typeparam name="T">The type of the value.</typeparam>
-public class Result<T> : Multiple<T, Error>
+public class Result<T> : Multiple<T, ATError>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Result{T}"/> class.
@@ -24,12 +24,12 @@ public class Result<T> : Multiple<T, Error>
     /// Initializes a new instance of the <see cref="Result{T}"/> class.
     /// </summary>
     /// <param name="value">Represents the type of value.</param>
-    private Result(Error? value)
+    private Result(ATError? value)
         : base(1, default, value)
     {
     }
 
     public static implicit operator Result<T?>(T? t) => new(t);
 
-    public static implicit operator Result<T?>(Error? t) => new(t);
+    public static implicit operator Result<T?>(ATError? t) => new(t);
 }

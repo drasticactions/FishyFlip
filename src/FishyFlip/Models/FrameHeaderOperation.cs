@@ -20,7 +20,7 @@ public enum FrameHeaderOperation
     Frame = 1,
 
     /// <summary>
-    /// Error frame.
+    /// ATError frame.
     /// </summary>
     Error = -1,
 }

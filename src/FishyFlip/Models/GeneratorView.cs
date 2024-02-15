@@ -7,4 +7,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a view of a generator.
 /// </summary>
-public record GeneratorView(ATUri Uri, Cid Cid, ATDid Did, string Avatar, int LikeCount, string DisplayName, string Description, ActorProfile Creator, Viewer Viewer, DateTime IndexedAt);
+public record GeneratorView(ATUri Uri, ATCid Cid, ATDid Did, string Avatar, int LikeCount, string DisplayName, string Description, ActorProfile Creator, Viewer Viewer, DateTime IndexedAt);

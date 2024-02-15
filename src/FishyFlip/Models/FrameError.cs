@@ -5,27 +5,27 @@
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Frame error.
+/// Frame atError.
 /// </summary>
 public class FrameError
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameError"/> class.
     /// </summary>
-    /// <param name="obj">The CBOR object containing the error information.</param>
+    /// <param name="obj">The CBOR object containing the atError information.</param>
     public FrameError(CBORObject obj)
     {
-        this.Error = obj["error"].AsString();
+        this.Error = obj["atError"].AsString();
         this.Message = obj["message"].AsString();
     }
 
     /// <summary>
-    /// Gets the error.
+    /// Gets the atError.
     /// </summary>
     public string? Error { get; }
 
     /// <summary>
-    /// Gets the error.
+    /// Gets the atError.
     /// </summary>
     public string? Message { get; }
 }

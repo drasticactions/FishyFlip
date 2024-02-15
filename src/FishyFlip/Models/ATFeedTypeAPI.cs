@@ -15,7 +15,7 @@ public abstract class ATFeedTypeAPI
     /// <param name="uri">The URI of the feed type.</param>
     /// <param name="cid">The CID of the feed type.</param>
     [JsonConstructor]
-    public ATFeedTypeAPI(ATUri? uri, Cid? cid)
+    public ATFeedTypeAPI(ATUri? uri, ATCid? cid)
     {
         this.Uri = uri;
         this.Cid = cid;
@@ -29,5 +29,5 @@ public abstract class ATFeedTypeAPI
     /// <summary>
     /// Gets the CID.
     /// </summary>
-    public Cid? Cid { get; }
+    public ATCid? Cid { get; }
 }

@@ -15,16 +15,16 @@ public class CreatePostResponse
     /// <param name="uri">The Post URI.</param>
     /// <param name="cid">The reference to the post.</param>
     [JsonConstructor]
-    public CreatePostResponse(ATUri? uri, Cid? cid)
+    public CreatePostResponse(ATUri? uri, ATCid? cid)
     {
         this.Cid = cid;
         this.Uri = uri;
     }
 
     /// <summary>
-    /// Gets the Cid of the created post.
+    /// Gets the ATCid of the created post.
     /// </summary>
-    public Cid? Cid { get; }
+    public ATCid? Cid { get; }
 
     /// <summary>
     /// Gets the Uri of the created post.

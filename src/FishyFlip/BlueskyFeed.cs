@@ -42,7 +42,7 @@ public sealed class BlueskyFeed
             url += $"&depth={depth}";
         }
 
-        Multiple<ThreadPostViewFeed?, Error> result = await this.Client.Get<ThreadPostViewFeed>(url, this.Options.SourceGenerationContext.ThreadPostViewFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<ThreadPostViewFeed?, ATError> result = await this.Client.Get<ThreadPostViewFeed>(url, this.Options.SourceGenerationContext.ThreadPostViewFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<ThreadPostViewFeed>>(
                 timeline => timeline!,
@@ -61,7 +61,7 @@ public sealed class BlueskyFeed
     public async Task<Result<RepostedFeed>> GetRepostedByAsync(
     ATUri uri,
     int limit = 50,
-    Cid? cid = default,
+    ATCid? cid = default,
     string? cursor = default,
     CancellationToken cancellationToken = default)
     {
@@ -77,7 +77,7 @@ public sealed class BlueskyFeed
             url += $"&cursor={cursor}";
         }
 
-        Multiple<RepostedFeed?, Error> result = await this.Client.Get<RepostedFeed>(url, this.Options.SourceGenerationContext.RepostedFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<RepostedFeed?, ATError> result = await this.Client.Get<RepostedFeed>(url, this.Options.SourceGenerationContext.RepostedFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<RepostedFeed>>(
                 timeline => (timeline ?? new RepostedFeed(Array.Empty<FeedProfile>(), null))!,
@@ -93,7 +93,7 @@ public sealed class BlueskyFeed
     /// <param name="cursor">Optional. A cursor that can be used to paginate through likes.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the likes of the post, or null if no likes were found.</returns>
-    public async Task<Result<LikesFeed>> GetLikesAsync(ATUri uri, int limit = 50, Cid? cid = default, string? cursor = default, CancellationToken cancellationToken = default)
+    public async Task<Result<LikesFeed>> GetLikesAsync(ATUri uri, int limit = 50, ATCid? cid = default, string? cursor = default, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetLikes}?uri={uri.ToString()}&limit={limit}";
 
@@ -107,7 +107,7 @@ public sealed class BlueskyFeed
             url += $"&cursor={cursor}";
         }
 
-        Multiple<LikesFeed?, Error> result = await this.Client.Get<LikesFeed>(url, this.Options.SourceGenerationContext.LikesFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<LikesFeed?, ATError> result = await this.Client.Get<LikesFeed>(url, this.Options.SourceGenerationContext.LikesFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<LikesFeed>>(
                 timeline => (timeline ?? new LikesFeed(Array.Empty<Like>(), null))!,
@@ -125,7 +125,7 @@ public sealed class BlueskyFeed
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetListFeed}?list={uri.ToString()}&limit={limit}";
 
-        Multiple<ListFeed?, Error> result = await this.Client.Get<ListFeed>(url, this.Options.SourceGenerationContext.ListFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<ListFeed?, ATError> result = await this.Client.Get<ListFeed>(url, this.Options.SourceGenerationContext.ListFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<ListFeed>>(
                 timeline => (timeline ?? new ListFeed(Array.Empty<FeedViewPost>(), null))!,
@@ -148,7 +148,7 @@ public sealed class BlueskyFeed
             url += $"&cursor={cursor}";
         }
 
-        Multiple<Timeline?, Error> result = await this.Client.Get<Timeline>(url, this.Options.SourceGenerationContext.Timeline, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<Timeline?, ATError> result = await this.Client.Get<Timeline>(url, this.Options.SourceGenerationContext.Timeline, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<Timeline>>(
                 authorFeed => (authorFeed ?? new Timeline(Array.Empty<FeedViewPost>(), null))!,
@@ -171,7 +171,7 @@ public sealed class BlueskyFeed
             url += $"&cursor={cursor}";
         }
 
-        Multiple<Timeline?, Error> result = await this.Client.Get<Timeline>(url, this.Options.SourceGenerationContext.Timeline, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<Timeline?, ATError> result = await this.Client.Get<Timeline>(url, this.Options.SourceGenerationContext.Timeline, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<Timeline>>(
                 authorFeed => (authorFeed ?? new Timeline(Array.Empty<FeedViewPost>(), null))!,
@@ -188,7 +188,7 @@ public sealed class BlueskyFeed
     {
         var answer = string.Join("&", query.Select(n => $"uris={n}"));
         string url = $"{Constants.Urls.Bluesky.Feed.GetPosts}?{answer}";
-        Multiple<PostCollection?, Error> result = await this.Client.Get<PostCollection>(url, this.Options.SourceGenerationContext.PostCollection, this.Options.JsonSerializerOptions, cancellationToken);
+        Multiple<PostCollection?, ATError> result = await this.Client.Get<PostCollection>(url, this.Options.SourceGenerationContext.PostCollection, this.Options.JsonSerializerOptions, cancellationToken);
         return result
             .Match<Result<PostCollection>>(
                 timeline => (timeline ?? new PostCollection(new PostView[0]))!,
@@ -211,7 +211,7 @@ public sealed class BlueskyFeed
             url += $"&cursor={cursor}";
         }
 
-        Multiple<Timeline?, Error> result = await this.Client.Get<Timeline>(url, this.Options.SourceGenerationContext.Timeline, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<Timeline?, ATError> result = await this.Client.Get<Timeline>(url, this.Options.SourceGenerationContext.Timeline, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<Timeline>>(
                 timeline => (timeline ?? new Timeline(Array.Empty<FeedViewPost>(), null))!,
@@ -234,7 +234,7 @@ public sealed class BlueskyFeed
             url += $"&cursor={cursor}";
         }
 
-        Multiple<FeedPostList?, Error> result = await this.Client.Get<FeedPostList>(url, this.Options.SourceGenerationContext.FeedPostList, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<FeedPostList?, ATError> result = await this.Client.Get<FeedPostList>(url, this.Options.SourceGenerationContext.FeedPostList, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<FeedPostList>>(
                 timeline => (timeline ?? new FeedPostList(Array.Empty<FeedViewPost>(), null))!,
@@ -251,7 +251,7 @@ public sealed class BlueskyFeed
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetFeedGenerator}?feed={uri}";
 
-        Multiple<FeedGeneratorRecord?, Error> result = await this.Client.Get<FeedGeneratorRecord>(url, this.Options.SourceGenerationContext.FeedGeneratorRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        Multiple<FeedGeneratorRecord?, ATError> result = await this.Client.Get<FeedGeneratorRecord>(url, this.Options.SourceGenerationContext.FeedGeneratorRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         return result
             .Match<Result<FeedGeneratorRecord>>(
                 timeline => timeline!,

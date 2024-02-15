@@ -2,8 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Org.BouncyCastle.Ocsp;
-
 namespace FishyFlip.Models;
 
 /// <summary>

@@ -14,7 +14,7 @@ public class CarProgressStatusEvent
     /// </summary>
     /// <param name="cid">The car ID.</param>
     /// <param name="bytes">The progress status bytes.</param>
-    public CarProgressStatusEvent(Cid cid, byte[] bytes)
+    public CarProgressStatusEvent(ATCid cid, byte[] bytes)
     {
         this.Cid = cid;
         this.Bytes = bytes;
@@ -28,5 +28,5 @@ public class CarProgressStatusEvent
     /// <summary>
     /// Gets the car ID.
     /// </summary>
-    public Cid Cid { get; }
+    public ATCid Cid { get; }
 }

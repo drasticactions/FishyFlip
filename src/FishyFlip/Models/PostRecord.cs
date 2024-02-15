@@ -16,7 +16,7 @@ public class PostRecord : ATFeedTypeAPI
     /// <param name="uri">The URI of the post.</param>
     /// <param name="cid">The CID of the post.</param>
     [JsonConstructor]
-    public PostRecord(Post? value, ATUri? uri, Cid? cid)
+    public PostRecord(Post? value, ATUri? uri, ATCid? cid)
         : base(uri, cid)
     {
         this.Value = value;

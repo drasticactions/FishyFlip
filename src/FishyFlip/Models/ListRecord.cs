@@ -8,6 +8,6 @@ namespace FishyFlip.Models;
 /// Represents a record that contains information about a list.
 /// </summary>
 /// <param name="Uri">The URI of the list.</param>
-/// <param name="Cid">The CID of the list.</param>
+/// <param name="ATCid">The CID of the list.</param>
 /// <param name="Value">The value of the list record.</param>
-public record ListRecord(ATUri? Uri, Cid? Cid, ATRecord? Value);
+public record ListRecord(ATUri? Uri, ATCid? ATCid, ATRecord? Value);

@@ -18,8 +18,8 @@ public class FrameFooter
     {
         this.Did = ATDid.Create(obj["did"].AsString());
         this.Version = obj["version"].AsInt32();
-        this.Prev = obj["prev"].ToCid(logger);
-        this.Data = obj["data"].ToCid(logger);
+        this.Prev = obj["prev"].ToATCid(logger);
+        this.Data = obj["data"].ToATCid(logger);
         this.Sig = obj["sig"].GetByteString();
     }
 
@@ -36,12 +36,12 @@ public class FrameFooter
     /// <summary>
     /// Gets the previous CID of the frame footer.
     /// </summary>
-    public Cid? Prev { get; }
+    public ATCid? Prev { get; }
 
     /// <summary>
     /// Gets the data CID of the frame footer.
     /// </summary>
-    public Cid? Data { get; }
+    public ATCid? Data { get; }
 
     /// <summary>
     /// Gets the signature of the frame footer.

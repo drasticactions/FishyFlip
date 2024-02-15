@@ -30,7 +30,7 @@ public class Like : ATRecord
     /// <param name="logger">The logger to use for logging.</param>
     public Like(CBORObject obj, ILogger? logger = default)
     {
-        var cid = obj["subject"]["cid"].ToCid(logger);
+        var cid = obj["subject"]["cid"].ToATCid(logger);
         var uri = new ATUri(obj["subject"]["uri"].AsString());
         this.Subject = new Subject(cid, uri);
         this.CreatedAt = obj["createdAt"].ToDateTime();

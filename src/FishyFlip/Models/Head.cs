@@ -7,4 +7,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents the head of a repo.
 /// </summary>
-public record Head(Cid? Root);
+public record Head(ATCid? Root);

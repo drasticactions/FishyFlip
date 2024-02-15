@@ -15,7 +15,7 @@ public delegate void OnCarDecoded(CarProgressStatusEvent e);
 /// </summary>
 public static class CarDecoder
 {
-    private const int CidV1BytesLength = 36;
+    private const int ATCidV1BytesLength = 36;
     private const int BufferSize = 32768;
 
     /// <summary>
@@ -40,12 +40,12 @@ public static class CarDecoder
 
             start += body.Length;
 
-            var cidBytes = bytes[start..(start + CidV1BytesLength)];
+            var cidBytes = bytes[start..(start + ATCidV1BytesLength)];
             var cid = Cid.Read(cidBytes);
 
-            start += CidV1BytesLength;
-            var bs = bytes[start..(start + body.Value - CidV1BytesLength)];
-            start += body.Value - CidV1BytesLength;
+            start += ATCidV1BytesLength;
+            var bs = bytes[start..(start + body.Value - ATCidV1BytesLength)];
+            start += body.Value - ATCidV1BytesLength;
             progress?.Invoke(new CarProgressStatusEvent(cid, bs));
         }
     }
@@ -79,14 +79,14 @@ public static class CarDecoder
             start += body.Length;
 
             // System.Diagnostics.Debug.WriteLine($"body: Value: {body.Value} - Length: {body.Length} - Start: {start}");
-            byte[] cidBuffer = new byte[CidV1BytesLength];
-            await stream.ReadExactlyAsync(cidBuffer, 0, CidV1BytesLength);
+            byte[] cidBuffer = new byte[ATCidV1BytesLength];
+            await stream.ReadExactlyAsync(cidBuffer, 0, ATCidV1BytesLength);
             var cid = Cid.Read(cidBuffer);
-            totalBytesRead += CidV1BytesLength;
+            totalBytesRead += ATCidV1BytesLength;
 
             // System.Diagnostics.Debug.WriteLine($"cidBytes: {cidBuffer.Length}  - total: {totalBytesRead}");
-            byte[] bodyBuffer = new byte[body.Value - CidV1BytesLength];
-            await stream.ReadExactlyAsync(bodyBuffer, 0, body.Value - CidV1BytesLength);
+            byte[] bodyBuffer = new byte[body.Value - ATCidV1BytesLength];
+            await stream.ReadExactlyAsync(bodyBuffer, 0, body.Value - ATCidV1BytesLength);
             totalBytesRead += bodyBuffer.Length;
 
             // System.Diagnostics.Debug.WriteLine($"bs: {bodyBuffer.Length}  - total: {totalBytesRead}");

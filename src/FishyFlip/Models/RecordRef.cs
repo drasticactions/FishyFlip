@@ -7,4 +7,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a reference to a record.
 /// </summary>
-public record RecordRef(Cid Cid, ATUri Uri);
+public record RecordRef(ATCid Cid, ATUri Uri);

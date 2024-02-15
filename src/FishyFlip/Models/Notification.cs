@@ -13,4 +13,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a notification.
 /// </summary>
-public record Notification(ATUri Uri, Cid Cid, string Reason, bool IsRead, DateTime IndexedAt, IReadOnlyList<Label> Labels, ATRecord? Record, FeedProfile Author);
+public record Notification(ATUri Uri, ATCid Cid, string Reason, bool IsRead, DateTime IndexedAt, IReadOnlyList<Label> Labels, ATRecord? Record, FeedProfile Author);

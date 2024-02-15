@@ -15,7 +15,7 @@ public class RepoStrongRef
     /// <param name="uri">The URI of the repository.</param>
     /// <param name="cid">The CID (Content Identifier) of the repository.</param>
     [JsonConstructor]
-    public RepoStrongRef(ATUri uri, Cid? cid)
+    public RepoStrongRef(ATUri uri, ATCid? cid)
     {
         this.Uri = uri;
         this.Cid = cid;
@@ -30,7 +30,7 @@ public class RepoStrongRef
     /// <summary>
     /// Gets the CID (Content Identifier) of the repository.
     /// </summary>
-    public Cid? Cid { get; }
+    public ATCid? Cid { get; }
 
     /// <summary>
     /// Gets the type of the repository strong reference.

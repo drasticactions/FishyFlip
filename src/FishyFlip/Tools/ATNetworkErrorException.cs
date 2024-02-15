@@ -5,7 +5,7 @@
 namespace FishyFlip.Tools;
 
 /// <summary>
-/// AT Network Error Exception.
+/// AT Network ATError Exception.
 /// Thrown if given a failed result from ATProtocol.
 /// </summary>
 public class ATNetworkErrorException : Exception
@@ -13,15 +13,15 @@ public class ATNetworkErrorException : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ATNetworkErrorException"/> class.
     /// </summary>
-    /// <param name="error">Error message.</param>
-    public ATNetworkErrorException(Error error)
-        : base($"{error.StatusCode}: {error.Detail}")
+    /// <param name="atError">ATError message.</param>
+    public ATNetworkErrorException(ATError atError)
+        : base($"{atError.StatusCode}: {atError.Detail}")
     {
-        this.Error = error;
+        this.AtError = atError;
     }
 
     /// <summary>
-    /// Gets the base error.
+    /// Gets the base atError.
     /// </summary>
-    public Error Error { get; }
+    public ATError AtError { get; }
 }

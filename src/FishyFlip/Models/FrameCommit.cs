@@ -20,11 +20,11 @@ public class FrameCommit
         this.Seq = obj["seq"].AsInt32();
         this.Blocks = obj["blocks"]?.GetByteString();
 #pragma warning disable CS0618
-        this.Prev = obj["prev"]?.ToCid(logger);
+        this.Prev = obj["prev"]?.ToATCid(logger);
 #pragma warning restore CS0618
         this.Rev = obj["rev"]?.ToRawString();
         this.Since = obj["since"]?.ToRawString();
-        this.Commit = obj["commit"].ToCid(logger);
+        this.Commit = obj["commit"].ToATCid(logger);
         this.Repo = obj["repo"] is not null ? ATDid.Create(obj["repo"].AsString()) : null;
         this.Handle = obj["handle"] is not null ? ATHandle.Create(obj["handle"].AsString()) : null;
         this.Rebase = obj["rebase"]?.AsBoolean() ?? false;
@@ -51,7 +51,7 @@ public class FrameCommit
     /// Gets the previous id.
     /// </summary>
     [Obsolete("Obsolete in the V3 Spec, use Rev instead.")]
-    public Cid? Prev { get; }
+    public ATCid? Prev { get; }
 
     /// <summary>
     /// Gets the rev.
@@ -81,7 +81,7 @@ public class FrameCommit
     /// <summary>
     /// Gets the commit.
     /// </summary>
-    public Cid? Commit { get; }
+    public ATCid? Commit { get; }
 
     /// <summary>
     /// Gets a value indicating whether this is a rebase.

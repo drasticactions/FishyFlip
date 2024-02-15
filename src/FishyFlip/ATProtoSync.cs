@@ -28,10 +28,10 @@ public sealed class ATProtoSync
     /// Get a Blob.
     /// </summary>
     /// <param name="did"><see cref="ATDid"/>.</param>
-    /// <param name="cid"><see cref="Cid"/>.</param>
+    /// <param name="cid"><see cref="ATCid"/>.</param>
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>Result of Blob.</returns>
-    public async Task<Result<Blob?>> GetBlobAsync(ATDid did, Cid cid, CancellationToken cancellationToken = default)
+    public async Task<Result<Blob?>> GetBlobAsync(ATDid did, ATCid cid, CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.ATProtoSync.GetBlob}?did={did}&cid={cid}";
         return await this.Client.GetBlob(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
@@ -130,12 +130,12 @@ public sealed class ATProtoSync
     /// Get Commit Path.
     /// </summary>
     /// <param name="did">Actor ATDid.</param>
-    /// <param name="latest">Latest Cid Commit.</param>
-    /// <param name="earliest">Earliest Cid Commit.</param>
+    /// <param name="latest">Latest ATCid Commit.</param>
+    /// <param name="earliest">Earliest ATCid Commit.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>result of CommitPath.</returns>
     [Obsolete("Deprecated in Repo V3. This should no longer work.")]
-    public async Task<Result<CommitPath?>> GetCommitPathAsync(ATDid did, Cid? latest = default, Cid? earliest = default, CancellationToken cancellationToken = default)
+    public async Task<Result<CommitPath?>> GetCommitPathAsync(ATDid did, ATCid? latest = default, ATCid? earliest = default, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetCommitPath}&did={did}";
         if (latest is not null)
@@ -155,11 +155,11 @@ public sealed class ATProtoSync
     /// Get Blocks.
     /// </summary>
     /// <param name="did">Actor ATDid.</param>
-    /// <param name="commits">Array of Cid Commits.</param>
+    /// <param name="commits">Array of ATCid Commits.</param>
     /// <param name="onDecoded">OnCarDecoded callback.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Blocks.</returns>
-    public Task<Result<Success?>> GetBlocksAsync(ATDid did, Cid[] commits, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+    public Task<Result<Success?>> GetBlocksAsync(ATDid did, ATCid[] commits, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
     {
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
         var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&{commitList}";
@@ -176,12 +176,12 @@ public sealed class ATProtoSync
     /// Download Blocks as CAR file.
     /// </summary>
     /// <param name="did">Actor ATDid.</param>
-    /// <param name="commits">Array of Cid Commits.</param>
+    /// <param name="commits">Array of ATCid Commits.</param>
     /// <param name="path">Path to file.</param>
     /// <param name="filename">Filename.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Blocks.</returns>
-    public Task<Result<Success?>> DownloadBlocksAsync(ATDid did, Cid[] commits, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
+    public Task<Result<Success?>> DownloadBlocksAsync(ATDid did, ATCid[] commits, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
         var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&{commitList}";
@@ -201,11 +201,11 @@ public sealed class ATProtoSync
     /// </summary>
     /// <param name="did">Actor ATDid.</param>
     /// <param name="onDecoded">OnCarDecoded callback.</param>
-    /// <param name="commit">Cid Commit.</param>
+    /// <param name="commit">ATCid Commit.</param>
     /// <param name="cancellationToken">Optional Cancellation token.</param>
     /// <returns>Result of success.</returns>
     [Obsolete("Deprecated in favor of GetRepo")]
-    public Task<Result<Success?>> GetCheckoutAsync(ATDid did, OnCarDecoded onDecoded, Cid? commit = default, CancellationToken cancellationToken = default)
+    public Task<Result<Success?>> GetCheckoutAsync(ATDid did, OnCarDecoded onDecoded, ATCid? commit = default, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={did}";
         if (commit is not null)
@@ -230,7 +230,7 @@ public sealed class ATProtoSync
     /// <param name="filename">Filename.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Result of success.</returns>
-    public Task<Result<Success?>> DownloadCheckoutAsync(ATDid did, Cid? commit = default, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
+    public Task<Result<Success?>> DownloadCheckoutAsync(ATDid did, ATCid? commit = default, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={did}";
         if (commit is not null)
@@ -254,7 +254,7 @@ public sealed class ATProtoSync
     /// <param name="commit">Commit.</param>
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>Result of success.</returns>
-    public Task<Result<Success?>> GetRecordAsync(string collection, ATDid repo, string rkey, OnCarDecoded onDecoded, Cid? commit = default, CancellationToken cancellationToken = default)
+    public Task<Result<Success?>> GetRecordAsync(string collection, ATDid repo, string rkey, OnCarDecoded onDecoded, ATCid? commit = default, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={repo}&rkey={rkey}";
         if (commit is not null)
@@ -285,7 +285,7 @@ public sealed class ATProtoSync
         string collection,
         ATDid repo,
         string rkey,
-        Cid? commit = default,
+        ATCid? commit = default,
         string? path = default,
         string? filename = default,
         CancellationToken cancellationToken = default)
@@ -337,7 +337,7 @@ public sealed class ATProtoSync
     /// <param name="since">Optional revision of the repo to list blobs since.</param>
     /// <param name="cursor">Optional Cursor. Used to continue response.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
-    /// <returns>Result of Cids.</returns>
+    /// <returns>Result of ATCids.</returns>
     public async Task<Result<ListBlobs?>> ListBlobsAsync(ATDid repo, int limit = 500, string? since = default, string? cursor = default, CancellationToken cancellationToken = default)
     {
         var url = Constants.Urls.ATProtoSync.ListBlobs + $"?did={repo}&limit={limit}";

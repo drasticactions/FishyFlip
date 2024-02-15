@@ -33,7 +33,7 @@ public sealed class ATProtoModeration
     /// <param name="reason">The reason for the moderation report. This is optional.</param>
     /// <param name="cancellationToken">A token that may be used to cancel the operation. This is optional.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{ModerationRecord}"/> that represents the moderation record.</returns>
-    public Task<Result<ModerationRecord?>> CreateModerationReportPostAsync(ModerationReasonType reasonType, ATUri uri, Cid cid, string? reason = default, CancellationToken cancellationToken = default)
+    public Task<Result<ModerationRecord?>> CreateModerationReportPostAsync(ModerationReasonType reasonType, ATUri uri, ATCid cid, string? reason = default, CancellationToken cancellationToken = default)
     {
         return this.Client.Post<CreateModerationReportPost, ModerationRecord?>(
                        Constants.Urls.ATProtoModeration.CreateReport,

@@ -7,4 +7,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a reference to a repository.
 /// </summary>
-public record RepoRef(ATDid? Did, Cid? Head);
+public record RepoRef(ATDid? Did, ATCid? Head);

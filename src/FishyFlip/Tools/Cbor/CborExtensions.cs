@@ -10,12 +10,12 @@ namespace FishyFlip.Tools.Cbor;
 internal static class CborExtensions
 {
     /// <summary>
-    /// CBOR to Cid.
+    /// CBOR to ATCid.
     /// </summary>
     /// <param name="obj">Nullable CBORobject.</param>
     /// <param name="logger">ILogger.</param>
-    /// <returns>Cid.</returns>
-    public static Cid? ToCid(this CBORObject? obj, ILogger? logger = default)
+    /// <returns>ATCid.</returns>
+    public static ATCid? ToATCid(this CBORObject? obj, ILogger? logger = default)
     {
         if (obj is null)
         {
@@ -40,7 +40,7 @@ internal static class CborExtensions
         }
         catch (Exception ex)
         {
-            logger?.LogError(ex, "Failed to convert to Cid.");
+            logger?.LogError(ex, "Failed to convert to ATCid.");
         }
 
         return null;
@@ -138,8 +138,8 @@ internal static class CborExtensions
             return null;
         }
 
-        var rootRef = new ReplyRef(root["cid"].ToCid()!, ATUri.Create(root["uri"].AsString()));
-        var parentRef = new ReplyRef(parent["cid"].ToCid()!, ATUri.Create(parent["uri"].AsString()));
+        var rootRef = new ReplyRef(root["cid"].ToATCid()!, ATUri.Create(root["uri"].AsString()));
+        var parentRef = new ReplyRef(parent["cid"].ToATCid()!, ATUri.Create(parent["uri"].AsString()));
         return new Reply(rootRef, parentRef);
     }
 }

@@ -7,4 +7,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a reference to a reply.
 /// </summary>
-public record ReplyRef(Cid Cid, ATUri Uri);
+public record ReplyRef(ATCid Cid, ATUri Uri);

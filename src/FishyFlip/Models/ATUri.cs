@@ -20,7 +20,7 @@ public class ATUri
     /// </summary>
     /// <param name="uri">The URI.</param>
     /// <exception cref="FormatException">Thrown if format is invalid.</exception>
-    internal ATUri(string uri)
+    public ATUri(string uri)
     {
         Match match = AtpUriRegex.Match(uri);
 

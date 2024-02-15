@@ -22,8 +22,10 @@ public class ThreadGateReason
     /// <summary>
     /// Initializes a new instance of the <see cref="ThreadGateReason"/> class.
     /// </summary>
-    public ThreadGateReason()
+    /// <param name="obj">CBorObject.</param>
+    public ThreadGateReason(CBORObject obj)
     {
+        this.Type = obj["$type"].AsString();
     }
 
     /// <summary>

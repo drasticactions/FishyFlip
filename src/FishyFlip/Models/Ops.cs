@@ -2,8 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Org.BouncyCastle.Ocsp;
-
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -18,14 +16,14 @@ public class Ops
     public Ops(CBORObject obj)
     {
         this.Action = obj["action"].AsString();
-        this.Cid = obj["cid"].ToCid();
+        this.Cid = obj["cid"].ToATCid();
         this.Path = obj["path"].AsString();
     }
 
     /// <summary>
     /// Gets or sets the CID.
     /// </summary>
-    public Cid? Cid { get; set; }
+    public ATCid? Cid { get; set; }
 
     /// <summary>
     /// Gets or sets the Path.

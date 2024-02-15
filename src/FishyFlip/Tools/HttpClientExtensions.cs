@@ -41,8 +41,8 @@ internal static class HttpClientExtensions
         using var message = await client.PostAsync(url, content, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
-            Error error = await CreateError(message!, options, cancellationToken, logger);
-            return error!;
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
@@ -81,8 +81,8 @@ internal static class HttpClientExtensions
         using var message = await client.PostAsync(url, body, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
-            Error error = await CreateError(message!, options, cancellationToken, logger);
-            return error!;
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
@@ -119,8 +119,8 @@ internal static class HttpClientExtensions
         using var message = await client.PostAsync(url, null, cancellationToken: cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
-            Error error = await CreateError(message!, options, cancellationToken, logger);
-            return error!;
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
@@ -154,8 +154,8 @@ internal static class HttpClientExtensions
         using var message = await client.GetAsync(url, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
-            Error error = await CreateError(message!, options, cancellationToken, logger);
-            return error!;
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
         }
 
         var blob = await message.Content.ReadAsByteArrayAsync(cancellationToken);
@@ -187,8 +187,8 @@ internal static class HttpClientExtensions
         using var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
-            Error error = await CreateError(message!, options, cancellationToken, logger);
-            return error!;
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
         }
 
         await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
@@ -221,8 +221,8 @@ internal static class HttpClientExtensions
         using var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
-            Error error = await CreateError(message!, options, cancellationToken, logger);
-            return error!;
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
         }
 
         var fileDownload = Path.Combine(filePath, StringExtensions.GenerateValidFilename(fileName));
@@ -258,8 +258,8 @@ internal static class HttpClientExtensions
         using var message = await client.GetAsync(url, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
-            Error error = await CreateError(message!, options, cancellationToken, logger);
-            return error!;
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
         }
 
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
@@ -272,29 +272,29 @@ internal static class HttpClientExtensions
         return JsonSerializer.Deserialize<T>(response, type);
     }
 
-    private static async Task<Error> CreateError(HttpResponseMessage message, JsonSerializerOptions options, CancellationToken cancellationToken, ILogger? logger = default)
+    private static async Task<ATError> CreateError(HttpResponseMessage message, JsonSerializerOptions options, CancellationToken cancellationToken, ILogger? logger = default)
     {
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
-        Error error;
+        ATError atError;
         ErrorDetail? detail = default;
         if (string.IsNullOrEmpty(response))
         {
-            error = new Error((int)message.StatusCode, detail);
+            atError = new ATError((int)message.StatusCode, detail);
         }
         else
         {
             try
             {
                 detail = JsonSerializer.Deserialize<ErrorDetail>(response, ((SourceGenerationContext)options.TypeInfoResolver!).ErrorDetail);
-                error = new Error((int)message.StatusCode, detail);
+                atError = new ATError((int)message.StatusCode, detail);
             }
             catch (Exception)
             {
-                error = new Error((int)message.StatusCode, null);
+                atError = new ATError((int)message.StatusCode, null);
             }
         }
 
-        logger?.LogError($"Error: {error.StatusCode} {error.Detail?.Error} {error.Detail?.Message}");
-        return error;
+        logger?.LogError($"ATError: {atError.StatusCode} {atError.Detail?.Error} {atError.Detail?.Message}");
+        return atError;
     }
 }

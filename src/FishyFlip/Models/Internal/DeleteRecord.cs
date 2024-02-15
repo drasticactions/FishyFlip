@@ -12,4 +12,4 @@ namespace FishyFlip.Models.Internal;
 /// <param name="Rkey">The key of the record to be deleted.</param>
 /// <param name="SwapRecord">The record to be swapped with the deleted record.</param>
 /// <param name="SwapCommit">The commit to be swapped with the deleted record's commit.</param>
-public record DeleteRecord(string Collection, string Repo, string Rkey, Cid? SwapRecord = null, Cid? SwapCommit = null);
+public record DeleteRecord(string Collection, string Repo, string Rkey, ATCid? SwapRecord = null, ATCid? SwapCommit = null);

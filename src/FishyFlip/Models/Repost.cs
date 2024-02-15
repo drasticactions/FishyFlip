@@ -17,7 +17,7 @@ public class Repost : ATRecord
     /// <param name="createdAt">The creation date and time of the repost.</param>
     /// <param name="type">The type of the repost.</param>
     [JsonConstructor]
-    public Repost(Cid? cid, ATUri? uri, DateTime? createdAt, string? type)
+    public Repost(ATCid? cid, ATUri? uri, DateTime? createdAt, string? type)
         : base(type)
     {
         this.Cid = cid;
@@ -32,7 +32,7 @@ public class Repost : ATRecord
     /// <param name="logger">The logger to use for logging.</param>
     public Repost(CBORObject obj, ILogger? logger = default)
     {
-        this.Cid = obj["subject"]["cid"].ToCid(logger);
+        this.Cid = obj["subject"]["cid"].ToATCid(logger);
         this.Uri = new ATUri(obj["subject"]["uri"].AsString());
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Type = Constants.FeedType.Repost;
@@ -41,7 +41,7 @@ public class Repost : ATRecord
     /// <summary>
     /// Gets the unique identifier of the repost.
     /// </summary>
-    public Cid? Cid { get; }
+    public ATCid? Cid { get; }
 
     /// <summary>
     /// Gets the URI of the repost.

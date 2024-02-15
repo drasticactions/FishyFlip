@@ -5,17 +5,17 @@
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Represents an error response body.
+/// Represents an atError response body.
 /// </summary>
 public class ErrorBody
 {
     /// <summary>
-    /// Gets or sets the error code.
+    /// Gets or sets the atError code.
     /// </summary>
     public string? Error { get; set; }
 
     /// <summary>
-    /// Gets or sets the error message.
+    /// Gets or sets the atError message.
     /// </summary>
     public string? Message { get; set; }
 }

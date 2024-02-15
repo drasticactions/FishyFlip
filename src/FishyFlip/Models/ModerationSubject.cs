@@ -23,7 +23,7 @@ public class ModerationSubject
     /// <param name="cid">The CID of the moderation subject.</param>
     /// <param name="did">The ATDID of the moderation subject.</param>
     [JsonConstructor]
-    public ModerationSubject(string type, string? uri, Cid? cid, ATDid? did)
+    public ModerationSubject(string type, string? uri, ATCid? cid, ATDid? did)
     {
         this.Uri = uri;
         this.Type = type;
@@ -44,7 +44,7 @@ public class ModerationSubject
     /// <summary>
     /// Gets the CID of the moderation subject.
     /// </summary>
-    public Cid? Cid { get; }
+    public ATCid? Cid { get; }
 
     /// <summary>
     /// Gets the type of the moderation subject.

@@ -37,7 +37,7 @@ public sealed class ATProtoRepo
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the reference to the created like record.</returns>
     public Task<Result<RecordRef>> CreateLikeAsync(
-      Cid cid,
+      ATCid cid,
       ATUri uri,
       DateTime? createdAt = null,
       CancellationToken cancellationToken = default)
@@ -59,7 +59,7 @@ public sealed class ATProtoRepo
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the reference to the created repost.</returns>
     public Task<Result<RecordRef>> CreateRepostAsync(
-       Cid cid,
+       ATCid cid,
        ATUri uri,
        DateTime? createdAt = null,
        CancellationToken cancellationToken = default)
@@ -215,7 +215,7 @@ public sealed class ATProtoRepo
     /// <param name="cid">The CID (Content Identifier) of the post.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved post record, or null if not found.</returns>
-    public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
+    public async Task<Result<PostRecord?>> GetPostAsync(ATIdentifier repo, string rkey, ATCid? cid = null, CancellationToken cancellationToken = default)
       => await this.GetRecordAsync<PostRecord>(Constants.FeedType.Post, this.Options.SourceGenerationContext.PostRecord, repo, rkey, cid, cancellationToken);
 
     /// <summary>
@@ -225,7 +225,7 @@ public sealed class ATProtoRepo
     /// <param name="cid">The CID of the actor record. If null, the latest record will be retrieved.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the actor record, or null if not found.</returns>
-    public async Task<Result<ActorRecord?>> GetActorAsync(ATIdentifier repo, Cid? cid = null, CancellationToken cancellationToken = default)
+    public async Task<Result<ActorRecord?>> GetActorAsync(ATIdentifier repo, ATCid? cid = null, CancellationToken cancellationToken = default)
         => await this.GetRecordAsync<ActorRecord>(Constants.ActorTypes.Profile, this.Options.SourceGenerationContext.ActorRecord, repo, "self", cid, cancellationToken);
 
     /// <summary>
@@ -256,7 +256,7 @@ public sealed class ATProtoRepo
     /// <param name="cid">Optional. The CID (Content Identifier) of the record. If specified, the method retrieves the record with this CID.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the retrieved record of type T, or null if the record was not found.</returns>
-    public async Task<Result<T?>> GetRecordAsync<T>(string collection, JsonTypeInfo<T> type, ATIdentifier repo, string rkey, Cid? cid = null, CancellationToken cancellationToken = default)
+    public async Task<Result<T?>> GetRecordAsync<T>(string collection, JsonTypeInfo<T> type, ATIdentifier repo, string rkey, ATCid? cid = null, CancellationToken cancellationToken = default)
         where T : ATFeedTypeAPI
     {
         string url = $"{Constants.Urls.ATProtoRepo.GetRecord}?collection={collection}&repo={repo}&rkey={rkey}";
@@ -290,8 +290,8 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteFollowAsync(
         string rkey,
-        Cid? swapRecord = null,
-        Cid? swapCommit = null,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.Follow, rkey, swapRecord, swapCommit, cancellationToken);
 
@@ -305,8 +305,8 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteBlockAsync(
         string rkey,
-        Cid? swapRecord = null,
-        Cid? swapCommit = null,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.Block, rkey, swapRecord, swapCommit, cancellationToken);
 
@@ -320,8 +320,8 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteLikeAsync(
         string rkey,
-        Cid? swapRecord = null,
-        Cid? swapCommit = null,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Like, rkey, swapRecord, swapCommit, cancellationToken);
 
@@ -335,8 +335,8 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeletePostAsync(
         string rkey,
-        Cid? swapRecord = null,
-        Cid? swapCommit = null,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Post, rkey, swapRecord, swapCommit, cancellationToken);
 
@@ -350,8 +350,8 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteRepostAsync(
         string rkey,
-        Cid? swapRecord = null,
-        Cid? swapCommit = null,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.FeedType.Repost, rkey, swapRecord, swapCommit, cancellationToken);
 
@@ -365,8 +365,8 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteListAsync(
         string rkey,
-        Cid? swapRecord = null,
-        Cid? swapCommit = null,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.List, rkey, swapRecord, swapCommit, cancellationToken);
 
@@ -380,8 +380,8 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
     public Task<Result<Success>> DeleteListItemAsync(
         string rkey,
-        Cid? swapRecord = null,
-        Cid? swapCommit = null,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
         CancellationToken cancellationToken = default)
         => this.DeleteRecordAsync(Constants.GraphTypes.ListItem, rkey, swapRecord, swapCommit, cancellationToken);
 
@@ -539,7 +539,7 @@ public sealed class ATProtoRepo
                     this.Options.Logger);
     }
 
-    private async Task<Result<Success>> DeleteRecordAsync(string collection, string rkey, Cid? swapRecord = null, Cid? swapCommit = null, CancellationToken cancellationToken = default)
+    private async Task<Result<Success>> DeleteRecordAsync(string collection, string rkey, ATCid? swapRecord = null, ATCid? swapCommit = null, CancellationToken cancellationToken = default)
     {
         DeleteRecord record = new(
             collection,

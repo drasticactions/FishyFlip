@@ -129,7 +129,7 @@ internal class SessionManager : IDisposable
         {
             if (this.session is not null)
             {
-                Multiple<Session, Error> result =
+                Multiple<Session, ATError> result =
                 await this.protocol.ThrowIfNull().Server.RefreshSessionAsync(this.session, CancellationToken.None);
 
                 result

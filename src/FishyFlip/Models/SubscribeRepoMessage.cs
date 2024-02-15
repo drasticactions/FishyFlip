@@ -35,7 +35,7 @@ public class SubscribeRepoMessage
     public ATRecord? Record { get; internal set; }
 
     /// <summary>
-    /// Gets the error of the message.
+    /// Gets the atError of the message.
     /// </summary>
     public FrameError? Error { get; internal set; }
 

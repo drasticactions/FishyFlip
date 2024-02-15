@@ -10,12 +10,12 @@ namespace FishyFlip.Models;
 public class Record
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Record"/> class with the specified Cid and Uri.
+    /// Initializes a new instance of the <see cref="Record"/> class with the specified ATCid and Uri.
     /// </summary>
-    /// <param name="cid">The Cid of the record.</param>
+    /// <param name="cid">The ATCid of the record.</param>
     /// <param name="uri">The Uri of the record.</param>
     [JsonConstructor]
-    public Record(Cid? cid, string? uri)
+    public Record(ATCid? cid, string? uri)
     {
         this.Cid = cid;
         this.Uri = uri;
@@ -27,14 +27,14 @@ public class Record
     /// <param name="obj">The CBORObject containing the record data.</param>
     public Record(CBORObject obj)
     {
-        this.Cid = obj["cid"].ToCid();
+        this.Cid = obj["cid"].ToATCid();
         this.Uri = obj["uri"].AsString();
     }
 
     /// <summary>
-    /// Gets the Cid of the record.
+    /// Gets the ATCid of the record.
     /// </summary>
-    public Cid? Cid { get; }
+    public ATCid? Cid { get; }
 
     /// <summary>
     /// Gets the Uri of the record.

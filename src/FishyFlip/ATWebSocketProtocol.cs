@@ -252,7 +252,7 @@ public sealed class ATWebSocketProtocol : IDisposable
             case FrameHeaderOperation.Error:
                 var frameError = new FrameError(objects[1]);
                 message.Error = frameError;
-                this.logger?.LogError($"WSS: Error: {frameError.Message}");
+                this.logger?.LogError($"WSS: ATError: {frameError.Message}");
                 this.CloseAsync(WebSocketCloseStatus.InternalServerError, frameError.Message ?? string.Empty).FireAndForgetSafeAsync(this.logger);
                 break;
             default:
@@ -288,7 +288,7 @@ public sealed class ATWebSocketProtocol : IDisposable
             }
             catch (Exception e)
             {
-                this.logger?.LogError(e, "WSS: Error receiving message.");
+                this.logger?.LogError(e, "WSS: ATError receiving message.");
             }
         }
     }

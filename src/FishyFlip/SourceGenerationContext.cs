@@ -59,7 +59,7 @@ namespace FishyFlip;
 [JsonSerializable(typeof(DescribeRepo))]
 [JsonSerializable(typeof(DescribeServer))]
 [JsonSerializable(typeof(Embed))]
-[JsonSerializable(typeof(Error))]
+[JsonSerializable(typeof(ATError))]
 [JsonSerializable(typeof(ErrorBody))]
 [JsonSerializable(typeof(ErrorDetail))]
 [JsonSerializable(typeof(External))]

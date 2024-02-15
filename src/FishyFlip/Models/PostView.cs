@@ -9,7 +9,7 @@ namespace FishyFlip.Models;
 /// </summary>
 public record PostView(
     ATUri Uri,
-    Cid Cid,
+    ATCid Cid,
     int ReplyCount,
     int RepostCount,
     int LikeCount,

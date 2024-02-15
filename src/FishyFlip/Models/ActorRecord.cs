@@ -14,9 +14,9 @@ public class ActorRecord : ATFeedTypeAPI
     /// </summary>
     /// <param name="value">The profile of the actor.</param>
     /// <param name="uri">The ATUri of the actor.</param>
-    /// <param name="cid">The Cid of the action.</param>
+    /// <param name="cid">The ATCid of the action.</param>
     [JsonConstructor]
-    public ActorRecord(Profile? value, ATUri? uri, Cid? cid)
+    public ActorRecord(Profile? value, ATUri? uri, ATCid? cid)
         : base(uri, cid)
     {
         this.Value = value;

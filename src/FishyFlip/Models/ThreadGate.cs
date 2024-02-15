@@ -29,7 +29,7 @@ public class ThreadGate : ATRecord
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Type = Constants.FeedType.ThreadGate;
         this.Post = new ATUri(obj["post"].AsString());
-        this.AllowedTypes = obj["allow"].Values.Select(n => new ThreadGateReason(n.AsString())).ToArray()!;
+        this.AllowedTypes = obj["allow"].Values.Select(n => new ThreadGateReason(n)).ToArray()!;
     }
 
     /// <summary>
