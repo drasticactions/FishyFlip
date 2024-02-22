@@ -18,7 +18,11 @@ namespace FishyFlip.Tools
         /// <exception cref="ArgumentNullException">Thrown when the provided object is null.</exception>
         internal static T ThrowIfNull<T>(this T? t)
         {
-            ArgumentNullException.ThrowIfNull(t);
+            if (t == null)
+            {
+                throw new ArgumentNullException(nameof(t));
+            }
+
             return t;
         }
     }

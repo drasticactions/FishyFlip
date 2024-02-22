@@ -52,7 +52,7 @@ internal static class HandleValidator
                 return false;
             }
 
-            if (l.EndsWith('-') || l.StartsWith('-'))
+            if (l.EndsWith("-") || l.StartsWith("-"))
             {
                 logger?.LogError("Handle parts can not start or end with hyphens");
                 return false;

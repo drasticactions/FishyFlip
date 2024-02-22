@@ -4,6 +4,7 @@
 
 using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
+using System.Net.Http;
 
 namespace FishyFlip.Tests;
 

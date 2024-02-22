@@ -45,7 +45,11 @@ internal static class HttpClientExtensions
             return atError!;
         }
 
+#if NETSTANDARD
+        string response = await message.Content.ReadAsStringAsync();
+#else
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+#endif
         if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
         {
             response = "{ }";
@@ -85,7 +89,11 @@ internal static class HttpClientExtensions
             return atError!;
         }
 
+#if NETSTANDARD
+        string response = await message.Content.ReadAsStringAsync();
+#else
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+#endif
         if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
         {
             response = "{ }";
@@ -123,7 +131,11 @@ internal static class HttpClientExtensions
             return atError!;
         }
 
+#if NETSTANDARD
+        string response = await message.Content.ReadAsStringAsync();
+#else
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+#endif
         if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
         {
             response = "{ }";
@@ -158,8 +170,13 @@ internal static class HttpClientExtensions
             return atError!;
         }
 
+#if NETSTANDARD
+        var blob = await message.Content.ReadAsByteArrayAsync();
+        string response = await message.Content.ReadAsStringAsync();
+#else
         var blob = await message.Content.ReadAsByteArrayAsync(cancellationToken);
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+#endif
 
         logger?.LogDebug($"GET BLOB {url}: {response}");
         return new Blob(blob);
@@ -191,7 +208,11 @@ internal static class HttpClientExtensions
             return atError!;
         }
 
+#if NETSTANDARD
+        using var stream = await message.Content.ReadAsStreamAsync();
+#else
         await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
+#endif
         await CarDecoder.DecodeCarAsync(stream, progress);
         return new Success();
     }
@@ -226,11 +247,17 @@ internal static class HttpClientExtensions
         }
 
         var fileDownload = Path.Combine(filePath, StringExtensions.GenerateValidFilename(fileName));
-        await using (var content = File.Create(fileDownload))
+#if NETSTANDARD
+        using var content = File.Create(fileDownload);
+        using var stream = await message.Content.ReadAsStreamAsync();
+        await stream.CopyToAsync(content);
+#else
+        await using (FileStream content = File.Create(fileDownload))
         {
             await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
             await stream.CopyToAsync(content, cancellationToken);
         }
+#endif
 
         return new Success();
     }
@@ -262,7 +289,11 @@ internal static class HttpClientExtensions
             return atError!;
         }
 
+#if NETSTANDARD
+        string response = await message.Content.ReadAsStringAsync();
+#else
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+#endif
         if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
         {
             response = "{ }";
@@ -274,7 +305,11 @@ internal static class HttpClientExtensions
 
     private static async Task<ATError> CreateError(HttpResponseMessage message, JsonSerializerOptions options, CancellationToken cancellationToken, ILogger? logger = default)
     {
+#if NETSTANDARD
+        string response = await message.Content.ReadAsStringAsync();
+#else
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
+#endif
         ATError atError;
         ErrorDetail? detail = default;
         if (string.IsNullOrEmpty(response))

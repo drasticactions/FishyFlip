@@ -280,6 +280,17 @@ public sealed class ATWebSocketProtocol : IDisposable
         {
             try
             {
+#if NETSTANDARD
+                var result =
+                    await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
+                if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
+                {
+                    continue;
+                }
+
+                byte[] newArray = new byte[result.Count];
+                Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+#else
                 var result =
                     await webSocket.ReceiveAsync(new Memory<byte>(receiveBuffer), token);
                 if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
@@ -289,6 +300,7 @@ public sealed class ATWebSocketProtocol : IDisposable
 
                 byte[] newArray = new byte[result.Count];
                 Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+#endif
 
                 Task.Run(() => this.HandleMessage(newArray)).FireAndForgetSafeAsync(this.logger);
             }

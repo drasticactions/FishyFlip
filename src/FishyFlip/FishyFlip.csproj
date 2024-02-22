@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net7.0;net8.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsPackable>true</IsPackable>
@@ -15,5 +15,10 @@
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 		<PackageReference Include="IpfsShipyard.Ipfs.Core" />
 		<PackageReference Include="PeterO.Cbor" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1'">
+		<PackageReference Include="System.Memory" />
+		<PackageReference Include="System.Memory.Data" />
+		<PackageReference Include="System.Text.Json" />
 	</ItemGroup>
 </Project>
