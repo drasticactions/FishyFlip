@@ -16,10 +16,11 @@ public class AuthorizedTests
     {
         string handle = Environment.GetEnvironmentVariable("BLUESKY_TEST_HANDLE") ?? throw new ArgumentNullException();
         string password = Environment.GetEnvironmentVariable("BLUESKY_TEST_PASSWORD") ?? throw new ArgumentNullException();
+        string instance = Environment.GetEnvironmentVariable("BLUESKY_INSTANCE_URL") ?? throw new ArgumentNullException();
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)
-            .WithInstanceUrl(new Uri("https://drasticactions.ninja"))
+            .WithInstanceUrl(new Uri(instance))
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
         this.proto = atProtocolBuilder.Build();
         this.proto.Server.CreateSessionAsync(handle, password).Wait();
@@ -259,6 +260,15 @@ public class AuthorizedTests
             {
                 Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
             });
+    }
+
+    [Fact]
+    public async Task CreatePostWithReplyAsyncTest()
+    {
+        var test = (await this.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, null, null, new[] { "en" })).HandleResult();
+        Assert.True(test!.Cid is not null);
+        var reply = (await this.proto.Repo.CreatePostAsync("CreatePostAsyncTestReply", new Reply(new ReplyRef(test!.Cid, test.Uri!), new ReplyRef(test!.Cid, test.Uri!)), null, null, new[] { "en" })).HandleResult();
+        Assert.True(reply!.Cid is not null);
     }
 
     [Fact]

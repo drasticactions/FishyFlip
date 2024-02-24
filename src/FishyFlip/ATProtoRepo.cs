@@ -135,11 +135,36 @@ public sealed class ATProtoRepo
         string? rkey = null,
         string? swapCommit = null,
         CancellationToken cancellationToken = default)
+        => this.CreatePostAsync(text, null, facets, embed, langs, createdAt, rkey, swapCommit, cancellationToken);
+
+    /// <summary>
+    /// Creates a post asynchronously.
+    /// </summary>
+    /// <param name="text">The text of the post.</param>
+    /// <param name="reply">The post to reply to.</param>
+    /// <param name="facets">The facets associated with the post.</param>
+    /// <param name="embed">The embed associated with the post.</param>
+    /// <param name="langs">The languages associated with the post.</param>
+    /// <param name="createdAt">The creation date of the post.</param>
+    /// <param name="rkey">The rkey associated with the post.</param>
+    /// <param name="swapCommit">The swap commit associated with the post.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the result of creating the post.</returns>
+    public Task<Result<CreatePostResponse>> CreatePostAsync(
+        string text,
+        Reply? reply,
+        Facet[]? facets = null,
+        Embed? embed = default,
+        string[]? langs = null,
+        DateTime? createdAt = null,
+        string? rkey = null,
+        string? swapCommit = null,
+        CancellationToken cancellationToken = default)
     {
         CreatePostRecord record = new(
             Constants.FeedType.Post,
             this.proto.SessionManager!.Session!.Did.ToString()!,
-            new Post(embed, facets, createdAt ?? DateTime.UtcNow, null, text, langs, Constants.FeedType.Post),
+            new Post(embed, facets, createdAt ?? DateTime.UtcNow, reply, text, langs, Constants.FeedType.Post),
             rkey,
             swapCommit);
         return this.CreateRecord<CreatePostRecord, CreatePostResponse>(record, this.Options.SourceGenerationContext.CreatePostRecord, this.Options.SourceGenerationContext.CreatePostResponse, cancellationToken);
