@@ -265,9 +265,9 @@ public class AuthorizedTests
     [Fact]
     public async Task CreatePostWithReplyAsyncTest()
     {
-        var test = (await this.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, null, null, new[] { "en" })).HandleResult();
+        (var test, var error) = await this.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, null, null, new[] { "en" });
         Assert.True(test!.Cid is not null);
-        var reply = (await this.proto.Repo.CreatePostAsync("CreatePostAsyncTestReply", new Reply(new ReplyRef(test!.Cid, test.Uri!), new ReplyRef(test!.Cid, test.Uri!)), null, null, new[] { "en" })).HandleResult();
+        (var reply, error) = await this.proto.Repo.CreatePostAsync("CreatePostAsyncTestReply", new Reply(new ReplyRef(test!.Cid, test.Uri!), new ReplyRef(test!.Cid, test.Uri!)), null, null, new[] { "en" });
         Assert.True(reply!.Cid is not null);
     }
 
