@@ -24,7 +24,7 @@
     <PackageVersion Include="System.Text.Json" Version="8.0.3" />
     <PackageVersion Include="xunit" Version="2.7.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.1" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
     <PackageVersion Include="PublishSPAforGitHubPages.Build" Version="2.1.0" />
     <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
