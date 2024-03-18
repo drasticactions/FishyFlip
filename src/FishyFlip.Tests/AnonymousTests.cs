@@ -4,25 +4,29 @@
 
 using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static FishyFlip.Tools.CarDecoder;
 
 namespace FishyFlip.Tests;
 
+[TestClass]
 public class AnonymousTests
 {
-    private ATProtocol proto;
+    static ATProtocol proto;
 
-    public AnonymousTests()
+    [ClassInitialize]
+    public static void ClassInitialize(TestContext context)
     {
+        string instance = (string?)context.Properties["BLUESKY_INSTANCE_URL"] ?? throw new ArgumentNullException();
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)
-            .WithInstanceUrl(new Uri("https://drasticactions.ninja"))
+            .WithInstanceUrl(new Uri(instance))
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
-        this.proto = atProtocolBuilder.Build();
+        AnonymousTests.proto = atProtocolBuilder.Build();
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetBlocksAsyncTest()
     {
         var atDid = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
@@ -32,7 +36,7 @@ public class AnonymousTests
         var oncardecoded = new OnCarDecoded((e) => {
         });
 
-        var result = await this.proto.Sync.GetBlocksAsync(atDid, new[] { postCid1.ToString(), postCid2.ToString() }, oncardecoded);
+        var result = await AnonymousTests.proto.Sync.GetBlocksAsync(atDid, new[] { postCid1.ToString(), postCid2.ToString() }, oncardecoded);
 
         result.Switch(
             success =>
@@ -44,14 +48,14 @@ public class AnonymousTests
             });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task DownloadBlocksAsyncTest()
     {
         var atDid = ATDid.Create("did:plc:wrrbtigjwpykuwzqsypnpazr");
         var postCid1 = Cid.Decode("bafyreibby2anauk6ef2ntmeyebeb3yosncathvohhjrb7jmxfpyljyeq2e");
         var postCid2 = Cid.Decode("bafyreiausj2iabpfs2mbmp2qtaszd2jokmsogto7z6zrz3pkncx3emyx4m");
 
-        var result = await this.proto.Sync.DownloadBlocksAsync(atDid, new[] { postCid1.ToString(), postCid2.ToString() });
+        var result = await AnonymousTests.proto.Sync.DownloadBlocksAsync(atDid, new[] { postCid1.ToString(), postCid2.ToString() });
 
         result.Switch(
             success =>
@@ -63,16 +67,16 @@ public class AnonymousTests
             });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetPostRecordTest()
     {
         var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k237aznn4k22");
         var postCid = Cid.Decode("bafyreih4jqh2l5xnp5q6xqfxyqx73weiauuj2s2baoym4a6b3huxt4ynza");
-        var post = await this.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
+        var post = await AnonymousTests.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
         post.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Cid);
+                Assert.AreEqual(postCid.ToString(), success!.Cid);
             },
             failed =>
             {
@@ -80,18 +84,18 @@ public class AnonymousTests
             });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetQuotePostRecordTest()
     {
         var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcdnc55k22");
         var postCid = Cid.Decode("bafyreiha4uutsovlvm3xisgzaendfyfhcr7p2xpuzc7an7xu5jeyrrifji");
-        var post = await this.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
+        var post = await AnonymousTests.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
         post.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Cid);
-                Assert.True(success.Value?.Embed is not null);
-                Assert.True(success.Value?.Embed.Type == Constants.EmbedTypes.Record);
+                Assert.AreEqual(postCid.ToString(), success!.Cid);
+                Assert.IsTrue(success.Value?.Embed is not null);
+                Assert.AreEqual(Constants.EmbedTypes.Record, success.Value?.Embed?.Type);
             },
             failed =>
             {
@@ -99,18 +103,18 @@ public class AnonymousTests
             });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetExternalPostRecordTest()
     {
         var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcwgl62222");
         var postCid = Cid.Decode("bafyreih26rnjlty7gxvdmq3m5wyb4im72irtdsfsiktdy3duvbo4hpo4l4");
-        var post = await this.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
+        var post = await AnonymousTests.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
         post.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Cid);
-                Assert.True(success.Value?.Embed is not null);
-                Assert.True(success.Value?.Embed.Type == Constants.EmbedTypes.External);
+                Assert.AreEqual(postCid.ToString(), success!.Cid);
+                Assert.IsTrue(success.Value?.Embed is not null);
+                Assert.AreEqual(Constants.EmbedTypes.External, success.Value?.Embed?.Type);
             },
             failed =>
             {
@@ -118,18 +122,18 @@ public class AnonymousTests
             });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetImagesPostRecordTest()
     {
         var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcf5psyk22");
         var postCid = Cid.Decode("bafyreibbc52hzs47woy7zjy76rjmzd6w743dajlwxkuihawatnoev7jzei");
-        var post = await this.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
+        var post = await AnonymousTests.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
         post.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Cid);
-                Assert.True(success.Value?.Embed is not null);
-                Assert.True(success.Value?.Embed.Type == Constants.EmbedTypes.Images);
+                Assert.AreEqual(postCid.ToString(), success!.Cid);
+                Assert.IsTrue(success.Value?.Embed is not null);
+                Assert.AreEqual(Constants.EmbedTypes.Images, success.Value?.Embed.Type);
             },
             failed =>
             {
@@ -137,18 +141,18 @@ public class AnonymousTests
             });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetRecordWithMediaPostRecordTest()
     {
         var postUri = ATUri.Create("at://did:plc:7i5tmb4yfkznrn7whz4dg4gz/app.bsky.feed.post/3k2dcee6joc22");
         var postCid = Cid.Decode("bafyreiezjt5bqt2xpcdfvisud7jrd4zuxygz4ssnuge3ddjcoptanvcnsa");
-        var post = await this.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
+        var post = await AnonymousTests.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
         post.Switch(
             success =>
             {
-                Assert.Equal(postCid, success!.Cid);
-                Assert.True(success.Value?.Embed is not null);
-                Assert.True(success.Value?.Embed.Type == Constants.EmbedTypes.RecordWithMedia);
+                Assert.AreEqual(postCid.ToString(), success!.Cid);
+                Assert.IsTrue(success.Value?.Embed is not null);
+                Assert.AreEqual(Constants.EmbedTypes.RecordWithMedia, success.Value?.Embed.Type);
             },
             failed =>
             {
@@ -156,17 +160,17 @@ public class AnonymousTests
             });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetJpegBlobTest()
     {
         var postUri = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
         var postCid = Cid.Decode("bafkreibcidyi7immx2komo7yccy2ecq3lpckq4mnypqp7euljd3tjomdwa");
-        var blob = await this.proto.Sync.GetBlobAsync(postUri, postCid);
+        var blob = await AnonymousTests.proto.Sync.GetBlobAsync(postUri, postCid);
         blob.Switch(
            success =>
            {
-               Assert.True(success!.Data!.Length > 0);
-               Assert.True(success!.Data!.Length == 134538);
+               Assert.IsTrue(success!.Data!.Length > 0);
+               Assert.AreEqual(134538, success!.Data!.Length);
            },
            failed =>
            {
@@ -174,15 +178,15 @@ public class AnonymousTests
            });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetHeadTest()
     {
         var postUri = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
-        var blob = await this.proto.Sync.GetHeadAsync(postUri);
+        var blob = await AnonymousTests.proto.Sync.GetHeadAsync(postUri);
         blob.Switch(
            success =>
            {
-               Assert.True(success!.Root is not null);
+               Assert.IsTrue(success!.Root is not null);
            },
            failed =>
            {
@@ -190,11 +194,11 @@ public class AnonymousTests
            });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetRepoTest()
     {
         var postUri = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
-        var blob = await this.proto.Sync.GetRepoAsync(postUri, HandleProgressStatus);
+        var blob = await AnonymousTests.proto.Sync.GetRepoAsync(postUri, HandleProgressStatus);
         blob.Switch(
            success =>
            {
@@ -206,11 +210,11 @@ public class AnonymousTests
            });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task GetCheckoutTest()
     {
         var postUri = ATDid.Create("did:plc:7i5tmb4yfkznrn7whz4dg4gz");
-        var blob = await this.proto.Sync.GetCheckoutAsync(postUri, HandleProgressStatus);
+        var blob = await AnonymousTests.proto.Sync.GetCheckoutAsync(postUri, HandleProgressStatus);
         blob.Switch(
            success =>
            {
@@ -222,15 +226,15 @@ public class AnonymousTests
            });
     }
 
-    [Fact]
+    [TestMethod]
     public async Task DescribeRepoTest()
     {
         var repo = ATDid.Create("did:plc:up76ybimufzledmmhbv25wse");
-        var describe = (await this.proto.Repo.DescribeRepoAsync(repo)).HandleResult();
-        Assert.True(describe is not null);
-        Assert.True(describe.HandleIsCorrect);
-        Assert.True(describe.Did is not null);
-        Assert.True(describe.Did!.ToString() == repo.ToString());
+        var describe = (await AnonymousTests.proto.Repo.DescribeRepoAsync(repo)).HandleResult();
+        Assert.IsTrue(describe is not null);
+        Assert.IsTrue(describe.HandleIsCorrect);
+        Assert.IsTrue(describe.Did is not null);
+        Assert.AreEqual(describe.Did!.ToString(), repo.ToString());
     }
 
     private static void HandleProgressStatus(CarProgressStatusEvent e)

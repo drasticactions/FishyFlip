@@ -20,5 +20,6 @@ global using FishyFlip.Tools.Json;
 global using Ipfs;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.Testing;
+global using Microsoft.VisualStudio.TestTools.UnitTesting;
 global using PeterO.Cbor;
-global using Xunit;
