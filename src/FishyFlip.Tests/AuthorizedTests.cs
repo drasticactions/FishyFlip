@@ -33,19 +33,19 @@ public class AuthorizedTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        AuthorizedTests.feed_generator = (string?)context.Properties["BLUESKY_TEST_FEED_GENERATOR"] ?? throw new ArgumentNullException();
-        AuthorizedTests.follow_did = (string?)context.Properties["BLUESKY_TEST_FOLLOW_DID"] ?? throw new ArgumentNullException();
-        AuthorizedTests.block_did = (string?)context.Properties["BLUESKY_TEST_BLOCK_DID"] ?? throw new ArgumentNullException();
-        AuthorizedTests.media_post = (string?)context.Properties["BLUESKY_TEST_MEDIA_POST"] ?? throw new ArgumentNullException();
-        AuthorizedTests.images_post = (string?)context.Properties["BLUESKY_TEST_IMAGES_POST"] ?? throw new ArgumentNullException();
-        AuthorizedTests.external_post = (string?)context.Properties["BLUESKY_TEST_EXTERNAL_POST"] ?? throw new ArgumentNullException();
-        AuthorizedTests.handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
-        AuthorizedTests.handle_2 = (string?)context.Properties["BLUESKY_TEST_HANDLE_2"] ?? throw new ArgumentNullException();
-        AuthorizedTests.did = (string?)context.Properties["BLUESKY_TEST_DID"] ?? throw new ArgumentNullException();
-        AuthorizedTests.did_2 = (string?)context.Properties["BLUESKY_TEST_DID_2"] ?? throw new ArgumentNullException();
-        AuthorizedTests.post_thread = (string?)context.Properties["BLUESKY_TEST_POST_THREAD"] ?? throw new ArgumentNullException();
-        AuthorizedTests.quote_post = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST"] ?? throw new ArgumentNullException();
-        AuthorizedTests.quote_post_2 = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST_2"] ?? throw new ArgumentNullException();
+        feed_generator = (string?)context.Properties["BLUESKY_TEST_FEED_GENERATOR"] ?? throw new ArgumentNullException();
+        follow_did = (string?)context.Properties["BLUESKY_TEST_FOLLOW_DID"] ?? throw new ArgumentNullException();
+        block_did = (string?)context.Properties["BLUESKY_TEST_BLOCK_DID"] ?? throw new ArgumentNullException();
+        media_post = (string?)context.Properties["BLUESKY_TEST_MEDIA_POST"] ?? throw new ArgumentNullException();
+        images_post = (string?)context.Properties["BLUESKY_TEST_IMAGES_POST"] ?? throw new ArgumentNullException();
+        external_post = (string?)context.Properties["BLUESKY_TEST_EXTERNAL_POST"] ?? throw new ArgumentNullException();
+        handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
+        handle_2 = (string?)context.Properties["BLUESKY_TEST_HANDLE_2"] ?? throw new ArgumentNullException();
+        did = (string?)context.Properties["BLUESKY_TEST_DID"] ?? throw new ArgumentNullException();
+        did_2 = (string?)context.Properties["BLUESKY_TEST_DID_2"] ?? throw new ArgumentNullException();
+        post_thread = (string?)context.Properties["BLUESKY_TEST_POST_THREAD"] ?? throw new ArgumentNullException();
+        quote_post = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST"] ?? throw new ArgumentNullException();
+        quote_post_2 = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST_2"] ?? throw new ArgumentNullException();
         string password = (string?)context.Properties["BLUESKY_TEST_PASSWORD"] ?? throw new ArgumentNullException();
         string instance = (string?)context.Properties["BLUESKY_INSTANCE_URL"] ?? throw new ArgumentNullException();
         var debugLog = new DebugLoggerProvider();
@@ -207,7 +207,7 @@ public class AuthorizedTests
     [TestMethod]
     public async Task GetExternalPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postUri = ATUri.Create(AuthorizedTests.external_post);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -223,7 +223,7 @@ public class AuthorizedTests
     [TestMethod]
     public async Task GetImagesPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7yddkqyzk2j");
+        var postUri = ATUri.Create(AuthorizedTests.images_post);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -239,7 +239,7 @@ public class AuthorizedTests
     [TestMethod]
     public async Task GetRecordWithMediaPostThreadAsyncTest()
     {
-        var postUri = ATUri.Create("at://did:plc:ix37rgpewy5wtl5qzhunsldu/app.bsky.feed.post/3k7ydijed6k2j");
+        var postUri = ATUri.Create(AuthorizedTests.media_post);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -377,6 +377,7 @@ public class AuthorizedTests
         Assert.IsTrue(follow!.Cid is not null);
         Assert.IsTrue(follow!.Uri is not null);
 
+        await Task.Delay(2500);
         var list = (await AuthorizedTests.proto.Graph.GetListAsync(createList.Uri)).HandleResult();
         Assert.IsTrue(list is not null);
         Assert.IsTrue(list!.Items.Count() > 0);

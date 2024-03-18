@@ -22,5 +22,6 @@ public class UploadBlobResponse
     /// <summary>
     /// Gets the uploaded blob record.
     /// </summary>
+    [JsonPropertyName("blob")]
     public BlobRecord Blob { get; }
 }

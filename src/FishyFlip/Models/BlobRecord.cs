@@ -26,18 +26,20 @@ public class BlobRecord : ATRecord
     /// <summary>
     /// Gets the MIME type of the blob.
     /// </summary>
+    [JsonPropertyName("mimeType")]
     public string? MimeType { get; }
 
     /// <summary>
     /// Gets the size of the blob in bytes.
     /// </summary>
+    [JsonPropertyName("size")]
     public int Size { get; }
 
     /// <summary>
     /// Gets or sets the reference to the blob.
     /// </summary>
     [JsonPropertyName("ref")]
-    public ATCid? Ref { get; set; }
+    public ATLinkRef? Ref { get; set; }
 
     /// <summary>
     /// Converts the blob record to an image.
@@ -46,6 +48,6 @@ public class BlobRecord : ATRecord
     public Image ToImage()
         => new(this.MimeType, this.Size, "blob")
         {
-            Ref = new ImageRef(this.Ref),
+            Ref = new ImageRef(this.Ref?.Link),
         };
 }

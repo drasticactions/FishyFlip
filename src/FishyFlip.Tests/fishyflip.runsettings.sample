@@ -16,5 +16,6 @@
         <Parameter name="BLUESKY_TEST_BLOCK_DID" value="" />
         <Parameter name="BLUESKY_TEST_PASSWORD" value="" />
         <Parameter name="BLUESKY_INSTANCE_URL" value="" />
+        <Parameter name="BLUESKY_IMAGE" value="" />
     </TestRunParameters>
 </RunSettings>

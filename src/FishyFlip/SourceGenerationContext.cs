@@ -157,6 +157,7 @@ namespace FishyFlip;
 [JsonSerializable(typeof(UnknownEmbed))]
 [JsonSerializable(typeof(UnreadCount))]
 [JsonSerializable(typeof(UploadBlobResponse))]
+[JsonSerializable(typeof(ATLinkRef))]
 [JsonSerializable(typeof(Used))]
 [JsonSerializable(typeof(Viewer))]
 internal partial class SourceGenerationContext : JsonSerializerContext
