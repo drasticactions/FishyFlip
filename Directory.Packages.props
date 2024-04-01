@@ -12,7 +12,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="Sharprompt" Version="2.4.5" />
-    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.5.0" />
     <PackageVersion Include="MimeTypes" Version="2.4.1" />
     <PackageVersion Include="IpfsShipyard.Ipfs.Core" Version="0.1.0" />
     <PackageVersion Include="PeterO.Cbor" Version="4.5.3" />
