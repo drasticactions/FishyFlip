@@ -205,6 +205,13 @@ public static class Constants
         public const string ThreadGate = "app.bsky.feed.threadgate";
     }
 
+    public static class ThreadGateReasonType
+    {
+        public const string MentionRule = "app.bsky.feed.threadgate#mentionRule";
+        public const string FollowingRule = "app.bsky.feed.threadgate#followingRule";
+        public const string ListRule = "app.bsky.feed.threadgate#listRule";
+    }
+
     public static class ModerationReasons
     {
         public const string ReasonSpam = "com.atproto.moderation.defs#reasonSpam";

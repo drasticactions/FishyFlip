@@ -27,6 +27,7 @@ namespace FishyFlip;
 [JsonSerializable(typeof(CreateModerationReportPost))]
 [JsonSerializable(typeof(CreateModerationReportRepo))]
 [JsonSerializable(typeof(CreateSeenAtRecord))]
+[JsonSerializable(typeof(CreateThreadGateRecord))]
 [JsonSerializable(typeof(DeleteRecord))]
 [JsonSerializable(typeof(Login))]
 [JsonSerializable(typeof(FeedResultList))]

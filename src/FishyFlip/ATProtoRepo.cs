@@ -171,6 +171,31 @@ public sealed class ATProtoRepo
     }
 
     /// <summary>
+    /// Asynchronously creates a ThreadGate record.
+    /// </summary>
+    /// <param name="post">The ATUri of the post associated with the ThreadGate.</param>
+    /// <param name="threadGateReasons">An array of ThreadGateReasons associated with the ThreadGate.</param>
+    /// <param name="createdAt">Optional. The creation date of the ThreadGate. If not provided, the current UTC date and time will be used.</param>
+    /// <param name="swapCommit">Optional. The swap commit associated with the ThreadGate.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains the response from the ThreadGate creation operation.</returns>
+    public Task<Result<CreatePostResponse>> CreateThreadGateAsync(
+        ATUri post,
+        ThreadGateReason[] threadGateReasons,
+        DateTime? createdAt = null,
+        string? swapCommit = null,
+        CancellationToken cancellationToken = default)
+    {
+        CreateThreadGateRecord record = new(
+            Constants.FeedType.ThreadGate,
+            this.proto.SessionManager!.Session!.Did.ToString()!,
+            new ThreadGate(post, threadGateReasons, createdAt ?? DateTime.UtcNow),
+            post.Rkey,
+            swapCommit);
+        return this.CreateRecord<CreateThreadGateRecord, CreatePostResponse>(record, this.Options.SourceGenerationContext.CreateThreadGateRecord, this.Options.SourceGenerationContext.CreatePostResponse, cancellationToken);
+    }
+
+    /// <summary>
     /// Creates a block asynchronously.
     /// </summary>
     /// <param name="did">The ATDid.</param>

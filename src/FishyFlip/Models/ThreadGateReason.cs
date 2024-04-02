@@ -15,7 +15,7 @@ public class ThreadGateReason
     /// <param name="list">List value.</param>
     /// <param name="type">The Type.</param>
     [JsonConstructor]
-    public ThreadGateReason(string? list, string? type)
+    public ThreadGateReason(ATUri? list, string? type)
     {
         this.List = list;
         this.Type = type;
@@ -34,11 +34,33 @@ public class ThreadGateReason
     /// Gets the Record Type.
     /// </summary>
     [JsonPropertyName("list")]
-    public string? List { get; internal set; }
+    public ATUri? List { get; internal set; }
 
     /// <summary>
     /// Gets the Record Type.
     /// </summary>
     [JsonPropertyName("$type")]
     public string? Type { get; internal set; }
+
+    /// <summary>
+    /// Creates a new ThreadGateReason instance for a MentionRule.
+    /// </summary>
+    /// <returns>A new ThreadGateReason instance with the Type set to MentionRule and the List set to null.</returns>
+    public static ThreadGateReason CreateMentionRule() =>
+        new ThreadGateReason(null, Constants.ThreadGateReasonType.MentionRule);
+
+    /// <summary>
+    /// Creates a new ThreadGateReason instance for a FollowingRule.
+    /// </summary>
+    /// <returns>A new ThreadGateReason instance with the Type set to FollowingRule and the List set to null.</returns>
+    public static ThreadGateReason CreateFollowingRule() =>
+        new ThreadGateReason(null, Constants.ThreadGateReasonType.FollowingRule);
+
+    /// <summary>
+    /// Creates a new ThreadGateReason instance for a ListRule.
+    /// </summary>
+    /// <param name="uri">The ATUri of the list associated with the ListRule.</param>
+    /// <returns>A new ThreadGateReason instance with the Type set to ListRule and the List set to the provided uri.</returns>
+    public static ThreadGateReason CreateListRule(ATUri uri) =>
+        new ThreadGateReason(uri, Constants.ThreadGateReasonType.ListRule);
 }
