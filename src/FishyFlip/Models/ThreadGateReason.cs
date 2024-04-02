@@ -12,10 +12,12 @@ public class ThreadGateReason
     /// <summary>
     /// Initializes a new instance of the <see cref="ThreadGateReason"/> class.
     /// </summary>
-    /// <param name="type">The type.</param>
+    /// <param name="list">List value.</param>
+    /// <param name="type">The Type.</param>
     [JsonConstructor]
-    public ThreadGateReason(string? type)
+    public ThreadGateReason(string? list, string? type)
     {
+        this.List = list;
         this.Type = type;
     }
 
@@ -27,6 +29,12 @@ public class ThreadGateReason
     {
         this.Type = obj["$type"].AsString();
     }
+
+    /// <summary>
+    /// Gets the Record Type.
+    /// </summary>
+    [JsonPropertyName("list")]
+    public string? List { get; internal set; }
 
     /// <summary>
     /// Gets the Record Type.

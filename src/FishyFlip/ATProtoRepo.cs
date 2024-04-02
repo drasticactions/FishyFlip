@@ -244,6 +244,17 @@ public sealed class ATProtoRepo
       => await this.GetRecordAsync<PostRecord>(Constants.FeedType.Post, this.Options.SourceGenerationContext.PostRecord, repo, rkey, cid, cancellationToken);
 
     /// <summary>
+    /// Retrieves a thread gate asynchronously.
+    /// </summary>
+    /// <param name="repo">The AT identifier.</param>
+    /// <param name="rkey">The record key.</param>
+    /// <param name="cid">The CID (Content Identifier) of the post.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved post record, or null if not found.</returns>
+    public async Task<Result<ThreadGateRecord?>> GetThreadGateAsync(ATIdentifier repo, string rkey, ATCid? cid = null, CancellationToken cancellationToken = default)
+        => await this.GetRecordAsync<ThreadGateRecord>(Constants.FeedType.ThreadGate, this.Options.SourceGenerationContext.ThreadGateRecord, repo, rkey, cid, cancellationToken);
+
+    /// <summary>
     /// Retrieves an actor asynchronously.
     /// </summary>
     /// <param name="repo">The AT identifier of the repository.</param>

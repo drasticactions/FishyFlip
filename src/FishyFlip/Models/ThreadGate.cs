@@ -14,9 +14,15 @@ public class ThreadGate : ATRecord
     /// <summary>
     /// Initializes a new instance of the <see cref="ThreadGate"/> class.
     /// </summary>
+    /// <param name="post">The URI of the post. Can be null.</param>
+    /// <param name="allow">Array of allowed gate types. Can be null.</param>
+    /// <param name="createdAt">The date and time when the ThreadGate was created. Can be null.</param>
     [JsonConstructor]
-    public ThreadGate()
+    public ThreadGate(ATUri? post, ThreadGateReason[]? allow, DateTime? createdAt)
     {
+        this.Post = post;
+        this.Allow = allow ?? [];
+        this.CreatedAt = createdAt;
         this.Type = Constants.FeedType.ThreadGate;
     }
 
@@ -29,24 +35,21 @@ public class ThreadGate : ATRecord
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Type = Constants.FeedType.ThreadGate;
         this.Post = new ATUri(obj["post"].AsString());
-        this.AllowedTypes = obj["allow"].Values.Select(n => new ThreadGateReason(n)).ToArray()!;
+        this.Allow = obj["allow"].Values.Select(n => new ThreadGateReason(n)).ToArray()!;
     }
 
     /// <summary>
     /// Gets the URI of the repost.
     /// </summary>
-    [JsonPropertyName("post")]
     public ATUri? Post { get; }
 
     /// <summary>
     /// Gets the allowed gate types.
     /// </summary>
-    [JsonPropertyName("allow")]
-    public ThreadGateReason[] AllowedTypes { get; } = [];
+    public ThreadGateReason[] Allow { get; }
 
     /// <summary>
     /// Gets the Created At Date.
     /// </summary>
-    [JsonPropertyName("createdAt")]
     public DateTime? CreatedAt { get; }
 }
