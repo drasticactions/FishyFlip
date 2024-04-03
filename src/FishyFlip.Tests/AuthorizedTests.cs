@@ -474,4 +474,18 @@ public class AuthorizedTests
         Assert.IsTrue(describe.Did is not null);
         Assert.IsTrue(describe.Did!.ToString() == repo.ToString());
     }
+
+    [TestMethod]
+    public async Task CreatePostWithThreadGate()
+    {
+        var (post, error) = await AuthorizedTests.proto.Repo.CreatePostAsync("prompt", null, null, new[] { "en" });
+        Assert.IsNull(error);
+        Assert.IsNotNull(post);
+        Assert.IsNotNull(post!.Uri);
+        var threadPostReasons = new[] { ThreadGateReason.CreateFollowingRule(), ThreadGateReason.CreateMentionRule() };
+        var (threadGate, _) = await AuthorizedTests.proto.Repo.CreateThreadGateAsync(post!.Uri!, threadPostReasons);
+        Assert.IsNotNull(threadGate);
+        Assert.IsNotNull(threadGate.Uri);
+        Assert.IsNotNull(threadGate.Cid);
+    }
 }
