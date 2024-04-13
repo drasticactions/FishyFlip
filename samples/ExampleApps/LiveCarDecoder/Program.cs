@@ -7,7 +7,6 @@ using FishyFlip;
 using FishyFlip.Models;
 using FishyFlip.Tools;
 using PeterO.Cbor;
-using System.Reflection;
 
 await Cli.RunAsync<RootCommand>(args);
 
@@ -59,25 +58,69 @@ public class RootCommand
             }
 
             // Fetch the repo. Decode the CAR as we download.
-            await protocol.Sync.GetRepoAsync(handle, this.HandleProgressStatus);
+            await protocol.Sync.GetRepoAsync(handle, HandleProgressStatus);
         }
+    }
+
+    /// <summary>
+    /// Use Did for fetching CAR.
+    /// </summary>
+    [CliCommand(Description = "did", ShortFormAutoGenerate = false)]
+    public class DidCommand
+    {
+        /// <summary>
+        /// Gets or sets the BSky Did.
+        /// </summary>
+        [CliArgument(Description = "BSky Did")]
+        public required string Did { get; set; }
 
         /// <summary>
-        /// Handle the progress of the CAR download.
+        /// Gets or sets the Instance.
         /// </summary>
-        /// <param name="e"><see cref="CarProgressStatusEvent"/>.</param>
-        private void HandleProgressStatus(CarProgressStatusEvent e)
-        {
-            var cid = e.Cid;
-            var bytes = e.Bytes;
-            var test = CBORObject.DecodeFromBytes(bytes);
-            var record = ATRecord.FromCBORObject(test);
+        [CliArgument(Description = "BSky Instance")]
+        public string? Instance { get; set; } = "https://bsky.social";
 
-            // Prints the type of the record.
-            if (!string.IsNullOrEmpty(record?.Type))
+        public async Task RunAsync()
+        {
+            if (Uri.TryCreate(this.Instance, UriKind.Absolute, out var uri) == false)
             {
-                Console.WriteLine(record.Type);
+                Console.WriteLine("Invalid instance URL");
+                return;
             }
+
+            var protocolBuilder = new ATProtocolBuilder().WithInstanceUrl(uri);
+            var protocol = protocolBuilder.Build();
+
+            // First, create an ATIdentifier from the Did.
+            var did = ATIdentifier.Create(this.Did);
+
+            // If it's invalid then print an error message.
+            if (did == null)
+            {
+                Console.WriteLine("Invalid handle");
+                return;
+            }
+
+            // Fetch the repo. Decode the CAR as we download.
+            await protocol.Sync.GetRepoAsync(did, HandleProgressStatus);
+        }
+    }
+
+    /// <summary>
+    /// Handle the progress of the CAR download.
+    /// </summary>
+    /// <param name="e"><see cref="CarProgressStatusEvent"/>.</param>
+    static void HandleProgressStatus(CarProgressStatusEvent e)
+    {
+        var cid = e.Cid;
+        var bytes = e.Bytes;
+        var test = CBORObject.DecodeFromBytes(bytes);
+        var record = ATRecord.FromCBORObject(test);
+
+        // Prints the type of the record.
+        if (!string.IsNullOrEmpty(record?.Type))
+        {
+            Console.WriteLine(record.Type);
         }
     }
 }
