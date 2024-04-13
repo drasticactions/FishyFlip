@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LiveCarDecoder": {
+      "commandName": "Project",
+      "commandLineArgs": "handle drasticactions.dev"
+    }
+  }
+}

@@ -178,6 +178,16 @@ public sealed class ATProtocol : IDisposable
     }
 
     /// <summary>
+    /// Update the Instance Uri.
+    /// </summary>
+    /// <param name="uri">Instance Uri.</param>
+    public void UpdateInstanceUri(Uri uri)
+    {
+        this.options.Url = uri;
+        this.UpdateOptions(this.options);
+    }
+
+    /// <summary>
     /// Update options for ATProto.
     /// This will log out the current session and dispose of the current session manager.
     /// </summary>
