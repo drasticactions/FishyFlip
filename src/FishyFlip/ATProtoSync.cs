@@ -93,17 +93,20 @@ public sealed class ATProtoSync
     /// <param name="since">Optional Since value.</param>
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>Result of Success.</returns>
-    public Task<Result<Success?>> GetRepoAsync(ATDid repo, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
+    public async Task<Result<Success?>> GetRepoAsync(ATIdentifier repo, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
     {
+        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
         var url = since is not null
-            ? $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}&since={since}"
-            : $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}";
-        return this.Client.GetCarAsync(
-            url,
-            this.Options.JsonSerializerOptions,
-            cancellationToken,
-            this.Options.Logger,
-            onDecoded);
+            ? $"{Constants.Urls.ATProtoSync.GetRepo}?did={did}&since={since}"
+            : $"{Constants.Urls.ATProtoSync.GetRepo}?did={did}";
+        try
+        {
+            return await protocol.Client.GetCarAsync(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
     }
 
     /// <summary>
@@ -114,16 +117,24 @@ public sealed class ATProtoSync
     /// <param name="filename">Filename.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Result of Success.</returns>
-    public Task<Result<Success?>> DownloadRepoAsync(ATDid repo, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
+    public async Task<Result<Success?>> DownloadRepoAsync(ATIdentifier repo, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
+        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
         filename ??= $"{repo}-repo.car";
-        return this.Client.DownloadCarAsync(
-            $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}",
-            path ?? Directory.GetCurrentDirectory(),
-            filename,
-            this.Options.JsonSerializerOptions,
-            cancellationToken,
-            this.Options.Logger);
+        try
+        {
+            return await protocol.Client.DownloadCarAsync(
+                $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}",
+                path ?? Directory.GetCurrentDirectory(),
+                filename,
+                this.Options.JsonSerializerOptions,
+                cancellationToken,
+                this.Options.Logger);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
     }
 
     /// <summary>
@@ -159,17 +170,19 @@ public sealed class ATProtoSync
     /// <param name="onDecoded">OnCarDecoded callback.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Blocks.</returns>
-    public Task<Result<Success?>> GetBlocksAsync(ATDid did, ATCid[] commits, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+    public async Task<Result<Success?>> GetBlocksAsync(ATIdentifier did, ATCid[] commits, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
     {
+        var (protocol, repo) = await this.GenerateClientFromATIdentifierAsync(did, cancellationToken);
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
-        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&{commitList}";
-
-        return this.Client.GetCarAsync(
-            url,
-            this.Options.JsonSerializerOptions,
-            cancellationToken,
-            this.Options.Logger,
-            onDecoded);
+        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={repo}&{commitList}";
+        try
+        {
+            return await protocol.Client.GetCarAsync(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
     }
 
     /// <summary>
@@ -181,18 +194,21 @@ public sealed class ATProtoSync
     /// <param name="filename">Filename.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Blocks.</returns>
-    public Task<Result<Success?>> DownloadBlocksAsync(ATDid did, ATCid[] commits, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
+    public async Task<Result<Success?>> DownloadBlocksAsync(ATIdentifier did, ATCid[] commits, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
+        var (protocol, repo) = await this.GenerateClientFromATIdentifierAsync(did, cancellationToken);
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
-        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={did}&{commitList}";
+        var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={repo}&{commitList}";
         filename ??= $"{did}-blocks.car";
-        return this.Client.DownloadCarAsync(
-            url,
-            path ?? Directory.GetCurrentDirectory(),
-            filename,
-            this.Options.JsonSerializerOptions,
-            cancellationToken,
-            this.Options.Logger);
+
+        try
+        {
+            return await protocol.Client.DownloadCarAsync(url, path ?? Directory.GetCurrentDirectory(), filename, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
     }
 
     /// <summary>
@@ -230,9 +246,10 @@ public sealed class ATProtoSync
     /// <param name="filename">Filename.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Result of success.</returns>
-    public Task<Result<Success?>> DownloadCheckoutAsync(ATDid did, ATCid? commit = default, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
+    public async Task<Result<Success?>> DownloadCheckoutAsync(ATIdentifier did, ATCid? commit = default, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
-        var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={did}";
+        var (protocol, repo) = await this.GenerateClientFromATIdentifierAsync(did, cancellationToken);
+        var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={repo}";
         if (commit is not null)
         {
             url += $"&commit={commit}";
@@ -240,7 +257,14 @@ public sealed class ATProtoSync
 
         filename ??= $"{did}-checkout.car";
 
-        return this.Client.DownloadCarAsync(url, path ?? Directory.GetCurrentDirectory(), filename, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        try
+        {
+            return await protocol.Client.DownloadCarAsync(url, path ?? Directory.GetCurrentDirectory(), filename, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
     }
 
     /// <summary>
@@ -254,20 +278,23 @@ public sealed class ATProtoSync
     /// <param name="commit">Commit.</param>
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>Result of success.</returns>
-    public Task<Result<Success?>> GetRecordAsync(string collection, ATDid repo, string rkey, OnCarDecoded onDecoded, ATCid? commit = default, CancellationToken cancellationToken = default)
+    public async Task<Result<Success?>> GetRecordAsync(string collection, ATIdentifier repo, string rkey, OnCarDecoded onDecoded, ATCid? commit = default, CancellationToken cancellationToken = default)
     {
-        var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={repo}&rkey={rkey}";
+        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={did}&rkey={rkey}";
         if (commit is not null)
         {
             url += $"&commit={commit}";
         }
 
-        return this.Client.GetCarAsync(
-            url,
-            this.Options.JsonSerializerOptions,
-            cancellationToken,
-            this.Options.Logger,
-            onDecoded);
+        try
+        {
+            return await protocol.Client.GetCarAsync(url, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, onDecoded);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
     }
 
     /// <summary>
@@ -281,16 +308,17 @@ public sealed class ATProtoSync
     /// <param name="filename">File name.</param>
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>Result of success.</returns>
-    public Task<Result<Success?>> DownloadRecordAsync(
+    public async Task<Result<Success?>> DownloadRecordAsync(
         string collection,
-        ATDid repo,
+        ATIdentifier repo,
         string rkey,
         ATCid? commit = default,
         string? path = default,
         string? filename = default,
         CancellationToken cancellationToken = default)
     {
-        var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={repo}&rkey={rkey}";
+        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={did}&rkey={rkey}";
         if (commit is not null)
         {
             url += $"&commit={commit}";
@@ -298,13 +326,14 @@ public sealed class ATProtoSync
 
         filename ??= $"{repo}-{rkey}.car";
 
-        return this.Client.DownloadCarAsync(
-            url,
-            path ?? Directory.GetCurrentDirectory(),
-            filename,
-            this.Options.JsonSerializerOptions,
-            cancellationToken,
-            this.Options.Logger);
+        try
+        {
+            return await protocol.Client.DownloadCarAsync(url, path ?? Directory.GetCurrentDirectory(), filename, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
     }
 
     /// <summary>
@@ -338,9 +367,10 @@ public sealed class ATProtoSync
     /// <param name="cursor">Optional Cursor. Used to continue response.</param>
     /// <param name="cancellationToken">Optional Cancellation Token.</param>
     /// <returns>Result of ATCids.</returns>
-    public async Task<Result<ListBlobs?>> ListBlobsAsync(ATDid repo, int limit = 500, string? since = default, string? cursor = default, CancellationToken cancellationToken = default)
+    public async Task<Result<ListBlobs?>> ListBlobsAsync(ATIdentifier repo, int limit = 500, string? since = default, string? cursor = default, CancellationToken cancellationToken = default)
     {
-        var url = Constants.Urls.ATProtoSync.ListBlobs + $"?did={repo}&limit={limit}";
+        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var url = Constants.Urls.ATProtoSync.ListBlobs + $"?did={did}&limit={limit}";
 
         if (cursor is not null)
         {
@@ -352,6 +382,27 @@ public sealed class ATProtoSync
             url += $"&since={since}";
         }
 
-        return await this.Client.Get<ListBlobs>(url, this.Options.SourceGenerationContext.ListBlobs, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        try
+        {
+            return await protocol.Client.Get<ListBlobs>(url, this.Options.SourceGenerationContext.ListBlobs, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        }
+        finally
+        {
+            protocol.Dispose();
+        }
+    }
+
+    private async Task<(ATProtocol Proto, ATDid Did)> GenerateClientFromATIdentifierAsync(ATIdentifier identifier, CancellationToken? token = default)
+    {
+        var (repo, atError) = await this.proto.Repo.DescribeRepoAsync(identifier, cancellationToken: token ?? CancellationToken.None);
+        if (atError is not null)
+        {
+            this.Options.Logger?.LogError($"ATError: {atError.StatusCode} {atError.Detail?.Error} {atError.Detail?.Message}");
+            throw new ATNetworkErrorException(atError);
+        }
+
+        var uri = new Uri(repo!.DidDoc.Service[0].ServiceEndpoint);
+        var protocolBuilder = new ATProtocolBuilder().WithInstanceUrl(uri);
+        return (protocolBuilder.Build(), repo.Did!);
     }
 }

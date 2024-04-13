@@ -58,22 +58,8 @@ public class RootCommand
                 return;
             }
 
-            // Describe the repo, this contains the DID we need to get the CAR file.
-            var (repo, error) = await protocol.Repo.DescribeRepoAsync(handle);
-            if (error is not null)
-            {
-                // TODO: Handle error
-                return;
-            }
-
-            // Update the instance URI for the given session.
-            protocol.UpdateInstanceUri(new Uri(repo!.DidDoc.Service[0].ServiceEndpoint));
-
-            // Get Current Directory
-            var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
             // Fetch the repo. Decode the CAR as we download.
-            await protocol.Sync.GetRepoAsync(repo!.Did, this.HandleProgressStatus);
+            await protocol.Sync.GetRepoAsync(handle, this.HandleProgressStatus);
         }
 
         /// <summary>
