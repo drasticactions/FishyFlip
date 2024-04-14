@@ -146,6 +146,8 @@ namespace FishyFlip;
 [JsonSerializable(typeof(SearchOption))]
 [JsonSerializable(typeof(SearchResults))]
 [JsonSerializable(typeof(ServerLinkProperties))]
+[JsonSerializable(typeof(SkeletonFeedPost))]
+[JsonSerializable(typeof(SkeletonReasonRepost))]
 [JsonSerializable(typeof(Session))]
 [JsonSerializable(typeof(SessionInfo))]
 [JsonSerializable(typeof(Subject))]

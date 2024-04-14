@@ -27,6 +27,11 @@ public class ThreadGateReason
     /// <param name="obj">CBorObject.</param>
     public ThreadGateReason(CBORObject obj)
     {
+        if (obj.ContainsKey("list"))
+        {
+            this.List = ATUri.Create(obj["list"].AsString());
+        }
+
         this.Type = obj["$type"].AsString();
     }
 
