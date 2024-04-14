@@ -1,0 +1,10 @@
+@AlfFeedGenerator_HostAddress = http://localhost:5050
+
+GET {{AlfFeedGenerator_HostAddress}}/
+
+###
+
+GET {{AlfFeedGenerator_HostAddress}}/xrpc/app.bsky.feed.getFeedSkeleton?feed=at://did:example:alice/app.bsky.feed.generator/whats-alf
+Accept: application/json
+
+###
