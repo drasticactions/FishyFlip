@@ -100,6 +100,26 @@ public class ATUri
         => new ATUri(uri);
 
     /// <summary>
+    /// Creates a new instance of the <see cref="ATUri"/> class.
+    /// </summary>
+    /// <param name="uri">String based URI.</param>
+    /// <param name="atUri">A new instance of the <see cref="ATUri"/> class.</param>
+    /// <returns>Bool if ATUri is valid.</returns>
+    public static bool TryCreate(string uri, out ATUri? atUri)
+    {
+        try
+        {
+            atUri = new ATUri(uri);
+            return true;
+        }
+        catch (Exception)
+        {
+            atUri = null;
+            return false;
+        }
+    }
+
+    /// <summary>
     /// Returns a string representation of the AT URI.
     /// </summary>
     /// <returns>A string representation of the AT URI.</returns>
