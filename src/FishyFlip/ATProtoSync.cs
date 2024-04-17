@@ -10,6 +10,7 @@ namespace FishyFlip;
 public sealed class ATProtoSync
 {
     private ATProtocol proto;
+    private ATProtocol socialProto;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtoSync"/> class.
@@ -18,6 +19,9 @@ public sealed class ATProtoSync
     internal ATProtoSync(ATProtocol proto)
     {
         this.proto = proto;
+        var socialUrl = new Uri(Constants.Urls.ATProtoServer.SocialApi);
+        var socialProtocolBuilder = new ATProtocolBuilder().WithInstanceUrl(socialUrl);
+        this.socialProto = socialProtocolBuilder.Build();
     }
 
     private ATProtocolOptions Options => this.proto.Options;
@@ -124,7 +128,7 @@ public sealed class ATProtoSync
         try
         {
             return await protocol.Client.DownloadCarAsync(
-                $"{Constants.Urls.ATProtoSync.GetRepo}?did={repo}",
+                $"{Constants.Urls.ATProtoSync.GetRepo}?did={did}",
                 path ?? Directory.GetCurrentDirectory(),
                 filename,
                 this.Options.JsonSerializerOptions,
@@ -394,7 +398,7 @@ public sealed class ATProtoSync
 
     private async Task<(ATProtocol Proto, ATDid Did)> GenerateClientFromATIdentifierAsync(ATIdentifier identifier, CancellationToken? token = default)
     {
-        var (repo, atError) = await this.proto.Repo.DescribeRepoAsync(identifier, cancellationToken: token ?? CancellationToken.None);
+        var (repo, atError) = await this.socialProto.Repo.DescribeRepoAsync(identifier, cancellationToken: token ?? CancellationToken.None);
         if (atError is not null)
         {
             this.Options.Logger?.LogError($"ATError: {atError.StatusCode} {atError.Detail?.Error} {atError.Detail?.Message}");

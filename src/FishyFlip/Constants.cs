@@ -15,6 +15,8 @@ public static class Constants
     {
         public static class ATProtoServer
         {
+            public const string PublicApi = "https://public.api.bsky.app";
+            public const string SocialApi = "https://bsky.social";
             public const string CreateSession = "/xrpc/com.atproto.server.createSession";
             public const string GetSession = "/xrpc/com.atproto.server.getSession";
             public const string RefreshSession = "/xrpc/com.atproto.server.refreshSession";

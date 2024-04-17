@@ -16,7 +16,7 @@ public class ATProtocolOptions
     {
         // HACK: Decodes a message to load the default ATCid protocols.
         this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
-        this.Url = new Uri("https://public.api.bsky.app");
+        this.Url = new Uri(Constants.Urls.ATProtoServer.PublicApi);
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
