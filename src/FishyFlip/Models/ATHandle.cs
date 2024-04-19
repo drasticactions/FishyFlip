@@ -47,6 +47,26 @@ public class ATHandle : ATIdentifier
     }
 
     /// <summary>
+    /// Creates a new instance of the <see cref="ATHandle"/> class.
+    /// </summary>
+    /// <param name="uri">String based URI.</param>
+    /// <param name="atHandle">A new instance of the <see cref="ATHandle"/> class.</param>
+    /// <returns>Bool if ATHandle is valid.</returns>
+    public static bool TryCreate(string uri, out ATHandle? atHandle)
+    {
+        try
+        {
+            atHandle = new ATHandle(uri);
+            return true;
+        }
+        catch (Exception)
+        {
+            atHandle = null;
+            return false;
+        }
+    }
+
+    /// <summary>
     /// Is the given string a valid ATHandle.
     /// </summary>
     /// <param name="uri">The uri as string.</param>

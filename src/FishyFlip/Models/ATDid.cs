@@ -47,6 +47,26 @@ public class ATDid : ATIdentifier
     }
 
     /// <summary>
+    /// Creates a new instance of the <see cref="ATDid"/> class.
+    /// </summary>
+    /// <param name="uri">String based URI.</param>
+    /// <param name="atDid">A new instance of the <see cref="ATDid"/> class.</param>
+    /// <returns>Bool if ATDid is valid.</returns>
+    public static bool TryCreate(string uri, out ATDid? atDid)
+    {
+        try
+        {
+            atDid = new ATDid(uri);
+            return true;
+        }
+        catch (Exception)
+        {
+            atDid = null;
+            return false;
+        }
+    }
+
+    /// <summary>
     /// Validate if a given string is a valid ATDid.
     /// </summary>
     /// <param name="uri">Uri.</param>

@@ -28,4 +28,36 @@ public abstract class ATIdentifier
 
         return null;
     }
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="ATIdentifier"/> class.
+    /// </summary>
+    /// <param name="uri">String based URI.</param>
+    /// <param name="atIdentifier">A new instance of the <see cref="ATIdentifier"/> class.</param>
+    /// <returns>Bool if ATIdentifier is valid.</returns>
+    public static bool TryCreate(string uri, out ATIdentifier? atIdentifier)
+    {
+        try
+        {
+            if (ATDid.IsValid(uri))
+            {
+                atIdentifier = ATDid.Create(uri);
+                return true;
+            }
+
+            if (ATHandle.IsValid(uri))
+            {
+                atIdentifier = ATHandle.Create(uri);
+                return true;
+            }
+
+            atIdentifier = null;
+            return false;
+        }
+        catch (Exception)
+        {
+            atIdentifier = null;
+            return false;
+        }
+    }
 }
