@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlcDirectoryGet", "PlcDirectoryGet.csproj", "{3CF2A374-7EFF-49CC-96D0-60C7BA58C1F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip", "..\..\src\FishyFlip\FishyFlip.csproj", "{EF51F13A-BE69-4B08-903C-4AA9CF3906BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CF2A374-7EFF-49CC-96D0-60C7BA58C1F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF2A374-7EFF-49CC-96D0-60C7BA58C1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF2A374-7EFF-49CC-96D0-60C7BA58C1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF2A374-7EFF-49CC-96D0-60C7BA58C1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF51F13A-BE69-4B08-903C-4AA9CF3906BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF51F13A-BE69-4B08-903C-4AA9CF3906BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF51F13A-BE69-4B08-903C-4AA9CF3906BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF51F13A-BE69-4B08-903C-4AA9CF3906BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A78EC35D-029E-4947-86BE-D827EE489E3E}
+	EndGlobalSection
+EndGlobal

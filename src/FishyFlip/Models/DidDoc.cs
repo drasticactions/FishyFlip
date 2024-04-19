@@ -36,6 +36,7 @@ public class DidDoc
     /// <summary>
     /// Gets the list of contexts.
     /// </summary>
+    [JsonPropertyName("@context")]
     public List<string> Context { get; }
 
     /// <summary>
@@ -57,4 +58,11 @@ public class DidDoc
     /// Gets the list of services.
     /// </summary>
     public List<Service> Service { get; }
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        var alsoKnownAsNamesAsString = string.Join(", ", this.AlsoKnownAs);
+        return $"ID: {this.Id}, AlsoKnownAs: {alsoKnownAsNamesAsString}";
+    }
 }

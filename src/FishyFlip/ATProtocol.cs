@@ -124,6 +124,11 @@ public sealed class ATProtocol : IDisposable
     public BlueskyNotification Notification => new(this);
 
     /// <summary>
+    /// Gets the PclDirectory Methods.
+    /// </summary>
+    public PlcDirectory PlcDirectory => new(this);
+
+    /// <summary>
     /// Gets a value indicating whether the subscription is active.
     /// </summary>
     public bool IsSubscriptionActive => this.webSocketProtocol.IsConnected;
