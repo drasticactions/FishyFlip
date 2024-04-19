@@ -5,7 +5,7 @@
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Represents a skeleton reason for reposting.
+/// Skeleton Reason Repost.
 /// </summary>
 public class SkeletonReasonRepost
 {
