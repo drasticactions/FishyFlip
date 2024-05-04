@@ -572,12 +572,22 @@ public sealed class ATProtoRepo
         return await this.Client.Get<ListRecords>(url, this.Options.SourceGenerationContext.ListRecords, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
-    private Task<Result<T2>> PutRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Asynchronously creates a record of type T and returns a result of type T2.
+    /// </summary>
+    /// <typeparam name="T">The type of the record to create.</typeparam>
+    /// <typeparam name="T2">The type of the result to return.</typeparam>
+    /// <param name="record">The record of type T to create.</param>
+    /// <param name="c1">The JsonTypeInfo of the record type T. Used for JSON serialization and deserialization.</param>
+    /// <param name="c2">The JsonTypeInfo of the result type T2. Used for JSON serialization and deserialization.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the result of type T2.</returns>
+    internal Task<Result<T2>> CreateRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
     {
         return
             this.Client
                 .Post<T, T2>(
-                    Constants.Urls.ATProtoRepo.PutRecord,
+                    Constants.Urls.ATProtoRepo.CreateRecord,
                     c1,
                     c2,
                     this.Options.JsonSerializerOptions,
@@ -586,12 +596,22 @@ public sealed class ATProtoRepo
                     this.Options.Logger);
     }
 
-    private Task<Result<T2>> CreateRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Asynchronously creates or updates a record of type T and returns a result of type T2.
+    /// </summary>
+    /// <typeparam name="T">The type of the record to create or update.</typeparam>
+    /// <typeparam name="T2">The type of the result to return.</typeparam>
+    /// <param name="record">The record of type T to create or update.</param>
+    /// <param name="c1">The JsonTypeInfo of the record type T. Used for JSON serialization and deserialization.</param>
+    /// <param name="c2">The JsonTypeInfo of the result type T2. Used for JSON serialization and deserialization.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the result of type T2.</returns>
+    internal Task<Result<T2>> PutRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
     {
         return
             this.Client
                 .Post<T, T2>(
-                    Constants.Urls.ATProtoRepo.CreateRecord,
+                    Constants.Urls.ATProtoRepo.PutRecord,
                     c1,
                     c2,
                     this.Options.JsonSerializerOptions,

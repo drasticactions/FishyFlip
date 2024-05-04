@@ -158,6 +158,20 @@ public static class Constants
                 public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
             }
         }
+
+        public static class WhiteWind
+        {
+            public const string GetAuthorPosts = "/xrpc/com.whtwnd.blog.getAuthorPosts";
+            public const string GetEntryMetadataByName = "/xrpc/com.whtwnd.blog.getEntryMetadataByName";
+            public const string GetMentionsByEntry = "/xrpc/com.whtwnd.blog.getMentionsByEntry";
+            public const string NotifyOfNewEntry = "/xrpc/com.whtwnd.blog.notifyOfNewEntry";
+        }
+    }
+
+    public static class WhiteWindTypes
+    {
+        public const string Entry = "com.whtwnd.blog.entry";
+        public const string Comment = "com.whtwnd.blog.comment";
     }
 
     public static class ActorTypes

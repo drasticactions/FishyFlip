@@ -74,6 +74,11 @@ public sealed class ATProtocol : IDisposable
     public ATProtoAdmin Admin => new(this);
 
     /// <summary>
+    /// Gets the White Wind Blog Protocol.
+    /// </summary>
+    public WhiteWindBlog Blog => new(this);
+
+    /// <summary>
     /// Gets the ATProto Identity Protocol.
     /// </summary>
     public ATProtoIdentity Identity => new(this);

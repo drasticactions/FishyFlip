@@ -28,6 +28,8 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                         return JsonSerializer.Deserialize<Repost>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Repost);
                     case Constants.GraphTypes.Follow:
                         return JsonSerializer.Deserialize<Follow>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Follow);
+                    case Constants.WhiteWindTypes.Entry:
+                        return JsonSerializer.Deserialize<Models.WhiteWind.Entry>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Entry);
                     default:
 #if DEBUG
                         System.Diagnostics.Debugger.Break();
