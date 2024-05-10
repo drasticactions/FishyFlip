@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SampleAppMaui.FirehosePage"
              xmlns:vm="clr-namespace:SampleApp.ViewModels;assembly=SampleApp.Core"
+             xmlns:m="clr-namespace:SampleApp.Models;assembly=SampleApp.Core"
              xmlns:ff="clr-namespace:FishyFlip.Models;assembly=FishyFlip"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:SampleAppMaui"
              Title="FirehosePage">
     <ContentPage.Resources>
-        <DataTemplate x:Key="genericTemplate" x:DataType="ff:ATRecord">
+        <DataTemplate x:Key="genericTemplate" x:DataType="m:ATRecordWrapper">
             <Grid RowSpacing="3" RowDefinitions="Auto, 1">
-                <Label Text="{Binding Type}"/>
+                <Label Text="{Binding Record.Type}"/>
                 <BoxView
                    BackgroundColor="Black"
                    Grid.Row="1"/>
@@ -20,16 +21,28 @@
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="likeRecord" x:DataType="ff:LikeRecord">
-            <Grid RowSpacing="3" RowDefinitions="Auto, Auto, 1">
-                <Label Grid.Row="0" Text="{Binding Subject.Uri}"/>
-                <Label Grid.Row="1" Text="{Binding CreatedAt}"/>
-                <BoxView BackgroundColor="Red" Grid.Row="2"/>
+        <DataTemplate x:Key="likeRecord"  x:DataType="m:LikeWrapper">
+            <Grid RowSpacing="3" RowDefinitions="Auto, Auto, Auto, 1">
+                <Label Text="{Binding Like.Type}"/>
+                <Label Grid.Row="1" Text="{Binding Like.Subject.Uri}"/>
+                <Label Grid.Row="2" Text="{Binding Like.CreatedAt}"/>
+                <BoxView BackgroundColor="Red" Grid.Row="3"/>
+                <!--<Rectangle Background="Black" Grid.Row="2"/>-->
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="postRecord" x:DataType="m:PostWrapper">
+            <Grid RowSpacing="3" RowDefinitions="Auto, Auto, Auto, 1">
+                <Label Text="{Binding Post.Type}"/>
+                <Label Grid.Row="1" Text="{Binding Post.Text}"/>
+                <Label Grid.Row="2" Text="{Binding Post.CreatedAt}"/>
+                <BoxView BackgroundColor="Orange" Grid.Row="3"/>
                 <!--<Rectangle Background="Black" Grid.Row="2"/>-->
             </Grid>
         </DataTemplate>
         <local:ATRecordDataTemplateSelector x:Key="ATRecordDataTemplateSelector"
                                           LikeTemplate="{StaticResource likeRecord}"
+                                            PostTemplate="{StaticResource postRecord}"
                                           GenericTemplate="{StaticResource genericTemplate}"
                                           />
     </ContentPage.Resources>
