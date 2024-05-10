@@ -6,6 +6,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new FirehosePage(provider);
+        MainPage = new AppShell(provider);
     }
 }

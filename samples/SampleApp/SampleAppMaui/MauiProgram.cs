@@ -27,7 +27,8 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<IAppDispatcher, MauiAppDispatcher>();
         builder.Services.AddSingleton<IErrorHandlerService, MauiDebugErrorHandler>();
-        builder.Services.AddSingleton<FirehoseViewModel>();
+        builder.Services.AddTransient<FirehoseViewModel>();
+        builder.Services.AddTransient<ProfileViewModel>();
 
         return builder.Build();
     }

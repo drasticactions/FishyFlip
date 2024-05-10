@@ -8,14 +8,11 @@ using Drastic.ViewModels;
 using FishyFlip;
 using FishyFlip.Events;
 using FishyFlip.Models;
-using FishyFlip.Tools;
-using SampleApp.Models;
 
 namespace SampleApp.ViewModels;
 
 public class FirehoseViewModel : BaseViewModel
 {
-    private ATProtocol protocol;
     private ATWebSocketProtocol webSocketProtocol;
     private AsyncCommand connectCommand;
     private AsyncCommand stopCommand;
@@ -24,8 +21,6 @@ public class FirehoseViewModel : BaseViewModel
     public FirehoseViewModel(IServiceProvider services)
         : base(services)
     {
-        var protocolBuilder = new ATProtocolBuilder();
-        this.protocol = protocolBuilder.Build();
         var webProtocolBuilder = new ATWebSocketProtocolBuilder();
         this.webSocketProtocol = webProtocolBuilder.Build();
         this.webSocketProtocol.OnSubscribedRepoMessage += WebSocketProtocol_OnSubscribedRepoMessage;
@@ -40,7 +35,7 @@ public class FirehoseViewModel : BaseViewModel
 
     public AsyncCommand CleanCommand => this.cleanCommand;
 
-    public ObservableCollection<ATRecordWrapper> Records { get; } = new ObservableCollection<ATRecordWrapper>();
+    public ObservableCollection<ATRecord> Records { get; } = new ObservableCollection<ATRecord>();
 
     /// <inheritdoc/>
     public override void RaiseCanExecuteChanged()
@@ -90,14 +85,14 @@ public class FirehoseViewModel : BaseViewModel
 
     private async Task HandleRecordAsync(FrameCommit commit, ATRecord wsRecord)
     {
-        ATRecordWrapper? record = null;
+        ATRecord? record = null;
         switch (wsRecord.Type)
         {
             case FishyFlip.Constants.FeedType.Post:
-                record = new PostWrapper((Post)wsRecord);
+                record = (Post)wsRecord;
                 break;
             case FishyFlip.Constants.FeedType.Like:
-                record = new LikeWrapper((Like)wsRecord);
+                record = (Like)wsRecord;
                 break;
             case FishyFlip.Constants.FeedType.Generator:
             case FishyFlip.Constants.FeedType.Repost:
@@ -108,16 +103,13 @@ public class FirehoseViewModel : BaseViewModel
             case FishyFlip.Constants.ActorTypes.Profile:
             case FishyFlip.Constants.FeedType.ThreadGate:
             default:
-                record = new ATRecordWrapper(wsRecord);
+                record = wsRecord;
                 break;
         }
 
-        if (record != null)
+        lock (this)
         {
-            lock (this)
-            {
-                this.Records.Add(record);
-            }
+            this.Records.Add(record);
         }
     }
 }

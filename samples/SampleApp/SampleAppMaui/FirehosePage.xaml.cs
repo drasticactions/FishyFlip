@@ -6,7 +6,7 @@ public partial class FirehosePage : ContentPage
 {
     public FirehosePage(IServiceProvider provider)
     {
-        InitializeComponent();
+        this.InitializeComponent();
         this.BindingContext = this.ViewModel = provider.GetRequiredService<FirehoseViewModel>();
     }
 

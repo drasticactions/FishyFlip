@@ -1,6 +1,5 @@
 ﻿using FishyFlip.Models;
 using SampleApp;
-using SampleApp.Models;
 
 namespace SampleAppMaui;
 
@@ -14,7 +13,7 @@ public class ATRecordDataTemplateSelector : DataTemplateSelector
 
     protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
     {
-        switch (((ATRecordWrapper)item).Record.Type)
+        switch (((ATRecord)item).Type)
         {
             case FishyFlip.Constants.FeedType.Like:
                 return this.LikeTemplate;

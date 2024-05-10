@@ -2,16 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SampleAppMaui.FirehosePage"
-             xmlns:vm="clr-namespace:SampleApp.ViewModels;assembly=SampleApp.Core"
-             xmlns:m="clr-namespace:SampleApp.Models;assembly=SampleApp.Core"
              xmlns:ff="clr-namespace:FishyFlip.Models;assembly=FishyFlip"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:SampleAppMaui"
-             Title="FirehosePage">
+             Title="Firehose Collection View">
     <ContentPage.Resources>
-        <DataTemplate x:Key="genericTemplate" x:DataType="m:ATRecordWrapper">
+        <DataTemplate x:Key="genericTemplate" x:DataType="ff:ATRecord">
             <Grid RowSpacing="3" RowDefinitions="Auto, 1">
-                <Label Text="{Binding Record.Type}"/>
+                <Label Text="{Binding Type}"/>
                 <BoxView
                    BackgroundColor="Black"
                    Grid.Row="1"/>
@@ -21,21 +18,21 @@
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="likeRecord"  x:DataType="m:LikeWrapper">
+        <DataTemplate x:Key="likeRecord"  x:DataType="ff:Like">
             <Grid RowSpacing="3" RowDefinitions="Auto, Auto, Auto, 1">
-                <Label Text="{Binding Like.Type}"/>
-                <Label Grid.Row="1" Text="{Binding Like.Subject.Uri}"/>
-                <Label Grid.Row="2" Text="{Binding Like.CreatedAt}"/>
+                <Label Text="{Binding Type}"/>
+                <Label Grid.Row="1" Text="{Binding Subject.Uri}"/>
+                <Label Grid.Row="2" Text="{Binding CreatedAt}"/>
                 <BoxView BackgroundColor="Red" Grid.Row="3"/>
                 <!--<Rectangle Background="Black" Grid.Row="2"/>-->
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="postRecord" x:DataType="m:PostWrapper">
+        <DataTemplate x:Key="postRecord" x:DataType="ff:Post">
             <Grid RowSpacing="3" RowDefinitions="Auto, Auto, Auto, 1">
-                <Label Text="{Binding Post.Type}"/>
-                <Label Grid.Row="1" Text="{Binding Post.Text}"/>
-                <Label Grid.Row="2" Text="{Binding Post.CreatedAt}"/>
+                <Label Text="{Binding Type}"/>
+                <Label Grid.Row="1" Text="{Binding Text}"/>
+                <Label Grid.Row="2" Text="{Binding CreatedAt}"/>
                 <BoxView BackgroundColor="Orange" Grid.Row="3"/>
                 <!--<Rectangle Background="Black" Grid.Row="2"/>-->
             </Grid>
