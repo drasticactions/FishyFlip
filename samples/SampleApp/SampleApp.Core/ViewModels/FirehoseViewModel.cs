@@ -15,10 +15,6 @@ namespace SampleApp.ViewModels;
 
 public class FirehoseViewModel : BaseViewModel
 {
-#if DEBUG
-    public static FirehoseViewModel DesignInstance = new(null!);
-#endif
-
     private ATProtocol protocol;
     private ATWebSocketProtocol webSocketProtocol;
     private AsyncCommand connectCommand;
