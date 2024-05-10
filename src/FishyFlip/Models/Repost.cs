@@ -33,7 +33,8 @@ public class Repost : ATRecord
     public Repost(CBORObject obj, ILogger? logger = default)
     {
         this.Cid = obj["subject"]["cid"].ToATCid(logger);
-        this.Uri = new ATUri(obj["subject"]["uri"].AsString());
+        ATUri.TryCreate(obj["subject"]["uri"].AsString(), out var uri);
+        this.Uri = uri;
         this.CreatedAt = obj["createdAt"].ToDateTime();
         this.Type = Constants.FeedType.Repost;
     }

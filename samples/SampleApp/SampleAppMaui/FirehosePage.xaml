@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SampleAppMaui.FirehosePage"
+             xmlns:vm="clr-namespace:SampleApp.ViewModels;assembly=SampleApp.Core"
+             xmlns:ff="clr-namespace:FishyFlip.Models;assembly=FishyFlip"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:SampleAppMaui"
+             Title="FirehosePage">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="genericTemplate" x:DataType="ff:ATRecord">
+            <Grid RowSpacing="3" RowDefinitions="Auto, 1">
+                <Label Text="{Binding Type}"/>
+                <BoxView
+                   BackgroundColor="Black"
+                   Grid.Row="1"/>
+                <!--<Rectangle
+                   Background="Black"
+                   Grid.Row="1"/>-->
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="likeRecord" x:DataType="ff:LikeRecord">
+            <Grid RowSpacing="3" RowDefinitions="Auto, Auto, 1">
+                <Label Grid.Row="0" Text="{Binding Subject.Uri}"/>
+                <Label Grid.Row="1" Text="{Binding CreatedAt}"/>
+                <BoxView BackgroundColor="Red" Grid.Row="2"/>
+                <!--<Rectangle Background="Black" Grid.Row="2"/>-->
+            </Grid>
+        </DataTemplate>
+        <local:ATRecordDataTemplateSelector x:Key="ATRecordDataTemplateSelector"
+                                          LikeTemplate="{StaticResource likeRecord}"
+                                          GenericTemplate="{StaticResource genericTemplate}"
+                                          />
+    </ContentPage.Resources>
+    <Grid Margin="15" RowSpacing="5" RowDefinitions="Auto, *">
+        <Grid ColumnSpacing="15" ColumnDefinitions="*, *, *">
+            <Button Text="Start" Command="{Binding ConnectCommand}"/>
+            <Button Text="Stop" Grid.Column="1" Command="{Binding StopCommand}"/>
+            <Button Text="Clear" Grid.Column="2" Command="{Binding CleanCommand}"/>
+        </Grid>
+        <CollectionView Grid.Row="1"
+                        ItemTemplate="{StaticResource ATRecordDataTemplateSelector}"
+                        ItemsSource="{Binding Records}"
+                        SelectionMode="None">
+        </CollectionView>
+    </Grid>
+</ContentPage>
