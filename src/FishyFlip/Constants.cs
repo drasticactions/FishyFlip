@@ -33,6 +33,16 @@ public static class Constants
             public const string ListAppPasswords = "/xrpc/com.atproto.server.listAppPasswords";
             public const string CreateInviteCode = "/xrpc/com.atproto.server.createInviteCode";
             public const string CreateInviteCodes = "/xrpc/com.atproto.server.createInviteCodes";
+            public const string RequestEmailUpdate = "/xrpc/com.atproto.server.requestEmailUpdate";
+            public const string CheckAccountStatus = "/xrpc/com.atproto.server.checkAccountStatus";
+            public const string UpdateEmail = "/xrpc/com.atproto.server.updateEmail";
+            public const string ConfirmEmail = "/xrpc/com.atproto.server.confirmEmail";
+            public const string DeactivateAccount = "/xrpc/com.atproto.server.deactivateAccount";
+            public const string ActivateAccount = "/xrpc/com.atproto.server.activateAccount";
+            public const string GetServerAuth = "/xrpc/com.atproto.server.getServerAuth";
+            public const string GetServiceAuth = "/xrpc/com.atproto.server.getServiceAuth";
+            public const string ReserveSigningKey = "/xrpc/com.atproto.server.reserveSigningKey";
+            public const string RequestEmailConfirmation = "/xrpc/com.atproto.server.requestEmailConfirmation";
         }
 
         public static class ATProtoModeration
@@ -55,6 +65,16 @@ public static class Constants
             public const string TakeModerationAction = "/xrpc/com.atproto.admin.takeModerationAction";
             public const string UpdateAccountEmail = "/xrpc/com.atproto.admin.updateAccountEmail";
             public const string UpdateAccountHandle = "/xrpc/com.atproto.admin.updateAccountHandle";
+            public const string DeleteAccount = "/xrpc/com.atproto.admin.deleteAccount";
+            public const string GetAccountInfos = "/xrpc/com.atproto.admin.getAccountInfos";
+            public const string SendEmail = "/xrpc/com.atproto.admin.sendEmail";
+            public const string UpdateSubjectStatus = "/xrpc/com.atproto.admin.updateSubjectStatus";
+            public const string DisableInviteCodes = "/xrpc/com.atproto.admin.disableInviteCodes";
+            public const string DisableAccountInvites = "/xrpc/com.atproto.admin.disableAccountInvites";
+            public const string EnableAccountInvites = "/xrpc/com.atproto.admin.enableAccountInvites";
+            public const string UpdateAccountPassword = "/xrpc/com.atproto.admin.updateAccountPassword";
+            public const string GetSubjectStatus = "/xrpc/com.atproto.admin.getSubjectStatus";
+            public const string GetAccountInfo = "/xrpc/com.atproto.admin.getAccountInfo";
         }
 
         public static class ATProtoLabel
@@ -67,6 +87,17 @@ public static class Constants
         {
             public const string ResolveHandle = "/xrpc/com.atproto.identity.resolveHandle";
             public const string UpdateHandle = "/xrpc/com.atproto.identity.updateHandle";
+            public const string GetRecommendedDidCredentials = "/xrpc/com.atproto.identity.getRecommendedDidCredentials";
+            public const string RequestPlcOperationSignature = "/xrpc/com.atproto.identity.requestPlcOperationSignature";
+            public const string SubmitPlcOperation = "/xrpc/com.atproto.identity.submitPlcOperation";
+            public const string SignPlcOperation = "/xrpc/com.atproto.identity.signPlcOperation";
+        }
+
+        public static class ATProtoTemp
+        {
+            public const string CheckSignupQueue = "/xrpc/com.atproto.temp.checkSignupQueue";
+            public const string RequestPhoneVerification = "/xrpc/com.atproto.temp.requestPhoneVerification";
+            public const string FetchLabels = "/xrpc/com.atproto.temp.fetchLabels";
         }
 
         public static class ATProtoRepo
@@ -79,6 +110,8 @@ public static class Constants
             public const string DescribeRepo = "/xrpc/com.atproto.repo.describeRepo";
             public const string DeleteRecord = "/xrpc/com.atproto.repo.deleteRecord";
             public const string ApplyWrites = "/xrpc/com.atproto.repo.applyWrites";
+            public const string ImportRepo = "/xrpc/com.atproto.repo.importRepo";
+            public const string ListMissingBlobs = "/xrpc/com.atproto.repo.listMissingBlobs";
         }
 
         public static class ATProtoSync
@@ -98,8 +131,68 @@ public static class Constants
             public const string SubscribeRepos = "/xrpc/com.atproto.sync.subscribeRepos";
         }
 
+        public static class Ozone
+        {
+            public static class Moderation
+            {
+                public const string QueryStatuses = "/xrpc/tools.ozone.moderation.queryStatuses";
+                public const string GetRepo = "/xrpc/tools.ozone.moderation.getRepo";
+                public const string GetEvent = "/xrpc/tools.ozone.moderation.getEvent";
+                public const string QueryEvents = "/xrpc/tools.ozone.moderation.queryEvents";
+                public const string GetRecord = "/xrpc/tools.ozone.moderation.getRecord";
+                public const string EmitEvent = "/xrpc/tools.ozone.moderation.emitEvent";
+                public const string SearchRepos = "/xrpc/tools.ozone.moderation.searchRepos";
+            }
+
+            public static class Communication
+            {
+                public const string UpdateTemplate = "/xrpc/tools.ozone.communication.updateTemplate";
+                public const string CreateTemplate = "/xrpc/tools.ozone.communication.createTemplate";
+                public const string ListTemplates = "/xrpc/tools.ozone.communication.listTemplates";
+                public const string DeleteTemplate = "/xrpc/tools.ozone.communication.deleteTemplate";
+            }
+        }
+
         public static class Bluesky
         {
+            public static class Chat
+            {
+                public static class Convo
+                {
+                    public const string ListConvos = "/xrpc/chat.bsky.convo.listConvos";
+                    public const string UnmuteConvo = "/xrpc/chat.bsky.convo.unmuteConvo";
+                    public const string GetLog = "/xrpc/chat.bsky.convo.getLog";
+                    public const string SendMessage = "/xrpc/chat.bsky.convo.sendMessage";
+                    public const string LeaveConvo = "/xrpc/chat.bsky.convo.leaveConvo";
+                    public const string MuteConvo = "/xrpc/chat.bsky.convo.muteConvo";
+                    public const string DeleteMessageForSelf = "/xrpc/chat.bsky.convo.deleteMessageForSelf";
+                    public const string UpdateRead = "/xrpc/chat.bsky.convo.updateRead";
+                    public const string GetConvo = "/xrpc/chat.bsky.convo.getConvo";
+                    public const string GetMessages = "/xrpc/chat.bsky.convo.getMessages";
+                    public const string GetConvoForMembers = "/xrpc/chat.bsky.convo.getConvoForMembers";
+                    public const string SendMessageBatch = "/xrpc/chat.bsky.convo.sendMessageBatch";
+                }
+
+                public static class Actor
+                {
+                    public const string ExportAccountData = "/xrpc/chat.bsky.actor.exportAccountData";
+                    public const string DeleteAccount = "/xrpc/chat.bsky.actor.deleteAccount";
+                }
+
+                public static class Moderation
+                {
+                    public const string GetActorMetadata = "/xrpc/chat.bsky.moderation.getActorMetadata";
+                    public const string GetMessageContext = "/xrpc/chat.bsky.moderation.getMessageContext";
+                    public const string UpdateActorAccess = "/xrpc/chat.bsky.moderation.updateActorAccess";
+                }
+            }
+
+            public static class Labeler
+            {
+                public const string Service = "/xrpc/app.bsky.labeler.service";
+                public const string GetServices = "/xrpc/app.bsky.labeler.getServices";
+            }
+
             public static class Feed
             {
                 public const string GetAuthorFeed = "/xrpc/app.bsky.feed.getAuthorFeed";
@@ -122,6 +215,8 @@ public static class Constants
             {
                 public const string GetActorProfile = "/xrpc/app.bsky.actor.getProfile";
                 public const string GetActorProfiles = "/xrpc/app.bsky.actor.getProfiles";
+                public const string GetPreferences = "/xrpc/app.bsky.actor.getPreferences";
+                public const string PutPreferences = "/xrpc/app.bsky.actor.putPreferences";
                 public const string GetActorSuggestions = "/xrpc/app.bsky.actor.getSuggestions";
                 public const string SearchActors = "/xrpc/app.bsky.actor.searchActors";
                 public const string SearchActorsTypeahead = "/xrpc/app.bsky.actor.searchActorsTypeahead";
@@ -149,6 +244,7 @@ public static class Constants
             public static class Notification
             {
                 public const string NotificationUpdateSeen = "/xrpc/app.bsky.notification.updateSeen";
+                public const string NotificationRegisterPush = "/xrpc/app.bsky.notification.registerPush";
                 public const string NotificationListNotifications = "/xrpc/app.bsky.notification.listNotifications";
                 public const string NotificationGetUnreadCount = "/xrpc/app.bsky.notification.getUnreadCount";
             }
@@ -156,6 +252,10 @@ public static class Constants
             public static class Unspecced
             {
                 public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
+                public const string GetTaggedSuggestions = "/xrpc/app.bsky.unspecced.getTaggedSuggestions";
+                public const string SearchPostsSkeleton = "/xrpc/app.bsky.unspecced.searchPostsSkeleton";
+                public const string GetSuggestionsSkeleton = "/xrpc/app.bsky.unspecced.getSuggestionsSkeleton";
+                public const string SearchActorsSkeleton = "/xrpc/app.bsky.unspecced.searchActorsSkeleton";
             }
         }
 
