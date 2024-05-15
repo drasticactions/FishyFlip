@@ -277,6 +277,10 @@ public static class Constants
     public static class ActorTypes
     {
         public const string Profile = "app.bsky.actor.profile";
+        public const string FeedViewPref = "app.bsky.actor.defs#feedViewPref";
+        public const string ContentLabelPref = "app.bsky.actor.defs#contentLabelPref";
+        public const string AdultContentPref = "app.bsky.actor.defs#adultContentPref";
+        public const string SavedFeedsPref = "app.bsky.actor.defs#savedFeedsPref";
     }
 
     public static class GraphTypes

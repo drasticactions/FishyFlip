@@ -169,6 +169,11 @@ namespace FishyFlip;
 [JsonSerializable(typeof(ATLinkRef))]
 [JsonSerializable(typeof(Used))]
 [JsonSerializable(typeof(Viewer))]
+[JsonSerializable(typeof(AdultContentPref))]
+[JsonSerializable(typeof(ContentLabelPref))]
+[JsonSerializable(typeof(FeedViewPref))]
+[JsonSerializable(typeof(SavedFeedsPref))]
+[JsonSerializable(typeof(ActorPreferences))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

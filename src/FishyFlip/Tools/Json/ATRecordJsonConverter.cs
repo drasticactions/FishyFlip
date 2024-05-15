@@ -28,6 +28,14 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                         return JsonSerializer.Deserialize<Repost>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Repost);
                     case Constants.GraphTypes.Follow:
                         return JsonSerializer.Deserialize<Follow>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Follow);
+                    case Constants.ActorTypes.AdultContentPref:
+                        return JsonSerializer.Deserialize<AdultContentPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).AdultContentPref);
+                    case Constants.ActorTypes.ContentLabelPref:
+                        return JsonSerializer.Deserialize<ContentLabelPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ContentLabelPref);
+                    case Constants.ActorTypes.FeedViewPref:
+                        return JsonSerializer.Deserialize<FeedViewPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).FeedViewPref);
+                    case Constants.ActorTypes.SavedFeedsPref:
+                        return JsonSerializer.Deserialize<SavedFeedsPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).SavedFeedsPref);
                     case Constants.WhiteWindTypes.Entry:
                         return JsonSerializer.Deserialize<Models.WhiteWind.Entry>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Entry);
                     default:
