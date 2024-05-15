@@ -53,6 +53,40 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, ATRecord value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        switch (value.Type)
+        {
+            case Constants.FeedType.Like:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((Like)value, ((SourceGenerationContext)options.TypeInfoResolver!).Like));
+                break;
+            case Constants.FeedType.Post:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((Post)value, ((SourceGenerationContext)options.TypeInfoResolver!).Post));
+                break;
+            case Constants.FeedType.Repost:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((Repost)value, ((SourceGenerationContext)options.TypeInfoResolver!).Repost));
+                break;
+            case Constants.GraphTypes.Follow:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((Follow)value, ((SourceGenerationContext)options.TypeInfoResolver!).Follow));
+                break;
+            case Constants.ActorTypes.AdultContentPref:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((AdultContentPref)value, ((SourceGenerationContext)options.TypeInfoResolver!).AdultContentPref));
+                break;
+            case Constants.ActorTypes.ContentLabelPref:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((ContentLabelPref)value, ((SourceGenerationContext)options.TypeInfoResolver!).ContentLabelPref));
+                break;
+            case Constants.ActorTypes.FeedViewPref:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((FeedViewPref)value, ((SourceGenerationContext)options.TypeInfoResolver!).FeedViewPref));
+                break;
+            case Constants.ActorTypes.SavedFeedsPref:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((SavedFeedsPref)value, ((SourceGenerationContext)options.TypeInfoResolver!).SavedFeedsPref));
+                break;
+            case Constants.WhiteWindTypes.Entry:
+                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((Models.WhiteWind.Entry)value, ((SourceGenerationContext)options.TypeInfoResolver!).Entry));
+                break;
+            default:
+#if DEBUG
+                System.Diagnostics.Debugger.Break();
+#endif
+                break;
+        }
     }
 }

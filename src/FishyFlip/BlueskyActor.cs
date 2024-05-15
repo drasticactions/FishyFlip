@@ -107,4 +107,13 @@ public sealed class BlueskyActor
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the actors preferences, or null if no matching actors were found.</returns>
     public Task<Result<ActorPreferences?>> GetPreferencesAsync(CancellationToken cancellationToken = default)
         => this.Client.Get<ActorPreferences>(Constants.Urls.Bluesky.Actor.GetPreferences, this.Options.SourceGenerationContext.ActorPreferences, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+
+    /// <summary>
+    /// Asynchronously updates the preferences of the current actor.
+    /// </summary>
+    /// <param name="preferences">Actor Preferences.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>Success action.</returns>
+    public Task<Result<Success>> PutPreferencesAsync(ActorPreferences preferences, CancellationToken cancellationToken = default)
+        => this.Client.Post<ActorPreferences, Success>(Constants.Urls.Bluesky.Actor.PutPreferences, this.Options.SourceGenerationContext.ActorPreferences, this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, preferences, cancellationToken, this.Options.Logger);
 }
