@@ -174,6 +174,8 @@ namespace FishyFlip;
 [JsonSerializable(typeof(FeedViewPref))]
 [JsonSerializable(typeof(SavedFeedsPref))]
 [JsonSerializable(typeof(ActorPreferences))]
+[JsonSerializable(typeof(TagSuggestion))]
+[JsonSerializable(typeof(TagSuggestions))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

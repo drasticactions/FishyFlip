@@ -51,4 +51,12 @@ public sealed class BlueskyUnspecced
                 timeline => (timeline ?? new FeedResultList(Array.Empty<FeedRecord>(), null))!,
                 error => error!);
     }
+
+    /// <summary>
+    /// Gets the tagged suggestions asynchronously.
+    /// </summary>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns><see cref="TagSuggestions"/>.</returns>
+    public Task<Result<TagSuggestions?>> GetTaggedSuggestionsAsync(CancellationToken cancellationToken = default)
+        => this.Client.Get<TagSuggestions>(Constants.Urls.Bluesky.Unspecced.GetTaggedSuggestions, this.Options.SourceGenerationContext.TagSuggestions, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
 }
