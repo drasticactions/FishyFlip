@@ -283,6 +283,29 @@ public static class Constants
         public const string SavedFeedsPref = "app.bsky.actor.defs#savedFeedsPref";
     }
 
+    public static class ConversationTypes
+    {
+        public const string MessageView = "chat.bsky.convo.defs#messageView";
+    }
+
+    public static class DeclarationTypes
+    {
+        public const string AllowIncomingPref = "chat.bsky.actor.declaration";
+    }
+
+    public static class ATProtoProxy
+    {
+        public const string Proxy = "atproto-proxy";
+        public const string BskyChat = "did:web:api.bsky.chat#bsky_chat";
+    }
+
+    public static class AllowIncomingTypes
+    {
+        public const string Following = "following";
+        public const string All = "all";
+        public const string None = "none";
+    }
+
     public static class GraphTypes
     {
         public const string ListItem = "app.bsky.graph.listitem";

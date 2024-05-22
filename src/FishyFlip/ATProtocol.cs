@@ -134,6 +134,11 @@ public sealed class ATProtocol : IDisposable
     public PlcDirectory PlcDirectory => new(this);
 
     /// <summary>
+    /// Gets the ATProto Chat Protocol.
+    /// </summary>
+    public BlueskyChat Chat => new(this);
+
+    /// <summary>
     /// Gets a value indicating whether the subscription is active.
     /// </summary>
     public bool IsSubscriptionActive => this.webSocketProtocol.IsConnected;

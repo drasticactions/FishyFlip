@@ -24,6 +24,7 @@ internal static class HttpClientExtensions
     /// <param name="body">The request body.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <param name="headers">Custom headers to include with the request.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     internal static async Task<Result<TK>> Post<T, TK>(
        this HttpClient client,
@@ -33,11 +34,20 @@ internal static class HttpClientExtensions
        JsonSerializerOptions options,
        T body,
        CancellationToken cancellationToken,
-       ILogger? logger = default)
+       ILogger? logger = default,
+       Dictionary<string, string>? headers = default)
     {
         var jsonContent = JsonSerializer.Serialize(body, typeT);
         StringContent content = new(jsonContent, Encoding.UTF8, "application/json");
-        logger?.LogDebug($"POST {url}: {jsonContent}");
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                content.Headers.Add(header.Key, header.Value);
+            }
+        }
+
+        logger?.LogDebug($"POST {client.BaseAddress}{url}: {jsonContent}");
         using var message = await client.PostAsync(url, content, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
@@ -55,7 +65,7 @@ internal static class HttpClientExtensions
             response = "{ }";
         }
 
-        logger?.LogDebug($"POST {url}: {response}");
+        logger?.LogDebug($"POST {client.BaseAddress}{url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, typeTK);
         return result!;
     }
@@ -81,7 +91,7 @@ internal static class HttpClientExtensions
        CancellationToken cancellationToken,
        ILogger? logger = default)
     {
-        logger?.LogDebug($"POST STREAM {url}: {body.Headers.ContentType}");
+        logger?.LogDebug($"POST STREAM {client.BaseAddress}{url}: {body.Headers.ContentType}");
         using var message = await client.PostAsync(url, body, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
@@ -99,7 +109,7 @@ internal static class HttpClientExtensions
             response = "{ }";
         }
 
-        logger?.LogDebug($"POST {url}: {response}");
+        logger?.LogDebug($"POST {client.BaseAddress}{url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, type);
         return result!;
     }
@@ -123,7 +133,7 @@ internal static class HttpClientExtensions
         CancellationToken cancellationToken,
         ILogger? logger = default)
     {
-        logger?.LogDebug($"POST {url}");
+        logger?.LogDebug($"POST {client.BaseAddress}{url}");
         using var message = await client.PostAsync(url, null, cancellationToken: cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
@@ -141,7 +151,7 @@ internal static class HttpClientExtensions
             response = "{ }";
         }
 
-        logger?.LogDebug($"POST {url}: {response}");
+        logger?.LogDebug($"POST {client.BaseAddress}{url}: {response}");
         TK? result = JsonSerializer.Deserialize<TK>(response, type);
         return result!;
     }
@@ -162,7 +172,7 @@ internal static class HttpClientExtensions
        CancellationToken cancellationToken,
        ILogger? logger = default)
     {
-        logger?.LogDebug($"GET {url}");
+        logger?.LogDebug($"GET {client.BaseAddress}{url}");
         using var message = await client.GetAsync(url, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
@@ -178,7 +188,7 @@ internal static class HttpClientExtensions
         string response = await message.Content.ReadAsStringAsync(cancellationToken);
 #endif
 
-        logger?.LogDebug($"GET BLOB {url}: {response}");
+        logger?.LogDebug($"GET BLOB {client.BaseAddress}{url}: {response}");
         return new Blob(blob);
     }
 
@@ -200,7 +210,7 @@ internal static class HttpClientExtensions
         ILogger? logger = default,
         OnCarDecoded? progress = null)
     {
-        logger?.LogDebug($"GET {url}");
+        logger?.LogDebug($"GET {client.BaseAddress}{url}");
         using var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
@@ -237,7 +247,7 @@ internal static class HttpClientExtensions
         CancellationToken cancellationToken,
         ILogger? logger = default)
     {
-        logger?.LogDebug($"GET {url}");
+        logger?.LogDebug($"GET {client.BaseAddress}{url}");
 
         using var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if (!message.IsSuccessStatusCode)
@@ -272,6 +282,7 @@ internal static class HttpClientExtensions
     /// <param name="options">The JsonSerializerOptions for the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <param name="headers">Custom headers to include with the request.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     internal static async Task<Result<T?>> Get<T>(
         this HttpClient client,
@@ -279,10 +290,21 @@ internal static class HttpClientExtensions
         JsonTypeInfo<T> type,
         JsonSerializerOptions options,
         CancellationToken cancellationToken,
-        ILogger? logger = default)
+        ILogger? logger = default,
+        Dictionary<string, string>? headers = default)
     {
-        logger?.LogDebug($"GET {url}");
-        using var message = await client.GetAsync(url, cancellationToken);
+        logger?.LogDebug($"GET {client.BaseAddress}{url}");
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+        }
+
+        using var message = await client.SendAsync(request, cancellationToken);
+
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
@@ -299,7 +321,7 @@ internal static class HttpClientExtensions
             response = "{ }";
         }
 
-        logger?.LogDebug($"GET {url}: {response}");
+        logger?.LogDebug($"GET {client.BaseAddress}{url}: {response}");
         return JsonSerializer.Deserialize<T>(response, type);
     }
 

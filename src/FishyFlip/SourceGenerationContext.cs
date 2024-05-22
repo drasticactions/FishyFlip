@@ -176,6 +176,14 @@ namespace FishyFlip;
 [JsonSerializable(typeof(ActorPreferences))]
 [JsonSerializable(typeof(TagSuggestion))]
 [JsonSerializable(typeof(TagSuggestions))]
+[JsonSerializable(typeof(MessageView))]
+[JsonSerializable(typeof(ChatSender))]
+[JsonSerializable(typeof(CreateMessage))]
+[JsonSerializable(typeof(CreateMessageMessage))]
+[JsonSerializable(typeof(ConversationMessages))]
+[JsonSerializable(typeof(Conversation))]
+[JsonSerializable(typeof(ConversationView))]
+[JsonSerializable(typeof(ConversationList))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }
