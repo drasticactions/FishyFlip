@@ -9,7 +9,8 @@ namespace FishyFlip;
 /// </summary>
 public sealed class BlueskyChat
 {
-    private ATProtocol proto;
+    private readonly ATProtocol proto;
+    private readonly Dictionary<string, string> chatHeaders;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BlueskyChat"/> class.
@@ -18,6 +19,10 @@ public sealed class BlueskyChat
     internal BlueskyChat(ATProtocol proto)
     {
         this.proto = proto;
+        this.chatHeaders = new Dictionary<string, string>
+        {
+            { Constants.ATProtoProxy.Proxy, Constants.ATProtoProxy.BskyChat },
+        };
     }
 
     private ATProtocolOptions Options => this.proto.Options;
@@ -46,12 +51,7 @@ public sealed class BlueskyChat
             url += $"&limit={limit}";
         }
 
-        var headers = new Dictionary<string, string>
-        {
-            { Constants.ATProtoProxy.Proxy, Constants.ATProtoProxy.BskyChat },
-        };
-
-        return this.Client.Get<ConversationMessages>(url, this.Options.SourceGenerationContext.ConversationMessages, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, headers);
+        return this.Client.Get<ConversationMessages>(url, this.Options.SourceGenerationContext.ConversationMessages, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, this.chatHeaders);
     }
 
     /// <summary>
@@ -70,12 +70,7 @@ public sealed class BlueskyChat
             url += $"&cursor={cursor}";
         }
 
-        var headers = new Dictionary<string, string>
-        {
-            { Constants.ATProtoProxy.Proxy, Constants.ATProtoProxy.BskyChat },
-        };
-
-        return this.Client.Get<ConversationList>(url, this.Options.SourceGenerationContext.ConversationList, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, headers);
+        return this.Client.Get<ConversationList>(url, this.Options.SourceGenerationContext.ConversationList, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, this.chatHeaders);
     }
 
     /// <summary>
@@ -87,12 +82,20 @@ public sealed class BlueskyChat
     public Task<Result<ConversationView?>> GetConversationAsync(string convoId, CancellationToken cancellationToken = default)
     {
         var url = $"{Constants.Urls.Bluesky.Chat.Convo.GetConvo}?convoId={convoId}";
-        var headers = new Dictionary<string, string>
-        {
-            { Constants.ATProtoProxy.Proxy, Constants.ATProtoProxy.BskyChat },
-        };
+        return this.Client.Get<ConversationView>(url, this.Options.SourceGenerationContext.ConversationView, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, this.chatHeaders);
+    }
 
-        return this.Client.Get<ConversationView>(url, this.Options.SourceGenerationContext.ConversationView, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, headers);
+    /// <summary>
+    /// Retrieves a conversation for members asynchronously.
+    /// </summary>
+    /// <param name="members">The ATDid of the member of the conversation.</param>
+    /// <param name="cancellationToken">An optional token to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{Conversation?}"/> that encapsulates the result of the operation.</returns>
+    public Task<Result<ConversationView?>> GetConversationForMembersAsync(ATDid[] members, CancellationToken cancellationToken = default)
+    {
+        var commaSeparatedMembers = string.Join(",", members.Select(x => x.ToString()));
+        var url = $"{Constants.Urls.Bluesky.Chat.Convo.GetConvoForMembers}?members={commaSeparatedMembers}";
+        return this.Client.Get<ConversationView>(url, this.Options.SourceGenerationContext.ConversationView, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, this.chatHeaders);
     }
 
     /// <summary>
@@ -106,11 +109,67 @@ public sealed class BlueskyChat
     {
         var url = $"{Constants.Urls.Bluesky.Chat.Convo.SendMessage}";
         var createMessage = new CreateMessage(convoId, new CreateMessageMessage(message));
-        var headers = new Dictionary<string, string>
-        {
-            { Constants.ATProtoProxy.Proxy, Constants.ATProtoProxy.BskyChat },
-        };
 
-        return this.Client.Post<CreateMessage, MessageView>(url, this.Options.SourceGenerationContext.CreateMessage, this.Options.SourceGenerationContext.MessageView, this.Options.JsonSerializerOptions, createMessage, cancellationToken, this.Options.Logger, headers);
+        return this.Client.Post<CreateMessage, MessageView>(url, this.Options.SourceGenerationContext.CreateMessage, this.Options.SourceGenerationContext.MessageView, this.Options.JsonSerializerOptions, createMessage, cancellationToken, this.Options.Logger, this.chatHeaders);
+    }
+
+    /// <summary>
+    /// Update the read status of a conversation asynchronously.
+    /// </summary>
+    /// <param name="convoId">The unique identifier of the conversation.</param>
+    /// <param name="cancellationToken">An optional token to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{Conversation?}"/> that encapsulates the result of the operation.</returns>
+    public Task<Result<ConversationView>> UpdateReadAsync(string convoId, CancellationToken cancellationToken = default)
+    {
+        var updateRead = new UpdateRead(convoId);
+        return this.Client.Post<UpdateRead, ConversationView>(Constants.Urls.Bluesky.Chat.Convo.UpdateRead, this.Options.SourceGenerationContext.UpdateRead, this.Options.SourceGenerationContext.ConversationView, this.Options.JsonSerializerOptions, updateRead, cancellationToken, this.Options.Logger, this.chatHeaders);
+    }
+
+    /// <summary>
+    /// Mute a conversation asynchronously.
+    /// </summary>
+    /// <param name="convoId">The unique identifier of the conversation.</param>
+    /// <param name="cancellationToken">An optional token to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{Conversation?}"/> that encapsulates the result of the operation.</returns>
+    public Task<Result<ConversationView>> MuteConvoAsync(string convoId, CancellationToken cancellationToken = default)
+    {
+        var updateRead = new UpdateRead(convoId);
+        return this.Client.Post<UpdateRead, ConversationView>(Constants.Urls.Bluesky.Chat.Convo.MuteConvo, this.Options.SourceGenerationContext.UpdateRead, this.Options.SourceGenerationContext.ConversationView, this.Options.JsonSerializerOptions, updateRead, cancellationToken, this.Options.Logger, this.chatHeaders);
+    }
+
+    /// <summary>
+    /// Unmute a conversation asynchronously.
+    /// </summary>
+    /// <param name="convoId">The unique identifier of the conversation.</param>
+    /// <param name="cancellationToken">An optional token to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{Conversation?}"/> that encapsulates the result of the operation.</returns>
+    public Task<Result<ConversationView>> UnmuteConvoAsync(string convoId, CancellationToken cancellationToken = default)
+    {
+        var updateRead = new UpdateRead(convoId);
+        return this.Client.Post<UpdateRead, ConversationView>(Constants.Urls.Bluesky.Chat.Convo.UnmuteConvo, this.Options.SourceGenerationContext.UpdateRead, this.Options.SourceGenerationContext.ConversationView, this.Options.JsonSerializerOptions, updateRead, cancellationToken, this.Options.Logger, this.chatHeaders);
+    }
+
+    /// <summary>
+    /// Retrieves the log asynchronously.
+    /// </summary>
+    /// <param name="cursor">The cursor for pagination in the log.</param>
+    /// <param name="cancellationToken">An optional token to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{LogResponse?}"/> that encapsulates the result of the operation.</returns>
+    public Task<Result<LogResponse?>> GetLogAsync(string cursor, CancellationToken cancellationToken = default)
+    {
+        var url = $"{Constants.Urls.Bluesky.Chat.Convo.GetLog}?cursor={cursor}";
+        return this.Client.Get<LogResponse>(url, this.Options.SourceGenerationContext.LogResponse, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger, this.chatHeaders);
+    }
+
+    /// <summary>
+    /// Leaves a conversation asynchronously.
+    /// </summary>
+    /// <param name="convoId">The unique identifier of the conversation.</param>
+    /// <param name="cancellationToken">An optional token to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{LeaveConvoResponse}"/> that encapsulates the result of the operation.</returns>
+    public Task<Result<LeaveConvoResponse>> LeaveConvoAsync(string convoId, CancellationToken cancellationToken = default)
+    {
+        var updateRead = new UpdateRead(convoId);
+        return this.Client.Post<UpdateRead, LeaveConvoResponse>(Constants.Urls.Bluesky.Chat.Convo.LeaveConvo, this.Options.SourceGenerationContext.UpdateRead, this.Options.SourceGenerationContext.LeaveConvoResponse, this.Options.JsonSerializerOptions, updateRead, cancellationToken, this.Options.Logger, this.chatHeaders);
     }
 }

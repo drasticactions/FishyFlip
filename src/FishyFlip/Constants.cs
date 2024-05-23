@@ -286,6 +286,11 @@ public static class Constants
     public static class ConversationTypes
     {
         public const string MessageView = "chat.bsky.convo.defs#messageView";
+        public const string DeletedMessageView = "chat.bsky.convo.defs#deletedMessageView";
+        public const string LogBeginConvo = "chat.bsky.convo.defs#logBeginConvo";
+        public const string LogLeaveConvo = "chat.bsky.convo.defs#logLeaveConvo";
+        public const string LogCreateMessage = "chat.bsky.convo.defs#logCreateMessage";
+        public const string LogDeleteMessage = "chat.bsky.convo.defs#logDeleteMessage";
     }
 
     public static class DeclarationTypes

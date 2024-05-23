@@ -184,6 +184,14 @@ namespace FishyFlip;
 [JsonSerializable(typeof(Conversation))]
 [JsonSerializable(typeof(ConversationView))]
 [JsonSerializable(typeof(ConversationList))]
+[JsonSerializable(typeof(UpdateRead))]
+[JsonSerializable(typeof(LogCreateMessage))]
+[JsonSerializable(typeof(LogDeleteMessage))]
+[JsonSerializable(typeof(LogResponse))]
+[JsonSerializable(typeof(LeaveConvoResponse))]
+[JsonSerializable(typeof(LogLeaveConvo))]
+[JsonSerializable(typeof(LogBeginConvo))]
+[JsonSerializable(typeof(DeletedMessageView))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }
