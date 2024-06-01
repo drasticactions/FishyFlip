@@ -313,5 +313,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                 this.logger?.LogError(e, "WSS: ATError receiving message.");
             }
         }
+
+        this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(webSocket.State));
     }
 }
