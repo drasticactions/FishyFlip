@@ -290,6 +290,21 @@ public sealed class ATProtoRepo
         => await this.GetRecordAsync<ActorRecord>(Constants.ActorTypes.Profile, this.Options.SourceGenerationContext.ActorRecord, repo, "self", cid, cancellationToken);
 
     /// <summary>
+    /// Uploads an image asynchronously.
+    /// If data is not a valid image supported by Bluesky, it will throw an exception.
+    /// </summary>
+    /// <param name="data">Image byte array.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the response from the blob upload operation.</returns>
+    public Task<Result<UploadBlobResponse>> UploadImageAsync(byte[] data, CancellationToken cancellationToken = default)
+    {
+        var mediaType = this.GetImageMediaType(data);
+        using var content = new StreamContent(new MemoryStream(data));
+        content.Headers.ContentType = mediaType;
+        return this.UploadBlobAsync(content, cancellationToken);
+    }
+
+    /// <summary>
     /// Uploads a blob asynchronously.
     /// </summary>
     /// <param name="content">The content of the blob as a stream.</param>
@@ -629,5 +644,36 @@ public sealed class ATProtoRepo
             swapRecord,
             swapCommit);
         return await this.Client.Post<DeleteRecord, Success>(Constants.Urls.ATProtoRepo.DeleteRecord, this.Options.SourceGenerationContext.DeleteRecord, this.Options.SourceGenerationContext.Success, this.Options.JsonSerializerOptions, record, cancellationToken, this.Options.Logger);
+    }
+
+    private MediaTypeHeaderValue GetImageMediaType(byte[] imageData)
+    {
+        // JPEG: FF D8
+        if (imageData.Length > 1 && imageData[0] == 0xFF && imageData[1] == 0xD8)
+        {
+            return new MediaTypeHeaderValue("image/jpeg");
+        }
+
+        // PNG: 89 50 4E 47
+        if (imageData.Length > 3 && imageData[0] == 0x89 && imageData[1] == 0x50 &&
+            imageData[2] == 0x4E && imageData[3] == 0x47)
+        {
+            return new MediaTypeHeaderValue("image/png");
+        }
+
+        // GIF: 47 49 46 38
+        if (imageData.Length > 3 && imageData[0] == 0x47 && imageData[1] == 0x49 &&
+            imageData[2] == 0x46 && imageData[3] == 0x38)
+        {
+            return new MediaTypeHeaderValue("image/gif");
+        }
+
+        // BMP: 42 4D
+        if (imageData.Length > 1 && imageData[0] == 0x42 && imageData[1] == 0x4D)
+        {
+            return new MediaTypeHeaderValue("image/bmp");
+        }
+
+        throw new NotSupportedException("Image format not supported.");
     }
 }
