@@ -12,6 +12,28 @@ namespace FishyFlip.Tools;
 internal static class HttpClientExtensions
 {
     /// <summary>
+    /// Asynchronously generates a client from an ATIdentifier.
+    /// </summary>
+    /// <param name="socialProto">The ATProtocol instance.</param>
+    /// <param name="identifier">The ATIdentifier instance.</param>
+    /// <param name="token">An optional cancellation token. Defaults to null.</param>
+    /// <param name="logger">An optional ILogger instance. Defaults to null.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a tuple with the ATProtocol and ATDid instances.</returns>
+    public static async Task<(ATProtocol Proto, ATDid Did)> GenerateClientFromATIdentifierAsync(this ATProtocol socialProto, ATIdentifier identifier, CancellationToken? token = default, ILogger? logger = null)
+    {
+        var (repo, atError) = await socialProto.Repo.DescribeRepoAsync(identifier, cancellationToken: token ?? CancellationToken.None);
+        if (atError is not null)
+        {
+            logger?.LogError($"ATError: {atError.StatusCode} {atError.Detail?.Error} {atError.Detail?.Message}");
+            throw new ATNetworkErrorException(atError);
+        }
+
+        var uri = new Uri(repo!.DidDoc.Service[0].ServiceEndpoint);
+        var protocolBuilder = new ATProtocolBuilder().WithInstanceUrl(uri);
+        return (protocolBuilder.Build(), repo.Did!);
+    }
+
+    /// <summary>
     /// Sends a POST request to the specified Uri as an asynchronous operation.
     /// </summary>
     /// <typeparam name="T">The type of the request body.</typeparam>

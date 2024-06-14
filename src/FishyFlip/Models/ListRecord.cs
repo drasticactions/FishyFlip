@@ -9,5 +9,5 @@ namespace FishyFlip.Models;
 /// </summary>
 /// <param name="Uri">The URI of the list.</param>
 /// <param name="ATCid">The CID of the list.</param>
-/// <param name="Value">The value of the list record.</param>
-public record ListRecord(ATUri? Uri, ATCid? ATCid, ATRecord? Value);
+/// <typeparam name="T">The type of the records in the list.</typeparam>
+public record ListRecord<T>(ATUri? Uri, ATCid? ATCid, T? Value);

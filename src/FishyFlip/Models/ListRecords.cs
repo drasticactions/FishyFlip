@@ -7,4 +7,5 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a list of records.
 /// </summary>
-public record ListRecords(ListRecord[] Records, string? Cursor);
+/// <typeparam name="T">The type of the records in the list.</typeparam>
+public record ListRecords<T>(ListRecord<T>[] Records, string? Cursor);

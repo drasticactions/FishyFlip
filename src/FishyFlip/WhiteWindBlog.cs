@@ -50,4 +50,39 @@ public sealed class WhiteWindBlog
         FishyFlip.Models.Internal.WhiteWind.CreateEntryRecord createRecord = new(Constants.WhiteWindTypes.Entry, this.proto.SessionManager!.Session!.Did.ToString()!,  record, rkey, validate);
         return !string.IsNullOrEmpty(rkey) ? this.proto.Repo.PutRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.Options.SourceGenerationContext.CreateEntryRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken) : this.proto.Repo.CreateRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.Options.SourceGenerationContext.CreateEntryRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
     }
+
+    /// <summary>
+    /// Asynchronously list the author posts.
+    /// </summary>
+    /// <param name="authorDid">Author repo.</param>
+    /// <param name="limit">The maximum number of records to retrieve. Default is 50.</param>
+    /// <param name="cursor">Optional. A string that represents the starting point for the next set of records.</param>
+    /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
+    /// <returns>A list of author posts.</returns>
+    public async Task<Result<ListRecords<Entry>?>> GetAuthorPostsAsync(
+        ATIdentifier authorDid,
+        int limit = 50,
+        string? cursor = default,
+        bool? reverse = default,
+        CancellationToken cancellationToken = default)
+    {
+        var (protocol, did) = await this.proto.GenerateClientFromATIdentifierAsync(authorDid, cancellationToken, this.Options.Logger);
+        using (protocol)
+        {
+            string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={Constants.WhiteWindTypes.Entry}&repo={did}&limit={limit}";
+            if (cursor is not null)
+            {
+                url += $"&cursor={cursor}";
+            }
+
+            if (reverse is not null)
+            {
+                url += $"&reverse={reverse}";
+            }
+
+            return await protocol.Client.Get<ListRecords<Entry>>(url, this.Options.SourceGenerationContext.ListRecordsEntry, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        }
+    }
 }

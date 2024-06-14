@@ -99,7 +99,7 @@ public sealed class ATProtoSync
     /// <returns>Result of Success.</returns>
     public async Task<Result<Success?>> GetRepoAsync(ATIdentifier repo, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var (protocol, did) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         var url = since is not null
             ? $"{Constants.Urls.ATProtoSync.GetRepo}?did={did}&since={since}"
             : $"{Constants.Urls.ATProtoSync.GetRepo}?did={did}";
@@ -123,7 +123,7 @@ public sealed class ATProtoSync
     /// <returns>Result of Success.</returns>
     public async Task<Result<Success?>> DownloadRepoAsync(ATIdentifier repo, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var (protocol, did) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         filename ??= $"{repo}-repo.car";
         try
         {
@@ -176,7 +176,7 @@ public sealed class ATProtoSync
     /// <returns>Blocks.</returns>
     public async Task<Result<Success?>> GetBlocksAsync(ATIdentifier did, ATCid[] commits, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
     {
-        var (protocol, repo) = await this.GenerateClientFromATIdentifierAsync(did, cancellationToken);
+        var (protocol, repo) = await this.socialProto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
         var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={repo}&{commitList}";
         try
@@ -200,7 +200,7 @@ public sealed class ATProtoSync
     /// <returns>Blocks.</returns>
     public async Task<Result<Success?>> DownloadBlocksAsync(ATIdentifier did, ATCid[] commits, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, repo) = await this.GenerateClientFromATIdentifierAsync(did, cancellationToken);
+        var (protocol, repo) = await this.socialProto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
         var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={repo}&{commitList}";
         filename ??= $"{did}-blocks.car";
@@ -252,7 +252,7 @@ public sealed class ATProtoSync
     /// <returns>Result of success.</returns>
     public async Task<Result<Success?>> DownloadCheckoutAsync(ATIdentifier did, ATCid? commit = default, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, repo) = await this.GenerateClientFromATIdentifierAsync(did, cancellationToken);
+        var (protocol, repo) = await this.socialProto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
         var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={repo}";
         if (commit is not null)
         {
@@ -284,7 +284,7 @@ public sealed class ATProtoSync
     /// <returns>Result of success.</returns>
     public async Task<Result<Success?>> GetRecordAsync(string collection, ATIdentifier repo, string rkey, OnCarDecoded onDecoded, ATCid? commit = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var (protocol, did) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={did}&rkey={rkey}";
         if (commit is not null)
         {
@@ -321,7 +321,7 @@ public sealed class ATProtoSync
         string? filename = default,
         CancellationToken cancellationToken = default)
     {
-        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var (protocol, did) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={did}&rkey={rkey}";
         if (commit is not null)
         {
@@ -373,7 +373,7 @@ public sealed class ATProtoSync
     /// <returns>Result of ATCids.</returns>
     public async Task<Result<ListBlobs?>> ListBlobsAsync(ATIdentifier repo, int limit = 500, string? since = default, string? cursor = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did) = await this.GenerateClientFromATIdentifierAsync(repo, cancellationToken);
+        var (protocol, did) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         var url = Constants.Urls.ATProtoSync.ListBlobs + $"?did={did}&limit={limit}";
 
         if (cursor is not null)
@@ -394,19 +394,5 @@ public sealed class ATProtoSync
         {
             protocol.Dispose();
         }
-    }
-
-    private async Task<(ATProtocol Proto, ATDid Did)> GenerateClientFromATIdentifierAsync(ATIdentifier identifier, CancellationToken? token = default)
-    {
-        var (repo, atError) = await this.socialProto.Repo.DescribeRepoAsync(identifier, cancellationToken: token ?? CancellationToken.None);
-        if (atError is not null)
-        {
-            this.Options.Logger?.LogError($"ATError: {atError.StatusCode} {atError.Detail?.Error} {atError.Detail?.Message}");
-            throw new ATNetworkErrorException(atError);
-        }
-
-        var uri = new Uri(repo!.DidDoc.Service[0].ServiceEndpoint);
-        var protocolBuilder = new ATProtocolBuilder().WithInstanceUrl(uri);
-        return (protocolBuilder.Build(), repo.Did!);
     }
 }

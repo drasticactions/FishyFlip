@@ -14,6 +14,7 @@ namespace FishyFlip;
 public sealed class ATProtoRepo
 {
     private ATProtocol proto;
+    private ATProtocol socialProto;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtoRepo"/> class.
@@ -22,6 +23,9 @@ public sealed class ATProtoRepo
     internal ATProtoRepo(ATProtocol proto)
     {
         this.proto = proto;
+        var socialUrl = new Uri(Constants.Urls.ATProtoServer.SocialApi);
+        var socialProtocolBuilder = new ATProtocolBuilder().WithInstanceUrl(socialUrl);
+        this.socialProto = socialProtocolBuilder.Build();
     }
 
     private ATProtocolOptions Options => this.proto.Options;
@@ -471,7 +475,7 @@ public sealed class ATProtoRepo
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of follow records, or null if no records were found.</returns>
     [Obsolete("Use ListFollowsAsync instead")]
-    public Task<Result<ListRecords?>> ListFollowAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListFollowAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Follow, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -483,7 +487,7 @@ public sealed class ATProtoRepo
     /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of follow records, or null if no records were found.</returns>
-    public Task<Result<ListRecords?>> ListFollowsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListFollowsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Follow, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -496,7 +500,7 @@ public sealed class ATProtoRepo
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of block records, or null if no records were found.</returns>
     [Obsolete("Use ListBlocksAsync instead")]
-    public Task<Result<ListRecords?>> ListBlockAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListBlockAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Block, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -508,7 +512,7 @@ public sealed class ATProtoRepo
     /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of block records, or null if no records were found.</returns>
-    public Task<Result<ListRecords?>> ListBlocksAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListBlocksAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.GraphTypes.Block, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -521,7 +525,7 @@ public sealed class ATProtoRepo
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     [Obsolete("Use ListLikesAsync instead")]
-    public Task<Result<ListRecords?>> ListLikeAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListLikeAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Like, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -533,7 +537,7 @@ public sealed class ATProtoRepo
     /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
-    public Task<Result<ListRecords?>> ListLikesAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListLikesAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Like, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -546,7 +550,7 @@ public sealed class ATProtoRepo
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     [Obsolete("Use ListPostsAsync instead")]
-    public Task<Result<ListRecords?>> ListPostAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListPostAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -558,7 +562,7 @@ public sealed class ATProtoRepo
     /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
-    public Task<Result<ListRecords?>> ListPostsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public Task<Result<ListRecords<ATRecord>?>> ListPostsAsync(ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
        => this.ListRecordsAsync(Constants.FeedType.Post, repo, limit, cursor, reverse, cancellationToken);
 
     /// <summary>
@@ -571,20 +575,24 @@ public sealed class ATProtoRepo
     /// <param name="reverse">Optional. A boolean that indicates whether the records should be retrieved in reverse order.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
-    public async Task<Result<ListRecords?>> ListRecordsAsync(string collection, ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+    public async Task<Result<ListRecords<ATRecord>?>> ListRecordsAsync(string collection, ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
     {
-        string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={collection}&repo={repo}&limit={limit}";
-        if (cursor is not null)
+        var (protocol, did) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+        using (protocol)
         {
-            url += $"&cursor={cursor}";
-        }
+            string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={collection}&repo={repo}&limit={limit}";
+            if (cursor is not null)
+            {
+                url += $"&cursor={cursor}";
+            }
 
-        if (reverse is not null)
-        {
-            url += $"&reverse={reverse}";
-        }
+            if (reverse is not null)
+            {
+                url += $"&reverse={reverse}";
+            }
 
-        return await this.Client.Get<ListRecords>(url, this.Options.SourceGenerationContext.ListRecords, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            return await protocol.Client.Get<ListRecords<ATRecord>>(url, this.Options.SourceGenerationContext.ListRecordsATRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        }
     }
 
     /// <summary>
