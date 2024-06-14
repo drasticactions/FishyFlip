@@ -577,7 +577,7 @@ public sealed class ATProtoRepo
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with a list of records, or null if no records were found.</returns>
     public async Task<Result<ListRecords<ATRecord>?>> ListRecordsAsync(string collection, ATIdentifier repo, int limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+        var (protocol, did, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         using (protocol)
         {
             string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={collection}&repo={repo}&limit={limit}";
@@ -591,7 +591,17 @@ public sealed class ATProtoRepo
                 url += $"&reverse={reverse}";
             }
 
-            return await protocol.Client.Get<ListRecords<ATRecord>>(url, this.Options.SourceGenerationContext.ListRecordsATRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            try
+            {
+                return await protocol.Client.Get<ListRecords<ATRecord>>(url,  this.Options.SourceGenerationContext.ListRecordsATRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            }
+            finally
+            {
+                if (!usingCurrentProto)
+                {
+                    protocol.Dispose();
+                }
+            }
         }
     }
 

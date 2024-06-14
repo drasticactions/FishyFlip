@@ -272,6 +272,8 @@ public static class Constants
     {
         public const string Entry = "com.whtwnd.blog.entry";
         public const string Comment = "com.whtwnd.blog.comment";
+        public const string MainComment = "com.whtwnd.blog.comment#main";
+        public const string Mentions = "com.whtwnd.blog.mentions";
     }
 
     public static class ActorTypes

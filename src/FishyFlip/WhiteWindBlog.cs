@@ -68,21 +68,29 @@ public sealed class WhiteWindBlog
         bool? reverse = default,
         CancellationToken cancellationToken = default)
     {
-        var (protocol, did) = await this.proto.GenerateClientFromATIdentifierAsync(authorDid, cancellationToken, this.Options.Logger);
-        using (protocol)
+        var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(authorDid, cancellationToken, this.Options.Logger);
+
+        string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={Constants.WhiteWindTypes.Entry}&repo={authorDid}&limit={limit}";
+        if (cursor is not null)
         {
-            string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={Constants.WhiteWindTypes.Entry}&repo={did}&limit={limit}";
-            if (cursor is not null)
-            {
-                url += $"&cursor={cursor}";
-            }
+            url += $"&cursor={cursor}";
+        }
 
-            if (reverse is not null)
-            {
-                url += $"&reverse={reverse}";
-            }
+        if (reverse is not null)
+        {
+            url += $"&reverse={reverse}";
+        }
 
+        try
+        {
             return await protocol.Client.Get<ListRecords<Entry>>(url, this.Options.SourceGenerationContext.ListRecordsEntry, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        }
+        finally
+        {
+            if (!usingCurrentProto)
+            {
+                protocol.Dispose();
+            }
         }
     }
 }
