@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Models.WhiteWind;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -194,6 +196,7 @@ namespace FishyFlip;
 [JsonSerializable(typeof(LogLeaveConvo))]
 [JsonSerializable(typeof(LogBeginConvo))]
 [JsonSerializable(typeof(DeletedMessageView))]
+[JsonSerializable(typeof(Ogp))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }
