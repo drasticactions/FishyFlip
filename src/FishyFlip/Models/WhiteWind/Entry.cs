@@ -17,9 +17,10 @@ public class Entry : ATRecord
     /// <param name="theme">The theme of the blog post.</param>
     /// <param name="createdAt">The date and time when the entry action was created.</param>
     /// <param name="blobs">The blobs for a given post.</param>
+    /// <param name="visibility">The visibility of the blog post.</param>
     /// <param name="type">The type of the follow action.</param>
     [JsonConstructor]
-    public Entry(string? content, string? title, string? theme, DateTime? createdAt, FishyFlip.Models.WhiteWind.BlobMetadata[]? blobs,  string? type)
+    public Entry(string? content, string? title, string? theme, DateTime? createdAt, FishyFlip.Models.WhiteWind.BlobMetadata[]? blobs, string visibility, string? type)
         : base(type)
     {
         this.Content = content;
@@ -27,12 +28,18 @@ public class Entry : ATRecord
         this.Theme = theme;
         this.CreatedAt = createdAt;
         this.Blobs = blobs;
+        this.Visibility = visibility;
     }
 
     /// <summary>
     /// Gets the title of the blog post.
     /// </summary>
     public string? Title { get; }
+
+    /// <summary>
+    /// Gets the visibility of the blog post.
+    /// </summary>
+    public string? Visibility { get; }
 
     /// <summary>
     /// Gets the content of the blog post.

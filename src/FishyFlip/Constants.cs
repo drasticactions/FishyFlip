@@ -276,6 +276,13 @@ public static class Constants
         public const string Mentions = "com.whtwnd.blog.mentions";
     }
 
+    public static class WhiteWindVisibility
+    {
+        public const string Public = "public";
+        public const string Unlisted = "unlisted";
+        public const string Private = "private";
+    }
+
     public static class ActorTypes
     {
         public const string Profile = "app.bsky.actor.profile";

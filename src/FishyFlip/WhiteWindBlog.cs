@@ -32,8 +32,9 @@ public sealed class WhiteWindBlog
     /// <param name="theme">The theme of the blog post.</param>
     /// <param name="createdAt">The creation date of the blog post. If null, the current UTC date will be used.</param>
     /// <param name="blobs">Blobs for a given post.</param>
-    /// <param name="rkey">The rkey associated with the post.</param>
+    /// <param name="rkey">The rkey associated with the post. Used to update existing post.</param>
     /// <param name="validate">Validate the record, defaults to false.</param>
+    /// <param name="visibility">The visibility of the blog post.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the reference to the created repost.</returns>
     public Task<Result<RecordRef>> CreateBlogPostAsync(
@@ -44,9 +45,10 @@ public sealed class WhiteWindBlog
         BlobMetadata[]? blobs = null,
         string? rkey = null,
         bool validate = false,
+        string visibility = Constants.WhiteWindVisibility.Public,
         CancellationToken cancellationToken = default)
     {
-        Models.WhiteWind.Entry record = new(content, title, theme, createdAt ?? DateTime.UtcNow, blobs, Constants.WhiteWindTypes.Entry);
+        Models.WhiteWind.Entry record = new(content, title, theme, createdAt ?? DateTime.UtcNow, blobs, visibility, Constants.WhiteWindTypes.Entry);
         FishyFlip.Models.Internal.WhiteWind.CreateEntryRecord createRecord = new(Constants.WhiteWindTypes.Entry, this.proto.SessionManager!.Session!.Did.ToString()!,  record, rkey, validate);
         return !string.IsNullOrEmpty(rkey) ? this.proto.Repo.PutRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.Options.SourceGenerationContext.CreateEntryRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken) : this.proto.Repo.CreateRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.Options.SourceGenerationContext.CreateEntryRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
     }
