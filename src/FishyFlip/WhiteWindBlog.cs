@@ -56,6 +56,17 @@ public sealed class WhiteWindBlog
     }
 
     /// <summary>
+    /// Retrieves a Entry asynchronously.
+    /// </summary>
+    /// <param name="repo">The AT identifier.</param>
+    /// <param name="rkey">The record key.</param>
+    /// <param name="cid">The CID (Content Identifier) of the post.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved post record, or null if not found.</returns>
+    public async Task<Result<EntryRecord?>> GetEntryAsync(ATIdentifier repo, string rkey, ATCid? cid = null, CancellationToken cancellationToken = default)
+        => await this.proto.Repo.GetRecordAsync<EntryRecord>(Constants.WhiteWindTypes.Entry, this.Options.SourceGenerationContext.EntryRecord, repo, rkey, cid, cancellationToken);
+
+    /// <summary>
     /// Asynchronously list the author posts.
     /// </summary>
     /// <param name="authorDid">Author repo.</param>

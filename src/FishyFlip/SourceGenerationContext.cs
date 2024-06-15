@@ -196,6 +196,7 @@ namespace FishyFlip;
 [JsonSerializable(typeof(LogLeaveConvo))]
 [JsonSerializable(typeof(LogBeginConvo))]
 [JsonSerializable(typeof(DeletedMessageView))]
+[JsonSerializable(typeof(EntryRecord))]
 [JsonSerializable(typeof(Ogp))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
