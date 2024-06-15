@@ -2,8 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Models.Experimental.MackerelMedia;
-
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -51,15 +49,5 @@ public class BlobRecord : ATRecord
         => new(this.MimeType, this.Size, "blob")
         {
             Ref = new ImageRef(this.Ref?.Link),
-        };
-
-    /// <summary>
-    /// Converts the blob record to media.
-    /// </summary>
-    /// <returns>An image object.</returns>
-    public Media ToMedia()
-        => new(this.MimeType, this.Size, "blob")
-        {
-            Ref = new MediaRef(this.Ref?.Link),
         };
 }
