@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<Description>Access the ATProtocol and Bluesky through .NET.</Description>
+		<PackageTags>atproto atprotocol bluesky</PackageTags>
+		<RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
+		<PackageProjectUrl>https://drasticactions.github.io/FishyFlip</PackageProjectUrl>
+		<PackageReleaseNotes>https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/CHANGELOG.md</PackageReleaseNotes>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net7.0;net8.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -20,5 +25,9 @@
 		<PackageReference Include="System.Memory" />
 		<PackageReference Include="System.Memory.Data" />
 		<PackageReference Include="System.Text.Json" />
+	</ItemGroup>
+	<ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
+		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
+		<None Include="$(MSBuildThisFileDirectory)CHANGELOG.md" Pack="true" PackagePath="" Visible="false" />
 	</ItemGroup>
 </Project>

@@ -4,8 +4,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageIcon>favicon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Description>Access the ATProtocol and Bluesky through .NET.</Description>
-    <PackageTags>atproto atprotocol bluesky</PackageTags>
     <Company>Drastic Actions</Company>
     <Copyright>Copyright (C) Drastic Actions</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -13,16 +11,11 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<DebugType>embedded</DebugType>
-    <RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
-    <PackageProjectUrl>https://drasticactions.github.io/FishyFlip</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/drasticactions/FishyFlip/blob/main/CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)favicon.png" Pack="true" PackagePath="" Visible="false" />
-		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
-    <None Include="$(MSBuildThisFileDirectory)CHANGELOG.md" Pack="true" PackagePath="" Visible="false" />
 	</ItemGroup>
 
   <ItemGroup>
