@@ -20,6 +20,8 @@ using WhiteWindLib.Models.WhiteWind;
 [JsonSerializable(typeof(BlobMetadata))]
 [JsonSerializable(typeof(BlobRecord))]
 [JsonSerializable(typeof(RecordRef))]
+[JsonSerializable(typeof(DeleteRecord))]
+[JsonSerializable(typeof(Success))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }
