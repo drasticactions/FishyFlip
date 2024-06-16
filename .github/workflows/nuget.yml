@@ -36,8 +36,8 @@ jobs:
       - uses: dotnet/nbgv@master
 
       # Pack Nuget
-      - name: Build and Pack FishyFlip Nuget
-        run: dotnet pack src/FishyFlip/FishyFlip.csproj --configuration Release --output nupkg
+      - name: Build and Pack Nugets
+        run: dotnet pack src/FishyFlip.sln --configuration Release --output nupkg
         
       - name: Upload Nuget
         uses: actions/upload-artifact@v3
