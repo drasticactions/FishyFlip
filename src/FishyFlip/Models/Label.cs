@@ -13,4 +13,5 @@ namespace FishyFlip.Models;
 /// <param name="Val">The short string name of the value or type of this label.</param>
 /// <param name="Neg">If true, this is a negation label, overwriting a previous label.</param>
 /// <param name="Cts">Timestamp when this label was created.</param>
-public record Label(ATUri Src, string Uri, ATCid Cid, string Val, bool Neg, DateTime Cts);
+/// <param name="Ver">Version of the label.</param>
+public record Label(ATUri Src, string Uri, ATCid Cid, string Val, bool Neg, DateTime Cts, int Ver);
