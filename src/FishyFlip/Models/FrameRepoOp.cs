@@ -15,7 +15,7 @@ public class FrameRepoOp
     /// <param name="obj">The CBOR object containing the operation data.</param>
     public FrameRepoOp(CBORObject obj)
     {
-        this.Cid = obj["cid"] is not null ? Ipfs.Cid.Decode(obj["cid"].AsString()).ToString() : null;
+        this.Cid = obj["cid"] is not null ? Ipfs.Cid.Decode(obj["cid"].AsString()) : null;
         this.Path = obj["path"]?.AsString();
         this.Action = obj["action"]?.AsString();
     }

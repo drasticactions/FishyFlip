@@ -21,7 +21,7 @@ global using Ipfs;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.IdentityModel.Tokens;
 global using PeterO.Cbor;
-global using ATCid = System.String;
+global using ATCid = Ipfs.Cid;
 
 #if NETSTANDARD
 namespace System.Runtime.CompilerServices
