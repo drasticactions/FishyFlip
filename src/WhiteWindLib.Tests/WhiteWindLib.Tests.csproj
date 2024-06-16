@@ -1,25 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="MSTest.Sdk/3.3.1">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
-    <PackageReference Include="MSTest"/>
-    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <EnableMSTestRunner>true</EnableMSTestRunner>
+    </PropertyGroup>
 
-  <ItemGroup>
-		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-	</ItemGroup>
+    <PropertyGroup>
+        <RunSettingsFilePath>$(MSBuildProjectDirectory)\whitewindlib.runsettings</RunSettingsFilePath>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug"/>
+        <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FishyFlip\FishyFlip.csproj" />
-    <ProjectReference Include="..\WhiteWindLib\WhiteWindLib.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\FishyFlip\FishyFlip.csproj"/>
+        <ProjectReference Include="..\WhiteWindLib\WhiteWindLib.csproj"/>
+    </ItemGroup>
 
 </Project>
