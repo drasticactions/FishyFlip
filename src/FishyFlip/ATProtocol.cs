@@ -74,11 +74,6 @@ public sealed class ATProtocol : IDisposable
     public ATProtoAdmin Admin => new(this);
 
     /// <summary>
-    /// Gets the White Wind Blog Protocol.
-    /// </summary>
-    public WhiteWindBlog Blog => new(this);
-
-    /// <summary>
     /// Gets the ATProto Identity Protocol.
     /// </summary>
     public ATProtoIdentity Identity => new(this);
@@ -149,9 +144,9 @@ public sealed class ATProtocol : IDisposable
     public Uri? BaseAddress => this.client.BaseAddress;
 
     /// <summary>
-    /// Gets the Internal HttpClient.
+    /// Gets the HttpClient.
     /// </summary>
-    internal HttpClient Client => this.client;
+    public HttpClient Client => this.client;
 
     /// <summary>
     /// Gets the internal session manager.

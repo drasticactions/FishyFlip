@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-namespace FishyFlip.Models.WhiteWind;
+namespace WhiteWindLib.Models.WhiteWind;
 
 /// <summary>
 /// Represents a record for an entry.

@@ -36,8 +36,6 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                         return JsonSerializer.Deserialize<FeedViewPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).FeedViewPref);
                     case Constants.ActorTypes.SavedFeedsPref:
                         return JsonSerializer.Deserialize<SavedFeedsPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).SavedFeedsPref);
-                    case Constants.WhiteWindTypes.Entry:
-                        return JsonSerializer.Deserialize<Models.WhiteWind.Entry>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Entry);
                     case Constants.ConversationTypes.LogCreateMessage:
                         return JsonSerializer.Deserialize<LogCreateMessage>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogCreateMessage);
                     case Constants.ConversationTypes.LogDeleteMessage:
@@ -90,9 +88,6 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                 break;
             case Constants.ActorTypes.SavedFeedsPref:
                 writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((SavedFeedsPref)value, ((SourceGenerationContext)options.TypeInfoResolver!).SavedFeedsPref));
-                break;
-            case Constants.WhiteWindTypes.Entry:
-                writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((Models.WhiteWind.Entry)value, ((SourceGenerationContext)options.TypeInfoResolver!).Entry));
                 break;
             case Constants.ConversationTypes.MessageView:
                 writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((MessageView)value, ((SourceGenerationContext)options.TypeInfoResolver!).MessageView));

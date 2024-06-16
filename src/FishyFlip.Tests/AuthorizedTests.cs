@@ -367,7 +367,7 @@ public class AuthorizedTests
         Assert.IsTrue(createList!.Cid is not null);
         Assert.IsTrue(createList!.Uri is not null);
 
-        var repo = AuthorizedTests.proto.SessionManager!.Session!.Did;
+        var repo = AuthorizedTests.proto.Session!.Did;
         var lists = (await AuthorizedTests.proto.Graph.GetListsAsync(repo)).HandleResult();
         Assert.IsTrue(lists is not null);
         Assert.IsTrue(lists!.Lists.Count() > 0);
@@ -396,7 +396,7 @@ public class AuthorizedTests
         var create = (await AuthorizedTests.proto.Repo.CreatePostAsync(randomName)).HandleResult();
         Assert.IsTrue(create!.Cid is not null);
         Assert.IsTrue(create!.Uri is not null);
-        var repo = AuthorizedTests.proto.SessionManager!.Session!.Did;
+        var repo = AuthorizedTests.proto!.Session!.Did;
         var remove = (await AuthorizedTests.proto.Repo.DeletePostAsync(create.Uri.Rkey)).HandleResult();
         Assert.IsTrue(remove is not null);
     }
@@ -413,7 +413,7 @@ public class AuthorizedTests
         Assert.IsTrue(repost!.Cid is not null);
         Assert.IsTrue(repost!.Uri is not null);
 
-        var repo = AuthorizedTests.proto.SessionManager!.Session!.Did;
+        var repo = AuthorizedTests.proto.Session!.Did;
         var removeRepost = (await AuthorizedTests.proto.Repo.DeleteRepostAsync(repost.Uri.Rkey)).HandleResult();
         Assert.IsTrue(removeRepost is not null);
 
@@ -467,7 +467,7 @@ public class AuthorizedTests
     [TestMethod]
     public async Task DescribeRepoTest()
     {
-        var repo = AuthorizedTests.proto.SessionManager!.Session!.Did;
+        var repo = AuthorizedTests.proto!.Session!.Did;
         var describe = (await AuthorizedTests.proto.Repo.DescribeRepoAsync(repo)).HandleResult();
         Assert.IsTrue(describe is not null);
         Assert.IsTrue(describe.HandleIsCorrect);

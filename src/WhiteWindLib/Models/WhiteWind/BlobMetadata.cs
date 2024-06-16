@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-namespace FishyFlip.Models.WhiteWind;
+namespace WhiteWindLib.Models.WhiteWind;
 
 /// <summary>
 /// The blob metadata for a given post.

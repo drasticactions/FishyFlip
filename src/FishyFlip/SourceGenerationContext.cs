@@ -2,8 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Models.WhiteWind;
-
 namespace FishyFlip;
 
 /// <summary>
@@ -62,9 +60,6 @@ namespace FishyFlip;
 [JsonSerializable(typeof(DescribeRepo))]
 [JsonSerializable(typeof(DescribeServer))]
 [JsonSerializable(typeof(Embed))]
-[JsonSerializable(typeof(Models.WhiteWind.Entry))]
-[JsonSerializable(typeof(Models.Internal.WhiteWind.CreateEntryRecord))]
-[JsonSerializable(typeof(Models.WhiteWind.BlobMetadata))]
 [JsonSerializable(typeof(ATError))]
 [JsonSerializable(typeof(ErrorBody))]
 [JsonSerializable(typeof(ErrorDetail))]
@@ -113,14 +108,12 @@ namespace FishyFlip;
 [JsonSerializable(typeof(LikeRecord))]
 [JsonSerializable(typeof(LikesFeed))]
 [JsonSerializable(typeof(ListRecord<ATRecord>))]
-[JsonSerializable(typeof(ListRecord<Models.WhiteWind.Entry>))]
 [JsonSerializable(typeof(ListItemRecord))]
 [JsonSerializable(typeof(ListItemView))]
 [JsonSerializable(typeof(ListItemViewRecord))]
 [JsonSerializable(typeof(ListBlobs))]
 [JsonSerializable(typeof(ListFeed))]
 [JsonSerializable(typeof(ListRecords<ATRecord>))]
-[JsonSerializable(typeof(ListRecords<Models.WhiteWind.Entry>))]
 [JsonSerializable(typeof(ListView))]
 [JsonSerializable(typeof(ListViewRecord))]
 [JsonSerializable(typeof(ModerationReasonType))]
@@ -196,8 +189,6 @@ namespace FishyFlip;
 [JsonSerializable(typeof(LogLeaveConvo))]
 [JsonSerializable(typeof(LogBeginConvo))]
 [JsonSerializable(typeof(DeletedMessageView))]
-[JsonSerializable(typeof(EntryRecord))]
-[JsonSerializable(typeof(Ogp))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-namespace FishyFlip.Models.WhiteWind;
+namespace WhiteWindLib.Models.WhiteWind;
 
 /// <summary>
 /// Represents an Entry in the WhiteWind Blog.
@@ -21,7 +21,7 @@ public class Entry : ATRecord
     /// <param name="ogp">The Open Graph Protocol item of the blog post.</param>
     /// <param name="type">The type of the follow action.</param>
     [JsonConstructor]
-    public Entry(string? content, string? title, string? theme, DateTime? createdAt, FishyFlip.Models.WhiteWind.BlobMetadata[]? blobs, string? visibility, Ogp? ogp, string? type)
+    public Entry(string? content, string? title, string? theme, DateTime? createdAt, BlobMetadata[]? blobs, string? visibility, Ogp? ogp, string? type)
         : base(type)
     {
         this.Content = content;
@@ -61,7 +61,7 @@ public class Entry : ATRecord
     /// <summary>
     /// Gets the blobs for a given post.
     /// </summary>
-    public FishyFlip.Models.WhiteWind.BlobMetadata[]? Blobs { get; }
+    public BlobMetadata[]? Blobs { get; }
 
     /// <summary>
     /// Gets the date and time when the entry action was created.

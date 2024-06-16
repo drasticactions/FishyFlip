@@ -2,9 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using FishyFlip.Models.WhiteWind;
+using FishyFlip;
+using FishyFlip.Tools;
+using WhiteWindLib.Models.WhiteWind;
 
-namespace FishyFlip;
+namespace WhiteWindLib;
 
 /// <summary>
 /// WhiteWind Blog.
@@ -12,14 +14,16 @@ namespace FishyFlip;
 public sealed class WhiteWindBlog
 {
     private ATProtocol proto;
+    private SourceGenerationContext sourceGenerationContext;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WhiteWindBlog"/> class.
     /// </summary>
     /// <param name="proto"><see cref="ATProtocol"/>.</param>
-    internal WhiteWindBlog(ATProtocol proto)
+    public WhiteWindBlog(ATProtocol proto)
     {
         this.proto = proto;
+        this.sourceGenerationContext = new SourceGenerationContext(proto.Options.JsonSerializerOptions);
     }
 
     private ATProtocolOptions Options => this.proto.Options;
@@ -51,8 +55,8 @@ public sealed class WhiteWindBlog
         CancellationToken cancellationToken = default)
     {
         Models.WhiteWind.Entry record = new(content, title, theme, createdAt ?? DateTime.UtcNow, blobs, visibility, ogp, Constants.WhiteWindTypes.Entry);
-        FishyFlip.Models.Internal.WhiteWind.CreateEntryRecord createRecord = new(Constants.WhiteWindTypes.Entry, this.proto.SessionManager!.Session!.Did.ToString()!,  record, rkey, validate);
-        return !string.IsNullOrEmpty(rkey) ? this.proto.Repo.PutRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.Options.SourceGenerationContext.CreateEntryRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken) : this.proto.Repo.CreateRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.Options.SourceGenerationContext.CreateEntryRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
+        WhiteWindLib.Models.Internal.WhiteWind.CreateEntryRecord createRecord = new(Constants.WhiteWindTypes.Entry, this.proto.Session!.Did.ToString()!,  record, rkey, validate);
+        return !string.IsNullOrEmpty(rkey) ? this.proto.Repo.PutRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.sourceGenerationContext.CreateEntryRecord, this.sourceGenerationContext.RecordRef, cancellationToken) : this.proto.Repo.CreateRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(createRecord, this.sourceGenerationContext.CreateEntryRecord, this.sourceGenerationContext.RecordRef, cancellationToken);
     }
 
     /// <summary>
@@ -64,7 +68,7 @@ public sealed class WhiteWindBlog
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved post record, or null if not found.</returns>
     public async Task<Result<EntryRecord?>> GetEntryAsync(ATIdentifier repo, string rkey, ATCid? cid = null, CancellationToken cancellationToken = default)
-        => await this.proto.Repo.GetRecordAsync<EntryRecord>(Constants.WhiteWindTypes.Entry, this.Options.SourceGenerationContext.EntryRecord, repo, rkey, cid, cancellationToken);
+        => await this.proto.Repo.GetRecordAsync<EntryRecord>(Constants.WhiteWindTypes.Entry, this.sourceGenerationContext.EntryRecord, repo, rkey, cid, cancellationToken);
 
     /// <summary>
     /// Asynchronously list the author posts.
@@ -85,7 +89,7 @@ public sealed class WhiteWindBlog
     {
         var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(authorDid, cancellationToken, this.Options.Logger);
 
-        string url = $"{Constants.Urls.ATProtoRepo.ListRecords}?collection={Constants.WhiteWindTypes.Entry}&repo={authorDid}&limit={limit}";
+        string url = $"{FishyFlip.Constants.Urls.ATProtoRepo.ListRecords}?collection={Constants.WhiteWindTypes.Entry}&repo={authorDid}&limit={limit}";
         if (cursor is not null)
         {
             url += $"&cursor={cursor}";
@@ -98,7 +102,7 @@ public sealed class WhiteWindBlog
 
         try
         {
-            return await protocol.Client.Get<ListRecords<Entry>>(url, this.Options.SourceGenerationContext.ListRecordsEntry, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            return await protocol.Client.Get<ListRecords<Entry>>(url, this.sourceGenerationContext.ListRecordsEntry, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         }
         finally
         {

@@ -615,7 +615,7 @@ public sealed class ATProtoRepo
     /// <param name="c2">The JsonTypeInfo of the result type T2. Used for JSON serialization and deserialization.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the result of type T2.</returns>
-    internal Task<Result<T2>> CreateRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
+    public Task<Result<T2>> CreateRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
     {
         return
             this.Client
@@ -639,7 +639,7 @@ public sealed class ATProtoRepo
     /// <param name="c2">The JsonTypeInfo of the result type T2. Used for JSON serialization and deserialization.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the result of type T2.</returns>
-    internal Task<Result<T2>> PutRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
+    public Task<Result<T2>> PutRecord<T, T2>(T record, JsonTypeInfo<T> c1, JsonTypeInfo<T2> c2, CancellationToken cancellationToken = default)
     {
         return
             this.Client
@@ -653,7 +653,16 @@ public sealed class ATProtoRepo
                     this.Options.Logger);
     }
 
-    private async Task<Result<Success>> DeleteRecordAsync(string collection, string rkey, ATCid? swapRecord = null, ATCid? swapCommit = null, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Deletes a record from the specified collection.
+    /// </summary>
+    /// <param name="collection">The name of the collection.</param>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional: The record to swap with the deleted record.</param>
+    /// <param name="swapCommit">Optional: The commit to swap with the deleted record.</param>
+    /// <param name="cancellationToken">Optional: A cancellation token to cancel the operation.</param>
+    /// <returns>A task representing the asynchronous operation. The task result contains a <see cref="Result{T}"/> indicating the success or failure of the operation.</returns>
+    public async Task<Result<Success>> DeleteRecordAsync(string collection, string rkey, ATCid? swapRecord = null, ATCid? swapCommit = null, CancellationToken cancellationToken = default)
     {
         DeleteRecord record = new(
             collection,

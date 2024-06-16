@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-namespace FishyFlip.Models.WhiteWind;
+namespace WhiteWindLib.Models.WhiteWind;
 
 /// <summary>
 /// Represents the Open Graph protocol (OGP) properties of a webpage.
