@@ -12,6 +12,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="Sharprompt" Version="2.4.5" />
+    <PackageVersion Include="ConsoleAppFramework" Version="5.2.1" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.5.2" />
     <PackageVersion Include="MimeTypes" Version="2.4.1" />
     <PackageVersion Include="IpfsShipyard.Ipfs.Core" Version="0.1.0" />
@@ -22,14 +23,9 @@
     <PackageVersion Include="System.Memory" Version="4.5.5" />
     <PackageVersion Include="System.Memory.Data" Version="8.0.0" />
     <PackageVersion Include="System.Text.Json" Version="8.0.3" />
-    <PackageVersion Include="xunit" Version="2.7.0" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
     <PackageVersion Include="PublishSPAforGitHubPages.Build" Version="2.1.0" />
     <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
-    <PackageVersion Include="EasyTestFile.XUnit" Version="2.0.6" />
-    <PackageVersion Include="EasyTestFile" Version="2.0.6" />
     <PackageVersion Include="MSTest" Version="3.3.1" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.10.4" />
   </ItemGroup>

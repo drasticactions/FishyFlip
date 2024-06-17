@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteWindBlog", "WhiteWindBlog.csproj", "{5B309B5C-6545-4B39-B87E-540E91DA8AAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteWindLib", "..\..\src\WhiteWindLib\WhiteWindLib.csproj", "{2F9BCA3E-7336-463F-87E3-C95205EE02E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishyFlip", "..\..\src\FishyFlip\FishyFlip.csproj", "{DE3272F9-893E-4DB8-B58E-0C05EBA65D2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B309B5C-6545-4B39-B87E-540E91DA8AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B309B5C-6545-4B39-B87E-540E91DA8AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B309B5C-6545-4B39-B87E-540E91DA8AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B309B5C-6545-4B39-B87E-540E91DA8AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9BCA3E-7336-463F-87E3-C95205EE02E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9BCA3E-7336-463F-87E3-C95205EE02E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9BCA3E-7336-463F-87E3-C95205EE02E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9BCA3E-7336-463F-87E3-C95205EE02E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3272F9-893E-4DB8-B58E-0C05EBA65D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3272F9-893E-4DB8-B58E-0C05EBA65D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3272F9-893E-4DB8-B58E-0C05EBA65D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3272F9-893E-4DB8-B58E-0C05EBA65D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
