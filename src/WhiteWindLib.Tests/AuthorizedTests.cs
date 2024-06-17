@@ -28,14 +28,14 @@ public class AuthorizedTests
     [TestMethod]
     public async Task HandleCreateAndRemoveEntry()
     {
-        var (result, error) = await AuthorizedTests.blog.CreateEntryAsync("Test Entry", "This is a test entry.");
+        var (result, error) = await AuthorizedTests.blog.CreateEntryAsync("Unit Test Content", "Unit Test Title", visibility: "author");
         Assert.IsNull(error);
         Assert.IsNotNull(result);
         var (result2, error2) = await AuthorizedTests.blog.GetEntryAsync(result.Uri!.Did!, result.Uri.Rkey);
         Assert.IsNull(error2);
         Assert.IsNotNull(result2);
-        Assert.AreEqual("Test Entry", result2.Value!.Content);
-        Assert.AreEqual("This is a test entry.", result2.Value!.Title);
+        Assert.AreEqual("Unit Test Content", result2.Value!.Content);
+        Assert.AreEqual("Unit Test Title", result2.Value!.Title);
         var (result3, error3) = await AuthorizedTests.blog.DeleteEntryAsync(result.Uri.Did!, result.Uri.Rkey);
         Assert.IsNull(error3);
         Assert.IsNotNull(result3);
