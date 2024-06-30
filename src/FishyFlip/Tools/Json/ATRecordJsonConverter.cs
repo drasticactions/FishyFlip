@@ -12,52 +12,70 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
     /// <inheritdoc/>
     public override ATRecord? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
+        ATRecord? atRecord = null;
         if (JsonDocument.TryParseValue(ref reader, out var doc))
         {
+            var rawText = doc.RootElement.GetRawText();
             if (doc.RootElement.TryGetProperty("$type", out var type))
             {
                 var text = type.GetString()?.Trim() ?? string.Empty;
-                var rawText = doc.RootElement.GetRawText();
                 switch (text)
                 {
                     case Constants.FeedType.Like:
-                        return JsonSerializer.Deserialize<Like>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Like);
+                        atRecord = JsonSerializer.Deserialize<Like>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Like);
+                        break;
                     case Constants.FeedType.Post:
-                        return JsonSerializer.Deserialize<Post>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Post);
+                        atRecord = JsonSerializer.Deserialize<Post>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Post);
+                        break;
                     case Constants.FeedType.Repost:
-                        return JsonSerializer.Deserialize<Repost>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Repost);
+                        atRecord = JsonSerializer.Deserialize<Repost>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Repost);
+                        break;
                     case Constants.GraphTypes.Follow:
-                        return JsonSerializer.Deserialize<Follow>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Follow);
+                        atRecord = JsonSerializer.Deserialize<Follow>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).Follow);
+                        break;
                     case Constants.ActorTypes.AdultContentPref:
-                        return JsonSerializer.Deserialize<AdultContentPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).AdultContentPref);
+                        atRecord = JsonSerializer.Deserialize<AdultContentPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).AdultContentPref);
+                        break;
                     case Constants.ActorTypes.ContentLabelPref:
-                        return JsonSerializer.Deserialize<ContentLabelPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ContentLabelPref);
+                        atRecord = JsonSerializer.Deserialize<ContentLabelPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ContentLabelPref);
+                        break;
                     case Constants.ActorTypes.FeedViewPref:
-                        return JsonSerializer.Deserialize<FeedViewPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).FeedViewPref);
+                        atRecord = JsonSerializer.Deserialize<FeedViewPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).FeedViewPref);
+                        break;
                     case Constants.ActorTypes.SavedFeedsPref:
-                        return JsonSerializer.Deserialize<SavedFeedsPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).SavedFeedsPref);
+                        atRecord = JsonSerializer.Deserialize<SavedFeedsPref>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).SavedFeedsPref);
+                        break;
                     case Constants.ConversationTypes.LogCreateMessage:
-                        return JsonSerializer.Deserialize<LogCreateMessage>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogCreateMessage);
+                        atRecord = JsonSerializer.Deserialize<LogCreateMessage>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogCreateMessage);
+                        break;
                     case Constants.ConversationTypes.LogDeleteMessage:
-                        return JsonSerializer.Deserialize<LogDeleteMessage>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogDeleteMessage);
+                        atRecord = JsonSerializer.Deserialize<LogDeleteMessage>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogDeleteMessage);
+                        break;
                     case Constants.ConversationTypes.LogLeaveConvo:
-                        return JsonSerializer.Deserialize<LogLeaveConvo>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogLeaveConvo);
+                        atRecord = JsonSerializer.Deserialize<LogLeaveConvo>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogLeaveConvo);
+                        break;
                     case Constants.ConversationTypes.LogBeginConvo:
-                        return JsonSerializer.Deserialize<LogBeginConvo>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogBeginConvo);
+                        atRecord = JsonSerializer.Deserialize<LogBeginConvo>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).LogBeginConvo);
+                        break;
                     case Constants.ConversationTypes.MessageView:
-                        return JsonSerializer.Deserialize<MessageView>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).MessageView);
+                        atRecord = JsonSerializer.Deserialize<MessageView>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).MessageView);
+                        break;
                     case Constants.ConversationTypes.DeletedMessageView:
-                        return JsonSerializer.Deserialize<DeletedMessageView>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).DeletedMessageView);
+                        atRecord = JsonSerializer.Deserialize<DeletedMessageView>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).DeletedMessageView);
+                        break;
                     default:
 #if DEBUG
                         System.Diagnostics.Debugger.Break();
 #endif
+                        atRecord = new UnknownRecord(text);
                         break;
                 }
+
+                atRecord?.SetJson(rawText);
             }
         }
 
-        return null;
+        return atRecord;
     }
 
     /// <inheritdoc/>

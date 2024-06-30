@@ -33,6 +33,11 @@ public abstract class ATRecord
     public string? Type { get; internal set; }
 
     /// <summary>
+    /// Gets the raw JSON.
+    /// </summary>
+    public string? Json { get; internal set; }
+
+    /// <summary>
     /// Creates an AT Record from a CBORObject.
     /// </summary>
     /// <param name="blockObj">The CBORObject to convert.</param>
@@ -45,36 +50,59 @@ public abstract class ATRecord
         logger?.LogDebug($"Raw Object: {rawObj}");
 #endif
 
+        ATRecord? record = null;
         if (blockObj["$type"] is not null)
         {
             switch (blockObj["$type"].AsString())
             {
                 case Constants.FeedType.Post:
-                    return new Post(blockObj);
+                    record = new Post(blockObj);
+                    break;
                 case Constants.FeedType.Like:
-                    return new Like(blockObj, logger);
+                    record = new Like(blockObj, logger);
+                    break;
                 case Constants.FeedType.Generator:
-                    return new FeedGenerator(blockObj);
+                    record = new FeedGenerator(blockObj);
+                    break;
                 case Constants.FeedType.Repost:
-                    return new Repost(blockObj, logger);
+                    record = new Repost(blockObj, logger);
+                    break;
                 case Constants.GraphTypes.Follow:
-                    return new Follow(blockObj);
+                    record = new Follow(blockObj);
+                    break;
                 case Constants.GraphTypes.List:
-                    return new BSList(blockObj);
+                    record = new BSList(blockObj);
+                    break;
                 case Constants.GraphTypes.ListItem:
-                    return new BSListItem(blockObj);
+                    record = new BSListItem(blockObj);
+                    break;
                 case Constants.GraphTypes.Block:
-                    return new Block(blockObj);
+                    record = new Block(blockObj);
+                    break;
                 case Constants.ActorTypes.Profile:
-                    return new Profile(blockObj);
+                    record = new Profile(blockObj);
+                    break;
                 case Constants.FeedType.ThreadGate:
-                    return new ThreadGate(blockObj);
+                    record = new ThreadGate(blockObj);
+                    break;
                 default:
                     logger?.LogDebug($"Unknown type: {blockObj["$type"].AsString()}");
-                    return new UnknownRecord(blockObj["$type"].AsString());
+                    record = new UnknownRecord(blockObj["$type"].AsString());
+                    break;
             }
+
+            record.SetJson(blockObj.ToJSONString());
         }
 
-        return new UnknownRecord(string.Empty);
+        return record ?? new UnknownRecord("Unknown");
+    }
+
+    /// <summary>
+    /// Sets the raw JSON.
+    /// </summary>
+    /// <param name="json">The raw JSON.</param>
+    internal void SetJson(string json)
+    {
+        this.Json = json;
     }
 }
