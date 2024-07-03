@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Description>Access the ATProtocol and Bluesky through .NET.</Description>
+        <Description>Access WhiteWind through .NET.</Description>
 		<PackageTags>atproto atprotocol bluesky</PackageTags>
 		<RepositoryUrl>https://github.com/drasticactions/FishyFlip/src/WhiteWindLib</RepositoryUrl>
 		<PackageProjectUrl>https://drasticactions.github.io/FishyFlip</PackageProjectUrl>
