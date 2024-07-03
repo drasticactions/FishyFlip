@@ -14,9 +14,8 @@ public class ATProtocolOptions
     /// </summary>
     public ATProtocolOptions()
     {
-        // HACK: Decodes a message to load the default ATCid protocols.
         this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
-        this.Url = new Uri(Constants.Urls.ATProtoServer.PublicApi);
+        this.Url = new Uri(Constants.Urls.ATProtoServer.SocialApi);
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
