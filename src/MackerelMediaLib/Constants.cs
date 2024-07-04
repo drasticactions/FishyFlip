@@ -9,7 +9,7 @@ public static class Constants
 {
     public static class MackerelMediaTypes
     {
-        public const string MediaEmbed = "com.mackerelmedia.embed";
+        public const string MediaEmbed = "com.mackerelmedia.embed.media";
         public const string Media = "com.mackerelmedia.media";
     }
 }

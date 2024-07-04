@@ -299,12 +299,19 @@ public sealed class ATProtoRepo
     /// <param name="data">Image byte array.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the response from the blob upload operation.</returns>
-    public Task<Result<UploadBlobResponse>> UploadImageAsync(byte[] data, CancellationToken cancellationToken = default)
+    public async Task<Result<UploadBlobResponse>> UploadImageAsync(byte[] data, CancellationToken cancellationToken = default)
     {
         var mediaType = this.GetImageMediaType(data);
-        using var content = new StreamContent(new MemoryStream(data));
+        var content = new StreamContent(new MemoryStream(data));
         content.Headers.ContentType = mediaType;
-        return this.UploadBlobAsync(content, cancellationToken);
+        try
+        {
+            return await this.UploadBlobAsync(content, cancellationToken);
+        }
+        finally
+        {
+            content.Dispose();
+        }
     }
 
     /// <summary>

@@ -63,24 +63,32 @@ public sealed class MackerelMedia
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{RecordRef}"/>.</returns>
     public async Task<Result<RecordRef>> UploadMediaAsync(byte[] mediaBytes, MediaTypeHeaderValue mediaHeader, ImageEmbed? thumbnail, CancellationToken cancellationToken = default)
     {
-        using var memoryStream = new MemoryStream(mediaBytes);
-        using var streamContent = new StreamContent(memoryStream);
-        streamContent.Headers.ContentType = mediaHeader;
-        var (blobResult, blobError) = await this.proto.Repo.UploadBlobAsync(streamContent, cancellationToken);
-
-        if (blobError is not null)
+        var memoryStream = new MemoryStream(mediaBytes);
+        var streamContent = new StreamContent(memoryStream);
+        try
         {
-            return blobError!;
+            streamContent.Headers.ContentType = mediaHeader;
+            var (blobResult, blobError) = await this.proto.Repo.UploadBlobAsync(streamContent, cancellationToken);
+
+            if (blobError is not null)
+            {
+                return blobError!;
+            }
+
+            var blob = blobResult!.Blob;
+            var media = new Media(blob.MimeType, blob.Size, thumbnail)
+            {
+                Ref = new MediaRef(blob.Ref?.Link),
+            };
+
+            var mediaRecord = new CreateMediaRecord(Constants.MackerelMediaTypes.Media, this.proto!.Session!.Did.ToString()!, media);
+            return await this.proto.Repo.CreateRecord<CreateMediaRecord, RecordRef>(mediaRecord, this.sourceGenerationContext.CreateMediaRecord, this.sourceGenerationContext.RecordRef, cancellationToken);
         }
-
-        var blob = blobResult!.Blob;
-        var media = new Media(blob.MimeType, blob.Size, thumbnail)
+        finally
         {
-            Ref = new MediaRef(blob.Ref?.Link),
-        };
-
-        var mediaRecord = new CreateMediaRecord(Constants.MackerelMediaTypes.Media, this.proto!.Session!.Did.ToString()!, media);
-        return await this.proto.Repo.CreateRecord<CreateMediaRecord, RecordRef>(mediaRecord, this.sourceGenerationContext.CreateMediaRecord, this.sourceGenerationContext.RecordRef, cancellationToken);
+            memoryStream.Dispose();
+            streamContent.Dispose();
+        }
     }
 
     /// <summary>
@@ -123,6 +131,21 @@ public sealed class MackerelMedia
     /// <returns>A task that represents the asynchronous operation. The task result contains the media record, or null if not found.</returns>
     public async Task<Result<MediaRecord?>> GetMediaAsync(ATIdentifier repo, string rkey, ATCid? cid = null, CancellationToken cancellationToken = default)
         => await this.proto.Repo.GetRecordAsync<MediaRecord>(Constants.MackerelMediaTypes.Media, this.sourceGenerationContext.MediaRecord, repo, rkey, cid, cancellationToken);
+
+    /// <summary>
+    /// Asynchronously deletes a media record.
+    /// </summary>
+    /// <param name="rkey">The key of the record to delete.</param>
+    /// <param name="swapRecord">Optional. The CID (Content Identifier) of the record to swap with. If specified, the method swaps the record with this CID before deleting it.</param>
+    /// <param name="swapCommit">Optional. The CID (Content Identifier) of the commit to swap with. If specified, the method swaps the commit with this CID before deleting the record.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Success object indicating whether the operation was successful.</returns>
+    public Task<Result<Success>> DeleteMediaAsync(
+        string rkey,
+        ATCid? swapRecord = null,
+        ATCid? swapCommit = null,
+        CancellationToken cancellationToken = default)
+        => this.proto.Repo.DeleteRecordAsync(Constants.MackerelMediaTypes.Media, rkey, swapRecord, swapCommit, cancellationToken);
 
     /// <summary>
     /// Asynchronously list the media from the user.
