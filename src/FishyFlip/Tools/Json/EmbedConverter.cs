@@ -11,6 +11,17 @@ namespace FishyFlip.Tools.Json;
 /// </summary>
 public class EmbedConverter : JsonConverter<Embed>
 {
+    private IReadOnlyList<ICustomEmbedConverter> converters;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EmbedConverter"/> class.
+    /// </summary>
+    /// <param name="converters">A read-only list of JSON converters specific to <see cref="Embed"/> types. If null, initializes to an empty list.</param>
+    public EmbedConverter(IReadOnlyList<ICustomEmbedConverter>? converters = default)
+    {
+        this.converters = converters ?? new List<ICustomEmbedConverter>();
+    }
+
     /// <inheritdoc/>
     public override Embed? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -118,6 +129,20 @@ public class EmbedConverter : JsonConverter<Embed>
                         }
 
                         return new RecordWithMediaEmbed(record, media);
+                    default:
+                        foreach (var converter in this.converters)
+                        {
+                            if (converter.SupportedTypes.Contains(text))
+                            {
+                                var item = converter.Read(text, doc.RootElement.GetRawText());
+                                if (item is not null)
+                                {
+                                    return item;
+                                }
+                            }
+                        }
+
+                        break;
                 }
             }
         }
@@ -128,6 +153,15 @@ public class EmbedConverter : JsonConverter<Embed>
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, Embed value, JsonSerializerOptions options)
     {
+        foreach (var converter in this.converters)
+        {
+            if (converter.SupportedTypes.Contains(value.Type))
+            {
+                converter.Write(writer, value, options);
+                return;
+            }
+        }
+
         JsonSerializer.Serialize(writer, value, value.GetType(), (JsonSerializerContext)options.TypeInfoResolver!);
     }
 }

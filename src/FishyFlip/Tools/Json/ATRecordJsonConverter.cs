@@ -70,8 +70,6 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                         atRecord = new UnknownRecord(text);
                         break;
                 }
-
-                atRecord?.SetJson(rawText);
             }
         }
 

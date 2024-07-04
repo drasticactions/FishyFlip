@@ -20,6 +20,8 @@ using MackerelMediaLib.Models;
 [JsonSerializable(typeof(MediaRef))]
 [JsonSerializable(typeof(ListRecords<Media>))]
 [JsonSerializable(typeof(MediaRecord))]
+[JsonSerializable(typeof(MediaEmbed))]
+[JsonSerializable(typeof(Cid))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

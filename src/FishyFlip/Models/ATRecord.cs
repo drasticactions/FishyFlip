@@ -33,11 +33,6 @@ public abstract class ATRecord
     public string? Type { get; internal set; }
 
     /// <summary>
-    /// Gets the raw JSON.
-    /// </summary>
-    public string? Json { get; internal set; }
-
-    /// <summary>
     /// Creates an AT Record from a CBORObject.
     /// </summary>
     /// <param name="blockObj">The CBORObject to convert.</param>
@@ -90,19 +85,8 @@ public abstract class ATRecord
                     record = new UnknownRecord(blockObj["$type"].AsString());
                     break;
             }
-
-            record.SetJson(blockObj.ToJSONString());
         }
 
         return record ?? new UnknownRecord("Unknown");
-    }
-
-    /// <summary>
-    /// Sets the raw JSON.
-    /// </summary>
-    /// <param name="json">The raw JSON.</param>
-    internal void SetJson(string json)
-    {
-        this.Json = json;
     }
 }

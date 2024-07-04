@@ -45,6 +45,36 @@ public sealed class MackerelMedia
     private ATProtocolOptions Options => this.proto.Options;
 
     /// <summary>
+    /// Generates a list of custom embed converters.
+    /// </summary>
+    /// <remarks>
+    /// This method creates a list containing instances of custom embed converters used for JSON serialization
+    /// and deserialization of embedded media content. It utilizes the <see cref="SourceGenerationContext.Default"/>
+    /// for configuring the converters, ensuring they are compatible with the default serialization settings.
+    /// </remarks>
+    /// <returns>A read-only list of <see cref="ICustomEmbedConverter"/> instances.</returns>
+    public static IReadOnlyList<ICustomEmbedConverter> GenerateEmbedConverters()
+    {
+        var jsonSerializerOptions = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            Converters =
+            {
+                new AtUriJsonConverter(),
+                new AtHandlerJsonConverter(),
+                new AtDidJsonConverter(),
+                new EmbedConverter(),
+                new ATRecordJsonConverter(),
+                new ATCidConverter(),
+            },
+        };
+        var sourceGenerationContext = new SourceGenerationContext(jsonSerializerOptions);
+        return new List<ICustomEmbedConverter>() { new MackerelMediaLib.Tools.EmbedConverter(sourceGenerationContext) };
+    }
+
+    /// <summary>
     /// Asynchronously uploads a media record to the repository.
     /// </summary>
     /// <param name="mediaRecord">The media record to be uploaded.</param>
