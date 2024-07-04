@@ -13,7 +13,7 @@ namespace MackerelMediaLib.Tools;
 /// </summary>
 public class EmbedConverter : ICustomEmbedConverter
 {
-    private SourceGenerationContext context;
+    private readonly SourceGenerationContext context;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EmbedConverter"/> class.

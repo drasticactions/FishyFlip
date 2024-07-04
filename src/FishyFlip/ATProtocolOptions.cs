@@ -13,7 +13,8 @@ public class ATProtocolOptions
     /// Initializes a new instance of the <see cref="ATProtocolOptions"/> class.
     /// </summary>
     /// <param name="customEmbedConverters">Customer JSON Converters for Embed.</param>
-    public ATProtocolOptions(IReadOnlyList<ICustomEmbedConverter>? customEmbedConverters = default)
+    /// <param name="customAtRecordConverters">Customer JSON Converters for ATRecord.</param>
+    public ATProtocolOptions(IReadOnlyList<ICustomEmbedConverter>? customEmbedConverters = default, IReadOnlyList<ICustomATRecordConverter>? customAtRecordConverters = default)
     {
         this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
         this.Url = new Uri(Constants.Urls.ATProtoServer.SocialApi);
@@ -28,7 +29,7 @@ public class ATProtocolOptions
                 new AtHandlerJsonConverter(),
                 new AtDidJsonConverter(),
                 new EmbedConverter(customEmbedConverters),
-                new ATRecordJsonConverter(),
+                new ATRecordJsonConverter(customAtRecordConverters),
                 new ATCidConverter(),
             },
         };

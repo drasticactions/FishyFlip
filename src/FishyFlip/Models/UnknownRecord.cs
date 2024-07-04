@@ -15,9 +15,11 @@ public class UnknownRecord : ATRecord
     /// Initializes a new instance of the <see cref="UnknownRecord"/> class.
     /// </summary>
     /// <param name="type">The type of the unknown record.</param>
-    public UnknownRecord(string type)
+    /// <param name="json">The json of the unknown record.</param>
+    public UnknownRecord(string type, string json)
         : base(type)
     {
+        this.Json = json;
     }
 
     /// <summary>
@@ -27,5 +29,11 @@ public class UnknownRecord : ATRecord
     [JsonConstructor]
     public UnknownRecord()
     {
+        this.Json = string.Empty;
     }
+
+    /// <summary>
+    /// Gets the json of the unknown record.
+    /// </summary>
+    public string Json { get; }
 }

@@ -82,11 +82,11 @@ public abstract class ATRecord
                     break;
                 default:
                     logger?.LogDebug($"Unknown type: {blockObj["$type"].AsString()}");
-                    record = new UnknownRecord(blockObj["$type"].AsString());
+                    record = new UnknownRecord(blockObj["$type"].AsString(), blockObj.ToJSONString());
                     break;
             }
         }
 
-        return record ?? new UnknownRecord("Unknown");
+        return record ?? new UnknownRecord("Unknown", string.Empty);
     }
 }

@@ -11,11 +11,11 @@ namespace MackerelMediaLib;
 /// </summary>
 public sealed class MackerelMedia
 {
+    private static SourceGenerationContext? sourceGenerationContext;
+
+    private static JsonSerializerOptions? jsonSerializerOptions;
+
     private ATProtocol proto;
-
-    private SourceGenerationContext sourceGenerationContext;
-
-    private JsonSerializerOptions jsonSerializerOptions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MackerelMedia"/> class.
@@ -24,54 +24,37 @@ public sealed class MackerelMedia
     public MackerelMedia(ATProtocol proto)
     {
         this.proto = proto;
-        this.jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new EmbedConverter(),
-                new ATRecordJsonConverter(),
-                new ATCidConverter(),
-            },
-        };
-        this.sourceGenerationContext = new SourceGenerationContext(this.jsonSerializerOptions);
+        GenerateSourceGenerationContext();
     }
 
     private ATProtocolOptions Options => this.proto.Options;
 
     /// <summary>
-    /// Generates a list of custom embed converters.
+    /// Generates a custom embed converter.
     /// </summary>
     /// <remarks>
     /// This method creates a list containing instances of custom embed converters used for JSON serialization
     /// and deserialization of embedded media content. It utilizes the <see cref="SourceGenerationContext.Default"/>
     /// for configuring the converters, ensuring they are compatible with the default serialization settings.
     /// </remarks>
-    /// <returns>A read-only list of <see cref="ICustomEmbedConverter"/> instances.</returns>
-    public static IReadOnlyList<ICustomEmbedConverter> GenerateEmbedConverters()
+    /// <returns>A <see cref="ICustomEmbedConverter"/> instance.</returns>
+    public static ICustomEmbedConverter GenerateEmbedConverter()
     {
-        var jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new EmbedConverter(),
-                new ATRecordJsonConverter(),
-                new ATCidConverter(),
-            },
-        };
-        var sourceGenerationContext = new SourceGenerationContext(jsonSerializerOptions);
-        return new List<ICustomEmbedConverter>() { new MackerelMediaLib.Tools.EmbedConverter(sourceGenerationContext) };
+        return new MackerelMediaLib.Tools.EmbedConverter(MackerelMedia.sourceGenerationContext ?? GenerateSourceGenerationContext());
+    }
+
+    /// <summary>
+    /// Generates custom record converter.
+    /// </summary>
+    /// <remarks>
+    /// This method creates a list containing instances of custom embed converters used for JSON serialization
+    /// and deserialization of embedded media content. It utilizes the <see cref="SourceGenerationContext.Default"/>
+    /// for configuring the converters, ensuring they are compatible with the default serialization settings.
+    /// </remarks>
+    /// <returns>A <see cref="ICustomATRecordConverter"/> instance.</returns>
+    public static ICustomATRecordConverter GenerateRecordConverter()
+    {
+        return new MackerelMediaLib.Tools.MediaRecordConverter(MackerelMedia.sourceGenerationContext ?? GenerateSourceGenerationContext());
     }
 
     /// <summary>
@@ -81,7 +64,7 @@ public sealed class MackerelMedia
     /// <param name="cancellationToken">A token to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Result{RecordRef}"/>.</returns>
     public async Task<Result<RecordRef>> UploadMediaAsync(CreateMediaRecord mediaRecord, CancellationToken cancellationToken = default)
-        => await this.proto.Repo.CreateRecord<CreateMediaRecord, RecordRef>(mediaRecord, this.sourceGenerationContext.CreateMediaRecord, this.sourceGenerationContext.RecordRef, cancellationToken);
+        => await this.proto.Repo.CreateRecord<CreateMediaRecord, RecordRef>(mediaRecord, sourceGenerationContext!.CreateMediaRecord, sourceGenerationContext!.RecordRef, cancellationToken);
 
     /// <summary>
     /// Asynchronously uploads a media file to the repository and creates a media record.
@@ -112,7 +95,7 @@ public sealed class MackerelMedia
             };
 
             var mediaRecord = new CreateMediaRecord(Constants.MackerelMediaTypes.Media, this.proto!.Session!.Did.ToString()!, media);
-            return await this.proto.Repo.CreateRecord<CreateMediaRecord, RecordRef>(mediaRecord, this.sourceGenerationContext.CreateMediaRecord, this.sourceGenerationContext.RecordRef, cancellationToken);
+            return await this.proto.Repo.CreateRecord<CreateMediaRecord, RecordRef>(mediaRecord, sourceGenerationContext!.CreateMediaRecord, sourceGenerationContext!.RecordRef, cancellationToken);
         }
         finally
         {
@@ -160,7 +143,7 @@ public sealed class MackerelMedia
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the media record, or null if not found.</returns>
     public async Task<Result<MediaRecord?>> GetMediaAsync(ATIdentifier repo, string rkey, ATCid? cid = null, CancellationToken cancellationToken = default)
-        => await this.proto.Repo.GetRecordAsync<MediaRecord>(Constants.MackerelMediaTypes.Media, this.sourceGenerationContext.MediaRecord, repo, rkey, cid, cancellationToken);
+        => await this.proto.Repo.GetRecordAsync<MediaRecord>(Constants.MackerelMediaTypes.Media, sourceGenerationContext!.MediaRecord, repo, rkey, cid, cancellationToken);
 
     /// <summary>
     /// Asynchronously deletes a media record.
@@ -211,7 +194,7 @@ public sealed class MackerelMedia
 
         try
         {
-            return await protocol.Client.Get<ListRecords<Media>>(url, this.sourceGenerationContext.ListRecordsMedia, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+            return await protocol.Client.Get<ListRecords<Media>>(url, sourceGenerationContext!.ListRecordsMedia, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
         }
         finally
         {
@@ -220,5 +203,25 @@ public sealed class MackerelMedia
                 protocol.Dispose();
             }
         }
+    }
+
+    private static SourceGenerationContext GenerateSourceGenerationContext()
+    {
+        jsonSerializerOptions = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            Converters =
+            {
+                new AtUriJsonConverter(),
+                new AtHandlerJsonConverter(),
+                new AtDidJsonConverter(),
+                new EmbedConverter(),
+                new ATRecordJsonConverter(),
+                new ATCidConverter(),
+            },
+        };
+        return sourceGenerationContext = new SourceGenerationContext(jsonSerializerOptions);
     }
 }

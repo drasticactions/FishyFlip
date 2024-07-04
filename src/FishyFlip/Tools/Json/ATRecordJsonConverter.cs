@@ -9,6 +9,17 @@ namespace FishyFlip.Tools.Json;
 /// </summary>
 public class ATRecordJsonConverter : JsonConverter<ATRecord>
 {
+    private IReadOnlyList<ICustomATRecordConverter> converters;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATRecordJsonConverter"/> class.
+    /// </summary>
+    /// <param name="converters">A read-only list of JSON converters specific to <see cref="ATRecord"/> types. If null, initializes to an empty list.</param>
+    public ATRecordJsonConverter(IReadOnlyList<ICustomATRecordConverter>? converters = default)
+    {
+        this.converters = converters ?? new List<ICustomATRecordConverter>();
+    }
+
     /// <inheritdoc/>
     public override ATRecord? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -64,10 +75,17 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                         atRecord = JsonSerializer.Deserialize<DeletedMessageView>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).DeletedMessageView);
                         break;
                     default:
-#if DEBUG
-                        System.Diagnostics.Debugger.Break();
-#endif
-                        atRecord = new UnknownRecord(text);
+                        foreach (var converter in this.converters)
+                        {
+                            if (converter.SupportedTypes.Contains(text))
+                            {
+                                atRecord = converter.Read(text, rawText);
+                                break;
+                            }
+                        }
+
+                        atRecord ??= new UnknownRecord(text, rawText);
+
                         break;
                 }
             }
@@ -124,9 +142,15 @@ public class ATRecordJsonConverter : JsonConverter<ATRecord>
                 writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes((LogBeginConvo)value, ((SourceGenerationContext)options.TypeInfoResolver!).LogBeginConvo));
                 break;
             default:
-#if DEBUG
-                System.Diagnostics.Debugger.Break();
-#endif
+                foreach (var converter in this.converters)
+                {
+                    if (converter.SupportedTypes.Contains(value.Type))
+                    {
+                        converter.Write(writer, value, options);
+                        return;
+                    }
+                }
+
                 break;
         }
     }

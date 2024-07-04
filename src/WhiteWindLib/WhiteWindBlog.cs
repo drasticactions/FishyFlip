@@ -6,6 +6,7 @@ using System.Text.Json.Serialization.Metadata;
 using FishyFlip;
 using FishyFlip.Tools;
 using WhiteWindLib.Models.WhiteWind;
+using WhiteWindLib.Tools;
 
 namespace WhiteWindLib;
 
@@ -14,10 +15,9 @@ namespace WhiteWindLib;
 /// </summary>
 public sealed class WhiteWindBlog
 {
+    private static SourceGenerationContext? sourceGenerationContext;
+    private static JsonSerializerOptions? jsonSerializerOptions;
     private ATProtocol proto;
-    private SourceGenerationContext sourceGenerationContext;
-
-    private JsonSerializerOptions jsonSerializerOptions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WhiteWindBlog"/> class.
@@ -26,25 +26,24 @@ public sealed class WhiteWindBlog
     public WhiteWindBlog(ATProtocol proto)
     {
         this.proto = proto;
-        this.jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new EmbedConverter(),
-                new ATRecordJsonConverter(),
-                new ATCidConverter(),
-            },
-        };
-        this.sourceGenerationContext = new SourceGenerationContext(this.jsonSerializerOptions);
+        GenerateSourceGenerationContext();
     }
 
     private ATProtocolOptions Options => this.proto.Options;
+
+    /// <summary>
+    /// Generates custom record converter.
+    /// </summary>
+    /// <remarks>
+    /// This method creates a list containing instances of custom embed converters used for JSON serialization
+    /// and deserialization of embedded media content. It utilizes the <see cref="SourceGenerationContext.Default"/>
+    /// for configuring the converters, ensuring they are compatible with the default serialization settings.
+    /// </remarks>
+    /// <returns>A <see cref="ICustomATRecordConverter"/> instance.</returns>
+    public static ICustomATRecordConverter GenerateRecordConverter()
+    {
+        return new EntryConverter(WhiteWindBlog.sourceGenerationContext ?? GenerateSourceGenerationContext());
+    }
 
     /// <summary>
     /// Creates a blog post asynchronously.
@@ -74,7 +73,7 @@ public sealed class WhiteWindBlog
     {
         Models.WhiteWind.Entry record = new(content, title, theme, createdAt ?? DateTime.UtcNow, blobs, visibility, ogp, Constants.WhiteWindTypes.Entry);
         WhiteWindLib.Models.Internal.WhiteWind.CreateEntryRecord createRecord = new(Constants.WhiteWindTypes.Entry, this.proto.Session!.Did.ToString()!,  record, rkey, validate);
-        return !string.IsNullOrEmpty(rkey) ? PutRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(this.proto, this.jsonSerializerOptions, createRecord, this.sourceGenerationContext.CreateEntryRecord, this.sourceGenerationContext.RecordRef, cancellationToken) : CreateRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(this.proto, this.jsonSerializerOptions, createRecord, this.sourceGenerationContext.CreateEntryRecord, this.sourceGenerationContext.RecordRef, cancellationToken);
+        return !string.IsNullOrEmpty(rkey) ? PutRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(this.proto, jsonSerializerOptions!, createRecord, sourceGenerationContext!.CreateEntryRecord, sourceGenerationContext!.RecordRef, cancellationToken) : CreateRecord<Models.Internal.WhiteWind.CreateEntryRecord, RecordRef>(this.proto, jsonSerializerOptions!, createRecord, sourceGenerationContext!.CreateEntryRecord, sourceGenerationContext!.RecordRef, cancellationToken);
     }
 
     /// <summary>
@@ -90,7 +89,7 @@ public sealed class WhiteWindBlog
         var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         try
         {
-            return await GetRecordAsync<EntryRecord>(protocol, this.jsonSerializerOptions, Constants.WhiteWindTypes.Entry, this.sourceGenerationContext.EntryRecord, repo, rkey, cid, cancellationToken);
+            return await GetRecordAsync<EntryRecord>(protocol, jsonSerializerOptions!, Constants.WhiteWindTypes.Entry, sourceGenerationContext!.EntryRecord, repo, rkey, cid, cancellationToken);
         }
         finally
         {
@@ -111,7 +110,7 @@ public sealed class WhiteWindBlog
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation. Defaults to None.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result of type Success indicating the success of the operation.</returns>
     public Task<Result<Success>> DeleteEntryAsync(ATIdentifier repo, string rkey, ATCid? swapRecord = null, ATCid? swapCommit = null, CancellationToken cancellationToken = default)
-        => DeleteRecordAsync(this.proto, this.sourceGenerationContext, this.jsonSerializerOptions, Constants.WhiteWindTypes.Entry, rkey, swapRecord, swapCommit, cancellationToken);
+        => DeleteRecordAsync(this.proto, sourceGenerationContext!, jsonSerializerOptions!, Constants.WhiteWindTypes.Entry, rkey, swapRecord, swapCommit, cancellationToken);
 
     /// <summary>
     /// Asynchronously list the author posts.
@@ -145,7 +144,7 @@ public sealed class WhiteWindBlog
 
         try
         {
-            return await protocol.Client.Get<ListRecords<Entry>>(url, this.sourceGenerationContext.ListRecordsEntry, this.jsonSerializerOptions, cancellationToken, this.Options.Logger);
+            return await protocol.Client.Get<ListRecords<Entry>>(url, sourceGenerationContext!.ListRecordsEntry, jsonSerializerOptions!, cancellationToken, this.Options.Logger);
         }
         finally
         {
@@ -205,5 +204,25 @@ public sealed class WhiteWindBlog
                     record,
                     cancellationToken,
                     proto.Options.Logger);
+    }
+
+    private static SourceGenerationContext GenerateSourceGenerationContext()
+    {
+        jsonSerializerOptions = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            Converters =
+            {
+                new AtUriJsonConverter(),
+                new AtHandlerJsonConverter(),
+                new AtDidJsonConverter(),
+                new EmbedConverter(),
+                new ATRecordJsonConverter(),
+                new ATCidConverter(),
+            },
+        };
+        return sourceGenerationContext = new SourceGenerationContext(jsonSerializerOptions);
     }
 }
