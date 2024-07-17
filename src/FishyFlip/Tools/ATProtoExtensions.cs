@@ -26,6 +26,18 @@ public static class ATProtoExtensions
             return (socialProto, identifier as ATDid, true);
         }
 
+        if (socialProto.BaseAddress?.ToString() == $"{Constants.Urls.ATProtoServer.NetworkApi}/")
+        {
+            logger?.LogDebug("Using current PDS, as we are already on the Network API.");
+            return (socialProto, identifier as ATDid, true);
+        }
+
+        if (!socialProto.SessionManager.IsAuthenticated)
+        {
+            logger?.LogDebug("Not authenticated, using defaults from user.");
+            return (socialProto, identifier as ATDid, true);
+        }
+
         var (repo, atError) = await socialProto.Repo.DescribeRepoAsync(identifier, cancellationToken: token ?? CancellationToken.None);
         if (atError is not null)
         {

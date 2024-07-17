@@ -10,7 +10,6 @@ namespace FishyFlip;
 public sealed class ATProtoSync
 {
     private ATProtocol proto;
-    private ATProtocol socialProto;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtoSync"/> class.
@@ -19,9 +18,6 @@ public sealed class ATProtoSync
     internal ATProtoSync(ATProtocol proto)
     {
         this.proto = proto;
-        var socialUrl = new Uri(Constants.Urls.ATProtoServer.SocialApi);
-        var socialProtocolBuilder = new ATProtocolBuilder().WithInstanceUrl(socialUrl);
-        this.socialProto = socialProtocolBuilder.Build();
     }
 
     private ATProtocolOptions Options => this.proto.Options;
@@ -99,7 +95,7 @@ public sealed class ATProtoSync
     /// <returns>Result of Success.</returns>
     public async Task<Result<Success?>> GetRepoAsync(ATIdentifier repo, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+        var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         var url = since is not null
             ? $"{Constants.Urls.ATProtoSync.GetRepo}?did={did}&since={since}"
             : $"{Constants.Urls.ATProtoSync.GetRepo}?did={did}";
@@ -126,7 +122,7 @@ public sealed class ATProtoSync
     /// <returns>Result of Success.</returns>
     public async Task<Result<Success?>> DownloadRepoAsync(ATIdentifier repo, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+        var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         filename ??= $"{repo}-repo.car";
         try
         {
@@ -182,7 +178,7 @@ public sealed class ATProtoSync
     /// <returns>Blocks.</returns>
     public async Task<Result<Success?>> GetBlocksAsync(ATIdentifier did, ATCid[] commits, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
     {
-        var (protocol, repo, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
+        var (protocol, repo, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
         var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={repo}&{commitList}";
         try
@@ -209,7 +205,7 @@ public sealed class ATProtoSync
     /// <returns>Blocks.</returns>
     public async Task<Result<Success?>> DownloadBlocksAsync(ATIdentifier did, ATCid[] commits, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, repo, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
+        var (protocol, repo, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
         var commitList = string.Join("&", commits.Select(n => $"cids={n}"));
         var url = $"{Constants.Urls.ATProtoSync.GetBlocks}?did={repo}&{commitList}";
         filename ??= $"{did}-blocks.car";
@@ -264,7 +260,7 @@ public sealed class ATProtoSync
     /// <returns>Result of success.</returns>
     public async Task<Result<Success?>> DownloadCheckoutAsync(ATIdentifier did, ATCid? commit = default, string? path = default, string? filename = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, repo, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
+        var (protocol, repo, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(did, cancellationToken, this.Options.Logger);
         var url = $"{Constants.Urls.ATProtoSync.GetCheckout}?did={repo}";
         if (commit is not null)
         {
@@ -299,7 +295,8 @@ public sealed class ATProtoSync
     /// <returns>Result of success.</returns>
     public async Task<Result<Success?>> GetRecordAsync(string collection, ATIdentifier repo, string rkey, OnCarDecoded onDecoded, ATCid? commit = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+        var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+
         var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={did}&rkey={rkey}";
         if (commit is not null)
         {
@@ -339,7 +336,7 @@ public sealed class ATProtoSync
         string? filename = default,
         CancellationToken cancellationToken = default)
     {
-        var (protocol, did, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+        var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         var url = $"{Constants.Urls.ATProtoSync.GetRecord}?collection={collection}&did={did}&rkey={rkey}";
         if (commit is not null)
         {
@@ -394,7 +391,7 @@ public sealed class ATProtoSync
     /// <returns>Result of ATCids.</returns>
     public async Task<Result<ListBlobs?>> ListBlobsAsync(ATIdentifier repo, int limit = 500, string? since = default, string? cursor = default, CancellationToken cancellationToken = default)
     {
-        var (protocol, did, usingCurrentProto) = await this.socialProto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
+        var (protocol, did, usingCurrentProto) = await this.proto.GenerateClientFromATIdentifierAsync(repo, cancellationToken, this.Options.Logger);
         var url = Constants.Urls.ATProtoSync.ListBlobs + $"?did={did}&limit={limit}";
 
         if (cursor is not null)
