@@ -18,11 +18,11 @@ public class VideoEmbed : Embed
     /// A video embedded in a Bluesky record (eg, a post).
     /// </summary>
     /// <param name="video">Video.</param>
-    /// <param name="captions">Captions.</param>
     /// <param name="alt">Alt text.</param>
     /// <param name="aspectRatio">Aspect Ratio.</param>
+    /// <param name="captions">Captions.</param>
     [JsonConstructor]
-    public VideoEmbed(BlobRecord video, Caption[]? captions, string? alt, AspectRatio? aspectRatio)
+    public VideoEmbed(BlobRecord video, string? alt = default, AspectRatio? aspectRatio = default, Caption[]? captions = default)
         : base(Constants.EmbedTypes.Video)
     {
         this.Video = video;
