@@ -619,7 +619,7 @@ public sealed class ATProtoRepo
 
             try
             {
-                return await protocol.Client.Get<ListRecords<ATRecord>>(url,  this.Options.SourceGenerationContext.ListRecordsATRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+                return await protocol.Client.Get<ListRecords<ATRecord>>(url, this.Options.SourceGenerationContext.ListRecordsATRecord, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
             }
             finally
             {
