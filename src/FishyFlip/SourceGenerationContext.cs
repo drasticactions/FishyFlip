@@ -191,6 +191,8 @@ namespace FishyFlip;
 [JsonSerializable(typeof(DeletedMessageView))]
 [JsonSerializable(typeof(UnknownRecord))]
 [JsonSerializable(typeof(UnknownRecordResponse))]
+[JsonSerializable(typeof(VideoEmbed))]
+[JsonSerializable(typeof(AspectRatio))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

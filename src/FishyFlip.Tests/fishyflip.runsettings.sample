@@ -10,6 +10,7 @@
         <Parameter name="BLUESKY_TEST_IMAGES_POST" value="" />
         <Parameter name="BLUESKY_TEST_EXTERNAL_POST" value="" />
         <Parameter name="BLUESKY_TEST_MEDIA_POST" value="" />
+		<Parameter name="BLUESKY_TEST_VIDEO_POST" value="" />
         <Parameter name="BLUESKY_TEST_DID" value="" />
         <Parameter name="BLUESKY_TEST_DID_2" value="" />
         <Parameter name="BLUESKY_TEST_FOLLOW_DID" value="" />

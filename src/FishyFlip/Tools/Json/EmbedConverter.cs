@@ -73,6 +73,14 @@ public class EmbedConverter : JsonConverter<Embed>
                         }
 
                         break;
+                    case Constants.EmbedTypes.Video:
+                        if (doc.RootElement.TryGetProperty("video", out var vid))
+                        {
+                            var item = JsonSerializer.Deserialize<VideoEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).VideoEmbed);
+                            return item;
+                        }
+
+                        break;
                     case Constants.EmbedTypes.RecordView:
                         if (doc.RootElement.TryGetProperty("record", out var rec))
                         {
