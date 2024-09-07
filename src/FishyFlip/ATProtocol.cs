@@ -14,7 +14,7 @@ public sealed class ATProtocol : IDisposable
     private HttpClient client;
     private ATWebSocketProtocol webSocketProtocol;
     private bool disposedValue;
-    private SessionManager sessionManager;
+    private PasswordSessionManager sessionManager;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtocol"/> class.
@@ -28,11 +28,11 @@ public sealed class ATProtocol : IDisposable
         this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
         if (options.Session is not null)
         {
-            this.sessionManager = new SessionManager(this, options.Session);
+            this.sessionManager = new PasswordSessionManager(this, options.Session);
         }
         else
         {
-            this.sessionManager = new SessionManager(this);
+            this.sessionManager = new PasswordSessionManager(this);
         }
     }
 
@@ -151,7 +151,7 @@ public sealed class ATProtocol : IDisposable
     /// <summary>
     /// Gets the internal session manager.
     /// </summary>
-    internal SessionManager SessionManager => this.sessionManager;
+    internal ISessionManager SessionManager => this.sessionManager;
 
     /// <summary>
     /// Start the ATProtocol SubscribeRepos sync session.
@@ -214,11 +214,11 @@ public sealed class ATProtocol : IDisposable
         this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
         if (options.Session is not null)
         {
-            this.sessionManager = new SessionManager(this, options.Session);
+            this.sessionManager = new PasswordSessionManager(this, options.Session);
         }
         else
         {
-            this.sessionManager = new SessionManager(this);
+            this.sessionManager = new PasswordSessionManager(this);
         }
     }
 
@@ -281,7 +281,7 @@ public sealed class ATProtocol : IDisposable
 
         if (this.sessionManager is null)
         {
-            this.sessionManager = new SessionManager(this);
+            this.sessionManager = new PasswordSessionManager(this);
         }
 
         this.SetSession(session);
