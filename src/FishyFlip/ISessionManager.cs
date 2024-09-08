@@ -22,4 +22,16 @@ internal interface ISessionManager : IDisposable
     /// Gets the current session.
     /// </summary>
     public Session? Session { get; }
+
+    /// <summary>
+    /// Refresh the given session.
+    /// </summary>
+    /// <returns>Task.</returns>
+    public Task RefreshSessionAsync();
+
+    /// <summary>
+    /// Set the current session.
+    /// </summary>
+    /// <param name="session">Session.</param>
+    public void SetSession(Session session);
 }

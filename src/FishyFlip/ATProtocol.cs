@@ -13,7 +13,7 @@ public sealed class ATProtocol : IDisposable
     private ATProtocolOptions options;
     private HttpClient client;
     private bool disposedValue;
-    private SessionManager sessionManager;
+    private ISessionManager sessionManager;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtocol"/> class.
@@ -25,25 +25,13 @@ public sealed class ATProtocol : IDisposable
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
         if (options.Session is not null)
         {
-            this.sessionManager = new SessionManager(this, options.Session);
+            this.sessionManager = new PasswordSessionManager(this, options.Session);
         }
         else
         {
-            this.sessionManager = new SessionManager(this);
+            this.sessionManager = new PasswordSessionManager(this);
         }
     }
-
-    /// <summary>
-    /// Event for when a subscribed repo message is received.
-    /// </summary>
-    [Obsolete("Use ATWebSocketProtocol directly.")]
-    public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
-
-    /// <summary>
-    /// Event for when a subscribed repo message is received.
-    /// </summary>
-    [Obsolete("Use ATWebSocketProtocol directly.")]
-    public event EventHandler<SubscriptionConnectionStatusEventArgs>? OnConnectionUpdated;
 
     /// <summary>
     /// Event for when a session is updated.
@@ -174,11 +162,11 @@ public sealed class ATProtocol : IDisposable
         this.sessionManager.Dispose();
         if (options.Session is not null)
         {
-            this.sessionManager = new SessionManager(this, options.Session);
+            this.sessionManager = new PasswordSessionManager(this, options.Session);
         }
         else
         {
-            this.sessionManager = new SessionManager(this);
+            this.sessionManager = new PasswordSessionManager(this);
         }
     }
 
@@ -191,7 +179,7 @@ public sealed class ATProtocol : IDisposable
     /// Otherwise, the task will complete when the session has been refreshed.
     /// </returns>
     public Task RefreshSessionAsync()
-        => this.sessionManager?.RefreshTokenAsync() ?? Task.CompletedTask;
+        => this.sessionManager?.RefreshSessionAsync() ?? Task.CompletedTask;
 
     /// <inheritdoc/>
     public void Dispose()
@@ -234,7 +222,7 @@ public sealed class ATProtocol : IDisposable
 
         if (this.sessionManager is null)
         {
-            this.sessionManager = new SessionManager(this);
+            this.sessionManager = new PasswordSessionManager(this);
         }
 
         this.SetSession(session);

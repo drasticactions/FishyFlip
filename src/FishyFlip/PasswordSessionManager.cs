@@ -1,4 +1,4 @@
-﻿// <copyright file="SessionManager.cs" company="Drastic Actions">
+﻿// <copyright file="PasswordSessionManager.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace FishyFlip;
 /// <summary>
 /// Bluesky Session Manager.
 /// </summary>
-internal class SessionManager : ISessionManager
+internal class PasswordSessionManager : ISessionManager
 {
     private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
 
@@ -37,21 +37,21 @@ internal class SessionManager : ISessionManager
     private ILogger? logger;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SessionManager"/> class.
+    /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
     /// </summary>
     /// <param name="protocol"><see cref="ATProtocol"/>.</param>
-    public SessionManager(ATProtocol protocol)
+    public PasswordSessionManager(ATProtocol protocol)
     {
         this.protocol = protocol;
         this.logger = this.protocol.Options.Logger;
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SessionManager"/> class.
+    /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
     /// </summary>
     /// <param name="protocol"><see cref="ATProtocol"/>.</param>
     /// <param name="session">Existing Session.</param>
-    public SessionManager(ATProtocol protocol, Session session)
+    public PasswordSessionManager(ATProtocol protocol, Session session)
     {
         this.protocol = protocol;
         this.logger = this.protocol.Options.Logger;
@@ -69,25 +69,17 @@ internal class SessionManager : ISessionManager
     public Session? Session => this.session;
 
     /// <inheritdoc/>
-    public void Dispose() => this.Dispose(true);
+    public Task RefreshSessionAsync()
+        => this.RefreshTokenAsync();
 
-    /// <summary>
-    /// Updates the bearer token for the session.
-    /// </summary>
-    /// <param name="session">The updated session.</param>
-    internal void UpdateBearerToken(Session session)
-    {
-        this.protocol.Client
-                .DefaultRequestHeaders
-                .Authorization =
-            new AuthenticationHeaderValue("Bearer", session.AccessJwt);
-    }
+    /// <inheritdoc/>
+    public void Dispose() => this.Dispose(true);
 
     /// <summary>
     /// Sets the given session.
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
-    internal void SetSession(Session session)
+    public void SetSession(Session session)
     {
         this.session = session;
         this.UpdateBearerToken(session);
@@ -104,6 +96,18 @@ internal class SessionManager : ISessionManager
         this.timer ??= new System.Timers.Timer();
 
         this.ConfigureRefreshTokenTimer();
+    }
+
+    /// <summary>
+    /// Updates the bearer token for the session.
+    /// </summary>
+    /// <param name="session">The updated session.</param>
+    internal void UpdateBearerToken(Session session)
+    {
+        this.protocol.Client
+                .DefaultRequestHeaders
+                .Authorization =
+            new AuthenticationHeaderValue("Bearer", session.AccessJwt);
     }
 
     /// <summary>
