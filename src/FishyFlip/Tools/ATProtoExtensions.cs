@@ -32,7 +32,7 @@ public static class ATProtoExtensions
             return (socialProto, identifier as ATDid, true);
         }
 
-        if (!socialProto.SessionManager.IsAuthenticated)
+        if (!socialProto.IsAuthenticated)
         {
             logger?.LogDebug("Not authenticated, using defaults from user.");
             return (socialProto, identifier as ATDid, true);
@@ -61,13 +61,13 @@ public static class ATProtoExtensions
         if (identifier is ATDid did)
         {
             logger?.LogDebug($"Checking if identifier {did} is the same as the current session Did.");
-            return did == proto.SessionManager?.Session?.Did;
+            return did == proto?.Session?.Did;
         }
 
         if (identifier is ATHandle handle)
         {
             logger?.LogDebug($"Checking if handle {handle} is the same as the current session Handle.");
-            return handle == proto.SessionManager?.Session?.Handle;
+            return handle == proto?.Session?.Handle;
         }
 
         logger?.LogDebug("Could not determine if we should use the current PDS. Defaulting to false.");

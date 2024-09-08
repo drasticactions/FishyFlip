@@ -47,7 +47,7 @@ public sealed class ATProtoRepo
     {
         CreateLikeRecord record = new(
             Constants.FeedType.Like,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             new LikeRecord(new Subject(cid, uri), createdAt ?? DateTime.UtcNow));
 
         return this.CreateRecord<CreateLikeRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateLikeRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
@@ -69,7 +69,7 @@ public sealed class ATProtoRepo
     {
         CreateRepostRecord record = new(
             Constants.FeedType.Repost,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             new RepostRecord(new Subject(cid, uri), createdAt ?? DateTime.UtcNow));
 
         return this.CreateRecord<CreateRepostRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateRepostRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
@@ -89,7 +89,7 @@ public sealed class ATProtoRepo
     {
         CreateFollowRecord record = new(
             Constants.GraphTypes.Follow,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             new FollowRecord(did, createdAt ?? DateTime.UtcNow));
 
         return this.CreateRecord<CreateFollowRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateFollowRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
@@ -111,7 +111,7 @@ public sealed class ATProtoRepo
     {
         CreateListItemRecord record = new(
             Constants.GraphTypes.ListItem,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             new ListItemRecord(subject, list, createdAt ?? DateTime.UtcNow));
 
         return this.CreateRecord<CreateListItemRecord, RecordRef>(record, this.Options.SourceGenerationContext.CreateListItemRecord, this.Options.SourceGenerationContext.RecordRef, cancellationToken);
@@ -166,7 +166,7 @@ public sealed class ATProtoRepo
     {
         CreatePostRecord record = new(
             Constants.FeedType.Post,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             new Post(embed, facets, createdAt ?? DateTime.UtcNow, reply, text, langs, Constants.FeedType.Post),
             rkey,
             swapCommit);
@@ -191,7 +191,7 @@ public sealed class ATProtoRepo
     {
         CreateThreadGateRecord record = new(
             Constants.FeedType.ThreadGate,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             new ThreadGate(post, threadGateReasons, createdAt ?? DateTime.UtcNow),
             post.Rkey,
             swapCommit);
@@ -212,7 +212,7 @@ public sealed class ATProtoRepo
     {
         CreateBlockRecord record = new(
             Constants.GraphTypes.Block,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             new BlockRecord(did, createdAt ?? DateTime.UtcNow));
 
         return this.Client.Post<CreateBlockRecord, RecordRef>(
@@ -247,7 +247,7 @@ public sealed class ATProtoRepo
 
         CreateListRecord record = new(
             Constants.GraphTypes.List,
-            this.proto.SessionManager!.Session!.Did.ToString(),
+            this.proto.Session!.Did.ToString(),
             listRecord);
 
         return this.Client.Post<CreateListRecord, RecordRef>(
@@ -692,7 +692,7 @@ public sealed class ATProtoRepo
     {
         DeleteRecord record = new(
             collection,
-            this.proto.SessionManager!.Session!.Did.ToString()!,
+            this.proto.Session!.Did.ToString()!,
             rkey,
             swapRecord,
             swapCommit);

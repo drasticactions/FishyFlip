@@ -54,6 +54,11 @@ public sealed class ATProtocol : IDisposable
     public event EventHandler<SessionUpdatedEventArgs>? OnSessionUpdated;
 
     /// <summary>
+    /// Gets a value indicating whether the user is authenticated.
+    /// </summary>
+    public bool IsAuthenticated => this.sessionManager.IsAuthenticated;
+
+    /// <summary>
     /// Gets the ATProtocol Options.
     /// </summary>
     public ATProtocolOptions Options => this.options;
