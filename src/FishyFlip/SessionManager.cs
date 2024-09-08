@@ -1,4 +1,4 @@
-﻿// <copyright file="PasswordSessionManager.cs" company="Drastic Actions">
+﻿// <copyright file="SessionManager.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace FishyFlip;
 /// <summary>
 /// Bluesky Session Manager.
 /// </summary>
-internal class PasswordSessionManager : ISessionManager
+internal class SessionManager : ISessionManager
 {
     private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
 
@@ -37,21 +37,21 @@ internal class PasswordSessionManager : ISessionManager
     private ILogger? logger;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
+    /// Initializes a new instance of the <see cref="SessionManager"/> class.
     /// </summary>
     /// <param name="protocol"><see cref="ATProtocol"/>.</param>
-    public PasswordSessionManager(ATProtocol protocol)
+    public SessionManager(ATProtocol protocol)
     {
         this.protocol = protocol;
         this.logger = this.protocol.Options.Logger;
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
+    /// Initializes a new instance of the <see cref="SessionManager"/> class.
     /// </summary>
     /// <param name="protocol"><see cref="ATProtocol"/>.</param>
     /// <param name="session">Existing Session.</param>
-    public PasswordSessionManager(ATProtocol protocol, Session session)
+    public SessionManager(ATProtocol protocol, Session session)
     {
         this.protocol = protocol;
         this.logger = this.protocol.Options.Logger;

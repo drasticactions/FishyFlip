@@ -11,7 +11,7 @@ namespace FishyFlip;
 /// <summary>
 /// Manage ATProtocol sessions.
 /// </summary>
-public interface ISessionManager : IDisposable
+internal interface ISessionManager : IDisposable
 {
     /// <summary>
     /// Gets a value indicating whether the session is authenticated.

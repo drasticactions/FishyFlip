@@ -12,7 +12,7 @@
         <IsPackable>true</IsPackable>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsAsErrors>nullable</WarningsAsErrors>
-        <IsAotCompatible>true</IsAotCompatible>
+        <IsAotCompatible Condition="'$(TargetFramework)' == 'net8.0'">true</IsAotCompatible>
         <NoWarn>$(NoWarn);SA0001</NoWarn>
     </PropertyGroup>
 
