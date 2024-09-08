@@ -12,7 +12,6 @@ namespace FishyFlip;
 public class ATProtocolBuilder
 {
     private readonly ATProtocolOptions atProtocolOptions;
-    private bool setHttpClientDefaults = true;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtocolBuilder"/> class.
@@ -31,19 +30,6 @@ public class ATProtocolBuilder
     public ATProtocolBuilder(ATProtocolOptions options)
     {
         this.atProtocolOptions = options;
-    }
-
-    /// <summary>
-    /// Set a custom HttpClient.
-    /// </summary>
-    /// <param name="client">HttpClient.</param>
-    /// <param name="setDefaults">Enables the default values to be set.</param>
-    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
-    public ATProtocolBuilder WithHttpClient(HttpClient client, bool setDefaults = true)
-    {
-        this.atProtocolOptions.HttpClient = client;
-        this.setHttpClientDefaults = setDefaults;
-        return this;
     }
 
     /// <summary>
@@ -118,40 +104,11 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
-    /// Sets an initial session to use.
-    /// </summary>
-    /// <param name="session"><see cref="Session"/>.</param>
-    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
-    public ATProtocolBuilder WithInitialSession(Session session)
-    {
-        this.atProtocolOptions.Session = session;
-        return this;
-    }
-
-    /// <summary>
-    /// Set the ATProtocol to use admin credentials.
-    /// </summary>
-    /// <param name="password">Admin password.</param>
-    /// <param name="username">Admin username. Defaults to "admin".</param>
-    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
-    public ATProtocolBuilder AsAdmin(string password, string username = "admin")
-    {
-        string base64Credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
-        this.atProtocolOptions.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64Credentials);
-        return this;
-    }
-
-    /// <summary>
     /// Returns the ATProtocolOptions.
     /// </summary>
     /// <returns>ATProtocolOptions.</returns>
     public ATProtocolOptions BuildOptions()
     {
-        if (this.setHttpClientDefaults)
-        {
-            this.atProtocolOptions.UpdateHttpClient(this.atProtocolOptions.Url);
-        }
-
         return this.atProtocolOptions;
     }
 

@@ -41,7 +41,6 @@ public sealed class ATProtoServer
                 .Match(
                 s =>
                 {
-                    this.proto.OnUserLoggedIn(s);
                     return result;
                 },
                 error => error!);
@@ -67,7 +66,8 @@ public sealed class ATProtoServer
                 .Match(
                 s =>
                 {
-                    this.proto.SetSession(s);
+                    // Used for passwords, this should be set in PasswordSessionManager.
+                    // this.proto.SetSession(s);
                     return result;
                 },
                 error => error!);

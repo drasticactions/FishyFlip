@@ -11,7 +11,6 @@ namespace FishyFlip;
 public sealed class ATProtocol : IDisposable
 {
     private ATProtocolOptions options;
-    private HttpClient client;
     private bool disposedValue;
     private ISessionManager sessionManager;
 
@@ -22,21 +21,8 @@ public sealed class ATProtocol : IDisposable
     public ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
-        this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
-        if (options.Session is not null)
-        {
-            this.sessionManager = new PasswordSessionManager(this, options.Session);
-        }
-        else
-        {
-            this.sessionManager = new PasswordSessionManager(this);
-        }
+        this.sessionManager = new UnauthenticatedSessionManager(options);
     }
-
-    /// <summary>
-    /// Event for when a session is updated.
-    /// </summary>
-    public event EventHandler<SessionUpdatedEventArgs>? OnSessionUpdated;
 
     /// <summary>
     /// Gets a value indicating whether the user is authenticated.
@@ -126,12 +112,12 @@ public sealed class ATProtocol : IDisposable
     /// <summary>
     /// Gets the base address for the underlying HttpClient.
     /// </summary>
-    public Uri? BaseAddress => this.client.BaseAddress;
+    public Uri? BaseAddress => this.sessionManager.Client.BaseAddress;
 
     /// <summary>
     /// Gets the HttpClient.
     /// </summary>
-    public HttpClient Client => this.client;
+    public HttpClient Client => this.sessionManager.Client;
 
     /// <summary>
     /// Gets the internal session manager.
@@ -139,35 +125,51 @@ public sealed class ATProtocol : IDisposable
     internal ISessionManager SessionManager => this.sessionManager;
 
     /// <summary>
-    /// Update the Instance Uri.
+    /// Asynchronously creates a new session manager using a password.
     /// </summary>
-    /// <param name="uri">Instance Uri.</param>
-    public void UpdateInstanceUri(Uri uri)
+    /// <param name="identifier">The identifier of the user.</param>
+    /// <param name="password">The password of the user.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    public async Task<Session?> AuthenticateWithPasswordAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
-        this.options.Url = uri;
-        this.UpdateOptions(this.options);
+        this.sessionManager.Dispose();
+        var passwordSessionManager = new PasswordSessionManager(this);
+        this.sessionManager = passwordSessionManager;
+        return await passwordSessionManager.CreateSessionAsync(identifier, password, cancellationToken);
     }
 
     /// <summary>
-    /// Update options for ATProto.
-    /// This will log out the current session and dispose of the current session manager.
+    /// Starts the OAuth2 authentication process asynchronously.
     /// </summary>
-    /// <param name="options">Options.</param>
-    /// <exception cref="NullReferenceException">Thrown if missing options.</exception>
-    public void UpdateOptions(ATProtocolOptions options)
+    /// <param name="clientId">ClientID, must be a URL.</param>
+    /// <param name="redirectUrl">RedirectUrl.</param>
+    /// <param name="scopes">ATProtocol Scopes.</param>
+    /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Authorization URL to call.</returns>
+    public async Task<string> GenerateOAuth2AuthenticationUrlAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
-        this.options = options;
-        this.options.UpdateHttpClient(options.Url);
-        this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
         this.sessionManager.Dispose();
-        if (options.Session is not null)
+        var oAuth2SessionManager = new OAuth2SessionManager(this);
+        this.sessionManager = oAuth2SessionManager;
+        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, instanceUrl, cancellationToken);
+    }
+
+    /// <summary>
+    /// Authenticates with OAuth2 callback asynchronously.
+    /// </summary>
+    /// <param name="callbackData">The callback data received from the OAuth2 provider.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    public async Task<Session?> AuthenticateWithOAuth2CallbackAsync(string callbackData, CancellationToken cancellationToken = default)
+    {
+        if (this.sessionManager is not OAuth2SessionManager oAuth2SessionManager)
         {
-            this.sessionManager = new PasswordSessionManager(this, options.Session);
+            throw new OAuth2Exception("Session manager is not an OAuth2 session manager.");
         }
-        else
-        {
-            this.sessionManager = new PasswordSessionManager(this);
-        }
+
+        return await oAuth2SessionManager.CompleteAuthorizationAsync(callbackData, cancellationToken);
     }
 
     /// <summary>
@@ -188,63 +190,13 @@ public sealed class ATProtocol : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    /// <summary>
-    /// Run when a user logs in.
-    /// </summary>
-    /// <param name="session"><see cref="Session"/>.</param>
-    internal void OnUserLoggedIn(Session session)
-    {
-        if (this.options.UseServiceEndpointUponLogin)
-        {
-            var logger = this.options?.Logger;
-            var serviceUrl = session.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
-            if (string.IsNullOrEmpty(serviceUrl))
-            {
-                logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
-            }
-            else
-            {
-                var result = Uri.TryCreate(serviceUrl, UriKind.Absolute, out Uri? uriResult);
-                if (!result || uriResult is null)
-                {
-                    logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
-                }
-                else
-                {
-                    this.Options.Url = uriResult;
-                    this.Options.Session = session;
-                    logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
-                    this.UpdateOptions(this.Options);
-                    return;
-                }
-            }
-        }
-
-        if (this.sessionManager is null)
-        {
-            this.sessionManager = new PasswordSessionManager(this);
-        }
-
-        this.SetSession(session);
-    }
-
-    /// <summary>
-    /// Sets the current session.
-    /// </summary>
-    /// <param name="session"><see cref="Session"/>.</param>
-    internal void SetSession(Session session)
-    {
-        this.sessionManager?.SetSession(session);
-        this.OnSessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(session, this.BaseAddress));
-    }
-
     private void Dispose(bool disposing)
     {
         if (!this.disposedValue)
         {
             if (disposing)
             {
-                this.client.Dispose();
+                this.sessionManager.Dispose();
             }
 
             this.disposedValue = true;

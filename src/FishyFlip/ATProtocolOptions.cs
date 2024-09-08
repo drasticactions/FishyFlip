@@ -16,7 +16,6 @@ public class ATProtocolOptions
     /// <param name="customAtRecordConverters">Customer JSON Converters for ATRecord.</param>
     public ATProtocolOptions(IReadOnlyList<ICustomEmbedConverter>? customEmbedConverters = default, IReadOnlyList<ICustomATRecordConverter>? customAtRecordConverters = default)
     {
-        this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
         this.Url = new Uri(Constants.Urls.ATProtoServer.SocialApi);
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {
@@ -39,19 +38,9 @@ public class ATProtocolOptions
     }
 
     /// <summary>
-    /// Gets the HttpClient.
-    /// </summary>
-    public HttpClient HttpClient { get; internal set; }
-
-    /// <summary>
     /// Gets the logger.
     /// </summary>
     public ILogger? Logger { get; internal set; }
-
-    /// <summary>
-    /// Gets the initial session.
-    /// </summary>
-    public Session? Session { get; internal set; }
 
     /// <summary>
     /// Gets the instance Url.
@@ -91,17 +80,16 @@ public class ATProtocolOptions
     internal SourceGenerationContext SourceGenerationContext { get; }
 
     /// <summary>
-    /// Update the existing HttpClient with a new URI endpoint.
+    /// Generates an HttpClient based on the options.
     /// </summary>
-    /// <param name="serviceUri">Uri Endpoint.</param>
-    internal void UpdateHttpClient(Uri serviceUri)
+    /// <param name="handler">Handler.</param>
+    /// <returns><see cref="HttpClient"/>.</returns>
+    internal HttpClient GenerateHttpClient(HttpMessageHandler? handler = default)
     {
-        // Remove existing HttpClient.
-        this.HttpClient.Dispose();
-        this.HttpClient = new HttpClient(new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
-        this.HttpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
-        this.HttpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
-        this.HttpClient.BaseAddress = serviceUri;
-        this.Url = serviceUri;
+        var httpClient = new HttpClient(handler ?? new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
+        httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
+        httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
+        httpClient.BaseAddress = this.Url;
+        return httpClient;
     }
 }

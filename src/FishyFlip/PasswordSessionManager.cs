@@ -5,7 +5,7 @@
 namespace FishyFlip;
 
 /// <summary>
-/// Bluesky Session Manager.
+/// ATProtocol Password Session Manager.
 /// </summary>
 internal class PasswordSessionManager : ISessionManager
 {
@@ -29,6 +29,7 @@ internal class PasswordSessionManager : ISessionManager
         },
     };
 
+    private HttpClient client;
     private ATProtocol protocol;
     private Session? session;
     private bool disposed;
@@ -43,6 +44,7 @@ internal class PasswordSessionManager : ISessionManager
     public PasswordSessionManager(ATProtocol protocol)
     {
         this.protocol = protocol;
+        this.client = protocol.Options.GenerateHttpClient();
         this.logger = this.protocol.Options.Logger;
     }
 
@@ -54,6 +56,7 @@ internal class PasswordSessionManager : ISessionManager
     public PasswordSessionManager(ATProtocol protocol, Session session)
     {
         this.protocol = protocol;
+        this.client = protocol.Options.GenerateHttpClient();
         this.logger = this.protocol.Options.Logger;
         this.SetSession(session);
     }
@@ -69,11 +72,57 @@ internal class PasswordSessionManager : ISessionManager
     public Session? Session => this.session;
 
     /// <inheritdoc/>
+    public HttpClient Client => this.client;
+
+    /// <inheritdoc/>
     public Task RefreshSessionAsync()
         => this.RefreshTokenAsync();
 
     /// <inheritdoc/>
     public void Dispose() => this.Dispose(true);
+
+    /// <summary>
+    /// Asynchronously creates a new session.
+    /// </summary>
+    /// <param name="identifier">The identifier of the user.</param>
+    /// <param name="password">The password of the user.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    public async Task<Session?> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
+    {
+        var session = (await this.protocol.Server.CreateSessionAsync(identifier, password, cancellationToken)).HandleResult();
+        if (session is not null)
+        {
+            if (this.protocol.Options.UseServiceEndpointUponLogin)
+            {
+                var logger = this.protocol.Options.Logger;
+                var serviceUrl = session.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
+                if (string.IsNullOrEmpty(serviceUrl))
+                {
+                    logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
+                }
+                else
+                {
+                    var result = Uri.TryCreate(serviceUrl, UriKind.Absolute, out Uri? uriResult);
+                    if (!result || uriResult is null)
+                    {
+                        logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
+                    }
+                    else
+                    {
+                        this.protocol.Options.Url = uriResult;
+                        this.client.Dispose();
+                        this.client = this.protocol.Options.GenerateHttpClient();
+                        logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
+                    }
+                }
+            }
+
+            this.SetSession(session);
+        }
+
+        return session;
+    }
 
     /// <summary>
     /// Sets the given session.
@@ -104,7 +153,7 @@ internal class PasswordSessionManager : ISessionManager
     /// <param name="session">The updated session.</param>
     internal void UpdateBearerToken(Session session)
     {
-        this.protocol.Client
+        this.client
                 .DefaultRequestHeaders
                 .Authorization =
             new AuthenticationHeaderValue("Bearer", session.AccessJwt);
@@ -175,6 +224,7 @@ internal class PasswordSessionManager : ISessionManager
             this.timer.Enabled = false;
             this.timer.Dispose();
             this.timer = null;
+            this.client?.Dispose();
         }
 
         this.disposed = true;

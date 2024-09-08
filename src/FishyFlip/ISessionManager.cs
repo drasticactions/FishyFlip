@@ -14,6 +14,11 @@ namespace FishyFlip;
 internal interface ISessionManager : IDisposable
 {
     /// <summary>
+    /// Gets the HttpClient used to make calls into ATProtocol.
+    /// </summary>
+    public HttpClient Client { get; }
+
+    /// <summary>
     /// Gets a value indicating whether the session is authenticated.
     /// </summary>
     public bool IsAuthenticated { get; }
