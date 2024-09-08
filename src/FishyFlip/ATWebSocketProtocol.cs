@@ -269,7 +269,6 @@ public sealed class ATWebSocketProtocol : IDisposable
                 break;
         }
 
-        this.protocol?.OnSubscribedRepoMessageInternal(new SubscribedRepoEventArgs(message));
         this.OnSubscribedRepoMessage?.Invoke(this, new SubscribedRepoEventArgs(message));
     }
 

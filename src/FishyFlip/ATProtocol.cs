@@ -12,7 +12,6 @@ public sealed class ATProtocol : IDisposable
 {
     private ATProtocolOptions options;
     private HttpClient client;
-    private ATWebSocketProtocol webSocketProtocol;
     private bool disposedValue;
     private SessionManager sessionManager;
 
@@ -24,8 +23,6 @@ public sealed class ATProtocol : IDisposable
     {
         this.options = options;
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
-        this.webSocketProtocol = new ATWebSocketProtocol(this);
-        this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
         if (options.Session is not null)
         {
             this.sessionManager = new SessionManager(this, options.Session);
@@ -139,11 +136,6 @@ public sealed class ATProtocol : IDisposable
     public BlueskyChat Chat => new(this);
 
     /// <summary>
-    /// Gets a value indicating whether the subscription is active.
-    /// </summary>
-    public bool IsSubscriptionActive => this.webSocketProtocol.IsConnected;
-
-    /// <summary>
     /// Gets the base address for the underlying HttpClient.
     /// </summary>
     public Uri? BaseAddress => this.client.BaseAddress;
@@ -157,40 +149,6 @@ public sealed class ATProtocol : IDisposable
     /// Gets the internal session manager.
     /// </summary>
     internal ISessionManager SessionManager => this.sessionManager;
-
-    /// <summary>
-    /// Start the ATProtocol SubscribeRepos sync session.
-    /// </summary>
-    /// <param name="token">Cancellation Token.</param>
-    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    [Obsolete("Use ATWebSocketProtocol directly.")]
-    public Task StartSubscribeReposAsync(CancellationToken? token = default)
-        => this.webSocketProtocol.ConnectAsync(Constants.Urls.ATProtoSync.SubscribeRepos, token);
-
-    /// <summary>
-    /// Start the ATProtocol SubscribeRepos sync session.
-    /// </summary>
-    /// <param name="token">Cancellation Token.</param>
-    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    [Obsolete("Use ATWebSocketProtocol directly.")]
-    public Task StartSubscribeLabelsAsync(CancellationToken? token = default)
-        => this.webSocketProtocol.ConnectAsync(Constants.Urls.ATProtoLabel.SubscribeLabels, token);
-
-    /// <summary>
-    /// Stops the ATProtocol Subscription session.
-    /// </summary>
-    /// <param name="token">Cancellation Token.</param>
-    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    [Obsolete("Use ATWebSocketProtocol directly.")]
-    public Task StopSubscriptionAsync(CancellationToken? token = default)
-    {
-        if (this.IsSubscriptionActive)
-        {
-            return this.webSocketProtocol.CloseAsync(token: token);
-        }
-
-        return Task.CompletedTask;
-    }
 
     /// <summary>
     /// Update the Instance Uri.
@@ -213,10 +171,7 @@ public sealed class ATProtocol : IDisposable
         this.options = options;
         this.options.UpdateHttpClient(options.Url);
         this.client = options.HttpClient ?? throw new NullReferenceException(nameof(options.HttpClient));
-        this.webSocketProtocol.Dispose();
         this.sessionManager.Dispose();
-        this.webSocketProtocol = new ATWebSocketProtocol(this);
-        this.webSocketProtocol.OnConnectionUpdated += this.WebSocketProtocolOnConnectionUpdated;
         if (options.Session is not null)
         {
             this.sessionManager = new SessionManager(this, options.Session);
@@ -244,13 +199,6 @@ public sealed class ATProtocol : IDisposable
         this.Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
-
-    /// <summary>
-    /// Handles a subscribed repo message.
-    /// </summary>
-    /// <param name="e"><see cref="SubscribedRepoEventArgs"/>.</param>
-    internal void OnSubscribedRepoMessageInternal(SubscribedRepoEventArgs e)
-        => this.OnSubscribedRepoMessage?.Invoke(this, e);
 
     /// <summary>
     /// Run when a user logs in.
@@ -308,14 +256,10 @@ public sealed class ATProtocol : IDisposable
         {
             if (disposing)
             {
-                this.webSocketProtocol.OnConnectionUpdated -= this.WebSocketProtocolOnConnectionUpdated;
                 this.client.Dispose();
             }
 
             this.disposedValue = true;
         }
     }
-
-    private void WebSocketProtocolOnConnectionUpdated(object? sender, SubscriptionConnectionStatusEventArgs e)
-        => this.OnConnectionUpdated?.Invoke(this, e);
 }
