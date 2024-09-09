@@ -1,0 +1,3 @@
+[submodule "external/IdentityModel.OidcClient"]
+	path = external/IdentityModel.OidcClient
+	url = git@github.com:drasticactions/IdentityModel.OidcClient.git
