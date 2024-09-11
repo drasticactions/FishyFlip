@@ -182,17 +182,33 @@ public sealed class ATProtocol : IDisposable
     /// </summary>
     /// <param name="session">The OAuth session.</param>
     /// <param name="clientId">The client ID.</param>
-    /// <param name="redirectUrl">The redirect URL.</param>
-    /// <param name="scopes">The scopes.</param>
     /// <param name="instanceUrl">Optional. The instance URL. If null, uses https://bsky.social.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Session?> AuthenticateWithOAuth2SessionAsync(OAuthSession session, string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default)
+    public async Task<Session?> AuthenticateWithOAuth2SessionAsync(OAuthSession session, string clientId, string? instanceUrl = default)
     {
         this.sessionManager.Dispose();
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.sessionManager = oAuth2SessionManager;
-        oAuth2SessionManager.StartSession(session, clientId, redirectUrl, scopes, instanceUrl);
+        await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl);
         return await Task.FromResult<Session?>(oAuth2SessionManager.Session);
+    }
+
+    /// <summary>
+    /// Saves the current OAuth session asynchronously.
+    /// Returns null if the session manager is not an OAuth2 session manager.
+    /// </summary>
+    /// <returns><see cref="OAuthSession"/>.</returns>
+    public async Task<OAuthSession?> SaveOAuthSessionAsync()
+    {
+        if (this.sessionManager is not OAuth2SessionManager oAuth2SessionManager)
+        {
+            return null;
+        }
+
+        // Refresh the token to make sure it's the most up to date.
+        var result = await oAuth2SessionManager.RefreshTokenAsync();
+
+        return oAuth2SessionManager.OAuthSession;
     }
 
     /// <summary>

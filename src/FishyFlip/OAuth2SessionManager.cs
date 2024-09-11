@@ -2,9 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools;
 using IdentityModel.Client;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.DPoP;
+using IdentityModel.OidcClient.Results;
 using Microsoft.Extensions.Logging;
 
 namespace FishyFlip;
@@ -55,19 +57,16 @@ internal class OAuth2SessionManager : ISessionManager
     /// </summary>
     /// <param name="session">Previous OAuth Session.</param>
     /// <param name="clientId">ClientID, must be a URL.</param>
-    /// <param name="redirectUrl">RedirectUrl.</param>
-    /// <param name="scopes">ATProtocol Scopes.</param>
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
     /// <exception cref="OAuth2Exception">Thrown if missing OAuth2 information.</exception>
-    public void StartSession(OAuthSession session, string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default)
+    /// <returns>Task.</returns>
+    public async Task StartSessionAsync(OAuthSession session, string clientId, string? instanceUrl = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
         {
             Authority = instanceUrl,
             ClientId = clientId,
-            Scope = string.Join(" ", scopes),
-            RedirectUri = redirectUrl,
             LoadProfile = false,
         };
 
@@ -93,6 +92,11 @@ internal class OAuth2SessionManager : ISessionManager
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
 
         this.SetSession(session.Session);
+        var refreshTokenResult = await this.RefreshTokenAsync() ?? throw new OAuth2Exception("Failed to refresh token.");
+        if (refreshTokenResult.IsError)
+        {
+            throw new OAuth2Exception($"Failed to refresh token: {refreshTokenResult.Error} {refreshTokenResult.ErrorDescription}");
+        }
     }
 
     /// <summary>
@@ -175,20 +179,13 @@ internal class OAuth2SessionManager : ISessionManager
         this.delegatingHandler = (RefreshTokenDelegatingHandler)result.RefreshTokenHandler;
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
         this.SetSession(session);
+
         return session;
     }
 
     /// <inheritdoc/>
     public Task RefreshSessionAsync()
-    {
-        if (this.oidcClient is null)
-        {
-            this.logger?.LogWarning("OdicClient is null.Start OAuth Session first.");
-            return Task.CompletedTask;
-        }
-
-        return this.oidcClient.RefreshTokenAsync(this.session!.RefreshJwt, backChannelParameters: null, scope: null, cancellationToken: default);
-    }
+        => this.RefreshTokenAsync();
 
     /// <inheritdoc/>
     public void SetSession(Session session)
@@ -227,6 +224,37 @@ internal class OAuth2SessionManager : ISessionManager
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         this.Dispose(disposing: true);
         GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Refresh Token.
+    /// </summary>
+    /// <returns>Token result.</returns>
+    internal async Task<RefreshTokenResult?> RefreshTokenAsync()
+    {
+        if (this.oidcClient is null)
+        {
+            this.logger?.LogWarning("OdicClient is null.Start OAuth Session first.");
+            return null;
+        }
+
+        var refreshResult = await this.oidcClient.RefreshTokenAsync(this.session!.RefreshJwt, backChannelParameters: null, scope: null, cancellationToken: default);
+        if (refreshResult.IsError)
+        {
+            this.logger?.LogError($"Failed to refresh token: {refreshResult.Error} {refreshResult.ErrorDescription}");
+        }
+
+        if (this.session is null)
+        {
+            throw new NullReferenceException("Session should not be null if RefreshToken handler is enabled");
+        }
+
+        lock (this.session)
+        {
+            this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, refreshResult.AccessToken, refreshResult.RefreshToken);
+        }
+
+        return refreshResult;
     }
 
     /// <summary>
