@@ -351,6 +351,7 @@ public static class Constants
         public const string RecordView = "app.bsky.embed.record#view";
         public const string Record = "app.bsky.embed.record";
         public const string Video = "app.bsky.embed.video";
+        public const string VideoView = "app.bsky.embed.video#view";
         public const string RecordWithMedia = "app.bsky.embed.recordWithMedia";
         public const string RecordWithMediaView = "app.bsky.embed.recordWithMedia#view";
         public const string AspectRatio = "app.bsky.embed.defs#aspectRatio";

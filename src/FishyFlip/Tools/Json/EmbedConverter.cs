@@ -32,6 +32,9 @@ public class EmbedConverter : JsonConverter<Embed>
                 var text = type.GetString()?.Trim() ?? string.Empty;
                 switch (text)
                 {
+                    case Constants.EmbedTypes.VideoView:
+                        var vidView = JsonSerializer.Deserialize<VideoViewEmbed>(doc.RootElement.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).VideoViewEmbed);
+                        return vidView;
                     case Constants.EmbedTypes.ImageView:
                         if (doc.RootElement.TryGetProperty("images", out var t))
                         {

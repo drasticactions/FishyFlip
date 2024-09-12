@@ -13,4 +13,4 @@ namespace FishyFlip.Models;
 /// </summary>
 /// <param name="Lang">Language.</param>
 /// <param name="File">VTT Subtitle.</param>
-public record Caption(string Lang, Blob File);
+public record Caption(string Lang, CaptionBlob File);
