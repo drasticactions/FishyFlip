@@ -22,10 +22,19 @@ public class VideoRef
     /// <summary>
     /// Initializes a new instance of the <see cref="VideoRef"/> class with the specified CBOR object.
     /// </summary>
-    /// <param name="image">The CBOR object representing the image.</param>
-    public VideoRef(CBORObject image)
+    /// <param name="obj">The CBOR object representing the video.</param>
+    public VideoRef(CBORObject obj)
     {
-        this.Link = Cid.Read(image.GetByteString());
+        switch (obj.Type)
+        {
+            case CBORType.ByteString:
+                var cid = obj.GetByteString();
+                this.Link = Cid.Read(cid);
+                break;
+            case CBORType.TextString:
+                this.Link = Cid.Decode(obj.AsString());
+                break;
+        }
     }
 
     /// <summary>

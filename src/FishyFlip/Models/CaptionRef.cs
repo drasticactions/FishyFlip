@@ -25,7 +25,16 @@ public class CaptionRef
     /// <param name="caption">The CBOR object representing the caption.</param>
     public CaptionRef(CBORObject caption)
     {
-        this.Link = Cid.Read(caption.GetByteString());
+        switch (caption.Type)
+        {
+            case CBORType.ByteString:
+                var cid = caption.GetByteString();
+                this.Link = Cid.Read(cid);
+                break;
+            case CBORType.TextString:
+                this.Link = Cid.Decode(caption.AsString());
+                break;
+        }
     }
 
     /// <summary>
