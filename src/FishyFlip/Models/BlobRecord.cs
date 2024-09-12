@@ -50,4 +50,14 @@ public class BlobRecord : ATRecord
         {
             Ref = new ImageRef(this.Ref?.Link),
         };
+
+    /// <summary>
+    /// Converts the blob record to an video.
+    /// </summary>
+    /// <returns>An video object.</returns>
+    public Video ToVideo()
+        => new(this.MimeType, this.Size, "blob")
+        {
+            Ref = new VideoRef(this.Ref?.Link),
+        };
 }

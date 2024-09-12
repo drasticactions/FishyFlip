@@ -114,9 +114,11 @@ internal static class CborExtensions
                 return new RecordWithMediaEmbed(obj["record"], obj["media"]);
             case Constants.EmbedTypes.External:
                 return new ExternalEmbed(obj["external"]);
+            case Constants.EmbedTypes.Video:
+                return new VideoEmbed(obj);
+            default:
+                return new UnknownEmbed(type);
         }
-
-        return new UnknownEmbed(type);
     }
 
     /// <summary>
