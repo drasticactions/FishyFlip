@@ -29,8 +29,8 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Condition="!Exists('packages.config')">
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="GitVersion.MSBuild">
+      <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>

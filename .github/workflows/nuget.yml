@@ -33,8 +33,6 @@ jobs:
         with:
           dotnet-version: 8.x
 
-      - uses: dotnet/nbgv@master
-
       # Pack Nuget
       - name: Build and Pack Nugets
         run: dotnet pack src/FishyFlip.sln --configuration Release --output nupkg
