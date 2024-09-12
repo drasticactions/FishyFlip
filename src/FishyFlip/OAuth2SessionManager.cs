@@ -60,7 +60,7 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
     /// <exception cref="OAuth2Exception">Thrown if missing OAuth2 information.</exception>
     /// <returns>Task.</returns>
-    public async Task StartSessionAsync(OAuthSession session, string clientId, string? instanceUrl = default)
+    public Task StartSessionAsync(OAuthSession session, string clientId, string? instanceUrl = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
@@ -92,11 +92,7 @@ internal class OAuth2SessionManager : ISessionManager
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
 
         this.SetSession(session.Session);
-        var refreshTokenResult = await this.RefreshTokenAsync() ?? throw new OAuth2Exception("Failed to refresh token.");
-        if (refreshTokenResult.IsError)
-        {
-            throw new OAuth2Exception($"Failed to refresh token: {refreshTokenResult.Error} {refreshTokenResult.ErrorDescription}");
-        }
+        return Task.CompletedTask;
     }
 
     /// <summary>
