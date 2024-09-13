@@ -25,16 +25,9 @@ public class VideoRef
     /// <param name="obj">The CBOR object representing the video.</param>
     public VideoRef(CBORObject obj)
     {
-        switch (obj.Type)
-        {
-            case CBORType.ByteString:
-                var cid = obj.GetByteString();
-                this.Link = Cid.Read(cid);
-                break;
-            case CBORType.TextString:
-                this.Link = Cid.Decode(obj.AsString());
-                break;
-        }
+        var cid = obj.GetByteString();
+        using var memoryStream = new MemoryStream(cid);
+        this.Link = Cid.Read(memoryStream);
     }
 
     /// <summary>

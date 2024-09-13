@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Security.Cryptography;
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -25,16 +27,9 @@ public class ImageRef
     /// <param name="image">The CBOR object representing the image.</param>
     public ImageRef(CBORObject image)
     {
-        switch (image.Type)
-        {
-            case CBORType.ByteString:
-                var cid = image.GetByteString();
-                this.Link = Cid.Read(cid);
-                break;
-            case CBORType.TextString:
-                this.Link = Cid.Decode(image.AsString());
-                break;
-        }
+        var cid = image.GetByteString();
+        using var memoryStream = new MemoryStream(cid);
+        this.Link = Cid.Read(memoryStream);
     }
 
     /// <summary>

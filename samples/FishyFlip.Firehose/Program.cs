@@ -5,11 +5,27 @@
 using FishyFlip;
 using FishyFlip.Models;
 using FishyFlip.Tools;
+using Ipfs;
 using Microsoft.Extensions.Logging.Debug;
+using System.Security.Cryptography;
+using System.Text;
 
 Console.WriteLine("Hello, ATProtocol Firehose!");
 
-var debugLog = new DebugLoggerProvider();
+Encoding enc = Encoding.UTF8;
+SHA256 sha256 = SHA256.Create();
+byte[] hashDigest = sha256.ComputeHash(Encoding.UTF8.GetBytes("Hello"));
+// Sha256
+var cid = Cid.Decode("bafkreiefakrdmclohastskuauwurbtx3tnu2drjpnirsoroyalq5nqr73a");
+// 
+var cid2 = Cid.Decode("baeavkeraqubkenqjny4ckojkqcs2sego7onq");
+
+var cid1Long = cid.ToString("L");
+var cid2Long = cid2.ToString("L");
+
+// cid.ContentType = "codec-1";
+var fun = cid.ToString();
+ var debugLog = new DebugLoggerProvider();
 
 // You can set a custom url with WithInstanceUrl
 var atWebProtocolBuilder = new ATWebSocketProtocolBuilder()
@@ -64,9 +80,33 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
 
             if (post.Reply is not null)
             {
-               Console.WriteLine($"Reply Root: {post.Reply.Root.Uri}");
-               Console.WriteLine($"Reply Parent: {post.Reply.Parent.Uri}");
+                Console.WriteLine($"Reply Root: {post.Reply.Root.Uri}");
+                Console.WriteLine($"Reply Parent: {post.Reply.Parent.Uri}");
             }
+
+            if (post.Embed is VideoEmbed videoEmbed)
+            {
+                // https://video.bsky.app/watch/did%3Aplc%3Acxe5e4ldjfvryf5dqvopdq3v/bafkreiefakrdmclohastskuauwurbtx3tnu2drjpnirsoroyalq5nqr73a/playlist.m3u8
+                var link = videoEmbed.Video?.Ref?.Link;
+                var linkString = link.ToString();
+                Console.WriteLine($"Video Link: https://video.bsky.app/watch/{did}/{linkString}/playlist.m3u8");
+            }
+        }
+
+        static string sha256_hash(string value)
+        {
+            StringBuilder Sb = new StringBuilder();
+
+            using (SHA256 hash = SHA256.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
     }
 }

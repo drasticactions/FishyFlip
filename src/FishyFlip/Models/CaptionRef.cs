@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -25,16 +27,9 @@ public class CaptionRef
     /// <param name="caption">The CBOR object representing the caption.</param>
     public CaptionRef(CBORObject caption)
     {
-        switch (caption.Type)
-        {
-            case CBORType.ByteString:
-                var cid = caption.GetByteString();
-                this.Link = Cid.Read(cid);
-                break;
-            case CBORType.TextString:
-                this.Link = Cid.Decode(caption.AsString());
-                break;
-        }
+        var cid = caption.GetByteString();
+        using var memoryStream = new MemoryStream(cid);
+        this.Link = Cid.Read(memoryStream);
     }
 
     /// <summary>
