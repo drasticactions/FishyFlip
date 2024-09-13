@@ -1,0 +1,3 @@
+next-version: 1.9
+assembly-file-versioning-format: '{Major}.{Minor}.{Patch}.{CommitsSinceVersionSource ?? 0}'
+assembly-informational-format: '{Major}.{Minor}.{Patch}.{CommitsSinceVersionSource ?? 0}-{BranchName}-{Sha}'
