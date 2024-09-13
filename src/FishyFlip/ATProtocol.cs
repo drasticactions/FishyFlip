@@ -228,8 +228,7 @@ public sealed class ATProtocol : IDisposable
             throw new OAuth2Exception("Proof key is required for OAuth2 sessions.");
         }
 
-        await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl);
-        return await Task.FromResult<Session?>(oAuth2SessionManager.Session);
+        return (await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl)).Session;
     }
 
     /// <summary>

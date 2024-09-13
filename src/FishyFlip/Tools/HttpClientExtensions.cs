@@ -337,6 +337,7 @@ public static class HttpClientExtensions
         ErrorDetail? detail = default;
         if (string.IsNullOrEmpty(response))
         {
+            detail = new ErrorDetail("HTTP Error", message.ReasonPhrase ?? string.Empty);
             atError = new ATError((int)message.StatusCode, detail);
         }
         else
