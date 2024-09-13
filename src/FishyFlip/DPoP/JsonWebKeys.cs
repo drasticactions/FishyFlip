@@ -34,7 +34,7 @@ public static class JsonWebKeys
     /// </summary>
     public static string CreateRsaJson(string algorithm = OidcConstants.Algorithms.Asymmetric.PS256)
     {
-        return JsonSerializer.Serialize(CreateRsa(algorithm), SourceGenerationContext.Default.JsonWebKey);
+        return JsonSerializer.Serialize(CreateRsa(algorithm), SourceGenerationContext.Default.JsonWebKey_A);
     }
     
     /// <summary>

@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Text.Json.Serialization.Metadata;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FishyFlip.Tools;
 

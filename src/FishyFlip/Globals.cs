@@ -19,7 +19,6 @@ global using FishyFlip.Tools.Cbor;
 global using FishyFlip.Tools.Json;
 global using Ipfs;
 global using Microsoft.Extensions.Logging;
-global using Microsoft.IdentityModel.Tokens;
 global using PeterO.Cbor;
 global using ATCid = Ipfs.Cid;
 
