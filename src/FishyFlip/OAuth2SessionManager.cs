@@ -38,6 +38,9 @@ internal class OAuth2SessionManager : ISessionManager
     }
 
     /// <inheritdoc/>
+    public event EventHandler<SessionUpdatedEventArgs>? SessionUpdated;
+
+    /// <inheritdoc/>
     public HttpClient Client => this.client;
 
     /// <inheritdoc/>
@@ -49,18 +52,19 @@ internal class OAuth2SessionManager : ISessionManager
     /// <summary>
     /// Gets the OAuth2 Session. If null, the session is not authenticated.
     /// </summary>
-    public OAuthSession? OAuthSession => this.session is null || this.proofKey is null ? null : new OAuthSession(this.session, this.proofKey);
+    public AuthSession? OAuthSession => this.session is null || this.proofKey is null ? null : new AuthSession(this.session, this.proofKey);
 
     /// <summary>
     /// Starts an existing OAuth2 Session.
     /// These should be the same parameters as used when creating the previous session.
     /// </summary>
-    /// <param name="session">Previous OAuth Session.</param>
+    /// <param name="session">Previous Auth Session.</param>
     /// <param name="clientId">ClientID, must be a URL.</param>
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
     /// <exception cref="OAuth2Exception">Thrown if missing OAuth2 information.</exception>
     /// <returns>Task.</returns>
-    public Task StartSessionAsync(OAuthSession session, string clientId, string? instanceUrl = default)
+    public Task StartSessionAsync(AuthSession session, string clientId, string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
@@ -180,8 +184,8 @@ internal class OAuth2SessionManager : ISessionManager
     }
 
     /// <inheritdoc/>
-    public Task RefreshSessionAsync()
-        => this.RefreshTokenAsync();
+    public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
+        => this.RefreshTokenAsync(cancellationToken);
 
     /// <inheritdoc/>
     public void SetSession(Session session)
@@ -225,8 +229,9 @@ internal class OAuth2SessionManager : ISessionManager
     /// <summary>
     /// Refresh Token.
     /// </summary>
+    /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Token result.</returns>
-    internal async Task<RefreshTokenResult?> RefreshTokenAsync()
+    internal async Task<RefreshTokenResult?> RefreshTokenAsync(CancellationToken cancellationToken = default)
     {
         if (this.oidcClient is null)
         {
@@ -234,7 +239,7 @@ internal class OAuth2SessionManager : ISessionManager
             return null;
         }
 
-        var refreshResult = await this.oidcClient.RefreshTokenAsync(this.session!.RefreshJwt, backChannelParameters: null, scope: null, cancellationToken: default);
+        var refreshResult = await this.oidcClient.RefreshTokenAsync(this.session!.RefreshJwt, backChannelParameters: null, scope: null, cancellationToken: cancellationToken);
         if (refreshResult.IsError)
         {
             this.logger?.LogError($"Failed to refresh token: {refreshResult.Error} {refreshResult.ErrorDescription}");
@@ -285,6 +290,7 @@ internal class OAuth2SessionManager : ISessionManager
         lock (this.session)
         {
             this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, e.AccessToken, e.RefreshToken);
+            this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.OAuthSession!, this.protocol.Options.Url));
         }
     }
 }

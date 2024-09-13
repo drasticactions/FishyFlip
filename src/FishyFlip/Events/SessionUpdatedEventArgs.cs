@@ -15,7 +15,7 @@ public class SessionUpdatedEventArgs : EventArgs
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
     /// <param name="uri">The Instance Uri.</param>
-    public SessionUpdatedEventArgs(Session session, Uri? uri)
+    public SessionUpdatedEventArgs(AuthSession session, Uri? uri)
     {
         this.Session = session;
         this.InstanceUri = uri;
@@ -24,7 +24,7 @@ public class SessionUpdatedEventArgs : EventArgs
     /// <summary>
     /// Gets the Session.
     /// </summary>
-    public Session Session { get; }
+    public AuthSession Session { get; }
 
     /// <summary>
     /// Gets the Instance Uri.

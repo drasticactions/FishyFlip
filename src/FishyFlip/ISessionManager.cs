@@ -14,6 +14,11 @@ namespace FishyFlip;
 internal interface ISessionManager : IDisposable
 {
     /// <summary>
+    /// Fires when a session is updated.
+    /// </summary>
+    public event EventHandler<SessionUpdatedEventArgs>? SessionUpdated;
+
+    /// <summary>
     /// Gets the HttpClient used to make calls into ATProtocol.
     /// </summary>
     public HttpClient Client { get; }
@@ -31,8 +36,9 @@ internal interface ISessionManager : IDisposable
     /// <summary>
     /// Refresh the given session.
     /// </summary>
+    /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
-    public Task RefreshSessionAsync();
+    public Task RefreshSessionAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Set the current session.

@@ -28,6 +28,9 @@ internal class UnauthenticatedSessionManager : ISessionManager
     }
 
     /// <inheritdoc/>
+    public event EventHandler<SessionUpdatedEventArgs>? SessionUpdated;
+
+    /// <inheritdoc/>
     public bool IsAuthenticated => false;
 
     /// <inheritdoc/>
@@ -37,7 +40,7 @@ internal class UnauthenticatedSessionManager : ISessionManager
     public HttpClient Client => this.client;
 
     /// <inheritdoc/>
-    public Task RefreshSessionAsync()
+    public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
     {
         return Task.CompletedTask;
     }
@@ -46,6 +49,7 @@ internal class UnauthenticatedSessionManager : ISessionManager
     public void SetSession(Session session)
     {
         this.logger?.LogWarning("Unauthenticated session manager, session not set.");
+        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(new AuthSession(session), null));
     }
 
     /// <inheritdoc/>

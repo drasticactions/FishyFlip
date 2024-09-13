@@ -63,6 +63,9 @@ internal class PasswordSessionManager : ISessionManager
         this.SetSession(session);
     }
 
+    /// <inheritdoc/>
+    public event EventHandler<SessionUpdatedEventArgs>? SessionUpdated;
+
     /// <summary>
     /// Gets a value indicating whether the user is authenticated.
     /// </summary>
@@ -77,8 +80,8 @@ internal class PasswordSessionManager : ISessionManager
     public HttpClient Client => this.client;
 
     /// <inheritdoc/>
-    public Task RefreshSessionAsync()
-        => this.RefreshTokenAsync();
+    public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
+        => this.RefreshTokenAsync(cancellationToken);
 
     /// <inheritdoc/>
     public void Dispose() => this.Dispose(true);
@@ -137,6 +140,8 @@ internal class PasswordSessionManager : ISessionManager
 
         this.logger?.LogDebug($"Session set, {session.Did}");
 
+        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(new AuthSession(session), this.protocol.Options.Url));
+
         if (!this.protocol.Options.AutoRenewSession)
         {
             this.logger?.LogDebug("AutoRenewSession is disabled.");
@@ -164,8 +169,9 @@ internal class PasswordSessionManager : ISessionManager
     /// <summary>
     /// Refresh session token.
     /// </summary>
+    /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
-    internal async Task RefreshTokenAsync()
+    internal async Task RefreshTokenAsync(CancellationToken cancellationToken = default)
     {
         if (Interlocked.Increment(ref this.refreshing) > 1)
         {
@@ -185,14 +191,11 @@ internal class PasswordSessionManager : ISessionManager
             if (this.session is not null)
             {
                 Multiple<Session, ATError> result =
-                await this.protocol.ThrowIfNull().Server.RefreshSessionAsync(this.session, CancellationToken.None);
+                await this.protocol.ThrowIfNull().Server.RefreshSessionAsync(this.session, cancellationToken);
 
                 result
                     .Switch(
-                    s =>
-                    {
-                        this.SetSession(s);
-                    },
+                    this.SetSession,
                     e =>
                     {
                         this.logger?.LogError(e.ToString(), e);

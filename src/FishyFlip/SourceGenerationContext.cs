@@ -203,7 +203,7 @@ namespace FishyFlip;
 [JsonSerializable(typeof(CaptionRef))]
 [JsonSerializable(typeof(Video))]
 [JsonSerializable(typeof(VideoViewEmbed))]
-[JsonSerializable(typeof(OAuthSession))]
+[JsonSerializable(typeof(AuthSession))]
 [JsonSerializable(typeof(AuthorizeState))]
 [JsonSerializable(typeof(Dictionary<string, JsonElement>))]
 [JsonSerializable(typeof(OidcClientOptions))]

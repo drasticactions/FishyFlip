@@ -25,6 +25,11 @@ public sealed class ATProtocol : IDisposable
     }
 
     /// <summary>
+    /// Fires when a session is updated.
+    /// </summary>
+    public event EventHandler<SessionUpdatedEventArgs>? SessionUpdated;
+
+    /// <summary>
     /// Gets a value indicating whether the user is authenticated.
     /// </summary>
     public bool IsAuthenticated => this.sessionManager.IsAuthenticated;
@@ -122,12 +127,25 @@ public sealed class ATProtocol : IDisposable
     /// <summary>
     /// Gets the current OAuth session, if any is active.
     /// </summary>
-    public OAuthSession? OAuthSession => this.sessionManager is OAuth2SessionManager oAuth2SessionManager ? oAuth2SessionManager.OAuthSession : null;
+    public AuthSession? OAuthSession => this.sessionManager is OAuth2SessionManager oAuth2SessionManager ? oAuth2SessionManager.OAuthSession : null;
 
     /// <summary>
-    /// Gets the internal session manager.
+    /// Gets or sets the internal session manager.
     /// </summary>
-    internal ISessionManager SessionManager => this.sessionManager;
+    internal ISessionManager SessionManager
+    {
+        get => this.sessionManager;
+
+        set
+        {
+            this.sessionManager.SessionUpdated -= this.OnSessionUpdated;
+            this.sessionManager.Dispose();
+
+            this.sessionManager = value;
+
+            this.sessionManager.SessionUpdated += this.OnSessionUpdated;
+        }
+    }
 
     /// <summary>
     /// Asynchronously creates a new session manager using a password.
@@ -138,9 +156,9 @@ public sealed class ATProtocol : IDisposable
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
     public async Task<Session?> AuthenticateWithPasswordAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
-        this.sessionManager.Dispose();
         var passwordSessionManager = new PasswordSessionManager(this);
-        this.sessionManager = passwordSessionManager;
+        this.SessionManager = passwordSessionManager;
+
         return await passwordSessionManager.CreateSessionAsync(identifier, password, cancellationToken);
     }
 
@@ -155,9 +173,8 @@ public sealed class ATProtocol : IDisposable
     /// <returns>Authorization URL to call.</returns>
     public async Task<string> GenerateOAuth2AuthenticationUrlAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
-        this.sessionManager.Dispose();
         var oAuth2SessionManager = new OAuth2SessionManager(this);
-        this.sessionManager = oAuth2SessionManager;
+        this.SessionManager = oAuth2SessionManager;
         return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, instanceUrl, cancellationToken);
     }
 
@@ -169,12 +186,30 @@ public sealed class ATProtocol : IDisposable
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
     public async Task<Session?> AuthenticateWithOAuth2CallbackAsync(string callbackData, CancellationToken cancellationToken = default)
     {
-        if (this.sessionManager is not OAuth2SessionManager oAuth2SessionManager)
+        if (this.SessionManager is not OAuth2SessionManager oAuth2SessionManager)
         {
             throw new OAuth2Exception("Session manager is not an OAuth2 session manager.");
         }
 
         return await oAuth2SessionManager.CompleteAuthorizationAsync(callbackData, cancellationToken);
+    }
+
+    /// <summary>
+    /// Authenticates with password session asynchronously.
+    /// </summary>
+    /// <param name="session">The password session.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    /// <exception cref="OAuth2Exception">Thrown if ProofKey was included in AuthSession.</exception>
+    public async Task<Session?> AuthenticateWithPasswordSessionAsync(AuthSession session)
+    {
+        if (!string.IsNullOrEmpty(session.ProofKey))
+        {
+            throw new OAuth2Exception("Proof key is not required for password sessions. Is this an OAuth2 session?");
+        }
+
+        var passwordSessionManager = new PasswordSessionManager(this, session.Session);
+        this.SessionManager = passwordSessionManager;
+        return await Task.FromResult<Session?>(passwordSessionManager.Session);
     }
 
     /// <summary>
@@ -184,43 +219,38 @@ public sealed class ATProtocol : IDisposable
     /// <param name="clientId">The client ID.</param>
     /// <param name="instanceUrl">Optional. The instance URL. If null, uses https://bsky.social.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Session?> AuthenticateWithOAuth2SessionAsync(OAuthSession session, string clientId, string? instanceUrl = default)
+    public async Task<Session?> AuthenticateWithOAuth2SessionAsync(AuthSession session, string clientId, string? instanceUrl = default)
     {
-        this.sessionManager.Dispose();
         var oAuth2SessionManager = new OAuth2SessionManager(this);
-        this.sessionManager = oAuth2SessionManager;
+        this.SessionManager = oAuth2SessionManager;
+        if (string.IsNullOrEmpty(session.ProofKey))
+        {
+            throw new OAuth2Exception("Proof key is required for OAuth2 sessions.");
+        }
+
         await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl);
         return await Task.FromResult<Session?>(oAuth2SessionManager.Session);
     }
 
     /// <summary>
-    /// Saves the current OAuth session asynchronously.
-    /// Returns null if the session manager is not an OAuth2 session manager.
-    /// </summary>
-    /// <returns><see cref="OAuthSession"/>.</returns>
-    public async Task<OAuthSession?> SaveOAuthSessionAsync()
-    {
-        if (this.sessionManager is not OAuth2SessionManager oAuth2SessionManager)
-        {
-            return null;
-        }
-
-        // Refresh the token to make sure it's the most up to date.
-        var result = await oAuth2SessionManager.RefreshTokenAsync();
-
-        return oAuth2SessionManager.OAuthSession;
-    }
-
-    /// <summary>
     /// Refreshes the current session asynchronously.
     /// </summary>
-    /// <returns>
-    /// A task that represents the asynchronous operation.
-    /// If the session manager is null, the task will complete immediately.
-    /// Otherwise, the task will complete when the session has been refreshed.
-    /// </returns>
-    public Task RefreshSessionAsync()
-        => this.sessionManager?.RefreshSessionAsync() ?? Task.CompletedTask;
+    /// <returns><see cref="AuthSession"/>.</returns>
+    public async Task<AuthSession?> RefreshAuthSessionAsync()
+    {
+        switch (this.sessionManager)
+        {
+            case OAuth2SessionManager oAuth2SessionManager:
+                // Refresh the token to make sure it's the most up to date.
+                var result = await oAuth2SessionManager.RefreshTokenAsync();
+                return oAuth2SessionManager.OAuthSession;
+            case PasswordSessionManager { Session: not null } passwordManager:
+                await passwordManager.RefreshSessionAsync();
+                return new AuthSession(passwordManager.Session);
+            default:
+                return null;
+        }
+    }
 
     /// <inheritdoc/>
     public void Dispose()
@@ -240,5 +270,10 @@ public sealed class ATProtocol : IDisposable
 
             this.disposedValue = true;
         }
+    }
+
+    private void OnSessionUpdated(object? sender, SessionUpdatedEventArgs e)
+    {
+        this.SessionUpdated?.Invoke(sender, e);
     }
 }
