@@ -4,300 +4,192 @@
 
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
-using DotMake.CommandLine;
+using Bskycli;
+using ConsoleAppFramework;
 using FishyFlip;
 using FishyFlip.Models;
 using FishyFlip.Tools;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 
-#if DEBUG
-var loggerFactory = LoggerFactory.Create(
-    builder => builder
-        .AddConsole()
-        .AddDebug()
-        .SetMinimumLevel(LogLevel.Debug));
-#else
-var loggerFactory = LoggerFactory.Create(
-    builder => builder
-        .AddDebug()
-        .SetMinimumLevel(LogLevel.Debug));
-#endif
-
-var logger = loggerFactory.CreateLogger<RootCommand>();
-
-Cli.Ext.ConfigureServices(service =>
-{
-    service.AddSingleton(loggerFactory);
-});
-
-try
-{
-    logger.LogDebug("Console Arguments: bskycli" + string.Join(" ", args));
-    await Cli.RunAsync<RootCommand>(args);
-}
-catch (Exception e)
-{
-    logger.LogError(e, "An error occurred.");
-}
+var app = ConsoleApp.Create();
+app.Add<AppCommands>();
+app.Run(args);
 
 /// <summary>
-/// Root CLI command.
+/// App Commands.
 /// </summary>
-[CliCommand(Description = "bskycli", ShortFormAutoGenerate = false)]
-public class RootCommand
+#pragma warning disable SA1649 // File name should match first type name
+public class AppCommands
+#pragma warning restore SA1649 // File name should match first type name
 {
     /// <summary>
-    /// Post Command.
+    /// Creates a text post to Bluesky.
     /// </summary>
-    [CliCommand(Description = "Post a message with images")]
-#pragma warning disable CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
-    public class ImagePostCommand(ILoggerFactory loggerFactory) : CredentialCommandBase(loggerFactory)
-#pragma warning restore CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
+    /// <param name="text">The message to post. Can be formatted with Markdown for links.</param>
+    /// <param name="linkCardUrl">Path to link card. Embed into the post as external.</param>
+    /// <param name="languages">Languages used in the post. Can use two or four-letter ISO (Ex. 'th' 'en-US').</param>
+    /// <param name="sessionJson">Path to the login users session.json.</param>
+    /// <param name="verbose">Verbose output.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/>.</returns>
+    [Command("post")]
+    public async Task PostTextAsync(string text, string? linkCardUrl = default, string[]? languages = default, string sessionJson = "session.json", bool verbose = false, CancellationToken cancellationToken = default)
     {
-        /// <summary>
-        /// Gets or sets the message to post.
-        /// </summary>
-        [CliOption(Description = "Text to post", Required = false)]
-        public string Text { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the images to post.
-        /// </summary>
-        /// <remarks>
-        /// The images should be existing files.
-        /// The maximum number of images that can be posted is 4.
-        /// </remarks>
-        [CliOption(
-            Description = "Images to post. Max of 4.",
-            AllowMultipleArgumentsPerToken = true,
-            ValidationRules = CliValidationRules.ExistingFile)]
-        public required IEnumerable<FileInfo> Images { get; set; }
-
-        /// <summary>
-        /// Gets or sets the alternative text for the images.
-        /// </summary>
-        /// <remarks>
-        /// The alternative text is mapped to the images in the order of entry.
-        /// This is not a required field.
-        /// </remarks>
-        [CliOption(Description = "Alt Text for images. Max of 4. Text is mapped to images in order of entry.", AllowMultipleArgumentsPerToken = true, Required = false)]
-        public IEnumerable<string>? AltText { get; set; }
-
-        /// <summary>
-        /// Gets or sets the languages used in the post.
-        /// </summary>
-        /// <remarks>
-        /// The languages can be specified using two or four letter ISO codes (e.g., 'th', 'en-US').
-        /// This is not a required field.
-        /// </remarks>
-        [CliOption(Description = "Languages used in post. Can use two or four letter ISO (Ex. 'th' 'en-US')", AllowMultipleArgumentsPerToken = true, Required = false)]
-        public IEnumerable<string>? Languages { get; set; }
-
-        /// <summary>
-        /// Run the command.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task RunAsync()
+        var consoleLog = new ConsoleLog(verbose);
+        var session = await this.GetSessionAsync(consoleLog, sessionJson, cancellationToken);
+        if (session is null)
         {
-            var logger = loggerFactory.CreateLogger<ImagePostCommand>();
-            if (!this.Images.Any())
-            {
-                throw new Exception("Images are required.");
-            }
+            return;
+        }
 
-            this.Languages ??= new List<string>();
+        var protocol = await this.GenerateProtocolAsync(consoleLog, session);
+        if (protocol is null)
+        {
+            consoleLog.LogError("Failed to generate protocol.");
+            return;
+        }
 
-            var parsedText = MarkdownLinkParser.ParseMarkdown(this.Text ?? string.Empty);
-            var facets = MarkdownLinkParser.GenerateFacets(parsedText);
-            var images = this.Images?.Take(4).ToList() ?? throw new Exception("No images provided.");
-            var alts = this.AltText?.Take(4).ToList() ?? new List<string>();
+        ExternalEmbed? externalEmbed = null;
+        if (!string.IsNullOrEmpty(linkCardUrl))
+        {
+            var parser = new OpenGraphParser(protocol);
+            externalEmbed = await parser.GenerateExternalEmbed(linkCardUrl);
+        }
 
-            var imageEmbeds = new List<ImageEmbed>();
-            var fileDetector = new FileContentTypeDetector(logger);
+        await this.PostAsync(protocol: protocol, text: text, externalEmbed: externalEmbed, languages: languages, sessionJson: sessionJson, verbose: verbose, cancellationToken: cancellationToken);
+    }
 
-            // Verify the images before we upload
-            var contentTypes = new List<string>();
-            foreach (var image in images)
-            {
-                await using var fileStream = image.OpenRead();
-                var contentType = fileDetector.GetContentType(fileStream);
-                if (contentType == "unsupported")
-                {
-                    throw new Exception($"Unsupported file type for {image.FullName}");
-                }
+    /// <summary>
+    /// Login to Bluesky.
+    /// </summary>
+    /// <param name="verbose">-v, Verbose logging.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>A <see cref="Task"/>.</returns>
+    [Command("login")]
+    public async Task StartSessionAsync(bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+        var instanceUrl = new Uri("https://bsky.social");
+        var outputName = "session.json";
+        var clientId = "http://localhost";
+        var scopeList = new List<string> { "atproto", "transition:generic", "transition:chat.bsky" };
+        var browser = new SystemBrowser();
+        var redirectUrl = $"http://127.0.0.1:{browser.Port}";
 
-                contentTypes.Add(contentType);
-            }
+        var protocol = await this.GenerateProtocolAsync(consoleLog);
+        if (protocol is null)
+        {
+            consoleLog.LogError("Failed to generate protocol.");
+            return;
+        }
 
-            if (contentTypes.Any(x => x != "image/jpeg" && x != "image/png" && x != "image/gif"))
-            {
-                throw new Exception("Unsupported file type.");
-            }
+        consoleLog.Log($"Starting OAuth2 Authentication for {instanceUrl}");
+        var url = await protocol.GenerateOAuth2AuthenticationUrlAsync(clientId, redirectUrl, scopeList, instanceUrl.ToString(), cancellationToken);
+        var result = await browser.InvokeAsync(url, cancellationToken);
+        if (result.IsError)
+        {
+            consoleLog.LogError(result.Error);
+            return;
+        }
 
-            // Log in and upload the images.
-            await base.RunAsync();
-            ArgumentNullException.ThrowIfNull(this.AtProtocol);
+        consoleLog.Log($"Got session, finishing OAuth2 Authentication on {instanceUrl}");
 
-            for (var i = 0; i < this.Images.Count(); i++)
-            {
-                var image = images.ElementAt(i);
-                var altText = alts.ElementAtOrDefault(i) ?? string.Empty;
-                var contentType = contentTypes.ElementAt(i);
-                await using var fileStream = image.OpenRead();
-                var content = new StreamContent(fileStream);
-                content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-                var blobResult = (await this.AtProtocol!.Repo.UploadBlobAsync(content)).HandleResult();
-                logger.LogDebug($"Uploaded {image.Name} to {blobResult.Blob.Ref}");
-                var img = blobResult.Blob.ToImage() ?? throw new Exception($"Failed to convert blob {image.Name} to image.");
-                var imgEmbed = new ImageEmbed(img, altText);
-                logger.LogDebug($"{imgEmbed.Image!.Ref} {imgEmbed.Alt}");
-                imageEmbeds.Add(imgEmbed);
-            }
+        var session = await protocol.AuthenticateWithOAuth2CallbackAsync(result.Response, cancellationToken);
+        if (session is null)
+        {
+            consoleLog.LogError("Failed to authenticate, session is null");
+            return;
+        }
 
-            var postResult = (await this.AtProtocol!.Repo.CreatePostAsync(
+        consoleLog.Log($"Authenticated as {session.Did}");
+        consoleLog.LogDebug($"Did: {session.Did}");
+        consoleLog.LogDebug($"Access Token: {session.AccessJwt}");
+        consoleLog.LogDebug($"Refresh Token: {session.RefreshJwt}");
+
+        var savedSession = await protocol.SaveOAuthSessionAsync();
+        if (savedSession is null)
+        {
+            consoleLog.LogError("OAuth Session is null");
+            return;
+        }
+
+        consoleLog.LogDebug($"OAuth Session: {savedSession}");
+        await File.WriteAllTextAsync(outputName, savedSession.ToString(), cancellationToken);
+        consoleLog.Log($"Session saved to {outputName}");
+    }
+
+    private async Task<OAuthSession?> GetSessionAsync(ConsoleLog consoleLog, string sessionJson, CancellationToken cancellationToken)
+    {
+        var sessionJsonText = await File.ReadAllTextAsync(sessionJson, cancellationToken);
+        var session = OAuthSession.FromString(sessionJsonText);
+        if (session is null)
+        {
+            consoleLog.LogError("Session is null. Please login first.");
+            return null;
+        }
+
+        return session;
+    }
+
+    private async Task<ATProtocol?> GenerateProtocolAsync(ConsoleLog consoleLog, OAuthSession? session = default)
+    {
+        var debugLogger = new DebugLoggerProvider();
+        var builder = new ATProtocolBuilder();
+        builder.WithLogger(debugLogger.CreateLogger("ATProtocol"));
+        builder.WithInstanceUrl(new Uri("https://bsky.social"));
+        var protocol = builder.Build();
+        if (session is null)
+        {
+            return protocol;
+        }
+
+        var oauthSession = await protocol.AuthenticateWithOAuth2SessionAsync(session, "http://localhost", "https://bsky.social");
+        if (oauthSession is not null)
+        {
+            return protocol;
+        }
+
+        consoleLog.LogError("Failed to authenticate with OAuth2 session.");
+        return null;
+    }
+
+    private async Task PostAsync(ATProtocol protocol, string text, ExternalEmbed? externalEmbed = default, string[]? languages = default, string sessionJson = "session.json", bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+        if (!File.Exists(sessionJson))
+        {
+            consoleLog.LogError("Session file does not exist. Please login first.");
+            return;
+        }
+
+        var parsedText = MarkdownLinkParser.ParseMarkdown(text ?? string.Empty);
+        var facets = MarkdownLinkParser.GenerateFacets(parsedText);
+
+        languages ??= Array.Empty<string>();
+
+        try
+        {
+            var postResult = (await protocol.Repo.CreatePostAsync(
                 parsedText?.ModifiedString ?? string.Empty,
                 facets,
-                langs: this.Languages.ToArray(),
-                embed: new ImagesEmbed(imageEmbeds.ToArray()))).HandleResult();
-            logger.LogInformation($"Post Created: {postResult.Uri} {postResult.Cid}");
-            var url = $"https://bsky.app/profile/{postResult.Uri!.Did}/post/{postResult.Uri!.Pathname.Split("/").Last()}";
-            Console.WriteLine($"Post: {postResult.Uri}");
-            Console.WriteLine($"Post URL: {url}");
-        }
-    }
-
-    /// <summary>
-    /// Post Command.
-    /// </summary>
-    [CliCommand(Description = "Post a message")]
-#pragma warning disable CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
-    public class PostCommand(ILoggerFactory loggerFactory) : CredentialCommandBase(loggerFactory)
-#pragma warning restore CS9107 // パラメーターは外側の型の状態にキャプチャされ、その値も基底コンストラクターに渡されます。この値は、基底クラスでもキャプチャされる可能性があります。
-    {
-        /// <summary>
-        /// Gets or sets the message to post.
-        /// </summary>
-        [CliOption(Description = "Text to post")]
-        public required string Text { get; set; }
-
-        /// <summary>
-        /// Gets or sets the message to the link card.
-        /// </summary>
-        [CliOption(Description = "Link Card Url. Embed into the post as external.", Required = false)]
-        public string LinkCardUrl { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the languages used in the post.
-        /// </summary>
-        /// <remarks>
-        /// The languages can be specified using two or four letter ISO codes (e.g., 'th', 'en-US').
-        /// This is not a required field.
-        /// </remarks>
-        [CliOption(Description = "Languages used in post. Can use two or four letter ISO (Ex. 'th' 'en-US')", AllowMultipleArgumentsPerToken = true, Required = false)]
-        public IEnumerable<string>? Languages { get; set; }
-
-        /// <summary>
-        /// Run the command.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task RunAsync()
-        {
-            var logger = loggerFactory.CreateLogger<PostCommand>();
-            if (string.IsNullOrEmpty(this.Text))
-            {
-                throw new Exception("Text is required.");
-            }
-
-            this.Languages ??= new List<string>();
-
-            var parsedText = MarkdownLinkParser.ParseMarkdown(this.Text);
-            var facets = MarkdownLinkParser.GenerateFacets(parsedText);
-
-            if (parsedText?.ModifiedString == null)
-            {
-                throw new Exception("Failed to parse text.");
-            }
-
-            await base.RunAsync();
-            ArgumentNullException.ThrowIfNull(this.AtProtocol);
-
-            ExternalEmbed? externalEmbed = null;
-            if (!string.IsNullOrEmpty(this.LinkCardUrl))
-            {
-                var parser = new OpenGraphParser(this.AtProtocol!, logger);
-                externalEmbed = await parser.GenerateExternalEmbed(this.LinkCardUrl);
-            }
-
-            var postResult = (await this.AtProtocol!.Repo.CreatePostAsync(
-                parsedText.ModifiedString,
-                facets,
                 externalEmbed,
-                langs: this.Languages.ToArray())).HandleResult();
-            logger.LogInformation($"Post Created: {postResult.Uri} {postResult.Cid}");
-            var url = $"https://bsky.app/profile/{postResult.Uri!.Did}/post/{postResult.Uri!.Pathname.Split("/").Last()}";
-            Console.WriteLine($"Post: {postResult.Uri}");
-            Console.WriteLine($"Post URL: {url}");
+                langs: languages.ToArray(),
+                cancellationToken: cancellationToken)).HandleResult();
+
+            consoleLog.Log($"Post Created: {postResult.Uri} {postResult.Cid}");
+            var url =
+                $"https://bsky.app/profile/{postResult.Uri!.Did}/post/{postResult.Uri!.Pathname.Split("/").Last()}";
+            consoleLog.Log($"Url: {url}");
         }
-    }
-
-    /// <summary>
-    /// Base Credential Command.
-    /// </summary>
-    public abstract class CredentialCommandBase(ILoggerFactory loggerFactory)
-    {
-        /// <summary>
-        /// Gets or sets the Bluesky Username.
-        /// This property is used to store the username of the user in the Bluesky platform.
-        /// </summary>
-        [CliOption(Description = "Bluesky Identifier")]
-        public required string Identifier { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Bluesky App-Password.
-        /// This property is used to store the password of the user in the Bluesky platform.
-        /// </summary>
-        [CliOption(Description = "Bluesky App-Password")]
-        public required string Password { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Bluesky Instance URL.
-        /// This property is used to store the URL of the Bluesky instance the user wants to connect to.
-        /// By default, it is set to "bsky.social".
-        /// </summary>
-        [CliOption(Description = "Bluesky Instance URL.", ValidationRules = CliValidationRules.LegalUri)]
-        public string Instance { get; set; } = "https://bsky.social";
-
-        /// <summary>
-        /// Gets or sets the AtProtocol.
-        /// </summary>
-        public ATProtocol? AtProtocol { get; set; }
-
-        /// <summary>
-        /// Gets or sets the users session information.
-        /// </summary>
-        public Session? Session { get; set; }
-
-        /// <summary>
-        /// Run the command.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public virtual async Task RunAsync()
+        catch (Exception e)
         {
-            var logger = loggerFactory.CreateLogger<CredentialCommandBase>();
-            ATProtocolBuilder builder = new ATProtocolBuilder();
-            Uri.TryCreate(this.Instance, UriKind.Absolute, out var instance);
-            if (instance is null)
-            {
-                throw new Exception("Invalid URL");
-            }
-
-            this.AtProtocol = builder
-                .WithInstanceUrl(instance)
-                .Build();
-            this.Session = (await this.AtProtocol.Server.CreateSessionAsync(this.Identifier, this.Password)).HandleResult();
-            logger.LogInformation($"Authenticated as {this.Session.Handle}.");
-            logger.LogDebug($"Session Did: {this.Session.Did}");
+            consoleLog.LogError($"Failed to create post: {e.Message}");
+        }
+        finally
+        {
+            await File.WriteAllTextAsync(sessionJson, protocol.OAuthSession!.ToString(), cancellationToken);
+            consoleLog.Log($"Session saved to {sessionJson}");
         }
     }
 
@@ -467,14 +359,15 @@ public class RootCommand
         private readonly FileContentTypeDetector fileContentTypeDetector;
         private readonly ATProtocol atProtocol;
 
-        public OpenGraphParser(ATProtocol protocol, ILogger logger)
+        public OpenGraphParser(ATProtocol protocol)
         {
             this.atProtocol = protocol;
-            this.logger = logger;
+            var debugLogger = new DebugLoggerProvider();
+            this.logger = debugLogger.CreateLogger("OpenGraphParser");
             this.httpClient = new HttpClient();
             this.httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("FishyFlip");
             this.regex = new Regex("<meta property=\"og:([^\"]+)\" content=\"([^\"]+)\"");
-            this.fileContentTypeDetector = new FileContentTypeDetector(logger);
+            this.fileContentTypeDetector = new FileContentTypeDetector(this.logger);
         }
 
         public async Task<ExternalEmbed?> GenerateExternalEmbed(string url)

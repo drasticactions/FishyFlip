@@ -6,24 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
-    <InvariantGlobalization>true</InvariantGlobalization>
-    <NoWarn>$(NoWarn);SA0001;SA1649</NoWarn>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <StripSymbols>true</StripSymbols>
-    <PublishTrimmed>true</PublishTrimmed>
-  </PropertyGroup>
-  
   <ItemGroup>
     <ProjectReference Include="..\..\src\FishyFlip\FishyFlip.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="DotMake.CommandLine" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="ConsoleAppFramework">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug"/>
   </ItemGroup>
-
 </Project>
