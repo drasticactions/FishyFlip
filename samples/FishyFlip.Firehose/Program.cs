@@ -12,20 +12,7 @@ using System.Text;
 
 Console.WriteLine("Hello, ATProtocol Firehose!");
 
-Encoding enc = Encoding.UTF8;
-SHA256 sha256 = SHA256.Create();
-byte[] hashDigest = sha256.ComputeHash(Encoding.UTF8.GetBytes("Hello"));
-// Sha256
-var cid = Cid.Decode("bafkreiefakrdmclohastskuauwurbtx3tnu2drjpnirsoroyalq5nqr73a");
-// 
-var cid2 = Cid.Decode("baeavkeraqubkenqjny4ckojkqcs2sego7onq");
-
-var cid1Long = cid.ToString("L");
-var cid2Long = cid2.ToString("L");
-
-// cid.ContentType = "codec-1";
-var fun = cid.ToString();
- var debugLog = new DebugLoggerProvider();
+var debugLog = new DebugLoggerProvider();
 
 // You can set a custom url with WithInstanceUrl
 var atWebProtocolBuilder = new ATWebSocketProtocolBuilder()
