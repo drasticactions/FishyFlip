@@ -2,6 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.DPoP;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -10,6 +13,7 @@ namespace FishyFlip;
 [JsonSourceGenerationOptions(
     WriteIndented = true,
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    GenerationMode = JsonSourceGenerationMode.Metadata,
     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]
 [JsonSerializable(typeof(Embed))]
 [JsonSerializable(typeof(CreateBlockRecord))]
@@ -200,6 +204,10 @@ namespace FishyFlip;
 [JsonSerializable(typeof(Video))]
 [JsonSerializable(typeof(VideoViewEmbed))]
 [JsonSerializable(typeof(OAuthSession))]
+[JsonSerializable(typeof(AuthorizeState))]
+[JsonSerializable(typeof(Dictionary<string, JsonElement>))]
+[JsonSerializable(typeof(OidcClientOptions))]
+[JsonSerializable(typeof(DPoPProofPayload))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

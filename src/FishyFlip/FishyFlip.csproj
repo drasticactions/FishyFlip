@@ -20,6 +20,7 @@
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 		<PackageReference Include="IpfsShipyard.Ipfs.Core" />
 		<PackageReference Include="PeterO.Cbor" />
+		<PackageReference Include="IdentityModel" />
 		<PackageReference Include="GitVersion.MSBuild">
 			<PrivateAssets>All</PrivateAssets>
 		</PackageReference>
@@ -32,9 +33,5 @@
 	<ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
 		<None Include="$(MSBuildThisFileDirectory)CHANGELOG.md" Pack="true" PackagePath="" Visible="false" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\..\external\IdentityModel.OidcClient\src\DPoP\DPoP.csproj" />
-	  <ProjectReference Include="..\..\external\IdentityModel.OidcClient\src\OidcClient\OidcClient.csproj" />
 	</ItemGroup>
 </Project>
