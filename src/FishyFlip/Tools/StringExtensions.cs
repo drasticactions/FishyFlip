@@ -41,4 +41,12 @@ internal static class StringExtensions
 
         return sanitizedInput;
     }
+
+    /// <summary>
+    /// IsNullOrEmpty extension method for strings.
+    /// </summary>
+    /// <param name="input">String.</param>
+    /// <returns>If null or empty.</returns>
+    internal static bool IsNullOrEmpty(this string input)
+        => string.IsNullOrEmpty(input);
 }
