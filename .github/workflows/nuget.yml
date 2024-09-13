@@ -35,5 +35,11 @@ jobs:
           dotnet-version: 8.x
 
       # Pack Nuget
-      - name: Build
-        run: dotnet build src/FishyFlip.sln --configuration Release
+      - name: Build and Pack Nugets
+        run: dotnet pack src/FishyFlip.sln --configuration Release --output nupkg
+        
+      - name: Upload Nuget
+        uses: actions/upload-artifact@v3
+        with:
+          name: nupkg
+          path: nupkg/*.nupkg
