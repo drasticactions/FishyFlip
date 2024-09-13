@@ -242,12 +242,12 @@ internal class OAuth2SessionManager : ISessionManager
         var refreshResult = await this.oidcClient.RefreshTokenAsync(this.session!.RefreshJwt, backChannelParameters: null, scope: null, cancellationToken: cancellationToken);
         if (refreshResult.IsError)
         {
-            this.logger?.LogError($"Failed to refresh token: {refreshResult.Error} {refreshResult.ErrorDescription}");
+            throw new OAuth2Exception($"Failed to refresh token: {refreshResult.Error} {refreshResult.ErrorDescription}");
         }
 
         if (this.session is null)
         {
-            throw new NullReferenceException("Session should not be null if RefreshToken handler is enabled");
+            throw new OAuth2Exception("Session should not be null if RefreshToken handler is enabled");
         }
 
         lock (this.session)
