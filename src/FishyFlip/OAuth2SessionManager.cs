@@ -64,7 +64,7 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <exception cref="OAuth2Exception">Thrown if missing OAuth2 information.</exception>
     /// <returns>Task.</returns>
-    public Task StartSessionAsync(AuthSession session, string clientId, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public Task<AuthSession> StartSessionAsync(AuthSession session, string clientId, string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
@@ -96,7 +96,7 @@ internal class OAuth2SessionManager : ISessionManager
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
 
         this.SetSession(session.Session);
-        return Task.CompletedTask;
+        return Task.FromResult(session);
     }
 
     /// <summary>
@@ -285,6 +285,16 @@ internal class OAuth2SessionManager : ISessionManager
         if (this.session is null)
         {
             throw new NullReferenceException("Session should not be null if RefreshToken handler is enabled");
+        }
+
+        if (string.IsNullOrEmpty(e.RefreshToken))
+        {
+            throw new OAuth2Exception("RefreshToken is null or empty.");
+        }
+
+        if (string.IsNullOrEmpty(e.AccessToken))
+        {
+            throw new OAuth2Exception("AccessToken is null or empty.");
         }
 
         lock (this.session)
