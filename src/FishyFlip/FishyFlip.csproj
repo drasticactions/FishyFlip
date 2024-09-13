@@ -27,6 +27,7 @@
 		<PackageReference Include="IdentityModel" />
 		<PackageReference Include="GitVersion.MSBuild">
 			<PrivateAssets>All</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1'">

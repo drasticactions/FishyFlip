@@ -13,6 +13,7 @@
 		<DebugType>embedded</DebugType>
     <IncludeSymbols>true</IncludeSymbols>
     <NoWarn>$(NoWarn);SA1208</NoWarn>
+    <GitVersionTargetFramework>net8.0</GitVersionTargetFramework>
   </PropertyGroup>
 
   <ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
