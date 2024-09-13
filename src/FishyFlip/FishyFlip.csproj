@@ -21,6 +21,9 @@
 		<PackageReference Include="IpfsShipyard.Ipfs.Core" />
 		<PackageReference Include="PeterO.Cbor" />
 		<PackageReference Include="IdentityModel" />
+		<PackageReference Include="GitVersion.MSBuild">
+			<PrivateAssets>All</PrivateAssets>
+		</PackageReference>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1'">
 		<PackageReference Include="System.Memory" />

@@ -18,6 +18,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\FishyFlip\FishyFlip.csproj"/>
+        <PackageReference Include="GitVersion.MSBuild">
+            <PrivateAssets>All</PrivateAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
