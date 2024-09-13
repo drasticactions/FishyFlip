@@ -39,7 +39,7 @@ jobs:
         run: dotnet pack src/FishyFlip.sln --configuration Release --output nupkg
         
       - name: Upload Nuget
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nupkg
           path: nupkg/*.nupkg
