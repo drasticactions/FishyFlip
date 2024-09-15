@@ -38,6 +38,7 @@ internal class PasswordSessionManager : ISessionManager
     private System.Timers.Timer? timer;
     private int refreshing;
     private ILogger? logger;
+    private AuthSession? authSession;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
@@ -78,6 +79,11 @@ internal class PasswordSessionManager : ISessionManager
 
     /// <inheritdoc/>
     public HttpClient Client => this.client;
+
+    /// <summary>
+    /// Gets the password Auth Session.
+    /// </summary>
+    public AuthSession? PasswordSession => this.authSession;
 
     /// <inheritdoc/>
     public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
@@ -140,7 +146,12 @@ internal class PasswordSessionManager : ISessionManager
 
         this.logger?.LogDebug($"Session set, {session.Did}");
 
-        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(new AuthSession(session), this.protocol.Options.Url));
+        lock (this)
+        {
+            this.authSession = new AuthSession(session);
+        }
+
+        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.authSession, this.protocol.Options.Url));
 
         if (!this.protocol.Options.AutoRenewSession)
         {
