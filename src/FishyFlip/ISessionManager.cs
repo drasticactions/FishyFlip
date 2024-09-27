@@ -39,10 +39,4 @@ internal interface ISessionManager : IDisposable
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     public Task RefreshSessionAsync(CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Set the current session.
-    /// </summary>
-    /// <param name="session">Session.</param>
-    public void SetSession(Session session);
 }
