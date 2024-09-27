@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Net;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -86,7 +88,7 @@ public class ATProtocolOptions
     /// <returns><see cref="HttpClient"/>.</returns>
     internal HttpClient GenerateHttpClient(HttpMessageHandler? handler = default)
     {
-        var httpClient = new HttpClient(handler ?? new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue });
+        var httpClient = new HttpClient(handler ?? new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue, AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate, });
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
         httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
         httpClient.BaseAddress = this.Url;
