@@ -93,36 +93,6 @@ internal class PasswordSessionManager : ISessionManager
     public void Dispose() => this.Dispose(true);
 
     /// <summary>
-    /// Sets the given session.
-    /// </summary>
-    /// <param name="session"><see cref="Session"/>.</param>
-    public void SetSession(Session session)
-    {
-        this.session = session;
-        this.UpdateBearerToken(session);
-
-        this.logger?.LogDebug($"Session set, {session.Did}");
-
-        lock (this)
-        {
-            this.authSession = new AuthSession(session);
-        }
-
-        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.authSession, this.protocol.Options.Url));
-
-        if (!this.protocol.Options.AutoRenewSession)
-        {
-            this.logger?.LogDebug("AutoRenewSession is disabled.");
-            return;
-        }
-
-        this.logger?.LogDebug("AutoRenewSession is enabled.");
-        this.timer ??= new System.Timers.Timer();
-
-        this.ConfigureRefreshTokenTimer();
-    }
-
-    /// <summary>
     /// Asynchronously creates a new session.
     /// </summary>
     /// <param name="identifier">The identifier of the user.</param>
@@ -167,6 +137,36 @@ internal class PasswordSessionManager : ISessionManager
             e => this.logger?.LogError(e.ToString(), e));
 
         return resultSession;
+    }
+
+    /// <summary>
+    /// Sets the given session.
+    /// </summary>
+    /// <param name="session"><see cref="Session"/>.</param>
+    internal void SetSession(Session session)
+    {
+        this.session = session;
+        this.UpdateBearerToken(session);
+
+        this.logger?.LogDebug($"Session set, {session.Did}");
+
+        lock (this)
+        {
+            this.authSession = new AuthSession(session);
+        }
+
+        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.authSession, this.protocol.Options.Url));
+
+        if (!this.protocol.Options.AutoRenewSession)
+        {
+            this.logger?.LogDebug("AutoRenewSession is disabled.");
+            return;
+        }
+
+        this.logger?.LogDebug("AutoRenewSession is enabled.");
+        this.timer ??= new System.Timers.Timer();
+
+        this.ConfigureRefreshTokenTimer();
     }
 
     /// <summary>

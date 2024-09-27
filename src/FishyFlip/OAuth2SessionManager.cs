@@ -188,7 +188,18 @@ internal class OAuth2SessionManager : ISessionManager
         => this.RefreshTokenAsync(cancellationToken);
 
     /// <inheritdoc/>
-    public void SetSession(Session session)
+    public void Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        this.Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Set the session.
+    /// </summary>
+    /// <param name="session">Session.</param>
+    internal void SetSession(Session session)
     {
         if (this.protocol.Options.UseServiceEndpointUponLogin)
         {
@@ -216,14 +227,6 @@ internal class OAuth2SessionManager : ISessionManager
         }
 
         this.session = session;
-    }
-
-    /// <inheritdoc/>
-    public void Dispose()
-    {
-        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-        this.Dispose(disposing: true);
-        GC.SuppressFinalize(this);
     }
 
     /// <summary>
