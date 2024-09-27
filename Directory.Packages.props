@@ -34,7 +34,10 @@
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.12.4" />
     <PackageVersion Include="GitVersion.MSBuild" Version="6.0.2" />
     <PackageVersion Include="IdentityModel" Version="7.0.0" />
-    <PackageVersion Include="ConsoleAppFramework" Version="5.2.3" />
+    <PackageVersion Include="ConsoleAppFramework" Version="5.2.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageVersion>
   </ItemGroup>
   <ItemGroup Condition="$(UseMaui) == true">
     <PackageVersion Include="Microsoft.Maui.Controls" Version="8.0.21" />
