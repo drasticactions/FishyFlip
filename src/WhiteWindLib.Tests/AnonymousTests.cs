@@ -23,9 +23,9 @@ public class AnonymousTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        did = (string?)context.Properties["BLUESKY_TEST_DID"] ?? throw new ArgumentNullException();
-        aturi = (string?)context.Properties["BLUESKY_TEST_ATURI"] ?? throw new ArgumentNullException();
-        string instance = (string?)context.Properties["BLUESKY_INSTANCE_URL"] ?? throw new ArgumentNullException();
+        did = "did:plc:fzkpgpjj7nki7r5rhtmgzrez";
+        aturi = "at://did:plc:fzkpgpjj7nki7r5rhtmgzrez/com.whtwnd.blog.entry/3kudrxp52ps2a";
+        string instance = "https://bsky.social";
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)

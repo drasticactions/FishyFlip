@@ -31,6 +31,7 @@ public sealed class ATProtoServer
     /// <param name="password">The password of the user.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    [Obsolete("No longer automatically authenticates password sessions. To authenticate with a password and create a session, use ATProtocol.AuthenticateWithPasswordAsync")]
     public async Task<Result<Session>> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
         Result<Session> result =

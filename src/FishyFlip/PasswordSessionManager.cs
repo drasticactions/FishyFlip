@@ -101,7 +101,9 @@ internal class PasswordSessionManager : ISessionManager
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
     internal async Task<Session?> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
+#pragma warning disable CS0618
         var sessionResult = await this.protocol.Server.CreateSessionAsync(identifier, password, cancellationToken);
+#pragma warning restore CS0618
         Session? resultSession = null;
         sessionResult.Switch(
             session =>

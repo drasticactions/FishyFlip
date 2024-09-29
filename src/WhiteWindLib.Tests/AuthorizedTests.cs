@@ -14,14 +14,14 @@ public class AuthorizedTests
     {
         handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
         string password = (string?)context.Properties["BLUESKY_TEST_PASSWORD"] ?? throw new ArgumentNullException();
-        string instance = (string?)context.Properties["BLUESKY_INSTANCE_URL"] ?? throw new ArgumentNullException();
+        string instance = "https://bsky.social";
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)
             .WithInstanceUrl(new Uri(instance))
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
         AuthorizedTests.proto = atProtocolBuilder.Build();
-        AuthorizedTests.proto.Server.CreateSessionAsync(AuthorizedTests.handle, password).Wait();
+        AuthorizedTests.proto.AuthenticateWithPasswordAsync(AuthorizedTests.handle, password).Wait();
         AuthorizedTests.blog = new WhiteWindBlog(AuthorizedTests.proto);
     }
 
