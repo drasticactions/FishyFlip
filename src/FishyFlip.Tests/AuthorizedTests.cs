@@ -33,21 +33,22 @@ public class AuthorizedTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        feed_generator = (string?)context.Properties["BLUESKY_TEST_FEED_GENERATOR"] ?? throw new ArgumentNullException();
-        follow_did = (string?)context.Properties["BLUESKY_TEST_FOLLOW_DID"] ?? throw new ArgumentNullException();
-        block_did = (string?)context.Properties["BLUESKY_TEST_BLOCK_DID"] ?? throw new ArgumentNullException();
-        media_post = (string?)context.Properties["BLUESKY_TEST_MEDIA_POST"] ?? throw new ArgumentNullException();
-        images_post = (string?)context.Properties["BLUESKY_TEST_IMAGES_POST"] ?? throw new ArgumentNullException();
-        external_post = (string?)context.Properties["BLUESKY_TEST_EXTERNAL_POST"] ?? throw new ArgumentNullException();
+        feed_generator = "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot";
+        follow_did = "did:plc:nrfz3bngz57p7g7yg6pbkyqr";
+        block_did = "did:plc:nrfz3bngz57p7g7yg6pbkyqr";
+        media_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46xtosyvf2y";
+        images_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46tcntvgy2a";
+        external_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46sr63j7r2m";
         handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
-        handle_2 = (string?)context.Properties["BLUESKY_TEST_HANDLE_2"] ?? throw new ArgumentNullException();
-        did = (string?)context.Properties["BLUESKY_TEST_DID"] ?? throw new ArgumentNullException();
-        did_2 = (string?)context.Properties["BLUESKY_TEST_DID_2"] ?? throw new ArgumentNullException();
-        post_thread = (string?)context.Properties["BLUESKY_TEST_POST_THREAD"] ?? throw new ArgumentNullException();
-        quote_post = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST"] ?? throw new ArgumentNullException();
-        quote_post_2 = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST_2"] ?? throw new ArgumentNullException();
+        handle_2 = "peepthisbot.bsky.social";
+
+        did = "did:plc:nrfz3bngz57p7g7yg6pbkyqr";
+        did_2 = "did:plc:okblbaji7rz243bluudjlgxt";
+        post_thread = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l5bialwzz52f";
+        quote_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxmjdxlpl2r";
+        quote_post_2 = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxdo7r2cj2m";
         string password = (string?)context.Properties["BLUESKY_TEST_PASSWORD"] ?? throw new ArgumentNullException();
-        string instance = (string?)context.Properties["BLUESKY_INSTANCE_URL"] ?? throw new ArgumentNullException();
+        string instance = "https://bsky.social";
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)

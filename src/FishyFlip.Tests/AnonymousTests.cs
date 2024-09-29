@@ -13,27 +13,24 @@ namespace FishyFlip.Tests;
 public class AnonymousTests
 {
     static ATProtocol proto;
-    static string handle;
     static string did;
     static string media_post;
     static string images_post;
     static string external_post;
     static string quote_post;
-    static string quote_post_2;
     static string post_thread;
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        did = (string?)context.Properties["BLUESKY_TEST_DID"] ?? throw new ArgumentNullException();
-        images_post = (string?)context.Properties["BLUESKY_TEST_IMAGES_POST"] ?? throw new ArgumentNullException();
-        media_post = (string?)context.Properties["BLUESKY_TEST_MEDIA_POST"] ?? throw new ArgumentNullException();
-        images_post = (string?)context.Properties["BLUESKY_TEST_IMAGES_POST"] ?? throw new ArgumentNullException();
-        external_post = (string?)context.Properties["BLUESKY_TEST_EXTERNAL_POST"] ?? throw new ArgumentNullException();
-        post_thread = (string?)context.Properties["BLUESKY_TEST_POST_THREAD"] ?? throw new ArgumentNullException();
-        quote_post = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST"] ?? throw new ArgumentNullException();
-        quote_post_2 = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST_2"] ?? throw new ArgumentNullException();
-        string instance = (string?)context.Properties["BLUESKY_INSTANCE_URL"] ?? throw new ArgumentNullException();
+        // drasticactions.xn--q9jyb4c
+        did = "did:plc:okblbaji7rz243bluudjlgxt";
+        images_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3kv25q57gcs2k";
+        media_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46xtosyvf2y";
+        external_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46sr63j7r2m";
+        post_thread = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3kv25q4gqbk2y";
+        quote_post = "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxcq7bwwo2j";
+        string instance = "https://bsky.social";
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)
@@ -112,8 +109,7 @@ public class AnonymousTests
     }
 
     [TestMethod]
-    [Ignore("Can't create MediaWithPostRecord. Not sure if that's broken in Bluesky.")]
-    public async Task GetRecordWithMediaPostRecordTest()
+    public async Task GetRecordWithVideoPostRecordTest()
     {
         var postUri = ATUri.Create(media_post);
         var post = await AnonymousTests.proto.Repo.GetPostAsync(postUri.Did!, postUri.Rkey);
@@ -122,7 +118,7 @@ public class AnonymousTests
             {
                 Assert.AreEqual(postUri.ToString(), success!.Uri!.ToString());
                 Assert.IsTrue(success.Value?.Embed is not null);
-                Assert.AreEqual(Constants.EmbedTypes.RecordWithMedia, success.Value?.Embed.Type);
+                Assert.AreEqual(Constants.EmbedTypes.Video, success.Value?.Embed.Type);
             },
             failed =>
             {
@@ -139,12 +135,5 @@ public class AnonymousTests
         Assert.IsTrue(describe.HandleIsCorrect);
         Assert.IsTrue(describe.Did is not null);
         Assert.AreEqual(describe.Did!.ToString(), repo.ToString());
-    }
-
-    private static void HandleProgressStatus(CarProgressStatusEvent e)
-    {
-        var cid = e.Cid;
-        var bytes = e.Bytes;
-        var test = CBORObject.DecodeFromBytes(bytes);
     }
 }
