@@ -28,18 +28,25 @@ public sealed class BlueskyFeed
     /// Asynchronously retrieves the thread of a post.
     /// </summary>
     /// <param name="uri">The URI of the post whose thread is to be retrieved.</param>
-    /// <param name="depth">Optional. The depth of the thread. Default is 0.</param>
+    /// <param name="depth">Optional. The depth of the thread. Default is 6.</param>
+    /// <param name="parentHeight">How many levels of parent (and grandparent, etc) post to include. Default is 80.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the thread of the post, or null if the thread could not be retrieved.</returns>
     public async Task<Result<ThreadPostViewFeed>> GetPostThreadAsync(
        ATUri uri,
-       int depth = 0,
+       int depth = 6,
+       int parentHeight = 80,
        CancellationToken cancellationToken = default)
     {
         string url = $"{Constants.Urls.Bluesky.Feed.GetPostThread}?uri={uri}";
-        if (depth > 0)
+        if (depth != 6)
         {
             url += $"&depth={depth}";
+        }
+
+        if (parentHeight != 80)
+        {
+            url += $"&parentHeight={parentHeight}";
         }
 
         Multiple<ThreadPostViewFeed?, ATError> result = await this.Client.Get<ThreadPostViewFeed>(url, this.Options.SourceGenerationContext.ThreadPostViewFeed, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
