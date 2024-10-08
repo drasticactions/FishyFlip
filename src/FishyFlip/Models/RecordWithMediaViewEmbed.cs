@@ -19,12 +19,12 @@ public class RecordWithMediaViewEmbed : Embed
     /// Initializes a new instance of the <see cref="RecordWithMediaViewEmbed"/> class.
     /// </summary>
     /// <param name="record">The record view embed.</param>
-    /// <param name="images">The image view embed.</param>
+    /// <param name="embed">The media embed.</param>
     [JsonConstructor]
-    public RecordWithMediaViewEmbed(RecordViewEmbed? record, ImageViewEmbed? images)
+    public RecordWithMediaViewEmbed(RecordViewEmbed? record, Embed? embed)
     {
         this.Record = record;
-        this.Images = images;
+        this.Embed = embed;
         this.Type = Constants.EmbedTypes.RecordWithMedia;
     }
 
@@ -36,5 +36,5 @@ public class RecordWithMediaViewEmbed : Embed
     /// <summary>
     /// Gets the image view embed.
     /// </summary>
-    public ImageViewEmbed? Images { get; }
+    public Embed? Embed { get; }
 }
