@@ -13,18 +13,12 @@ namespace WhiteWindLib.Tests;
 [TestClass]
 public class AnonymousTests
 {
-    static string did;
-
-    static string aturi;
-
     static ATProtocol proto;
     static WhiteWindBlog blog;
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        did = "did:plc:fzkpgpjj7nki7r5rhtmgzrez";
-        aturi = "at://did:plc:fzkpgpjj7nki7r5rhtmgzrez/com.whtwnd.blog.entry/3kudrxp52ps2a";
         string instance = "https://bsky.social";
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
@@ -36,9 +30,10 @@ public class AnonymousTests
     }
 
     [TestMethod]
-    public async Task GetAuthorPostsTest()
+    [DataRow("did:plc:fzkpgpjj7nki7r5rhtmgzrez")]
+    public async Task GetAuthorPostsTest(string didString)
     {
-        var did = ATDid.Create(AnonymousTests.did);
+        var did = ATDid.Create(didString);
         var (result, error) = await blog.GetAuthorEntriesAsync(did!);
         Assert.IsNull(error);
         Assert.IsNotNull(result);
@@ -46,9 +41,10 @@ public class AnonymousTests
     }
 
     [TestMethod]
-    public async Task GetAuthorPostTest()
+    [DataRow("at://did:plc:fzkpgpjj7nki7r5rhtmgzrez/com.whtwnd.blog.entry/3kudrxp52ps2a")]
+    public async Task GetAuthorPostTest(string atDid)
     {
-        var postUri = ATUri.Create(AnonymousTests.aturi);
+        var postUri = ATUri.Create(atDid);
         var (result, error) = await blog.GetEntryAsync(postUri.Did!, postUri.Rkey);
         Assert.IsNull(error);
         Assert.IsNotNull(result);

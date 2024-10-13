@@ -1,0 +1,32 @@
+name: Tests
+on:
+  push:
+    branches: [ "main", release-*, develop ]
+  pull_request:
+    branches: [ "main", release-*, develop ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of commits
+          submodules: 'true'
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Run FishyFlip.Tests
+        run: dotnet test src/FishyFlip.Tests/FishyFlip.Tests.csproj --logger trx --results-directory testresults
+
+      - name: Run WhiteWindLib.Tests
+        run: dotnet test src/WhiteWindLib.Tests/WhiteWindLib.Tests.csproj --logger trx --results-directory testresults
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: testresults
+        if: ${{ always() }}
