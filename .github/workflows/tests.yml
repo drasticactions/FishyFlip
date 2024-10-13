@@ -20,14 +20,14 @@ jobs:
           dotnet-version: 8.x
 
       - name: Run FishyFlip.Tests
-        run: dotnet test src/FishyFlip.Tests/FishyFlip.Tests.csproj --logger trx --results-directory testresults
+        run: dotnet test src/FishyFlip.Tests/FishyFlip.Tests.csproj -- --report-trx --results-directory ../../dotnet-test-results
 
       - name: Run WhiteWindLib.Tests
-        run: dotnet test src/WhiteWindLib.Tests/WhiteWindLib.Tests.csproj --logger trx --results-directory testresults
+        run: dotnet test src/WhiteWindLib.Tests/WhiteWindLib.Tests.csproj -- --report-trx --results-directory ../../dotnet-test-results
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
         with:
-          name: testresults
-          path: testresults
+          name: dotnet-test-results
+          path: dotnet-test-results
         if: ${{ always() }}
