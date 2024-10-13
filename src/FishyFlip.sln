@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteWindLib", "WhiteWindLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteWindLib.Tests", "WhiteWindLib.Tests\WhiteWindLib.Tests.csproj", "{2E024F2D-D298-4F7C-9644-63C417824128}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishyFlip.Auth.Tests", "FishyFlip.Auth.Tests\FishyFlip.Auth.Tests.csproj", "{262AB344-8C76-4243-ADBA-01A478A1C10C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteWindLib.Auth.Tests", "WhiteWindLib.Auth.Tests\WhiteWindLib.Auth.Tests.csproj", "{39CDE0DA-3AA1-4713-9B0C-C7EF61534243}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{2E024F2D-D298-4F7C-9644-63C417824128}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E024F2D-D298-4F7C-9644-63C417824128}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E024F2D-D298-4F7C-9644-63C417824128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{262AB344-8C76-4243-ADBA-01A478A1C10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{262AB344-8C76-4243-ADBA-01A478A1C10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{262AB344-8C76-4243-ADBA-01A478A1C10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{262AB344-8C76-4243-ADBA-01A478A1C10C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CDE0DA-3AA1-4713-9B0C-C7EF61534243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CDE0DA-3AA1-4713-9B0C-C7EF61534243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CDE0DA-3AA1-4713-9B0C-C7EF61534243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CDE0DA-3AA1-4713-9B0C-C7EF61534243}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
