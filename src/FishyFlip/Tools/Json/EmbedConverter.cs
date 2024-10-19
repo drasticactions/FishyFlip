@@ -94,7 +94,7 @@ public class EmbedConverter : JsonConverter<Embed>
                         break;
                     case Constants.EmbedTypes.RecordWithMediaView:
                         RecordViewEmbed? record1 = null;
-                        ImageViewEmbed? media1 = null;
+                        Embed? media1 = null;
 
                         if (doc.RootElement.TryGetProperty("record", out var recordVal2))
                         {
@@ -111,6 +111,9 @@ public class EmbedConverter : JsonConverter<Embed>
                                     case Constants.EmbedTypes.ImageView:
                                         media1 = JsonSerializer.Deserialize<ImageViewEmbed>(mediaVal2.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImageViewEmbed);
                                         break;
+                                    case Constants.EmbedTypes.VideoView:
+                                        media1 = JsonSerializer.Deserialize<VideoViewEmbed>(mediaVal2.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).VideoViewEmbed);
+                                        break;
                                 }
                             }
                         }
@@ -118,7 +121,7 @@ public class EmbedConverter : JsonConverter<Embed>
                         return new RecordWithMediaViewEmbed(record1, media1);
                     case Constants.EmbedTypes.RecordWithMedia:
                         RecordEmbed? record = null;
-                        ImagesEmbed? media = null;
+                        Embed? media = null;
 
                         if (doc.RootElement.TryGetProperty("record", out var recordVal))
                         {
@@ -134,6 +137,9 @@ public class EmbedConverter : JsonConverter<Embed>
                                 {
                                     case Constants.EmbedTypes.Images:
                                         media = JsonSerializer.Deserialize<ImagesEmbed>(mediaVal.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).ImagesEmbed);
+                                        break;
+                                    case Constants.EmbedTypes.VideoView:
+                                        media = JsonSerializer.Deserialize<VideoViewEmbed>(mediaVal.GetRawText(), ((SourceGenerationContext)options.TypeInfoResolver!).VideoViewEmbed);
                                         break;
                                 }
                             }

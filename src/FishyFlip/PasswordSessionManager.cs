@@ -38,6 +38,7 @@ internal class PasswordSessionManager : ISessionManager
     private System.Timers.Timer? timer;
     private int refreshing;
     private ILogger? logger;
+    private AuthSession? authSession;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
@@ -79,6 +80,11 @@ internal class PasswordSessionManager : ISessionManager
     /// <inheritdoc/>
     public HttpClient Client => this.client;
 
+    /// <summary>
+    /// Gets the password Auth Session.
+    /// </summary>
+    public AuthSession? PasswordSession => this.authSession;
+
     /// <inheritdoc/>
     public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
         => this.RefreshTokenAsync(cancellationToken);
@@ -93,11 +99,16 @@ internal class PasswordSessionManager : ISessionManager
     /// <param name="password">The password of the user.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Session?> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
+    internal async Task<Session?> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
-        var session = (await this.protocol.Server.CreateSessionAsync(identifier, password, cancellationToken)).HandleResult();
-        if (session is not null)
+#pragma warning disable CS0618
+        var sessionResult = await this.protocol.Server.CreateSessionAsync(identifier, password, cancellationToken);
+#pragma warning restore CS0618
+        Session? resultSession = null;
+        sessionResult.Switch(
+            session =>
         {
+            resultSession = session;
             if (this.protocol.Options.UseServiceEndpointUponLogin)
             {
                 var logger = this.protocol.Options.Logger;
@@ -124,23 +135,29 @@ internal class PasswordSessionManager : ISessionManager
             }
 
             this.SetSession(session);
-        }
+        },
+            e => this.logger?.LogError(e.ToString(), e));
 
-        return session;
+        return resultSession;
     }
 
     /// <summary>
     /// Sets the given session.
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
-    public void SetSession(Session session)
+    internal void SetSession(Session session)
     {
         this.session = session;
         this.UpdateBearerToken(session);
 
         this.logger?.LogDebug($"Session set, {session.Did}");
 
-        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(new AuthSession(session), this.protocol.Options.Url));
+        lock (this)
+        {
+            this.authSession = new AuthSession(session);
+        }
+
+        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.authSession, this.protocol.Options.Url));
 
         if (!this.protocol.Options.AutoRenewSession)
         {

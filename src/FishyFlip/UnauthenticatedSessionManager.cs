@@ -46,18 +46,21 @@ internal class UnauthenticatedSessionManager : ISessionManager
     }
 
     /// <inheritdoc/>
-    public void SetSession(Session session)
-    {
-        this.logger?.LogWarning("Unauthenticated session manager, session not set.");
-        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(new AuthSession(session), null));
-    }
-
-    /// <inheritdoc/>
     public void Dispose()
     {
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         this.Dispose(disposing: true);
         GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Set the session.
+    /// </summary>
+    /// <param name="session">Session.</param>
+    internal void SetSession(Session session)
+    {
+        this.logger?.LogWarning("Unauthenticated session manager, session not set.");
+        this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(new AuthSession(session), null));
     }
 
     /// <summary>

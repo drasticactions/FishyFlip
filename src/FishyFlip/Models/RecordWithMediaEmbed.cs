@@ -13,12 +13,12 @@ public class RecordWithMediaEmbed : Embed
     /// Initializes a new instance of the <see cref="RecordWithMediaEmbed"/> class.
     /// </summary>
     /// <param name="record">The record to be embedded. Can be null.</param>
-    /// <param name="images">The images to be embedded. Can be null.</param>
+    /// <param name="embed">The media to be embedded. Can be null.</param>
     [JsonConstructor]
-    public RecordWithMediaEmbed(RecordEmbed? record, ImagesEmbed? images)
+    public RecordWithMediaEmbed(RecordEmbed? record, Embed? embed)
     {
         this.Record = record;
-        this.Images = images;
+        this.Embed = embed;
         this.Type = Constants.EmbedTypes.RecordWithMedia;
     }
 
@@ -35,7 +35,7 @@ public class RecordWithMediaEmbed : Embed
         switch (type)
         {
             case Constants.EmbedTypes.Images:
-                this.Images = new ImagesEmbed(media["images"]);
+                this.Embed = new ImagesEmbed(media["images"]);
                 break;
         }
     }
@@ -48,5 +48,5 @@ public class RecordWithMediaEmbed : Embed
     /// <summary>
     /// Gets the images to be embedded.
     /// </summary>
-    public ImagesEmbed? Images { get; }
+    public Embed? Embed { get; }
 }

@@ -12,19 +12,6 @@ namespace FishyFlip.Tests;
 public class AuthorizedTests
 {
     static ATProtocol proto;
-    static string handle;
-    static string handle_2;
-    static string did;
-    static string did_2;
-    static string post_thread;
-    static string quote_post;
-    static string quote_post_2;
-    static string feed_generator;
-    static string follow_did;
-    static string block_did;
-    static string media_post;
-    static string images_post;
-    static string external_post;
 
     public AuthorizedTests()
     {
@@ -33,28 +20,16 @@ public class AuthorizedTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        feed_generator = (string?)context.Properties["BLUESKY_TEST_FEED_GENERATOR"] ?? throw new ArgumentNullException();
-        follow_did = (string?)context.Properties["BLUESKY_TEST_FOLLOW_DID"] ?? throw new ArgumentNullException();
-        block_did = (string?)context.Properties["BLUESKY_TEST_BLOCK_DID"] ?? throw new ArgumentNullException();
-        media_post = (string?)context.Properties["BLUESKY_TEST_MEDIA_POST"] ?? throw new ArgumentNullException();
-        images_post = (string?)context.Properties["BLUESKY_TEST_IMAGES_POST"] ?? throw new ArgumentNullException();
-        external_post = (string?)context.Properties["BLUESKY_TEST_EXTERNAL_POST"] ?? throw new ArgumentNullException();
-        handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
-        handle_2 = (string?)context.Properties["BLUESKY_TEST_HANDLE_2"] ?? throw new ArgumentNullException();
-        did = (string?)context.Properties["BLUESKY_TEST_DID"] ?? throw new ArgumentNullException();
-        did_2 = (string?)context.Properties["BLUESKY_TEST_DID_2"] ?? throw new ArgumentNullException();
-        post_thread = (string?)context.Properties["BLUESKY_TEST_POST_THREAD"] ?? throw new ArgumentNullException();
-        quote_post = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST"] ?? throw new ArgumentNullException();
-        quote_post_2 = (string?)context.Properties["BLUESKY_TEST_QUOTE_POST_2"] ?? throw new ArgumentNullException();
+        string handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
         string password = (string?)context.Properties["BLUESKY_TEST_PASSWORD"] ?? throw new ArgumentNullException();
-        string instance = (string?)context.Properties["BLUESKY_INSTANCE_URL"] ?? throw new ArgumentNullException();
+        string instance = "https://bsky.social";
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)
             .WithInstanceUrl(new Uri(instance))
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
         AuthorizedTests.proto = atProtocolBuilder.Build();
-        AuthorizedTests.proto.AuthenticateWithPasswordAsync(AuthorizedTests.handle, password).Wait();
+        AuthorizedTests.proto.AuthenticateWithPasswordAsync(handle, password).Wait();
     }
 
     [TestMethod]
@@ -73,9 +48,10 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetFeedAsyncTest()
+    [DataRow("at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot")]
+    public async Task GetFeedAsyncTest(string feedGenerator)
     {
-        var atUri = ATUri.Create(AuthorizedTests.feed_generator);
+        var atUri = ATUri.Create(feedGenerator);
         var result = await AuthorizedTests.proto.Feed.GetFeedAsync(atUri);
         result.Switch(
             success =>
@@ -89,9 +65,10 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetFeedGeneratorAsyncTest()
+    [DataRow("at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot")]
+    public async Task GetFeedGeneratorAsyncTest(string feedGenerator)
     {
-        var atUri = ATUri.Create(AuthorizedTests.feed_generator);
+        var atUri = ATUri.Create(feedGenerator);
         var result = await AuthorizedTests.proto.Feed.GetFeedGeneratorAsync(atUri);
         result.Switch(
             success =>
@@ -105,13 +82,14 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetProfileAsyncTest()
+    [DataRow("drasticactions.xn--q9jyb4c")]
+    public async Task GetProfileAsyncTest(string handle1)
     {
-        var result = await AuthorizedTests.proto.Actor.GetProfileAsync(ATHandle.Create(AuthorizedTests.handle) ?? throw new ArgumentNullException(nameof(AuthorizedTests.handle)));
+        var result = await AuthorizedTests.proto.Actor.GetProfileAsync(ATHandle.Create(handle1) ?? throw new ArgumentNullException(nameof(handle1)));
         result.Switch(
             success =>
             {
-                Assert.AreEqual(success!.Handle, AuthorizedTests.handle);
+                Assert.AreEqual(success!.Handle, handle1);
             },
             failed =>
             {
@@ -120,14 +98,15 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetProfilesAsyncWithHandlesTest()
+    [DataRow("drasticactions.xn--q9jyb4c", "peepthisbot.bsky.social")]
+    public async Task GetProfilesAsyncWithHandlesTest(string handle1, string handle2)
     {
-        var result = await AuthorizedTests.proto.Actor.GetProfilesAsync(new[] { ATHandle.Create(AuthorizedTests.handle), ATHandle.Create(AuthorizedTests.handle_2) });
+        var result = await AuthorizedTests.proto.Actor.GetProfilesAsync(new[] { ATHandle.Create(handle1), ATHandle.Create(handle2) });
         result.Switch(
             success =>
             {
-                Assert.AreEqual(AuthorizedTests.handle, success!.Profiles[0]!.Handle.ToString());
-                Assert.AreEqual(AuthorizedTests.handle_2.ToString(), success!.Profiles[1]!.Handle.ToString());
+                Assert.AreEqual(handle1, success!.Profiles[0]!.Handle.ToString());
+                Assert.AreEqual(handle2, success!.Profiles[1]!.Handle.ToString());
             },
             failed =>
             {
@@ -136,10 +115,11 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetProfilesAsyncWithDidTest()
+    [DataRow("did:plc:nrfz3bngz57p7g7yg6pbkyqr", "did:plc:okblbaji7rz243bluudjlgxt")]
+    public async Task GetProfilesAsyncWithDidTest(string did1, string did2)
     {
-        var test1did = ATDid.Create(AuthorizedTests.did);
-        var test2did = ATDid.Create(AuthorizedTests.did_2);
+        var test1did = ATDid.Create(did1);
+        var test2did = ATDid.Create(did2);
         var result = await AuthorizedTests.proto.Actor.GetProfilesAsync(new[] { test1did, test2did });
         result.Switch(
             success =>
@@ -154,10 +134,11 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetPostsAsyncTest()
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxmjdxlpl2r", "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxdo7r2cj2m")]
+    public async Task GetPostsAsyncTest(string quotePost, string quotePost2)
     {
-        var postUri = ATUri.Create(AuthorizedTests.quote_post);
-        var postUri2 = ATUri.Create(AuthorizedTests.quote_post_2);
+        var postUri = ATUri.Create(quotePost);
+        var postUri2 = ATUri.Create(quotePost2);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostsAsync(new[] { postUri, postUri2 });
         postThreadResult.Switch(
             success =>
@@ -172,9 +153,10 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetPostThreadAsyncTest()
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l5bialwzz52f")]
+    public async Task GetPostThreadAsyncTest(string postThread)
     {
-        var postUri = ATUri.Create(AuthorizedTests.post_thread);
+        var postUri = ATUri.Create(postThread);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -182,21 +164,22 @@ public class AuthorizedTests
                            Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
                        },
             failed =>
-                                  {
-                                      Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
-                                  });
+                        {
+                            Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+                        });
     }
 
     [TestMethod]
-    public async Task GetQuotePostThreadAsyncTest()
+    [DataRow("", "")]
+    public async Task GetQuotePostThreadAsyncTest(string quotePost, string quotePost2)
     {
-        var postUri = ATUri.Create(AuthorizedTests.quote_post);
+        var postUri = ATUri.Create(quotePost);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
             {
                 Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
-                Assert.AreEqual(AuthorizedTests.quote_post_2, ((RecordViewEmbed)success!.Thread!.Post!.Embed!)!.Post.Uri.ToString());
+                Assert.AreEqual(quotePost2, ((RecordViewEmbed)success!.Thread!.Post!.Embed!)!.Post.Uri.ToString());
             },
             failed =>
             {
@@ -205,25 +188,10 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetExternalPostThreadAsyncTest()
+    [DataRow("")]
+    public async Task GetExternalPostThreadAsyncTest(string externalPost)
     {
-        var postUri = ATUri.Create(AuthorizedTests.external_post);
-        var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
-        postThreadResult.Switch(
-            success =>
-            {
-                Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
-            },
-            failed =>
-            {
-                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
-            });
-    }
-
-    [TestMethod]
-    public async Task GetImagesPostThreadAsyncTest()
-    {
-        var postUri = ATUri.Create(AuthorizedTests.images_post);
+        var postUri = ATUri.Create(externalPost);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -237,9 +205,10 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetRecordWithMediaPostThreadAsyncTest()
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46tcntvgy2a")]
+    public async Task GetImagesPostThreadAsyncTest(string imagesPost)
     {
-        var postUri = ATUri.Create(AuthorizedTests.media_post);
+        var postUri = ATUri.Create(imagesPost);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -253,9 +222,27 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task GetRepliesPostThreadAsyncTest()
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46xtosyvf2y")]
+    public async Task GetRecordWithMediaPostThreadAsyncTest(string mediaPost)
     {
-        var postUri = ATUri.Create(AuthorizedTests.post_thread);
+        var postUri = ATUri.Create(mediaPost);
+        var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
+        postThreadResult.Switch(
+            success =>
+            {
+                Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
+
+    [TestMethod]
+    [DataRow("")]
+    public async Task GetRepliesPostThreadAsyncTest(string postThread)
+    {
+        var postUri = ATUri.Create(postThread);
         var postThreadResult = await AuthorizedTests.proto.Feed.GetPostThreadAsync(postUri);
         postThreadResult.Switch(
             success =>
@@ -360,7 +347,8 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task CreateAndRemoveListTest()
+    [DataRow("did:plc:nrfz3bngz57p7g7yg6pbkyqr")]
+    public async Task CreateAndRemoveListTest(string followDid)
     {
         var randomName = Guid.NewGuid().ToString();
         var createList = (await AuthorizedTests.proto.Repo.CreateCurateListAsync(randomName, "Test List", DateTime.UtcNow)).HandleResult();
@@ -372,7 +360,7 @@ public class AuthorizedTests
         Assert.IsTrue(lists is not null);
         Assert.IsTrue(lists!.Lists.Count() > 0);
 
-        var follow1 = ATDid.Create(AuthorizedTests.follow_did);
+        var follow1 = ATDid.Create(followDid);
         var follow = (await AuthorizedTests.proto.Repo.CreateListItemAsync(follow1, createList.Uri)).HandleResult();
         Assert.IsTrue(follow!.Cid is not null);
         Assert.IsTrue(follow!.Uri is not null);
@@ -441,9 +429,10 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task CreateAndRemoveFollowTest()
+    [DataRow("did:plc:nrfz3bngz57p7g7yg6pbkyqr")]
+    public async Task CreateAndRemoveFollowTest(string followDid)
     {
-        var follow1 = ATDid.Create(AuthorizedTests.follow_did);
+        var follow1 = ATDid.Create(followDid);
         var follow = (await AuthorizedTests.proto.Repo.CreateFollowAsync(follow1)).HandleResult();
         Assert.IsTrue(follow!.Cid is not null);
         Assert.IsTrue(follow!.Uri is not null);
@@ -453,9 +442,10 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    public async Task CreateAndRemoveBlockTest()
+    [DataRow("did:plc:nrfz3bngz57p7g7yg6pbkyqr")]
+    public async Task CreateAndRemoveBlockTest(string blockDid)
     {
-        var follow2 = ATDid.Create(AuthorizedTests.block_did);
+        var follow2 = ATDid.Create(blockDid);
         var follow = (await AuthorizedTests.proto.Repo.CreateBlockAsync(follow2)).HandleResult();
         Assert.IsTrue(follow!.Cid is not null);
         Assert.IsTrue(follow!.Uri is not null);

@@ -26,7 +26,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
     <PackageVersion Include="System.Memory" Version="4.5.5" />
     <PackageVersion Include="System.Memory.Data" Version="8.0.0" />
-    <PackageVersion Include="System.Text.Json" Version="8.0.4" />
+    <PackageVersion Include="System.Text.Json" Version="8.0.5" />
     <PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
     <PackageVersion Include="PublishSPAforGitHubPages.Build" Version="2.1.0" />
     <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
@@ -34,7 +34,10 @@
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.12.4" />
     <PackageVersion Include="GitVersion.MSBuild" Version="6.0.2" />
     <PackageVersion Include="IdentityModel" Version="7.0.0" />
-    <PackageVersion Include="ConsoleAppFramework" Version="5.2.3" />
+    <PackageVersion Include="ConsoleAppFramework" Version="5.2.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageVersion>
   </ItemGroup>
   <ItemGroup Condition="$(UseMaui) == true">
     <PackageVersion Include="Microsoft.Maui.Controls" Version="8.0.21" />

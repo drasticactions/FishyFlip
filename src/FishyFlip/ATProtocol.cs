@@ -130,6 +130,21 @@ public sealed class ATProtocol : IDisposable
     public AuthSession? OAuthSession => this.sessionManager is OAuth2SessionManager oAuth2SessionManager ? oAuth2SessionManager.OAuthSession : null;
 
     /// <summary>
+    /// Gets the current PasswordSession session, if any is active.
+    /// </summary>
+    public AuthSession? PasswordSession => this.sessionManager is PasswordSessionManager passwordSessionManager ? passwordSessionManager.PasswordSession : null;
+
+    /// <summary>
+    /// Gets the current AuthSession.
+    /// </summary>
+    public AuthSession? AuthSession => this.sessionManager switch
+    {
+        PasswordSessionManager passwordSessionManager => passwordSessionManager.PasswordSession,
+        OAuth2SessionManager oAuth2SessionManager => oAuth2SessionManager.OAuthSession,
+        _ => null,
+    };
+
+    /// <summary>
     /// Gets or sets the internal session manager.
     /// </summary>
     internal ISessionManager SessionManager

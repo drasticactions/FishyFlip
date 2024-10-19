@@ -208,6 +208,12 @@ namespace FishyFlip;
 [JsonSerializable(typeof(Dictionary<string, JsonElement>))]
 [JsonSerializable(typeof(OidcClientOptions))]
 [JsonSerializable(typeof(DPoPProofPayload))]
+[JsonSerializable(typeof(ATWebSocketEvent))]
+[JsonSerializable(typeof(ATWebSocketCommit))]
+[JsonSerializable(typeof(ATWebSocketCommitType))]
+[JsonSerializable(typeof(ATWebSocketRecord))]
+[JsonSerializable(typeof(ActorRecord))]
+[JsonSerializable(typeof(ActorIdentity))]
 [JsonSerializable(typeof(Microsoft.IdentityModel.Tokens.JsonWebKey), TypeInfoPropertyName = nameof(Microsoft.IdentityModel.Tokens.JsonWebKey) + "_A")]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
