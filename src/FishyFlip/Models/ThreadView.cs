@@ -12,16 +12,23 @@ public class ThreadView : ATRecord
     /// <summary>
     /// Initializes a new instance of the <see cref="ThreadView"/> class.
     /// </summary>
+    /// <param name="parent">The parent of the post.</param>
     /// <param name="post">The main post of the thread.</param>
     /// <param name="replies">The replies to the main post.</param>
     /// <param name="type">The type of the thread.</param>
     [JsonConstructor]
-    public ThreadView(PostView? post, ThreadView[] replies, string type)
+    public ThreadView(ThreadView? parent, PostView? post, ThreadView[] replies, string type)
     {
+        this.Parent = parent;
         this.Post = post;
         this.Replies = replies;
         this.Type = type;
     }
+
+    /// <summary>
+    /// Gets the parent of the thread.
+    /// </summary>
+    public ThreadView? Parent { get; }
 
     /// <summary>
     /// Gets the main post of the thread.
