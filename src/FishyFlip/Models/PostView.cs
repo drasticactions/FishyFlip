@@ -17,4 +17,5 @@ public record PostView(
     FeedProfile Author,
     Post? Record,
     DateTime IndexedAt,
-    IReadOnlyList<Label> Label);
+    IReadOnlyList<Label> Label,
+    PostViewer? Viewer = null);
