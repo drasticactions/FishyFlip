@@ -43,3 +43,34 @@ jobs:
         with:
           name: nupkg
           path: nupkg/*.nupkg
+  publish:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+
+    steps:
+      - name: Download Nuget Package
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg
+          path: nupkg
+
+      - name: Wait for Tests
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Tests' # Replace with your test job name if different
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Publish to NuGet
+        run: |
+          for f in ./nupkg/*.nupkg
+          do
+            dotnet nuget push $f --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+          done
