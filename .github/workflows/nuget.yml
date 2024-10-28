@@ -1,4 +1,4 @@
-name: Nuget
+name: Build Package
 
 on:
   push:
@@ -31,8 +31,33 @@ jobs:
         with:
           name: nupkg
           path: nupkg/*.nupkg
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'true'
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Run FishyFlip.Tests
+        run: dotnet test src/FishyFlip.Tests/FishyFlip.Tests.csproj -- --report-trx --results-directory ../../dotnet-test-results
+
+      - name: Run WhiteWindLib.Tests
+        run: dotnet test src/WhiteWindLib.Tests/WhiteWindLib.Tests.csproj -- --report-trx --results-directory ../../dotnet-test-results
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-test-results
+          path: dotnet-test-results
+        if: ${{ always() }}
   publish:
-    needs: [build]
+    needs: [build, test]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
 
@@ -42,14 +67,6 @@ jobs:
         with:
           name: nupkg
           path: nupkg
-
-      - name: Wait for Tests
-        uses: lewagon/wait-on-check-action@v1.3.4
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Tests'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
