@@ -81,4 +81,188 @@ public class Facet : ATRecord
     /// <returns>The created facet.</returns>
     public static Facet CreateFacetMention(int start, int end, ATDid mention)
         => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateMention(mention) });
+
+    /// <summary>
+    /// Creates an array of facets with link features for the URIs in the specified post.
+    /// </summary>
+    /// <param name="post">Post text.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] ForUris(string post)
+    {
+        var facets = new List<Facet>();
+        var matches = Regex.Matches(post, @"(https?://[^\s]+)");
+        foreach (Match match in matches)
+        {
+            var start = match.Index;
+            var end = match.Index + match.Length;
+            var uri = match.Value;
+            facets.Add(CreateFacetLink(start, end, uri));
+        }
+
+        return facets.ToArray();
+    }
+
+    /// <summary>
+    /// Creates an array of facets with link features for the URIs in the specified post.
+    /// </summary>
+    /// <param name="post">Post text.</param>
+    /// <param name="baseText">Text to embed with link.</param>
+    /// <param name="uri">Link Uri.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] ForUris(string post, string baseText, string uri)
+    {
+        var facets = new List<Facet>();
+        var matches = Regex.Matches(post, baseText);
+        foreach (Match match in matches)
+        {
+            var start = match.Index;
+            var end = match.Index + match.Length;
+            facets.Add(CreateFacetLink(start, end, uri));
+        }
+
+        return facets.ToArray();
+    }
+
+    /// <summary>
+    /// Creates an array of facets with hashtag features for the hashtags in the specified post.
+    /// </summary>
+    /// <param name="post">Post text.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] ForHashtags(string post)
+    {
+        var facets = new List<Facet>();
+
+        // Match all hashtags in the post that are not part of a URL.
+        var matches = Regex.Matches(post, @"(?<![@\w/])#(?!\s)[\w\u0080-\uFFFF]+");
+        foreach (Match match in matches)
+        {
+            var start = match.Index;
+            var end = match.Index + match.Length;
+            var hashtag = match.Value;
+
+            if (hashtag.StartsWith("#"))
+            {
+                hashtag = hashtag.Substring(1);
+            }
+
+            if (string.IsNullOrEmpty(hashtag))
+            {
+                continue;
+            }
+
+            facets.Add(CreateFacetHashtag(start, end, hashtag));
+        }
+
+        return facets.ToArray();
+    }
+
+    /// <summary>
+    /// Creates an array of facets with mention features for the mentions in the specified post.
+    /// </summary>
+    /// <param name="post">Post text.</param>
+    /// <param name="actors">Array of actors profiles.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] ForMentions(string post, FacetActorIdentifier[] actors)
+    {
+        var facets = new List<Facet>();
+
+        // Match all mentions in the post that are not part of a URL.
+        var matches = Regex.Matches(post, @"@(?!http)[a-zA-Z0-9][-a-zA-Z0-9_.]{1,}");
+        foreach (Match match in matches)
+        {
+            var start = match.Index;
+            var end = match.Index + match.Length;
+            var mention = match.Value;
+            if (mention.StartsWith("@"))
+            {
+                mention = mention.Substring(1);
+            }
+
+            if (string.IsNullOrEmpty(mention))
+            {
+                continue;
+            }
+
+            var actor = actors.FirstOrDefault(n => n.Handle.ToString() == mention);
+            if (actor?.Did is not null)
+            {
+                facets.Add(CreateFacetMention(start, end, actor.Did));
+            }
+        }
+
+        return facets.ToArray();
+    }
+
+    /// <summary>
+    /// Creates an array of facets with mention features for the mentions in the specified post.
+    /// </summary>
+    /// <param name="post">Post text.</param>
+    /// <param name="actors">Actor profiles.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] ForMentions(string post, ActorProfile[] actors)
+    {
+        var actorList = new List<FacetActorIdentifier>();
+        foreach (var actor in actors)
+        {
+            if (actor.Handle is null)
+            {
+                continue;
+            }
+
+            if (!ATHandle.TryCreate(actor.Handle, out var atHandle))
+            {
+                continue;
+            }
+
+            if (atHandle is null || actor.Did is null)
+            {
+                continue;
+            }
+
+            actorList.Add(new FacetActorIdentifier(atHandle, actor.Did));
+        }
+
+        return ForMentions(post, actorList.ToArray());
+    }
+
+    /// <summary>
+    /// Creates an array of facets with mention features for the mentions in the specified post.
+    /// </summary>
+    /// <param name="post">Post text.</param>
+    /// <param name="actors">Actor profiles.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] ForMentions(string post, FeedProfile[] actors)
+    {
+        var actorList = new List<FacetActorIdentifier>();
+        foreach (var actor in actors)
+        {
+            if (actor.Handle is null)
+            {
+                continue;
+            }
+
+            if (!ATHandle.TryCreate(actor.Handle, out var atHandle))
+            {
+                continue;
+            }
+
+            if (atHandle is null || actor.Did is null)
+            {
+                continue;
+            }
+
+            actorList.Add(new FacetActorIdentifier(atHandle, actor.Did));
+        }
+
+        return ForMentions(post, actorList.ToArray());
+    }
+
+    /// <summary>
+    /// Creates an array of facets with mention features for the mentions in the specified post.
+    /// </summary>
+    /// <param name="post">Post text.</param>
+    /// <param name="actor">Actor profiles.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] ForMentions(string post, FeedProfile actor)
+        => ForMentions(post, new FeedProfile[] { actor });
 }

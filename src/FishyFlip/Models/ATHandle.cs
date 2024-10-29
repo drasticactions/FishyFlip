@@ -67,6 +67,38 @@ public class ATHandle : ATIdentifier
     }
 
     /// <summary>
+    /// Gets the handles from a post text.
+    /// </summary>
+    /// <param name="post">Text of the post.</param>
+    /// <returns>Array of ATHandle.</returns>
+    public static ATHandle[] FromPostText(string post)
+    {
+        var handles = new List<ATHandle>();
+        var matches = Regex.Matches(post, @"@(?!http)[a-zA-Z0-9][-a-zA-Z0-9_.]{1,}");
+        foreach (Match match in matches)
+        {
+            if (match.Success)
+            {
+                var handle = match.Value;
+                if (handle.StartsWith("@"))
+                {
+                    handle = handle.Substring(1);
+                }
+
+                if (HandleValidator.EnsureValidHandle(handle))
+                {
+                    if (!handles.Any(n => n.Handle == handle))
+                    {
+                        handles.Add(new ATHandle(handle));
+                    }
+                }
+            }
+        }
+
+        return handles.ToArray();
+    }
+
+    /// <summary>
     /// Is the given string a valid ATHandle.
     /// </summary>
     /// <param name="uri">The uri as string.</param>
