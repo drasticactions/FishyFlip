@@ -71,7 +71,7 @@ public class ATHandle : ATIdentifier
     /// </summary>
     /// <param name="post">Text of the post.</param>
     /// <returns>Array of ATHandle.</returns>
-    public static ATHandle[] GetHandlesFromPostText(string post)
+    public static ATHandle[] FromPostText(string post)
     {
         var handles = new List<ATHandle>();
         var matches = Regex.Matches(post, @"@(?!http)[a-zA-Z0-9][-a-zA-Z0-9_.]{1,}");

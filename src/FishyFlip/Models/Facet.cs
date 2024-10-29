@@ -87,7 +87,7 @@ public class Facet : ATRecord
     /// </summary>
     /// <param name="post">Post text.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] CreateFacetsForUris(string post)
+    public static Facet[] ForUris(string post)
     {
         var facets = new List<Facet>();
         var matches = Regex.Matches(post, @"(https?://[^\s]+)");
@@ -109,7 +109,7 @@ public class Facet : ATRecord
     /// <param name="baseText">Text to embed with link.</param>
     /// <param name="uri">Link Uri.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] CreateFacetsForUris(string post, string baseText, string uri)
+    public static Facet[] ForUris(string post, string baseText, string uri)
     {
         var facets = new List<Facet>();
         var matches = Regex.Matches(post, baseText);
@@ -128,7 +128,7 @@ public class Facet : ATRecord
     /// </summary>
     /// <param name="post">Post text.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] CreateFacetsForHashtags(string post)
+    public static Facet[] ForHashtags(string post)
     {
         var facets = new List<Facet>();
 
@@ -162,7 +162,7 @@ public class Facet : ATRecord
     /// <param name="post">Post text.</param>
     /// <param name="actors">Array of actors profiles.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] CreateFacetsForMentions(string post, FacetActorIdentifier[] actors)
+    public static Facet[] ForMentions(string post, FacetActorIdentifier[] actors)
     {
         var facets = new List<Facet>();
 
@@ -199,7 +199,7 @@ public class Facet : ATRecord
     /// <param name="post">Post text.</param>
     /// <param name="actors">Actor profiles.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] CreateFacetsForMentions(string post, ActorProfile[] actors)
+    public static Facet[] ForMentions(string post, ActorProfile[] actors)
     {
         var actorList = new List<FacetActorIdentifier>();
         foreach (var actor in actors)
@@ -222,7 +222,7 @@ public class Facet : ATRecord
             actorList.Add(new FacetActorIdentifier(atHandle, actor.Did));
         }
 
-        return CreateFacetsForMentions(post, actorList.ToArray());
+        return ForMentions(post, actorList.ToArray());
     }
 
     /// <summary>
@@ -231,7 +231,7 @@ public class Facet : ATRecord
     /// <param name="post">Post text.</param>
     /// <param name="actors">Actor profiles.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] CreateFacetsForMentions(string post, FeedProfile[] actors)
+    public static Facet[] ForMentions(string post, FeedProfile[] actors)
     {
         var actorList = new List<FacetActorIdentifier>();
         foreach (var actor in actors)
@@ -254,7 +254,7 @@ public class Facet : ATRecord
             actorList.Add(new FacetActorIdentifier(atHandle, actor.Did));
         }
 
-        return CreateFacetsForMentions(post, actorList.ToArray());
+        return ForMentions(post, actorList.ToArray());
     }
 
     /// <summary>
@@ -263,6 +263,6 @@ public class Facet : ATRecord
     /// <param name="post">Post text.</param>
     /// <param name="actor">Actor profiles.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] CreateFacetsForMentions(string post, FeedProfile actor)
-        => CreateFacetsForMentions(post, new FeedProfile[] { actor });
+    public static Facet[] ForMentions(string post, FeedProfile actor)
+        => ForMentions(post, new FeedProfile[] { actor });
 }
