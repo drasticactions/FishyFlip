@@ -118,4 +118,41 @@ public class AnonymousTests
         Assert.IsTrue(describe.Did is not null);
         Assert.AreEqual(describe.Did!.ToString(), repo.ToString());
     }
+
+    [TestMethod]
+    public async Task ValidateFacetHelpers()
+    {
+        var daDev = new FacetActorIdentifier(ATHandle.Create("drasticactions.dev")!, ATDid.Create("did:plc:okblbaji7rz243bluudjlgxt")!);
+        var daJp = new FacetActorIdentifier(ATHandle.Create("drasticactions.jp")!, ATDid.Create("did:plc:okblbaji7rz243bluudjl2bt")!);
+
+        var postText = "@drasticactions.dev This is a #test #test of #testing the #FishyFlip #API. https://github.com/drasticactions DAHome. @drasticactions.jp https://github.com/drasticactions/FishyFlip @drasticactions.dev Weee!";
+        var postHandles = ATHandle.FromPostText(postText);
+        Assert.IsTrue(postHandles.Length == 2);
+        Assert.IsTrue(postHandles[0].Handle == "drasticactions.dev");
+        Assert.IsTrue(postHandles[1].Handle == "drasticactions.jp");
+
+        var handleFacets = Facet.ForMentions(postText, new FacetActorIdentifier[] { daDev, daJp });
+
+        Assert.IsTrue(handleFacets.Length == 3);
+        Assert.IsTrue(handleFacets[0].Index!.ByteStart == 0);
+        Assert.IsTrue(handleFacets[0].Index!.ByteEnd == 19);
+        Assert.IsTrue(handleFacets[0].Features![0]!.Did! == daDev.Did);
+
+        Assert.IsTrue(handleFacets[1].Index!.ByteStart == 117);
+        Assert.IsTrue(handleFacets[1].Index!.ByteEnd == 135);
+        Assert.IsTrue(handleFacets[1].Features![0]!.Did! == daJp.Did);
+
+        Assert.IsTrue(handleFacets[2].Features![0]!.Did! == daDev.Did);
+        Assert.IsTrue(handleFacets[2].Index!.ByteStart == 180);
+        Assert.IsTrue(handleFacets[2].Index!.ByteEnd == 199);
+
+        var hashtagFacets = Facet.ForHashtags(postText);
+        Assert.IsTrue(hashtagFacets.Length == 5);
+        var uriFacets = Facet.ForUris(postText);
+        Assert.IsTrue(uriFacets.Length == 2);
+        var baseUriFacets = Facet.ForUris(postText, "DAHome", "https://github.com/drasticactions");
+        Assert.IsTrue(baseUriFacets.Length == 1);
+        var facets = handleFacets.Concat(hashtagFacets).Concat(uriFacets).Concat(baseUriFacets).ToArray();
+        Assert.IsTrue(facets.Length == 11);
+    }
 }
