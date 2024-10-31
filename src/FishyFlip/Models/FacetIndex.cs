@@ -40,4 +40,13 @@ public class FacetIndex
     /// Gets the starting byte position of the facet.
     /// </summary>
     public int ByteStart { get; }
+
+    /// <summary>
+    /// Returns a string that represents the current object.
+    /// </summary>
+    /// <returns>String.</returns>
+    public override string ToString()
+    {
+        return $"ByteStart: {this.ByteStart}, ByteEnd: {this.ByteEnd}";
+    }
 }

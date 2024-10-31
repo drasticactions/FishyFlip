@@ -265,4 +265,14 @@ public class Facet : ATRecord
     /// <returns>Array of Facets.</returns>
     public static Facet[] ForMentions(string post, FeedProfile actor)
         => ForMentions(post, new FeedProfile[] { actor });
+
+    /// <summary>
+    /// Returns a string that represents the current object.
+    /// </summary>
+    /// <returns>String.</returns>
+    public override string ToString()
+    {
+        var features = this.Features ?? Array.Empty<FacetFeature>();
+        return $"Facet: {this.Index}, Features: {string.Join(", ", features.Select(f => f.ToString()))}";
+    }
 }

@@ -120,6 +120,28 @@ public class AnonymousTests
     }
 
     [TestMethod]
+    public void MarkdownPostTest()
+    {
+        var markdownPost = @"Markdown Test: [FishyFlip](https://drasticactions.github.io/FishyFlip), #FishyFlip, [@drasticactions.dev](did:plc:yhgc5rlqhoezrx6fbawajxlh)";
+        var post = MarkdownPost.Parse(markdownPost);
+        Assert.IsTrue(post.OriginalMarkdown == markdownPost);
+        Assert.IsTrue(post.Post == "Markdown Test: FishyFlip, #FishyFlip, @drasticactions.dev");
+        Assert.IsTrue(post.Facets.Length == 3);
+        Assert.IsTrue(post.Facets[0].Features![0]!.Type == Constants.FacetTypes.Link);
+        Assert.IsTrue(post.Facets[0].Features![0]!.Uri == "https://drasticactions.github.io/FishyFlip");
+        Assert.IsTrue(post.Facets[0].Index!.ByteStart == 15);
+        Assert.IsTrue(post.Facets[0].Index!.ByteEnd == 24);
+        Assert.IsTrue(post.Facets[1].Features![0]!.Type == Constants.FacetTypes.Mention);
+        Assert.IsTrue(post.Facets[1].Features![0]!.Did!.ToString() == "did:plc:yhgc5rlqhoezrx6fbawajxlh");
+        Assert.IsTrue(post.Facets[1].Index!.ByteStart == 38);
+        Assert.IsTrue(post.Facets[1].Index!.ByteEnd == 57);
+        Assert.IsTrue(post.Facets[2].Features![0]!.Type == Constants.FacetTypes.Tag);
+        Assert.IsTrue(post.Facets[2].Features![0]!.Tag == "FishyFlip");
+        Assert.IsTrue(post.Facets[2].Index!.ByteStart == 26);
+        Assert.IsTrue(post.Facets[2].Index!.ByteEnd == 36);
+    }
+
+    [TestMethod]
     public async Task ValidateFacetHelpers()
     {
         var daDev = new FacetActorIdentifier(ATHandle.Create("drasticactions.dev")!, ATDid.Create("did:plc:okblbaji7rz243bluudjlgxt")!);
