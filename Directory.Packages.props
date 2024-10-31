@@ -29,7 +29,6 @@
     <PackageVersion Include="System.Text.Json" Version="8.0.5" />
     <PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
     <PackageVersion Include="PublishSPAforGitHubPages.Build" Version="2.1.0" />
-    <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
     <PackageVersion Include="MSTest" Version="3.3.1" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.12.4" />
     <PackageVersion Include="GitVersion.MSBuild" Version="6.0.2" />

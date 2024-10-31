@@ -10,7 +10,7 @@ For documentation, check out https://drasticactions.github.io/FishyFlip
 
 ### Third-Party Libraries
 
-- [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning)
+- [GitVersion](https://github.com/GitTools/GitVersion)
 
 FishyFlip
 
