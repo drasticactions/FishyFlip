@@ -81,4 +81,19 @@ public class FacetFeature
     /// <returns>A new instance of the <see cref="FacetFeature"/> class.</returns>
     public static FacetFeature CreateHashtag(string tag)
         => new(Constants.FacetTypes.Tag, null, tag, null);
+
+    /// <summary>
+    /// Returns a string that represents the current object.
+    /// </summary>
+    /// <returns>String.</returns>
+    public override string ToString()
+    {
+        return this.Type switch
+        {
+            Constants.FacetTypes.Link => $"Link: {this.Uri}",
+            Constants.FacetTypes.Mention => $"Mention: {this.Did}",
+            Constants.FacetTypes.Tag => $"Tag: {this.Tag}",
+            _ => "Unknown",
+        };
+    }
 }
