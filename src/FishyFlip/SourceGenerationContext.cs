@@ -215,6 +215,7 @@ namespace FishyFlip;
 [JsonSerializable(typeof(ActorRecord))]
 [JsonSerializable(typeof(ActorIdentity))]
 [JsonSerializable(typeof(PostViewer))]
+[JsonSerializable(typeof(PinnedPost))]
 [JsonSerializable(typeof(Microsoft.IdentityModel.Tokens.JsonWebKey), TypeInfoPropertyName = nameof(Microsoft.IdentityModel.Tokens.JsonWebKey) + "_A")]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
