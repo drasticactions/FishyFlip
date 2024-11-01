@@ -20,11 +20,11 @@ public class ATWebSocketEventConverter : JsonConverter<ATWebSocketEvent>
 
         switch (value)
         {
-            case "com":
+            case "commit":
                 return ATWebSocketEvent.Commit;
-            case "acc":
+            case "account":
                 return ATWebSocketEvent.Account;
-            case "id":
+            case "identity":
                 return ATWebSocketEvent.Identity;
             default:
                 return ATWebSocketEvent.Unknown;

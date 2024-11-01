@@ -20,11 +20,11 @@ public class ATWebSocketCommitTypeConverter : JsonConverter<ATWebSocketCommitTyp
 
         switch (value)
         {
-            case "u":
+            case "update":
                 return ATWebSocketCommitType.Update;
-            case "c":
+            case "create":
                 return ATWebSocketCommitType.Create;
-            case "d":
+            case "delete":
                 return ATWebSocketCommitType.Delete;
             default:
                 return ATWebSocketCommitType.Unknown;
