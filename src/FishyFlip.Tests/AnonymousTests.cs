@@ -118,4 +118,63 @@ public class AnonymousTests
         Assert.IsTrue(describe.Did is not null);
         Assert.AreEqual(describe.Did!.ToString(), repo.ToString());
     }
+
+    [TestMethod]
+    public void MarkdownPostTest()
+    {
+        var markdownPost = @"Markdown Test: [FishyFlip](https://drasticactions.github.io/FishyFlip), #FishyFlip, [@drasticactions.dev](did:plc:yhgc5rlqhoezrx6fbawajxlh)";
+        var post = MarkdownPost.Parse(markdownPost);
+        Assert.IsTrue(post.OriginalMarkdown == markdownPost);
+        Assert.IsTrue(post.Post == "Markdown Test: FishyFlip, #FishyFlip, @drasticactions.dev");
+        Assert.IsTrue(post.Facets.Length == 3);
+        Assert.IsTrue(post.Facets[0].Features![0]!.Type == Constants.FacetTypes.Link);
+        Assert.IsTrue(post.Facets[0].Features![0]!.Uri == "https://drasticactions.github.io/FishyFlip");
+        Assert.IsTrue(post.Facets[0].Index!.ByteStart == 15);
+        Assert.IsTrue(post.Facets[0].Index!.ByteEnd == 24);
+        Assert.IsTrue(post.Facets[1].Features![0]!.Type == Constants.FacetTypes.Mention);
+        Assert.IsTrue(post.Facets[1].Features![0]!.Did!.ToString() == "did:plc:yhgc5rlqhoezrx6fbawajxlh");
+        Assert.IsTrue(post.Facets[1].Index!.ByteStart == 38);
+        Assert.IsTrue(post.Facets[1].Index!.ByteEnd == 57);
+        Assert.IsTrue(post.Facets[2].Features![0]!.Type == Constants.FacetTypes.Tag);
+        Assert.IsTrue(post.Facets[2].Features![0]!.Tag == "FishyFlip");
+        Assert.IsTrue(post.Facets[2].Index!.ByteStart == 26);
+        Assert.IsTrue(post.Facets[2].Index!.ByteEnd == 36);
+    }
+
+    [TestMethod]
+    public async Task ValidateFacetHelpers()
+    {
+        var daDev = new FacetActorIdentifier(ATHandle.Create("drasticactions.dev")!, ATDid.Create("did:plc:okblbaji7rz243bluudjlgxt")!);
+        var daJp = new FacetActorIdentifier(ATHandle.Create("drasticactions.jp")!, ATDid.Create("did:plc:okblbaji7rz243bluudjl2bt")!);
+
+        var postText = "@drasticactions.dev This is a #test #test of #testing the #FishyFlip #API. https://github.com/drasticactions DAHome. @drasticactions.jp https://github.com/drasticactions/FishyFlip @drasticactions.dev Weee!";
+        var postHandles = ATHandle.FromPostText(postText);
+        Assert.IsTrue(postHandles.Length == 2);
+        Assert.IsTrue(postHandles[0].Handle == "drasticactions.dev");
+        Assert.IsTrue(postHandles[1].Handle == "drasticactions.jp");
+
+        var handleFacets = Facet.ForMentions(postText, new FacetActorIdentifier[] { daDev, daJp });
+
+        Assert.IsTrue(handleFacets.Length == 3);
+        Assert.IsTrue(handleFacets[0].Index!.ByteStart == 0);
+        Assert.IsTrue(handleFacets[0].Index!.ByteEnd == 19);
+        Assert.IsTrue(handleFacets[0].Features![0]!.Did! == daDev.Did);
+
+        Assert.IsTrue(handleFacets[1].Index!.ByteStart == 117);
+        Assert.IsTrue(handleFacets[1].Index!.ByteEnd == 135);
+        Assert.IsTrue(handleFacets[1].Features![0]!.Did! == daJp.Did);
+
+        Assert.IsTrue(handleFacets[2].Features![0]!.Did! == daDev.Did);
+        Assert.IsTrue(handleFacets[2].Index!.ByteStart == 180);
+        Assert.IsTrue(handleFacets[2].Index!.ByteEnd == 199);
+
+        var hashtagFacets = Facet.ForHashtags(postText);
+        Assert.IsTrue(hashtagFacets.Length == 5);
+        var uriFacets = Facet.ForUris(postText);
+        Assert.IsTrue(uriFacets.Length == 2);
+        var baseUriFacets = Facet.ForUris(postText, "DAHome", "https://github.com/drasticactions");
+        Assert.IsTrue(baseUriFacets.Length == 1);
+        var facets = handleFacets.Concat(hashtagFacets).Concat(uriFacets).Concat(baseUriFacets).ToArray();
+        Assert.IsTrue(facets.Length == 11);
+    }
 }

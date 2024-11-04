@@ -13,15 +13,15 @@ public class ATWebSocketCommit
     /// Initializes a new instance of the <see cref="ATWebSocketCommit"/> class.
     /// </summary>
     /// <param name="rev">The revision identifier.</param>
-    /// <param name="type">The type of the WebSocket commit.</param>
+    /// <param name="operation">The type of the WebSocket commit.</param>
     /// <param name="collection">The collection name.</param>
     /// <param name="rKey">The record key.</param>
     /// <param name="record">The record associated with the commit.</param>
     /// <param name="cid">The CID associated with the commit.</param>
-    public ATWebSocketCommit(string? rev, ATWebSocketCommitType type, string? collection, string? rKey, ATRecord? record, ATCid? cid)
+    public ATWebSocketCommit(string? rev, ATWebSocketCommitType operation, string? collection, string? rKey, ATRecord? record, ATCid? cid)
     {
         this.Rev = rev;
-        this.Type = type;
+        this.Operation = operation;
         this.Collection = collection;
         this.RKey = rKey;
         this.Record = record;
@@ -36,7 +36,13 @@ public class ATWebSocketCommit
     /// <summary>
     /// Gets the type of the WebSocket commit.
     /// </summary>
-    public ATWebSocketCommitType Type { get; }
+    public ATWebSocketCommitType Operation { get; }
+
+    /// <summary>
+    /// Gets the type of the WebSocket commit.
+    /// </summary>
+    [Obsolete("Use Operation instead.")]
+    public ATWebSocketCommitType Type => this.Operation;
 
     /// <summary>
     /// Gets the collection name.

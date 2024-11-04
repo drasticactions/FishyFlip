@@ -12,15 +12,15 @@ public class ATWebSocketRecord
     /// <summary>
     /// Initializes a new instance of the <see cref="ATWebSocketRecord"/> class.
     /// </summary>
-    /// <param name="type">Type.</param>
+    /// <param name="kind">Type.</param>
     /// <param name="did">Did.</param>
     /// <param name="commit">Commit.</param>
     /// <param name="identity">Identity.</param>
     /// <param name="account">Account.</param>
     [JsonConstructor]
-    public ATWebSocketRecord(ATWebSocketEvent type, ATDid? did, ATWebSocketCommit? commit, ActorIdentity? identity, ActorAccount? account)
+    public ATWebSocketRecord(ATWebSocketEvent kind, ATDid? did, ATWebSocketCommit? commit, ActorIdentity? identity, ActorAccount? account)
     {
-        this.Type = type;
+        this.Kind = kind;
         this.Did = did;
         this.Commit = commit;
         this.Identity = identity;
@@ -30,7 +30,13 @@ public class ATWebSocketRecord
     /// <summary>
     /// Gets the Type.
     /// </summary>
-    public ATWebSocketEvent Type { get; }
+    public ATWebSocketEvent Kind { get; }
+
+    /// <summary>
+    /// Gets the Type.
+    /// </summary>
+    [Obsolete("Use Kind instead.")]
+    public ATWebSocketEvent Type => this.Kind;
 
     /// <summary>
     /// Gets the Commit.

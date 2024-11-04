@@ -16,6 +16,7 @@ public record FeedProfile(ATDid Did,
     int FollowsCount,
     int FollowersCount,
     int PostsCount,
+    PinnedPost? PinnedPost,
     DateTime IndexedAt,
     Viewer Viewer,
     IReadOnlyList<Label> Labels);

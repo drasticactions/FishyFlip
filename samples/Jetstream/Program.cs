@@ -21,7 +21,7 @@ atWebProtocol.OnConnectionUpdated += (sender, args) =>
 
 atWebProtocol.OnRecordReceived += (sender, args) =>
 {
-    Console.WriteLine($"Record Received: {args.Record.Type}");
+    Console.WriteLine($"Record Received: {args.Record.Kind}");
 };
 
 await atWebProtocol.ConnectAsync();

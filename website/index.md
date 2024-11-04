@@ -10,7 +10,7 @@ This site is under construction.
 
 ## Third-Party Libraries
 
-- [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning)
+- [GitVersion](https://github.com/GitTools/GitVersion)
 
 FishyFlip
 
