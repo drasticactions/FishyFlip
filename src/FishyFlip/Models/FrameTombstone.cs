@@ -16,7 +16,7 @@ public class FrameTombstone
     public FrameTombstone(CBORObject obj)
     {
         this.Did = obj["did"] is not null ? ATDid.Create(obj["did"].AsString()) : null;
-        this.Seq = obj["seq"].AsInt32();
+        this.Seq = obj["seq"].ToObject<long>();
         this.Time = obj["time"] is not null ? obj["time"].ToDateTime() : null;
     }
 
@@ -28,7 +28,7 @@ public class FrameTombstone
     /// <summary>
     /// Gets the sequence number of the frame.
     /// </summary>
-    public int Seq { get; }
+    public long Seq { get; }
 
     /// <summary>
     /// Gets the timestamp of the tombstone.
