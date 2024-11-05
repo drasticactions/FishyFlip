@@ -16,7 +16,7 @@ public class FrameHandle
     public FrameHandle(CBORObject obj)
     {
         this.Did = obj["did"] is not null ? ATDid.Create(obj["did"].AsString()) : null;
-        this.Seq = obj["seq"].AsInt32();
+        this.Seq = obj["seq"].ToObject<long>();
         this.Handle = obj["handle"]?.AsString();
         this.Time = obj["time"] is not null ? obj["time"].ToDateTime() : null;
     }
@@ -29,7 +29,7 @@ public class FrameHandle
     /// <summary>
     /// Gets the sequence number of the frame handle.
     /// </summary>
-    public int Seq { get; }
+    public long Seq { get; }
 
     /// <summary>
     /// Gets the handle string of the frame handle.

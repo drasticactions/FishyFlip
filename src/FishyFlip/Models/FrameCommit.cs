@@ -17,7 +17,7 @@ public class FrameCommit
     public FrameCommit(CBORObject obj, ILogger? logger = default)
     {
         this.Ops = obj["ops"]?.Values.Select(n => new Ops(n)).ToArray();
-        this.Seq = obj["seq"].AsInt32();
+        this.Seq = obj["seq"].ToObject<long>();
         this.Blocks = obj["blocks"]?.GetByteString();
 #pragma warning disable CS0618
         this.Prev = obj["prev"]?.ToATCid(logger);
@@ -40,7 +40,7 @@ public class FrameCommit
     /// <summary>
     /// Gets the sequence.
     /// </summary>
-    public int Seq { get; }
+    public long Seq { get; }
 
     /// <summary>
     /// Gets the handle.
