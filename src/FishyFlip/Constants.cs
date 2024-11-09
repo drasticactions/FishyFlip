@@ -390,6 +390,14 @@ public static class Constants
         public const string Delete = "com.atproto.repo.applyWrites#delete";
     }
 
+    internal class AuthorFeedFilterTypes
+    {
+        public const string PostsWithReplies = "posts_with_replies";
+        public const string PostsNoReplies = "posts_no_replies";
+        public const string PostsWithMedia = "posts_with_media";
+        public const string PostsAndAuthorThreads = "posts_and_author_threads";
+    }
+
     internal class HeaderNames
     {
         public const string UserAgent = "user-agent";

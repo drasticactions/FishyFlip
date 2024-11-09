@@ -34,4 +34,26 @@ public static class EnumExtensions
                 return "Unknown";
         }
     }
+
+    /// <summary>
+    /// Returns the filter type string for the enum.
+    /// </summary>
+    /// <param name="me"><see cref="AuthorFeedFilterType"/>.</param>
+    /// <returns>String.</returns>
+    public static string ToActorFeedFilterString(this AuthorFeedFilterType me)
+    {
+        switch (me)
+        {
+            case AuthorFeedFilterType.PostsWithReplies:
+                return Constants.AuthorFeedFilterTypes.PostsWithReplies;
+            case AuthorFeedFilterType.PostsNoReplies:
+                return Constants.AuthorFeedFilterTypes.PostsNoReplies;
+            case AuthorFeedFilterType.PostsWithMedia:
+                return Constants.AuthorFeedFilterTypes.PostsWithMedia;
+            case AuthorFeedFilterType.PostsAndAuthorThreads:
+                return Constants.AuthorFeedFilterTypes.PostsAndAuthorThreads;
+            default:
+                throw new InvalidOperationException("Unknwon ActorFeedFilter type.");
+        }
+    }
 }
