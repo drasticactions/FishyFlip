@@ -136,7 +136,7 @@ internal class PasswordSessionManager : ISessionManager
 
             this.SetSession(session);
         },
-            e => this.logger?.LogError(e.ToString(), e));
+            e => this.logger?.LogError(e.ToString()));
 
         return resultSession;
     }
@@ -215,7 +215,7 @@ internal class PasswordSessionManager : ISessionManager
                     this.SetSession,
                     e =>
                     {
-                        this.logger?.LogError(e.ToString(), e);
+                        this.logger?.LogError(e.ToString());
                     });
             }
             else
