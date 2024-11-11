@@ -143,13 +143,15 @@ public sealed class BlueskyFeed
     /// Asynchronously retrieves the feed of an author.
     /// </summary>
     /// <param name="handle">The handle of the author whose feed is to be retrieved.</param>
+    /// <param name="filter">Optional. Combinations of post/repost types to include in the response.</param>
+    /// <param name="includePins">Optional. Specifies if pinned posts should be included in the response.</param>
     /// <param name="limit">Optional. The maximum number of posts to retrieve. Default is 50.</param>
     /// <param name="cursor">Optional. A cursor that can be used to paginate through posts.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the feed of the author, or null if no feed was found.</returns>
-    public async Task<Result<Timeline>> GetAuthorFeedAsync(ATIdentifier handle, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+    public async Task<Result<Timeline>> GetAuthorFeedAsync(ATIdentifier handle, AuthorFeedFilterType filter = AuthorFeedFilterType.PostsWithReplies, bool includePins = true, int limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
     {
-        string url = $"{Constants.Urls.Bluesky.Feed.GetAuthorFeed}?actor={handle.ToString()}&limit={limit}";
+        string url = $"{Constants.Urls.Bluesky.Feed.GetAuthorFeed}?actor={handle.ToString()}&limit={limit}&filter={filter.ToActorFeedFilterString()}&includePins={(includePins ? "true" : "false")}";
         if (cursor is not null)
         {
             url += $"&cursor={cursor}";
