@@ -19,16 +19,20 @@ app.Run(args);
 public class AppCommands
 #pragma warning restore SA1649 // File name should match first type name
 {
+    private string baseNamespace { get; set; } = "FishyFlip.Lexicon";
+
     /// <summary>
     /// Generate lexicon source code.
     /// </summary>
     /// <param name="lexiconPath">Path to lexicon files.</param>
     /// <param name="outputDir">-o, Output directory.</param>
+    /// <param name="baseNamespace">-n, Base Namespace.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("generate")]
-    public async Task GenerateAsync([Argument] string lexiconPath, string? outputDir = default, CancellationToken cancellationToken = default)
+    public async Task GenerateAsync([Argument] string lexiconPath, string? outputDir = default, string? baseNamespace = default, CancellationToken cancellationToken = default)
     {
+        this.baseNamespace = baseNamespace ??= this.baseNamespace;
         outputDir ??= AppDomain.CurrentDomain.BaseDirectory;
         Console.WriteLine($"Lexicon Path: {lexiconPath}");
         Console.WriteLine($"Output Directory: {outputDir}");
@@ -67,7 +71,7 @@ public class AppCommands
 
         // Take everything except last.
         var path = schemaDocument.Id.Split('.').Take(schemaDocument.Id.Split('.').Length - 1).Select(n => n.ToPascalCase()).ToArray();
-        var ns = $"FishyFlip.Lexicon.{string.Join(".", path)}";
+        var ns = $"{this.baseNamespace}.{string.Join(".", path)}";
         var outputPath = Path.Combine(baseOutputDir, Path.Combine(path));
         Directory.CreateDirectory(outputPath);
 
@@ -262,13 +266,15 @@ public class AppCommands
             "blob" => "Blob",
             "integer" => "int",
             "boolean" => "bool",
+            "bytes" => "byte[]",
+            "cid-link" => "Ipfs.Cid",
             "array" when property.Items != null => this.GetListPropertyName(className, name, property),
             // "object" when property.Properties != null => "Dictionary<string, object>", // Could be expanded to generate nested types
             "unknown" => "object",
             "union" when property.Refs?.Length > 0 => "object", // Could be expanded to generate union types
             "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetClassNameFromRef(property.Ref),
             "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => "RepoStrongRef",
-            _ => "object",
+            _ => throw new InvalidOperationException($"Unknown property type: {property.Type}"),
         };
 
         return $"{baseType}?";
@@ -282,27 +288,38 @@ public class AppCommands
         }
 
         var item = $"List<{this.GetPropertyType(className, name, property.Items)}>";
+        Console.WriteLine($"List Property: {item}");
         return item;
     }
 
     private string GetClassNameFromRef(string refString)
     {
+        if (!refString.Contains("#"))
+        {
+            var cn = string.Join(string.Empty, refString.Split('.').TakeLast(2).Select(n => n.ToPascalCase())).ToPascalCase();
+            var ns2 = string.Join(".", refString.Split('.').Take(refString.Split('.').Length - 1).Select(n => n.ToPascalCase()));
+            return $"{this.baseNamespace}.{ns2}.{cn}";
+        }
+
+        Console.WriteLine($"{refString} Has #, {refString.Contains("#")}");
         var className = refString.Split('#').Last().ToPascalCase();
         var namespaceName = refString.Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray();
-
+        Console.WriteLine($"Ref Property className: {className}");
+        Console.WriteLine($"Ref Property namespaceName: {namespaceName}");
         if (namespaceName.Contains("Defs"))
         {
-            namespaceName = namespaceName.Take(namespaceName.Length - 1).ToArray();
+            namespaceName = namespaceName.Take(namespaceName.Length - 1).Select(n => n.ToPascalCase()).ToArray();
         }
 
         var ns = string.Join(".", namespaceName);
-
         if (string.IsNullOrEmpty(ns))
         {
             return className;
         }
 
-        return $"FishyFlip.Lexicon.{ns}.{className}";
+        var item = $"{this.baseNamespace}.{ns}.{className}";
+        Console.WriteLine($"Ref Property: {item}");
+        return item;
     }
 
     private string GenerateEnumSource(string className, PropertyDefinition definition, string ns)
@@ -412,7 +429,7 @@ public class AppCommands
         sb.AppendLine();
     }
 
-    private void GenerateNamespace(StringBuilder sb, string ns = "FishyFlip.Lexicon")
+    private void GenerateNamespace(StringBuilder sb, string ns)
     {
         sb.AppendLine($"namespace {ns}");
     }
