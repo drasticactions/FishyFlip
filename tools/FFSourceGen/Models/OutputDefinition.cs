@@ -13,6 +13,5 @@ public class OutputDefinition
     public string Encoding { get; set; } = string.Empty;
 
     [JsonPropertyName("schema")]
-    [JsonRequired]
-    public SchemaDefinition Schema { get; set; } = new();
+    public SchemaDefinition? Schema { get; set; } = new();
 }

@@ -33,8 +33,7 @@ public class AppCommands
         Console.WriteLine($"Lexicon Path: {lexiconPath}");
         Console.WriteLine($"Output Directory: {outputDir}");
         var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories);
-        var defsJsonFiles = files.Where(f => Path.GetFileName(f).Equals("defs.json"));
-        Console.WriteLine($"Found {defsJsonFiles.Count()} definition files.");
+        Console.WriteLine($"Found {files.Count()} files.");
 
         var modelPath = Path.Combine(outputDir, "Models");
         if (Directory.Exists(modelPath))
@@ -42,14 +41,11 @@ public class AppCommands
             Directory.Delete(modelPath, true);
         }
 
-        foreach (var defJsonPath in defsJsonFiles)
+        Directory.CreateDirectory(modelPath);
+        foreach (var jsonFile in files)
         {
-            Directory.CreateDirectory(modelPath);
-            await this.GenerateModelFile(defJsonPath, modelPath);
+            await this.GenerateModelFile(jsonFile, modelPath);
         }
-
-        var endpointFiles = files.Except(defsJsonFiles);
-        Console.WriteLine($"Found {endpointFiles.Count()} endpoint files.");
     }
 
     private async Task GenerateModelFile(string defJsonPath, string baseOutputDir)
