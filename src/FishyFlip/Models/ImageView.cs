@@ -7,4 +7,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents an image view with its thumbnail, fullsize, and alt text.
 /// </summary>
-public record ImageView(string Thumb, string Fullsize, string Alt);
+public record ImageView(string Thumb, string Fullsize, string Alt, AspectRatio? AspectRatio);
