@@ -57,6 +57,10 @@ public class AppCommands
 
             await this.GenerateModelFile(jsonFile, modelPath, jsonType);
         }
+
+        var atRecordSource = this.GenerateATRecordSource(this.baseNamespace);
+        var atRecordPath = Path.Combine(modelPath, "ATRecord.g.cs");
+        await File.WriteAllTextAsync(atRecordPath, atRecordSource);
     }
 
     private async Task GenerateModelFile(string defJsonPath, string baseOutputDir, JsonType jsonType)
@@ -90,21 +94,17 @@ public class AppCommands
                 {
                     switch (def.Value.Type)
                     {
-                        case "query":
-                            break;
                         case "object":
-                            if (def.Key == "main")
+                            var cn = string.Join(string.Empty, schemaDocument.Id.Split('.').TakeLast(2).Select(n => n.ToPascalCase())).ToPascalCase();
+                            if (def.Key != "main")
                             {
-                                var cn = string.Join(string.Empty, schemaDocument.Id.Split('.').TakeLast(2).Select(n => n.ToPascalCase())).ToPascalCase();
-                                Console.WriteLine($"Generating Class: {schemaDocument.Id}, {cn}");
-                                var classSource = this.GenerateClassSource(cn, def.Value, ns);
-                                var classPath = Path.Combine(outputPath, $"{cn}.g.cs");
-                                await File.WriteAllTextAsync(classPath, classSource);
+                                cn = $"{cn}{def.Key.ToPascalCase()}";
                             }
-                            else
-                            {
-                                await this.GenerateClass(schemaDocument, def, outputPath, ns);
-                            }
+
+                            Console.WriteLine($"Generating Class: {schemaDocument.Id}, {cn}");
+                            var classSource = this.GenerateClassSource(cn, def.Value, ns);
+                            var classPath = Path.Combine(outputPath, $"{cn}.g.cs");
+                            await File.WriteAllTextAsync(classPath, classSource);
 
                             break;
                         default:
@@ -161,6 +161,29 @@ public class AppCommands
                 }
             }
         }
+    }
+
+    private string GenerateATRecordSource(string ns)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, ns);
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// The ATRecord class.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public abstract class ATRecord");
+        sb.AppendLine("    {");
+        sb.AppendLine($"        /// <summary>");
+        sb.AppendLine($"        /// The type of the record.");
+        sb.AppendLine($"        /// </summary>");
+        sb.AppendLine($"        [JsonPropertyName(\"$type\")]");
+        sb.AppendLine("        [JsonRequired]");
+        sb.AppendLine($"        public string? Type {{ get; set; }}");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        return sb.ToString();
     }
 
     private string GenerateClassSource(string className, SchemaDefinition definition, string ns)
