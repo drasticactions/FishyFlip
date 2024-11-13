@@ -7,7 +7,7 @@
             "request": "launch",
             "preLaunchTask": "build_ffsourcegen",
             "program": "${workspaceFolder}/tools/FFSourceGen/bin/Debug/net9.0/FFSourceGen.dll",
-            "args": [ "generate", "/Users/drasticactions/Developer/Library/atproto/lexicons" ],
+            "args": [ "generate", "${workspaceFolder}/../atproto/lexicons", "-o", "${workspaceFolder}/src/FishyFlip/" ],
             "cwd": "${workspaceFolder}/tools/FFSourceGen",
             "console": "internalConsole",
             "stopAtEntry": false

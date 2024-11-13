@@ -48,6 +48,21 @@ internal static class StringExtensions
         return result.ToString();
     }
 
+    public static string ToPreventClassPropertyNameClash(this string input, string className)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return input;
+        }
+
+        if (input == className)
+        {
+            return input + "Value";
+        }
+
+        return input;
+    }
+
     /// <summary>
     /// Convert a string to a class safe name.
     /// </summary>

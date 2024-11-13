@@ -35,7 +35,7 @@ public class AppCommands
         var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories);
         Console.WriteLine($"Found {files.Count()} files.");
 
-        var modelPath = Path.Combine(outputDir, "Models");
+        var modelPath = Path.Combine(outputDir, "Lexicon");
         if (Directory.Exists(modelPath))
         {
             Directory.Delete(modelPath, true);
@@ -44,11 +44,18 @@ public class AppCommands
         Directory.CreateDirectory(modelPath);
         foreach (var jsonFile in files)
         {
-            await this.GenerateModelFile(jsonFile, modelPath);
+            var filename = Path.GetFileNameWithoutExtension(jsonFile);
+            var jsonType = filename switch
+            {
+                "defs" => JsonType.Defs,
+                _ => JsonType.Other,
+            };
+
+            await this.GenerateModelFile(jsonFile, modelPath, jsonType);
         }
     }
 
-    private async Task GenerateModelFile(string defJsonPath, string baseOutputDir)
+    private async Task GenerateModelFile(string defJsonPath, string baseOutputDir, JsonType jsonType)
     {
         var defJsonText = await File.ReadAllTextAsync(defJsonPath);
         var schemaDocument = JsonSerializer.Deserialize<SchemaDocument>(defJsonText, SourceGenerationContext.Default.SchemaDocument);
@@ -58,34 +65,105 @@ public class AppCommands
             return;
         }
 
-        Console.WriteLine($"Definition: {schemaDocument.Id}");
-        foreach (var def in schemaDocument.Defs)
+        // Take everything except last.
+        var path = schemaDocument.Id.Split('.').Take(schemaDocument.Id.Split('.').Length - 1).Select(n => n.ToPascalCase()).ToArray();
+        var ns = $"FishyFlip.Lexicon.{string.Join(".", path)}";
+        var outputPath = Path.Combine(baseOutputDir, Path.Combine(path));
+        Directory.CreateDirectory(outputPath);
+
+        switch (jsonType)
         {
-            var className = def.Key.ToPascalCase();
-            switch (def.Value.Type)
+            case JsonType.Defs:
+                Console.WriteLine($"Definition: {schemaDocument.Id}");
+                foreach (KeyValuePair<string, SchemaDefinition> def in schemaDocument.Defs)
+                {
+                    await this.GenerateClass(schemaDocument, def, outputPath, ns);
+                }
+
+                break;
+            case JsonType.Other:
+                foreach (var def in schemaDocument.Defs)
+                {
+                    switch (def.Value.Type)
+                    {
+                        case "query":
+                            break;
+                        case "object":
+                            if (def.Key == "main")
+                            {
+                                var cn = string.Join(string.Empty, schemaDocument.Id.Split('.').TakeLast(2).Select(n => n.ToPascalCase())).ToPascalCase();
+                                Console.WriteLine($"Generating Class: {schemaDocument.Id}, {cn}");
+                                var classSource = this.GenerateClassSource(cn, def.Value, ns);
+                                var classPath = Path.Combine(outputPath, $"{cn}.g.cs");
+                                await File.WriteAllTextAsync(classPath, classSource);
+                            }
+                            else
+                            {
+                                await this.GenerateClass(schemaDocument, def, outputPath, ns);
+                            }
+
+                            break;
+                        default:
+                            Console.WriteLine($"GenerateClass Unknown ({def.Value.Type}) {schemaDocument.Id} {def.Key}.");
+                            break;
+                    }
+                }
+
+                break;
+        }
+    }
+
+    private async Task GenerateClass(SchemaDocument schemaDocument, KeyValuePair<string, SchemaDefinition> def, string outputPath, string ns)
+    {
+        var className = def.Key.ToPascalCase();
+        switch (def.Value.Type)
+        {
+            case "string":
+                Console.WriteLine($"Generating Enum {className}.");
+                List<KeyValuePair<string, SchemaDefinition>> tokens = schemaDocument.Defs.Where(d => d.Value.Type == "token").ToList();
+                var enumSource = this.GenerateEnumSource(className, def.Value, tokens, ns);
+                var enumPath = Path.Combine(outputPath, $"{className}.g.cs");
+                await File.WriteAllTextAsync(enumPath, enumSource);
+                break;
+            case "object":
+                Console.WriteLine($"Generating Class {className}.");
+                var classSource = this.GenerateClassSource(className, def.Value, ns);
+                var classPath = Path.Combine(outputPath, $"{className}.g.cs");
+                await File.WriteAllTextAsync(classPath, classSource);
+                break;
+            case "token":
+                // This is used in enums.
+                break;
+            default:
+                Console.WriteLine($"GenerateClass Unknown ({def.Value.Type}) {className}.");
+                break;
+        }
+
+        if (def.Value.Properties != null)
+        {
+            foreach (var prop in def.Value.Properties)
             {
-                case "string":
-                    Console.WriteLine($"Generating Enum {className}.");
-                    List<KeyValuePair<string, SchemaDefinition>> tokens = schemaDocument.Defs.Where(d => d.Value.Type == "token").ToList();
-                    var enumSource = this.GenerateEnumSource(className, def.Value, tokens);
-                    var enumPath = Path.Combine(baseOutputDir, $"{className}.g.cs");
-                    await File.WriteAllTextAsync(enumPath, enumSource);
-                    break;
-                case "object":
-                    Console.WriteLine($"Generating Class {className}.");
-                    var classSource = this.GenerateClassSource(className, def.Value);
-                    var classPath = Path.Combine(baseOutputDir, $"{className}.{schemaDocument.Id}.g.cs");
-                    await File.WriteAllTextAsync(classPath, classSource);
-                    break;
+                switch (prop.Value.Type)
+                {
+                    case "string":
+                        if (prop.Value.KnownValues is not null)
+                        {
+                            var enumSource = this.GenerateEnumSource(prop.Key.ToPascalCase(), prop.Value, ns);
+                            var enumPath = Path.Combine(outputPath, $"{prop.Key.ToPascalCase()}.g.cs");
+                            await File.WriteAllTextAsync(enumPath, enumSource);
+                        }
+
+                        break;
+                }
             }
         }
     }
 
-    private string GenerateClassSource(string className, SchemaDefinition definition)
+    private string GenerateClassSource(string className, SchemaDefinition definition, string ns)
     {
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb);
+        this.GenerateNamespace(sb, ns);
         sb.AppendLine("{");
 
         this.GenerateClassDocumentation(sb, definition);
@@ -125,7 +203,6 @@ public class AppCommands
         if (definition.Required?.Contains(propertyName) == true)
         {
             sb.AppendLine("        [JsonRequired]");
-            sb.AppendLine("        [Required]");
         }
 
         // Add validation attributes
@@ -133,7 +210,7 @@ public class AppCommands
 
         // Generate the property
         var propertyType = this.GetPropertyType(className, propertyName.ToPascalCase(), property);
-        var pascalPropertyName = propertyName.ToPascalCase();
+        var pascalPropertyName = propertyName.ToPascalCase().ToPreventClassPropertyNameClash(className);
 
         // Handle default values
         if (property.Default != null)
@@ -141,7 +218,7 @@ public class AppCommands
             var defaultValue = this.GetDefaultValueString(property);
             if (property.KnownValues?.Length > 0)
             {
-                defaultValue = $"{className}{propertyName.ToPascalCase()}.{defaultValue.ToPascalCase()}";
+                defaultValue = $"{propertyName.ToPascalCase()}.{defaultValue.ToPascalCase()}";
             }
 
             sb.AppendLine($"        public {propertyType} {pascalPropertyName} {{ get; set; }} = {defaultValue};");
@@ -171,7 +248,7 @@ public class AppCommands
         // Handle known values as enums
         if (property.KnownValues?.Length > 0)
         {
-            return $"{className}{name}".ToPascalCase();
+            return $"{name}".ToPascalCase();
         }
 
         var baseType = property.Type?.ToLower() switch
@@ -182,21 +259,53 @@ public class AppCommands
             "string" when property.Format == "at-uri" => "FishyFlip.Models.ATUri",
             "string" when property.Format == "at-identifier" => "FishyFlip.Models.ATIdentifier",
             "string" => "string",
+            "blob" => "Blob",
             "integer" => "int",
             "boolean" => "bool",
-            "array" when property.Items != null => $"List<{this.GetPropertyType(className, name, property.Items)}>",
+            "array" when property.Items != null => this.GetListPropertyName(className, name, property),
             // "object" when property.Properties != null => "Dictionary<string, object>", // Could be expanded to generate nested types
             "unknown" => "object",
             "union" when property.Refs?.Length > 0 => "object", // Could be expanded to generate union types
-            "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => property.Ref.Split('#').Last().ToPascalCase(),
-            "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => "FishyFlip.Models.StrongRef",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetClassNameFromRef(property.Ref),
+            "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => "RepoStrongRef",
             _ => "object",
         };
 
         return $"{baseType}?";
     }
 
-    private string GenerateEnumSource(string className, SchemaDefinition definition, List<KeyValuePair<string, SchemaDefinition>> tokens)
+    private string GetListPropertyName(string className, string name, PropertyDefinition property)
+    {
+        if (property.Items is null)
+        {
+            throw new InvalidOperationException("Property does not have items.");
+        }
+
+        var item = $"List<{this.GetPropertyType(className, name, property.Items)}>";
+        return item;
+    }
+
+    private string GetClassNameFromRef(string refString)
+    {
+        var className = refString.Split('#').Last().ToPascalCase();
+        var namespaceName = refString.Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray();
+
+        if (namespaceName.Contains("Defs"))
+        {
+            namespaceName = namespaceName.Take(namespaceName.Length - 1).ToArray();
+        }
+
+        var ns = string.Join(".", namespaceName);
+
+        if (string.IsNullOrEmpty(ns))
+        {
+            return className;
+        }
+
+        return $"FishyFlip.Lexicon.{ns}.{className}";
+    }
+
+    private string GenerateEnumSource(string className, PropertyDefinition definition, string ns)
     {
         if (definition.KnownValues == null)
         {
@@ -205,7 +314,47 @@ public class AppCommands
 
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb);
+        this.GenerateNamespace(sb, ns);
+        sb.AppendLine("{");
+
+        this.GenerateClassDocumentation(sb, definition);
+
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Known values for {className}");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    [JsonConverter(typeof(JsonStringEnumConverter))]");
+        sb.AppendLine($"    public enum {className}");
+        sb.AppendLine("    {");
+        sb.AppendLine();
+        foreach (var value in definition.KnownValues)
+        {
+            var rawValue = value.Split('#').Last();
+            var enumValue = rawValue.ToPascalCase();
+            sb.AppendLine($"       /// <summary>");
+            sb.AppendLine($"       /// Known value for {className}.");
+            sb.AppendLine($"       /// </summary>");
+
+            sb.AppendLine($"       [JsonPropertyName(\"{value}\")]");
+            sb.AppendLine($"       {enumValue.ToClassSafe()},");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        return sb.ToString();
+    }
+
+    private string GenerateEnumSource(string className, SchemaDefinition definition, List<KeyValuePair<string, SchemaDefinition>> tokens, string ns)
+    {
+        if (definition.KnownValues == null)
+        {
+            throw new InvalidOperationException("Definition does not have known values.");
+        }
+
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, ns);
         sb.AppendLine("{");
 
         this.GenerateClassDocumentation(sb, definition);
@@ -256,7 +405,6 @@ public class AppCommands
         // Add using statements
         sb.AppendLine("using System;");
         sb.AppendLine("using System.Collections.Generic;");
-        sb.AppendLine("using System.ComponentModel.DataAnnotations;");
         sb.AppendLine("using System.Text.Json.Serialization;");
 
         // Add #nullable
@@ -278,5 +426,22 @@ public class AppCommands
             sb.AppendLine($"    /// {definition.Description}");
             sb.AppendLine($"    /// </summary>");
         }
+    }
+
+    private void GenerateClassDocumentation(StringBuilder sb, PropertyDefinition definition)
+    {
+        // Add class documentation if available
+        if (!string.IsNullOrEmpty(definition.Description))
+        {
+            sb.AppendLine($"    /// <summary>");
+            sb.AppendLine($"    /// {definition.Description}");
+            sb.AppendLine($"    /// </summary>");
+        }
+    }
+
+    private enum JsonType
+    {
+        Defs,
+        Other
     }
 }
