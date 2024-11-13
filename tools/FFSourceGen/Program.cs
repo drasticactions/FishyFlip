@@ -419,11 +419,6 @@ public class AppCommands
         sb.AppendLine("// Do not modify this file.");
         sb.AppendLine();
 
-        // Add using statements
-        sb.AppendLine("using System;");
-        sb.AppendLine("using System.Collections.Generic;");
-        sb.AppendLine("using System.Text.Json.Serialization;");
-
         // Add #nullable
         sb.AppendLine("#nullable enable");
         sb.AppendLine();
