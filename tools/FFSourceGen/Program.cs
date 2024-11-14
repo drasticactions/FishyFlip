@@ -20,6 +20,7 @@ public class AppCommands
 #pragma warning restore SA1649 // File name should match first type name
 {
     private string baseNamespace { get; set; } = "FishyFlip.Lexicon";
+    private string basePath { get; set; }
 
     /// <summary>
     /// Generate lexicon source code.
@@ -39,13 +40,14 @@ public class AppCommands
         var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories);
         Console.WriteLine($"Found {files.Count()} files.");
 
-        var modelPath = Path.Combine(outputDir, "Lexicon");
-        if (Directory.Exists(modelPath))
+        this.basePath = Path.Combine(outputDir, "Lexicon");
+        if (Directory.Exists(this.basePath))
         {
-            Directory.Delete(modelPath, true);
+            Directory.Delete(this.basePath, true);
         }
 
-        Directory.CreateDirectory(modelPath);
+        Directory.CreateDirectory(this.basePath);
+        var classList = new List<ClassGeneration>();
         foreach (var jsonFile in files)
         {
             var filename = Path.GetFileNameWithoutExtension(jsonFile);
@@ -55,12 +57,157 @@ public class AppCommands
                 _ => JsonType.Other,
             };
 
-            await this.GenerateModelFile(jsonFile, modelPath, jsonType);
+            classList.AddRange(await this.ProcessFile(jsonFile, jsonType));
         }
 
-        var atRecordSource = this.GenerateATRecordSource(this.baseNamespace);
-        var atRecordPath = Path.Combine(modelPath, "ATRecord.g.cs");
-        await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+        var constantsFile = this.GenerateConstants(classList, this.baseNamespace);
+        var constantsPath = Path.Combine(this.basePath, "Constants.g.cs");
+        await File.WriteAllTextAsync(constantsPath, constantsFile);
+
+        // var atRecordSource = this.GenerateATRecordSource(this.baseNamespace);
+        // var atRecordPath = Path.Combine(modelPath, "ATRecord.g.cs");
+        // await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+    }
+
+    private async Task<List<ClassGeneration>> ProcessFile(string defJsonPath, JsonType jsonType)
+    {
+        var defJsonText = await File.ReadAllTextAsync(defJsonPath);
+        var schemaDocument = JsonSerializer.Deserialize<SchemaDocument>(defJsonText, SourceGenerationContext.Default.SchemaDocument);
+        if (schemaDocument == null)
+        {
+            throw new Exception($"Failed to deserialize {defJsonPath}.");
+        }
+
+        var path = Path.Combine(schemaDocument.Id.Split('.').Take(schemaDocument.Id.Split('.').Length - 1).Select(n => n.ToPascalCase()).ToArray());
+        var classList = new List<ClassGeneration>();
+        foreach (var definition in schemaDocument.Defs)
+        {
+            var classGeneration = new ClassGeneration(schemaDocument, definition.Key, definition.Value, path);
+            Console.WriteLine(classGeneration.ToString());
+            foreach (var enumProp in classGeneration.EnumProperties)
+            {
+                Console.WriteLine(enumProp.ToString());
+            }
+
+            classList.Add(classGeneration);
+        }
+
+        return classList;
+    }
+
+    private class EnumProperties
+    {
+        public EnumProperties(PropertyDefinition propertyDefinition, string key, SchemaDocument document, SchemaDefinition def, string path, string ns, string cns)
+        {
+            this.PropertyDefinition = propertyDefinition;
+            this.Document = document;
+            this.Definition = def;
+            this.Path = path;
+            this.Key = key;
+            this.Namespace = ns;
+            this.CSharpNamespace = cns;
+            this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
+            this.RawValues = this.PropertyDefinition.KnownValues ?? Array.Empty<string>();
+            this.Values = this.PropertyDefinition.KnownValues?.Select(v => v.Split('#').Last().ToClassSafe().ToPascalCase()).ToArray() ?? Array.Empty<string>();
+        }
+
+        public string ClassName { get; }
+
+        public PropertyDefinition PropertyDefinition { get; }
+
+        public SchemaDocument Document { get; }
+
+        public SchemaDefinition Definition { get; }
+
+        public string Key { get; }
+
+        public string Path { get; }
+
+        public string[] RawValues { get; }
+
+        public string[] Values { get; }
+
+        public string Namespace { get; }
+
+        public string CSharpNamespace { get; }
+
+        public override string ToString()
+        {
+            return $"Enum: {this.Document.Id}, {this.ClassName} - {string.Join(", ", this.RawValues)}";
+        }
+    }
+
+    private class ClassGeneration
+    {
+        public ClassGeneration(SchemaDocument document, string key, SchemaDefinition def, string path)
+        {
+            this.Path = path;
+            this.Document = document;
+            this.Definition = def;
+            this.Key = key;
+            this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
+            this.Namespace = string.Join(".", document.Id.Split('.').Take(document.Id.Split('.').Length - 1).ToArray());
+            this.CSharpNamespace = string.Join(".", document.Id.Split('.').Take(document.Id.Split('.').Length - 1).Select(n => n.ToPascalCase()).ToArray());
+            this.ProcessProperties();
+        }
+
+        public string ClassName { get; }
+
+        public SchemaDocument Document { get; }
+
+        public SchemaDefinition Definition { get; }
+
+        public string Namespace { get; }
+
+        public string CSharpNamespace { get; }
+
+        public string Path { get; }
+
+        public string Key { get; }
+
+        public bool IsEndpoint => this.Definition.Type == "procedure";
+
+        public List<EnumProperties> EnumProperties { get; } = new();
+
+        public string Id
+        {
+            get
+            {
+                if (this.Key == "main")
+                {
+                    return this.Document.Id;
+                }
+                else
+                {
+                    return $"{this.Document.Id}#{this.Key}";
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"Class: {this.Id}, {this.ClassName}";
+        }
+
+        private void ProcessProperties()
+        {
+            if (this.Definition.Properties != null)
+            {
+                foreach (var prop in this.Definition.Properties)
+                {
+                    switch (prop.Value.Type)
+                    {
+                        case "string":
+                            if (prop.Value.KnownValues is not null)
+                            {
+                                this.EnumProperties.Add(new EnumProperties(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace));
+                            }
+
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     private async Task GenerateModelFile(string defJsonPath, string baseOutputDir, JsonType jsonType)
@@ -184,6 +331,103 @@ public class AppCommands
         sb.AppendLine("}");
         sb.AppendLine();
         return sb.ToString();
+    }
+
+    private string GenerateConstants(List<ClassGeneration> classes, string ns)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, ns);
+        sb.AppendLine();
+        sb.AppendLine("#pragma warning disable SA1600 // Elements should be documented");
+        var endpoints = classes.Where(n => n.IsEndpoint).GroupBy(n => n.Namespace);
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Constant values for ATProtocol and Bluesky.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public static class Constants");
+        sb.AppendLine("    {");
+        sb.AppendLine($"        public static class Urls");
+        sb.AppendLine("        {");
+        foreach (var endpointGroup in endpoints)
+        {
+            var name = $"ATProto{endpointGroup.Key.Split(".").Last().ToPascalCase()}";
+            Console.WriteLine($"Endpoint Group: {endpointGroup.Key}");
+            sb.AppendLine($"            /// <summary>");
+            sb.AppendLine($"            /// Endpoints for {endpointGroup.Key}.");
+            sb.AppendLine($"            /// </summary>");
+            sb.AppendLine($"            public static class {name}");
+            sb.AppendLine("            {");
+            foreach (var endpoint in endpointGroup)
+            {
+                var url = $"/xrpc/{endpoint.Id}";
+                sb.AppendLine($"                /// <summary>");
+                sb.AppendLine($"                /// {endpoint.Definition.Description}");
+                sb.AppendLine($"                /// </summary>");
+                sb.AppendLine($"                public const string {endpoint.ClassName} = \"{url}\";");
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("            }");
+            sb.AppendLine();
+        }
+        sb.AppendLine();
+        sb.AppendLine("    }");
+
+        sb.AppendLine($"            public static class ATProtoTypes");
+        sb.AppendLine("            {");
+        // foreach (var classGroup in classes.GroupBy(n => n.Namespace))
+        // {
+        //     Console.WriteLine($"Class Group: {classGroup.Key}");
+        //     var classLevels = classGroup.Key.Split(".");
+        //     var classDepth = classLevels.Length;
+        //     for (var i = 0; i < classDepth; i++)
+        //     {
+        //         var name = classLevels[i].ToPascalCase();
+        //         var spaces = string.Join("", Enumerable.Repeat("    ", i));
+        //         sb.AppendLine($"{spaces}public static class {name}");
+        //         sb.AppendLine($"{spaces}{{");
+        //     }
+        //     for (var i = 0; i < classDepth; i++)
+        //     {
+        //         var spaces = string.Join("", Enumerable.Repeat("    ", classDepth - i - 1));
+        //         sb.AppendLine($"{spaces}}}");
+        //     }
+        //     // var name = classItem.ClassName;
+        //     // var id = classItem.Id;
+        //     // Console.WriteLine($"Adding {name} - {id}");
+        // }
+        sb.AppendLine("            }");
+        sb.AppendLine("        }");
+
+        sb.AppendLine("}");
+        sb.AppendLine();
+        sb.AppendLine("#pragma warning restore SA1600 // Elements should be documented");
+        sb.AppendLine();
+        return sb.ToString();
+    }
+
+    private void GenerateConstantPropertyHeader(StringBuilder sb, ClassGeneration classItem, int spaces)
+    {
+        var space = string.Join(string.Empty, Enumerable.Repeat("    ", spaces));
+        sb.AppendLine($"{space}public static class {classItem.ClassName}");
+        sb.AppendLine($"{space}{{");
+    }
+
+    private void GenerateConstantProperty(StringBuilder sb, ClassGeneration classItem, string value, int spaces)
+    {
+        var space = string.Join(string.Empty, Enumerable.Repeat("    ", spaces));
+        sb.AppendLine($"{space}    /// <summary>");
+        sb.AppendLine($"{space}    /// {classItem.Definition.Description}");
+        sb.AppendLine($"{space}    /// </summary>");
+        sb.AppendLine($"{space}    public const string {classItem.ClassName} = \"{value}\";");
+        sb.AppendLine();
+    }
+
+    private void GenerateConstantPropertyFooter(StringBuilder sb, ClassGeneration classItem, int spaces)
+    {
+        var space = string.Join(string.Empty, Enumerable.Repeat("    ", spaces));
+        sb.AppendLine($"{space}}}");
     }
 
     private string GenerateClassSource(string className, SchemaDefinition definition, string ns)
