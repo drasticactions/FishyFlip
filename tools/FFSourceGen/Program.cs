@@ -60,13 +60,14 @@ public class AppCommands
             classList.AddRange(await this.ProcessFile(jsonFile, jsonType));
         }
 
-        var constantsFile = this.GenerateConstants(classList, this.baseNamespace);
-        var constantsPath = Path.Combine(this.basePath, "Constants.g.cs");
-        await File.WriteAllTextAsync(constantsPath, constantsFile);
+        foreach (var cls in classList)
+        {
+            await this.GenerateModelFile(cls);
+        }
 
-        // var atRecordSource = this.GenerateATRecordSource(this.baseNamespace);
-        // var atRecordPath = Path.Combine(modelPath, "ATRecord.g.cs");
-        // await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+        var atRecordSource = this.GenerateATRecordSource(this.baseNamespace);
+        var atRecordPath = Path.Combine(this.basePath, "ATRecord.g.cs");
+        await File.WriteAllTextAsync(atRecordPath, atRecordSource);
     }
 
     private async Task<List<ClassGeneration>> ProcessFile(string defJsonPath, JsonType jsonType)
@@ -131,9 +132,138 @@ public class AppCommands
 
         public string CSharpNamespace { get; }
 
+        public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
+
         public override string ToString()
         {
             return $"Enum: {this.Document.Id}, {this.ClassName} - {string.Join(", ", this.RawValues)}";
+        }
+    }
+
+    private class PropertyGeneration
+    {
+        public PropertyGeneration(PropertyDefinition propertyDefinition, string key, SchemaDocument document, SchemaDefinition def, string path, string ns, string cns)
+        {
+            this.PropertyDefinition = propertyDefinition;
+            this.Document = document;
+            this.Definition = def;
+            this.Path = path;
+            this.Key = key;
+            this.Namespace = ns;
+            this.CSharpNamespace = cns;
+            this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
+            this.Type = this.GetPropertyType(this.ClassName, this.ClassName, propertyDefinition);
+        }
+
+        public string ClassName { get; }
+
+        public PropertyDefinition PropertyDefinition { get; }
+
+        public SchemaDocument Document { get; }
+
+        public SchemaDefinition Definition { get; }
+
+        public string Key { get; }
+
+        public string Path { get; }
+
+        public string Namespace { get; }
+
+        public string CSharpNamespace { get; }
+
+        public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
+
+        public string Type { get; }
+
+        public string GetDefaultValue()
+        {
+            var defaultValue = this.GetDefaultValueString(this.PropertyDefinition);
+            if (this.PropertyDefinition.KnownValues?.Length > 0)
+            {
+                defaultValue = $"{this.GetClassNameAndNamespace()}.{defaultValue.ToPascalCase()}";
+            }
+            return defaultValue;
+        }
+
+        private string GetDefaultValueString(PropertyDefinition property)
+        {
+            return property.Type?.ToLower() switch
+            {
+                "string" => property.Default?.ToString() ?? "\"\"",
+                "integer" => property.Default?.ToString() ?? "0",
+                "boolean" => property.Default?.ToString()?.ToLower() ?? "false",
+                "array" => "new()",
+                _ => "default",
+            };
+        }
+
+        public string GetClassNameAndNamespace()
+        {
+            // If Ref contains a #, with something before it, then it's a reference to another class.
+            if (this.PropertyDefinition.Ref != null && this.PropertyDefinition.Ref.Contains("#"))
+            {
+                return $"{this.CSharpNamespace}.{this.GetClassNameFromRef(this.PropertyDefinition.Ref)}";
+            }
+
+            if (this.IsEnum)
+            {
+                return $"{this.CSharpNamespace}.{this.ClassName}";
+            }
+
+            return this.Type;
+        }
+
+        private bool IsEnum => this.PropertyDefinition.KnownValues?.Length > 0;
+
+        private string GetPropertyType(string className, string name, PropertyDefinition property)
+        {
+            // Handle known values as enums
+            if (property.KnownValues?.Length > 0)
+            {
+                return $"{name}".ToPascalCase();
+            }
+
+            var baseType = property.Type?.ToLower() switch
+            {
+                "string" when property.Format == "did" => "FishyFlip.Models.ATDid",
+                "string" when property.Format == "handle" => "FishyFlip.Models.ATHandle",
+                "string" when property.Format == "datetime" => "DateTime",
+                "string" when property.Format == "at-uri" => "FishyFlip.Models.ATUri",
+                "string" when property.Format == "at-identifier" => "FishyFlip.Models.ATIdentifier",
+                "string" => "string",
+                "blob" => "Blob",
+                "integer" => "int",
+                "boolean" => "bool",
+                "bytes" => "byte[]",
+                "cid-link" => "Ipfs.Cid",
+                "array" when property.Items != null => this.GetListPropertyName(className, name, property),
+                // "object" when property.Properties != null => "Dictionary<string, object>", // Could be expanded to generate nested types
+                "unknown" => "object",
+                "union" when property.Refs?.Length > 0 => "object", // Could be expanded to generate union types
+                "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetClassNameFromRef(property.Ref),
+                "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => "RepoStrongRef",
+                _ => throw new InvalidOperationException($"Unknown property type: {property.Type}"),
+            };
+
+            return $"{baseType}?";
+        }
+
+        private string GetListPropertyName(string className, string name, PropertyDefinition property)
+        {
+            if (property.Items is null)
+            {
+                throw new InvalidOperationException("Property does not have items.");
+            }
+
+            var item = $"List<{this.GetPropertyType(className, name, property.Items)}>";
+            Console.WriteLine($"List Property: {item}");
+            return item;
+        }
+
+        private string GetClassNameFromRef(string refString)
+        {
+            Console.WriteLine($"{refString} Has #, {refString.Contains("#")}");
+            return refString.Split('#').Last().ToPascalCase();
         }
     }
 
@@ -168,6 +298,10 @@ public class AppCommands
         public bool IsEndpoint => this.Definition.Type == "procedure";
 
         public List<EnumProperties> EnumProperties { get; } = new();
+
+        public List<PropertyGeneration> Properties { get; } = new();
+
+        public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
 
         public string Id
         {
@@ -205,9 +339,83 @@ public class AppCommands
 
                             break;
                     }
+
+                    this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace));
                 }
             }
         }
+    }
+
+    private async Task GenerateModelFile(ClassGeneration cls)
+    {
+        Console.WriteLine($"Generating Class: {cls.Id}, {cls.CSharpNamespace}, {cls.ClassName}");
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, $"{this.baseNamespace}.{cls.CSharpNamespace}");
+        sb.AppendLine("{");
+
+        this.GenerateClassDocumentation(sb, cls.Definition);
+
+        sb.AppendLine($"    public partial class {cls.ClassName}");
+        sb.AppendLine("    {");
+
+        foreach (var property in cls.Properties)
+        {
+            this.GenerateProperty(sb, property);
+        }
+
+        this.GenerateTypeProperty(sb, cls.Id);
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, cls.Path);
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"{cls.ClassName}.g.cs");
+        await File.WriteAllTextAsync(classPath, sb.ToString());
+
+        foreach (var enumProp in cls.EnumProperties)
+        {
+            Console.WriteLine($"Generating Enum: {enumProp.Document.Id}, {enumProp.ClassName}");
+            var enumSource = this.GenerateEnumSource(enumProp.ClassName, enumProp.PropertyDefinition, enumProp.CSharpNamespace);
+            var enumPath = Path.Combine(outputPath, $"{enumProp.ClassName}.g.cs");
+            await File.WriteAllTextAsync(enumPath, enumSource);
+        }
+    }
+
+    private void GenerateProperty(StringBuilder sb, PropertyGeneration property)
+    {
+        Console.WriteLine($"Generating Property for {property.Document.Id}: {property.Key}, {property.Type}");
+        // Add property documentation if available
+        if (!string.IsNullOrEmpty(property.PropertyDefinition.Description))
+        {
+            sb.AppendLine($"        /// <summary>");
+            sb.AppendLine($"        /// {property.PropertyDefinition.Description}");
+            sb.AppendLine($"        /// </summary>");
+        }
+
+        // Add JSON property name attribute
+        sb.AppendLine($"        [JsonPropertyName(\"{property.Key}\")]");
+
+        // Add Required attribute if property is required
+        if (property.Definition.Required?.Contains(property.Key) == true)
+        {
+            sb.AppendLine("        [JsonRequired]");
+        }
+
+        // Add validation attributes
+        // GenerateValidationAttributes(sb, property);
+
+        // Handle default values
+        if (property.PropertyDefinition.Default != null)
+        {
+            sb.AppendLine($"        public {property.GetClassNameAndNamespace()} {property.ClassName} {{ get; set; }} = {property.GetDefaultValue()};");
+        }
+        else
+        {
+            sb.AppendLine($"        public {property.GetClassNameAndNamespace()} {property.ClassName} {{ get; set; }}");
+        }
+
+        sb.AppendLine();
     }
 
     private async Task GenerateModelFile(string defJsonPath, string baseOutputDir, JsonType jsonType)
@@ -249,7 +457,7 @@ public class AppCommands
                             }
 
                             Console.WriteLine($"Generating Class: {schemaDocument.Id}, {cn}");
-                            var classSource = this.GenerateClassSource(cn, def.Value, ns);
+                            var classSource = this.GenerateClassSource(cn, def.Value, schemaDocument, ns);
                             var classPath = Path.Combine(outputPath, $"{cn}.g.cs");
                             await File.WriteAllTextAsync(classPath, classSource);
 
@@ -278,7 +486,7 @@ public class AppCommands
                 break;
             case "object":
                 Console.WriteLine($"Generating Class {className}.");
-                var classSource = this.GenerateClassSource(className, def.Value, ns);
+                var classSource = this.GenerateClassSource(className, def.Value, schemaDocument, ns);
                 var classPath = Path.Combine(outputPath, $"{className}.g.cs");
                 await File.WriteAllTextAsync(classPath, classSource);
                 break;
@@ -321,116 +529,13 @@ public class AppCommands
         sb.AppendLine($"    /// </summary>");
         sb.AppendLine($"    public abstract class ATRecord");
         sb.AppendLine("    {");
-        sb.AppendLine($"        /// <summary>");
-        sb.AppendLine($"        /// The type of the record.");
-        sb.AppendLine($"        /// </summary>");
-        sb.AppendLine($"        [JsonPropertyName(\"$type\")]");
-        sb.AppendLine("        [JsonRequired]");
-        sb.AppendLine($"        public string? Type {{ get; set; }}");
         sb.AppendLine("    }");
         sb.AppendLine("}");
         sb.AppendLine();
         return sb.ToString();
     }
 
-    private string GenerateConstants(List<ClassGeneration> classes, string ns)
-    {
-        var sb = new StringBuilder();
-        this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, ns);
-        sb.AppendLine();
-        sb.AppendLine("#pragma warning disable SA1600 // Elements should be documented");
-        var endpoints = classes.Where(n => n.IsEndpoint).GroupBy(n => n.Namespace);
-        sb.AppendLine("{");
-        sb.AppendLine($"    /// <summary>");
-        sb.AppendLine($"    /// Constant values for ATProtocol and Bluesky.");
-        sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public static class Constants");
-        sb.AppendLine("    {");
-        sb.AppendLine($"        public static class Urls");
-        sb.AppendLine("        {");
-        foreach (var endpointGroup in endpoints)
-        {
-            var name = $"ATProto{endpointGroup.Key.Split(".").Last().ToPascalCase()}";
-            Console.WriteLine($"Endpoint Group: {endpointGroup.Key}");
-            sb.AppendLine($"            /// <summary>");
-            sb.AppendLine($"            /// Endpoints for {endpointGroup.Key}.");
-            sb.AppendLine($"            /// </summary>");
-            sb.AppendLine($"            public static class {name}");
-            sb.AppendLine("            {");
-            foreach (var endpoint in endpointGroup)
-            {
-                var url = $"/xrpc/{endpoint.Id}";
-                sb.AppendLine($"                /// <summary>");
-                sb.AppendLine($"                /// {endpoint.Definition.Description}");
-                sb.AppendLine($"                /// </summary>");
-                sb.AppendLine($"                public const string {endpoint.ClassName} = \"{url}\";");
-                sb.AppendLine();
-            }
-
-            sb.AppendLine("            }");
-            sb.AppendLine();
-        }
-        sb.AppendLine();
-        sb.AppendLine("    }");
-
-        sb.AppendLine($"            public static class ATProtoTypes");
-        sb.AppendLine("            {");
-        // foreach (var classGroup in classes.GroupBy(n => n.Namespace))
-        // {
-        //     Console.WriteLine($"Class Group: {classGroup.Key}");
-        //     var classLevels = classGroup.Key.Split(".");
-        //     var classDepth = classLevels.Length;
-        //     for (var i = 0; i < classDepth; i++)
-        //     {
-        //         var name = classLevels[i].ToPascalCase();
-        //         var spaces = string.Join("", Enumerable.Repeat("    ", i));
-        //         sb.AppendLine($"{spaces}public static class {name}");
-        //         sb.AppendLine($"{spaces}{{");
-        //     }
-        //     for (var i = 0; i < classDepth; i++)
-        //     {
-        //         var spaces = string.Join("", Enumerable.Repeat("    ", classDepth - i - 1));
-        //         sb.AppendLine($"{spaces}}}");
-        //     }
-        //     // var name = classItem.ClassName;
-        //     // var id = classItem.Id;
-        //     // Console.WriteLine($"Adding {name} - {id}");
-        // }
-        sb.AppendLine("            }");
-        sb.AppendLine("        }");
-
-        sb.AppendLine("}");
-        sb.AppendLine();
-        sb.AppendLine("#pragma warning restore SA1600 // Elements should be documented");
-        sb.AppendLine();
-        return sb.ToString();
-    }
-
-    private void GenerateConstantPropertyHeader(StringBuilder sb, ClassGeneration classItem, int spaces)
-    {
-        var space = string.Join(string.Empty, Enumerable.Repeat("    ", spaces));
-        sb.AppendLine($"{space}public static class {classItem.ClassName}");
-        sb.AppendLine($"{space}{{");
-    }
-
-    private void GenerateConstantProperty(StringBuilder sb, ClassGeneration classItem, string value, int spaces)
-    {
-        var space = string.Join(string.Empty, Enumerable.Repeat("    ", spaces));
-        sb.AppendLine($"{space}    /// <summary>");
-        sb.AppendLine($"{space}    /// {classItem.Definition.Description}");
-        sb.AppendLine($"{space}    /// </summary>");
-        sb.AppendLine($"{space}    public const string {classItem.ClassName} = \"{value}\";");
-        sb.AppendLine();
-    }
-
-    private void GenerateConstantPropertyFooter(StringBuilder sb, ClassGeneration classItem, int spaces)
-    {
-        var space = string.Join(string.Empty, Enumerable.Repeat("    ", spaces));
-        sb.AppendLine($"{space}}}");
-    }
-
-    private string GenerateClassSource(string className, SchemaDefinition definition, string ns)
+    private string GenerateClassSource(string className, SchemaDefinition definition, SchemaDocument document, string ns)
     {
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
@@ -451,10 +556,21 @@ public class AppCommands
             }
         }
 
+        this.GenerateTypeProperty(sb, document.Id);
+
         sb.AppendLine("    }");
         sb.AppendLine("}");
         sb.AppendLine();
         return sb.ToString();
+    }
+
+    private void GenerateTypeProperty(StringBuilder sb, string id)
+    {
+        sb.AppendLine($"        /// <summary>");
+        sb.AppendLine($"        /// Gets or sets the ATRecord Type.");
+        sb.AppendLine($"        /// </summary>");
+        sb.AppendLine($"        [JsonPropertyName(\"$type\")]");
+        sb.AppendLine($"        public string Type {{ get; set; }} = \"{id}\";");
     }
 
     private void GenerateProperty(StringBuilder sb, string className, string propertyName, SchemaDefinition definition, PropertyDefinition property)
@@ -514,7 +630,7 @@ public class AppCommands
         };
     }
 
-    private string GetPropertyType(string className, string name, PropertyDefinition property)
+    internal string GetPropertyType(string className, string name, PropertyDefinition property)
     {
         // Handle known values as enums
         if (property.KnownValues?.Length > 0)
