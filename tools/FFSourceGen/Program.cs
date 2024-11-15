@@ -65,6 +65,8 @@ public partial class AppCommands
             await this.GenerateModelFile(cls);
         }
 
+        await this.GenerateJsonSerializerContextFile(classList);
+
         var atRecordSource = this.GenerateATRecordSource(this.baseNamespace);
         var atRecordPath = Path.Combine(this.basePath, "ATRecord.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
@@ -101,13 +103,40 @@ public partial class AppCommands
         var properties = cls.Properties.Select(n => n.CSharpNamespace).Where(n => n != cls.CSharpNamespace).Distinct();
         foreach (var item in properties)
         {
-             sb.AppendLine($"using {this.baseNamespace}.{item};");
+            sb.AppendLine($"using {this.baseNamespace}.{item};");
         }
 
         if (properties.Any())
         {
             sb.AppendLine();
         }
+    }
+
+    private async Task GenerateJsonSerializerContextFile(List<ClassGeneration> classes)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, this.baseNamespace);
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// ATProtocol Message Source Generation Context.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    [JsonSourceGenerationOptions(");
+        sb.AppendLine($"        WriteIndented = true,");
+        sb.AppendLine($"        PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,");
+        sb.AppendLine($"        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]");
+        foreach (var cls in classes)
+        {
+            sb.AppendLine($"    [JsonSerializable(typeof({this.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}))]");
+        }
+
+        sb.AppendLine($"    internal partial class SourceGenerationContext : JsonSerializerContext");
+        sb.AppendLine("    {");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, "SourceGenerationContext.g.cs");
+        await File.WriteAllTextAsync(outputPath, sb.ToString());
     }
 
     private async Task GenerateModelFile(ClassGeneration cls)
@@ -130,6 +159,134 @@ public partial class AppCommands
         }
 
         this.GenerateTypeProperty(sb, cls.Id);
+
+        var requiresJsonConverters = cls.Properties.Where(n => n.RequiresConverter);
+        foreach (var converter in requiresJsonConverters)
+        {
+            if (converter.PropertyDefinition.Refs is null)
+            {
+                continue;
+            }
+
+            var ids = converter.PropertyDefinition.Refs.ToArray();
+            sb.AppendLine($"        public class {converter.ClassName}JsonConverter : JsonConverter<{converter.Type}>");
+            sb.AppendLine("        {");
+            sb.AppendLine($"            public override {converter.Type} Read(ref Utf8JsonReader reader, System.Type typeToConvert, JsonSerializerOptions options)");
+            sb.AppendLine("            {");
+            sb.AppendLine($"                if (reader.TokenType == JsonTokenType.StartObject)");
+            sb.AppendLine("                {");
+            sb.AppendLine("                    using (JsonDocument doc = JsonDocument.ParseValue(ref reader))");
+            sb.AppendLine("                    {");
+            sb.AppendLine($"                        if (doc.RootElement.TryGetProperty(\"$type\", out JsonElement typeElement))");
+            sb.AppendLine("                        {");
+            sb.AppendLine("                            var type = typeElement.GetString();");
+            foreach (var id in ids)
+            {
+                var idSplit = id.Replace("#view", string.Empty).Replace(".defs", string.Empty).Split('#');
+                var jsonSerName = string.Empty;
+                var cs = string.Empty;
+
+                if (string.IsNullOrEmpty(idSplit[0]))
+                {
+                    jsonSerName = idSplit.Last().ToPascalCase();
+                    cs = $"{cls.CSharpNamespace}.{jsonSerName}";
+                }
+                else if (idSplit.Length == 1)
+                {
+                    var splitTwo = idSplit[0].Split('.').Select(n => n.ToPascalCase()).ToArray();
+                    if (splitTwo.Length == 1)
+                    {
+                        jsonSerName = splitTwo.First();
+                        cs = $"{cls.CSharpNamespace}.{jsonSerName}";
+                    }
+                    else
+                    {
+                        jsonSerName = splitTwo.Last();
+                        cs = string.Join(".", id.Replace("defs", jsonSerName).Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray());
+                    }
+                }
+                else
+                {
+                    var t = idSplit.First().Split('.').Select(n => n.ToPascalCase()).ToArray();
+                    jsonSerName = idSplit.Last().ToPascalCase();
+                    cs = string.Join(".", id.Replace("defs", jsonSerName).Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray());
+                }
+
+                if (string.IsNullOrEmpty(jsonSerName))
+                {
+                    throw new Exception("Failed to get jsonSerName.");
+                }
+
+                if (string.IsNullOrEmpty(cs))
+                {
+                    throw new Exception("Failed to get cs.");
+                }
+
+                sb.AppendLine($"                            if (type == \"{id}\")");
+                sb.AppendLine("                            {");
+                sb.AppendLine($"                                return JsonSerializer.Deserialize<{cs}>(doc.RootElement.GetRawText(), (JsonTypeInfo<{cs}>)((SourceGenerationContext)options.TypeInfoResolver!).{jsonSerName});");
+                sb.AppendLine("                            }");
+            }
+            sb.AppendLine("                        }");
+            sb.AppendLine("                    }");
+            sb.AppendLine("                }");
+            sb.AppendLine($"                throw new NotImplementedException();");
+            sb.AppendLine("            }");
+            sb.AppendLine($"            public override void Write(Utf8JsonWriter writer, {converter.Type} value, JsonSerializerOptions options)");
+            sb.AppendLine("            {");
+            foreach (var id in ids)
+            {
+                var idSplit = id.Replace("#view", string.Empty).Replace(".defs", string.Empty).Split('#');
+                var jsonSerName = string.Empty;
+                var cs = string.Empty;
+
+                if (string.IsNullOrEmpty(idSplit[0]))
+                {
+                    jsonSerName = idSplit.Last().ToPascalCase();
+                    cs = $"{cls.CSharpNamespace}.{jsonSerName}";
+                }
+                else if (idSplit.Length == 1)
+                {
+                    var splitTwo = idSplit[0].Split('.').Select(n => n.ToPascalCase()).ToArray();
+                    if (splitTwo.Length == 1)
+                    {
+                        jsonSerName = splitTwo.First();
+                        cs = $"{cls.CSharpNamespace}.{jsonSerName}";
+                    }
+                    else
+                    {
+                        jsonSerName = splitTwo.Last();
+                        cs = string.Join(".", id.Replace("defs", jsonSerName).Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray());
+                    }
+                }
+                else
+                {
+                    var t = idSplit.First().Split('.').Select(n => n.ToPascalCase()).ToArray();
+                    jsonSerName = idSplit.Last().ToPascalCase();
+                    cs = string.Join(".", id.Replace("defs", jsonSerName).Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray());
+                }
+
+                if (string.IsNullOrEmpty(jsonSerName))
+                {
+                    throw new Exception("Failed to get jsonSerName.");
+                }
+
+                if (string.IsNullOrEmpty(cs))
+                {
+                    throw new Exception("Failed to get cs.");
+                }
+
+                sb.AppendLine($"                if (value is {cs} {jsonSerName})");
+                sb.AppendLine("                {");
+                sb.AppendLine($"                    JsonSerializer.Serialize(writer, {jsonSerName}, (JsonTypeInfo<{cs}>)((SourceGenerationContext)options.TypeInfoResolver!).{jsonSerName});");
+                sb.AppendLine("                    return;");
+                sb.AppendLine("                }");
+            }
+            sb.AppendLine("            }");
+            sb.AppendLine("        }");
+            sb.AppendLine();
+        }
+
         sb.AppendLine("    }");
         sb.AppendLine("}");
         sb.AppendLine();
@@ -141,10 +298,6 @@ public partial class AppCommands
         foreach (var enumProp in cls.EnumProperties)
         {
             await this.GenerateEnum(enumProp);
-            // Console.WriteLine($"Generating Enum: {enumProp.Document.Id}, {enumProp.ClassName}");
-            // var enumSource = this.GenerateEnumSource(enumProp.ClassName, enumProp.PropertyDefinition, enumProp.CSharpNamespace);
-            // var enumPath = Path.Combine(outputPath, $"{enumProp.ClassName}.g.cs");
-            // await File.WriteAllTextAsync(enumPath, enumSource);
         }
     }
 
@@ -194,6 +347,11 @@ public partial class AppCommands
         if (property.Definition.Required?.Contains(property.Key) == true)
         {
             sb.AppendLine("        [JsonRequired]");
+        }
+
+        if (property.RequiresConverter)
+        {
+            sb.AppendLine($"        [JsonConverter(typeof({property.ClassName}JsonConverter))]");
         }
 
         // Add validation attributes

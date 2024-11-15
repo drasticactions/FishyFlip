@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Text;
 using FFSourceGen;
 using FFSourceGen.Models;
 
@@ -68,6 +69,8 @@ public class PropertyGeneration
     public SchemaDocument Document { get; }
 
     public SchemaDefinition Definition { get; }
+
+    public bool RequiresConverter => this.PropertyDefinition.Type == "union";
 
     public string Key { get; }
 
