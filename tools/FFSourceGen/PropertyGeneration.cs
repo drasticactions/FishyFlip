@@ -8,7 +8,7 @@ using FFSourceGen.Models;
 
 public class PropertyGeneration
 {
-    public PropertyGeneration(PropertyDefinition propertyDefinition, string key, SchemaDocument document, SchemaDefinition def, string path, string ns, string cns)
+    public PropertyGeneration(PropertyDefinition propertyDefinition, string key, SchemaDocument document, SchemaDefinition def, string path, string ns, string cns, string cn)
     {
         this.PropertyDefinition = propertyDefinition;
         this.Document = document;
@@ -18,6 +18,18 @@ public class PropertyGeneration
         this.SetNamespace(ns, cns);
         this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
         this.Type = this.GetPropertyType(this.ClassName, this.ClassName, propertyDefinition);
+        this.PropertyName = this.ClassName;
+        if (this.PropertyName == cn)
+        {
+            this.PropertyName = $"{this.PropertyName}Value";
+        }
+
+        if (this.PropertyName == "Type")
+        {
+            this.PropertyName = "TypeValue";
+        }
+
+        this.CBorProperty = this.GenerateCborProperty();
     }
 
     private void SetNamespace(string ns, string cns)
@@ -72,6 +84,8 @@ public class PropertyGeneration
 
     public bool RequiresConverter => this.PropertyDefinition.Type == "union";
 
+    public string PropertyName { get; }
+
     public string Key { get; }
 
     public string Path { get; }
@@ -79,6 +93,8 @@ public class PropertyGeneration
     public string Namespace { get; private set; }
 
     public string CSharpNamespace { get; private set; }
+
+    public string CBorProperty { get; }
 
     public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
 
@@ -113,6 +129,26 @@ public class PropertyGeneration
     }
 
     private bool IsEnum => this.PropertyDefinition.KnownValues?.Length > 0;
+
+    private string GenerateCborProperty()
+    {
+        var property = this.PropertyDefinition;
+        if (property.KnownValues?.Length > 0)
+        {
+            return $"// enum";
+        }
+
+        var baseType = property.Type?.ToLower() switch
+        {
+            "string" when property.Format == "datetime" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToDateTime();",
+            "string" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
+            _ => $"// {property.Type?.ToLower()}",
+        };
+
+        return baseType;
+    }
 
     private string GetPropertyType(string className, string name, PropertyDefinition property)
     {

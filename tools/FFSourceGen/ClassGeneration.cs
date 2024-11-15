@@ -17,6 +17,7 @@ public class ClassGeneration
         this.Namespace = string.Join(".", document.Id.Split('.').Take(document.Id.Split('.').Length - 1).ToArray());
         this.CSharpNamespace = string.Join(".", document.Id.Split('.').Take(document.Id.Split('.').Length - 1).Select(n => n.ToPascalCase()).ToArray());
         this.ProcessProperties();
+        this.CBorProperty = $"this.{this.ClassName} = new {this.ClassName}(obj[\"{this.Key}\"]);";
     }
 
     public string ClassName { get; }
@@ -32,6 +33,8 @@ public class ClassGeneration
     public string Path { get; }
 
     public string Key { get; }
+
+    public string CBorProperty { get; }
 
     public bool IsEndpoint => this.Definition.Type == "procedure";
 
@@ -78,7 +81,7 @@ public class ClassGeneration
                         break;
                 }
 
-                this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace));
+                this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace, this.ClassName));
             }
         }
     }
