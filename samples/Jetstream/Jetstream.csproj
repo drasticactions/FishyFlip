@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\FishyFlip\FishyFlip.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
@@ -15,4 +11,8 @@
   <ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FishyFlipDX\FishyFlipDX.csproj" />
+  </ItemGroup>
 </Project>

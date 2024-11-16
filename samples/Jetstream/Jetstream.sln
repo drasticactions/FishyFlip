@@ -3,26 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishyFlip", "..\..\src\FishyFlip\FishyFlip.csproj", "{48260865-FB6C-4F37-B80B-4CF1F8B52E66}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jetstream", "Jetstream.csproj", "{D80F3939-6001-4EFE-B574-26771F9B7523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishyFlipDX", "..\..\src\FishyFlipDX\FishyFlipDX.csproj", "{4C2EB0E8-0F90-5D79-475C-D9A32CF27B49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{48260865-FB6C-4F37-B80B-4CF1F8B52E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48260865-FB6C-4F37-B80B-4CF1F8B52E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48260865-FB6C-4F37-B80B-4CF1F8B52E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48260865-FB6C-4F37-B80B-4CF1F8B52E66}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D80F3939-6001-4EFE-B574-26771F9B7523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D80F3939-6001-4EFE-B574-26771F9B7523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D80F3939-6001-4EFE-B574-26771F9B7523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D80F3939-6001-4EFE-B574-26771F9B7523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C2EB0E8-0F90-5D79-475C-D9A32CF27B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C2EB0E8-0F90-5D79-475C-D9A32CF27B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C2EB0E8-0F90-5D79-475C-D9A32CF27B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C2EB0E8-0F90-5D79-475C-D9A32CF27B49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

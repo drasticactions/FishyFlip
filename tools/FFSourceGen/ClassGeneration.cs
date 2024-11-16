@@ -84,5 +84,24 @@ public class ClassGeneration
                 this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace, this.ClassName));
             }
         }
+
+        if (this.Definition.Record is not null)
+        {
+            foreach (var prop in this.Definition.Record.Properties)
+            {
+                switch (prop.Value.Type)
+                {
+                    case "string":
+                        if (prop.Value.KnownValues is not null)
+                        {
+                            this.EnumProperties.Add(new EnumProperties(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace));
+                        }
+
+                        break;
+                }
+
+                this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace, this.ClassName));
+            }
+        }
     }
 }

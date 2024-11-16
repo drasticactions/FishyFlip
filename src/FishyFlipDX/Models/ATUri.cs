@@ -120,6 +120,23 @@ public class ATUri
     }
 
     /// <summary>
+    /// Checks if the AT URI is valid.
+    /// </summary>
+    /// <param name="uri">Uri value.</param>
+    /// <returns>Bool.</returns>
+    public static bool IsValid(string uri)
+    {
+        Match match = AtpUriRegex.Match(uri);
+
+        if (match == null || !match.Success)
+        {
+            return false;
+        }
+
+        return match.Success;
+    }
+
+    /// <summary>
     /// Returns a string representation of the AT URI.
     /// </summary>
     /// <returns>A string representation of the AT URI.</returns>

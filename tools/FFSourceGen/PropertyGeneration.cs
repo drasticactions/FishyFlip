@@ -29,6 +29,8 @@ public class PropertyGeneration
             this.PropertyName = "TypeValue";
         }
 
+        this.Id = $"{document.Id}#{key}";
+
         this.CBorProperty = this.GenerateCborProperty();
     }
 
@@ -74,6 +76,8 @@ public class PropertyGeneration
         this.CSharpNamespace = cns;
     }
 
+    public string Id { get; }
+
     public string ClassName { get; }
 
     public PropertyDefinition PropertyDefinition { get; }
@@ -82,7 +86,7 @@ public class PropertyGeneration
 
     public SchemaDefinition Definition { get; }
 
-    public bool RequiresConverter => this.PropertyDefinition.Type == "union";
+    public bool IsATObject => this.Type.Contains("ATObject");
 
     public string PropertyName { get; }
 
@@ -98,7 +102,9 @@ public class PropertyGeneration
 
     public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
 
-    public string Type { get; }
+    public string Type { get; private set; }
+
+    public bool IsEnum => this.PropertyDefinition.KnownValues?.Length > 0;
 
     public string GetDefaultValue()
     {
@@ -128,7 +134,10 @@ public class PropertyGeneration
         };
     }
 
-    private bool IsEnum => this.PropertyDefinition.KnownValues?.Length > 0;
+    public void UpdateType()
+    {
+        this.Type = this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition);
+    }
 
     private string GenerateCborProperty()
     {
@@ -147,12 +156,33 @@ public class PropertyGeneration
             "string" when property.Format == "at-identifier" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATIdentifier();",
             "string" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
             "cid-link" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
-            "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);",
-            "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
+            //"ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);",
+            // "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
             _ => $"// {property.Type?.ToLower()}",
         };
 
         return baseType;
+    }
+
+    private bool IsBaseType(string type)
+    {
+        var item = type.Replace("?", string.Empty);
+        if (item.Contains("List<"))
+        {
+            return this.IsBaseType(item.Replace("List<", string.Empty).Replace(">", string.Empty));
+        }
+
+        return type.Replace("?", string.Empty) switch
+        {
+            "string" => true,
+            "long" => true,
+            "bool" => true,
+            "byte[]" => true,
+            "Blob" => true,
+            "DateTime" => true,
+            "Ipfs.Cid" => true,
+            _ => false,
+        };
     }
 
     private string GetPropertyType(string className, string name, PropertyDefinition property)
@@ -172,15 +202,17 @@ public class PropertyGeneration
             "string" when property.Format == "at-identifier" => "FishyFlip.Models.ATIdentifier",
             "string" => "string",
             "blob" => "Blob",
-            "integer" => "int",
+            "integer" => "long",
             "boolean" => "bool",
             "bytes" => "byte[]",
             "cid-link" => "Ipfs.Cid",
             "array" when property.Items != null => this.GetListPropertyName(className, name, property),
-            "unknown" => "object",
-            "union" when property.Refs?.Length > 0 => "object", // Could be expanded to generate union types
+            "unknown" => "ATObject",
+            "object" => "ATObject",
+            "record" => "ATObject",
+            "union" when property.Refs?.Length > 0 => "ATObject", // Could be expanded to generate union types
             "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetClassNameFromRef(property.Ref),
-            // "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => "RepoStrongRef",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => "Com.Atproto.Repo.StrongRef",
             "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => "string",
             _ => throw new InvalidOperationException($"Unknown property type: {property.Type}"),
         };
@@ -195,7 +227,7 @@ public class PropertyGeneration
             throw new InvalidOperationException("Property does not have items.");
         }
         var propertyName = this.GetPropertyType(className, name, property.Items);
-        var propertyNamePascal = string.Join(".", propertyName.Split('.').Select(n => n.ToPascalCase()));
+        var propertyNamePascal = !this.IsBaseType(propertyName) ? string.Join(".", propertyName.Split('.').Select(n => n.ToPascalCase())) : propertyName;
         var item = $"List<{propertyNamePascal}>";
         Console.WriteLine($"List Property: {item}");
         return item;
@@ -204,6 +236,26 @@ public class PropertyGeneration
     private string GetClassNameFromRef(string refString)
     {
         Console.WriteLine($"{refString} Has #, {refString.Contains("#")}");
+        if (refString.Contains("."))
+        {
+            if (AppCommands.AllProperties.Any())
+            {
+                var ff = AppCommands.AllProperties.FirstOrDefault(n => n.Id == refString);
+                if (ff is not null)
+                {
+                }
+            }
+        }
+
+        var id = string.Join(".", refString.Replace(".defs", string.Empty).Replace("#", ".").Split('.')).Split(".").Last();
+        var test = this.Document.Defs.Where(n => n.Key == id).Select(n => n.Value).FirstOrDefault();
+        if (test is not null)
+        {
+            if (test.Type == "string")
+            {
+                return "string";
+            }
+        }
         var result = string.Join(".", refString.Replace(".defs", string.Empty).Replace("#", ".").Split('.').Select(n => n.ToPascalCase())).Split(".").Last();
         return result;
     }

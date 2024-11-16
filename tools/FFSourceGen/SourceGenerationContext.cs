@@ -21,6 +21,7 @@ namespace FFSourceGen;
 [JsonSerializable(typeof(PropertyDefinition))]
 [JsonSerializable(typeof(SchemaDefinition))]
 [JsonSerializable(typeof(SchemaDocument))]
+[JsonSerializable(typeof(RecordDefinition))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

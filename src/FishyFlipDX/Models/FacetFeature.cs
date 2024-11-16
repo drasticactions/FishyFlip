@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -56,6 +58,7 @@ public class FacetFeature
     /// <summary>
     /// Gets the DID (Decentralized Identifier) of the facet feature.
     /// </summary>
+    [JsonConverter(typeof(ATDidJsonConverter))]
     public ATDid? Did { get; }
 
     /// <summary>
@@ -64,7 +67,7 @@ public class FacetFeature
     /// <param name="uri">The URI of the facet feature.</param>
     /// <returns>A new instance of the <see cref="FacetFeature"/> class.</returns>
     public static FacetFeature CreateLink(string uri)
-        => new(Lexicon.App.Bsky.Richtext.Link.Type, uri, null, null);
+        => new(Lexicon.App.Bsky.Richtext.Link.RecordType, uri, null, null);
 
     /// <summary>
     /// Creates a facet feature of type "Mention" with the specified DID.
@@ -72,7 +75,7 @@ public class FacetFeature
     /// <param name="mention">The DID (Decentralized Identifier) to mention.</param>
     /// <returns>A new instance of the <see cref="FacetFeature"/> class.</returns>
     public static FacetFeature CreateMention(ATDid mention)
-        => new(Lexicon.App.Bsky.Richtext.Mention.Type, null, null, mention);
+        => new(Lexicon.App.Bsky.Richtext.Mention.RecordType, null, null, mention);
 
     /// <summary>
     /// Creates a facet feature of type "Tag" with the specified tag.
@@ -80,7 +83,7 @@ public class FacetFeature
     /// <param name="tag">The tag of the facet feature.</param>
     /// <returns>A new instance of the <see cref="FacetFeature"/> class.</returns>
     public static FacetFeature CreateHashtag(string tag)
-        => new(Lexicon.App.Bsky.Richtext.Tag.Type, null, tag, null);
+        => new(Lexicon.App.Bsky.Richtext.Tag.RecordType, null, tag, null);
 
     /// <summary>
     /// Returns a string that represents the current object.
@@ -90,9 +93,9 @@ public class FacetFeature
     {
         return this.Type switch
         {
-            Lexicon.App.Bsky.Richtext.Link.Type => $"Link: {this.Uri}",
-            Lexicon.App.Bsky.Richtext.Mention.Type => $"Mention: {this.Did}",
-            Lexicon.App.Bsky.Richtext.Tag.Type => $"Tag: {this.Tag}",
+            Lexicon.App.Bsky.Richtext.Link.RecordType => $"Link: {this.Uri}",
+            Lexicon.App.Bsky.Richtext.Mention.RecordType => $"Mention: {this.Did}",
+            Lexicon.App.Bsky.Richtext.Tag.RecordType => $"Tag: {this.Tag}",
             _ => "Unknown",
         };
     }
