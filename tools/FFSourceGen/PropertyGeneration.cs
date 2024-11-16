@@ -140,8 +140,13 @@ public class PropertyGeneration
 
         var baseType = property.Type?.ToLower() switch
         {
+            "string" when property.Format == "did" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATDid();",
             "string" when property.Format == "datetime" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToDateTime();",
+            "string" when property.Format == "handle" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATHandle();",
+            "string" when property.Format == "at-uri" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATUri();",
+            "string" when property.Format == "at-identifier" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATIdentifier();",
             "string" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
+            "cid-link" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
             "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);",
             "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
             _ => $"// {property.Type?.ToLower()}",
@@ -160,11 +165,11 @@ public class PropertyGeneration
 
         var baseType = property.Type?.ToLower() switch
         {
-            // "string" when property.Format == "did" => "FishyFlip.Models.ATDid",
-            // "string" when property.Format == "handle" => "FishyFlip.Models.ATHandle",
+            "string" when property.Format == "did" => "FishyFlip.Models.ATDid",
+            "string" when property.Format == "handle" => "FishyFlip.Models.ATHandle",
             "string" when property.Format == "datetime" => "DateTime",
-            // "string" when property.Format == "at-uri" => "FishyFlip.Models.ATUri",
-            // "string" when property.Format == "at-identifier" => "FishyFlip.Models.ATIdentifier",
+            "string" when property.Format == "at-uri" => "FishyFlip.Models.ATUri",
+            "string" when property.Format == "at-identifier" => "FishyFlip.Models.ATIdentifier",
             "string" => "string",
             "blob" => "Blob",
             "integer" => "int",

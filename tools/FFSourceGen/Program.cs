@@ -436,10 +436,10 @@ public partial class AppCommands
     private void GenerateTypeProperty(StringBuilder sb, string id)
     {
         sb.AppendLine($"        /// <summary>");
-        sb.AppendLine($"        /// Gets or sets the ATRecord Type.");
+        sb.AppendLine($"        /// Gets the ATRecord Type.");
         sb.AppendLine($"        /// </summary>");
         sb.AppendLine($"        [JsonPropertyName(\"$type\")]");
-        sb.AppendLine($"        public string Type {{ get; set; }} = \"{id}\";");
+        sb.AppendLine($"        public const string Type = \"{id}\";");
     }
 
     private void GenerateHeader(StringBuilder sb)
