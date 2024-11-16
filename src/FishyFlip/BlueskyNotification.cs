@@ -74,7 +74,7 @@ public sealed class BlueskyNotification
         var url = Constants.Urls.Bluesky.Notification.NotificationListNotifications + $"?limit={limit}";
         if (seenAt is not null)
         {
-            url += $"?seenAt={seenAt.Value.ToUniversalTime().ToString("o", CultureInfo.InvariantCulture)}";
+            url += $"&seenAt={seenAt.Value.ToUniversalTime().ToString("o", CultureInfo.InvariantCulture)}";
         }
 
         if (cursor is not null)
