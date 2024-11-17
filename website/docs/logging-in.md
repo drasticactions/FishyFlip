@@ -5,11 +5,11 @@
 - To log in with an App Password, you can call `AuthenticateWithPasswordAsync`
 
 ```csharp
-var atProtocol = new ATProtocolBuilder()
+var protocol = new ATProtocolBuilder()
             .WithLogger(new DebugLoggerProvider().CreateLogger("FishyFlip"))
             .Build();
 
-var session = await atProtocol.AuthenticateWithPasswordAsync(identifier, password, cancellationToken);
+var session = await protocol.AuthenticateWithPasswordAsync(identifier, password, cancellationToken);
 if (session is null)
 {
     Console.WriteLine("Failed to authenticate.");
@@ -24,10 +24,10 @@ Console.WriteLine($"Session Token: {session.AccessJwt}");
 ```
 
 - OAuth authentication is more complex. There is a full example showing a [local user authentication session](https://github.com/drasticactions/BSkyOAuthTokenGenerator/tree/main/src/BSkyOAuthTokenGenerator) but in short, you must:
-  - Starting the session with `atProtocol.GenerateOAuth2AuthenticationUrlAsync`
+  - Starting the session with `protocol.GenerateOAuth2AuthenticationUrlAsync`
   - Sending the user to a web browser to log in
   - Handling the callback with the return URI, 
-  - Sending that URI to `atProtocol.AuthenticateWithOAuth2CallbackAsync` to generate the session.
+  - Sending that URI to `protocol.AuthenticateWithOAuth2CallbackAsync` to generate the session.
 
 ```csharp
 var scopeList = scopes.Split(',').Select(n => n.Trim()).ToArray();
@@ -37,9 +37,9 @@ if (scopeList.Length == 0)
     return;
 }
 
-var atProtocol = this.GenerateProtocol(iUrl);
+var protocol = this.GenerateProtocol(iUrl);
 consoleLog.Log($"Starting OAuth2 Authentication for {instanceUrl}");
-var url = await atProtocol.GenerateOAuth2AuthenticationUrlAsync(clientId, "http://127.0.0.1", scopeList, instanceUrl.ToString(), cancellationToken);
+var url = await protocol.GenerateOAuth2AuthenticationUrlAsync(clientId, "http://127.0.0.1", scopeList, instanceUrl.ToString(), cancellationToken);
 consoleLog.Log($"Login URL: {url}");
 consoleLog.Log("Please login and copy the URL of the page you are redirected to.");
 var redirectUrl = Console.ReadLine();
@@ -50,7 +50,7 @@ if (string.IsNullOrEmpty(redirectUrl))
 }
 
 consoleLog.Log($"Got redirect url, finishing OAuth2 Authentication on {instanceUrl}");
-var session = await atProtocol.AuthenticateWithOAuth2CallbackAsync(redirectUrl, cancellationToken);
+var session = await protocol.AuthenticateWithOAuth2CallbackAsync(redirectUrl, cancellationToken);
 
 if (session is null)
 {
