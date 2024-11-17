@@ -227,9 +227,14 @@ public sealed class ATJetStream : IDisposable
 
             this.OnRecordReceived?.Invoke(this, new JetStreamATWebSocketRecordEventArgs(atWebSocketRecord, json));
         }
-        catch (Exception ex)
+        catch (JsonException ex)
         {
             this.logger?.LogError(ex, "WSS: Failed to deserialize ATWebSocketRecord.");
+            this.logger?.LogError(json);
+        }
+        catch (Exception ex)
+        {
+            this.logger?.LogError(ex, "WSS: An unknown error occurred.");
             this.logger?.LogError(json);
         }
     }

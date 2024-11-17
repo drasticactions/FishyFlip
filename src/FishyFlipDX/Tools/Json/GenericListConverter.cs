@@ -57,37 +57,3 @@ public class GenericListConverter<T, TConverter> : JsonConverter<List<T?>>
         writer.WriteEndArray();
     }
 }
-
-public class GenericListConverterFactory : JsonConverterFactory
-{
-    public override bool CanConvert(Type typeToConvert)
-    {
-        if (!typeToConvert.IsGenericType)
-        {
-            return false;
-        }
-
-        var genericType = typeToConvert.GetGenericTypeDefinition();
-        return genericType == typeof(List<>);
-    }
-
-    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-    {
-        var elementType = typeToConvert.GetGenericArguments()[0];
-
-        // Find the appropriate element converter from the options
-        var elementConverter = options.GetConverter(elementType);
-        if (elementConverter == null)
-        {
-            throw new JsonException($"No converter found for element type {elementType}");
-        }
-
-        // Create the converter type with the element type and converter type as generic arguments
-        var converterType = typeof(GenericListConverter<,>).MakeGenericType(
-            elementType,
-            elementConverter.GetType());
-
-        // Create an instance of the converter
-        return (JsonConverter)Activator.CreateInstance(converterType)!;
-    }
-}

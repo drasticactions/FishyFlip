@@ -56,19 +56,19 @@ public partial class AppCommands
         foreach (var jsonFile in defs)
         {
             var filename = Path.GetFileNameWithoutExtension(jsonFile);
-            await this.ProcessFile(jsonFile, JsonType.Defs);
+            await this.ProcessFile(jsonFile);
         }
 
         foreach (var jsonFile in mainRecordFiles)
         {
             var filename = Path.GetFileNameWithoutExtension(jsonFile);
-            await this.ProcessFile(jsonFile, JsonType.Other);
+            await this.ProcessFile(jsonFile);
         }
 
         foreach (var jsonFile in other)
         {
             var filename = Path.GetFileNameWithoutExtension(jsonFile);
-            await this.ProcessFile(jsonFile, JsonType.Other);
+            await this.ProcessFile(jsonFile);
         }
 
         foreach (var cls in AllClasses)
@@ -114,9 +114,8 @@ public partial class AppCommands
         var enumList = AllClasses.SelectMany(n => n.EnumProperties).ToList();
         var modelClasses = AllClasses.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record").ToList();
         await this.GenerateJsonSerializerContextFile(modelClasses, enumList);
-        await this.GenerateJsonConverterClassFile(modelClasses);
 
-        var atRecordSource = this.GenerateATObjectSource(this.baseNamespace);
+        var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
     }
@@ -146,7 +145,7 @@ public partial class AppCommands
         return mainRecordFiles;
     }
 
-    private async Task ProcessFile(string defJsonPath, JsonType jsonType)
+    private async Task ProcessFile(string defJsonPath)
     {
         var defJsonText = await File.ReadAllTextAsync(defJsonPath);
         var schemaDocument = JsonSerializer.Deserialize<SchemaDocument>(defJsonText, SourceGenerationContext.Default.SchemaDocument);
@@ -183,54 +182,6 @@ public partial class AppCommands
         }
     }
 
-    private async Task GenerateJsonConverterClassFile(List<ClassGeneration> classes)
-    {
-        var sb = new StringBuilder();
-        this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, $"{this.baseNamespace}");
-        sb.AppendLine("{");
-        sb.AppendLine($"    /// <summary>");
-        sb.AppendLine($"    /// ATProtocol Message Json Converter.");
-        sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public class ATProtocolJsonConverter : JsonConverter<ATObject?>");
-        sb.AppendLine("    {");
-        sb.AppendLine($"        public override ATObject? Read(ref Utf8JsonReader reader, System.Type typeToConvert, JsonSerializerOptions options)");
-        sb.AppendLine("        {");
-        sb.AppendLine("            if (reader.TokenType == JsonTokenType.StartObject)");
-        sb.AppendLine("            {");
-        sb.AppendLine("                using (JsonDocument doc = JsonDocument.ParseValue(ref reader))");
-        sb.AppendLine("                {");
-        sb.AppendLine("                    var rawText = doc.RootElement.GetRawText();");
-        sb.AppendLine("                    if (doc.RootElement.TryGetProperty(\"$type\", out JsonElement typeElement))");
-        sb.AppendLine("                    {");
-        sb.AppendLine($"                       switch (typeElement.GetString())");
-        sb.AppendLine("                        {");
-        foreach (var cls in classes)
-        {
-            sb.AppendLine($"                            case \"{cls.Id}\":");
-            sb.AppendLine($"                                return {cls.CSharpNamespace}.{cls.ClassName}.FromJson(rawText);");
-        }
-        sb.AppendLine("                        }");
-        sb.AppendLine("                    }");
-        sb.AppendLine("                }");
-        sb.AppendLine("            }");
-        sb.AppendLine("            return null;");
-        sb.AppendLine("        }");
-        sb.AppendLine();
-        sb.AppendLine($"        public override void Write(Utf8JsonWriter writer, ATObject? value, JsonSerializerOptions options)");
-        sb.AppendLine("        {");
-        sb.AppendLine("            if (value is ATObject record)");
-        sb.AppendLine("            {");
-        sb.AppendLine("                JsonSerializer.Serialize(writer, record.ToJson());");
-        sb.AppendLine("            }");
-        sb.AppendLine("        }");
-        sb.AppendLine("    }");
-        sb.AppendLine("}");
-        sb.AppendLine();
-        var outputPath = Path.Combine(this.basePath, "ATProtocolJsonConverter.g.cs");
-        await File.WriteAllTextAsync(outputPath, sb.ToString());
-    }
-
     private async Task GenerateJsonSerializerContextFile(List<ClassGeneration> classes, List<EnumProperties> enums)
     {
         var sb = new StringBuilder();
@@ -244,6 +195,12 @@ public partial class AppCommands
         sb.AppendLine($"        WriteIndented = true,");
         sb.AppendLine($"        PropertyNameCaseInsensitive = true,");
         sb.AppendLine("        Converters = new [] {");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATUriJsonConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATCidJsonConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATHandleJsonConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATDidJsonConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),");
         foreach (var enumProp in enums)
         {
             sb.AppendLine($"            typeof(JsonStringEnumConverter<{enumProp.CSharpNamespace}.{enumProp.ClassName}>),");
@@ -464,11 +421,11 @@ public partial class AppCommands
         {
             if (property.PropertyDefinition.Type == "array")
             {
-                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<ATObject, ATProtocolJsonConverter>))]");
+                // sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<ATObject, ATProtocolJsonConverter>))]");
             }
             else
             {
-                sb.AppendLine($"        [JsonConverter(typeof(ATProtocolJsonConverter))]");
+               // sb.AppendLine($"        [JsonConverter(typeof(ATProtocolJsonConverter))]");
             }
         }
         else if (property.IsEnum)
@@ -493,19 +450,6 @@ public partial class AppCommands
             {
                 sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATDidJsonConverter>))]");
             }
-            else
-            {
-                var enumValue = AllClasses.SelectMany(n => n.EnumProperties).FirstOrDefault(n => n.ClassName == property.RawType.Split(".").Last().Replace("?", string.Empty));
-                if (enumValue is not null)
-                {
-                    // Is Enum.
-                }
-                else
-                {
-                    sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, {property.CSharpNamespace}.{property.RawType.Split(".").Last().Replace("?", string.Empty)}JsonConverter>))]");
-                    await this.GenerateJsonConverterClass(property, cls);
-                }
-            }
         }
 
         // Add Converter for various AT Object types (Ex. ATDid, ATUri, etc.)
@@ -529,11 +473,8 @@ public partial class AppCommands
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]");
         }
 
-        // Add validation attributes
-        // GenerateValidationAttributes(sb, property);
-
         var propertyName = property.PropertyName;
-        
+
         // Handle default values
         if (property.PropertyDefinition.Default != null)
         {
@@ -547,63 +488,17 @@ public partial class AppCommands
         sb.AppendLine();
     }
 
-    private async Task GenerateJsonConverterClass(PropertyGeneration property, ClassGeneration cls)
-    {
-        var sb = new StringBuilder();
-        this.GenerateHeader(sb);
-        sb.AppendLine($"using {this.baseNamespace}.{property.CSharpNamespace};");
-        sb.AppendLine();
-        this.GenerateNamespace(sb, $"{this.baseNamespace}.{property.CSharpNamespace}");
-        var ts = property.RawType ?? property.Type;
-        var typeName = ts.Replace("?", string.Empty);
-        var className = typeName.Split('.').Last();
-        sb.AppendLine("{");
-        sb.AppendLine($"    /// <summary>");
-        sb.AppendLine($"    /// Json Converter for {className}.");
-        sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public class {className}JsonConverter : JsonConverter<{typeName}?>");
-        sb.AppendLine("    {");
-        sb.AppendLine($"        public override {typeName}? Read(ref Utf8JsonReader reader, System.Type typeToConvert, JsonSerializerOptions options)");
-        sb.AppendLine("        {");
-        sb.AppendLine("            if (reader.TokenType == JsonTokenType.StartObject)");
-        sb.AppendLine("            {");
-        sb.AppendLine("                using (JsonDocument doc = JsonDocument.ParseValue(ref reader))");
-        sb.AppendLine("                {");
-        sb.AppendLine("                    var rawText = doc.RootElement.GetRawText();");
-        sb.AppendLine("                    try");
-        sb.AppendLine("                    {");
-        sb.AppendLine($"                        return {typeName}.FromJson(rawText);");
-        sb.AppendLine("                    }");
-        sb.AppendLine("                    catch (Exception ex)");
-        sb.AppendLine("                    {");
-        sb.AppendLine("                        Console.WriteLine(ex);");
-        sb.AppendLine("                    }");
-        sb.AppendLine("                }");
-        sb.AppendLine("            }");
-        sb.AppendLine("            return null;");
-        sb.AppendLine("        }");
-        sb.AppendLine();
-        sb.AppendLine($"        public override void Write(Utf8JsonWriter writer, {typeName}? value, JsonSerializerOptions options)");
-        sb.AppendLine("        {");
-        sb.AppendLine("            JsonSerializer.Serialize(writer, value?.ToJson());");
-        sb.AppendLine("        }");
-        sb.AppendLine("    }");
-        sb.AppendLine("}");
-        sb.AppendLine();
-        var namespaceToPath = property.CSharpNamespace.Replace(".", Path.DirectorySeparatorChar.ToString());
-        var outputPath = Path.Combine(this.basePath, namespaceToPath);
-        Directory.CreateDirectory(outputPath);
-        var classPath = Path.Combine(outputPath, $"{className}JsonConverter.g.cs");
-        Console.WriteLine($"Writing Json Converter: {classPath}");
-        await File.WriteAllTextAsync(classPath, sb.ToString());
-    }
-
-    private string GenerateATObjectSource(string ns)
+    private string GenerateATObjectSource(string ns, List<ClassGeneration> classes)
     {
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
         this.GenerateNamespace(sb, ns);
         sb.AppendLine("{");
+        foreach (var cls in classes)
+        {
+            sb.AppendLine($"    [JsonDerivedType(typeof({cls.CSharpNamespace}.{cls.ClassName}), typeDiscriminator: \"{cls.Id}\")]");
+        }
+
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// The base class for FishyFlip ATProtocol Objects.");
         sb.AppendLine($"    /// </summary>");
@@ -675,11 +570,5 @@ public partial class AppCommands
             sb.AppendLine($"    /// {definition.Description}");
             sb.AppendLine($"    /// </summary>");
         }
-    }
-
-    private enum JsonType
-    {
-        Defs,
-        Other
     }
 }

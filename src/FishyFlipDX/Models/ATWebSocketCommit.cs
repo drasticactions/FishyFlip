@@ -61,7 +61,6 @@ public class ATWebSocketCommit
     /// <summary>
     /// Gets the record associated with the commit.
     /// </summary>
-    [JsonConverter(typeof(ATProtocolJsonConverter))]
     public ATObject? Record { get; }
 
     /// <summary>
