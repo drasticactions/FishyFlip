@@ -154,13 +154,32 @@ public class PropertyGeneration
             "string" when property.Format == "at-uri" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATUri();",
             "string" when property.Format == "at-identifier" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATIdentifier();",
             "string" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
+            "integer" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsInt64Value();",
+            "boolean" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsBoolean();",
+            "bytes" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].EncodeToBytes();",
             "cid-link" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
-            //"ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);",
-            // "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
-            _ => $"// {property.Type?.ToLower()}",
+            "blob" => $"this.{this.PropertyName} = new FishyFlip.Models.Blob(obj[\"{this.Key}\"]);",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && !this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].{this.TypeToCBorCast(this.Type)};",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj[\"{this.Key}\"]);",
+            _ => $"// TODO CBOR: {this.ClassName} {property.Type?.ToLower()}",
         };
 
         return baseType;
+    }
+
+    private string TypeToCBorCast(string type)
+    {
+        return type.Replace("?", string.Empty).ToLowerInvariant() switch
+        {
+            "string" => "AsString()",
+            "long" => "AsInt64Value()",
+            "bool" => "AsBoolean()",
+            "byte[]" => "EncodeToBytes()",
+            "datetime" => "AsDateTime()",
+            "ipfs.cid" => "ToATCid()",
+            _ => throw new InvalidOperationException($"Unknown type: {type}"),
+        };
     }
 
     private bool _IsBaseType(string type)
@@ -171,15 +190,17 @@ public class PropertyGeneration
             return this._IsBaseType(item.Replace("List<", string.Empty).Replace(">", string.Empty));
         }
 
-        return type.Replace("?", string.Empty) switch
+        return type.Replace("?", string.Empty).ToLowerInvariant() switch
         {
             "string" => true,
             "long" => true,
+            "integer" => true,
             "bool" => true,
+            "boolean" => true,
             "byte[]" => true,
-            "Blob" => true,
-            "DateTime" => true,
-            "Ipfs.Cid" => true,
+            "blob" => true,
+            "datetime" => true,
+            "ipfs.cid" => true,
             _ => false,
         };
     }

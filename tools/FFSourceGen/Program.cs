@@ -94,7 +94,7 @@ public partial class AppCommands
 
         foreach (var cls in AllClasses)
         {
-            switch(cls.Definition.Type)
+            switch (cls.Definition.Type)
             {
                 case "object":
                 case "record":
@@ -168,20 +168,6 @@ public partial class AppCommands
         }
     }
 
-    private void GenerateUsingsList(StringBuilder sb, ClassGeneration cls)
-    {
-        var properties = cls.Properties.Select(n => n.CSharpNamespace).Where(n => n != cls.CSharpNamespace).Distinct();
-        foreach (var item in properties)
-        {
-            sb.AppendLine($"using {this.baseNamespace}.{item};");
-        }
-
-        if (properties.Any())
-        {
-            sb.AppendLine();
-        }
-    }
-
     private async Task GenerateJsonSerializerContextFile(List<ClassGeneration> classes, List<EnumProperties> enums)
     {
         var sb = new StringBuilder();
@@ -221,6 +207,7 @@ public partial class AppCommands
             var typeInfoPropertyName = $"{enumProp.CSharpNamespace}.{enumProp.ClassName}".Replace(".", string.Empty);
             sb.AppendLine($"    [JsonSerializable(typeof({typeName}), TypeInfoPropertyName = \"{typeInfoPropertyName}\")]");
         }
+
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATWebSocketCommit))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATWebSocketCommitType))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATWebSocketEvent))]");
@@ -260,7 +247,7 @@ public partial class AppCommands
         this.GenerateCBorObjectClassConstructor(sb, cls);
         foreach (var property in cls.Properties)
         {
-            await this.GenerateProperty(sb, property, cls);
+            await this.GenerateProperty(sb, property);
         }
 
         this.GenerateTypeProperty(sb, cls.Id);
@@ -282,7 +269,7 @@ public partial class AppCommands
            Console.WriteLine($"File already exists: {cls.Id} {classPath}");
            return;
         }
-        
+
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
@@ -330,40 +317,6 @@ public partial class AppCommands
         sb.AppendLine();
     }
 
-    private (string jsonSerName, string cs) GenerateJsonSerNameAndCs(string id, string[] idSplit, string clsNamespace)
-    {
-        var jsonSerName = string.Empty;
-        var cs = string.Empty;
-
-        if (string.IsNullOrEmpty(idSplit[0]))
-        {
-            jsonSerName = idSplit.Last().ToPascalCase();
-            cs = $"{clsNamespace}.{jsonSerName}";
-        }
-        else if (idSplit.Length == 1)
-        {
-            var splitTwo = idSplit[0].Split('.').Select(n => n.ToPascalCase()).ToArray();
-            if (splitTwo.Length == 1)
-            {
-                jsonSerName = splitTwo.First();
-                cs = $"{clsNamespace}.{jsonSerName}";
-            }
-            else
-            {
-                jsonSerName = splitTwo.Last();
-                cs = string.Join(".", id.Replace("defs", jsonSerName).Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray());
-            }
-        }
-        else
-        {
-            var t = idSplit.First().Split('.').Select(n => n.ToPascalCase()).ToArray();
-            jsonSerName = idSplit.Last().ToPascalCase();
-            cs = string.Join(".", id.Replace("defs", jsonSerName).Split('#').First().Split('.').Select(n => n.ToPascalCase()).ToArray());
-        }
-
-        return (jsonSerName, cs);
-    }
-
     private async Task GenerateEnum(EnumProperties enumProperties)
     {
         Console.WriteLine($"Generating Enum: {enumProperties.Document.Id}, {enumProperties.ClassName}");
@@ -397,9 +350,10 @@ public partial class AppCommands
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
-    private async Task GenerateProperty(StringBuilder sb, PropertyGeneration property, ClassGeneration cls)
+    private async Task GenerateProperty(StringBuilder sb, PropertyGeneration property)
     {
         Console.WriteLine($"Generating Property for {property.Document.Id}: {property.Key}, {property.Type}");
+
         // Add property documentation if available
         if (!string.IsNullOrEmpty(property.PropertyDefinition.Description))
         {
@@ -417,18 +371,7 @@ public partial class AppCommands
             sb.AppendLine("        [JsonRequired]");
         }
 
-        if (property.IsATObject)
-        {
-            if (property.PropertyDefinition.Type == "array")
-            {
-                // sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<ATObject, ATProtocolJsonConverter>))]");
-            }
-            else
-            {
-               // sb.AppendLine($"        [JsonConverter(typeof(ATProtocolJsonConverter))]");
-            }
-        }
-        else if (property.IsEnum)
+        if (property.IsEnum)
         {
             sb.AppendLine($"        [JsonConverter(typeof(JsonStringEnumConverter<{property.ClassName}>))]");
         }

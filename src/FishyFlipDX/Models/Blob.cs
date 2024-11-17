@@ -19,6 +19,15 @@ public class Blob
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="Blob"/> class.
+    /// </summary>
+    /// <param name="cborObject">The binary data.</param>
+    public Blob(CBORObject? cborObject)
+    {
+        this.Data = cborObject?.EncodeToBytes();
+    }
+
+    /// <summary>
     /// Gets the binary data.
     /// </summary>
     public byte[]? Data { get; }
