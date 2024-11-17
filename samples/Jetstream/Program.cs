@@ -36,10 +36,20 @@ atWebProtocol.OnRecordReceived += (sender, args) =>
                         case FishyFlip.Lexicon.App.Bsky.Feed.Post.RecordType:
                             Console.WriteLine($"Post: {args.Record.Commit?.Collection}");
                             break;
+                        case FishyFlip.Lexicon.App.Bsky.Feed.Threadgate.RecordType:
+                            Console.WriteLine($"ThreadGate: {args.Record.Commit?.Collection}");
+                            var r = args.Record.Commit?.Record as FishyFlip.Lexicon.App.Bsky.Feed.Threadgate;
+                            if (r != null && (r.HiddenReplies?.Any() ?? false))
+                            {
+                                Console.WriteLine($"Post: {r.Post}");
+                            }
+
+                            break;
                         default:
                             Console.WriteLine($"Unknown Collection: {args.Record.Commit?.Collection}");
                             break;
                     }
+
                     break;
                 case ATWebSocketCommitType.Update:
                     Console.WriteLine($"Update: {args.Record.Commit?.Collection}");

@@ -22,7 +22,7 @@ public partial class AppCommands
     private string baseNamespace { get; set; } = "FishyFlip.Lexicon";
     private string basePath { get; set; }
 
-    public static List<PropertyGeneration> AllProperties { get; } = new();
+    public static List<ClassGeneration> AllClasses { get; } = new();
 
     /// <summary>
     /// Generate lexicon source code.
@@ -49,42 +49,104 @@ public partial class AppCommands
         }
 
         Directory.CreateDirectory(this.basePath);
-        var classList = new List<ClassGeneration>();
-        foreach (var jsonFile in files)
+        var defs = files.Where(n => n.Contains("defs.json")).ToList();
+        var mainRecordFiles = this.GetMainRecordJsonFiles(files.Except(defs).ToList());
+        var other = files.Except(defs).Except(mainRecordFiles).ToList();
+
+        foreach (var jsonFile in defs)
         {
             var filename = Path.GetFileNameWithoutExtension(jsonFile);
-            var jsonType = filename switch
+            await this.ProcessFile(jsonFile, JsonType.Defs);
+        }
+
+        foreach (var jsonFile in mainRecordFiles)
+        {
+            var filename = Path.GetFileNameWithoutExtension(jsonFile);
+            await this.ProcessFile(jsonFile, JsonType.Other);
+        }
+
+        foreach (var jsonFile in other)
+        {
+            var filename = Path.GetFileNameWithoutExtension(jsonFile);
+            await this.ProcessFile(jsonFile, JsonType.Other);
+        }
+
+        foreach (var cls in AllClasses)
+        {
+            switch (cls.Definition.Type)
             {
-                "defs" => JsonType.Defs,
-                _ => JsonType.Other,
-            };
+                 case "string":
+                    if (cls.Definition.KnownValues != null)
+                    {
+                        var prop = new PropertyDefinition()
+                        {
+                            Type = "string",
+                            KnownValues = cls.Definition.KnownValues,
+                        };
 
-            classList.AddRange(await this.ProcessFile(jsonFile, jsonType));
+                        var enumProp = new EnumProperties(prop, cls.Key, cls.Document, cls.Definition, cls.Path, cls.Namespace, cls.CSharpNamespace);
+                        cls.EnumProperties.Add(enumProp);
+                    }
+
+                    break;
+            }
         }
 
-        AllProperties.AddRange(classList.SelectMany(n => n.Properties));
-
-        foreach (var test in AllProperties)
+        foreach (var cls in AllClasses)
         {
-            test.UpdateType();
+            switch(cls.Definition.Type)
+            {
+                case "object":
+                case "record":
+                    await this.GenerateModelFile(cls);
+                    break;
+                default:
+                    Console.WriteLine($"Skipping {cls.Definition.Type} for {cls.Id}");
+                    break;
+            }
+
+            foreach (var enumProp in cls.EnumProperties)
+            {
+                await this.GenerateEnum(enumProp);
+            }
         }
 
-        foreach (var cls in classList)
-        {
-            await this.GenerateModelFile(cls);
-        }
-
-        var enumList = classList.SelectMany(n => n.EnumProperties).ToList();
-
-        await this.GenerateJsonSerializerContextFile(classList, enumList);
-        await this.GenerateJsonConverterClassFile(classList);
+        var enumList = AllClasses.SelectMany(n => n.EnumProperties).ToList();
+        var modelClasses = AllClasses.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record").ToList();
+        await this.GenerateJsonSerializerContextFile(modelClasses, enumList);
+        await this.GenerateJsonConverterClassFile(modelClasses);
 
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
     }
 
-    private async Task<List<ClassGeneration>> ProcessFile(string defJsonPath, JsonType jsonType)
+    private List<string> GetMainRecordJsonFiles(List<string> jsonFiles)
+    {
+        var mainRecordFiles = new List<string>();
+        foreach (var file in jsonFiles)
+        {
+            var jsonText = File.ReadAllText(file);
+            var schemaDocument = JsonSerializer.Deserialize<SchemaDocument>(jsonText, SourceGenerationContext.Default.SchemaDocument);
+            if (schemaDocument == null)
+            {
+                throw new Exception($"Failed to deserialize {file}.");
+            }
+
+            var mainRecord = schemaDocument.Defs.FirstOrDefault(n => n.Key == "main");
+            if (mainRecord.Value != null)
+            {
+                if (mainRecord.Value.Type == "record")
+                {
+                    mainRecordFiles.Add(file);
+                }
+            }
+        }
+
+        return mainRecordFiles;
+    }
+
+    private async Task ProcessFile(string defJsonPath, JsonType jsonType)
     {
         var defJsonText = await File.ReadAllTextAsync(defJsonPath);
         var schemaDocument = JsonSerializer.Deserialize<SchemaDocument>(defJsonText, SourceGenerationContext.Default.SchemaDocument);
@@ -94,7 +156,6 @@ public partial class AppCommands
         }
 
         var path = Path.Combine(schemaDocument.Id.Split('.').Take(schemaDocument.Id.Split('.').Length - 1).Select(n => n.ToPascalCase()).ToArray());
-        var classList = new List<ClassGeneration>();
         foreach (var definition in schemaDocument.Defs)
         {
             var classGeneration = new ClassGeneration(schemaDocument, definition.Key, definition.Value, path);
@@ -104,10 +165,8 @@ public partial class AppCommands
                 Console.WriteLine(enumProp.ToString());
             }
 
-            classList.Add(classGeneration);
+            AllClasses.Add(classGeneration);
         }
-
-        return classList;
     }
 
     private void GenerateUsingsList(StringBuilder sb, ClassGeneration cls)
@@ -150,7 +209,6 @@ public partial class AppCommands
         {
             sb.AppendLine($"                            case \"{cls.Id}\":");
             sb.AppendLine($"                                return {cls.CSharpNamespace}.{cls.ClassName}.FromJson(rawText);");
-            sb.AppendLine("                                break;");
         }
         sb.AppendLine("                        }");
         sb.AppendLine("                    }");
@@ -184,6 +242,13 @@ public partial class AppCommands
         sb.AppendLine($"    /// </summary>");
         sb.AppendLine($"    [JsonSourceGenerationOptions(");
         sb.AppendLine($"        WriteIndented = true,");
+        sb.AppendLine($"        PropertyNameCaseInsensitive = true,");
+        sb.AppendLine("        Converters = new [] {");
+        foreach (var enumProp in enums)
+        {
+            sb.AppendLine($"            typeof(JsonStringEnumConverter<{enumProp.CSharpNamespace}.{enumProp.ClassName}>),");
+        }
+        sb.AppendLine("        },");
         sb.AppendLine($"        PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,");
         sb.AppendLine($"        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]");
         foreach (var cls in classes)
@@ -209,9 +274,6 @@ public partial class AppCommands
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATIdentifier))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATUri))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Blob))]");
-        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Facet))]");
-        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.FacetFeature))]");
-        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.FacetIndex))]");
         sb.AppendLine($"    [JsonSerializable(typeof(List<ATObject>))]");
         sb.AppendLine($"    internal partial class SourceGenerationContext : JsonSerializerContext");
         sb.AppendLine("    {");
@@ -224,10 +286,11 @@ public partial class AppCommands
 
     private async Task GenerateModelFile(ClassGeneration cls)
     {
-        Console.WriteLine($"Generating Class: {cls.Id}, {cls.CSharpNamespace}, {cls.ClassName}");
+        Console.WriteLine($"Generating Class: {cls.Id}, {cls.CSharpNamespace}, {cls.ClassName}, {cls.Definition.Type}");
+
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateUsingsList(sb, cls);
+        // this.GenerateUsingsList(sb, cls);
         this.GenerateNamespace(sb, $"{this.baseNamespace}.{cls.CSharpNamespace}");
         sb.AppendLine("{");
 
@@ -240,7 +303,7 @@ public partial class AppCommands
         this.GenerateCBorObjectClassConstructor(sb, cls);
         foreach (var property in cls.Properties)
         {
-            this.GenerateProperty(sb, property, cls);
+            await this.GenerateProperty(sb, property, cls);
         }
 
         this.GenerateTypeProperty(sb, cls.Id);
@@ -257,12 +320,13 @@ public partial class AppCommands
         var outputPath = Path.Combine(this.basePath, cls.Path);
         Directory.CreateDirectory(outputPath);
         var classPath = Path.Combine(outputPath, $"{cls.ClassName}.g.cs");
-        await File.WriteAllTextAsync(classPath, sb.ToString());
-
-        foreach (var enumProp in cls.EnumProperties)
+        if (File.Exists(classPath))
         {
-            await this.GenerateEnum(enumProp);
+           Console.WriteLine($"File already exists: {cls.Id} {classPath}");
+           return;
         }
+        
+        await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
     private void GenerateToJsonWithSourceGenerator(StringBuilder sb, ClassGeneration cls)
@@ -357,9 +421,14 @@ public partial class AppCommands
         sb.AppendLine($"    /// </summary>");
         sb.AppendLine($"    public enum {enumProperties.ClassName}");
         sb.AppendLine("    {");
-        foreach (var value in enumProperties.Values)
+        for (int i = 0; i < enumProperties.Values.Length; i++)
         {
+            string? value = enumProperties.Values[i];
+            string? rawValue = enumProperties.RawValues[i];
+
+            sb.AppendLine($"       [JsonPropertyName(\"{rawValue}\")]");
             sb.AppendLine($"       {value},");
+            sb.AppendLine();
         }
 
         sb.AppendLine("    }");
@@ -371,7 +440,7 @@ public partial class AppCommands
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
-    private void GenerateProperty(StringBuilder sb, PropertyGeneration property, ClassGeneration cls)
+    private async Task GenerateProperty(StringBuilder sb, PropertyGeneration property, ClassGeneration cls)
     {
         Console.WriteLine($"Generating Property for {property.Document.Id}: {property.Key}, {property.Type}");
         // Add property documentation if available
@@ -388,14 +457,14 @@ public partial class AppCommands
         // Add Required attribute if property is required
         if (property.Definition.Required?.Contains(property.Key) == true)
         {
-           // sb.AppendLine("        [JsonRequired]");
+            sb.AppendLine("        [JsonRequired]");
         }
 
         if (property.IsATObject)
         {
             if (property.PropertyDefinition.Type == "array")
             {
-                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.ATProtocolListJsonConverter))]");
+                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<ATObject, ATProtocolJsonConverter>))]");
             }
             else
             {
@@ -405,6 +474,38 @@ public partial class AppCommands
         else if (property.IsEnum)
         {
             sb.AppendLine($"        [JsonConverter(typeof(JsonStringEnumConverter<{property.ClassName}>))]");
+        }
+        else if (property.PropertyDefinition.Type == "array" && !property.IsBaseType)
+        {
+            if (property.RawType == "FishyFlip.Models.ATUri?")
+            {
+                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATUriJsonConverter>))]");
+            }
+            else if (property.RawType == "Ipfs.Cid?")
+            {
+                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATCidJsonConverter>))]");
+            }
+            else if (property.RawType == "FishyFlip.Models.ATHandle?")
+            {
+                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATHandleJsonConverter>))]");
+            }
+            else if (property.RawType == "FishyFlip.Models.ATDid?")
+            {
+                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATDidJsonConverter>))]");
+            }
+            else
+            {
+                var enumValue = AllClasses.SelectMany(n => n.EnumProperties).FirstOrDefault(n => n.ClassName == property.RawType.Split(".").Last().Replace("?", string.Empty));
+                if (enumValue is not null)
+                {
+                    // Is Enum.
+                }
+                else
+                {
+                    sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, {property.CSharpNamespace}.{property.RawType.Split(".").Last().Replace("?", string.Empty)}JsonConverter>))]");
+                    await this.GenerateJsonConverterClass(property, cls);
+                }
+            }
         }
 
         // Add Converter for various AT Object types (Ex. ATDid, ATUri, etc.)
@@ -446,6 +547,57 @@ public partial class AppCommands
         sb.AppendLine();
     }
 
+    private async Task GenerateJsonConverterClass(PropertyGeneration property, ClassGeneration cls)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        sb.AppendLine($"using {this.baseNamespace}.{property.CSharpNamespace};");
+        sb.AppendLine();
+        this.GenerateNamespace(sb, $"{this.baseNamespace}.{property.CSharpNamespace}");
+        var ts = property.RawType ?? property.Type;
+        var typeName = ts.Replace("?", string.Empty);
+        var className = typeName.Split('.').Last();
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Json Converter for {className}.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public class {className}JsonConverter : JsonConverter<{typeName}?>");
+        sb.AppendLine("    {");
+        sb.AppendLine($"        public override {typeName}? Read(ref Utf8JsonReader reader, System.Type typeToConvert, JsonSerializerOptions options)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            if (reader.TokenType == JsonTokenType.StartObject)");
+        sb.AppendLine("            {");
+        sb.AppendLine("                using (JsonDocument doc = JsonDocument.ParseValue(ref reader))");
+        sb.AppendLine("                {");
+        sb.AppendLine("                    var rawText = doc.RootElement.GetRawText();");
+        sb.AppendLine("                    try");
+        sb.AppendLine("                    {");
+        sb.AppendLine($"                        return {typeName}.FromJson(rawText);");
+        sb.AppendLine("                    }");
+        sb.AppendLine("                    catch (Exception ex)");
+        sb.AppendLine("                    {");
+        sb.AppendLine("                        Console.WriteLine(ex);");
+        sb.AppendLine("                    }");
+        sb.AppendLine("                }");
+        sb.AppendLine("            }");
+        sb.AppendLine("            return null;");
+        sb.AppendLine("        }");
+        sb.AppendLine();
+        sb.AppendLine($"        public override void Write(Utf8JsonWriter writer, {typeName}? value, JsonSerializerOptions options)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            JsonSerializer.Serialize(writer, value?.ToJson());");
+        sb.AppendLine("        }");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var namespaceToPath = property.CSharpNamespace.Replace(".", Path.DirectorySeparatorChar.ToString());
+        var outputPath = Path.Combine(this.basePath, namespaceToPath);
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"{className}JsonConverter.g.cs");
+        Console.WriteLine($"Writing Json Converter: {classPath}");
+        await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
     private string GenerateATObjectSource(string ns)
     {
         var sb = new StringBuilder();
@@ -455,9 +607,10 @@ public partial class AppCommands
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// The base class for FishyFlip ATProtocol Objects.");
         sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public abstract class ATObject");
+        sb.AppendLine($"    public class ATObject");
         sb.AppendLine("    {");
         sb.AppendLine();
+        sb.AppendLine("        public ATObject() { }");
         sb.AppendLine($"        /// <summary>");
         sb.AppendLine($"        /// Gets the ATRecord Type.");
         sb.AppendLine($"        /// </summary>");

@@ -13,11 +13,49 @@ public class ClassGeneration
         this.Document = document;
         this.Definition = def;
         this.Key = key;
-        this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
         this.Namespace = string.Join(".", document.Id.Split('.').Take(document.Id.Split('.').Length - 1).ToArray());
         this.CSharpNamespace = string.Join(".", document.Id.Split('.').Take(document.Id.Split('.').Length - 1).Select(n => n.ToPascalCase()).ToArray());
+        this.ClassName = this.GenerateClassName();
         this.ProcessProperties();
         this.CBorProperty = $"this.{this.ClassName} = new {this.ClassName}(obj[\"{this.Key}\"]);";
+    }
+
+    private string GenerateClassName()
+    {
+        if (this.Key == "main")
+        {
+            var item = string.Join(string.Empty, this.Document.Id.Split('.').TakeLast(1));
+            var test = this.HasPropertyWithClassName(item);
+            var itemsToTake = 1;
+            if (this.HasPropertyWithClassName(item))
+            {
+                itemsToTake = 2;
+            }
+
+            return string.Join(string.Empty, this.Document.Id.Split('.').TakeLast(itemsToTake).Select(n => n.ToPascalCase())).ToPascalCase();
+        }
+        else if (this.Key == "view" || this.Key == "viewExternal")
+        {
+            var item = this.Key.ToPascalCase();
+            var root = this.Document.Id.Split("#").First();
+            var newItem = $"{item}{string.Join(string.Empty, root.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase()}";
+            if (newItem == "ViewRecord")
+            {
+                return "ViewRecordDef";
+            }
+
+            return newItem;
+        }
+
+        var cn = this.Key.ToPascalCase();
+        var testingBesting = $"{this.Namespace}{this.Key}";
+        var existingNamespace = AppCommands.AllClasses.Where(n => n.Namespace == this.Namespace);
+        var existingClass = existingNamespace.FirstOrDefault(n => n.ClassName == cn);
+        if (existingClass != null)
+        {
+            cn = $"{cn}Def";
+        }
+        return cn;
     }
 
     public string ClassName { get; }
@@ -62,6 +100,17 @@ public class ClassGeneration
     public override string ToString()
     {
         return $"Class: {this.Id}, {this.ClassName}";
+    }
+
+    private bool HasPropertyWithClassName(string key)
+    {
+        var test = this.Definition.Properties.TryGetValue(key, out var prop);
+        if (test)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void ProcessProperties()

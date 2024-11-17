@@ -1,4 +1,4 @@
-﻿// <copyright file="ATCidConverter.cs" company="Drastic Actions">
+﻿// <copyright file="ATCidJsonConverter.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 

@@ -16,6 +16,7 @@ public class PropertyGeneration
         this.Path = path;
         this.Key = key;
         this.SetNamespace(ns, cns);
+        this.Id = $"{document.Id}#{key}";
         this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
         this.Type = this.GetPropertyType(this.ClassName, this.ClassName, propertyDefinition);
         this.PropertyName = this.ClassName;
@@ -29,7 +30,6 @@ public class PropertyGeneration
             this.PropertyName = "TypeValue";
         }
 
-        this.Id = $"{document.Id}#{key}";
 
         this.CBorProperty = this.GenerateCborProperty();
     }
@@ -80,6 +80,8 @@ public class PropertyGeneration
 
     public string ClassName { get; }
 
+    public string RawType { get; private set; }
+
     public PropertyDefinition PropertyDefinition { get; }
 
     public SchemaDocument Document { get; }
@@ -103,6 +105,8 @@ public class PropertyGeneration
     public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
 
     public string Type { get; private set; }
+
+    public bool IsBaseType => this._IsBaseType(this.Type);
 
     public bool IsEnum => this.PropertyDefinition.KnownValues?.Length > 0;
 
@@ -134,11 +138,6 @@ public class PropertyGeneration
         };
     }
 
-    public void UpdateType()
-    {
-        this.Type = this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition);
-    }
-
     private string GenerateCborProperty()
     {
         var property = this.PropertyDefinition;
@@ -164,12 +163,12 @@ public class PropertyGeneration
         return baseType;
     }
 
-    private bool IsBaseType(string type)
+    private bool _IsBaseType(string type)
     {
         var item = type.Replace("?", string.Empty);
         if (item.Contains("List<"))
         {
-            return this.IsBaseType(item.Replace("List<", string.Empty).Replace(">", string.Empty));
+            return this._IsBaseType(item.Replace("List<", string.Empty).Replace(">", string.Empty));
         }
 
         return type.Replace("?", string.Empty) switch
@@ -217,6 +216,16 @@ public class PropertyGeneration
             _ => throw new InvalidOperationException($"Unknown property type: {property.Type}"),
         };
 
+        if (string.IsNullOrEmpty(baseType))
+        {
+            throw new InvalidOperationException("Base Type is null or empty.");
+        }
+
+        if (string.IsNullOrEmpty(this.RawType))
+        {
+            this.RawType = baseType;
+        }
+
         return $"{baseType}?";
     }
 
@@ -227,24 +236,86 @@ public class PropertyGeneration
             throw new InvalidOperationException("Property does not have items.");
         }
         var propertyName = this.GetPropertyType(className, name, property.Items);
-        var propertyNamePascal = !this.IsBaseType(propertyName) ? string.Join(".", propertyName.Split('.').Select(n => n.ToPascalCase())) : propertyName;
-        var item = $"List<{propertyNamePascal}>";
+        var propertyNamePascal = !this._IsBaseType(propertyName) ? string.Join(".", propertyName.Split('.').Select(n => n.ToPascalCase())) : propertyName;
+        var item = $"List<{propertyName}>";
         Console.WriteLine($"List Property: {item}");
+        this.RawType = propertyName;
         return item;
     }
 
     private string GetClassNameFromRef(string refString)
     {
-        Console.WriteLine($"{refString} Has #, {refString.Contains("#")}");
-        if (refString.Contains("."))
+        var idSplit = refString.Split('#');
+        var namespaceName = idSplit.First().Replace(".defs", string.Empty);
+        var idName = idSplit.Last();
+
+        if (AppCommands.AllClasses.Any() && !string.IsNullOrEmpty(namespaceName) && !string.IsNullOrEmpty(idName))
         {
-            if (AppCommands.AllProperties.Any())
+            var mainRef = AppCommands.AllClasses.FirstOrDefault(n => n.Id == refString);
+            if (mainRef is not null)
             {
-                var ff = AppCommands.AllProperties.FirstOrDefault(n => n.Id == refString);
-                if (ff is not null)
+                if (mainRef.Definition.Type == "string")
                 {
+                    return "string";
                 }
+
+                return $"{mainRef.CSharpNamespace}.{mainRef.ClassName}";
             }
+        }
+
+        if (string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(idName))
+        {
+            return "ATObject";
+        }
+
+        var localRef = this.Document.Defs.Where(n => n.Key == idName).Select(n => n.Value).FirstOrDefault();
+        if (localRef is not null)
+        {
+            switch (localRef.Type)
+            {
+                case "string":
+                    return "string";
+                case "object":
+                    return idName.ToPascalCase();
+                default:
+                    Console.WriteLine($"Local Ref: {localRef.Type}");
+                    break;
+            }
+        }
+
+        if (string.IsNullOrEmpty(namespaceName) && !string.IsNullOrEmpty(idName))
+        {
+            return idName.ToPascalCase();
+        }
+
+        if (!string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(idName))
+        {
+            // Ref is in another namespace.
+            return string.Join(".", namespaceName.Split('.').Select(n => n.ToPascalCase()));
+        }
+
+        if (idName.Contains("."))
+        {
+            return string.Join(".", idName.Split('.').Select(n => n.ToPascalCase()));
+        }
+
+        if (!string.IsNullOrEmpty(namespaceName) && !string.IsNullOrEmpty(idName))
+        {
+            return $"{string.Join(".", namespaceName.Split('.').Select(n => n.ToPascalCase()))}.{idName.ToPascalCase()}";
+        }
+
+        Console.WriteLine($"{refString} Has #, {refString.Contains("#")}");
+        if (refString.Contains(".") && !refString.Contains("#"))
+        {
+            var full = string.Join(".", refString.Replace(".defs", string.Empty).Replace("#", ".").Split('.').Select(n => n.ToPascalCase()));
+            return full;
+            // if (AppCommands.AllProperties.Any())
+            // {
+            //     var ff = AppCommands.AllProperties.FirstOrDefault(n => n.Id == refString);
+            //     if (ff is not null)
+            //     {
+            //     }
+            // }
         }
 
         var id = string.Join(".", refString.Replace(".defs", string.Empty).Replace("#", ".").Split('.')).Split(".").Last();

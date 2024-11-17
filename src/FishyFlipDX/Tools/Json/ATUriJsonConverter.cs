@@ -7,7 +7,7 @@ namespace FishyFlip.Tools.Json;
 /// <summary>
 /// Converts an <see cref="ATUri"/> object to and from JSON.
 /// </summary>
-public class ATUriJsonConverter : JsonConverter<ATUri>
+public class ATUriJsonConverter : JsonConverter<ATUri?>
 {
     /// <inheritdoc/>
     public override ATUri? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

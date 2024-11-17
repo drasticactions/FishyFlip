@@ -35,6 +35,7 @@ public sealed class ATJetStream : IDisposable
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            Converters = { new ATUriJsonConverter() },
         };
         this.sourceGenerationContext = new SourceGenerationContext(this.jsonSerializerOptions);
     }

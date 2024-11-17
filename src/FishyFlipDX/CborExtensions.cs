@@ -48,10 +48,12 @@ internal static class CborExtensions
         {
             return null;
         }
+
         if (obj.IsNull)
         {
             return null;
         }
+
         try
         {
             return ATHandle.Create(obj.AsString());
