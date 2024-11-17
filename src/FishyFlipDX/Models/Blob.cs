@@ -1,34 +1,45 @@
-﻿// <copyright file="Blob.cs" company="Drastic Actions">
+// <copyright file="Blob.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
+
+using FishyFlip.Lexicon.Com.Atproto.Repo;
 
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Represents a blob of binary data.
+/// Represents a blob record.
 /// </summary>
-public class Blob
+public class Blob : ATObject
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Blob"/> class.
     /// </summary>
-    /// <param name="data">The binary data.</param>
-    public Blob(byte[]? data)
+    public Blob()
     {
-        this.Data = data;
+    }
+
+    public Blob(CBORObject obj)
+    {
+        this.MimeType = obj["mimeType"].AsString();
+        this.Size = obj["size"].AsInt32();
+        this.Ref = new ATLinkRef(obj["ref"]);
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Blob"/> class.
+    /// Gets or sets the MIME type of the blob.
     /// </summary>
-    /// <param name="cborObject">The binary data.</param>
-    public Blob(CBORObject? cborObject)
-    {
-        this.Data = cborObject?.EncodeToBytes();
-    }
+    [JsonPropertyName("mimeType")]
+    public string? MimeType { get; set; }
 
     /// <summary>
-    /// Gets the binary data.
+    /// Gets or sets the size of the blob in bytes.
     /// </summary>
-    public byte[]? Data { get; }
+    [JsonPropertyName("size")]
+    public int Size { get; set; }
+
+    /// <summary>
+    /// Gets or sets the reference to the blob.
+    /// </summary>
+    [JsonPropertyName("ref")]
+    public ATLinkRef? Ref { get; set; }
 }

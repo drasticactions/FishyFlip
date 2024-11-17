@@ -3,6 +3,7 @@
 // </copyright>
 
 using FishyFlip;
+using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
 
@@ -36,7 +37,7 @@ atWebProtocol.OnRecordReceived += (sender, args) =>
                         case FishyFlip.Lexicon.App.Bsky.Feed.Post.RecordType:
                             Console.WriteLine($"Post: {args.Record.Commit?.Collection}");
                             var t = args.Record.Commit?.Record as FishyFlip.Lexicon.App.Bsky.Feed.Post;
-                            if (t?.Embed is not null)
+                            if (t?.Embed is not null && (t?.Embed is not EmbedRecord && t.Embed is not EmbedExternal))
                             {
                                 Console.WriteLine($"Embed: {t.Embed}");
                             }

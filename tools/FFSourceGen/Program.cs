@@ -248,6 +248,7 @@ public partial class AppCommands
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATError))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATHandle))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATIdentifier))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATLinkRef))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATUri))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Blob))]");
         sb.AppendLine($"    [JsonSerializable(typeof(List<ATObject>))]");
