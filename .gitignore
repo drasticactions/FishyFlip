@@ -9,10 +9,8 @@ src/Frameworks
 nuget/
 .meteor/
 .DS_Store
-.vscode/
 samples/SandboxApp/Program.cs
 xcuserdata/
-
 *.xcscmblueprint
 *.xccheckout
 
