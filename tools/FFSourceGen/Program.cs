@@ -114,6 +114,7 @@ public partial class AppCommands
         var enumList = AllClasses.SelectMany(n => n.EnumProperties).ToList();
         var modelClasses = AllClasses.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record").ToList();
         await this.GenerateJsonSerializerContextFile(modelClasses, enumList);
+        await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
 
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
@@ -143,6 +144,11 @@ public partial class AppCommands
         }
 
         return mainRecordFiles;
+    }
+
+    public static bool DoesRefStringHaveNoNamespace(string refString)
+    {
+        return refString.Contains("#") && !refString.Contains(".");
     }
 
     public static ClassGeneration? FindClassFromRef(string refString)
@@ -273,7 +279,7 @@ public partial class AppCommands
         this.GenerateCBorObjectClassConstructor(sb, cls);
         foreach (var property in cls.Properties)
         {
-            await this.GenerateProperty(sb, property);
+            await this.GenerateProperty(sb, property, cls);
         }
 
         this.GenerateTypeProperty(sb, cls.Id);
@@ -376,7 +382,7 @@ public partial class AppCommands
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
-    private async Task GenerateProperty(StringBuilder sb, PropertyGeneration property)
+    private async Task GenerateProperty(StringBuilder sb, PropertyGeneration property, ClassGeneration cls)
     {
         Console.WriteLine($"Generating Property for {property.Document.Id}: {property.Key}, {property.Type}");
 
@@ -443,7 +449,7 @@ public partial class AppCommands
         }
 
         var propertyName = property.PropertyName;
-        var propertyType = this.GenerateTypeClassValue(property);
+        var propertyType = this.GenerateTypeClassValue(property, cls);
 
         // Handle default values
         if (property.PropertyDefinition.Default != null)
@@ -458,7 +464,7 @@ public partial class AppCommands
         sb.AppendLine();
     }
 
-    private string GenerateTypeClassValue(PropertyGeneration property)
+    private string GenerateTypeClassValue(PropertyGeneration property, ClassGeneration cls)
     {
         if (property.IsBaseType)
         {
@@ -468,6 +474,28 @@ public partial class AppCommands
         if (property.RawType.Contains("ATObject") || property.RawType.Contains("FishyFlip.Models"))
         {
             return property.Type;
+        }
+
+        if (property.PropertyDefinition.Type == "ref" && property.PropertyDefinition.Ref != null)
+        {
+            var refString = property.PropertyDefinition.Ref;
+            if (DoesRefStringHaveNoNamespace(refString))
+            {
+                refString = $"{property.Id.Split("#").First()}{refString}";
+            }
+
+            var classRef = FindClassFromRef(refString);
+            if (classRef != null)
+            {
+                return $"{classRef.CSharpNamespace}.{classRef.ClassName}?";
+            }
+
+            var propRef = FindPropertyFromRef(property.PropertyDefinition.Ref);
+
+            if (propRef != null)
+            {
+                return $"{propRef.CSharpNamespace}.{propRef.ClassName}?";
+            }
         }
 
         var freshString = string.Empty;
@@ -517,6 +545,75 @@ public partial class AppCommands
         {
             return $"{freshString}?";
         }
+    }
+
+    private async Task GenerateCBORToATObjectConverterClassFile(List<ClassGeneration> classes)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, "FishyFlip.Lexicon");
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Converts CBOR to ATObjects.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public static class CborLexiconExtensions");
+        sb.AppendLine("    {");
+        // foreach (var cls in classes.DistinctBy(n => n.Id))
+        // {
+        //             sb.AppendLine($"    /// <summary>");
+        //             sb.AppendLine($"    /// Converts CBOR to {cls.ClassName}.");
+        //             sb.AppendLine($"    /// </summary>");
+        //             sb.AppendLine($"    public static {cls.CSharpNamespace}.{cls.ClassName}? To{cls.ClassName}(this CBORObject obj)");
+        //             sb.AppendLine("    {");
+        //             sb.AppendLine("        if (obj == null)");
+        //             sb.AppendLine("        {");
+        //             sb.AppendLine("            return null;");
+        //             sb.AppendLine("        }");
+        //             sb.AppendLine();
+        //             sb.AppendLine($"        return new {cls.CSharpNamespace}.{cls.ClassName}(obj);");
+        //             sb.AppendLine("    }");
+        //             sb.AppendLine();
+        // }
+        sb.AppendLine("        public static ATObject? ToATObject(this CBORObject obj)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            if (obj == null)");
+        sb.AppendLine("            {");
+        sb.AppendLine("                return null;");
+        sb.AppendLine("            }");
+        sb.AppendLine();
+        sb.AppendLine("            var type = obj[\"$type\"].AsString();");
+        sb.AppendLine("            switch (type)");
+        sb.AppendLine("            {");
+        foreach (var cls in classes)
+        {
+            sb.AppendLine($"                case \"{cls.Id}\":");
+            sb.AppendLine($"                    return new {cls.CSharpNamespace}.{cls.ClassName}(obj);");
+        }
+
+        sb.AppendLine("                default:");
+        sb.AppendLine("                    return null;");
+        sb.AppendLine("            }");
+        sb.AppendLine("        }");
+        sb.AppendLine();
+        sb.AppendLine("        public static List<ATObject?>? ToATObjectList(this CBORObject obj)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            if (obj == null)");
+        sb.AppendLine("            {");
+        sb.AppendLine("                return null;");
+        sb.AppendLine("            }");
+        sb.AppendLine();
+        sb.AppendLine("            var list = new List<ATObject?>();");
+        sb.AppendLine("            foreach (var item in obj.Values)");
+        sb.AppendLine("            {");
+        sb.AppendLine("                list.Add(item.ToATObject());");
+        sb.AppendLine("            }");
+        sb.AppendLine("            return list;");
+        sb.AppendLine("        }");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, "CborExtensions.g.cs");
+        await File.WriteAllTextAsync(outputPath, sb.ToString());
     }
 
     private string GenerateATObjectSource(string ns, List<ClassGeneration> classes)

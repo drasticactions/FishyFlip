@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip.Firehose", "FishyFlip.Firehose.csproj", "{6BF45A5A-22EE-4D17-B6B0-AC84370F0DD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishyFlip", "..\..\src\FishyFlip\FishyFlip.csproj", "{71A074B5-1054-462E-9D88-95C1E6875AC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishyFlipDX", "..\..\src\FishyFlipDX\FishyFlipDX.csproj", "{4C228EE0-4170-4A18-A7CF-2CEEB70D8E1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6BF45A5A-22EE-4D17-B6B0-AC84370F0DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BF45A5A-22EE-4D17-B6B0-AC84370F0DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BF45A5A-22EE-4D17-B6B0-AC84370F0DD9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71A074B5-1054-462E-9D88-95C1E6875AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71A074B5-1054-462E-9D88-95C1E6875AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71A074B5-1054-462E-9D88-95C1E6875AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71A074B5-1054-462E-9D88-95C1E6875AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C228EE0-4170-4A18-A7CF-2CEEB70D8E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C228EE0-4170-4A18-A7CF-2CEEB70D8E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C228EE0-4170-4A18-A7CF-2CEEB70D8E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C228EE0-4170-4A18-A7CF-2CEEB70D8E1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

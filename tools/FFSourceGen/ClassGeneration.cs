@@ -64,6 +64,8 @@ public class ClassGeneration
 
     public SchemaDefinition Definition { get; }
 
+    public string FullNamespace { get; }
+
     public string Namespace { get; }
 
     public string CSharpNamespace { get; }

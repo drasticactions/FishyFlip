@@ -18,6 +18,16 @@ public class ATUri
     /// <summary>
     /// Initializes a new instance of the <see cref="ATUri"/> class.
     /// </summary>
+    /// <param name="n">The CBOR URI.</param>
+    /// <exception cref="FormatException">Thrown if format is invalid.</exception>
+    public ATUri(CBORObject n)
+        : this(n.AsString() ?? string.Empty)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATUri"/> class.
+    /// </summary>
     /// <param name="uri">The URI.</param>
     /// <exception cref="FormatException">Thrown if format is invalid.</exception>
     public ATUri(string uri)

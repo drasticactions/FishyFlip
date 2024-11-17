@@ -17,6 +17,8 @@ global using Microsoft.Extensions.Logging;
 global using PeterO.Cbor;
 global using Ipfs;
 global using ATCid = Ipfs.Cid;
+global using FishyFlip.Events;
+global using FishyFlip.Lexicon;
 
 #if NETSTANDARD
 namespace System.Runtime.CompilerServices

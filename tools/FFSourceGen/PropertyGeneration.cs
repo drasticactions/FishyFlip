@@ -154,18 +154,23 @@ public class PropertyGeneration
 
         var baseType = property.Type?.ToLower() switch
         {
-            "string" when property.Format == "did" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATDid();",
-            "string" when property.Format == "datetime" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToDateTime();",
-            "string" when property.Format == "handle" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATHandle();",
-            "string" when property.Format == "at-uri" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATUri();",
-            "string" when property.Format == "at-identifier" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATIdentifier();",
-            "string" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
-            "integer" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsInt64Value();",
-            "boolean" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].AsBoolean();",
-            "bytes" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].EncodeToBytes();",
-            "cid-link" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
-            "blob" => $"this.{this.PropertyName} = new FishyFlip.Models.Blob(obj[\"{this.Key}\"]);",
-            "ref" when !string.IsNullOrEmpty(property.Ref) && !this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetCBORTypeFromRef(property.Ref),
+            "string" when property.Format == "did" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATDid();",
+            "string" when property.Format == "datetime" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToDateTime();",
+            "string" when property.Format == "handle" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATHandle();",
+            "string" when property.Format == "at-uri" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATUri();",
+            "string" when property.Format == "at-identifier" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATIdentifier();",
+            "string" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].AsString();",
+            "integer" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].AsInt64Value();",
+            "boolean" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].AsBoolean();",
+            "bytes" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].EncodeToBytes();",
+            "cid-link" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
+            "unknown" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
+            "object" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
+            "record" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
+            "union" when property.Refs?.Length > 0 => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
+            "blob" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new FishyFlip.Models.Blob(obj[\"{this.Key}\"]);",
+            "array" when property.Items != null => this.GetListString(),
+            "ref" when !string.IsNullOrEmpty(property.Ref) && !this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetFullCBORTypeFromRef(property.Ref),
             "ref" when !string.IsNullOrEmpty(property.Ref) && this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].{this.TypeToCBorCast(this.Type)};",
             "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj[\"{this.Key}\"]);",
             _ => $"// TODO CBOR: {this.ClassName} {property.Type?.ToLower()}",
@@ -174,12 +179,55 @@ public class PropertyGeneration
         return baseType;
     }
 
-    private string GetCBORTypeFromRef(string refString)
+    private string GetListString()
     {
-        var isList = this.PropertyDefinition.Type?.ToLower() == "array";
-        if (isList)
+        var propertyName = this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition.Items!);
+
+        if (this.IsBaseType)
         {
-            return $"// TODO CBOR: {this.ClassName} {this.PropertyDefinition.Type?.ToLower()}";
+            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.{this.TypeToCBorCast(propertyName)} : default).ToList();";
+        }
+
+        if (propertyName.Contains("ATObject"))
+        {
+            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();";
+        }
+
+        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? new {propertyName.Replace("?", string.Empty)}(n) : null).ToList();";
+    }
+
+    private string GetTypeFromRef(string refString)
+    {
+        if (AppCommands.DoesRefStringHaveNoNamespace(refString))
+        {
+            refString = $"{this.Id.Split("#").First()}{refString}";
+        }
+
+        var classRef = AppCommands.FindClassFromRef(refString);
+        if (classRef is not null)
+        {
+            if (classRef.Definition.KnownValues?.Length > 0)
+            {
+                return $"{classRef.CSharpNamespace}.{classRef.ClassName}";
+            }
+
+            return $"{classRef.CSharpNamespace}.{classRef.ClassName}";
+        }
+
+        var prop = AppCommands.FindPropertyFromRef(refString);
+        if (prop is not null)
+        {
+            return prop.ClassName;
+        }
+
+        return "ATObject";
+    }
+
+    private string GetFullCBORTypeFromRef(string refString)
+    {
+        if (AppCommands.DoesRefStringHaveNoNamespace(refString))
+        {
+            refString = $"{this.Id.Split("#").First()}{refString}";
         }
 
         var classRef = AppCommands.FindClassFromRef(refString);
@@ -306,6 +354,7 @@ public class PropertyGeneration
 
     private string GetClassNameFromRef(string refString)
     {
+        // var classRef = AppCommands.FindClassFromRef(refString);
         var idSplit = refString.Split('#');
         var namespaceName = idSplit.First().Replace(".defs", string.Empty);
         var idName = idSplit.Last();
