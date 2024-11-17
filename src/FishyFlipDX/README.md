@@ -4,7 +4,7 @@
 
 ![FishyFlip Logo](https://user-images.githubusercontent.com/898335/253740405-4b0ae177-cc49-4c26-b6b0-ab8e835a0e62.png)
 
-FishyFlipDX is an alpha version of FishyFlip, an [ATProtocol](https://atproto.com/) library for .NET. The biggest differences between it and the original version is the Lexicon. The ATProtocl Lexicon is being source generated, making it _much_ easier to upgrade as changes and improvements are made to it, and also helps make it consistant for comparing implementation details between their API documentation and this.
+FishyFlipDX is an alpha version of FishyFlip, an [ATProtocol](https://atproto.com/) library for .NET. The biggest differences between it and the original version is the Lexicon. The ATProtocol Lexicon is being source generated, making it _much_ easier to upgrade as changes and improvements are made to it, and also helps make it consistant for comparing implementation details between their API documentation and this.
 
 However, this may require breaking changes around namespaces and object names to make it work without more hackery. This library exists to work through those issues in the open.
 
