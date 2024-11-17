@@ -114,19 +114,17 @@ public class PropertyGeneration
 
     public bool IsBaseType => this._IsBaseType(this.Type);
 
-    public bool IsEnum => this.PropertyDefinition.KnownValues?.Length > 0;
-
     public string GetDefaultValue()
     {
         var defaultValue = this.GetDefaultValueString(this.PropertyDefinition);
         if (this.PropertyDefinition.KnownValues?.Length > 0)
         {
-            defaultValue = $"{defaultValue.ToPascalCase()}";
-        }
+            if (this.Type == "string?")
+            {
+                return $"\"{defaultValue}\"";
+            }
 
-        if (this.IsEnum)
-        {
-            defaultValue = $"{this.ClassName}.{defaultValue}";
+            return $"{defaultValue}";
         }
 
         return defaultValue;
@@ -173,7 +171,7 @@ public class PropertyGeneration
             "ref" when !string.IsNullOrEmpty(property.Ref) && !this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetFullCBORTypeFromRef(property.Ref),
             "ref" when !string.IsNullOrEmpty(property.Ref) && this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].{this.TypeToCBorCast(this.Type)};",
             "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj[\"{this.Key}\"]);",
-            _ => $"// TODO CBOR: {this.ClassName} {property.Type?.ToLower()}",
+            _ => throw new InvalidOperationException($"Unknown property type: {property.Type}"),
         };
 
         return baseType;
@@ -233,22 +231,12 @@ public class PropertyGeneration
         var classRef = AppCommands.FindClassFromRef(refString);
         if (classRef is not null)
         {
-            if (classRef.Definition.KnownValues?.Length > 0)
-            {
-                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = ({classRef.CSharpNamespace}.{classRef.ClassName})Enum.Parse(typeof({classRef.CSharpNamespace}.{classRef.ClassName}), obj[\"{this.Key}\"].AsString());";
-            }
-
             return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {classRef.CSharpNamespace}.{classRef.ClassName}(obj[\"{this.Key}\"]);";
         }
 
         var prop = AppCommands.FindPropertyFromRef(refString);
         if (prop is not null)
         {
-            if (prop.IsEnum)
-            {
-                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = {prop.ClassName}.Parse(obj[\"{this.Key}\"].AsString());";
-            }
-
             return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {prop.ClassName}(obj[\"{this.Key}\"]);";
         }
 
@@ -295,11 +283,11 @@ public class PropertyGeneration
     private string GetPropertyType(string className, string name, PropertyDefinition property)
     {
         // Handle known values as enums
-        if (property.KnownValues?.Length > 0)
-        {
-            this.rawType = $"{name}".ToPascalCase();
-            return $"{name}".ToPascalCase();
-        }
+        // if (property.KnownValues?.Length > 0)
+        // {
+        //     this.rawType = $"{name}".ToPascalCase();
+        //     return $"{name}".ToPascalCase();
+        // }
 
         var baseType = property.Type?.ToLower() switch
         {

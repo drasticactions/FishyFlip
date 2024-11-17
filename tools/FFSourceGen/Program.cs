@@ -75,27 +75,6 @@ public partial class AppCommands
         {
             switch (cls.Definition.Type)
             {
-                 case "string":
-                    if (cls.Definition.KnownValues != null)
-                    {
-                        var prop = new PropertyDefinition()
-                        {
-                            Type = "string",
-                            KnownValues = cls.Definition.KnownValues,
-                        };
-
-                        var enumProp = new EnumProperties(prop, cls.Key, cls.Document, cls.Definition, cls.Path, cls.Namespace, cls.CSharpNamespace);
-                        cls.EnumProperties.Add(enumProp);
-                    }
-
-                    break;
-            }
-        }
-
-        foreach (var cls in AllClasses)
-        {
-            switch (cls.Definition.Type)
-            {
                 case "object":
                 case "record":
                     await this.GenerateModelFile(cls);
@@ -104,16 +83,10 @@ public partial class AppCommands
                     Console.WriteLine($"Skipping {cls.Definition.Type} for {cls.Id}");
                     break;
             }
-
-            foreach (var enumProp in cls.EnumProperties)
-            {
-                await this.GenerateEnum(enumProp);
-            }
         }
 
-        var enumList = AllClasses.SelectMany(n => n.EnumProperties).ToList();
         var modelClasses = AllClasses.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record").ToList();
-        await this.GenerateJsonSerializerContextFile(modelClasses, enumList);
+        await this.GenerateJsonSerializerContextFile(modelClasses);
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
 
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
@@ -191,16 +164,11 @@ public partial class AppCommands
         {
             var classGeneration = new ClassGeneration(schemaDocument, definition.Key, definition.Value, path);
             Console.WriteLine(classGeneration.ToString());
-            foreach (var enumProp in classGeneration.EnumProperties)
-            {
-                Console.WriteLine(enumProp.ToString());
-            }
-
             AllClasses.Add(classGeneration);
         }
     }
 
-    private async Task GenerateJsonSerializerContextFile(List<ClassGeneration> classes, List<EnumProperties> enums)
+    private async Task GenerateJsonSerializerContextFile(List<ClassGeneration> classes)
     {
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
@@ -219,10 +187,10 @@ public partial class AppCommands
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATDidJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),");
-        foreach (var enumProp in enums)
-        {
-            sb.AppendLine($"            typeof(JsonStringEnumConverter<{enumProp.CSharpNamespace}.{enumProp.ClassName}>),");
-        }
+        // foreach (var enumProp in enums)
+        // {
+        //     sb.AppendLine($"            typeof(JsonStringEnumConverter<{enumProp.CSharpNamespace}.{enumProp.ClassName}>),");
+        // }
         sb.AppendLine("        },");
         sb.AppendLine($"        PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,");
         sb.AppendLine($"        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]");
@@ -230,13 +198,6 @@ public partial class AppCommands
         {
             var typeName = $"{this.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}";
             var typeInfoPropertyName = $"{cls.CSharpNamespace}.{cls.ClassName}".Replace(".", string.Empty);
-            sb.AppendLine($"    [JsonSerializable(typeof({typeName}), TypeInfoPropertyName = \"{typeInfoPropertyName}\")]");
-        }
-
-        foreach (var enumProp in enums)
-        {
-            var typeName = $"{this.baseNamespace}.{enumProp.CSharpNamespace}.{enumProp.ClassName}";
-            var typeInfoPropertyName = $"{enumProp.CSharpNamespace}.{enumProp.ClassName}".Replace(".", string.Empty);
             sb.AppendLine($"    [JsonSerializable(typeof({typeName}), TypeInfoPropertyName = \"{typeInfoPropertyName}\")]");
         }
 
@@ -299,8 +260,8 @@ public partial class AppCommands
         var classPath = Path.Combine(outputPath, $"{cls.ClassName}.g.cs");
         if (File.Exists(classPath))
         {
-           Console.WriteLine($"File already exists: {cls.Id} {classPath}");
-           return;
+            Console.WriteLine($"File already exists: {cls.Id} {classPath}");
+            return;
         }
 
         await File.WriteAllTextAsync(classPath, sb.ToString());
@@ -350,39 +311,6 @@ public partial class AppCommands
         sb.AppendLine();
     }
 
-    private async Task GenerateEnum(EnumProperties enumProperties)
-    {
-        Console.WriteLine($"Generating Enum: {enumProperties.Document.Id}, {enumProperties.ClassName}");
-        var sb = new StringBuilder();
-        this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, $"{this.baseNamespace}.{enumProperties.CSharpNamespace}");
-        sb.AppendLine("{");
-
-        this.GenerateClassDocumentation(sb, enumProperties.PropertyDefinition);
-        sb.AppendLine($"    /// <summary>");
-        sb.AppendLine($"    /// Known value for {enumProperties.ClassName}.");
-        sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public enum {enumProperties.ClassName}");
-        sb.AppendLine("    {");
-        for (int i = 0; i < enumProperties.Values.Length; i++)
-        {
-            string? value = enumProperties.Values[i];
-            string? rawValue = enumProperties.RawValues[i];
-
-            sb.AppendLine($"       [JsonPropertyName(\"{rawValue}\")]");
-            sb.AppendLine($"       {value},");
-            sb.AppendLine();
-        }
-
-        sb.AppendLine("    }");
-        sb.AppendLine("}");
-        sb.AppendLine();
-        var outputPath = Path.Combine(this.basePath, enumProperties.Path);
-        Directory.CreateDirectory(outputPath);
-        var classPath = Path.Combine(outputPath, $"{enumProperties.ClassName}.g.cs");
-        await File.WriteAllTextAsync(classPath, sb.ToString());
-    }
-
     private async Task GenerateProperty(StringBuilder sb, PropertyGeneration property, ClassGeneration cls)
     {
         Console.WriteLine($"Generating Property for {property.Document.Id}: {property.Key}, {property.Type}");
@@ -404,11 +332,7 @@ public partial class AppCommands
             sb.AppendLine("        [JsonRequired]");
         }
 
-        if (property.IsEnum)
-        {
-            sb.AppendLine($"        [JsonConverter(typeof(JsonStringEnumConverter<{property.ClassName}>))]");
-        }
-        else if (property.PropertyDefinition.Type == "array" && !property.IsBaseType)
+        if (property.PropertyDefinition.Type == "array" && !property.IsBaseType)
         {
             if (property.RawType == "FishyFlip.Models.ATUri?")
             {
@@ -538,14 +462,7 @@ public partial class AppCommands
             throw new Exception($"Failed to generate type for {property.Key}");
         }
 
-        if (property.IsEnum)
-        {
-            return $"{freshString}";
-        }
-        else
-        {
-            return $"{freshString}?";
-        }
+        return $"{freshString}?";
     }
 
     private async Task GenerateCBORToATObjectConverterClassFile(List<ClassGeneration> classes)
@@ -559,22 +476,6 @@ public partial class AppCommands
         sb.AppendLine($"    /// </summary>");
         sb.AppendLine($"    public static class CborLexiconExtensions");
         sb.AppendLine("    {");
-        // foreach (var cls in classes.DistinctBy(n => n.Id))
-        // {
-        //             sb.AppendLine($"    /// <summary>");
-        //             sb.AppendLine($"    /// Converts CBOR to {cls.ClassName}.");
-        //             sb.AppendLine($"    /// </summary>");
-        //             sb.AppendLine($"    public static {cls.CSharpNamespace}.{cls.ClassName}? To{cls.ClassName}(this CBORObject obj)");
-        //             sb.AppendLine("    {");
-        //             sb.AppendLine("        if (obj == null)");
-        //             sb.AppendLine("        {");
-        //             sb.AppendLine("            return null;");
-        //             sb.AppendLine("        }");
-        //             sb.AppendLine();
-        //             sb.AppendLine($"        return new {cls.CSharpNamespace}.{cls.ClassName}(obj);");
-        //             sb.AppendLine("    }");
-        //             sb.AppendLine();
-        // }
         sb.AppendLine("        public static ATObject? ToATObject(this CBORObject obj)");
         sb.AppendLine("        {");
         sb.AppendLine("            if (obj == null)");

@@ -78,8 +78,6 @@ public class ClassGeneration
 
     public bool IsEndpoint => this.Definition.Type == "procedure";
 
-    public List<EnumProperties> EnumProperties { get; } = new();
-
     public List<PropertyGeneration> Properties { get; } = new();
 
     public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
@@ -121,17 +119,6 @@ public class ClassGeneration
         {
             foreach (var prop in this.Definition.Properties)
             {
-                switch (prop.Value.Type)
-                {
-                    case "string":
-                        if (prop.Value.KnownValues is not null)
-                        {
-                            this.EnumProperties.Add(new EnumProperties(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace));
-                        }
-
-                        break;
-                }
-
                 this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace, this.ClassName));
             }
         }
@@ -140,17 +127,6 @@ public class ClassGeneration
         {
             foreach (var prop in this.Definition.Record.Properties)
             {
-                switch (prop.Value.Type)
-                {
-                    case "string":
-                        if (prop.Value.KnownValues is not null)
-                        {
-                            this.EnumProperties.Add(new EnumProperties(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace));
-                        }
-
-                        break;
-                }
-
                 this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace, this.ClassName));
             }
         }

@@ -9,7 +9,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a blob record.
 /// </summary>
-public class Blob : ATObject
+public class Blob
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Blob"/> class.

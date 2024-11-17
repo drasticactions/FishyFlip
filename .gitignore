@@ -11,7 +11,6 @@ nuget/
 .DS_Store
 samples/SandboxApp/Program.cs
 xcuserdata/
-src/FishyFlipDX/Lexicon/
 *.xcscmblueprint
 *.xccheckout
 
