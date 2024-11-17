@@ -23,7 +23,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public AppPasswordDef(CBORObject obj)
         {
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
-            if (obj["password"] is not null) this.Password = obj["password"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["privileged"] is not null) this.Privileged = obj["privileged"].AsBoolean();
         }
@@ -31,10 +30,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("name")]
         [JsonRequired]
         public string? Name { get; set; }
-
-        [JsonPropertyName("password")]
-        [JsonRequired]
-        public string? Password { get; set; }
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
@@ -47,9 +42,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets the ATRecord Type.
         /// </summary>
         [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createAppPassword#appPassword";
+        public override string Type => "com.atproto.server.listAppPasswords#appPassword";
 
-        public const string RecordType = "com.atproto.server.createAppPassword#appPassword";
+        public const string RecordType = "com.atproto.server.listAppPasswords#appPassword";
 
         public override string ToJson()
         {

@@ -16,7 +16,7 @@ public class FrameTombstone
     public FrameTombstone(CBORObject obj)
     {
         this.Did = obj["did"] is not null ? ATDid.Create(obj["did"].AsString()) : null;
-        this.Seq = obj["seq"].ToObject<long>();
+        this.Seq = obj["seq"].AsInt64Value();
         this.Time = obj["time"] is not null ? obj["time"].ToDateTime() : null;
     }
 
