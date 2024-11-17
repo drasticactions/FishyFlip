@@ -7,4 +7,4 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a collection of notifications.
 /// </summary>
-public record NotificationCollection(Notification[] Notifications);
+public record NotificationCollection(Notification[] Notifications, string Cursor);
