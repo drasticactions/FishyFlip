@@ -8,6 +8,16 @@ FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, f
 
 For documentation, check out https://drasticactions.github.io/FishyFlip
 
+### Code Flow
+
+The code flow for this repo is:
+
+- `develop` for the newest tip
+- `main` for the newest "stable" release build
+- `release-version` for servicing previous releases, should it be needed
+
+For 99.9% of PRs, you should target `develop`
+
 ### Third-Party Libraries
 
 - [GitVersion](https://github.com/GitTools/GitVersion)
