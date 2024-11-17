@@ -145,6 +145,32 @@ public partial class AppCommands
         return mainRecordFiles;
     }
 
+    public static ClassGeneration? FindClassFromRef(string refString)
+    {
+        return AllClasses.FirstOrDefault(n => n.Id == refString);
+    }
+
+    public static PropertyGeneration? FindPropertyFromRef(string refString)
+    {
+        var splitHashtag = refString.Split('#').Where(n => !string.IsNullOrEmpty(n)).ToArray();
+        if (splitHashtag.Length == 2)
+        {
+            var def = splitHashtag[0];
+            var key = splitHashtag[1];
+            var cls = AllClasses.FirstOrDefault(n => n.Id == def);
+            if (cls != null)
+            {
+                var prop = cls.Properties.FirstOrDefault(n => n.Key == key);
+                if (prop != null)
+                {
+                    return prop;
+                }
+            }
+        }
+
+        return null;
+    }
+
     private async Task ProcessFile(string defJsonPath)
     {
         var defJsonText = await File.ReadAllTextAsync(defJsonPath);
@@ -417,18 +443,80 @@ public partial class AppCommands
         }
 
         var propertyName = property.PropertyName;
+        var propertyType = this.GenerateTypeClassValue(property);
 
         // Handle default values
         if (property.PropertyDefinition.Default != null)
         {
-            sb.AppendLine($"        public {property.Type} {propertyName} {{ get; set; }} = {property.GetDefaultValue()};");
+            sb.AppendLine($"        public {propertyType} {propertyName} {{ get; set; }} = {property.GetDefaultValue()};");
         }
         else
         {
-            sb.AppendLine($"        public {property.Type} {propertyName} {{ get; set; }}");
+            sb.AppendLine($"        public {propertyType} {propertyName} {{ get; set; }}");
         }
 
         sb.AppendLine();
+    }
+
+    private string GenerateTypeClassValue(PropertyGeneration property)
+    {
+        if (property.IsBaseType)
+        {
+            return property.Type;
+        }
+
+        if (property.RawType.Contains("ATObject") || property.RawType.Contains("FishyFlip.Models"))
+        {
+            return property.Type;
+        }
+
+        var freshString = string.Empty;
+        var type = property.RawType;
+
+        if (!type.Contains("."))
+        {
+            if (!type.Contains(this.baseNamespace))
+            {
+                freshString = $"{this.baseNamespace}.";
+            }
+
+            if (!type.Contains(property.CSharpNamespace))
+            {
+                freshString += $"{property.CSharpNamespace}.";
+            }
+
+            freshString += $"{type.ToPascalCase()}";
+        }
+        else
+        {
+            if (!type.Contains(this.baseNamespace) && !type.Contains("FishyFlip.Models"))
+            {
+                freshString = $"{this.baseNamespace}.{type.ToPascalCase()}";
+            }
+            else
+            {
+                freshString = type;
+            }
+        }
+
+        if (property.Type.Contains("List<"))
+        {
+            freshString = $"List<{freshString}>";
+        }
+
+        if (string.IsNullOrEmpty(freshString))
+        {
+            throw new Exception($"Failed to generate type for {property.Key}");
+        }
+
+        if (property.IsEnum)
+        {
+            return $"{freshString}";
+        }
+        else
+        {
+            return $"{freshString}?";
+        }
     }
 
     private string GenerateATObjectSource(string ns, List<ClassGeneration> classes)

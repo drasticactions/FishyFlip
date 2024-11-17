@@ -18,7 +18,6 @@ public class PropertyGeneration
         this.SetNamespace(ns, cns);
         this.Id = $"{document.Id}#{key}";
         this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
-        this.Type = this.GetPropertyType(this.ClassName, this.ClassName, propertyDefinition);
         this.PropertyName = this.ClassName;
         if (this.PropertyName == cn)
         {
@@ -29,9 +28,6 @@ public class PropertyGeneration
         {
             this.PropertyName = "TypeValue";
         }
-
-
-        this.CBorProperty = this.GenerateCborProperty();
     }
 
     private void SetNamespace(string ns, string cns)
@@ -80,7 +76,17 @@ public class PropertyGeneration
 
     public string ClassName { get; }
 
-    public string RawType { get; private set; }
+    private string? rawType = null;
+
+    public string RawType {
+        get
+        {
+            if (this.rawType is not null)
+                return this.rawType;
+            this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition);
+            return this.rawType;
+        }
+    }
 
     public PropertyDefinition PropertyDefinition { get; }
 
@@ -100,11 +106,11 @@ public class PropertyGeneration
 
     public string CSharpNamespace { get; private set; }
 
-    public string CBorProperty { get; }
+    public string CBorProperty => this.GenerateCborProperty();
 
     public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
 
-    public string Type { get; private set; }
+    public string Type => this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition);
 
     public bool IsBaseType => this._IsBaseType(this.Type);
 
@@ -159,13 +165,46 @@ public class PropertyGeneration
             "bytes" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].EncodeToBytes();",
             "cid-link" => $"this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
             "blob" => $"this.{this.PropertyName} = new FishyFlip.Models.Blob(obj[\"{this.Key}\"]);",
-            "ref" when !string.IsNullOrEmpty(property.Ref) && !this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);",
+            "ref" when !string.IsNullOrEmpty(property.Ref) && !this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetCBORTypeFromRef(property.Ref),
             "ref" when !string.IsNullOrEmpty(property.Ref) && this.IsBaseType && !property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].{this.TypeToCBorCast(this.Type)};",
             "ref" when !string.IsNullOrEmpty(property.Ref) && property.Ref.Equals("com.atproto.repo.strongRef") => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj[\"{this.Key}\"]);",
             _ => $"// TODO CBOR: {this.ClassName} {property.Type?.ToLower()}",
         };
 
         return baseType;
+    }
+
+    private string GetCBORTypeFromRef(string refString)
+    {
+        var isList = this.PropertyDefinition.Type?.ToLower() == "array";
+        if (isList)
+        {
+            return $"// TODO CBOR: {this.ClassName} {this.PropertyDefinition.Type?.ToLower()}";
+        }
+
+        var classRef = AppCommands.FindClassFromRef(refString);
+        if (classRef is not null)
+        {
+            if (classRef.Definition.KnownValues?.Length > 0)
+            {
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = ({classRef.CSharpNamespace}.{classRef.ClassName})Enum.Parse(typeof({classRef.CSharpNamespace}.{classRef.ClassName}), obj[\"{this.Key}\"].AsString());";
+            }
+
+            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {classRef.CSharpNamespace}.{classRef.ClassName}(obj[\"{this.Key}\"]);";
+        }
+
+        var prop = AppCommands.FindPropertyFromRef(refString);
+        if (prop is not null)
+        {
+            if (prop.IsEnum)
+            {
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = {prop.ClassName}.Parse(obj[\"{this.Key}\"].AsString());";
+            }
+
+            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {prop.ClassName}(obj[\"{this.Key}\"]);";
+        }
+
+        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);";
     }
 
     private string TypeToCBorCast(string type)
@@ -210,6 +249,7 @@ public class PropertyGeneration
         // Handle known values as enums
         if (property.KnownValues?.Length > 0)
         {
+            this.rawType = $"{name}".ToPascalCase();
             return $"{name}".ToPascalCase();
         }
 
@@ -242,9 +282,9 @@ public class PropertyGeneration
             throw new InvalidOperationException("Base Type is null or empty.");
         }
 
-        if (string.IsNullOrEmpty(this.RawType))
+        if (string.IsNullOrEmpty(this.rawType))
         {
-            this.RawType = baseType;
+            this.rawType = baseType;
         }
 
         return $"{baseType}?";
@@ -260,7 +300,7 @@ public class PropertyGeneration
         var propertyNamePascal = !this._IsBaseType(propertyName) ? string.Join(".", propertyName.Split('.').Select(n => n.ToPascalCase())) : propertyName;
         var item = $"List<{propertyName}>";
         Console.WriteLine($"List Property: {item}");
-        this.RawType = propertyName;
+        this.rawType = propertyName;
         return item;
     }
 
@@ -325,30 +365,6 @@ public class PropertyGeneration
             return $"{string.Join(".", namespaceName.Split('.').Select(n => n.ToPascalCase()))}.{idName.ToPascalCase()}";
         }
 
-        Console.WriteLine($"{refString} Has #, {refString.Contains("#")}");
-        if (refString.Contains(".") && !refString.Contains("#"))
-        {
-            var full = string.Join(".", refString.Replace(".defs", string.Empty).Replace("#", ".").Split('.').Select(n => n.ToPascalCase()));
-            return full;
-            // if (AppCommands.AllProperties.Any())
-            // {
-            //     var ff = AppCommands.AllProperties.FirstOrDefault(n => n.Id == refString);
-            //     if (ff is not null)
-            //     {
-            //     }
-            // }
-        }
-
-        var id = string.Join(".", refString.Replace(".defs", string.Empty).Replace("#", ".").Split('.')).Split(".").Last();
-        var test = this.Document.Defs.Where(n => n.Key == id).Select(n => n.Value).FirstOrDefault();
-        if (test is not null)
-        {
-            if (test.Type == "string")
-            {
-                return "string";
-            }
-        }
-        var result = string.Join(".", refString.Replace(".defs", string.Empty).Replace("#", ".").Split('.').Select(n => n.ToPascalCase())).Split(".").Last();
-        return result;
+        return "ATObject";
     }
 }
