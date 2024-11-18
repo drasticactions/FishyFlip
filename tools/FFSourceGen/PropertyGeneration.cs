@@ -342,7 +342,7 @@ public class PropertyGeneration
 
     private string GetClassNameFromRef(string refString)
     {
-        // var classRef = AppCommands.FindClassFromRef(refString);
+        var classRef = AppCommands.FindClassFromRef(refString);
         var idSplit = refString.Split('#');
         var namespaceName = idSplit.First().Replace(".defs", string.Empty);
         var idName = idSplit.Last();
@@ -355,6 +355,16 @@ public class PropertyGeneration
                 if (mainRef.Definition.Type == "string")
                 {
                     return "string";
+                }
+
+                if (mainRef.Definition.Type == "array" && mainRef.Definition.Items?.Type == "string")
+                {
+                    return "List<string?>";
+                }
+
+                if (mainRef.Definition.Type == "array" && mainRef.Definition.Items?.Type == "union")
+                {
+                    return "List<ATObject?>";
                 }
 
                 return $"{mainRef.CSharpNamespace}.{mainRef.ClassName}";

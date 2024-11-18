@@ -17,6 +17,9 @@ public class SchemaDefinition
     [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;
 
+    [JsonPropertyName("items")]
+    public SchemaDefinition Items { get; set; }
+
     [JsonPropertyName("key")]
     public string Key { get; set; } = string.Empty;
 
@@ -31,6 +34,9 @@ public class SchemaDefinition
 
     [JsonPropertyName("output")]
     public OutputDefinition? Output { get; set; }
+
+    [JsonPropertyName("input")]
+    public InputDefinition? Input { get; set; }
 
     [JsonPropertyName("record")]
     public RecordDefinition? Record { get; set; }

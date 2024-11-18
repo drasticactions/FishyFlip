@@ -93,12 +93,121 @@ public partial class AppCommands
         }
 
         var modelClasses = AllClasses.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record").ToList();
+        var procedureClasses = AllClasses.Where(n => n.Definition.Type == "procedure" || n.Definition.Type == "query").GroupBy(n => n.CSharpNamespace).ToList();
+        foreach (var group in procedureClasses)
+        {
+            await this.GenerateEndpointGroupAsync(group);
+        }
+
         await this.GenerateJsonSerializerContextFile(modelClasses);
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
 
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+    }
+
+    private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
+    {
+            Console.WriteLine($"Generating Endpoint Group: {group.Key}");
+            var sb = new StringBuilder();
+            this.GenerateHeader(sb);
+            this.GenerateNamespace(sb, group.Key);
+            var className = $"{group.Key.Split(".").Last()}Endpoints";
+            sb.AppendLine("{");
+            sb.AppendLine();
+            sb.AppendLine($"    /// <summary>");
+            sb.AppendLine($"    /// {group.Key.ToLower()} Endpoint Group.");
+            sb.AppendLine($"    /// </summary>");
+            sb.AppendLine($"    public class {className}");
+            sb.AppendLine("    {");
+            foreach (var item in group)
+            {
+                sb.AppendLine();
+                Console.WriteLine($"{item.Definition.Type} {item.Id}");
+                var methodName = $"{item.ClassName}Async";
+                var returnType = "Task";
+                var inputProperties = this.FetchInputProperties(item);
+                var outputProperty = this.FetchOutputProperties(item);
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {item.Definition.Description}");
+                sb.AppendLine($"        /// </summary>");
+                sb.AppendLine($"        public {returnType} {methodName}(");
+                sb.AppendLine($"            )");
+                sb.AppendLine("        {");
+                sb.AppendLine("            throw new NotImplementedException();");
+                sb.AppendLine("        }");
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+            sb.AppendLine();
+            var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+            Directory.CreateDirectory(outputPath);
+            var classPath = Path.Combine(outputPath, $"{className}.g.cs");
+            if (File.Exists(classPath))
+            {
+                throw new Exception($"File already exists: {className} {classPath}");
+            }
+
+            await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
+    private List<string> FetchInputProperties(ClassGeneration classGeneration)
+    {
+        var inputProperties = new List<string>();
+        if (classGeneration.Definition.Input?.Schema?.Properties is null)
+        {
+            return inputProperties;
+        }
+
+        foreach (var prop in classGeneration.Definition.Input.Schema.Properties)
+        {
+            Console.WriteLine($"Property: {prop.Key}");
+            if (prop.Value.Ref is not null)
+            {
+                var classRef = FindClassFromRef(prop.Value.Ref);
+                if (classRef is not null)
+                {
+                    Console.WriteLine($"Class Ref: {classRef.Id}");
+                }
+            }
+        }
+
+        return inputProperties;
+    }
+
+    private string FetchOutputProperties(ClassGeneration classGeneration)
+    {
+        if (classGeneration.Definition.Output?.Schema?.Properties is null)
+        {
+            return string.Empty;
+        }
+
+        foreach (var prop in classGeneration.Definition.Output.Schema.Properties)
+        {
+            Console.WriteLine($"Property: {prop.Key}");
+            if (prop.Value.Ref is not null)
+            {
+                var classRef = FindClassFromRef(prop.Value.Ref);
+                if (classRef is not null)
+                {
+                    Console.WriteLine($"Class Ref: {classRef.Id}");
+                }
+            }
+        }
+
+        return string.Empty;
+    }
+
+    private string GenerateReturnTypeFromClassGeneration(ClassGeneration classGeneration)
+    {
+        switch (classGeneration.Definition.Type)
+        {
+            default:
+                return "object";
+        }
     }
 
     private List<string> GetMainRecordJsonFiles(List<string> jsonFiles)
