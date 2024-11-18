@@ -132,6 +132,16 @@ public class PropertyGeneration
         };
     }
 
+    private string GenerateCborPropertyForUnknownType(PropertyDefinition property)
+    {
+        if (this.ClassName == "DidDoc")
+        {
+            return "// Ignore DidDoc";
+        }
+
+        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();";
+    }
+
     private string GenerateCborProperty()
     {
         var property = this.PropertyDefinition;
@@ -152,7 +162,7 @@ public class PropertyGeneration
             "boolean" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].AsBoolean();",
             "bytes" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].EncodeToBytes();",
             "cid-link" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
-            "unknown" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
+            "unknown" => this.GenerateCborPropertyForUnknownType(property),
             "object" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
             "record" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
             "union" when property.Refs?.Length > 0 => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
@@ -269,6 +279,16 @@ public class PropertyGeneration
         };
     }
 
+    private string GetUnknownObjectType(PropertyDefinition property)
+    {
+        if (this.ClassName == "DidDoc")
+        {
+            return "FishyFlip.Models.DidDoc";
+        }
+
+        return "ATObject";
+    }
+
     private string GetPropertyType(string className, string name, PropertyDefinition property)
     {
         var baseType = property.Type?.ToLower() switch
@@ -285,7 +305,7 @@ public class PropertyGeneration
             "bytes" => "byte[]",
             "cid-link" => "Ipfs.Cid",
             "array" when property.Items != null => this.GetListPropertyName(className, name, property),
-            "unknown" => "ATObject",
+            "unknown" => this.GetUnknownObjectType(property),
             "object" => "ATObject",
             "record" => "ATObject",
             "union" when property.Refs?.Length > 0 => "ATObject", // Could be expanded to generate union types

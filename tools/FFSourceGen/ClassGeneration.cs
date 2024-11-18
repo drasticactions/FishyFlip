@@ -22,6 +22,8 @@ public class ClassGeneration
 
     private string GenerateClassName()
     {
+        var name = string.Empty;
+
         if (this.Key == "main")
         {
             var item = string.Join(string.Empty, this.Document.Id.Split('.').TakeLast(1));
@@ -32,7 +34,7 @@ public class ClassGeneration
                 itemsToTake = 2;
             }
 
-            return string.Join(string.Empty, this.Document.Id.Split('.').TakeLast(itemsToTake).Select(n => n.ToPascalCase())).ToPascalCase();
+            name = string.Join(string.Empty, this.Document.Id.Split('.').TakeLast(itemsToTake).Select(n => n.ToPascalCase())).ToPascalCase();
         }
         else if (this.Key == "view" || this.Key == "viewExternal")
         {
@@ -44,18 +46,22 @@ public class ClassGeneration
                 return "ViewRecordDef";
             }
 
-            return newItem;
+            name = newItem;
         }
 
-        var cn = this.Key.ToPascalCase();
-        var testingBesting = $"{this.Namespace}{this.Key}";
-        var existingNamespace = AppCommands.AllClasses.Where(n => n.Namespace == this.Namespace);
-        var existingClass = existingNamespace.FirstOrDefault(n => n.ClassName == cn);
-        if (existingClass != null)
+        if (string.IsNullOrEmpty(name))
         {
-            cn = $"{cn}Def";
+            name = this.Key.ToPascalCase();
+            var testingBesting = $"{this.Namespace}{this.Key}";
+            var existingNamespace = AppCommands.AllClasses.Where(n => n.Namespace == this.Namespace);
+            var existingClass = existingNamespace.FirstOrDefault(n => n.ClassName == name);
+            if (existingClass != null)
+            {
+                name = $"{name}Def";
+            }
         }
-        return cn;
+
+        return name;
     }
 
     public string ClassName { get; }

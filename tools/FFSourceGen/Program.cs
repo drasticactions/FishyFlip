@@ -101,10 +101,39 @@ public partial class AppCommands
 
         await this.GenerateJsonSerializerContextFile(modelClasses);
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
+        // await this.GenerateATProtocolEndpointListAsync(procedureClasses.Select(n => n.Key).ToList());
 
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+    }
+
+    private async Task GenerateATProtocolEndpointListAsync(List<string> classNames)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, "FishyFlip");
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// AT Protocol.");
+        sb.AppendLine($"    /// https://atproto.com/specs/atp.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public partial class ATProtocol");
+        sb.AppendLine("    {");
+        sb.AppendLine();
+        foreach (var className in classNames)
+        {
+            var propertyName = string.Join(".", className.Split('.').Select(n => n.ToPascalCase()));
+            sb.AppendLine($"        public {this.baseNamespace}.{propertyName}.{className.Split(".").Last()}Endpoints {className.Replace(".", string.Empty)} => new(this);");
+
+            sb.AppendLine();
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, "ATProtocol.g.cs");
+        await File.WriteAllTextAsync(outputPath, sb.ToString());
     }
 
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
@@ -112,15 +141,22 @@ public partial class AppCommands
             Console.WriteLine($"Generating Endpoint Group: {group.Key}");
             var sb = new StringBuilder();
             this.GenerateHeader(sb);
-            this.GenerateNamespace(sb, group.Key);
+            this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
             var className = $"{group.Key.Split(".").Last()}Endpoints";
             sb.AppendLine("{");
             sb.AppendLine();
             sb.AppendLine($"    /// <summary>");
             sb.AppendLine($"    /// {group.Key.ToLower()} Endpoint Group.");
             sb.AppendLine($"    /// </summary>");
-            sb.AppendLine($"    public class {className}");
+            sb.AppendLine($"    public static class {className}");
             sb.AppendLine("    {");
+            sb.AppendLine();
+            foreach (var item in group)
+            {
+                sb.AppendLine($"       public const string {item.ClassName} = \"/xrpc/{item.Id}\";");
+                sb.AppendLine();
+            }
+
             foreach (var item in group)
             {
                 sb.AppendLine();
@@ -128,11 +164,11 @@ public partial class AppCommands
                 var methodName = $"{item.ClassName}Async";
                 var inputProperties = this.FetchInputProperties(item);
                 var outputProperty = this.FetchOutputProperties(item);
+                var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
                 sb.AppendLine($"        /// <summary>");
-                sb.AppendLine($"        /// {item.Definition.Description}");
+                sb.AppendLine($"        /// {description}");
                 sb.AppendLine($"        /// </summary>");
-                sb.AppendLine();
-                sb.Append($"        public {outputProperty} {methodName} (");
+                sb.Append($"        public static {outputProperty} {methodName} (");
                 for (int i = 0; i < inputProperties.Count; i++)
                 {
                     sb.Append($"{inputProperties[i]}");
@@ -163,13 +199,20 @@ public partial class AppCommands
             await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
+    private string PropertyNameToCSharpSafeValue(string propertyName)
+    {
+        // if the property name is a reserved keyword, prefix it with an @
+        return new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" }.Contains(propertyName) ? $"@{propertyName}" : propertyName;
+    }
+
     private List<string> FetchInputProperties(ClassGeneration classGeneration)
     {
-        var inputProperties = new List<string>();
+        var inputProperties = new List<string>() { "this FishyFlip.ATProtocol atp" };
 
         foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ?? new Dictionary<string, PropertyDefinition>())
         {
             Console.WriteLine($"Property: {prop.Key}");
+            var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
             if (prop.Value.Ref is not null)
             {
                 Console.WriteLine($"Property Ref: {prop.Value.Ref}");
@@ -177,13 +220,66 @@ public partial class AppCommands
                 if (classRef is not null)
                 {
                     var returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
-                    var propertyName = prop.Key;
+
                     inputProperties.Add($"{returnType} {propertyName}");
                     Console.WriteLine($"{returnType} {propertyName}");
                 }
             }
+            else
+            {
+                var returnType = prop.Value.CSharpType;
+                if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
+                {
+                    returnType += "?";
+                    switch (prop.Value.Type)
+                    {
+                        case "integer":
+                            propertyName += $" = {prop.Value.Default ?? 0}";
+                            break;
+                        default:
+                            propertyName += " = default";
+                            break;
+                    }
+                }
+
+                inputProperties.Add($"{returnType} {propertyName}");
+                Console.WriteLine($"{returnType} {propertyName}");
+            }
         }
 
+        if (classGeneration.Definition.Parameters is not null)
+        {
+            Console.WriteLine($"Params Type: {classGeneration.Definition.Parameters.Type}");
+            foreach (var param in classGeneration.Definition.Parameters.Properties)
+            {
+                Console.WriteLine($"Param: {param.Key}");
+                if (param.Value.Description.ToLowerInvariant().Contains("deprecated"))
+                {
+                    Console.WriteLine($"Skipping deprecated param: {param.Key}");
+                    continue;
+                }
+
+                var returnType = param.Value.CSharpType;
+                var propertyName = this.PropertyNameToCSharpSafeValue(param.Key);
+                if (!classGeneration.Definition.Parameters.Required.Contains(param.Key))
+                {
+                    returnType += "?";
+                    switch (param.Value.Type)
+                    {
+                        case "integer":
+                            propertyName += $" = {param.Value.Default ?? 0}";
+                            break;
+                        default:
+                            propertyName += " = default";
+                            break;
+                    }
+                }
+
+                inputProperties.Add($"{returnType} {propertyName}");
+            }
+        }
+
+        inputProperties = inputProperties.OrderByDescending(n => !n.Contains("?")).ToList();
         inputProperties.Add("CancellationToken cancellationToken = default");
 
         return inputProperties;
@@ -326,7 +422,7 @@ public partial class AppCommands
                 AllClasses.Add(outputClass);
             }
 
-            if (classGeneration.Definition.Input is not null && classGeneration.Definition.Input.Schema?.Type == "object")
+            if (classGeneration.Definition.Input is not null)
             {
                 var outputClass = new ClassGeneration(classGeneration.Document, $"{classGeneration.ClassName}Input", classGeneration.Definition.Input.Schema, classGeneration.Path);
                 AllClasses.Add(outputClass);
@@ -375,6 +471,13 @@ public partial class AppCommands
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATLinkRef))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATUri))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Blob))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.AuthSession))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Session))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Success))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(OidcClientOptions))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(DPoPProofPayload))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(Dictionary<string, JsonElement>))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(Microsoft.IdentityModel.Tokens.JsonWebKey), TypeInfoPropertyName = nameof(Microsoft.IdentityModel.Tokens.JsonWebKey) + \"_A\")]");
         sb.AppendLine($"    [JsonSerializable(typeof(List<ATObject>))]");
         sb.AppendLine($"    internal partial class SourceGenerationContext : JsonSerializerContext");
         sb.AppendLine("    {");
