@@ -167,10 +167,11 @@ public partial class AppCommands
             Console.WriteLine($"Property: {prop.Key}");
             if (prop.Value.Ref is not null)
             {
+                Console.WriteLine($"Property Ref: {prop.Value.Ref}");
                 var classRef = FindClassFromRef(prop.Value.Ref);
                 if (classRef is not null)
                 {
-                    Console.WriteLine($"Class Ref: {classRef.Id}");
+                    Console.WriteLine($"Class Ref: {classRef.Id} ");
                 }
             }
         }
@@ -190,6 +191,7 @@ public partial class AppCommands
             Console.WriteLine($"Property: {prop.Key}");
             if (prop.Value.Ref is not null)
             {
+                Console.WriteLine($"Property Ref: {prop.Value.Ref}");
                 var classRef = FindClassFromRef(prop.Value.Ref);
                 if (classRef is not null)
                 {
@@ -315,6 +317,7 @@ public partial class AppCommands
             var typeName = $"{this.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}";
             var typeInfoPropertyName = $"{cls.CSharpNamespace}.{cls.ClassName}".Replace(".", string.Empty);
             sb.AppendLine($"    [JsonSerializable(typeof({typeName}), TypeInfoPropertyName = \"{typeInfoPropertyName}\")]");
+            sb.AppendLine($"    [JsonSerializable(typeof(List<{typeName}>), TypeInfoPropertyName = \"List{typeInfoPropertyName}\")]");
         }
 
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATWebSocketCommit))]");
@@ -489,17 +492,14 @@ public partial class AppCommands
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]");
         }
 
-        var propertyName = property.PropertyName;
-        var propertyType = this.GenerateTypeClassValue(property, cls);
-
         // Handle default values
         if (property.PropertyDefinition.Default != null)
         {
-            sb.AppendLine($"        public {propertyType} {propertyName} {{ get; set; }} = {property.GetDefaultValue()};");
+            sb.AppendLine($"        public {property.Type} {property.PropertyName} {{ get; set; }} = {property.GetDefaultValue()};");
         }
         else
         {
-            sb.AppendLine($"        public {propertyType} {propertyName} {{ get; set; }}");
+            sb.AppendLine($"        public {property.Type} {property.PropertyName} {{ get; set; }}");
         }
 
         sb.AppendLine();

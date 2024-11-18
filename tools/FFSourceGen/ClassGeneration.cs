@@ -119,7 +119,7 @@ public class ClassGeneration
         {
             foreach (var prop in this.Definition.Properties)
             {
-                this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace, this.ClassName));
+                this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this));
             }
         }
 
@@ -127,7 +127,7 @@ public class ClassGeneration
         {
             foreach (var prop in this.Definition.Record.Properties)
             {
-                this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this.Document, this.Definition, this.Path, this.Namespace, this.CSharpNamespace, this.ClassName));
+                this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this));
             }
         }
     }
