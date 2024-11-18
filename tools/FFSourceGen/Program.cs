@@ -39,8 +39,6 @@ public partial class AppCommands
         outputDir ??= AppDomain.CurrentDomain.BaseDirectory;
         Console.WriteLine($"Lexicon Path: {lexiconPath}");
         Console.WriteLine($"Output Directory: {outputDir}");
-        var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories).ToList();
-        Console.WriteLine($"Found {files.Count()} files.");
 
         this.basePath = Path.Combine(outputDir, "Lexicon");
         if (Directory.Exists(this.basePath))
@@ -49,6 +47,15 @@ public partial class AppCommands
         }
 
         Directory.CreateDirectory(this.basePath);
+
+        await this.GenerateModelFiles(lexiconPath);
+    }
+
+    private async Task GenerateModelFiles(string lexiconPath)
+    {
+        var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories).ToList();
+        Console.WriteLine($"Found {files.Count()} files.");
+
         var defs = files.Where(n => n.Contains("defs.json")).ToList();
         var mainRecordFiles = this.GetMainRecordJsonFiles(files.Except(defs).ToList());
         var other = files.Except(defs).Except(mainRecordFiles).ToList();
