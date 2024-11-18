@@ -131,8 +131,18 @@ public partial class AppCommands
                 sb.AppendLine($"        /// <summary>");
                 sb.AppendLine($"        /// {item.Definition.Description}");
                 sb.AppendLine($"        /// </summary>");
-                sb.AppendLine($"        public {outputProperty} {methodName}(");
-                sb.AppendLine($"            )");
+                sb.AppendLine();
+                sb.Append($"        public {outputProperty} {methodName} (");
+                for (int i = 0; i < inputProperties.Count; i++)
+                {
+                    sb.Append($"{inputProperties[i]}");
+                    if (i < inputProperties.Count - 1)
+                    {
+                        sb.Append(", ");
+                    }
+                }
+
+                sb.AppendLine($")");
                 sb.AppendLine("        {");
                 sb.AppendLine("            throw new NotImplementedException();");
                 sb.AppendLine("        }");
@@ -156,12 +166,8 @@ public partial class AppCommands
     private List<string> FetchInputProperties(ClassGeneration classGeneration)
     {
         var inputProperties = new List<string>();
-        if (classGeneration.Definition.Input?.Schema?.Properties is null)
-        {
-            return inputProperties;
-        }
 
-        foreach (var prop in classGeneration.Definition.Input.Schema.Properties)
+        foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ?? new Dictionary<string, PropertyDefinition>())
         {
             Console.WriteLine($"Property: {prop.Key}");
             if (prop.Value.Ref is not null)
@@ -170,11 +176,15 @@ public partial class AppCommands
                 var classRef = FindClassFromRef(prop.Value.Ref);
                 if (classRef is not null)
                 {
-                    Console.WriteLine($"Class Ref: {classRef.Id} ");
-                    inputProperties.Add(this.GenerateReturnTypeFromClassGeneration(classRef));
+                    var returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
+                    var propertyName = prop.Key;
+                    inputProperties.Add($"{returnType} {propertyName}");
+                    Console.WriteLine($"{returnType} {propertyName}");
                 }
             }
         }
+
+        inputProperties.Add("CancellationToken cancellationToken = default");
 
         return inputProperties;
     }
@@ -223,6 +233,17 @@ public partial class AppCommands
             {
                 return $"List<string>";
             }
+        }
+
+        if (classRef.IsBaseType)
+        {
+            return classRef.Definition.Type switch
+            {
+                "string" => "string",
+                "number" => "double",
+                "boolean" => "bool",
+                _ => "ATObject",
+            };
         }
 
         return $"{this.baseNamespace}.{classRef.CSharpNamespace}.{classRef.ClassName}";

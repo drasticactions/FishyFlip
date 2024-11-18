@@ -64,6 +64,8 @@ public class ClassGeneration
 
     public bool IsArray => this.Definition.Type == "array";
 
+    public bool IsBaseType => this.Definition.Type == "string" || this.Definition.Type == "number" || this.Definition.Type == "boolean";
+
     public bool IsArrayOfATObjects => this.Definition.Type == "array" && (this.Definition.Items.Type == "object" || this.Definition.Items.Type == "union");
 
     public bool IsArrayOfStrings => this.Definition.Type == "string" && this.Definition.KnownValues?.Count() > 0;
