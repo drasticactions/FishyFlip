@@ -18,6 +18,10 @@ public class Blob
     {
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Blob"/> class.
+    /// </summary>
+    /// <param name="obj">Obj.</param>
     public Blob(CBORObject obj)
     {
         this.MimeType = obj["mimeType"].AsString();

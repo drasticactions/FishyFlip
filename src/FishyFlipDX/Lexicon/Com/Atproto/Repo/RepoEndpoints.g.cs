@@ -64,9 +64,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Get information about an account and repository, including the list of collections. Does not require auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>> DescribeRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default)
+        public static async Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?>> DescribeRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var url = $"{DescribeRepo}?repo={repo}";
+            return await atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?>(url, SourceGenerationContext.Default.ComAtprotoRepoDescribeRepoOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
