@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public string? Description { get; set; }
 
         [JsonPropertyName("descriptionFacets")]
-        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet?>? DescriptionFacets { get; set; }
+        public List<App.Bsky.Richtext.Facet?>? DescriptionFacets { get; set; }
 
         [JsonPropertyName("avatar")]
         public Blob? Avatar { get; set; }

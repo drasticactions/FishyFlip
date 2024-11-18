@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Post(CBORObject obj)
         {
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
-            if (obj["entities"] is not null) this.Entities = obj["entities"].Values.Select(n => n is not null ? new Entity(n) : null).ToList();
+            if (obj["entities"] is not null) this.Entities = obj["entities"].Values.Select(n => n is not null ? new App.Bsky.Feed.Entity(n) : null).ToList();
             if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n => n is not null ? new App.Bsky.Richtext.Facet(n) : null).ToList();
             if (obj["reply"] is not null) this.Reply = new App.Bsky.Feed.ReplyRefDef(obj["reply"]);
             if (obj["embed"] is not null) this.Embed = obj["embed"].ToATObject();
@@ -46,13 +46,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// DEPRECATED: replaced by app.bsky.richtext.facet.
         /// </summary>
         [JsonPropertyName("entities")]
-        public List<FishyFlip.Lexicon.App.Bsky.Feed.Entity?>? Entities { get; set; }
+        public List<App.Bsky.Feed.Entity?>? Entities { get; set; }
 
         /// <summary>
         /// Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet?>? Facets { get; set; }
+        public List<App.Bsky.Richtext.Facet?>? Facets { get; set; }
 
         [JsonPropertyName("reply")]
         public App.Bsky.Feed.ReplyRefDef? Reply { get; set; }

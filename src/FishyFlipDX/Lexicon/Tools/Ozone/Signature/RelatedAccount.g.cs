@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public Com.Atproto.Admin.AccountView? Account { get; set; }
 
         [JsonPropertyName("similarities")]
-        public List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail?>? Similarities { get; set; }
+        public List<Tools.Ozone.Signature.SigDetail?>? Similarities { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

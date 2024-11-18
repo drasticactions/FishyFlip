@@ -63,7 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public string? Description { get; set; }
 
         [JsonPropertyName("descriptionFacets")]
-        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet?>? DescriptionFacets { get; set; }
+        public List<App.Bsky.Richtext.Facet?>? DescriptionFacets { get; set; }
 
         [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public bool? AcceptsInteractions { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("viewer")]
         public App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }

@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
-            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n => n is not null ? new BlobView(n) : null).ToList();
+            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n => n is not null ? new Tools.Ozone.Moderation.BlobView(n) : null).ToList();
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["moderation"] is not null) this.Moderation = new Tools.Ozone.Moderation.ModerationDetail(obj["moderation"]);
@@ -47,10 +47,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("blobs")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView?>? Blobs { get; set; }
+        public List<Tools.Ozone.Moderation.BlobView?>? Blobs { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("indexedAt")]
         [JsonRequired]

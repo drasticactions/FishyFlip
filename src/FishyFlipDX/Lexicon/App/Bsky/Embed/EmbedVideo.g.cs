@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public EmbedVideo(CBORObject obj)
         {
             if (obj["video"] is not null) this.Video = new FishyFlip.Models.Blob(obj["video"]);
-            if (obj["captions"] is not null) this.Captions = obj["captions"].Values.Select(n => n is not null ? new Caption(n) : null).ToList();
+            if (obj["captions"] is not null) this.Captions = obj["captions"].Values.Select(n => n is not null ? new App.Bsky.Embed.Caption(n) : null).ToList();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
             if (obj["aspectRatio"] is not null) this.AspectRatio = new App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
         }
@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public Blob? Video { get; set; }
 
         [JsonPropertyName("captions")]
-        public List<FishyFlip.Lexicon.App.Bsky.Embed.Caption?>? Captions { get; set; }
+        public List<App.Bsky.Embed.Caption?>? Captions { get; set; }
 
         /// <summary>
         /// Alt text description of the video, for accessibility.

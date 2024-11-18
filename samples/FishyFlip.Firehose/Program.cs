@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Lexicon.App.Bsky.Feed;
+using FishyFlip.Lexicon.Com.Atproto.Repo;
 
 Console.WriteLine("Hello, ATProtocol Firehose!");
 
@@ -20,6 +21,10 @@ var debugLog = new DebugLoggerProvider();
 var atWebProtocolBuilder = new ATWebSocketProtocolBuilder()
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atWebProtocol = atWebProtocolBuilder.Build();
+
+var atProtocolBuilder = new ATProtocolBuilder()
+    .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
+var atProtocol = atProtocolBuilder.Build();
 
 atWebProtocol.OnSubscribedRepoMessage += (sender, args) =>
 {
@@ -55,11 +60,13 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
             // The Actor Did.
             var did = message.Commit.Repo;
 
+            var repo = (await atProtocol.DescribeRepoAsync(did)).HandleResult();
+
             // Commit.Ops are the actions used when creating the message.
             // In this case, it's a create record for the post.
             // The path contains the post action and path, we need the path, so we split to get it.
             var url = $"https://bsky.app/profile/{did}/post/{message.Commit.Ops![0]!.Path!.Split('/').Last()}";
-           // Console.WriteLine($"Post URL: {url}, from {repo.Handle}");
+            Console.WriteLine($"Post URL: {url}, from {repo.Handle}");
 
             if (post.Reply is not null)
             {
@@ -70,9 +77,9 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
             if (post.Embed is EmbedVideo videoEmbed)
             {
                 // https://video.bsky.app/watch/did%3Aplc%3Acxe5e4ldjfvryf5dqvopdq3v/bafkreiefakrdmclohastskuauwurbtx3tnu2drjpnirsoroyalq5nqr73a/playlist.m3u8
-               // var link = videoEmbed.Video?.Ref?.Link;
-               // var linkString = link.ToString();
-               // Console.WriteLine($"Video Link: https://video.bsky.app/watch/{did}/{linkString}/playlist.m3u8");
+                var link = videoEmbed.Video?.Ref?.Link;
+                var linkString = link.ToString();
+                Console.WriteLine($"Video Link: https://video.bsky.app/watch/{did}/{linkString}/playlist.m3u8");
             }
         }
 

@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public long? ListItemCount { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("viewer")]
         public App.Bsky.Graph.ListViewerState? Viewer { get; set; }

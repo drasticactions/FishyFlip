@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public long? JoinedAllTimeCount { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("indexedAt")]
         [JsonRequired]

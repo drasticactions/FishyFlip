@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         [JsonPropertyName("members")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic?>? Members { get; set; }
+        public List<Chat.Bsky.Actor.ProfileViewBasic?>? Members { get; set; }
 
         [JsonPropertyName("lastMessage")]
         public ATObject? LastMessage { get; set; }

@@ -64,13 +64,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public Tools.Ozone.Moderation.ModerationDetail? Moderation { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("invitedBy")]
         public Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
 
         [JsonPropertyName("invites")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode?>? Invites { get; set; }
+        public List<Com.Atproto.Server.InviteCode?>? Invites { get; set; }
 
         [JsonPropertyName("invitesDisabled")]
         public bool? InvitesDisabled { get; set; }
@@ -85,7 +85,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public DateTime? DeactivatedAt { get; set; }
 
         [JsonPropertyName("threatSignatures")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature?>? ThreatSignatures { get; set; }
+        public List<Com.Atproto.Admin.ThreatSignature?>? ThreatSignatures { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

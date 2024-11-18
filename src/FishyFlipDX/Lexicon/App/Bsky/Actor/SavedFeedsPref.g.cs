@@ -22,19 +22,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public SavedFeedsPref(CBORObject obj)
         {
-            if (obj["pinned"] is not null) this.Pinned = obj["pinned"].Values.Select(n => n is not null ? new FishyFlip.Models.ATUri(n) : null).ToList();
-            if (obj["saved"] is not null) this.Saved = obj["saved"].Values.Select(n => n is not null ? new FishyFlip.Models.ATUri(n) : null).ToList();
+            if (obj["pinned"] is not null) this.Pinned = obj["pinned"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();
+            if (obj["saved"] is not null) this.Saved = obj["saved"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();
             if (obj["timelineIndex"] is not null) this.TimelineIndex = obj["timelineIndex"].AsInt64Value();
         }
 
         [JsonPropertyName("pinned")]
         [JsonRequired]
-        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<FishyFlip.Models.ATUri?, FishyFlip.Tools.Json.ATUriJsonConverter>))]
         public List<FishyFlip.Models.ATUri?>? Pinned { get; set; }
 
         [JsonPropertyName("saved")]
         [JsonRequired]
-        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<FishyFlip.Models.ATUri?, FishyFlip.Tools.Json.ATUriJsonConverter>))]
         public List<FishyFlip.Models.ATUri?>? Saved { get; set; }
 
         [JsonPropertyName("timelineIndex")]

@@ -21,9 +21,16 @@ public class ATLinkRef
         this.Link = link;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATLinkRef"/> class.
+    /// </summary>
+    /// <param name="obj">Object.</param>
     public ATLinkRef(CBORObject obj)
     {
-        this.Link = obj["link"].ToATCid();
+        if (obj is not null)
+        {
+            this.Link = obj.ToATCid();
+        }
     }
 
     /// <summary>

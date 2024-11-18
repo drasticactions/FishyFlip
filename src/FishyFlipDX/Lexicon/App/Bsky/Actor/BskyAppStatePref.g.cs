@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Storage for NUXs the user has encountered.
         /// </summary>
         [JsonPropertyName("nuxs")]
-        public List<FishyFlip.Lexicon.App.Bsky.Actor.Nux?>? Nuxs { get; set; }
+        public List<App.Bsky.Actor.Nux?>? Nuxs { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

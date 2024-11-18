@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public ATObject? Record { get; set; }
 
         [JsonPropertyName("lists")]
-        public List<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic?>? Lists { get; set; }
+        public List<App.Bsky.Graph.ListViewBasic?>? Lists { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
