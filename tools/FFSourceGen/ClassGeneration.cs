@@ -60,6 +60,14 @@ public class ClassGeneration
 
     public string ClassName { get; }
 
+    public string FullClassName => $"{this.CSharpNamespace}.{this.ClassName}";
+
+    public bool IsArray => this.Definition.Type == "array";
+
+    public bool IsArrayOfATObjects => this.Definition.Type == "array" && (this.Definition.Items.Type == "object" || this.Definition.Items.Type == "union");
+
+    public bool IsArrayOfStrings => this.Definition.Type == "string" && this.Definition.KnownValues?.Count() > 0;
+
     public SchemaDocument Document { get; }
 
     public SchemaDefinition Definition { get; }

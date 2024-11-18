@@ -126,13 +126,12 @@ public partial class AppCommands
                 sb.AppendLine();
                 Console.WriteLine($"{item.Definition.Type} {item.Id}");
                 var methodName = $"{item.ClassName}Async";
-                var returnType = "Task";
                 var inputProperties = this.FetchInputProperties(item);
                 var outputProperty = this.FetchOutputProperties(item);
                 sb.AppendLine($"        /// <summary>");
                 sb.AppendLine($"        /// {item.Definition.Description}");
                 sb.AppendLine($"        /// </summary>");
-                sb.AppendLine($"        public {returnType} {methodName}(");
+                sb.AppendLine($"        public {outputProperty} {methodName}(");
                 sb.AppendLine($"            )");
                 sb.AppendLine("        {");
                 sb.AppendLine("            throw new NotImplementedException();");
@@ -172,6 +171,7 @@ public partial class AppCommands
                 if (classRef is not null)
                 {
                     Console.WriteLine($"Class Ref: {classRef.Id} ");
+                    inputProperties.Add(this.GenerateReturnTypeFromClassGeneration(classRef));
                 }
             }
         }
@@ -183,33 +183,49 @@ public partial class AppCommands
     {
         if (classGeneration.Definition.Output?.Schema?.Properties is null)
         {
-            return string.Empty;
+            return "Task<Result<Success>>";
         }
 
-        foreach (var prop in classGeneration.Definition.Output.Schema.Properties)
+        if (classGeneration.Definition.Output.Schema.Type == "ref")
         {
-            Console.WriteLine($"Property: {prop.Key}");
-            if (prop.Value.Ref is not null)
+            var classRef = FindClassFromRef(classGeneration.Definition.Output.Schema.Ref);
+            if (classRef is not null)
             {
-                Console.WriteLine($"Property Ref: {prop.Value.Ref}");
-                var classRef = FindClassFromRef(prop.Value.Ref);
-                if (classRef is not null)
-                {
-                    Console.WriteLine($"Class Ref: {classRef.Id}");
-                }
+                return $"Task<Result<{this.GenerateReturnTypeFromClassGeneration(classRef)}>>";
             }
         }
 
-        return string.Empty;
+        if (classGeneration.Definition.Output.Schema.Type == "object")
+        {
+            // Find the generated Output ref.
+            var outputRef = $"{classGeneration.Id}#{classGeneration.ClassName}Output";
+            var classRef = FindClassFromRef(outputRef);
+            if (classRef is not null)
+            {
+                return $"Task<Result<{this.GenerateReturnTypeFromClassGeneration(classRef)}>>";
+            }
+        }
+
+        Console.WriteLine($"Could not find output type for {classGeneration.Id}.");
+        return "Task<Result<Success>>";
     }
 
-    private string GenerateReturnTypeFromClassGeneration(ClassGeneration classGeneration)
+    private string GenerateReturnTypeFromClassGeneration(ClassGeneration classRef)
     {
-        switch (classGeneration.Definition.Type)
+        if (classRef.IsArray)
         {
-            default:
-                return "object";
+            if (classRef.IsArrayOfATObjects)
+            {
+                return $"List<ATObject>";
+            }
+
+            if (classRef.IsArrayOfStrings)
+            {
+                return $"List<string>";
+            }
         }
+
+        return $"{this.baseNamespace}.{classRef.CSharpNamespace}.{classRef.ClassName}";
     }
 
     private List<string> GetMainRecordJsonFiles(List<string> jsonFiles)
@@ -283,6 +299,17 @@ public partial class AppCommands
             var classGeneration = new ClassGeneration(schemaDocument, definition.Key, definition.Value, path);
             Console.WriteLine(classGeneration.ToString());
             AllClasses.Add(classGeneration);
+            if (classGeneration.Definition.Output is not null && classGeneration.Definition.Output.Schema?.Type == "object")
+            {
+                var outputClass = new ClassGeneration(classGeneration.Document, $"{classGeneration.ClassName}Output", classGeneration.Definition.Output.Schema, classGeneration.Path);
+                AllClasses.Add(outputClass);
+            }
+
+            if (classGeneration.Definition.Input is not null && classGeneration.Definition.Input.Schema?.Type == "object")
+            {
+                var outputClass = new ClassGeneration(classGeneration.Document, $"{classGeneration.ClassName}Input", classGeneration.Definition.Input.Schema, classGeneration.Path);
+                AllClasses.Add(outputClass);
+            }
         }
     }
 
@@ -305,10 +332,6 @@ public partial class AppCommands
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATDidJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),");
-        // foreach (var enumProp in enums)
-        // {
-        //     sb.AppendLine($"            typeof(JsonStringEnumConverter<{enumProp.CSharpNamespace}.{enumProp.ClassName}>),");
-        // }
         sb.AppendLine("        },");
         sb.AppendLine($"        PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,");
         sb.AppendLine($"        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]");
@@ -347,7 +370,6 @@ public partial class AppCommands
 
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        // this.GenerateUsingsList(sb, cls);
         this.GenerateNamespace(sb, $"{this.baseNamespace}.{cls.CSharpNamespace}");
         sb.AppendLine("{");
 
@@ -503,82 +525,6 @@ public partial class AppCommands
         }
 
         sb.AppendLine();
-    }
-
-    private string GenerateTypeClassValue(PropertyGeneration property, ClassGeneration cls)
-    {
-        if (property.IsBaseType)
-        {
-            return property.Type;
-        }
-
-        if (property.RawType.Contains("ATObject") || property.RawType.Contains("FishyFlip.Models"))
-        {
-            return property.Type;
-        }
-
-        if (property.PropertyDefinition.Type == "ref" && property.PropertyDefinition.Ref != null)
-        {
-            var refString = property.PropertyDefinition.Ref;
-            if (DoesRefStringHaveNoNamespace(refString))
-            {
-                refString = $"{property.Id.Split("#").First()}{refString}";
-            }
-
-            var classRef = FindClassFromRef(refString);
-            if (classRef != null)
-            {
-                return $"{classRef.CSharpNamespace}.{classRef.ClassName}?";
-            }
-
-            var propRef = FindPropertyFromRef(property.PropertyDefinition.Ref);
-
-            if (propRef != null)
-            {
-                return $"{propRef.CSharpNamespace}.{propRef.ClassName}?";
-            }
-        }
-
-        var freshString = string.Empty;
-        var type = property.RawType;
-
-        if (!type.Contains("."))
-        {
-            if (!type.Contains(this.baseNamespace))
-            {
-                freshString = $"{this.baseNamespace}.";
-            }
-
-            if (!type.Contains(property.CSharpNamespace))
-            {
-                freshString += $"{property.CSharpNamespace}.";
-            }
-
-            freshString += $"{type.ToPascalCase()}";
-        }
-        else
-        {
-            if (!type.Contains(this.baseNamespace) && !type.Contains("FishyFlip.Models"))
-            {
-                freshString = $"{this.baseNamespace}.{type.ToPascalCase()}";
-            }
-            else
-            {
-                freshString = type;
-            }
-        }
-
-        if (property.Type.Contains("List<"))
-        {
-            freshString = $"List<{freshString}>";
-        }
-
-        if (string.IsNullOrEmpty(freshString))
-        {
-            throw new Exception($"Failed to generate type for {property.Key}");
-        }
-
-        return $"{freshString}?";
     }
 
     private async Task GenerateCBORToATObjectConverterClassFile(List<ClassGeneration> classes)

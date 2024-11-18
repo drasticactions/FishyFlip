@@ -23,6 +23,9 @@ public class SchemaDefinition
     [JsonPropertyName("key")]
     public string Key { get; set; } = string.Empty;
 
+    [JsonPropertyName("ref")]
+    public string Ref { get; set; } = string.Empty;
+
     [JsonPropertyName("required")]
     public string[] Required { get; set; } = Array.Empty<string>();
 

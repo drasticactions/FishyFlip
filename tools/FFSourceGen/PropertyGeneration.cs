@@ -8,7 +8,6 @@ using FFSourceGen.Models;
 
 public class PropertyGeneration
 {
-    //     public PropertyGeneration(PropertyDefinition propertyDefinition, string key, SchemaDocument document, SchemaDefinition def, string path, string ns, string cns, string cn, ClassGeneration cs)
     public PropertyGeneration(PropertyDefinition propertyDefinition, string key, ClassGeneration cs)
     {
         this.Class = cs;
@@ -182,7 +181,25 @@ public class PropertyGeneration
             return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();";
         }
 
-        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? new {propertyName.Replace("?", string.Empty)}(n) : null).ToList();";
+        switch (propertyName)
+        {
+            case "FishyFlip.Models.ATDid?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATDid() : null).ToList();";
+            case "FishyFlip.Models.ATHandle?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATHandle() : null).ToList();";
+            case "FishyFlip.Models.ATUri?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();";
+            case "FishyFlip.Models.ATIdentifier?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATIdentifier() : null).ToList();";
+            case "DateTime?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToDateTime() : default).ToList();";
+            case "Blob?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? new FishyFlip.Models.Blob(n) : null).ToList();";
+            case "Ipfs.Cid?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATCid() : null).ToList();";
+            default:
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? new {propertyName.Replace("?", string.Empty)}(n) : null).ToList();";
+        }
     }
 
     private string GetFullCBORTypeFromRef(string refString)
@@ -193,18 +210,26 @@ public class PropertyGeneration
         }
 
         var classRef = AppCommands.FindClassFromRef(refString);
+
         if (classRef is not null)
         {
-            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {classRef.CSharpNamespace}.{classRef.ClassName}(obj[\"{this.Key}\"]);";
+            if (classRef.IsArray)
+            {
+                if (classRef.IsArrayOfATObjects)
+                {
+                    return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();";
+                }
+
+                if (classRef.IsArrayOfStrings)
+                {
+                    return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.AsString() : null).ToList();";
+                }
+            }
+
+            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);";
         }
 
-        var prop = AppCommands.FindPropertyFromRef(refString);
-        if (prop is not null)
-        {
-            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {prop.ClassName}(obj[\"{this.Key}\"]);";
-        }
-
-        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);";
+        throw new InvalidOperationException($"Could not find class ref: {refString}");
     }
 
     private string TypeToCBorCast(string type)
