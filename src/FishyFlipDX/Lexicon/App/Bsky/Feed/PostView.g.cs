@@ -77,7 +77,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public App.Bsky.Feed.ViewerState? Viewer { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("threadgate")]
         public App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }

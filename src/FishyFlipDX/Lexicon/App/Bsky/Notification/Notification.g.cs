@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public DateTime? IndexedAt { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

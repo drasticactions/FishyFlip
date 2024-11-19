@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public ATObject? Value { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("replyCount")]
         public long? ReplyCount { get; set; }

@@ -25,12 +25,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         public SelfLabels(CBORObject obj)
         {
-            if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n => n is not null ? new SelfLabel(n) : null).ToList();
+            if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n => n is not null ? new Com.Atproto.Label.SelfLabel(n) : null).ToList();
         }
 
         [JsonPropertyName("values")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel?>? Values { get; set; }
+        public List<Com.Atproto.Label.SelfLabel?>? Values { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

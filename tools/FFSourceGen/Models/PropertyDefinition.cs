@@ -55,4 +55,19 @@ public class PropertyDefinition
 
     [JsonPropertyName("properties")]
     public Dictionary<string, PropertyDefinition>? Properties { get; set; }
+
+    public string CSharpType => this.Type switch
+    {
+        "string" when this.Format == "did" => "FishyFlip.Models.ATDid",
+        "string" when this.Format == "handle" => "FishyFlip.Models.ATHandle",
+        "string" when this.Format == "datetime" => "DateTime",
+        "string" when this.Format == "at-uri" => "FishyFlip.Models.ATUri",
+        "string" when this.Format == "at-identifier" => "FishyFlip.Models.ATIdentifier",
+        "string" => "string",
+        "number" => "double",
+        "integer" => "int",
+        "boolean" => "bool",
+        "array" => $"List<{this.Items?.CSharpType}?>",
+        _ => "ATObject",
+    };
 }

@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed?>? Items { get; set; }
+        public List<App.Bsky.Actor.SavedFeed?>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

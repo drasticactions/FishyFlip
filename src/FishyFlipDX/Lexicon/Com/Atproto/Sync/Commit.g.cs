@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["since"] is not null) this.Since = obj["since"].AsString();
             if (obj["blocks"] is not null) this.Blocks = obj["blocks"].EncodeToBytes();
-            if (obj["ops"] is not null) this.Ops = obj["ops"].Values.Select(n => n is not null ? new RepoOp(n) : null).ToList();
+            if (obj["ops"] is not null) this.Ops = obj["ops"].Values.Select(n => n is not null ? new Com.Atproto.Sync.RepoOp(n) : null).ToList();
             if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n => n is not null ? n.ToATCid() : default).ToList();
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
         }
@@ -106,7 +106,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         [JsonPropertyName("ops")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp?>? Ops { get; set; }
+        public List<Com.Atproto.Sync.RepoOp?>? Ops { get; set; }
 
         [JsonPropertyName("blobs")]
         [JsonRequired]

@@ -73,7 +73,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public DateTime? DeactivatedAt { get; set; }
 
         [JsonPropertyName("threatSignatures")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature?>? ThreatSignatures { get; set; }
+        public List<Com.Atproto.Admin.ThreatSignature?>? ThreatSignatures { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -1,4 +1,8 @@
-﻿using ConsoleAppFramework;
+﻿// <copyright file="Program.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using ConsoleAppFramework;
 using FishyFlip;
 using Microsoft.Extensions.Logging.Debug;
 

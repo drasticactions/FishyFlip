@@ -87,7 +87,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
 
         [JsonPropertyName("pinnedPost")]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }

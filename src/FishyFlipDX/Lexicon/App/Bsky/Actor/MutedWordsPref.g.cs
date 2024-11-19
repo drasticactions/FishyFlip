@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord?>? Items { get; set; }
+        public List<App.Bsky.Actor.MutedWord?>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

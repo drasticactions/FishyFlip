@@ -47,7 +47,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet?>? Facets { get; set; }
+        public List<App.Bsky.Richtext.Facet?>? Facets { get; set; }
 
         [JsonPropertyName("embed")]
         public ATObject? Embed { get; set; }

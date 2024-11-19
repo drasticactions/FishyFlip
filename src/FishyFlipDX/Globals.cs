@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+global using System.IdentityModel.Tokens.Jwt;
 global using System.Net.Http.Headers;
 global using System.Net.WebSockets;
 global using System.Text;
@@ -15,6 +16,8 @@ global using FishyFlip.Events;
 global using FishyFlip.Lexicon;
 global using FishyFlip.Models;
 global using FishyFlip.Tools;
+global using IdentityModel.OidcClient;
+global using IdentityModel.OidcClient.DPoP;
 global using Ipfs;
 global using Microsoft.Extensions.Logging;
 global using PeterO.Cbor;

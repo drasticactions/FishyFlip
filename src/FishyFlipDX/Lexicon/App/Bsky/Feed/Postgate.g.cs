@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["post"] is not null) this.Post = obj["post"].ToATUri();
-            if (obj["detachedEmbeddingUris"] is not null) this.DetachedEmbeddingUris = obj["detachedEmbeddingUris"].Values.Select(n => n is not null ? new FishyFlip.Models.ATUri(n) : null).ToList();
+            if (obj["detachedEmbeddingUris"] is not null) this.DetachedEmbeddingUris = obj["detachedEmbeddingUris"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();
             if (obj["embeddingRules"] is not null) this.EmbeddingRules = obj["embeddingRules"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
         }
 
@@ -45,7 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// List of AT-URIs embedding this post that the author has detached from.
         /// </summary>
         [JsonPropertyName("detachedEmbeddingUris")]
-        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<FishyFlip.Models.ATUri?, FishyFlip.Tools.Json.ATUriJsonConverter>))]
         public List<FishyFlip.Models.ATUri?>? DetachedEmbeddingUris { get; set; }
 
         [JsonPropertyName("embeddingRules")]

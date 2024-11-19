@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["post"] is not null) this.Post = obj["post"].ToATUri();
             if (obj["allow"] is not null) this.Allow = obj["allow"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
-            if (obj["hiddenReplies"] is not null) this.HiddenReplies = obj["hiddenReplies"].Values.Select(n => n is not null ? new FishyFlip.Models.ATUri(n) : null).ToList();
+            if (obj["hiddenReplies"] is not null) this.HiddenReplies = obj["hiddenReplies"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();
         }
 
         /// <summary>
@@ -48,7 +48,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// List of hidden reply URIs.
         /// </summary>
         [JsonPropertyName("hiddenReplies")]
-        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<FishyFlip.Models.ATUri?, FishyFlip.Tools.Json.ATUriJsonConverter>))]
         public List<FishyFlip.Models.ATUri?>? HiddenReplies { get; set; }
 
         /// <summary>

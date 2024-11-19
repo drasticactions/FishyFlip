@@ -8,18 +8,16 @@ using FFSourceGen.Models;
 
 public class PropertyGeneration
 {
-    public PropertyGeneration(PropertyDefinition propertyDefinition, string key, SchemaDocument document, SchemaDefinition def, string path, string ns, string cns, string cn)
+    public PropertyGeneration(PropertyDefinition propertyDefinition, string key, ClassGeneration cs)
     {
+        this.Class = cs;
         this.PropertyDefinition = propertyDefinition;
-        this.Document = document;
-        this.Definition = def;
-        this.Path = path;
         this.Key = key;
-        this.SetNamespace(ns, cns);
-        this.Id = $"{document.Id}#{key}";
-        this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
+        this.SetNamespace(this.Class.Namespace, this.Class.CSharpNamespace);
+        this.Id = $"{this.Class.Document.Id}#{key}";
+        this.ClassName = key != "main" ? key.ToPascalCase() : string.Join(string.Empty, this.Class.Document.Id.Split('.').TakeLast(1).Select(n => n.ToPascalCase())).ToPascalCase();
         this.PropertyName = this.ClassName;
-        if (this.PropertyName == cn)
+        if (this.PropertyName == this.Class.ClassName)
         {
             this.PropertyName = $"{this.PropertyName}Value";
         }
@@ -72,27 +70,19 @@ public class PropertyGeneration
         this.CSharpNamespace = cns;
     }
 
+    public ClassGeneration? Class { get; }
+
     public string Id { get; }
 
     public string ClassName { get; }
 
-    private string? rawType = null;
-
-    public string RawType {
-        get
-        {
-            if (this.rawType is not null)
-                return this.rawType;
-            this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition);
-            return this.rawType;
-        }
-    }
+    public string RawType => this.Type.Replace("?", string.Empty);
 
     public PropertyDefinition PropertyDefinition { get; }
 
-    public SchemaDocument Document { get; }
+    public SchemaDocument Document => this.Class.Document;
 
-    public SchemaDefinition Definition { get; }
+    public SchemaDefinition Definition => this.Class.Definition;
 
     public bool IsATObject => this.Type.Contains("ATObject");
 
@@ -142,6 +132,16 @@ public class PropertyGeneration
         };
     }
 
+    private string GenerateCborPropertyForUnknownType(PropertyDefinition property)
+    {
+        if (this.ClassName == "DidDoc")
+        {
+            return "// Ignore DidDoc";
+        }
+
+        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();";
+    }
+
     private string GenerateCborProperty()
     {
         var property = this.PropertyDefinition;
@@ -162,7 +162,7 @@ public class PropertyGeneration
             "boolean" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].AsBoolean();",
             "bytes" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].EncodeToBytes();",
             "cid-link" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
-            "unknown" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
+            "unknown" => this.GenerateCborPropertyForUnknownType(property),
             "object" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
             "record" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
             "union" when property.Refs?.Length > 0 => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
@@ -191,34 +191,25 @@ public class PropertyGeneration
             return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();";
         }
 
-        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? new {propertyName.Replace("?", string.Empty)}(n) : null).ToList();";
-    }
-
-    private string GetTypeFromRef(string refString)
-    {
-        if (AppCommands.DoesRefStringHaveNoNamespace(refString))
+        switch (propertyName)
         {
-            refString = $"{this.Id.Split("#").First()}{refString}";
+            case "FishyFlip.Models.ATDid?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATDid() : null).ToList();";
+            case "FishyFlip.Models.ATHandle?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATHandle() : null).ToList();";
+            case "FishyFlip.Models.ATUri?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();";
+            case "FishyFlip.Models.ATIdentifier?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATIdentifier() : null).ToList();";
+            case "DateTime?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToDateTime() : default).ToList();";
+            case "Blob?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? new FishyFlip.Models.Blob(n) : null).ToList();";
+            case "Ipfs.Cid?":
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATCid() : null).ToList();";
+            default:
+                return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? new {propertyName.Replace("?", string.Empty)}(n) : null).ToList();";
         }
-
-        var classRef = AppCommands.FindClassFromRef(refString);
-        if (classRef is not null)
-        {
-            if (classRef.Definition.KnownValues?.Length > 0)
-            {
-                return $"{classRef.CSharpNamespace}.{classRef.ClassName}";
-            }
-
-            return $"{classRef.CSharpNamespace}.{classRef.ClassName}";
-        }
-
-        var prop = AppCommands.FindPropertyFromRef(refString);
-        if (prop is not null)
-        {
-            return prop.ClassName;
-        }
-
-        return "ATObject";
     }
 
     private string GetFullCBORTypeFromRef(string refString)
@@ -229,18 +220,26 @@ public class PropertyGeneration
         }
 
         var classRef = AppCommands.FindClassFromRef(refString);
+
         if (classRef is not null)
         {
-            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {classRef.CSharpNamespace}.{classRef.ClassName}(obj[\"{this.Key}\"]);";
+            if (classRef.IsArray)
+            {
+                if (classRef.IsArrayOfATObjects)
+                {
+                    return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();";
+                }
+
+                if (classRef.IsArrayOfStrings)
+                {
+                    return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n => n is not null ? n.AsString() : null).ToList();";
+                }
+            }
+
+            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);";
         }
 
-        var prop = AppCommands.FindPropertyFromRef(refString);
-        if (prop is not null)
-        {
-            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {prop.ClassName}(obj[\"{this.Key}\"]);";
-        }
-
-        return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new {this.Type.Replace("?", string.Empty)}(obj[\"{this.Key}\"]);";
+        throw new InvalidOperationException($"Could not find class ref: {refString}");
     }
 
     private string TypeToCBorCast(string type)
@@ -280,15 +279,18 @@ public class PropertyGeneration
         };
     }
 
+    private string GetUnknownObjectType(PropertyDefinition property)
+    {
+        if (this.ClassName == "DidDoc")
+        {
+            return "FishyFlip.Models.DidDoc";
+        }
+
+        return "ATObject";
+    }
+
     private string GetPropertyType(string className, string name, PropertyDefinition property)
     {
-        // Handle known values as enums
-        // if (property.KnownValues?.Length > 0)
-        // {
-        //     this.rawType = $"{name}".ToPascalCase();
-        //     return $"{name}".ToPascalCase();
-        // }
-
         var baseType = property.Type?.ToLower() switch
         {
             "string" when property.Format == "did" => "FishyFlip.Models.ATDid",
@@ -303,7 +305,7 @@ public class PropertyGeneration
             "bytes" => "byte[]",
             "cid-link" => "Ipfs.Cid",
             "array" when property.Items != null => this.GetListPropertyName(className, name, property),
-            "unknown" => "ATObject",
+            "unknown" => this.GetUnknownObjectType(property),
             "object" => "ATObject",
             "record" => "ATObject",
             "union" when property.Refs?.Length > 0 => "ATObject", // Could be expanded to generate union types
@@ -316,11 +318,6 @@ public class PropertyGeneration
         if (string.IsNullOrEmpty(baseType))
         {
             throw new InvalidOperationException("Base Type is null or empty.");
-        }
-
-        if (string.IsNullOrEmpty(this.rawType))
-        {
-            this.rawType = baseType;
         }
 
         return $"{baseType}?";
@@ -336,29 +333,39 @@ public class PropertyGeneration
         var propertyNamePascal = !this._IsBaseType(propertyName) ? string.Join(".", propertyName.Split('.').Select(n => n.ToPascalCase())) : propertyName;
         var item = $"List<{propertyName}>";
         Console.WriteLine($"List Property: {item}");
-        this.rawType = propertyName;
         return item;
     }
 
     private string GetClassNameFromRef(string refString)
     {
-        // var classRef = AppCommands.FindClassFromRef(refString);
+        if (!refString.Contains("."))
+        {
+            refString = $"{this.Document.Id}{refString}";
+        }
+
+        var mainRef = AppCommands.FindClassFromRef(refString);
         var idSplit = refString.Split('#');
         var namespaceName = idSplit.First().Replace(".defs", string.Empty);
         var idName = idSplit.Last();
 
-        if (AppCommands.AllClasses.Any() && !string.IsNullOrEmpty(namespaceName) && !string.IsNullOrEmpty(idName))
+        if (mainRef is not null)
         {
-            var mainRef = AppCommands.AllClasses.FirstOrDefault(n => n.Id == refString);
-            if (mainRef is not null)
+            if (mainRef.Definition.Type == "string")
             {
-                if (mainRef.Definition.Type == "string")
-                {
-                    return "string";
-                }
-
-                return $"{mainRef.CSharpNamespace}.{mainRef.ClassName}";
+                return "string";
             }
+
+            if (mainRef.Definition.Type == "array" && mainRef.Definition.Items?.Type == "string")
+            {
+                return "List<string?>";
+            }
+
+            if (mainRef.Definition.Type == "array" && mainRef.Definition.Items?.Type == "union")
+            {
+                return "List<ATObject?>";
+            }
+
+            return $"{mainRef.CSharpNamespace}.{mainRef.ClassName}";
         }
 
         if (string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(idName))

@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["forAccount"] is not null) this.ForAccount = obj["forAccount"].AsString();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
-            if (obj["uses"] is not null) this.Uses = obj["uses"].Values.Select(n => n is not null ? new InviteCodeUse(n) : null).ToList();
+            if (obj["uses"] is not null) this.Uses = obj["uses"].Values.Select(n => n is not null ? new Com.Atproto.Server.InviteCodeUse(n) : null).ToList();
         }
 
         [JsonPropertyName("code")]
@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         [JsonPropertyName("uses")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse?>? Uses { get; set; }
+        public List<Com.Atproto.Server.InviteCodeUse?>? Uses { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

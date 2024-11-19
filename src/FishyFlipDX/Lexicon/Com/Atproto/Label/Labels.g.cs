@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         [JsonPropertyName("labels")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label?>? LabelsValue { get; set; }
+        public List<Com.Atproto.Label.Label?>? LabelsValue { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
