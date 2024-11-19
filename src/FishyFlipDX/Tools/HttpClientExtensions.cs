@@ -322,6 +322,9 @@ public static class HttpClientExtensions
             response = "{ }";
         }
 
+        // BUG: Sometimes, ATProtocol does not set $type as the first property in the JSON response.
+        // That causes the deserialization to fail. This is a workaround to reorder the $type property.
+        response = JsonTypeReorderer.ReorderTypeProperty(response);
         logger?.LogDebug($"GET {client.BaseAddress}{url}: {response}");
         return JsonSerializer.Deserialize<T>(response, type);
     }

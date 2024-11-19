@@ -392,6 +392,7 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(Tools.Ozone.Team.DeleteMemberInput), typeDiscriminator: "tools.ozone.team.deleteMember#DeleteMemberInput")]
     [JsonDerivedType(typeof(Tools.Ozone.Team.ListMembersOutput), typeDiscriminator: "tools.ozone.team.listMembers#ListMembersOutput")]
     [JsonDerivedType(typeof(Tools.Ozone.Team.UpdateMemberInput), typeDiscriminator: "tools.ozone.team.updateMember#UpdateMemberInput")]
+    [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: "blob")]
     /// <summary>
     /// The base class for FishyFlip ATProtocol Objects.
     /// </summary>

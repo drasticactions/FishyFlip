@@ -134,14 +134,14 @@ internal class PasswordSessionManager : ISessionManager
                 }
             }
 
-            var newSession = new Session(
+            resultSession = new Session(
                 session!.Did!,
                 session.DidDoc,
                 session.Handle!,
                 session.Email,
                 session.AccessJwt!,
                 session.RefreshJwt!);
-            this.SetSession(newSession);
+            this.SetSession(resultSession);
         },
             e => this.logger?.LogError(e.ToString()));
 
