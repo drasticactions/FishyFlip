@@ -194,7 +194,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
             if (tag != null)
             {
-                queryStrings.Add("tag=" + string.Join(",", tag));
+                queryStrings.Add(string.Join("&", tag.Select(n => "tag=" + n)));
             }
 
             if (viewer != null)

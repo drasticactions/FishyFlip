@@ -308,7 +308,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
             if (others != null)
             {
-                queryStrings.Add("others=" + string.Join(",", others));
+                queryStrings.Add(string.Join("&", others.Select(n => "others=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);
@@ -341,7 +341,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             List<string> queryStrings = new();
             if (uris != null)
             {
-                queryStrings.Add("uris=" + string.Join(",", uris));
+                queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);

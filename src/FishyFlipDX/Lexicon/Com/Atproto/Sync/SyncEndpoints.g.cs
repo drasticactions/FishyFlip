@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
             if (cids != null)
             {
-                queryStrings.Add("cids=" + string.Join(",", cids));
+                queryStrings.Add(string.Join("&", cids.Select(n => "cids=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);

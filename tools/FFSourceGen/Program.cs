@@ -108,34 +108,6 @@ public partial class AppCommands
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
     }
 
-    private async Task GenerateATProtocolEndpointListAsync(List<string> classNames)
-    {
-        var sb = new StringBuilder();
-        this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, "FishyFlip");
-        sb.AppendLine("{");
-        sb.AppendLine($"    /// <summary>");
-        sb.AppendLine($"    /// AT Protocol.");
-        sb.AppendLine($"    /// https://atproto.com/specs/atp.");
-        sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public partial class ATProtocol");
-        sb.AppendLine("    {");
-        sb.AppendLine();
-        foreach (var className in classNames)
-        {
-            var propertyName = string.Join(".", className.Split('.').Select(n => n.ToPascalCase()));
-            sb.AppendLine($"        public {this.baseNamespace}.{propertyName}.{className.Split(".").Last()}Endpoints {className.Replace(".", string.Empty)} => new(this);");
-
-            sb.AppendLine();
-        }
-
-        sb.AppendLine("    }");
-        sb.AppendLine("}");
-        sb.AppendLine();
-        var outputPath = Path.Combine(this.basePath, "ATProtocol.g.cs");
-        await File.WriteAllTextAsync(outputPath, sb.ToString());
-    }
-
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
     {
             Console.WriteLine($"Generating Endpoint Group: {group.Key}");
@@ -189,6 +161,10 @@ public partial class AppCommands
                         {
                             sb.AppendLine($"            return atp.Client.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
                         }
+                        else if (inputProperties[1].Contains("StreamContent"))
+                        {
+                            sb.AppendLine($"            return atp.Client.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, {inputProperties[1].Split(" ").Last()}, cancellationToken, atp.Options.Logger);");
+                        }
                         else
                         {
                             sb.AppendLine($"            var inputItem = new {item.ClassName}Input();");
@@ -223,13 +199,13 @@ public partial class AppCommands
                                 {
                                     sb.AppendLine($"            if ({prop} != null)");
                                     sb.AppendLine("            {");
-                                    sb.AppendLine($"                queryStrings.Add(\"{prop}=\" + string.Join(\",\", {prop}));");
+                                    sb.AppendLine($"                queryStrings.Add(string.Join(\"&\", {prop}.Select(n => \"{prop}=\" + n)));");
                                     sb.AppendLine("            }");
                                     sb.AppendLine();
                                 }
                                 else
                                 {
-                                    sb.AppendLine($"            queryStrings.Add(\"{prop}=\" + string.Join(\",\", {prop}));");
+                                    sb.AppendLine($"            queryStrings.Add(string.Join(\"&\", {prop}.Select(n => \"{prop}=\" + n)));");
                                     sb.AppendLine();
                                 }
                             }
@@ -439,6 +415,11 @@ public partial class AppCommands
                 }
 
             }
+        }
+
+        if (classGeneration.Definition.Input?.Encoding == "*/*")
+        {
+            requiredProperties.Add("StreamContent content");
         }
 
         var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -885,6 +866,7 @@ public partial class AppCommands
             sb.AppendLine($"    [JsonDerivedType(typeof({cls.CSharpNamespace}.{cls.ClassName}), typeDiscriminator: \"{cls.Id}\")]");
         }
 
+        sb.AppendLine($"    [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: \"blob\")]");
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// The base class for FishyFlip ATProtocol Objects.");
         sb.AppendLine($"    /// </summary>");

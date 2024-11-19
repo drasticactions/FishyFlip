@@ -207,10 +207,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Upload a new blob, to be referenced from a repository record. The blob will be deleted if it is not referenced within a time window (eg, minutes). Blob restrictions (mimetype, size, etc) are enforced when the reference is created. Requires auth, implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>> UploadBlobAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>> UploadBlobAsync (this FishyFlip.ATProtocol atp, StreamContent content, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UploadBlob.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoUploadBlobOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoUploadBlobOutput!, atp.Options.JsonSerializerOptions, content, cancellationToken, atp.Options.Logger);
         }
 
     }

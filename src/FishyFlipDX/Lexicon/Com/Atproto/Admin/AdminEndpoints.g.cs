@@ -118,7 +118,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             List<string> queryStrings = new();
             if (dids != null)
             {
-                queryStrings.Add("dids=" + string.Join(",", dids));
+                queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);

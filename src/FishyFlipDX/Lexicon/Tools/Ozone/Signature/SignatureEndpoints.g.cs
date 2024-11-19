@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             List<string> queryStrings = new();
             if (dids != null)
             {
-                queryStrings.Add("dids=" + string.Join(",", dids));
+                queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);
@@ -73,7 +73,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             List<string> queryStrings = new();
             if (values != null)
             {
-                queryStrings.Add("values=" + string.Join(",", values));
+                queryStrings.Add(string.Join("&", values.Select(n => "values=" + n)));
             }
 
             if (cursor != null)

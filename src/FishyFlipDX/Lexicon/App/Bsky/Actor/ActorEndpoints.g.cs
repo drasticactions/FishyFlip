@@ -63,7 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             List<string> queryStrings = new();
             if (actors != null)
             {
-                queryStrings.Add("actors=" + string.Join(",", actors));
+                queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);

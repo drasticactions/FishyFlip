@@ -76,7 +76,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             List<string> queryStrings = new();
             if (members != null)
             {
-                queryStrings.Add("members=" + string.Join(",", members));
+                queryStrings.Add(string.Join("&", members.Select(n => "members=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);

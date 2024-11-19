@@ -195,7 +195,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             List<string> queryStrings = new();
             if (feeds != null)
             {
-                queryStrings.Add("feeds=" + string.Join(",", feeds));
+                queryStrings.Add(string.Join("&", feeds.Select(n => "feeds=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);
@@ -293,7 +293,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             List<string> queryStrings = new();
             if (uris != null)
             {
-                queryStrings.Add("uris=" + string.Join(",", uris));
+                queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);
@@ -489,7 +489,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
             if (tag != null)
             {
-                queryStrings.Add("tag=" + string.Join(",", tag));
+                queryStrings.Add(string.Join("&", tag.Select(n => "tag=" + n)));
             }
 
             if (limit != null)

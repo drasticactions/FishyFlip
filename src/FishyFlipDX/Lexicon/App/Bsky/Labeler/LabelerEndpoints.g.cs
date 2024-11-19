@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             List<string> queryStrings = new();
             if (dids != null)
             {
-                queryStrings.Add("dids=" + string.Join(",", dids));
+                queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
             }
 
             if (detailed != null)

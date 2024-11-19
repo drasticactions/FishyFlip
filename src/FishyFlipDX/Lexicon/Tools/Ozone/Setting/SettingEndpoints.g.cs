@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
             if (keys != null)
             {
-                queryStrings.Add("keys=" + string.Join(",", keys));
+                queryStrings.Add(string.Join("&", keys.Select(n => "keys=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);

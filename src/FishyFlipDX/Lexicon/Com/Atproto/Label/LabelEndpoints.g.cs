@@ -26,12 +26,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             List<string> queryStrings = new();
             if (uriPatterns != null)
             {
-                queryStrings.Add("uriPatterns=" + string.Join(",", uriPatterns));
+                queryStrings.Add(string.Join("&", uriPatterns.Select(n => "uriPatterns=" + n)));
             }
 
             if (sources != null)
             {
-                queryStrings.Add("sources=" + string.Join(",", sources));
+                queryStrings.Add(string.Join("&", sources.Select(n => "sources=" + n)));
             }
 
             if (limit != null)

@@ -92,7 +92,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             List<string> queryStrings = new();
             if (uris != null)
             {
-                queryStrings.Add("uris=" + string.Join(",", uris));
+                queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);
@@ -125,7 +125,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             List<string> queryStrings = new();
             if (dids != null)
             {
-                queryStrings.Add("dids=" + string.Join(",", dids));
+                queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
             }
 
             endpointUrl += string.Join("&", queryStrings);
@@ -143,7 +143,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             List<string> queryStrings = new();
             if (types != null)
             {
-                queryStrings.Add("types=" + string.Join(",", types));
+                queryStrings.Add(string.Join("&", types.Select(n => "types=" + n)));
             }
 
             if (createdBy != null)
@@ -173,7 +173,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (collections != null)
             {
-                queryStrings.Add("collections=" + string.Join(",", collections));
+                queryStrings.Add(string.Join("&", collections.Select(n => "collections=" + n)));
             }
 
             if (subjectType != null)
@@ -203,27 +203,27 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (addedLabels != null)
             {
-                queryStrings.Add("addedLabels=" + string.Join(",", addedLabels));
+                queryStrings.Add(string.Join("&", addedLabels.Select(n => "addedLabels=" + n)));
             }
 
             if (removedLabels != null)
             {
-                queryStrings.Add("removedLabels=" + string.Join(",", removedLabels));
+                queryStrings.Add(string.Join("&", removedLabels.Select(n => "removedLabels=" + n)));
             }
 
             if (addedTags != null)
             {
-                queryStrings.Add("addedTags=" + string.Join(",", addedTags));
+                queryStrings.Add(string.Join("&", addedTags.Select(n => "addedTags=" + n)));
             }
 
             if (removedTags != null)
             {
-                queryStrings.Add("removedTags=" + string.Join(",", removedTags));
+                queryStrings.Add(string.Join("&", removedTags.Select(n => "removedTags=" + n)));
             }
 
             if (reportTypes != null)
             {
-                queryStrings.Add("reportTypes=" + string.Join(",", reportTypes));
+                queryStrings.Add(string.Join("&", reportTypes.Select(n => "reportTypes=" + n)));
             }
 
             if (cursor != null)
@@ -296,7 +296,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (hostingStatuses != null)
             {
-                queryStrings.Add("hostingStatuses=" + string.Join(",", hostingStatuses));
+                queryStrings.Add(string.Join("&", hostingStatuses.Select(n => "hostingStatuses=" + n)));
             }
 
             if (reviewedBefore != null)
@@ -321,7 +321,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (ignoreSubjects != null)
             {
-                queryStrings.Add("ignoreSubjects=" + string.Join(",", ignoreSubjects));
+                queryStrings.Add(string.Join("&", ignoreSubjects.Select(n => "ignoreSubjects=" + n)));
             }
 
             if (lastReviewedBy != null)
@@ -356,12 +356,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (tags != null)
             {
-                queryStrings.Add("tags=" + string.Join(",", tags));
+                queryStrings.Add(string.Join("&", tags.Select(n => "tags=" + n)));
             }
 
             if (excludeTags != null)
             {
-                queryStrings.Add("excludeTags=" + string.Join(",", excludeTags));
+                queryStrings.Add(string.Join("&", excludeTags.Select(n => "excludeTags=" + n)));
             }
 
             if (cursor != null)
@@ -371,7 +371,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (collections != null)
             {
-                queryStrings.Add("collections=" + string.Join(",", collections));
+                queryStrings.Add(string.Join("&", collections.Select(n => "collections=" + n)));
             }
 
             if (subjectType != null)
