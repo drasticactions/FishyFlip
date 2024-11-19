@@ -29,54 +29,191 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Get miscellaneous runtime configuration.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput?>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetConfig.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetConfigOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// An unspecced view of globally popular feed generators.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>> GetPopularFeedGeneratorsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput?>> GetPopularFeedGeneratorsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetPopularFeedGenerators.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (query != null)
+            {
+                queryStrings.Add("query=" + query);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get a skeleton of suggested actors. Intended to be called and then hydrated through app.bsky.actor.getSuggestions
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>> GetSuggestionsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput?>> GetSuggestionsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetSuggestionsSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (relativeToDid != null)
+            {
+                queryStrings.Add("relativeToDid=" + relativeToDid);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestionsSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get a list of suggestions (feeds and users) tagged with categories
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>> GetTaggedSuggestionsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput?>> GetTaggedSuggestionsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetTaggedSuggestions.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTaggedSuggestionsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Backend Actors (profile) search, returns only skeleton.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>> SearchActorsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput?>> SearchActorsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = SearchActorsSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("q=" + q);
+
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (typeahead != null)
+            {
+                queryStrings.Add("typeahead=" + typeahead);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchActorsSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Backend Posts search, returns only skeleton
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>> SearchPostsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput?>> SearchPostsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string?>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = SearchPostsSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("q=" + q);
+
+            if (sort != null)
+            {
+                queryStrings.Add("sort=" + sort);
+            }
+
+            if (since != null)
+            {
+                queryStrings.Add("since=" + since);
+            }
+
+            if (until != null)
+            {
+                queryStrings.Add("until=" + until);
+            }
+
+            if (mentions != null)
+            {
+                queryStrings.Add("mentions=" + mentions);
+            }
+
+            if (author != null)
+            {
+                queryStrings.Add("author=" + author);
+            }
+
+            if (lang != null)
+            {
+                queryStrings.Add("lang=" + lang);
+            }
+
+            if (domain != null)
+            {
+                queryStrings.Add("domain=" + domain);
+            }
+
+            if (url != null)
+            {
+                queryStrings.Add("url=" + url);
+            }
+
+            if (tag != null)
+            {
+                queryStrings.Add("tag=" + string.Join(",", tag));
+            }
+
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchPostsSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

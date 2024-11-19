@@ -67,7 +67,7 @@ public class PropertyDefinition
         "number" => "double",
         "integer" => "int",
         "boolean" => "bool",
-        "array" => $"List<{this.Items?.CSharpType}>",
+        "array" => $"List<{this.Items?.CSharpType}?>",
         _ => "ATObject",
     };
 }

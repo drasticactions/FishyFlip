@@ -25,36 +25,62 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Add a member to the ozone team. Requires admin role.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member>> AddMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = AddMember.ToString();
+            var inputItem = new AddMemberInput();
+            inputItem.Did = did;
+            inputItem.Role = role;
+            return atp.Client.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamAddMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Delete a member from ozone team. Requires admin role.
         /// </summary>
-        public static Task<Result<Success>> DeleteMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> DeleteMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = DeleteMember.ToString();
+            var inputItem = new DeleteMemberInput();
+            inputItem.Did = did;
+            return atp.Client.Post<DeleteMemberInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamDeleteMemberInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// List all members with access to the ozone service.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>> ListMembersAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ListMembers.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamListMembersOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Update a member in the ozone service. Requires admin role.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member>> UpdateMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> UpdateMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = UpdateMember.ToString();
+            var inputItem = new UpdateMemberInput();
+            inputItem.Did = did;
+            inputItem.Disabled = disabled;
+            inputItem.Role = role;
+            return atp.Client.Post<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamUpdateMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

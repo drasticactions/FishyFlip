@@ -19,9 +19,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Get details about ozone's server configuration.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput?>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetConfig.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneServerGetConfigOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

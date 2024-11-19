@@ -35,81 +35,380 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Take a moderation action on an actor.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>> EmitEventAsync (this FishyFlip.ATProtocol atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (this FishyFlip.ATProtocol atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string?>? subjectBlobCids = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = EmitEvent.ToString();
+            var inputItem = new EmitEventInput();
+            inputItem.Event = @event;
+            inputItem.Subject = subject;
+            inputItem.CreatedBy = createdBy;
+            inputItem.SubjectBlobCids = subjectBlobCids;
+            return atp.Client.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get details about a moderation event.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>> GetEventAsync (this FishyFlip.ATProtocol atp, int id, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail?>> GetEventAsync (this FishyFlip.ATProtocol atp, int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetEvent.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("id=" + id);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventViewDetail!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get details about a record.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetRecord.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("uri=" + uri);
+
+            if (cid != null)
+            {
+                queryStrings.Add("cid=" + cid);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRecordViewDetail!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get details about some records.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>> GetRecordsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput?>> GetRecordsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri?> uris, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetRecords.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (uris != null)
+            {
+                queryStrings.Add("uris=" + string.Join(",", uris));
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetRecordsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get details about a repository.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail?>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetRepo.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRepoViewDetail!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get details about some repositories.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>> GetReposAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput?>> GetReposAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid?> dids, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetRepos.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (dids != null)
+            {
+                queryStrings.Add("dids=" + string.Join(",", dids));
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReposOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// List moderation events related to a subject.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string?>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string?>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string?>? addedLabels = default, List<string?>? removedLabels = default, List<string?>? addedTags = default, List<string?>? removedTags = default, List<string?>? reportTypes = default, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = QueryEvents.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (types != null)
+            {
+                queryStrings.Add("types=" + string.Join(",", types));
+            }
+
+            if (createdBy != null)
+            {
+                queryStrings.Add("createdBy=" + createdBy);
+            }
+
+            if (sortDirection != null)
+            {
+                queryStrings.Add("sortDirection=" + sortDirection);
+            }
+
+            if (createdAfter != null)
+            {
+                queryStrings.Add("createdAfter=" + createdAfter);
+            }
+
+            if (createdBefore != null)
+            {
+                queryStrings.Add("createdBefore=" + createdBefore);
+            }
+
+            if (subject != null)
+            {
+                queryStrings.Add("subject=" + subject);
+            }
+
+            if (collections != null)
+            {
+                queryStrings.Add("collections=" + string.Join(",", collections));
+            }
+
+            if (subjectType != null)
+            {
+                queryStrings.Add("subjectType=" + subjectType);
+            }
+
+            if (includeAllUserRecords != null)
+            {
+                queryStrings.Add("includeAllUserRecords=" + includeAllUserRecords);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (hasComment != null)
+            {
+                queryStrings.Add("hasComment=" + hasComment);
+            }
+
+            if (comment != null)
+            {
+                queryStrings.Add("comment=" + comment);
+            }
+
+            if (addedLabels != null)
+            {
+                queryStrings.Add("addedLabels=" + string.Join(",", addedLabels));
+            }
+
+            if (removedLabels != null)
+            {
+                queryStrings.Add("removedLabels=" + string.Join(",", removedLabels));
+            }
+
+            if (addedTags != null)
+            {
+                queryStrings.Add("addedTags=" + string.Join(",", addedTags));
+            }
+
+            if (removedTags != null)
+            {
+                queryStrings.Add("removedTags=" + string.Join(",", removedTags));
+            }
+
+            if (reportTypes != null)
+            {
+                queryStrings.Add("reportTypes=" + string.Join(",", reportTypes));
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryEventsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// View moderation statuses of subjects (record or repo).
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string?>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string?>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string?>? tags = default, List<string?>? excludeTags = default, string? cursor = default, List<string?>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = QueryStatuses.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (includeAllUserRecords != null)
+            {
+                queryStrings.Add("includeAllUserRecords=" + includeAllUserRecords);
+            }
+
+            if (subject != null)
+            {
+                queryStrings.Add("subject=" + subject);
+            }
+
+            if (comment != null)
+            {
+                queryStrings.Add("comment=" + comment);
+            }
+
+            if (reportedAfter != null)
+            {
+                queryStrings.Add("reportedAfter=" + reportedAfter);
+            }
+
+            if (reportedBefore != null)
+            {
+                queryStrings.Add("reportedBefore=" + reportedBefore);
+            }
+
+            if (reviewedAfter != null)
+            {
+                queryStrings.Add("reviewedAfter=" + reviewedAfter);
+            }
+
+            if (hostingDeletedAfter != null)
+            {
+                queryStrings.Add("hostingDeletedAfter=" + hostingDeletedAfter);
+            }
+
+            if (hostingDeletedBefore != null)
+            {
+                queryStrings.Add("hostingDeletedBefore=" + hostingDeletedBefore);
+            }
+
+            if (hostingUpdatedAfter != null)
+            {
+                queryStrings.Add("hostingUpdatedAfter=" + hostingUpdatedAfter);
+            }
+
+            if (hostingUpdatedBefore != null)
+            {
+                queryStrings.Add("hostingUpdatedBefore=" + hostingUpdatedBefore);
+            }
+
+            if (hostingStatuses != null)
+            {
+                queryStrings.Add("hostingStatuses=" + string.Join(",", hostingStatuses));
+            }
+
+            if (reviewedBefore != null)
+            {
+                queryStrings.Add("reviewedBefore=" + reviewedBefore);
+            }
+
+            if (includeMuted != null)
+            {
+                queryStrings.Add("includeMuted=" + includeMuted);
+            }
+
+            if (onlyMuted != null)
+            {
+                queryStrings.Add("onlyMuted=" + onlyMuted);
+            }
+
+            if (reviewState != null)
+            {
+                queryStrings.Add("reviewState=" + reviewState);
+            }
+
+            if (ignoreSubjects != null)
+            {
+                queryStrings.Add("ignoreSubjects=" + string.Join(",", ignoreSubjects));
+            }
+
+            if (lastReviewedBy != null)
+            {
+                queryStrings.Add("lastReviewedBy=" + lastReviewedBy);
+            }
+
+            if (sortField != null)
+            {
+                queryStrings.Add("sortField=" + sortField);
+            }
+
+            if (sortDirection != null)
+            {
+                queryStrings.Add("sortDirection=" + sortDirection);
+            }
+
+            if (takendown != null)
+            {
+                queryStrings.Add("takendown=" + takendown);
+            }
+
+            if (appealed != null)
+            {
+                queryStrings.Add("appealed=" + appealed);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (tags != null)
+            {
+                queryStrings.Add("tags=" + string.Join(",", tags));
+            }
+
+            if (excludeTags != null)
+            {
+                queryStrings.Add("excludeTags=" + string.Join(",", excludeTags));
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (collections != null)
+            {
+                queryStrings.Add("collections=" + string.Join(",", collections));
+            }
+
+            if (subjectType != null)
+            {
+                queryStrings.Add("subjectType=" + subjectType);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryStatusesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Find repositories based on a search term.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>> SearchReposAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput?>> SearchReposAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = SearchRepos.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (q != null)
+            {
+                queryStrings.Add("q=" + q);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationSearchReposOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

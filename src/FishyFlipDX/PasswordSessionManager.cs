@@ -112,7 +112,7 @@ internal class PasswordSessionManager : ISessionManager
             if (this.protocol.Options.UseServiceEndpointUponLogin)
             {
                 var logger = this.protocol.Options.Logger;
-                var serviceUrl = session.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
+                var serviceUrl = session!.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
                 if (string.IsNullOrEmpty(serviceUrl))
                 {
                     logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
@@ -135,7 +135,7 @@ internal class PasswordSessionManager : ISessionManager
             }
 
             var newSession = new Session(
-                session.Did!,
+                session!.Did!,
                 session.DidDoc,
                 session.Handle!,
                 session.Email,
@@ -214,7 +214,7 @@ internal class PasswordSessionManager : ISessionManager
         {
             if (this.session is not null)
             {
-                Multiple<RefreshSessionOutput, ATError> result =
+                Multiple<RefreshSessionOutput?, ATError> result =
                 await this.protocol.ThrowIfNull().RefreshSessionAsync(cancellationToken);
 
                 result
@@ -222,7 +222,7 @@ internal class PasswordSessionManager : ISessionManager
                     d =>
                     {
                         var newSession = new Session(
-                            d.Did!,
+                            d!.Did!,
                             d.DidDoc,
                             d.Handle!,
                             string.Empty,

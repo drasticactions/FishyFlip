@@ -37,91 +37,180 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Apply a batch transaction of repository creates, updates, and deletes. Requires auth, implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>> ApplyWritesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, List<ATObject> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>> ApplyWritesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, List<ATObject?> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ApplyWrites.ToString();
+            var inputItem = new ApplyWritesInput();
+            inputItem.Repo = repo;
+            inputItem.Writes = writes;
+            inputItem.Validate = validate;
+            inputItem.SwapCommit = swapCommit;
+            return atp.Client.Post<ApplyWritesInput, FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Create a single new repository record. Requires auth, implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>> CreateRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, ATObject record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>> CreateRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, ATObject record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CreateRecord.ToString();
+            var inputItem = new CreateRecordInput();
+            inputItem.Repo = repo;
+            inputItem.Collection = collection;
+            inputItem.Record = record;
+            inputItem.Rkey = rkey;
+            inputItem.Validate = validate;
+            inputItem.SwapCommit = swapCommit;
+            return atp.Client.Post<CreateRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Delete a repository record, or ensure it doesn't exist. Requires auth, implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>> DeleteRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>> DeleteRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = DeleteRecord.ToString();
+            var inputItem = new DeleteRecordInput();
+            inputItem.Repo = repo;
+            inputItem.Collection = collection;
+            inputItem.Rkey = rkey;
+            inputItem.SwapRecord = swapRecord;
+            inputItem.SwapCommit = swapCommit;
+            return atp.Client.Post<DeleteRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get information about an account and repository, including the list of collections. Does not require auth.
         /// </summary>
-        public static async Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?>> DescribeRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?>> DescribeRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default)
         {
-            var url = $"{DescribeRepo}?repo={repo}";
-            return await atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?>(url, SourceGenerationContext.Default.ComAtprotoRepoDescribeRepoOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            var endpointUrl = DescribeRepo.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("repo=" + repo);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDescribeRepoOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get a single record from a repository. Does not require auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, string? cid = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetRecord.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("repo=" + repo);
+
+            queryStrings.Add("collection=" + collection);
+
+            queryStrings.Add("rkey=" + rkey);
+
+            if (cid != null)
+            {
+                queryStrings.Add("cid=" + cid);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoGetRecordOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Import a repo in the form of a CAR file. Requires Content-Length HTTP header to be set.
         /// </summary>
-        public static Task<Result<Success>> ImportRepoAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> ImportRepoAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ImportRepo.ToString();
+            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Returns a list of missing blobs for the requesting account. Intended to be used in the account migration flow.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>> ListMissingBlobsAsync (this FishyFlip.ATProtocol atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput?>> ListMissingBlobsAsync (this FishyFlip.ATProtocol atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ListMissingBlobs.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListMissingBlobsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// List a range of records in a repository, matching a specific collection. Does not require auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>> ListRecordsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput?>> ListRecordsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ListRecords.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("repo=" + repo);
+
+            queryStrings.Add("collection=" + collection);
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (reverse != null)
+            {
+                queryStrings.Add("reverse=" + reverse);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListRecordsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Write a repository record, creating or updating it as needed. Requires auth, implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput>> PutRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, ATObject record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>> PutRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, ATObject record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = PutRecord.ToString();
+            var inputItem = new PutRecordInput();
+            inputItem.Repo = repo;
+            inputItem.Collection = collection;
+            inputItem.Rkey = rkey;
+            inputItem.Record = record;
+            inputItem.Validate = validate;
+            inputItem.SwapRecord = swapRecord;
+            inputItem.SwapCommit = swapCommit;
+            return atp.Client.Post<PutRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Upload a new blob, to be referenced from a repository record. The blob will be deleted if it is not referenced within a time window (eg, minutes). Blob restrictions (mimetype, size, etc) are enforced when the reference is created. Requires auth, implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput>> UploadBlobAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>> UploadBlobAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = UploadBlob.ToString();
+            return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoUploadBlobOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

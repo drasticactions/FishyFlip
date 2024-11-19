@@ -19,9 +19,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <summary>
         /// Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput>> CreateReportAsync (this FishyFlip.ATProtocol atp, string reasonType, ATObject subject, string? reason = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (this FishyFlip.ATProtocol atp, string reasonType, ATObject subject, string? reason = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CreateReport.ToString();
+            var inputItem = new CreateReportInput();
+            inputItem.ReasonType = reasonType;
+            inputItem.Subject = subject;
+            inputItem.Reason = reason;
+            return atp.Client.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

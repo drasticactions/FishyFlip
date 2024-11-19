@@ -67,225 +67,324 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Activates a currently deactivated account. Used to finalize account migration after the account's repo is imported and identity is setup.
         /// </summary>
-        public static Task<Result<Success>> ActivateAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> ActivateAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ActivateAccount.ToString();
+            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Returns the status of an account, especially as pertaining to import or recovery. Can be called many times over the course of an account migration. Requires auth and can only be called pertaining to oneself.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>> CheckAccountStatusAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput?>> CheckAccountStatusAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CheckAccountStatus.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCheckAccountStatusOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Confirm an email using a token from com.atproto.server.requestEmailConfirmation.
         /// </summary>
-        public static Task<Result<Success>> ConfirmEmailAsync (this FishyFlip.ATProtocol atp, string email, string token, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> ConfirmEmailAsync (this FishyFlip.ATProtocol atp, string email, string token, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ConfirmEmail.ToString();
+            var inputItem = new ConfirmEmailInput();
+            inputItem.Email = email;
+            inputItem.Token = token;
+            return atp.Client.Post<ConfirmEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerConfirmEmailInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Create an account. Implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>> CreateAccountAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, string? email = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>> CreateAccountAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, string? email = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CreateAccount.ToString();
+            var inputItem = new CreateAccountInput();
+            inputItem.Handle = handle;
+            inputItem.Email = email;
+            inputItem.Did = did;
+            inputItem.InviteCode = inviteCode;
+            inputItem.VerificationCode = verificationCode;
+            inputItem.VerificationPhone = verificationPhone;
+            inputItem.Password = password;
+            inputItem.RecoveryKey = recoveryKey;
+            inputItem.PlcOp = plcOp;
+            return atp.Client.Post<CreateAccountInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Create an App Password.
         /// </summary>
-        public static Task<Result<Success>> CreateAppPasswordAsync (this FishyFlip.ATProtocol atp, string name, bool? privileged = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?>> CreateAppPasswordAsync (this FishyFlip.ATProtocol atp, string name, bool? privileged = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CreateAppPassword.ToString();
+            var inputItem = new CreateAppPasswordInput();
+            inputItem.Name = name;
+            inputItem.Privileged = privileged;
+            return atp.Client.Post<CreateAppPasswordInput, FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAppPasswordInput!, atp.Options.SourceGenerationContext.ComAtprotoServerAppPassword!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Create an invite code.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>> CreateInviteCodeAsync (this FishyFlip.ATProtocol atp, int useCount, FishyFlip.Models.ATDid? forAccount = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput?>> CreateInviteCodeAsync (this FishyFlip.ATProtocol atp, int useCount, FishyFlip.Models.ATDid? forAccount = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CreateInviteCode.ToString();
+            var inputItem = new CreateInviteCodeInput();
+            inputItem.UseCount = useCount;
+            inputItem.ForAccount = forAccount;
+            return atp.Client.Post<CreateInviteCodeInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodeInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodeOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Create invite codes.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput>> CreateInviteCodesAsync (this FishyFlip.ATProtocol atp, int codeCount, int useCount, List<FishyFlip.Models.ATDid>? forAccounts = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>> CreateInviteCodesAsync (this FishyFlip.ATProtocol atp, int codeCount, int useCount, List<FishyFlip.Models.ATDid?>? forAccounts = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CreateInviteCodes.ToString();
+            var inputItem = new CreateInviteCodesInput();
+            inputItem.CodeCount = codeCount;
+            inputItem.UseCount = useCount;
+            inputItem.ForAccounts = forAccounts;
+            return atp.Client.Post<CreateInviteCodesInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodesInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodesOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Create an authentication session.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>> CreateSessionAsync (this FishyFlip.ATProtocol atp, string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (this FishyFlip.ATProtocol atp, string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CreateSession.ToString();
+            var inputItem = new CreateSessionInput();
+            inputItem.Identifier = identifier;
+            inputItem.Password = password;
+            inputItem.AuthFactorToken = authFactorToken;
+            return atp.Client.Post<CreateSessionInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Deactivates a currently active account. Stops serving of repo, and future writes to repo until reactivated. Used to finalize account migration with the old host after the account has been activated on the new host.
         /// </summary>
-        public static Task<Result<Success>> DeactivateAccountAsync (this FishyFlip.ATProtocol atp, DateTime? deleteAfter = default, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> DeactivateAccountAsync (this FishyFlip.ATProtocol atp, DateTime? deleteAfter = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = DeactivateAccount.ToString();
+            var inputItem = new DeactivateAccountInput();
+            inputItem.DeleteAfter = deleteAfter;
+            return atp.Client.Post<DeactivateAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDeactivateAccountInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Delete an actor's account with a token and password. Can only be called after requesting a deletion token. Requires auth.
         /// </summary>
-        public static Task<Result<Success>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string password, string token, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string password, string token, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = DeleteAccount.ToString();
+            var inputItem = new DeleteAccountInput();
+            inputItem.Did = did;
+            inputItem.Password = password;
+            inputItem.Token = token;
+            return atp.Client.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Delete the current session. Requires auth.
         /// </summary>
-        public static Task<Result<Success>> DeleteSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> DeleteSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = DeleteSession.ToString();
+            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Describes the server's account creation requirements and capabilities. Implemented by PDS.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>> DescribeServerAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput?>> DescribeServerAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = DescribeServer.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDescribeServerOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get all invite codes for the current account. Requires auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>> GetAccountInviteCodesAsync (this FishyFlip.ATProtocol atp, bool? includeUsed = default, bool? createAvailable = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput?>> GetAccountInviteCodesAsync (this FishyFlip.ATProtocol atp, bool? includeUsed = default, bool? createAvailable = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetAccountInviteCodes.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (includeUsed != null)
+            {
+                queryStrings.Add("includeUsed=" + includeUsed);
+            }
+
+            if (createAvailable != null)
+            {
+                queryStrings.Add("createAvailable=" + createAvailable);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetAccountInviteCodesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get a signed token on behalf of the requesting DID for the requested service.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>> GetServiceAuthAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid aud, int? exp = 0, string? lxm = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput?>> GetServiceAuthAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid aud, int? exp = 0, string? lxm = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetServiceAuth.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("aud=" + aud);
+
+            if (exp != null)
+            {
+                queryStrings.Add("exp=" + exp);
+            }
+
+            if (lxm != null)
+            {
+                queryStrings.Add("lxm=" + lxm);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetServiceAuthOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get information about the current auth session. Requires auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput>> GetSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput?>> GetSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetSession.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetSessionOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// List all App Passwords.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>> ListAppPasswordsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput?>> ListAppPasswordsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ListAppPasswords.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerListAppPasswordsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Refresh an authentication session. Requires auth using the 'refreshJwt' (not the 'accessJwt').
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput>> RefreshSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>> RefreshSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RefreshSession.ToString();
+            return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRefreshSessionOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Initiate a user account deletion via email.
         /// </summary>
-        public static Task<Result<Success>> RequestAccountDeleteAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RequestAccountDeleteAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RequestAccountDelete.ToString();
+            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Request an email with a code to confirm ownership of email.
         /// </summary>
-        public static Task<Result<Success>> RequestEmailConfirmationAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RequestEmailConfirmationAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RequestEmailConfirmation.ToString();
+            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Request a token in order to update email.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput>> RequestEmailUpdateAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput?>> RequestEmailUpdateAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RequestEmailUpdate.ToString();
+            return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRequestEmailUpdateOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Initiate a user account password reset via email.
         /// </summary>
-        public static Task<Result<Success>> RequestPasswordResetAsync (this FishyFlip.ATProtocol atp, string email, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RequestPasswordResetAsync (this FishyFlip.ATProtocol atp, string email, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RequestPasswordReset.ToString();
+            var inputItem = new RequestPasswordResetInput();
+            inputItem.Email = email;
+            return atp.Client.Post<RequestPasswordResetInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRequestPasswordResetInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Reserve a repo signing key, for use with account creation. Necessary so that a DID PLC update operation can be constructed during an account migraiton. Public and does not require auth; implemented by PDS. NOTE: this endpoint may change when full account migration is implemented.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput>> ReserveSigningKeyAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? did = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput?>> ReserveSigningKeyAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? did = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ReserveSigningKey.ToString();
+            var inputItem = new ReserveSigningKeyInput();
+            inputItem.Did = did;
+            return atp.Client.Post<ReserveSigningKeyInput, FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerReserveSigningKeyInput!, atp.Options.SourceGenerationContext.ComAtprotoServerReserveSigningKeyOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Reset a user account password using a token.
         /// </summary>
-        public static Task<Result<Success>> ResetPasswordAsync (this FishyFlip.ATProtocol atp, string token, string password, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> ResetPasswordAsync (this FishyFlip.ATProtocol atp, string token, string password, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ResetPassword.ToString();
+            var inputItem = new ResetPasswordInput();
+            inputItem.Token = token;
+            inputItem.Password = password;
+            return atp.Client.Post<ResetPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerResetPasswordInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Revoke an App Password by name.
         /// </summary>
-        public static Task<Result<Success>> RevokeAppPasswordAsync (this FishyFlip.ATProtocol atp, string name, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RevokeAppPasswordAsync (this FishyFlip.ATProtocol atp, string name, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RevokeAppPassword.ToString();
+            var inputItem = new RevokeAppPasswordInput();
+            inputItem.Name = name;
+            return atp.Client.Post<RevokeAppPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRevokeAppPasswordInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Update an account's email.
         /// </summary>
-        public static Task<Result<Success>> UpdateEmailAsync (this FishyFlip.ATProtocol atp, string email, bool? emailAuthFactor = default, string? token = default, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> UpdateEmailAsync (this FishyFlip.ATProtocol atp, string email, bool? emailAuthFactor = default, string? token = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = UpdateEmail.ToString();
+            var inputItem = new UpdateEmailInput();
+            inputItem.Email = email;
+            inputItem.EmailAuthFactor = emailAuthFactor;
+            inputItem.Token = token;
+            return atp.Client.Post<UpdateEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerUpdateEmailInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

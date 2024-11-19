@@ -164,11 +164,12 @@ public partial class AppCommands
                 var methodName = $"{item.ClassName}Async";
                 var inputProperties = this.FetchInputProperties(item);
                 var outputProperty = this.FetchOutputProperties(item);
+                var sourceContext = outputProperty == "Success" ? "Success" : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
                 var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
                 sb.AppendLine($"        /// <summary>");
                 sb.AppendLine($"        /// {description}");
                 sb.AppendLine($"        /// </summary>");
-                sb.Append($"        public static {outputProperty} {methodName} (");
+                sb.Append($"        public static Task<Result<{outputProperty}?>> {methodName} (");
                 for (int i = 0; i < inputProperties.Count; i++)
                 {
                     sb.Append($"{inputProperties[i]}");
@@ -180,7 +181,87 @@ public partial class AppCommands
 
                 sb.AppendLine($")");
                 sb.AppendLine("        {");
-                sb.AppendLine("            throw new NotImplementedException();");
+                switch (item.Definition.Type)
+                {
+                    case "procedure":
+                        sb.AppendLine($"            var endpointUrl = {item.ClassName}.ToString();");
+                        if (inputProperties.Count <= 2)
+                        {
+                            sb.AppendLine($"            return atp.Client.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"            var inputItem = new {item.ClassName}Input();");
+                            var inputSourceContext = $"{item.CSharpNamespace.Replace(".", string.Empty)}{item.ClassName}Input";
+                            for (int i = 1; i < inputProperties.Count - 1; i++)
+                            {
+                                 var typeName = inputProperties[i].Split(" ")[0];
+                                 var prop = inputProperties[i].Split(" ")[1];
+                                 sb.AppendLine($"            inputItem.{prop.Replace("@", string.Empty).ToPascalCase()} = {prop};");
+                            }
+                            // return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput?, FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+                            sb.AppendLine($"            return atp.Client.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{inputSourceContext}!, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);");
+                        }
+
+                        break;
+                    case "query":
+                        sb.AppendLine($"            var endpointUrl = {item.ClassName}.ToString();");
+                        if (inputProperties.Count > 2)
+                        {
+                            sb.AppendLine("            endpointUrl += \"?\";");
+                            sb.AppendLine("            List<string> queryStrings = new();");
+                        }
+
+                        for (int i = 1; i < inputProperties.Count - 1; i++)
+                        {
+                            var typeName = inputProperties[i].Split(" ")[0];
+                            var prop = inputProperties[i].Split(" ")[1];
+                            var isList = typeName.Contains("List<");
+                            if (isList)
+                            {
+                                if (typeName.Contains("?"))
+                                {
+                                    sb.AppendLine($"            if ({prop} != null)");
+                                    sb.AppendLine("            {");
+                                    sb.AppendLine($"                queryStrings.Add(\"{prop}=\" + string.Join(\",\", {prop}));");
+                                    sb.AppendLine("            }");
+                                    sb.AppendLine();
+                                }
+                                else
+                                {
+                                    sb.AppendLine($"            queryStrings.Add(\"{prop}=\" + string.Join(\",\", {prop}));");
+                                    sb.AppendLine();
+                                }
+                            }
+                            else
+                            {
+                                if (typeName.Contains("?"))
+                                {
+                                    sb.AppendLine($"            if ({prop} != null)");
+                                    sb.AppendLine("            {");
+                                    sb.AppendLine($"                queryStrings.Add(\"{prop}=\" + {prop});");
+                                    sb.AppendLine("            }");
+                                    sb.AppendLine();
+                                }
+                                else
+                                {
+                                    sb.AppendLine($"            queryStrings.Add(\"{prop}=\" + {prop});");
+                                    sb.AppendLine();
+                                }
+                            }
+                        }
+
+                        if (inputProperties.Count > 2)
+                        {
+                            sb.AppendLine("            endpointUrl += string.Join(\"&\", queryStrings);");
+                        }
+
+                        sb.AppendLine($"            return atp.Client.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                        break;
+                    default:
+                        sb.AppendLine("            throw new NotImplementedException();");
+                        break;
+                }
                 sb.AppendLine("        }");
                 sb.AppendLine();
             }
@@ -207,7 +288,8 @@ public partial class AppCommands
 
     private List<string> FetchInputProperties(ClassGeneration classGeneration)
     {
-        var inputProperties = new List<string>() { "this FishyFlip.ATProtocol atp" };
+        var requiredProperties = new List<string>();
+        var optionalProperties = new List<string>();
 
         foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ?? new Dictionary<string, PropertyDefinition>())
         {
@@ -216,12 +298,83 @@ public partial class AppCommands
             if (prop.Value.Ref is not null)
             {
                 Console.WriteLine($"Property Ref: {prop.Value.Ref}");
-                var classRef = FindClassFromRef(prop.Value.Ref);
+                var refString = prop.Value.Ref;
+                var refSplit = prop.Value.Ref.Split("#");
+                if (string.IsNullOrEmpty(refSplit[0]))
+                {
+                    refString = $"{classGeneration.Id}#{refSplit[1]}";
+                }
+
+                var classRef = FindClassFromRef(refString);
+
                 if (classRef is not null)
                 {
                     var returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
 
-                    inputProperties.Add($"{returnType} {propertyName}");
+                    if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
+                    {
+                        optionalProperties.Add($"{returnType} {propertyName}");
+                    }
+                    else
+                    {
+                        requiredProperties.Add($"{returnType} {propertyName}");
+                    }
+                    Console.WriteLine($"{returnType} {propertyName}");
+                }
+            }
+            else if (prop.Value.Type == "array")
+            {
+                if (prop.Value.Items?.Ref is not null)
+                {
+                    Console.WriteLine($"Property Array Ref: {prop.Value.Items.Ref}");
+                    var refString = prop.Value.Items.Ref;
+                    var refSplit = prop.Value.Items.Ref.Split("#");
+                    if (string.IsNullOrEmpty(refSplit[0]))
+                    {
+                        refString = $"{classGeneration.Id}#{refSplit[1]}";
+                    }
+
+                    var classRef = FindClassFromRef(refString);
+
+                    if (classRef is not null)
+                    {
+                        var returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
+                        if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
+                        {
+                            returnType += "?";
+                            propertyName += " = default";
+                            optionalProperties.Add($"List<{returnType}?> {propertyName}");
+                        }
+                        else
+                        {
+                            requiredProperties.Add($"List<{returnType}?> {propertyName}");
+                        }
+
+                        Console.WriteLine($"{returnType} {propertyName}");
+                    }
+                }
+                else
+                {
+                    var returnType = prop.Value.CSharpType;
+                    if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
+                    {
+                        returnType += "?";
+                        switch (prop.Value.Type)
+                        {
+                            case "integer":
+                                propertyName += $" = {prop.Value.Default ?? 0}";
+                                break;
+                            default:
+                                propertyName += " = default";
+                                break;
+                        }
+                        optionalProperties.Add($"{returnType} {propertyName}");
+                    }
+                    else
+                    {
+                        requiredProperties.Add($"{returnType} {propertyName}");
+                    }
+
                     Console.WriteLine($"{returnType} {propertyName}");
                 }
             }
@@ -240,9 +393,13 @@ public partial class AppCommands
                             propertyName += " = default";
                             break;
                     }
+                    optionalProperties.Add($"{returnType} {propertyName}");
+                }
+                else
+                {
+                    requiredProperties.Add($"{returnType} {propertyName}");
                 }
 
-                inputProperties.Add($"{returnType} {propertyName}");
                 Console.WriteLine($"{returnType} {propertyName}");
             }
         }
@@ -273,13 +430,19 @@ public partial class AppCommands
                             propertyName += " = default";
                             break;
                     }
+
+                    optionalProperties.Add($"{returnType} {propertyName}");
+                }
+                else
+                {
+                    requiredProperties.Add($"{returnType} {propertyName}");
                 }
 
-                inputProperties.Add($"{returnType} {propertyName}");
             }
         }
 
-        inputProperties = inputProperties.OrderByDescending(n => !n.Contains("?")).ToList();
+        var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+        inputProperties.Insert(0, "this FishyFlip.ATProtocol atp");
         inputProperties.Add("CancellationToken cancellationToken = default");
 
         return inputProperties;
@@ -287,17 +450,24 @@ public partial class AppCommands
 
     private string FetchOutputProperties(ClassGeneration classGeneration)
     {
-        if (classGeneration.Definition.Output?.Schema?.Properties is null)
+        if (classGeneration.Definition.Output?.Schema is null)
         {
-            return "Task<Result<Success>>";
+            return "Success";
         }
 
         if (classGeneration.Definition.Output.Schema.Type == "ref")
         {
-            var classRef = FindClassFromRef(classGeneration.Definition.Output.Schema.Ref);
+            var refString = classGeneration.Definition.Output.Schema.Ref;
+            var refSplit = classGeneration.Definition.Output.Schema.Ref.Split("#");
+            if (string.IsNullOrEmpty(refSplit[0]))
+            {
+                refString = $"{classGeneration.Id}#{refSplit[1]}";
+            }
+
+            var classRef = FindClassFromRef(refString);
             if (classRef is not null)
             {
-                return $"Task<Result<{this.GenerateReturnTypeFromClassGeneration(classRef)}>>";
+                return $"{this.GenerateReturnTypeFromClassGeneration(classRef)}";
             }
         }
 
@@ -308,12 +478,12 @@ public partial class AppCommands
             var classRef = FindClassFromRef(outputRef);
             if (classRef is not null)
             {
-                return $"Task<Result<{this.GenerateReturnTypeFromClassGeneration(classRef)}>>";
+                return $"{this.GenerateReturnTypeFromClassGeneration(classRef)}";
             }
         }
 
         Console.WriteLine($"Could not find output type for {classGeneration.Id}.");
-        return "Task<Result<Success>>";
+        return "Success";
     }
 
     private string GenerateReturnTypeFromClassGeneration(ClassGeneration classRef)
@@ -322,7 +492,7 @@ public partial class AppCommands
         {
             if (classRef.IsArrayOfATObjects)
             {
-                return $"List<ATObject>";
+                return $"List<ATObject?>";
             }
 
             if (classRef.IsArrayOfStrings)

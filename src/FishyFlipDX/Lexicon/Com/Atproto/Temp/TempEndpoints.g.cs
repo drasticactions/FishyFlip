@@ -23,27 +23,45 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <summary>
         /// Check accounts location in signup queue.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>> CheckSignupQueueAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?>> CheckSignupQueueAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = CheckSignupQueue.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// DEPRECATED: use queryLabels or subscribeLabels instead -- Fetch all labels from a labeler created after a certain date.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput>> FetchLabelsAsync (this FishyFlip.ATProtocol atp, int? since = 0, int? limit = 50, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?>> FetchLabelsAsync (this FishyFlip.ATProtocol atp, int? since = 0, int? limit = 50, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = FetchLabels.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (since != null)
+            {
+                queryStrings.Add("since=" + since);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempFetchLabelsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Request a verification code to be sent to the supplied phone number
         /// </summary>
-        public static Task<Result<Success>> RequestPhoneVerificationAsync (this FishyFlip.ATProtocol atp, string phoneNumber, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RequestPhoneVerificationAsync (this FishyFlip.ATProtocol atp, string phoneNumber, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RequestPhoneVerification.ToString();
+            var inputItem = new RequestPhoneVerificationInput();
+            inputItem.PhoneNumber = phoneNumber;
+            return atp.Client.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

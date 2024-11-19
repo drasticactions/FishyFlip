@@ -31,63 +31,129 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Get private preferences attached to the current account. Expected use is synchronization between multiple devices, and import/export during account migration. Requires auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>> GetPreferencesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput?>> GetPreferencesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetPreferences.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetPreferencesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get detailed profile view of an actor. Does not require auth, but contains relevant metadata with auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>> GetProfileAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed?>> GetProfileAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetProfile.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("actor=" + actor);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorProfileViewDetailed!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get detailed profile views of multiple actors.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>> GetProfilesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATIdentifier?> actors, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetProfiles.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (actors != null)
+            {
+                queryStrings.Add("actors=" + string.Join(",", actors));
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Get a list of suggested actors. Expected use is discovery of accounts to follow during new account onboarding.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>> GetSuggestionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput?>> GetSuggestionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetSuggestions.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetSuggestionsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Set the private preferences attached to the account.
         /// </summary>
-        public static Task<Result<Success>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, List<ATObject> preferences, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, List<ATObject?> preferences, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = PutPreferences.ToString();
+            var inputItem = new PutPreferencesInput();
+            inputItem.Preferences = preferences;
+            return atp.Client.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Find actors (profiles) matching search criteria. Does not require auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>> SearchActorsAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput?>> SearchActorsAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = SearchActors.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (q != null)
+            {
+                queryStrings.Add("q=" + q);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Find actor suggestions for a prefix search term. Expected use is for auto-completion during text field entry. Does not require auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>> SearchActorsTypeaheadAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput?>> SearchActorsTypeaheadAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = SearchActorsTypeahead.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (q != null)
+            {
+                queryStrings.Add("q=" + q);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsTypeaheadOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

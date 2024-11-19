@@ -19,9 +19,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Get information about a list of labeler services.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>> GetServicesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, bool? detailed = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput?>> GetServicesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid?> dids, bool? detailed = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = GetServices.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (dids != null)
+            {
+                queryStrings.Add("dids=" + string.Join(",", dids));
+            }
+
+            if (detailed != null)
+            {
+                queryStrings.Add("detailed=" + detailed);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyLabelerGetServicesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

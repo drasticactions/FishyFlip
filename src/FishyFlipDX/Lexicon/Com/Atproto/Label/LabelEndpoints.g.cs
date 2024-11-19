@@ -19,9 +19,33 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Find labels relevant to the provided AT-URI patterns. Public endpoint for moderation services, though may return different or additional results with auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>> QueryLabelsAsync (this FishyFlip.ATProtocol atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput?>> QueryLabelsAsync (this FishyFlip.ATProtocol atp, List<string?> uriPatterns, List<FishyFlip.Models.ATDid?>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = QueryLabels.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (uriPatterns != null)
+            {
+                queryStrings.Add("uriPatterns=" + string.Join(",", uriPatterns));
+            }
+
+            if (sources != null)
+            {
+                queryStrings.Add("sources=" + string.Join(",", sources));
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

@@ -23,27 +23,67 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// List settings with optional filtering
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>> ListOptionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string?>? keys = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = ListOptions.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (scope != null)
+            {
+                queryStrings.Add("scope=" + scope);
+            }
+
+            if (prefix != null)
+            {
+                queryStrings.Add("prefix=" + prefix);
+            }
+
+            if (keys != null)
+            {
+                queryStrings.Add("keys=" + string.Join(",", keys));
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingListOptionsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Delete settings by key
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>> RemoveOptionsAsync (this FishyFlip.ATProtocol atp, List<string> keys, string scope, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (this FishyFlip.ATProtocol atp, List<string?> keys, string scope, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = RemoveOptions.ToString();
+            var inputItem = new RemoveOptionsInput();
+            inputItem.Keys = keys;
+            inputItem.Scope = scope;
+            return atp.Client.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Create or update setting option
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>> UpsertOptionAsync (this FishyFlip.ATProtocol atp, string key, string scope, ATObject value, string? description = default, string? managerRole = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>> UpsertOptionAsync (this FishyFlip.ATProtocol atp, string key, string scope, ATObject value, string? description = default, string? managerRole = default, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var endpointUrl = UpsertOption.ToString();
+            var inputItem = new UpsertOptionInput();
+            inputItem.Key = key;
+            inputItem.Scope = scope;
+            inputItem.Value = value;
+            inputItem.Description = description;
+            inputItem.ManagerRole = managerRole;
+            return atp.Client.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }
