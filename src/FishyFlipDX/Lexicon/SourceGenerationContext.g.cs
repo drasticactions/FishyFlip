@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon
             typeof(FishyFlip.Tools.Json.ATCidJsonConverter),
             typeof(FishyFlip.Tools.Json.ATHandleJsonConverter),
             typeof(FishyFlip.Tools.Json.ATDidJsonConverter),
+            typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter),
             typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),
             typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),
         },

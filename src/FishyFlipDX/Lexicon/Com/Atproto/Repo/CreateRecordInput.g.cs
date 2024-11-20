@@ -35,6 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]
         public FishyFlip.Models.ATIdentifier? Repo { get; set; }
 
         /// <summary>

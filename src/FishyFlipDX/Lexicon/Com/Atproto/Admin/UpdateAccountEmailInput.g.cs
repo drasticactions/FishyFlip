@@ -31,6 +31,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         [JsonPropertyName("account")]
         [JsonRequired]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]
         public FishyFlip.Models.ATIdentifier? Account { get; set; }
 
         [JsonPropertyName("email")]

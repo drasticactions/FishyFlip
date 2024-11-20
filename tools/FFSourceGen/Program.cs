@@ -233,7 +233,8 @@ public partial class AppCommands
                 sb.AppendLine();
                 Console.WriteLine($"{item.Definition.Type} {item.Id}");
                 var methodName = $"{item.ClassName}Async";
-                var inputProperties = this.FetchInputProperties(item);
+                var (requiredProperties, optionalProperties) = this.FetchInputProperties(item);
+                var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                 var outputProperty = this.FetchOutputProperties(item);
                 var sourceContext = outputProperty == "Success" ? "Success" : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
                 var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
@@ -318,7 +319,7 @@ public partial class AppCommands
         this.GenerateHeader(sb);
         sb.AppendLine($"using FishyFlip.Lexicon.Com.Atproto.Repo;");
         sb.AppendLine();
-        this.GenerateNamespace(sb, $"FishyFlip");
+        this.GenerateNamespace(sb, this.baseNamespace);
         sb.AppendLine("{");
         sb.AppendLine();
         sb.AppendLine($"    /// <summary>");
@@ -332,14 +333,15 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Create a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}RecordAsync(");
-                    var inputProperties = this.FetchInputProperties(createRecord, true);
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
+                    var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
-                    var collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(createRecord);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     var properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     // replace collection with the first input property.
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
@@ -349,53 +351,94 @@ public partial class AppCommands
                     sb.AppendLine("        }");
                     sb.AppendLine();
                     sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Create a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, false);
+                    requiredProperties.Remove(requiredProperties.First(n => n == "string collection"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "ATObject record"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
+
+                    var (propertyRequiredProperties, propertyOptionalProperties) = this.FetchInputPropertiesFromProperties(item, true);
+                    propertyOptionalProperties.RemoveAt(propertyOptionalProperties.Count - 1);
+                    var totalRequiredProperties = propertyRequiredProperties.Concat(requiredProperties).ToList();
+                    var totalOptionalProperties = propertyOptionalProperties.Concat(optionalProperties).ToList();
+                    inputProperties = totalRequiredProperties.Concat(totalOptionalProperties).ToList();
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
+                    for (int i = 0; i < item.Properties.Count(); i++)
+                    {
+                        var prop = item.Properties[i].ClassName;
+                        var key = item.Properties[i].Key;
+                        sb.AppendLine($"            record.{prop} = {key};");
+                    }
+
+                    sb.AppendLine($"            return atp.ATProtocol.CreateRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+
+                    sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Delete a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}RecordAsync(");
-                    inputProperties = this.FetchInputProperties(deleteRecord, true);
-                    collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
+                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(deleteRecord);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
-                    sb.AppendLine($"            return atp.DeleteRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine($"            return atp.ATProtocol.DeleteRecordAsync({string.Join(", ", properties)});");
                     sb.AppendLine("        }");
                     sb.AppendLine();
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Put a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}RecordAsync(");
-                    inputProperties = this.FetchInputProperties(putRecord, true);
-                    collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
+                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(putRecord);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     // replace collection with the first input property.
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
-                    sb.AppendLine($"            return atp.PutRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine($"            return atp.ATProtocol.PutRecordAsync({string.Join(", ", properties)});");
                     sb.AppendLine("        }");
                     sb.AppendLine();
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// List {item.ClassName} records.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}RecordsAsync(");
-                    inputProperties = this.FetchInputProperties(listRecords, true);
-                    collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
+                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(listRecords);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
-                    sb.AppendLine($"            return atp.ListRecordsAsync({string.Join(", ", properties)});");
+                    sb.AppendLine($"            return atp.ATProtocol.ListRecordsAsync({string.Join(", ", properties)});");
                     sb.AppendLine("        }");
         }
 
@@ -437,30 +480,67 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Create a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}RecordAsync(");
-                    var inputProperties = this.FetchInputProperties(createRecord, true);
-                    var collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
+                    var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
+                    inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(createRecord);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     var properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     // replace collection with the first input property.
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
                     sb.AppendLine($"            return atp.CreateRecordAsync({string.Join(", ", properties)});");
                     sb.AppendLine("        }");
                     sb.AppendLine();
+
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Create a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, false);
+                    requiredProperties.Remove(requiredProperties.First(n => n == "string collection"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "ATObject record"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
+
+                    var (propertyRequiredProperties, propertyOptionalProperties) = this.FetchInputPropertiesFromProperties(item, true);
+                    propertyOptionalProperties.RemoveAt(propertyOptionalProperties.Count - 1);
+                    var totalRequiredProperties = propertyRequiredProperties.Concat(requiredProperties).ToList();
+                    var totalOptionalProperties = propertyOptionalProperties.Concat(optionalProperties).ToList();
+                    this.GenerateInputProperties(sb, totalRequiredProperties.Concat(totalOptionalProperties).ToList());
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
+                    for (int i = 0; i < item.Properties.Count(); i++)
+                    {
+                        var prop = item.Properties[i].ClassName;
+                        var key = item.Properties[i].Key;
+                        sb.AppendLine($"            record.{prop} = {key};");
+                    }
+                    sb.AppendLine($"            return atp.CreateRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Delete a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}RecordAsync(");
-                    inputProperties = this.FetchInputProperties(deleteRecord, true);
-                    collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
+                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(deleteRecord);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
                     sb.AppendLine(")");
@@ -471,13 +551,14 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Put a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}RecordAsync(");
-                    inputProperties = this.FetchInputProperties(putRecord, true);
-                    collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
+                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(putRecord);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     // replace collection with the first input property.
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
@@ -489,12 +570,13 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// List {item.ClassName} records.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}RecordsAsync(");
-                    inputProperties = this.FetchInputProperties(listRecords, true);
-                    collectionItem = inputProperties.First(n => n == "string collection");
-                    inputProperties.Remove(collectionItem);
+                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     this.GenerateInputProperties(sb, inputProperties);
-                    inputProperties = this.FetchInputProperties(listRecords);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
                     sb.AppendLine(")");
@@ -590,7 +672,8 @@ public partial class AppCommands
                 sb.AppendLine();
                 Console.WriteLine($"{item.Definition.Type} {item.Id}");
                 var methodName = $"{item.ClassName}Async";
-                var inputProperties = this.FetchInputProperties(item, true);
+                var (requiredProperties, optionalProperties) = this.FetchInputProperties(item, true);
+                var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                 var outputProperty = this.FetchOutputProperties(item);
                 var sourceContext = outputProperty == "Success" ? "Success" : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
                 var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
@@ -722,7 +805,71 @@ public partial class AppCommands
         return new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" }.Contains(propertyName) ? $"@{propertyName}" : propertyName;
     }
 
-    private List<string> FetchInputProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
+    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputPropertiesFromProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
+    {
+        var requiredProperties = new List<string>();
+        var optionalProperties = new List<string>();
+        var requiredFields = classGeneration.Definition.Record?.Required?.ToList() ?? new List<string>();
+        foreach (var prop in classGeneration.Properties)
+        {
+            var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
+            var isRequired = requiredFields.Contains(prop.Key);
+            var returnType = prop.Type;
+            var isArray = prop.PropertyDefinition.Type == "array";
+            var arrayType = prop.PropertyDefinition.Items?.CSharpType;
+            Console.WriteLine($"Property: {prop.Key}, isRequired: {isRequired}, isArray: {isArray}, arrayType: {arrayType ?? "None"}, returnType: {returnType}");
+            if (isArray)
+            {
+                if (arrayType is not null)
+                {
+                    if (!isRequired)
+                    {
+                        propertyName += " = default";
+                        optionalProperties.Add($"{returnType} {propertyName}");
+                    }
+                    else
+                    {
+                        requiredProperties.Add($"{returnType} {propertyName}");
+                    }
+                }
+                else
+                {
+                    if (!isRequired)
+                    {
+                        propertyName += " = default";
+                        optionalProperties.Add($"{returnType} {propertyName}");
+                    }
+                    else
+                    {
+                        requiredProperties.Add($"{returnType} {propertyName}");
+                    }
+                }
+            }
+            else
+            {
+                if (!isRequired)
+                {
+                    propertyName += " = default";
+                    optionalProperties.Add($"{returnType} {propertyName}");
+                }
+                else
+                {
+                    requiredProperties.Add($"{returnType} {propertyName}");
+                }
+            }
+        }
+
+        if (isExtensionMethod)
+        {
+            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+        }
+
+        optionalProperties.Add("CancellationToken cancellationToken = default");
+
+         return (requiredProperties, optionalProperties);
+    }
+
+    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
     {
         var requiredProperties = new List<string>();
         var optionalProperties = new List<string>();
@@ -882,15 +1029,14 @@ public partial class AppCommands
             requiredProperties.Add("StreamContent content");
         }
 
-        var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
         if (isExtensionMethod)
         {
-            inputProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
         }
 
-        inputProperties.Add("CancellationToken cancellationToken = default");
+        optionalProperties.Add("CancellationToken cancellationToken = default");
 
-        return inputProperties;
+        return (requiredProperties, optionalProperties);
     }
 
     private string FetchOutputProperties(ClassGeneration classGeneration)
@@ -1062,6 +1208,7 @@ public partial class AppCommands
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATCidJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATHandleJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATDidJsonConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),");
         sb.AppendLine("        },");
@@ -1230,6 +1377,10 @@ public partial class AppCommands
             {
                 sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATDidJsonConverter>))]");
             }
+            else if (property.RawType == "FishyFlip.Models.ATIdentifier?")
+            {
+                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATIdentifierJsonConverter>))]");
+            }
         }
 
         // Add Converter for various AT Object types (Ex. ATDid, ATUri, etc.)
@@ -1251,6 +1402,11 @@ public partial class AppCommands
         if (property.Type == "FishyFlip.Models.ATDid?")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]");
+        }
+
+        if (property.RawType == "FishyFlip.Models.ATIdentifier")
+        {
+            sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]");
         }
 
         // Handle default values

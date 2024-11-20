@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         [JsonPropertyName("actor")]
         [JsonRequired]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]
         public FishyFlip.Models.ATIdentifier? Actor { get; set; }
 
         /// <summary>

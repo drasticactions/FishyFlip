@@ -6,7 +6,7 @@
 
 using FishyFlip.Lexicon.Com.Atproto.Repo;
 
-namespace FishyFlip
+namespace FishyFlip.Lexicon
 {
 
     /// <summary>
@@ -18,188 +18,264 @@ namespace FishyFlip
         /// <summary>
         /// Create a Block record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateBlockRecordAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Block record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateBlockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Block record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.graph.block", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
+        /// Create a Block record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateBlockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATDid? subject, DateTime? createdAt, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Graph.Block();
+            record.Subject = subject;
+            record.CreatedAt = createdAt;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.block", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
         /// Delete a Block record.
         /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteBlockRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteBlockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteRecordAsync(repo, "app.bsky.graph.block", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.graph.block", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// Put a Block record.
         /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutBlockRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Block record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutBlockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Block record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.PutRecordAsync(repo, "app.bsky.graph.block", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.graph.block", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// List Block records.
         /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListBlockRecordsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListBlocksAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(repo, "app.bsky.graph.block", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.graph.block", limit, cursor, reverse, cancellationToken);
         }
         /// <summary>
         /// Create a Follow record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateFollowRecordAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Follow record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateFollowAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Follow record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.graph.follow", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
+        /// Create a Follow record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateFollowAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATDid? subject, DateTime? createdAt, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Graph.Follow();
+            record.Subject = subject;
+            record.CreatedAt = createdAt;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.follow", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
         /// Delete a Follow record.
         /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteFollowRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteFollowAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteRecordAsync(repo, "app.bsky.graph.follow", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.graph.follow", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// Put a Follow record.
         /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutFollowRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Follow record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutFollowAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Follow record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.PutRecordAsync(repo, "app.bsky.graph.follow", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.graph.follow", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// List Follow records.
         /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListFollowRecordsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListFollowsAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(repo, "app.bsky.graph.follow", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.graph.follow", limit, cursor, reverse, cancellationToken);
         }
         /// <summary>
         /// Create a List record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateListRecordAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.List record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateListAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.List record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.graph.list", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
+        /// Create a List record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateListAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, string? purpose, string? name, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet?>? descriptionFacets = default, Blob? avatar = default, ATObject? labels = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Graph.List();
+            record.Purpose = purpose;
+            record.Name = name;
+            record.Description = description;
+            record.DescriptionFacets = descriptionFacets;
+            record.Avatar = avatar;
+            record.Labels = labels;
+            record.CreatedAt = createdAt;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.list", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
         /// Delete a List record.
         /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteListRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteListAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteRecordAsync(repo, "app.bsky.graph.list", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.graph.list", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// Put a List record.
         /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutListRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.List record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutListAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.List record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.PutRecordAsync(repo, "app.bsky.graph.list", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.graph.list", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// List List records.
         /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListListRecordsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListListsAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(repo, "app.bsky.graph.list", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.graph.list", limit, cursor, reverse, cancellationToken);
         }
         /// <summary>
         /// Create a Listblock record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateListblockRecordAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Listblock record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateListblockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Listblock record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.graph.listblock", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
+        /// Create a Listblock record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateListblockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATUri? subject, DateTime? createdAt, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Graph.Listblock();
+            record.Subject = subject;
+            record.CreatedAt = createdAt;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.listblock", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
         /// Delete a Listblock record.
         /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteListblockRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteListblockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteRecordAsync(repo, "app.bsky.graph.listblock", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.graph.listblock", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// Put a Listblock record.
         /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutListblockRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Listblock record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutListblockAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Listblock record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.PutRecordAsync(repo, "app.bsky.graph.listblock", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.graph.listblock", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// List Listblock records.
         /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListListblockRecordsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListListblocksAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(repo, "app.bsky.graph.listblock", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.graph.listblock", limit, cursor, reverse, cancellationToken);
         }
         /// <summary>
         /// Create a Listitem record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateListitemRecordAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Listitem record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateListitemAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Listitem record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.graph.listitem", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
+        /// Create a Listitem record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateListitemAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATDid? subject, FishyFlip.Models.ATUri? list, DateTime? createdAt, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Graph.Listitem();
+            record.Subject = subject;
+            record.List = list;
+            record.CreatedAt = createdAt;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.listitem", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
         /// Delete a Listitem record.
         /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteListitemRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteListitemAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteRecordAsync(repo, "app.bsky.graph.listitem", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.graph.listitem", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// Put a Listitem record.
         /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutListitemRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Listitem record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutListitemAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Listitem record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.PutRecordAsync(repo, "app.bsky.graph.listitem", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.graph.listitem", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// List Listitem records.
         /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListListitemRecordsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListListitemsAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(repo, "app.bsky.graph.listitem", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.graph.listitem", limit, cursor, reverse, cancellationToken);
         }
         /// <summary>
         /// Create a Starterpack record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateStarterpackRecordAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Starterpack record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStarterpackAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Graph.Starterpack record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.graph.starterpack", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
+        /// Create a Starterpack record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateStarterpackAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, string? name, FishyFlip.Models.ATUri? list, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet?>? descriptionFacets = default, List<App.Bsky.Graph.FeedItem?>? feeds = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Graph.Starterpack();
+            record.Name = name;
+            record.Description = description;
+            record.DescriptionFacets = descriptionFacets;
+            record.List = list;
+            record.Feeds = feeds;
+            record.CreatedAt = createdAt;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.starterpack", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
         /// Delete a Starterpack record.
         /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteStarterpackRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteStarterpackAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteRecordAsync(repo, "app.bsky.graph.starterpack", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.graph.starterpack", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// Put a Starterpack record.
         /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutStarterpackRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Starterpack record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutStarterpackAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Starterpack record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.PutRecordAsync(repo, "app.bsky.graph.starterpack", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.graph.starterpack", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// List Starterpack records.
         /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListStarterpackRecordsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListStarterpacksAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(repo, "app.bsky.graph.starterpack", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.graph.starterpack", limit, cursor, reverse, cancellationToken);
         }
     }
 }

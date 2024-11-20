@@ -6,7 +6,7 @@
 
 using FishyFlip.Lexicon.Com.Atproto.Repo;
 
-namespace FishyFlip
+namespace FishyFlip.Lexicon
 {
 
     /// <summary>
@@ -18,33 +18,43 @@ namespace FishyFlip
         /// <summary>
         /// Create a Declaration record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateDeclarationRecordAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.CreateRecordAsync(repo, "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
+        /// Create a Declaration record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, string? allowIncoming, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration();
+            record.AllowIncoming = allowIncoming;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
         /// Delete a Declaration record.
         /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteDeclarationRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteDeclarationAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteRecordAsync(repo, "chat.bsky.actor.declaration", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(repo, "chat.bsky.actor.declaration", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// Put a Declaration record.
         /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutDeclarationRecordAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutDeclarationAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.PutRecordAsync(repo, "chat.bsky.actor.declaration", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(repo, "chat.bsky.actor.declaration", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
         /// List Declaration records.
         /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListDeclarationRecordsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListDeclarationsAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(repo, "chat.bsky.actor.declaration", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(repo, "chat.bsky.actor.declaration", limit, cursor, reverse, cancellationToken);
         }
     }
 }
