@@ -59,4 +59,7 @@ public class RecordDefinition
 
     [JsonPropertyName("properties")]
     public Dictionary<string, PropertyDefinition> Properties { get; set; } = new();
+
+    [JsonPropertyName("required")]
+    public string[]? Required { get; set; }
 }

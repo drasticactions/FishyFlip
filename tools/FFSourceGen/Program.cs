@@ -240,6 +240,14 @@ public partial class AppCommands
                 sb.AppendLine();
             }
 
+            var id = group.Key.ToLowerInvariant();
+            switch (id)
+            {
+                case "com.atproto.repo":
+                    // this.GenerateATProtocolRepoHelperMethods(sb);
+                    break;
+            }
+
             sb.AppendLine("    }");
             sb.AppendLine("}");
             sb.AppendLine();
@@ -252,6 +260,47 @@ public partial class AppCommands
             }
 
             await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
+    private void GenerateATProtocolRepoHelperMethods(StringBuilder sb)
+    {
+        var graphClasses = AllClasses.Where(n => n.Definition.Type == "record").ToList();
+        foreach (var item in graphClasses)
+        {
+            Console.WriteLine($"Generating Repo Helper Method for {item.Id}");
+            sb.AppendLine();
+            var methodTypes = new List<string> { "Create", "Put", $"Delete" };
+            var baseMethodName = $"{item.ClassName}Async";
+            var inputProperties = new List<string> { $"{item.FullClassName} input", "CancellationToken cancellationToken = default" };
+            var baseOutputProperty = $"RecordOutput";
+            foreach (var methodType in methodTypes)
+            {
+                sb.AppendLine();
+                var methodName = $"{methodType}{item.ClassName}Async";
+                var description = $"{methodType} record for {item.Id}.";
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {description}");
+                sb.AppendLine($"        /// </summary>");
+                sb.Append($"        public Task<Result<{this.baseNamespace}.Com.Atproto.Repo.{methodType}RecordOutput?>> {methodName} (");
+                for (int i = 0; i < inputProperties.Count; i++)
+                {
+                    sb.Append($"{inputProperties[i]}");
+                    if (i < inputProperties.Count - 1)
+                    {
+                        sb.Append(", ");
+                    }
+                }
+                sb.AppendLine($")");
+                sb.AppendLine("        {");
+                sb.AppendLine($"            var createRecordInput = new CreateRecordInput();");
+                sb.AppendLine($"            createRecordInput.Record = input;");
+                sb.AppendLine($"            return this.atp.{methodType}RecordAsync(createRecordInput, cancellationToken);");
+                sb.AppendLine("        }");
+
+            }
+
+            sb.AppendLine("   }");
+        }
     }
 
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
