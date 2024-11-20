@@ -133,6 +133,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SkeletonSearchPost(obj);
                 case "app.bsky.unspecced.defs#skeletonSearchActor":
                     return new App.Bsky.Unspecced.SkeletonSearchActor(obj);
+                case "app.bsky.unspecced.defs#skeletonSearchStarterPack":
+                    return new App.Bsky.Unspecced.SkeletonSearchStarterPack(obj);
                 case "app.bsky.video.defs#jobStatus":
                     return new App.Bsky.Video.JobStatus(obj);
                 case "chat.bsky.actor.defs#profileViewBasic":
@@ -437,6 +439,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.MuteActorListInput(obj);
                 case "app.bsky.graph.muteThread#MuteThreadInput":
                     return new App.Bsky.Graph.MuteThreadInput(obj);
+                case "app.bsky.graph.searchStarterPacks#SearchStarterPacksOutput":
+                    return new App.Bsky.Graph.SearchStarterPacksOutput(obj);
                 case "app.bsky.graph.unmuteActor#UnmuteActorInput":
                     return new App.Bsky.Graph.UnmuteActorInput(obj);
                 case "app.bsky.graph.unmuteActorList#UnmuteActorListInput":
@@ -481,6 +485,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
                 case "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput":
                     return new App.Bsky.Unspecced.SearchPostsSkeletonOutput(obj);
+                case "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput":
+                    return new App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput(obj);
                 case "app.bsky.video.getJobStatus#GetJobStatusOutput":
                     return new App.Bsky.Video.GetJobStatusOutput(obj);
                 case "app.bsky.video.getUploadLimits#GetUploadLimitsOutput":

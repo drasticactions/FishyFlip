@@ -92,12 +92,27 @@ public partial class AppCommands
             }
         }
 
+        var records = AllClasses.Where(n => n.Definition.Type == "record").GroupBy(n => n.CSharpNamespace).ToList();
+        foreach (var record in records)
+        {
+            await this.GenerateRecordStaticExtensionClass(record);
+            await this.GenerateRecordExtensionClass(record);
+        }
+
+        // var recordList = new string[] { "com.atproto.repo.createRecord", "com.atproto.repo.deleteRecord", "com.atproto.repo.putRecord", "com.atproto.repo.listRecords" };
+        // foreach (var item in records)
+        // {
+        // }
+
         var modelClasses = AllClasses.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record").ToList();
         var procedureClasses = AllClasses.Where(n => n.Definition.Type == "procedure" || n.Definition.Type == "query").GroupBy(n => n.CSharpNamespace).ToList();
         foreach (var group in procedureClasses)
         {
             await this.GenerateEndpointGroupAsync(group);
+            await this.GenerateEndpointClassAsync(group);
         }
+
+        await this.GenerateEndpointClassListForATProtoCS(procedureClasses);
 
         await this.GenerateJsonSerializerContextFile(modelClasses);
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
@@ -106,6 +121,529 @@ public partial class AppCommands
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+    }
+
+    private async Task GenerateEndpointClassListForATProtoCS(List<IGrouping<string, ClassGeneration>> groupList)
+    {
+            var sb = new StringBuilder();
+            this.GenerateHeader(sb);
+            this.GenerateNamespace(sb, $"FishyFlip");
+            sb.AppendLine("{");
+            sb.AppendLine();
+            sb.AppendLine($"    /// <summary>");
+            sb.AppendLine($"    /// ATProto Endpoint List.");
+            sb.AppendLine($"    /// </summary>");
+            sb.AppendLine($"    public sealed partial class ATProtocol");
+            sb.AppendLine("    {");
+            sb.AppendLine();
+            foreach (var group in groupList)
+            {
+                var groupSplit = group.Key.Split(".");
+                var className = string.Empty;
+                if (groupSplit[1] == "Atproto")
+                {
+                    className = $"ATProto{groupSplit.Last().ToPascalCase()}";
+                }
+                else if (groupSplit[0] == "App")
+                {
+                    className = $"Bluesky{groupSplit.Last().ToPascalCase()}";
+                }
+                else
+                {
+                    className = string.Join(string.Empty, groupSplit.Select(n => n.ToPascalCase()).ToArray());
+                }
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {group.Key.ToLower()} Endpoint Group.");
+                sb.AppendLine($"        /// </summary>");
+                sb.AppendLine($"        public {this.baseNamespace}.{group.Key}.{className} {className.Replace("ATProto", string.Empty).Replace("Bluesky", string.Empty)} => new (this);");
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+            sb.AppendLine();
+            var outputPath = Path.Combine(this.basePath);
+            Directory.CreateDirectory(outputPath);
+            var classPath = Path.Combine(outputPath, $"ATProtocol.g.cs");
+            if (File.Exists(classPath))
+            {
+                throw new Exception($"File already exists: ATProtocol {classPath}");
+            }
+
+            await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
+    private void CreateAuthenticationCheck(StringBuilder sb, int spaces = 12)
+    {
+        sb.AppendLine($"{new string(' ', spaces)}if (!atp.IsAuthenticated)");
+        sb.AppendLine($"{new string(' ', spaces)}{{");
+        sb.AppendLine($"{new string(' ', spaces + 4)}throw new FFAuthenticationError();");
+        sb.AppendLine($"{new string(' ', spaces)}}}");
+        sb.AppendLine();
+    }
+
+    private async Task GenerateEndpointClassAsync(IGrouping<string, ClassGeneration> group)
+    {
+            Console.WriteLine($"Generating Endpoint Group: {group.Key}");
+            var sb = new StringBuilder();
+            this.GenerateHeader(sb);
+            this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
+            var groupSplit = group.Key.Split(".");
+            var className = string.Empty;
+            if (groupSplit[1] == "Atproto")
+            {
+                className = $"ATProto{groupSplit.Last().ToPascalCase()}";
+            }
+            else if (groupSplit[0] == "App")
+            {
+                className = $"Bluesky{groupSplit.Last().ToPascalCase()}";
+            }
+            else
+            {
+                className = string.Join(string.Empty, groupSplit.Select(n => n.ToPascalCase()).ToArray());
+            }
+
+            Console.WriteLine($"Generated Class Name: {className}");
+            sb.AppendLine("{");
+            sb.AppendLine();
+            sb.AppendLine($"    /// <summary>");
+            sb.AppendLine($"    /// {group.Key.ToLower()} Endpoint Class.");
+            sb.AppendLine($"    /// </summary>");
+            sb.AppendLine($"    public sealed class {className}");
+            sb.AppendLine("    {");
+            sb.AppendLine();
+            sb.AppendLine("        private ATProtocol atp;");
+            sb.AppendLine();
+            sb.AppendLine($"        /// <summary>");
+            sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{className}\"/> class.");
+            sb.AppendLine($"        /// </summary>");
+            sb.AppendLine($"        /// <param name=\"atp\"><see cref=\"ATProtocol\"/>.</param>");
+            sb.AppendLine($"        internal {className}(ATProtocol atp)");
+            sb.AppendLine("        {");
+            sb.AppendLine("            this.atp = atp;");
+            sb.AppendLine("        }");
+            sb.AppendLine();
+            sb.AppendLine("        /// <summary>");
+            sb.AppendLine("        /// Gets the ATProtocol.");
+            sb.AppendLine("        /// </summary>");
+            sb.AppendLine("        internal ATProtocol ATProtocol => this.atp;");
+            sb.AppendLine();
+            foreach (var item in group)
+            {
+                sb.AppendLine();
+                Console.WriteLine($"{item.Definition.Type} {item.Id}");
+                var methodName = $"{item.ClassName}Async";
+                var (requiredProperties, optionalProperties) = this.FetchInputProperties(item);
+                var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                var outputProperty = this.FetchOutputProperties(item);
+                var sourceContext = outputProperty == "Success" ? "Success" : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
+                var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {description}");
+                sb.AppendLine($"        /// </summary>");
+                sb.Append($"        public Task<Result<{outputProperty}?>> {methodName} (");
+                for (int i = 0; i < inputProperties.Count; i++)
+                {
+                    sb.Append($"{inputProperties[i]}");
+                    if (i < inputProperties.Count - 1)
+                    {
+                        sb.Append(", ");
+                    }
+                }
+
+                sb.AppendLine($")");
+                sb.AppendLine("        {");
+                if (item.Definition.RequiresAuth)
+                {
+                    // this.CreateAuthenticationCheck(sb);
+                }
+
+                sb.Append($"            return atp.{methodName}(");
+                for (int i = 0; i < inputProperties.Count; i++)
+                {
+                    sb.Append($"{inputProperties[i].Split(" ")[1]}");
+                    if (i < inputProperties.Count - 1)
+                    {
+                        sb.Append(", ");
+                    }
+                }
+                sb.AppendLine($");");
+                sb.AppendLine("        }");
+                sb.AppendLine();
+            }
+
+            var id = group.Key.ToLowerInvariant();
+            switch (id)
+            {
+                case "com.atproto.repo":
+                    // this.GenerateATProtocolRepoHelperMethods(sb);
+                    break;
+            }
+
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+            sb.AppendLine();
+            var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+            Directory.CreateDirectory(outputPath);
+            var classPath = Path.Combine(outputPath, $"{className}.g.cs");
+            if (File.Exists(classPath))
+            {
+                throw new Exception($"File already exists: {className} {classPath}");
+            }
+
+            await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
+    private async Task GenerateRecordExtensionClass(IGrouping<string, ClassGeneration> group)
+    {
+        var groupSplit = group.Key.Split(".");
+        var className = string.Empty;
+        if (groupSplit[1] == "Atproto")
+        {
+            className = $"ATProto{groupSplit.Last().ToPascalCase()}";
+        }
+        else if (groupSplit[0] == "App")
+        {
+            className = $"Bluesky{groupSplit.Last().ToPascalCase()}";
+        }
+        else
+        {
+            className = string.Join(string.Empty, groupSplit.Select(n => n.ToPascalCase()).ToArray());
+        }
+
+        var createRecord = AllClasses.First(n => n.Id == "com.atproto.repo.createRecord");
+        var deleteRecord = AllClasses.First(n => n.Id == "com.atproto.repo.deleteRecord");
+        var putRecord = AllClasses.First(n => n.Id == "com.atproto.repo.putRecord");
+        var listRecords = AllClasses.First(n => n.Id == "com.atproto.repo.listRecords");
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        sb.AppendLine($"using FishyFlip.Lexicon.Com.Atproto.Repo;");
+        sb.AppendLine();
+        this.GenerateNamespace(sb, this.baseNamespace);
+        sb.AppendLine("{");
+        sb.AppendLine();
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Extension methods for {group.Key.ToLower()}.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public static class {className}Extensions");
+        sb.AppendLine("    {");
+        sb.AppendLine();
+        foreach (var item in group)
+        {
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Create a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
+                    var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    var properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    // replace collection with the first input property.
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.ATProtocol.CreateRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Create a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, false);
+                    requiredProperties.Remove(requiredProperties.First(n => n == "string collection"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "ATObject record"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
+
+                    var (propertyRequiredProperties, propertyOptionalProperties) = this.FetchInputPropertiesFromProperties(item, true);
+                    propertyOptionalProperties.RemoveAt(propertyOptionalProperties.Count - 1);
+                    var totalRequiredProperties = propertyRequiredProperties.Concat(requiredProperties).ToList();
+                    var totalOptionalProperties = propertyOptionalProperties.Concat(optionalProperties).ToList();
+                    inputProperties = totalRequiredProperties.Concat(totalOptionalProperties).ToList();
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
+                    for (int i = 0; i < item.Properties.Count(); i++)
+                    {
+                        var prop = item.Properties[i].ClassName;
+                        var key = item.Properties[i].Key;
+                        sb.AppendLine($"            record.{prop} = {key};");
+                    }
+
+                    sb.AppendLine($"            return atp.ATProtocol.CreateRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Delete a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.ATProtocol.DeleteRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Put a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    // replace collection with the first input property.
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.ATProtocol.PutRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// List {item.ClassName} records.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.ATProtocol.ListRecordsAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"{group.Key.Split(".").Last()}Extensions.g.cs");
+        if (File.Exists(classPath))
+        {
+            throw new Exception($"File already exists: {group.Key.Split(".").Last()}Extensions {classPath}");
+        }
+
+        await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
+    private async Task GenerateRecordStaticExtensionClass(IGrouping<string, ClassGeneration> group)
+    {
+        var createRecord = AllClasses.First(n => n.Id == "com.atproto.repo.createRecord");
+        var deleteRecord = AllClasses.First(n => n.Id == "com.atproto.repo.deleteRecord");
+        var putRecord = AllClasses.First(n => n.Id == "com.atproto.repo.putRecord");
+        var listRecords = AllClasses.First(n => n.Id == "com.atproto.repo.listRecords");
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        sb.AppendLine($"using FishyFlip.Lexicon.Com.Atproto.Repo;");
+        sb.AppendLine();
+        this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
+        sb.AppendLine("{");
+        sb.AppendLine();
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Extension methods for {group.Key.ToLower()}.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public static class ATProto{group.Key.Split(".").Last()}Extensions");
+        sb.AppendLine("    {");
+        sb.AppendLine();
+        foreach (var item in group)
+        {
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Create a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
+                    var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
+                    inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    var properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    // replace collection with the first input property.
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.CreateRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Create a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, false);
+                    requiredProperties.Remove(requiredProperties.First(n => n == "string collection"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "ATObject record"));
+                    requiredProperties.Remove(requiredProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
+
+                    var (propertyRequiredProperties, propertyOptionalProperties) = this.FetchInputPropertiesFromProperties(item, true);
+                    propertyOptionalProperties.RemoveAt(propertyOptionalProperties.Count - 1);
+                    var totalRequiredProperties = propertyRequiredProperties.Concat(requiredProperties).ToList();
+                    var totalOptionalProperties = propertyOptionalProperties.Concat(optionalProperties).ToList();
+                    this.GenerateInputProperties(sb, totalRequiredProperties.Concat(totalOptionalProperties).ToList());
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
+                    for (int i = 0; i < item.Properties.Count(); i++)
+                    {
+                        var prop = item.Properties[i].ClassName;
+                        var key = item.Properties[i].Key;
+                        sb.AppendLine($"            record.{prop} = {key};");
+                    }
+                    sb.AppendLine($"            return atp.CreateRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Delete a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.DeleteRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// Put a {item.ClassName} record.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    // replace collection with the first input property.
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.PutRecordAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+                    sb.AppendLine("        /// <summary>");
+                    sb.AppendLine($"        /// List {item.ClassName} records.");
+                    sb.AppendLine("        /// </summary>");
+                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    this.GenerateInputProperties(sb, inputProperties);
+                    (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords);
+                    inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+                    properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
+                    properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    sb.AppendLine(")");
+                    sb.AppendLine("        {");
+                    sb.AppendLine($"            return atp.ListRecordsAsync({string.Join(", ", properties)});");
+                    sb.AppendLine("        }");
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"ATProto{group.Key.Split(".").Last()}Extensions.g.cs");
+        if (File.Exists(classPath))
+        {
+            throw new Exception($"File already exists: ATProto{group.Key.Split(".").Last()}Extensions {classPath}");
+        }
+
+        await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
+    private void GenerateInputProperties(StringBuilder sb, List<string> inputProperties, bool removeStatic = false)
+    {
+        var start = removeStatic ? 1 : 0;
+        for (int i = start; i < inputProperties.Count; i++)
+        {
+            sb.Append($"{inputProperties[i]}");
+            if (i < inputProperties.Count - 1)
+            {
+                sb.Append(", ");
+            }
+        }
+    }
+
+    private void GenerateATProtocolRepoHelperMethods(StringBuilder sb)
+    {
+        var graphClasses = AllClasses.Where(n => n.Definition.Type == "record").ToList();
+        foreach (var item in graphClasses)
+        {
+            Console.WriteLine($"Generating Repo Helper Method for {item.Id}");
+            sb.AppendLine();
+            var methodTypes = new List<string> { "Create", "Put", $"Delete" };
+            var baseMethodName = $"{item.ClassName}Async";
+            var inputProperties = new List<string> { $"{item.FullClassName} input", "CancellationToken cancellationToken = default" };
+            var baseOutputProperty = $"RecordOutput";
+            foreach (var methodType in methodTypes)
+            {
+                sb.AppendLine();
+                var methodName = $"{methodType}{item.ClassName}Async";
+                var description = $"{methodType} record for {item.Id}.";
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {description}");
+                sb.AppendLine($"        /// </summary>");
+                sb.Append($"        public Task<Result<{this.baseNamespace}.Com.Atproto.Repo.{methodType}RecordOutput?>> {methodName} (");
+                this.GenerateInputProperties(sb, inputProperties);
+                sb.AppendLine($")");
+                sb.AppendLine("        {");
+                sb.AppendLine($"            var createRecordInput = new CreateRecordInput();");
+                sb.AppendLine($"            createRecordInput.Record = input;");
+                sb.AppendLine($"            return this.atp.{methodType}RecordAsync(createRecordInput, cancellationToken);");
+                sb.AppendLine("        }");
+
+            }
+
+            sb.AppendLine("   }");
+        }
     }
 
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
@@ -134,7 +672,8 @@ public partial class AppCommands
                 sb.AppendLine();
                 Console.WriteLine($"{item.Definition.Type} {item.Id}");
                 var methodName = $"{item.ClassName}Async";
-                var inputProperties = this.FetchInputProperties(item);
+                var (requiredProperties, optionalProperties) = this.FetchInputProperties(item, true);
+                var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                 var outputProperty = this.FetchOutputProperties(item);
                 var sourceContext = outputProperty == "Success" ? "Success" : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
                 var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
@@ -153,6 +692,10 @@ public partial class AppCommands
 
                 sb.AppendLine($")");
                 sb.AppendLine("        {");
+                if (item.Definition.RequiresAuth)
+                {
+                     // this.CreateAuthenticationCheck(sb);
+                }
                 switch (item.Definition.Type)
                 {
                     case "procedure":
@@ -262,7 +805,71 @@ public partial class AppCommands
         return new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" }.Contains(propertyName) ? $"@{propertyName}" : propertyName;
     }
 
-    private List<string> FetchInputProperties(ClassGeneration classGeneration)
+    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputPropertiesFromProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
+    {
+        var requiredProperties = new List<string>();
+        var optionalProperties = new List<string>();
+        var requiredFields = classGeneration.Definition.Record?.Required?.ToList() ?? new List<string>();
+        foreach (var prop in classGeneration.Properties)
+        {
+            var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
+            var isRequired = requiredFields.Contains(prop.Key);
+            var returnType = prop.Type;
+            var isArray = prop.PropertyDefinition.Type == "array";
+            var arrayType = prop.PropertyDefinition.Items?.CSharpType;
+            Console.WriteLine($"Property: {prop.Key}, isRequired: {isRequired}, isArray: {isArray}, arrayType: {arrayType ?? "None"}, returnType: {returnType}");
+            if (isArray)
+            {
+                if (arrayType is not null)
+                {
+                    if (!isRequired)
+                    {
+                        propertyName += " = default";
+                        optionalProperties.Add($"{returnType} {propertyName}");
+                    }
+                    else
+                    {
+                        requiredProperties.Add($"{returnType} {propertyName}");
+                    }
+                }
+                else
+                {
+                    if (!isRequired)
+                    {
+                        propertyName += " = default";
+                        optionalProperties.Add($"{returnType} {propertyName}");
+                    }
+                    else
+                    {
+                        requiredProperties.Add($"{returnType} {propertyName}");
+                    }
+                }
+            }
+            else
+            {
+                if (!isRequired)
+                {
+                    propertyName += " = default";
+                    optionalProperties.Add($"{returnType} {propertyName}");
+                }
+                else
+                {
+                    requiredProperties.Add($"{returnType} {propertyName}");
+                }
+            }
+        }
+
+        if (isExtensionMethod)
+        {
+            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+        }
+
+        optionalProperties.Add("CancellationToken cancellationToken = default");
+
+         return (requiredProperties, optionalProperties);
+    }
+
+    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
     {
         var requiredProperties = new List<string>();
         var optionalProperties = new List<string>();
@@ -422,11 +1029,14 @@ public partial class AppCommands
             requiredProperties.Add("StreamContent content");
         }
 
-        var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
-        inputProperties.Insert(0, "this FishyFlip.ATProtocol atp");
-        inputProperties.Add("CancellationToken cancellationToken = default");
+        if (isExtensionMethod)
+        {
+            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+        }
 
-        return inputProperties;
+        optionalProperties.Add("CancellationToken cancellationToken = default");
+
+        return (requiredProperties, optionalProperties);
     }
 
     private string FetchOutputProperties(ClassGeneration classGeneration)
@@ -598,6 +1208,7 @@ public partial class AppCommands
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATCidJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATHandleJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATDidJsonConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),");
         sb.AppendLine("        },");
@@ -766,6 +1377,10 @@ public partial class AppCommands
             {
                 sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATDidJsonConverter>))]");
             }
+            else if (property.RawType == "FishyFlip.Models.ATIdentifier?")
+            {
+                sb.AppendLine($"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATIdentifierJsonConverter>))]");
+            }
         }
 
         // Add Converter for various AT Object types (Ex. ATDid, ATUri, etc.)
@@ -787,6 +1402,11 @@ public partial class AppCommands
         if (property.Type == "FishyFlip.Models.ATDid?")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]");
+        }
+
+        if (property.RawType == "FishyFlip.Models.ATIdentifier")
+        {
+            sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]");
         }
 
         // Handle default values

@@ -63,10 +63,12 @@ public class PropertyDefinition
         "string" when this.Format == "datetime" => "DateTime",
         "string" when this.Format == "at-uri" => "FishyFlip.Models.ATUri",
         "string" when this.Format == "at-identifier" => "FishyFlip.Models.ATIdentifier",
+        "ref" when this.Ref == "com.atproto.repo.strongRef" => "Com.Atproto.Repo.StrongRef",
         "string" => "string",
         "number" => "double",
         "integer" => "int",
         "boolean" => "bool",
+        "blob" => "FishyFlip.Models.Blob",
         "array" => $"List<{this.Items?.CSharpType}?>",
         _ => "ATObject",
     };

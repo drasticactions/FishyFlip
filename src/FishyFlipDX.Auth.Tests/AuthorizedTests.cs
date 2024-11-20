@@ -173,4 +173,19 @@ public class AuthorizedTests
                             Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
                         });
     }
+
+    [TestMethod]
+    public async Task CreatePostAsyncTest()
+    {
+        var test = await AuthorizedTests.proto.CreatePostAsync("CreatePostAsyncTest", DateTime.UtcNow, null, langs: new List<string?> { "en" });
+        test.Switch(
+            success =>
+            {
+                Assert.IsTrue(success!.Cid is not null);
+            },
+            failed =>
+            {
+                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
+            });
+    }
 }

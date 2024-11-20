@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon
             typeof(FishyFlip.Tools.Json.ATCidJsonConverter),
             typeof(FishyFlip.Tools.Json.ATHandleJsonConverter),
             typeof(FishyFlip.Tools.Json.ATDidJsonConverter),
+            typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter),
             typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),
             typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),
         },
@@ -134,6 +135,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>), TypeInfoPropertyName = "ListAppBskyUnspeccedSkeletonSearchPost")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor), TypeInfoPropertyName = "AppBskyUnspeccedSkeletonSearchActor")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>), TypeInfoPropertyName = "ListAppBskyUnspeccedSkeletonSearchActor")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack), TypeInfoPropertyName = "AppBskyUnspeccedSkeletonSearchStarterPack")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack>), TypeInfoPropertyName = "ListAppBskyUnspeccedSkeletonSearchStarterPack")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Video.JobStatus), TypeInfoPropertyName = "AppBskyVideoJobStatus")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Video.JobStatus>), TypeInfoPropertyName = "ListAppBskyVideoJobStatus")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic), TypeInfoPropertyName = "ChatBskyActorProfileViewBasic")]
@@ -438,6 +441,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.MuteActorListInput>), TypeInfoPropertyName = "ListAppBskyGraphMuteActorListInput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput), TypeInfoPropertyName = "AppBskyGraphMuteThreadInput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput>), TypeInfoPropertyName = "ListAppBskyGraphMuteThreadInput")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput), TypeInfoPropertyName = "AppBskyGraphSearchStarterPacksOutput")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>), TypeInfoPropertyName = "ListAppBskyGraphSearchStarterPacksOutput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorInput), TypeInfoPropertyName = "AppBskyGraphUnmuteActorInput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorInput>), TypeInfoPropertyName = "ListAppBskyGraphUnmuteActorInput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorListInput), TypeInfoPropertyName = "AppBskyGraphUnmuteActorListInput")]
@@ -482,6 +487,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>), TypeInfoPropertyName = "ListAppBskyUnspeccedSearchActorsSkeletonOutput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput), TypeInfoPropertyName = "AppBskyUnspeccedSearchPostsSkeletonOutput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>), TypeInfoPropertyName = "ListAppBskyUnspeccedSearchPostsSkeletonOutput")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput), TypeInfoPropertyName = "AppBskyUnspeccedSearchStarterPacksSkeletonOutput")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>), TypeInfoPropertyName = "ListAppBskyUnspeccedSearchStarterPacksSkeletonOutput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput), TypeInfoPropertyName = "AppBskyVideoGetJobStatusOutput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>), TypeInfoPropertyName = "ListAppBskyVideoGetJobStatusOutput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput), TypeInfoPropertyName = "AppBskyVideoGetUploadLimitsOutput")]

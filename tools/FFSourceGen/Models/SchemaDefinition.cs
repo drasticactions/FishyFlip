@@ -49,6 +49,8 @@ public class SchemaDefinition
 
     [JsonPropertyName("knownValues")]
     public string[]? KnownValues { get; set; }
+
+    public bool RequiresAuth => this.Description.Contains("Requires auth", StringComparison.OrdinalIgnoreCase);
 }
 
 public class RecordDefinition
@@ -59,4 +61,7 @@ public class RecordDefinition
 
     [JsonPropertyName("properties")]
     public Dictionary<string, PropertyDefinition> Properties { get; set; } = new();
+
+    [JsonPropertyName("required")]
+    public string[]? Required { get; set; }
 }

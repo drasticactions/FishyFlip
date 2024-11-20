@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageVersion Include="DeepCloner" Version="0.10.4" />
     <PackageVersion Include="DotMake.CommandLine" Version="1.8.7" />
     <PackageVersion Include="IdentityModel.OidcClient" Version="6.0.0" />
     <PackageVersion Include="IdentityModel.OidcClient.DPoP" Version="6.0.0" />

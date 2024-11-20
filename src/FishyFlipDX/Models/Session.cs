@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -38,6 +40,7 @@ public class Session
     /// <summary>
     /// Gets the ATDid associated with the session.
     /// </summary>
+    [JsonConverter(typeof(ATDidJsonConverter))]
     public ATDid Did { get; }
 
     /// <summary>

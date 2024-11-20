@@ -60,6 +60,11 @@ public sealed partial class ATProtocol : IDisposable
     public AuthSession? PasswordSession => this.sessionManager is PasswordSessionManager passwordSessionManager ? passwordSessionManager.PasswordSession : null;
 
     /// <summary>
+    /// Gets the PclDirectory Methods.
+    /// </summary>
+    public PlcDirectory PlcDirectory => new(this);
+
+    /// <summary>
     /// Gets the current AuthSession.
     /// </summary>
     public AuthSession? AuthSession => this.sessionManager switch
