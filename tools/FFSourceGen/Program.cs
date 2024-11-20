@@ -97,7 +97,10 @@ public partial class AppCommands
         foreach (var group in procedureClasses)
         {
             await this.GenerateEndpointGroupAsync(group);
+            await this.GenerateEndpointClassAsync(group);
         }
+
+        await this.GenerateEndpointClassListForATProtoCS(procedureClasses);
 
         await this.GenerateJsonSerializerContextFile(modelClasses);
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
@@ -106,6 +109,149 @@ public partial class AppCommands
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+    }
+
+    private async Task GenerateEndpointClassListForATProtoCS(List<IGrouping<string, ClassGeneration>> groupList)
+    {
+            var sb = new StringBuilder();
+            this.GenerateHeader(sb);
+            this.GenerateNamespace(sb, $"FishyFlip");
+            sb.AppendLine("{");
+            sb.AppendLine();
+            sb.AppendLine($"    /// <summary>");
+            sb.AppendLine($"    /// ATProto Endpoint List.");
+            sb.AppendLine($"    /// </summary>");
+            sb.AppendLine($"    public sealed partial class ATProtocol");
+            sb.AppendLine("    {");
+            sb.AppendLine();
+            foreach (var group in groupList)
+            {
+                var groupSplit = group.Key.Split(".");
+                var className = string.Empty;
+                if (groupSplit[1] == "Atproto")
+                {
+                    className = $"ATProto{groupSplit.Last().ToPascalCase()}";
+                }
+                else if (groupSplit[0] == "App")
+                {
+                    className = $"Bluesky{groupSplit.Last().ToPascalCase()}";
+                }
+                else
+                {
+                    className = string.Join(string.Empty, groupSplit.Select(n => n.ToPascalCase()).ToArray());
+                }
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {group.Key.ToLower()} Endpoint Group.");
+                sb.AppendLine($"        /// </summary>");
+                sb.AppendLine($"        public {this.baseNamespace}.{group.Key}.{className} {className.Replace("ATProto", string.Empty).Replace("Bluesky", string.Empty)} => new (this);");
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+            sb.AppendLine();
+            var outputPath = Path.Combine(this.basePath);
+            Directory.CreateDirectory(outputPath);
+            var classPath = Path.Combine(outputPath, $"ATProtocol.g.cs");
+            if (File.Exists(classPath))
+            {
+                throw new Exception($"File already exists: ATProtocol {classPath}");
+            }
+
+            await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
+    private async Task GenerateEndpointClassAsync(IGrouping<string, ClassGeneration> group)
+    {
+            Console.WriteLine($"Generating Endpoint Group: {group.Key}");
+            var sb = new StringBuilder();
+            this.GenerateHeader(sb);
+            this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
+            var groupSplit = group.Key.Split(".");
+            var className = string.Empty;
+            if (groupSplit[1] == "Atproto")
+            {
+                className = $"ATProto{groupSplit.Last().ToPascalCase()}";
+            }
+            else if (groupSplit[0] == "App")
+            {
+                className = $"Bluesky{groupSplit.Last().ToPascalCase()}";
+            }
+            else
+            {
+                className = string.Join(string.Empty, groupSplit.Select(n => n.ToPascalCase()).ToArray());
+            }
+
+            Console.WriteLine($"Generated Class Name: {className}");
+            sb.AppendLine("{");
+            sb.AppendLine();
+            sb.AppendLine($"    /// <summary>");
+            sb.AppendLine($"    /// {group.Key.ToLower()} Endpoint Class.");
+            sb.AppendLine($"    /// </summary>");
+            sb.AppendLine($"    public sealed class {className}");
+            sb.AppendLine("    {");
+            sb.AppendLine();
+            sb.AppendLine("        private ATProtocol atp;");
+            sb.AppendLine();
+            sb.AppendLine($"        /// <summary>");
+            sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{className}\"/> class.");
+            sb.AppendLine($"        /// </summary>");
+            sb.AppendLine($"        /// <param name=\"atp\"><see cref=\"ATProtocol\"/>.</param>");
+            sb.AppendLine($"        internal {className}(ATProtocol atp)");
+            sb.AppendLine("        {");
+            sb.AppendLine("            this.atp = atp;");
+            sb.AppendLine("        }");
+            sb.AppendLine();
+            foreach (var item in group)
+            {
+                sb.AppendLine();
+                Console.WriteLine($"{item.Definition.Type} {item.Id}");
+                var methodName = $"{item.ClassName}Async";
+                var inputProperties = this.FetchInputProperties(item);
+                var outputProperty = this.FetchOutputProperties(item);
+                var sourceContext = outputProperty == "Success" ? "Success" : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
+                var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {description}");
+                sb.AppendLine($"        /// </summary>");
+                sb.Append($"        public Task<Result<{outputProperty}?>> {methodName} (");
+                for (int i = 0; i < inputProperties.Count; i++)
+                {
+                    sb.Append($"{inputProperties[i]}");
+                    if (i < inputProperties.Count - 1)
+                    {
+                        sb.Append(", ");
+                    }
+                }
+
+                sb.AppendLine($")");
+                sb.AppendLine("        {");
+                sb.Append($"            return atp.{methodName}(");
+                for (int i = 0; i < inputProperties.Count; i++)
+                {
+                    sb.Append($"{inputProperties[i].Split(" ")[1]}");
+                    if (i < inputProperties.Count - 1)
+                    {
+                        sb.Append(", ");
+                    }
+                }
+                sb.AppendLine($");");
+                sb.AppendLine("        }");
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+            sb.AppendLine();
+            var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+            Directory.CreateDirectory(outputPath);
+            var classPath = Path.Combine(outputPath, $"{className}.g.cs");
+            if (File.Exists(classPath))
+            {
+                throw new Exception($"File already exists: {className} {classPath}");
+            }
+
+            await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
@@ -134,7 +280,7 @@ public partial class AppCommands
                 sb.AppendLine();
                 Console.WriteLine($"{item.Definition.Type} {item.Id}");
                 var methodName = $"{item.ClassName}Async";
-                var inputProperties = this.FetchInputProperties(item);
+                var inputProperties = this.FetchInputProperties(item, true);
                 var outputProperty = this.FetchOutputProperties(item);
                 var sourceContext = outputProperty == "Success" ? "Success" : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
                 var description = !string.IsNullOrEmpty(item.Definition.Description) ? item.Definition.Description : $"Generated endpoint for {item.Id}";
@@ -262,7 +408,7 @@ public partial class AppCommands
         return new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" }.Contains(propertyName) ? $"@{propertyName}" : propertyName;
     }
 
-    private List<string> FetchInputProperties(ClassGeneration classGeneration)
+    private List<string> FetchInputProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
     {
         var requiredProperties = new List<string>();
         var optionalProperties = new List<string>();
@@ -423,7 +569,11 @@ public partial class AppCommands
         }
 
         var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
-        inputProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+        if (isExtensionMethod)
+        {
+            inputProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+        }
+
         inputProperties.Add("CancellationToken cancellationToken = default");
 
         return inputProperties;

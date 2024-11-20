@@ -25,6 +25,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string SearchPostsSkeleton = "/xrpc/app.bsky.unspecced.searchPostsSkeleton";
 
+       public const string SearchStarterPacksSkeleton = "/xrpc/app.bsky.unspecced.searchStarterPacksSkeleton";
+
 
         /// <summary>
         /// Get miscellaneous runtime configuration.
@@ -214,6 +216,36 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchPostsSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Backend Starter Pack search, returns only skeleton.
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput?>> SearchStarterPacksSkeletonAsync (this FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = SearchStarterPacksSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("q=" + q);
+
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchStarterPacksSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

@@ -47,6 +47,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
        public const string MuteThread = "/xrpc/app.bsky.graph.muteThread";
 
+       public const string SearchStarterPacks = "/xrpc/app.bsky.graph.searchStarterPacks";
+
        public const string UnmuteActor = "/xrpc/app.bsky.graph.unmuteActor";
 
        public const string UnmuteActorList = "/xrpc/app.bsky.graph.unmuteActorList";
@@ -397,6 +399,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var inputItem = new MuteThreadInput();
             inputItem.Root = root;
             return atp.Client.Post<MuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteThreadInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Find starter packs matching search criteria. Does not require auth.
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput?>> SearchStarterPacksAsync (this FishyFlip.ATProtocol atp, string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = SearchStarterPacks.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("q=" + q);
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphSearchStarterPacksOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
