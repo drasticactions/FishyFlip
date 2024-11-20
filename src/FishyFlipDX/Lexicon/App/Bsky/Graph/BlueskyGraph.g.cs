@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Get a list of starter packs created by the actor.

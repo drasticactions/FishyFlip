@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Count the number of unread notifications for the requesting account. Requires auth.

@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Find all correlated threat signatures between 2 or more accounts.

@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Generated endpoint for chat.bsky.convo.deleteMessageForSelf

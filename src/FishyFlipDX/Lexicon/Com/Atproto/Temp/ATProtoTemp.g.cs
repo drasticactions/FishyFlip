@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Check accounts location in signup queue.

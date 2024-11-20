@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Activates a currently deactivated account. Used to finalize account migration after the account's repo is imported and identity is setup.

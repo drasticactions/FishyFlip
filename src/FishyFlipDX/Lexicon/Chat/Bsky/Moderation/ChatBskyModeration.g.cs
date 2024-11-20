@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Generated endpoint for chat.bsky.moderation.getActorMetadata

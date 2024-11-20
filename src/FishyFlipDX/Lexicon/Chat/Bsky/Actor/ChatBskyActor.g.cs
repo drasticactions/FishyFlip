@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Generated endpoint for chat.bsky.actor.deleteAccount

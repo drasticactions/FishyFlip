@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Get miscellaneous runtime configuration.

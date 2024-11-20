@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Apply a batch transaction of repository creates, updates, and deletes. Requires auth, implemented by PDS.

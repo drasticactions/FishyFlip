@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Describe the credentials that should be included in the DID doc of an account that is migrating to this service.

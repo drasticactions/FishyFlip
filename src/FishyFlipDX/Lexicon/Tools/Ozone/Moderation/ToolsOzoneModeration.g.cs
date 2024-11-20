@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Take a moderation action on an actor.

@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// List settings with optional filtering

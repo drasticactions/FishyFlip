@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Get status details for a video processing job.

@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Get information about a list of labeler services.

@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Get details about ozone's server configuration.

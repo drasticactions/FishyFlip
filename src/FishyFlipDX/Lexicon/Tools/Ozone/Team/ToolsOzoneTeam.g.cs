@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Add a member to the ozone team. Requires admin role.

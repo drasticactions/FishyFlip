@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Delete a user account as an administrator.

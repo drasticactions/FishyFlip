@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Add values to a specific set. Attempting to add values to a set that does not exist will result in an error.

@@ -24,6 +24,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             this.atp = atp;
         }
 
+        /// <summary>
+        /// Gets the ATProtocol.
+        /// </summary>
+        internal ATProtocol ATProtocol => this.atp;
+
 
         /// <summary>
         /// Administrative action to create a new, re-usable communication (email for now) template.
