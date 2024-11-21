@@ -22,7 +22,6 @@ var atWebProtocolBuilder = new ATWebSocketProtocolBuilder()
  .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atWebProtocol = atWebProtocolBuilder.Build();
 
-// Downloading Repo files requires the PDS of the given user.
 var atProtocolBuilder = new ATProtocolBuilder()
  .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
