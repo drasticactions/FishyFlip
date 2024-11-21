@@ -24,6 +24,5 @@ var atWebProtocol = atWebProtocolBuilder.Build();
 
 // Downloading Repo files requires the PDS of the given user.
 var atProtocolBuilder = new ATProtocolBuilder()
- .WithInstanceUrl(new Uri("https://puffball.us-east.host.bsky.network"))
  .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
