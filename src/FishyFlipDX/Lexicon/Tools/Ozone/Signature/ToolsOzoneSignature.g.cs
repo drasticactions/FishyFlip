@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Find all correlated threat signatures between 2 or more accounts.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput?>> FindCorrelationAsync (List<FishyFlip.Models.ATDid?> dids, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput?>> FindCorrelationAsync (List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
         {
             return atp.FindCorrelationAsync(dids, cancellationToken);
         }
@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Search for accounts that match one or more threat signature values.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (List<string?> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             return atp.SearchAccountsAsync(values, cursor, limit, cancellationToken);
         }

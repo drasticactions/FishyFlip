@@ -58,17 +58,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Get data blocks from a given repo, by CID. For example, intermediate MST nodes, or records. Does not require auth; implemented by PDS.
         /// </summary>
-        public static Task<Result<Success?>> GetBlocksAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string?> cids, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> GetBlocksAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string> cids, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetBlocks.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
             queryStrings.Add("did=" + did);
 
-            if (cids != null)
-            {
-                queryStrings.Add(string.Join("&", cids.Select(n => "cids=" + n)));
-            }
+            queryStrings.Add(string.Join("&", cids.Select(n => "cids=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);

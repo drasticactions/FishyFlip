@@ -26,12 +26,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["author"] is not null) this.Author = new App.Bsky.Actor.ProfileViewBasic(obj["author"]);
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
             if (obj["replyCount"] is not null) this.ReplyCount = obj["replyCount"].AsInt64Value();
             if (obj["repostCount"] is not null) this.RepostCount = obj["repostCount"].AsInt64Value();
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
             if (obj["quoteCount"] is not null) this.QuoteCount = obj["quoteCount"].AsInt64Value();
-            if (obj["embeds"] is not null) this.Embeds = obj["embeds"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["embeds"] is not null) this.Embeds = obj["embeds"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public ATObject? Value { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         [JsonPropertyName("replyCount")]
         public long? ReplyCount { get; set; }
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public long? QuoteCount { get; set; }
 
         [JsonPropertyName("embeds")]
-        public List<ATObject?>? Embeds { get; set; }
+        public List<ATObject>? Embeds { get; set; }
 
         [JsonPropertyName("indexedAt")]
         [JsonRequired]

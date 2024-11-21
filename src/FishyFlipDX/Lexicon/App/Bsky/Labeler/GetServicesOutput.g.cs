@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public GetServicesOutput(CBORObject obj)
         {
-            if (obj["views"] is not null) this.Views = obj["views"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["views"] is not null) this.Views = obj["views"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("views")]
         [JsonRequired]
-        public List<ATObject?>? Views { get; set; }
+        public List<ATObject>? Views { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

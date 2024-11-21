@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["hitsTotal"] is not null) this.HitsTotal = obj["hitsTotal"].AsInt64Value();
-            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n => n is not null ? new App.Bsky.Unspecced.SkeletonSearchStarterPack(n) : null).ToList();
+            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Unspecced.SkeletonSearchStarterPack(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.SkeletonSearchStarterPack?>? StarterPacks { get; set; }
+        public List<App.Bsky.Unspecced.SkeletonSearchStarterPack>? StarterPacks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Disable some set of codes and/or all codes associated with a set of users.
         /// </summary>
-        public static Task<Result<Success?>> DisableInviteCodesAsync (this FishyFlip.ATProtocol atp, List<string?>? codes = default, List<string?>? accounts = default, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> DisableInviteCodesAsync (this FishyFlip.ATProtocol atp, List<string>? codes = default, List<string>? accounts = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DisableInviteCodes.ToString();
             var inputItem = new DisableInviteCodesInput();
@@ -111,15 +111,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Get details about some accounts.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput?>> GetAccountInfosAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid?> dids, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput?>> GetAccountInfosAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetAccountInfos.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            if (dids != null)
-            {
-                queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
-            }
+            queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetAccountInfosOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);

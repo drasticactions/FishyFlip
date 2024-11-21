@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public RelatedAccount(CBORObject obj)
         {
             if (obj["account"] is not null) this.Account = new Com.Atproto.Admin.AccountView(obj["account"]);
-            if (obj["similarities"] is not null) this.Similarities = obj["similarities"].Values.Select(n => n is not null ? new Tools.Ozone.Signature.SigDetail(n) : null).ToList();
+            if (obj["similarities"] is not null) this.Similarities = obj["similarities"].Values.Select(n =>new Tools.Ozone.Signature.SigDetail(n)).ToList();
         }
 
         [JsonPropertyName("account")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public Com.Atproto.Admin.AccountView? Account { get; set; }
 
         [JsonPropertyName("similarities")]
-        public List<Tools.Ozone.Signature.SigDetail?>? Similarities { get; set; }
+        public List<Tools.Ozone.Signature.SigDetail>? Similarities { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

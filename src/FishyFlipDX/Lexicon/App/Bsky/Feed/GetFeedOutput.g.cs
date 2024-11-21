@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GetFeedOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["feed"] is not null) this.Feed = obj["feed"].Values.Select(n => n is not null ? new App.Bsky.Feed.FeedViewPost(n) : null).ToList();
+            if (obj["feed"] is not null) this.Feed = obj["feed"].Values.Select(n =>new App.Bsky.Feed.FeedViewPost(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         [JsonPropertyName("feed")]
         [JsonRequired]
-        public List<App.Bsky.Feed.FeedViewPost?>? Feed { get; set; }
+        public List<App.Bsky.Feed.FeedViewPost>? Feed { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

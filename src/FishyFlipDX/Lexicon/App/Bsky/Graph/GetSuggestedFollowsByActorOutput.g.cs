@@ -22,13 +22,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetSuggestedFollowsByActorOutput(CBORObject obj)
         {
-            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n => n is not null ? new App.Bsky.Actor.ProfileView(n) : null).ToList();
+            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
             if (obj["isFallback"] is not null) this.IsFallback = obj["isFallback"].AsBoolean();
         }
 
         [JsonPropertyName("suggestions")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView?>? Suggestions { get; set; }
+        public List<App.Bsky.Actor.ProfileView>? Suggestions { get; set; }
 
         /// <summary>
         /// If true, response has fallen-back to generic results, and is not scoped using relativeToDid

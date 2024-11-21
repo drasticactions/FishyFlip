@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public GetLogOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["logs"] is not null) this.Logs = obj["logs"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["logs"] is not null) this.Logs = obj["logs"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         [JsonPropertyName("logs")]
         [JsonRequired]
-        public List<ATObject?>? Logs { get; set; }
+        public List<ATObject>? Logs { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -22,7 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public MutedWordsPref(CBORObject obj)
         {
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n => n is not null ? new App.Bsky.Actor.MutedWord(n) : null).ToList();
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new App.Bsky.Actor.MutedWord(n)).ToList();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<App.Bsky.Actor.MutedWord?>? Items { get; set; }
+        public List<App.Bsky.Actor.MutedWord>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

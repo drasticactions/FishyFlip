@@ -25,8 +25,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventTag(CBORObject obj)
         {
-            if (obj["add"] is not null) this.Add = obj["add"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
-            if (obj["remove"] is not null) this.Remove = obj["remove"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["add"] is not null) this.Add = obj["add"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["remove"] is not null) this.Remove = obj["remove"].Values.Select(n =>n.AsString()).ToList();
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
         }
 
@@ -35,14 +35,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("add")]
         [JsonRequired]
-        public List<string?>? Add { get; set; }
+        public List<string>? Add { get; set; }
 
         /// <summary>
         /// Tags to be removed to the subject. Ignores a tag If it doesn't exist, won't be duplicated.
         /// </summary>
         [JsonPropertyName("remove")]
         [JsonRequired]
-        public List<string?>? Remove { get; set; }
+        public List<string>? Remove { get; set; }
 
         /// <summary>
         /// Additional comment about added/removed tags.

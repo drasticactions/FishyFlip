@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetActorStarterPacksOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n => n is not null ? new App.Bsky.Graph.StarterPackViewBasic(n) : null).ToList();
+            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
-        public List<App.Bsky.Graph.StarterPackViewBasic?>? StarterPacks { get; set; }
+        public List<App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

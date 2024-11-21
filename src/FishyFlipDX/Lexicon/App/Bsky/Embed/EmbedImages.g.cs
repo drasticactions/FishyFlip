@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public EmbedImages(CBORObject obj)
         {
-            if (obj["images"] is not null) this.Images = obj["images"].Values.Select(n => n is not null ? new App.Bsky.Embed.Image(n) : null).ToList();
+            if (obj["images"] is not null) this.Images = obj["images"].Values.Select(n =>new App.Bsky.Embed.Image(n)).ToList();
         }
 
         [JsonPropertyName("images")]
         [JsonRequired]
-        public List<App.Bsky.Embed.Image?>? Images { get; set; }
+        public List<App.Bsky.Embed.Image>? Images { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

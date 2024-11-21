@@ -21,7 +21,7 @@ public partial class Facet
         var facet = new Facet();
         var link = new Link();
         link.Uri = uri;
-        facet.Features = new List<ATObject?> { link };
+        facet.Features = new List<ATObject> { link };
         facet.Index = new ByteSlice();
         facet.Index.ByteStart = start;
         facet.Index.ByteEnd = end;
@@ -40,7 +40,7 @@ public partial class Facet
         var facet = new Facet();
         var hashtagFeature = new Tag();
         hashtagFeature.TagValue = hashtag;
-        facet.Features = new List<ATObject?> { hashtagFeature };
+        facet.Features = new List<ATObject> { hashtagFeature };
         facet.Index = new ByteSlice();
         facet.Index.ByteStart = start;
         facet.Index.ByteEnd = end;
@@ -59,7 +59,7 @@ public partial class Facet
         var facet = new Facet();
         var mentionFeature = new Mention();
         mentionFeature.Did = mention;
-        facet.Features = new List<ATObject?> { mentionFeature };
+        facet.Features = new List<ATObject> { mentionFeature };
         facet.Index = new ByteSlice();
         facet.Index.ByteStart = start;
         facet.Index.ByteEnd = end;

@@ -87,7 +87,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Create invite codes.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>> CreateInviteCodesAsync (int codeCount, int useCount, List<FishyFlip.Models.ATDid?>? forAccounts = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>> CreateInviteCodesAsync (int codeCount, int useCount, List<FishyFlip.Models.ATDid>? forAccounts = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateInviteCodesAsync(codeCount, useCount, forAccounts, cancellationToken);
         }

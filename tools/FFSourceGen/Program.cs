@@ -926,11 +926,11 @@ public partial class AppCommands
                         {
                             returnType += "?";
                             propertyName += " = default";
-                            optionalProperties.Add($"List<{returnType}?> {propertyName}");
+                            optionalProperties.Add($"List<{returnType}> {propertyName}");
                         }
                         else
                         {
-                            requiredProperties.Add($"List<{returnType}?> {propertyName}");
+                            requiredProperties.Add($"List<{returnType}> {propertyName}");
                         }
 
                         Console.WriteLine($"{returnType} {propertyName}");
@@ -1083,7 +1083,7 @@ public partial class AppCommands
         {
             if (classRef.IsArrayOfATObjects)
             {
-                return $"List<ATObject?>";
+                return $"List<ATObject>";
             }
 
             if (classRef.IsArrayOfStrings)
@@ -1236,6 +1236,7 @@ public partial class AppCommands
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.AuthSession))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Session))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Success))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.UnknownATObject))]");
         sb.AppendLine($"    [JsonSerializable(typeof(OidcClientOptions))]");
         sb.AppendLine($"    [JsonSerializable(typeof(DPoPProofPayload))]");
         sb.AppendLine($"    [JsonSerializable(typeof(Dictionary<string, JsonElement>))]");
@@ -1433,11 +1434,11 @@ public partial class AppCommands
         sb.AppendLine($"    /// </summary>");
         sb.AppendLine($"    public static class CborLexiconExtensions");
         sb.AppendLine("    {");
-        sb.AppendLine("        public static ATObject? ToATObject(this CBORObject obj)");
+        sb.AppendLine("        public static ATObject ToATObject(this CBORObject obj)");
         sb.AppendLine("        {");
         sb.AppendLine("            if (obj == null)");
         sb.AppendLine("            {");
-        sb.AppendLine("                return null;");
+        sb.AppendLine("                 throw new NullReferenceException(nameof(obj));");
         sb.AppendLine("            }");
         sb.AppendLine();
         sb.AppendLine("            var type = obj[\"$type\"].AsString();");
@@ -1450,18 +1451,18 @@ public partial class AppCommands
         }
 
         sb.AppendLine("                default:");
-        sb.AppendLine("                    return null;");
+        sb.AppendLine("                    return new FishyFlip.Models.UnknownATObject(obj);");
         sb.AppendLine("            }");
         sb.AppendLine("        }");
         sb.AppendLine();
-        sb.AppendLine("        public static List<ATObject?>? ToATObjectList(this CBORObject obj)");
+        sb.AppendLine("        public static List<ATObject>? ToATObjectList(this CBORObject obj)");
         sb.AppendLine("        {");
         sb.AppendLine("            if (obj == null)");
         sb.AppendLine("            {");
         sb.AppendLine("                return null;");
         sb.AppendLine("            }");
         sb.AppendLine();
-        sb.AppendLine("            var list = new List<ATObject?>();");
+        sb.AppendLine("            var list = new List<ATObject>();");
         sb.AppendLine("            foreach (var item in obj.Values)");
         sb.AppendLine("            {");
         sb.AppendLine("                list.Add(item.ToATObject());");
@@ -1487,6 +1488,7 @@ public partial class AppCommands
         }
 
         sb.AppendLine($"    [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: \"blob\")]");
+        sb.AppendLine($"    [JsonPolymorphic(IgnoreUnrecognizedTypeDiscriminators = true)]");
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// The base class for FishyFlip ATProtocol Objects.");
         sb.AppendLine($"    /// </summary>");
@@ -1498,11 +1500,11 @@ public partial class AppCommands
         sb.AppendLine($"        /// Gets the ATRecord Type.");
         sb.AppendLine($"        /// </summary>");
         sb.AppendLine($"        [JsonPropertyName(\"$type\")]");
-        sb.AppendLine($"        public virtual string Type => throw new NotImplementedException();");
+        sb.AppendLine($"        public virtual string Type {{ get; }} = string.Empty;");
         sb.AppendLine();
         sb.AppendLine($"        public virtual string ToJson()");
         sb.AppendLine("        {");
-        sb.AppendLine($"            throw new NotImplementedException();");
+        sb.AppendLine($"            return JsonSerializer.Serialize<ATObject>(this, (JsonTypeInfo<ATObject>)SourceGenerationContext.Default.ATObject)!;");
         sb.AppendLine("        }");
         sb.AppendLine("    }");
         sb.AppendLine("}");

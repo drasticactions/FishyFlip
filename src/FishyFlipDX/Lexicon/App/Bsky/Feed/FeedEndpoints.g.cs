@@ -188,15 +188,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get information about a list of feed generators.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput?>> GetFeedGeneratorsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri?> feeds, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput?>> GetFeedGeneratorsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri> feeds, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetFeedGenerators.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            if (feeds != null)
-            {
-                queryStrings.Add(string.Join("&", feeds.Select(n => "feeds=" + n)));
-            }
+            queryStrings.Add(string.Join("&", feeds.Select(n => "feeds=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyFeedGetFeedGeneratorsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
@@ -286,15 +283,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Gets post views for a specified list of posts (by AT-URI). This is sometimes referred to as 'hydrating' a 'feed skeleton'.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput?>> GetPostsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri?> uris, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput?>> GetPostsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPosts.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            if (uris != null)
-            {
-                queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
-            }
+            queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyFeedGetPostsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
@@ -440,7 +434,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Find posts matching search criteria, returning views of those posts.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput?>> SearchPostsAsync (this FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string?>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput?>> SearchPostsAsync (this FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SearchPosts.ToString();
             endpointUrl += "?";
@@ -510,7 +504,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Send information about interactions with feed items back to the feed generator that served them.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction?> interactions, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SendInteractions.ToString();
             var inputItem = new SendInteractionsInput();

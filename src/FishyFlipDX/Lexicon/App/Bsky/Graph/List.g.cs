@@ -28,9 +28,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["purpose"] is not null) this.Purpose = obj["purpose"].AsString();
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n => n is not null ? new App.Bsky.Richtext.Facet(n) : null).ToList();
+            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].ToATObject();
+            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -50,13 +50,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public string? Description { get; set; }
 
         [JsonPropertyName("descriptionFacets")]
-        public List<App.Bsky.Richtext.Facet?>? DescriptionFacets { get; set; }
+        public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         [JsonPropertyName("avatar")]
         public Blob? Avatar { get; set; }
 
         [JsonPropertyName("labels")]
-        public ATObject? Labels { get; set; }
+        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }

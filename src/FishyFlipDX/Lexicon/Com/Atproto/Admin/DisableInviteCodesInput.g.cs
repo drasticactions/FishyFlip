@@ -22,15 +22,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public DisableInviteCodesInput(CBORObject obj)
         {
-            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
-            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>n.AsString()).ToList();
         }
 
         [JsonPropertyName("codes")]
-        public List<string?>? Codes { get; set; }
+        public List<string>? Codes { get; set; }
 
         [JsonPropertyName("accounts")]
-        public List<string?>? Accounts { get; set; }
+        public List<string>? Accounts { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

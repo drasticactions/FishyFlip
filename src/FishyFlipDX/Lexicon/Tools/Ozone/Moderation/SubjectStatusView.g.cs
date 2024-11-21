@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["id"] is not null) this.Id = obj["id"].AsInt64Value();
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
             if (obj["hosting"] is not null) this.Hosting = obj["hosting"].ToATObject();
-            if (obj["subjectBlobCids"] is not null) this.SubjectBlobCids = obj["subjectBlobCids"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["subjectBlobCids"] is not null) this.SubjectBlobCids = obj["subjectBlobCids"].Values.Select(n =>n.AsString()).ToList();
             if (obj["subjectRepoHandle"] is not null) this.SubjectRepoHandle = obj["subjectRepoHandle"].AsString();
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["takendown"] is not null) this.Takendown = obj["takendown"].AsBoolean();
             if (obj["appealed"] is not null) this.Appealed = obj["appealed"].AsBoolean();
             if (obj["suspendUntil"] is not null) this.SuspendUntil = obj["suspendUntil"].ToDateTime();
-            if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
         }
 
         [JsonPropertyName("id")]
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ATObject? Hosting { get; set; }
 
         [JsonPropertyName("subjectBlobCids")]
-        public List<string?>? SubjectBlobCids { get; set; }
+        public List<string>? SubjectBlobCids { get; set; }
 
         [JsonPropertyName("subjectRepoHandle")]
         public string? SubjectRepoHandle { get; set; }
@@ -119,7 +119,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public DateTime? SuspendUntil { get; set; }
 
         [JsonPropertyName("tags")]
-        public List<string?>? Tags { get; set; }
+        public List<string>? Tags { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

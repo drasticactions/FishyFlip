@@ -135,6 +135,11 @@ public class ClassGeneration
         {
             foreach (var prop in this.Definition.Properties)
             {
+                if (prop.Value.Description.Contains("DEPRECATED", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
                 this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this));
             }
         }
@@ -143,6 +148,11 @@ public class ClassGeneration
         {
             foreach (var prop in this.Definition.Record.Properties)
             {
+                if (prop.Value.Description.Contains("DEPRECATED", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
                 this.Properties.Add(new PropertyGeneration(prop.Value, prop.Key, this));
             }
         }

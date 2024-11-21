@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon
         /// <summary>
         /// Create a Generator record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateGeneratorAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATDid? did, string? displayName, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet?>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, ATObject? labels = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateGeneratorAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATDid? did, string? displayName, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, Com.Atproto.Label.SelfLabels? labels = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Feed.Generator();
             record.Did = did;
@@ -116,11 +116,10 @@ namespace FishyFlip.Lexicon
         /// <summary>
         /// Create a Post record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreatePostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, string? text, DateTime? createdAt, List<App.Bsky.Feed.Entity?>? entities = default, List<App.Bsky.Richtext.Facet?>? facets = default, App.Bsky.Feed.ReplyRefDef? reply = default, ATObject? embed = default, List<string?>? langs = default, ATObject? labels = default, List<string?>? tags = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, string? text, DateTime? createdAt, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Feed.ReplyRefDef? reply = default, ATObject? embed = default, List<string>? langs = default, Com.Atproto.Label.SelfLabels? labels = default, List<string>? tags = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Feed.Post();
             record.Text = text;
-            record.Entities = entities;
             record.Facets = facets;
             record.Reply = reply;
             record.Embed = embed;
@@ -165,7 +164,7 @@ namespace FishyFlip.Lexicon
         /// <summary>
         /// Create a Postgate record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, DateTime? createdAt, FishyFlip.Models.ATUri? post, List<FishyFlip.Models.ATUri?>? detachedEmbeddingUris = default, List<ATObject?>? embeddingRules = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, DateTime? createdAt, FishyFlip.Models.ATUri? post, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Feed.Postgate();
             record.CreatedAt = createdAt;
@@ -251,7 +250,7 @@ namespace FishyFlip.Lexicon
         /// <summary>
         /// Create a Threadgate record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATUri? post, DateTime? createdAt, List<ATObject?>? allow = default, List<FishyFlip.Models.ATUri?>? hiddenReplies = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATUri? post, DateTime? createdAt, List<ATObject>? allow = default, List<FishyFlip.Models.ATUri>? hiddenReplies = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Feed.Threadgate();
             record.Post = post;

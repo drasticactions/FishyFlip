@@ -26,9 +26,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Threadgate(CBORObject obj)
         {
             if (obj["post"] is not null) this.Post = obj["post"].ToATUri();
-            if (obj["allow"] is not null) this.Allow = obj["allow"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["allow"] is not null) this.Allow = obj["allow"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
-            if (obj["hiddenReplies"] is not null) this.HiddenReplies = obj["hiddenReplies"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();
+            if (obj["hiddenReplies"] is not null) this.HiddenReplies = obj["hiddenReplies"].Values.Select(n =>n.ToATUri()!).ToList();
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public FishyFlip.Models.ATUri? Post { get; set; }
 
         [JsonPropertyName("allow")]
-        public List<ATObject?>? Allow { get; set; }
+        public List<ATObject>? Allow { get; set; }
 
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// List of hidden reply URIs.
         /// </summary>
         [JsonPropertyName("hiddenReplies")]
-        public List<FishyFlip.Models.ATUri?>? HiddenReplies { get; set; }
+        public List<FishyFlip.Models.ATUri>? HiddenReplies { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

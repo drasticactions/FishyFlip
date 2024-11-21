@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetPostsOutput(CBORObject obj)
         {
-            if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n => n is not null ? new App.Bsky.Feed.PostView(n) : null).ToList();
+            if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new App.Bsky.Feed.PostView(n)).ToList();
         }
 
         [JsonPropertyName("posts")]
         [JsonRequired]
-        public List<App.Bsky.Feed.PostView?>? Posts { get; set; }
+        public List<App.Bsky.Feed.PostView>? Posts { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

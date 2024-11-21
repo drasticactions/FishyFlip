@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Generated endpoint for chat.bsky.convo.getConvoForMembers
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput?>> GetConvoForMembersAsync (List<FishyFlip.Models.ATDid?> members, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput?>> GetConvoForMembersAsync (List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default)
         {
             return atp.GetConvoForMembersAsync(members, cancellationToken);
         }
@@ -114,7 +114,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Generated endpoint for chat.bsky.convo.sendMessageBatch
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>> SendMessageBatchAsync (List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem?> items, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>> SendMessageBatchAsync (List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem> items, CancellationToken cancellationToken = default)
         {
             return atp.SendMessageBatchAsync(items, cancellationToken);
         }

@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public SavedFeedsPrefV2(CBORObject obj)
         {
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n => n is not null ? new App.Bsky.Actor.SavedFeed(n) : null).ToList();
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new App.Bsky.Actor.SavedFeed(n)).ToList();
         }
 
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<App.Bsky.Actor.SavedFeed?>? Items { get; set; }
+        public List<App.Bsky.Actor.SavedFeed>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

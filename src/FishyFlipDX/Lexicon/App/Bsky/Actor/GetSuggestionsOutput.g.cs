@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public GetSuggestionsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n => n is not null ? new App.Bsky.Actor.ProfileView(n) : null).ToList();
+            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         [JsonPropertyName("actors")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView?>? Actors { get; set; }
+        public List<App.Bsky.Actor.ProfileView>? Actors { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

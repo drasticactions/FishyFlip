@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
-            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n => n is not null ? new Chat.Bsky.Actor.ProfileViewBasic(n) : null).ToList();
+            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new Chat.Bsky.Actor.ProfileViewBasic(n)).ToList();
             if (obj["lastMessage"] is not null) this.LastMessage = obj["lastMessage"].ToATObject();
             if (obj["muted"] is not null) this.Muted = obj["muted"].AsBoolean();
             if (obj["opened"] is not null) this.Opened = obj["opened"].AsBoolean();
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         [JsonPropertyName("members")]
         [JsonRequired]
-        public List<Chat.Bsky.Actor.ProfileViewBasic?>? Members { get; set; }
+        public List<Chat.Bsky.Actor.ProfileViewBasic>? Members { get; set; }
 
         [JsonPropertyName("lastMessage")]
         public ATObject? LastMessage { get; set; }

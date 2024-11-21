@@ -22,13 +22,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public QuerySetsOutput(CBORObject obj)
         {
-            if (obj["sets"] is not null) this.Sets = obj["sets"].Values.Select(n => n is not null ? new Tools.Ozone.Set.SetView(n) : null).ToList();
+            if (obj["sets"] is not null) this.Sets = obj["sets"].Values.Select(n =>new Tools.Ozone.Set.SetView(n)).ToList();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
         }
 
         [JsonPropertyName("sets")]
         [JsonRequired]
-        public List<Tools.Ozone.Set.SetView?>? Sets { get; set; }
+        public List<Tools.Ozone.Set.SetView>? Sets { get; set; }
 
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }

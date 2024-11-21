@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
-            if (obj["blobCids"] is not null) this.BlobCids = obj["blobCids"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["blobCids"] is not null) this.BlobCids = obj["blobCids"].Values.Select(n =>n.AsString()).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["moderation"] is not null) this.Moderation = new Tools.Ozone.Moderation.Moderation(obj["moderation"]);
             if (obj["repo"] is not null) this.Repo = new Tools.Ozone.Moderation.RepoView(obj["repo"]);
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("blobCids")]
         [JsonRequired]
-        public List<string?>? BlobCids { get; set; }
+        public List<string>? BlobCids { get; set; }
 
         [JsonPropertyName("indexedAt")]
         [JsonRequired]

@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         public ListTemplatesOutput(CBORObject obj)
         {
-            if (obj["communicationTemplates"] is not null) this.CommunicationTemplates = obj["communicationTemplates"].Values.Select(n => n is not null ? new Tools.Ozone.Communication.TemplateView(n) : null).ToList();
+            if (obj["communicationTemplates"] is not null) this.CommunicationTemplates = obj["communicationTemplates"].Values.Select(n =>new Tools.Ozone.Communication.TemplateView(n)).ToList();
         }
 
         [JsonPropertyName("communicationTemplates")]
         [JsonRequired]
-        public List<Tools.Ozone.Communication.TemplateView?>? CommunicationTemplates { get; set; }
+        public List<Tools.Ozone.Communication.TemplateView>? CommunicationTemplates { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

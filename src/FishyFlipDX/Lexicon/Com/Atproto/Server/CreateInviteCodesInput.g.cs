@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             if (obj["codeCount"] is not null) this.CodeCount = obj["codeCount"].AsInt64Value();
             if (obj["useCount"] is not null) this.UseCount = obj["useCount"].AsInt64Value();
-            if (obj["forAccounts"] is not null) this.ForAccounts = obj["forAccounts"].Values.Select(n => n is not null ? n.ToATDid() : null).ToList();
+            if (obj["forAccounts"] is not null) this.ForAccounts = obj["forAccounts"].Values.Select(n =>n.ToATDid()!).ToList();
         }
 
         [JsonPropertyName("codeCount")]
@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public long? UseCount { get; set; }
 
         [JsonPropertyName("forAccounts")]
-        public List<FishyFlip.Models.ATDid?>? ForAccounts { get; set; }
+        public List<FishyFlip.Models.ATDid>? ForAccounts { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetMutesOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["mutes"] is not null) this.Mutes = obj["mutes"].Values.Select(n => n is not null ? new App.Bsky.Actor.ProfileView(n) : null).ToList();
+            if (obj["mutes"] is not null) this.Mutes = obj["mutes"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         [JsonPropertyName("mutes")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView?>? Mutes { get; set; }
+        public List<App.Bsky.Actor.ProfileView>? Mutes { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

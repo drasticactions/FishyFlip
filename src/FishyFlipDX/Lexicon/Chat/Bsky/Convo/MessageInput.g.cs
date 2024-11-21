@@ -23,8 +23,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public MessageInput(CBORObject obj)
         {
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
-            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n => n is not null ? new App.Bsky.Richtext.Facet(n) : null).ToList();
-            if (obj["embed"] is not null) this.Embed = obj["embed"].ToATObject();
+            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["embed"] is not null) this.Embed = new App.Bsky.Embed.EmbedRecord(obj["embed"]);
         }
 
         [JsonPropertyName("text")]
@@ -35,10 +35,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<App.Bsky.Richtext.Facet?>? Facets { get; set; }
+        public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         [JsonPropertyName("embed")]
-        public ATObject? Embed { get; set; }
+        public App.Bsky.Embed.EmbedRecord? Embed { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["isRead"] is not null) this.IsRead = obj["isRead"].AsBoolean();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
         [JsonPropertyName("uri")]
@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public DateTime? IndexedAt { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

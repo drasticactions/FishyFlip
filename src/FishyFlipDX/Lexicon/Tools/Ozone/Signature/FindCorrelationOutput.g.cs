@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         public FindCorrelationOutput(CBORObject obj)
         {
-            if (obj["details"] is not null) this.Details = obj["details"].Values.Select(n => n is not null ? new Tools.Ozone.Signature.SigDetail(n) : null).ToList();
+            if (obj["details"] is not null) this.Details = obj["details"].Values.Select(n =>new Tools.Ozone.Signature.SigDetail(n)).ToList();
         }
 
         [JsonPropertyName("details")]
         [JsonRequired]
-        public List<Tools.Ozone.Signature.SigDetail?>? Details { get; set; }
+        public List<Tools.Ozone.Signature.SigDetail>? Details { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

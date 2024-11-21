@@ -69,15 +69,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Generated endpoint for chat.bsky.convo.getConvoForMembers
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput?>> GetConvoForMembersAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid?> members, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput?>> GetConvoForMembersAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetConvoForMembers.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            if (members != null)
-            {
-                queryStrings.Add(string.Join("&", members.Select(n => "members=" + n)));
-            }
+            queryStrings.Add(string.Join("&", members.Select(n => "members=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoForMembersOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
@@ -190,7 +187,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Generated endpoint for chat.bsky.convo.sendMessageBatch
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>> SendMessageBatchAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem?> items, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>> SendMessageBatchAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem> items, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SendMessageBatch.ToString();
             var inputItem = new SendMessageBatchInput();

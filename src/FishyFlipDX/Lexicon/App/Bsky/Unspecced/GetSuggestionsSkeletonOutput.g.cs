@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetSuggestionsSkeletonOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n => n is not null ? new App.Bsky.Unspecced.SkeletonSearchActor(n) : null).ToList();
+            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
             if (obj["relativeToDid"] is not null) this.RelativeToDid = obj["relativeToDid"].ToATDid();
         }
 
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         [JsonPropertyName("actors")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.SkeletonSearchActor?>? Actors { get; set; }
+        public List<App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }
 
         /// <summary>
         /// DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.

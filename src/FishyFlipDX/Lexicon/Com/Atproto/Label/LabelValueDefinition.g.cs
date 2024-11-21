@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             // enum
             // enum
             if (obj["adultOnly"] is not null) this.AdultOnly = obj["adultOnly"].AsBoolean();
-            if (obj["locales"] is not null) this.Locales = obj["locales"].Values.Select(n => n is not null ? new Com.Atproto.Label.LabelValueDefinitionStrings(n) : null).ToList();
+            if (obj["locales"] is not null) this.Locales = obj["locales"].Values.Select(n =>new Com.Atproto.Label.LabelValueDefinitionStrings(n)).ToList();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         [JsonPropertyName("locales")]
         [JsonRequired]
-        public List<Com.Atproto.Label.LabelValueDefinitionStrings?>? Locales { get; set; }
+        public List<Com.Atproto.Label.LabelValueDefinitionStrings>? Locales { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

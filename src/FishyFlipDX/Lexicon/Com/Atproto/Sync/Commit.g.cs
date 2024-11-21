@@ -26,16 +26,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public Commit(CBORObject obj)
         {
             if (obj["seq"] is not null) this.Seq = obj["seq"].AsInt64Value();
-            if (obj["rebase"] is not null) this.Rebase = obj["rebase"].AsBoolean();
             if (obj["tooBig"] is not null) this.TooBig = obj["tooBig"].AsBoolean();
             if (obj["repo"] is not null) this.Repo = obj["repo"].ToATDid();
             if (obj["commit"] is not null) this.CommitValue = obj["commit"].ToATCid();
-            if (obj["prev"] is not null) this.Prev = obj["prev"].ToATCid();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["since"] is not null) this.Since = obj["since"].AsString();
             if (obj["blocks"] is not null) this.Blocks = obj["blocks"].EncodeToBytes();
-            if (obj["ops"] is not null) this.Ops = obj["ops"].Values.Select(n => n is not null ? new Com.Atproto.Sync.RepoOp(n) : null).ToList();
-            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n => n is not null ? n.ToATCid() : default).ToList();
+            if (obj["ops"] is not null) this.Ops = obj["ops"].Values.Select(n =>new Com.Atproto.Sync.RepoOp(n)).ToList();
+            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>n.ToATCid()!).ToList();
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
         }
 
@@ -45,13 +43,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("seq")]
         [JsonRequired]
         public long? Seq { get; set; }
-
-        /// <summary>
-        /// DEPRECATED -- unused
-        /// </summary>
-        [JsonPropertyName("rebase")]
-        [JsonRequired]
-        public bool? Rebase { get; set; }
 
         /// <summary>
         /// Indicates that this commit contained too many ops, or data size was too large. Consumers will need to make a separate request to get missing data.
@@ -77,13 +68,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public Ipfs.Cid? CommitValue { get; set; }
 
         /// <summary>
-        /// DEPRECATED -- unused. WARNING -- nullable and optional; stick with optional to ensure golang interoperability.
-        /// </summary>
-        [JsonPropertyName("prev")]
-        [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
-        public Ipfs.Cid? Prev { get; set; }
-
-        /// <summary>
         /// The rev of the emitted commit. Note that this information is also in the commit object included in blocks, unless this is a tooBig event.
         /// </summary>
         [JsonPropertyName("rev")]
@@ -106,11 +90,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         [JsonPropertyName("ops")]
         [JsonRequired]
-        public List<Com.Atproto.Sync.RepoOp?>? Ops { get; set; }
+        public List<Com.Atproto.Sync.RepoOp>? Ops { get; set; }
 
         [JsonPropertyName("blobs")]
         [JsonRequired]
-        public List<Ipfs.Cid?>? Blobs { get; set; }
+        public List<Ipfs.Cid>? Blobs { get; set; }
 
         /// <summary>
         /// Timestamp of when this message was originally broadcast.

@@ -22,13 +22,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public RemoveOptionsInput(CBORObject obj)
         {
-            if (obj["keys"] is not null) this.Keys = obj["keys"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["keys"] is not null) this.Keys = obj["keys"].Values.Select(n =>n.AsString()).ToList();
             // enum
         }
 
         [JsonPropertyName("keys")]
         [JsonRequired]
-        public List<string?>? Keys { get; set; }
+        public List<string>? Keys { get; set; }
 
         [JsonPropertyName("scope")]
         [JsonRequired]

@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Add values to a specific set. Attempting to add values to a set that does not exist will result in an error.
         /// </summary>
-        public Task<Result<Success?>> AddValuesAsync (string name, List<string?> values, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> AddValuesAsync (string name, List<string> values, CancellationToken cancellationToken = default)
         {
             return atp.AddValuesAsync(name, values, cancellationToken);
         }
@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Delete values from a specific set. Attempting to delete values that are not in the set will not result in an error
         /// </summary>
-        public Task<Result<Success?>> DeleteValuesAsync (string name, List<string?> values, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> DeleteValuesAsync (string name, List<string> values, CancellationToken cancellationToken = default)
         {
             return atp.DeleteValuesAsync(name, values, cancellationToken);
         }

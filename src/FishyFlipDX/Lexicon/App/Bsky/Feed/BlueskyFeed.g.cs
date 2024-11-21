@@ -87,7 +87,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get information about a list of feed generators.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput?>> GetFeedGeneratorsAsync (List<FishyFlip.Models.ATUri?> feeds, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput?>> GetFeedGeneratorsAsync (List<FishyFlip.Models.ATUri> feeds, CancellationToken cancellationToken = default)
         {
             return atp.GetFeedGeneratorsAsync(feeds, cancellationToken);
         }
@@ -123,7 +123,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Gets post views for a specified list of posts (by AT-URI). This is sometimes referred to as 'hydrating' a 'feed skeleton'.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput?>> GetPostsAsync (List<FishyFlip.Models.ATUri?> uris, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput?>> GetPostsAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
             return atp.GetPostsAsync(uris, cancellationToken);
         }
@@ -177,7 +177,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Find posts matching search criteria, returning views of those posts.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput?>> SearchPostsAsync (string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string?>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput?>> SearchPostsAsync (string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.SearchPostsAsync(q, sort, since, until, mentions, author, lang, domain, url, tag, limit, cursor, cancellationToken);
         }
@@ -186,7 +186,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Send information about interactions with feed items back to the feed generator that served them.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction?> interactions, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default)
         {
             return atp.SendInteractionsAsync(interactions, cancellationToken);
         }

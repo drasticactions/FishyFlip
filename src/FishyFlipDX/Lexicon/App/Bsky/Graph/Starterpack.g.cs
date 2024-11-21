@@ -27,9 +27,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n => n is not null ? new App.Bsky.Richtext.Facet(n) : null).ToList();
+            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["list"] is not null) this.List = obj["list"].ToATUri();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n => n is not null ? new App.Bsky.Graph.FeedItem(n) : null).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Graph.FeedItem(n)).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public string? Description { get; set; }
 
         [JsonPropertyName("descriptionFacets")]
-        public List<App.Bsky.Richtext.Facet?>? DescriptionFacets { get; set; }
+        public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Reference (AT-URI) to the list record.
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public FishyFlip.Models.ATUri? List { get; set; }
 
         [JsonPropertyName("feeds")]
-        public List<App.Bsky.Graph.FeedItem?>? Feeds { get; set; }
+        public List<App.Bsky.Graph.FeedItem>? Feeds { get; set; }
 
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }

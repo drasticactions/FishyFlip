@@ -56,15 +56,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Get detailed profile views of multiple actors.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATIdentifier?> actors, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetProfiles.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            if (actors != null)
-            {
-                queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
-            }
+            queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
@@ -97,7 +94,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Set the private preferences attached to the account.
         /// </summary>
-        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, List<ATObject?> preferences, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, List<ATObject> preferences, CancellationToken cancellationToken = default)
         {
             var endpointUrl = PutPreferences.ToString();
             var inputItem = new PutPreferencesInput();

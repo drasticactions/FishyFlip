@@ -23,8 +23,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public SignPlcOperationInput(CBORObject obj)
         {
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
-            if (obj["rotationKeys"] is not null) this.RotationKeys = obj["rotationKeys"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
-            if (obj["alsoKnownAs"] is not null) this.AlsoKnownAs = obj["alsoKnownAs"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["rotationKeys"] is not null) this.RotationKeys = obj["rotationKeys"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["alsoKnownAs"] is not null) this.AlsoKnownAs = obj["alsoKnownAs"].Values.Select(n =>n.AsString()).ToList();
             if (obj["verificationMethods"] is not null) this.VerificationMethods = obj["verificationMethods"].ToATObject();
             if (obj["services"] is not null) this.Services = obj["services"].ToATObject();
         }
@@ -36,10 +36,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public string? Token { get; set; }
 
         [JsonPropertyName("rotationKeys")]
-        public List<string?>? RotationKeys { get; set; }
+        public List<string>? RotationKeys { get; set; }
 
         [JsonPropertyName("alsoKnownAs")]
-        public List<string?>? AlsoKnownAs { get; set; }
+        public List<string>? AlsoKnownAs { get; set; }
 
         [JsonPropertyName("verificationMethods")]
         public ATObject? VerificationMethods { get; set; }

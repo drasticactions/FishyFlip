@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public GetProfilesOutput(CBORObject obj)
         {
-            if (obj["profiles"] is not null) this.Profiles = obj["profiles"].Values.Select(n => n is not null ? new App.Bsky.Actor.ProfileViewDetailed(n) : null).ToList();
+            if (obj["profiles"] is not null) this.Profiles = obj["profiles"].Values.Select(n =>new App.Bsky.Actor.ProfileViewDetailed(n)).ToList();
         }
 
         [JsonPropertyName("profiles")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileViewDetailed?>? Profiles { get; set; }
+        public List<App.Bsky.Actor.ProfileViewDetailed>? Profiles { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

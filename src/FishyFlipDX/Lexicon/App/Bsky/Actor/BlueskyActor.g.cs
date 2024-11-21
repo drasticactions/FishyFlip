@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Get detailed profile views of multiple actors.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (List<FishyFlip.Models.ATIdentifier?> actors, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default)
         {
             return atp.GetProfilesAsync(actors, cancellationToken);
         }
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Set the private preferences attached to the account.
         /// </summary>
-        public Task<Result<Success?>> PutPreferencesAsync (List<ATObject?> preferences, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> PutPreferencesAsync (List<ATObject> preferences, CancellationToken cancellationToken = default)
         {
             return atp.PutPreferencesAsync(preferences, cancellationToken);
         }

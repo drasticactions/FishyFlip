@@ -19,7 +19,7 @@ public class MarkdownPost
         var links = ExtractLinks(markdown);
         var facets = GetFacetLinks(links);
         var hashtagFacets = Facet.ForHashtags(this.Post);
-        this.Facets = facets.Concat(hashtagFacets).ToArray();
+        this.Facets = facets.Concat(hashtagFacets).ToList();
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class MarkdownPost
     /// <summary>
     /// Gets the facets in the post.
     /// </summary>
-    public Facet[] Facets { get; private set; }
+    public List<Facet> Facets { get; private set; }
 
     /// <summary>
     /// Parse a markdown string into a post.

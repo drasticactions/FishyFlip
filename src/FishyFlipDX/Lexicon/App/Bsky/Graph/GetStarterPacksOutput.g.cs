@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetStarterPacksOutput(CBORObject obj)
         {
-            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n => n is not null ? new App.Bsky.Graph.StarterPackViewBasic(n) : null).ToList();
+            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
         }
 
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
-        public List<App.Bsky.Graph.StarterPackViewBasic?>? StarterPacks { get; set; }
+        public List<App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

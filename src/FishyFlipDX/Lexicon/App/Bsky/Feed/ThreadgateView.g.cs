@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
-            if (obj["lists"] is not null) this.Lists = obj["lists"].Values.Select(n => n is not null ? new App.Bsky.Graph.ListViewBasic(n) : null).ToList();
+            if (obj["lists"] is not null) this.Lists = obj["lists"].Values.Select(n =>new App.Bsky.Graph.ListViewBasic(n)).ToList();
         }
 
         [JsonPropertyName("uri")]
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public ATObject? Record { get; set; }
 
         [JsonPropertyName("lists")]
-        public List<App.Bsky.Graph.ListViewBasic?>? Lists { get; set; }
+        public List<App.Bsky.Graph.ListViewBasic>? Lists { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

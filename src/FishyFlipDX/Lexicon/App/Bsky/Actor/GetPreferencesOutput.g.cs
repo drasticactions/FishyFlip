@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public GetPreferencesOutput(CBORObject obj)
         {
-            if (obj["preferences"] is not null) this.Preferences = obj["preferences"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["preferences"] is not null) this.Preferences = obj["preferences"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("preferences")]
         [JsonRequired]
-        public List<ATObject?>? Preferences { get; set; }
+        public List<ATObject>? Preferences { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

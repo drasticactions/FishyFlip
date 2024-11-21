@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public LabelersPref(CBORObject obj)
         {
-            if (obj["labelers"] is not null) this.Labelers = obj["labelers"].Values.Select(n => n is not null ? new App.Bsky.Actor.LabelerPrefItem(n) : null).ToList();
+            if (obj["labelers"] is not null) this.Labelers = obj["labelers"].Values.Select(n =>new App.Bsky.Actor.LabelerPrefItem(n)).ToList();
         }
 
         [JsonPropertyName("labelers")]
         [JsonRequired]
-        public List<App.Bsky.Actor.LabelerPrefItem?>? Labelers { get; set; }
+        public List<App.Bsky.Actor.LabelerPrefItem>? Labelers { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

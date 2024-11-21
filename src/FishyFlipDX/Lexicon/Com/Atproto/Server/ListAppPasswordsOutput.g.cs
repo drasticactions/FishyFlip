@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ListAppPasswordsOutput(CBORObject obj)
         {
-            if (obj["passwords"] is not null) this.Passwords = obj["passwords"].Values.Select(n => n is not null ? new Com.Atproto.Server.AppPasswordDef(n) : null).ToList();
+            if (obj["passwords"] is not null) this.Passwords = obj["passwords"].Values.Select(n =>new Com.Atproto.Server.AppPasswordDef(n)).ToList();
         }
 
         [JsonPropertyName("passwords")]
         [JsonRequired]
-        public List<Com.Atproto.Server.AppPasswordDef?>? Passwords { get; set; }
+        public List<Com.Atproto.Server.AppPasswordDef>? Passwords { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
