@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             this.Disabled = disabled;
             this.Lang = lang;
             this.LastUpdatedBy = lastUpdatedBy;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.UpdatedAt = updatedAt;
         }
 
@@ -94,7 +94,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("updatedAt")]
         [JsonRequired]

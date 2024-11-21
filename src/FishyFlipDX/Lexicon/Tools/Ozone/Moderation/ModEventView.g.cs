@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Subject = subject;
             this.SubjectBlobCids = subjectBlobCids;
             this.CreatedBy = createdBy;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.CreatorHandle = creatorHandle;
             this.SubjectHandle = subjectHandle;
         }
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("creatorHandle")]
         public string? CreatorHandle { get; set; }

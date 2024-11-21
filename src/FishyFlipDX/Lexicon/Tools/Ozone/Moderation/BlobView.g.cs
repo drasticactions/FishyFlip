@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Cid = cid;
             this.MimeType = mimeType;
             this.Size = size;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Details = details;
             this.Moderation = moderation;
         }
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("details")]
         public ATObject? Details { get; set; }

@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Associated = associated;
             this.Viewer = viewer;
             this.Labels = labels;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
 
@@ -74,7 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

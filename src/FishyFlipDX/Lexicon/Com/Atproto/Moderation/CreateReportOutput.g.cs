@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             this.Reason = reason;
             this.Subject = subject;
             this.ReportedBy = reportedBy;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
 
@@ -66,7 +66,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

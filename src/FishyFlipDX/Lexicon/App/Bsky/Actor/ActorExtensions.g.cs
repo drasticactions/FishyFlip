@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon
             record.Labels = labels;
             record.JoinedViaStarterPack = joinedViaStarterPack;
             record.PinnedPost = pinnedPost;
-            record.CreatedAt = createdAt;
+            record.CreatedAt = createdAt ?? DateTime.UtcNow;
             return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.actor.profile", record, rkey, validate, swapCommit, cancellationToken);
         }
 

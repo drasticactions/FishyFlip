@@ -378,7 +378,14 @@ public partial class AppCommands
                     {
                         var prop = item.Properties[i].ClassName;
                         var key = item.Properties[i].Key;
-                        sb.AppendLine($"            record.{prop} = {key};");
+                        if (key == "createdAt")
+                        {
+                            sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"            record.{prop} = {key};");
+                        }
                     }
 
                     sb.AppendLine($"            return atp.ATProtocol.CreateRecordAsync({string.Join(", ", properties)});");
@@ -525,7 +532,14 @@ public partial class AppCommands
                     {
                         var prop = item.Properties[i].ClassName;
                         var key = item.Properties[i].Key;
-                        sb.AppendLine($"            record.{prop} = {key};");
+                        if (key == "createdAt")
+                        {
+                            sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"            record.{prop} = {key};");
+                        }
                     }
                     sb.AppendLine($"            return atp.CreateRecordAsync({string.Join(", ", properties)});");
                     sb.AppendLine("        }");
@@ -609,40 +623,6 @@ public partial class AppCommands
             {
                 sb.Append(", ");
             }
-        }
-    }
-
-    private void GenerateATProtocolRepoHelperMethods(StringBuilder sb)
-    {
-        var graphClasses = AllClasses.Where(n => n.Definition.Type == "record").ToList();
-        foreach (var item in graphClasses)
-        {
-            Console.WriteLine($"Generating Repo Helper Method for {item.Id}");
-            sb.AppendLine();
-            var methodTypes = new List<string> { "Create", "Put", $"Delete" };
-            var baseMethodName = $"{item.ClassName}Async";
-            var inputProperties = new List<string> { $"{item.FullClassName} input", "CancellationToken cancellationToken = default" };
-            var baseOutputProperty = $"RecordOutput";
-            foreach (var methodType in methodTypes)
-            {
-                sb.AppendLine();
-                var methodName = $"{methodType}{item.ClassName}Async";
-                var description = $"{methodType} record for {item.Id}.";
-                sb.AppendLine($"        /// <summary>");
-                sb.AppendLine($"        /// {description}");
-                sb.AppendLine($"        /// </summary>");
-                sb.Append($"        public Task<Result<{this.baseNamespace}.Com.Atproto.Repo.{methodType}RecordOutput?>> {methodName} (");
-                this.GenerateInputProperties(sb, inputProperties);
-                sb.AppendLine($")");
-                sb.AppendLine("        {");
-                sb.AppendLine($"            var createRecordInput = new CreateRecordInput();");
-                sb.AppendLine($"            createRecordInput.Record = input;");
-                sb.AppendLine($"            return this.atp.{methodType}RecordAsync(createRecordInput, cancellationToken);");
-                sb.AppendLine("        }");
-
-            }
-
-            sb.AppendLine("   }");
         }
     }
 
@@ -821,6 +801,11 @@ public partial class AppCommands
         {
             var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
             var isRequired = requiredFields.Contains(prop.Key);
+            if (prop.Key == "createdAt")
+            {
+                isRequired = false;
+                prop.PropertyDefinition.Default = "DateTime.UtcNow";
+            }
             var returnType = prop.Type;
             var isArray = prop.PropertyDefinition.Type == "array";
             var arrayType = prop.PropertyDefinition.Items?.CSharpType;
@@ -1371,7 +1356,14 @@ public partial class AppCommands
         sb.AppendLine("        {");
         foreach (var property in cls.Properties)
         {
-            sb.AppendLine($"            this.{property.PropertyName} = {PropertyNameToCSharpSafeValue(property.Key)};");
+            if (property.Key == "createdAt")
+            {
+                sb.AppendLine($"            this.{property.PropertyName} = {PropertyNameToCSharpSafeValue(property.Key)} ?? DateTime.UtcNow;");
+            }
+            else
+            {
+                sb.AppendLine($"            this.{property.PropertyName} = {PropertyNameToCSharpSafeValue(property.Key)};");
+            }
         }
         sb.AppendLine("        }");
         sb.AppendLine();

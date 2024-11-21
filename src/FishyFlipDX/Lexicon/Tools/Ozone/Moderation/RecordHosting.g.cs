@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Status = status;
             this.UpdatedAt = updatedAt;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.DeletedAt = deletedAt;
         }
 
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public DateTime? UpdatedAt { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("deletedAt")]
         public DateTime? DeletedAt { get; set; }

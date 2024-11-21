@@ -15,11 +15,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Listitem"/> class.
         /// </summary>
-        public Listitem(FishyFlip.Models.ATDid? subject, FishyFlip.Models.ATUri? list, DateTime? createdAt)
+        public Listitem(FishyFlip.Models.ATDid? subject, FishyFlip.Models.ATUri? list, DateTime? createdAt = default)
         {
             this.Subject = subject;
             this.List = list;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
 
@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public FishyFlip.Models.ATUri? List { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="List"/> class.
         /// </summary>
-        public List(string? purpose, string? name, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, Com.Atproto.Label.SelfLabels? labels = default)
+        public List(string? purpose, string? name, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
         {
             this.Purpose = purpose;
             this.Name = name;
@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.DescriptionFacets = descriptionFacets;
             this.Avatar = avatar;
             this.Labels = labels;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
 
@@ -74,7 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

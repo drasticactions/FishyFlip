@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public LikeDef(DateTime? indexedAt = default, DateTime? createdAt = default, App.Bsky.Actor.ProfileView? actor = default)
         {
             this.IndexedAt = indexedAt;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Actor = actor;
         }
 
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("actor")]
         [JsonRequired]

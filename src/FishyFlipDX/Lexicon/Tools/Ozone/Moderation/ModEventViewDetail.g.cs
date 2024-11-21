@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Subject = subject;
             this.SubjectBlobs = subjectBlobs;
             this.CreatedBy = createdBy;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
 
@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -20,7 +20,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.SubjectBlobCids = subjectBlobCids;
             this.SubjectRepoHandle = subjectRepoHandle;
             this.UpdatedAt = updatedAt;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.ReviewState = reviewState;
             this.Comment = comment;
             this.MuteUntil = muteUntil;
@@ -99,7 +99,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("reviewState")]
         [JsonRequired]

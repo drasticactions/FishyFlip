@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             this.Did = did;
             this.Value = value;
             this.Description = description;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.UpdatedAt = updatedAt;
             this.ManagerRole = managerRole;
             this.Scope = scope;
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public string? Description { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }

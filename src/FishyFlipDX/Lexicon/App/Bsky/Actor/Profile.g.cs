@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Labels = labels;
             this.JoinedViaStarterPack = joinedViaStarterPack;
             this.PinnedPost = pinnedPost;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
 
@@ -85,7 +85,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Generator"/> class.
         /// </summary>
-        public Generator(FishyFlip.Models.ATDid? did, string? displayName, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, Com.Atproto.Label.SelfLabels? labels = default)
+        public Generator(FishyFlip.Models.ATDid? did, string? displayName, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
         {
             this.Did = did;
             this.DisplayName = displayName;
@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Avatar = avatar;
             this.AcceptsInteractions = acceptsInteractions;
             this.Labels = labels;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
 
@@ -80,7 +80,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

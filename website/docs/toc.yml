@@ -3,7 +3,9 @@
   href: ../index.md
 - href: creating-a-session.md
 - href: logging-in.md
+- href: class-layout.md
 - href: send-post.md
 - href: upload-image.md
+- href: upload-video.md
+- href: facets.md
 - href: access-firehose.md
-- name: Protocol Info

@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.Disabled = disabled;
             this.ForAccount = forAccount;
             this.CreatedBy = createdBy;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Uses = uses;
         }
 
@@ -68,7 +68,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("uses")]
         [JsonRequired]

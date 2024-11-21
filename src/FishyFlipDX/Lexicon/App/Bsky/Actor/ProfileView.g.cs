@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Avatar = avatar;
             this.Associated = associated;
             this.IndexedAt = indexedAt;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Viewer = viewer;
             this.Labels = labels;
         }
@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public DateTime? IndexedAt { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("viewer")]
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }

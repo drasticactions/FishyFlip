@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             this.Did = did;
             this.Disabled = disabled;
             this.Profile = profile;
-            this.CreatedAt = createdAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.UpdatedAt = updatedAt;
             this.LastUpdatedBy = lastUpdatedBy;
             this.Role = role;
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         public App.Bsky.Actor.ProfileViewDetailed? Profile { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
