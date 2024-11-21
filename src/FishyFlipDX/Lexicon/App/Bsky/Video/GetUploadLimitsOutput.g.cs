@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUploadLimitsOutput"/> class.
         /// </summary>
+        public GetUploadLimitsOutput(bool? canUpload = default, long? remainingDailyVideos = default, long? remainingDailyBytes = default, string? message = default, string? error = default)
+        {
+            this.CanUpload = canUpload;
+            this.RemainingDailyVideos = remainingDailyVideos;
+            this.RemainingDailyBytes = remainingDailyBytes;
+            this.Message = message;
+            this.Error = error;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetUploadLimitsOutput"/> class.
+        /// </summary>
         public GetUploadLimitsOutput()
         {
         }

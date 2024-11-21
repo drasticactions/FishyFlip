@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadViewPost"/> class.
         /// </summary>
+        public ThreadViewPost(App.Bsky.Feed.PostView? post = default, ATObject? parent = default, List<ATObject>? replies = default)
+        {
+            this.Post = post;
+            this.Parent = parent;
+            this.Replies = replies;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadViewPost"/> class.
+        /// </summary>
         public ThreadViewPost()
         {
         }

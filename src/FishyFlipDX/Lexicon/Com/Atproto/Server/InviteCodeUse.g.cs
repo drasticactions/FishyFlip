@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="InviteCodeUse"/> class.
         /// </summary>
+        public InviteCodeUse(FishyFlip.Models.ATDid? usedBy = default, DateTime? usedAt = default)
+        {
+            this.UsedBy = usedBy;
+            this.UsedAt = usedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InviteCodeUse"/> class.
+        /// </summary>
         public InviteCodeUse()
         {
         }

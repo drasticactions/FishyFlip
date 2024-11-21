@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetLikesOutput"/> class.
         /// </summary>
+        public GetLikesOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<App.Bsky.Feed.LikeDef>? likes = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Cursor = cursor;
+            this.Likes = likes;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetLikesOutput"/> class.
+        /// </summary>
         public GetLikesOutput()
         {
         }

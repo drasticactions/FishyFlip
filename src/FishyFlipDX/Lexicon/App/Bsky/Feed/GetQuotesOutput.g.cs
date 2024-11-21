@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetQuotesOutput"/> class.
         /// </summary>
+        public GetQuotesOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<App.Bsky.Feed.PostView>? posts = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Cursor = cursor;
+            this.Posts = posts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetQuotesOutput"/> class.
+        /// </summary>
         public GetQuotesOutput()
         {
         }

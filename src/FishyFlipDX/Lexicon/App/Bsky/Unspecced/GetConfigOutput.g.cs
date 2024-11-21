@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
         /// </summary>
+        public GetConfigOutput(bool? checkEmailConfirmed = default)
+        {
+            this.CheckEmailConfirmed = checkEmailConfirmed;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
+        /// </summary>
         public GetConfigOutput()
         {
         }

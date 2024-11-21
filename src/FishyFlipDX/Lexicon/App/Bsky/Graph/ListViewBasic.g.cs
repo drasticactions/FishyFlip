@@ -12,6 +12,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="ListViewBasic"/> class.
         /// </summary>
+        public ListViewBasic(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? name = default, string? purpose = default, string? avatar = default, long? listItemCount = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Graph.ListViewerState? viewer = default, DateTime? indexedAt = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Name = name;
+            this.Purpose = purpose;
+            this.Avatar = avatar;
+            this.ListItemCount = listItemCount;
+            this.Labels = labels;
+            this.Viewer = viewer;
+            this.IndexedAt = indexedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListViewBasic"/> class.
+        /// </summary>
         public ListViewBasic()
         {
         }

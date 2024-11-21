@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoveOptionsInput"/> class.
         /// </summary>
+        public RemoveOptionsInput(List<string>? keys = default, string? scope = default)
+        {
+            this.Keys = keys;
+            this.Scope = scope;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RemoveOptionsInput"/> class.
+        /// </summary>
         public RemoveOptionsInput()
         {
         }

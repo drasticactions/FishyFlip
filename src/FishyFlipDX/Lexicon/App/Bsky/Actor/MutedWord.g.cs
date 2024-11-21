@@ -15,6 +15,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="MutedWord"/> class.
         /// </summary>
+        public MutedWord(string? id = default, string? value = default, List<string>? targets = default, string? actorTarget = default, DateTime? expiresAt = default)
+        {
+            this.Id = id;
+            this.Value = value;
+            this.Targets = targets;
+            this.ActorTarget = actorTarget;
+            this.ExpiresAt = expiresAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MutedWord"/> class.
+        /// </summary>
         public MutedWord()
         {
         }

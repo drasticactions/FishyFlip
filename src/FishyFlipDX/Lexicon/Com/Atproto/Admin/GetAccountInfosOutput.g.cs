@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAccountInfosOutput"/> class.
         /// </summary>
+        public GetAccountInfosOutput(List<Com.Atproto.Admin.AccountView>? infos = default)
+        {
+            this.Infos = infos;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetAccountInfosOutput"/> class.
+        /// </summary>
         public GetAccountInfosOutput()
         {
         }

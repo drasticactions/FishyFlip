@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="DisableInviteCodesInput"/> class.
         /// </summary>
+        public DisableInviteCodesInput(List<string>? codes = default, List<string>? accounts = default)
+        {
+            this.Codes = codes;
+            this.Accounts = accounts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DisableInviteCodesInput"/> class.
+        /// </summary>
         public DisableInviteCodesInput()
         {
         }

@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteRecordInput"/> class.
         /// </summary>
+        public DeleteRecordInput(FishyFlip.Models.ATIdentifier? repo = default, string? collection = default, string? rkey = default, string? swapRecord = default, string? swapCommit = default)
+        {
+            this.Repo = repo;
+            this.Collection = collection;
+            this.Rkey = rkey;
+            this.SwapRecord = swapRecord;
+            this.SwapCommit = swapCommit;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteRecordInput"/> class.
+        /// </summary>
         public DeleteRecordInput()
         {
         }

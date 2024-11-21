@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPostThreadOutput"/> class.
         /// </summary>
+        public GetPostThreadOutput(ATObject? thread = default, App.Bsky.Feed.ThreadgateView? threadgate = default)
+        {
+            this.Thread = thread;
+            this.Threadgate = threadgate;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetPostThreadOutput"/> class.
+        /// </summary>
         public GetPostThreadOutput()
         {
         }

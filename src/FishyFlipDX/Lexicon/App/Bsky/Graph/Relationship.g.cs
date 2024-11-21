@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Relationship"/> class.
         /// </summary>
+        public Relationship(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default)
+        {
+            this.Did = did;
+            this.Following = following;
+            this.FollowedBy = followedBy;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Relationship"/> class.
+        /// </summary>
         public Relationship()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteAccountInput"/> class.
         /// </summary>
+        public DeleteAccountInput(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteAccountInput"/> class.
+        /// </summary>
         public DeleteAccountInput()
         {
         }

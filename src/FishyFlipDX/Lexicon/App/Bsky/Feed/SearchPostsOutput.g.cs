@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchPostsOutput"/> class.
         /// </summary>
+        public SearchPostsOutput(string? cursor = default, long? hitsTotal = default, List<App.Bsky.Feed.PostView>? posts = default)
+        {
+            this.Cursor = cursor;
+            this.HitsTotal = hitsTotal;
+            this.Posts = posts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchPostsOutput"/> class.
+        /// </summary>
         public SearchPostsOutput()
         {
         }

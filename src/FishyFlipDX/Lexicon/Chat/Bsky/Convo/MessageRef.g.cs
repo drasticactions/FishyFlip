@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageRef"/> class.
         /// </summary>
+        public MessageRef(FishyFlip.Models.ATDid? did = default, string? convoId = default, string? messageId = default)
+        {
+            this.Did = did;
+            this.ConvoId = convoId;
+            this.MessageId = messageId;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageRef"/> class.
+        /// </summary>
         public MessageRef()
         {
         }

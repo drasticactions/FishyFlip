@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActorMetadataOutput"/> class.
         /// </summary>
+        public GetActorMetadataOutput(Chat.Bsky.Moderation.Metadata? day = default, Chat.Bsky.Moderation.Metadata? month = default, Chat.Bsky.Moderation.Metadata? all = default)
+        {
+            this.Day = day;
+            this.Month = month;
+            this.All = all;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetActorMetadataOutput"/> class.
+        /// </summary>
         public GetActorMetadataOutput()
         {
         }

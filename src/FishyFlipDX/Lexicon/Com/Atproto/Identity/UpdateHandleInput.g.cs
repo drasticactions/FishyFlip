@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateHandleInput"/> class.
         /// </summary>
+        public UpdateHandleInput(FishyFlip.Models.ATHandle? handle = default)
+        {
+            this.Handle = handle;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateHandleInput"/> class.
+        /// </summary>
         public UpdateHandleInput()
         {
         }

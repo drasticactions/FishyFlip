@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="Service"/> class.
         /// </summary>
+        public Service(App.Bsky.Labeler.LabelerPolicies? policies, DateTime? createdAt, Com.Atproto.Label.SelfLabels? labels = default)
+        {
+            this.Policies = policies;
+            this.Labels = labels;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Service"/> class.
+        /// </summary>
         public Service()
         {
         }

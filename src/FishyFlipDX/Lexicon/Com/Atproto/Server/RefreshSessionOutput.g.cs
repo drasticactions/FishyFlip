@@ -12,6 +12,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RefreshSessionOutput"/> class.
         /// </summary>
+        public RefreshSessionOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, bool? active = default, string? status = default)
+        {
+            this.AccessJwt = accessJwt;
+            this.RefreshJwt = refreshJwt;
+            this.Handle = handle;
+            this.Did = did;
+            this.DidDoc = didDoc;
+            this.Active = active;
+            this.Status = status;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RefreshSessionOutput"/> class.
+        /// </summary>
         public RefreshSessionOutput()
         {
         }

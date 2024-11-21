@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="DeactivateAccountInput"/> class.
         /// </summary>
+        public DeactivateAccountInput(DateTime? deleteAfter = default)
+        {
+            this.DeleteAfter = deleteAfter;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeactivateAccountInput"/> class.
+        /// </summary>
         public DeactivateAccountInput()
         {
         }

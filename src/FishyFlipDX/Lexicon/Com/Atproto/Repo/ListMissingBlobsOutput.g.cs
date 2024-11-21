@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ListMissingBlobsOutput"/> class.
         /// </summary>
+        public ListMissingBlobsOutput(string? cursor = default, List<Com.Atproto.Repo.RecordBlob>? blobs = default)
+        {
+            this.Cursor = cursor;
+            this.Blobs = blobs;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListMissingBlobsOutput"/> class.
+        /// </summary>
         public ListMissingBlobsOutput()
         {
         }

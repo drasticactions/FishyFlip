@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="PutPreferencesInput"/> class.
         /// </summary>
+        public PutPreferencesInput(bool? priority = default)
+        {
+            this.Priority = priority;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PutPreferencesInput"/> class.
+        /// </summary>
         public PutPreferencesInput()
         {
         }

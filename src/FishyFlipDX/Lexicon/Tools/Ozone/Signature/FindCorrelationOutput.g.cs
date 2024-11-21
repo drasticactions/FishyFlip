@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="FindCorrelationOutput"/> class.
         /// </summary>
+        public FindCorrelationOutput(List<Tools.Ozone.Signature.SigDetail>? details = default)
+        {
+            this.Details = details;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindCorrelationOutput"/> class.
+        /// </summary>
         public FindCorrelationOutput()
         {
         }

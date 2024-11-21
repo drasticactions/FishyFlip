@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountCodes"/> class.
         /// </summary>
+        public AccountCodes(string? account = default, List<string>? codes = default)
+        {
+            this.Account = account;
+            this.Codes = codes;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountCodes"/> class.
+        /// </summary>
         public AccountCodes()
         {
         }

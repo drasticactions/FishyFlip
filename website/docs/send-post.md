@@ -2,7 +2,7 @@
 
 ```csharp
 // Creates a text post of "Hello, World!" to the signed in users account.
-var postResult = await atProtocol.Repo.CreatePostAsync("Hello, World!");
+var postResult = await atProtocol.Repo.CreatePostAsync("Hello, World!", DateTime.UtcNow);
 postResult.Switch(
     success =>
     {

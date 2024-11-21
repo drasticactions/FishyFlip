@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="ResolveHandleOutput"/> class.
         /// </summary>
+        public ResolveHandleOutput(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResolveHandleOutput"/> class.
+        /// </summary>
         public ResolveHandleOutput()
         {
         }

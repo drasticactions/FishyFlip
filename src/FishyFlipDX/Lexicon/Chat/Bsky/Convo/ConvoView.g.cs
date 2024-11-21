@@ -12,6 +12,21 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvoView"/> class.
         /// </summary>
+        public ConvoView(string? id = default, string? rev = default, List<Chat.Bsky.Actor.ProfileViewBasic>? members = default, ATObject? lastMessage = default, bool? muted = default, bool? opened = default, long? unreadCount = default)
+        {
+            this.Id = id;
+            this.Rev = rev;
+            this.Members = members;
+            this.LastMessage = lastMessage;
+            this.Muted = muted;
+            this.Opened = opened;
+            this.UnreadCount = unreadCount;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConvoView"/> class.
+        /// </summary>
         public ConvoView()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestCrawlInput"/> class.
         /// </summary>
+        public RequestCrawlInput(string? hostname = default)
+        {
+            this.Hostname = hostname;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequestCrawlInput"/> class.
+        /// </summary>
         public RequestCrawlInput()
         {
         }

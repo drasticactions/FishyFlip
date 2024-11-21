@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="ListOptionsOutput"/> class.
         /// </summary>
+        public ListOptionsOutput(string? cursor = default, List<Tools.Ozone.Setting.Option>? options = default)
+        {
+            this.Cursor = cursor;
+            this.Options = options;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListOptionsOutput"/> class.
+        /// </summary>
         public ListOptionsOutput()
         {
         }

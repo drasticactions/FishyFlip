@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateTemplateInput"/> class.
         /// </summary>
+        public CreateTemplateInput(string? name = default, string? contentMarkdown = default, string? subject = default, string? lang = default, FishyFlip.Models.ATDid? createdBy = default)
+        {
+            this.Name = name;
+            this.ContentMarkdown = contentMarkdown;
+            this.Subject = subject;
+            this.Lang = lang;
+            this.CreatedBy = createdBy;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateTemplateInput"/> class.
+        /// </summary>
         public CreateTemplateInput()
         {
         }

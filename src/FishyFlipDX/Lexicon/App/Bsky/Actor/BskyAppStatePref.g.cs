@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="BskyAppStatePref"/> class.
         /// </summary>
+        public BskyAppStatePref(App.Bsky.Actor.BskyAppProgressGuide? activeProgressGuide = default, List<string>? queuedNudges = default, List<App.Bsky.Actor.Nux>? nuxs = default)
+        {
+            this.ActiveProgressGuide = activeProgressGuide;
+            this.QueuedNudges = queuedNudges;
+            this.Nuxs = nuxs;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BskyAppStatePref"/> class.
+        /// </summary>
         public BskyAppStatePref()
         {
         }

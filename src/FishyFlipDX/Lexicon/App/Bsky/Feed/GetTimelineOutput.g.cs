@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTimelineOutput"/> class.
         /// </summary>
+        public GetTimelineOutput(string? cursor = default, List<App.Bsky.Feed.FeedViewPost>? feed = default)
+        {
+            this.Cursor = cursor;
+            this.Feed = feed;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetTimelineOutput"/> class.
+        /// </summary>
         public GetTimelineOutput()
         {
         }

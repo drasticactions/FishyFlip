@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="ListBlobsOutput"/> class.
         /// </summary>
+        public ListBlobsOutput(string? cursor = default, List<string>? cids = default)
+        {
+            this.Cursor = cursor;
+            this.Cids = cids;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListBlobsOutput"/> class.
+        /// </summary>
         public ListBlobsOutput()
         {
         }

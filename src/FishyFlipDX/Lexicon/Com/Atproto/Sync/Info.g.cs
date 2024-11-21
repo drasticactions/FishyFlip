@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Info"/> class.
         /// </summary>
+        public Info(string? name = default, string? message = default)
+        {
+            this.Name = name;
+            this.Message = message;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Info"/> class.
+        /// </summary>
         public Info()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="SendEmailOutput"/> class.
         /// </summary>
+        public SendEmailOutput(bool? sent = default)
+        {
+            this.Sent = sent;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SendEmailOutput"/> class.
+        /// </summary>
         public SendEmailOutput()
         {
         }

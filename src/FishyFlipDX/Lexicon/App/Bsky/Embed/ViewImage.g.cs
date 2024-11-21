@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewImage"/> class.
         /// </summary>
+        public ViewImage(string? thumb = default, string? fullsize = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
+        {
+            this.Thumb = thumb;
+            this.Fullsize = fullsize;
+            this.Alt = alt;
+            this.AspectRatio = aspectRatio;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewImage"/> class.
+        /// </summary>
         public ViewImage()
         {
         }

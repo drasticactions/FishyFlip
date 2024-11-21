@@ -12,6 +12,27 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GeneratorView"/> class.
         /// </summary>
+        public GeneratorView(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Models.ATDid? did = default, App.Bsky.Actor.ProfileView? creator = default, string? displayName = default, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, string? avatar = default, long? likeCount = default, bool? acceptsInteractions = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Feed.GeneratorViewerState? viewer = default, DateTime? indexedAt = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Did = did;
+            this.Creator = creator;
+            this.DisplayName = displayName;
+            this.Description = description;
+            this.DescriptionFacets = descriptionFacets;
+            this.Avatar = avatar;
+            this.LikeCount = likeCount;
+            this.AcceptsInteractions = acceptsInteractions;
+            this.Labels = labels;
+            this.Viewer = viewer;
+            this.IndexedAt = indexedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeneratorView"/> class.
+        /// </summary>
         public GeneratorView()
         {
         }

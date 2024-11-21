@@ -12,6 +12,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelerViewDetailed"/> class.
         /// </summary>
+        public LabelerViewDetailed(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileView? creator = default, App.Bsky.Labeler.LabelerPolicies? policies = default, long? likeCount = default, App.Bsky.Labeler.LabelerViewerState? viewer = default, DateTime? indexedAt = default, List<Com.Atproto.Label.Label>? labels = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Creator = creator;
+            this.Policies = policies;
+            this.LikeCount = likeCount;
+            this.Viewer = viewer;
+            this.IndexedAt = indexedAt;
+            this.Labels = labels;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelerViewDetailed"/> class.
+        /// </summary>
         public LabelerViewDetailed()
         {
         }

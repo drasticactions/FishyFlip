@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSuggestionsSkeletonOutput"/> class.
         /// </summary>
+        public GetSuggestionsSkeletonOutput(string? cursor = default, List<App.Bsky.Unspecced.SkeletonSearchActor>? actors = default, FishyFlip.Models.ATDid? relativeToDid = default)
+        {
+            this.Cursor = cursor;
+            this.Actors = actors;
+            this.RelativeToDid = relativeToDid;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetSuggestionsSkeletonOutput"/> class.
+        /// </summary>
         public GetSuggestionsSkeletonOutput()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelerViewerState"/> class.
         /// </summary>
+        public LabelerViewerState(FishyFlip.Models.ATUri? like = default)
+        {
+            this.Like = like;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelerViewerState"/> class.
+        /// </summary>
         public LabelerViewerState()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestPasswordResetInput"/> class.
         /// </summary>
+        public RequestPasswordResetInput(string? email = default)
+        {
+            this.Email = email;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequestPasswordResetInput"/> class.
+        /// </summary>
         public RequestPasswordResetInput()
         {
         }

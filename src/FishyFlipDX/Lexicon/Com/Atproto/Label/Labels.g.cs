@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="Labels"/> class.
         /// </summary>
+        public Labels(long? seq = default, List<Com.Atproto.Label.Label>? labels = default)
+        {
+            this.Seq = seq;
+            this.LabelsValue = labels;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Labels"/> class.
+        /// </summary>
         public Labels()
         {
         }

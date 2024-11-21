@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="SavedFeedsPref"/> class.
         /// </summary>
+        public SavedFeedsPref(List<FishyFlip.Models.ATUri>? pinned = default, List<FishyFlip.Models.ATUri>? saved = default, long? timelineIndex = default)
+        {
+            this.Pinned = pinned;
+            this.Saved = saved;
+            this.TimelineIndex = timelineIndex;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SavedFeedsPref"/> class.
+        /// </summary>
         public SavedFeedsPref()
         {
         }

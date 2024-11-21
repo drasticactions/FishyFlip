@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ReasonRepost"/> class.
         /// </summary>
+        public ReasonRepost(App.Bsky.Actor.ProfileViewBasic? by = default, DateTime? indexedAt = default)
+        {
+            this.By = by;
+            this.IndexedAt = indexedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReasonRepost"/> class.
+        /// </summary>
         public ReasonRepost()
         {
         }

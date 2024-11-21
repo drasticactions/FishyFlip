@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInviteCodeInput"/> class.
         /// </summary>
+        public CreateInviteCodeInput(long? useCount = default, FishyFlip.Models.ATDid? forAccount = default)
+        {
+            this.UseCount = useCount;
+            this.ForAccount = forAccount;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateInviteCodeInput"/> class.
+        /// </summary>
         public CreateInviteCodeInput()
         {
         }

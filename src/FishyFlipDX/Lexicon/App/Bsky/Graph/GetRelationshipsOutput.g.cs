@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRelationshipsOutput"/> class.
         /// </summary>
+        public GetRelationshipsOutput(FishyFlip.Models.ATDid? actor = default, List<ATObject>? relationships = default)
+        {
+            this.Actor = actor;
+            this.Relationships = relationships;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetRelationshipsOutput"/> class.
+        /// </summary>
         public GetRelationshipsOutput()
         {
         }

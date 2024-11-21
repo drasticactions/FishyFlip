@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestEmailUpdateOutput"/> class.
         /// </summary>
+        public RequestEmailUpdateOutput(bool? tokenRequired = default)
+        {
+            this.TokenRequired = tokenRequired;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequestEmailUpdateOutput"/> class.
+        /// </summary>
         public RequestEmailUpdateOutput()
         {
         }

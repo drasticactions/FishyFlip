@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="UnmuteActorInput"/> class.
         /// </summary>
+        public UnmuteActorInput(FishyFlip.Models.ATIdentifier? actor = default)
+        {
+            this.Actor = actor;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnmuteActorInput"/> class.
+        /// </summary>
         public UnmuteActorInput()
         {
         }

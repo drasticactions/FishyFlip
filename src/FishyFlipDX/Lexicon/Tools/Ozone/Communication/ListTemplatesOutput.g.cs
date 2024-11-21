@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="ListTemplatesOutput"/> class.
         /// </summary>
+        public ListTemplatesOutput(List<Tools.Ozone.Communication.TemplateView>? communicationTemplates = default)
+        {
+            this.CommunicationTemplates = communicationTemplates;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListTemplatesOutput"/> class.
+        /// </summary>
         public ListTemplatesOutput()
         {
         }

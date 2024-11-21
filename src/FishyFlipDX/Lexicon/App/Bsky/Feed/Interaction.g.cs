@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Interaction"/> class.
         /// </summary>
+        public Interaction(FishyFlip.Models.ATUri? item = default, string? @event = default, string? feedContext = default)
+        {
+            this.Item = item;
+            this.Event = @event;
+            this.FeedContext = feedContext;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Interaction"/> class.
+        /// </summary>
         public Interaction()
         {
         }

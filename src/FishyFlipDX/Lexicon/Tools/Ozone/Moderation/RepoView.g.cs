@@ -12,6 +12,25 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RepoView"/> class.
         /// </summary>
+        public RepoView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? email = default, List<ATObject>? relatedRecords = default, DateTime? indexedAt = default, Tools.Ozone.Moderation.Moderation? moderation = default, Com.Atproto.Server.InviteCode? invitedBy = default, bool? invitesDisabled = default, string? inviteNote = default, DateTime? deactivatedAt = default, List<Com.Atproto.Admin.ThreatSignature>? threatSignatures = default)
+        {
+            this.Did = did;
+            this.Handle = handle;
+            this.Email = email;
+            this.RelatedRecords = relatedRecords;
+            this.IndexedAt = indexedAt;
+            this.Moderation = moderation;
+            this.InvitedBy = invitedBy;
+            this.InvitesDisabled = invitesDisabled;
+            this.InviteNote = inviteNote;
+            this.DeactivatedAt = deactivatedAt;
+            this.ThreatSignatures = threatSignatures;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RepoView"/> class.
+        /// </summary>
         public RepoView()
         {
         }

@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="KnownFollowers"/> class.
         /// </summary>
+        public KnownFollowers(long? count = default, List<App.Bsky.Actor.ProfileViewBasic>? followers = default)
+        {
+            this.Count = count;
+            this.Followers = followers;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KnownFollowers"/> class.
+        /// </summary>
         public KnownFollowers()
         {
         }

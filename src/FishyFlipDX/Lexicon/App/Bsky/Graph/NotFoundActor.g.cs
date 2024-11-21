@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="NotFoundActor"/> class.
         /// </summary>
+        public NotFoundActor(FishyFlip.Models.ATIdentifier? actor = default, bool? notFound = default)
+        {
+            this.Actor = actor;
+            this.NotFound = notFound;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotFoundActor"/> class.
+        /// </summary>
         public NotFoundActor()
         {
         }

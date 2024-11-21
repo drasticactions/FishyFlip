@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewerConfig"/> class.
         /// </summary>
+        public ViewerConfig(string? role = default)
+        {
+            this.Role = role;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewerConfig"/> class.
+        /// </summary>
         public ViewerConfig()
         {
         }

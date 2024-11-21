@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelersPref"/> class.
         /// </summary>
+        public LabelersPref(List<App.Bsky.Actor.LabelerPrefItem>? labelers = default)
+        {
+            this.Labelers = labelers;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelersPref"/> class.
+        /// </summary>
         public LabelersPref()
         {
         }

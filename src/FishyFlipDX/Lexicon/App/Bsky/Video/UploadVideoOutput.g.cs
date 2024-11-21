@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadVideoOutput"/> class.
         /// </summary>
+        public UploadVideoOutput(App.Bsky.Video.JobStatus? jobStatus = default)
+        {
+            this.JobStatus = jobStatus;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UploadVideoOutput"/> class.
+        /// </summary>
         public UploadVideoOutput()
         {
         }

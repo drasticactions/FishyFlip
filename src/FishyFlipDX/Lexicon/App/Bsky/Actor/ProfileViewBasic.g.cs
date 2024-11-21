@@ -12,6 +12,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileViewBasic"/> class.
         /// </summary>
+        public ProfileViewBasic(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? avatar = default, App.Bsky.Actor.ProfileAssociated? associated = default, App.Bsky.Actor.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? createdAt = default)
+        {
+            this.Did = did;
+            this.Handle = handle;
+            this.DisplayName = displayName;
+            this.Avatar = avatar;
+            this.Associated = associated;
+            this.Viewer = viewer;
+            this.Labels = labels;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfileViewBasic"/> class.
+        /// </summary>
         public ProfileViewBasic()
         {
         }

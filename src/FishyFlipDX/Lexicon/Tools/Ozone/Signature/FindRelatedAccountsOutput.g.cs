@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="FindRelatedAccountsOutput"/> class.
         /// </summary>
+        public FindRelatedAccountsOutput(string? cursor = default, List<Tools.Ozone.Signature.RelatedAccount>? accounts = default)
+        {
+            this.Cursor = cursor;
+            this.Accounts = accounts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindRelatedAccountsOutput"/> class.
+        /// </summary>
         public FindRelatedAccountsOutput()
         {
         }

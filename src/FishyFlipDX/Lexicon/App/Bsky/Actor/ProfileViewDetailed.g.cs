@@ -12,6 +12,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileViewDetailed"/> class.
         /// </summary>
+        public ProfileViewDetailed(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? description = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, App.Bsky.Actor.ProfileAssociated? associated = default, App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, App.Bsky.Actor.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default)
+        {
+            this.Did = did;
+            this.Handle = handle;
+            this.DisplayName = displayName;
+            this.Description = description;
+            this.Avatar = avatar;
+            this.Banner = banner;
+            this.FollowersCount = followersCount;
+            this.FollowsCount = followsCount;
+            this.PostsCount = postsCount;
+            this.Associated = associated;
+            this.JoinedViaStarterPack = joinedViaStarterPack;
+            this.IndexedAt = indexedAt;
+            this.CreatedAt = createdAt;
+            this.Viewer = viewer;
+            this.Labels = labels;
+            this.PinnedPost = pinnedPost;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfileViewDetailed"/> class.
+        /// </summary>
         public ProfileViewDetailed()
         {
         }

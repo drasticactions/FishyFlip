@@ -12,6 +12,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Initializes a new instance of the <see cref="JobStatus"/> class.
         /// </summary>
+        public JobStatus(string? jobId = default, FishyFlip.Models.ATDid? did = default, string? state = default, long? progress = default, Blob? blob = default, string? error = default, string? message = default)
+        {
+            this.JobId = jobId;
+            this.Did = did;
+            this.State = state;
+            this.Progress = progress;
+            this.Blob = blob;
+            this.Error = error;
+            this.Message = message;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobStatus"/> class.
+        /// </summary>
         public JobStatus()
         {
         }

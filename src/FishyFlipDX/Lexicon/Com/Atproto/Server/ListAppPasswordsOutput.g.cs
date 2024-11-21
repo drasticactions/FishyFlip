@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ListAppPasswordsOutput"/> class.
         /// </summary>
+        public ListAppPasswordsOutput(List<Com.Atproto.Server.AppPassword>? passwords = default)
+        {
+            this.Passwords = passwords;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListAppPasswordsOutput"/> class.
+        /// </summary>
         public ListAppPasswordsOutput()
         {
         }

@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordBlob"/> class.
         /// </summary>
+        public RecordBlob(string? cid = default, FishyFlip.Models.ATUri? recordUri = default)
+        {
+            this.Cid = cid;
+            this.RecordUri = recordUri;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecordBlob"/> class.
+        /// </summary>
         public RecordBlob()
         {
         }

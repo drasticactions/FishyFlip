@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAppPasswordInput"/> class.
         /// </summary>
+        public CreateAppPasswordInput(string? name = default, bool? privileged = default)
+        {
+            this.Name = name;
+            this.Privileged = privileged;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateAppPasswordInput"/> class.
+        /// </summary>
         public CreateAppPasswordInput()
         {
         }

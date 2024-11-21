@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Threadgate"/> class.
         /// </summary>
+        public Threadgate(FishyFlip.Models.ATUri? post, DateTime? createdAt, List<ATObject>? allow = default, List<FishyFlip.Models.ATUri>? hiddenReplies = default)
+        {
+            this.Post = post;
+            this.Allow = allow;
+            this.CreatedAt = createdAt;
+            this.HiddenReplies = hiddenReplies;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Threadgate"/> class.
+        /// </summary>
         public Threadgate()
         {
         }

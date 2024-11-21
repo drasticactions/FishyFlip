@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelerPolicies"/> class.
         /// </summary>
+        public LabelerPolicies(List<string>? labelValues = default, List<Com.Atproto.Label.LabelValueDefinition>? labelValueDefinitions = default)
+        {
+            this.LabelValues = labelValues;
+            this.LabelValueDefinitions = labelValueDefinitions;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelerPolicies"/> class.
+        /// </summary>
         public LabelerPolicies()
         {
         }

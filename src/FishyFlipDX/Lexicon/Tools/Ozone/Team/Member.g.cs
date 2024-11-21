@@ -12,6 +12,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Initializes a new instance of the <see cref="Member"/> class.
         /// </summary>
+        public Member(FishyFlip.Models.ATDid? did = default, bool? disabled = default, App.Bsky.Actor.ProfileViewDetailed? profile = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? lastUpdatedBy = default, string? role = default)
+        {
+            this.Did = did;
+            this.Disabled = disabled;
+            this.Profile = profile;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.LastUpdatedBy = lastUpdatedBy;
+            this.Role = role;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Member"/> class.
+        /// </summary>
         public Member()
         {
         }

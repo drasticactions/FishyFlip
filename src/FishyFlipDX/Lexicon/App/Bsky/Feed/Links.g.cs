@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Links"/> class.
         /// </summary>
+        public Links(string? privacyPolicy = default, string? termsOfService = default)
+        {
+            this.PrivacyPolicy = privacyPolicy;
+            this.TermsOfService = termsOfService;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Links"/> class.
+        /// </summary>
         public Links()
         {
         }

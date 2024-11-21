@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="DescribeServerOutput"/> class.
         /// </summary>
+        public DescribeServerOutput(bool? inviteCodeRequired = default, bool? phoneVerificationRequired = default, List<string>? availableUserDomains = default, Com.Atproto.Server.Links? links = default, Com.Atproto.Server.Contact? contact = default, FishyFlip.Models.ATDid? did = default)
+        {
+            this.InviteCodeRequired = inviteCodeRequired;
+            this.PhoneVerificationRequired = phoneVerificationRequired;
+            this.AvailableUserDomains = availableUserDomains;
+            this.Links = links;
+            this.Contact = contact;
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DescribeServerOutput"/> class.
+        /// </summary>
         public DescribeServerOutput()
         {
         }

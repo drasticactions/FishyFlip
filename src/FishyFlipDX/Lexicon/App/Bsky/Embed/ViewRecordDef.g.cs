@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewRecordDef"/> class.
         /// </summary>
+        public ViewRecordDef(ATObject? record = default)
+        {
+            this.Record = record;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewRecordDef"/> class.
+        /// </summary>
         public ViewRecordDef()
         {
         }

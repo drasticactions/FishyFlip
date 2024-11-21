@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="ByteSlice"/> class.
         /// </summary>
+        public ByteSlice(long? byteStart = default, long? byteEnd = default)
+        {
+            this.ByteStart = byteStart;
+            this.ByteEnd = byteEnd;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ByteSlice"/> class.
+        /// </summary>
         public ByteSlice()
         {
         }

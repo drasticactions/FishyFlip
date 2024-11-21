@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="LogDeleteMessage"/> class.
         /// </summary>
+        public LogDeleteMessage(string? rev = default, string? convoId = default, ATObject? message = default)
+        {
+            this.Rev = rev;
+            this.ConvoId = convoId;
+            this.Message = message;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogDeleteMessage"/> class.
+        /// </summary>
         public LogDeleteMessage()
         {
         }

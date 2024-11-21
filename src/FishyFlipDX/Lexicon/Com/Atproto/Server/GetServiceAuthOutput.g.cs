@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="GetServiceAuthOutput"/> class.
         /// </summary>
+        public GetServiceAuthOutput(string? token = default)
+        {
+            this.Token = token;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetServiceAuthOutput"/> class.
+        /// </summary>
         public GetServiceAuthOutput()
         {
         }

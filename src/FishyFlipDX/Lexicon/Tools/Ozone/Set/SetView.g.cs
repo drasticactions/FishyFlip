@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="SetView"/> class.
         /// </summary>
+        public SetView(string? name = default, string? description = default, long? setSize = default, DateTime? createdAt = default, DateTime? updatedAt = default)
+        {
+            this.Name = name;
+            this.Description = description;
+            this.SetSize = setSize;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SetView"/> class.
+        /// </summary>
         public SetView()
         {
         }

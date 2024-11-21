@@ -12,6 +12,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="Notification"/> class.
         /// </summary>
+        public Notification(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileView? author = default, string? reason = default, FishyFlip.Models.ATUri? reasonSubject = default, ATObject? record = default, bool? isRead = default, DateTime? indexedAt = default, List<Com.Atproto.Label.Label>? labels = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Author = author;
+            this.Reason = reason;
+            this.ReasonSubject = reasonSubject;
+            this.Record = record;
+            this.IsRead = isRead;
+            this.IndexedAt = indexedAt;
+            this.Labels = labels;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Notification"/> class.
+        /// </summary>
         public Notification()
         {
         }

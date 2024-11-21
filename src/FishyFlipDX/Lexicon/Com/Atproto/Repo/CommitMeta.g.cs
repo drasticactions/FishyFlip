@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="CommitMeta"/> class.
         /// </summary>
+        public CommitMeta(string? cid = default, string? rev = default)
+        {
+            this.Cid = cid;
+            this.Rev = rev;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommitMeta"/> class.
+        /// </summary>
         public CommitMeta()
         {
         }

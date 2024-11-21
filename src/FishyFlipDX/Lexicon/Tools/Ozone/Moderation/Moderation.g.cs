@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="Moderation"/> class.
         /// </summary>
+        public Moderation(Tools.Ozone.Moderation.SubjectStatusView? subjectStatus = default)
+        {
+            this.SubjectStatus = subjectStatus;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Moderation"/> class.
+        /// </summary>
         public Moderation()
         {
         }

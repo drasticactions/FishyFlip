@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonFeedPost"/> class.
         /// </summary>
+        public SkeletonFeedPost(FishyFlip.Models.ATUri? post = default, ATObject? reason = default, string? feedContext = default)
+        {
+            this.Post = post;
+            this.Reason = reason;
+            this.FeedContext = feedContext;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SkeletonFeedPost"/> class.
+        /// </summary>
         public SkeletonFeedPost()
         {
         }

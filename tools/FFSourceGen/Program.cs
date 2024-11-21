@@ -812,7 +812,7 @@ public partial class AppCommands
         return new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" }.Contains(propertyName) ? $"@{propertyName}" : propertyName;
     }
 
-    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputPropertiesFromProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
+    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputPropertiesFromProperties(ClassGeneration classGeneration, bool isExtensionMethod = false, bool includeCancellationToken = true)
     {
         var requiredProperties = new List<string>();
         var optionalProperties = new List<string>();
@@ -871,9 +871,12 @@ public partial class AppCommands
             requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
         }
 
-        optionalProperties.Add("CancellationToken cancellationToken = default");
+        if (includeCancellationToken)
+        {
+            optionalProperties.Add("CancellationToken cancellationToken = default");
+        }
 
-         return (requiredProperties, optionalProperties);
+        return (requiredProperties, optionalProperties);
     }
 
     private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
@@ -1277,6 +1280,7 @@ public partial class AppCommands
         sb.AppendLine($"    public partial class {cls.ClassName} : ATObject");
         sb.AppendLine("    {");
 
+        this.GenerateClassConstructor(sb, cls);
         this.GenerateEmptyClassConstructor(sb, cls.ClassName);
         this.GenerateCBorObjectClassConstructor(sb, cls);
         foreach (var property in cls.Properties)
@@ -1334,6 +1338,40 @@ public partial class AppCommands
         foreach (var property in cls.Properties)
         {
             sb.AppendLine($"            {property.CBorProperty}");
+        }
+        sb.AppendLine("        }");
+        sb.AppendLine();
+    }
+
+    private void GenerateClassConstructor(StringBuilder sb, ClassGeneration cls)
+    {
+        var (requiredProperties, optionalProperties) = this.FetchInputPropertiesFromProperties(cls, false, false);
+        var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+        if (inputProperties.Count == 0)
+        {
+            return;
+        }
+
+        sb.AppendLine();
+        sb.AppendLine("        /// <summary>");
+        sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{cls.ClassName}\"/> class.");
+        sb.AppendLine("        /// </summary>");
+        
+        sb.Append($"        public {cls.ClassName}(");
+        for (int i = 0; i < inputProperties.Count; i++)
+        {
+            sb.Append($"{inputProperties[i]}");
+            if (i < inputProperties.Count - 1)
+            {
+                sb.Append(", ");
+            }
+        }
+
+        sb.AppendLine(")");
+        sb.AppendLine("        {");
+        foreach (var property in cls.Properties)
+        {
+            sb.AppendLine($"            this.{property.PropertyName} = {PropertyNameToCSharpSafeValue(property.Key)};");
         }
         sb.AppendLine("        }");
         sb.AppendLine();

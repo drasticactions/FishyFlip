@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="UpsertOptionOutput"/> class.
         /// </summary>
+        public UpsertOptionOutput(Tools.Ozone.Setting.Option? option = default)
+        {
+            this.Option = option;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpsertOptionOutput"/> class.
+        /// </summary>
         public UpsertOptionOutput()
         {
         }

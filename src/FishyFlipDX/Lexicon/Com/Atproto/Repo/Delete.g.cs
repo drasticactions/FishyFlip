@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="Delete"/> class.
         /// </summary>
+        public Delete(string? collection = default, string? rkey = default)
+        {
+            this.Collection = collection;
+            this.Rkey = rkey;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Delete"/> class.
+        /// </summary>
         public Delete()
         {
         }

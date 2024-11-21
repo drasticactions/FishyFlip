@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ListRecordsOutput"/> class.
         /// </summary>
+        public ListRecordsOutput(string? cursor = default, List<Com.Atproto.Repo.Record>? records = default)
+        {
+            this.Cursor = cursor;
+            this.Records = records;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListRecordsOutput"/> class.
+        /// </summary>
         public ListRecordsOutput()
         {
         }

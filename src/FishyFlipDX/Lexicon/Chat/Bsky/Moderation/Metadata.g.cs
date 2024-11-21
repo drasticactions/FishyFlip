@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="Metadata"/> class.
         /// </summary>
+        public Metadata(long? messagesSent = default, long? messagesReceived = default, long? convos = default, long? convosStarted = default)
+        {
+            this.MessagesSent = messagesSent;
+            this.MessagesReceived = messagesReceived;
+            this.Convos = convos;
+            this.ConvosStarted = convosStarted;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Metadata"/> class.
+        /// </summary>
         public Metadata()
         {
         }

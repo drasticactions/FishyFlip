@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="SigDetail"/> class.
         /// </summary>
+        public SigDetail(string? property = default, string? value = default)
+        {
+            this.Property = property;
+            this.Value = value;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SigDetail"/> class.
+        /// </summary>
         public SigDetail()
         {
         }

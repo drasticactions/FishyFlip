@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUnreadCountOutput"/> class.
         /// </summary>
+        public GetUnreadCountOutput(long? count = default)
+        {
+            this.Count = count;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetUnreadCountOutput"/> class.
+        /// </summary>
         public GetUnreadCountOutput()
         {
         }

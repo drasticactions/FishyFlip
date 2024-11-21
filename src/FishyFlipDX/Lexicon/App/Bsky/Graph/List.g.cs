@@ -15,6 +15,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="List"/> class.
         /// </summary>
+        public List(string? purpose, string? name, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, Com.Atproto.Label.SelfLabels? labels = default)
+        {
+            this.Purpose = purpose;
+            this.Name = name;
+            this.Description = description;
+            this.DescriptionFacets = descriptionFacets;
+            this.Avatar = avatar;
+            this.Labels = labels;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="List"/> class.
+        /// </summary>
         public List()
         {
         }

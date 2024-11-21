@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryEventsOutput"/> class.
         /// </summary>
+        public QueryEventsOutput(string? cursor = default, List<Tools.Ozone.Moderation.ModEventView>? events = default)
+        {
+            this.Cursor = cursor;
+            this.Events = events;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueryEventsOutput"/> class.
+        /// </summary>
         public QueryEventsOutput()
         {
         }

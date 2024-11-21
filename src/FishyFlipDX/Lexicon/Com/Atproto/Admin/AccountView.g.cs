@@ -12,6 +12,26 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountView"/> class.
         /// </summary>
+        public AccountView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? email = default, List<ATObject>? relatedRecords = default, DateTime? indexedAt = default, Com.Atproto.Server.InviteCode? invitedBy = default, List<Com.Atproto.Server.InviteCode>? invites = default, bool? invitesDisabled = default, DateTime? emailConfirmedAt = default, string? inviteNote = default, DateTime? deactivatedAt = default, List<Com.Atproto.Admin.ThreatSignature>? threatSignatures = default)
+        {
+            this.Did = did;
+            this.Handle = handle;
+            this.Email = email;
+            this.RelatedRecords = relatedRecords;
+            this.IndexedAt = indexedAt;
+            this.InvitedBy = invitedBy;
+            this.Invites = invites;
+            this.InvitesDisabled = invitesDisabled;
+            this.EmailConfirmedAt = emailConfirmedAt;
+            this.InviteNote = inviteNote;
+            this.DeactivatedAt = deactivatedAt;
+            this.ThreatSignatures = threatSignatures;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountView"/> class.
+        /// </summary>
         public AccountView()
         {
         }

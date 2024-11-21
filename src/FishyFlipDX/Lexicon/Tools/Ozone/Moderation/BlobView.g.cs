@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="BlobView"/> class.
         /// </summary>
+        public BlobView(string? cid = default, string? mimeType = default, long? size = default, DateTime? createdAt = default, ATObject? details = default, Tools.Ozone.Moderation.Moderation? moderation = default)
+        {
+            this.Cid = cid;
+            this.MimeType = mimeType;
+            this.Size = size;
+            this.CreatedAt = createdAt;
+            this.Details = details;
+            this.Moderation = moderation;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlobView"/> class.
+        /// </summary>
         public BlobView()
         {
         }

@@ -15,6 +15,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="Profile"/> class.
         /// </summary>
+        public Profile(string? displayName = default, string? description = default, Blob? avatar = default, Blob? banner = default, Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default)
+        {
+            this.DisplayName = displayName;
+            this.Description = description;
+            this.Avatar = avatar;
+            this.Banner = banner;
+            this.Labels = labels;
+            this.JoinedViaStarterPack = joinedViaStarterPack;
+            this.PinnedPost = pinnedPost;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Profile"/> class.
+        /// </summary>
         public Profile()
         {
         }

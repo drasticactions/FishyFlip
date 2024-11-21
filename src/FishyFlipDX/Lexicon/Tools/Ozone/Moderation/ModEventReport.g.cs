@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventReport"/> class.
         /// </summary>
+        public ModEventReport(string? comment = default, bool? isReporterMuted = default, string? reportType = default)
+        {
+            this.Comment = comment;
+            this.IsReporterMuted = isReporterMuted;
+            this.ReportType = reportType;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventReport"/> class.
+        /// </summary>
         public ModEventReport()
         {
         }

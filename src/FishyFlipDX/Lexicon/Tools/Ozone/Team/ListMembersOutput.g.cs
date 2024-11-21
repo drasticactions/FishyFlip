@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Initializes a new instance of the <see cref="ListMembersOutput"/> class.
         /// </summary>
+        public ListMembersOutput(string? cursor = default, List<Tools.Ozone.Team.Member>? members = default)
+        {
+            this.Cursor = cursor;
+            this.Members = members;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListMembersOutput"/> class.
+        /// </summary>
         public ListMembersOutput()
         {
         }

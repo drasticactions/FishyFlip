@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateRecordInput"/> class.
         /// </summary>
+        public CreateRecordInput(FishyFlip.Models.ATIdentifier? repo = default, string? collection = default, string? rkey = default, bool? validate = default, ATObject? record = default, string? swapCommit = default)
+        {
+            this.Repo = repo;
+            this.Collection = collection;
+            this.Rkey = rkey;
+            this.Validate = validate;
+            this.Record = record;
+            this.SwapCommit = swapCommit;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateRecordInput"/> class.
+        /// </summary>
         public CreateRecordInput()
         {
         }

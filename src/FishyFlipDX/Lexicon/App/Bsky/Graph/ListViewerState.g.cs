@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="ListViewerState"/> class.
         /// </summary>
+        public ListViewerState(bool? muted = default, FishyFlip.Models.ATUri? blocked = default)
+        {
+            this.Muted = muted;
+            this.Blocked = blocked;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListViewerState"/> class.
+        /// </summary>
         public ListViewerState()
         {
         }

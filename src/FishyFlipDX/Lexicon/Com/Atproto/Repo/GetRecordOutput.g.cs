@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRecordOutput"/> class.
         /// </summary>
+        public GetRecordOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? value = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Value = value;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetRecordOutput"/> class.
+        /// </summary>
         public GetRecordOutput()
         {
         }

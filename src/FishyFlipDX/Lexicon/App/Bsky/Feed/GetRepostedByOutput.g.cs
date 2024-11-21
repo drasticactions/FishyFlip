@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRepostedByOutput"/> class.
         /// </summary>
+        public GetRepostedByOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<App.Bsky.Actor.ProfileView>? repostedBy = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Cursor = cursor;
+            this.RepostedBy = repostedBy;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetRepostedByOutput"/> class.
+        /// </summary>
         public GetRepostedByOutput()
         {
         }

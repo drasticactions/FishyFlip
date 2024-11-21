@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="GetHeadOutput"/> class.
         /// </summary>
+        public GetHeadOutput(string? root = default)
+        {
+            this.Root = root;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetHeadOutput"/> class.
+        /// </summary>
         public GetHeadOutput()
         {
         }

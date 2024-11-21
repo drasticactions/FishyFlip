@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteTemplateInput"/> class.
         /// </summary>
+        public DeleteTemplateInput(string? id = default)
+        {
+            this.Id = id;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteTemplateInput"/> class.
+        /// </summary>
         public DeleteTemplateInput()
         {
         }

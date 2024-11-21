@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSuggestedFollowsByActorOutput"/> class.
         /// </summary>
+        public GetSuggestedFollowsByActorOutput(List<App.Bsky.Actor.ProfileView>? suggestions = default, bool? isFallback = default)
+        {
+            this.Suggestions = suggestions;
+            this.IsFallback = isFallback;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetSuggestedFollowsByActorOutput"/> class.
+        /// </summary>
         public GetSuggestedFollowsByActorOutput()
         {
         }

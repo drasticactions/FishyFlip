@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInviteCodeOutput"/> class.
         /// </summary>
+        public CreateInviteCodeOutput(string? code = default)
+        {
+            this.Code = code;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateInviteCodeOutput"/> class.
+        /// </summary>
         public CreateInviteCodeOutput()
         {
         }

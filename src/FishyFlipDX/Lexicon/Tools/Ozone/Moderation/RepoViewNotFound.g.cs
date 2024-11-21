@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RepoViewNotFound"/> class.
         /// </summary>
+        public RepoViewNotFound(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RepoViewNotFound"/> class.
+        /// </summary>
         public RepoViewNotFound()
         {
         }

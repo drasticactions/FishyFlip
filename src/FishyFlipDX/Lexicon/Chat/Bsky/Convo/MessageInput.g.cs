@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageInput"/> class.
         /// </summary>
+        public MessageInput(string? text = default, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Embed.EmbedRecord? embed = default)
+        {
+            this.Text = text;
+            this.Facets = facets;
+            this.Embed = embed;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageInput"/> class.
+        /// </summary>
         public MessageInput()
         {
         }

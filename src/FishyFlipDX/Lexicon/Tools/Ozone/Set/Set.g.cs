@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="Set"/> class.
         /// </summary>
+        public Set(string? name = default, string? description = default)
+        {
+            this.Name = name;
+            this.Description = description;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Set"/> class.
+        /// </summary>
         public Set()
         {
         }

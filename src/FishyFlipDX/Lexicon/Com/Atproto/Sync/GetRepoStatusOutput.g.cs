@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRepoStatusOutput"/> class.
         /// </summary>
+        public GetRepoStatusOutput(FishyFlip.Models.ATDid? did = default, bool? active = default, string? status = default, string? rev = default)
+        {
+            this.Did = did;
+            this.Active = active;
+            this.Status = status;
+            this.Rev = rev;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetRepoStatusOutput"/> class.
+        /// </summary>
         public GetRepoStatusOutput()
         {
         }

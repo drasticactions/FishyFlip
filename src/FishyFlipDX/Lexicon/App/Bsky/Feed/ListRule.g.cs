@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ListRule"/> class.
         /// </summary>
+        public ListRule(FishyFlip.Models.ATUri? list = default)
+        {
+            this.List = list;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListRule"/> class.
+        /// </summary>
         public ListRule()
         {
         }

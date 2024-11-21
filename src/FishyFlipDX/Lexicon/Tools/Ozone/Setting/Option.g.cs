@@ -12,6 +12,24 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="Option"/> class.
         /// </summary>
+        public Option(string? key = default, FishyFlip.Models.ATDid? did = default, ATObject? value = default, string? description = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? managerRole = default, string? scope = default, FishyFlip.Models.ATDid? createdBy = default, FishyFlip.Models.ATDid? lastUpdatedBy = default)
+        {
+            this.Key = key;
+            this.Did = did;
+            this.Value = value;
+            this.Description = description;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.ManagerRole = managerRole;
+            this.Scope = scope;
+            this.CreatedBy = createdBy;
+            this.LastUpdatedBy = lastUpdatedBy;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Option"/> class.
+        /// </summary>
         public Option()
         {
         }

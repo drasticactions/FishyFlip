@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="Facet"/> class.
         /// </summary>
+        public Facet(App.Bsky.Richtext.ByteSlice? index = default, List<ATObject>? features = default)
+        {
+            this.Index = index;
+            this.Features = features;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Facet"/> class.
+        /// </summary>
         public Facet()
         {
         }

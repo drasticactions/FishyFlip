@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventAcknowledge"/> class.
         /// </summary>
+        public ModEventAcknowledge(string? comment = default)
+        {
+            this.Comment = comment;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventAcknowledge"/> class.
+        /// </summary>
         public ModEventAcknowledge()
         {
         }

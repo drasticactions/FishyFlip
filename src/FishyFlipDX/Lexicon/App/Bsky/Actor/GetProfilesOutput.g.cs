@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="GetProfilesOutput"/> class.
         /// </summary>
+        public GetProfilesOutput(List<App.Bsky.Actor.ProfileViewDetailed>? profiles = default)
+        {
+            this.Profiles = profiles;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetProfilesOutput"/> class.
+        /// </summary>
         public GetProfilesOutput()
         {
         }

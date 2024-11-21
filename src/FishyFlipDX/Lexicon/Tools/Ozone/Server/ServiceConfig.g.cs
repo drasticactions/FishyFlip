@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceConfig"/> class.
         /// </summary>
+        public ServiceConfig(string? url = default)
+        {
+            this.Url = url;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServiceConfig"/> class.
+        /// </summary>
         public ServiceConfig()
         {
         }

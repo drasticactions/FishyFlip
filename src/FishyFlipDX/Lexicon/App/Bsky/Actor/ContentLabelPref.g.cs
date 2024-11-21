@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentLabelPref"/> class.
         /// </summary>
+        public ContentLabelPref(FishyFlip.Models.ATDid? labelerDid = default, string? label = default, string? visibility = default)
+        {
+            this.LabelerDid = labelerDid;
+            this.Label = label;
+            this.Visibility = visibility;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContentLabelPref"/> class.
+        /// </summary>
         public ContentLabelPref()
         {
         }

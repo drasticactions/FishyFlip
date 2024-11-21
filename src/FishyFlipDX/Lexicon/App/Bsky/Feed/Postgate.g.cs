@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Postgate"/> class.
         /// </summary>
+        public Postgate(DateTime? createdAt, FishyFlip.Models.ATUri? post, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default)
+        {
+            this.CreatedAt = createdAt;
+            this.Post = post;
+            this.DetachedEmbeddingUris = detachedEmbeddingUris;
+            this.EmbeddingRules = embeddingRules;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Postgate"/> class.
+        /// </summary>
         public Postgate()
         {
         }

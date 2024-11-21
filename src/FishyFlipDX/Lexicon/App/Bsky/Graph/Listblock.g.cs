@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Listblock"/> class.
         /// </summary>
+        public Listblock(FishyFlip.Models.ATUri? subject, DateTime? createdAt)
+        {
+            this.Subject = subject;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Listblock"/> class.
+        /// </summary>
         public Listblock()
         {
         }

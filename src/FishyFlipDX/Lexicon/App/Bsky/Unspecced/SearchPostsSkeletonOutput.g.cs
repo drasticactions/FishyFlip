@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchPostsSkeletonOutput"/> class.
         /// </summary>
+        public SearchPostsSkeletonOutput(string? cursor = default, long? hitsTotal = default, List<App.Bsky.Unspecced.SkeletonSearchPost>? posts = default)
+        {
+            this.Cursor = cursor;
+            this.HitsTotal = hitsTotal;
+            this.Posts = posts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchPostsSkeletonOutput"/> class.
+        /// </summary>
         public SearchPostsSkeletonOutput()
         {
         }

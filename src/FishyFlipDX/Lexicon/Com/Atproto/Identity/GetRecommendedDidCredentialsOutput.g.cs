@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRecommendedDidCredentialsOutput"/> class.
         /// </summary>
+        public GetRecommendedDidCredentialsOutput(List<string>? rotationKeys = default, List<string>? alsoKnownAs = default, ATObject? verificationMethods = default, ATObject? services = default)
+        {
+            this.RotationKeys = rotationKeys;
+            this.AlsoKnownAs = alsoKnownAs;
+            this.VerificationMethods = verificationMethods;
+            this.Services = services;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetRecommendedDidCredentialsOutput"/> class.
+        /// </summary>
         public GetRecommendedDidCredentialsOutput()
         {
         }

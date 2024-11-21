@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Repost"/> class.
         /// </summary>
+        public Repost(Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt)
+        {
+            this.Subject = subject;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Repost"/> class.
+        /// </summary>
         public Repost()
         {
         }

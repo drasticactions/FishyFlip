@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
         /// </summary>
+        public GetConfigOutput(Tools.Ozone.Server.ServiceConfig? appview = default, Tools.Ozone.Server.ServiceConfig? pds = default, Tools.Ozone.Server.ServiceConfig? blobDivert = default, Tools.Ozone.Server.ServiceConfig? chat = default, Tools.Ozone.Server.ViewerConfig? viewer = default)
+        {
+            this.Appview = appview;
+            this.Pds = pds;
+            this.BlobDivert = blobDivert;
+            this.Chat = chat;
+            this.Viewer = viewer;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
+        /// </summary>
         public GetConfigOutput()
         {
         }

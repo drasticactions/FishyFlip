@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="NotifyOfUpdateInput"/> class.
         /// </summary>
+        public NotifyOfUpdateInput(string? hostname = default)
+        {
+            this.Hostname = hostname;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotifyOfUpdateInput"/> class.
+        /// </summary>
         public NotifyOfUpdateInput()
         {
         }

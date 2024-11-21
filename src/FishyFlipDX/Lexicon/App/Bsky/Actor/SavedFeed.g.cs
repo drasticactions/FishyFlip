@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="SavedFeed"/> class.
         /// </summary>
+        public SavedFeed(string? id = default, string? type = default, string? value = default, bool? pinned = default)
+        {
+            this.Id = id;
+            this.TypeValue = type;
+            this.Value = value;
+            this.Pinned = pinned;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SavedFeed"/> class.
+        /// </summary>
         public SavedFeed()
         {
         }

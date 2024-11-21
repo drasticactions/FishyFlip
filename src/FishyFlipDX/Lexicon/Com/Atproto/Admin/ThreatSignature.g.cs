@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreatSignature"/> class.
         /// </summary>
+        public ThreatSignature(string? property = default, string? value = default)
+        {
+            this.Property = property;
+            this.Value = value;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreatSignature"/> class.
+        /// </summary>
         public ThreatSignature()
         {
         }

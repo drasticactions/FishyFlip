@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Repo"/> class.
         /// </summary>
+        public Repo(FishyFlip.Models.ATDid? did = default, string? head = default, string? rev = default, bool? active = default, string? status = default)
+        {
+            this.Did = did;
+            this.Head = head;
+            this.Rev = rev;
+            this.Active = active;
+            this.Status = status;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Repo"/> class.
+        /// </summary>
         public Repo()
         {
         }

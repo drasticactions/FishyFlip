@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="Contact"/> class.
         /// </summary>
+        public Contact(string? email = default)
+        {
+            this.Email = email;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Contact"/> class.
+        /// </summary>
         public Contact()
         {
         }

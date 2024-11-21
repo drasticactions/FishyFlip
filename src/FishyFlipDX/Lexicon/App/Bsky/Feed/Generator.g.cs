@@ -15,6 +15,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Generator"/> class.
         /// </summary>
+        public Generator(FishyFlip.Models.ATDid? did, string? displayName, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, Com.Atproto.Label.SelfLabels? labels = default)
+        {
+            this.Did = did;
+            this.DisplayName = displayName;
+            this.Description = description;
+            this.DescriptionFacets = descriptionFacets;
+            this.Avatar = avatar;
+            this.AcceptsInteractions = acceptsInteractions;
+            this.Labels = labels;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Generator"/> class.
+        /// </summary>
         public Generator()
         {
         }

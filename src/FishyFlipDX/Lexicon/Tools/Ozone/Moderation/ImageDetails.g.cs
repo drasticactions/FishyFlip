@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageDetails"/> class.
         /// </summary>
+        public ImageDetails(long? width = default, long? height = default)
+        {
+            this.Width = width;
+            this.Height = height;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImageDetails"/> class.
+        /// </summary>
         public ImageDetails()
         {
         }

@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedViewPref"/> class.
         /// </summary>
+        public FeedViewPref(string? feed = default, bool? hideReplies = default, bool? hideRepliesByUnfollowed = default, long? hideRepliesByLikeCount = default, bool? hideReposts = default, bool? hideQuotePosts = default)
+        {
+            this.Feed = feed;
+            this.HideReplies = hideReplies;
+            this.HideRepliesByUnfollowed = hideRepliesByUnfollowed;
+            this.HideRepliesByLikeCount = hideRepliesByLikeCount;
+            this.HideReposts = hideReposts;
+            this.HideQuotePosts = hideQuotePosts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FeedViewPref"/> class.
+        /// </summary>
         public FeedViewPref()
         {
         }

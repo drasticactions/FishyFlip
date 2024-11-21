@@ -15,6 +15,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Post"/> class.
         /// </summary>
+        public Post(string? text, DateTime? createdAt, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Feed.ReplyRefDef? reply = default, ATObject? embed = default, List<string>? langs = default, Com.Atproto.Label.SelfLabels? labels = default, List<string>? tags = default)
+        {
+            this.Text = text;
+            this.Facets = facets;
+            this.Reply = reply;
+            this.Embed = embed;
+            this.Langs = langs;
+            this.Labels = labels;
+            this.Tags = tags;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Post"/> class.
+        /// </summary>
         public Post()
         {
         }

@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDetached"/> class.
         /// </summary>
+        public ViewDetached(FishyFlip.Models.ATUri? uri = default, bool? detached = default)
+        {
+            this.Uri = uri;
+            this.Detached = detached;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewDetached"/> class.
+        /// </summary>
         public ViewDetached()
         {
         }

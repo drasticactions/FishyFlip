@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="HiddenPostsPref"/> class.
         /// </summary>
+        public HiddenPostsPref(List<FishyFlip.Models.ATUri>? items = default)
+        {
+            this.Items = items;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HiddenPostsPref"/> class.
+        /// </summary>
         public HiddenPostsPref()
         {
         }

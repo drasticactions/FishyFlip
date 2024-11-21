@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="GetLatestCommitOutput"/> class.
         /// </summary>
+        public GetLatestCommitOutput(string? cid = default, string? rev = default)
+        {
+            this.Cid = cid;
+            this.Rev = rev;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetLatestCommitOutput"/> class.
+        /// </summary>
         public GetLatestCommitOutput()
         {
         }

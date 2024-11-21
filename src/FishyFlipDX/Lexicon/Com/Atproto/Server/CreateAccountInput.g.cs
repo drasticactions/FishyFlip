@@ -12,6 +12,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAccountInput"/> class.
         /// </summary>
+        public CreateAccountInput(string? email = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default)
+        {
+            this.Email = email;
+            this.Handle = handle;
+            this.Did = did;
+            this.InviteCode = inviteCode;
+            this.VerificationCode = verificationCode;
+            this.VerificationPhone = verificationPhone;
+            this.Password = password;
+            this.RecoveryKey = recoveryKey;
+            this.PlcOp = plcOp;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateAccountInput"/> class.
+        /// </summary>
         public CreateAccountInput()
         {
         }

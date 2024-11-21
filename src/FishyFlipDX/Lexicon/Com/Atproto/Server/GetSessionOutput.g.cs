@@ -12,6 +12,22 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSessionOutput"/> class.
         /// </summary>
+        public GetSessionOutput(FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, string? email = default, bool? emailConfirmed = default, bool? emailAuthFactor = default, FishyFlip.Models.DidDoc? didDoc = default, bool? active = default, string? status = default)
+        {
+            this.Handle = handle;
+            this.Did = did;
+            this.Email = email;
+            this.EmailConfirmed = emailConfirmed;
+            this.EmailAuthFactor = emailAuthFactor;
+            this.DidDoc = didDoc;
+            this.Active = active;
+            this.Status = status;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetSessionOutput"/> class.
+        /// </summary>
         public GetSessionOutput()
         {
         }

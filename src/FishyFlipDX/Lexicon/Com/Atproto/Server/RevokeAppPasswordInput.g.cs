@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RevokeAppPasswordInput"/> class.
         /// </summary>
+        public RevokeAppPasswordInput(string? name = default)
+        {
+            this.Name = name;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RevokeAppPasswordInput"/> class.
+        /// </summary>
         public RevokeAppPasswordInput()
         {
         }

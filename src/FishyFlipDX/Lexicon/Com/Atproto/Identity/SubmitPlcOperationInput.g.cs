@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmitPlcOperationInput"/> class.
         /// </summary>
+        public SubmitPlcOperationInput(ATObject? operation = default)
+        {
+            this.Operation = operation;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubmitPlcOperationInput"/> class.
+        /// </summary>
         public SubmitPlcOperationInput()
         {
         }

@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="SendEmailInput"/> class.
         /// </summary>
+        public SendEmailInput(FishyFlip.Models.ATDid? recipientDid = default, string? content = default, string? subject = default, FishyFlip.Models.ATDid? senderDid = default, string? comment = default)
+        {
+            this.RecipientDid = recipientDid;
+            this.Content = content;
+            this.Subject = subject;
+            this.SenderDid = senderDid;
+            this.Comment = comment;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SendEmailInput"/> class.
+        /// </summary>
         public SendEmailInput()
         {
         }

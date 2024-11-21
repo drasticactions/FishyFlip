@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckSignupQueueOutput"/> class.
         /// </summary>
+        public CheckSignupQueueOutput(bool? activated = default, long? placeInQueue = default, long? estimatedTimeMs = default)
+        {
+            this.Activated = activated;
+            this.PlaceInQueue = placeInQueue;
+            this.EstimatedTimeMs = estimatedTimeMs;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CheckSignupQueueOutput"/> class.
+        /// </summary>
         public CheckSignupQueueOutput()
         {
         }

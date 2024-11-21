@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SendInteractionsInput"/> class.
         /// </summary>
+        public SendInteractionsInput(List<App.Bsky.Feed.Interaction>? interactions = default)
+        {
+            this.Interactions = interactions;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SendInteractionsInput"/> class.
+        /// </summary>
         public SendInteractionsInput()
         {
         }

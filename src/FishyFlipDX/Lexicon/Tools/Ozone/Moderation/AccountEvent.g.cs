@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountEvent"/> class.
         /// </summary>
+        public AccountEvent(string? comment = default, bool? active = default, string? status = default, DateTime? timestamp = default)
+        {
+            this.Comment = comment;
+            this.Active = active;
+            this.Status = status;
+            this.Timestamp = timestamp;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountEvent"/> class.
+        /// </summary>
         public AccountEvent()
         {
         }

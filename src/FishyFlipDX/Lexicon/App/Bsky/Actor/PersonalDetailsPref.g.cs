@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonalDetailsPref"/> class.
         /// </summary>
+        public PersonalDetailsPref(DateTime? birthDate = default)
+        {
+            this.BirthDate = birthDate;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PersonalDetailsPref"/> class.
+        /// </summary>
         public PersonalDetailsPref()
         {
         }

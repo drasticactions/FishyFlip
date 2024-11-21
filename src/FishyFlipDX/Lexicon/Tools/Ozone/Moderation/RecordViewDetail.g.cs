@@ -12,6 +12,22 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordViewDetail"/> class.
         /// </summary>
+        public RecordViewDetail(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? value = default, List<Tools.Ozone.Moderation.BlobView>? blobs = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default, Tools.Ozone.Moderation.ModerationDetail? moderation = default, Tools.Ozone.Moderation.RepoView? repo = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Value = value;
+            this.Blobs = blobs;
+            this.Labels = labels;
+            this.IndexedAt = indexedAt;
+            this.Moderation = moderation;
+            this.Repo = repo;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecordViewDetail"/> class.
+        /// </summary>
         public RecordViewDetail()
         {
         }

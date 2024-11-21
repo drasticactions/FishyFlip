@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetMessageContextOutput"/> class.
         /// </summary>
+        public GetMessageContextOutput(List<ATObject>? messages = default)
+        {
+            this.Messages = messages;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetMessageContextOutput"/> class.
+        /// </summary>
         public GetMessageContextOutput()
         {
         }

@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateAccountPasswordInput"/> class.
         /// </summary>
+        public UpdateAccountPasswordInput(FishyFlip.Models.ATDid? did = default, string? password = default)
+        {
+            this.Did = did;
+            this.Password = password;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateAccountPasswordInput"/> class.
+        /// </summary>
         public UpdateAccountPasswordInput()
         {
         }

@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="BlockedAuthor"/> class.
         /// </summary>
+        public BlockedAuthor(FishyFlip.Models.ATDid? did = default, App.Bsky.Actor.ViewerState? viewer = default)
+        {
+            this.Did = did;
+            this.Viewer = viewer;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlockedAuthor"/> class.
+        /// </summary>
         public BlockedAuthor()
         {
         }

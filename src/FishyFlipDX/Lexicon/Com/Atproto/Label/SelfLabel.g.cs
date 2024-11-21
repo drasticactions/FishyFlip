@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="SelfLabel"/> class.
         /// </summary>
+        public SelfLabel(string? val = default)
+        {
+            this.Val = val;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelfLabel"/> class.
+        /// </summary>
         public SelfLabel()
         {
         }

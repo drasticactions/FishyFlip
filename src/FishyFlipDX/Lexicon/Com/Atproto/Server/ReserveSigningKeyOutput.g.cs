@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ReserveSigningKeyOutput"/> class.
         /// </summary>
+        public ReserveSigningKeyOutput(string? signingKey = default)
+        {
+            this.SigningKey = signingKey;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReserveSigningKeyOutput"/> class.
+        /// </summary>
         public ReserveSigningKeyOutput()
         {
         }

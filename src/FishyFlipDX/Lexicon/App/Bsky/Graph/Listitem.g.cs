@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Listitem"/> class.
         /// </summary>
+        public Listitem(FishyFlip.Models.ATDid? subject, FishyFlip.Models.ATUri? list, DateTime? createdAt)
+        {
+            this.Subject = subject;
+            this.List = list;
+            this.CreatedAt = createdAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Listitem"/> class.
+        /// </summary>
         public Listitem()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRecordsOutput"/> class.
         /// </summary>
+        public GetRecordsOutput(List<ATObject>? records = default)
+        {
+            this.Records = records;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetRecordsOutput"/> class.
+        /// </summary>
         public GetRecordsOutput()
         {
         }

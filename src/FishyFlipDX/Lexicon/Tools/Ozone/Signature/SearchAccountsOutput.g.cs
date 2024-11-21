@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchAccountsOutput"/> class.
         /// </summary>
+        public SearchAccountsOutput(string? cursor = default, List<Com.Atproto.Admin.AccountView>? accounts = default)
+        {
+            this.Cursor = cursor;
+            this.Accounts = accounts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchAccountsOutput"/> class.
+        /// </summary>
         public SearchAccountsOutput()
         {
         }

@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="EmitEventInput"/> class.
         /// </summary>
+        public EmitEventInput(ATObject? @event = default, ATObject? subject = default, List<string>? subjectBlobCids = default, FishyFlip.Models.ATDid? createdBy = default)
+        {
+            this.Event = @event;
+            this.Subject = subject;
+            this.SubjectBlobCids = subjectBlobCids;
+            this.CreatedBy = createdBy;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmitEventInput"/> class.
+        /// </summary>
         public EmitEventInput()
         {
         }
