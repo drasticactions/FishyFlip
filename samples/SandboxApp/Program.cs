@@ -27,19 +27,3 @@ var atProtocolBuilder = new ATProtocolBuilder()
  .WithInstanceUrl(new Uri("https://puffball.us-east.host.bsky.network"))
  .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
-
-var checkoutResult = await atProtocol.Sync.GetRepoAsync(ATDid.Create("did:plc:6d3q55s45v6o57gwrxnwzhlz")!, HandleProgressStatus);
-
-async void HandleProgressStatus(CarProgressStatusEvent e)
-{
- var cid = e.Cid;
- var bytes = e.Bytes;
- var cborObject = CBORObject.DecodeFromBytes(bytes);
- if (cborObject.IsATObject())
- {
-  var record = cborObject.ToATObject();
-
-  // Print the record as JSON.
-  Console.WriteLine($"Record: {record.ToJson()}");
- }
-}
