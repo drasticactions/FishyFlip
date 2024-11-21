@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="Link"/> class.
         /// </summary>
+        public Link(string? uri = default)
+        {
+            this.Uri = uri;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Link"/> class.
+        /// </summary>
         public Link()
         {
         }

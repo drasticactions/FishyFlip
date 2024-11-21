@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="Tag"/> class.
         /// </summary>
+        public Tag(string? tag = default)
+        {
+            this.TagValue = tag;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tag"/> class.
+        /// </summary>
         public Tag()
         {
         }

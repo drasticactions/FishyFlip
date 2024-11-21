@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSessionInput"/> class.
         /// </summary>
+        public CreateSessionInput(string? identifier = default, string? password = default, string? authFactorToken = default)
+        {
+            this.Identifier = identifier;
+            this.Password = password;
+            this.AuthFactorToken = authFactorToken;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateSessionInput"/> class.
+        /// </summary>
         public CreateSessionInput()
         {
         }

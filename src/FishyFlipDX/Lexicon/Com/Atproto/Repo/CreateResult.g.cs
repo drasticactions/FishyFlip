@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateResult"/> class.
         /// </summary>
+        public CreateResult(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? validationStatus = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.ValidationStatus = validationStatus;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateResult"/> class.
+        /// </summary>
         public CreateResult()
         {
         }

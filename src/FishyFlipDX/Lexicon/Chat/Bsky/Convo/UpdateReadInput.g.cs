@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateReadInput"/> class.
         /// </summary>
+        public UpdateReadInput(string? convoId = default, string? messageId = default)
+        {
+            this.ConvoId = convoId;
+            this.MessageId = messageId;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateReadInput"/> class.
+        /// </summary>
         public UpdateReadInput()
         {
         }

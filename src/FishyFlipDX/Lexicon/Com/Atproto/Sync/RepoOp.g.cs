@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="RepoOp"/> class.
         /// </summary>
+        public RepoOp(string? action = default, string? path = default, Ipfs.Cid? cid = default)
+        {
+            this.Action = action;
+            this.Path = path;
+            this.Cid = cid;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RepoOp"/> class.
+        /// </summary>
         public RepoOp()
         {
         }

@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateActorAccessInput"/> class.
         /// </summary>
+        public UpdateActorAccessInput(FishyFlip.Models.ATDid? actor = default, bool? allowAccess = default, string? @ref = default)
+        {
+            this.Actor = actor;
+            this.AllowAccess = allowAccess;
+            this.Ref = @ref;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateActorAccessInput"/> class.
+        /// </summary>
         public UpdateActorAccessInput()
         {
         }

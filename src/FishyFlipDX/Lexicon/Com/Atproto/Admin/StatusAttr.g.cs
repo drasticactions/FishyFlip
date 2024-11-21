@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="StatusAttr"/> class.
         /// </summary>
+        public StatusAttr(bool? applied = default, string? @ref = default)
+        {
+            this.Applied = applied;
+            this.Ref = @ref;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StatusAttr"/> class.
+        /// </summary>
         public StatusAttr()
         {
         }

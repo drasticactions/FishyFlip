@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadViewPref"/> class.
         /// </summary>
+        public ThreadViewPref(string? sort = default, bool? prioritizeFollowedUsers = default)
+        {
+            this.Sort = sort;
+            this.PrioritizeFollowedUsers = prioritizeFollowedUsers;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadViewPref"/> class.
+        /// </summary>
         public ThreadViewPref()
         {
         }

@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="BskyAppProgressGuide"/> class.
         /// </summary>
+        public BskyAppProgressGuide(string? guide = default)
+        {
+            this.Guide = guide;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BskyAppProgressGuide"/> class.
+        /// </summary>
         public BskyAppProgressGuide()
         {
         }

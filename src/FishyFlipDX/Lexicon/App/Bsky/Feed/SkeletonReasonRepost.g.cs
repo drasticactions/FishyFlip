@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonReasonRepost"/> class.
         /// </summary>
+        public SkeletonReasonRepost(FishyFlip.Models.ATUri? repost = default)
+        {
+            this.Repost = repost;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SkeletonReasonRepost"/> class.
+        /// </summary>
         public SkeletonReasonRepost()
         {
         }

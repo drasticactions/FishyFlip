@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="UnmuteThreadInput"/> class.
         /// </summary>
+        public UnmuteThreadInput(FishyFlip.Models.ATUri? root = default)
+        {
+            this.Root = root;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnmuteThreadInput"/> class.
+        /// </summary>
         public UnmuteThreadInput()
         {
         }

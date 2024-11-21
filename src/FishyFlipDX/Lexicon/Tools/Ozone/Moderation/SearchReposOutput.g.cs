@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchReposOutput"/> class.
         /// </summary>
+        public SearchReposOutput(string? cursor = default, List<Tools.Ozone.Moderation.RepoView>? repos = default)
+        {
+            this.Cursor = cursor;
+            this.Repos = repos;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchReposOutput"/> class.
+        /// </summary>
         public SearchReposOutput()
         {
         }

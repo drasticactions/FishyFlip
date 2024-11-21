@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteMemberInput"/> class.
         /// </summary>
+        public DeleteMemberInput(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteMemberInput"/> class.
+        /// </summary>
         public DeleteMemberInput()
         {
         }

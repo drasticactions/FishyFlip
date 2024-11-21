@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="Service"/> class.
         /// </summary>
+        public Service(App.Bsky.Labeler.LabelerPolicies? policies, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
+        {
+            this.Policies = policies;
+            this.Labels = labels;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Service"/> class.
+        /// </summary>
         public Service()
         {
         }
@@ -37,7 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

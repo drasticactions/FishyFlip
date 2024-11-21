@@ -15,6 +15,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAccountOutput"/> class.
         /// </summary>
+        public CreateAccountOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default)
+        {
+            this.AccessJwt = accessJwt;
+            this.RefreshJwt = refreshJwt;
+            this.Handle = handle;
+            this.Did = did;
+            this.DidDoc = didDoc;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateAccountOutput"/> class.
+        /// </summary>
         public CreateAccountOutput()
         {
         }

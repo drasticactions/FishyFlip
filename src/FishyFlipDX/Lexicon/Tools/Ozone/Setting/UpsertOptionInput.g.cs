@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="UpsertOptionInput"/> class.
         /// </summary>
+        public UpsertOptionInput(string? key = default, string? scope = default, ATObject? value = default, string? description = default, string? managerRole = default)
+        {
+            this.Key = key;
+            this.Scope = scope;
+            this.Value = value;
+            this.Description = description;
+            this.ManagerRole = managerRole;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpsertOptionInput"/> class.
+        /// </summary>
         public UpsertOptionInput()
         {
         }

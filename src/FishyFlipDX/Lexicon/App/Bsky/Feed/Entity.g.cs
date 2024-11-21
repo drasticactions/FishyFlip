@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Entity"/> class.
         /// </summary>
+        public Entity(App.Bsky.Feed.TextSlice? index = default, string? type = default, string? value = default)
+        {
+            this.Index = index;
+            this.TypeValue = type;
+            this.Value = value;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Entity"/> class.
+        /// </summary>
         public Entity()
         {
         }

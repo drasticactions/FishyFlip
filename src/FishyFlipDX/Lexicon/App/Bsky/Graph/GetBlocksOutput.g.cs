@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetBlocksOutput"/> class.
         /// </summary>
+        public GetBlocksOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? blocks = default)
+        {
+            this.Cursor = cursor;
+            this.Blocks = blocks;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetBlocksOutput"/> class.
+        /// </summary>
         public GetBlocksOutput()
         {
         }

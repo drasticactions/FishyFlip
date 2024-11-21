@@ -40,20 +40,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
 
         /// <summary>
-        /// DEPRECATED: use queryLabels or subscribeLabels instead -- Fetch all labels from a labeler created after a certain date.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?>> FetchLabelsAsync (int? since = 0, int? limit = 50, CancellationToken cancellationToken = default)
-        {
-            return atp.FetchLabelsAsync(since, limit, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Request a verification code to be sent to the supplied phone number
         /// </summary>
         public Task<Result<Success?>> RequestPhoneVerificationAsync (string phoneNumber, CancellationToken cancellationToken = default)
         {
             return atp.RequestPhoneVerificationAsync(phoneNumber, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// DEPRECATED: use queryLabels or subscribeLabels instead -- Fetch all labels from a labeler created after a certain date.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?>> FetchLabelsAsync (int? since = 0, int? limit = 50, CancellationToken cancellationToken = default)
+        {
+            return atp.FetchLabelsAsync(since, limit, cancellationToken);
         }
 
     }

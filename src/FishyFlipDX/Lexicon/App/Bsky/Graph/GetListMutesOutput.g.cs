@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetListMutesOutput"/> class.
         /// </summary>
+        public GetListMutesOutput(string? cursor = default, List<App.Bsky.Graph.ListView>? lists = default)
+        {
+            this.Cursor = cursor;
+            this.Lists = lists;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetListMutesOutput"/> class.
+        /// </summary>
         public GetListMutesOutput()
         {
         }

@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventUnmute"/> class.
         /// </summary>
+        public ModEventUnmute(string? comment = default)
+        {
+            this.Comment = comment;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventUnmute"/> class.
+        /// </summary>
         public ModEventUnmute()
         {
         }

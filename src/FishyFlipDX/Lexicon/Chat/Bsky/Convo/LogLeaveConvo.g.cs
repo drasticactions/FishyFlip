@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="LogLeaveConvo"/> class.
         /// </summary>
+        public LogLeaveConvo(string? rev = default, string? convoId = default)
+        {
+            this.Rev = rev;
+            this.ConvoId = convoId;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogLeaveConvo"/> class.
+        /// </summary>
         public LogLeaveConvo()
         {
         }

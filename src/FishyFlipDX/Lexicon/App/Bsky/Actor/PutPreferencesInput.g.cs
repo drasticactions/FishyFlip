@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="PutPreferencesInput"/> class.
         /// </summary>
+        public PutPreferencesInput(List<ATObject>? preferences = default)
+        {
+            this.Preferences = preferences;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PutPreferencesInput"/> class.
+        /// </summary>
         public PutPreferencesInput()
         {
         }

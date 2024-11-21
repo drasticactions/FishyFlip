@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPopularFeedGeneratorsOutput"/> class.
         /// </summary>
+        public GetPopularFeedGeneratorsOutput(string? cursor = default, List<App.Bsky.Feed.GeneratorView>? feeds = default)
+        {
+            this.Cursor = cursor;
+            this.Feeds = feeds;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetPopularFeedGeneratorsOutput"/> class.
+        /// </summary>
         public GetPopularFeedGeneratorsOutput()
         {
         }

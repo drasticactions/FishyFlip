@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryLabelsOutput"/> class.
         /// </summary>
+        public QueryLabelsOutput(string? cursor = default, List<Com.Atproto.Label.Label>? labels = default)
+        {
+            this.Cursor = cursor;
+            this.Labels = labels;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueryLabelsOutput"/> class.
+        /// </summary>
         public QueryLabelsOutput()
         {
         }

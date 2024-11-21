@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountHosting"/> class.
         /// </summary>
+        public AccountHosting(string? status = default, DateTime? updatedAt = default, DateTime? createdAt = default, DateTime? deletedAt = default, DateTime? deactivatedAt = default, DateTime? reactivatedAt = default)
+        {
+            this.Status = status;
+            this.UpdatedAt = updatedAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.DeletedAt = deletedAt;
+            this.DeactivatedAt = deactivatedAt;
+            this.ReactivatedAt = reactivatedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountHosting"/> class.
+        /// </summary>
         public AccountHosting()
         {
         }
@@ -38,7 +52,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public DateTime? UpdatedAt { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("deletedAt")]
         public DateTime? DeletedAt { get; set; }

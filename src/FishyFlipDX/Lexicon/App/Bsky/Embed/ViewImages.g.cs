@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewImages"/> class.
         /// </summary>
+        public ViewImages(List<App.Bsky.Embed.ViewImage>? images = default)
+        {
+            this.Images = images;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewImages"/> class.
+        /// </summary>
         public ViewImages()
         {
         }

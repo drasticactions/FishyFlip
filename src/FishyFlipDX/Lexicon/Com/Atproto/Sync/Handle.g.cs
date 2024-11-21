@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Handle"/> class.
         /// </summary>
+        public Handle(long? seq = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, DateTime? time = default)
+        {
+            this.Seq = seq;
+            this.Did = did;
+            this.HandleValue = handle;
+            this.Time = time;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Handle"/> class.
+        /// </summary>
         public Handle()
         {
         }

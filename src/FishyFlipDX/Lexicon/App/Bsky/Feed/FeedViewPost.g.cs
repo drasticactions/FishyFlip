@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedViewPost"/> class.
         /// </summary>
+        public FeedViewPost(App.Bsky.Feed.PostView? post = default, App.Bsky.Feed.ReplyRef? reply = default, ATObject? reason = default, string? feedContext = default)
+        {
+            this.Post = post;
+            this.Reply = reply;
+            this.Reason = reason;
+            this.FeedContext = feedContext;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FeedViewPost"/> class.
+        /// </summary>
         public FeedViewPost()
         {
         }

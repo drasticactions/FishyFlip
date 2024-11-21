@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletedMessageView"/> class.
         /// </summary>
+        public DeletedMessageView(string? id = default, string? rev = default, Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
+        {
+            this.Id = id;
+            this.Rev = rev;
+            this.Sender = sender;
+            this.SentAt = sentAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeletedMessageView"/> class.
+        /// </summary>
         public DeletedMessageView()
         {
         }

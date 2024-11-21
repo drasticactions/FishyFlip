@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateMemberInput"/> class.
         /// </summary>
+        public UpdateMemberInput(FishyFlip.Models.ATDid? did = default, bool? disabled = default, string? role = default)
+        {
+            this.Did = did;
+            this.Disabled = disabled;
+            this.Role = role;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateMemberInput"/> class.
+        /// </summary>
         public UpdateMemberInput()
         {
         }

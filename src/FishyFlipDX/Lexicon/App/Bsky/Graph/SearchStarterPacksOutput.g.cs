@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchStarterPacksOutput"/> class.
         /// </summary>
+        public SearchStarterPacksOutput(string? cursor = default, List<App.Bsky.Graph.StarterPackViewBasic>? starterPacks = default)
+        {
+            this.Cursor = cursor;
+            this.StarterPacks = starterPacks;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchStarterPacksOutput"/> class.
+        /// </summary>
         public SearchStarterPacksOutput()
         {
         }

@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateAccountHandleInput"/> class.
         /// </summary>
+        public UpdateAccountHandleInput(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default)
+        {
+            this.Did = did;
+            this.Handle = handle;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateAccountHandleInput"/> class.
+        /// </summary>
         public UpdateAccountHandleInput()
         {
         }

@@ -40,11 +40,29 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
 
         /// <summary>
+        /// Get a specific set and its values
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput?>> GetValuesAsync (string name, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetValuesAsync(name, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Delete an entire set. Attempting to delete a set that does not exist will result in an error.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>> DeleteSetAsync (string name, CancellationToken cancellationToken = default)
         {
             return atp.DeleteSetAsync(name, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Create or update set metadata
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.UpsertSetAsync(cancellationToken);
         }
 
 
@@ -58,29 +76,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
 
         /// <summary>
-        /// Get a specific set and its values
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput?>> GetValuesAsync (string name, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetValuesAsync(name, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Query available sets
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput?>> QuerySetsAsync (int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
         {
             return atp.QuerySetsAsync(limit, cursor, namePrefix, sortBy, sortDirection, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Create or update set metadata
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (CancellationToken cancellationToken = default)
-        {
-            return atp.UpsertSetAsync(cancellationToken);
         }
 
     }

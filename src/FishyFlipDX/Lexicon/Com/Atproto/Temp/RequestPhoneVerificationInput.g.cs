@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestPhoneVerificationInput"/> class.
         /// </summary>
+        public RequestPhoneVerificationInput(string? phoneNumber = default)
+        {
+            this.PhoneNumber = phoneNumber;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequestPhoneVerificationInput"/> class.
+        /// </summary>
         public RequestPhoneVerificationInput()
         {
         }

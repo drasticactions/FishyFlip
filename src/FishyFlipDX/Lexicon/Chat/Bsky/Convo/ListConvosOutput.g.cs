@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="ListConvosOutput"/> class.
         /// </summary>
+        public ListConvosOutput(string? cursor = default, List<Chat.Bsky.Convo.ConvoView>? convos = default)
+        {
+            this.Cursor = cursor;
+            this.Convos = convos;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListConvosOutput"/> class.
+        /// </summary>
         public ListConvosOutput()
         {
         }

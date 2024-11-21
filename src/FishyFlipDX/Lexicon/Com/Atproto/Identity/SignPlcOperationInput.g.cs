@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="SignPlcOperationInput"/> class.
         /// </summary>
+        public SignPlcOperationInput(string? token = default, List<string>? rotationKeys = default, List<string>? alsoKnownAs = default, ATObject? verificationMethods = default, ATObject? services = default)
+        {
+            this.Token = token;
+            this.RotationKeys = rotationKeys;
+            this.AlsoKnownAs = alsoKnownAs;
+            this.VerificationMethods = verificationMethods;
+            this.Services = services;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SignPlcOperationInput"/> class.
+        /// </summary>
         public SignPlcOperationInput()
         {
         }

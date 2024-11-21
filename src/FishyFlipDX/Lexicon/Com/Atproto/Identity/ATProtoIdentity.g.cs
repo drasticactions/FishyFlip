@@ -31,29 +31,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
 
         /// <summary>
-        /// Describe the credentials that should be included in the DID doc of an account that is migrating to this service.
+        /// Updates the current account's handle. Verifies handle validity, and updates did:plc document if necessary. Implemented by PDS, and requires auth.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput?>> GetRecommendedDidCredentialsAsync (CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> UpdateHandleAsync (FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
-            return atp.GetRecommendedDidCredentialsAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Request an email with a code to in order to request a signed PLC operation. Requires Auth.
-        /// </summary>
-        public Task<Result<Success?>> RequestPlcOperationSignatureAsync (CancellationToken cancellationToken = default)
-        {
-            return atp.RequestPlcOperationSignatureAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Resolves a handle (domain name) to a DID.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput?>> ResolveHandleAsync (FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
-        {
-            return atp.ResolveHandleAsync(handle, cancellationToken);
+            return atp.UpdateHandleAsync(handle, cancellationToken);
         }
 
 
@@ -76,11 +58,29 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
 
         /// <summary>
-        /// Updates the current account's handle. Verifies handle validity, and updates did:plc document if necessary. Implemented by PDS, and requires auth.
+        /// Resolves a handle (domain name) to a DID.
         /// </summary>
-        public Task<Result<Success?>> UpdateHandleAsync (FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput?>> ResolveHandleAsync (FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
-            return atp.UpdateHandleAsync(handle, cancellationToken);
+            return atp.ResolveHandleAsync(handle, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Request an email with a code to in order to request a signed PLC operation. Requires Auth.
+        /// </summary>
+        public Task<Result<Success?>> RequestPlcOperationSignatureAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.RequestPlcOperationSignatureAsync(cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Describe the credentials that should be included in the DID doc of an account that is migrating to this service.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput?>> GetRecommendedDidCredentialsAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecommendedDidCredentialsAsync(cancellationToken);
         }
 
     }

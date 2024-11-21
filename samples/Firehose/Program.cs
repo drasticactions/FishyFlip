@@ -53,7 +53,7 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
 
     if (message.Record is not null)
     {
-        Console.WriteLine($"Record: {message.Record.Type}");
+        Console.WriteLine($"Record: {message.Record.ToJson()}");
 
         if (message.Record is Post post)
         {

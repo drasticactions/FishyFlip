@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetListOutput"/> class.
         /// </summary>
+        public GetListOutput(string? cursor = default, App.Bsky.Graph.ListView? list = default, List<App.Bsky.Graph.ListItemView>? items = default)
+        {
+            this.Cursor = cursor;
+            this.List = list;
+            this.Items = items;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetListOutput"/> class.
+        /// </summary>
         public GetListOutput()
         {
         }

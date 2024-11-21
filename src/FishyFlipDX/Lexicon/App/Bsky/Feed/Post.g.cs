@@ -15,6 +15,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Post"/> class.
         /// </summary>
+        public Post(string? text, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Feed.ReplyRefDef? reply = default, ATObject? embed = default, List<string>? langs = default, Com.Atproto.Label.SelfLabels? labels = default, List<string>? tags = default, DateTime? createdAt = default)
+        {
+            this.Text = text;
+            this.Facets = facets;
+            this.Reply = reply;
+            this.Embed = embed;
+            this.Langs = langs;
+            this.Labels = labels;
+            this.Tags = tags;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Post"/> class.
+        /// </summary>
         public Post()
         {
         }
@@ -75,7 +91,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Client-declared timestamp when this post was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

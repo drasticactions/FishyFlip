@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Listblock"/> class.
         /// </summary>
+        public Listblock(FishyFlip.Models.ATUri? subject, DateTime? createdAt = default)
+        {
+            this.Subject = subject;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Listblock"/> class.
+        /// </summary>
         public Listblock()
         {
         }
@@ -37,7 +47,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public FishyFlip.Models.ATUri? Subject { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

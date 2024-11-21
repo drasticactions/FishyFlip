@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadgateView"/> class.
         /// </summary>
+        public ThreadgateView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, List<App.Bsky.Graph.ListViewBasic>? lists = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Record = record;
+            this.Lists = lists;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadgateView"/> class.
+        /// </summary>
         public ThreadgateView()
         {
         }

@@ -15,6 +15,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewerState"/> class.
         /// </summary>
+        public ViewerState(FishyFlip.Models.ATUri? repost = default, FishyFlip.Models.ATUri? like = default, bool? threadMuted = default, bool? replyDisabled = default, bool? embeddingDisabled = default, bool? pinned = default)
+        {
+            this.Repost = repost;
+            this.Like = like;
+            this.ThreadMuted = threadMuted;
+            this.ReplyDisabled = replyDisabled;
+            this.EmbeddingDisabled = embeddingDisabled;
+            this.Pinned = pinned;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewerState"/> class.
+        /// </summary>
         public ViewerState()
         {
         }

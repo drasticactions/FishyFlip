@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="EmbedVideo"/> class.
         /// </summary>
+        public EmbedVideo(Blob? video = default, List<App.Bsky.Embed.Caption>? captions = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
+        {
+            this.Video = video;
+            this.Captions = captions;
+            this.Alt = alt;
+            this.AspectRatio = aspectRatio;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmbedVideo"/> class.
+        /// </summary>
         public EmbedVideo()
         {
         }

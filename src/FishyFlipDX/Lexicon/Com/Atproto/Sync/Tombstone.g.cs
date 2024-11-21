@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Tombstone"/> class.
         /// </summary>
+        public Tombstone(long? seq = default, FishyFlip.Models.ATDid? did = default, DateTime? time = default)
+        {
+            this.Seq = seq;
+            this.Did = did;
+            this.Time = time;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tombstone"/> class.
+        /// </summary>
         public Tombstone()
         {
         }

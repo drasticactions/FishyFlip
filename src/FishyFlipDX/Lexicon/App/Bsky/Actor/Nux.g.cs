@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="Nux"/> class.
         /// </summary>
+        public Nux(string? id = default, bool? completed = default, string? data = default, DateTime? expiresAt = default)
+        {
+            this.Id = id;
+            this.Completed = completed;
+            this.Data = data;
+            this.ExpiresAt = expiresAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Nux"/> class.
+        /// </summary>
         public Nux()
         {
         }

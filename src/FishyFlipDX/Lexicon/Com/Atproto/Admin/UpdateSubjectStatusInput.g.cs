@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSubjectStatusInput"/> class.
         /// </summary>
+        public UpdateSubjectStatusInput(ATObject? subject = default, Com.Atproto.Admin.StatusAttr? takedown = default, Com.Atproto.Admin.StatusAttr? deactivated = default)
+        {
+            this.Subject = subject;
+            this.Takedown = takedown;
+            this.Deactivated = deactivated;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateSubjectStatusInput"/> class.
+        /// </summary>
         public UpdateSubjectStatusInput()
         {
         }

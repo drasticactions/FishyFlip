@@ -31,119 +31,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
 
         /// <summary>
-        /// Activates a currently deactivated account. Used to finalize account migration after the account's repo is imported and identity is setup.
+        /// Request an email with a code to confirm ownership of email.
         /// </summary>
-        public Task<Result<Success?>> ActivateAccountAsync (CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> RequestEmailConfirmationAsync (CancellationToken cancellationToken = default)
         {
-            return atp.ActivateAccountAsync(cancellationToken);
+            return atp.RequestEmailConfirmationAsync(cancellationToken);
         }
 
 
         /// <summary>
-        /// Returns the status of an account, especially as pertaining to import or recovery. Can be called many times over the course of an account migration. Requires auth and can only be called pertaining to oneself.
+        /// Reserve a repo signing key, for use with account creation. Necessary so that a DID PLC update operation can be constructed during an account migraiton. Public and does not require auth; implemented by PDS. NOTE: this endpoint may change when full account migration is implemented.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput?>> CheckAccountStatusAsync (CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput?>> ReserveSigningKeyAsync (FishyFlip.Models.ATDid? did = default, CancellationToken cancellationToken = default)
         {
-            return atp.CheckAccountStatusAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Confirm an email using a token from com.atproto.server.requestEmailConfirmation.
-        /// </summary>
-        public Task<Result<Success?>> ConfirmEmailAsync (string email, string token, CancellationToken cancellationToken = default)
-        {
-            return atp.ConfirmEmailAsync(email, token, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Create an account. Implemented by PDS.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>> CreateAccountAsync (FishyFlip.Models.ATHandle handle, string? email = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default, CancellationToken cancellationToken = default)
-        {
-            return atp.CreateAccountAsync(handle, email, did, inviteCode, verificationCode, verificationPhone, password, recoveryKey, plcOp, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Create an App Password.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?>> CreateAppPasswordAsync (string name, bool? privileged = default, CancellationToken cancellationToken = default)
-        {
-            return atp.CreateAppPasswordAsync(name, privileged, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Create an invite code.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput?>> CreateInviteCodeAsync (int useCount, FishyFlip.Models.ATDid? forAccount = default, CancellationToken cancellationToken = default)
-        {
-            return atp.CreateInviteCodeAsync(useCount, forAccount, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Create invite codes.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>> CreateInviteCodesAsync (int codeCount, int useCount, List<FishyFlip.Models.ATDid>? forAccounts = default, CancellationToken cancellationToken = default)
-        {
-            return atp.CreateInviteCodesAsync(codeCount, useCount, forAccounts, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Create an authentication session.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
-        {
-            return atp.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Deactivates a currently active account. Stops serving of repo, and future writes to repo until reactivated. Used to finalize account migration with the old host after the account has been activated on the new host.
-        /// </summary>
-        public Task<Result<Success?>> DeactivateAccountAsync (DateTime? deleteAfter = default, CancellationToken cancellationToken = default)
-        {
-            return atp.DeactivateAccountAsync(deleteAfter, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Delete an actor's account with a token and password. Can only be called after requesting a deletion token. Requires auth.
-        /// </summary>
-        public Task<Result<Success?>> DeleteAccountAsync (FishyFlip.Models.ATDid did, string password, string token, CancellationToken cancellationToken = default)
-        {
-            return atp.DeleteAccountAsync(did, password, token, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Delete the current session. Requires auth.
-        /// </summary>
-        public Task<Result<Success?>> DeleteSessionAsync (CancellationToken cancellationToken = default)
-        {
-            return atp.DeleteSessionAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Describes the server's account creation requirements and capabilities. Implemented by PDS.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput?>> DescribeServerAsync (CancellationToken cancellationToken = default)
-        {
-            return atp.DescribeServerAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get all invite codes for the current account. Requires auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput?>> GetAccountInviteCodesAsync (bool? includeUsed = default, bool? createAvailable = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetAccountInviteCodesAsync(includeUsed, createAvailable, cancellationToken);
+            return atp.ReserveSigningKeyAsync(did, cancellationToken);
         }
 
 
@@ -157,11 +58,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
 
         /// <summary>
-        /// Get information about the current auth session. Requires auth.
+        /// Get all invite codes for the current account. Requires auth.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput?>> GetSessionAsync (CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput?>> GetAccountInviteCodesAsync (bool? includeUsed = default, bool? createAvailable = default, CancellationToken cancellationToken = default)
         {
-            return atp.GetSessionAsync(cancellationToken);
+            return atp.GetAccountInviteCodesAsync(includeUsed, createAvailable, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Create an authentication session.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
+        {
+            return atp.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken);
         }
 
 
@@ -175,6 +85,78 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
 
         /// <summary>
+        /// Create invite codes.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>> CreateInviteCodesAsync (int codeCount, int useCount, List<FishyFlip.Models.ATDid>? forAccounts = default, CancellationToken cancellationToken = default)
+        {
+            return atp.CreateInviteCodesAsync(codeCount, useCount, forAccounts, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Delete the current session. Requires auth.
+        /// </summary>
+        public Task<Result<Success?>> DeleteSessionAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.DeleteSessionAsync(cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Revoke an App Password by name.
+        /// </summary>
+        public Task<Result<Success?>> RevokeAppPasswordAsync (string name, CancellationToken cancellationToken = default)
+        {
+            return atp.RevokeAppPasswordAsync(name, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Create an App Password.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef?>> CreateAppPasswordAsync (string name, bool? privileged = default, CancellationToken cancellationToken = default)
+        {
+            return atp.CreateAppPasswordAsync(name, privileged, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Activates a currently deactivated account. Used to finalize account migration after the account's repo is imported and identity is setup.
+        /// </summary>
+        public Task<Result<Success?>> ActivateAccountAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.ActivateAccountAsync(cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Describes the server's account creation requirements and capabilities. Implemented by PDS.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput?>> DescribeServerAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.DescribeServerAsync(cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Confirm an email using a token from com.atproto.server.requestEmailConfirmation.
+        /// </summary>
+        public Task<Result<Success?>> ConfirmEmailAsync (string email, string token, CancellationToken cancellationToken = default)
+        {
+            return atp.ConfirmEmailAsync(email, token, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get information about the current auth session. Requires auth.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput?>> GetSessionAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.GetSessionAsync(cancellationToken);
+        }
+
+
+        /// <summary>
         /// Refresh an authentication session. Requires auth using the 'refreshJwt' (not the 'accessJwt').
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>> RefreshSessionAsync (CancellationToken cancellationToken = default)
@@ -184,20 +166,38 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
 
         /// <summary>
-        /// Initiate a user account deletion via email.
+        /// Deactivates a currently active account. Stops serving of repo, and future writes to repo until reactivated. Used to finalize account migration with the old host after the account has been activated on the new host.
         /// </summary>
-        public Task<Result<Success?>> RequestAccountDeleteAsync (CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> DeactivateAccountAsync (DateTime? deleteAfter = default, CancellationToken cancellationToken = default)
         {
-            return atp.RequestAccountDeleteAsync(cancellationToken);
+            return atp.DeactivateAccountAsync(deleteAfter, cancellationToken);
         }
 
 
         /// <summary>
-        /// Request an email with a code to confirm ownership of email.
+        /// Update an account's email.
         /// </summary>
-        public Task<Result<Success?>> RequestEmailConfirmationAsync (CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> UpdateEmailAsync (string email, bool? emailAuthFactor = default, string? token = default, CancellationToken cancellationToken = default)
         {
-            return atp.RequestEmailConfirmationAsync(cancellationToken);
+            return atp.UpdateEmailAsync(email, emailAuthFactor, token, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Reset a user account password using a token.
+        /// </summary>
+        public Task<Result<Success?>> ResetPasswordAsync (string token, string password, CancellationToken cancellationToken = default)
+        {
+            return atp.ResetPasswordAsync(token, password, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Returns the status of an account, especially as pertaining to import or recovery. Can be called many times over the course of an account migration. Requires auth and can only be called pertaining to oneself.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput?>> CheckAccountStatusAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.CheckAccountStatusAsync(cancellationToken);
         }
 
 
@@ -220,38 +220,38 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
 
         /// <summary>
-        /// Reserve a repo signing key, for use with account creation. Necessary so that a DID PLC update operation can be constructed during an account migraiton. Public and does not require auth; implemented by PDS. NOTE: this endpoint may change when full account migration is implemented.
+        /// Initiate a user account deletion via email.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput?>> ReserveSigningKeyAsync (FishyFlip.Models.ATDid? did = default, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> RequestAccountDeleteAsync (CancellationToken cancellationToken = default)
         {
-            return atp.ReserveSigningKeyAsync(did, cancellationToken);
+            return atp.RequestAccountDeleteAsync(cancellationToken);
         }
 
 
         /// <summary>
-        /// Reset a user account password using a token.
+        /// Create an account. Implemented by PDS.
         /// </summary>
-        public Task<Result<Success?>> ResetPasswordAsync (string token, string password, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>> CreateAccountAsync (FishyFlip.Models.ATHandle handle, string? email = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default, CancellationToken cancellationToken = default)
         {
-            return atp.ResetPasswordAsync(token, password, cancellationToken);
+            return atp.CreateAccountAsync(handle, email, did, inviteCode, verificationCode, verificationPhone, password, recoveryKey, plcOp, cancellationToken);
         }
 
 
         /// <summary>
-        /// Revoke an App Password by name.
+        /// Delete an actor's account with a token and password. Can only be called after requesting a deletion token. Requires auth.
         /// </summary>
-        public Task<Result<Success?>> RevokeAppPasswordAsync (string name, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> DeleteAccountAsync (FishyFlip.Models.ATDid did, string password, string token, CancellationToken cancellationToken = default)
         {
-            return atp.RevokeAppPasswordAsync(name, cancellationToken);
+            return atp.DeleteAccountAsync(did, password, token, cancellationToken);
         }
 
 
         /// <summary>
-        /// Update an account's email.
+        /// Create an invite code.
         /// </summary>
-        public Task<Result<Success?>> UpdateEmailAsync (string email, bool? emailAuthFactor = default, string? token = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput?>> CreateInviteCodeAsync (int useCount, FishyFlip.Models.ATDid? forAccount = default, CancellationToken cancellationToken = default)
         {
-            return atp.UpdateEmailAsync(email, emailAuthFactor, token, cancellationToken);
+            return atp.CreateInviteCodeAsync(useCount, forAccount, cancellationToken);
         }
 
     }

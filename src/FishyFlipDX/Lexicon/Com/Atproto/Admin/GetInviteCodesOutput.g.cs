@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="GetInviteCodesOutput"/> class.
         /// </summary>
+        public GetInviteCodesOutput(string? cursor = default, List<Com.Atproto.Server.InviteCode>? codes = default)
+        {
+            this.Cursor = cursor;
+            this.Codes = codes;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetInviteCodesOutput"/> class.
+        /// </summary>
         public GetInviteCodesOutput()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetReposOutput"/> class.
         /// </summary>
+        public GetReposOutput(List<ATObject>? repos = default)
+        {
+            this.Repos = repos;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetReposOutput"/> class.
+        /// </summary>
         public GetReposOutput()
         {
         }

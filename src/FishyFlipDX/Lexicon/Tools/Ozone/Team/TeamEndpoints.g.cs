@@ -13,38 +13,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
     public static class TeamEndpoints
     {
 
-       public const string AddMember = "/xrpc/tools.ozone.team.addMember";
+       public const string ListMembers = "/xrpc/tools.ozone.team.listMembers";
 
        public const string DeleteMember = "/xrpc/tools.ozone.team.deleteMember";
 
-       public const string ListMembers = "/xrpc/tools.ozone.team.listMembers";
-
        public const string UpdateMember = "/xrpc/tools.ozone.team.updateMember";
 
-
-        /// <summary>
-        /// Add a member to the ozone team. Requires admin role.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = AddMember.ToString();
-            var inputItem = new AddMemberInput();
-            inputItem.Did = did;
-            inputItem.Role = role;
-            return atp.Client.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamAddMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Delete a member from ozone team. Requires admin role.
-        /// </summary>
-        public static Task<Result<Success?>> DeleteMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = DeleteMember.ToString();
-            var inputItem = new DeleteMemberInput();
-            inputItem.Did = did;
-            return atp.Client.Post<DeleteMemberInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamDeleteMemberInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
+       public const string AddMember = "/xrpc/tools.ozone.team.addMember";
 
 
         /// <summary>
@@ -71,6 +46,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
 
         /// <summary>
+        /// Delete a member from ozone team. Requires admin role.
+        /// </summary>
+        public static Task<Result<Success?>> DeleteMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = DeleteMember.ToString();
+            var inputItem = new DeleteMemberInput();
+            inputItem.Did = did;
+            return atp.Client.Post<DeleteMemberInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamDeleteMemberInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
         /// Update a member in the ozone service. Requires admin role.
         /// </summary>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> UpdateMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
@@ -81,6 +68,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             inputItem.Disabled = disabled;
             inputItem.Role = role;
             return atp.Client.Post<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamUpdateMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Add a member to the ozone team. Requires admin role.
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = AddMember.ToString();
+            var inputItem = new AddMemberInput();
+            inputItem.Did = did;
+            inputItem.Role = role;
+            return atp.Client.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamAddMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

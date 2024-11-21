@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageViewSender"/> class.
         /// </summary>
+        public MessageViewSender(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageViewSender"/> class.
+        /// </summary>
         public MessageViewSender()
         {
         }

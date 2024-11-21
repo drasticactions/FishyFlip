@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="AppPassword"/> class.
         /// </summary>
+        public AppPassword(string? name = default, DateTime? createdAt = default, bool? privileged = default)
+        {
+            this.Name = name;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Privileged = privileged;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppPassword"/> class.
+        /// </summary>
         public AppPassword()
         {
         }
@@ -23,7 +34,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public AppPassword(CBORObject obj)
         {
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
-            if (obj["password"] is not null) this.Password = obj["password"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["privileged"] is not null) this.Privileged = obj["privileged"].AsBoolean();
         }
@@ -32,13 +42,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         public string? Name { get; set; }
 
-        [JsonPropertyName("password")]
-        [JsonRequired]
-        public string? Password { get; set; }
-
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("privileged")]
         public bool? Privileged { get; set; }
@@ -47,9 +53,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets the ATRecord Type.
         /// </summary>
         [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createAppPassword#appPassword";
+        public override string Type => "com.atproto.server.listAppPasswords#appPassword";
 
-        public const string RecordType = "com.atproto.server.createAppPassword#appPassword";
+        public const string RecordType = "com.atproto.server.listAppPasswords#appPassword";
 
         public override string ToJson()
         {

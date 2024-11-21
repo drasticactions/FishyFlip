@@ -12,6 +12,27 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="PostView"/> class.
         /// </summary>
+        public PostView(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? record = default, ATObject? embed = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, DateTime? indexedAt = default, App.Bsky.Feed.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Feed.ThreadgateView? threadgate = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Author = author;
+            this.Record = record;
+            this.Embed = embed;
+            this.ReplyCount = replyCount;
+            this.RepostCount = repostCount;
+            this.LikeCount = likeCount;
+            this.QuoteCount = quoteCount;
+            this.IndexedAt = indexedAt;
+            this.Viewer = viewer;
+            this.Labels = labels;
+            this.Threadgate = threadgate;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PostView"/> class.
+        /// </summary>
         public PostView()
         {
         }

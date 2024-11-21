@@ -26,12 +26,12 @@ namespace FishyFlip.Lexicon
         /// <summary>
         /// Create a Service record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, App.Bsky.Labeler.LabelerPolicies? policies, DateTime? createdAt, Com.Atproto.Label.SelfLabels? labels = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, App.Bsky.Labeler.LabelerPolicies? policies, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Labeler.Service();
             record.Policies = policies;
             record.Labels = labels;
-            record.CreatedAt = createdAt;
+            record.CreatedAt = createdAt ?? DateTime.UtcNow;
             return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
         }
 

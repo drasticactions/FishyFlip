@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="SendMessageBatchOutput"/> class.
         /// </summary>
+        public SendMessageBatchOutput(List<Chat.Bsky.Convo.MessageView>? items = default)
+        {
+            this.Items = items;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SendMessageBatchOutput"/> class.
+        /// </summary>
         public SendMessageBatchOutput()
         {
         }

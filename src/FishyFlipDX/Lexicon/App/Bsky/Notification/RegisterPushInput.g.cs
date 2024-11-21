@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterPushInput"/> class.
         /// </summary>
+        public RegisterPushInput(FishyFlip.Models.ATDid? serviceDid = default, string? token = default, string? platform = default, string? appId = default)
+        {
+            this.ServiceDid = serviceDid;
+            this.Token = token;
+            this.Platform = platform;
+            this.AppId = appId;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RegisterPushInput"/> class.
+        /// </summary>
         public RegisterPushInput()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSeenInput"/> class.
         /// </summary>
+        public UpdateSeenInput(DateTime? seenAt = default)
+        {
+            this.SeenAt = seenAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateSeenInput"/> class.
+        /// </summary>
         public UpdateSeenInput()
         {
         }

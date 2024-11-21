@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="DescribeFeedGeneratorOutput"/> class.
         /// </summary>
+        public DescribeFeedGeneratorOutput(FishyFlip.Models.ATDid? did = default, List<App.Bsky.Feed.Feed>? feeds = default, App.Bsky.Feed.Links? links = default)
+        {
+            this.Did = did;
+            this.Feeds = feeds;
+            this.Links = links;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DescribeFeedGeneratorOutput"/> class.
+        /// </summary>
         public DescribeFeedGeneratorOutput()
         {
         }

@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="AspectRatio"/> class.
         /// </summary>
+        public AspectRatio(long? width = default, long? height = default)
+        {
+            this.Width = width;
+            this.Height = height;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AspectRatio"/> class.
+        /// </summary>
         public AspectRatio()
         {
         }

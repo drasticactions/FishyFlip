@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="Caption"/> class.
         /// </summary>
+        public Caption(string? lang = default, Blob? file = default)
+        {
+            this.Lang = lang;
+            this.File = file;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Caption"/> class.
+        /// </summary>
         public Caption()
         {
         }

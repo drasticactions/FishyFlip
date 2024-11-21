@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="Create"/> class.
         /// </summary>
+        public Create(string? collection = default, string? rkey = default, ATObject? value = default)
+        {
+            this.Collection = collection;
+            this.Rkey = rkey;
+            this.Value = value;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Create"/> class.
+        /// </summary>
         public Create()
         {
         }

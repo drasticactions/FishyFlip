@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="NotFoundPost"/> class.
         /// </summary>
+        public NotFoundPost(FishyFlip.Models.ATUri? uri = default, bool? notFound = default)
+        {
+            this.Uri = uri;
+            this.NotFound = notFound;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotFoundPost"/> class.
+        /// </summary>
         public NotFoundPost()
         {
         }

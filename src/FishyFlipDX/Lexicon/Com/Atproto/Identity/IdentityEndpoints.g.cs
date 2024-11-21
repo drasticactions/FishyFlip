@@ -13,51 +13,28 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
     public static class IdentityEndpoints
     {
 
-       public const string GetRecommendedDidCredentials = "/xrpc/com.atproto.identity.getRecommendedDidCredentials";
-
-       public const string RequestPlcOperationSignature = "/xrpc/com.atproto.identity.requestPlcOperationSignature";
-
-       public const string ResolveHandle = "/xrpc/com.atproto.identity.resolveHandle";
+       public const string UpdateHandle = "/xrpc/com.atproto.identity.updateHandle";
 
        public const string SignPlcOperation = "/xrpc/com.atproto.identity.signPlcOperation";
 
        public const string SubmitPlcOperation = "/xrpc/com.atproto.identity.submitPlcOperation";
 
-       public const string UpdateHandle = "/xrpc/com.atproto.identity.updateHandle";
+       public const string ResolveHandle = "/xrpc/com.atproto.identity.resolveHandle";
+
+       public const string RequestPlcOperationSignature = "/xrpc/com.atproto.identity.requestPlcOperationSignature";
+
+       public const string GetRecommendedDidCredentials = "/xrpc/com.atproto.identity.getRecommendedDidCredentials";
 
 
         /// <summary>
-        /// Describe the credentials that should be included in the DID doc of an account that is migrating to this service.
+        /// Updates the current account's handle. Verifies handle validity, and updates did:plc document if necessary. Implemented by PDS, and requires auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput?>> GetRecommendedDidCredentialsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> UpdateHandleAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = GetRecommendedDidCredentials.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityGetRecommendedDidCredentialsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Request an email with a code to in order to request a signed PLC operation. Requires Auth.
-        /// </summary>
-        public static Task<Result<Success?>> RequestPlcOperationSignatureAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = RequestPlcOperationSignature.ToString();
-            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Resolves a handle (domain name) to a DID.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput?>> ResolveHandleAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = ResolveHandle.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("handle=" + handle);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            var endpointUrl = UpdateHandle.ToString();
+            var inputItem = new UpdateHandleInput();
+            inputItem.Handle = handle;
+            return atp.Client.Post<UpdateHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityUpdateHandleInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
@@ -90,14 +67,37 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
 
         /// <summary>
-        /// Updates the current account's handle. Verifies handle validity, and updates did:plc document if necessary. Implemented by PDS, and requires auth.
+        /// Resolves a handle (domain name) to a DID.
         /// </summary>
-        public static Task<Result<Success?>> UpdateHandleAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput?>> ResolveHandleAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = UpdateHandle.ToString();
-            var inputItem = new UpdateHandleInput();
-            inputItem.Handle = handle;
-            return atp.Client.Post<UpdateHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityUpdateHandleInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            var endpointUrl = ResolveHandle.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("handle=" + handle);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Request an email with a code to in order to request a signed PLC operation. Requires Auth.
+        /// </summary>
+        public static Task<Result<Success?>> RequestPlcOperationSignatureAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = RequestPlcOperationSignature.ToString();
+            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Describe the credentials that should be included in the DID doc of an account that is migrating to this service.
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput?>> GetRecommendedDidCredentialsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetRecommendedDidCredentials.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityGetRecommendedDidCredentialsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

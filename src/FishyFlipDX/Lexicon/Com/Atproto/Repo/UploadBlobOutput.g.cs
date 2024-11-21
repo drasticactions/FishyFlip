@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadBlobOutput"/> class.
         /// </summary>
+        public UploadBlobOutput(Blob? blob = default)
+        {
+            this.Blob = blob;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UploadBlobOutput"/> class.
+        /// </summary>
         public UploadBlobOutput()
         {
         }

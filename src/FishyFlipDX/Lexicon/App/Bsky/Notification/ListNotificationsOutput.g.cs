@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="ListNotificationsOutput"/> class.
         /// </summary>
+        public ListNotificationsOutput(string? cursor = default, List<App.Bsky.Notification.Notification>? notifications = default, bool? priority = default, DateTime? seenAt = default)
+        {
+            this.Cursor = cursor;
+            this.Notifications = notifications;
+            this.Priority = priority;
+            this.SeenAt = seenAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListNotificationsOutput"/> class.
+        /// </summary>
         public ListNotificationsOutput()
         {
         }

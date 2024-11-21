@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="GetServicesOutput"/> class.
         /// </summary>
+        public GetServicesOutput(List<ATObject>? views = default)
+        {
+            this.Views = views;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetServicesOutput"/> class.
+        /// </summary>
         public GetServicesOutput()
         {
         }

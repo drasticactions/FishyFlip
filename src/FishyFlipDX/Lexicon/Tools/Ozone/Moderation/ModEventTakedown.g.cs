@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventTakedown"/> class.
         /// </summary>
+        public ModEventTakedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default)
+        {
+            this.Comment = comment;
+            this.DurationInHours = durationInHours;
+            this.AcknowledgeAccountSubjects = acknowledgeAccountSubjects;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventTakedown"/> class.
+        /// </summary>
         public ModEventTakedown()
         {
         }

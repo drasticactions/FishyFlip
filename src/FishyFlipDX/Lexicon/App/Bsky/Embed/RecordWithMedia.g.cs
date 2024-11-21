@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordWithMedia"/> class.
         /// </summary>
+        public RecordWithMedia(App.Bsky.Embed.EmbedRecord? record = default, ATObject? media = default)
+        {
+            this.Record = record;
+            this.Media = media;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecordWithMedia"/> class.
+        /// </summary>
         public RecordWithMedia()
         {
         }

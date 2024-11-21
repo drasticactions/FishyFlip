@@ -31,38 +31,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
 
         /// <summary>
-        /// Take a moderation action on an actor.
+        /// View moderation statuses of subjects (record or repo).
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
         {
-            return atp.EmitEventAsync(@event, subject, createdBy, subjectBlobCids, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get details about a moderation event.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail?>> GetEventAsync (int id, CancellationToken cancellationToken = default)
-        {
-            return atp.GetEventAsync(id, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get details about a record.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail?>> GetRecordAsync (FishyFlip.Models.ATUri uri, string? cid = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetRecordAsync(uri, cid, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get details about some records.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput?>> GetRecordsAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
-        {
-            return atp.GetRecordsAsync(uris, cancellationToken);
+            return atp.QueryStatusesAsync(includeAllUserRecords, subject, comment, reportedAfter, reportedBefore, reviewedAfter, hostingDeletedAfter, hostingDeletedBefore, hostingUpdatedAfter, hostingUpdatedBefore, hostingStatuses, reviewedBefore, includeMuted, onlyMuted, reviewState, ignoreSubjects, lastReviewedBy, sortField, sortDirection, takendown, appealed, limit, tags, excludeTags, cursor, collections, subjectType, cancellationToken);
         }
 
 
@@ -76,11 +49,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
 
         /// <summary>
-        /// Get details about some repositories.
+        /// Get details about some records.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput?>> GetReposAsync (List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput?>> GetRecordsAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
-            return atp.GetReposAsync(dids, cancellationToken);
+            return atp.GetRecordsAsync(uris, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get details about a moderation event.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail?>> GetEventAsync (int id, CancellationToken cancellationToken = default)
+        {
+            return atp.GetEventAsync(id, cancellationToken);
         }
 
 
@@ -94,11 +76,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
 
         /// <summary>
-        /// View moderation statuses of subjects (record or repo).
+        /// Get details about a record.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail?>> GetRecordAsync (FishyFlip.Models.ATUri uri, string? cid = default, CancellationToken cancellationToken = default)
         {
-            return atp.QueryStatusesAsync(includeAllUserRecords, subject, comment, reportedAfter, reportedBefore, reviewedAfter, hostingDeletedAfter, hostingDeletedBefore, hostingUpdatedAfter, hostingUpdatedBefore, hostingStatuses, reviewedBefore, includeMuted, onlyMuted, reviewState, ignoreSubjects, lastReviewedBy, sortField, sortDirection, takendown, appealed, limit, tags, excludeTags, cursor, collections, subjectType, cancellationToken);
+            return atp.GetRecordAsync(uri, cid, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Take a moderation action on an actor.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, CancellationToken cancellationToken = default)
+        {
+            return atp.EmitEventAsync(@event, subject, createdBy, subjectBlobCids, cancellationToken);
         }
 
 
@@ -108,6 +99,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput?>> SearchReposAsync (string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.SearchReposAsync(q, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get details about some repositories.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput?>> GetReposAsync (List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        {
+            return atp.GetReposAsync(dids, cancellationToken);
         }
 
     }

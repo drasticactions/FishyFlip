@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ListAppPasswordsOutput"/> class.
         /// </summary>
+        public ListAppPasswordsOutput(List<Com.Atproto.Server.AppPassword>? passwords = default)
+        {
+            this.Passwords = passwords;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListAppPasswordsOutput"/> class.
+        /// </summary>
         public ListAppPasswordsOutput()
         {
         }
@@ -22,12 +31,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ListAppPasswordsOutput(CBORObject obj)
         {
-            if (obj["passwords"] is not null) this.Passwords = obj["passwords"].Values.Select(n =>new Com.Atproto.Server.AppPasswordDef(n)).ToList();
+            if (obj["passwords"] is not null) this.Passwords = obj["passwords"].Values.Select(n =>new Com.Atproto.Server.AppPassword(n)).ToList();
         }
 
         [JsonPropertyName("passwords")]
         [JsonRequired]
-        public List<Com.Atproto.Server.AppPasswordDef>? Passwords { get; set; }
+        public List<Com.Atproto.Server.AppPassword>? Passwords { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

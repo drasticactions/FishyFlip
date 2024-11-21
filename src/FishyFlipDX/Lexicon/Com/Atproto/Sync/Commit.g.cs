@@ -15,6 +15,24 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Commit"/> class.
         /// </summary>
+        public Commit(long? seq = default, bool? tooBig = default, FishyFlip.Models.ATDid? repo = default, Ipfs.Cid? commit = default, string? rev = default, string? since = default, byte[]? blocks = default, List<Com.Atproto.Sync.RepoOp>? ops = default, List<Ipfs.Cid>? blobs = default, DateTime? time = default)
+        {
+            this.Seq = seq;
+            this.TooBig = tooBig;
+            this.Repo = repo;
+            this.CommitValue = commit;
+            this.Rev = rev;
+            this.Since = since;
+            this.Blocks = blocks;
+            this.Ops = ops;
+            this.Blobs = blobs;
+            this.Time = time;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Commit"/> class.
+        /// </summary>
         public Commit()
         {
         }

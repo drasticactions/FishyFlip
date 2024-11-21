@@ -31,38 +31,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
 
         /// <summary>
-        /// Get private preferences attached to the current account. Expected use is synchronization between multiple devices, and import/export during account migration. Requires auth.
+        /// Find actor suggestions for a prefix search term. Expected use is for auto-completion during text field entry. Does not require auth.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput?>> GetPreferencesAsync (CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput?>> SearchActorsTypeaheadAsync (string? q = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
-            return atp.GetPreferencesAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get detailed profile view of an actor. Does not require auth, but contains relevant metadata with auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed?>> GetProfileAsync (FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
-        {
-            return atp.GetProfileAsync(actor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get detailed profile views of multiple actors.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default)
-        {
-            return atp.GetProfilesAsync(actors, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get a list of suggested actors. Expected use is discovery of accounts to follow during new account onboarding.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput?>> GetSuggestionsAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetSuggestionsAsync(limit, cursor, cancellationToken);
+            return atp.SearchActorsTypeaheadAsync(q, limit, cancellationToken);
         }
 
 
@@ -76,6 +49,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
 
         /// <summary>
+        /// Get detailed profile view of an actor. Does not require auth, but contains relevant metadata with auth.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed?>> GetProfileAsync (FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
+        {
+            return atp.GetProfileAsync(actor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested actors. Expected use is discovery of accounts to follow during new account onboarding.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput?>> GetSuggestionsAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestionsAsync(limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Find actors (profiles) matching search criteria. Does not require auth.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput?>> SearchActorsAsync (string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
@@ -85,11 +76,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
 
         /// <summary>
-        /// Find actor suggestions for a prefix search term. Expected use is for auto-completion during text field entry. Does not require auth.
+        /// Get detailed profile views of multiple actors.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput?>> SearchActorsTypeaheadAsync (string? q = default, int? limit = 10, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default)
         {
-            return atp.SearchActorsTypeaheadAsync(q, limit, cancellationToken);
+            return atp.GetProfilesAsync(actors, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get private preferences attached to the current account. Expected use is synchronization between multiple devices, and import/export during account migration. Requires auth.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput?>> GetPreferencesAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.GetPreferencesAsync(cancellationToken);
         }
 
     }

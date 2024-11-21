@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ReserveSigningKeyInput"/> class.
         /// </summary>
+        public ReserveSigningKeyInput(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReserveSigningKeyInput"/> class.
+        /// </summary>
         public ReserveSigningKeyInput()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileAssociatedChat"/> class.
         /// </summary>
+        public ProfileAssociatedChat(string? allowIncoming = default)
+        {
+            this.AllowIncoming = allowIncoming;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfileAssociatedChat"/> class.
+        /// </summary>
         public ProfileAssociatedChat()
         {
         }

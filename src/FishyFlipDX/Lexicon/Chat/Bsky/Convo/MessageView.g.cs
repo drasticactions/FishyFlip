@@ -12,6 +12,21 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageView"/> class.
         /// </summary>
+        public MessageView(string? id = default, string? rev = default, string? text = default, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Embed.ViewRecordDef? embed = default, Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
+        {
+            this.Id = id;
+            this.Rev = rev;
+            this.Text = text;
+            this.Facets = facets;
+            this.Embed = embed;
+            this.Sender = sender;
+            this.SentAt = sentAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageView"/> class.
+        /// </summary>
         public MessageView()
         {
         }

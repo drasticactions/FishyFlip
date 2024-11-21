@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="Declaration"/> class.
         /// </summary>
+        public Declaration(string? allowIncoming)
+        {
+            this.AllowIncoming = allowIncoming;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Declaration"/> class.
+        /// </summary>
         public Declaration()
         {
         }

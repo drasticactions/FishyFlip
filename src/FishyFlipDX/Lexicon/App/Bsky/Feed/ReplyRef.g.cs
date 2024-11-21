@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplyRef"/> class.
         /// </summary>
+        public ReplyRef(ATObject? root = default, ATObject? parent = default, App.Bsky.Actor.ProfileViewBasic? grandparentAuthor = default)
+        {
+            this.Root = root;
+            this.Parent = parent;
+            this.GrandparentAuthor = grandparentAuthor;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReplyRef"/> class.
+        /// </summary>
         public ReplyRef()
         {
         }

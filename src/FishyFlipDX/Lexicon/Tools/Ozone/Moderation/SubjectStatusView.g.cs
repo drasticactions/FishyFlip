@@ -12,6 +12,33 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="SubjectStatusView"/> class.
         /// </summary>
+        public SubjectStatusView(long? id = default, ATObject? subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string? reviewState = default, string? comment = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default)
+        {
+            this.Id = id;
+            this.Subject = subject;
+            this.Hosting = hosting;
+            this.SubjectBlobCids = subjectBlobCids;
+            this.SubjectRepoHandle = subjectRepoHandle;
+            this.UpdatedAt = updatedAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.ReviewState = reviewState;
+            this.Comment = comment;
+            this.MuteUntil = muteUntil;
+            this.MuteReportingUntil = muteReportingUntil;
+            this.LastReviewedBy = lastReviewedBy;
+            this.LastReviewedAt = lastReviewedAt;
+            this.LastReportedAt = lastReportedAt;
+            this.LastAppealedAt = lastAppealedAt;
+            this.Takendown = takendown;
+            this.Appealed = appealed;
+            this.SuspendUntil = suspendUntil;
+            this.Tags = tags;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubjectStatusView"/> class.
+        /// </summary>
         public SubjectStatusView()
         {
         }
@@ -72,7 +99,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("reviewState")]
         [JsonRequired]

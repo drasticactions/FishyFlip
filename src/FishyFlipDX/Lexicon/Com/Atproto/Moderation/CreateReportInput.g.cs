@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateReportInput"/> class.
         /// </summary>
+        public CreateReportInput(string? reasonType = default, string? reason = default, ATObject? subject = default)
+        {
+            this.ReasonType = reasonType;
+            this.Reason = reason;
+            this.Subject = subject;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateReportInput"/> class.
+        /// </summary>
         public CreateReportInput()
         {
         }

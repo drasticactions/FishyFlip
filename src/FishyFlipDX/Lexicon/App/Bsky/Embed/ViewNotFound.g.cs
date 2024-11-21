@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewNotFound"/> class.
         /// </summary>
+        public ViewNotFound(FishyFlip.Models.ATUri? uri = default, bool? notFound = default)
+        {
+            this.Uri = uri;
+            this.NotFound = notFound;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewNotFound"/> class.
+        /// </summary>
         public ViewNotFound()
         {
         }

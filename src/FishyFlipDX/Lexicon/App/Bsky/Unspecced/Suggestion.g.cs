@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="Suggestion"/> class.
         /// </summary>
+        public Suggestion(string? tag = default, string? subjectType = default, string? subject = default)
+        {
+            this.Tag = tag;
+            this.SubjectType = subjectType;
+            this.Subject = subject;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Suggestion"/> class.
+        /// </summary>
         public Suggestion()
         {
         }

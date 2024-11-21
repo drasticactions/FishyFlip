@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetFeedGeneratorOutput"/> class.
         /// </summary>
+        public GetFeedGeneratorOutput(App.Bsky.Feed.GeneratorView? view = default, bool? isOnline = default, bool? isValid = default)
+        {
+            this.View = view;
+            this.IsOnline = isOnline;
+            this.IsValid = isValid;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetFeedGeneratorOutput"/> class.
+        /// </summary>
         public GetFeedGeneratorOutput()
         {
         }

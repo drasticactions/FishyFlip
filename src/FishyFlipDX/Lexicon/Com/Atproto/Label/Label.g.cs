@@ -15,6 +15,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="Label"/> class.
         /// </summary>
+        public Label(long? ver = default, FishyFlip.Models.ATDid? src = default, string? uri = default, string? cid = default, string? val = default, bool? neg = default, DateTime? cts = default, DateTime? exp = default, byte[]? sig = default)
+        {
+            this.Ver = ver;
+            this.Src = src;
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Val = val;
+            this.Neg = neg;
+            this.Cts = cts;
+            this.Exp = exp;
+            this.Sig = sig;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Label"/> class.
+        /// </summary>
         public Label()
         {
         }

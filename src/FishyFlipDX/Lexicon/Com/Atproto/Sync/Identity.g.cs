@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Identity"/> class.
         /// </summary>
+        public Identity(long? seq = default, FishyFlip.Models.ATDid? did = default, DateTime? time = default, FishyFlip.Models.ATHandle? handle = default)
+        {
+            this.Seq = seq;
+            this.Did = did;
+            this.Time = time;
+            this.Handle = handle;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Identity"/> class.
+        /// </summary>
         public Identity()
         {
         }

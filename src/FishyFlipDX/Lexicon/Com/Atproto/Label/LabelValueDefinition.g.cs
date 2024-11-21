@@ -15,6 +15,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelValueDefinition"/> class.
         /// </summary>
+        public LabelValueDefinition(string? identifier = default, string? severity = default, string? blurs = default, string? defaultSetting = default, bool? adultOnly = default, List<Com.Atproto.Label.LabelValueDefinitionStrings>? locales = default)
+        {
+            this.Identifier = identifier;
+            this.Severity = severity;
+            this.Blurs = blurs;
+            this.DefaultSetting = defaultSetting;
+            this.AdultOnly = adultOnly;
+            this.Locales = locales;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelValueDefinition"/> class.
+        /// </summary>
         public LabelValueDefinition()
         {
         }

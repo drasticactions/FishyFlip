@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonSearchStarterPack"/> class.
         /// </summary>
+        public SkeletonSearchStarterPack(FishyFlip.Models.ATUri? uri = default)
+        {
+            this.Uri = uri;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SkeletonSearchStarterPack"/> class.
+        /// </summary>
         public SkeletonSearchStarterPack()
         {
         }

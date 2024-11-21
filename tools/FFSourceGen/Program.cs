@@ -378,7 +378,14 @@ public partial class AppCommands
                     {
                         var prop = item.Properties[i].ClassName;
                         var key = item.Properties[i].Key;
-                        sb.AppendLine($"            record.{prop} = {key};");
+                        if (key == "createdAt")
+                        {
+                            sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"            record.{prop} = {key};");
+                        }
                     }
 
                     sb.AppendLine($"            return atp.ATProtocol.CreateRecordAsync({string.Join(", ", properties)});");
@@ -525,7 +532,14 @@ public partial class AppCommands
                     {
                         var prop = item.Properties[i].ClassName;
                         var key = item.Properties[i].Key;
-                        sb.AppendLine($"            record.{prop} = {key};");
+                        if (key == "createdAt")
+                        {
+                            sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"            record.{prop} = {key};");
+                        }
                     }
                     sb.AppendLine($"            return atp.CreateRecordAsync({string.Join(", ", properties)});");
                     sb.AppendLine("        }");
@@ -609,40 +623,6 @@ public partial class AppCommands
             {
                 sb.Append(", ");
             }
-        }
-    }
-
-    private void GenerateATProtocolRepoHelperMethods(StringBuilder sb)
-    {
-        var graphClasses = AllClasses.Where(n => n.Definition.Type == "record").ToList();
-        foreach (var item in graphClasses)
-        {
-            Console.WriteLine($"Generating Repo Helper Method for {item.Id}");
-            sb.AppendLine();
-            var methodTypes = new List<string> { "Create", "Put", $"Delete" };
-            var baseMethodName = $"{item.ClassName}Async";
-            var inputProperties = new List<string> { $"{item.FullClassName} input", "CancellationToken cancellationToken = default" };
-            var baseOutputProperty = $"RecordOutput";
-            foreach (var methodType in methodTypes)
-            {
-                sb.AppendLine();
-                var methodName = $"{methodType}{item.ClassName}Async";
-                var description = $"{methodType} record for {item.Id}.";
-                sb.AppendLine($"        /// <summary>");
-                sb.AppendLine($"        /// {description}");
-                sb.AppendLine($"        /// </summary>");
-                sb.Append($"        public Task<Result<{this.baseNamespace}.Com.Atproto.Repo.{methodType}RecordOutput?>> {methodName} (");
-                this.GenerateInputProperties(sb, inputProperties);
-                sb.AppendLine($")");
-                sb.AppendLine("        {");
-                sb.AppendLine($"            var createRecordInput = new CreateRecordInput();");
-                sb.AppendLine($"            createRecordInput.Record = input;");
-                sb.AppendLine($"            return this.atp.{methodType}RecordAsync(createRecordInput, cancellationToken);");
-                sb.AppendLine("        }");
-
-            }
-
-            sb.AppendLine("   }");
         }
     }
 
@@ -775,7 +755,14 @@ public partial class AppCommands
                             sb.AppendLine("            endpointUrl += string.Join(\"&\", queryStrings);");
                         }
 
-                        sb.AppendLine($"            return atp.Client.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                        if (inputProperties.Any(n => n.Contains("OnCarDecoded")))
+                        {
+                            sb.AppendLine($"            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"            return atp.Client.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                        }
                         break;
                     default:
                         sb.AppendLine("            throw new NotImplementedException();");
@@ -805,7 +792,7 @@ public partial class AppCommands
         return new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" }.Contains(propertyName) ? $"@{propertyName}" : propertyName;
     }
 
-    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputPropertiesFromProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
+    private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputPropertiesFromProperties(ClassGeneration classGeneration, bool isExtensionMethod = false, bool includeCancellationToken = true)
     {
         var requiredProperties = new List<string>();
         var optionalProperties = new List<string>();
@@ -814,6 +801,11 @@ public partial class AppCommands
         {
             var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
             var isRequired = requiredFields.Contains(prop.Key);
+            if (prop.Key == "createdAt")
+            {
+                isRequired = false;
+                prop.PropertyDefinition.Default = "DateTime.UtcNow";
+            }
             var returnType = prop.Type;
             var isArray = prop.PropertyDefinition.Type == "array";
             var arrayType = prop.PropertyDefinition.Items?.CSharpType;
@@ -864,9 +856,12 @@ public partial class AppCommands
             requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
         }
 
-        optionalProperties.Add("CancellationToken cancellationToken = default");
+        if (includeCancellationToken)
+        {
+            optionalProperties.Add("CancellationToken cancellationToken = default");
+        }
 
-         return (requiredProperties, optionalProperties);
+        return (requiredProperties, optionalProperties);
     }
 
     private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputProperties(ClassGeneration classGeneration, bool isExtensionMethod = false)
@@ -1027,6 +1022,11 @@ public partial class AppCommands
         if (classGeneration.Definition.Input?.Encoding == "*/*")
         {
             requiredProperties.Add("StreamContent content");
+        }
+
+        if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
+        {
+            requiredProperties.Add("OnCarDecoded onDecoded");
         }
 
         if (isExtensionMethod)
@@ -1265,6 +1265,7 @@ public partial class AppCommands
         sb.AppendLine($"    public partial class {cls.ClassName} : ATObject");
         sb.AppendLine("    {");
 
+        this.GenerateClassConstructor(sb, cls);
         this.GenerateEmptyClassConstructor(sb, cls.ClassName);
         this.GenerateCBorObjectClassConstructor(sb, cls);
         foreach (var property in cls.Properties)
@@ -1322,6 +1323,47 @@ public partial class AppCommands
         foreach (var property in cls.Properties)
         {
             sb.AppendLine($"            {property.CBorProperty}");
+        }
+        sb.AppendLine("        }");
+        sb.AppendLine();
+    }
+
+    private void GenerateClassConstructor(StringBuilder sb, ClassGeneration cls)
+    {
+        var (requiredProperties, optionalProperties) = this.FetchInputPropertiesFromProperties(cls, false, false);
+        var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+        if (inputProperties.Count == 0)
+        {
+            return;
+        }
+
+        sb.AppendLine();
+        sb.AppendLine("        /// <summary>");
+        sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{cls.ClassName}\"/> class.");
+        sb.AppendLine("        /// </summary>");
+        
+        sb.Append($"        public {cls.ClassName}(");
+        for (int i = 0; i < inputProperties.Count; i++)
+        {
+            sb.Append($"{inputProperties[i]}");
+            if (i < inputProperties.Count - 1)
+            {
+                sb.Append(", ");
+            }
+        }
+
+        sb.AppendLine(")");
+        sb.AppendLine("        {");
+        foreach (var property in cls.Properties)
+        {
+            if (property.Key == "createdAt")
+            {
+                sb.AppendLine($"            this.{property.PropertyName} = {PropertyNameToCSharpSafeValue(property.Key)} ?? DateTime.UtcNow;");
+            }
+            else
+            {
+                sb.AppendLine($"            this.{property.PropertyName} = {PropertyNameToCSharpSafeValue(property.Key)};");
+            }
         }
         sb.AppendLine("        }");
         sb.AppendLine();
@@ -1434,6 +1476,12 @@ public partial class AppCommands
         sb.AppendLine($"    /// </summary>");
         sb.AppendLine($"    public static class CborLexiconExtensions");
         sb.AppendLine("    {");
+        sb.AppendLine();
+        sb.AppendLine("        public static bool IsATObject(this CBORObject obj)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            return obj?.ContainsKey(\"$type\") ?? false;");
+        sb.AppendLine("        }");
+        sb.AppendLine();
         sb.AppendLine("        public static ATObject ToATObject(this CBORObject obj)");
         sb.AppendLine("        {");
         sb.AppendLine("            if (obj == null)");
@@ -1441,7 +1489,7 @@ public partial class AppCommands
         sb.AppendLine("                 throw new NullReferenceException(nameof(obj));");
         sb.AppendLine("            }");
         sb.AppendLine();
-        sb.AppendLine("            var type = obj[\"$type\"].AsString();");
+        sb.AppendLine("            var type = obj[\"$type\"]?.AsString() ?? string.Empty;");
         sb.AppendLine("            switch (type)");
         sb.AppendLine("            {");
         foreach (var cls in classes)

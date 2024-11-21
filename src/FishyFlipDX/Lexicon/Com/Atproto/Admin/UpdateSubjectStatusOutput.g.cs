@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSubjectStatusOutput"/> class.
         /// </summary>
+        public UpdateSubjectStatusOutput(ATObject? subject = default, Com.Atproto.Admin.StatusAttr? takedown = default)
+        {
+            this.Subject = subject;
+            this.Takedown = takedown;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateSubjectStatusOutput"/> class.
+        /// </summary>
         public UpdateSubjectStatusOutput()
         {
         }

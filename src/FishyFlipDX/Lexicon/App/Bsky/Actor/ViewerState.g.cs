@@ -15,6 +15,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewerState"/> class.
         /// </summary>
+        public ViewerState(bool? muted = default, App.Bsky.Graph.ListViewBasic? mutedByList = default, bool? blockedBy = default, FishyFlip.Models.ATUri? blocking = default, App.Bsky.Graph.ListViewBasic? blockingByList = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, App.Bsky.Actor.KnownFollowers? knownFollowers = default)
+        {
+            this.Muted = muted;
+            this.MutedByList = mutedByList;
+            this.BlockedBy = blockedBy;
+            this.Blocking = blocking;
+            this.BlockingByList = blockingByList;
+            this.Following = following;
+            this.FollowedBy = followedBy;
+            this.KnownFollowers = knownFollowers;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewerState"/> class.
+        /// </summary>
         public ViewerState()
         {
         }

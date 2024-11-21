@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateEmailInput"/> class.
         /// </summary>
+        public UpdateEmailInput(string? email = default, bool? emailAuthFactor = default, string? token = default)
+        {
+            this.Email = email;
+            this.EmailAuthFactor = emailAuthFactor;
+            this.Token = token;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateEmailInput"/> class.
+        /// </summary>
         public UpdateEmailInput()
         {
         }

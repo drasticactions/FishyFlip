@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateReportOutput"/> class.
         /// </summary>
+        public CreateReportOutput(long? id = default, string? reasonType = default, string? reason = default, ATObject? subject = default, FishyFlip.Models.ATDid? reportedBy = default, DateTime? createdAt = default)
+        {
+            this.Id = id;
+            this.ReasonType = reasonType;
+            this.Reason = reason;
+            this.Subject = subject;
+            this.ReportedBy = reportedBy;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateReportOutput"/> class.
+        /// </summary>
         public CreateReportOutput()
         {
         }
@@ -52,7 +66,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

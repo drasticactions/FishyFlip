@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Threadgate"/> class.
         /// </summary>
+        public Threadgate(FishyFlip.Models.ATUri? post, List<ATObject>? allow = default, DateTime? createdAt = default, List<FishyFlip.Models.ATUri>? hiddenReplies = default)
+        {
+            this.Post = post;
+            this.Allow = allow;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.HiddenReplies = hiddenReplies;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Threadgate"/> class.
+        /// </summary>
         public Threadgate()
         {
         }
@@ -42,7 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public List<ATObject>? Allow { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// List of hidden reply URIs.

@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventLabel"/> class.
         /// </summary>
+        public ModEventLabel(string? comment = default, List<string>? createLabelVals = default, List<string>? negateLabelVals = default)
+        {
+            this.Comment = comment;
+            this.CreateLabelVals = createLabelVals;
+            this.NegateLabelVals = negateLabelVals;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventLabel"/> class.
+        /// </summary>
         public ModEventLabel()
         {
         }

@@ -15,6 +15,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentityEvent"/> class.
         /// </summary>
+        public IdentityEvent(string? comment = default, FishyFlip.Models.ATHandle? handle = default, string? pdsHost = default, bool? tombstone = default, DateTime? timestamp = default)
+        {
+            this.Comment = comment;
+            this.Handle = handle;
+            this.PdsHost = pdsHost;
+            this.Tombstone = tombstone;
+            this.Timestamp = timestamp;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IdentityEvent"/> class.
+        /// </summary>
         public IdentityEvent()
         {
         }

@@ -15,6 +15,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Starterpack"/> class.
         /// </summary>
+        public Starterpack(string? name, FishyFlip.Models.ATUri? list, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, List<App.Bsky.Graph.FeedItem>? feeds = default, DateTime? createdAt = default)
+        {
+            this.Name = name;
+            this.Description = description;
+            this.DescriptionFacets = descriptionFacets;
+            this.List = list;
+            this.Feeds = feeds;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Starterpack"/> class.
+        /// </summary>
         public Starterpack()
         {
         }
@@ -56,7 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public List<App.Bsky.Graph.FeedItem>? Feeds { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

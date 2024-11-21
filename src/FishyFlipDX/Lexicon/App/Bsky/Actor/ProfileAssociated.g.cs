@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileAssociated"/> class.
         /// </summary>
+        public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, App.Bsky.Actor.ProfileAssociatedChat? chat = default)
+        {
+            this.Lists = lists;
+            this.Feedgens = feedgens;
+            this.StarterPacks = starterPacks;
+            this.Labeler = labeler;
+            this.Chat = chat;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfileAssociated"/> class.
+        /// </summary>
         public ProfileAssociated()
         {
         }

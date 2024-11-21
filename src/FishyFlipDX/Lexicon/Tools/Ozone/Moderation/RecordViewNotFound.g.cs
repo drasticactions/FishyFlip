@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordViewNotFound"/> class.
         /// </summary>
+        public RecordViewNotFound(FishyFlip.Models.ATUri? uri = default)
+        {
+            this.Uri = uri;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecordViewNotFound"/> class.
+        /// </summary>
         public RecordViewNotFound()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="RepoRef"/> class.
         /// </summary>
+        public RepoRef(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RepoRef"/> class.
+        /// </summary>
         public RepoRef()
         {
         }

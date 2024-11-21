@@ -12,6 +12,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileView"/> class.
         /// </summary>
+        public ProfileView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? description = default, string? avatar = default, App.Bsky.Actor.ProfileAssociated? associated = default, DateTime? indexedAt = default, DateTime? createdAt = default, App.Bsky.Actor.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default)
+        {
+            this.Did = did;
+            this.Handle = handle;
+            this.DisplayName = displayName;
+            this.Description = description;
+            this.Avatar = avatar;
+            this.Associated = associated;
+            this.IndexedAt = indexedAt;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Viewer = viewer;
+            this.Labels = labels;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfileView"/> class.
+        /// </summary>
         public ProfileView()
         {
         }
@@ -60,7 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public DateTime? IndexedAt { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("viewer")]
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }

@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="Image"/> class.
         /// </summary>
+        public Image(Blob? image = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
+        {
+            this.ImageValue = image;
+            this.Alt = alt;
+            this.AspectRatio = aspectRatio;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Image"/> class.
+        /// </summary>
         public Image()
         {
         }

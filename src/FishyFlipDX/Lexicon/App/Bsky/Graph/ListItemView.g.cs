@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="ListItemView"/> class.
         /// </summary>
+        public ListItemView(FishyFlip.Models.ATUri? uri = default, App.Bsky.Actor.ProfileView? subject = default)
+        {
+            this.Uri = uri;
+            this.Subject = subject;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListItemView"/> class.
+        /// </summary>
         public ListItemView()
         {
         }

@@ -12,6 +12,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="InviteCode"/> class.
         /// </summary>
+        public InviteCode(string? code = default, long? available = default, bool? disabled = default, string? forAccount = default, string? createdBy = default, DateTime? createdAt = default, List<Com.Atproto.Server.InviteCodeUse>? uses = default)
+        {
+            this.Code = code;
+            this.Available = available;
+            this.Disabled = disabled;
+            this.ForAccount = forAccount;
+            this.CreatedBy = createdBy;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Uses = uses;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InviteCode"/> class.
+        /// </summary>
         public InviteCode()
         {
         }
@@ -53,7 +68,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("uses")]
         [JsonRequired]

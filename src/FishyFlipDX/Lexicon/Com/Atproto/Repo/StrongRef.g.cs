@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="StrongRef"/> class.
         /// </summary>
+        public StrongRef(FishyFlip.Models.ATUri? uri = default, string? cid = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StrongRef"/> class.
+        /// </summary>
         public StrongRef()
         {
         }

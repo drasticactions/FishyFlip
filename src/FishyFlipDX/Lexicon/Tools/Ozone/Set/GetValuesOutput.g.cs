@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="GetValuesOutput"/> class.
         /// </summary>
+        public GetValuesOutput(Tools.Ozone.Set.SetView? set = default, List<string>? values = default, string? cursor = default)
+        {
+            this.Set = set;
+            this.Values = values;
+            this.Cursor = cursor;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetValuesOutput"/> class.
+        /// </summary>
         public GetValuesOutput()
         {
         }

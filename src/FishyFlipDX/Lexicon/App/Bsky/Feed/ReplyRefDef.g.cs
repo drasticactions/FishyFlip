@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplyRefDef"/> class.
         /// </summary>
+        public ReplyRefDef(Com.Atproto.Repo.StrongRef? root = default, Com.Atproto.Repo.StrongRef? parent = default)
+        {
+            this.Root = root;
+            this.Parent = parent;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReplyRefDef"/> class.
+        /// </summary>
         public ReplyRefDef()
         {
         }

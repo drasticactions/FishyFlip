@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteRecordOutput"/> class.
         /// </summary>
+        public DeleteRecordOutput(Com.Atproto.Repo.CommitMeta? commit = default)
+        {
+            this.Commit = commit;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteRecordOutput"/> class.
+        /// </summary>
         public DeleteRecordOutput()
         {
         }

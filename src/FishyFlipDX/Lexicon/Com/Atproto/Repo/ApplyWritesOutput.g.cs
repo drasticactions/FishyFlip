@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplyWritesOutput"/> class.
         /// </summary>
+        public ApplyWritesOutput(Com.Atproto.Repo.CommitMeta? commit = default, List<ATObject>? results = default)
+        {
+            this.Commit = commit;
+            this.Results = results;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplyWritesOutput"/> class.
+        /// </summary>
         public ApplyWritesOutput()
         {
         }

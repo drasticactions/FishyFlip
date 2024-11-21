@@ -12,6 +12,25 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewRecord"/> class.
         /// </summary>
+        public ViewRecord(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? value = default, List<Com.Atproto.Label.Label>? labels = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, List<ATObject>? embeds = default, DateTime? indexedAt = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Author = author;
+            this.Value = value;
+            this.Labels = labels;
+            this.ReplyCount = replyCount;
+            this.RepostCount = repostCount;
+            this.LikeCount = likeCount;
+            this.QuoteCount = quoteCount;
+            this.Embeds = embeds;
+            this.IndexedAt = indexedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewRecord"/> class.
+        /// </summary>
         public ViewRecord()
         {
         }

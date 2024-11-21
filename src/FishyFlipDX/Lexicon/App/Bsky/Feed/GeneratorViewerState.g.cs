@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GeneratorViewerState"/> class.
         /// </summary>
+        public GeneratorViewerState(FishyFlip.Models.ATUri? like = default)
+        {
+            this.Like = like;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeneratorViewerState"/> class.
+        /// </summary>
         public GeneratorViewerState()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <summary>
         /// Initializes a new instance of the <see cref="FetchLabelsOutput"/> class.
         /// </summary>
+        public FetchLabelsOutput(List<Com.Atproto.Label.Label>? labels = default)
+        {
+            this.Labels = labels;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FetchLabelsOutput"/> class.
+        /// </summary>
         public FetchLabelsOutput()
         {
         }

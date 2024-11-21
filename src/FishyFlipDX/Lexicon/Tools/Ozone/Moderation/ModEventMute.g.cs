@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventMute"/> class.
         /// </summary>
+        public ModEventMute(string? comment = default, long? durationInHours = default)
+        {
+            this.Comment = comment;
+            this.DurationInHours = durationInHours;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventMute"/> class.
+        /// </summary>
         public ModEventMute()
         {
         }

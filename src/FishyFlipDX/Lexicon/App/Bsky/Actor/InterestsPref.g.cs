@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="InterestsPref"/> class.
         /// </summary>
+        public InterestsPref(List<string>? tags = default)
+        {
+            this.Tags = tags;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InterestsPref"/> class.
+        /// </summary>
         public InterestsPref()
         {
         }

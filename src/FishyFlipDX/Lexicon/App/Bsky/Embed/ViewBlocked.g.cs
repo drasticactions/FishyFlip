@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewBlocked"/> class.
         /// </summary>
+        public ViewBlocked(FishyFlip.Models.ATUri? uri = default, bool? blocked = default, App.Bsky.Feed.BlockedAuthor? author = default)
+        {
+            this.Uri = uri;
+            this.Blocked = blocked;
+            this.Author = author;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewBlocked"/> class.
+        /// </summary>
         public ViewBlocked()
         {
         }

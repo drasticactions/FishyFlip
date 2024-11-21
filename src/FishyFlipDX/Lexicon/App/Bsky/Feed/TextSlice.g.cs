@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="TextSlice"/> class.
         /// </summary>
+        public TextSlice(long? start = default, long? end = default)
+        {
+            this.Start = start;
+            this.End = end;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextSlice"/> class.
+        /// </summary>
         public TextSlice()
         {
         }

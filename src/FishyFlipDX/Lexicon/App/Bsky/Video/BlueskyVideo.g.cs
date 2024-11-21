@@ -31,6 +31,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
 
         /// <summary>
+        /// Upload a video to be processed then stored on the PDS.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.UploadVideoAsync(cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get status details for a video processing job.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput?>> GetJobStatusAsync (string jobId, CancellationToken cancellationToken = default)
@@ -45,15 +54,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput?>> GetUploadLimitsAsync (CancellationToken cancellationToken = default)
         {
             return atp.GetUploadLimitsAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Upload a video to be processed then stored on the PDS.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (CancellationToken cancellationToken = default)
-        {
-            return atp.UploadVideoAsync(cancellationToken);
         }
 
     }

@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventViewDetail"/> class.
         /// </summary>
+        public ModEventViewDetail(long? id = default, ATObject? @event = default, ATObject? subject = default, List<Tools.Ozone.Moderation.BlobView>? subjectBlobs = default, FishyFlip.Models.ATDid? createdBy = default, DateTime? createdAt = default)
+        {
+            this.Id = id;
+            this.Event = @event;
+            this.Subject = subject;
+            this.SubjectBlobs = subjectBlobs;
+            this.CreatedBy = createdBy;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventViewDetail"/> class.
+        /// </summary>
         public ModEventViewDetail()
         {
         }
@@ -53,7 +67,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

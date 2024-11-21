@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="DescribeRepoOutput"/> class.
         /// </summary>
+        public DescribeRepoOutput(FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, List<string>? collections = default, bool? handleIsCorrect = default)
+        {
+            this.Handle = handle;
+            this.Did = did;
+            this.DidDoc = didDoc;
+            this.Collections = collections;
+            this.HandleIsCorrect = handleIsCorrect;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DescribeRepoOutput"/> class.
+        /// </summary>
         public DescribeRepoOutput()
         {
         }

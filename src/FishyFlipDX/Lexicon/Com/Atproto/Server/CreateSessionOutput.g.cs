@@ -12,6 +12,24 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSessionOutput"/> class.
         /// </summary>
+        public CreateSessionOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, string? email = default, bool? emailConfirmed = default, bool? emailAuthFactor = default, bool? active = default, string? status = default)
+        {
+            this.AccessJwt = accessJwt;
+            this.RefreshJwt = refreshJwt;
+            this.Handle = handle;
+            this.Did = did;
+            this.DidDoc = didDoc;
+            this.Email = email;
+            this.EmailConfirmed = emailConfirmed;
+            this.EmailAuthFactor = emailAuthFactor;
+            this.Active = active;
+            this.Status = status;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateSessionOutput"/> class.
+        /// </summary>
         public CreateSessionOutput()
         {
         }

@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateAccountEmailInput"/> class.
         /// </summary>
+        public UpdateAccountEmailInput(FishyFlip.Models.ATIdentifier? account = default, string? email = default)
+        {
+            this.Account = account;
+            this.Email = email;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateAccountEmailInput"/> class.
+        /// </summary>
         public UpdateAccountEmailInput()
         {
         }

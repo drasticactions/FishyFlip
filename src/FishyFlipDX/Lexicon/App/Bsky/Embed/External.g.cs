@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="External"/> class.
         /// </summary>
+        public External(string? uri = default, string? title = default, string? description = default, Blob? thumb = default)
+        {
+            this.Uri = uri;
+            this.Title = title;
+            this.Description = description;
+            this.Thumb = thumb;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="External"/> class.
+        /// </summary>
         public External()
         {
         }

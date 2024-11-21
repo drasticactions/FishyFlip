@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Repost"/> class.
         /// </summary>
+        public Repost(Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default)
+        {
+            this.Subject = subject;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Repost"/> class.
+        /// </summary>
         public Repost()
         {
         }
@@ -33,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Com.Atproto.Repo.StrongRef? Subject { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the ATRecord Type.

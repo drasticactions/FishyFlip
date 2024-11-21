@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Migrate"/> class.
         /// </summary>
+        public Migrate(long? seq = default, FishyFlip.Models.ATDid? did = default, string? migrateTo = default, DateTime? time = default)
+        {
+            this.Seq = seq;
+            this.Did = did;
+            this.MigrateTo = migrateTo;
+            this.Time = time;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Migrate"/> class.
+        /// </summary>
         public Migrate()
         {
         }

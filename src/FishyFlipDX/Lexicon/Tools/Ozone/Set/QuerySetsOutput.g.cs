@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySetsOutput"/> class.
         /// </summary>
+        public QuerySetsOutput(List<Tools.Ozone.Set.SetView>? sets = default, string? cursor = default)
+        {
+            this.Sets = sets;
+            this.Cursor = cursor;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QuerySetsOutput"/> class.
+        /// </summary>
         public QuerySetsOutput()
         {
         }

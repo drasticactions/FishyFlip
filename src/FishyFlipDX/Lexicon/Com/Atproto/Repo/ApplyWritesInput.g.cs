@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplyWritesInput"/> class.
         /// </summary>
+        public ApplyWritesInput(FishyFlip.Models.ATIdentifier? repo = default, bool? validate = default, List<ATObject>? writes = default, string? swapCommit = default)
+        {
+            this.Repo = repo;
+            this.Validate = validate;
+            this.Writes = writes;
+            this.SwapCommit = swapCommit;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplyWritesInput"/> class.
+        /// </summary>
         public ApplyWritesInput()
         {
         }

@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Postgate"/> class.
         /// </summary>
+        public Postgate(FishyFlip.Models.ATUri? post, DateTime? createdAt = default, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default)
+        {
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Post = post;
+            this.DetachedEmbeddingUris = detachedEmbeddingUris;
+            this.EmbeddingRules = embeddingRules;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Postgate"/> class.
+        /// </summary>
         public Postgate()
         {
         }
@@ -32,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         }
 
         [JsonPropertyName("createdAt")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Reference (AT-URI) to the post record.

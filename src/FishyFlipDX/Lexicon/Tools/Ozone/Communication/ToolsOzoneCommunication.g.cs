@@ -31,20 +31,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
 
         /// <summary>
+        /// Administrative action to update an existing communication template. Allows passing partial fields to patch specific fields only.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
+        {
+            return atp.UpdateTemplateAsync(id, name, lang, contentMarkdown, subject, updatedBy, disabled, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Administrative action to create a new, re-usable communication (email for now) template.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> CreateTemplateAsync (string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateTemplateAsync(name, contentMarkdown, subject, lang, createdBy, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Delete a communication template.
-        /// </summary>
-        public Task<Result<Success?>> DeleteTemplateAsync (string id, CancellationToken cancellationToken = default)
-        {
-            return atp.DeleteTemplateAsync(id, cancellationToken);
         }
 
 
@@ -58,11 +58,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
 
         /// <summary>
-        /// Administrative action to update an existing communication template. Allows passing partial fields to patch specific fields only.
+        /// Delete a communication template.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> DeleteTemplateAsync (string id, CancellationToken cancellationToken = default)
         {
-            return atp.UpdateTemplateAsync(id, name, lang, contentMarkdown, subject, updatedBy, disabled, cancellationToken);
+            return atp.DeleteTemplateAsync(id, cancellationToken);
         }
 
     }

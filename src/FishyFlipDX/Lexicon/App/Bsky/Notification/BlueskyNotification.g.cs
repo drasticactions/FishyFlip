@@ -31,20 +31,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
 
         /// <summary>
-        /// Count the number of unread notifications for the requesting account. Requires auth.
+        /// Register to receive push notifications, via a specified service, for the requesting account. Requires auth.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?>> GetUnreadCountAsync (bool? priority = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> RegisterPushAsync (FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
         {
-            return atp.GetUnreadCountAsync(priority, seenAt, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerate notifications for the requesting account. Requires auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?>> ListNotificationsAsync (int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ListNotificationsAsync(limit, priority, cursor, seenAt, cancellationToken);
+            return atp.RegisterPushAsync(serviceDid, token, platform, appId, cancellationToken);
         }
 
 
@@ -58,20 +49,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
 
         /// <summary>
-        /// Register to receive push notifications, via a specified service, for the requesting account. Requires auth.
-        /// </summary>
-        public Task<Result<Success?>> RegisterPushAsync (FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
-        {
-            return atp.RegisterPushAsync(serviceDid, token, platform, appId, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Notify server that the requesting account has seen notifications. Requires auth.
         /// </summary>
         public Task<Result<Success?>> UpdateSeenAsync (DateTime seenAt, CancellationToken cancellationToken = default)
         {
             return atp.UpdateSeenAsync(seenAt, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerate notifications for the requesting account. Requires auth.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?>> ListNotificationsAsync (int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListNotificationsAsync(limit, priority, cursor, seenAt, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Count the number of unread notifications for the requesting account. Requires auth.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?>> GetUnreadCountAsync (bool? priority = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetUnreadCountAsync(priority, seenAt, cancellationToken);
         }
 
     }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelerPrefItem"/> class.
         /// </summary>
+        public LabelerPrefItem(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelerPrefItem"/> class.
+        /// </summary>
         public LabelerPrefItem()
         {
         }

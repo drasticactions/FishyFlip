@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="RelatedAccount"/> class.
         /// </summary>
+        public RelatedAccount(Com.Atproto.Admin.AccountView? account = default, List<Tools.Ozone.Signature.SigDetail>? similarities = default)
+        {
+            this.Account = account;
+            this.Similarities = similarities;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RelatedAccount"/> class.
+        /// </summary>
         public RelatedAccount()
         {
         }

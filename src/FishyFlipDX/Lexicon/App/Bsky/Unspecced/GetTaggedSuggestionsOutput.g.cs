@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTaggedSuggestionsOutput"/> class.
         /// </summary>
+        public GetTaggedSuggestionsOutput(List<App.Bsky.Unspecced.Suggestion>? suggestions = default)
+        {
+            this.Suggestions = suggestions;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetTaggedSuggestionsOutput"/> class.
+        /// </summary>
         public GetTaggedSuggestionsOutput()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteSetInput"/> class.
         /// </summary>
+        public DeleteSetInput(string? name = default)
+        {
+            this.Name = name;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteSetInput"/> class.
+        /// </summary>
         public DeleteSetInput()
         {
         }

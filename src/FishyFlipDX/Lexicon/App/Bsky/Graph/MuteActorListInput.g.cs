@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="MuteActorListInput"/> class.
         /// </summary>
+        public MuteActorListInput(FishyFlip.Models.ATUri? list = default)
+        {
+            this.List = list;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MuteActorListInput"/> class.
+        /// </summary>
         public MuteActorListInput()
         {
         }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPostsOutput"/> class.
         /// </summary>
+        public GetPostsOutput(List<App.Bsky.Feed.PostView>? posts = default)
+        {
+            this.Posts = posts;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetPostsOutput"/> class.
+        /// </summary>
         public GetPostsOutput()
         {
         }

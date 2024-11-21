@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventTag"/> class.
         /// </summary>
+        public ModEventTag(List<string>? add = default, List<string>? remove = default, string? comment = default)
+        {
+            this.Add = add;
+            this.Remove = remove;
+            this.Comment = comment;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventTag"/> class.
+        /// </summary>
         public ModEventTag()
         {
         }

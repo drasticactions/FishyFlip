@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryStatusesOutput"/> class.
         /// </summary>
+        public QueryStatusesOutput(string? cursor = default, List<Tools.Ozone.Moderation.SubjectStatusView>? subjectStatuses = default)
+        {
+            this.Cursor = cursor;
+            this.SubjectStatuses = subjectStatuses;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueryStatusesOutput"/> class.
+        /// </summary>
         public QueryStatusesOutput()
         {
         }

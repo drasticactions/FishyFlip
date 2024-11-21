@@ -31,56 +31,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
 
         /// <summary>
-        /// Get information about a feed generator, including policies and offered feed URIs. Does not require auth; implemented by Feed Generator services (not App View).
+        /// Send information about interactions with feed items back to the feed generator that served them.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput?>> DescribeFeedGeneratorAsync (CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default)
         {
-            return atp.DescribeFeedGeneratorAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get a list of feeds (feed generator records) created by the actor (in the actor's repo).
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput?>> GetActorFeedsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetActorFeedsAsync(actor, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get a list of posts liked by an actor. Requires auth, actor must be the requesting account.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput?>> GetActorLikesAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetActorLikesAsync(actor, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get a view of an actor's 'author feed' (post and reposts by the author). Does not require auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput?>> GetAuthorFeedAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetAuthorFeedAsync(actor, limit, cursor, filter, includePins, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get a hydrated feed from an actor's selected feed generator. Implemented by App View.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput?>> GetFeedAsync (FishyFlip.Models.ATUri feed, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetFeedAsync(feed, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get information about a feed generator. Implemented by AppView.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput?>> GetFeedGeneratorAsync (FishyFlip.Models.ATUri feed, CancellationToken cancellationToken = default)
-        {
-            return atp.GetFeedGeneratorAsync(feed, cancellationToken);
+            return atp.SendInteractionsAsync(interactions, cancellationToken);
         }
 
 
@@ -94,11 +49,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
 
         /// <summary>
-        /// Get a skeleton of a feed provided by a feed generator. Auth is optional, depending on provider requirements, and provides the DID of the requester. Implemented by Feed Generator Service.
+        /// Get a view of the requesting account's home timeline. This is expected to be some form of reverse-chronological feed.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedSkeletonOutput?>> GetFeedSkeletonAsync (FishyFlip.Models.ATUri feed, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput?>> GetTimelineAsync (string? algorithm = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.GetFeedSkeletonAsync(feed, limit, cursor, cancellationToken);
+            return atp.GetTimelineAsync(algorithm, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get information about a feed generator. Implemented by AppView.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput?>> GetFeedGeneratorAsync (FishyFlip.Models.ATUri feed, CancellationToken cancellationToken = default)
+        {
+            return atp.GetFeedGeneratorAsync(feed, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a view of an actor's 'author feed' (post and reposts by the author). Does not require auth.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput?>> GetAuthorFeedAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetAuthorFeedAsync(actor, limit, cursor, filter, includePins, cancellationToken);
         }
 
 
@@ -112,24 +85,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
 
         /// <summary>
-        /// Get a feed of recent posts from a list (posts and reposts from any actors on the list). Does not require auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput?>> GetListFeedAsync (FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetListFeedAsync(list, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Gets post views for a specified list of posts (by AT-URI). This is sometimes referred to as 'hydrating' a 'feed skeleton'.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput?>> GetPostsAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
-        {
-            return atp.GetPostsAsync(uris, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Get posts in a thread. Does not require auth, but additional metadata and filtering will be applied for authed requests.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput?>> GetPostThreadAsync (FishyFlip.Models.ATUri uri, int? depth = 6, int? parentHeight = 80, CancellationToken cancellationToken = default)
@@ -139,11 +94,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
 
         /// <summary>
-        /// Get a list of quotes for a given post.
+        /// Get a list of posts liked by an actor. Requires auth, actor must be the requesting account.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput?>> GetQuotesAsync (FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput?>> GetActorLikesAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.GetQuotesAsync(uri, cid, limit, cursor, cancellationToken);
+            return atp.GetActorLikesAsync(actor, limit, cursor, cancellationToken);
         }
 
 
@@ -157,20 +112,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
 
         /// <summary>
-        /// Get a list of suggested feeds (feed generators) for the requesting account.
+        /// Get information about a feed generator, including policies and offered feed URIs. Does not require auth; implemented by Feed Generator services (not App View).
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput?>> GetSuggestedFeedsAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput?>> DescribeFeedGeneratorAsync (CancellationToken cancellationToken = default)
         {
-            return atp.GetSuggestedFeedsAsync(limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get a view of the requesting account's home timeline. This is expected to be some form of reverse-chronological feed.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput?>> GetTimelineAsync (string? algorithm = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetTimelineAsync(algorithm, limit, cursor, cancellationToken);
+            return atp.DescribeFeedGeneratorAsync(cancellationToken);
         }
 
 
@@ -184,11 +130,65 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
 
         /// <summary>
-        /// Send information about interactions with feed items back to the feed generator that served them.
+        /// Gets post views for a specified list of posts (by AT-URI). This is sometimes referred to as 'hydrating' a 'feed skeleton'.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput?>> GetPostsAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
-            return atp.SendInteractionsAsync(interactions, cancellationToken);
+            return atp.GetPostsAsync(uris, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a hydrated feed from an actor's selected feed generator. Implemented by App View.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput?>> GetFeedAsync (FishyFlip.Models.ATUri feed, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetFeedAsync(feed, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of quotes for a given post.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput?>> GetQuotesAsync (FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetQuotesAsync(uri, cid, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of a feed provided by a feed generator. Auth is optional, depending on provider requirements, and provides the DID of the requester. Implemented by Feed Generator Service.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedSkeletonOutput?>> GetFeedSkeletonAsync (FishyFlip.Models.ATUri feed, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetFeedSkeletonAsync(feed, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a feed of recent posts from a list (posts and reposts from any actors on the list). Does not require auth.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput?>> GetListFeedAsync (FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetListFeedAsync(list, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested feeds (feed generators) for the requesting account.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput?>> GetSuggestedFeedsAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedFeedsAsync(limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of feeds (feed generator records) created by the actor (in the actor's repo).
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput?>> GetActorFeedsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetActorFeedsAsync(actor, limit, cursor, cancellationToken);
         }
 
     }

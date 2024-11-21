@@ -12,6 +12,23 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateView"/> class.
         /// </summary>
+        public TemplateView(string? id = default, string? name = default, string? subject = default, string? contentMarkdown = default, bool? disabled = default, string? lang = default, FishyFlip.Models.ATDid? lastUpdatedBy = default, DateTime? createdAt = default, DateTime? updatedAt = default)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Subject = subject;
+            this.ContentMarkdown = contentMarkdown;
+            this.Disabled = disabled;
+            this.Lang = lang;
+            this.LastUpdatedBy = lastUpdatedBy;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.UpdatedAt = updatedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TemplateView"/> class.
+        /// </summary>
         public TemplateView()
         {
         }
@@ -77,7 +94,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         [JsonPropertyName("createdAt")]
         [JsonRequired]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("updatedAt")]
         [JsonRequired]

@@ -12,6 +12,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckAccountStatusOutput"/> class.
         /// </summary>
+        public CheckAccountStatusOutput(bool? activated = default, bool? validDid = default, string? repoCommit = default, string? repoRev = default, long? repoBlocks = default, long? indexedRecords = default, long? privateStateValues = default, long? expectedBlobs = default, long? importedBlobs = default)
+        {
+            this.Activated = activated;
+            this.ValidDid = validDid;
+            this.RepoCommit = repoCommit;
+            this.RepoRev = repoRev;
+            this.RepoBlocks = repoBlocks;
+            this.IndexedRecords = indexedRecords;
+            this.PrivateStateValues = privateStateValues;
+            this.ExpectedBlobs = expectedBlobs;
+            this.ImportedBlobs = importedBlobs;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CheckAccountStatusOutput"/> class.
+        /// </summary>
         public CheckAccountStatusOutput()
         {
         }

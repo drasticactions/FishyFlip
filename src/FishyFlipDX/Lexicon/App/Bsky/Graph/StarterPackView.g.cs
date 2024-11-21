@@ -12,6 +12,25 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="StarterPackView"/> class.
         /// </summary>
+        public StarterPackView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, App.Bsky.Actor.ProfileViewBasic? creator = default, App.Bsky.Graph.ListViewBasic? list = default, List<App.Bsky.Graph.ListItemView>? listItemsSample = default, List<App.Bsky.Feed.GeneratorView>? feeds = default, long? joinedWeekCount = default, long? joinedAllTimeCount = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Record = record;
+            this.Creator = creator;
+            this.List = list;
+            this.ListItemsSample = listItemsSample;
+            this.Feeds = feeds;
+            this.JoinedWeekCount = joinedWeekCount;
+            this.JoinedAllTimeCount = joinedAllTimeCount;
+            this.Labels = labels;
+            this.IndexedAt = indexedAt;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StarterPackView"/> class.
+        /// </summary>
         public StarterPackView()
         {
         }

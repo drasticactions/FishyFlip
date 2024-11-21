@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventEmail"/> class.
         /// </summary>
+        public ModEventEmail(string? subjectLine = default, string? content = default, string? comment = default)
+        {
+            this.SubjectLine = subjectLine;
+            this.Content = content;
+            this.Comment = comment;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModEventEmail"/> class.
+        /// </summary>
         public ModEventEmail()
         {
         }

@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetFollowersOutput"/> class.
         /// </summary>
+        public GetFollowersOutput(App.Bsky.Actor.ProfileView? subject = default, string? cursor = default, List<App.Bsky.Actor.ProfileView>? followers = default)
+        {
+            this.Subject = subject;
+            this.Cursor = cursor;
+            this.Followers = followers;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetFollowersOutput"/> class.
+        /// </summary>
         public GetFollowersOutput()
         {
         }

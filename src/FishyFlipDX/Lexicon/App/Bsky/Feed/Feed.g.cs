@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Feed"/> class.
         /// </summary>
+        public Feed(FishyFlip.Models.ATUri? uri = default)
+        {
+            this.Uri = uri;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Feed"/> class.
+        /// </summary>
         public Feed()
         {
         }

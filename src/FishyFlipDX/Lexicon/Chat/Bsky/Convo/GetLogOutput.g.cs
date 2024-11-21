@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="GetLogOutput"/> class.
         /// </summary>
+        public GetLogOutput(string? cursor = default, List<ATObject>? logs = default)
+        {
+            this.Cursor = cursor;
+            this.Logs = logs;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetLogOutput"/> class.
+        /// </summary>
         public GetLogOutput()
         {
         }

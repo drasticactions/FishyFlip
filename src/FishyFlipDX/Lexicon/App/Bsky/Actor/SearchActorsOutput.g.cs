@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchActorsOutput"/> class.
         /// </summary>
+        public SearchActorsOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? actors = default)
+        {
+            this.Cursor = cursor;
+            this.Actors = actors;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchActorsOutput"/> class.
+        /// </summary>
         public SearchActorsOutput()
         {
         }

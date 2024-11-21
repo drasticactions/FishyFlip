@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonSearchActor"/> class.
         /// </summary>
+        public SkeletonSearchActor(FishyFlip.Models.ATDid? did = default)
+        {
+            this.Did = did;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SkeletonSearchActor"/> class.
+        /// </summary>
         public SkeletonSearchActor()
         {
         }

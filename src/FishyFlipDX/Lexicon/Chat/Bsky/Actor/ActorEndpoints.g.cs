@@ -13,19 +13,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
     public static class ActorEndpoints
     {
 
-       public const string DeleteAccount = "/xrpc/chat.bsky.actor.deleteAccount";
-
        public const string ExportAccountData = "/xrpc/chat.bsky.actor.exportAccountData";
 
-
-        /// <summary>
-        /// Generated endpoint for chat.bsky.actor.deleteAccount
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = DeleteAccount.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
+       public const string DeleteAccount = "/xrpc/chat.bsky.actor.deleteAccount";
 
 
         /// <summary>
@@ -35,6 +25,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         {
             var endpointUrl = ExportAccountData.ToString();
             return atp.Client.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Generated endpoint for chat.bsky.actor.deleteAccount
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = DeleteAccount.ToString();
+            return atp.Client.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

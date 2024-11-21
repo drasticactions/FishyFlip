@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateRecordOutput"/> class.
         /// </summary>
+        public CreateRecordOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, Com.Atproto.Repo.CommitMeta? commit = default, string? validationStatus = default)
+        {
+            this.Uri = uri;
+            this.Cid = cid;
+            this.Commit = commit;
+            this.ValidationStatus = validationStatus;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateRecordOutput"/> class.
+        /// </summary>
         public CreateRecordOutput()
         {
         }

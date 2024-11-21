@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordEvent"/> class.
         /// </summary>
+        public RecordEvent(string? comment = default, string? op = default, string? cid = default, DateTime? timestamp = default)
+        {
+            this.Comment = comment;
+            this.Op = op;
+            this.Cid = cid;
+            this.Timestamp = timestamp;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecordEvent"/> class.
+        /// </summary>
         public RecordEvent()
         {
         }
