@@ -22,8 +22,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public LabelerPolicies(CBORObject obj)
         {
-            if (obj["labelValues"] is not null) this.LabelValues = obj["labelValues"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
-            if (obj["labelValueDefinitions"] is not null) this.LabelValueDefinitions = obj["labelValueDefinitions"].Values.Select(n => n is not null ? new Com.Atproto.Label.LabelValueDefinition(n) : null).ToList();
+            if (obj["labelValues"] is not null) this.LabelValues = obj["labelValues"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["labelValueDefinitions"] is not null) this.LabelValueDefinitions = obj["labelValueDefinitions"].Values.Select(n =>new Com.Atproto.Label.LabelValueDefinition(n)).ToList();
         }
 
         /// <summary>
@@ -31,13 +31,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         [JsonPropertyName("labelValues")]
         [JsonRequired]
-        public List<string?>? LabelValues { get; set; }
+        public List<string>? LabelValues { get; set; }
 
         /// <summary>
         /// Label values created by this labeler and scoped exclusively to it. Labels defined here will override global label definitions for this labeler.
         /// </summary>
         [JsonPropertyName("labelValueDefinitions")]
-        public List<Com.Atproto.Label.LabelValueDefinition?>? LabelValueDefinitions { get; set; }
+        public List<Com.Atproto.Label.LabelValueDefinition>? LabelValueDefinitions { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

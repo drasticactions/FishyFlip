@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetFeedGeneratorsOutput(CBORObject obj)
         {
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n => n is not null ? new App.Bsky.Feed.GeneratorView(n) : null).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
         }
 
         [JsonPropertyName("feeds")]
         [JsonRequired]
-        public List<App.Bsky.Feed.GeneratorView?>? Feeds { get; set; }
+        public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

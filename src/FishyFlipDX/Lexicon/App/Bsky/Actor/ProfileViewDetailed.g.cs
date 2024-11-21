@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Actor.ViewerState(obj["viewer"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
             if (obj["pinnedPost"] is not null) this.PinnedPost = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["pinnedPost"]);
         }
 
@@ -87,7 +87,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         [JsonPropertyName("pinnedPost")]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }

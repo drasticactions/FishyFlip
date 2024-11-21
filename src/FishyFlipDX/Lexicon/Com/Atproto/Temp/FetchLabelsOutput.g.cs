@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         public FetchLabelsOutput(CBORObject obj)
         {
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
         [JsonPropertyName("labels")]
         [JsonRequired]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

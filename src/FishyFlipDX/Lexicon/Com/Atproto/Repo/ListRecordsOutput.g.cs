@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public ListRecordsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n => n is not null ? new Com.Atproto.Repo.Record(n) : null).ToList();
+            if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n =>new Com.Atproto.Repo.Record(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         [JsonPropertyName("records")]
         [JsonRequired]
-        public List<Com.Atproto.Repo.Record?>? Records { get; set; }
+        public List<Com.Atproto.Repo.Record>? Records { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public SendMessageBatchInput(CBORObject obj)
         {
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n => n is not null ? new Chat.Bsky.Convo.BatchItem(n) : null).ToList();
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new Chat.Bsky.Convo.BatchItem(n)).ToList();
         }
 
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<Chat.Bsky.Convo.BatchItem?>? Items { get; set; }
+        public List<Chat.Bsky.Convo.BatchItem>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

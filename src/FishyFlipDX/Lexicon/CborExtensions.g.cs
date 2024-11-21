@@ -11,11 +11,11 @@ namespace FishyFlip.Lexicon
     /// </summary>
     public static class CborLexiconExtensions
     {
-        public static ATObject? ToATObject(this CBORObject obj)
+        public static ATObject ToATObject(this CBORObject obj)
         {
             if (obj == null)
             {
-                return null;
+                 throw new NullReferenceException(nameof(obj));
             }
 
             var type = obj["$type"].AsString();
@@ -800,18 +800,18 @@ namespace FishyFlip.Lexicon
                 case "tools.ozone.team.updateMember#UpdateMemberInput":
                     return new Tools.Ozone.Team.UpdateMemberInput(obj);
                 default:
-                    return null;
+                    return new FishyFlip.Models.UnknownATObject(obj);
             }
         }
 
-        public static List<ATObject?>? ToATObjectList(this CBORObject obj)
+        public static List<ATObject>? ToATObjectList(this CBORObject obj)
         {
             if (obj == null)
             {
                 return null;
             }
 
-            var list = new List<ATObject?>();
+            var list = new List<ATObject>();
             foreach (var item in obj.Values)
             {
                 list.Add(item.ToATObject());

@@ -123,7 +123,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Enumerates public relationships between one account, and a list of other accounts. Does not require auth.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?>> GetRelationshipsAsync (FishyFlip.Models.ATIdentifier actor, List<FishyFlip.Models.ATIdentifier?>? others = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?>> GetRelationshipsAsync (FishyFlip.Models.ATIdentifier actor, List<FishyFlip.Models.ATIdentifier>? others = default, CancellationToken cancellationToken = default)
         {
             return atp.GetRelationshipsAsync(actor, others, cancellationToken);
         }
@@ -141,7 +141,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Get views for a list of starter packs.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput?>> GetStarterPacksAsync (List<FishyFlip.Models.ATUri?> uris, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput?>> GetStarterPacksAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
             return atp.GetStarterPacksAsync(uris, cancellationToken);
         }

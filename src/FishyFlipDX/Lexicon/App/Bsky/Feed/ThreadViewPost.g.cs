@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["post"] is not null) this.Post = new App.Bsky.Feed.PostView(obj["post"]);
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
-            if (obj["replies"] is not null) this.Replies = obj["replies"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["replies"] is not null) this.Replies = obj["replies"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("post")]
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public ATObject? Parent { get; set; }
 
         [JsonPropertyName("replies")]
-        public List<ATObject?>? Replies { get; set; }
+        public List<ATObject>? Replies { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// List settings with optional filtering
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string?>? keys = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
         {
             return atp.ListOptionsAsync(limit, cursor, scope, prefix, keys, cancellationToken);
         }
@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Delete settings by key
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (List<string?> keys, string scope, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (List<string> keys, string scope, CancellationToken cancellationToken = default)
         {
             return atp.RemoveOptionsAsync(keys, scope, cancellationToken);
         }

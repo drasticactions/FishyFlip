@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         public GetValuesOutput(CBORObject obj)
         {
             if (obj["set"] is not null) this.Set = new Tools.Ozone.Set.SetView(obj["set"]);
-            if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n =>n.AsString()).ToList();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
         }
 
@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         [JsonPropertyName("values")]
         [JsonRequired]
-        public List<string?>? Values { get; set; }
+        public List<string>? Values { get; set; }
 
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }

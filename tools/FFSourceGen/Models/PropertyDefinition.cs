@@ -69,7 +69,7 @@ public class PropertyDefinition
         "integer" => "int",
         "boolean" => "bool",
         "blob" => "FishyFlip.Models.Blob",
-        "array" => $"List<{this.Items?.CSharpType}?>",
+        "array" => $"List<{this.Items?.CSharpType}>",
         _ => "ATObject",
     };
 }

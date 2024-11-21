@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public ListOptionsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["options"] is not null) this.Options = obj["options"].Values.Select(n => n is not null ? new Tools.Ozone.Setting.Option(n) : null).ToList();
+            if (obj["options"] is not null) this.Options = obj["options"].Values.Select(n =>new Tools.Ozone.Setting.Option(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         [JsonPropertyName("options")]
         [JsonRequired]
-        public List<Tools.Ozone.Setting.Option?>? Options { get; set; }
+        public List<Tools.Ozone.Setting.Option>? Options { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

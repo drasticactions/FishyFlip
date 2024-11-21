@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public GetAccountInfosOutput(CBORObject obj)
         {
-            if (obj["infos"] is not null) this.Infos = obj["infos"].Values.Select(n => n is not null ? new Com.Atproto.Admin.AccountView(n) : null).ToList();
+            if (obj["infos"] is not null) this.Infos = obj["infos"].Values.Select(n =>new Com.Atproto.Admin.AccountView(n)).ToList();
         }
 
         [JsonPropertyName("infos")]
         [JsonRequired]
-        public List<Com.Atproto.Admin.AccountView?>? Infos { get; set; }
+        public List<Com.Atproto.Admin.AccountView>? Infos { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

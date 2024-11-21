@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         public AddValuesInput(CBORObject obj)
         {
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
-            if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n =>n.AsString()).ToList();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         [JsonPropertyName("values")]
         [JsonRequired]
-        public List<string?>? Values { get; set; }
+        public List<string>? Values { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

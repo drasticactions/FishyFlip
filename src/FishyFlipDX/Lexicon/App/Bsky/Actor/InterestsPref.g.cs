@@ -22,7 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public InterestsPref(CBORObject obj)
         {
-            if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("tags")]
         [JsonRequired]
-        public List<string?>? Tags { get; set; }
+        public List<string>? Tags { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

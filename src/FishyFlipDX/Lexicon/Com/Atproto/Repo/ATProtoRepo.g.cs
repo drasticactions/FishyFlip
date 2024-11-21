@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Apply a batch transaction of repository creates, updates, and deletes. Requires auth, implemented by PDS.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>> ApplyWritesAsync (FishyFlip.Models.ATIdentifier repo, List<ATObject?> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>> ApplyWritesAsync (FishyFlip.Models.ATIdentifier repo, List<ATObject> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.ApplyWritesAsync(repo, writes, validate, swapCommit, cancellationToken);
         }

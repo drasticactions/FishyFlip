@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateInviteCodesOutput(CBORObject obj)
         {
-            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n => n is not null ? new Com.Atproto.Server.AccountCodes(n) : null).ToList();
+            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>new Com.Atproto.Server.AccountCodes(n)).ToList();
         }
 
         [JsonPropertyName("codes")]
         [JsonRequired]
-        public List<Com.Atproto.Server.AccountCodes?>? Codes { get; set; }
+        public List<Com.Atproto.Server.AccountCodes>? Codes { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

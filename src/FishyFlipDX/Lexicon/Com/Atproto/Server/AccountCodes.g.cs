@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public AccountCodes(CBORObject obj)
         {
             if (obj["account"] is not null) this.Account = obj["account"].AsString();
-            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>n.AsString()).ToList();
         }
 
         [JsonPropertyName("account")]
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         [JsonPropertyName("codes")]
         [JsonRequired]
-        public List<string?>? Codes { get; set; }
+        public List<string>? Codes { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

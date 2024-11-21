@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["quoteCount"] is not null) this.QuoteCount = obj["quoteCount"].AsInt64Value();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Feed.ViewerState(obj["viewer"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
             if (obj["threadgate"] is not null) this.Threadgate = new App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
         }
 
@@ -77,7 +77,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public App.Bsky.Feed.ViewerState? Viewer { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         [JsonPropertyName("threadgate")]
         public App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }

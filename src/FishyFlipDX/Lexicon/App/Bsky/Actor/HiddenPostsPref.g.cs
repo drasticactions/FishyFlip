@@ -22,7 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public HiddenPostsPref(CBORObject obj)
         {
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n => n is not null ? n.ToATUri() : null).ToList();
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>n.ToATUri()!).ToList();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<FishyFlip.Models.ATUri?>? Items { get; set; }
+        public List<FishyFlip.Models.ATUri>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

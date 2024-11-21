@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             if (obj["repo"] is not null) this.Repo = obj["repo"].ToATIdentifier();
             if (obj["validate"] is not null) this.Validate = obj["validate"].AsBoolean();
-            if (obj["writes"] is not null) this.Writes = obj["writes"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["writes"] is not null) this.Writes = obj["writes"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["swapCommit"] is not null) this.SwapCommit = obj["swapCommit"].AsString();
         }
 
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         [JsonPropertyName("writes")]
         [JsonRequired]
-        public List<ATObject?>? Writes { get; set; }
+        public List<ATObject>? Writes { get; set; }
 
         /// <summary>
         /// If provided, the entire operation will fail if the current repo commit CID does not match this value. Used to prevent conflicting repo mutations.

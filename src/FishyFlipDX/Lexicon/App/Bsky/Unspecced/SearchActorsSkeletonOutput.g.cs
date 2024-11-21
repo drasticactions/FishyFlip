@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["hitsTotal"] is not null) this.HitsTotal = obj["hitsTotal"].AsInt64Value();
-            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n => n is not null ? new App.Bsky.Unspecced.SkeletonSearchActor(n) : null).ToList();
+            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         [JsonPropertyName("actors")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.SkeletonSearchActor?>? Actors { get; set; }
+        public List<App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

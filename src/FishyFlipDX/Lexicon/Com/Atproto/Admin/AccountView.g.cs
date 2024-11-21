@@ -25,15 +25,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
             if (obj["email"] is not null) this.Email = obj["email"].AsString();
-            if (obj["relatedRecords"] is not null) this.RelatedRecords = obj["relatedRecords"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["relatedRecords"] is not null) this.RelatedRecords = obj["relatedRecords"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["invitedBy"] is not null) this.InvitedBy = new Com.Atproto.Server.InviteCode(obj["invitedBy"]);
-            if (obj["invites"] is not null) this.Invites = obj["invites"].Values.Select(n => n is not null ? new Com.Atproto.Server.InviteCode(n) : null).ToList();
+            if (obj["invites"] is not null) this.Invites = obj["invites"].Values.Select(n =>new Com.Atproto.Server.InviteCode(n)).ToList();
             if (obj["invitesDisabled"] is not null) this.InvitesDisabled = obj["invitesDisabled"].AsBoolean();
             if (obj["emailConfirmedAt"] is not null) this.EmailConfirmedAt = obj["emailConfirmedAt"].ToDateTime();
             if (obj["inviteNote"] is not null) this.InviteNote = obj["inviteNote"].AsString();
             if (obj["deactivatedAt"] is not null) this.DeactivatedAt = obj["deactivatedAt"].ToDateTime();
-            if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n => n is not null ? new Com.Atproto.Admin.ThreatSignature(n) : null).ToList();
+            if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n =>new Com.Atproto.Admin.ThreatSignature(n)).ToList();
         }
 
         [JsonPropertyName("did")]
@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public string? Email { get; set; }
 
         [JsonPropertyName("relatedRecords")]
-        public List<ATObject?>? RelatedRecords { get; set; }
+        public List<ATObject>? RelatedRecords { get; set; }
 
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
 
         [JsonPropertyName("invites")]
-        public List<Com.Atproto.Server.InviteCode?>? Invites { get; set; }
+        public List<Com.Atproto.Server.InviteCode>? Invites { get; set; }
 
         [JsonPropertyName("invitesDisabled")]
         public bool? InvitesDisabled { get; set; }
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public DateTime? DeactivatedAt { get; set; }
 
         [JsonPropertyName("threatSignatures")]
-        public List<Com.Atproto.Admin.ThreatSignature?>? ThreatSignatures { get; set; }
+        public List<Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

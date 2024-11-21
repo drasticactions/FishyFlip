@@ -27,11 +27,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["creator"] is not null) this.Creator = new App.Bsky.Actor.ProfileViewBasic(obj["creator"]);
             if (obj["list"] is not null) this.List = new App.Bsky.Graph.ListViewBasic(obj["list"]);
-            if (obj["listItemsSample"] is not null) this.ListItemsSample = obj["listItemsSample"].Values.Select(n => n is not null ? new App.Bsky.Graph.ListItemView(n) : null).ToList();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n => n is not null ? new App.Bsky.Feed.GeneratorView(n) : null).ToList();
+            if (obj["listItemsSample"] is not null) this.ListItemsSample = obj["listItemsSample"].Values.Select(n =>new App.Bsky.Graph.ListItemView(n)).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
             if (obj["joinedWeekCount"] is not null) this.JoinedWeekCount = obj["joinedWeekCount"].AsInt64Value();
             if (obj["joinedAllTimeCount"] is not null) this.JoinedAllTimeCount = obj["joinedAllTimeCount"].AsInt64Value();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
@@ -56,10 +56,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public App.Bsky.Graph.ListViewBasic? List { get; set; }
 
         [JsonPropertyName("listItemsSample")]
-        public List<App.Bsky.Graph.ListItemView?>? ListItemsSample { get; set; }
+        public List<App.Bsky.Graph.ListItemView>? ListItemsSample { get; set; }
 
         [JsonPropertyName("feeds")]
-        public List<App.Bsky.Feed.GeneratorView?>? Feeds { get; set; }
+        public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
         [JsonPropertyName("joinedWeekCount")]
         public long? JoinedWeekCount { get; set; }
@@ -68,7 +68,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public long? JoinedAllTimeCount { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         [JsonPropertyName("indexedAt")]
         [JsonRequired]

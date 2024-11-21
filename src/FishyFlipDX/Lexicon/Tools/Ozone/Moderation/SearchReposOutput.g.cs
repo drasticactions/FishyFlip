@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public SearchReposOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n => n is not null ? new Tools.Ozone.Moderation.RepoView(n) : null).ToList();
+            if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n =>new Tools.Ozone.Moderation.RepoView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("repos")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.RepoView?>? Repos { get; set; }
+        public List<Tools.Ozone.Moderation.RepoView>? Repos { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

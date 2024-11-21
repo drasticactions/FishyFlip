@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SendInteractionsInput(CBORObject obj)
         {
-            if (obj["interactions"] is not null) this.Interactions = obj["interactions"].Values.Select(n => n is not null ? new App.Bsky.Feed.Interaction(n) : null).ToList();
+            if (obj["interactions"] is not null) this.Interactions = obj["interactions"].Values.Select(n =>new App.Bsky.Feed.Interaction(n)).ToList();
         }
 
         [JsonPropertyName("interactions")]
         [JsonRequired]
-        public List<App.Bsky.Feed.Interaction?>? Interactions { get; set; }
+        public List<App.Bsky.Feed.Interaction>? Interactions { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

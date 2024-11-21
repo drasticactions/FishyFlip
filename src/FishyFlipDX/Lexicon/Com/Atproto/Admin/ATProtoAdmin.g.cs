@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Disable some set of codes and/or all codes associated with a set of users.
         /// </summary>
-        public Task<Result<Success?>> DisableInviteCodesAsync (List<string?>? codes = default, List<string?>? accounts = default, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> DisableInviteCodesAsync (List<string>? codes = default, List<string>? accounts = default, CancellationToken cancellationToken = default)
         {
             return atp.DisableInviteCodesAsync(codes, accounts, cancellationToken);
         }
@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Get details about some accounts.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput?>> GetAccountInfosAsync (List<FishyFlip.Models.ATDid?> dids, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput?>> GetAccountInfosAsync (List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
         {
             return atp.GetAccountInfosAsync(dids, cancellationToken);
         }

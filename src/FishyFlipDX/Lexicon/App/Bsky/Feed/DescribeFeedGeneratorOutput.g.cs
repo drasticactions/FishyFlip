@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public DescribeFeedGeneratorOutput(CBORObject obj)
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n => n is not null ? new App.Bsky.Feed.Feed(n) : null).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.Feed(n)).ToList();
             if (obj["links"] is not null) this.Links = new App.Bsky.Feed.Links(obj["links"]);
         }
 
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         [JsonPropertyName("feeds")]
         [JsonRequired]
-        public List<App.Bsky.Feed.Feed?>? Feeds { get; set; }
+        public List<App.Bsky.Feed.Feed>? Feeds { get; set; }
 
         [JsonPropertyName("links")]
         public App.Bsky.Feed.Links? Links { get; set; }

@@ -28,11 +28,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["creator"] is not null) this.Creator = new App.Bsky.Actor.ProfileView(obj["creator"]);
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n => n is not null ? new App.Bsky.Richtext.Facet(n) : null).ToList();
+            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["avatar"] is not null) this.Avatar = obj["avatar"].AsString();
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
             if (obj["acceptsInteractions"] is not null) this.AcceptsInteractions = obj["acceptsInteractions"].AsBoolean();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
             if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Feed.GeneratorViewerState(obj["viewer"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
@@ -63,7 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public string? Description { get; set; }
 
         [JsonPropertyName("descriptionFacets")]
-        public List<App.Bsky.Richtext.Facet?>? DescriptionFacets { get; set; }
+        public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public bool? AcceptsInteractions { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         [JsonPropertyName("viewer")]
         public App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }

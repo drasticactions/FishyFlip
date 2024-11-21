@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public GetInviteCodesOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n => n is not null ? new Com.Atproto.Server.InviteCode(n) : null).ToList();
+            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>new Com.Atproto.Server.InviteCode(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         [JsonPropertyName("codes")]
         [JsonRequired]
-        public List<Com.Atproto.Server.InviteCode?>? Codes { get; set; }
+        public List<Com.Atproto.Server.InviteCode>? Codes { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

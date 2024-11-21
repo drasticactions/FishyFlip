@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Get data blocks from a given repo, by CID. For example, intermediate MST nodes, or records. Does not require auth; implemented by PDS.
         /// </summary>
-        public Task<Result<Success?>> GetBlocksAsync (FishyFlip.Models.ATDid did, List<string?> cids, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> GetBlocksAsync (FishyFlip.Models.ATDid did, List<string> cids, CancellationToken cancellationToken = default)
         {
             return atp.GetBlocksAsync(did, cids, cancellationToken);
         }

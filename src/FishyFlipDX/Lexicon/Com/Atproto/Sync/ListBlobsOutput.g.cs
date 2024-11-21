@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public ListBlobsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["cids"] is not null) this.Cids = obj["cids"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["cids"] is not null) this.Cids = obj["cids"].Values.Select(n =>n.AsString()).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         [JsonPropertyName("cids")]
         [JsonRequired]
-        public List<string?>? Cids { get; set; }
+        public List<string>? Cids { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

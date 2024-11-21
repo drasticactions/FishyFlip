@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             if (obj["inviteCodeRequired"] is not null) this.InviteCodeRequired = obj["inviteCodeRequired"].AsBoolean();
             if (obj["phoneVerificationRequired"] is not null) this.PhoneVerificationRequired = obj["phoneVerificationRequired"].AsBoolean();
-            if (obj["availableUserDomains"] is not null) this.AvailableUserDomains = obj["availableUserDomains"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["availableUserDomains"] is not null) this.AvailableUserDomains = obj["availableUserDomains"].Values.Select(n =>n.AsString()).ToList();
             if (obj["links"] is not null) this.Links = new Com.Atproto.Server.Links(obj["links"]);
             if (obj["contact"] is not null) this.Contact = new Com.Atproto.Server.Contact(obj["contact"]);
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
@@ -47,7 +47,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("availableUserDomains")]
         [JsonRequired]
-        public List<string?>? AvailableUserDomains { get; set; }
+        public List<string>? AvailableUserDomains { get; set; }
 
         /// <summary>
         /// URLs of service policy documents.

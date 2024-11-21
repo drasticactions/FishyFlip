@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public KnownFollowers(CBORObject obj)
         {
             if (obj["count"] is not null) this.Count = obj["count"].AsInt64Value();
-            if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n => n is not null ? new App.Bsky.Actor.ProfileViewBasic(n) : null).ToList();
+            if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new App.Bsky.Actor.ProfileViewBasic(n)).ToList();
         }
 
         [JsonPropertyName("count")]
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         [JsonPropertyName("followers")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileViewBasic?>? Followers { get; set; }
+        public List<App.Bsky.Actor.ProfileViewBasic>? Followers { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

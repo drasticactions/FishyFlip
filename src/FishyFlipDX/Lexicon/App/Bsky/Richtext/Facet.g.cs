@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         public Facet(CBORObject obj)
         {
             if (obj["index"] is not null) this.Index = new App.Bsky.Richtext.ByteSlice(obj["index"]);
-            if (obj["features"] is not null) this.Features = obj["features"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["features"] is not null) this.Features = obj["features"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("index")]
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
 
         [JsonPropertyName("features")]
         [JsonRequired]
-        public List<ATObject?>? Features { get; set; }
+        public List<ATObject>? Features { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

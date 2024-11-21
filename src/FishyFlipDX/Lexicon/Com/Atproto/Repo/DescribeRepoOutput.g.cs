@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             // Ignore DidDoc
-            if (obj["collections"] is not null) this.Collections = obj["collections"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["collections"] is not null) this.Collections = obj["collections"].Values.Select(n =>n.AsString()).ToList();
             if (obj["handleIsCorrect"] is not null) this.HandleIsCorrect = obj["handleIsCorrect"].AsBoolean();
         }
 
@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("collections")]
         [JsonRequired]
-        public List<string?>? Collections { get; set; }
+        public List<string>? Collections { get; set; }
 
         /// <summary>
         /// Indicates if handle is currently valid (resolves bi-directionally)

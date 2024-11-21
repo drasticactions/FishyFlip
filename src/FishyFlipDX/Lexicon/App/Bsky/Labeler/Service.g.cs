@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public Service(CBORObject obj)
         {
             if (obj["policies"] is not null) this.Policies = new App.Bsky.Labeler.LabelerPolicies(obj["policies"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].ToATObject();
+            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public App.Bsky.Labeler.LabelerPolicies? Policies { get; set; }
 
         [JsonPropertyName("labels")]
-        public ATObject? Labels { get; set; }
+        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }

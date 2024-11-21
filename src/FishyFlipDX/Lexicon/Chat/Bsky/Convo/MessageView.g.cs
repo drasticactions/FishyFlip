@@ -25,8 +25,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
-            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n => n is not null ? new App.Bsky.Richtext.Facet(n) : null).ToList();
-            if (obj["embed"] is not null) this.Embed = obj["embed"].ToATObject();
+            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["embed"] is not null) this.Embed = new App.Bsky.Embed.ViewRecordDef(obj["embed"]);
             if (obj["sender"] is not null) this.Sender = new Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
         }
@@ -47,10 +47,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<App.Bsky.Richtext.Facet?>? Facets { get; set; }
+        public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         [JsonPropertyName("embed")]
-        public ATObject? Embed { get; set; }
+        public App.Bsky.Embed.ViewRecordDef? Embed { get; set; }
 
         [JsonPropertyName("sender")]
         [JsonRequired]

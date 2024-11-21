@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetTaggedSuggestionsOutput(CBORObject obj)
         {
-            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n => n is not null ? new App.Bsky.Unspecced.Suggestion(n) : null).ToList();
+            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new App.Bsky.Unspecced.Suggestion(n)).ToList();
         }
 
         [JsonPropertyName("suggestions")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.Suggestion?>? Suggestions { get; set; }
+        public List<App.Bsky.Unspecced.Suggestion>? Suggestions { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         public ListMembersOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n => n is not null ? new Tools.Ozone.Team.Member(n) : null).ToList();
+            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new Tools.Ozone.Team.Member(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         [JsonPropertyName("members")]
         [JsonRequired]
-        public List<Tools.Ozone.Team.Member?>? Members { get; set; }
+        public List<Tools.Ozone.Team.Member>? Members { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

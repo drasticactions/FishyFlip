@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public SearchAccountsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n => n is not null ? new Com.Atproto.Admin.AccountView(n) : null).ToList();
+            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new Com.Atproto.Admin.AccountView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
         [JsonPropertyName("accounts")]
         [JsonRequired]
-        public List<Com.Atproto.Admin.AccountView?>? Accounts { get; set; }
+        public List<Com.Atproto.Admin.AccountView>? Accounts { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

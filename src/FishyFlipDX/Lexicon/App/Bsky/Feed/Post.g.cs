@@ -26,13 +26,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Post(CBORObject obj)
         {
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
-            if (obj["entities"] is not null) this.Entities = obj["entities"].Values.Select(n => n is not null ? new App.Bsky.Feed.Entity(n) : null).ToList();
-            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n => n is not null ? new App.Bsky.Richtext.Facet(n) : null).ToList();
+            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["reply"] is not null) this.Reply = new App.Bsky.Feed.ReplyRefDef(obj["reply"]);
             if (obj["embed"] is not null) this.Embed = obj["embed"].ToATObject();
-            if (obj["langs"] is not null) this.Langs = obj["langs"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].ToATObject();
-            if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["langs"] is not null) this.Langs = obj["langs"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
+            if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -43,16 +42,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public string? Text { get; set; }
 
         /// <summary>
-        /// DEPRECATED: replaced by app.bsky.richtext.facet.
-        /// </summary>
-        [JsonPropertyName("entities")]
-        public List<App.Bsky.Feed.Entity?>? Entities { get; set; }
-
-        /// <summary>
         /// Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<App.Bsky.Richtext.Facet?>? Facets { get; set; }
+        public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         [JsonPropertyName("reply")]
         public App.Bsky.Feed.ReplyRefDef? Reply { get; set; }
@@ -64,19 +57,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Indicates human language of post primary text content.
         /// </summary>
         [JsonPropertyName("langs")]
-        public List<string?>? Langs { get; set; }
+        public List<string>? Langs { get; set; }
 
         /// <summary>
         /// Self-label values for this post. Effectively content warnings.
         /// </summary>
         [JsonPropertyName("labels")]
-        public ATObject? Labels { get; set; }
+        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Additional hashtags, in addition to any included in post text and facets.
         /// </summary>
         [JsonPropertyName("tags")]
-        public List<string?>? Tags { get; set; }
+        public List<string>? Tags { get; set; }
 
         /// <summary>
         /// Client-declared timestamp when this post was originally created.

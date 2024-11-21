@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["id"] is not null) this.Id = obj["id"].AsInt64Value();
             if (obj["event"] is not null) this.Event = obj["event"].ToATObject();
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
-            if (obj["subjectBlobs"] is not null) this.SubjectBlobs = obj["subjectBlobs"].Values.Select(n => n is not null ? new Tools.Ozone.Moderation.BlobView(n) : null).ToList();
+            if (obj["subjectBlobs"] is not null) this.SubjectBlobs = obj["subjectBlobs"].Values.Select(n =>new Tools.Ozone.Moderation.BlobView(n)).ToList();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("subjectBlobs")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.BlobView?>? SubjectBlobs { get; set; }
+        public List<Tools.Ozone.Moderation.BlobView>? SubjectBlobs { get; set; }
 
         [JsonPropertyName("createdBy")]
         [JsonRequired]

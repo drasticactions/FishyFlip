@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public QueryEventsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["events"] is not null) this.Events = obj["events"].Values.Select(n => n is not null ? new Tools.Ozone.Moderation.ModEventView(n) : null).ToList();
+            if (obj["events"] is not null) this.Events = obj["events"].Values.Select(n =>new Tools.Ozone.Moderation.ModEventView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("events")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.ModEventView?>? Events { get; set; }
+        public List<Tools.Ozone.Moderation.ModEventView>? Events { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

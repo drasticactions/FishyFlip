@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
             if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Labeler.LabelerViewerState(obj["viewer"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
         [JsonPropertyName("uri")]
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public DateTime? IndexedAt { get; set; }
 
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label?>? Labels { get; set; }
+        public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

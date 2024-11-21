@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// List settings with optional filtering
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string?>? keys = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListOptions.ToString();
             endpointUrl += "?";
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Delete settings by key
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (this FishyFlip.ATProtocol atp, List<string?> keys, string scope, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (this FishyFlip.ATProtocol atp, List<string> keys, string scope, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RemoveOptions.ToString();
             var inputItem = new RemoveOptionsInput();

@@ -23,14 +23,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public ApplyWritesOutput(CBORObject obj)
         {
             if (obj["commit"] is not null) this.Commit = new Com.Atproto.Repo.CommitMeta(obj["commit"]);
-            if (obj["results"] is not null) this.Results = obj["results"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["results"] is not null) this.Results = obj["results"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("commit")]
         public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         [JsonPropertyName("results")]
-        public List<ATObject?>? Results { get; set; }
+        public List<ATObject>? Results { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

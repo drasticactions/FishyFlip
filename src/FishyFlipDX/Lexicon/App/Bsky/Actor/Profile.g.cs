@@ -29,7 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
             if (obj["banner"] is not null) this.Banner = new FishyFlip.Models.Blob(obj["banner"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].ToATObject();
+            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["joinedViaStarterPack"] is not null) this.JoinedViaStarterPack = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["joinedViaStarterPack"]);
             if (obj["pinnedPost"] is not null) this.PinnedPost = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["pinnedPost"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Self-label values, specific to the Bluesky application, on the overall account.
         /// </summary>
         [JsonPropertyName("labels")]
-        public ATObject? Labels { get; set; }
+        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         [JsonPropertyName("joinedViaStarterPack")]
         public Com.Atproto.Repo.StrongRef? JoinedViaStarterPack { get; set; }

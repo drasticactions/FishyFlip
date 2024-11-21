@@ -301,7 +301,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Enumerates public relationships between one account, and a list of other accounts. Does not require auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?>> GetRelationshipsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, List<FishyFlip.Models.ATIdentifier?>? others = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?>> GetRelationshipsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, List<FishyFlip.Models.ATIdentifier>? others = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRelationships.ToString();
             endpointUrl += "?";
@@ -336,15 +336,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Get views for a list of starter packs.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput?>> GetStarterPacksAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri?> uris, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput?>> GetStarterPacksAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetStarterPacks.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            if (uris != null)
-            {
-                queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
-            }
+            queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);

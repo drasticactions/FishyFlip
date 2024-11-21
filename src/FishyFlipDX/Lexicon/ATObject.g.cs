@@ -396,6 +396,7 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(Tools.Ozone.Team.ListMembersOutput), typeDiscriminator: "tools.ozone.team.listMembers#ListMembersOutput")]
     [JsonDerivedType(typeof(Tools.Ozone.Team.UpdateMemberInput), typeDiscriminator: "tools.ozone.team.updateMember#UpdateMemberInput")]
     [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: "blob")]
+    [JsonPolymorphic(IgnoreUnrecognizedTypeDiscriminators = true)]
     /// <summary>
     /// The base class for FishyFlip ATProtocol Objects.
     /// </summary>
@@ -407,11 +408,11 @@ namespace FishyFlip.Lexicon
         /// Gets the ATRecord Type.
         /// </summary>
         [JsonPropertyName("$type")]
-        public virtual string Type => throw new NotImplementedException();
+        public virtual string Type { get; } = string.Empty;
 
         public virtual string ToJson()
         {
-            throw new NotImplementedException();
+            return JsonSerializer.Serialize<ATObject>(this, (JsonTypeInfo<ATObject>)SourceGenerationContext.Default.ATObject)!;
         }
     }
 }

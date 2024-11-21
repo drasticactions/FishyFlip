@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetBlocksOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["blocks"] is not null) this.Blocks = obj["blocks"].Values.Select(n => n is not null ? new App.Bsky.Actor.ProfileView(n) : null).ToList();
+            if (obj["blocks"] is not null) this.Blocks = obj["blocks"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         [JsonPropertyName("blocks")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView?>? Blocks { get; set; }
+        public List<App.Bsky.Actor.ProfileView>? Blocks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

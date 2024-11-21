@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["list"] is not null) this.List = new App.Bsky.Graph.ListView(obj["list"]);
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n => n is not null ? new App.Bsky.Graph.ListItemView(n) : null).ToList();
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new App.Bsky.Graph.ListItemView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<App.Bsky.Graph.ListItemView?>? Items { get; set; }
+        public List<App.Bsky.Graph.ListItemView>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

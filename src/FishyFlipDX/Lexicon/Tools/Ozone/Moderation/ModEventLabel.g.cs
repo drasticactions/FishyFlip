@@ -26,8 +26,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventLabel(CBORObject obj)
         {
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
-            if (obj["createLabelVals"] is not null) this.CreateLabelVals = obj["createLabelVals"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
-            if (obj["negateLabelVals"] is not null) this.NegateLabelVals = obj["negateLabelVals"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["createLabelVals"] is not null) this.CreateLabelVals = obj["createLabelVals"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["negateLabelVals"] is not null) this.NegateLabelVals = obj["negateLabelVals"].Values.Select(n =>n.AsString()).ToList();
         }
 
         [JsonPropertyName("comment")]
@@ -35,11 +35,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("createLabelVals")]
         [JsonRequired]
-        public List<string?>? CreateLabelVals { get; set; }
+        public List<string>? CreateLabelVals { get; set; }
 
         [JsonPropertyName("negateLabelVals")]
         [JsonRequired]
-        public List<string?>? NegateLabelVals { get; set; }
+        public List<string>? NegateLabelVals { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

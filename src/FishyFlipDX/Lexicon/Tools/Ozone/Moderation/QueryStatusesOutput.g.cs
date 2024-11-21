@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public QueryStatusesOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["subjectStatuses"] is not null) this.SubjectStatuses = obj["subjectStatuses"].Values.Select(n => n is not null ? new Tools.Ozone.Moderation.SubjectStatusView(n) : null).ToList();
+            if (obj["subjectStatuses"] is not null) this.SubjectStatuses = obj["subjectStatuses"].Values.Select(n =>new Tools.Ozone.Moderation.SubjectStatusView(n)).ToList();
         }
 
         [JsonPropertyName("cursor")]
@@ -31,7 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         [JsonPropertyName("subjectStatuses")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.SubjectStatusView?>? SubjectStatuses { get; set; }
+        public List<Tools.Ozone.Moderation.SubjectStatusView>? SubjectStatuses { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

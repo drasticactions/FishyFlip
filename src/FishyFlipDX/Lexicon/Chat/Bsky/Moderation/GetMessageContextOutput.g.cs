@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         public GetMessageContextOutput(CBORObject obj)
         {
-            if (obj["messages"] is not null) this.Messages = obj["messages"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["messages"] is not null) this.Messages = obj["messages"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("messages")]
         [JsonRequired]
-        public List<ATObject?>? Messages { get; set; }
+        public List<ATObject>? Messages { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

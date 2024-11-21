@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetRelationshipsOutput(CBORObject obj)
         {
             if (obj["actor"] is not null) this.Actor = obj["actor"].ToATDid();
-            if (obj["relationships"] is not null) this.Relationships = obj["relationships"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["relationships"] is not null) this.Relationships = obj["relationships"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("actor")]
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         [JsonPropertyName("relationships")]
         [JsonRequired]
-        public List<ATObject?>? Relationships { get; set; }
+        public List<ATObject>? Relationships { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
-            if (obj["targets"] is not null) this.Targets = obj["targets"].Values.Select(n => n is not null ? n.AsString() : default).ToList();
+            if (obj["targets"] is not null) this.Targets = obj["targets"].Values.Select(n =>n.AsString()).ToList();
             // enum
             if (obj["expiresAt"] is not null) this.ExpiresAt = obj["expiresAt"].ToDateTime();
         }
@@ -47,7 +47,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("targets")]
         [JsonRequired]
-        public List<string?>? Targets { get; set; }
+        public List<string>? Targets { get; set; }
 
         /// <summary>
         /// Groups of users to apply the muted word to. If undefined, applies to all users.

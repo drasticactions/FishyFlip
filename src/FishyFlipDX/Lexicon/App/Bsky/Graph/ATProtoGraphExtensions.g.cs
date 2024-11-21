@@ -110,7 +110,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Create a List record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateListAsync(this FishyFlip.ATProtocol atp, string? purpose, string? name, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet?>? descriptionFacets = default, Blob? avatar = default, ATObject? labels = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateListAsync(this FishyFlip.ATProtocol atp, string? purpose, string? name, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, Com.Atproto.Label.SelfLabels? labels = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Graph.List();
             record.Purpose = purpose;
@@ -242,7 +242,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Create a Starterpack record.
         /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateStarterpackAsync(this FishyFlip.ATProtocol atp, string? name, FishyFlip.Models.ATUri? list, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet?>? descriptionFacets = default, List<App.Bsky.Graph.FeedItem?>? feeds = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStarterpackAsync(this FishyFlip.ATProtocol atp, string? name, FishyFlip.Models.ATUri? list, DateTime? createdAt, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, List<App.Bsky.Graph.FeedItem>? feeds = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Graph.Starterpack();
             record.Name = name;

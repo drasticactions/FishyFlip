@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public Labels(CBORObject obj)
         {
             if (obj["seq"] is not null) this.Seq = obj["seq"].AsInt64Value();
-            if (obj["labels"] is not null) this.LabelsValue = obj["labels"].Values.Select(n => n is not null ? new Com.Atproto.Label.Label(n) : null).ToList();
+            if (obj["labels"] is not null) this.LabelsValue = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
         [JsonPropertyName("seq")]
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         [JsonPropertyName("labels")]
         [JsonRequired]
-        public List<Com.Atproto.Label.Label?>? LabelsValue { get; set; }
+        public List<Com.Atproto.Label.Label>? LabelsValue { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

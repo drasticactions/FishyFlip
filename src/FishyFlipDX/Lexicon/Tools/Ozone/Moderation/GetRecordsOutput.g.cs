@@ -22,12 +22,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public GetRecordsOutput(CBORObject obj)
         {
-            if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n => n is not null ? n.ToATObject() : null).ToList();
+            if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
         [JsonPropertyName("records")]
         [JsonRequired]
-        public List<ATObject?>? Records { get; set; }
+        public List<ATObject>? Records { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

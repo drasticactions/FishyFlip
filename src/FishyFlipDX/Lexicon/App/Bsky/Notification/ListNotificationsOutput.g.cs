@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public ListNotificationsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["notifications"] is not null) this.Notifications = obj["notifications"].Values.Select(n => n is not null ? new App.Bsky.Notification.Notification(n) : null).ToList();
+            if (obj["notifications"] is not null) this.Notifications = obj["notifications"].Values.Select(n =>new App.Bsky.Notification.Notification(n)).ToList();
             if (obj["priority"] is not null) this.Priority = obj["priority"].AsBoolean();
             if (obj["seenAt"] is not null) this.SeenAt = obj["seenAt"].ToDateTime();
         }
@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         [JsonPropertyName("notifications")]
         [JsonRequired]
-        public List<App.Bsky.Notification.Notification?>? Notifications { get; set; }
+        public List<App.Bsky.Notification.Notification>? Notifications { get; set; }
 
         [JsonPropertyName("priority")]
         public bool? Priority { get; set; }
