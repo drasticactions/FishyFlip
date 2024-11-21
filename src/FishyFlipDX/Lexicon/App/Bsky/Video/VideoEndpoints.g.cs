@@ -13,11 +13,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
     public static class VideoEndpoints
     {
 
+       public const string UploadVideo = "/xrpc/app.bsky.video.uploadVideo";
+
        public const string GetJobStatus = "/xrpc/app.bsky.video.getJobStatus";
 
        public const string GetUploadLimits = "/xrpc/app.bsky.video.getUploadLimits";
 
-       public const string UploadVideo = "/xrpc/app.bsky.video.uploadVideo";
+
+        /// <summary>
+        /// Upload a video to be processed then stored on the PDS.
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = UploadVideo.ToString();
+            return atp.Client.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
 
 
         /// <summary>
@@ -42,16 +52,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         {
             var endpointUrl = GetUploadLimits.ToString();
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetUploadLimitsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Upload a video to be processed then stored on the PDS.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = UploadVideo.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

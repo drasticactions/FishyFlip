@@ -31,11 +31,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
 
         /// <summary>
-        /// Add a member to the ozone team. Requires admin role.
+        /// List all members with access to the ozone service.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.AddMemberAsync(did, role, cancellationToken);
+            return atp.ListMembersAsync(limit, cursor, cancellationToken);
         }
 
 
@@ -49,20 +49,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
 
         /// <summary>
-        /// List all members with access to the ozone service.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ListMembersAsync(limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Update a member in the ozone service. Requires admin role.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> UpdateMemberAsync (FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
         {
             return atp.UpdateMemberAsync(did, disabled, role, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Add a member to the ozone team. Requires admin role.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
+        {
+            return atp.AddMemberAsync(did, role, cancellationToken);
         }
 
     }

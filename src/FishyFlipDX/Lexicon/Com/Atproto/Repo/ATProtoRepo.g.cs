@@ -31,11 +31,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
 
         /// <summary>
-        /// Apply a batch transaction of repository creates, updates, and deletes. Requires auth, implemented by PDS.
+        /// Returns a list of missing blobs for the requesting account. Intended to be used in the account migration flow.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>> ApplyWritesAsync (FishyFlip.Models.ATIdentifier repo, List<ATObject> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput?>> ListMissingBlobsAsync (int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.ApplyWritesAsync(repo, writes, validate, swapCommit, cancellationToken);
+            return atp.ListMissingBlobsAsync(limit, cursor, cancellationToken);
         }
 
 
@@ -58,6 +58,33 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
 
         /// <summary>
+        /// Write a repository record, creating or updating it as needed. Requires auth, implemented by PDS.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>> PutRecordAsync (FishyFlip.Models.ATIdentifier repo, string collection, string rkey, ATObject record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.PutRecordAsync(repo, collection, rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Upload a new blob, to be referenced from a repository record. The blob will be deleted if it is not referenced within a time window (eg, minutes). Blob restrictions (mimetype, size, etc) are enforced when the reference is created. Requires auth, implemented by PDS.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>> UploadBlobAsync (StreamContent content, CancellationToken cancellationToken = default)
+        {
+            return atp.UploadBlobAsync(content, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Import a repo in the form of a CAR file. Requires Content-Length HTTP header to be set.
+        /// </summary>
+        public Task<Result<Success?>> ImportRepoAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.ImportRepoAsync(cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get information about an account and repository, including the list of collections. Does not require auth.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?>> DescribeRepoAsync (FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default)
@@ -76,20 +103,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
 
         /// <summary>
-        /// Import a repo in the form of a CAR file. Requires Content-Length HTTP header to be set.
+        /// Apply a batch transaction of repository creates, updates, and deletes. Requires auth, implemented by PDS.
         /// </summary>
-        public Task<Result<Success?>> ImportRepoAsync (CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>> ApplyWritesAsync (FishyFlip.Models.ATIdentifier repo, List<ATObject> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ImportRepoAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Returns a list of missing blobs for the requesting account. Intended to be used in the account migration flow.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput?>> ListMissingBlobsAsync (int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ListMissingBlobsAsync(limit, cursor, cancellationToken);
+            return atp.ApplyWritesAsync(repo, writes, validate, swapCommit, cancellationToken);
         }
 
 
@@ -99,24 +117,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput?>> ListRecordsAsync (FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, collection, limit, cursor, reverse, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Write a repository record, creating or updating it as needed. Requires auth, implemented by PDS.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>> PutRecordAsync (FishyFlip.Models.ATIdentifier repo, string collection, string rkey, ATObject record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.PutRecordAsync(repo, collection, rkey, record, validate, swapRecord, swapCommit, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Upload a new blob, to be referenced from a repository record. The blob will be deleted if it is not referenced within a time window (eg, minutes). Blob restrictions (mimetype, size, etc) are enforced when the reference is created. Requires auth, implemented by PDS.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>> UploadBlobAsync (StreamContent content, CancellationToken cancellationToken = default)
-        {
-            return atp.UploadBlobAsync(content, cancellationToken);
         }
 
     }

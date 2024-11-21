@@ -13,28 +13,53 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     public static class ActorEndpoints
     {
 
-       public const string GetPreferences = "/xrpc/app.bsky.actor.getPreferences";
-
-       public const string GetProfile = "/xrpc/app.bsky.actor.getProfile";
-
-       public const string GetProfiles = "/xrpc/app.bsky.actor.getProfiles";
-
-       public const string GetSuggestions = "/xrpc/app.bsky.actor.getSuggestions";
+       public const string SearchActorsTypeahead = "/xrpc/app.bsky.actor.searchActorsTypeahead";
 
        public const string PutPreferences = "/xrpc/app.bsky.actor.putPreferences";
 
+       public const string GetProfile = "/xrpc/app.bsky.actor.getProfile";
+
+       public const string GetSuggestions = "/xrpc/app.bsky.actor.getSuggestions";
+
        public const string SearchActors = "/xrpc/app.bsky.actor.searchActors";
 
-       public const string SearchActorsTypeahead = "/xrpc/app.bsky.actor.searchActorsTypeahead";
+       public const string GetProfiles = "/xrpc/app.bsky.actor.getProfiles";
+
+       public const string GetPreferences = "/xrpc/app.bsky.actor.getPreferences";
 
 
         /// <summary>
-        /// Get private preferences attached to the current account. Expected use is synchronization between multiple devices, and import/export during account migration. Requires auth.
+        /// Find actor suggestions for a prefix search term. Expected use is for auto-completion during text field entry. Does not require auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput?>> GetPreferencesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput?>> SearchActorsTypeaheadAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = GetPreferences.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetPreferencesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            var endpointUrl = SearchActorsTypeahead.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (q != null)
+            {
+                queryStrings.Add("q=" + q);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsTypeaheadOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Set the private preferences attached to the account.
+        /// </summary>
+        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, List<ATObject> preferences, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = PutPreferences.ToString();
+            var inputItem = new PutPreferencesInput();
+            inputItem.Preferences = preferences;
+            return atp.Client.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
@@ -50,21 +75,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorProfileViewDetailed!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Get detailed profile views of multiple actors.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = GetProfiles.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
@@ -88,18 +98,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetSuggestionsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Set the private preferences attached to the account.
-        /// </summary>
-        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, List<ATObject> preferences, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = PutPreferences.ToString();
-            var inputItem = new PutPreferencesInput();
-            inputItem.Preferences = preferences;
-            return atp.Client.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
@@ -132,25 +130,27 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
 
         /// <summary>
-        /// Find actor suggestions for a prefix search term. Expected use is for auto-completion during text field entry. Does not require auth.
+        /// Get detailed profile views of multiple actors.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput?>> SearchActorsTypeaheadAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput?>> GetProfilesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = SearchActorsTypeahead.ToString();
+            var endpointUrl = GetProfiles.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            if (q != null)
-            {
-                queryStrings.Add("q=" + q);
-            }
-
-            if (limit != null)
-            {
-                queryStrings.Add("limit=" + limit);
-            }
+            queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsTypeaheadOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Get private preferences attached to the current account. Expected use is synchronization between multiple devices, and import/export during account migration. Requires auth.
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput?>> GetPreferencesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetPreferences.ToString();
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetPreferencesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

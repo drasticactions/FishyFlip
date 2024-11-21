@@ -3,6 +3,7 @@
 // </copyright>
 
 using FishyFlip;
+using FishyFlip.Lexicon;
 using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
@@ -21,6 +22,10 @@ atWebProtocol.OnConnectionUpdated += (sender, args) =>
     Console.WriteLine($"Connection Updated: {args.State}");
 };
 
+// OnRecordReceived returns ATObjectWebSocket records,
+// Which contain ATObject records.
+// If you wish to receive all records being returned,
+// subscribe to OnRawMessageReceived.
 atWebProtocol.OnRecordReceived += (sender, args) =>
 {
     Console.WriteLine($"Record Received: {args.Record.Kind}");
@@ -30,42 +35,27 @@ atWebProtocol.OnRecordReceived += (sender, args) =>
             Console.WriteLine($"Commit: {args.Record.Commit?.Operation}");
             switch (args.Record.Commit?.Operation)
             {
+                // Create is when a new record is created.
                 case ATWebSocketCommitType.Create:
                     Console.WriteLine($"Create: {args.Record.Commit?.Collection}");
-                    switch (args.Record.Commit?.Collection)
-                    {
-                        case FishyFlip.Lexicon.App.Bsky.Feed.Post.RecordType:
-                            Console.WriteLine($"Post: {args.Record.Commit?.Collection}");
-                            var t = args.Record.Commit?.Record as FishyFlip.Lexicon.App.Bsky.Feed.Post;
-                            if (t?.Embed is not null && (t?.Embed is not EmbedRecord && t.Embed is not EmbedExternal))
-                            {
-                                Console.WriteLine($"Embed: {t.Embed}");
-                            }
-                            break;
-                        case FishyFlip.Lexicon.App.Bsky.Feed.Threadgate.RecordType:
-                            Console.WriteLine($"ThreadGate: {args.Record.Commit?.Collection}");
-                            var r = args.Record.Commit?.Record as FishyFlip.Lexicon.App.Bsky.Feed.Threadgate;
-                            if (r != null && (r.HiddenReplies?.Any() ?? false))
-                            {
-                                Console.WriteLine($"Post: {r.Post}");
-                            }
 
+                    // Record is an ATWebSocketRecord, which contains the actual record inside Commit.
+                    switch (args.Record.Commit?.Record)
+                    {
+                        case FishyFlip.Lexicon.App.Bsky.Feed.Post post:
+                            Console.WriteLine($"Post: {post.ToJson()}");
+                            break;
+                        case FishyFlip.Lexicon.App.Bsky.Feed.Threadgate threadgate:
+                            Console.WriteLine($"ThreadGate: {threadgate.ToJson()}");
                             break;
                         default:
-                            Console.WriteLine($"Unknown Collection: {args.Record.Commit?.Collection}");
+                            if (args.Record.Commit?.Record is { } obj)
+                            {
+                                Console.WriteLine($"ATObject: {obj.ToJson()}");
+                            }
+
                             break;
                     }
-
-                    break;
-                case ATWebSocketCommitType.Update:
-                    Console.WriteLine($"Update: {args.Record.Commit?.Collection}");
-                    break;
-                case ATWebSocketCommitType.Delete:
-                    Console.WriteLine($"Delete: {args.Record.Commit?.Collection}");
-                    break;
-                case ATWebSocketCommitType.Unknown:
-                default:
-                    Console.WriteLine($"Unknown: {args.Record.Commit?.Operation}");
                     break;
             }
 
@@ -78,7 +68,7 @@ atWebProtocol.OnRecordReceived += (sender, args) =>
             break;
         case ATWebSocketEvent.Unknown:
         default:
-            Console.WriteLine($"Unknown: {args.Record.Kind}");
+            Console.WriteLine($"{args.Record.Kind}");
             break;
     }
 };

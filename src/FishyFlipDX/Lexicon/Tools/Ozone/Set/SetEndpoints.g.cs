@@ -15,15 +15,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
        public const string AddValues = "/xrpc/tools.ozone.set.addValues";
 
+       public const string GetValues = "/xrpc/tools.ozone.set.getValues";
+
        public const string DeleteSet = "/xrpc/tools.ozone.set.deleteSet";
+
+       public const string UpsertSet = "/xrpc/tools.ozone.set.upsertSet";
 
        public const string DeleteValues = "/xrpc/tools.ozone.set.deleteValues";
 
-       public const string GetValues = "/xrpc/tools.ozone.set.getValues";
-
        public const string QuerySets = "/xrpc/tools.ozone.set.querySets";
-
-       public const string UpsertSet = "/xrpc/tools.ozone.set.upsertSet";
 
 
         /// <summary>
@@ -36,31 +36,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             inputItem.Name = name;
             inputItem.Values = values;
             return atp.Client.Post<AddValuesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetAddValuesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Delete an entire set. Attempting to delete a set that does not exist will result in an error.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>> DeleteSetAsync (this FishyFlip.ATProtocol atp, string name, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = DeleteSet.ToString();
-            var inputItem = new DeleteSetInput();
-            inputItem.Name = name;
-            return atp.Client.Post<DeleteSetInput, FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetInput!, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Delete values from a specific set. Attempting to delete values that are not in the set will not result in an error
-        /// </summary>
-        public static Task<Result<Success?>> DeleteValuesAsync (this FishyFlip.ATProtocol atp, string name, List<string> values, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = DeleteValues.ToString();
-            var inputItem = new DeleteValuesInput();
-            inputItem.Name = name;
-            inputItem.Values = values;
-            return atp.Client.Post<DeleteValuesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteValuesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
@@ -86,6 +61,41 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetGetValuesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Delete an entire set. Attempting to delete a set that does not exist will result in an error.
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>> DeleteSetAsync (this FishyFlip.ATProtocol atp, string name, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = DeleteSet.ToString();
+            var inputItem = new DeleteSetInput();
+            inputItem.Name = name;
+            return atp.Client.Post<DeleteSetInput, FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetInput!, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Create or update set metadata
+        /// </summary>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = UpsertSet.ToString();
+            return atp.Client.Post<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetSetView!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Delete values from a specific set. Attempting to delete values that are not in the set will not result in an error
+        /// </summary>
+        public static Task<Result<Success?>> DeleteValuesAsync (this FishyFlip.ATProtocol atp, string name, List<string> values, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = DeleteValues.ToString();
+            var inputItem = new DeleteValuesInput();
+            inputItem.Name = name;
+            inputItem.Values = values;
+            return atp.Client.Post<DeleteValuesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteValuesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
@@ -124,16 +134,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetQuerySetsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Create or update set metadata
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = UpsertSet.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetSetView!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

@@ -40,20 +40,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
 
         /// <summary>
-        /// Get accounts that share some matching threat signatures with the root account.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput?>> FindRelatedAccountsAsync (FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
-        {
-            return atp.FindRelatedAccountsAsync(did, cursor, limit, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Search for accounts that match one or more threat signature values.
         /// </summary>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             return atp.SearchAccountsAsync(values, cursor, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get accounts that share some matching threat signatures with the root account.
+        /// </summary>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput?>> FindRelatedAccountsAsync (FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        {
+            return atp.FindRelatedAccountsAsync(did, cursor, limit, cancellationToken);
         }
 
     }

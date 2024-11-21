@@ -64,6 +64,94 @@ namespace FishyFlip.Lexicon
             return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.generator", limit, cursor, reverse, cancellationToken);
         }
         /// <summary>
+        /// Create a Postgate record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Postgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.postgate", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a Postgate record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, DateTime? createdAt, FishyFlip.Models.ATUri? post, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Feed.Postgate();
+            record.CreatedAt = createdAt;
+            record.Post = post;
+            record.DetachedEmbeddingUris = detachedEmbeddingUris;
+            record.EmbeddingRules = embeddingRules;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.postgate", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete a Postgate record.
+        /// </summary>
+        public static Task<Result<DeleteRecordOutput?>> DeletePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.feed.postgate", rkey, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Put a Postgate record.
+        /// </summary>
+        public static Task<Result<PutRecordOutput?>> PutPostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Feed.Postgate record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.feed.postgate", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Postgate records.
+        /// </summary>
+        public static Task<Result<ListRecordsOutput?>> ListPostgatesAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.postgate", limit, cursor, reverse, cancellationToken);
+        }
+        /// <summary>
+        /// Create a Threadgate record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Threadgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.threadgate", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a Threadgate record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATUri? post, DateTime? createdAt, List<ATObject>? allow = default, List<FishyFlip.Models.ATUri>? hiddenReplies = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Feed.Threadgate();
+            record.Post = post;
+            record.Allow = allow;
+            record.CreatedAt = createdAt;
+            record.HiddenReplies = hiddenReplies;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.threadgate", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete a Threadgate record.
+        /// </summary>
+        public static Task<Result<DeleteRecordOutput?>> DeleteThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.feed.threadgate", rkey, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Put a Threadgate record.
+        /// </summary>
+        public static Task<Result<PutRecordOutput?>> PutThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Feed.Threadgate record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.feed.threadgate", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Threadgate records.
+        /// </summary>
+        public static Task<Result<ListRecordsOutput?>> ListThreadgatesAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.threadgate", limit, cursor, reverse, cancellationToken);
+        }
+        /// <summary>
         /// Create a Like record.
         /// </summary>
         public static Task<Result<CreateRecordOutput?>> CreateLikeAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Like record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
@@ -104,6 +192,48 @@ namespace FishyFlip.Lexicon
         public static Task<Result<ListRecordsOutput?>> ListLikesAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.like", limit, cursor, reverse, cancellationToken);
+        }
+        /// <summary>
+        /// Create a Repost record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Repost record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.repost", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a Repost record.
+        /// </summary>
+        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Feed.Repost();
+            record.Subject = subject;
+            record.CreatedAt = createdAt;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.repost", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete a Repost record.
+        /// </summary>
+        public static Task<Result<DeleteRecordOutput?>> DeleteRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.feed.repost", rkey, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Put a Repost record.
+        /// </summary>
+        public static Task<Result<PutRecordOutput?>> PutRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Feed.Repost record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.feed.repost", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Repost records.
+        /// </summary>
+        public static Task<Result<ListRecordsOutput?>> ListRepostsAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.repost", limit, cursor, reverse, cancellationToken);
         }
         /// <summary>
         /// Create a Post record.
@@ -152,136 +282,6 @@ namespace FishyFlip.Lexicon
         public static Task<Result<ListRecordsOutput?>> ListPostsAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.post", limit, cursor, reverse, cancellationToken);
-        }
-        /// <summary>
-        /// Create a Postgate record.
-        /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Postgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.postgate", record, rkey, validate, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Create a Postgate record.
-        /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, DateTime? createdAt, FishyFlip.Models.ATUri? post, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            var record = new FishyFlip.Lexicon.App.Bsky.Feed.Postgate();
-            record.CreatedAt = createdAt;
-            record.Post = post;
-            record.DetachedEmbeddingUris = detachedEmbeddingUris;
-            record.EmbeddingRules = embeddingRules;
-            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.postgate", record, rkey, validate, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Delete a Postgate record.
-        /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeletePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.feed.postgate", rkey, swapRecord, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Put a Postgate record.
-        /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutPostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Feed.Postgate record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.feed.postgate", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// List Postgate records.
-        /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListPostgatesAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.postgate", limit, cursor, reverse, cancellationToken);
-        }
-        /// <summary>
-        /// Create a Repost record.
-        /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Repost record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.repost", record, rkey, validate, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Create a Repost record.
-        /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            var record = new FishyFlip.Lexicon.App.Bsky.Feed.Repost();
-            record.Subject = subject;
-            record.CreatedAt = createdAt;
-            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.repost", record, rkey, validate, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Delete a Repost record.
-        /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.feed.repost", rkey, swapRecord, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Put a Repost record.
-        /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Feed.Repost record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.feed.repost", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// List Repost records.
-        /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListRepostsAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.repost", limit, cursor, reverse, cancellationToken);
-        }
-        /// <summary>
-        /// Create a Threadgate record.
-        /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Threadgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.threadgate", record, rkey, validate, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Create a Threadgate record.
-        /// </summary>
-        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATUri? post, DateTime? createdAt, List<ATObject>? allow = default, List<FishyFlip.Models.ATUri>? hiddenReplies = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            var record = new FishyFlip.Lexicon.App.Bsky.Feed.Threadgate();
-            record.Post = post;
-            record.Allow = allow;
-            record.CreatedAt = createdAt;
-            record.HiddenReplies = hiddenReplies;
-            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.threadgate", record, rkey, validate, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Delete a Threadgate record.
-        /// </summary>
-        public static Task<Result<DeleteRecordOutput?>> DeleteThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.DeleteRecordAsync(repo, "app.bsky.feed.threadgate", rkey, swapRecord, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// Put a Threadgate record.
-        /// </summary>
-        public static Task<Result<PutRecordOutput?>> PutThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Bsky.Feed.Threadgate record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.PutRecordAsync(repo, "app.bsky.feed.threadgate", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
-        }
-
-        /// <summary>
-        /// List Threadgate records.
-        /// </summary>
-        public static Task<Result<ListRecordsOutput?>> ListThreadgatesAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
-        {
-            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.feed.threadgate", limit, cursor, reverse, cancellationToken);
         }
     }
 }

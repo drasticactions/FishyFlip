@@ -775,7 +775,14 @@ public partial class AppCommands
                             sb.AppendLine("            endpointUrl += string.Join(\"&\", queryStrings);");
                         }
 
-                        sb.AppendLine($"            return atp.Client.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                        if (inputProperties.Any(n => n.Contains("OnCarDecoded")))
+                        {
+                            sb.AppendLine($"            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"            return atp.Client.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                        }
                         break;
                     default:
                         sb.AppendLine("            throw new NotImplementedException();");
@@ -1027,6 +1034,11 @@ public partial class AppCommands
         if (classGeneration.Definition.Input?.Encoding == "*/*")
         {
             requiredProperties.Add("StreamContent content");
+        }
+
+        if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
+        {
+            requiredProperties.Add("OnCarDecoded onDecoded");
         }
 
         if (isExtensionMethod)
@@ -1434,6 +1446,12 @@ public partial class AppCommands
         sb.AppendLine($"    /// </summary>");
         sb.AppendLine($"    public static class CborLexiconExtensions");
         sb.AppendLine("    {");
+        sb.AppendLine();
+        sb.AppendLine("        public static bool IsATObject(this CBORObject obj)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            return obj?.ContainsKey(\"$type\") ?? false;");
+        sb.AppendLine("        }");
+        sb.AppendLine();
         sb.AppendLine("        public static ATObject ToATObject(this CBORObject obj)");
         sb.AppendLine("        {");
         sb.AppendLine("            if (obj == null)");
@@ -1441,7 +1459,7 @@ public partial class AppCommands
         sb.AppendLine("                 throw new NullReferenceException(nameof(obj));");
         sb.AppendLine("            }");
         sb.AppendLine();
-        sb.AppendLine("            var type = obj[\"$type\"].AsString();");
+        sb.AppendLine("            var type = obj[\"$type\"]?.AsString() ?? string.Empty;");
         sb.AppendLine("            switch (type)");
         sb.AppendLine("            {");
         foreach (var cls in classes)
