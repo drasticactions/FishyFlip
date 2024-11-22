@@ -166,7 +166,7 @@ public static class HttpClientExtensions
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Blob response message as the result.</returns>
-    public static async Task<Result<Blob?>> GetBlob(
+    public static async Task<Result<byte[]?>> GetBlob(
        this HttpClient client,
        string url,
        JsonSerializerOptions options,
@@ -190,7 +190,7 @@ public static class HttpClientExtensions
 #endif
 
         logger?.LogDebug($"GET BLOB {client.BaseAddress}{url}: {response}");
-        return new Blob(blob);
+        return blob;
     }
 
     /// <summary>
@@ -322,6 +322,9 @@ public static class HttpClientExtensions
             response = "{ }";
         }
 
+        // BUG: Sometimes, ATProtocol does not set $type as the first property in the JSON response.
+        // That causes the deserialization to fail. This is a workaround to reorder the $type property.
+        response = JsonTypeReorderer.ReorderTypeProperty(response);
         logger?.LogDebug($"GET {client.BaseAddress}{url}: {response}");
         return JsonSerializer.Deserialize<T>(response, type);
     }

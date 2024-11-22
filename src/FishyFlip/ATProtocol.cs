@@ -8,7 +8,7 @@ namespace FishyFlip;
 /// AT Protocol.
 /// https://atproto.com/specs/atp.
 /// </summary>
-public sealed class ATProtocol : IDisposable
+public sealed partial class ATProtocol : IDisposable
 {
     private ATProtocolOptions options;
     private bool disposedValue;
@@ -35,84 +35,14 @@ public sealed class ATProtocol : IDisposable
     public bool IsAuthenticated => this.sessionManager.IsAuthenticated;
 
     /// <summary>
-    /// Gets the ATProtocol Options.
-    /// </summary>
-    public ATProtocolOptions Options => this.options;
-
-    /// <summary>
-    /// Gets the ATProto Server Protocol.
-    /// </summary>
-    public ATProtoServer Server => new(this);
-
-    /// <summary>
     /// Gets the current ATProto Session. Null if no session is active.
     /// </summary>
     public Session? Session => this.sessionManager?.Session;
 
     /// <summary>
-    /// Gets the ATProto Admin Protocol.
+    /// Gets the ATProtocol Options.
     /// </summary>
-    public ATProtoAdmin Admin => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Identity Protocol.
-    /// </summary>
-    public ATProtoIdentity Identity => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Sync Protocol.
-    /// </summary>
-    public ATProtoSync Sync => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Repo Protocol.
-    /// </summary>
-    public ATProtoRepo Repo => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Actor Protocol.
-    /// </summary>
-    public BlueskyActor Actor => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Label Protocol.
-    /// </summary>
-    public ATProtoLabel Label => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Moderation Protocol.
-    /// </summary>
-    public ATProtoModeration Moderation => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Unspecced Protocol.
-    /// </summary>
-    public BlueskyUnspecced Unspecced => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Feed Protocol.
-    /// </summary>
-    public BlueskyFeed Feed => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Graph Protocol.
-    /// </summary>
-    public BlueskyGraph Graph => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Notification Protocol.
-    /// </summary>
-    public BlueskyNotification Notification => new(this);
-
-    /// <summary>
-    /// Gets the PclDirectory Methods.
-    /// </summary>
-    public PlcDirectory PlcDirectory => new(this);
-
-    /// <summary>
-    /// Gets the ATProto Chat Protocol.
-    /// </summary>
-    public BlueskyChat Chat => new(this);
+    public ATProtocolOptions Options => this.options;
 
     /// <summary>
     /// Gets the base address for the underlying HttpClient.
@@ -133,6 +63,11 @@ public sealed class ATProtocol : IDisposable
     /// Gets the current PasswordSession session, if any is active.
     /// </summary>
     public AuthSession? PasswordSession => this.sessionManager is PasswordSessionManager passwordSessionManager ? passwordSessionManager.PasswordSession : null;
+
+    /// <summary>
+    /// Gets the PclDirectory Methods.
+    /// </summary>
+    public PlcDirectory PlcDirectory => new(this);
 
     /// <summary>
     /// Gets the current AuthSession.

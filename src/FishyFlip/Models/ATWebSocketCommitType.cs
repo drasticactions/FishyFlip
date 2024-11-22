@@ -2,11 +2,14 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip.Models;
 
 /// <summary>
 /// AT WebSocket Commit Type.
 /// </summary>
+[JsonConverter(typeof(ATWebSocketCommitTypeConverter))]
 public enum ATWebSocketCommitType
 {
     /// <summary>

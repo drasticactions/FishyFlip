@@ -14,19 +14,6 @@ public sealed class ATWebSocketProtocol : IDisposable
     private bool disposedValue;
     private ILogger? logger;
     private Uri instanceUri;
-    private ATProtocol? protocol;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
-    /// </summary>
-    /// <param name="protocol"><see cref="ATProtocolOptions"/>.</param>
-    public ATWebSocketProtocol(ATProtocol protocol)
-    {
-        this.protocol = protocol;
-        this.instanceUri = protocol.Options.Url;
-        this.logger = protocol.Options.Logger;
-        this.client = new ClientWebSocket();
-    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
@@ -122,7 +109,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task StartSubscribeReposAsync(CancellationToken? token = default)
-        => this.ConnectAsync(Constants.Urls.ATProtoSync.SubscribeRepos, token);
+        => this.ConnectAsync("/xrpc/com.atproto.sync.subscribeRepos", token);
 
     /// <summary>
     /// Start the ATProtocol SubscribeRepos sync session.
@@ -130,7 +117,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task StartSubscribeLabelsAsync(CancellationToken? token = default)
-        => this.ConnectAsync(Constants.Urls.ATProtoLabel.SubscribeLabels, token);
+        => this.ConnectAsync("/xrpc/com.atproto.label.subscribeLabels", token);
 
     /// <summary>
     /// Stops the ATProtocol Subscription session.
@@ -183,7 +170,20 @@ public sealed class ATWebSocketProtocol : IDisposable
     private void HandleMessage(byte[] byteArray)
     {
         using var stream = new MemoryStream(byteArray);
-        var objects = CBORObject.ReadSequence(stream);
+        CBORObject[]? objects = null;
+        try
+        {
+            objects = CBORObject.ReadSequence(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
+        }
+        catch (Exception e)
+        {
+            this.logger?.LogError(e, "WSS: ATError reading message.");
+        }
+
+        if (objects is null)
+        {
+            return;
+        }
 
         if (objects.Length != 2)
         {
@@ -221,7 +221,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             var blockObj = CBORObject.Read(blockStream);
                             if (blockObj["$type"] is not null)
                             {
-                                message.Record = ATRecord.FromCBORObject(blockObj, this.logger);
+                                message.Record = blockObj.ToATObject();
                                 this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
                             }
                             else if (blockObj["sig"] is not null)

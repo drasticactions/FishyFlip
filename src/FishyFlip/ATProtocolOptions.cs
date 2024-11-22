@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools.Json;
 using System.Net;
 
 namespace FishyFlip;
@@ -16,7 +17,7 @@ public class ATProtocolOptions
     /// </summary>
     /// <param name="customEmbedConverters">Customer JSON Converters for Embed.</param>
     /// <param name="customAtRecordConverters">Customer JSON Converters for ATRecord.</param>
-    public ATProtocolOptions(IReadOnlyList<ICustomEmbedConverter>? customEmbedConverters = default, IReadOnlyList<ICustomATRecordConverter>? customAtRecordConverters = default)
+    public ATProtocolOptions()
     {
         this.Url = new Uri(Constants.Urls.ATProtoServer.SocialApi);
         this.JsonSerializerOptions = new JsonSerializerOptions()
@@ -24,15 +25,7 @@ public class ATProtocolOptions
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new EmbedConverter(customEmbedConverters),
-                new ATRecordJsonConverter(customAtRecordConverters),
-                new ATCidConverter(),
-            },
+            Converters = { new ATUriJsonConverter() },
         };
 
         this.SourceGenerationContext = new SourceGenerationContext(this.JsonSerializerOptions);

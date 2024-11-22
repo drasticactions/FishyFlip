@@ -2,6 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon;
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -18,7 +21,7 @@ public class ATWebSocketCommit
     /// <param name="rKey">The record key.</param>
     /// <param name="record">The record associated with the commit.</param>
     /// <param name="cid">The CID associated with the commit.</param>
-    public ATWebSocketCommit(string? rev, ATWebSocketCommitType operation, string? collection, string? rKey, ATRecord? record, ATCid? cid)
+    public ATWebSocketCommit(string? rev, ATWebSocketCommitType operation, string? collection, string? rKey, ATObject? record, ATCid? cid)
     {
         this.Rev = rev;
         this.Operation = operation;
@@ -36,6 +39,7 @@ public class ATWebSocketCommit
     /// <summary>
     /// Gets the type of the WebSocket commit.
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter<ATWebSocketCommitType>))]
     public ATWebSocketCommitType Operation { get; }
 
     /// <summary>
@@ -57,10 +61,11 @@ public class ATWebSocketCommit
     /// <summary>
     /// Gets the record associated with the commit.
     /// </summary>
-    public ATRecord? Record { get; }
+    public ATObject? Record { get; }
 
     /// <summary>
     /// Gets the CID associated with the commit.
     /// </summary>
+    [JsonConverter(typeof(ATCidJsonConverter))]
     public ATCid? Cid { get; }
 }

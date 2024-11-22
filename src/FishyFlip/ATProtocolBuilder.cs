@@ -16,11 +16,9 @@ public class ATProtocolBuilder
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtocolBuilder"/> class.
     /// </summary>
-    /// <param name="customEmbedConverters">Customer JSON Converters for Embed.</param>
-    /// <param name="customAtRecordConverters">Customer JSON Converters for ATRecord.</param>
-    public ATProtocolBuilder(IReadOnlyList<ICustomEmbedConverter>? customEmbedConverters = default, IReadOnlyList<ICustomATRecordConverter>? customAtRecordConverters = default)
+    public ATProtocolBuilder()
     {
-        this.atProtocolOptions = new ATProtocolOptions(customEmbedConverters, customAtRecordConverters);
+        this.atProtocolOptions = new ATProtocolOptions();
     }
 
     /// <summary>

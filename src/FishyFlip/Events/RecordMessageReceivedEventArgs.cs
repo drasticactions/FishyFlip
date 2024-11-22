@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon;
+
 namespace FishyFlip.Events;
 
 /// <summary>
@@ -14,7 +16,7 @@ public class RecordMessageReceivedEventArgs : EventArgs
     /// </summary>
     /// <param name="frameCommit">The frame commit associated with the record.</param>
     /// <param name="record">The record that was received.</param>
-    public RecordMessageReceivedEventArgs(FrameCommit frameCommit, ATRecord record)
+    public RecordMessageReceivedEventArgs(FrameCommit frameCommit, ATObject? record)
     {
         this.FrameCommit = frameCommit;
         this.Record = record;
@@ -28,5 +30,5 @@ public class RecordMessageReceivedEventArgs : EventArgs
     /// <summary>
     /// Gets the record that was received.
     /// </summary>
-    public ATRecord Record { get; }
+    public ATObject? Record { get; }
 }

@@ -2,6 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon;
+using FishyFlip.Lexicon.App.Bsky.Actor;
+using FishyFlip.Lexicon.Com.Atproto.Sync;
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -18,7 +23,7 @@ public class ATWebSocketRecord
     /// <param name="identity">Identity.</param>
     /// <param name="account">Account.</param>
     [JsonConstructor]
-    public ATWebSocketRecord(ATWebSocketEvent kind, ATDid? did, ATWebSocketCommit? commit, ActorIdentity? identity, ActorAccount? account)
+    public ATWebSocketRecord(ATWebSocketEvent kind, ATDid? did, ATWebSocketCommit? commit, Identity? identity, Account? account)
     {
         this.Kind = kind;
         this.Did = did;
@@ -30,6 +35,7 @@ public class ATWebSocketRecord
     /// <summary>
     /// Gets the Type.
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter<ATWebSocketEvent>))]
     public ATWebSocketEvent Kind { get; }
 
     /// <summary>
@@ -46,17 +52,18 @@ public class ATWebSocketRecord
     /// <summary>
     /// Gets the Did.
     /// </summary>
+    [JsonConverter(typeof(ATDidJsonConverter))]
     public ATDid? Did { get; }
 
     /// <summary>
     /// Gets the Identity.
     /// </summary>
-    public ActorIdentity? Identity { get; }
+    public Identity? Identity { get; }
 
     /// <summary>
     /// Gets the Account.
     /// </summary>
-    public ActorAccount? Account { get; }
+    public Account? Account { get; }
 
     /// <summary>
     /// Gets or sets the time.

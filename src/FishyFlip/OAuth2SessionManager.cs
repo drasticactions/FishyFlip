@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon.Com.Atproto.Repo;
 using FishyFlip.Tools;
 using IdentityModel.Client;
 using IdentityModel.OidcClient;
@@ -174,8 +175,8 @@ internal class OAuth2SessionManager : ISessionManager
         var sub = result.TokenResponse!.Json!.Value!.TryGetValue("sub");
         var subValue = sub!.ToString();
         var didSub = ATDid.Create(subValue)!;
-        var describeRepo = (await this.protocol.Repo.DescribeRepoAsync(didSub, cancellationToken)).HandleResult();
-        var session = new Session(describeRepo!.Did, describeRepo.DidDoc, ATHandle.Create(describeRepo.Handle)!, null, result.AccessToken, result.RefreshToken);
+        var describeRepo = (await this.protocol.DescribeRepoAsync(didSub, cancellationToken)).HandleResult();
+        var session = new Session(describeRepo!.Did!, describeRepo.DidDoc, describeRepo.Handle!, null, result.AccessToken, result.RefreshToken);
         this.delegatingHandler = (RefreshTokenDelegatingHandler)result.RefreshTokenHandler;
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
         this.SetSession(session);

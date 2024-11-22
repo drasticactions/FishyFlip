@@ -121,6 +121,48 @@ public partial class AppCommands
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
+
+        var stringClassWithKnownValues = AllClasses.Where(n => n.Definition.Type == "string" && (n.Definition.KnownValues?.Any() ?? false)).ToList();
+        foreach (var cls in stringClassWithKnownValues)
+        {
+            await this.GenerateConstantKnownValueClass(cls);
+        }
+    }
+
+    private async Task GenerateConstantKnownValueClass(ClassGeneration cls)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, $"{this.baseNamespace}.{cls.CSharpNamespace}");
+        sb.AppendLine("{");
+        sb.AppendLine();
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Known Values for {cls.ClassName}.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public static class {cls.ClassName}");
+        sb.AppendLine("    {");
+        sb.AppendLine();
+        foreach (var knownValue in cls.Definition.KnownValues!)
+        {
+            sb.AppendLine($"        /// <summary>");
+            sb.AppendLine($"        /// {knownValue}");
+            sb.AppendLine($"        /// </summary>");
+            sb.AppendLine($"        public const string {(knownValue.Split("#").Last().ToClassSafe().ToPascalCase())} = \"{knownValue}\";");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, cls.CSharpNamespace.Replace('.', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"{cls.ClassName}.g.cs");
+        if (File.Exists(classPath))
+        {
+            throw new Exception($"File already exists: {cls.ClassName} {classPath}");
+        }
+
+        await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
     private async Task GenerateEndpointClassListForATProtoCS(List<IGrouping<string, ClassGeneration>> groupList)
@@ -404,6 +446,7 @@ public partial class AppCommands
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
                     this.GenerateParams(sb, item, inputProperties);
                     sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
@@ -411,6 +454,7 @@ public partial class AppCommands
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
                     sb.AppendLine($"            return atp.ATProtocol.DeleteRecordAsync({string.Join(", ", properties)});");
@@ -422,6 +466,7 @@ public partial class AppCommands
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
                     this.GenerateParams(sb, item, inputProperties);
@@ -432,6 +477,7 @@ public partial class AppCommands
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     // replace collection with the first input property.
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
                     sb.AppendLine($"            return atp.ATProtocol.PutRecordAsync({string.Join(", ", properties)});");
@@ -443,6 +489,7 @@ public partial class AppCommands
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     this.GenerateParams(sb, item, inputProperties);
                     sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
@@ -451,6 +498,7 @@ public partial class AppCommands
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
                     sb.AppendLine($"            return atp.ATProtocol.ListRecordsAsync({string.Join(", ", properties)});");
@@ -742,6 +790,56 @@ public partial class AppCommands
                 sb.Append(prop.PropertyDefinition.Description);
             }
 
+            if (prop?.PropertyDefinition.Type == "ref")
+            {
+                sb.AppendLine();
+                var refString = prop.PropertyDefinition.Ref;
+                var refSplit = prop.PropertyDefinition.Ref!.Split("#");
+                if (string.IsNullOrEmpty(refSplit[0]))
+                {
+                    refString = $"{item.Namespace}.defs#{refSplit[1]}";
+                }
+
+                var cls2 = FindClassFromRef(refString);
+                if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
+                {
+                    sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                }
+                else
+                {
+                    if (cls2?.Definition.KnownValues?.Any() ?? false)
+                    {
+                        sb.AppendLine($"        /// Known Values:");
+                        foreach (var knownValue in cls2.Definition.KnownValues)
+                        {
+                            var refString2 = knownValue;
+                            var refSplit2 = knownValue.Split("#");
+                            if (string.IsNullOrEmpty(refSplit2[0]))
+                            {
+                                refString2 = $"{cls2.Id}#{refSplit2[1]}";
+                            }
+
+                            var cls3 = FindClassFromRef(refString2);
+                            if (cls3 is not null)
+                            {
+                                sb.AppendLine($"        /// {knownValue} - {cls3.Definition.Description}");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"        /// {knownValue}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        sb.AppendLine($"        /// {refString}");
+                    }
+                }
+
+                sb.AppendLine("        /// </param>");
+                continue;
+            }
+
             if (prop?.PropertyDefinition.Type == "union" || (prop?.PropertyDefinition.Type == "array" && prop?.PropertyDefinition.Items?.Type == "union"))
             {
                 sb.AppendLine();
@@ -753,7 +851,7 @@ public partial class AppCommands
                     var refSplit = unionType.Split("#");
                     if (string.IsNullOrEmpty(refSplit[0]))
                     {
-                        refString = $"{item.Id.Split("#").First()}#{refSplit[1]}";
+                        refString = $"{item.Namespace}.defs#{refSplit[1]}";
                     }
 
                     var cls2 = FindClassFromRef(refString);
@@ -1541,7 +1639,56 @@ public partial class AppCommands
                 sb.Append(prop.PropertyDefinition.Description);
             }
 
-            if (prop?.PropertyDefinition.Type == "union" || (prop?.PropertyDefinition.Type == "array" && prop?.PropertyDefinition.Items?.Type == "union"))
+            if (prop?.PropertyDefinition.Type == "ref")
+            {
+                sb.AppendLine();
+                var refString = prop.PropertyDefinition.Ref;
+                var refSplit = prop.PropertyDefinition.Ref!.Split("#");
+                if (string.IsNullOrEmpty(refSplit[0]))
+                {
+                    refString = $"{cls.Namespace}.defs#{refSplit[1]}";
+                }
+
+                var cls2 = FindClassFromRef(refString);
+                if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
+                {
+                    sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                }
+                else
+                {
+                    if (cls2?.Definition.KnownValues?.Any() ?? false)
+                    {
+                        sb.AppendLine($"        /// Known Values:");
+                        foreach (var knownValue in cls2.Definition.KnownValues)
+                        {
+                            var refString2 = knownValue;
+                            var refSplit2 = knownValue.Split("#");
+                            if (string.IsNullOrEmpty(refSplit2[0]))
+                            {
+                                refString2 = $"{cls2.Id}#{refSplit2[1]}";
+                            }
+
+                            var cls3 = FindClassFromRef(refString2);
+                            if (cls3 is not null)
+                            {
+                                sb.AppendLine($"        /// {knownValue} - {cls3.Definition.Description}");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"        /// {knownValue}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        sb.AppendLine($"        /// {refString}");
+                    }
+                }
+
+                sb.AppendLine("        /// </param>");
+
+            }
+            else if (prop?.PropertyDefinition.Type == "union" || (prop?.PropertyDefinition.Type == "array" && prop?.PropertyDefinition.Items?.Type == "union"))
             {
                 sb.AppendLine();
                 sb.AppendLine($"        /// Union Types:");
@@ -1552,7 +1699,7 @@ public partial class AppCommands
                     var refSplit = unionType.Split("#");
                     if (string.IsNullOrEmpty(refSplit[0]))
                     {
-                        refString = $"{cls.Id.Split("#").First()}#{refSplit[1]}";
+                        refString = $"{cls.Namespace}.defs#{refSplit[1]}";
                     }
 
                     var cls2 = FindClassFromRef(refString);
@@ -1648,6 +1795,52 @@ public partial class AppCommands
         if (!string.IsNullOrEmpty(property.PropertyDefinition.Description))
         {
             sb.AppendLine($"        /// {property.PropertyDefinition.Description}");
+        }
+
+        if (property?.PropertyDefinition.Type == "ref")
+        {
+            var refString = property.PropertyDefinition.Ref;
+            var refSplit = property.PropertyDefinition.Ref.Split("#");
+            if (string.IsNullOrEmpty(refSplit[0]))
+            {
+                refString = $"{cls.Namespace}.defs#{refSplit[1]}";
+            }
+
+            var cls2 = FindClassFromRef(refString);
+            if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
+            {
+                sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+            }
+            else
+            {
+                if (cls2?.Definition.KnownValues?.Any() ?? false)
+                {
+                    sb.AppendLine($"        /// Known Values:");
+                    foreach (var knownValue in cls2.Definition.KnownValues)
+                    {
+                        var refString2 = knownValue;
+                        var refSplit2 = knownValue.Split("#");
+                        if (string.IsNullOrEmpty(refSplit2[0]))
+                        {
+                            refString2 = $"{cls2.Id}#{refSplit2[1]}";
+                        }
+
+                        var cls3 = FindClassFromRef(refString2);
+                        if (cls3 is not null)
+                        {
+                            sb.AppendLine($"        /// {knownValue} - {cls3.Definition.Description}");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"        /// {knownValue}");
+                        }
+                    }
+                }
+                else
+                {
+                    sb.AppendLine($"        /// {refString}");
+                }
+            }
         }
 
         if (property?.PropertyDefinition.Type == "union" || (property?.PropertyDefinition.Type == "array" && property?.PropertyDefinition.Items?.Type == "union"))

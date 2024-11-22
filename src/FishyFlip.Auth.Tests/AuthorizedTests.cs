@@ -2,6 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon;
+using FishyFlip.Lexicon.App.Bsky.Embed;
+using FishyFlip.Lexicon.App.Bsky.Feed;
+using FishyFlip.Lexicon.App.Bsky.Graph;
+using FishyFlip.Lexicon.App.Bsky.Richtext;
 using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
 using System.Net.Http;
@@ -89,7 +94,7 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.AreEqual(success!.Handle, handle1);
+                Assert.AreEqual(success!.Handle!.ToString(), handle1);
             },
             failed =>
             {
@@ -101,7 +106,7 @@ public class AuthorizedTests
     [DataRow("drasticactions.xn--q9jyb4c", "peepthisbot.bsky.social")]
     public async Task GetProfilesAsyncWithHandlesTest(string handle1, string handle2)
     {
-        var result = await AuthorizedTests.proto.Actor.GetProfilesAsync(new[] { ATHandle.Create(handle1), ATHandle.Create(handle2) });
+        var result = await AuthorizedTests.proto.Actor.GetProfilesAsync(new() { ATHandle.Create(handle1), ATHandle.Create(handle2) });
         result.Switch(
             success =>
             {
@@ -120,7 +125,7 @@ public class AuthorizedTests
     {
         var test1did = ATDid.Create(did1);
         var test2did = ATDid.Create(did2);
-        var result = await AuthorizedTests.proto.Actor.GetProfilesAsync(new[] { test1did, test2did });
+        var result = await AuthorizedTests.proto.Actor.GetProfilesAsync(new() { test1did, test2did });
         result.Switch(
             success =>
             {
@@ -139,7 +144,7 @@ public class AuthorizedTests
     {
         var postUri = ATUri.Create(quotePost);
         var postUri2 = ATUri.Create(quotePost2);
-        var postThreadResult = await AuthorizedTests.proto.Feed.GetPostsAsync(new[] { postUri, postUri2 });
+        var postThreadResult = await AuthorizedTests.proto.Feed.GetPostsAsync(new() { postUri, postUri2 });
         postThreadResult.Switch(
             success =>
             {
@@ -161,7 +166,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
                        {
-                           Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
+                           Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!)!.Post!.Uri!.ToString());
                        },
             failed =>
                         {
@@ -170,7 +175,7 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    [DataRow("", "")]
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3lbju2qfzz22r", "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3kwyf2iwzb226")]
     public async Task GetQuotePostThreadAsyncTest(string quotePost, string quotePost2)
     {
         var postUri = ATUri.Create(quotePost);
@@ -178,8 +183,9 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
-                Assert.AreEqual(quotePost2, ((RecordViewEmbed)success!.Thread!.Post!.Embed!)!.Post.Uri.ToString());
+                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri!.ToString());
+                var embedRecord = (ViewRecordDef)((ThreadViewPost)success!.Thread!).Post!.Embed!;
+                Assert.AreEqual(quotePost2, ((ViewRecord)embedRecord.Record!).Uri!.ToString());
             },
             failed =>
             {
@@ -188,7 +194,7 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    [DataRow("")]
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46sr63j7r2m")]
     public async Task GetExternalPostThreadAsyncTest(string externalPost)
     {
         var postUri = ATUri.Create(externalPost);
@@ -196,7 +202,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
+                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri.ToString());
             },
             failed =>
             {
@@ -213,7 +219,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
+                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri.ToString());
             },
             failed =>
             {
@@ -230,7 +236,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
+                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri.ToString());
             },
             failed =>
             {
@@ -239,7 +245,7 @@ public class AuthorizedTests
     }
 
     [TestMethod]
-    [DataRow("")]
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3lbfhxv7mem2b")]
     public async Task GetRepliesPostThreadAsyncTest(string postThread)
     {
         var postUri = ATUri.Create(postThread);
@@ -247,8 +253,8 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), success!.Thread.Post!.Uri.ToString());
-                Assert.IsTrue(success.Thread.Replies!.Count() > 0);
+                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri.ToString());
+                Assert.IsTrue(((ThreadViewPost)success!.Thread!).Replies!.Count() > 0);
             },
             failed =>
             {
@@ -259,7 +265,7 @@ public class AuthorizedTests
     [TestMethod]
     public async Task CreatePostAsyncTest()
     {
-        var test = await AuthorizedTests.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, null, new[] { "en" });
+        var test = await AuthorizedTests.proto.Feed.CreatePostAsync("CreatePostAsyncTest", langs: new() { "en" });
         test.Switch(
             success =>
                        {
@@ -274,9 +280,9 @@ public class AuthorizedTests
     [TestMethod]
     public async Task CreatePostWithReplyAsyncTest()
     {
-        (var test, var error) = await AuthorizedTests.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, null, null, new[] { "en" });
+        (var test, var error) = await AuthorizedTests.proto.Feed.CreatePostAsync("CreatePostAsyncTest", null, null, null, new() { "en" });
         Assert.IsTrue(test!.Cid is not null);
-        (var reply, error) = await AuthorizedTests.proto.Repo.CreatePostAsync("CreatePostAsyncTestReply", new Reply(new ReplyRef(test!.Cid, test.Uri!), new ReplyRef(test!.Cid, test.Uri!)), null, null, new[] { "en" });
+        (var reply, error) = await AuthorizedTests.proto.Feed.CreatePostAsync("CreatePostAsyncTestReply", null, new ReplyRefDef(new Lexicon.Com.Atproto.Repo.StrongRef(test.Uri!, test.Cid), new Lexicon.Com.Atproto.Repo.StrongRef(test.Uri!, test.Cid)), langs: new() { "en" });
         Assert.IsTrue(reply!.Cid is not null);
     }
 
@@ -293,8 +299,8 @@ public class AuthorizedTests
             async success =>
             {
                 Assert.IsTrue(success!.Blob is not null);
-                var imagesEmbed = new ImagesEmbed(success.Blob.ToImage(), "CreatePostWithImageAsyncTest");
-                var test = await AuthorizedTests.proto.Repo.CreatePostAsync("CreatePostAsyncTest", null, imagesEmbed, new[] { "en" });
+                var imagesEmbed = new EmbedImages(images: new() { new Image(success.Blob, "CreatePostAsyncTest") });
+                var test = await AuthorizedTests.proto.Feed.CreatePostAsync("CreatePostAsyncTest", embed: imagesEmbed, langs: new() { "en" });
                 test.Switch(
                         success2 =>
                         {
@@ -321,7 +327,7 @@ public class AuthorizedTests
         int promptStart = prompt.IndexOf(linkText, StringComparison.InvariantCulture);
         int promptEnd = promptStart + Encoding.Default.GetBytes(linkText).Length;
         var facet = Facet.CreateFacetLink(promptStart, promptEnd, "https://drasticactions.ninja");
-        var test = await AuthorizedTests.proto.Repo.CreatePostAsync(prompt, new[] { facet }, null, new[] { "en" });
+        var test = await AuthorizedTests.proto.Feed.CreatePostAsync(prompt, new() { facet }, null, langs: new() { "en" });
         test.Switch(
             success =>
                        {
@@ -342,7 +348,7 @@ public class AuthorizedTests
         int promptStart = prompt.IndexOf(linkText, StringComparison.InvariantCulture);
         int promptEnd = promptStart + Encoding.Default.GetBytes(linkText).Length;
         var facet = Facet.CreateFacetHashtag(promptStart, promptEnd, "FishyFlipTest");
-        var test = (await AuthorizedTests.proto.Repo.CreatePostAsync(prompt, new[] { facet }, null, new[] { "en" })).HandleResult();
+        var test = (await AuthorizedTests.proto.Feed.CreatePostAsync(prompt, new() { facet }, null, langs: new() { "en" })).HandleResult();
         Assert.IsTrue(test!.Cid is not null);
     }
 
@@ -351,7 +357,8 @@ public class AuthorizedTests
     public async Task CreateAndRemoveListTest(string followDid)
     {
         var randomName = Guid.NewGuid().ToString();
-        var createList = (await AuthorizedTests.proto.Repo.CreateCurateListAsync(randomName, "Test List", DateTime.UtcNow)).HandleResult();
+        var list = new FishyFlip.Lexicon.App.Bsky.Graph.List(ListPurpose.Curatelist, randomName, "Test List", createdAt: DateTime.UtcNow);
+        var createList = (await AuthorizedTests.proto.Graph.CreateListAsync(list)).HandleResult();
         Assert.IsTrue(createList!.Cid is not null);
         Assert.IsTrue(createList!.Uri is not null);
 
@@ -361,19 +368,19 @@ public class AuthorizedTests
         Assert.IsTrue(lists!.Lists.Count() > 0);
 
         var follow1 = ATDid.Create(followDid);
-        var follow = (await AuthorizedTests.proto.Repo.CreateListItemAsync(follow1, createList.Uri)).HandleResult();
+        var follow = (await AuthorizedTests.proto.Graph.CreateListitemAsync(follow1, createList.Uri)).HandleResult();
         Assert.IsTrue(follow!.Cid is not null);
         Assert.IsTrue(follow!.Uri is not null);
 
         await Task.Delay(2500);
-        var list = (await AuthorizedTests.proto.Graph.GetListAsync(createList.Uri)).HandleResult();
-        Assert.IsTrue(list is not null);
-        Assert.IsTrue(list!.Items.Count() > 0);
+        var listOutput = (await AuthorizedTests.proto.Graph.GetListAsync(createList.Uri)).HandleResult();
+        Assert.IsTrue(listOutput is not null);
+        Assert.IsTrue(listOutput!.Items!.Count() > 0);
 
-        var removeListItem = (await AuthorizedTests.proto.Repo.DeleteListItemAsync(follow.Uri.Rkey)).HandleResult();
+        var removeListItem = (await AuthorizedTests.proto.Graph.DeleteListitemAsync(follow.Uri.Rkey)).HandleResult();
         Assert.IsTrue(removeListItem is not null);
 
-        var removeList = (await AuthorizedTests.proto.Repo.DeleteListAsync(createList.Uri.Rkey)).HandleResult();
+        var removeList = (await AuthorizedTests.proto.Graph.DeleteListitemAsync(createList.Uri.Rkey)).HandleResult();
         Assert.IsTrue(removeList is not null);
     }
 
@@ -381,11 +388,11 @@ public class AuthorizedTests
     public async Task CreateAndRemovePostTest()
     {
         var randomName = Guid.NewGuid().ToString();
-        var create = (await AuthorizedTests.proto.Repo.CreatePostAsync(randomName)).HandleResult();
+        var create = (await AuthorizedTests.proto.Feed.CreatePostAsync(randomName)).HandleResult();
         Assert.IsTrue(create!.Cid is not null);
         Assert.IsTrue(create!.Uri is not null);
         var repo = AuthorizedTests.proto!.Session!.Did;
-        var remove = (await AuthorizedTests.proto.Repo.DeletePostAsync(create.Uri.Rkey)).HandleResult();
+        var remove = (await AuthorizedTests.proto.Feed.DeletePostAsync(create.Uri.Rkey)).HandleResult();
         Assert.IsTrue(remove is not null);
     }
 
@@ -393,19 +400,19 @@ public class AuthorizedTests
     public async Task CreateAndRemoveRepostTest()
     {
         var randomName = Guid.NewGuid().ToString();
-        var create = (await AuthorizedTests.proto.Repo.CreatePostAsync(randomName)).HandleResult();
+        var create = (await AuthorizedTests.proto.Feed.CreatePostAsync(randomName)).HandleResult();
         Assert.IsTrue(create!.Cid is not null);
         Assert.IsTrue(create!.Uri is not null);
 
-        var repost = (await AuthorizedTests.proto.Repo.CreateRepostAsync(create.Cid, create.Uri)).HandleResult();
+        var repost = (await AuthorizedTests.proto.Feed.CreateRepostAsync(new Repost(new Lexicon.Com.Atproto.Repo.StrongRef(create.Uri, create.Cid)))).HandleResult();
         Assert.IsTrue(repost!.Cid is not null);
         Assert.IsTrue(repost!.Uri is not null);
 
         var repo = AuthorizedTests.proto.Session!.Did;
-        var removeRepost = (await AuthorizedTests.proto.Repo.DeleteRepostAsync(repost.Uri.Rkey)).HandleResult();
+        var removeRepost = (await AuthorizedTests.proto.Feed.DeleteRepostAsync(repost.Uri.Rkey)).HandleResult();
         Assert.IsTrue(removeRepost is not null);
 
-        var remove = (await AuthorizedTests.proto.Repo.DeletePostAsync(create.Uri.Rkey)).HandleResult();
+        var remove = (await AuthorizedTests.proto.Feed.DeletePostAsync(create.Uri.Rkey)).HandleResult();
         Assert.IsTrue(remove is not null);
     }
 
@@ -413,18 +420,18 @@ public class AuthorizedTests
     public async Task CreateAndRemoveLikeTest()
     {
         var randomName = Guid.NewGuid().ToString();
-        var create = (await AuthorizedTests.proto.Repo.CreatePostAsync(randomName)).HandleResult();
+        var create = (await AuthorizedTests.proto.Feed.CreatePostAsync(randomName)).HandleResult();
         Assert.IsTrue(create!.Cid is not null);
         Assert.IsTrue(create!.Uri is not null);
 
-        var like = (await AuthorizedTests.proto.Repo.CreateLikeAsync(create.Cid, create.Uri)).HandleResult();
+        var like = (await AuthorizedTests.proto.Feed.CreateLikeAsync(new Like(new Lexicon.Com.Atproto.Repo.StrongRef(create.Uri, create.Cid)))).HandleResult();
         Assert.IsTrue(like!.Cid is not null);
         Assert.IsTrue(like!.Uri is not null);
 
-        var removeLike = (await AuthorizedTests.proto.Repo.DeleteLikeAsync(like.Uri.Rkey)).HandleResult();
+        var removeLike = (await AuthorizedTests.proto.Feed.DeleteLikeAsync(like.Uri.Rkey)).HandleResult();
         Assert.IsTrue(removeLike is not null);
 
-        var remove = (await AuthorizedTests.proto.Repo.DeletePostAsync(create.Uri.Rkey)).HandleResult();
+        var remove = (await AuthorizedTests.proto.Feed.DeletePostAsync(create.Uri.Rkey)).HandleResult();
         Assert.IsTrue(remove is not null);
     }
 
@@ -433,11 +440,11 @@ public class AuthorizedTests
     public async Task CreateAndRemoveFollowTest(string followDid)
     {
         var follow1 = ATDid.Create(followDid);
-        var follow = (await AuthorizedTests.proto.Repo.CreateFollowAsync(follow1)).HandleResult();
+        var follow = (await AuthorizedTests.proto.Graph.CreateFollowAsync(follow1)).HandleResult();
         Assert.IsTrue(follow!.Cid is not null);
         Assert.IsTrue(follow!.Uri is not null);
 
-        var remove = (await AuthorizedTests.proto.Repo.DeleteFollowAsync(follow.Uri.Rkey)).HandleResult();
+        var remove = (await AuthorizedTests.proto.Graph.DeleteFollowAsync(follow.Uri.Rkey)).HandleResult();
         Assert.IsTrue(remove is not null);
     }
 
@@ -446,11 +453,11 @@ public class AuthorizedTests
     public async Task CreateAndRemoveBlockTest(string blockDid)
     {
         var follow2 = ATDid.Create(blockDid);
-        var follow = (await AuthorizedTests.proto.Repo.CreateBlockAsync(follow2)).HandleResult();
+        var follow = (await AuthorizedTests.proto.Graph.CreateBlockAsync(follow2)).HandleResult();
         Assert.IsTrue(follow!.Cid is not null);
         Assert.IsTrue(follow!.Uri is not null);
 
-        var remove = (await AuthorizedTests.proto.Repo.DeleteBlockAsync(follow.Uri.Rkey)).HandleResult();
+        var remove = (await AuthorizedTests.proto.Graph.DeleteBlockAsync(follow.Uri.Rkey)).HandleResult();
         Assert.IsTrue(remove is not null);
     }
 
@@ -468,12 +475,12 @@ public class AuthorizedTests
     [TestMethod]
     public async Task CreatePostWithThreadGate()
     {
-        var (post, error) = await AuthorizedTests.proto.Repo.CreatePostAsync("prompt", null, null, new[] { "en" });
+        var (post, error) = await AuthorizedTests.proto.Feed.CreatePostAsync("prompt", null, null, langs: new() { "en" });
         Assert.IsNull(error);
         Assert.IsNotNull(post);
         Assert.IsNotNull(post!.Uri);
-        var threadPostReasons = new[] { ThreadGateReason.CreateFollowingRule(), ThreadGateReason.CreateMentionRule() };
-        var (threadGate, _) = await AuthorizedTests.proto.Repo.CreateThreadGateAsync(post!.Uri!, threadPostReasons);
+        var gate = new Threadgate(post!.Uri!, new() { new MentionRule(), new FollowingRule() });
+        var (threadGate, _) = await AuthorizedTests.proto.Feed.CreateThreadgateAsync(gate);
         Assert.IsNotNull(threadGate);
         Assert.IsNotNull(threadGate.Uri);
         Assert.IsNotNull(threadGate.Cid);
