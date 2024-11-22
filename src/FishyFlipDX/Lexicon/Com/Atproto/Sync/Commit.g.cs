@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Commit"/> class.
         /// </summary>
+        /// <param name="seq">The stream sequence number of this message.</param>
+        /// <param name="tooBig">Indicates that this commit contained too many ops, or data size was too large. Consumers will need to make a separate request to get missing data.</param>
+        /// <param name="repo">The repo this event comes from.</param>
+        /// <param name="commit">Repo commit object CID.</param>
+        /// <param name="rev">The rev of the emitted commit. Note that this information is also in the commit object included in blocks, unless this is a tooBig event.</param>
+        /// <param name="since">The rev of the last emitted commit from this repo (if any).</param>
+        /// <param name="blocks">CAR file containing relevant blocks, as a diff since the previous repo state.</param>
+        /// <param name="ops"></param>
+        /// <param name="blobs"></param>
+        /// <param name="time">Timestamp of when this message was originally broadcast.</param>
         public Commit(long? seq = default, bool? tooBig = default, FishyFlip.Models.ATDid? repo = default, Ipfs.Cid? commit = default, string? rev = default, string? since = default, byte[]? blocks = default, List<Com.Atproto.Sync.RepoOp>? ops = default, List<Ipfs.Cid>? blobs = default, DateTime? time = default)
         {
             this.Seq = seq;
@@ -56,6 +66,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         }
 
         /// <summary>
+        /// Gets or sets the seq.
         /// The stream sequence number of this message.
         /// </summary>
         [JsonPropertyName("seq")]
@@ -63,6 +74,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public long? Seq { get; set; }
 
         /// <summary>
+        /// Gets or sets the tooBig.
         /// Indicates that this commit contained too many ops, or data size was too large. Consumers will need to make a separate request to get missing data.
         /// </summary>
         [JsonPropertyName("tooBig")]
@@ -70,6 +82,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public bool? TooBig { get; set; }
 
         /// <summary>
+        /// Gets or sets the repo.
         /// The repo this event comes from.
         /// </summary>
         [JsonPropertyName("repo")]
@@ -78,6 +91,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public FishyFlip.Models.ATDid? Repo { get; set; }
 
         /// <summary>
+        /// Gets or sets the commit.
         /// Repo commit object CID.
         /// </summary>
         [JsonPropertyName("commit")]
@@ -86,6 +100,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public Ipfs.Cid? CommitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the rev.
         /// The rev of the emitted commit. Note that this information is also in the commit object included in blocks, unless this is a tooBig event.
         /// </summary>
         [JsonPropertyName("rev")]
@@ -93,6 +108,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public string? Rev { get; set; }
 
         /// <summary>
+        /// Gets or sets the since.
         /// The rev of the last emitted commit from this repo (if any).
         /// </summary>
         [JsonPropertyName("since")]
@@ -100,21 +116,29 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public string? Since { get; set; }
 
         /// <summary>
+        /// Gets or sets the blocks.
         /// CAR file containing relevant blocks, as a diff since the previous repo state.
         /// </summary>
         [JsonPropertyName("blocks")]
         [JsonRequired]
         public byte[]? Blocks { get; set; }
 
+        /// <summary>
+        /// Gets or sets the ops.
+        /// </summary>
         [JsonPropertyName("ops")]
         [JsonRequired]
         public List<Com.Atproto.Sync.RepoOp>? Ops { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blobs.
+        /// </summary>
         [JsonPropertyName("blobs")]
         [JsonRequired]
         public List<Ipfs.Cid>? Blobs { get; set; }
 
         /// <summary>
+        /// Gets or sets the time.
         /// Timestamp of when this message was originally broadcast.
         /// </summary>
         [JsonPropertyName("time")]

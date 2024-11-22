@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplyRef"/> class.
         /// </summary>
+        /// <param name="root">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </param>
+        /// <param name="parent">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </param>
+        /// <param name="grandparentAuthor">When parent is a reply to another post, this is the author of that post.</param>
         public ReplyRef(ATObject? root = default, ATObject? parent = default, App.Bsky.Actor.ProfileViewBasic? grandparentAuthor = default)
         {
             this.Root = root;
@@ -38,15 +51,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["grandparentAuthor"] is not null) this.GrandparentAuthor = new App.Bsky.Actor.ProfileViewBasic(obj["grandparentAuthor"]);
         }
 
+        /// <summary>
+        /// Gets or sets the root.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </summary>
         [JsonPropertyName("root")]
         [JsonRequired]
         public ATObject? Root { get; set; }
 
+        /// <summary>
+        /// Gets or sets the parent.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </summary>
         [JsonPropertyName("parent")]
         [JsonRequired]
         public ATObject? Parent { get; set; }
 
         /// <summary>
+        /// Gets or sets the grandparentAuthor.
         /// When parent is a reply to another post, this is the author of that post.
         /// </summary>
         [JsonPropertyName("grandparentAuthor")]

@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="BskyAppProgressGuide"/> class.
         /// </summary>
+        /// <param name="guide"></param>
         public BskyAppProgressGuide(string? guide = default)
         {
             this.Guide = guide;
@@ -37,6 +38,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["guide"] is not null) this.Guide = obj["guide"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the guide.
+        /// </summary>
         [JsonPropertyName("guide")]
         [JsonRequired]
         public string? Guide { get; set; }

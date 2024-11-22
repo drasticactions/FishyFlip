@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSubjectStatusInput"/> class.
         /// </summary>
+        /// <param name="subject">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef"/> (com.atproto.admin.defs#repoBlobRef)
+        /// </param>
+        /// <param name="takedown"></param>
+        /// <param name="deactivated"></param>
         public UpdateSubjectStatusInput(ATObject? subject = default, Com.Atproto.Admin.StatusAttr? takedown = default, Com.Atproto.Admin.StatusAttr? deactivated = default)
         {
             this.Subject = subject;
@@ -38,13 +46,26 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["deactivated"] is not null) this.Deactivated = new Com.Atproto.Admin.StatusAttr(obj["deactivated"]);
         }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef"/> (com.atproto.admin.defs#repoBlobRef)
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public ATObject? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the takedown.
+        /// </summary>
         [JsonPropertyName("takedown")]
         public Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
 
+        /// <summary>
+        /// Gets or sets the deactivated.
+        /// </summary>
         [JsonPropertyName("deactivated")]
         public Com.Atproto.Admin.StatusAttr? Deactivated { get; set; }
 

@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="BlockedPost"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="blocked"></param>
+        /// <param name="author"></param>
         public BlockedPost(FishyFlip.Models.ATUri? uri = default, bool? blocked = default, App.Bsky.Feed.BlockedAuthor? author = default)
         {
             this.Uri = uri;
@@ -38,15 +41,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["author"] is not null) this.Author = new App.Bsky.Feed.BlockedAuthor(obj["author"]);
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blocked.
+        /// </summary>
         [JsonPropertyName("blocked")]
         [JsonRequired]
         public bool? Blocked { get; set; }
 
+        /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
         public App.Bsky.Feed.BlockedAuthor? Author { get; set; }

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteMessageForSelfInput"/> class.
         /// </summary>
+        /// <param name="convoId"></param>
+        /// <param name="messageId"></param>
         public DeleteMessageForSelfInput(string? convoId = default, string? messageId = default)
         {
             this.ConvoId = convoId;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["messageId"] is not null) this.MessageId = obj["messageId"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the convoId.
+        /// </summary>
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string? ConvoId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the messageId.
+        /// </summary>
         [JsonPropertyName("messageId")]
         [JsonRequired]
         public string? MessageId { get; set; }

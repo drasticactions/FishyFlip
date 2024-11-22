@@ -12,6 +12,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRelationshipsOutput"/> class.
         /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="relationships">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.Relationship"/> (app.bsky.graph.defs#relationship)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor"/> (app.bsky.graph.defs#notFoundActor)
+        /// </param>
         public GetRelationshipsOutput(FishyFlip.Models.ATDid? actor = default, List<ATObject>? relationships = default)
         {
             this.Actor = actor;
@@ -36,10 +42,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["relationships"] is not null) this.Relationships = obj["relationships"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the actor.
+        /// </summary>
         [JsonPropertyName("actor")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Actor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the relationships.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.Relationship"/> (app.bsky.graph.defs#relationship)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor"/> (app.bsky.graph.defs#notFoundActor)
+        /// </summary>
         [JsonPropertyName("relationships")]
         [JsonRequired]
         public List<ATObject>? Relationships { get; set; }

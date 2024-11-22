@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordWithMedia"/> class.
         /// </summary>
+        /// <param name="record"></param>
+        /// <param name="media">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external)
+        /// </param>
         public RecordWithMedia(App.Bsky.Embed.EmbedRecord? record = default, ATObject? media = default)
         {
             this.Record = record;
@@ -36,10 +43,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["media"] is not null) this.Media = obj["media"].ToATObject();
         }
 
+        /// <summary>
+        /// Gets or sets the record.
+        /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
         public App.Bsky.Embed.EmbedRecord? Record { get; set; }
 
+        /// <summary>
+        /// Gets or sets the media.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external)
+        /// </summary>
         [JsonPropertyName("media")]
         [JsonRequired]
         public ATObject? Media { get; set; }

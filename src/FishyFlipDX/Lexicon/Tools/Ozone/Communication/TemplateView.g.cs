@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateView"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name">Name of the template.</param>
+        /// <param name="subject">Content of the template, can contain markdown and variable placeholders.</param>
+        /// <param name="contentMarkdown">Subject of the message, used in emails.</param>
+        /// <param name="disabled"></param>
+        /// <param name="lang">Message language.</param>
+        /// <param name="lastUpdatedBy">DID of the user who last updated the template.</param>
+        /// <param name="createdAt"></param>
+        /// <param name="updatedAt"></param>
         public TemplateView(string? id = default, string? name = default, string? subject = default, string? contentMarkdown = default, bool? disabled = default, string? lang = default, FishyFlip.Models.ATDid? lastUpdatedBy = default, DateTime? createdAt = default, DateTime? updatedAt = default)
         {
             this.Id = id;
@@ -50,11 +59,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public string? Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the name.
         /// Name of the template.
         /// </summary>
         [JsonPropertyName("name")]
@@ -62,29 +75,36 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the subject.
         /// Content of the template, can contain markdown and variable placeholders.
         /// </summary>
         [JsonPropertyName("subject")]
         public string? Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets the contentMarkdown.
         /// Subject of the message, used in emails.
         /// </summary>
         [JsonPropertyName("contentMarkdown")]
         [JsonRequired]
         public string? ContentMarkdown { get; set; }
 
+        /// <summary>
+        /// Gets or sets the disabled.
+        /// </summary>
         [JsonPropertyName("disabled")]
         [JsonRequired]
         public bool? Disabled { get; set; }
 
         /// <summary>
+        /// Gets or sets the lang.
         /// Message language.
         /// </summary>
         [JsonPropertyName("lang")]
         public string? Lang { get; set; }
 
         /// <summary>
+        /// Gets or sets the lastUpdatedBy.
         /// DID of the user who last updated the template.
         /// </summary>
         [JsonPropertyName("lastUpdatedBy")]
@@ -92,10 +112,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? LastUpdatedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the updatedAt.
+        /// </summary>
         [JsonPropertyName("updatedAt")]
         [JsonRequired]
         public DateTime? UpdatedAt { get; set; }

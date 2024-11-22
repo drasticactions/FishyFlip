@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="Metadata"/> class.
         /// </summary>
+        /// <param name="messagesSent"></param>
+        /// <param name="messagesReceived"></param>
+        /// <param name="convos"></param>
+        /// <param name="convosStarted"></param>
         public Metadata(long? messagesSent = default, long? messagesReceived = default, long? convos = default, long? convosStarted = default)
         {
             this.MessagesSent = messagesSent;
@@ -40,18 +44,30 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             if (obj["convosStarted"] is not null) this.ConvosStarted = obj["convosStarted"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the messagesSent.
+        /// </summary>
         [JsonPropertyName("messagesSent")]
         [JsonRequired]
         public long? MessagesSent { get; set; }
 
+        /// <summary>
+        /// Gets or sets the messagesReceived.
+        /// </summary>
         [JsonPropertyName("messagesReceived")]
         [JsonRequired]
         public long? MessagesReceived { get; set; }
 
+        /// <summary>
+        /// Gets or sets the convos.
+        /// </summary>
         [JsonPropertyName("convos")]
         [JsonRequired]
         public long? Convos { get; set; }
 
+        /// <summary>
+        /// Gets or sets the convosStarted.
+        /// </summary>
         [JsonPropertyName("convosStarted")]
         [JsonRequired]
         public long? ConvosStarted { get; set; }

@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="SetView"/> class.
         /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="setSize"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="updatedAt"></param>
         public SetView(string? name = default, string? description = default, long? setSize = default, DateTime? createdAt = default, DateTime? updatedAt = default)
         {
             this.Name = name;
@@ -42,21 +47,36 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the setSize.
+        /// </summary>
         [JsonPropertyName("setSize")]
         [JsonRequired]
         public long? SetSize { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the updatedAt.
+        /// </summary>
         [JsonPropertyName("updatedAt")]
         [JsonRequired]
         public DateTime? UpdatedAt { get; set; }

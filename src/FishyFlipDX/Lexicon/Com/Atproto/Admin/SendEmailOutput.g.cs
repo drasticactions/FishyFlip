@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="SendEmailOutput"/> class.
         /// </summary>
+        /// <param name="sent"></param>
         public SendEmailOutput(bool? sent = default)
         {
             this.Sent = sent;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["sent"] is not null) this.Sent = obj["sent"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the sent.
+        /// </summary>
         [JsonPropertyName("sent")]
         [JsonRequired]
         public bool? Sent { get; set; }

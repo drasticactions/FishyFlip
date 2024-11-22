@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Listblock"/> class.
         /// </summary>
+        /// <param name="subject">Reference (AT-URI) to the mod list record.</param>
+        /// <param name="createdAt"></param>
         public Listblock(FishyFlip.Models.ATUri? subject, DateTime? createdAt = default)
         {
             this.Subject = subject;
@@ -40,12 +42,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         }
 
         /// <summary>
+        /// Gets or sets the subject.
         /// Reference (AT-URI) to the mod list record.
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

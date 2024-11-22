@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateReportOutput"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="reasonType"></param>
+        /// <param name="reason"></param>
+        /// <param name="subject">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </param>
+        /// <param name="reportedBy"></param>
+        /// <param name="createdAt"></param>
         public CreateReportOutput(long? id = default, string? reasonType = default, string? reason = default, ATObject? subject = default, FishyFlip.Models.ATDid? reportedBy = default, DateTime? createdAt = default)
         {
             this.Id = id;
@@ -44,26 +54,47 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public long? Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reasonType.
+        /// </summary>
         [JsonPropertyName("reasonType")]
         [JsonRequired]
         public string? ReasonType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reason.
+        /// </summary>
         [JsonPropertyName("reason")]
         public string? Reason { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public ATObject? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reportedBy.
+        /// </summary>
         [JsonPropertyName("reportedBy")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? ReportedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;

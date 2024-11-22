@@ -15,6 +15,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewerState"/> class.
         /// </summary>
+        /// <param name="muted"></param>
+        /// <param name="mutedByList"></param>
+        /// <param name="blockedBy"></param>
+        /// <param name="blocking"></param>
+        /// <param name="blockingByList"></param>
+        /// <param name="following"></param>
+        /// <param name="followedBy"></param>
+        /// <param name="knownFollowers"></param>
         public ViewerState(bool? muted = default, App.Bsky.Graph.ListViewBasic? mutedByList = default, bool? blockedBy = default, FishyFlip.Models.ATUri? blocking = default, App.Bsky.Graph.ListViewBasic? blockingByList = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, App.Bsky.Actor.KnownFollowers? knownFollowers = default)
         {
             this.Muted = muted;
@@ -51,30 +59,54 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["knownFollowers"] is not null) this.KnownFollowers = new App.Bsky.Actor.KnownFollowers(obj["knownFollowers"]);
         }
 
+        /// <summary>
+        /// Gets or sets the muted.
+        /// </summary>
         [JsonPropertyName("muted")]
         public bool? Muted { get; set; }
 
+        /// <summary>
+        /// Gets or sets the mutedByList.
+        /// </summary>
         [JsonPropertyName("mutedByList")]
         public App.Bsky.Graph.ListViewBasic? MutedByList { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blockedBy.
+        /// </summary>
         [JsonPropertyName("blockedBy")]
         public bool? BlockedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blocking.
+        /// </summary>
         [JsonPropertyName("blocking")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Blocking { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blockingByList.
+        /// </summary>
         [JsonPropertyName("blockingByList")]
         public App.Bsky.Graph.ListViewBasic? BlockingByList { get; set; }
 
+        /// <summary>
+        /// Gets or sets the following.
+        /// </summary>
         [JsonPropertyName("following")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Following { get; set; }
 
+        /// <summary>
+        /// Gets or sets the followedBy.
+        /// </summary>
         [JsonPropertyName("followedBy")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? FollowedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the knownFollowers.
+        /// </summary>
         [JsonPropertyName("knownFollowers")]
         public App.Bsky.Actor.KnownFollowers? KnownFollowers { get; set; }
 

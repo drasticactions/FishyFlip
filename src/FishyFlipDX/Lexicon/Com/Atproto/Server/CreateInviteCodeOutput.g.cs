@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInviteCodeOutput"/> class.
         /// </summary>
+        /// <param name="code"></param>
         public CreateInviteCodeOutput(string? code = default)
         {
             this.Code = code;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["code"] is not null) this.Code = obj["code"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the code.
+        /// </summary>
         [JsonPropertyName("code")]
         [JsonRequired]
         public string? Code { get; set; }

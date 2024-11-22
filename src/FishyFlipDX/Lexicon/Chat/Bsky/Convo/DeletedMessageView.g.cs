@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletedMessageView"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="rev"></param>
+        /// <param name="sender"></param>
+        /// <param name="sentAt"></param>
         public DeletedMessageView(string? id = default, string? rev = default, Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
         {
             this.Id = id;
@@ -40,18 +44,30 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public string? Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }
 
+        /// <summary>
+        /// Gets or sets the sender.
+        /// </summary>
         [JsonPropertyName("sender")]
         [JsonRequired]
         public Chat.Bsky.Convo.MessageViewSender? Sender { get; set; }
 
+        /// <summary>
+        /// Gets or sets the sentAt.
+        /// </summary>
         [JsonPropertyName("sentAt")]
         [JsonRequired]
         public DateTime? SentAt { get; set; }

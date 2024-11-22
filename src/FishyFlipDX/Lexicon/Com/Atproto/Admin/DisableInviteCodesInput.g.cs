@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="DisableInviteCodesInput"/> class.
         /// </summary>
+        /// <param name="codes"></param>
+        /// <param name="accounts"></param>
         public DisableInviteCodesInput(List<string>? codes = default, List<string>? accounts = default)
         {
             this.Codes = codes;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>n.AsString()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the codes.
+        /// </summary>
         [JsonPropertyName("codes")]
         public List<string>? Codes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the accounts.
+        /// </summary>
         [JsonPropertyName("accounts")]
         public List<string>? Accounts { get; set; }
 

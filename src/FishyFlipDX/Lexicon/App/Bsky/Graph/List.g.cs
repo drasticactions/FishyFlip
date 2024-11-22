@@ -15,6 +15,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="List"/> class.
         /// </summary>
+        /// <param name="purpose">Defines the purpose of the list (aka, moderation-oriented or curration-oriented)</param>
+        /// <param name="name">Display name for list; can not be empty.</param>
+        /// <param name="description"></param>
+        /// <param name="descriptionFacets"></param>
+        /// <param name="avatar"></param>
+        /// <param name="labels">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// </param>
+        /// <param name="createdAt"></param>
         public List(string? purpose, string? name, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
         {
             this.Purpose = purpose;
@@ -50,29 +60,48 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         }
 
         /// <summary>
+        /// Gets or sets the purpose.
         /// Defines the purpose of the list (aka, moderation-oriented or curration-oriented)
         /// </summary>
         [JsonPropertyName("purpose")]
         public string? Purpose { get; set; }
 
         /// <summary>
+        /// Gets or sets the name.
         /// Display name for list; can not be empty.
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the descriptionFacets.
+        /// </summary>
         [JsonPropertyName("descriptionFacets")]
         public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
+        /// <summary>
+        /// Gets or sets the avatar.
+        /// </summary>
         [JsonPropertyName("avatar")]
         public Blob? Avatar { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

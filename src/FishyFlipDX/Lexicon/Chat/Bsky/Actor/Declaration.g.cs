@@ -15,6 +15,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="Declaration"/> class.
         /// </summary>
+        /// <param name="allowIncoming">
+        /// Known Values:
+        /// all
+        /// none
+        /// following
+        /// </param>
         public Declaration(string? allowIncoming)
         {
             this.AllowIncoming = allowIncoming;
@@ -34,9 +40,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// </summary>
         public Declaration(CBORObject obj)
         {
-            // enum
+            if (obj["allowIncoming"] is not null) this.AllowIncoming = obj["allowIncoming"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the allowIncoming.
+        /// Known Values:
+        /// all
+        /// none
+        /// following
+        /// </summary>
         [JsonPropertyName("allowIncoming")]
         public string? AllowIncoming { get; set; }
 

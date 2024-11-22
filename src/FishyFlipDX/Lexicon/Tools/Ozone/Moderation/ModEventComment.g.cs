@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventComment"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="sticky">Make the comment persistent on the subject</param>
         public ModEventComment(string? comment = default, bool? sticky = default)
         {
             this.Comment = comment;
@@ -39,11 +41,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["sticky"] is not null) this.Sticky = obj["sticky"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         [JsonRequired]
         public string? Comment { get; set; }
 
         /// <summary>
+        /// Gets or sets the sticky.
         /// Make the comment persistent on the subject
         /// </summary>
         [JsonPropertyName("sticky")]

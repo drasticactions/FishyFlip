@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="UpsertOptionOutput"/> class.
         /// </summary>
+        /// <param name="option"></param>
         public UpsertOptionOutput(Tools.Ozone.Setting.Option? option = default)
         {
             this.Option = option;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             if (obj["option"] is not null) this.Option = new Tools.Ozone.Setting.Option(obj["option"]);
         }
 
+        /// <summary>
+        /// Gets or sets the option.
+        /// </summary>
         [JsonPropertyName("option")]
         [JsonRequired]
         public Tools.Ozone.Setting.Option? Option { get; set; }

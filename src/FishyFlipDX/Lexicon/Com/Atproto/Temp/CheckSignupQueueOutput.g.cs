@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckSignupQueueOutput"/> class.
         /// </summary>
+        /// <param name="activated"></param>
+        /// <param name="placeInQueue"></param>
+        /// <param name="estimatedTimeMs"></param>
         public CheckSignupQueueOutput(bool? activated = default, long? placeInQueue = default, long? estimatedTimeMs = default)
         {
             this.Activated = activated;
@@ -38,13 +41,22 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             if (obj["estimatedTimeMs"] is not null) this.EstimatedTimeMs = obj["estimatedTimeMs"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the activated.
+        /// </summary>
         [JsonPropertyName("activated")]
         [JsonRequired]
         public bool? Activated { get; set; }
 
+        /// <summary>
+        /// Gets or sets the placeInQueue.
+        /// </summary>
         [JsonPropertyName("placeInQueue")]
         public long? PlaceInQueue { get; set; }
 
+        /// <summary>
+        /// Gets or sets the estimatedTimeMs.
+        /// </summary>
         [JsonPropertyName("estimatedTimeMs")]
         public long? EstimatedTimeMs { get; set; }
 

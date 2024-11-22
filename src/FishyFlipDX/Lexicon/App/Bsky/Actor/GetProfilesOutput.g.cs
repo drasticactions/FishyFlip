@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="GetProfilesOutput"/> class.
         /// </summary>
+        /// <param name="profiles"></param>
         public GetProfilesOutput(List<App.Bsky.Actor.ProfileViewDetailed>? profiles = default)
         {
             this.Profiles = profiles;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["profiles"] is not null) this.Profiles = obj["profiles"].Values.Select(n =>new App.Bsky.Actor.ProfileViewDetailed(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the profiles.
+        /// </summary>
         [JsonPropertyName("profiles")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileViewDetailed>? Profiles { get; set; }

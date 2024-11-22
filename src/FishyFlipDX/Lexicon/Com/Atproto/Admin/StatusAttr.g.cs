@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="StatusAttr"/> class.
         /// </summary>
+        /// <param name="applied"></param>
+        /// <param name="@ref"></param>
         public StatusAttr(bool? applied = default, string? @ref = default)
         {
             this.Applied = applied;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["ref"] is not null) this.Ref = obj["ref"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the applied.
+        /// </summary>
         [JsonPropertyName("applied")]
         [JsonRequired]
         public bool? Applied { get; set; }
 
+        /// <summary>
+        /// Gets or sets the ref.
+        /// </summary>
         [JsonPropertyName("ref")]
         public string? Ref { get; set; }
 

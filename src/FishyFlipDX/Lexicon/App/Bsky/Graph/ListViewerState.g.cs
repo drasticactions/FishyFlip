@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="ListViewerState"/> class.
         /// </summary>
+        /// <param name="muted"></param>
+        /// <param name="blocked"></param>
         public ListViewerState(bool? muted = default, FishyFlip.Models.ATUri? blocked = default)
         {
             this.Muted = muted;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["blocked"] is not null) this.Blocked = obj["blocked"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the muted.
+        /// </summary>
         [JsonPropertyName("muted")]
         public bool? Muted { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blocked.
+        /// </summary>
         [JsonPropertyName("blocked")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Blocked { get; set; }

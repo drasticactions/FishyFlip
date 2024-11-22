@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="Profile"/> class.
         /// </summary>
+        /// <param name="displayName"></param>
+        /// <param name="description">Free-form profile description text.</param>
+        /// <param name="avatar">Small image to be displayed next to posts from account. AKA, 'profile picture'</param>
+        /// <param name="banner">Larger horizontal image to display behind profile view.</param>
+        /// <param name="labels">Self-label values, specific to the Bluesky application, on the overall account.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// </param>
+        /// <param name="joinedViaStarterPack"></param>
+        /// <param name="pinnedPost"></param>
+        /// <param name="createdAt"></param>
         public Profile(string? displayName = default, string? description = default, Blob? avatar = default, Blob? banner = default, Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default)
         {
             this.DisplayName = displayName;
@@ -51,39 +62,57 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the displayName.
+        /// </summary>
         [JsonPropertyName("displayName")]
         public string? DisplayName { get; set; }
 
         /// <summary>
+        /// Gets or sets the description.
         /// Free-form profile description text.
         /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the avatar.
         /// Small image to be displayed next to posts from account. AKA, 'profile picture'
         /// </summary>
         [JsonPropertyName("avatar")]
         public Blob? Avatar { get; set; }
 
         /// <summary>
+        /// Gets or sets the banner.
         /// Larger horizontal image to display behind profile view.
         /// </summary>
         [JsonPropertyName("banner")]
         public Blob? Banner { get; set; }
 
         /// <summary>
+        /// Gets or sets the labels.
         /// Self-label values, specific to the Bluesky application, on the overall account.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the joinedViaStarterPack.
+        /// </summary>
         [JsonPropertyName("joinedViaStarterPack")]
         public Com.Atproto.Repo.StrongRef? JoinedViaStarterPack { get; set; }
 
+        /// <summary>
+        /// Gets or sets the pinnedPost.
+        /// </summary>
         [JsonPropertyName("pinnedPost")]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

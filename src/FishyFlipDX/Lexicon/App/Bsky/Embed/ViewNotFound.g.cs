@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewNotFound"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="notFound"></param>
         public ViewNotFound(FishyFlip.Models.ATUri? uri = default, bool? notFound = default)
         {
             this.Uri = uri;
@@ -36,11 +38,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["notFound"] is not null) this.NotFound = obj["notFound"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the notFound.
+        /// </summary>
         [JsonPropertyName("notFound")]
         [JsonRequired]
         public bool? NotFound { get; set; }

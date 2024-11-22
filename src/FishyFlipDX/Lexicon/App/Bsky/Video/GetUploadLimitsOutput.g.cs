@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUploadLimitsOutput"/> class.
         /// </summary>
+        /// <param name="canUpload"></param>
+        /// <param name="remainingDailyVideos"></param>
+        /// <param name="remainingDailyBytes"></param>
+        /// <param name="message"></param>
+        /// <param name="error"></param>
         public GetUploadLimitsOutput(bool? canUpload = default, long? remainingDailyVideos = default, long? remainingDailyBytes = default, string? message = default, string? error = default)
         {
             this.CanUpload = canUpload;
@@ -42,19 +47,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             if (obj["error"] is not null) this.Error = obj["error"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the canUpload.
+        /// </summary>
         [JsonPropertyName("canUpload")]
         [JsonRequired]
         public bool? CanUpload { get; set; }
 
+        /// <summary>
+        /// Gets or sets the remainingDailyVideos.
+        /// </summary>
         [JsonPropertyName("remainingDailyVideos")]
         public long? RemainingDailyVideos { get; set; }
 
+        /// <summary>
+        /// Gets or sets the remainingDailyBytes.
+        /// </summary>
         [JsonPropertyName("remainingDailyBytes")]
         public long? RemainingDailyBytes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the message.
+        /// </summary>
         [JsonPropertyName("message")]
         public string? Message { get; set; }
 
+        /// <summary>
+        /// Gets or sets the error.
+        /// </summary>
         [JsonPropertyName("error")]
         public string? Error { get; set; }
 

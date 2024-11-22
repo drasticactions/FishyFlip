@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAccountInfosOutput"/> class.
         /// </summary>
+        /// <param name="infos"></param>
         public GetAccountInfosOutput(List<Com.Atproto.Admin.AccountView>? infos = default)
         {
             this.Infos = infos;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["infos"] is not null) this.Infos = obj["infos"].Values.Select(n =>new Com.Atproto.Admin.AccountView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the infos.
+        /// </summary>
         [JsonPropertyName("infos")]
         [JsonRequired]
         public List<Com.Atproto.Admin.AccountView>? Infos { get; set; }

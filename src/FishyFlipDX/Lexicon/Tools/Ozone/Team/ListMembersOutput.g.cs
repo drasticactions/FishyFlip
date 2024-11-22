@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Initializes a new instance of the <see cref="ListMembersOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="members"></param>
         public ListMembersOutput(string? cursor = default, List<Tools.Ozone.Team.Member>? members = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new Tools.Ozone.Team.Member(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the members.
+        /// </summary>
         [JsonPropertyName("members")]
         [JsonRequired]
         public List<Tools.Ozone.Team.Member>? Members { get; set; }

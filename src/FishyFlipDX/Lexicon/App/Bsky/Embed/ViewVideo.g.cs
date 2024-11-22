@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewVideo"/> class.
         /// </summary>
+        /// <param name="cid"></param>
+        /// <param name="playlist"></param>
+        /// <param name="thumbnail"></param>
+        /// <param name="alt"></param>
+        /// <param name="aspectRatio"></param>
         public ViewVideo(string? cid = default, string? playlist = default, string? thumbnail = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
         {
             this.Cid = cid;
@@ -42,20 +47,35 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["aspectRatio"] is not null) this.AspectRatio = new App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
         }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the playlist.
+        /// </summary>
         [JsonPropertyName("playlist")]
         [JsonRequired]
         public string? Playlist { get; set; }
 
+        /// <summary>
+        /// Gets or sets the thumbnail.
+        /// </summary>
         [JsonPropertyName("thumbnail")]
         public string? Thumbnail { get; set; }
 
+        /// <summary>
+        /// Gets or sets the alt.
+        /// </summary>
         [JsonPropertyName("alt")]
         public string? Alt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the aspectRatio.
+        /// </summary>
         [JsonPropertyName("aspectRatio")]
         public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActorLikesOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="feed"></param>
         public GetActorLikesOutput(string? cursor = default, List<App.Bsky.Feed.FeedViewPost>? feed = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["feed"] is not null) this.Feed = obj["feed"].Values.Select(n =>new App.Bsky.Feed.FeedViewPost(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the feed.
+        /// </summary>
         [JsonPropertyName("feed")]
         [JsonRequired]
         public List<App.Bsky.Feed.FeedViewPost>? Feed { get; set; }

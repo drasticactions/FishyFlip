@@ -19,6 +19,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Find labels relevant to the provided AT-URI patterns. Public endpoint for moderation services, though may return different or additional results with auth.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="uriPatterns"></param>
+        /// <param name="sources"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput?>> QueryLabelsAsync (this FishyFlip.ATProtocol atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryLabels.ToString();

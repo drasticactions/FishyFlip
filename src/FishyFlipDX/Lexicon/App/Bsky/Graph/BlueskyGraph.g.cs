@@ -31,8 +31,159 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
 
         /// <summary>
+        /// Get a list of starter packs created by the actor.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput?>> GetActorStarterPacksAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetActorStarterPacksAsync(actor, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates which accounts the requesting account is currently blocking. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput?>> GetBlocksAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetBlocksAsync(limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates accounts which follow a specified account (actor).
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput?>> GetFollowersAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetFollowersAsync(actor, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates accounts which a specified account (actor) follows.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput?>> GetFollowsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetFollowsAsync(actor, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates accounts which follow a specified account (actor) and are followed by the viewer.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput?>> GetKnownFollowersAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetKnownFollowersAsync(actor, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Gets a 'view' (with additional context) of a specified list.
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput?>> GetListAsync (FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetListAsync(list, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get mod lists that the requesting account (actor) is blocking. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput?>> GetListBlocksAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetListBlocksAsync(limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates mod lists that the requesting account (actor) currently has muted. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput?>> GetListMutesAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetListMutesAsync(limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates the lists created by a specified account (actor).
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput?>> GetListsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetListsAsync(actor, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput?>> GetMutesAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetMutesAsync(limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates public relationships between one account, and a list of other accounts. Does not require auth.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="others"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?>> GetRelationshipsAsync (FishyFlip.Models.ATIdentifier actor, List<FishyFlip.Models.ATIdentifier>? others = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRelationshipsAsync(actor, others, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Gets a view of a starter pack.
+        /// </summary>
+        /// <param name="starterPack"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput?>> GetStarterPackAsync (FishyFlip.Models.ATUri starterPack, CancellationToken cancellationToken = default)
+        {
+            return atp.GetStarterPackAsync(starterPack, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get views for a list of starter packs.
         /// </summary>
+        /// <param name="uris"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput?>> GetStarterPacksAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
             return atp.GetStarterPacksAsync(uris, cancellationToken);
@@ -42,6 +193,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Enumerates follows similar to a given account (actor). Expected use is to recommend additional accounts immediately after following one account.
         /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput?>> GetSuggestedFollowsByActorAsync (FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
         {
             return atp.GetSuggestedFollowsByActorAsync(actor, cancellationToken);
@@ -49,35 +202,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
 
         /// <summary>
-        /// Unmutes the specified list of accounts. Requires auth.
+        /// Creates a mute relationship for the specified account. Mutes are private in Bluesky. Requires auth.
         /// </summary>
-        public Task<Result<Success?>> UnmuteActorListAsync (FishyFlip.Models.ATUri list, CancellationToken cancellationToken = default)
+        /// <param name="actor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> MuteActorAsync (FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
         {
-            return atp.UnmuteActorListAsync(list, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Get mod lists that the requesting account (actor) is blocking. Requires auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput?>> GetListBlocksAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetListBlocksAsync(limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Gets a view of a starter pack.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput?>> GetStarterPackAsync (FishyFlip.Models.ATUri starterPack, CancellationToken cancellationToken = default)
-        {
-            return atp.GetStarterPackAsync(starterPack, cancellationToken);
+            return atp.MuteActorAsync(actor, cancellationToken);
         }
 
 
         /// <summary>
         /// Creates a mute relationship for the specified list of accounts. Mutes are private in Bluesky. Requires auth.
         /// </summary>
+        /// <param name="list"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> MuteActorListAsync (FishyFlip.Models.ATUri list, CancellationToken cancellationToken = default)
         {
             return atp.MuteActorListAsync(list, cancellationToken);
@@ -87,6 +226,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Mutes a thread preventing notifications from the thread and any of its children. Mutes are private in Bluesky. Requires auth.
         /// </summary>
+        /// <param name="root"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> MuteThreadAsync (FishyFlip.Models.ATUri root, CancellationToken cancellationToken = default)
         {
             return atp.MuteThreadAsync(root, cancellationToken);
@@ -96,6 +237,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Find starter packs matching search criteria. Does not require auth.
         /// </summary>
+        /// <param name="q"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput?>> SearchStarterPacksAsync (string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.SearchStarterPacksAsync(q, limit, cursor, cancellationToken);
@@ -103,107 +248,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
 
         /// <summary>
-        /// Get a list of starter packs created by the actor.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput?>> GetActorStarterPacksAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetActorStarterPacksAsync(actor, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates the lists created by a specified account (actor).
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput?>> GetListsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetListsAsync(actor, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates accounts which follow a specified account (actor).
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput?>> GetFollowersAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetFollowersAsync(actor, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Unmutes the specified thread. Requires auth.
-        /// </summary>
-        public Task<Result<Success?>> UnmuteThreadAsync (FishyFlip.Models.ATUri root, CancellationToken cancellationToken = default)
-        {
-            return atp.UnmuteThreadAsync(root, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Creates a mute relationship for the specified account. Mutes are private in Bluesky. Requires auth.
-        /// </summary>
-        public Task<Result<Success?>> MuteActorAsync (FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
-        {
-            return atp.MuteActorAsync(actor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput?>> GetMutesAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetMutesAsync(limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates accounts which follow a specified account (actor) and are followed by the viewer.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput?>> GetKnownFollowersAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetKnownFollowersAsync(actor, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates mod lists that the requesting account (actor) currently has muted. Requires auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput?>> GetListMutesAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetListMutesAsync(limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates accounts which a specified account (actor) follows.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput?>> GetFollowsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetFollowsAsync(actor, limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates which accounts the requesting account is currently blocking. Requires auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput?>> GetBlocksAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetBlocksAsync(limit, cursor, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// Enumerates public relationships between one account, and a list of other accounts. Does not require auth.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?>> GetRelationshipsAsync (FishyFlip.Models.ATIdentifier actor, List<FishyFlip.Models.ATIdentifier>? others = default, CancellationToken cancellationToken = default)
-        {
-            return atp.GetRelationshipsAsync(actor, others, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Unmutes the specified account. Requires auth.
         /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> UnmuteActorAsync (FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
         {
             return atp.UnmuteActorAsync(actor, cancellationToken);
@@ -211,11 +259,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
 
         /// <summary>
-        /// Gets a 'view' (with additional context) of a specified list.
+        /// Unmutes the specified list of accounts. Requires auth.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput?>> GetListAsync (FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        /// <param name="list"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> UnmuteActorListAsync (FishyFlip.Models.ATUri list, CancellationToken cancellationToken = default)
         {
-            return atp.GetListAsync(list, limit, cursor, cancellationToken);
+            return atp.UnmuteActorListAsync(list, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Unmutes the specified thread. Requires auth.
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> UnmuteThreadAsync (FishyFlip.Models.ATUri root, CancellationToken cancellationToken = default)
+        {
+            return atp.UnmuteThreadAsync(root, cancellationToken);
         }
 
     }

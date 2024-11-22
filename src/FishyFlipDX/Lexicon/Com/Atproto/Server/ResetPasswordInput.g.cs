@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ResetPasswordInput"/> class.
         /// </summary>
+        /// <param name="token"></param>
+        /// <param name="password"></param>
         public ResetPasswordInput(string? token = default, string? password = default)
         {
             this.Token = token;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["password"] is not null) this.Password = obj["password"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the token.
+        /// </summary>
         [JsonPropertyName("token")]
         [JsonRequired]
         public string? Token { get; set; }
 
+        /// <summary>
+        /// Gets or sets the password.
+        /// </summary>
         [JsonPropertyName("password")]
         [JsonRequired]
         public string? Password { get; set; }

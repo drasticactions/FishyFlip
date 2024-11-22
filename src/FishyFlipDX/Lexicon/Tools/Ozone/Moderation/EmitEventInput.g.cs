@@ -12,6 +12,33 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="EmitEventInput"/> class.
         /// </summary>
+        /// <param name="@event">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown"/> (tools.ozone.moderation.defs#modEventTakedown)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge"/> (tools.ozone.moderation.defs#modEventAcknowledge)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate"/> (tools.ozone.moderation.defs#modEventEscalate)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment"/> (tools.ozone.moderation.defs#modEventComment)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel"/> (tools.ozone.moderation.defs#modEventLabel)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport"/> (tools.ozone.moderation.defs#modEventReport)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute"/> (tools.ozone.moderation.defs#modEventMute)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute"/> (tools.ozone.moderation.defs#modEventUnmute)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter"/> (tools.ozone.moderation.defs#modEventMuteReporter)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter"/> (tools.ozone.moderation.defs#modEventUnmuteReporter)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown"/> (tools.ozone.moderation.defs#modEventReverseTakedown)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal"/> (tools.ozone.moderation.defs#modEventResolveAppeal)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail"/> (tools.ozone.moderation.defs#modEventEmail)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTag"/> (tools.ozone.moderation.defs#modEventTag)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent"/> (tools.ozone.moderation.defs#accountEvent)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent)
+        /// </param>
+        /// <param name="subject">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </param>
+        /// <param name="subjectBlobCids"></param>
+        /// <param name="createdBy"></param>
         public EmitEventInput(ATObject? @event = default, ATObject? subject = default, List<string>? subjectBlobCids = default, FishyFlip.Models.ATDid? createdBy = default)
         {
             this.Event = @event;
@@ -40,17 +67,50 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
         }
 
+        /// <summary>
+        /// Gets or sets the event.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown"/> (tools.ozone.moderation.defs#modEventTakedown)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge"/> (tools.ozone.moderation.defs#modEventAcknowledge)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate"/> (tools.ozone.moderation.defs#modEventEscalate)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment"/> (tools.ozone.moderation.defs#modEventComment)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel"/> (tools.ozone.moderation.defs#modEventLabel)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport"/> (tools.ozone.moderation.defs#modEventReport)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute"/> (tools.ozone.moderation.defs#modEventMute)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute"/> (tools.ozone.moderation.defs#modEventUnmute)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter"/> (tools.ozone.moderation.defs#modEventMuteReporter)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter"/> (tools.ozone.moderation.defs#modEventUnmuteReporter)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown"/> (tools.ozone.moderation.defs#modEventReverseTakedown)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal"/> (tools.ozone.moderation.defs#modEventResolveAppeal)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail"/> (tools.ozone.moderation.defs#modEventEmail)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTag"/> (tools.ozone.moderation.defs#modEventTag)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent"/> (tools.ozone.moderation.defs#accountEvent)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent)
+        /// </summary>
         [JsonPropertyName("event")]
         [JsonRequired]
         public ATObject? Event { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public ATObject? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subjectBlobCids.
+        /// </summary>
         [JsonPropertyName("subjectBlobCids")]
         public List<string>? SubjectBlobCids { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdBy.
+        /// </summary>
         [JsonPropertyName("createdBy")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ReasonRepost"/> class.
         /// </summary>
+        /// <param name="by"></param>
+        /// <param name="indexedAt"></param>
         public ReasonRepost(App.Bsky.Actor.ProfileViewBasic? by = default, DateTime? indexedAt = default)
         {
             this.By = by;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the by.
+        /// </summary>
         [JsonPropertyName("by")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileViewBasic? By { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }

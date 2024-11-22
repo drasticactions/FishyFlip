@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="InviteCode"/> class.
         /// </summary>
+        /// <param name="code"></param>
+        /// <param name="available"></param>
+        /// <param name="disabled"></param>
+        /// <param name="forAccount"></param>
+        /// <param name="createdBy"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="uses"></param>
         public InviteCode(string? code = default, long? available = default, bool? disabled = default, string? forAccount = default, string? createdBy = default, DateTime? createdAt = default, List<Com.Atproto.Server.InviteCodeUse>? uses = default)
         {
             this.Code = code;
@@ -46,30 +53,51 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["uses"] is not null) this.Uses = obj["uses"].Values.Select(n =>new Com.Atproto.Server.InviteCodeUse(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the code.
+        /// </summary>
         [JsonPropertyName("code")]
         [JsonRequired]
         public string? Code { get; set; }
 
+        /// <summary>
+        /// Gets or sets the available.
+        /// </summary>
         [JsonPropertyName("available")]
         [JsonRequired]
         public long? Available { get; set; }
 
+        /// <summary>
+        /// Gets or sets the disabled.
+        /// </summary>
         [JsonPropertyName("disabled")]
         [JsonRequired]
         public bool? Disabled { get; set; }
 
+        /// <summary>
+        /// Gets or sets the forAccount.
+        /// </summary>
         [JsonPropertyName("forAccount")]
         [JsonRequired]
         public string? ForAccount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdBy.
+        /// </summary>
         [JsonPropertyName("createdBy")]
         [JsonRequired]
         public string? CreatedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the uses.
+        /// </summary>
         [JsonPropertyName("uses")]
         [JsonRequired]
         public List<Com.Atproto.Server.InviteCodeUse>? Uses { get; set; }

@@ -15,14 +15,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
        public const string FindCorrelation = "/xrpc/tools.ozone.signature.findCorrelation";
 
-       public const string SearchAccounts = "/xrpc/tools.ozone.signature.searchAccounts";
-
        public const string FindRelatedAccounts = "/xrpc/tools.ozone.signature.findRelatedAccounts";
+
+       public const string SearchAccounts = "/xrpc/tools.ozone.signature.searchAccounts";
 
 
         /// <summary>
         /// Find all correlated threat signatures between 2 or more accounts.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="dids"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput?>> FindCorrelationAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
         {
             var endpointUrl = FindCorrelation.ToString();
@@ -36,33 +40,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
 
         /// <summary>
-        /// Search for accounts that match one or more threat signature values.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (this FishyFlip.ATProtocol atp, List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = SearchAccounts.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add(string.Join("&", values.Select(n => "values=" + n)));
-
-            if (cursor != null)
-            {
-                queryStrings.Add("cursor=" + cursor);
-            }
-
-            if (limit != null)
-            {
-                queryStrings.Add("limit=" + limit);
-            }
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
         /// Get accounts that share some matching threat signatures with the root account.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="cursor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput?>> FindRelatedAccountsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             var endpointUrl = FindRelatedAccounts.ToString();
@@ -82,6 +67,37 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindRelatedAccountsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Search for accounts that match one or more threat signature values.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="values"></param>
+        /// <param name="cursor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (this FishyFlip.ATProtocol atp, List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = SearchAccounts.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add(string.Join("&", values.Select(n => "values=" + n)));
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
     }

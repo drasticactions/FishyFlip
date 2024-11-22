@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
         /// </summary>
+        /// <param name="appview"></param>
+        /// <param name="pds"></param>
+        /// <param name="blobDivert"></param>
+        /// <param name="chat"></param>
+        /// <param name="viewer"></param>
         public GetConfigOutput(Tools.Ozone.Server.ServiceConfig? appview = default, Tools.Ozone.Server.ServiceConfig? pds = default, Tools.Ozone.Server.ServiceConfig? blobDivert = default, Tools.Ozone.Server.ServiceConfig? chat = default, Tools.Ozone.Server.ViewerConfig? viewer = default)
         {
             this.Appview = appview;
@@ -42,18 +47,33 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             if (obj["viewer"] is not null) this.Viewer = new Tools.Ozone.Server.ViewerConfig(obj["viewer"]);
         }
 
+        /// <summary>
+        /// Gets or sets the appview.
+        /// </summary>
         [JsonPropertyName("appview")]
         public Tools.Ozone.Server.ServiceConfig? Appview { get; set; }
 
+        /// <summary>
+        /// Gets or sets the pds.
+        /// </summary>
         [JsonPropertyName("pds")]
         public Tools.Ozone.Server.ServiceConfig? Pds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blobDivert.
+        /// </summary>
         [JsonPropertyName("blobDivert")]
         public Tools.Ozone.Server.ServiceConfig? BlobDivert { get; set; }
 
+        /// <summary>
+        /// Gets or sets the chat.
+        /// </summary>
         [JsonPropertyName("chat")]
         public Tools.Ozone.Server.ServiceConfig? Chat { get; set; }
 
+        /// <summary>
+        /// Gets or sets the viewer.
+        /// </summary>
         [JsonPropertyName("viewer")]
         public Tools.Ozone.Server.ViewerConfig? Viewer { get; set; }
 

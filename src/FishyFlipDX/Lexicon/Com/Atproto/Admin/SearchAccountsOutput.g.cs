@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchAccountsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="accounts"></param>
         public SearchAccountsOutput(string? cursor = default, List<Com.Atproto.Admin.AccountView>? accounts = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new Com.Atproto.Admin.AccountView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the accounts.
+        /// </summary>
         [JsonPropertyName("accounts")]
         [JsonRequired]
         public List<Com.Atproto.Admin.AccountView>? Accounts { get; set; }

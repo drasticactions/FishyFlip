@@ -20,6 +20,9 @@ public class SchemaDefinition
     [JsonPropertyName("items")]
     public SchemaDefinition Items { get; set; }
 
+    [JsonPropertyName("refs")]
+    public string[]? Refs { get; set; }
+
     [JsonPropertyName("key")]
     public string Key { get; set; } = string.Empty;
 

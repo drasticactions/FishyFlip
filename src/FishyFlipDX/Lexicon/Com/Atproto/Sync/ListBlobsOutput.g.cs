@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="ListBlobsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="cids"></param>
         public ListBlobsOutput(string? cursor = default, List<string>? cids = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["cids"] is not null) this.Cids = obj["cids"].Values.Select(n =>n.AsString()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cids.
+        /// </summary>
         [JsonPropertyName("cids")]
         [JsonRequired]
         public List<string>? Cids { get; set; }

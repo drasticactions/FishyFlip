@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventMuteReporter"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="durationInHours">Indicates how long the account should remain muted. Falsy value here means a permanent mute.</param>
         public ModEventMuteReporter(string? comment = default, long? durationInHours = default)
         {
             this.Comment = comment;
@@ -39,10 +41,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["durationInHours"] is not null) this.DurationInHours = obj["durationInHours"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
         /// <summary>
+        /// Gets or sets the durationInHours.
         /// Indicates how long the account should remain muted. Falsy value here means a permanent mute.
         /// </summary>
         [JsonPropertyName("durationInHours")]

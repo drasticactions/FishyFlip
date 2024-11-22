@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventReverseTakedown"/> class.
         /// </summary>
+        /// <param name="comment">Describe reasoning behind the reversal.</param>
         public ModEventReverseTakedown(string? comment = default)
         {
             this.Comment = comment;
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         }
 
         /// <summary>
+        /// Gets or sets the comment.
         /// Describe reasoning behind the reversal.
         /// </summary>
         [JsonPropertyName("comment")]

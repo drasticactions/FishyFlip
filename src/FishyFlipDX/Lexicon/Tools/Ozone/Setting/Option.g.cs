@@ -12,6 +12,25 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="Option"/> class.
         /// </summary>
+        /// <param name="key"></param>
+        /// <param name="did"></param>
+        /// <param name="value"></param>
+        /// <param name="description"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="updatedAt"></param>
+        /// <param name="managerRole">
+        /// Known Values:
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// </param>
+        /// <param name="scope">
+        /// Known Values:
+        /// instance
+        /// personal
+        /// </param>
+        /// <param name="createdBy"></param>
+        /// <param name="lastUpdatedBy"></param>
         public Option(string? key = default, FishyFlip.Models.ATDid? did = default, ATObject? value = default, string? description = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? managerRole = default, string? scope = default, FishyFlip.Models.ATDid? createdBy = default, FishyFlip.Models.ATDid? lastUpdatedBy = default)
         {
             this.Key = key;
@@ -46,46 +65,83 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
-            // enum
-            // enum
+            if (obj["managerRole"] is not null) this.ManagerRole = obj["managerRole"].AsString();
+            if (obj["scope"] is not null) this.Scope = obj["scope"].AsString();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
             if (obj["lastUpdatedBy"] is not null) this.LastUpdatedBy = obj["lastUpdatedBy"].ToATDid();
         }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
         [JsonPropertyName("key")]
         [JsonRequired]
         public string? Key { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public ATObject? Value { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the updatedAt.
+        /// </summary>
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the managerRole.
+        /// Known Values:
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// </summary>
         [JsonPropertyName("managerRole")]
         public string? ManagerRole { get; set; }
 
+        /// <summary>
+        /// Gets or sets the scope.
+        /// Known Values:
+        /// instance
+        /// personal
+        /// </summary>
         [JsonPropertyName("scope")]
         [JsonRequired]
         public string? Scope { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdBy.
+        /// </summary>
         [JsonPropertyName("createdBy")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? CreatedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lastUpdatedBy.
+        /// </summary>
         [JsonPropertyName("lastUpdatedBy")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

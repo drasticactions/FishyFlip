@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchActorsSkeletonOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="hitsTotal">Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.</param>
+        /// <param name="actors"></param>
         public SearchActorsSkeletonOutput(string? cursor = default, long? hitsTotal = default, List<App.Bsky.Unspecced.SkeletonSearchActor>? actors = default)
         {
             this.Cursor = cursor;
@@ -38,15 +41,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
         /// <summary>
+        /// Gets or sets the hitsTotal.
         /// Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.
         /// </summary>
         [JsonPropertyName("hitsTotal")]
         public long? HitsTotal { get; set; }
 
+        /// <summary>
+        /// Gets or sets the actors.
+        /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
         public List<App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }

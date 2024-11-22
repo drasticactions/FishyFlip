@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActorStarterPacksOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="starterPacks"></param>
         public GetActorStarterPacksOutput(string? cursor = default, List<App.Bsky.Graph.StarterPackViewBasic>? starterPacks = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the starterPacks.
+        /// </summary>
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
         public List<App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }

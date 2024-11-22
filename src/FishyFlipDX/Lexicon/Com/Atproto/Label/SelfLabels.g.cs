@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="SelfLabels"/> class.
         /// </summary>
+        /// <param name="values"></param>
         public SelfLabels(List<Com.Atproto.Label.SelfLabel>? values = default)
         {
             this.Values = values;
@@ -37,6 +38,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n =>new Com.Atproto.Label.SelfLabel(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the values.
+        /// </summary>
         [JsonPropertyName("values")]
         [JsonRequired]
         public List<Com.Atproto.Label.SelfLabel>? Values { get; set; }

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="GetInviteCodesOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="codes"></param>
         public GetInviteCodesOutput(string? cursor = default, List<Com.Atproto.Server.InviteCode>? codes = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>new Com.Atproto.Server.InviteCode(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the codes.
+        /// </summary>
         [JsonPropertyName("codes")]
         [JsonRequired]
         public List<Com.Atproto.Server.InviteCode>? Codes { get; set; }

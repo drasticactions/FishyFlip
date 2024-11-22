@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Listitem"/> class.
         /// </summary>
+        /// <param name="subject">The account which is included on the list.</param>
+        /// <param name="list">Reference (AT-URI) to the list record (app.bsky.graph.list).</param>
+        /// <param name="createdAt"></param>
         public Listitem(FishyFlip.Models.ATDid? subject, FishyFlip.Models.ATUri? list, DateTime? createdAt = default)
         {
             this.Subject = subject;
@@ -42,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         }
 
         /// <summary>
+        /// Gets or sets the subject.
         /// The account which is included on the list.
         /// </summary>
         [JsonPropertyName("subject")]
@@ -49,12 +53,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public FishyFlip.Models.ATDid? Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets the list.
         /// Reference (AT-URI) to the list record (app.bsky.graph.list).
         /// </summary>
         [JsonPropertyName("list")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? List { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

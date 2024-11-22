@@ -33,6 +33,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Get information about a list of labeler services.
         /// </summary>
+        /// <param name="dids"></param>
+        /// <param name="detailed"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput?>> GetServicesAsync (List<FishyFlip.Models.ATDid> dids, bool? detailed = default, CancellationToken cancellationToken = default)
         {
             return atp.GetServicesAsync(dids, detailed, cancellationToken);

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ListMissingBlobsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="blobs"></param>
         public ListMissingBlobsOutput(string? cursor = default, List<Com.Atproto.Repo.RecordBlob>? blobs = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new Com.Atproto.Repo.RecordBlob(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blobs.
+        /// </summary>
         [JsonPropertyName("blobs")]
         [JsonRequired]
         public List<Com.Atproto.Repo.RecordBlob>? Blobs { get; set; }

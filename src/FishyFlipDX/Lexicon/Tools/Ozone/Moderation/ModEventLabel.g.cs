@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventLabel"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="createLabelVals"></param>
+        /// <param name="negateLabelVals"></param>
         public ModEventLabel(string? comment = default, List<string>? createLabelVals = default, List<string>? negateLabelVals = default)
         {
             this.Comment = comment;
@@ -41,13 +44,22 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["negateLabelVals"] is not null) this.NegateLabelVals = obj["negateLabelVals"].Values.Select(n =>n.AsString()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createLabelVals.
+        /// </summary>
         [JsonPropertyName("createLabelVals")]
         [JsonRequired]
         public List<string>? CreateLabelVals { get; set; }
 
+        /// <summary>
+        /// Gets or sets the negateLabelVals.
+        /// </summary>
         [JsonPropertyName("negateLabelVals")]
         [JsonRequired]
         public List<string>? NegateLabelVals { get; set; }

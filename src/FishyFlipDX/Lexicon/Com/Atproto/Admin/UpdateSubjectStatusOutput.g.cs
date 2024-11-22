@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSubjectStatusOutput"/> class.
         /// </summary>
+        /// <param name="subject">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef"/> (com.atproto.admin.defs#repoBlobRef)
+        /// </param>
+        /// <param name="takedown"></param>
         public UpdateSubjectStatusOutput(ATObject? subject = default, Com.Atproto.Admin.StatusAttr? takedown = default)
         {
             this.Subject = subject;
@@ -36,10 +43,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["takedown"] is not null) this.Takedown = new Com.Atproto.Admin.StatusAttr(obj["takedown"]);
         }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef"/> (com.atproto.admin.defs#repoBlobRef)
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public ATObject? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the takedown.
+        /// </summary>
         [JsonPropertyName("takedown")]
         public Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
 

@@ -15,6 +15,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewerState"/> class.
         /// </summary>
+        /// <param name="repost"></param>
+        /// <param name="like"></param>
+        /// <param name="threadMuted"></param>
+        /// <param name="replyDisabled"></param>
+        /// <param name="embeddingDisabled"></param>
+        /// <param name="pinned"></param>
         public ViewerState(FishyFlip.Models.ATUri? repost = default, FishyFlip.Models.ATUri? like = default, bool? threadMuted = default, bool? replyDisabled = default, bool? embeddingDisabled = default, bool? pinned = default)
         {
             this.Repost = repost;
@@ -47,23 +53,41 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["pinned"] is not null) this.Pinned = obj["pinned"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the repost.
+        /// </summary>
         [JsonPropertyName("repost")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Repost { get; set; }
 
+        /// <summary>
+        /// Gets or sets the like.
+        /// </summary>
         [JsonPropertyName("like")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Like { get; set; }
 
+        /// <summary>
+        /// Gets or sets the threadMuted.
+        /// </summary>
         [JsonPropertyName("threadMuted")]
         public bool? ThreadMuted { get; set; }
 
+        /// <summary>
+        /// Gets or sets the replyDisabled.
+        /// </summary>
         [JsonPropertyName("replyDisabled")]
         public bool? ReplyDisabled { get; set; }
 
+        /// <summary>
+        /// Gets or sets the embeddingDisabled.
+        /// </summary>
         [JsonPropertyName("embeddingDisabled")]
         public bool? EmbeddingDisabled { get; set; }
 
+        /// <summary>
+        /// Gets or sets the pinned.
+        /// </summary>
         [JsonPropertyName("pinned")]
         public bool? Pinned { get; set; }
 

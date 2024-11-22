@@ -15,6 +15,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountEvent"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="active">Indicates that the account has a repository which can be fetched from the host that emitted this event.</param>
+        /// <param name="status">
+        /// Known Values:
+        /// unknown
+        /// deactivated
+        /// deleted
+        /// takendown
+        /// suspended
+        /// tombstoned
+        /// </param>
+        /// <param name="timestamp"></param>
         public AccountEvent(string? comment = default, bool? active = default, string? status = default, DateTime? timestamp = default)
         {
             this.Comment = comment;
@@ -39,23 +51,40 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["timestamp"] is not null) this.Timestamp = obj["timestamp"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
         /// <summary>
+        /// Gets or sets the active.
         /// Indicates that the account has a repository which can be fetched from the host that emitted this event.
         /// </summary>
         [JsonPropertyName("active")]
         [JsonRequired]
         public bool? Active { get; set; }
 
+        /// <summary>
+        /// Gets or sets the status.
+        /// Known Values:
+        /// unknown
+        /// deactivated
+        /// deleted
+        /// takendown
+        /// suspended
+        /// tombstoned
+        /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timestamp.
+        /// </summary>
         [JsonPropertyName("timestamp")]
         [JsonRequired]
         public DateTime? Timestamp { get; set; }

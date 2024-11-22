@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="MuteThreadInput"/> class.
         /// </summary>
+        /// <param name="root"></param>
         public MuteThreadInput(FishyFlip.Models.ATUri? root = default)
         {
             this.Root = root;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["root"] is not null) this.Root = obj["root"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the root.
+        /// </summary>
         [JsonPropertyName("root")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

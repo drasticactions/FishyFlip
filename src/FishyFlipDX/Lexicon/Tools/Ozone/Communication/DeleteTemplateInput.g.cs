@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteTemplateInput"/> class.
         /// </summary>
+        /// <param name="id"></param>
         public DeleteTemplateInput(string? id = default)
         {
             this.Id = id;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public string? Id { get; set; }

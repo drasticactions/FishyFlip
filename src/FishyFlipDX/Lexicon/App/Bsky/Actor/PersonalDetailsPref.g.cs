@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonalDetailsPref"/> class.
         /// </summary>
+        /// <param name="birthDate">The birth date of account owner.</param>
         public PersonalDetailsPref(DateTime? birthDate = default)
         {
             this.BirthDate = birthDate;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         }
 
         /// <summary>
+        /// Gets or sets the birthDate.
         /// The birth date of account owner.
         /// </summary>
         [JsonPropertyName("birthDate")]

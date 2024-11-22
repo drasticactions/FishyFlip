@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Threadgate"/> class.
         /// </summary>
+        /// <param name="post">Reference (AT-URI) to the post record.</param>
+        /// <param name="allow">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.MentionRule"/> (app.bsky.feed.threadgate#mentionRule)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule)
+        /// </param>
+        /// <param name="createdAt"></param>
+        /// <param name="hiddenReplies">List of hidden reply URIs.</param>
         public Threadgate(FishyFlip.Models.ATUri? post, List<ATObject>? allow = default, DateTime? createdAt = default, List<FishyFlip.Models.ATUri>? hiddenReplies = default)
         {
             this.Post = post;
@@ -44,19 +53,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         }
 
         /// <summary>
+        /// Gets or sets the post.
         /// Reference (AT-URI) to the post record.
         /// </summary>
         [JsonPropertyName("post")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Post { get; set; }
 
+        /// <summary>
+        /// Gets or sets the allow.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.MentionRule"/> (app.bsky.feed.threadgate#mentionRule)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule)
+        /// </summary>
         [JsonPropertyName("allow")]
         public List<ATObject>? Allow { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
+        /// Gets or sets the hiddenReplies.
         /// List of hidden reply URIs.
         /// </summary>
         [JsonPropertyName("hiddenReplies")]

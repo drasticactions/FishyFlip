@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Repo"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="head">Current repo commit CID</param>
+        /// <param name="rev"></param>
+        /// <param name="active"></param>
+        /// <param name="status">If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
+        /// </param>
         public Repo(FishyFlip.Models.ATDid? did = default, string? head = default, string? rev = default, bool? active = default, string? status = default)
         {
             this.Did = did;
@@ -39,30 +49,45 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["head"] is not null) this.Head = obj["head"].AsString();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
         /// <summary>
+        /// Gets or sets the head.
         /// Current repo commit CID
         /// </summary>
         [JsonPropertyName("head")]
         [JsonRequired]
         public string? Head { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }
 
+        /// <summary>
+        /// Gets or sets the active.
+        /// </summary>
         [JsonPropertyName("active")]
         public bool? Active { get; set; }
 
         /// <summary>
+        /// Gets or sets the status.
         /// If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

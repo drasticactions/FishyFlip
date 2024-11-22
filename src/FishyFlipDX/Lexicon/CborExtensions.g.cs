@@ -27,18 +27,172 @@ namespace FishyFlip.Lexicon
             var type = obj["$type"]?.AsString() ?? string.Empty;
             switch (type)
             {
-                case "tools.ozone.signature.defs#sigDetail":
-                    return new Tools.Ozone.Signature.SigDetail(obj);
-                case "tools.ozone.team.defs#member":
-                    return new Tools.Ozone.Team.Member(obj);
+                case "app.bsky.actor.defs#profileViewBasic":
+                    return new App.Bsky.Actor.ProfileViewBasic(obj);
+                case "app.bsky.actor.defs#profileView":
+                    return new App.Bsky.Actor.ProfileView(obj);
+                case "app.bsky.actor.defs#profileViewDetailed":
+                    return new App.Bsky.Actor.ProfileViewDetailed(obj);
+                case "app.bsky.actor.defs#profileAssociated":
+                    return new App.Bsky.Actor.ProfileAssociated(obj);
+                case "app.bsky.actor.defs#profileAssociatedChat":
+                    return new App.Bsky.Actor.ProfileAssociatedChat(obj);
+                case "app.bsky.actor.defs#viewerState":
+                    return new App.Bsky.Actor.ViewerState(obj);
+                case "app.bsky.actor.defs#knownFollowers":
+                    return new App.Bsky.Actor.KnownFollowers(obj);
+                case "app.bsky.actor.defs#adultContentPref":
+                    return new App.Bsky.Actor.AdultContentPref(obj);
+                case "app.bsky.actor.defs#contentLabelPref":
+                    return new App.Bsky.Actor.ContentLabelPref(obj);
+                case "app.bsky.actor.defs#savedFeed":
+                    return new App.Bsky.Actor.SavedFeed(obj);
+                case "app.bsky.actor.defs#savedFeedsPrefV2":
+                    return new App.Bsky.Actor.SavedFeedsPrefV2(obj);
+                case "app.bsky.actor.defs#savedFeedsPref":
+                    return new App.Bsky.Actor.SavedFeedsPref(obj);
+                case "app.bsky.actor.defs#personalDetailsPref":
+                    return new App.Bsky.Actor.PersonalDetailsPref(obj);
+                case "app.bsky.actor.defs#feedViewPref":
+                    return new App.Bsky.Actor.FeedViewPref(obj);
+                case "app.bsky.actor.defs#threadViewPref":
+                    return new App.Bsky.Actor.ThreadViewPref(obj);
+                case "app.bsky.actor.defs#interestsPref":
+                    return new App.Bsky.Actor.InterestsPref(obj);
+                case "app.bsky.actor.defs#mutedWord":
+                    return new App.Bsky.Actor.MutedWord(obj);
+                case "app.bsky.actor.defs#mutedWordsPref":
+                    return new App.Bsky.Actor.MutedWordsPref(obj);
+                case "app.bsky.actor.defs#hiddenPostsPref":
+                    return new App.Bsky.Actor.HiddenPostsPref(obj);
+                case "app.bsky.actor.defs#labelersPref":
+                    return new App.Bsky.Actor.LabelersPref(obj);
+                case "app.bsky.actor.defs#labelerPrefItem":
+                    return new App.Bsky.Actor.LabelerPrefItem(obj);
+                case "app.bsky.actor.defs#bskyAppStatePref":
+                    return new App.Bsky.Actor.BskyAppStatePref(obj);
+                case "app.bsky.actor.defs#bskyAppProgressGuide":
+                    return new App.Bsky.Actor.BskyAppProgressGuide(obj);
+                case "app.bsky.actor.defs#nux":
+                    return new App.Bsky.Actor.Nux(obj);
+                case "app.bsky.embed.defs#aspectRatio":
+                    return new App.Bsky.Embed.AspectRatio(obj);
+                case "app.bsky.feed.defs#postView":
+                    return new App.Bsky.Feed.PostView(obj);
+                case "app.bsky.feed.defs#viewerState":
+                    return new App.Bsky.Feed.ViewerState(obj);
+                case "app.bsky.feed.defs#feedViewPost":
+                    return new App.Bsky.Feed.FeedViewPost(obj);
+                case "app.bsky.feed.defs#replyRef":
+                    return new App.Bsky.Feed.ReplyRef(obj);
+                case "app.bsky.feed.defs#reasonRepost":
+                    return new App.Bsky.Feed.ReasonRepost(obj);
+                case "app.bsky.feed.defs#reasonPin":
+                    return new App.Bsky.Feed.ReasonPin(obj);
+                case "app.bsky.feed.defs#threadViewPost":
+                    return new App.Bsky.Feed.ThreadViewPost(obj);
+                case "app.bsky.feed.defs#notFoundPost":
+                    return new App.Bsky.Feed.NotFoundPost(obj);
+                case "app.bsky.feed.defs#blockedPost":
+                    return new App.Bsky.Feed.BlockedPost(obj);
+                case "app.bsky.feed.defs#blockedAuthor":
+                    return new App.Bsky.Feed.BlockedAuthor(obj);
+                case "app.bsky.feed.defs#generatorView":
+                    return new App.Bsky.Feed.GeneratorView(obj);
+                case "app.bsky.feed.defs#generatorViewerState":
+                    return new App.Bsky.Feed.GeneratorViewerState(obj);
+                case "app.bsky.feed.defs#skeletonFeedPost":
+                    return new App.Bsky.Feed.SkeletonFeedPost(obj);
+                case "app.bsky.feed.defs#skeletonReasonRepost":
+                    return new App.Bsky.Feed.SkeletonReasonRepost(obj);
+                case "app.bsky.feed.defs#skeletonReasonPin":
+                    return new App.Bsky.Feed.SkeletonReasonPin(obj);
+                case "app.bsky.feed.defs#threadgateView":
+                    return new App.Bsky.Feed.ThreadgateView(obj);
+                case "app.bsky.feed.defs#interaction":
+                    return new App.Bsky.Feed.Interaction(obj);
+                case "app.bsky.graph.defs#listViewBasic":
+                    return new App.Bsky.Graph.ListViewBasic(obj);
+                case "app.bsky.graph.defs#listView":
+                    return new App.Bsky.Graph.ListView(obj);
+                case "app.bsky.graph.defs#listItemView":
+                    return new App.Bsky.Graph.ListItemView(obj);
+                case "app.bsky.graph.defs#starterPackView":
+                    return new App.Bsky.Graph.StarterPackView(obj);
+                case "app.bsky.graph.defs#starterPackViewBasic":
+                    return new App.Bsky.Graph.StarterPackViewBasic(obj);
+                case "app.bsky.graph.defs#listViewerState":
+                    return new App.Bsky.Graph.ListViewerState(obj);
+                case "app.bsky.graph.defs#notFoundActor":
+                    return new App.Bsky.Graph.NotFoundActor(obj);
+                case "app.bsky.graph.defs#relationship":
+                    return new App.Bsky.Graph.Relationship(obj);
+                case "app.bsky.labeler.defs#labelerView":
+                    return new App.Bsky.Labeler.LabelerView(obj);
+                case "app.bsky.labeler.defs#labelerViewDetailed":
+                    return new App.Bsky.Labeler.LabelerViewDetailed(obj);
+                case "app.bsky.labeler.defs#labelerViewerState":
+                    return new App.Bsky.Labeler.LabelerViewerState(obj);
+                case "app.bsky.labeler.defs#labelerPolicies":
+                    return new App.Bsky.Labeler.LabelerPolicies(obj);
+                case "app.bsky.unspecced.defs#skeletonSearchPost":
+                    return new App.Bsky.Unspecced.SkeletonSearchPost(obj);
+                case "app.bsky.unspecced.defs#skeletonSearchActor":
+                    return new App.Bsky.Unspecced.SkeletonSearchActor(obj);
+                case "app.bsky.unspecced.defs#skeletonSearchStarterPack":
+                    return new App.Bsky.Unspecced.SkeletonSearchStarterPack(obj);
+                case "app.bsky.video.defs#jobStatus":
+                    return new App.Bsky.Video.JobStatus(obj);
+                case "chat.bsky.actor.defs#profileViewBasic":
+                    return new Chat.Bsky.Actor.ProfileViewBasic(obj);
+                case "chat.bsky.convo.defs#messageRef":
+                    return new Chat.Bsky.Convo.MessageRef(obj);
+                case "chat.bsky.convo.defs#messageInput":
+                    return new Chat.Bsky.Convo.MessageInput(obj);
+                case "chat.bsky.convo.defs#messageView":
+                    return new Chat.Bsky.Convo.MessageView(obj);
+                case "chat.bsky.convo.defs#deletedMessageView":
+                    return new Chat.Bsky.Convo.DeletedMessageView(obj);
+                case "chat.bsky.convo.defs#messageViewSender":
+                    return new Chat.Bsky.Convo.MessageViewSender(obj);
+                case "chat.bsky.convo.defs#convoView":
+                    return new Chat.Bsky.Convo.ConvoView(obj);
+                case "chat.bsky.convo.defs#logBeginConvo":
+                    return new Chat.Bsky.Convo.LogBeginConvo(obj);
+                case "chat.bsky.convo.defs#logLeaveConvo":
+                    return new Chat.Bsky.Convo.LogLeaveConvo(obj);
+                case "chat.bsky.convo.defs#logCreateMessage":
+                    return new Chat.Bsky.Convo.LogCreateMessage(obj);
+                case "chat.bsky.convo.defs#logDeleteMessage":
+                    return new Chat.Bsky.Convo.LogDeleteMessage(obj);
+                case "com.atproto.admin.defs#statusAttr":
+                    return new Com.Atproto.Admin.StatusAttr(obj);
+                case "com.atproto.admin.defs#accountView":
+                    return new Com.Atproto.Admin.AccountView(obj);
+                case "com.atproto.admin.defs#repoRef":
+                    return new Com.Atproto.Admin.RepoRef(obj);
+                case "com.atproto.admin.defs#repoBlobRef":
+                    return new Com.Atproto.Admin.RepoBlobRef(obj);
+                case "com.atproto.admin.defs#threatSignature":
+                    return new Com.Atproto.Admin.ThreatSignature(obj);
+                case "com.atproto.label.defs#label":
+                    return new Com.Atproto.Label.Label(obj);
+                case "com.atproto.label.defs#selfLabels":
+                    return new Com.Atproto.Label.SelfLabels(obj);
+                case "com.atproto.label.defs#selfLabel":
+                    return new Com.Atproto.Label.SelfLabel(obj);
+                case "com.atproto.label.defs#labelValueDefinition":
+                    return new Com.Atproto.Label.LabelValueDefinition(obj);
+                case "com.atproto.label.defs#labelValueDefinitionStrings":
+                    return new Com.Atproto.Label.LabelValueDefinitionStrings(obj);
+                case "com.atproto.repo.defs#commitMeta":
+                    return new Com.Atproto.Repo.CommitMeta(obj);
+                case "com.atproto.server.defs#inviteCode":
+                    return new Com.Atproto.Server.InviteCode(obj);
+                case "com.atproto.server.defs#inviteCodeUse":
+                    return new Com.Atproto.Server.InviteCodeUse(obj);
                 case "tools.ozone.communication.defs#templateView":
                     return new Tools.Ozone.Communication.TemplateView(obj);
-                case "tools.ozone.set.defs#set":
-                    return new Tools.Ozone.Set.Set(obj);
-                case "tools.ozone.set.defs#setView":
-                    return new Tools.Ozone.Set.SetView(obj);
-                case "tools.ozone.setting.defs#option":
-                    return new Tools.Ozone.Setting.Option(obj);
                 case "tools.ozone.moderation.defs#modEventView":
                     return new Tools.Ozone.Moderation.ModEventView(obj);
                 case "tools.ozone.moderation.defs#modEventViewDetail":
@@ -107,190 +261,32 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.AccountHosting(obj);
                 case "tools.ozone.moderation.defs#recordHosting":
                     return new Tools.Ozone.Moderation.RecordHosting(obj);
-                case "app.bsky.video.defs#jobStatus":
-                    return new App.Bsky.Video.JobStatus(obj);
-                case "app.bsky.embed.defs#aspectRatio":
-                    return new App.Bsky.Embed.AspectRatio(obj);
-                case "app.bsky.unspecced.defs#skeletonSearchPost":
-                    return new App.Bsky.Unspecced.SkeletonSearchPost(obj);
-                case "app.bsky.unspecced.defs#skeletonSearchActor":
-                    return new App.Bsky.Unspecced.SkeletonSearchActor(obj);
-                case "app.bsky.unspecced.defs#skeletonSearchStarterPack":
-                    return new App.Bsky.Unspecced.SkeletonSearchStarterPack(obj);
-                case "app.bsky.graph.defs#listViewBasic":
-                    return new App.Bsky.Graph.ListViewBasic(obj);
-                case "app.bsky.graph.defs#listView":
-                    return new App.Bsky.Graph.ListView(obj);
-                case "app.bsky.graph.defs#listItemView":
-                    return new App.Bsky.Graph.ListItemView(obj);
-                case "app.bsky.graph.defs#starterPackView":
-                    return new App.Bsky.Graph.StarterPackView(obj);
-                case "app.bsky.graph.defs#starterPackViewBasic":
-                    return new App.Bsky.Graph.StarterPackViewBasic(obj);
-                case "app.bsky.graph.defs#listViewerState":
-                    return new App.Bsky.Graph.ListViewerState(obj);
-                case "app.bsky.graph.defs#notFoundActor":
-                    return new App.Bsky.Graph.NotFoundActor(obj);
-                case "app.bsky.graph.defs#relationship":
-                    return new App.Bsky.Graph.Relationship(obj);
-                case "app.bsky.feed.defs#postView":
-                    return new App.Bsky.Feed.PostView(obj);
-                case "app.bsky.feed.defs#viewerState":
-                    return new App.Bsky.Feed.ViewerState(obj);
-                case "app.bsky.feed.defs#feedViewPost":
-                    return new App.Bsky.Feed.FeedViewPost(obj);
-                case "app.bsky.feed.defs#replyRef":
-                    return new App.Bsky.Feed.ReplyRef(obj);
-                case "app.bsky.feed.defs#reasonRepost":
-                    return new App.Bsky.Feed.ReasonRepost(obj);
-                case "app.bsky.feed.defs#reasonPin":
-                    return new App.Bsky.Feed.ReasonPin(obj);
-                case "app.bsky.feed.defs#threadViewPost":
-                    return new App.Bsky.Feed.ThreadViewPost(obj);
-                case "app.bsky.feed.defs#notFoundPost":
-                    return new App.Bsky.Feed.NotFoundPost(obj);
-                case "app.bsky.feed.defs#blockedPost":
-                    return new App.Bsky.Feed.BlockedPost(obj);
-                case "app.bsky.feed.defs#blockedAuthor":
-                    return new App.Bsky.Feed.BlockedAuthor(obj);
-                case "app.bsky.feed.defs#generatorView":
-                    return new App.Bsky.Feed.GeneratorView(obj);
-                case "app.bsky.feed.defs#generatorViewerState":
-                    return new App.Bsky.Feed.GeneratorViewerState(obj);
-                case "app.bsky.feed.defs#skeletonFeedPost":
-                    return new App.Bsky.Feed.SkeletonFeedPost(obj);
-                case "app.bsky.feed.defs#skeletonReasonRepost":
-                    return new App.Bsky.Feed.SkeletonReasonRepost(obj);
-                case "app.bsky.feed.defs#skeletonReasonPin":
-                    return new App.Bsky.Feed.SkeletonReasonPin(obj);
-                case "app.bsky.feed.defs#threadgateView":
-                    return new App.Bsky.Feed.ThreadgateView(obj);
-                case "app.bsky.feed.defs#interaction":
-                    return new App.Bsky.Feed.Interaction(obj);
-                case "app.bsky.actor.defs#profileViewBasic":
-                    return new App.Bsky.Actor.ProfileViewBasic(obj);
-                case "app.bsky.actor.defs#profileView":
-                    return new App.Bsky.Actor.ProfileView(obj);
-                case "app.bsky.actor.defs#profileViewDetailed":
-                    return new App.Bsky.Actor.ProfileViewDetailed(obj);
-                case "app.bsky.actor.defs#profileAssociated":
-                    return new App.Bsky.Actor.ProfileAssociated(obj);
-                case "app.bsky.actor.defs#profileAssociatedChat":
-                    return new App.Bsky.Actor.ProfileAssociatedChat(obj);
-                case "app.bsky.actor.defs#viewerState":
-                    return new App.Bsky.Actor.ViewerState(obj);
-                case "app.bsky.actor.defs#knownFollowers":
-                    return new App.Bsky.Actor.KnownFollowers(obj);
-                case "app.bsky.actor.defs#adultContentPref":
-                    return new App.Bsky.Actor.AdultContentPref(obj);
-                case "app.bsky.actor.defs#contentLabelPref":
-                    return new App.Bsky.Actor.ContentLabelPref(obj);
-                case "app.bsky.actor.defs#savedFeed":
-                    return new App.Bsky.Actor.SavedFeed(obj);
-                case "app.bsky.actor.defs#savedFeedsPrefV2":
-                    return new App.Bsky.Actor.SavedFeedsPrefV2(obj);
-                case "app.bsky.actor.defs#savedFeedsPref":
-                    return new App.Bsky.Actor.SavedFeedsPref(obj);
-                case "app.bsky.actor.defs#personalDetailsPref":
-                    return new App.Bsky.Actor.PersonalDetailsPref(obj);
-                case "app.bsky.actor.defs#feedViewPref":
-                    return new App.Bsky.Actor.FeedViewPref(obj);
-                case "app.bsky.actor.defs#threadViewPref":
-                    return new App.Bsky.Actor.ThreadViewPref(obj);
-                case "app.bsky.actor.defs#interestsPref":
-                    return new App.Bsky.Actor.InterestsPref(obj);
-                case "app.bsky.actor.defs#mutedWord":
-                    return new App.Bsky.Actor.MutedWord(obj);
-                case "app.bsky.actor.defs#mutedWordsPref":
-                    return new App.Bsky.Actor.MutedWordsPref(obj);
-                case "app.bsky.actor.defs#hiddenPostsPref":
-                    return new App.Bsky.Actor.HiddenPostsPref(obj);
-                case "app.bsky.actor.defs#labelersPref":
-                    return new App.Bsky.Actor.LabelersPref(obj);
-                case "app.bsky.actor.defs#labelerPrefItem":
-                    return new App.Bsky.Actor.LabelerPrefItem(obj);
-                case "app.bsky.actor.defs#bskyAppStatePref":
-                    return new App.Bsky.Actor.BskyAppStatePref(obj);
-                case "app.bsky.actor.defs#bskyAppProgressGuide":
-                    return new App.Bsky.Actor.BskyAppProgressGuide(obj);
-                case "app.bsky.actor.defs#nux":
-                    return new App.Bsky.Actor.Nux(obj);
-                case "app.bsky.labeler.defs#labelerView":
-                    return new App.Bsky.Labeler.LabelerView(obj);
-                case "app.bsky.labeler.defs#labelerViewDetailed":
-                    return new App.Bsky.Labeler.LabelerViewDetailed(obj);
-                case "app.bsky.labeler.defs#labelerViewerState":
-                    return new App.Bsky.Labeler.LabelerViewerState(obj);
-                case "app.bsky.labeler.defs#labelerPolicies":
-                    return new App.Bsky.Labeler.LabelerPolicies(obj);
-                case "chat.bsky.convo.defs#messageRef":
-                    return new Chat.Bsky.Convo.MessageRef(obj);
-                case "chat.bsky.convo.defs#messageInput":
-                    return new Chat.Bsky.Convo.MessageInput(obj);
-                case "chat.bsky.convo.defs#messageView":
-                    return new Chat.Bsky.Convo.MessageView(obj);
-                case "chat.bsky.convo.defs#deletedMessageView":
-                    return new Chat.Bsky.Convo.DeletedMessageView(obj);
-                case "chat.bsky.convo.defs#messageViewSender":
-                    return new Chat.Bsky.Convo.MessageViewSender(obj);
-                case "chat.bsky.convo.defs#convoView":
-                    return new Chat.Bsky.Convo.ConvoView(obj);
-                case "chat.bsky.convo.defs#logBeginConvo":
-                    return new Chat.Bsky.Convo.LogBeginConvo(obj);
-                case "chat.bsky.convo.defs#logLeaveConvo":
-                    return new Chat.Bsky.Convo.LogLeaveConvo(obj);
-                case "chat.bsky.convo.defs#logCreateMessage":
-                    return new Chat.Bsky.Convo.LogCreateMessage(obj);
-                case "chat.bsky.convo.defs#logDeleteMessage":
-                    return new Chat.Bsky.Convo.LogDeleteMessage(obj);
-                case "chat.bsky.actor.defs#profileViewBasic":
-                    return new Chat.Bsky.Actor.ProfileViewBasic(obj);
-                case "com.atproto.admin.defs#statusAttr":
-                    return new Com.Atproto.Admin.StatusAttr(obj);
-                case "com.atproto.admin.defs#accountView":
-                    return new Com.Atproto.Admin.AccountView(obj);
-                case "com.atproto.admin.defs#repoRef":
-                    return new Com.Atproto.Admin.RepoRef(obj);
-                case "com.atproto.admin.defs#repoBlobRef":
-                    return new Com.Atproto.Admin.RepoBlobRef(obj);
-                case "com.atproto.admin.defs#threatSignature":
-                    return new Com.Atproto.Admin.ThreatSignature(obj);
-                case "com.atproto.label.defs#label":
-                    return new Com.Atproto.Label.Label(obj);
-                case "com.atproto.label.defs#selfLabels":
-                    return new Com.Atproto.Label.SelfLabels(obj);
-                case "com.atproto.label.defs#selfLabel":
-                    return new Com.Atproto.Label.SelfLabel(obj);
-                case "com.atproto.label.defs#labelValueDefinition":
-                    return new Com.Atproto.Label.LabelValueDefinition(obj);
-                case "com.atproto.label.defs#labelValueDefinitionStrings":
-                    return new Com.Atproto.Label.LabelValueDefinitionStrings(obj);
-                case "com.atproto.server.defs#inviteCode":
-                    return new Com.Atproto.Server.InviteCode(obj);
-                case "com.atproto.server.defs#inviteCodeUse":
-                    return new Com.Atproto.Server.InviteCodeUse(obj);
-                case "com.atproto.repo.defs#commitMeta":
-                    return new Com.Atproto.Repo.CommitMeta(obj);
-                case "app.bsky.graph.block":
-                    return new App.Bsky.Graph.Block(obj);
-                case "app.bsky.graph.follow":
-                    return new App.Bsky.Graph.Follow(obj);
-                case "app.bsky.graph.listblock":
-                    return new App.Bsky.Graph.Listblock(obj);
-                case "app.bsky.graph.starterpack":
-                    return new App.Bsky.Graph.Starterpack(obj);
-                case "app.bsky.graph.starterpack#feedItem":
-                    return new App.Bsky.Graph.FeedItem(obj);
-                case "app.bsky.graph.listitem":
-                    return new App.Bsky.Graph.Listitem(obj);
-                case "app.bsky.graph.list":
-                    return new App.Bsky.Graph.List(obj);
+                case "tools.ozone.set.defs#set":
+                    return new Tools.Ozone.Set.Set(obj);
+                case "tools.ozone.set.defs#setView":
+                    return new Tools.Ozone.Set.SetView(obj);
+                case "tools.ozone.setting.defs#option":
+                    return new Tools.Ozone.Setting.Option(obj);
+                case "tools.ozone.signature.defs#sigDetail":
+                    return new Tools.Ozone.Signature.SigDetail(obj);
+                case "tools.ozone.team.defs#member":
+                    return new Tools.Ozone.Team.Member(obj);
+                case "app.bsky.actor.profile":
+                    return new App.Bsky.Actor.Profile(obj);
                 case "app.bsky.feed.generator":
                     return new App.Bsky.Feed.Generator(obj);
+                case "app.bsky.feed.like":
+                    return new App.Bsky.Feed.Like(obj);
+                case "app.bsky.feed.post":
+                    return new App.Bsky.Feed.Post(obj);
+                case "app.bsky.feed.post#replyRef":
+                    return new App.Bsky.Feed.ReplyRefDef(obj);
                 case "app.bsky.feed.postgate":
                     return new App.Bsky.Feed.Postgate(obj);
                 case "app.bsky.feed.postgate#disableRule":
                     return new App.Bsky.Feed.DisableRule(obj);
+                case "app.bsky.feed.repost":
+                    return new App.Bsky.Feed.Repost(obj);
                 case "app.bsky.feed.threadgate":
                     return new App.Bsky.Feed.Threadgate(obj);
                 case "app.bsky.feed.threadgate#mentionRule":
@@ -299,94 +295,52 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.FollowingRule(obj);
                 case "app.bsky.feed.threadgate#listRule":
                     return new App.Bsky.Feed.ListRule(obj);
-                case "app.bsky.feed.like":
-                    return new App.Bsky.Feed.Like(obj);
-                case "app.bsky.feed.repost":
-                    return new App.Bsky.Feed.Repost(obj);
-                case "app.bsky.feed.post":
-                    return new App.Bsky.Feed.Post(obj);
-                case "app.bsky.feed.post#replyRef":
-                    return new App.Bsky.Feed.ReplyRefDef(obj);
-                case "app.bsky.feed.post#entity":
-                    return new App.Bsky.Feed.Entity(obj);
-                case "app.bsky.feed.post#textSlice":
-                    return new App.Bsky.Feed.TextSlice(obj);
-                case "app.bsky.actor.profile":
-                    return new App.Bsky.Actor.Profile(obj);
+                case "app.bsky.graph.block":
+                    return new App.Bsky.Graph.Block(obj);
+                case "app.bsky.graph.follow":
+                    return new App.Bsky.Graph.Follow(obj);
+                case "app.bsky.graph.list":
+                    return new App.Bsky.Graph.List(obj);
+                case "app.bsky.graph.listblock":
+                    return new App.Bsky.Graph.Listblock(obj);
+                case "app.bsky.graph.listitem":
+                    return new App.Bsky.Graph.Listitem(obj);
+                case "app.bsky.graph.starterpack":
+                    return new App.Bsky.Graph.Starterpack(obj);
+                case "app.bsky.graph.starterpack#feedItem":
+                    return new App.Bsky.Graph.FeedItem(obj);
                 case "app.bsky.labeler.service":
                     return new App.Bsky.Labeler.Service(obj);
                 case "chat.bsky.actor.declaration":
                     return new Chat.Bsky.Actor.Declaration(obj);
-                case "tools.ozone.signature.findCorrelation#FindCorrelationOutput":
-                    return new Tools.Ozone.Signature.FindCorrelationOutput(obj);
-                case "tools.ozone.signature.searchAccounts#SearchAccountsOutput":
-                    return new Tools.Ozone.Signature.SearchAccountsOutput(obj);
-                case "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput":
-                    return new Tools.Ozone.Signature.FindRelatedAccountsOutput(obj);
-                case "tools.ozone.signature.findRelatedAccounts#relatedAccount":
-                    return new Tools.Ozone.Signature.RelatedAccount(obj);
-                case "tools.ozone.server.getConfig#GetConfigOutput":
-                    return new Tools.Ozone.Server.GetConfigOutput(obj);
-                case "tools.ozone.server.getConfig#serviceConfig":
-                    return new Tools.Ozone.Server.ServiceConfig(obj);
-                case "tools.ozone.server.getConfig#viewerConfig":
-                    return new Tools.Ozone.Server.ViewerConfig(obj);
-                case "tools.ozone.team.listMembers#ListMembersOutput":
-                    return new Tools.Ozone.Team.ListMembersOutput(obj);
-                case "tools.ozone.team.deleteMember#DeleteMemberInput":
-                    return new Tools.Ozone.Team.DeleteMemberInput(obj);
-                case "tools.ozone.team.updateMember#UpdateMemberInput":
-                    return new Tools.Ozone.Team.UpdateMemberInput(obj);
-                case "tools.ozone.team.addMember#AddMemberInput":
-                    return new Tools.Ozone.Team.AddMemberInput(obj);
-                case "tools.ozone.communication.updateTemplate#UpdateTemplateInput":
-                    return new Tools.Ozone.Communication.UpdateTemplateInput(obj);
-                case "tools.ozone.communication.createTemplate#CreateTemplateInput":
-                    return new Tools.Ozone.Communication.CreateTemplateInput(obj);
-                case "tools.ozone.communication.listTemplates#ListTemplatesOutput":
-                    return new Tools.Ozone.Communication.ListTemplatesOutput(obj);
-                case "tools.ozone.communication.deleteTemplate#DeleteTemplateInput":
-                    return new Tools.Ozone.Communication.DeleteTemplateInput(obj);
-                case "tools.ozone.set.addValues#AddValuesInput":
-                    return new Tools.Ozone.Set.AddValuesInput(obj);
-                case "tools.ozone.set.getValues#GetValuesOutput":
-                    return new Tools.Ozone.Set.GetValuesOutput(obj);
-                case "tools.ozone.set.deleteSet#DeleteSetOutput":
-                    return new Tools.Ozone.Set.DeleteSetOutput(obj);
-                case "tools.ozone.set.deleteSet#DeleteSetInput":
-                    return new Tools.Ozone.Set.DeleteSetInput(obj);
-                case "tools.ozone.set.deleteValues#DeleteValuesInput":
-                    return new Tools.Ozone.Set.DeleteValuesInput(obj);
-                case "tools.ozone.set.querySets#QuerySetsOutput":
-                    return new Tools.Ozone.Set.QuerySetsOutput(obj);
-                case "tools.ozone.setting.listOptions#ListOptionsOutput":
-                    return new Tools.Ozone.Setting.ListOptionsOutput(obj);
-                case "tools.ozone.setting.removeOptions#RemoveOptionsOutput":
-                    return new Tools.Ozone.Setting.RemoveOptionsOutput(obj);
-                case "tools.ozone.setting.removeOptions#RemoveOptionsInput":
-                    return new Tools.Ozone.Setting.RemoveOptionsInput(obj);
-                case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
-                    return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
-                case "tools.ozone.setting.upsertOption#UpsertOptionInput":
-                    return new Tools.Ozone.Setting.UpsertOptionInput(obj);
-                case "tools.ozone.moderation.queryStatuses#QueryStatusesOutput":
-                    return new Tools.Ozone.Moderation.QueryStatusesOutput(obj);
-                case "tools.ozone.moderation.getRecords#GetRecordsOutput":
-                    return new Tools.Ozone.Moderation.GetRecordsOutput(obj);
-                case "tools.ozone.moderation.queryEvents#QueryEventsOutput":
-                    return new Tools.Ozone.Moderation.QueryEventsOutput(obj);
-                case "tools.ozone.moderation.emitEvent#EmitEventInput":
-                    return new Tools.Ozone.Moderation.EmitEventInput(obj);
-                case "tools.ozone.moderation.searchRepos#SearchReposOutput":
-                    return new Tools.Ozone.Moderation.SearchReposOutput(obj);
-                case "tools.ozone.moderation.getRepos#GetReposOutput":
-                    return new Tools.Ozone.Moderation.GetReposOutput(obj);
-                case "app.bsky.video.uploadVideo#UploadVideoOutput":
-                    return new App.Bsky.Video.UploadVideoOutput(obj);
-                case "app.bsky.video.getJobStatus#GetJobStatusOutput":
-                    return new App.Bsky.Video.GetJobStatusOutput(obj);
-                case "app.bsky.video.getUploadLimits#GetUploadLimitsOutput":
-                    return new App.Bsky.Video.GetUploadLimitsOutput(obj);
+                case "app.bsky.actor.getPreferences#GetPreferencesOutput":
+                    return new App.Bsky.Actor.GetPreferencesOutput(obj);
+                case "app.bsky.actor.getProfiles#GetProfilesOutput":
+                    return new App.Bsky.Actor.GetProfilesOutput(obj);
+                case "app.bsky.actor.getSuggestions#GetSuggestionsOutput":
+                    return new App.Bsky.Actor.GetSuggestionsOutput(obj);
+                case "app.bsky.actor.putPreferences#PutPreferencesInput":
+                    return new App.Bsky.Actor.PutPreferencesInput(obj);
+                case "app.bsky.actor.searchActors#SearchActorsOutput":
+                    return new App.Bsky.Actor.SearchActorsOutput(obj);
+                case "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput":
+                    return new App.Bsky.Actor.SearchActorsTypeaheadOutput(obj);
+                case "app.bsky.embed.external":
+                    return new App.Bsky.Embed.EmbedExternal(obj);
+                case "app.bsky.embed.external#external":
+                    return new App.Bsky.Embed.External(obj);
+                case "app.bsky.embed.external#view":
+                    return new App.Bsky.Embed.ViewExternal(obj);
+                case "app.bsky.embed.external#viewExternal":
+                    return new App.Bsky.Embed.ViewExternalExternal(obj);
+                case "app.bsky.embed.images":
+                    return new App.Bsky.Embed.EmbedImages(obj);
+                case "app.bsky.embed.images#image":
+                    return new App.Bsky.Embed.Image(obj);
+                case "app.bsky.embed.images#view":
+                    return new App.Bsky.Embed.ViewImages(obj);
+                case "app.bsky.embed.images#viewImage":
+                    return new App.Bsky.Embed.ViewImage(obj);
                 case "app.bsky.embed.record":
                     return new App.Bsky.Embed.EmbedRecord(obj);
                 case "app.bsky.embed.record#view":
@@ -399,14 +353,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.ViewBlocked(obj);
                 case "app.bsky.embed.record#viewDetached":
                     return new App.Bsky.Embed.ViewDetached(obj);
-                case "app.bsky.embed.images":
-                    return new App.Bsky.Embed.EmbedImages(obj);
-                case "app.bsky.embed.images#image":
-                    return new App.Bsky.Embed.Image(obj);
-                case "app.bsky.embed.images#view":
-                    return new App.Bsky.Embed.ViewImages(obj);
-                case "app.bsky.embed.images#viewImage":
-                    return new App.Bsky.Embed.ViewImage(obj);
                 case "app.bsky.embed.recordWithMedia":
                     return new App.Bsky.Embed.RecordWithMedia(obj);
                 case "app.bsky.embed.recordWithMedia#view":
@@ -417,128 +363,106 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.Caption(obj);
                 case "app.bsky.embed.video#view":
                     return new App.Bsky.Embed.ViewVideo(obj);
-                case "app.bsky.embed.external":
-                    return new App.Bsky.Embed.EmbedExternal(obj);
-                case "app.bsky.embed.external#external":
-                    return new App.Bsky.Embed.External(obj);
-                case "app.bsky.embed.external#view":
-                    return new App.Bsky.Embed.ViewExternal(obj);
-                case "app.bsky.embed.external#viewExternal":
-                    return new App.Bsky.Embed.ViewExternalExternal(obj);
-                case "app.bsky.notification.registerPush#RegisterPushInput":
-                    return new App.Bsky.Notification.RegisterPushInput(obj);
-                case "app.bsky.notification.putPreferences#PutPreferencesInput":
-                    return new App.Bsky.Notification.PutPreferencesInput(obj);
-                case "app.bsky.notification.updateSeen#UpdateSeenInput":
-                    return new App.Bsky.Notification.UpdateSeenInput(obj);
-                case "app.bsky.notification.listNotifications#ListNotificationsOutput":
-                    return new App.Bsky.Notification.ListNotificationsOutput(obj);
-                case "app.bsky.notification.listNotifications#notification":
-                    return new App.Bsky.Notification.Notification(obj);
-                case "app.bsky.notification.getUnreadCount#GetUnreadCountOutput":
-                    return new App.Bsky.Notification.GetUnreadCountOutput(obj);
-                case "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput":
-                    return new App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput(obj);
-                case "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput":
-                    return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
-                case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
-                    return new App.Bsky.Unspecced.GetSuggestionsSkeletonOutput(obj);
-                case "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput":
-                    return new App.Bsky.Unspecced.SearchPostsSkeletonOutput(obj);
-                case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
-                    return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
-                case "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput":
-                    return new App.Bsky.Unspecced.GetTaggedSuggestionsOutput(obj);
-                case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
-                    return new App.Bsky.Unspecced.Suggestion(obj);
-                case "app.bsky.unspecced.getConfig#GetConfigOutput":
-                    return new App.Bsky.Unspecced.GetConfigOutput(obj);
-                case "app.bsky.graph.getStarterPacks#GetStarterPacksOutput":
-                    return new App.Bsky.Graph.GetStarterPacksOutput(obj);
-                case "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput":
-                    return new App.Bsky.Graph.GetSuggestedFollowsByActorOutput(obj);
-                case "app.bsky.graph.unmuteActorList#UnmuteActorListInput":
-                    return new App.Bsky.Graph.UnmuteActorListInput(obj);
-                case "app.bsky.graph.getListBlocks#GetListBlocksOutput":
-                    return new App.Bsky.Graph.GetListBlocksOutput(obj);
-                case "app.bsky.graph.getStarterPack#GetStarterPackOutput":
-                    return new App.Bsky.Graph.GetStarterPackOutput(obj);
-                case "app.bsky.graph.muteActorList#MuteActorListInput":
-                    return new App.Bsky.Graph.MuteActorListInput(obj);
-                case "app.bsky.graph.muteThread#MuteThreadInput":
-                    return new App.Bsky.Graph.MuteThreadInput(obj);
-                case "app.bsky.graph.searchStarterPacks#SearchStarterPacksOutput":
-                    return new App.Bsky.Graph.SearchStarterPacksOutput(obj);
-                case "app.bsky.graph.getActorStarterPacks#GetActorStarterPacksOutput":
-                    return new App.Bsky.Graph.GetActorStarterPacksOutput(obj);
-                case "app.bsky.graph.getLists#GetListsOutput":
-                    return new App.Bsky.Graph.GetListsOutput(obj);
-                case "app.bsky.graph.getFollowers#GetFollowersOutput":
-                    return new App.Bsky.Graph.GetFollowersOutput(obj);
-                case "app.bsky.graph.unmuteThread#UnmuteThreadInput":
-                    return new App.Bsky.Graph.UnmuteThreadInput(obj);
-                case "app.bsky.graph.muteActor#MuteActorInput":
-                    return new App.Bsky.Graph.MuteActorInput(obj);
-                case "app.bsky.graph.getMutes#GetMutesOutput":
-                    return new App.Bsky.Graph.GetMutesOutput(obj);
-                case "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput":
-                    return new App.Bsky.Graph.GetKnownFollowersOutput(obj);
-                case "app.bsky.graph.getListMutes#GetListMutesOutput":
-                    return new App.Bsky.Graph.GetListMutesOutput(obj);
-                case "app.bsky.graph.getFollows#GetFollowsOutput":
-                    return new App.Bsky.Graph.GetFollowsOutput(obj);
-                case "app.bsky.graph.getBlocks#GetBlocksOutput":
-                    return new App.Bsky.Graph.GetBlocksOutput(obj);
-                case "app.bsky.graph.getRelationships#GetRelationshipsOutput":
-                    return new App.Bsky.Graph.GetRelationshipsOutput(obj);
-                case "app.bsky.graph.unmuteActor#UnmuteActorInput":
-                    return new App.Bsky.Graph.UnmuteActorInput(obj);
-                case "app.bsky.graph.getList#GetListOutput":
-                    return new App.Bsky.Graph.GetListOutput(obj);
-                case "app.bsky.feed.sendInteractions#SendInteractionsOutput":
-                    return new App.Bsky.Feed.SendInteractionsOutput(obj);
-                case "app.bsky.feed.sendInteractions#SendInteractionsInput":
-                    return new App.Bsky.Feed.SendInteractionsInput(obj);
-                case "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput":
-                    return new App.Bsky.Feed.GetFeedGeneratorsOutput(obj);
-                case "app.bsky.feed.getTimeline#GetTimelineOutput":
-                    return new App.Bsky.Feed.GetTimelineOutput(obj);
-                case "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput":
-                    return new App.Bsky.Feed.GetFeedGeneratorOutput(obj);
-                case "app.bsky.feed.getAuthorFeed#GetAuthorFeedOutput":
-                    return new App.Bsky.Feed.GetAuthorFeedOutput(obj);
-                case "app.bsky.feed.getLikes#GetLikesOutput":
-                    return new App.Bsky.Feed.GetLikesOutput(obj);
-                case "app.bsky.feed.getLikes#like":
-                    return new App.Bsky.Feed.LikeDef(obj);
-                case "app.bsky.feed.getPostThread#GetPostThreadOutput":
-                    return new App.Bsky.Feed.GetPostThreadOutput(obj);
-                case "app.bsky.feed.getActorLikes#GetActorLikesOutput":
-                    return new App.Bsky.Feed.GetActorLikesOutput(obj);
-                case "app.bsky.feed.getRepostedBy#GetRepostedByOutput":
-                    return new App.Bsky.Feed.GetRepostedByOutput(obj);
                 case "app.bsky.feed.describeFeedGenerator#DescribeFeedGeneratorOutput":
                     return new App.Bsky.Feed.DescribeFeedGeneratorOutput(obj);
                 case "app.bsky.feed.describeFeedGenerator#feed":
                     return new App.Bsky.Feed.Feed(obj);
                 case "app.bsky.feed.describeFeedGenerator#links":
                     return new App.Bsky.Feed.Links(obj);
-                case "app.bsky.feed.searchPosts#SearchPostsOutput":
-                    return new App.Bsky.Feed.SearchPostsOutput(obj);
-                case "app.bsky.feed.getPosts#GetPostsOutput":
-                    return new App.Bsky.Feed.GetPostsOutput(obj);
-                case "app.bsky.feed.getFeed#GetFeedOutput":
-                    return new App.Bsky.Feed.GetFeedOutput(obj);
-                case "app.bsky.feed.getQuotes#GetQuotesOutput":
-                    return new App.Bsky.Feed.GetQuotesOutput(obj);
-                case "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput":
-                    return new App.Bsky.Feed.GetFeedSkeletonOutput(obj);
-                case "app.bsky.feed.getListFeed#GetListFeedOutput":
-                    return new App.Bsky.Feed.GetListFeedOutput(obj);
-                case "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput":
-                    return new App.Bsky.Feed.GetSuggestedFeedsOutput(obj);
                 case "app.bsky.feed.getActorFeeds#GetActorFeedsOutput":
                     return new App.Bsky.Feed.GetActorFeedsOutput(obj);
+                case "app.bsky.feed.getActorLikes#GetActorLikesOutput":
+                    return new App.Bsky.Feed.GetActorLikesOutput(obj);
+                case "app.bsky.feed.getAuthorFeed#GetAuthorFeedOutput":
+                    return new App.Bsky.Feed.GetAuthorFeedOutput(obj);
+                case "app.bsky.feed.getFeed#GetFeedOutput":
+                    return new App.Bsky.Feed.GetFeedOutput(obj);
+                case "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput":
+                    return new App.Bsky.Feed.GetFeedGeneratorOutput(obj);
+                case "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput":
+                    return new App.Bsky.Feed.GetFeedGeneratorsOutput(obj);
+                case "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput":
+                    return new App.Bsky.Feed.GetFeedSkeletonOutput(obj);
+                case "app.bsky.feed.getLikes#GetLikesOutput":
+                    return new App.Bsky.Feed.GetLikesOutput(obj);
+                case "app.bsky.feed.getLikes#like":
+                    return new App.Bsky.Feed.LikeDef(obj);
+                case "app.bsky.feed.getListFeed#GetListFeedOutput":
+                    return new App.Bsky.Feed.GetListFeedOutput(obj);
+                case "app.bsky.feed.getPosts#GetPostsOutput":
+                    return new App.Bsky.Feed.GetPostsOutput(obj);
+                case "app.bsky.feed.getPostThread#GetPostThreadOutput":
+                    return new App.Bsky.Feed.GetPostThreadOutput(obj);
+                case "app.bsky.feed.getQuotes#GetQuotesOutput":
+                    return new App.Bsky.Feed.GetQuotesOutput(obj);
+                case "app.bsky.feed.getRepostedBy#GetRepostedByOutput":
+                    return new App.Bsky.Feed.GetRepostedByOutput(obj);
+                case "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput":
+                    return new App.Bsky.Feed.GetSuggestedFeedsOutput(obj);
+                case "app.bsky.feed.getTimeline#GetTimelineOutput":
+                    return new App.Bsky.Feed.GetTimelineOutput(obj);
+                case "app.bsky.feed.searchPosts#SearchPostsOutput":
+                    return new App.Bsky.Feed.SearchPostsOutput(obj);
+                case "app.bsky.feed.sendInteractions#SendInteractionsOutput":
+                    return new App.Bsky.Feed.SendInteractionsOutput(obj);
+                case "app.bsky.feed.sendInteractions#SendInteractionsInput":
+                    return new App.Bsky.Feed.SendInteractionsInput(obj);
+                case "app.bsky.graph.getActorStarterPacks#GetActorStarterPacksOutput":
+                    return new App.Bsky.Graph.GetActorStarterPacksOutput(obj);
+                case "app.bsky.graph.getBlocks#GetBlocksOutput":
+                    return new App.Bsky.Graph.GetBlocksOutput(obj);
+                case "app.bsky.graph.getFollowers#GetFollowersOutput":
+                    return new App.Bsky.Graph.GetFollowersOutput(obj);
+                case "app.bsky.graph.getFollows#GetFollowsOutput":
+                    return new App.Bsky.Graph.GetFollowsOutput(obj);
+                case "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput":
+                    return new App.Bsky.Graph.GetKnownFollowersOutput(obj);
+                case "app.bsky.graph.getList#GetListOutput":
+                    return new App.Bsky.Graph.GetListOutput(obj);
+                case "app.bsky.graph.getListBlocks#GetListBlocksOutput":
+                    return new App.Bsky.Graph.GetListBlocksOutput(obj);
+                case "app.bsky.graph.getListMutes#GetListMutesOutput":
+                    return new App.Bsky.Graph.GetListMutesOutput(obj);
+                case "app.bsky.graph.getLists#GetListsOutput":
+                    return new App.Bsky.Graph.GetListsOutput(obj);
+                case "app.bsky.graph.getMutes#GetMutesOutput":
+                    return new App.Bsky.Graph.GetMutesOutput(obj);
+                case "app.bsky.graph.getRelationships#GetRelationshipsOutput":
+                    return new App.Bsky.Graph.GetRelationshipsOutput(obj);
+                case "app.bsky.graph.getStarterPack#GetStarterPackOutput":
+                    return new App.Bsky.Graph.GetStarterPackOutput(obj);
+                case "app.bsky.graph.getStarterPacks#GetStarterPacksOutput":
+                    return new App.Bsky.Graph.GetStarterPacksOutput(obj);
+                case "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput":
+                    return new App.Bsky.Graph.GetSuggestedFollowsByActorOutput(obj);
+                case "app.bsky.graph.muteActor#MuteActorInput":
+                    return new App.Bsky.Graph.MuteActorInput(obj);
+                case "app.bsky.graph.muteActorList#MuteActorListInput":
+                    return new App.Bsky.Graph.MuteActorListInput(obj);
+                case "app.bsky.graph.muteThread#MuteThreadInput":
+                    return new App.Bsky.Graph.MuteThreadInput(obj);
+                case "app.bsky.graph.searchStarterPacks#SearchStarterPacksOutput":
+                    return new App.Bsky.Graph.SearchStarterPacksOutput(obj);
+                case "app.bsky.graph.unmuteActor#UnmuteActorInput":
+                    return new App.Bsky.Graph.UnmuteActorInput(obj);
+                case "app.bsky.graph.unmuteActorList#UnmuteActorListInput":
+                    return new App.Bsky.Graph.UnmuteActorListInput(obj);
+                case "app.bsky.graph.unmuteThread#UnmuteThreadInput":
+                    return new App.Bsky.Graph.UnmuteThreadInput(obj);
+                case "app.bsky.labeler.getServices#GetServicesOutput":
+                    return new App.Bsky.Labeler.GetServicesOutput(obj);
+                case "app.bsky.notification.getUnreadCount#GetUnreadCountOutput":
+                    return new App.Bsky.Notification.GetUnreadCountOutput(obj);
+                case "app.bsky.notification.listNotifications#ListNotificationsOutput":
+                    return new App.Bsky.Notification.ListNotificationsOutput(obj);
+                case "app.bsky.notification.listNotifications#notification":
+                    return new App.Bsky.Notification.Notification(obj);
+                case "app.bsky.notification.putPreferences#PutPreferencesInput":
+                    return new App.Bsky.Notification.PutPreferencesInput(obj);
+                case "app.bsky.notification.registerPush#RegisterPushInput":
+                    return new App.Bsky.Notification.RegisterPushInput(obj);
+                case "app.bsky.notification.updateSeen#UpdateSeenInput":
+                    return new App.Bsky.Notification.UpdateSeenInput(obj);
                 case "app.bsky.richtext.facet":
                     return new App.Bsky.Richtext.Facet(obj);
                 case "app.bsky.richtext.facet#mention":
@@ -549,58 +473,66 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Richtext.Tag(obj);
                 case "app.bsky.richtext.facet#byteSlice":
                     return new App.Bsky.Richtext.ByteSlice(obj);
-                case "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput":
-                    return new App.Bsky.Actor.SearchActorsTypeaheadOutput(obj);
-                case "app.bsky.actor.putPreferences#PutPreferencesInput":
-                    return new App.Bsky.Actor.PutPreferencesInput(obj);
-                case "app.bsky.actor.getSuggestions#GetSuggestionsOutput":
-                    return new App.Bsky.Actor.GetSuggestionsOutput(obj);
-                case "app.bsky.actor.searchActors#SearchActorsOutput":
-                    return new App.Bsky.Actor.SearchActorsOutput(obj);
-                case "app.bsky.actor.getProfiles#GetProfilesOutput":
-                    return new App.Bsky.Actor.GetProfilesOutput(obj);
-                case "app.bsky.actor.getPreferences#GetPreferencesOutput":
-                    return new App.Bsky.Actor.GetPreferencesOutput(obj);
-                case "app.bsky.labeler.getServices#GetServicesOutput":
-                    return new App.Bsky.Labeler.GetServicesOutput(obj);
-                case "chat.bsky.convo.listConvos#ListConvosOutput":
-                    return new Chat.Bsky.Convo.ListConvosOutput(obj);
-                case "chat.bsky.convo.unmuteConvo#UnmuteConvoOutput":
-                    return new Chat.Bsky.Convo.UnmuteConvoOutput(obj);
-                case "chat.bsky.convo.unmuteConvo#UnmuteConvoInput":
-                    return new Chat.Bsky.Convo.UnmuteConvoInput(obj);
+                case "app.bsky.unspecced.getConfig#GetConfigOutput":
+                    return new App.Bsky.Unspecced.GetConfigOutput(obj);
+                case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
+                    return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
+                case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetSuggestionsSkeletonOutput(obj);
+                case "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput":
+                    return new App.Bsky.Unspecced.GetTaggedSuggestionsOutput(obj);
+                case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
+                    return new App.Bsky.Unspecced.Suggestion(obj);
+                case "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput":
+                    return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
+                case "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput":
+                    return new App.Bsky.Unspecced.SearchPostsSkeletonOutput(obj);
+                case "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput":
+                    return new App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput(obj);
+                case "app.bsky.video.getJobStatus#GetJobStatusOutput":
+                    return new App.Bsky.Video.GetJobStatusOutput(obj);
+                case "app.bsky.video.getUploadLimits#GetUploadLimitsOutput":
+                    return new App.Bsky.Video.GetUploadLimitsOutput(obj);
+                case "app.bsky.video.uploadVideo#UploadVideoOutput":
+                    return new App.Bsky.Video.UploadVideoOutput(obj);
+                case "chat.bsky.actor.deleteAccount#DeleteAccountOutput":
+                    return new Chat.Bsky.Actor.DeleteAccountOutput(obj);
+                case "chat.bsky.convo.deleteMessageForSelf#DeleteMessageForSelfInput":
+                    return new Chat.Bsky.Convo.DeleteMessageForSelfInput(obj);
+                case "chat.bsky.convo.getConvo#GetConvoOutput":
+                    return new Chat.Bsky.Convo.GetConvoOutput(obj);
+                case "chat.bsky.convo.getConvoForMembers#GetConvoForMembersOutput":
+                    return new Chat.Bsky.Convo.GetConvoForMembersOutput(obj);
                 case "chat.bsky.convo.getLog#GetLogOutput":
                     return new Chat.Bsky.Convo.GetLogOutput(obj);
-                case "chat.bsky.convo.sendMessage#SendMessageInput":
-                    return new Chat.Bsky.Convo.SendMessageInput(obj);
+                case "chat.bsky.convo.getMessages#GetMessagesOutput":
+                    return new Chat.Bsky.Convo.GetMessagesOutput(obj);
                 case "chat.bsky.convo.leaveConvo#LeaveConvoOutput":
                     return new Chat.Bsky.Convo.LeaveConvoOutput(obj);
                 case "chat.bsky.convo.leaveConvo#LeaveConvoInput":
                     return new Chat.Bsky.Convo.LeaveConvoInput(obj);
+                case "chat.bsky.convo.listConvos#ListConvosOutput":
+                    return new Chat.Bsky.Convo.ListConvosOutput(obj);
                 case "chat.bsky.convo.muteConvo#MuteConvoOutput":
                     return new Chat.Bsky.Convo.MuteConvoOutput(obj);
                 case "chat.bsky.convo.muteConvo#MuteConvoInput":
                     return new Chat.Bsky.Convo.MuteConvoInput(obj);
-                case "chat.bsky.convo.deleteMessageForSelf#DeleteMessageForSelfInput":
-                    return new Chat.Bsky.Convo.DeleteMessageForSelfInput(obj);
-                case "chat.bsky.convo.updateRead#UpdateReadOutput":
-                    return new Chat.Bsky.Convo.UpdateReadOutput(obj);
-                case "chat.bsky.convo.updateRead#UpdateReadInput":
-                    return new Chat.Bsky.Convo.UpdateReadInput(obj);
-                case "chat.bsky.convo.getConvo#GetConvoOutput":
-                    return new Chat.Bsky.Convo.GetConvoOutput(obj);
-                case "chat.bsky.convo.getMessages#GetMessagesOutput":
-                    return new Chat.Bsky.Convo.GetMessagesOutput(obj);
-                case "chat.bsky.convo.getConvoForMembers#GetConvoForMembersOutput":
-                    return new Chat.Bsky.Convo.GetConvoForMembersOutput(obj);
+                case "chat.bsky.convo.sendMessage#SendMessageInput":
+                    return new Chat.Bsky.Convo.SendMessageInput(obj);
                 case "chat.bsky.convo.sendMessageBatch#SendMessageBatchOutput":
                     return new Chat.Bsky.Convo.SendMessageBatchOutput(obj);
                 case "chat.bsky.convo.sendMessageBatch#SendMessageBatchInput":
                     return new Chat.Bsky.Convo.SendMessageBatchInput(obj);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return new Chat.Bsky.Convo.BatchItem(obj);
-                case "chat.bsky.actor.deleteAccount#DeleteAccountOutput":
-                    return new Chat.Bsky.Actor.DeleteAccountOutput(obj);
+                case "chat.bsky.convo.unmuteConvo#UnmuteConvoOutput":
+                    return new Chat.Bsky.Convo.UnmuteConvoOutput(obj);
+                case "chat.bsky.convo.unmuteConvo#UnmuteConvoInput":
+                    return new Chat.Bsky.Convo.UnmuteConvoInput(obj);
+                case "chat.bsky.convo.updateRead#UpdateReadOutput":
+                    return new Chat.Bsky.Convo.UpdateReadOutput(obj);
+                case "chat.bsky.convo.updateRead#UpdateReadInput":
+                    return new Chat.Bsky.Convo.UpdateReadInput(obj);
                 case "chat.bsky.moderation.getActorMetadata#GetActorMetadataOutput":
                     return new Chat.Bsky.Moderation.GetActorMetadataOutput(obj);
                 case "chat.bsky.moderation.getActorMetadata#metadata":
@@ -609,178 +541,58 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Moderation.GetMessageContextOutput(obj);
                 case "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput":
                     return new Chat.Bsky.Moderation.UpdateActorAccessInput(obj);
-                case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
-                    return new Com.Atproto.Temp.CheckSignupQueueOutput(obj);
-                case "com.atproto.temp.requestPhoneVerification#RequestPhoneVerificationInput":
-                    return new Com.Atproto.Temp.RequestPhoneVerificationInput(obj);
-                case "com.atproto.temp.fetchLabels#FetchLabelsOutput":
-                    return new Com.Atproto.Temp.FetchLabelsOutput(obj);
-                case "com.atproto.identity.updateHandle#UpdateHandleInput":
-                    return new Com.Atproto.Identity.UpdateHandleInput(obj);
+                case "com.atproto.admin.deleteAccount#DeleteAccountInput":
+                    return new Com.Atproto.Admin.DeleteAccountInput(obj);
+                case "com.atproto.admin.disableAccountInvites#DisableAccountInvitesInput":
+                    return new Com.Atproto.Admin.DisableAccountInvitesInput(obj);
+                case "com.atproto.admin.disableInviteCodes#DisableInviteCodesInput":
+                    return new Com.Atproto.Admin.DisableInviteCodesInput(obj);
+                case "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput":
+                    return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
+                case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
+                    return new Com.Atproto.Admin.GetAccountInfosOutput(obj);
+                case "com.atproto.admin.getInviteCodes#GetInviteCodesOutput":
+                    return new Com.Atproto.Admin.GetInviteCodesOutput(obj);
+                case "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput":
+                    return new Com.Atproto.Admin.GetSubjectStatusOutput(obj);
+                case "com.atproto.admin.searchAccounts#SearchAccountsOutput":
+                    return new Com.Atproto.Admin.SearchAccountsOutput(obj);
+                case "com.atproto.admin.sendEmail#SendEmailOutput":
+                    return new Com.Atproto.Admin.SendEmailOutput(obj);
+                case "com.atproto.admin.sendEmail#SendEmailInput":
+                    return new Com.Atproto.Admin.SendEmailInput(obj);
+                case "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput":
+                    return new Com.Atproto.Admin.UpdateAccountEmailInput(obj);
+                case "com.atproto.admin.updateAccountHandle#UpdateAccountHandleInput":
+                    return new Com.Atproto.Admin.UpdateAccountHandleInput(obj);
+                case "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput":
+                    return new Com.Atproto.Admin.UpdateAccountPasswordInput(obj);
+                case "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusOutput":
+                    return new Com.Atproto.Admin.UpdateSubjectStatusOutput(obj);
+                case "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusInput":
+                    return new Com.Atproto.Admin.UpdateSubjectStatusInput(obj);
+                case "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput":
+                    return new Com.Atproto.Identity.GetRecommendedDidCredentialsOutput(obj);
+                case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
+                    return new Com.Atproto.Identity.ResolveHandleOutput(obj);
                 case "com.atproto.identity.signPlcOperation#SignPlcOperationOutput":
                     return new Com.Atproto.Identity.SignPlcOperationOutput(obj);
                 case "com.atproto.identity.signPlcOperation#SignPlcOperationInput":
                     return new Com.Atproto.Identity.SignPlcOperationInput(obj);
                 case "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput":
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
-                case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
-                    return new Com.Atproto.Identity.ResolveHandleOutput(obj);
-                case "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput":
-                    return new Com.Atproto.Identity.GetRecommendedDidCredentialsOutput(obj);
-                case "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput":
-                    return new Com.Atproto.Admin.UpdateAccountEmailInput(obj);
-                case "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput":
-                    return new Com.Atproto.Admin.GetSubjectStatusOutput(obj);
-                case "com.atproto.admin.searchAccounts#SearchAccountsOutput":
-                    return new Com.Atproto.Admin.SearchAccountsOutput(obj);
-                case "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput":
-                    return new Com.Atproto.Admin.UpdateAccountPasswordInput(obj);
-                case "com.atproto.admin.updateAccountHandle#UpdateAccountHandleInput":
-                    return new Com.Atproto.Admin.UpdateAccountHandleInput(obj);
-                case "com.atproto.admin.getInviteCodes#GetInviteCodesOutput":
-                    return new Com.Atproto.Admin.GetInviteCodesOutput(obj);
-                case "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput":
-                    return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
-                case "com.atproto.admin.disableAccountInvites#DisableAccountInvitesInput":
-                    return new Com.Atproto.Admin.DisableAccountInvitesInput(obj);
-                case "com.atproto.admin.disableInviteCodes#DisableInviteCodesInput":
-                    return new Com.Atproto.Admin.DisableInviteCodesInput(obj);
-                case "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusOutput":
-                    return new Com.Atproto.Admin.UpdateSubjectStatusOutput(obj);
-                case "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusInput":
-                    return new Com.Atproto.Admin.UpdateSubjectStatusInput(obj);
-                case "com.atproto.admin.sendEmail#SendEmailOutput":
-                    return new Com.Atproto.Admin.SendEmailOutput(obj);
-                case "com.atproto.admin.sendEmail#SendEmailInput":
-                    return new Com.Atproto.Admin.SendEmailInput(obj);
-                case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
-                    return new Com.Atproto.Admin.GetAccountInfosOutput(obj);
-                case "com.atproto.admin.deleteAccount#DeleteAccountInput":
-                    return new Com.Atproto.Admin.DeleteAccountInput(obj);
+                case "com.atproto.identity.updateHandle#UpdateHandleInput":
+                    return new Com.Atproto.Identity.UpdateHandleInput(obj);
+                case "com.atproto.label.queryLabels#QueryLabelsOutput":
+                    return new Com.Atproto.Label.QueryLabelsOutput(obj);
                 case "com.atproto.label.subscribeLabels#labels":
                     return new Com.Atproto.Label.Labels(obj);
                 case "com.atproto.label.subscribeLabels#info":
                     return new Com.Atproto.Label.Info(obj);
-                case "com.atproto.label.queryLabels#QueryLabelsOutput":
-                    return new Com.Atproto.Label.QueryLabelsOutput(obj);
-                case "com.atproto.server.reserveSigningKey#ReserveSigningKeyOutput":
-                    return new Com.Atproto.Server.ReserveSigningKeyOutput(obj);
-                case "com.atproto.server.reserveSigningKey#ReserveSigningKeyInput":
-                    return new Com.Atproto.Server.ReserveSigningKeyInput(obj);
-                case "com.atproto.server.getServiceAuth#GetServiceAuthOutput":
-                    return new Com.Atproto.Server.GetServiceAuthOutput(obj);
-                case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
-                    return new Com.Atproto.Server.GetAccountInviteCodesOutput(obj);
-                case "com.atproto.server.createSession#CreateSessionOutput":
-                    return new Com.Atproto.Server.CreateSessionOutput(obj);
-                case "com.atproto.server.createSession#CreateSessionInput":
-                    return new Com.Atproto.Server.CreateSessionInput(obj);
-                case "com.atproto.server.listAppPasswords#ListAppPasswordsOutput":
-                    return new Com.Atproto.Server.ListAppPasswordsOutput(obj);
-                case "com.atproto.server.listAppPasswords#appPassword":
-                    return new Com.Atproto.Server.AppPassword(obj);
-                case "com.atproto.server.createInviteCodes#CreateInviteCodesOutput":
-                    return new Com.Atproto.Server.CreateInviteCodesOutput(obj);
-                case "com.atproto.server.createInviteCodes#CreateInviteCodesInput":
-                    return new Com.Atproto.Server.CreateInviteCodesInput(obj);
-                case "com.atproto.server.createInviteCodes#accountCodes":
-                    return new Com.Atproto.Server.AccountCodes(obj);
-                case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
-                    return new Com.Atproto.Server.RevokeAppPasswordInput(obj);
-                case "com.atproto.server.createAppPassword#CreateAppPasswordInput":
-                    return new Com.Atproto.Server.CreateAppPasswordInput(obj);
-                case "com.atproto.server.createAppPassword#appPassword":
-                    return new Com.Atproto.Server.AppPasswordDef(obj);
-                case "com.atproto.server.describeServer#DescribeServerOutput":
-                    return new Com.Atproto.Server.DescribeServerOutput(obj);
-                case "com.atproto.server.describeServer#links":
-                    return new Com.Atproto.Server.Links(obj);
-                case "com.atproto.server.describeServer#contact":
-                    return new Com.Atproto.Server.Contact(obj);
-                case "com.atproto.server.confirmEmail#ConfirmEmailInput":
-                    return new Com.Atproto.Server.ConfirmEmailInput(obj);
-                case "com.atproto.server.getSession#GetSessionOutput":
-                    return new Com.Atproto.Server.GetSessionOutput(obj);
-                case "com.atproto.server.refreshSession#RefreshSessionOutput":
-                    return new Com.Atproto.Server.RefreshSessionOutput(obj);
-                case "com.atproto.server.deactivateAccount#DeactivateAccountInput":
-                    return new Com.Atproto.Server.DeactivateAccountInput(obj);
-                case "com.atproto.server.updateEmail#UpdateEmailInput":
-                    return new Com.Atproto.Server.UpdateEmailInput(obj);
-                case "com.atproto.server.resetPassword#ResetPasswordInput":
-                    return new Com.Atproto.Server.ResetPasswordInput(obj);
-                case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
-                    return new Com.Atproto.Server.CheckAccountStatusOutput(obj);
-                case "com.atproto.server.requestEmailUpdate#RequestEmailUpdateOutput":
-                    return new Com.Atproto.Server.RequestEmailUpdateOutput(obj);
-                case "com.atproto.server.requestPasswordReset#RequestPasswordResetInput":
-                    return new Com.Atproto.Server.RequestPasswordResetInput(obj);
-                case "com.atproto.server.createAccount#CreateAccountOutput":
-                    return new Com.Atproto.Server.CreateAccountOutput(obj);
-                case "com.atproto.server.createAccount#CreateAccountInput":
-                    return new Com.Atproto.Server.CreateAccountInput(obj);
-                case "com.atproto.server.deleteAccount#DeleteAccountInput":
-                    return new Com.Atproto.Server.DeleteAccountInput(obj);
-                case "com.atproto.server.createInviteCode#CreateInviteCodeOutput":
-                    return new Com.Atproto.Server.CreateInviteCodeOutput(obj);
-                case "com.atproto.server.createInviteCode#CreateInviteCodeInput":
-                    return new Com.Atproto.Server.CreateInviteCodeInput(obj);
-                case "com.atproto.sync.getHead#GetHeadOutput":
-                    return new Com.Atproto.Sync.GetHeadOutput(obj);
-                case "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput":
-                    return new Com.Atproto.Sync.NotifyOfUpdateInput(obj);
-                case "com.atproto.sync.requestCrawl#RequestCrawlInput":
-                    return new Com.Atproto.Sync.RequestCrawlInput(obj);
-                case "com.atproto.sync.listBlobs#ListBlobsOutput":
-                    return new Com.Atproto.Sync.ListBlobsOutput(obj);
-                case "com.atproto.sync.getLatestCommit#GetLatestCommitOutput":
-                    return new Com.Atproto.Sync.GetLatestCommitOutput(obj);
-                case "com.atproto.sync.subscribeRepos#commit":
-                    return new Com.Atproto.Sync.Commit(obj);
-                case "com.atproto.sync.subscribeRepos#identity":
-                    return new Com.Atproto.Sync.Identity(obj);
-                case "com.atproto.sync.subscribeRepos#account":
-                    return new Com.Atproto.Sync.Account(obj);
-                case "com.atproto.sync.subscribeRepos#handle":
-                    return new Com.Atproto.Sync.Handle(obj);
-                case "com.atproto.sync.subscribeRepos#migrate":
-                    return new Com.Atproto.Sync.Migrate(obj);
-                case "com.atproto.sync.subscribeRepos#tombstone":
-                    return new Com.Atproto.Sync.Tombstone(obj);
-                case "com.atproto.sync.subscribeRepos#info":
-                    return new Com.Atproto.Sync.Info(obj);
-                case "com.atproto.sync.subscribeRepos#repoOp":
-                    return new Com.Atproto.Sync.RepoOp(obj);
-                case "com.atproto.sync.getRepoStatus#GetRepoStatusOutput":
-                    return new Com.Atproto.Sync.GetRepoStatusOutput(obj);
-                case "com.atproto.sync.listRepos#ListReposOutput":
-                    return new Com.Atproto.Sync.ListReposOutput(obj);
-                case "com.atproto.sync.listRepos#repo":
-                    return new Com.Atproto.Sync.Repo(obj);
-                case "com.atproto.repo.strongRef":
-                    return new Com.Atproto.Repo.StrongRef(obj);
-                case "com.atproto.repo.listMissingBlobs#ListMissingBlobsOutput":
-                    return new Com.Atproto.Repo.ListMissingBlobsOutput(obj);
-                case "com.atproto.repo.listMissingBlobs#recordBlob":
-                    return new Com.Atproto.Repo.RecordBlob(obj);
-                case "com.atproto.repo.createRecord#CreateRecordOutput":
-                    return new Com.Atproto.Repo.CreateRecordOutput(obj);
-                case "com.atproto.repo.createRecord#CreateRecordInput":
-                    return new Com.Atproto.Repo.CreateRecordInput(obj);
-                case "com.atproto.repo.deleteRecord#DeleteRecordOutput":
-                    return new Com.Atproto.Repo.DeleteRecordOutput(obj);
-                case "com.atproto.repo.deleteRecord#DeleteRecordInput":
-                    return new Com.Atproto.Repo.DeleteRecordInput(obj);
-                case "com.atproto.repo.putRecord#PutRecordOutput":
-                    return new Com.Atproto.Repo.PutRecordOutput(obj);
-                case "com.atproto.repo.putRecord#PutRecordInput":
-                    return new Com.Atproto.Repo.PutRecordInput(obj);
-                case "com.atproto.repo.uploadBlob#UploadBlobOutput":
-                    return new Com.Atproto.Repo.UploadBlobOutput(obj);
-                case "com.atproto.repo.describeRepo#DescribeRepoOutput":
-                    return new Com.Atproto.Repo.DescribeRepoOutput(obj);
-                case "com.atproto.repo.getRecord#GetRecordOutput":
-                    return new Com.Atproto.Repo.GetRecordOutput(obj);
+                case "com.atproto.moderation.createReport#CreateReportOutput":
+                    return new Com.Atproto.Moderation.CreateReportOutput(obj);
+                case "com.atproto.moderation.createReport#CreateReportInput":
+                    return new Com.Atproto.Moderation.CreateReportInput(obj);
                 case "com.atproto.repo.applyWrites#ApplyWritesOutput":
                     return new Com.Atproto.Repo.ApplyWritesOutput(obj);
                 case "com.atproto.repo.applyWrites#ApplyWritesInput":
@@ -797,14 +609,192 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Repo.UpdateResult(obj);
                 case "com.atproto.repo.applyWrites#deleteResult":
                     return new Com.Atproto.Repo.DeleteResult(obj);
+                case "com.atproto.repo.createRecord#CreateRecordOutput":
+                    return new Com.Atproto.Repo.CreateRecordOutput(obj);
+                case "com.atproto.repo.createRecord#CreateRecordInput":
+                    return new Com.Atproto.Repo.CreateRecordInput(obj);
+                case "com.atproto.repo.deleteRecord#DeleteRecordOutput":
+                    return new Com.Atproto.Repo.DeleteRecordOutput(obj);
+                case "com.atproto.repo.deleteRecord#DeleteRecordInput":
+                    return new Com.Atproto.Repo.DeleteRecordInput(obj);
+                case "com.atproto.repo.describeRepo#DescribeRepoOutput":
+                    return new Com.Atproto.Repo.DescribeRepoOutput(obj);
+                case "com.atproto.repo.getRecord#GetRecordOutput":
+                    return new Com.Atproto.Repo.GetRecordOutput(obj);
+                case "com.atproto.repo.listMissingBlobs#ListMissingBlobsOutput":
+                    return new Com.Atproto.Repo.ListMissingBlobsOutput(obj);
+                case "com.atproto.repo.listMissingBlobs#recordBlob":
+                    return new Com.Atproto.Repo.RecordBlob(obj);
                 case "com.atproto.repo.listRecords#ListRecordsOutput":
                     return new Com.Atproto.Repo.ListRecordsOutput(obj);
                 case "com.atproto.repo.listRecords#record":
                     return new Com.Atproto.Repo.Record(obj);
-                case "com.atproto.moderation.createReport#CreateReportOutput":
-                    return new Com.Atproto.Moderation.CreateReportOutput(obj);
-                case "com.atproto.moderation.createReport#CreateReportInput":
-                    return new Com.Atproto.Moderation.CreateReportInput(obj);
+                case "com.atproto.repo.putRecord#PutRecordOutput":
+                    return new Com.Atproto.Repo.PutRecordOutput(obj);
+                case "com.atproto.repo.putRecord#PutRecordInput":
+                    return new Com.Atproto.Repo.PutRecordInput(obj);
+                case "com.atproto.repo.strongRef":
+                    return new Com.Atproto.Repo.StrongRef(obj);
+                case "com.atproto.repo.uploadBlob#UploadBlobOutput":
+                    return new Com.Atproto.Repo.UploadBlobOutput(obj);
+                case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
+                    return new Com.Atproto.Server.CheckAccountStatusOutput(obj);
+                case "com.atproto.server.confirmEmail#ConfirmEmailInput":
+                    return new Com.Atproto.Server.ConfirmEmailInput(obj);
+                case "com.atproto.server.createAccount#CreateAccountOutput":
+                    return new Com.Atproto.Server.CreateAccountOutput(obj);
+                case "com.atproto.server.createAccount#CreateAccountInput":
+                    return new Com.Atproto.Server.CreateAccountInput(obj);
+                case "com.atproto.server.createAppPassword#CreateAppPasswordInput":
+                    return new Com.Atproto.Server.CreateAppPasswordInput(obj);
+                case "com.atproto.server.createAppPassword#appPassword":
+                    return new Com.Atproto.Server.AppPassword(obj);
+                case "com.atproto.server.createInviteCode#CreateInviteCodeOutput":
+                    return new Com.Atproto.Server.CreateInviteCodeOutput(obj);
+                case "com.atproto.server.createInviteCode#CreateInviteCodeInput":
+                    return new Com.Atproto.Server.CreateInviteCodeInput(obj);
+                case "com.atproto.server.createInviteCodes#CreateInviteCodesOutput":
+                    return new Com.Atproto.Server.CreateInviteCodesOutput(obj);
+                case "com.atproto.server.createInviteCodes#CreateInviteCodesInput":
+                    return new Com.Atproto.Server.CreateInviteCodesInput(obj);
+                case "com.atproto.server.createInviteCodes#accountCodes":
+                    return new Com.Atproto.Server.AccountCodes(obj);
+                case "com.atproto.server.createSession#CreateSessionOutput":
+                    return new Com.Atproto.Server.CreateSessionOutput(obj);
+                case "com.atproto.server.createSession#CreateSessionInput":
+                    return new Com.Atproto.Server.CreateSessionInput(obj);
+                case "com.atproto.server.deactivateAccount#DeactivateAccountInput":
+                    return new Com.Atproto.Server.DeactivateAccountInput(obj);
+                case "com.atproto.server.deleteAccount#DeleteAccountInput":
+                    return new Com.Atproto.Server.DeleteAccountInput(obj);
+                case "com.atproto.server.describeServer#DescribeServerOutput":
+                    return new Com.Atproto.Server.DescribeServerOutput(obj);
+                case "com.atproto.server.describeServer#links":
+                    return new Com.Atproto.Server.Links(obj);
+                case "com.atproto.server.describeServer#contact":
+                    return new Com.Atproto.Server.Contact(obj);
+                case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
+                    return new Com.Atproto.Server.GetAccountInviteCodesOutput(obj);
+                case "com.atproto.server.getServiceAuth#GetServiceAuthOutput":
+                    return new Com.Atproto.Server.GetServiceAuthOutput(obj);
+                case "com.atproto.server.getSession#GetSessionOutput":
+                    return new Com.Atproto.Server.GetSessionOutput(obj);
+                case "com.atproto.server.listAppPasswords#ListAppPasswordsOutput":
+                    return new Com.Atproto.Server.ListAppPasswordsOutput(obj);
+                case "com.atproto.server.listAppPasswords#appPassword":
+                    return new Com.Atproto.Server.AppPasswordDef(obj);
+                case "com.atproto.server.refreshSession#RefreshSessionOutput":
+                    return new Com.Atproto.Server.RefreshSessionOutput(obj);
+                case "com.atproto.server.requestEmailUpdate#RequestEmailUpdateOutput":
+                    return new Com.Atproto.Server.RequestEmailUpdateOutput(obj);
+                case "com.atproto.server.requestPasswordReset#RequestPasswordResetInput":
+                    return new Com.Atproto.Server.RequestPasswordResetInput(obj);
+                case "com.atproto.server.reserveSigningKey#ReserveSigningKeyOutput":
+                    return new Com.Atproto.Server.ReserveSigningKeyOutput(obj);
+                case "com.atproto.server.reserveSigningKey#ReserveSigningKeyInput":
+                    return new Com.Atproto.Server.ReserveSigningKeyInput(obj);
+                case "com.atproto.server.resetPassword#ResetPasswordInput":
+                    return new Com.Atproto.Server.ResetPasswordInput(obj);
+                case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
+                    return new Com.Atproto.Server.RevokeAppPasswordInput(obj);
+                case "com.atproto.server.updateEmail#UpdateEmailInput":
+                    return new Com.Atproto.Server.UpdateEmailInput(obj);
+                case "com.atproto.sync.getLatestCommit#GetLatestCommitOutput":
+                    return new Com.Atproto.Sync.GetLatestCommitOutput(obj);
+                case "com.atproto.sync.getRepoStatus#GetRepoStatusOutput":
+                    return new Com.Atproto.Sync.GetRepoStatusOutput(obj);
+                case "com.atproto.sync.listBlobs#ListBlobsOutput":
+                    return new Com.Atproto.Sync.ListBlobsOutput(obj);
+                case "com.atproto.sync.listRepos#ListReposOutput":
+                    return new Com.Atproto.Sync.ListReposOutput(obj);
+                case "com.atproto.sync.listRepos#repo":
+                    return new Com.Atproto.Sync.Repo(obj);
+                case "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput":
+                    return new Com.Atproto.Sync.NotifyOfUpdateInput(obj);
+                case "com.atproto.sync.requestCrawl#RequestCrawlInput":
+                    return new Com.Atproto.Sync.RequestCrawlInput(obj);
+                case "com.atproto.sync.subscribeRepos#commit":
+                    return new Com.Atproto.Sync.Commit(obj);
+                case "com.atproto.sync.subscribeRepos#identity":
+                    return new Com.Atproto.Sync.Identity(obj);
+                case "com.atproto.sync.subscribeRepos#account":
+                    return new Com.Atproto.Sync.Account(obj);
+                case "com.atproto.sync.subscribeRepos#info":
+                    return new Com.Atproto.Sync.Info(obj);
+                case "com.atproto.sync.subscribeRepos#repoOp":
+                    return new Com.Atproto.Sync.RepoOp(obj);
+                case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
+                    return new Com.Atproto.Temp.AddReservedHandleOutput(obj);
+                case "com.atproto.temp.addReservedHandle#AddReservedHandleInput":
+                    return new Com.Atproto.Temp.AddReservedHandleInput(obj);
+                case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
+                    return new Com.Atproto.Temp.CheckSignupQueueOutput(obj);
+                case "com.atproto.temp.requestPhoneVerification#RequestPhoneVerificationInput":
+                    return new Com.Atproto.Temp.RequestPhoneVerificationInput(obj);
+                case "tools.ozone.communication.createTemplate#CreateTemplateInput":
+                    return new Tools.Ozone.Communication.CreateTemplateInput(obj);
+                case "tools.ozone.communication.deleteTemplate#DeleteTemplateInput":
+                    return new Tools.Ozone.Communication.DeleteTemplateInput(obj);
+                case "tools.ozone.communication.listTemplates#ListTemplatesOutput":
+                    return new Tools.Ozone.Communication.ListTemplatesOutput(obj);
+                case "tools.ozone.communication.updateTemplate#UpdateTemplateInput":
+                    return new Tools.Ozone.Communication.UpdateTemplateInput(obj);
+                case "tools.ozone.moderation.emitEvent#EmitEventInput":
+                    return new Tools.Ozone.Moderation.EmitEventInput(obj);
+                case "tools.ozone.moderation.getRecords#GetRecordsOutput":
+                    return new Tools.Ozone.Moderation.GetRecordsOutput(obj);
+                case "tools.ozone.moderation.getRepos#GetReposOutput":
+                    return new Tools.Ozone.Moderation.GetReposOutput(obj);
+                case "tools.ozone.moderation.queryEvents#QueryEventsOutput":
+                    return new Tools.Ozone.Moderation.QueryEventsOutput(obj);
+                case "tools.ozone.moderation.queryStatuses#QueryStatusesOutput":
+                    return new Tools.Ozone.Moderation.QueryStatusesOutput(obj);
+                case "tools.ozone.moderation.searchRepos#SearchReposOutput":
+                    return new Tools.Ozone.Moderation.SearchReposOutput(obj);
+                case "tools.ozone.server.getConfig#GetConfigOutput":
+                    return new Tools.Ozone.Server.GetConfigOutput(obj);
+                case "tools.ozone.server.getConfig#serviceConfig":
+                    return new Tools.Ozone.Server.ServiceConfig(obj);
+                case "tools.ozone.server.getConfig#viewerConfig":
+                    return new Tools.Ozone.Server.ViewerConfig(obj);
+                case "tools.ozone.set.addValues#AddValuesInput":
+                    return new Tools.Ozone.Set.AddValuesInput(obj);
+                case "tools.ozone.set.deleteSet#DeleteSetOutput":
+                    return new Tools.Ozone.Set.DeleteSetOutput(obj);
+                case "tools.ozone.set.deleteSet#DeleteSetInput":
+                    return new Tools.Ozone.Set.DeleteSetInput(obj);
+                case "tools.ozone.set.deleteValues#DeleteValuesInput":
+                    return new Tools.Ozone.Set.DeleteValuesInput(obj);
+                case "tools.ozone.set.getValues#GetValuesOutput":
+                    return new Tools.Ozone.Set.GetValuesOutput(obj);
+                case "tools.ozone.set.querySets#QuerySetsOutput":
+                    return new Tools.Ozone.Set.QuerySetsOutput(obj);
+                case "tools.ozone.setting.listOptions#ListOptionsOutput":
+                    return new Tools.Ozone.Setting.ListOptionsOutput(obj);
+                case "tools.ozone.setting.removeOptions#RemoveOptionsOutput":
+                    return new Tools.Ozone.Setting.RemoveOptionsOutput(obj);
+                case "tools.ozone.setting.removeOptions#RemoveOptionsInput":
+                    return new Tools.Ozone.Setting.RemoveOptionsInput(obj);
+                case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
+                    return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
+                case "tools.ozone.setting.upsertOption#UpsertOptionInput":
+                    return new Tools.Ozone.Setting.UpsertOptionInput(obj);
+                case "tools.ozone.signature.findCorrelation#FindCorrelationOutput":
+                    return new Tools.Ozone.Signature.FindCorrelationOutput(obj);
+                case "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput":
+                    return new Tools.Ozone.Signature.FindRelatedAccountsOutput(obj);
+                case "tools.ozone.signature.findRelatedAccounts#relatedAccount":
+                    return new Tools.Ozone.Signature.RelatedAccount(obj);
+                case "tools.ozone.signature.searchAccounts#SearchAccountsOutput":
+                    return new Tools.Ozone.Signature.SearchAccountsOutput(obj);
+                case "tools.ozone.team.addMember#AddMemberInput":
+                    return new Tools.Ozone.Team.AddMemberInput(obj);
+                case "tools.ozone.team.deleteMember#DeleteMemberInput":
+                    return new Tools.Ozone.Team.DeleteMemberInput(obj);
+                case "tools.ozone.team.listMembers#ListMembersOutput":
+                    return new Tools.Ozone.Team.ListMembersOutput(obj);
+                case "tools.ozone.team.updateMember#UpdateMemberInput":
+                    return new Tools.Ozone.Team.UpdateMemberInput(obj);
                 default:
                     return new FishyFlip.Models.UnknownATObject(obj);
             }

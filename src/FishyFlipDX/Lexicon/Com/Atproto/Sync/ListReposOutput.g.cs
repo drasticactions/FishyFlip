@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="ListReposOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="repos"></param>
         public ListReposOutput(string? cursor = default, List<Com.Atproto.Sync.Repo>? repos = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n =>new Com.Atproto.Sync.Repo(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repos.
+        /// </summary>
         [JsonPropertyName("repos")]
         [JsonRequired]
         public List<Com.Atproto.Sync.Repo>? Repos { get; set; }

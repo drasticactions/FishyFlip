@@ -12,6 +12,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewRecord"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="author"></param>
+        /// <param name="value">The record data itself.</param>
+        /// <param name="labels"></param>
+        /// <param name="replyCount"></param>
+        /// <param name="repostCount"></param>
+        /// <param name="likeCount"></param>
+        /// <param name="quoteCount"></param>
+        /// <param name="embeds">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view)
+        /// </param>
+        /// <param name="indexedAt"></param>
         public ViewRecord(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? value = default, List<Com.Atproto.Label.Label>? labels = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, List<ATObject>? embeds = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
@@ -54,44 +72,81 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileViewBasic? Author { get; set; }
 
         /// <summary>
+        /// Gets or sets the value.
         /// The record data itself.
         /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public ATObject? Value { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the replyCount.
+        /// </summary>
         [JsonPropertyName("replyCount")]
         public long? ReplyCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repostCount.
+        /// </summary>
         [JsonPropertyName("repostCount")]
         public long? RepostCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the likeCount.
+        /// </summary>
         [JsonPropertyName("likeCount")]
         public long? LikeCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the quoteCount.
+        /// </summary>
         [JsonPropertyName("quoteCount")]
         public long? QuoteCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the embeds.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view)
+        /// </summary>
         [JsonPropertyName("embeds")]
         public List<ATObject>? Embeds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }

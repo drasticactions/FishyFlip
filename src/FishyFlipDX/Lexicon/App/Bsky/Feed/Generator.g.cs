@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Generator"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="displayName"></param>
+        /// <param name="description"></param>
+        /// <param name="descriptionFacets"></param>
+        /// <param name="avatar"></param>
+        /// <param name="acceptsInteractions">Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions</param>
+        /// <param name="labels">Self-label values
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// </param>
+        /// <param name="createdAt"></param>
         public Generator(FishyFlip.Models.ATDid? did, string? displayName, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
         {
             this.Did = did;
@@ -51,34 +62,56 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the displayName.
+        /// </summary>
         [JsonPropertyName("displayName")]
         public string? DisplayName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the descriptionFacets.
+        /// </summary>
         [JsonPropertyName("descriptionFacets")]
         public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
+        /// <summary>
+        /// Gets or sets the avatar.
+        /// </summary>
         [JsonPropertyName("avatar")]
         public Blob? Avatar { get; set; }
 
         /// <summary>
+        /// Gets or sets the acceptsInteractions.
         /// Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions
         /// </summary>
         [JsonPropertyName("acceptsInteractions")]
         public bool? AcceptsInteractions { get; set; }
 
         /// <summary>
+        /// Gets or sets the labels.
         /// Self-label values
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

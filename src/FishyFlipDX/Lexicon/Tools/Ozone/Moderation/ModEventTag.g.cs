@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventTag"/> class.
         /// </summary>
+        /// <param name="add">Tags to be added to the subject. If already exists, won't be duplicated.</param>
+        /// <param name="remove">Tags to be removed to the subject. Ignores a tag If it doesn't exist, won't be duplicated.</param>
+        /// <param name="comment">Additional comment about added/removed tags.</param>
         public ModEventTag(List<string>? add = default, List<string>? remove = default, string? comment = default)
         {
             this.Add = add;
@@ -42,6 +45,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         }
 
         /// <summary>
+        /// Gets or sets the add.
         /// Tags to be added to the subject. If already exists, won't be duplicated.
         /// </summary>
         [JsonPropertyName("add")]
@@ -49,6 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public List<string>? Add { get; set; }
 
         /// <summary>
+        /// Gets or sets the remove.
         /// Tags to be removed to the subject. Ignores a tag If it doesn't exist, won't be duplicated.
         /// </summary>
         [JsonPropertyName("remove")]
@@ -56,6 +61,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public List<string>? Remove { get; set; }
 
         /// <summary>
+        /// Gets or sets the comment.
         /// Additional comment about added/removed tags.
         /// </summary>
         [JsonPropertyName("comment")]

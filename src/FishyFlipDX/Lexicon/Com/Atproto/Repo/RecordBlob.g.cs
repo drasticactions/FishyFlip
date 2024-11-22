@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordBlob"/> class.
         /// </summary>
+        /// <param name="cid"></param>
+        /// <param name="recordUri"></param>
         public RecordBlob(string? cid = default, FishyFlip.Models.ATUri? recordUri = default)
         {
             this.Cid = cid;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["recordUri"] is not null) this.RecordUri = obj["recordUri"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the recordUri.
+        /// </summary>
         [JsonPropertyName("recordUri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

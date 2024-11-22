@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmitPlcOperationInput"/> class.
         /// </summary>
+        /// <param name="operation"></param>
         public SubmitPlcOperationInput(ATObject? operation = default)
         {
             this.Operation = operation;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             if (obj["operation"] is not null) this.Operation = obj["operation"].ToATObject();
         }
 
+        /// <summary>
+        /// Gets or sets the operation.
+        /// </summary>
         [JsonPropertyName("operation")]
         [JsonRequired]
         public ATObject? Operation { get; set; }

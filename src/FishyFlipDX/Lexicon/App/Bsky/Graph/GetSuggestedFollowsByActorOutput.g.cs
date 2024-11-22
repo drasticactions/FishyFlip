@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSuggestedFollowsByActorOutput"/> class.
         /// </summary>
+        /// <param name="suggestions"></param>
+        /// <param name="isFallback">If true, response has fallen-back to generic results, and is not scoped using relativeToDid</param>
         public GetSuggestedFollowsByActorOutput(List<App.Bsky.Actor.ProfileView>? suggestions = default, bool? isFallback = default)
         {
             this.Suggestions = suggestions;
@@ -36,11 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["isFallback"] is not null) this.IsFallback = obj["isFallback"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the suggestions.
+        /// </summary>
         [JsonPropertyName("suggestions")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileView>? Suggestions { get; set; }
 
         /// <summary>
+        /// Gets or sets the isFallback.
         /// If true, response has fallen-back to generic results, and is not scoped using relativeToDid
         /// </summary>
         [JsonPropertyName("isFallback")]

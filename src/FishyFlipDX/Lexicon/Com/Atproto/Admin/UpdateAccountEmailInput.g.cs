@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateAccountEmailInput"/> class.
         /// </summary>
+        /// <param name="account">The handle or DID of the repo.</param>
+        /// <param name="email"></param>
         public UpdateAccountEmailInput(FishyFlip.Models.ATIdentifier? account = default, string? email = default)
         {
             this.Account = account;
@@ -37,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         }
 
         /// <summary>
+        /// Gets or sets the account.
         /// The handle or DID of the repo.
         /// </summary>
         [JsonPropertyName("account")]
@@ -44,6 +47,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]
         public FishyFlip.Models.ATIdentifier? Account { get; set; }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         [JsonRequired]
         public string? Email { get; set; }

@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileViewBasic"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="handle"></param>
+        /// <param name="displayName"></param>
+        /// <param name="avatar"></param>
+        /// <param name="associated"></param>
+        /// <param name="viewer"></param>
+        /// <param name="labels"></param>
+        /// <param name="createdAt"></param>
         public ProfileViewBasic(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? avatar = default, App.Bsky.Actor.ProfileAssociated? associated = default, App.Bsky.Actor.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? createdAt = default)
         {
             this.Did = did;
@@ -48,31 +56,55 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the displayName.
+        /// </summary>
         [JsonPropertyName("displayName")]
         public string? DisplayName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the avatar.
+        /// </summary>
         [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
 
+        /// <summary>
+        /// Gets or sets the associated.
+        /// </summary>
         [JsonPropertyName("associated")]
         public App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
 
+        /// <summary>
+        /// Gets or sets the viewer.
+        /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="ListNotificationsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="notifications"></param>
+        /// <param name="priority"></param>
+        /// <param name="seenAt"></param>
         public ListNotificationsOutput(string? cursor = default, List<App.Bsky.Notification.Notification>? notifications = default, bool? priority = default, DateTime? seenAt = default)
         {
             this.Cursor = cursor;
@@ -40,16 +44,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["seenAt"] is not null) this.SeenAt = obj["seenAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the notifications.
+        /// </summary>
         [JsonPropertyName("notifications")]
         [JsonRequired]
         public List<App.Bsky.Notification.Notification>? Notifications { get; set; }
 
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
         [JsonPropertyName("priority")]
         public bool? Priority { get; set; }
 
+        /// <summary>
+        /// Gets or sets the seenAt.
+        /// </summary>
         [JsonPropertyName("seenAt")]
         public DateTime? SeenAt { get; set; }
 

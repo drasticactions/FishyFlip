@@ -12,6 +12,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="Notification"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="author"></param>
+        /// <param name="reason">Expected values are 'like', 'repost', 'follow', 'mention', 'reply', 'quote', and 'starterpack-joined'.
+        /// Known Values:
+        /// like
+        /// repost
+        /// follow
+        /// mention
+        /// reply
+        /// quote
+        /// starterpack-joined
+        /// </param>
+        /// <param name="reasonSubject"></param>
+        /// <param name="record"></param>
+        /// <param name="isRead"></param>
+        /// <param name="indexedAt"></param>
+        /// <param name="labels"></param>
         public Notification(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileView? author = default, string? reason = default, FishyFlip.Models.ATUri? reasonSubject = default, ATObject? record = default, bool? isRead = default, DateTime? indexedAt = default, List<Com.Atproto.Label.Label>? labels = default)
         {
             this.Uri = uri;
@@ -42,7 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["author"] is not null) this.Author = new App.Bsky.Actor.ProfileView(obj["author"]);
-            // enum
+            if (obj["reason"] is not null) this.Reason = obj["reason"].AsString();
             if (obj["reasonSubject"] is not null) this.ReasonSubject = obj["reasonSubject"].ToATUri();
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["isRead"] is not null) this.IsRead = obj["isRead"].AsBoolean();
@@ -50,42 +68,75 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileView? Author { get; set; }
 
         /// <summary>
+        /// Gets or sets the reason.
         /// Expected values are 'like', 'repost', 'follow', 'mention', 'reply', 'quote', and 'starterpack-joined'.
+        /// Known Values:
+        /// like
+        /// repost
+        /// follow
+        /// mention
+        /// reply
+        /// quote
+        /// starterpack-joined
         /// </summary>
         [JsonPropertyName("reason")]
         [JsonRequired]
         public string? Reason { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reasonSubject.
+        /// </summary>
         [JsonPropertyName("reasonSubject")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? ReasonSubject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the record.
+        /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
         public ATObject? Record { get; set; }
 
+        /// <summary>
+        /// Gets or sets the isRead.
+        /// </summary>
         [JsonPropertyName("isRead")]
         [JsonRequired]
         public bool? IsRead { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 

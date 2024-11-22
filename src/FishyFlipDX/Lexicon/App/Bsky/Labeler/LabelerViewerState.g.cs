@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelerViewerState"/> class.
         /// </summary>
+        /// <param name="like"></param>
         public LabelerViewerState(FishyFlip.Models.ATUri? like = default)
         {
             this.Like = like;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["like"] is not null) this.Like = obj["like"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the like.
+        /// </summary>
         [JsonPropertyName("like")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Like { get; set; }

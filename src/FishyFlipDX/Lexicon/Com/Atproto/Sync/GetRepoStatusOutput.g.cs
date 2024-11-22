@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRepoStatusOutput"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="active"></param>
+        /// <param name="status">If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
+        /// </param>
+        /// <param name="rev">Optional field, the current rev of the repo, if active=true</param>
         public GetRepoStatusOutput(FishyFlip.Models.ATDid? did = default, bool? active = default, string? status = default, string? rev = default)
         {
             this.Did = did;
@@ -36,26 +45,38 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the active.
+        /// </summary>
         [JsonPropertyName("active")]
         [JsonRequired]
         public bool? Active { get; set; }
 
         /// <summary>
+        /// Gets or sets the status.
         /// If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 
         /// <summary>
+        /// Gets or sets the rev.
         /// Optional field, the current rev of the repo, if active=true
         /// </summary>
         [JsonPropertyName("rev")]

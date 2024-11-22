@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="GetLatestCommitOutput"/> class.
         /// </summary>
+        /// <param name="cid"></param>
+        /// <param name="rev"></param>
         public GetLatestCommitOutput(string? cid = default, string? rev = default)
         {
             this.Cid = cid;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }

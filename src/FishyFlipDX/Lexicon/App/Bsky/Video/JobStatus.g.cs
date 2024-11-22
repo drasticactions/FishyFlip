@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Initializes a new instance of the <see cref="JobStatus"/> class.
         /// </summary>
+        /// <param name="jobId"></param>
+        /// <param name="did"></param>
+        /// <param name="state">The state of the video processing job. All values not listed as a known value indicate that the job is in process.
+        /// Known Values:
+        /// JOB_STATE_COMPLETED
+        /// JOB_STATE_FAILED
+        /// </param>
+        /// <param name="progress">Progress within the current processing state.</param>
+        /// <param name="blob"></param>
+        /// <param name="error"></param>
+        /// <param name="message"></param>
         public JobStatus(string? jobId = default, FishyFlip.Models.ATDid? did = default, string? state = default, long? progress = default, Blob? blob = default, string? error = default, string? message = default)
         {
             this.JobId = jobId;
@@ -39,41 +50,61 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         {
             if (obj["jobId"] is not null) this.JobId = obj["jobId"].AsString();
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
-            // enum
+            if (obj["state"] is not null) this.State = obj["state"].AsString();
             if (obj["progress"] is not null) this.Progress = obj["progress"].AsInt64Value();
             if (obj["blob"] is not null) this.Blob = new FishyFlip.Models.Blob(obj["blob"]);
             if (obj["error"] is not null) this.Error = obj["error"].AsString();
             if (obj["message"] is not null) this.Message = obj["message"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the jobId.
+        /// </summary>
         [JsonPropertyName("jobId")]
         [JsonRequired]
         public string? JobId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
         /// <summary>
+        /// Gets or sets the state.
         /// The state of the video processing job. All values not listed as a known value indicate that the job is in process.
+        /// Known Values:
+        /// JOB_STATE_COMPLETED
+        /// JOB_STATE_FAILED
         /// </summary>
         [JsonPropertyName("state")]
         [JsonRequired]
         public string? State { get; set; }
 
         /// <summary>
+        /// Gets or sets the progress.
         /// Progress within the current processing state.
         /// </summary>
         [JsonPropertyName("progress")]
         public long? Progress { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blob.
+        /// </summary>
         [JsonPropertyName("blob")]
         public Blob? Blob { get; set; }
 
+        /// <summary>
+        /// Gets or sets the error.
+        /// </summary>
         [JsonPropertyName("error")]
         public string? Error { get; set; }
 
+        /// <summary>
+        /// Gets or sets the message.
+        /// </summary>
         [JsonPropertyName("message")]
         public string? Message { get; set; }
 

@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="Tag"/> class.
         /// </summary>
+        /// <param name="tag"></param>
         public Tag(string? tag = default)
         {
             this.TagValue = tag;
@@ -37,6 +38,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             if (obj["tag"] is not null) this.TagValue = obj["tag"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the tag.
+        /// </summary>
         [JsonPropertyName("tag")]
         [JsonRequired]
         public string? TagValue { get; set; }

@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="ByteSlice"/> class.
         /// </summary>
+        /// <param name="byteStart"></param>
+        /// <param name="byteEnd"></param>
         public ByteSlice(long? byteStart = default, long? byteEnd = default)
         {
             this.ByteStart = byteStart;
@@ -39,10 +41,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             if (obj["byteEnd"] is not null) this.ByteEnd = obj["byteEnd"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the byteStart.
+        /// </summary>
         [JsonPropertyName("byteStart")]
         [JsonRequired]
         public long? ByteStart { get; set; }
 
+        /// <summary>
+        /// Gets or sets the byteEnd.
+        /// </summary>
         [JsonPropertyName("byteEnd")]
         [JsonRequired]
         public long? ByteEnd { get; set; }

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="ListConvosOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="convos"></param>
         public ListConvosOutput(string? cursor = default, List<Chat.Bsky.Convo.ConvoView>? convos = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["convos"] is not null) this.Convos = obj["convos"].Values.Select(n =>new Chat.Bsky.Convo.ConvoView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the convos.
+        /// </summary>
         [JsonPropertyName("convos")]
         [JsonRequired]
         public List<Chat.Bsky.Convo.ConvoView>? Convos { get; set; }

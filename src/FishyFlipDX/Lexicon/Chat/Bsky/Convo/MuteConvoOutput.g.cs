@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MuteConvoOutput"/> class.
         /// </summary>
+        /// <param name="convo"></param>
         public MuteConvoOutput(Chat.Bsky.Convo.ConvoView? convo = default)
         {
             this.Convo = convo;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["convo"] is not null) this.Convo = new Chat.Bsky.Convo.ConvoView(obj["convo"]);
         }
 
+        /// <summary>
+        /// Gets or sets the convo.
+        /// </summary>
         [JsonPropertyName("convo")]
         [JsonRequired]
         public Chat.Bsky.Convo.ConvoView? Convo { get; set; }

@@ -12,6 +12,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSessionOutput"/> class.
         /// </summary>
+        /// <param name="accessJwt"></param>
+        /// <param name="refreshJwt"></param>
+        /// <param name="handle"></param>
+        /// <param name="did"></param>
+        /// <param name="didDoc"></param>
+        /// <param name="email"></param>
+        /// <param name="emailConfirmed"></param>
+        /// <param name="emailAuthFactor"></param>
+        /// <param name="active"></param>
+        /// <param name="status">If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
+        /// </param>
         public CreateSessionOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, string? email = default, bool? emailConfirmed = default, bool? emailAuthFactor = default, bool? active = default, string? status = default)
         {
             this.AccessJwt = accessJwt;
@@ -49,44 +64,76 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["emailConfirmed"] is not null) this.EmailConfirmed = obj["emailConfirmed"].AsBoolean();
             if (obj["emailAuthFactor"] is not null) this.EmailAuthFactor = obj["emailAuthFactor"].AsBoolean();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the accessJwt.
+        /// </summary>
         [JsonPropertyName("accessJwt")]
         [JsonRequired]
         public string? AccessJwt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the refreshJwt.
+        /// </summary>
         [JsonPropertyName("refreshJwt")]
         [JsonRequired]
         public string? RefreshJwt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the didDoc.
+        /// </summary>
         [JsonPropertyName("didDoc")]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
+        /// <summary>
+        /// Gets or sets the emailConfirmed.
+        /// </summary>
         [JsonPropertyName("emailConfirmed")]
         public bool? EmailConfirmed { get; set; }
 
+        /// <summary>
+        /// Gets or sets the emailAuthFactor.
+        /// </summary>
         [JsonPropertyName("emailAuthFactor")]
         public bool? EmailAuthFactor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the active.
+        /// </summary>
         [JsonPropertyName("active")]
         public bool? Active { get; set; }
 
         /// <summary>
+        /// Gets or sets the status.
         /// If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

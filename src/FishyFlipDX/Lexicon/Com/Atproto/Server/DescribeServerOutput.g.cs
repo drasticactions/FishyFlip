@@ -12,6 +12,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="DescribeServerOutput"/> class.
         /// </summary>
+        /// <param name="inviteCodeRequired">If true, an invite code must be supplied to create an account on this instance.</param>
+        /// <param name="phoneVerificationRequired">If true, a phone verification token must be supplied to create an account on this instance.</param>
+        /// <param name="availableUserDomains">List of domain suffixes that can be used in account handles.</param>
+        /// <param name="links">URLs of service policy documents.</param>
+        /// <param name="contact">Contact information</param>
+        /// <param name="did"></param>
         public DescribeServerOutput(bool? inviteCodeRequired = default, bool? phoneVerificationRequired = default, List<string>? availableUserDomains = default, Com.Atproto.Server.Links? links = default, Com.Atproto.Server.Contact? contact = default, FishyFlip.Models.ATDid? did = default)
         {
             this.InviteCodeRequired = inviteCodeRequired;
@@ -45,18 +51,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         }
 
         /// <summary>
+        /// Gets or sets the inviteCodeRequired.
         /// If true, an invite code must be supplied to create an account on this instance.
         /// </summary>
         [JsonPropertyName("inviteCodeRequired")]
         public bool? InviteCodeRequired { get; set; }
 
         /// <summary>
+        /// Gets or sets the phoneVerificationRequired.
         /// If true, a phone verification token must be supplied to create an account on this instance.
         /// </summary>
         [JsonPropertyName("phoneVerificationRequired")]
         public bool? PhoneVerificationRequired { get; set; }
 
         /// <summary>
+        /// Gets or sets the availableUserDomains.
         /// List of domain suffixes that can be used in account handles.
         /// </summary>
         [JsonPropertyName("availableUserDomains")]
@@ -64,17 +73,22 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public List<string>? AvailableUserDomains { get; set; }
 
         /// <summary>
+        /// Gets or sets the links.
         /// URLs of service policy documents.
         /// </summary>
         [JsonPropertyName("links")]
         public Com.Atproto.Server.Links? Links { get; set; }
 
         /// <summary>
+        /// Gets or sets the contact.
         /// Contact information
         /// </summary>
         [JsonPropertyName("contact")]
         public Com.Atproto.Server.Contact? Contact { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

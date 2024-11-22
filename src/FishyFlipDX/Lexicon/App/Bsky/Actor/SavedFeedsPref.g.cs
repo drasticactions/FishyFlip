@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="SavedFeedsPref"/> class.
         /// </summary>
+        /// <param name="pinned"></param>
+        /// <param name="saved"></param>
+        /// <param name="timelineIndex"></param>
         public SavedFeedsPref(List<FishyFlip.Models.ATUri>? pinned = default, List<FishyFlip.Models.ATUri>? saved = default, long? timelineIndex = default)
         {
             this.Pinned = pinned;
@@ -38,14 +41,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["timelineIndex"] is not null) this.TimelineIndex = obj["timelineIndex"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the pinned.
+        /// </summary>
         [JsonPropertyName("pinned")]
         [JsonRequired]
         public List<FishyFlip.Models.ATUri>? Pinned { get; set; }
 
+        /// <summary>
+        /// Gets or sets the saved.
+        /// </summary>
         [JsonPropertyName("saved")]
         [JsonRequired]
         public List<FishyFlip.Models.ATUri>? Saved { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timelineIndex.
+        /// </summary>
         [JsonPropertyName("timelineIndex")]
         public long? TimelineIndex { get; set; }
 

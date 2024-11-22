@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="Delete"/> class.
         /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="rkey"></param>
         public Delete(string? collection = default, string? rkey = default)
         {
             this.Collection = collection;
@@ -39,10 +41,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["rkey"] is not null) this.Rkey = obj["rkey"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the collection.
+        /// </summary>
         [JsonPropertyName("collection")]
         [JsonRequired]
         public string? Collection { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rkey.
+        /// </summary>
         [JsonPropertyName("rkey")]
         [JsonRequired]
         public string? Rkey { get; set; }

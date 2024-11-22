@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAppPasswordInput"/> class.
         /// </summary>
+        /// <param name="name">A short name for the App Password, to help distinguish them.</param>
+        /// <param name="privileged">If an app password has 'privileged' access to possibly sensitive account state. Meant for use with trusted clients.</param>
         public CreateAppPasswordInput(string? name = default, bool? privileged = default)
         {
             this.Name = name;
@@ -37,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         }
 
         /// <summary>
+        /// Gets or sets the name.
         /// A short name for the App Password, to help distinguish them.
         /// </summary>
         [JsonPropertyName("name")]
@@ -44,6 +47,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the privileged.
         /// If an app password has 'privileged' access to possibly sensitive account state. Meant for use with trusted clients.
         /// </summary>
         [JsonPropertyName("privileged")]

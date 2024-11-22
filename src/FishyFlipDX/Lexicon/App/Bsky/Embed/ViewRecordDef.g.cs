@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewRecordDef"/> class.
         /// </summary>
+        /// <param name="record">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord"/> (app.bsky.embed.record#viewRecord)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound"/> (app.bsky.embed.record#viewNotFound)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked"/> (app.bsky.embed.record#viewBlocked)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached"/> (app.bsky.embed.record#viewDetached)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic)
+        /// </param>
         public ViewRecordDef(ATObject? record = default)
         {
             this.Record = record;
@@ -34,6 +45,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
         }
 
+        /// <summary>
+        /// Gets or sets the record.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord"/> (app.bsky.embed.record#viewRecord)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound"/> (app.bsky.embed.record#viewNotFound)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked"/> (app.bsky.embed.record#viewBlocked)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached"/> (app.bsky.embed.record#viewDetached)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic)
+        /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
         public ATObject? Record { get; set; }

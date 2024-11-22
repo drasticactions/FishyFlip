@@ -15,6 +15,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Postgate"/> class.
         /// </summary>
+        /// <param name="post">Reference (AT-URI) to the post record.</param>
+        /// <param name="createdAt"></param>
+        /// <param name="detachedEmbeddingUris">List of AT-URIs embedding this post that the author has detached from.</param>
+        /// <param name="embeddingRules">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule)
+        /// </param>
         public Postgate(FishyFlip.Models.ATUri? post, DateTime? createdAt = default, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default)
         {
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
@@ -43,10 +50,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["embeddingRules"] is not null) this.EmbeddingRules = obj["embeddingRules"].Values.Select(n =>new App.Bsky.Feed.DisableRule(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
+        /// Gets or sets the post.
         /// Reference (AT-URI) to the post record.
         /// </summary>
         [JsonPropertyName("post")]
@@ -54,11 +65,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public FishyFlip.Models.ATUri? Post { get; set; }
 
         /// <summary>
+        /// Gets or sets the detachedEmbeddingUris.
         /// List of AT-URIs embedding this post that the author has detached from.
         /// </summary>
         [JsonPropertyName("detachedEmbeddingUris")]
         public List<FishyFlip.Models.ATUri>? DetachedEmbeddingUris { get; set; }
 
+        /// <summary>
+        /// Gets or sets the embeddingRules.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule)
+        /// </summary>
         [JsonPropertyName("embeddingRules")]
         public List<App.Bsky.Feed.DisableRule>? EmbeddingRules { get; set; }
 

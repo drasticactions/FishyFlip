@@ -23,6 +23,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Generated endpoint for chat.bsky.moderation.getActorMetadata
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="actor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput?>> GetActorMetadataAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid actor, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetActorMetadata.ToString();
@@ -38,6 +42,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Generated endpoint for chat.bsky.moderation.getMessageContext
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="messageId"></param>
+        /// <param name="convoId"></param>
+        /// <param name="before"></param>
+        /// <param name="after"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput?>> GetMessageContextAsync (this FishyFlip.ATProtocol atp, string messageId, string? convoId = default, int? before = 5, int? after = 5, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetMessageContext.ToString();
@@ -68,6 +79,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Generated endpoint for chat.bsky.moderation.updateActorAccess
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="actor"></param>
+        /// <param name="allowAccess"></param>
+        /// <param name="@ref"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> UpdateActorAccessAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid actor, bool allowAccess, string? @ref = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateActorAccess.ToString();

@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventResolveAppeal"/> class.
         /// </summary>
+        /// <param name="comment">Describe resolution.</param>
         public ModEventResolveAppeal(string? comment = default)
         {
             this.Comment = comment;
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         }
 
         /// <summary>
+        /// Gets or sets the comment.
         /// Describe resolution.
         /// </summary>
         [JsonPropertyName("comment")]

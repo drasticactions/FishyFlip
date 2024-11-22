@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDetached"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="detached"></param>
         public ViewDetached(FishyFlip.Models.ATUri? uri = default, bool? detached = default)
         {
             this.Uri = uri;
@@ -36,11 +38,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["detached"] is not null) this.Detached = obj["detached"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the detached.
+        /// </summary>
         [JsonPropertyName("detached")]
         [JsonRequired]
         public bool? Detached { get; set; }

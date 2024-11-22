@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRepostedByOutput"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="cursor"></param>
+        /// <param name="repostedBy"></param>
         public GetRepostedByOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<App.Bsky.Actor.ProfileView>? repostedBy = default)
         {
             this.Uri = uri;
@@ -40,17 +44,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["repostedBy"] is not null) this.RepostedBy = obj["repostedBy"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repostedBy.
+        /// </summary>
         [JsonPropertyName("repostedBy")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileView>? RepostedBy { get; set; }

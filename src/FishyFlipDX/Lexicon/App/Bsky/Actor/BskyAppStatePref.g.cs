@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="BskyAppStatePref"/> class.
         /// </summary>
+        /// <param name="activeProgressGuide"></param>
+        /// <param name="queuedNudges">An array of tokens which identify nudges (modals, popups, tours, highlight dots) that should be shown to the user.</param>
+        /// <param name="nuxs">Storage for NUXs the user has encountered.</param>
         public BskyAppStatePref(App.Bsky.Actor.BskyAppProgressGuide? activeProgressGuide = default, List<string>? queuedNudges = default, List<App.Bsky.Actor.Nux>? nuxs = default)
         {
             this.ActiveProgressGuide = activeProgressGuide;
@@ -41,16 +44,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["nuxs"] is not null) this.Nuxs = obj["nuxs"].Values.Select(n =>new App.Bsky.Actor.Nux(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the activeProgressGuide.
+        /// </summary>
         [JsonPropertyName("activeProgressGuide")]
         public App.Bsky.Actor.BskyAppProgressGuide? ActiveProgressGuide { get; set; }
 
         /// <summary>
+        /// Gets or sets the queuedNudges.
         /// An array of tokens which identify nudges (modals, popups, tours, highlight dots) that should be shown to the user.
         /// </summary>
         [JsonPropertyName("queuedNudges")]
         public List<string>? QueuedNudges { get; set; }
 
         /// <summary>
+        /// Gets or sets the nuxs.
         /// Storage for NUXs the user has encountered.
         /// </summary>
         [JsonPropertyName("nuxs")]

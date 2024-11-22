@@ -15,6 +15,27 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelValueDefinition"/> class.
         /// </summary>
+        /// <param name="identifier">The value of the label being defined. Must only include lowercase ascii and the '-' character ([a-z-]+).</param>
+        /// <param name="severity">How should a client visually convey this label? 'inform' means neutral and informational; 'alert' means negative and warning; 'none' means show nothing.
+        /// Known Values:
+        /// inform
+        /// alert
+        /// none
+        /// </param>
+        /// <param name="blurs">What should this label hide in the UI, if applied? 'content' hides all of the target; 'media' hides the images/video/audio; 'none' hides nothing.
+        /// Known Values:
+        /// content
+        /// media
+        /// none
+        /// </param>
+        /// <param name="defaultSetting">The default setting for this label.
+        /// Known Values:
+        /// ignore
+        /// warn
+        /// hide
+        /// </param>
+        /// <param name="adultOnly">Does the user need to have adult content enabled in order to configure this label?</param>
+        /// <param name="locales"></param>
         public LabelValueDefinition(string? identifier = default, string? severity = default, string? blurs = default, string? defaultSetting = default, bool? adultOnly = default, List<Com.Atproto.Label.LabelValueDefinitionStrings>? locales = default)
         {
             this.Identifier = identifier;
@@ -40,14 +61,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public LabelValueDefinition(CBORObject obj)
         {
             if (obj["identifier"] is not null) this.Identifier = obj["identifier"].AsString();
-            // enum
-            // enum
-            // enum
+            if (obj["severity"] is not null) this.Severity = obj["severity"].AsString();
+            if (obj["blurs"] is not null) this.Blurs = obj["blurs"].AsString();
+            if (obj["defaultSetting"] is not null) this.DefaultSetting = obj["defaultSetting"].AsString();
             if (obj["adultOnly"] is not null) this.AdultOnly = obj["adultOnly"].AsBoolean();
             if (obj["locales"] is not null) this.Locales = obj["locales"].Values.Select(n =>new Com.Atproto.Label.LabelValueDefinitionStrings(n)).ToList();
         }
 
         /// <summary>
+        /// Gets or sets the identifier.
         /// The value of the label being defined. Must only include lowercase ascii and the '-' character ([a-z-]+).
         /// </summary>
         [JsonPropertyName("identifier")]
@@ -55,31 +77,50 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public string? Identifier { get; set; }
 
         /// <summary>
+        /// Gets or sets the severity.
         /// How should a client visually convey this label? 'inform' means neutral and informational; 'alert' means negative and warning; 'none' means show nothing.
+        /// Known Values:
+        /// inform
+        /// alert
+        /// none
         /// </summary>
         [JsonPropertyName("severity")]
         [JsonRequired]
         public string? Severity { get; set; }
 
         /// <summary>
+        /// Gets or sets the blurs.
         /// What should this label hide in the UI, if applied? 'content' hides all of the target; 'media' hides the images/video/audio; 'none' hides nothing.
+        /// Known Values:
+        /// content
+        /// media
+        /// none
         /// </summary>
         [JsonPropertyName("blurs")]
         [JsonRequired]
         public string? Blurs { get; set; }
 
         /// <summary>
+        /// Gets or sets the defaultSetting.
         /// The default setting for this label.
+        /// Known Values:
+        /// ignore
+        /// warn
+        /// hide
         /// </summary>
         [JsonPropertyName("defaultSetting")]
         public string? DefaultSetting { get; set; } = "warn";
 
         /// <summary>
+        /// Gets or sets the adultOnly.
         /// Does the user need to have adult content enabled in order to configure this label?
         /// </summary>
         [JsonPropertyName("adultOnly")]
         public bool? AdultOnly { get; set; }
 
+        /// <summary>
+        /// Gets or sets the locales.
+        /// </summary>
         [JsonPropertyName("locales")]
         [JsonRequired]
         public List<Com.Atproto.Label.LabelValueDefinitionStrings>? Locales { get; set; }

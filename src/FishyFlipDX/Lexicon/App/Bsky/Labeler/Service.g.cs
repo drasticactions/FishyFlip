@@ -15,6 +15,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="Service"/> class.
         /// </summary>
+        /// <param name="policies"></param>
+        /// <param name="labels">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// </param>
+        /// <param name="createdAt"></param>
         public Service(App.Bsky.Labeler.LabelerPolicies? policies, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
         {
             this.Policies = policies;
@@ -41,12 +47,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the policies.
+        /// </summary>
         [JsonPropertyName("policies")]
         public App.Bsky.Labeler.LabelerPolicies? Policies { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvoView"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="rev"></param>
+        /// <param name="members"></param>
+        /// <param name="lastMessage">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </param>
+        /// <param name="muted"></param>
+        /// <param name="opened"></param>
+        /// <param name="unreadCount"></param>
         public ConvoView(string? id = default, string? rev = default, List<Chat.Bsky.Actor.ProfileViewBasic>? members = default, ATObject? lastMessage = default, bool? muted = default, bool? opened = default, long? unreadCount = default)
         {
             this.Id = id;
@@ -46,28 +57,52 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["unreadCount"] is not null) this.UnreadCount = obj["unreadCount"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public string? Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }
 
+        /// <summary>
+        /// Gets or sets the members.
+        /// </summary>
         [JsonPropertyName("members")]
         [JsonRequired]
         public List<Chat.Bsky.Actor.ProfileViewBasic>? Members { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lastMessage.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </summary>
         [JsonPropertyName("lastMessage")]
         public ATObject? LastMessage { get; set; }
 
+        /// <summary>
+        /// Gets or sets the muted.
+        /// </summary>
         [JsonPropertyName("muted")]
         [JsonRequired]
         public bool? Muted { get; set; }
 
+        /// <summary>
+        /// Gets or sets the opened.
+        /// </summary>
         [JsonPropertyName("opened")]
         public bool? Opened { get; set; }
 
+        /// <summary>
+        /// Gets or sets the unreadCount.
+        /// </summary>
         [JsonPropertyName("unreadCount")]
         [JsonRequired]
         public long? UnreadCount { get; set; }

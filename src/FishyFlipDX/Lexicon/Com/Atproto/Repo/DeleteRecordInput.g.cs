@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteRecordInput"/> class.
         /// </summary>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
+        /// <param name="collection">The NSID of the record collection.</param>
+        /// <param name="rkey">The Record Key.</param>
+        /// <param name="swapRecord">Compare and swap with the previous record by CID.</param>
+        /// <param name="swapCommit">Compare and swap with the previous commit by CID.</param>
         public DeleteRecordInput(FishyFlip.Models.ATIdentifier? repo = default, string? collection = default, string? rkey = default, string? swapRecord = default, string? swapCommit = default)
         {
             this.Repo = repo;
@@ -43,6 +48,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         }
 
         /// <summary>
+        /// Gets or sets the repo.
         /// The handle or DID of the repo (aka, current account).
         /// </summary>
         [JsonPropertyName("repo")]
@@ -51,6 +57,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public FishyFlip.Models.ATIdentifier? Repo { get; set; }
 
         /// <summary>
+        /// Gets or sets the collection.
         /// The NSID of the record collection.
         /// </summary>
         [JsonPropertyName("collection")]
@@ -58,6 +65,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public string? Collection { get; set; }
 
         /// <summary>
+        /// Gets or sets the rkey.
         /// The Record Key.
         /// </summary>
         [JsonPropertyName("rkey")]
@@ -65,12 +73,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public string? Rkey { get; set; }
 
         /// <summary>
+        /// Gets or sets the swapRecord.
         /// Compare and swap with the previous record by CID.
         /// </summary>
         [JsonPropertyName("swapRecord")]
         public string? SwapRecord { get; set; }
 
         /// <summary>
+        /// Gets or sets the swapCommit.
         /// Compare and swap with the previous commit by CID.
         /// </summary>
         [JsonPropertyName("swapCommit")]

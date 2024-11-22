@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteValuesInput"/> class.
         /// </summary>
+        /// <param name="name">Name of the set to delete values from</param>
+        /// <param name="values">Array of string values to delete from the set</param>
         public DeleteValuesInput(string? name = default, List<string>? values = default)
         {
             this.Name = name;
@@ -37,6 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         }
 
         /// <summary>
+        /// Gets or sets the name.
         /// Name of the set to delete values from
         /// </summary>
         [JsonPropertyName("name")]
@@ -44,6 +47,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the values.
         /// Array of string values to delete from the set
         /// </summary>
         [JsonPropertyName("values")]

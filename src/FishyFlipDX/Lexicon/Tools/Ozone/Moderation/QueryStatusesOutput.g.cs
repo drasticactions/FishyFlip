@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryStatusesOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="subjectStatuses"></param>
         public QueryStatusesOutput(string? cursor = default, List<Tools.Ozone.Moderation.SubjectStatusView>? subjectStatuses = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subjectStatuses"] is not null) this.SubjectStatuses = obj["subjectStatuses"].Values.Select(n =>new Tools.Ozone.Moderation.SubjectStatusView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subjectStatuses.
+        /// </summary>
         [JsonPropertyName("subjectStatuses")]
         [JsonRequired]
         public List<Tools.Ozone.Moderation.SubjectStatusView>? SubjectStatuses { get; set; }

@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterPushInput"/> class.
         /// </summary>
+        /// <param name="serviceDid"></param>
+        /// <param name="token"></param>
+        /// <param name="platform">
+        /// Known Values:
+        /// ios
+        /// android
+        /// web
+        /// </param>
+        /// <param name="appId"></param>
         public RegisterPushInput(FishyFlip.Models.ATDid? serviceDid = default, string? token = default, string? platform = default, string? appId = default)
         {
             this.ServiceDid = serviceDid;
@@ -36,23 +45,39 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         {
             if (obj["serviceDid"] is not null) this.ServiceDid = obj["serviceDid"].ToATDid();
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
-            // enum
+            if (obj["platform"] is not null) this.Platform = obj["platform"].AsString();
             if (obj["appId"] is not null) this.AppId = obj["appId"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the serviceDid.
+        /// </summary>
         [JsonPropertyName("serviceDid")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? ServiceDid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the token.
+        /// </summary>
         [JsonPropertyName("token")]
         [JsonRequired]
         public string? Token { get; set; }
 
+        /// <summary>
+        /// Gets or sets the platform.
+        /// Known Values:
+        /// ios
+        /// android
+        /// web
+        /// </summary>
         [JsonPropertyName("platform")]
         [JsonRequired]
         public string? Platform { get; set; }
 
+        /// <summary>
+        /// Gets or sets the appId.
+        /// </summary>
         [JsonPropertyName("appId")]
         [JsonRequired]
         public string? AppId { get; set; }

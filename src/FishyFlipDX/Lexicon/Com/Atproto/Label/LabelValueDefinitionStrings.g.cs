@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelValueDefinitionStrings"/> class.
         /// </summary>
+        /// <param name="lang">The code of the language these strings are written in.</param>
+        /// <param name="name">A short human-readable name for the label.</param>
+        /// <param name="description">A longer description of what the label means and why it might be applied.</param>
         public LabelValueDefinitionStrings(string? lang = default, string? name = default, string? description = default)
         {
             this.Lang = lang;
@@ -42,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         }
 
         /// <summary>
+        /// Gets or sets the lang.
         /// The code of the language these strings are written in.
         /// </summary>
         [JsonPropertyName("lang")]
@@ -49,6 +53,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public string? Lang { get; set; }
 
         /// <summary>
+        /// Gets or sets the name.
         /// A short human-readable name for the label.
         /// </summary>
         [JsonPropertyName("name")]
@@ -56,6 +61,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the description.
         /// A longer description of what the label means and why it might be applied.
         /// </summary>
         [JsonPropertyName("description")]

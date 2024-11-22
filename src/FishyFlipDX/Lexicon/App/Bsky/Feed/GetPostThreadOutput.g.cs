@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPostThreadOutput"/> class.
         /// </summary>
+        /// <param name="thread">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </param>
+        /// <param name="threadgate"></param>
         public GetPostThreadOutput(ATObject? thread = default, App.Bsky.Feed.ThreadgateView? threadgate = default)
         {
             this.Thread = thread;
@@ -36,10 +43,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["threadgate"] is not null) this.Threadgate = new App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
         }
 
+        /// <summary>
+        /// Gets or sets the thread.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </summary>
         [JsonPropertyName("thread")]
         [JsonRequired]
         public ATObject? Thread { get; set; }
 
+        /// <summary>
+        /// Gets or sets the threadgate.
+        /// </summary>
         [JsonPropertyName("threadgate")]
         public App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 

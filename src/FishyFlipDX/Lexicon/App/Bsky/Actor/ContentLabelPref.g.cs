@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentLabelPref"/> class.
         /// </summary>
+        /// <param name="labelerDid">Which labeler does this preference apply to? If undefined, applies globally.</param>
+        /// <param name="label"></param>
+        /// <param name="visibility">
+        /// Known Values:
+        /// ignore
+        /// show
+        /// warn
+        /// hide
+        /// </param>
         public ContentLabelPref(FishyFlip.Models.ATDid? labelerDid = default, string? label = default, string? visibility = default)
         {
             this.LabelerDid = labelerDid;
@@ -35,20 +44,32 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             if (obj["labelerDid"] is not null) this.LabelerDid = obj["labelerDid"].ToATDid();
             if (obj["label"] is not null) this.Label = obj["label"].AsString();
-            // enum
+            if (obj["visibility"] is not null) this.Visibility = obj["visibility"].AsString();
         }
 
         /// <summary>
+        /// Gets or sets the labelerDid.
         /// Which labeler does this preference apply to? If undefined, applies globally.
         /// </summary>
         [JsonPropertyName("labelerDid")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? LabelerDid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the label.
+        /// </summary>
         [JsonPropertyName("label")]
         [JsonRequired]
         public string? Label { get; set; }
 
+        /// <summary>
+        /// Gets or sets the visibility.
+        /// Known Values:
+        /// ignore
+        /// show
+        /// warn
+        /// hide
+        /// </summary>
         [JsonPropertyName("visibility")]
         [JsonRequired]
         public string? Visibility { get; set; }

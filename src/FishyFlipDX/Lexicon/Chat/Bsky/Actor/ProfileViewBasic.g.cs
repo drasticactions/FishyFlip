@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileViewBasic"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="handle"></param>
+        /// <param name="displayName"></param>
+        /// <param name="avatar"></param>
+        /// <param name="associated"></param>
+        /// <param name="viewer"></param>
+        /// <param name="labels"></param>
+        /// <param name="chatDisabled">Set to true when the actor cannot actively participate in converations</param>
         public ProfileViewBasic(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? avatar = default, App.Bsky.Actor.ProfileAssociated? associated = default, App.Bsky.Actor.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, bool? chatDisabled = default)
         {
             this.Did = did;
@@ -48,32 +56,54 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             if (obj["chatDisabled"] is not null) this.ChatDisabled = obj["chatDisabled"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the displayName.
+        /// </summary>
         [JsonPropertyName("displayName")]
         public string? DisplayName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the avatar.
+        /// </summary>
         [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
 
+        /// <summary>
+        /// Gets or sets the associated.
+        /// </summary>
         [JsonPropertyName("associated")]
         public App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
 
+        /// <summary>
+        /// Gets or sets the viewer.
+        /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
+        /// Gets or sets the chatDisabled.
         /// Set to true when the actor cannot actively participate in converations
         /// </summary>
         [JsonPropertyName("chatDisabled")]

@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="EmbedExternal"/> class.
         /// </summary>
+        /// <param name="external"></param>
         public EmbedExternal(App.Bsky.Embed.External? external = default)
         {
             this.External = external;
@@ -37,6 +38,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["external"] is not null) this.External = new App.Bsky.Embed.External(obj["external"]);
         }
 
+        /// <summary>
+        /// Gets or sets the external.
+        /// </summary>
         [JsonPropertyName("external")]
         [JsonRequired]
         public App.Bsky.Embed.External? External { get; set; }

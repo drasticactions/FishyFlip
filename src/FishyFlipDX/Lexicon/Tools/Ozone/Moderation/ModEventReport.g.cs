@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventReport"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="isReporterMuted">Set to true if the reporter was muted from reporting at the time of the event. These reports won't impact the reviewState of the subject.</param>
+        /// <param name="reportType"></param>
         public ModEventReport(string? comment = default, bool? isReporterMuted = default, string? reportType = default)
         {
             this.Comment = comment;
@@ -41,15 +44,22 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["reportType"] is not null) this.ReportType = obj["reportType"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
         /// <summary>
+        /// Gets or sets the isReporterMuted.
         /// Set to true if the reporter was muted from reporting at the time of the event. These reports won't impact the reviewState of the subject.
         /// </summary>
         [JsonPropertyName("isReporterMuted")]
         public bool? IsReporterMuted { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reportType.
+        /// </summary>
         [JsonPropertyName("reportType")]
         [JsonRequired]
         public string? ReportType { get; set; }

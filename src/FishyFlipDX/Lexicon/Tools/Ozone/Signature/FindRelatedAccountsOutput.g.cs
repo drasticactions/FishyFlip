@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="FindRelatedAccountsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="accounts"></param>
         public FindRelatedAccountsOutput(string? cursor = default, List<Tools.Ozone.Signature.RelatedAccount>? accounts = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new Tools.Ozone.Signature.RelatedAccount(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the accounts.
+        /// </summary>
         [JsonPropertyName("accounts")]
         [JsonRequired]
         public List<Tools.Ozone.Signature.RelatedAccount>? Accounts { get; set; }

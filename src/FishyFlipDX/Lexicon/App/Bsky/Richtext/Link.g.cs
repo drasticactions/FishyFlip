@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="Link"/> class.
         /// </summary>
+        /// <param name="uri"></param>
         public Link(string? uri = default)
         {
             this.Uri = uri;
@@ -37,6 +38,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             if (obj["uri"] is not null) this.Uri = obj["uri"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         public string? Uri { get; set; }

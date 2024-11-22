@@ -15,6 +15,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAccountOutput"/> class.
         /// </summary>
+        /// <param name="accessJwt"></param>
+        /// <param name="refreshJwt"></param>
+        /// <param name="handle"></param>
+        /// <param name="did">The DID of the new account.</param>
+        /// <param name="didDoc">Complete DID document.</param>
         public CreateAccountOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default)
         {
             this.AccessJwt = accessJwt;
@@ -45,20 +50,30 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             // Ignore DidDoc
         }
 
+        /// <summary>
+        /// Gets or sets the accessJwt.
+        /// </summary>
         [JsonPropertyName("accessJwt")]
         [JsonRequired]
         public string? AccessJwt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the refreshJwt.
+        /// </summary>
         [JsonPropertyName("refreshJwt")]
         [JsonRequired]
         public string? RefreshJwt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
         /// <summary>
+        /// Gets or sets the did.
         /// The DID of the new account.
         /// </summary>
         [JsonPropertyName("did")]
@@ -67,6 +82,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public FishyFlip.Models.ATDid? Did { get; set; }
 
         /// <summary>
+        /// Gets or sets the didDoc.
         /// Complete DID document.
         /// </summary>
         [JsonPropertyName("didDoc")]

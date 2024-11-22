@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventDivert"/> class.
         /// </summary>
+        /// <param name="comment"></param>
         public ModEventDivert(string? comment = default)
         {
             this.Comment = comment;
@@ -37,6 +38,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 

@@ -31,17 +31,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
 
         /// <summary>
-        /// Administrative action to update an existing communication template. Allows passing partial fields to patch specific fields only.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
-        {
-            return atp.UpdateTemplateAsync(id, name, lang, contentMarkdown, subject, updatedBy, disabled, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Administrative action to create a new, re-usable communication (email for now) template.
         /// </summary>
+        /// <param name="name"></param>
+        /// <param name="contentMarkdown"></param>
+        /// <param name="subject"></param>
+        /// <param name="lang"></param>
+        /// <param name="createdBy"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> CreateTemplateAsync (string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateTemplateAsync(name, contentMarkdown, subject, lang, createdBy, cancellationToken);
@@ -49,8 +46,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
 
         /// <summary>
+        /// Delete a communication template.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> DeleteTemplateAsync (string id, CancellationToken cancellationToken = default)
+        {
+            return atp.DeleteTemplateAsync(id, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get list of all communication templates.
         /// </summary>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?>> ListTemplatesAsync (CancellationToken cancellationToken = default)
         {
             return atp.ListTemplatesAsync(cancellationToken);
@@ -58,11 +67,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
 
         /// <summary>
-        /// Delete a communication template.
+        /// Administrative action to update an existing communication template. Allows passing partial fields to patch specific fields only.
         /// </summary>
-        public Task<Result<Success?>> DeleteTemplateAsync (string id, CancellationToken cancellationToken = default)
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="lang"></param>
+        /// <param name="contentMarkdown"></param>
+        /// <param name="subject"></param>
+        /// <param name="updatedBy"></param>
+        /// <param name="disabled"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
         {
-            return atp.DeleteTemplateAsync(id, cancellationToken);
+            return atp.UpdateTemplateAsync(id, name, lang, contentMarkdown, subject, updatedBy, disabled, cancellationToken);
         }
 
     }

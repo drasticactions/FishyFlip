@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ListRecordsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="records"></param>
         public ListRecordsOutput(string? cursor = default, List<Com.Atproto.Repo.Record>? records = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n =>new Com.Atproto.Repo.Record(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the records.
+        /// </summary>
         [JsonPropertyName("records")]
         [JsonRequired]
         public List<Com.Atproto.Repo.Record>? Records { get; set; }

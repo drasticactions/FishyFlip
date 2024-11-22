@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRecordsOutput"/> class.
         /// </summary>
+        /// <param name="records">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/> (tools.ozone.moderation.defs#recordViewDetail)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound)
+        /// </param>
         public GetRecordsOutput(List<ATObject>? records = default)
         {
             this.Records = records;
@@ -34,6 +39,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the records.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/> (tools.ozone.moderation.defs#recordViewDetail)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound)
+        /// </summary>
         [JsonPropertyName("records")]
         [JsonRequired]
         public List<ATObject>? Records { get; set; }

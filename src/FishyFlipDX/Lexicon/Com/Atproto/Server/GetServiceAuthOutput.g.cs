@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="GetServiceAuthOutput"/> class.
         /// </summary>
+        /// <param name="token"></param>
         public GetServiceAuthOutput(string? token = default)
         {
             this.Token = token;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the token.
+        /// </summary>
         [JsonPropertyName("token")]
         [JsonRequired]
         public string? Token { get; set; }

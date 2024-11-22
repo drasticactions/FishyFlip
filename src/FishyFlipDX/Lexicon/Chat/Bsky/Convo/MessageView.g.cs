@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageView"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="rev"></param>
+        /// <param name="text"></param>
+        /// <param name="facets">Annotations of text (mentions, URLs, hashtags, etc)</param>
+        /// <param name="embed">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
+        /// </param>
+        /// <param name="sender"></param>
+        /// <param name="sentAt"></param>
         public MessageView(string? id = default, string? rev = default, string? text = default, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Embed.ViewRecordDef? embed = default, Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
         {
             this.Id = id;
@@ -46,31 +56,52 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public string? Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }
 
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
         [JsonPropertyName("text")]
         [JsonRequired]
         public string? Text { get; set; }
 
         /// <summary>
+        /// Gets or sets the facets.
         /// Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
         public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
 
+        /// <summary>
+        /// Gets or sets the embed.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
+        /// </summary>
         [JsonPropertyName("embed")]
         public App.Bsky.Embed.ViewRecordDef? Embed { get; set; }
 
+        /// <summary>
+        /// Gets or sets the sender.
+        /// </summary>
         [JsonPropertyName("sender")]
         [JsonRequired]
         public Chat.Bsky.Convo.MessageViewSender? Sender { get; set; }
 
+        /// <summary>
+        /// Gets or sets the sentAt.
+        /// </summary>
         [JsonPropertyName("sentAt")]
         [JsonRequired]
         public DateTime? SentAt { get; set; }

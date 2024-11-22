@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="StrongRef"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
         public StrongRef(FishyFlip.Models.ATUri? uri = default, string? cid = default)
         {
             this.Uri = uri;
@@ -36,11 +38,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }

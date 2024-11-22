@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInviteCodesInput"/> class.
         /// </summary>
+        /// <param name="codeCount"></param>
+        /// <param name="useCount"></param>
+        /// <param name="forAccounts"></param>
         public CreateInviteCodesInput(long? codeCount = default, long? useCount = default, List<FishyFlip.Models.ATDid>? forAccounts = default)
         {
             this.CodeCount = codeCount;
@@ -38,14 +41,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["forAccounts"] is not null) this.ForAccounts = obj["forAccounts"].Values.Select(n =>n.ToATDid()!).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the codeCount.
+        /// </summary>
         [JsonPropertyName("codeCount")]
         [JsonRequired]
         public long? CodeCount { get; set; } = 1;
 
+        /// <summary>
+        /// Gets or sets the useCount.
+        /// </summary>
         [JsonPropertyName("useCount")]
         [JsonRequired]
         public long? UseCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the forAccounts.
+        /// </summary>
         [JsonPropertyName("forAccounts")]
         public List<FishyFlip.Models.ATDid>? ForAccounts { get; set; }
 

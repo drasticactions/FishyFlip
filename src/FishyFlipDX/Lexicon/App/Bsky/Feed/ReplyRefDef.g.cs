@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplyRefDef"/> class.
         /// </summary>
+        /// <param name="root"></param>
+        /// <param name="parent"></param>
         public ReplyRefDef(Com.Atproto.Repo.StrongRef? root = default, Com.Atproto.Repo.StrongRef? parent = default)
         {
             this.Root = root;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["parent"] is not null) this.Parent = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["parent"]);
         }
 
+        /// <summary>
+        /// Gets or sets the root.
+        /// </summary>
         [JsonPropertyName("root")]
         [JsonRequired]
         public Com.Atproto.Repo.StrongRef? Root { get; set; }
 
+        /// <summary>
+        /// Gets or sets the parent.
+        /// </summary>
         [JsonPropertyName("parent")]
         [JsonRequired]
         public Com.Atproto.Repo.StrongRef? Parent { get; set; }

@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="LikeDef"/> class.
         /// </summary>
+        /// <param name="indexedAt"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="actor"></param>
         public LikeDef(DateTime? indexedAt = default, DateTime? createdAt = default, App.Bsky.Actor.ProfileView? actor = default)
         {
             this.IndexedAt = indexedAt;
@@ -38,14 +41,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["actor"] is not null) this.Actor = new App.Bsky.Actor.ProfileView(obj["actor"]);
         }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the actor.
+        /// </summary>
         [JsonPropertyName("actor")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileView? Actor { get; set; }

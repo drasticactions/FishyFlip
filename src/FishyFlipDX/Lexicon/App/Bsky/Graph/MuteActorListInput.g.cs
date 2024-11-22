@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="MuteActorListInput"/> class.
         /// </summary>
+        /// <param name="list"></param>
         public MuteActorListInput(FishyFlip.Models.ATUri? list = default)
         {
             this.List = list;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["list"] is not null) this.List = obj["list"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the list.
+        /// </summary>
         [JsonPropertyName("list")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

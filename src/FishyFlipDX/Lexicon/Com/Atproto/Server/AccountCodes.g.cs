@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountCodes"/> class.
         /// </summary>
+        /// <param name="account"></param>
+        /// <param name="codes"></param>
         public AccountCodes(string? account = default, List<string>? codes = default)
         {
             this.Account = account;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>n.AsString()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the account.
+        /// </summary>
         [JsonPropertyName("account")]
         [JsonRequired]
         public string? Account { get; set; }
 
+        /// <summary>
+        /// Gets or sets the codes.
+        /// </summary>
         [JsonPropertyName("codes")]
         [JsonRequired]
         public List<string>? Codes { get; set; }

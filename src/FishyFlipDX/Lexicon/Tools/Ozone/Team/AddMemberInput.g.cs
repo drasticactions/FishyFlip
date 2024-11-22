@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Initializes a new instance of the <see cref="AddMemberInput"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="role">
+        /// Known Values:
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// </param>
         public AddMemberInput(FishyFlip.Models.ATDid? did = default, string? role = default)
         {
             this.Did = did;
@@ -33,14 +40,24 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         public AddMemberInput(CBORObject obj)
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
-            // enum
+            if (obj["role"] is not null) this.Role = obj["role"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the role.
+        /// Known Values:
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// </summary>
         [JsonPropertyName("role")]
         [JsonRequired]
         public string? Role { get; set; }

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryEventsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="events"></param>
         public QueryEventsOutput(string? cursor = default, List<Tools.Ozone.Moderation.ModEventView>? events = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["events"] is not null) this.Events = obj["events"].Values.Select(n =>new Tools.Ozone.Moderation.ModEventView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the events.
+        /// </summary>
         [JsonPropertyName("events")]
         [JsonRequired]
         public List<Tools.Ozone.Moderation.ModEventView>? Events { get; set; }

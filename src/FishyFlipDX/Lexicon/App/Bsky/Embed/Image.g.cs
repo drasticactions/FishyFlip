@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="Image"/> class.
         /// </summary>
+        /// <param name="image"></param>
+        /// <param name="alt">Alt text description of the image, for accessibility.</param>
+        /// <param name="aspectRatio"></param>
         public Image(Blob? image = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
         {
             this.ImageValue = image;
@@ -38,17 +41,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["aspectRatio"] is not null) this.AspectRatio = new App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
         }
 
+        /// <summary>
+        /// Gets or sets the image.
+        /// </summary>
         [JsonPropertyName("image")]
         [JsonRequired]
         public Blob? ImageValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the alt.
         /// Alt text description of the image, for accessibility.
         /// </summary>
         [JsonPropertyName("alt")]
         [JsonRequired]
         public string? Alt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the aspectRatio.
+        /// </summary>
         [JsonPropertyName("aspectRatio")]
         public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 

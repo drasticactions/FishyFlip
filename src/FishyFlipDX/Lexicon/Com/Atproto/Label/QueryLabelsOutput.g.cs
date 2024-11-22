@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryLabelsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="labels"></param>
         public QueryLabelsOutput(string? cursor = default, List<Com.Atproto.Label.Label>? labels = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         [JsonRequired]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }

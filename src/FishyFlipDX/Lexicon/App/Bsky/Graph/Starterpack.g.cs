@@ -15,6 +15,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Starterpack"/> class.
         /// </summary>
+        /// <param name="name">Display name for starter pack; can not be empty.</param>
+        /// <param name="list">Reference (AT-URI) to the list record.</param>
+        /// <param name="description"></param>
+        /// <param name="descriptionFacets"></param>
+        /// <param name="feeds"></param>
+        /// <param name="createdAt"></param>
         public Starterpack(string? name, FishyFlip.Models.ATUri? list, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, List<App.Bsky.Graph.FeedItem>? feeds = default, DateTime? createdAt = default)
         {
             this.Name = name;
@@ -48,27 +54,41 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         }
 
         /// <summary>
+        /// Gets or sets the name.
         /// Display name for starter pack; can not be empty.
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the descriptionFacets.
+        /// </summary>
         [JsonPropertyName("descriptionFacets")]
         public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
+        /// Gets or sets the list.
         /// Reference (AT-URI) to the list record.
         /// </summary>
         [JsonPropertyName("list")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? List { get; set; }
 
+        /// <summary>
+        /// Gets or sets the feeds.
+        /// </summary>
         [JsonPropertyName("feeds")]
         public List<App.Bsky.Graph.FeedItem>? Feeds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

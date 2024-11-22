@@ -13,36 +13,26 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
     public static class CommunicationEndpoints
     {
 
-       public const string UpdateTemplate = "/xrpc/tools.ozone.communication.updateTemplate";
-
        public const string CreateTemplate = "/xrpc/tools.ozone.communication.createTemplate";
-
-       public const string ListTemplates = "/xrpc/tools.ozone.communication.listTemplates";
 
        public const string DeleteTemplate = "/xrpc/tools.ozone.communication.deleteTemplate";
 
+       public const string ListTemplates = "/xrpc/tools.ozone.communication.listTemplates";
 
-        /// <summary>
-        /// Administrative action to update an existing communication template. Allows passing partial fields to patch specific fields only.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (this FishyFlip.ATProtocol atp, string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = UpdateTemplate.ToString();
-            var inputItem = new UpdateTemplateInput();
-            inputItem.Id = id;
-            inputItem.Name = name;
-            inputItem.Lang = lang;
-            inputItem.ContentMarkdown = contentMarkdown;
-            inputItem.Subject = subject;
-            inputItem.UpdatedBy = updatedBy;
-            inputItem.Disabled = disabled;
-            return atp.Client.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
+       public const string UpdateTemplate = "/xrpc/tools.ozone.communication.updateTemplate";
 
 
         /// <summary>
         /// Administrative action to create a new, re-usable communication (email for now) template.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="name"></param>
+        /// <param name="contentMarkdown"></param>
+        /// <param name="subject"></param>
+        /// <param name="lang"></param>
+        /// <param name="createdBy"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> CreateTemplateAsync (this FishyFlip.ATProtocol atp, string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateTemplate.ToString();
@@ -57,8 +47,27 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
 
         /// <summary>
+        /// Delete a communication template.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> DeleteTemplateAsync (this FishyFlip.ATProtocol atp, string id, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = DeleteTemplate.ToString();
+            var inputItem = new DeleteTemplateInput();
+            inputItem.Id = id;
+            return atp.Client.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
         /// Get list of all communication templates.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?>> ListTemplatesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListTemplates.ToString();
@@ -67,14 +76,30 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
 
         /// <summary>
-        /// Delete a communication template.
+        /// Administrative action to update an existing communication template. Allows passing partial fields to patch specific fields only.
         /// </summary>
-        public static Task<Result<Success?>> DeleteTemplateAsync (this FishyFlip.ATProtocol atp, string id, CancellationToken cancellationToken = default)
+        /// <param name="atp"></param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="lang"></param>
+        /// <param name="contentMarkdown"></param>
+        /// <param name="subject"></param>
+        /// <param name="updatedBy"></param>
+        /// <param name="disabled"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (this FishyFlip.ATProtocol atp, string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = DeleteTemplate.ToString();
-            var inputItem = new DeleteTemplateInput();
+            var endpointUrl = UpdateTemplate.ToString();
+            var inputItem = new UpdateTemplateInput();
             inputItem.Id = id;
-            return atp.Client.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            inputItem.Name = name;
+            inputItem.Lang = lang;
+            inputItem.ContentMarkdown = contentMarkdown;
+            inputItem.Subject = subject;
+            inputItem.UpdatedBy = updatedBy;
+            inputItem.Disabled = disabled;
+            return atp.Client.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

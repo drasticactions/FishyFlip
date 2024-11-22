@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestPasswordResetInput"/> class.
         /// </summary>
+        /// <param name="email"></param>
         public RequestPasswordResetInput(string? email = default)
         {
             this.Email = email;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["email"] is not null) this.Email = obj["email"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         [JsonRequired]
         public string? Email { get; set; }

@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="ListView"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="creator"></param>
+        /// <param name="name"></param>
+        /// <param name="purpose"></param>
+        /// <param name="description"></param>
+        /// <param name="descriptionFacets"></param>
+        /// <param name="avatar"></param>
+        /// <param name="listItemCount"></param>
+        /// <param name="labels"></param>
+        /// <param name="viewer"></param>
+        /// <param name="indexedAt"></param>
         public ListView(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileView? creator = default, string? name = default, string? purpose = default, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, string? avatar = default, long? listItemCount = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Graph.ListViewerState? viewer = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
@@ -56,45 +68,81 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the creator.
+        /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileView? Creator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the purpose.
+        /// </summary>
         [JsonPropertyName("purpose")]
         [JsonRequired]
         public string? Purpose { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the descriptionFacets.
+        /// </summary>
         [JsonPropertyName("descriptionFacets")]
         public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
+        /// <summary>
+        /// Gets or sets the avatar.
+        /// </summary>
         [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
 
+        /// <summary>
+        /// Gets or sets the listItemCount.
+        /// </summary>
         [JsonPropertyName("listItemCount")]
         public long? ListItemCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the viewer.
+        /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Graph.ListViewerState? Viewer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }

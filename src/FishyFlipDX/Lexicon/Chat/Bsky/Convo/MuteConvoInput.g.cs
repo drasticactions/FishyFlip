@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MuteConvoInput"/> class.
         /// </summary>
+        /// <param name="convoId"></param>
         public MuteConvoInput(string? convoId = default)
         {
             this.ConvoId = convoId;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["convoId"] is not null) this.ConvoId = obj["convoId"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the convoId.
+        /// </summary>
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string? ConvoId { get; set; }

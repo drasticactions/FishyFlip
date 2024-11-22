@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadgateView"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="record"></param>
+        /// <param name="lists"></param>
         public ThreadgateView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, List<App.Bsky.Graph.ListViewBasic>? lists = default)
         {
             this.Uri = uri;
@@ -40,16 +44,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["lists"] is not null) this.Lists = obj["lists"].Values.Select(n =>new App.Bsky.Graph.ListViewBasic(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the record.
+        /// </summary>
         [JsonPropertyName("record")]
         public ATObject? Record { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lists.
+        /// </summary>
         [JsonPropertyName("lists")]
         public List<App.Bsky.Graph.ListViewBasic>? Lists { get; set; }
 

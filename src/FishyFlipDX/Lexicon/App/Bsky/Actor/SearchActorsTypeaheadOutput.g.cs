@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchActorsTypeaheadOutput"/> class.
         /// </summary>
+        /// <param name="actors"></param>
         public SearchActorsTypeaheadOutput(List<App.Bsky.Actor.ProfileViewBasic>? actors = default)
         {
             this.Actors = actors;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Actor.ProfileViewBasic(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the actors.
+        /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileViewBasic>? Actors { get; set; }

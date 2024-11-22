@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSessionOutput"/> class.
         /// </summary>
+        /// <param name="handle"></param>
+        /// <param name="did"></param>
+        /// <param name="email"></param>
+        /// <param name="emailConfirmed"></param>
+        /// <param name="emailAuthFactor"></param>
+        /// <param name="didDoc"></param>
+        /// <param name="active"></param>
+        /// <param name="status">If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
+        /// </param>
         public GetSessionOutput(FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, string? email = default, bool? emailConfirmed = default, bool? emailAuthFactor = default, FishyFlip.Models.DidDoc? didDoc = default, bool? active = default, string? status = default)
         {
             this.Handle = handle;
@@ -45,36 +58,62 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["emailAuthFactor"] is not null) this.EmailAuthFactor = obj["emailAuthFactor"].AsBoolean();
             // Ignore DidDoc
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
+        /// <summary>
+        /// Gets or sets the emailConfirmed.
+        /// </summary>
         [JsonPropertyName("emailConfirmed")]
         public bool? EmailConfirmed { get; set; }
 
+        /// <summary>
+        /// Gets or sets the emailAuthFactor.
+        /// </summary>
         [JsonPropertyName("emailAuthFactor")]
         public bool? EmailAuthFactor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the didDoc.
+        /// </summary>
         [JsonPropertyName("didDoc")]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
 
+        /// <summary>
+        /// Gets or sets the active.
+        /// </summary>
         [JsonPropertyName("active")]
         public bool? Active { get; set; }
 
         /// <summary>
+        /// Gets or sets the status.
         /// If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

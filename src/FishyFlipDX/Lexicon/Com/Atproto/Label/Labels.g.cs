@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="Labels"/> class.
         /// </summary>
+        /// <param name="seq"></param>
+        /// <param name="labels"></param>
         public Labels(long? seq = default, List<Com.Atproto.Label.Label>? labels = default)
         {
             this.Seq = seq;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             if (obj["labels"] is not null) this.LabelsValue = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the seq.
+        /// </summary>
         [JsonPropertyName("seq")]
         [JsonRequired]
         public long? Seq { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         [JsonRequired]
         public List<Com.Atproto.Label.Label>? LabelsValue { get; set; }

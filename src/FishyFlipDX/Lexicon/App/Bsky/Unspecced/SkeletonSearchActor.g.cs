@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonSearchActor"/> class.
         /// </summary>
+        /// <param name="did"></param>
         public SkeletonSearchActor(FishyFlip.Models.ATDid? did = default)
         {
             this.Did = did;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

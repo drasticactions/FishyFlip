@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPostsOutput"/> class.
         /// </summary>
+        /// <param name="posts"></param>
         public GetPostsOutput(List<App.Bsky.Feed.PostView>? posts = default)
         {
             this.Posts = posts;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new App.Bsky.Feed.PostView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the posts.
+        /// </summary>
         [JsonPropertyName("posts")]
         [JsonRequired]
         public List<App.Bsky.Feed.PostView>? Posts { get; set; }

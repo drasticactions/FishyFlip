@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="ResolveHandleOutput"/> class.
         /// </summary>
+        /// <param name="did"></param>
         public ResolveHandleOutput(FishyFlip.Models.ATDid? did = default)
         {
             this.Did = did;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

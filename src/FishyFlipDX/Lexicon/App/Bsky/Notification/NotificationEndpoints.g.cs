@@ -13,59 +13,55 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
     public static class NotificationEndpoints
     {
 
-       public const string RegisterPush = "/xrpc/app.bsky.notification.registerPush";
-
-       public const string PutPreferences = "/xrpc/app.bsky.notification.putPreferences";
-
-       public const string UpdateSeen = "/xrpc/app.bsky.notification.updateSeen";
+       public const string GetUnreadCount = "/xrpc/app.bsky.notification.getUnreadCount";
 
        public const string ListNotifications = "/xrpc/app.bsky.notification.listNotifications";
 
-       public const string GetUnreadCount = "/xrpc/app.bsky.notification.getUnreadCount";
+       public const string PutPreferences = "/xrpc/app.bsky.notification.putPreferences";
+
+       public const string RegisterPush = "/xrpc/app.bsky.notification.registerPush";
+
+       public const string UpdateSeen = "/xrpc/app.bsky.notification.updateSeen";
 
 
         /// <summary>
-        /// Register to receive push notifications, via a specified service, for the requesting account. Requires auth.
+        /// Count the number of unread notifications for the requesting account. Requires auth.
         /// </summary>
-        public static Task<Result<Success?>> RegisterPushAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
+        /// <param name="atp"></param>
+        /// <param name="priority"></param>
+        /// <param name="seenAt"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?>> GetUnreadCountAsync (this FishyFlip.ATProtocol atp, bool? priority = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = RegisterPush.ToString();
-            var inputItem = new RegisterPushInput();
-            inputItem.ServiceDid = serviceDid;
-            inputItem.Token = token;
-            inputItem.Platform = platform;
-            inputItem.AppId = appId;
-            return atp.Client.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
+            var endpointUrl = GetUnreadCount.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (priority != null)
+            {
+                queryStrings.Add("priority=" + priority);
+            }
 
+            if (seenAt != null)
+            {
+                queryStrings.Add("seenAt=" + seenAt);
+            }
 
-        /// <summary>
-        /// Set notification-related preferences for an account. Requires auth.
-        /// </summary>
-        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, bool priority, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = PutPreferences.ToString();
-            var inputItem = new PutPreferencesInput();
-            inputItem.Priority = priority;
-            return atp.Client.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Notify server that the requesting account has seen notifications. Requires auth.
-        /// </summary>
-        public static Task<Result<Success?>> UpdateSeenAsync (this FishyFlip.ATProtocol atp, DateTime seenAt, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = UpdateSeen.ToString();
-            var inputItem = new UpdateSeenInput();
-            inputItem.SeenAt = seenAt;
-            return atp.Client.Post<UpdateSeenInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUpdateSeenInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// Enumerate notifications for the requesting account. Requires auth.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="priority"></param>
+        /// <param name="cursor"></param>
+        /// <param name="seenAt"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?>> ListNotificationsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListNotifications.ToString();
@@ -97,25 +93,56 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
 
         /// <summary>
-        /// Count the number of unread notifications for the requesting account. Requires auth.
+        /// Set notification-related preferences for an account. Requires auth.
         /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?>> GetUnreadCountAsync (this FishyFlip.ATProtocol atp, bool? priority = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        /// <param name="atp"></param>
+        /// <param name="priority"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, bool priority, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = GetUnreadCount.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            if (priority != null)
-            {
-                queryStrings.Add("priority=" + priority);
-            }
+            var endpointUrl = PutPreferences.ToString();
+            var inputItem = new PutPreferencesInput();
+            inputItem.Priority = priority;
+            return atp.Client.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
 
-            if (seenAt != null)
-            {
-                queryStrings.Add("seenAt=" + seenAt);
-            }
 
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        /// <summary>
+        /// Register to receive push notifications, via a specified service, for the requesting account. Requires auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="serviceDid"></param>
+        /// <param name="token"></param>
+        /// <param name="platform"></param>
+        /// <param name="appId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> RegisterPushAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = RegisterPush.ToString();
+            var inputItem = new RegisterPushInput();
+            inputItem.ServiceDid = serviceDid;
+            inputItem.Token = token;
+            inputItem.Platform = platform;
+            inputItem.AppId = appId;
+            return atp.Client.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Notify server that the requesting account has seen notifications. Requires auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="seenAt"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> UpdateSeenAsync (this FishyFlip.ATProtocol atp, DateTime seenAt, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = UpdateSeen.ToString();
+            var inputItem = new UpdateSeenInput();
+            inputItem.SeenAt = seenAt;
+            return atp.Client.Post<UpdateSeenInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUpdateSeenInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

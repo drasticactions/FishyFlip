@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonSearchStarterPack"/> class.
         /// </summary>
+        /// <param name="uri"></param>
         public SkeletonSearchStarterPack(FishyFlip.Models.ATUri? uri = default)
         {
             this.Uri = uri;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

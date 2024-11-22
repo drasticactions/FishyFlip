@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceConfig"/> class.
         /// </summary>
+        /// <param name="url"></param>
         public ServiceConfig(string? url = default)
         {
             this.Url = url;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             if (obj["url"] is not null) this.Url = obj["url"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the url.
+        /// </summary>
         [JsonPropertyName("url")]
         public string? Url { get; set; }
 

@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
         /// </summary>
+        /// <param name="checkEmailConfirmed"></param>
         public GetConfigOutput(bool? checkEmailConfirmed = default)
         {
             this.CheckEmailConfirmed = checkEmailConfirmed;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["checkEmailConfirmed"] is not null) this.CheckEmailConfirmed = obj["checkEmailConfirmed"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the checkEmailConfirmed.
+        /// </summary>
         [JsonPropertyName("checkEmailConfirmed")]
         public bool? CheckEmailConfirmed { get; set; }
 

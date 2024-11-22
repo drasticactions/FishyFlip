@@ -19,6 +19,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <summary>
         /// Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="reasonType">
+        /// Known Values:
+        /// reasonSpam - Spam: frequent unwanted promotion, replies, mentions
+        /// reasonViolation - Direct violation of server rules, laws, terms of service
+        /// reasonMisleading - Misleading identity, affiliation, or content
+        /// reasonSexual - Unwanted or mislabeled sexual content
+        /// reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior
+        /// reasonOther - Other: reports not falling under another report category
+        /// reasonAppeal - Appeal: appeal a previously taken moderation action
+        /// </param>
+        /// <param name="subject"></param>
+        /// <param name="reason"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (this FishyFlip.ATProtocol atp, string reasonType, ATObject subject, string? reason = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateReport.ToString();

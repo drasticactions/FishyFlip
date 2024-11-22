@@ -31,17 +31,22 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
 
         /// <summary>
-        /// List all members with access to the ozone service.
+        /// Add a member to the ozone team. Requires admin role.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        /// <param name="did"></param>
+        /// <param name="role"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
         {
-            return atp.ListMembersAsync(limit, cursor, cancellationToken);
+            return atp.AddMemberAsync(did, role, cancellationToken);
         }
 
 
         /// <summary>
         /// Delete a member from ozone team. Requires admin role.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> DeleteMemberAsync (FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
             return atp.DeleteMemberAsync(did, cancellationToken);
@@ -49,20 +54,27 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
 
         /// <summary>
-        /// Update a member in the ozone service. Requires admin role.
+        /// List all members with access to the ozone service.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> UpdateMemberAsync (FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.UpdateMemberAsync(did, disabled, role, cancellationToken);
+            return atp.ListMembersAsync(limit, cursor, cancellationToken);
         }
 
 
         /// <summary>
-        /// Add a member to the ozone team. Requires admin role.
+        /// Update a member in the ozone service. Requires admin role.
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
+        /// <param name="did"></param>
+        /// <param name="disabled"></param>
+        /// <param name="role"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> UpdateMemberAsync (FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
         {
-            return atp.AddMemberAsync(did, role, cancellationToken);
+            return atp.UpdateMemberAsync(did, disabled, role, cancellationToken);
         }
 
     }

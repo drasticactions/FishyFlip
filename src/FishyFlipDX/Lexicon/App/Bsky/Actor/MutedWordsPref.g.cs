@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="MutedWordsPref"/> class.
         /// </summary>
+        /// <param name="items">A list of words the account owner has muted.</param>
         public MutedWordsPref(List<App.Bsky.Actor.MutedWord>? items = default)
         {
             this.Items = items;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         }
 
         /// <summary>
+        /// Gets or sets the items.
         /// A list of words the account owner has muted.
         /// </summary>
         [JsonPropertyName("items")]

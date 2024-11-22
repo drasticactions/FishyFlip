@@ -31,17 +31,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
 
         /// <summary>
-        /// Upload a video to be processed then stored on the PDS.
-        /// </summary>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (CancellationToken cancellationToken = default)
-        {
-            return atp.UploadVideoAsync(cancellationToken);
-        }
-
-
-        /// <summary>
         /// Get status details for a video processing job.
         /// </summary>
+        /// <param name="jobId"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput?>> GetJobStatusAsync (string jobId, CancellationToken cancellationToken = default)
         {
             return atp.GetJobStatusAsync(jobId, cancellationToken);
@@ -51,9 +44,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Get video upload limits for the authenticated user.
         /// </summary>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput?>> GetUploadLimitsAsync (CancellationToken cancellationToken = default)
         {
             return atp.GetUploadLimitsAsync(cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Upload a video to be processed then stored on the PDS.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.UploadVideoAsync(cancellationToken);
         }
 
     }

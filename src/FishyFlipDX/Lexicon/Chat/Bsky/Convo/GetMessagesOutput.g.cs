@@ -12,6 +12,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="GetMessagesOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="messages">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </param>
         public GetMessagesOutput(string? cursor = default, List<ATObject>? messages = default)
         {
             this.Cursor = cursor;
@@ -36,9 +42,18 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["messages"] is not null) this.Messages = obj["messages"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the messages.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </summary>
         [JsonPropertyName("messages")]
         [JsonRequired]
         public List<ATObject>? Messages { get; set; }

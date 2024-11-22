@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ReserveSigningKeyOutput"/> class.
         /// </summary>
+        /// <param name="signingKey">The public key for the reserved signing key, in did:key serialization.</param>
         public ReserveSigningKeyOutput(string? signingKey = default)
         {
             this.SigningKey = signingKey;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         }
 
         /// <summary>
+        /// Gets or sets the signingKey.
         /// The public key for the reserved signing key, in did:key serialization.
         /// </summary>
         [JsonPropertyName("signingKey")]

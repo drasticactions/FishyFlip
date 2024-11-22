@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActorFeedsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="feeds"></param>
         public GetActorFeedsOutput(string? cursor = default, List<App.Bsky.Feed.GeneratorView>? feeds = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the feeds.
+        /// </summary>
         [JsonPropertyName("feeds")]
         [JsonRequired]
         public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }

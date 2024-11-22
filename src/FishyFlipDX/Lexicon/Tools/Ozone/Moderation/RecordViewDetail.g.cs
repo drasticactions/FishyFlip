@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordViewDetail"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="value"></param>
+        /// <param name="blobs"></param>
+        /// <param name="labels"></param>
+        /// <param name="indexedAt"></param>
+        /// <param name="moderation"></param>
+        /// <param name="repo"></param>
         public RecordViewDetail(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? value = default, List<Tools.Ozone.Moderation.BlobView>? blobs = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default, Tools.Ozone.Moderation.ModerationDetail? moderation = default, Tools.Ozone.Moderation.RepoView? repo = default)
         {
             this.Uri = uri;
@@ -48,34 +56,58 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["repo"] is not null) this.Repo = new Tools.Ozone.Moderation.RepoView(obj["repo"]);
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public ATObject? Value { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blobs.
+        /// </summary>
         [JsonPropertyName("blobs")]
         [JsonRequired]
         public List<Tools.Ozone.Moderation.BlobView>? Blobs { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the moderation.
+        /// </summary>
         [JsonPropertyName("moderation")]
         [JsonRequired]
         public Tools.Ozone.Moderation.ModerationDetail? Moderation { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repo.
+        /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]
         public Tools.Ozone.Moderation.RepoView? Repo { get; set; }

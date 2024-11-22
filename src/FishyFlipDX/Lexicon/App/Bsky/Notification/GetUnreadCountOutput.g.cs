@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUnreadCountOutput"/> class.
         /// </summary>
+        /// <param name="count"></param>
         public GetUnreadCountOutput(long? count = default)
         {
             this.Count = count;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["count"] is not null) this.Count = obj["count"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the count.
+        /// </summary>
         [JsonPropertyName("count")]
         [JsonRequired]
         public long? Count { get; set; }

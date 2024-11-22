@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadBlobOutput"/> class.
         /// </summary>
+        /// <param name="blob"></param>
         public UploadBlobOutput(Blob? blob = default)
         {
             this.Blob = blob;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["blob"] is not null) this.Blob = new FishyFlip.Models.Blob(obj["blob"]);
         }
 
+        /// <summary>
+        /// Gets or sets the blob.
+        /// </summary>
         [JsonPropertyName("blob")]
         [JsonRequired]
         public Blob? Blob { get; set; }

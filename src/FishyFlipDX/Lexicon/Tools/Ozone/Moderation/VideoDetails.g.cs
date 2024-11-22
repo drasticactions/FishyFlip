@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="VideoDetails"/> class.
         /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="length"></param>
         public VideoDetails(long? width = default, long? height = default, long? length = default)
         {
             this.Width = width;
@@ -38,14 +41,23 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["length"] is not null) this.Length = obj["length"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
         [JsonPropertyName("width")]
         [JsonRequired]
         public long? Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
         [JsonPropertyName("height")]
         [JsonRequired]
         public long? Height { get; set; }
 
+        /// <summary>
+        /// Gets or sets the length.
+        /// </summary>
         [JsonPropertyName("length")]
         [JsonRequired]
         public long? Length { get; set; }

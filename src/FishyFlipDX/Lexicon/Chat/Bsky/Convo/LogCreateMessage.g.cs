@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="LogCreateMessage"/> class.
         /// </summary>
+        /// <param name="rev"></param>
+        /// <param name="convoId"></param>
+        /// <param name="message">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </param>
         public LogCreateMessage(string? rev = default, string? convoId = default, ATObject? message = default)
         {
             this.Rev = rev;
@@ -38,14 +45,26 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["message"] is not null) this.Message = obj["message"].ToATObject();
         }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }
 
+        /// <summary>
+        /// Gets or sets the convoId.
+        /// </summary>
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string? ConvoId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the message.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </summary>
         [JsonPropertyName("message")]
         [JsonRequired]
         public ATObject? Message { get; set; }

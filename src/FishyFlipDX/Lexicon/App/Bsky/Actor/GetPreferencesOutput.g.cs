@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPreferencesOutput"/> class.
         /// </summary>
+        /// <param name="preferences"></param>
         public GetPreferencesOutput(List<ATObject>? preferences = default)
         {
             this.Preferences = preferences;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["preferences"] is not null) this.Preferences = obj["preferences"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the preferences.
+        /// </summary>
         [JsonPropertyName("preferences")]
         [JsonRequired]
         public List<ATObject>? Preferences { get; set; }

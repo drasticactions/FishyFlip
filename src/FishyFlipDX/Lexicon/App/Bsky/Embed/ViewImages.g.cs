@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewImages"/> class.
         /// </summary>
+        /// <param name="images"></param>
         public ViewImages(List<App.Bsky.Embed.ViewImage>? images = default)
         {
             this.Images = images;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["images"] is not null) this.Images = obj["images"].Values.Select(n =>new App.Bsky.Embed.ViewImage(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the images.
+        /// </summary>
         [JsonPropertyName("images")]
         [JsonRequired]
         public List<App.Bsky.Embed.ViewImage>? Images { get; set; }
