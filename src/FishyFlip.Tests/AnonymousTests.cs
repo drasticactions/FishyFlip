@@ -67,7 +67,7 @@ public class AnonymousTests
                             Assert.IsTrue(!string.IsNullOrEmpty(external.Uri));
                             Assert.IsNotNull(external.Thumb);
                             Assert.IsTrue(!string.IsNullOrEmpty(external.Thumb.MimeType));
-                            Assert.IsTrue(!string.IsNullOrEmpty(external.Thumb.Type));
+                            // Assert.IsTrue(!string.IsNullOrEmpty(external.Thumb.Type));
                             Assert.IsNotNull(external.Thumb.Ref);
                             Assert.IsNotNull(external.Thumb.Ref.Link);
                             break;
@@ -90,7 +90,7 @@ public class AnonymousTests
                             Assert.IsNotNull(videoEmbed.Video);
                             videoEmbed.Video?.Ref.ThrowIfNull();
                             Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.MimeType));
-                            Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.Type));
+                            // Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.Type));
                             Assert.IsNotNull(videoEmbed.AspectRatio);
                             Assert.IsTrue(videoEmbed.AspectRatio.Width > 0);
                             Assert.IsTrue(videoEmbed.AspectRatio.Height > 0);

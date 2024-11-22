@@ -131,7 +131,7 @@ public class AnonymousTests
         var post = MarkdownPost.Parse(markdownPost);
         Assert.IsTrue(post.OriginalMarkdown == markdownPost);
         Assert.IsTrue(post.Post == "Markdown Test: FishyFlip, #FishyFlip, @drasticactions.dev");
-        Assert.IsTrue(post.Facets.Length == 3);
+        Assert.IsTrue(post.Facets.Count == 3);
         Assert.IsTrue(post.Facets[0].Features![0]!.Type == FishyFlip.Lexicon.App.Bsky.Richtext.Link.RecordType);
         Assert.IsTrue(((Link)post.Facets[0].Features![0]!).Uri == "https://drasticactions.github.io/FishyFlip");
         Assert.IsTrue(post.Facets[0].Index!.ByteStart == 15);
