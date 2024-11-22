@@ -19,15 +19,14 @@ namespace FishyFlip.Lexicon
         /// Create a Declaration record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor atp, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>

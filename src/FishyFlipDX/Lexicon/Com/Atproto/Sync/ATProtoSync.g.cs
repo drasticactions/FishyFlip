@@ -56,29 +56,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
-        /// DEPRECATED - please use com.atproto.sync.getRepo instead
-        /// </summary>
-        /// <param name="did"></param>
-        /// <param name="onDecoded"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<Result<Success?>> GetCheckoutAsync (FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
-        {
-            return atp.GetCheckoutAsync(did, onDecoded, cancellationToken);
-        }
-
-
-        /// <summary>
-        /// DEPRECATED - please use com.atproto.sync.getLatestCommit instead
-        /// </summary>
-        /// <param name="did"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput?>> GetHeadAsync (FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
-        {
-            return atp.GetHeadAsync(did, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Get the current commit CID & revision of the specified repo. Does not require auth.
         /// </summary>
         /// <param name="did"></param>

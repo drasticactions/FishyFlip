@@ -19,15 +19,14 @@ namespace FishyFlip.Lexicon
         /// Create a Generator record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateGeneratorAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Generator record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateGeneratorAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Lexicon.App.Bsky.Feed.Generator record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.generator", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.generator", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -110,15 +109,14 @@ namespace FishyFlip.Lexicon
         /// Create a Like record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateLikeAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Like record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateLikeAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Lexicon.App.Bsky.Feed.Like record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.like", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.like", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -186,15 +184,14 @@ namespace FishyFlip.Lexicon
         /// Create a Post record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreatePostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Post record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Lexicon.App.Bsky.Feed.Post record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.post", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.post", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -284,15 +281,14 @@ namespace FishyFlip.Lexicon
         /// Create a Postgate record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Postgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePostgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Lexicon.App.Bsky.Feed.Postgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.postgate", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.postgate", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -367,15 +363,14 @@ namespace FishyFlip.Lexicon
         /// Create a Repost record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Repost record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Lexicon.App.Bsky.Feed.Repost record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.repost", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.repost", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -443,15 +438,14 @@ namespace FishyFlip.Lexicon
         /// Create a Threadgate record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Feed.Threadgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateThreadgateAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Lexicon.App.Bsky.Feed.Threadgate record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.feed.threadgate", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.threadgate", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>

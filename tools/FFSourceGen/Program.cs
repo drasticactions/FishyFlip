@@ -337,6 +337,7 @@ public partial class AppCommands
                     var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
                     var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
                     this.GenerateParams(sb, item, inputProperties);
@@ -347,6 +348,7 @@ public partial class AppCommands
                     var properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
                     // replace collection with the first input property.
                     properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
+                    properties[properties.IndexOf("repo")] = $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
                     sb.AppendLine(")");
                     sb.AppendLine("        {");
                     sb.AppendLine($"            return atp.ATProtocol.CreateRecordAsync({string.Join(", ", properties)});");
@@ -1352,6 +1354,12 @@ public partial class AppCommands
         {
             var classGeneration = new ClassGeneration(schemaDocument, definition.Key, definition.Value, path);
             Console.WriteLine(classGeneration.ToString());
+            if (classGeneration.Definition.Description.Contains("deprecated", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"Skipping deprecated class: {classGeneration.Id}");
+                continue;
+            }
+
             AllClasses.Add(classGeneration);
             if (classGeneration.Definition.Output is not null && classGeneration.Definition.Output.Schema?.Type == "object")
             {

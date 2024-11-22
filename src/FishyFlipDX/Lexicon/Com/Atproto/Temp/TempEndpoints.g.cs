@@ -13,11 +13,27 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
     public static class TempEndpoints
     {
 
+       public const string AddReservedHandle = "/xrpc/com.atproto.temp.addReservedHandle";
+
        public const string CheckSignupQueue = "/xrpc/com.atproto.temp.checkSignupQueue";
 
-       public const string FetchLabels = "/xrpc/com.atproto.temp.fetchLabels";
-
        public const string RequestPhoneVerification = "/xrpc/com.atproto.temp.requestPhoneVerification";
+
+
+        /// <summary>
+        /// Add a handle to the set of reserved handles.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="handle"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>> AddReservedHandleAsync (this FishyFlip.ATProtocol atp, string handle, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = AddReservedHandle.ToString();
+            var inputItem = new AddReservedHandleInput();
+            inputItem.Handle = handle;
+            return atp.Client.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+        }
 
 
         /// <summary>
@@ -30,34 +46,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         {
             var endpointUrl = CheckSignupQueue.ToString();
             return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// DEPRECATED: use queryLabels or subscribeLabels instead -- Fetch all labels from a labeler created after a certain date.
-        /// </summary>
-        /// <param name="atp"></param>
-        /// <param name="since"></param>
-        /// <param name="limit"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?>> FetchLabelsAsync (this FishyFlip.ATProtocol atp, int? since = 0, int? limit = 50, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = FetchLabels.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            if (since != null)
-            {
-                queryStrings.Add("since=" + since);
-            }
-
-            if (limit != null)
-            {
-                queryStrings.Add("limit=" + limit);
-            }
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempFetchLabelsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 

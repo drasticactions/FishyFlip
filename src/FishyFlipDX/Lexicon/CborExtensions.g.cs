@@ -281,10 +281,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.Post(obj);
                 case "app.bsky.feed.post#replyRef":
                     return new App.Bsky.Feed.ReplyRefDef(obj);
-                case "app.bsky.feed.post#entity":
-                    return new App.Bsky.Feed.Entity(obj);
-                case "app.bsky.feed.post#textSlice":
-                    return new App.Bsky.Feed.TextSlice(obj);
                 case "app.bsky.feed.postgate":
                     return new App.Bsky.Feed.Postgate(obj);
                 case "app.bsky.feed.postgate#disableRule":
@@ -703,8 +699,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.RevokeAppPasswordInput(obj);
                 case "com.atproto.server.updateEmail#UpdateEmailInput":
                     return new Com.Atproto.Server.UpdateEmailInput(obj);
-                case "com.atproto.sync.getHead#GetHeadOutput":
-                    return new Com.Atproto.Sync.GetHeadOutput(obj);
                 case "com.atproto.sync.getLatestCommit#GetLatestCommitOutput":
                     return new Com.Atproto.Sync.GetLatestCommitOutput(obj);
                 case "com.atproto.sync.getRepoStatus#GetRepoStatusOutput":
@@ -725,20 +719,16 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.Identity(obj);
                 case "com.atproto.sync.subscribeRepos#account":
                     return new Com.Atproto.Sync.Account(obj);
-                case "com.atproto.sync.subscribeRepos#handle":
-                    return new Com.Atproto.Sync.Handle(obj);
-                case "com.atproto.sync.subscribeRepos#migrate":
-                    return new Com.Atproto.Sync.Migrate(obj);
-                case "com.atproto.sync.subscribeRepos#tombstone":
-                    return new Com.Atproto.Sync.Tombstone(obj);
                 case "com.atproto.sync.subscribeRepos#info":
                     return new Com.Atproto.Sync.Info(obj);
                 case "com.atproto.sync.subscribeRepos#repoOp":
                     return new Com.Atproto.Sync.RepoOp(obj);
+                case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
+                    return new Com.Atproto.Temp.AddReservedHandleOutput(obj);
+                case "com.atproto.temp.addReservedHandle#AddReservedHandleInput":
+                    return new Com.Atproto.Temp.AddReservedHandleInput(obj);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
                     return new Com.Atproto.Temp.CheckSignupQueueOutput(obj);
-                case "com.atproto.temp.fetchLabels#FetchLabelsOutput":
-                    return new Com.Atproto.Temp.FetchLabelsOutput(obj);
                 case "com.atproto.temp.requestPhoneVerification#RequestPhoneVerificationInput":
                     return new Com.Atproto.Temp.RequestPhoneVerificationInput(obj);
                 case "tools.ozone.communication.createTemplate#CreateTemplateInput":

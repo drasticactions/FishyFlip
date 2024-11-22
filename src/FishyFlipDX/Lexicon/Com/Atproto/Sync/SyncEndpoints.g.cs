@@ -17,10 +17,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
        public const string GetBlocks = "/xrpc/com.atproto.sync.getBlocks";
 
-       public const string GetCheckout = "/xrpc/com.atproto.sync.getCheckout";
-
-       public const string GetHead = "/xrpc/com.atproto.sync.getHead";
-
        public const string GetLatestCommit = "/xrpc/com.atproto.sync.getLatestCommit";
 
        public const string GetRecord = "/xrpc/com.atproto.sync.getRecord";
@@ -82,47 +78,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
-        }
-
-
-        /// <summary>
-        /// DEPRECATED - please use com.atproto.sync.getRepo instead
-        /// </summary>
-        /// <param name="atp"></param>
-        /// <param name="did"></param>
-        /// <param name="onDecoded"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> GetCheckoutAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = GetCheckout.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
-
-            queryStrings.Add("onDecoded=" + onDecoded);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
-        }
-
-
-        /// <summary>
-        /// DEPRECATED - please use com.atproto.sync.getLatestCommit instead
-        /// </summary>
-        /// <param name="atp"></param>
-        /// <param name="did"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput?>> GetHeadAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = GetHead.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetHeadOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 

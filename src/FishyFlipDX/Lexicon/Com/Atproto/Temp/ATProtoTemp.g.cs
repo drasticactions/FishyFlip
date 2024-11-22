@@ -31,24 +31,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
 
         /// <summary>
+        /// Add a handle to the set of reserved handles.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>> AddReservedHandleAsync (string handle, CancellationToken cancellationToken = default)
+        {
+            return atp.AddReservedHandleAsync(handle, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Check accounts location in signup queue.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?>> CheckSignupQueueAsync (CancellationToken cancellationToken = default)
         {
             return atp.CheckSignupQueueAsync(cancellationToken);
-        }
-
-
-        /// <summary>
-        /// DEPRECATED: use queryLabels or subscribeLabels instead -- Fetch all labels from a labeler created after a certain date.
-        /// </summary>
-        /// <param name="since"></param>
-        /// <param name="limit"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?>> FetchLabelsAsync (int? since = 0, int? limit = 50, CancellationToken cancellationToken = default)
-        {
-            return atp.FetchLabelsAsync(since, limit, cancellationToken);
         }
 
 

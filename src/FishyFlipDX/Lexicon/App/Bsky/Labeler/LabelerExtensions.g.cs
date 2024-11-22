@@ -19,15 +19,14 @@ namespace FishyFlip.Lexicon
         /// Create a Service record.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
         /// <param name="record"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.App.Bsky.Labeler.Service record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, FishyFlip.Lexicon.App.Bsky.Labeler.Service record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(repo, "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
