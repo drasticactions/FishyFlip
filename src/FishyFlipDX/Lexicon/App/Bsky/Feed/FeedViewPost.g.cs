@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedViewPost"/> class.
         /// </summary>
+        /// <param name="post"></param>
+        /// <param name="reply"></param>
+        /// <param name="reason">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost"/> (app.bsky.feed.defs#reasonRepost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin)
+        /// </param>
+        /// <param name="feedContext">Context provided by feed generator that may be passed back alongside interactions.</param>
         public FeedViewPost(App.Bsky.Feed.PostView? post = default, App.Bsky.Feed.ReplyRef? reply = default, ATObject? reason = default, string? feedContext = default)
         {
             this.Post = post;
@@ -40,17 +48,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the post.
+        /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
         public App.Bsky.Feed.PostView? Post { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reply.
+        /// </summary>
         [JsonPropertyName("reply")]
         public App.Bsky.Feed.ReplyRef? Reply { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reason.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost"/> (app.bsky.feed.defs#reasonRepost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin)
+        /// </summary>
         [JsonPropertyName("reason")]
         public ATObject? Reason { get; set; }
 
         /// <summary>
+        /// Gets or sets the feedContext.
         /// Context provided by feed generator that may be passed back alongside interactions.
         /// </summary>
         [JsonPropertyName("feedContext")]

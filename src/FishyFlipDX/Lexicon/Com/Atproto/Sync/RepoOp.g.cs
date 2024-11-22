@@ -15,6 +15,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="RepoOp"/> class.
         /// </summary>
+        /// <param name="action">
+        /// Known Values:
+        /// create
+        /// update
+        /// delete
+        /// </param>
+        /// <param name="path"></param>
+        /// <param name="cid">For creates and updates, the new record CID. For deletions, null.</param>
         public RepoOp(string? action = default, string? path = default, Ipfs.Cid? cid = default)
         {
             this.Action = action;
@@ -36,20 +44,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public RepoOp(CBORObject obj)
         {
-            // enum
+            if (obj["action"] is not null) this.Action = obj["action"].AsString();
             if (obj["path"] is not null) this.Path = obj["path"].AsString();
             if (obj["cid"] is not null) this.Cid = obj["cid"].ToATCid();
         }
 
+        /// <summary>
+        /// Gets or sets the action.
+        /// Known Values:
+        /// create
+        /// update
+        /// delete
+        /// </summary>
         [JsonPropertyName("action")]
         [JsonRequired]
         public string? Action { get; set; }
 
+        /// <summary>
+        /// Gets or sets the path.
+        /// </summary>
         [JsonPropertyName("path")]
         [JsonRequired]
         public string? Path { get; set; }
 
         /// <summary>
+        /// Gets or sets the cid.
         /// For creates and updates, the new record CID. For deletions, null.
         /// </summary>
         [JsonPropertyName("cid")]

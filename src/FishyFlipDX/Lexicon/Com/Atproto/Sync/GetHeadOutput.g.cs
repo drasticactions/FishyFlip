@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="GetHeadOutput"/> class.
         /// </summary>
+        /// <param name="root"></param>
         public GetHeadOutput(string? root = default)
         {
             this.Root = root;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["root"] is not null) this.Root = obj["root"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the root.
+        /// </summary>
         [JsonPropertyName("root")]
         [JsonRequired]
         public string? Root { get; set; }

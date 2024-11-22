@@ -12,6 +12,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="BlobView"/> class.
         /// </summary>
+        /// <param name="cid"></param>
+        /// <param name="mimeType"></param>
+        /// <param name="size"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="details">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails"/> (tools.ozone.moderation.defs#imageDetails)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails"/> (tools.ozone.moderation.defs#videoDetails)
+        /// </param>
+        /// <param name="moderation"></param>
         public BlobView(string? cid = default, string? mimeType = default, long? size = default, DateTime? createdAt = default, ATObject? details = default, Tools.Ozone.Moderation.Moderation? moderation = default)
         {
             this.Cid = cid;
@@ -44,25 +54,46 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["moderation"] is not null) this.Moderation = new Tools.Ozone.Moderation.Moderation(obj["moderation"]);
         }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the mimeType.
+        /// </summary>
         [JsonPropertyName("mimeType")]
         [JsonRequired]
         public string? MimeType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the size.
+        /// </summary>
         [JsonPropertyName("size")]
         [JsonRequired]
         public long? Size { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the details.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails"/> (tools.ozone.moderation.defs#imageDetails)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails"/> (tools.ozone.moderation.defs#videoDetails)
+        /// </summary>
         [JsonPropertyName("details")]
         public ATObject? Details { get; set; }
 
+        /// <summary>
+        /// Gets or sets the moderation.
+        /// </summary>
         [JsonPropertyName("moderation")]
         public Tools.Ozone.Moderation.Moderation? Moderation { get; set; }
 

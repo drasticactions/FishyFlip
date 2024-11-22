@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Relationship"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="following">if the actor follows this DID, this is the AT-URI of the follow record</param>
+        /// <param name="followedBy">if the actor is followed by this DID, contains the AT-URI of the follow record</param>
         public Relationship(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default)
         {
             this.Did = did;
@@ -41,12 +44,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["followedBy"] is not null) this.FollowedBy = obj["followedBy"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
         /// <summary>
+        /// Gets or sets the following.
         /// if the actor follows this DID, this is the AT-URI of the follow record
         /// </summary>
         [JsonPropertyName("following")]
@@ -54,6 +61,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public FishyFlip.Models.ATUri? Following { get; set; }
 
         /// <summary>
+        /// Gets or sets the followedBy.
         /// if the actor is followed by this DID, contains the AT-URI of the follow record
         /// </summary>
         [JsonPropertyName("followedBy")]

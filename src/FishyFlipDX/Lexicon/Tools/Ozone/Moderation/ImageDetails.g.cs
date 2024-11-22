@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageDetails"/> class.
         /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public ImageDetails(long? width = default, long? height = default)
         {
             this.Width = width;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["height"] is not null) this.Height = obj["height"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
         [JsonPropertyName("width")]
         [JsonRequired]
         public long? Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
         [JsonPropertyName("height")]
         [JsonRequired]
         public long? Height { get; set; }

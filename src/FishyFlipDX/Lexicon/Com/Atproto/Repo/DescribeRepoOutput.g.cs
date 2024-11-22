@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="DescribeRepoOutput"/> class.
         /// </summary>
+        /// <param name="handle"></param>
+        /// <param name="did"></param>
+        /// <param name="didDoc">The complete DID document for this account.</param>
+        /// <param name="collections">List of all the collections (NSIDs) for which this repo contains at least one record.</param>
+        /// <param name="handleIsCorrect">Indicates if handle is currently valid (resolves bi-directionally)</param>
         public DescribeRepoOutput(FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, List<string>? collections = default, bool? handleIsCorrect = default)
         {
             this.Handle = handle;
@@ -42,17 +47,24 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["handleIsCorrect"] is not null) this.HandleIsCorrect = obj["handleIsCorrect"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
         /// <summary>
+        /// Gets or sets the didDoc.
         /// The complete DID document for this account.
         /// </summary>
         [JsonPropertyName("didDoc")]
@@ -60,6 +72,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
 
         /// <summary>
+        /// Gets or sets the collections.
         /// List of all the collections (NSIDs) for which this repo contains at least one record.
         /// </summary>
         [JsonPropertyName("collections")]
@@ -67,6 +80,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public List<string>? Collections { get; set; }
 
         /// <summary>
+        /// Gets or sets the handleIsCorrect.
         /// Indicates if handle is currently valid (resolves bi-directionally)
         /// </summary>
         [JsonPropertyName("handleIsCorrect")]

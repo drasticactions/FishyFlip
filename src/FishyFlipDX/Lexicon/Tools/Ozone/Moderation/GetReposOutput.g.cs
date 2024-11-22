@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetReposOutput"/> class.
         /// </summary>
+        /// <param name="repos">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/> (tools.ozone.moderation.defs#repoViewDetail)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound)
+        /// </param>
         public GetReposOutput(List<ATObject>? repos = default)
         {
             this.Repos = repos;
@@ -34,6 +39,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the repos.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/> (tools.ozone.moderation.defs#repoViewDetail)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound)
+        /// </summary>
         [JsonPropertyName("repos")]
         [JsonRequired]
         public List<ATObject>? Repos { get; set; }

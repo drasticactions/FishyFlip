@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadViewPost"/> class.
         /// </summary>
+        /// <param name="post"></param>
+        /// <param name="parent">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </param>
+        /// <param name="replies">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </param>
         public ThreadViewPost(App.Bsky.Feed.PostView? post = default, ATObject? parent = default, List<ATObject>? replies = default)
         {
             this.Post = post;
@@ -38,13 +51,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["replies"] is not null) this.Replies = obj["replies"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the post.
+        /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
         public App.Bsky.Feed.PostView? Post { get; set; }
 
+        /// <summary>
+        /// Gets or sets the parent.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </summary>
         [JsonPropertyName("parent")]
         public ATObject? Parent { get; set; }
 
+        /// <summary>
+        /// Gets or sets the replies.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// </summary>
         [JsonPropertyName("replies")]
         public List<ATObject>? Replies { get; set; }
 

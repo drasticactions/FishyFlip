@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="RelatedAccount"/> class.
         /// </summary>
+        /// <param name="account"></param>
+        /// <param name="similarities"></param>
         public RelatedAccount(Com.Atproto.Admin.AccountView? account = default, List<Tools.Ozone.Signature.SigDetail>? similarities = default)
         {
             this.Account = account;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             if (obj["similarities"] is not null) this.Similarities = obj["similarities"].Values.Select(n =>new Tools.Ozone.Signature.SigDetail(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the account.
+        /// </summary>
         [JsonPropertyName("account")]
         [JsonRequired]
         public Com.Atproto.Admin.AccountView? Account { get; set; }
 
+        /// <summary>
+        /// Gets or sets the similarities.
+        /// </summary>
         [JsonPropertyName("similarities")]
         public List<Tools.Ozone.Signature.SigDetail>? Similarities { get; set; }
 

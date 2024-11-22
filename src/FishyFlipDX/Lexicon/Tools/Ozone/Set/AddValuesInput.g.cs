@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="AddValuesInput"/> class.
         /// </summary>
+        /// <param name="name">Name of the set to add values to</param>
+        /// <param name="values">Array of string values to add to the set</param>
         public AddValuesInput(string? name = default, List<string>? values = default)
         {
             this.Name = name;
@@ -37,6 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         }
 
         /// <summary>
+        /// Gets or sets the name.
         /// Name of the set to add values to
         /// </summary>
         [JsonPropertyName("name")]
@@ -44,6 +47,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the values.
         /// Array of string values to add to the set
         /// </summary>
         [JsonPropertyName("values")]

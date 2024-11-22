@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateTemplateInput"/> class.
         /// </summary>
+        /// <param name="name">Name of the template.</param>
+        /// <param name="contentMarkdown">Content of the template, markdown supported, can contain variable placeholders.</param>
+        /// <param name="subject">Subject of the message, used in emails.</param>
+        /// <param name="lang">Message language.</param>
+        /// <param name="createdBy">DID of the user who is creating the template.</param>
         public CreateTemplateInput(string? name = default, string? contentMarkdown = default, string? subject = default, string? lang = default, FishyFlip.Models.ATDid? createdBy = default)
         {
             this.Name = name;
@@ -43,6 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         }
 
         /// <summary>
+        /// Gets or sets the name.
         /// Name of the template.
         /// </summary>
         [JsonPropertyName("name")]
@@ -50,6 +56,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the contentMarkdown.
         /// Content of the template, markdown supported, can contain variable placeholders.
         /// </summary>
         [JsonPropertyName("contentMarkdown")]
@@ -57,6 +64,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public string? ContentMarkdown { get; set; }
 
         /// <summary>
+        /// Gets or sets the subject.
         /// Subject of the message, used in emails.
         /// </summary>
         [JsonPropertyName("subject")]
@@ -64,12 +72,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public string? Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets the lang.
         /// Message language.
         /// </summary>
         [JsonPropertyName("lang")]
         public string? Lang { get; set; }
 
         /// <summary>
+        /// Gets or sets the createdBy.
         /// DID of the user who is creating the template.
         /// </summary>
         [JsonPropertyName("createdBy")]

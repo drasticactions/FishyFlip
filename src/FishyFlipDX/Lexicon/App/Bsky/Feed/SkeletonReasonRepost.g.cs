@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonReasonRepost"/> class.
         /// </summary>
+        /// <param name="repost"></param>
         public SkeletonReasonRepost(FishyFlip.Models.ATUri? repost = default)
         {
             this.Repost = repost;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["repost"] is not null) this.Repost = obj["repost"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the repost.
+        /// </summary>
         [JsonPropertyName("repost")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

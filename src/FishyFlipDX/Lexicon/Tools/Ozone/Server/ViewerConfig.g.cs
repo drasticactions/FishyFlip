@@ -12,6 +12,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewerConfig"/> class.
         /// </summary>
+        /// <param name="role">
+        /// Known Values:
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// </param>
         public ViewerConfig(string? role = default)
         {
             this.Role = role;
@@ -31,9 +37,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         public ViewerConfig(CBORObject obj)
         {
-            // enum
+            if (obj["role"] is not null) this.Role = obj["role"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the role.
+        /// Known Values:
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// </summary>
         [JsonPropertyName("role")]
         public string? Role { get; set; }
 

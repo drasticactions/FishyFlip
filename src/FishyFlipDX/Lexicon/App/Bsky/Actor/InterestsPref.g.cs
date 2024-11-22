@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="InterestsPref"/> class.
         /// </summary>
+        /// <param name="tags">A list of tags which describe the account owner's interests gathered during onboarding.</param>
         public InterestsPref(List<string>? tags = default)
         {
             this.Tags = tags;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         }
 
         /// <summary>
+        /// Gets or sets the tags.
         /// A list of tags which describe the account owner's interests gathered during onboarding.
         /// </summary>
         [JsonPropertyName("tags")]

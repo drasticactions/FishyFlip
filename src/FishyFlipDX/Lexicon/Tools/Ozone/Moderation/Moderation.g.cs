@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="Moderation"/> class.
         /// </summary>
+        /// <param name="subjectStatus"></param>
         public Moderation(Tools.Ozone.Moderation.SubjectStatusView? subjectStatus = default)
         {
             this.SubjectStatus = subjectStatus;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subjectStatus"] is not null) this.SubjectStatus = new Tools.Ozone.Moderation.SubjectStatusView(obj["subjectStatus"]);
         }
 
+        /// <summary>
+        /// Gets or sets the subjectStatus.
+        /// </summary>
         [JsonPropertyName("subjectStatus")]
         public Tools.Ozone.Moderation.SubjectStatusView? SubjectStatus { get; set; }
 

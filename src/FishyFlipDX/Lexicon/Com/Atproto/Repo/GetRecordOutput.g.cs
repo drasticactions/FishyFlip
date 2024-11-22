@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRecordOutput"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="value"></param>
         public GetRecordOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? value = default)
         {
             this.Uri = uri;
@@ -38,14 +41,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public ATObject? Value { get; set; }

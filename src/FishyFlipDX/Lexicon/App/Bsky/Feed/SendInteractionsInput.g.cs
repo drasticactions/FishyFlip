@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SendInteractionsInput"/> class.
         /// </summary>
+        /// <param name="interactions"></param>
         public SendInteractionsInput(List<App.Bsky.Feed.Interaction>? interactions = default)
         {
             this.Interactions = interactions;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["interactions"] is not null) this.Interactions = obj["interactions"].Values.Select(n =>new App.Bsky.Feed.Interaction(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the interactions.
+        /// </summary>
         [JsonPropertyName("interactions")]
         [JsonRequired]
         public List<App.Bsky.Feed.Interaction>? Interactions { get; set; }

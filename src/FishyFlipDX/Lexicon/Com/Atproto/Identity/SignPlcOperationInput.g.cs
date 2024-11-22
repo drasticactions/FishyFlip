@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="SignPlcOperationInput"/> class.
         /// </summary>
+        /// <param name="token">A token received through com.atproto.identity.requestPlcOperationSignature</param>
+        /// <param name="rotationKeys"></param>
+        /// <param name="alsoKnownAs"></param>
+        /// <param name="verificationMethods"></param>
+        /// <param name="services"></param>
         public SignPlcOperationInput(string? token = default, List<string>? rotationKeys = default, List<string>? alsoKnownAs = default, ATObject? verificationMethods = default, ATObject? services = default)
         {
             this.Token = token;
@@ -43,20 +48,33 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         }
 
         /// <summary>
+        /// Gets or sets the token.
         /// A token received through com.atproto.identity.requestPlcOperationSignature
         /// </summary>
         [JsonPropertyName("token")]
         public string? Token { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rotationKeys.
+        /// </summary>
         [JsonPropertyName("rotationKeys")]
         public List<string>? RotationKeys { get; set; }
 
+        /// <summary>
+        /// Gets or sets the alsoKnownAs.
+        /// </summary>
         [JsonPropertyName("alsoKnownAs")]
         public List<string>? AlsoKnownAs { get; set; }
 
+        /// <summary>
+        /// Gets or sets the verificationMethods.
+        /// </summary>
         [JsonPropertyName("verificationMethods")]
         public ATObject? VerificationMethods { get; set; }
 
+        /// <summary>
+        /// Gets or sets the services.
+        /// </summary>
         [JsonPropertyName("services")]
         public ATObject? Services { get; set; }
 

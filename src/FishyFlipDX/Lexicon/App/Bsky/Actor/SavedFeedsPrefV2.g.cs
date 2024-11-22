@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="SavedFeedsPrefV2"/> class.
         /// </summary>
+        /// <param name="items"></param>
         public SavedFeedsPrefV2(List<App.Bsky.Actor.SavedFeed>? items = default)
         {
             this.Items = items;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new App.Bsky.Actor.SavedFeed(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]
         public List<App.Bsky.Actor.SavedFeed>? Items { get; set; }

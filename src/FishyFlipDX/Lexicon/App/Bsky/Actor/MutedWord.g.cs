@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="MutedWord"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value">The muted word itself.</param>
+        /// <param name="targets">The intended targets of the muted word.</param>
+        /// <param name="actorTarget">Groups of users to apply the muted word to. If undefined, applies to all users.
+        /// Known Values:
+        /// all
+        /// exclude-following
+        /// </param>
+        /// <param name="expiresAt">The date and time at which the muted word will expire and no longer be applied.</param>
         public MutedWord(string? id = default, string? value = default, List<string>? targets = default, string? actorTarget = default, DateTime? expiresAt = default)
         {
             this.Id = id;
@@ -41,14 +50,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
             if (obj["targets"] is not null) this.Targets = obj["targets"].Values.Select(n =>n.AsString()).ToList();
-            // enum
+            if (obj["actorTarget"] is not null) this.ActorTarget = obj["actorTarget"].AsString();
             if (obj["expiresAt"] is not null) this.ExpiresAt = obj["expiresAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         public string? Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the value.
         /// The muted word itself.
         /// </summary>
         [JsonPropertyName("value")]
@@ -56,6 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public string? Value { get; set; }
 
         /// <summary>
+        /// Gets or sets the targets.
         /// The intended targets of the muted word.
         /// </summary>
         [JsonPropertyName("targets")]
@@ -63,12 +77,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public List<string>? Targets { get; set; }
 
         /// <summary>
+        /// Gets or sets the actorTarget.
         /// Groups of users to apply the muted word to. If undefined, applies to all users.
+        /// Known Values:
+        /// all
+        /// exclude-following
         /// </summary>
         [JsonPropertyName("actorTarget")]
         public string? ActorTarget { get; set; } = "all";
 
         /// <summary>
+        /// Gets or sets the expiresAt.
         /// The date and time at which the muted word will expire and no longer be applied.
         /// </summary>
         [JsonPropertyName("expiresAt")]

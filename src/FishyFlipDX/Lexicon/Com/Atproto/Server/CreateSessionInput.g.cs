@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSessionInput"/> class.
         /// </summary>
+        /// <param name="identifier">Handle or other identifier supported by the server for the authenticating user.</param>
+        /// <param name="password"></param>
+        /// <param name="authFactorToken"></param>
         public CreateSessionInput(string? identifier = default, string? password = default, string? authFactorToken = default)
         {
             this.Identifier = identifier;
@@ -39,16 +42,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         }
 
         /// <summary>
+        /// Gets or sets the identifier.
         /// Handle or other identifier supported by the server for the authenticating user.
         /// </summary>
         [JsonPropertyName("identifier")]
         [JsonRequired]
         public string? Identifier { get; set; }
 
+        /// <summary>
+        /// Gets or sets the password.
+        /// </summary>
         [JsonPropertyName("password")]
         [JsonRequired]
         public string? Password { get; set; }
 
+        /// <summary>
+        /// Gets or sets the authFactorToken.
+        /// </summary>
         [JsonPropertyName("authFactorToken")]
         public string? AuthFactorToken { get; set; }
 

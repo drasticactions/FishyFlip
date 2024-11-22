@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordHosting"/> class.
         /// </summary>
+        /// <param name="status">
+        /// Known Values:
+        /// deleted
+        /// unknown
+        /// </param>
+        /// <param name="updatedAt"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="deletedAt"></param>
         public RecordHosting(string? status = default, DateTime? updatedAt = default, DateTime? createdAt = default, DateTime? deletedAt = default)
         {
             this.Status = status;
@@ -34,22 +42,37 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public RecordHosting(CBORObject obj)
         {
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["deletedAt"] is not null) this.DeletedAt = obj["deletedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the status.
+        /// Known Values:
+        /// deleted
+        /// unknown
+        /// </summary>
         [JsonPropertyName("status")]
         [JsonRequired]
         public string? Status { get; set; }
 
+        /// <summary>
+        /// Gets or sets the updatedAt.
+        /// </summary>
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the deletedAt.
+        /// </summary>
         [JsonPropertyName("deletedAt")]
         public DateTime? DeletedAt { get; set; }
 

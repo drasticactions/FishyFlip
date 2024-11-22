@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Links"/> class.
         /// </summary>
+        /// <param name="privacyPolicy"></param>
+        /// <param name="termsOfService"></param>
         public Links(string? privacyPolicy = default, string? termsOfService = default)
         {
             this.PrivacyPolicy = privacyPolicy;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["termsOfService"] is not null) this.TermsOfService = obj["termsOfService"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the privacyPolicy.
+        /// </summary>
         [JsonPropertyName("privacyPolicy")]
         public string? PrivacyPolicy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the termsOfService.
+        /// </summary>
         [JsonPropertyName("termsOfService")]
         public string? TermsOfService { get; set; }
 

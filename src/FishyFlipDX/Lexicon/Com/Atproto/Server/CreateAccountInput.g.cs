@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAccountInput"/> class.
         /// </summary>
+        /// <param name="email"></param>
+        /// <param name="handle">Requested handle for the account.</param>
+        /// <param name="did">Pre-existing atproto DID, being imported to a new account.</param>
+        /// <param name="inviteCode"></param>
+        /// <param name="verificationCode"></param>
+        /// <param name="verificationPhone"></param>
+        /// <param name="password">Initial account password. May need to meet instance-specific password strength requirements.</param>
+        /// <param name="recoveryKey">DID PLC rotation key (aka, recovery key) to be included in PLC creation operation.</param>
+        /// <param name="plcOp">A signed DID PLC operation to be submitted as part of importing an existing account to this instance. NOTE: this optional field may be updated when full account migration is implemented.</param>
         public CreateAccountInput(string? email = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default)
         {
             this.Email = email;
@@ -50,10 +59,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["plcOp"] is not null) this.PlcOp = obj["plcOp"].ToATObject();
         }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
         /// <summary>
+        /// Gets or sets the handle.
         /// Requested handle for the account.
         /// </summary>
         [JsonPropertyName("handle")]
@@ -62,34 +75,47 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
         /// <summary>
+        /// Gets or sets the did.
         /// Pre-existing atproto DID, being imported to a new account.
         /// </summary>
         [JsonPropertyName("did")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the inviteCode.
+        /// </summary>
         [JsonPropertyName("inviteCode")]
         public string? InviteCode { get; set; }
 
+        /// <summary>
+        /// Gets or sets the verificationCode.
+        /// </summary>
         [JsonPropertyName("verificationCode")]
         public string? VerificationCode { get; set; }
 
+        /// <summary>
+        /// Gets or sets the verificationPhone.
+        /// </summary>
         [JsonPropertyName("verificationPhone")]
         public string? VerificationPhone { get; set; }
 
         /// <summary>
+        /// Gets or sets the password.
         /// Initial account password. May need to meet instance-specific password strength requirements.
         /// </summary>
         [JsonPropertyName("password")]
         public string? Password { get; set; }
 
         /// <summary>
+        /// Gets or sets the recoveryKey.
         /// DID PLC rotation key (aka, recovery key) to be included in PLC creation operation.
         /// </summary>
         [JsonPropertyName("recoveryKey")]
         public string? RecoveryKey { get; set; }
 
         /// <summary>
+        /// Gets or sets the plcOp.
         /// A signed DID PLC operation to be submitted as part of importing an existing account to this instance. NOTE: this optional field may be updated when full account migration is implemented.
         /// </summary>
         [JsonPropertyName("plcOp")]

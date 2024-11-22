@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="NotFoundActor"/> class.
         /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="notFound"></param>
         public NotFoundActor(FishyFlip.Models.ATIdentifier? actor = default, bool? notFound = default)
         {
             this.Actor = actor;
@@ -39,11 +41,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["notFound"] is not null) this.NotFound = obj["notFound"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the actor.
+        /// </summary>
         [JsonPropertyName("actor")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]
         public FishyFlip.Models.ATIdentifier? Actor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the notFound.
+        /// </summary>
         [JsonPropertyName("notFound")]
         [JsonRequired]
         public bool? NotFound { get; set; }

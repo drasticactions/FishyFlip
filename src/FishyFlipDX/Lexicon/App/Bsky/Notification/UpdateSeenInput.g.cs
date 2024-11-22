@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSeenInput"/> class.
         /// </summary>
+        /// <param name="seenAt"></param>
         public UpdateSeenInput(DateTime? seenAt = default)
         {
             this.SeenAt = seenAt;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["seenAt"] is not null) this.SeenAt = obj["seenAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the seenAt.
+        /// </summary>
         [JsonPropertyName("seenAt")]
         [JsonRequired]
         public DateTime? SeenAt { get; set; }

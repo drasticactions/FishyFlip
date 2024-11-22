@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="PutPreferencesInput"/> class.
         /// </summary>
+        /// <param name="priority"></param>
         public PutPreferencesInput(bool? priority = default)
         {
             this.Priority = priority;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["priority"] is not null) this.Priority = obj["priority"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
         [JsonPropertyName("priority")]
         [JsonRequired]
         public bool? Priority { get; set; }

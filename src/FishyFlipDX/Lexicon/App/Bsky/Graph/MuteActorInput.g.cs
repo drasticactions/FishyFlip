@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="MuteActorInput"/> class.
         /// </summary>
+        /// <param name="actor"></param>
         public MuteActorInput(FishyFlip.Models.ATIdentifier? actor = default)
         {
             this.Actor = actor;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["actor"] is not null) this.Actor = obj["actor"].ToATIdentifier();
         }
 
+        /// <summary>
+        /// Gets or sets the actor.
+        /// </summary>
         [JsonPropertyName("actor")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]

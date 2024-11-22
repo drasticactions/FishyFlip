@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="CommitMeta"/> class.
         /// </summary>
+        /// <param name="cid"></param>
+        /// <param name="rev"></param>
         public CommitMeta(string? cid = default, string? rev = default)
         {
             this.Cid = cid;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }

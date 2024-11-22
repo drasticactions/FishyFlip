@@ -15,6 +15,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Migrate"/> class.
         /// </summary>
+        /// <param name="seq"></param>
+        /// <param name="did"></param>
+        /// <param name="migrateTo"></param>
+        /// <param name="time"></param>
         public Migrate(long? seq = default, FishyFlip.Models.ATDid? did = default, string? migrateTo = default, DateTime? time = default)
         {
             this.Seq = seq;
@@ -43,19 +47,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the seq.
+        /// </summary>
         [JsonPropertyName("seq")]
         [JsonRequired]
         public long? Seq { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the migrateTo.
+        /// </summary>
         [JsonPropertyName("migrateTo")]
         [JsonRequired]
         public string? MigrateTo { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time.
+        /// </summary>
         [JsonPropertyName("time")]
         [JsonRequired]
         public DateTime? Time { get; set; }

@@ -12,6 +12,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Interaction"/> class.
         /// </summary>
+        /// <param name="item"></param>
+        /// <param name="@event">
+        /// Known Values:
+        /// requestLess - Request that less content like the given feed item be shown in the feed
+        /// requestMore - Request that more content like the given feed item be shown in the feed
+        /// clickthroughItem - User clicked through to the feed item
+        /// clickthroughAuthor - User clicked through to the author of the feed item
+        /// clickthroughReposter - User clicked through to the reposter of the feed item
+        /// clickthroughEmbed - User clicked through to the embedded content of the feed item
+        /// interactionSeen - Feed item was seen by user
+        /// interactionLike - User liked the feed item
+        /// interactionRepost - User reposted the feed item
+        /// interactionReply - User replied to the feed item
+        /// interactionQuote - User quoted the feed item
+        /// interactionShare - User shared the feed item
+        /// </param>
+        /// <param name="feedContext">Context on a feed item that was originally supplied by the feed generator on getFeedSkeleton.</param>
         public Interaction(FishyFlip.Models.ATUri? item = default, string? @event = default, string? feedContext = default)
         {
             this.Item = item;
@@ -34,18 +51,38 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Interaction(CBORObject obj)
         {
             if (obj["item"] is not null) this.Item = obj["item"].ToATUri();
-            // enum
+            if (obj["event"] is not null) this.Event = obj["event"].AsString();
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the item.
+        /// </summary>
         [JsonPropertyName("item")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Item { get; set; }
 
+        /// <summary>
+        /// Gets or sets the event.
+        /// Known Values:
+        /// requestLess - Request that less content like the given feed item be shown in the feed
+        /// requestMore - Request that more content like the given feed item be shown in the feed
+        /// clickthroughItem - User clicked through to the feed item
+        /// clickthroughAuthor - User clicked through to the author of the feed item
+        /// clickthroughReposter - User clicked through to the reposter of the feed item
+        /// clickthroughEmbed - User clicked through to the embedded content of the feed item
+        /// interactionSeen - Feed item was seen by user
+        /// interactionLike - User liked the feed item
+        /// interactionRepost - User reposted the feed item
+        /// interactionReply - User replied to the feed item
+        /// interactionQuote - User quoted the feed item
+        /// interactionShare - User shared the feed item
+        /// </summary>
         [JsonPropertyName("event")]
         public string? Event { get; set; }
 
         /// <summary>
+        /// Gets or sets the feedContext.
         /// Context on a feed item that was originally supplied by the feed generator on getFeedSkeleton.
         /// </summary>
         [JsonPropertyName("feedContext")]

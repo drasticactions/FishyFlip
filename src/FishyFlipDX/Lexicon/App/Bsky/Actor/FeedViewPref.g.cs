@@ -12,6 +12,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedViewPref"/> class.
         /// </summary>
+        /// <param name="feed">The URI of the feed, or an identifier which describes the feed.</param>
+        /// <param name="hideReplies">Hide replies in the feed.</param>
+        /// <param name="hideRepliesByUnfollowed">Hide replies in the feed if they are not by followed users.</param>
+        /// <param name="hideRepliesByLikeCount">Hide replies in the feed if they do not have this number of likes.</param>
+        /// <param name="hideReposts">Hide reposts in the feed.</param>
+        /// <param name="hideQuotePosts">Hide quote posts in the feed.</param>
         public FeedViewPref(string? feed = default, bool? hideReplies = default, bool? hideRepliesByUnfollowed = default, long? hideRepliesByLikeCount = default, bool? hideReposts = default, bool? hideQuotePosts = default)
         {
             this.Feed = feed;
@@ -45,6 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         }
 
         /// <summary>
+        /// Gets or sets the feed.
         /// The URI of the feed, or an identifier which describes the feed.
         /// </summary>
         [JsonPropertyName("feed")]
@@ -52,30 +59,35 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public string? Feed { get; set; }
 
         /// <summary>
+        /// Gets or sets the hideReplies.
         /// Hide replies in the feed.
         /// </summary>
         [JsonPropertyName("hideReplies")]
         public bool? HideReplies { get; set; }
 
         /// <summary>
+        /// Gets or sets the hideRepliesByUnfollowed.
         /// Hide replies in the feed if they are not by followed users.
         /// </summary>
         [JsonPropertyName("hideRepliesByUnfollowed")]
         public bool? HideRepliesByUnfollowed { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets the hideRepliesByLikeCount.
         /// Hide replies in the feed if they do not have this number of likes.
         /// </summary>
         [JsonPropertyName("hideRepliesByLikeCount")]
         public long? HideRepliesByLikeCount { get; set; }
 
         /// <summary>
+        /// Gets or sets the hideReposts.
         /// Hide reposts in the feed.
         /// </summary>
         [JsonPropertyName("hideReposts")]
         public bool? HideReposts { get; set; }
 
         /// <summary>
+        /// Gets or sets the hideQuotePosts.
         /// Hide quote posts in the feed.
         /// </summary>
         [JsonPropertyName("hideQuotePosts")]

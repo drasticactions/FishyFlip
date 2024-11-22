@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedItem"/> class.
         /// </summary>
+        /// <param name="uri"></param>
         public FeedItem(FishyFlip.Models.ATUri? uri = default)
         {
             this.Uri = uri;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

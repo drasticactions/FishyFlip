@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="Set"/> class.
         /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
         public Set(string? name = default, string? description = default)
         {
             this.Name = name;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 

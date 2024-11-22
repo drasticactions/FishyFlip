@@ -12,6 +12,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoveOptionsInput"/> class.
         /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="scope">
+        /// Known Values:
+        /// instance
+        /// personal
+        /// </param>
         public RemoveOptionsInput(List<string>? keys = default, string? scope = default)
         {
             this.Keys = keys;
@@ -33,13 +39,22 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public RemoveOptionsInput(CBORObject obj)
         {
             if (obj["keys"] is not null) this.Keys = obj["keys"].Values.Select(n =>n.AsString()).ToList();
-            // enum
+            if (obj["scope"] is not null) this.Scope = obj["scope"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the keys.
+        /// </summary>
         [JsonPropertyName("keys")]
         [JsonRequired]
         public List<string>? Keys { get; set; }
 
+        /// <summary>
+        /// Gets or sets the scope.
+        /// Known Values:
+        /// instance
+        /// personal
+        /// </summary>
         [JsonPropertyName("scope")]
         [JsonRequired]
         public string? Scope { get; set; }

@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelerView"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="creator"></param>
+        /// <param name="likeCount"></param>
+        /// <param name="viewer"></param>
+        /// <param name="indexedAt"></param>
+        /// <param name="labels"></param>
         public LabelerView(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileView? creator = default, long? likeCount = default, App.Bsky.Labeler.LabelerViewerState? viewer = default, DateTime? indexedAt = default, List<Com.Atproto.Label.Label>? labels = default)
         {
             this.Uri = uri;
@@ -46,29 +53,50 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the creator.
+        /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileView? Creator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the likeCount.
+        /// </summary>
         [JsonPropertyName("likeCount")]
         public long? LikeCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the viewer.
+        /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Labeler.LabelerViewerState? Viewer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 

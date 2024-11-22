@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Get details about ozone's server configuration.
         /// </summary>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput?>> GetConfigAsync (CancellationToken cancellationToken = default)
         {
             return atp.GetConfigAsync(cancellationToken);

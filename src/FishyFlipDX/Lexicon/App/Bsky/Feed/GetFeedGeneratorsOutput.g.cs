@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetFeedGeneratorsOutput"/> class.
         /// </summary>
+        /// <param name="feeds"></param>
         public GetFeedGeneratorsOutput(List<App.Bsky.Feed.GeneratorView>? feeds = default)
         {
             this.Feeds = feeds;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the feeds.
+        /// </summary>
         [JsonPropertyName("feeds")]
         [JsonRequired]
         public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }

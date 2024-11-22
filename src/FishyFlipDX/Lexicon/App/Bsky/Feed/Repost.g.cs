@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Repost"/> class.
         /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="createdAt"></param>
         public Repost(Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default)
         {
             this.Subject = subject;
@@ -39,9 +41,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// </summary>
         [JsonPropertyName("subject")]
         public Com.Atproto.Repo.StrongRef? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

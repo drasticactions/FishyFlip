@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="SendMessageInput"/> class.
         /// </summary>
+        /// <param name="convoId"></param>
+        /// <param name="message"></param>
         public SendMessageInput(string? convoId = default, Chat.Bsky.Convo.MessageInput? message = default)
         {
             this.ConvoId = convoId;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["message"] is not null) this.Message = new Chat.Bsky.Convo.MessageInput(obj["message"]);
         }
 
+        /// <summary>
+        /// Gets or sets the convoId.
+        /// </summary>
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string? ConvoId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the message.
+        /// </summary>
         [JsonPropertyName("message")]
         [JsonRequired]
         public Chat.Bsky.Convo.MessageInput? Message { get; set; }

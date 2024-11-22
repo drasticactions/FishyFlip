@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="RepoBlobRef"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="cid"></param>
+        /// <param name="recordUri"></param>
         public RepoBlobRef(FishyFlip.Models.ATDid? did = default, string? cid = default, FishyFlip.Models.ATUri? recordUri = default)
         {
             this.Did = did;
@@ -38,15 +41,24 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["recordUri"] is not null) this.RecordUri = obj["recordUri"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the recordUri.
+        /// </summary>
         [JsonPropertyName("recordUri")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? RecordUri { get; set; }

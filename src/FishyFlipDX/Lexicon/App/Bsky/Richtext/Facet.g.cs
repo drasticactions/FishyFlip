@@ -15,6 +15,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="Facet"/> class.
         /// </summary>
+        /// <param name="index"></param>
+        /// <param name="features">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Richtext.Mention"/> (app.bsky.richtext.facet#mention)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Richtext.Link"/> (app.bsky.richtext.facet#link)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Richtext.Tag"/> (app.bsky.richtext.facet#tag)
+        /// </param>
         public Facet(App.Bsky.Richtext.ByteSlice? index = default, List<ATObject>? features = default)
         {
             this.Index = index;
@@ -39,10 +46,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             if (obj["features"] is not null) this.Features = obj["features"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the index.
+        /// </summary>
         [JsonPropertyName("index")]
         [JsonRequired]
         public App.Bsky.Richtext.ByteSlice? Index { get; set; }
 
+        /// <summary>
+        /// Gets or sets the features.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Richtext.Mention"/> (app.bsky.richtext.facet#mention)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Richtext.Link"/> (app.bsky.richtext.facet#link)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Richtext.Tag"/> (app.bsky.richtext.facet#tag)
+        /// </summary>
         [JsonPropertyName("features")]
         [JsonRequired]
         public List<ATObject>? Features { get; set; }

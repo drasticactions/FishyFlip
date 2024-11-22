@@ -12,6 +12,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileAssociatedChat"/> class.
         /// </summary>
+        /// <param name="allowIncoming">
+        /// Known Values:
+        /// all
+        /// none
+        /// following
+        /// </param>
         public ProfileAssociatedChat(string? allowIncoming = default)
         {
             this.AllowIncoming = allowIncoming;
@@ -31,9 +37,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ProfileAssociatedChat(CBORObject obj)
         {
-            // enum
+            if (obj["allowIncoming"] is not null) this.AllowIncoming = obj["allowIncoming"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the allowIncoming.
+        /// Known Values:
+        /// all
+        /// none
+        /// following
+        /// </summary>
         [JsonPropertyName("allowIncoming")]
         [JsonRequired]
         public string? AllowIncoming { get; set; }

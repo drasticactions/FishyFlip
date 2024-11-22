@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="Caption"/> class.
         /// </summary>
+        /// <param name="lang"></param>
+        /// <param name="file"></param>
         public Caption(string? lang = default, Blob? file = default)
         {
             this.Lang = lang;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["file"] is not null) this.File = new FishyFlip.Models.Blob(obj["file"]);
         }
 
+        /// <summary>
+        /// Gets or sets the lang.
+        /// </summary>
         [JsonPropertyName("lang")]
         [JsonRequired]
         public string? Lang { get; set; }
 
+        /// <summary>
+        /// Gets or sets the file.
+        /// </summary>
         [JsonPropertyName("file")]
         [JsonRequired]
         public Blob? File { get; set; }

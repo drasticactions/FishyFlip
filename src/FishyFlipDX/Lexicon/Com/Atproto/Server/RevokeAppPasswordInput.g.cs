@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RevokeAppPasswordInput"/> class.
         /// </summary>
+        /// <param name="name"></param>
         public RevokeAppPasswordInput(string? name = default)
         {
             this.Name = name;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
         public string? Name { get; set; }

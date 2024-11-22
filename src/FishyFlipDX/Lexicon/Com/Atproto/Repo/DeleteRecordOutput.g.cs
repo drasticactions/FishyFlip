@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteRecordOutput"/> class.
         /// </summary>
+        /// <param name="commit"></param>
         public DeleteRecordOutput(Com.Atproto.Repo.CommitMeta? commit = default)
         {
             this.Commit = commit;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["commit"] is not null) this.Commit = new Com.Atproto.Repo.CommitMeta(obj["commit"]);
         }
 
+        /// <summary>
+        /// Gets or sets the commit.
+        /// </summary>
         [JsonPropertyName("commit")]
         public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 

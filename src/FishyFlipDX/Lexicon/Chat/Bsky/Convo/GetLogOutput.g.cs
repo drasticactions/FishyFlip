@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="GetLogOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="logs">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage)
+        /// </param>
         public GetLogOutput(string? cursor = default, List<ATObject>? logs = default)
         {
             this.Cursor = cursor;
@@ -36,9 +44,20 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["logs"] is not null) this.Logs = obj["logs"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the logs.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage)
+        /// </summary>
         [JsonPropertyName("logs")]
         [JsonRequired]
         public List<ATObject>? Logs { get; set; }

@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchStarterPacksSkeletonOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="hitsTotal">Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.</param>
+        /// <param name="starterPacks"></param>
         public SearchStarterPacksSkeletonOutput(string? cursor = default, long? hitsTotal = default, List<App.Bsky.Unspecced.SkeletonSearchStarterPack>? starterPacks = default)
         {
             this.Cursor = cursor;
@@ -38,15 +41,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Unspecced.SkeletonSearchStarterPack(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
         /// <summary>
+        /// Gets or sets the hitsTotal.
         /// Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.
         /// </summary>
         [JsonPropertyName("hitsTotal")]
         public long? HitsTotal { get; set; }
 
+        /// <summary>
+        /// Gets or sets the starterPacks.
+        /// </summary>
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
         public List<App.Bsky.Unspecced.SkeletonSearchStarterPack>? StarterPacks { get; set; }

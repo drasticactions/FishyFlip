@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="DescribeFeedGeneratorOutput"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="feeds"></param>
+        /// <param name="links"></param>
         public DescribeFeedGeneratorOutput(FishyFlip.Models.ATDid? did = default, List<App.Bsky.Feed.Feed>? feeds = default, App.Bsky.Feed.Links? links = default)
         {
             this.Did = did;
@@ -38,15 +41,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["links"] is not null) this.Links = new App.Bsky.Feed.Links(obj["links"]);
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the feeds.
+        /// </summary>
         [JsonPropertyName("feeds")]
         [JsonRequired]
         public List<App.Bsky.Feed.Feed>? Feeds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the links.
+        /// </summary>
         [JsonPropertyName("links")]
         public App.Bsky.Feed.Links? Links { get; set; }
 

@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SkeletonFeedPost"/> class.
         /// </summary>
+        /// <param name="post"></param>
+        /// <param name="reason">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost"/> (app.bsky.feed.defs#skeletonReasonRepost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin"/> (app.bsky.feed.defs#skeletonReasonPin)
+        /// </param>
+        /// <param name="feedContext">Context that will be passed through to client and may be passed to feed generator back alongside interactions.</param>
         public SkeletonFeedPost(FishyFlip.Models.ATUri? post = default, ATObject? reason = default, string? feedContext = default)
         {
             this.Post = post;
@@ -38,15 +45,25 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the post.
+        /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Post { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reason.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost"/> (app.bsky.feed.defs#skeletonReasonRepost)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin"/> (app.bsky.feed.defs#skeletonReasonPin)
+        /// </summary>
         [JsonPropertyName("reason")]
         public ATObject? Reason { get; set; }
 
         /// <summary>
+        /// Gets or sets the feedContext.
         /// Context that will be passed through to client and may be passed to feed generator back alongside interactions.
         /// </summary>
         [JsonPropertyName("feedContext")]

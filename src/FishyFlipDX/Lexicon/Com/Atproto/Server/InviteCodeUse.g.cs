@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="InviteCodeUse"/> class.
         /// </summary>
+        /// <param name="usedBy"></param>
+        /// <param name="usedAt"></param>
         public InviteCodeUse(FishyFlip.Models.ATDid? usedBy = default, DateTime? usedAt = default)
         {
             this.UsedBy = usedBy;
@@ -36,11 +38,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["usedAt"] is not null) this.UsedAt = obj["usedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the usedBy.
+        /// </summary>
         [JsonPropertyName("usedBy")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? UsedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the usedAt.
+        /// </summary>
         [JsonPropertyName("usedAt")]
         [JsonRequired]
         public DateTime? UsedAt { get; set; }

@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestEmailUpdateOutput"/> class.
         /// </summary>
+        /// <param name="tokenRequired"></param>
         public RequestEmailUpdateOutput(bool? tokenRequired = default)
         {
             this.TokenRequired = tokenRequired;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["tokenRequired"] is not null) this.TokenRequired = obj["tokenRequired"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the tokenRequired.
+        /// </summary>
         [JsonPropertyName("tokenRequired")]
         [JsonRequired]
         public bool? TokenRequired { get; set; }

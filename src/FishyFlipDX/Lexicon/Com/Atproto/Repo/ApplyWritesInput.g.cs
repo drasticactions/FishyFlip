@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplyWritesInput"/> class.
         /// </summary>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
+        /// <param name="validate">Can be set to 'false' to skip Lexicon schema validation of record data across all operations, 'true' to require it, or leave unset to validate only for known Lexicons.</param>
+        /// <param name="writes">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.Create"/> (com.atproto.repo.applyWrites#create)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.Update"/> (com.atproto.repo.applyWrites#update)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.Delete"/> (com.atproto.repo.applyWrites#delete)
+        /// </param>
+        /// <param name="swapCommit">If provided, the entire operation will fail if the current repo commit CID does not match this value. Used to prevent conflicting repo mutations.</param>
         public ApplyWritesInput(FishyFlip.Models.ATIdentifier? repo = default, bool? validate = default, List<ATObject>? writes = default, string? swapCommit = default)
         {
             this.Repo = repo;
@@ -41,6 +50,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         }
 
         /// <summary>
+        /// Gets or sets the repo.
         /// The handle or DID of the repo (aka, current account).
         /// </summary>
         [JsonPropertyName("repo")]
@@ -49,16 +59,25 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public FishyFlip.Models.ATIdentifier? Repo { get; set; }
 
         /// <summary>
+        /// Gets or sets the validate.
         /// Can be set to 'false' to skip Lexicon schema validation of record data across all operations, 'true' to require it, or leave unset to validate only for known Lexicons.
         /// </summary>
         [JsonPropertyName("validate")]
         public bool? Validate { get; set; }
 
+        /// <summary>
+        /// Gets or sets the writes.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.Create"/> (com.atproto.repo.applyWrites#create)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.Update"/> (com.atproto.repo.applyWrites#update)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.Delete"/> (com.atproto.repo.applyWrites#delete)
+        /// </summary>
         [JsonPropertyName("writes")]
         [JsonRequired]
         public List<ATObject>? Writes { get; set; }
 
         /// <summary>
+        /// Gets or sets the swapCommit.
         /// If provided, the entire operation will fail if the current repo commit CID does not match this value. Used to prevent conflicting repo mutations.
         /// </summary>
         [JsonPropertyName("swapCommit")]

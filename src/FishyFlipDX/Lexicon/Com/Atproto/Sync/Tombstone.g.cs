@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Tombstone"/> class.
         /// </summary>
+        /// <param name="seq"></param>
+        /// <param name="did"></param>
+        /// <param name="time"></param>
         public Tombstone(long? seq = default, FishyFlip.Models.ATDid? did = default, DateTime? time = default)
         {
             this.Seq = seq;
@@ -41,15 +44,24 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the seq.
+        /// </summary>
         [JsonPropertyName("seq")]
         [JsonRequired]
         public long? Seq { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time.
+        /// </summary>
         [JsonPropertyName("time")]
         [JsonRequired]
         public DateTime? Time { get; set; }

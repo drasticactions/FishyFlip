@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="Follow"/> class.
         /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="createdAt"></param>
         public Follow(FishyFlip.Models.ATDid? subject, DateTime? createdAt = default)
         {
             this.Subject = subject;
@@ -39,10 +41,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 

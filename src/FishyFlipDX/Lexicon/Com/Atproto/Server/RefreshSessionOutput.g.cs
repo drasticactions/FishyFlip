@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RefreshSessionOutput"/> class.
         /// </summary>
+        /// <param name="accessJwt"></param>
+        /// <param name="refreshJwt"></param>
+        /// <param name="handle"></param>
+        /// <param name="did"></param>
+        /// <param name="didDoc"></param>
+        /// <param name="active"></param>
+        /// <param name="status">Hosting status of the account. If not specified, then assume 'active'.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
+        /// </param>
         public RefreshSessionOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, bool? active = default, string? status = default)
         {
             this.AccessJwt = accessJwt;
@@ -43,35 +55,58 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             // Ignore DidDoc
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the accessJwt.
+        /// </summary>
         [JsonPropertyName("accessJwt")]
         [JsonRequired]
         public string? AccessJwt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the refreshJwt.
+        /// </summary>
         [JsonPropertyName("refreshJwt")]
         [JsonRequired]
         public string? RefreshJwt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the didDoc.
+        /// </summary>
         [JsonPropertyName("didDoc")]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
 
+        /// <summary>
+        /// Gets or sets the active.
+        /// </summary>
         [JsonPropertyName("active")]
         public bool? Active { get; set; }
 
         /// <summary>
+        /// Gets or sets the status.
         /// Hosting status of the account. If not specified, then assume 'active'.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deactivated
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

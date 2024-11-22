@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActorMetadataOutput"/> class.
         /// </summary>
+        /// <param name="day"></param>
+        /// <param name="month"></param>
+        /// <param name="all"></param>
         public GetActorMetadataOutput(Chat.Bsky.Moderation.Metadata? day = default, Chat.Bsky.Moderation.Metadata? month = default, Chat.Bsky.Moderation.Metadata? all = default)
         {
             this.Day = day;
@@ -38,14 +41,23 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             if (obj["all"] is not null) this.All = new Chat.Bsky.Moderation.Metadata(obj["all"]);
         }
 
+        /// <summary>
+        /// Gets or sets the day.
+        /// </summary>
         [JsonPropertyName("day")]
         [JsonRequired]
         public Chat.Bsky.Moderation.Metadata? Day { get; set; }
 
+        /// <summary>
+        /// Gets or sets the month.
+        /// </summary>
         [JsonPropertyName("month")]
         [JsonRequired]
         public Chat.Bsky.Moderation.Metadata? Month { get; set; }
 
+        /// <summary>
+        /// Gets or sets the all.
+        /// </summary>
         [JsonPropertyName("all")]
         [JsonRequired]
         public Chat.Bsky.Moderation.Metadata? All { get; set; }

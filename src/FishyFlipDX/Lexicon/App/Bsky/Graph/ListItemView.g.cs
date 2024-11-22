@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="ListItemView"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="subject"></param>
         public ListItemView(FishyFlip.Models.ATUri? uri = default, App.Bsky.Actor.ProfileView? subject = default)
         {
             this.Uri = uri;
@@ -36,11 +38,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["subject"] is not null) this.Subject = new App.Bsky.Actor.ProfileView(obj["subject"]);
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileView? Subject { get; set; }

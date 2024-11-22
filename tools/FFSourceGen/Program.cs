@@ -241,6 +241,7 @@ public partial class AppCommands
                 sb.AppendLine($"        /// <summary>");
                 sb.AppendLine($"        /// {description}");
                 sb.AppendLine($"        /// </summary>");
+                this.GenerateParams(sb, item, inputProperties);
                 sb.Append($"        public Task<Result<{outputProperty}?>> {methodName} (");
                 for (int i = 0; i < inputProperties.Count; i++)
                 {
@@ -333,12 +334,13 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Create a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
                     var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -353,7 +355,6 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Create a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, false);
                     requiredProperties.Remove(requiredProperties.First(n => n == "string collection"));
                     requiredProperties.Remove(requiredProperties.First(n => n == "ATObject record"));
@@ -365,6 +366,8 @@ public partial class AppCommands
                     var totalOptionalProperties = propertyOptionalProperties.Concat(optionalProperties).ToList();
                     inputProperties = totalRequiredProperties.Concat(totalOptionalProperties).ToList();
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -395,11 +398,12 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Delete a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -413,12 +417,13 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Put a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{this.baseNamespace}.{item.FullClassName} record";
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -433,11 +438,12 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// List {item.ClassName} records.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -487,12 +493,13 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Create a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
                     var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
                     inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -509,12 +516,12 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Create a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, false);
                     requiredProperties.Remove(requiredProperties.First(n => n == "string collection"));
                     requiredProperties.Remove(requiredProperties.First(n => n == "ATObject record"));
                     requiredProperties.Remove(requiredProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
-
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
                     var (propertyRequiredProperties, propertyOptionalProperties) = this.FetchInputPropertiesFromProperties(item, true);
                     propertyOptionalProperties.RemoveAt(propertyOptionalProperties.Count - 1);
                     var totalRequiredProperties = propertyRequiredProperties.Concat(requiredProperties).ToList();
@@ -548,10 +555,11 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Delete a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<DeleteRecordOutput?>> Delete{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -565,11 +573,12 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// Put a {item.ClassName} record.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
                     inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -584,10 +593,11 @@ public partial class AppCommands
                     sb.AppendLine("        /// <summary>");
                     sb.AppendLine($"        /// List {item.ClassName} records.");
                     sb.AppendLine("        /// </summary>");
-                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
                     inputProperties.Remove(inputProperties.First(n => n == "string collection"));
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}sAsync(");
                     this.GenerateInputProperties(sb, inputProperties);
                     (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords);
                     inputProperties = requiredProperties.Concat(optionalProperties).ToList();
@@ -626,6 +636,170 @@ public partial class AppCommands
         }
     }
 
+    private void GenerateParams(StringBuilder sb, ClassGeneration item, List<string> inputProperties)
+    {
+        foreach (var prop2 in inputProperties)
+        {
+            var testName = prop2.Replace("this ", string.Empty).Split(" ")[1];
+            sb.Append($"        /// <param name=\"{testName}\">");
+            var propName = testName.Replace("@", string.Empty);
+            var prop = item.Properties.FirstOrDefault(n => n.Key == propName);
+            if (prop is null && (item.Definition.Input?.Schema?.Properties.Any() ?? false))
+            {
+                var prop3 = item.Definition.Input.Schema.Properties.FirstOrDefault(n => n.Key == propName);
+                if (prop3.Value?.Ref is not null)
+                {
+                    var cls = FindClassFromRef(prop3.Value.Ref);
+                    if (cls is not null)
+                    {
+                        if (cls.Definition.Description is not null)
+                        {
+                            sb.Append(cls.Definition.Description);
+                        }
+
+                        if (cls.Definition.Type == "union" || (cls.Definition.Type == "array" && cls.Definition.Items?.Type == "union"))
+                        {
+                            sb.AppendLine();
+                            sb.AppendLine($"        /// Union Types:");
+                            var refs = cls.Definition.Refs ?? cls.Definition.Items?.Refs;
+                            foreach (var unionType in refs!)
+                            {
+                                var refString = unionType;
+                                var refSplit = unionType.Split("#");
+                                if (string.IsNullOrEmpty(refSplit[0]))
+                                {
+                                    var id = $"{item.Namespace}.defs";
+                                    refString = $"{id}#{refSplit[1]}";
+                                }
+
+                                var cls2 = FindClassFromRef(refString);
+                                if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
+                                {
+                                    sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                                }
+                                else
+                                {
+                                    sb.AppendLine($"        /// {unionType}");
+                                }
+                            }
+
+                            sb.AppendLine("        /// </param>");
+                        }
+                        else if (cls.Definition.KnownValues?.Any() ?? false)
+                        {
+                            sb.AppendLine();
+                            sb.AppendLine($"        /// Known Values:");
+                            foreach (var knownValue in cls.Definition.KnownValues)
+                            {
+                                var refString = knownValue;
+                                var refSplit = knownValue.Split("#");
+                                if (string.IsNullOrEmpty(refSplit[0]))
+                                {
+                                    refString = $"{item.Id}#{refSplit[1]}";
+                                }
+
+                                var cls2 = FindClassFromRef(refString);
+                                if (cls2 is not null)
+                                {
+                                    sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}");
+                                }
+                                else
+                                {
+                                    sb.AppendLine($"        /// {knownValue.Split("#").Last()}");
+                                }
+                            }
+
+                            sb.AppendLine("        /// </param>");
+                        }
+                        else
+                        {
+                            sb.AppendLine("</param>");
+                        }
+                    }
+                    else
+                    {
+                        sb.AppendLine("</param>");
+                    }
+                }
+                else
+                {
+                    sb.AppendLine("</param>");
+                }
+
+                continue;
+            }
+
+            if (prop is null)
+            {
+                sb.AppendLine("</param>");
+                continue;
+            }
+
+            if (!string.IsNullOrEmpty(prop?.PropertyDefinition.Description))
+            {
+                sb.Append(prop.PropertyDefinition.Description);
+            }
+
+            if (prop?.PropertyDefinition.Type == "union" || (prop?.PropertyDefinition.Type == "array" && prop?.PropertyDefinition.Items?.Type == "union"))
+            {
+                sb.AppendLine();
+                sb.AppendLine($"        /// Union Types:");
+                var refs = prop.PropertyDefinition.Refs ?? prop.PropertyDefinition.Items?.Refs;
+                foreach (var unionType in refs!)
+                {
+                    var refString = unionType;
+                    var refSplit = unionType.Split("#");
+                    if (string.IsNullOrEmpty(refSplit[0]))
+                    {
+                        refString = $"{item.Id.Split("#").First()}#{refSplit[1]}";
+                    }
+
+                    var cls2 = FindClassFromRef(refString);
+                    if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
+                    {
+                        sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"        /// {unionType}");
+                    }
+                }
+
+                sb.AppendLine("        /// </param>");
+            }
+            else if (prop?.PropertyDefinition.KnownValues?.Any() ?? false)
+            {
+                sb.AppendLine();
+                sb.AppendLine($"        /// Known Values:");
+                foreach (var knownValue in prop.PropertyDefinition.KnownValues)
+                {
+                    var refString = knownValue;
+                    var refSplit = knownValue.Split("#");
+                    if (string.IsNullOrEmpty(refSplit[0]))
+                    {
+                        refString = $"{item.Id}#{refSplit[1]}";
+                    }
+
+                    var cls2 = FindClassFromRef(refString);
+                    if (cls2 is not null)
+                    {
+                        sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"        /// {knownValue.Split("#").Last()}");
+                    }
+                }
+
+                sb.AppendLine("        /// </param>");
+            }
+            else
+            {
+                sb.AppendLine("</param>");
+            }
+        }
+    }
+
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
     {
             Console.WriteLine($"Generating Endpoint Group: {group.Key}");
@@ -660,6 +834,8 @@ public partial class AppCommands
                 sb.AppendLine($"        /// <summary>");
                 sb.AppendLine($"        /// {description}");
                 sb.AppendLine($"        /// </summary>");
+                this.GenerateParams(sb, item, inputProperties);
+                sb.AppendLine($"        /// <returns>Result of <see cref=\"{outputProperty}?\"/></returns>");
                 sb.Append($"        public static Task<Result<{outputProperty}?>> {methodName} (");
                 for (int i = 0; i < inputProperties.Count; i++)
                 {
@@ -1341,7 +1517,80 @@ public partial class AppCommands
         sb.AppendLine("        /// <summary>");
         sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{cls.ClassName}\"/> class.");
         sb.AppendLine("        /// </summary>");
-        
+        foreach (var item in inputProperties)
+        {
+            sb.Append($"        /// <param name=\"{item.Split(" ")[1]}\">");
+            var propName = item.Split(" ")[1].Replace("@", string.Empty);
+            var prop = cls.Properties.FirstOrDefault(n => n.Key == propName);
+            if (prop is null)
+            {
+                sb.AppendLine("</param>");
+                continue;
+            }
+
+            if (!string.IsNullOrEmpty(prop?.PropertyDefinition.Description))
+            {
+                sb.Append(prop.PropertyDefinition.Description);
+            }
+
+            if (prop?.PropertyDefinition.Type == "union" || (prop?.PropertyDefinition.Type == "array" && prop?.PropertyDefinition.Items?.Type == "union"))
+            {
+                sb.AppendLine();
+                sb.AppendLine($"        /// Union Types:");
+                var refs = prop.PropertyDefinition.Refs ?? prop.PropertyDefinition.Items?.Refs;
+                foreach (var unionType in refs!)
+                {
+                    var refString = unionType;
+                    var refSplit = unionType.Split("#");
+                    if (string.IsNullOrEmpty(refSplit[0]))
+                    {
+                        refString = $"{cls.Id.Split("#").First()}#{refSplit[1]}";
+                    }
+
+                    var cls2 = FindClassFromRef(refString);
+                    if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
+                    {
+                        sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"        /// {unionType}");
+                    }
+                }
+
+                sb.AppendLine("        /// </param>");
+            }
+            else if (prop?.PropertyDefinition.KnownValues?.Any() ?? false)
+            {
+                sb.AppendLine();
+                sb.AppendLine($"        /// Known Values:");
+                foreach (var knownValue in prop.PropertyDefinition.KnownValues)
+                {
+                    var refString = knownValue;
+                    var refSplit = knownValue.Split("#");
+                    if (string.IsNullOrEmpty(refSplit[0]))
+                    {
+                        refString = $"{cls.Id}#{refSplit[1]}";
+                    }
+
+                    var cls2 = FindClassFromRef(refString);
+                    if (cls2 is not null)
+                    {
+                        sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"        /// {knownValue.Split("#").Last()}");
+                    }
+                }
+
+                sb.AppendLine("        /// </param>");
+            }
+            else
+            {
+                sb.AppendLine("</param>");
+            }
+        }
         sb.Append($"        public {cls.ClassName}(");
         for (int i = 0; i < inputProperties.Count; i++)
         {
@@ -1385,13 +1634,63 @@ public partial class AppCommands
     {
         Console.WriteLine($"Generating Property for {property.Document.Id}: {property.Key}, {property.Type}");
 
+        sb.AppendLine($"        /// <summary>");
+        sb.AppendLine($"        /// Gets or sets the {property.Key}.");
         // Add property documentation if available
         if (!string.IsNullOrEmpty(property.PropertyDefinition.Description))
         {
-            sb.AppendLine($"        /// <summary>");
             sb.AppendLine($"        /// {property.PropertyDefinition.Description}");
-            sb.AppendLine($"        /// </summary>");
         }
+
+        if (property?.PropertyDefinition.Type == "union" || (property?.PropertyDefinition.Type == "array" && property?.PropertyDefinition.Items?.Type == "union"))
+        {
+            sb.AppendLine($"        /// Union Types:");
+            var refs = property.PropertyDefinition.Refs ?? property.PropertyDefinition.Items?.Refs;
+            foreach (var unionType in refs!)
+            {
+                var refString = unionType;
+                var refSplit = unionType.Split("#");
+                if (string.IsNullOrEmpty(refSplit[0]))
+                {
+                    refString = $"{cls.Id.Split("#").First()}#{refSplit[1]}";
+                }
+
+                var cls2 = FindClassFromRef(refString);
+                if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
+                {
+                    sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                }
+                else
+                {
+                    sb.AppendLine($"        /// {unionType}");
+                }
+            }
+        }
+        else if (property?.PropertyDefinition.KnownValues?.Any() ?? false)
+        {
+            sb.AppendLine($"        /// Known Values:");
+            foreach (var knownValue in property.PropertyDefinition.KnownValues)
+            {
+                var refString = knownValue;
+                var refSplit = knownValue.Split("#");
+                if (string.IsNullOrEmpty(refSplit[0]))
+                {
+                    refString = $"{cls.Id}#{refSplit[1]}";
+                }
+
+                var cls2 = FindClassFromRef(refString);
+                if (cls2 is not null)
+                {
+                    sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}");
+                }
+                else
+                {
+                    sb.AppendLine($"        /// {knownValue.Split("#").Last()}");
+                }
+            }
+        }
+
+        sb.AppendLine($"        /// </summary>");
 
         // Add JSON property name attribute
         sb.AppendLine($"        [JsonPropertyName(\"{property.Key}\")]");
@@ -1589,17 +1888,6 @@ public partial class AppCommands
     }
 
     private void GenerateClassDocumentation(StringBuilder sb, SchemaDefinition definition)
-    {
-        // Add class documentation if available
-        if (!string.IsNullOrEmpty(definition.Description))
-        {
-            sb.AppendLine($"    /// <summary>");
-            sb.AppendLine($"    /// {definition.Description}");
-            sb.AppendLine($"    /// </summary>");
-        }
-    }
-
-    private void GenerateClassDocumentation(StringBuilder sb, PropertyDefinition definition)
     {
         // Add class documentation if available
         if (!string.IsNullOrEmpty(definition.Description))

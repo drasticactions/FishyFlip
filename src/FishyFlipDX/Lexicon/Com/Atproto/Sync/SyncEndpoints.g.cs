@@ -13,49 +13,39 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     public static class SyncEndpoints
     {
 
-       public const string GetHead = "/xrpc/com.atproto.sync.getHead";
-
        public const string GetBlob = "/xrpc/com.atproto.sync.getBlob";
-
-       public const string GetRepo = "/xrpc/com.atproto.sync.getRepo";
-
-       public const string NotifyOfUpdate = "/xrpc/com.atproto.sync.notifyOfUpdate";
-
-       public const string RequestCrawl = "/xrpc/com.atproto.sync.requestCrawl";
-
-       public const string ListBlobs = "/xrpc/com.atproto.sync.listBlobs";
-
-       public const string GetLatestCommit = "/xrpc/com.atproto.sync.getLatestCommit";
-
-       public const string GetRepoStatus = "/xrpc/com.atproto.sync.getRepoStatus";
-
-       public const string GetRecord = "/xrpc/com.atproto.sync.getRecord";
-
-       public const string ListRepos = "/xrpc/com.atproto.sync.listRepos";
 
        public const string GetBlocks = "/xrpc/com.atproto.sync.getBlocks";
 
        public const string GetCheckout = "/xrpc/com.atproto.sync.getCheckout";
 
+       public const string GetHead = "/xrpc/com.atproto.sync.getHead";
 
-        /// <summary>
-        /// DEPRECATED - please use com.atproto.sync.getLatestCommit instead
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput?>> GetHeadAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = GetHead.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
+       public const string GetLatestCommit = "/xrpc/com.atproto.sync.getLatestCommit";
 
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetHeadOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
+       public const string GetRecord = "/xrpc/com.atproto.sync.getRecord";
+
+       public const string GetRepo = "/xrpc/com.atproto.sync.getRepo";
+
+       public const string GetRepoStatus = "/xrpc/com.atproto.sync.getRepoStatus";
+
+       public const string ListBlobs = "/xrpc/com.atproto.sync.listBlobs";
+
+       public const string ListRepos = "/xrpc/com.atproto.sync.listRepos";
+
+       public const string NotifyOfUpdate = "/xrpc/com.atproto.sync.notifyOfUpdate";
+
+       public const string RequestCrawl = "/xrpc/com.atproto.sync.requestCrawl";
 
 
         /// <summary>
         /// Get a blob associated with a given account. Returns the full blob as originally uploaded. Does not require auth; implemented by PDS.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> GetBlobAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetBlob.ToString();
@@ -71,8 +61,127 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
+        /// Get data blocks from a given repo, by CID. For example, intermediate MST nodes, or records. Does not require auth; implemented by PDS.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="cids"></param>
+        /// <param name="onDecoded"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> GetBlocksAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetBlocks.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
+
+            queryStrings.Add(string.Join("&", cids.Select(n => "cids=" + n)));
+
+            queryStrings.Add("onDecoded=" + onDecoded);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+        }
+
+
+        /// <summary>
+        /// DEPRECATED - please use com.atproto.sync.getRepo instead
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="onDecoded"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> GetCheckoutAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetCheckout.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
+
+            queryStrings.Add("onDecoded=" + onDecoded);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+        }
+
+
+        /// <summary>
+        /// DEPRECATED - please use com.atproto.sync.getLatestCommit instead
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput?>> GetHeadAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetHead.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetHeadOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetHeadOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Get the current commit CID & revision of the specified repo. Does not require auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?>> GetLatestCommitAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetLatestCommit.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Get data blocks needed to prove the existence or non-existence of record in the current version of repo. Does not require auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="collection"></param>
+        /// <param name="rkey"></param>
+        /// <param name="onDecoded"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetRecord.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
+
+            queryStrings.Add("collection=" + collection);
+
+            queryStrings.Add("rkey=" + rkey);
+
+            queryStrings.Add("onDecoded=" + onDecoded);
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+        }
+
+
+        /// <summary>
         /// Download a repository export as CAR file. Optionally only a 'diff' since a previous revision. Does not require auth; implemented by PDS.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="onDecoded"></param>
+        /// <param name="since"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRepo.ToString();
@@ -93,32 +202,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
-        /// Notify a crawling service of a recent update, and that crawling should resume. Intended use is after a gap between repo stream events caused the crawling service to disconnect. Does not require auth; implemented by Relay.
+        /// Get the hosting status for a repository, on this server. Expected to be implemented by PDS and Relay.
         /// </summary>
-        public static Task<Result<Success?>> NotifyOfUpdateAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?>> GetRepoStatusAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = NotifyOfUpdate.ToString();
-            var inputItem = new NotifyOfUpdateInput();
-            inputItem.Hostname = hostname;
-            return atp.Client.Post<NotifyOfUpdateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncNotifyOfUpdateInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
+            var endpointUrl = GetRepoStatus.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
 
-
-        /// <summary>
-        /// Request a service to persistently crawl hosted repos. Expected use is new PDS instances declaring their existence to Relays. Does not require auth.
-        /// </summary>
-        public static Task<Result<Success?>> RequestCrawlAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = RequestCrawl.ToString();
-            var inputItem = new RequestCrawlInput();
-            inputItem.Hostname = hostname;
-            return atp.Client.Post<RequestCrawlInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncRequestCrawlInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
         /// List blob CIDs for an account, since some repo revision. Does not require auth; implemented by PDS.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="since"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput?>> ListBlobsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? since = default, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListBlobs.ToString();
@@ -147,59 +258,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
-        /// Get the current commit CID & revision of the specified repo. Does not require auth.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?>> GetLatestCommitAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = GetLatestCommit.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Get the hosting status for a repository, on this server. Expected to be implemented by PDS and Relay.
-        /// </summary>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?>> GetRepoStatusAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = GetRepoStatus.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
-        /// Get data blocks needed to prove the existence or non-existence of record in the current version of repo. Does not require auth.
-        /// </summary>
-        public static Task<Result<Success?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = GetRecord.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
-
-            queryStrings.Add("collection=" + collection);
-
-            queryStrings.Add("rkey=" + rkey);
-
-            queryStrings.Add("onDecoded=" + onDecoded);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
-        }
-
-
-        /// <summary>
         /// Enumerates all the DID, rev, and commit CID for all repos hosted by this service. Does not require auth; implemented by PDS and Relay.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput?>> ListReposAsync (this FishyFlip.ATProtocol atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListRepos.ToString();
@@ -221,38 +286,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
-        /// Get data blocks from a given repo, by CID. For example, intermediate MST nodes, or records. Does not require auth; implemented by PDS.
+        /// Notify a crawling service of a recent update, and that crawling should resume. Intended use is after a gap between repo stream events caused the crawling service to disconnect. Does not require auth; implemented by Relay.
         /// </summary>
-        public static Task<Result<Success?>> GetBlocksAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        /// <param name="atp"></param>
+        /// <param name="hostname"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> NotifyOfUpdateAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = GetBlocks.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
-
-            queryStrings.Add(string.Join("&", cids.Select(n => "cids=" + n)));
-
-            queryStrings.Add("onDecoded=" + onDecoded);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+            var endpointUrl = NotifyOfUpdate.ToString();
+            var inputItem = new NotifyOfUpdateInput();
+            inputItem.Hostname = hostname;
+            return atp.Client.Post<NotifyOfUpdateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncNotifyOfUpdateInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 
         /// <summary>
-        /// DEPRECATED - please use com.atproto.sync.getRepo instead
+        /// Request a service to persistently crawl hosted repos. Expected use is new PDS instances declaring their existence to Relays. Does not require auth.
         /// </summary>
-        public static Task<Result<Success?>> GetCheckoutAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        /// <param name="atp"></param>
+        /// <param name="hostname"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> RequestCrawlAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = GetCheckout.ToString();
-            endpointUrl += "?";
-            List<string> queryStrings = new();
-            queryStrings.Add("did=" + did);
-
-            queryStrings.Add("onDecoded=" + onDecoded);
-
-            endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+            var endpointUrl = RequestCrawl.ToString();
+            var inputItem = new RequestCrawlInput();
+            inputItem.Hostname = hostname;
+            return atp.Client.Post<RequestCrawlInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncRequestCrawlInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

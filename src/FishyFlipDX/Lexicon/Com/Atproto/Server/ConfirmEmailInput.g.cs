@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfirmEmailInput"/> class.
         /// </summary>
+        /// <param name="email"></param>
+        /// <param name="token"></param>
         public ConfirmEmailInput(string? email = default, string? token = default)
         {
             this.Email = email;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         [JsonRequired]
         public string? Email { get; set; }
 
+        /// <summary>
+        /// Gets or sets the token.
+        /// </summary>
         [JsonPropertyName("token")]
         [JsonRequired]
         public string? Token { get; set; }

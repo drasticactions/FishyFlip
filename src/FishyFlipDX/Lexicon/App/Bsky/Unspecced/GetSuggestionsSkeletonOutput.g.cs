@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSuggestionsSkeletonOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="actors"></param>
+        /// <param name="relativeToDid">DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.</param>
         public GetSuggestionsSkeletonOutput(string? cursor = default, List<App.Bsky.Unspecced.SkeletonSearchActor>? actors = default, FishyFlip.Models.ATDid? relativeToDid = default)
         {
             this.Cursor = cursor;
@@ -38,14 +41,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["relativeToDid"] is not null) this.RelativeToDid = obj["relativeToDid"].ToATDid();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the actors.
+        /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
         public List<App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }
 
         /// <summary>
+        /// Gets or sets the relativeToDid.
         /// DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.
         /// </summary>
         [JsonPropertyName("relativeToDid")]

@@ -15,14 +15,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
        public const string CheckSignupQueue = "/xrpc/com.atproto.temp.checkSignupQueue";
 
-       public const string RequestPhoneVerification = "/xrpc/com.atproto.temp.requestPhoneVerification";
-
        public const string FetchLabels = "/xrpc/com.atproto.temp.fetchLabels";
+
+       public const string RequestPhoneVerification = "/xrpc/com.atproto.temp.requestPhoneVerification";
 
 
         /// <summary>
         /// Check accounts location in signup queue.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?>> CheckSignupQueueAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CheckSignupQueue.ToString();
@@ -31,20 +34,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
 
         /// <summary>
-        /// Request a verification code to be sent to the supplied phone number
-        /// </summary>
-        public static Task<Result<Success?>> RequestPhoneVerificationAsync (this FishyFlip.ATProtocol atp, string phoneNumber, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = RequestPhoneVerification.ToString();
-            var inputItem = new RequestPhoneVerificationInput();
-            inputItem.PhoneNumber = phoneNumber;
-            return atp.Client.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
-        }
-
-
-        /// <summary>
         /// DEPRECATED: use queryLabels or subscribeLabels instead -- Fetch all labels from a labeler created after a certain date.
         /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="since"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput?>> FetchLabelsAsync (this FishyFlip.ATProtocol atp, int? since = 0, int? limit = 50, CancellationToken cancellationToken = default)
         {
             var endpointUrl = FetchLabels.ToString();
@@ -62,6 +58,22 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
             endpointUrl += string.Join("&", queryStrings);
             return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Temp.FetchLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempFetchLabelsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+        }
+
+
+        /// <summary>
+        /// Request a verification code to be sent to the supplied phone number
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> RequestPhoneVerificationAsync (this FishyFlip.ATProtocol atp, string phoneNumber, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = RequestPhoneVerification.ToString();
+            var inputItem = new RequestPhoneVerificationInput();
+            inputItem.PhoneNumber = phoneNumber;
+            return atp.Client.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
     }

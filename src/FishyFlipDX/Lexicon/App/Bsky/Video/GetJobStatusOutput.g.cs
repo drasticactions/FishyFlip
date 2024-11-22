@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Initializes a new instance of the <see cref="GetJobStatusOutput"/> class.
         /// </summary>
+        /// <param name="jobStatus"></param>
         public GetJobStatusOutput(App.Bsky.Video.JobStatus? jobStatus = default)
         {
             this.JobStatus = jobStatus;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             if (obj["jobStatus"] is not null) this.JobStatus = new App.Bsky.Video.JobStatus(obj["jobStatus"]);
         }
 
+        /// <summary>
+        /// Gets or sets the jobStatus.
+        /// </summary>
         [JsonPropertyName("jobStatus")]
         [JsonRequired]
         public App.Bsky.Video.JobStatus? JobStatus { get; set; }

@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <summary>
         /// Initializes a new instance of the <see cref="FetchLabelsOutput"/> class.
         /// </summary>
+        /// <param name="labels"></param>
         public FetchLabelsOutput(List<Com.Atproto.Label.Label>? labels = default)
         {
             this.Labels = labels;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         [JsonRequired]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }

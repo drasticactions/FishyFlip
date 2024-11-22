@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateAccountHandleInput"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="handle"></param>
         public UpdateAccountHandleInput(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default)
         {
             this.Did = did;
@@ -36,11 +38,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]

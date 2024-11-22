@@ -15,6 +15,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Account"/> class.
         /// </summary>
+        /// <param name="seq"></param>
+        /// <param name="did"></param>
+        /// <param name="time"></param>
+        /// <param name="active">Indicates that the account has a repository which can be fetched from the host that emitted this event.</param>
+        /// <param name="status">If active=false, this optional field indicates a reason for why the account is not active.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deleted
+        /// deactivated
+        /// </param>
         public Account(long? seq = default, FishyFlip.Models.ATDid? did = default, DateTime? time = default, bool? active = default, string? status = default)
         {
             this.Seq = seq;
@@ -42,23 +53,33 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
-            // enum
+            if (obj["status"] is not null) this.Status = obj["status"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the seq.
+        /// </summary>
         [JsonPropertyName("seq")]
         [JsonRequired]
         public long? Seq { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time.
+        /// </summary>
         [JsonPropertyName("time")]
         [JsonRequired]
         public DateTime? Time { get; set; }
 
         /// <summary>
+        /// Gets or sets the active.
         /// Indicates that the account has a repository which can be fetched from the host that emitted this event.
         /// </summary>
         [JsonPropertyName("active")]
@@ -66,7 +87,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public bool? Active { get; set; }
 
         /// <summary>
+        /// Gets or sets the status.
         /// If active=false, this optional field indicates a reason for why the account is not active.
+        /// Known Values:
+        /// takendown
+        /// suspended
+        /// deleted
+        /// deactivated
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

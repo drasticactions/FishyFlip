@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="DeactivateAccountInput"/> class.
         /// </summary>
+        /// <param name="deleteAfter">A recommendation to server as to how long they should hold onto the deactivated account before deleting.</param>
         public DeactivateAccountInput(DateTime? deleteAfter = default)
         {
             this.DeleteAfter = deleteAfter;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         }
 
         /// <summary>
+        /// Gets or sets the deleteAfter.
         /// A recommendation to server as to how long they should hold onto the deactivated account before deleting.
         /// </summary>
         [JsonPropertyName("deleteAfter")]

@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplyWritesOutput"/> class.
         /// </summary>
+        /// <param name="commit"></param>
+        /// <param name="results">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CreateResult"/> (com.atproto.repo.applyWrites#createResult)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.UpdateResult"/> (com.atproto.repo.applyWrites#updateResult)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult"/> (com.atproto.repo.applyWrites#deleteResult)
+        /// </param>
         public ApplyWritesOutput(Com.Atproto.Repo.CommitMeta? commit = default, List<ATObject>? results = default)
         {
             this.Commit = commit;
@@ -36,9 +43,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["results"] is not null) this.Results = obj["results"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the commit.
+        /// </summary>
         [JsonPropertyName("commit")]
         public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
+        /// <summary>
+        /// Gets or sets the results.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CreateResult"/> (com.atproto.repo.applyWrites#createResult)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.UpdateResult"/> (com.atproto.repo.applyWrites#updateResult)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult"/> (com.atproto.repo.applyWrites#deleteResult)
+        /// </summary>
         [JsonPropertyName("results")]
         public List<ATObject>? Results { get; set; }
 

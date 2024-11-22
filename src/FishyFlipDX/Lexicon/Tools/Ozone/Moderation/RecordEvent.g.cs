@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordEvent"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="op">
+        /// Known Values:
+        /// create
+        /// update
+        /// delete
+        /// </param>
+        /// <param name="cid"></param>
+        /// <param name="timestamp"></param>
         public RecordEvent(string? comment = default, string? op = default, string? cid = default, DateTime? timestamp = default)
         {
             this.Comment = comment;
@@ -38,21 +47,37 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public RecordEvent(CBORObject obj)
         {
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
-            // enum
+            if (obj["op"] is not null) this.Op = obj["op"].AsString();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["timestamp"] is not null) this.Timestamp = obj["timestamp"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
+        /// <summary>
+        /// Gets or sets the op.
+        /// Known Values:
+        /// create
+        /// update
+        /// delete
+        /// </summary>
         [JsonPropertyName("op")]
         [JsonRequired]
         public string? Op { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timestamp.
+        /// </summary>
         [JsonPropertyName("timestamp")]
         [JsonRequired]
         public DateTime? Timestamp { get; set; }

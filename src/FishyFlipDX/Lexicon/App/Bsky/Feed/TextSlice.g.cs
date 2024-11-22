@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="TextSlice"/> class.
         /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         public TextSlice(long? start = default, long? end = default)
         {
             this.Start = start;
@@ -39,10 +41,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["end"] is not null) this.End = obj["end"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the start.
+        /// </summary>
         [JsonPropertyName("start")]
         [JsonRequired]
         public long? Start { get; set; }
 
+        /// <summary>
+        /// Gets or sets the end.
+        /// </summary>
         [JsonPropertyName("end")]
         [JsonRequired]
         public long? End { get; set; }

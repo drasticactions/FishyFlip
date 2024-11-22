@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="KnownFollowers"/> class.
         /// </summary>
+        /// <param name="count"></param>
+        /// <param name="followers"></param>
         public KnownFollowers(long? count = default, List<App.Bsky.Actor.ProfileViewBasic>? followers = default)
         {
             this.Count = count;
@@ -39,10 +41,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new App.Bsky.Actor.ProfileViewBasic(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the count.
+        /// </summary>
         [JsonPropertyName("count")]
         [JsonRequired]
         public long? Count { get; set; }
 
+        /// <summary>
+        /// Gets or sets the followers.
+        /// </summary>
         [JsonPropertyName("followers")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileViewBasic>? Followers { get; set; }

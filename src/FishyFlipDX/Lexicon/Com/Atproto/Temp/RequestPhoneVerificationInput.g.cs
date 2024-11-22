@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestPhoneVerificationInput"/> class.
         /// </summary>
+        /// <param name="phoneNumber"></param>
         public RequestPhoneVerificationInput(string? phoneNumber = default)
         {
             this.PhoneNumber = phoneNumber;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             if (obj["phoneNumber"] is not null) this.PhoneNumber = obj["phoneNumber"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the phoneNumber.
+        /// </summary>
         [JsonPropertyName("phoneNumber")]
         [JsonRequired]
         public string? PhoneNumber { get; set; }

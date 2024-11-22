@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySetsOutput"/> class.
         /// </summary>
+        /// <param name="sets"></param>
+        /// <param name="cursor"></param>
         public QuerySetsOutput(List<Tools.Ozone.Set.SetView>? sets = default, string? cursor = default)
         {
             this.Sets = sets;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the sets.
+        /// </summary>
         [JsonPropertyName("sets")]
         [JsonRequired]
         public List<Tools.Ozone.Set.SetView>? Sets { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 

@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="ModEventTakedown"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="durationInHours">Indicates how long the takedown should be in effect before automatically expiring.</param>
+        /// <param name="acknowledgeAccountSubjects">If true, all other reports on content authored by this account will be resolved (acknowledged).</param>
         public ModEventTakedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default)
         {
             this.Comment = comment;
@@ -41,16 +44,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["acknowledgeAccountSubjects"] is not null) this.AcknowledgeAccountSubjects = obj["acknowledgeAccountSubjects"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
         /// <summary>
+        /// Gets or sets the durationInHours.
         /// Indicates how long the takedown should be in effect before automatically expiring.
         /// </summary>
         [JsonPropertyName("durationInHours")]
         public long? DurationInHours { get; set; }
 
         /// <summary>
+        /// Gets or sets the acknowledgeAccountSubjects.
         /// If true, all other reports on content authored by this account will be resolved (acknowledged).
         /// </summary>
         [JsonPropertyName("acknowledgeAccountSubjects")]

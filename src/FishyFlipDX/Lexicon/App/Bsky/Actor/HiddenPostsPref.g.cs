@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="HiddenPostsPref"/> class.
         /// </summary>
+        /// <param name="items">A list of URIs of posts the account owner has hidden.</param>
         public HiddenPostsPref(List<FishyFlip.Models.ATUri>? items = default)
         {
             this.Items = items;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         }
 
         /// <summary>
+        /// Gets or sets the items.
         /// A list of URIs of posts the account owner has hidden.
         /// </summary>
         [JsonPropertyName("items")]

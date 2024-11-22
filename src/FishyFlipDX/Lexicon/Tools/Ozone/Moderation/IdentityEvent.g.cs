@@ -15,6 +15,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentityEvent"/> class.
         /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="handle"></param>
+        /// <param name="pdsHost"></param>
+        /// <param name="tombstone"></param>
+        /// <param name="timestamp"></param>
         public IdentityEvent(string? comment = default, FishyFlip.Models.ATHandle? handle = default, string? pdsHost = default, bool? tombstone = default, DateTime? timestamp = default)
         {
             this.Comment = comment;
@@ -45,19 +50,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["timestamp"] is not null) this.Timestamp = obj["timestamp"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the comment.
+        /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the pdsHost.
+        /// </summary>
         [JsonPropertyName("pdsHost")]
         public string? PdsHost { get; set; }
 
+        /// <summary>
+        /// Gets or sets the tombstone.
+        /// </summary>
         [JsonPropertyName("tombstone")]
         public bool? Tombstone { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timestamp.
+        /// </summary>
         [JsonPropertyName("timestamp")]
         [JsonRequired]
         public DateTime? Timestamp { get; set; }

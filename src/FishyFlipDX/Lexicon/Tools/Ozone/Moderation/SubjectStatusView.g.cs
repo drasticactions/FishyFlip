@@ -12,6 +12,33 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="SubjectStatusView"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="subject">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </param>
+        /// <param name="hosting">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting"/> (tools.ozone.moderation.defs#accountHosting)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting"/> (tools.ozone.moderation.defs#recordHosting)
+        /// </param>
+        /// <param name="subjectBlobCids"></param>
+        /// <param name="subjectRepoHandle"></param>
+        /// <param name="updatedAt">Timestamp referencing when the last update was made to the moderation status of the subject</param>
+        /// <param name="createdAt">Timestamp referencing the first moderation status impacting event was emitted on the subject</param>
+        /// <param name="reviewState"></param>
+        /// <param name="comment">Sticky comment on the subject.</param>
+        /// <param name="muteUntil"></param>
+        /// <param name="muteReportingUntil"></param>
+        /// <param name="lastReviewedBy"></param>
+        /// <param name="lastReviewedAt"></param>
+        /// <param name="lastReportedAt"></param>
+        /// <param name="lastAppealedAt">Timestamp referencing when the author of the subject appealed a moderation action</param>
+        /// <param name="takendown"></param>
+        /// <param name="appealed">True indicates that the a previously taken moderator action was appealed against, by the author of the content. False indicates last appeal was resolved by moderators.</param>
+        /// <param name="suspendUntil"></param>
+        /// <param name="tags"></param>
         public SubjectStatusView(long? id = default, ATObject? subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string? reviewState = default, string? comment = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default)
         {
             this.Id = id;
@@ -70,24 +97,46 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public long? Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public ATObject? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the hosting.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting"/> (tools.ozone.moderation.defs#accountHosting)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting"/> (tools.ozone.moderation.defs#recordHosting)
+        /// </summary>
         [JsonPropertyName("hosting")]
         public ATObject? Hosting { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subjectBlobCids.
+        /// </summary>
         [JsonPropertyName("subjectBlobCids")]
         public List<string>? SubjectBlobCids { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subjectRepoHandle.
+        /// </summary>
         [JsonPropertyName("subjectRepoHandle")]
         public string? SubjectRepoHandle { get; set; }
 
         /// <summary>
+        /// Gets or sets the updatedAt.
         /// Timestamp referencing when the last update was made to the moderation status of the subject
         /// </summary>
         [JsonPropertyName("updatedAt")]
@@ -95,56 +144,87 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
+        /// Gets or sets the createdAt.
         /// Timestamp referencing the first moderation status impacting event was emitted on the subject
         /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the reviewState.
+        /// </summary>
         [JsonPropertyName("reviewState")]
         [JsonRequired]
         public string? ReviewState { get; set; }
 
         /// <summary>
+        /// Gets or sets the comment.
         /// Sticky comment on the subject.
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
+        /// <summary>
+        /// Gets or sets the muteUntil.
+        /// </summary>
         [JsonPropertyName("muteUntil")]
         public DateTime? MuteUntil { get; set; }
 
+        /// <summary>
+        /// Gets or sets the muteReportingUntil.
+        /// </summary>
         [JsonPropertyName("muteReportingUntil")]
         public DateTime? MuteReportingUntil { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lastReviewedBy.
+        /// </summary>
         [JsonPropertyName("lastReviewedBy")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? LastReviewedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lastReviewedAt.
+        /// </summary>
         [JsonPropertyName("lastReviewedAt")]
         public DateTime? LastReviewedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lastReportedAt.
+        /// </summary>
         [JsonPropertyName("lastReportedAt")]
         public DateTime? LastReportedAt { get; set; }
 
         /// <summary>
+        /// Gets or sets the lastAppealedAt.
         /// Timestamp referencing when the author of the subject appealed a moderation action
         /// </summary>
         [JsonPropertyName("lastAppealedAt")]
         public DateTime? LastAppealedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the takendown.
+        /// </summary>
         [JsonPropertyName("takendown")]
         public bool? Takendown { get; set; }
 
         /// <summary>
+        /// Gets or sets the appealed.
         /// True indicates that the a previously taken moderator action was appealed against, by the author of the content. False indicates last appeal was resolved by moderators.
         /// </summary>
         [JsonPropertyName("appealed")]
         public bool? Appealed { get; set; }
 
+        /// <summary>
+        /// Gets or sets the suspendUntil.
+        /// </summary>
         [JsonPropertyName("suspendUntil")]
         public DateTime? SuspendUntil { get; set; }
 
+        /// <summary>
+        /// Gets or sets the tags.
+        /// </summary>
         [JsonPropertyName("tags")]
         public List<string>? Tags { get; set; }
 

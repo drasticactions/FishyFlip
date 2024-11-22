@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateActorAccessInput"/> class.
         /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="allowAccess"></param>
+        /// <param name="@ref"></param>
         public UpdateActorAccessInput(FishyFlip.Models.ATDid? actor = default, bool? allowAccess = default, string? @ref = default)
         {
             this.Actor = actor;
@@ -38,15 +41,24 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             if (obj["ref"] is not null) this.Ref = obj["ref"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the actor.
+        /// </summary>
         [JsonPropertyName("actor")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Actor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the allowAccess.
+        /// </summary>
         [JsonPropertyName("allowAccess")]
         [JsonRequired]
         public bool? AllowAccess { get; set; }
 
+        /// <summary>
+        /// Gets or sets the ref.
+        /// </summary>
         [JsonPropertyName("ref")]
         public string? Ref { get; set; }
 

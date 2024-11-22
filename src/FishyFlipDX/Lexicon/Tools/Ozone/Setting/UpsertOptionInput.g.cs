@@ -12,6 +12,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="UpsertOptionInput"/> class.
         /// </summary>
+        /// <param name="key"></param>
+        /// <param name="scope">
+        /// Known Values:
+        /// instance
+        /// personal
+        /// </param>
+        /// <param name="value"></param>
+        /// <param name="description"></param>
+        /// <param name="managerRole">
+        /// Known Values:
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// </param>
         public UpsertOptionInput(string? key = default, string? scope = default, ATObject? value = default, string? description = default, string? managerRole = default)
         {
             this.Key = key;
@@ -36,27 +50,49 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public UpsertOptionInput(CBORObject obj)
         {
             if (obj["key"] is not null) this.Key = obj["key"].AsString();
-            // enum
+            if (obj["scope"] is not null) this.Scope = obj["scope"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            // enum
+            if (obj["managerRole"] is not null) this.ManagerRole = obj["managerRole"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
         [JsonPropertyName("key")]
         [JsonRequired]
         public string? Key { get; set; }
 
+        /// <summary>
+        /// Gets or sets the scope.
+        /// Known Values:
+        /// instance
+        /// personal
+        /// </summary>
         [JsonPropertyName("scope")]
         [JsonRequired]
         public string? Scope { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public ATObject? Value { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the managerRole.
+        /// Known Values:
+        /// roleModerator - Moderator role. Can perform most actions.
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// </summary>
         [JsonPropertyName("managerRole")]
         public string? ManagerRole { get; set; }
 

@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Initializes a new instance of the <see cref="Member"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="disabled"></param>
+        /// <param name="profile"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="updatedAt"></param>
+        /// <param name="lastUpdatedBy"></param>
+        /// <param name="role">
+        /// Known Values:
+        /// roleAdmin
+        /// roleModerator
+        /// roleTriage
+        /// </param>
         public Member(FishyFlip.Models.ATDid? did = default, bool? disabled = default, App.Bsky.Actor.ProfileViewDetailed? profile = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? lastUpdatedBy = default, string? role = default)
         {
             this.Did = did;
@@ -43,29 +55,54 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
             if (obj["lastUpdatedBy"] is not null) this.LastUpdatedBy = obj["lastUpdatedBy"].AsString();
-            // enum
+            if (obj["role"] is not null) this.Role = obj["role"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the disabled.
+        /// </summary>
         [JsonPropertyName("disabled")]
         public bool? Disabled { get; set; }
 
+        /// <summary>
+        /// Gets or sets the profile.
+        /// </summary>
         [JsonPropertyName("profile")]
         public App.Bsky.Actor.ProfileViewDetailed? Profile { get; set; }
 
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets the updatedAt.
+        /// </summary>
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lastUpdatedBy.
+        /// </summary>
         [JsonPropertyName("lastUpdatedBy")]
         public string? LastUpdatedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the role.
+        /// Known Values:
+        /// roleAdmin
+        /// roleModerator
+        /// roleTriage
+        /// </summary>
         [JsonPropertyName("role")]
         [JsonRequired]
         public string? Role { get; set; }

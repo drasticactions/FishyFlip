@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="LogLeaveConvo"/> class.
         /// </summary>
+        /// <param name="rev"></param>
+        /// <param name="convoId"></param>
         public LogLeaveConvo(string? rev = default, string? convoId = default)
         {
             this.Rev = rev;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["convoId"] is not null) this.ConvoId = obj["convoId"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the rev.
+        /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string? Rev { get; set; }
 
+        /// <summary>
+        /// Gets or sets the convoId.
+        /// </summary>
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string? ConvoId { get; set; }

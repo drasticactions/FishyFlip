@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateEmailInput"/> class.
         /// </summary>
+        /// <param name="email"></param>
+        /// <param name="emailAuthFactor"></param>
+        /// <param name="token">Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.</param>
         public UpdateEmailInput(string? email = default, bool? emailAuthFactor = default, string? token = default)
         {
             this.Email = email;
@@ -38,14 +41,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         [JsonRequired]
         public string? Email { get; set; }
 
+        /// <summary>
+        /// Gets or sets the emailAuthFactor.
+        /// </summary>
         [JsonPropertyName("emailAuthFactor")]
         public bool? EmailAuthFactor { get; set; }
 
         /// <summary>
+        /// Gets or sets the token.
         /// Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.
         /// </summary>
         [JsonPropertyName("token")]

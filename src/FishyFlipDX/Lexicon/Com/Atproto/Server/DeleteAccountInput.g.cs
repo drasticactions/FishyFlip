@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteAccountInput"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="password"></param>
+        /// <param name="token"></param>
         public DeleteAccountInput(FishyFlip.Models.ATDid? did = default, string? password = default, string? token = default)
         {
             this.Did = did;
@@ -38,15 +41,24 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the password.
+        /// </summary>
         [JsonPropertyName("password")]
         [JsonRequired]
         public string? Password { get; set; }
 
+        /// <summary>
+        /// Gets or sets the token.
+        /// </summary>
         [JsonPropertyName("token")]
         [JsonRequired]
         public string? Token { get; set; }

@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchReposOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="repos"></param>
         public SearchReposOutput(string? cursor = default, List<Tools.Ozone.Moderation.RepoView>? repos = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n =>new Tools.Ozone.Moderation.RepoView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repos.
+        /// </summary>
         [JsonPropertyName("repos")]
         [JsonRequired]
         public List<Tools.Ozone.Moderation.RepoView>? Repos { get; set; }

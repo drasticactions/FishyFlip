@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetBlocksOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="blocks"></param>
         public GetBlocksOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? blocks = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["blocks"] is not null) this.Blocks = obj["blocks"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the blocks.
+        /// </summary>
         [JsonPropertyName("blocks")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileView>? Blocks { get; set; }

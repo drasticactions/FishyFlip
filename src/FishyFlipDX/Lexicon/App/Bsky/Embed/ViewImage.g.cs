@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewImage"/> class.
         /// </summary>
+        /// <param name="thumb">Fully-qualified URL where a thumbnail of the image can be fetched. For example, CDN location provided by the App View.</param>
+        /// <param name="fullsize">Fully-qualified URL where a large version of the image can be fetched. May or may not be the exact original blob. For example, CDN location provided by the App View.</param>
+        /// <param name="alt">Alt text description of the image, for accessibility.</param>
+        /// <param name="aspectRatio"></param>
         public ViewImage(string? thumb = default, string? fullsize = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
         {
             this.Thumb = thumb;
@@ -41,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         }
 
         /// <summary>
+        /// Gets or sets the thumb.
         /// Fully-qualified URL where a thumbnail of the image can be fetched. For example, CDN location provided by the App View.
         /// </summary>
         [JsonPropertyName("thumb")]
@@ -48,6 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public string? Thumb { get; set; }
 
         /// <summary>
+        /// Gets or sets the fullsize.
         /// Fully-qualified URL where a large version of the image can be fetched. May or may not be the exact original blob. For example, CDN location provided by the App View.
         /// </summary>
         [JsonPropertyName("fullsize")]
@@ -55,12 +61,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public string? Fullsize { get; set; }
 
         /// <summary>
+        /// Gets or sets the alt.
         /// Alt text description of the image, for accessibility.
         /// </summary>
         [JsonPropertyName("alt")]
         [JsonRequired]
         public string? Alt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the aspectRatio.
+        /// </summary>
         [JsonPropertyName("aspectRatio")]
         public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 

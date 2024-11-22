@@ -15,6 +15,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Handle"/> class.
         /// </summary>
+        /// <param name="seq"></param>
+        /// <param name="did"></param>
+        /// <param name="handle"></param>
+        /// <param name="time"></param>
         public Handle(long? seq = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, DateTime? time = default)
         {
             this.Seq = seq;
@@ -43,20 +47,32 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the seq.
+        /// </summary>
         [JsonPropertyName("seq")]
         [JsonRequired]
         public long? Seq { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? HandleValue { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time.
+        /// </summary>
         [JsonPropertyName("time")]
         [JsonRequired]
         public DateTime? Time { get; set; }

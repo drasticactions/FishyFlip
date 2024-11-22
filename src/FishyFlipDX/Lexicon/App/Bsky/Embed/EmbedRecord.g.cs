@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="EmbedRecord"/> class.
         /// </summary>
+        /// <param name="record"></param>
         public EmbedRecord(Com.Atproto.Repo.StrongRef? record = default)
         {
             this.Record = record;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["record"] is not null) this.Record = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["record"]);
         }
 
+        /// <summary>
+        /// Gets or sets the record.
+        /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
         public Com.Atproto.Repo.StrongRef? Record { get; set; }

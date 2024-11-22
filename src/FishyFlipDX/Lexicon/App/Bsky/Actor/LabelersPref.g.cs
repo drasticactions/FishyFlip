@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelersPref"/> class.
         /// </summary>
+        /// <param name="labelers"></param>
         public LabelersPref(List<App.Bsky.Actor.LabelerPrefItem>? labelers = default)
         {
             this.Labelers = labelers;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["labelers"] is not null) this.Labelers = obj["labelers"].Values.Select(n =>new App.Bsky.Actor.LabelerPrefItem(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the labelers.
+        /// </summary>
         [JsonPropertyName("labelers")]
         [JsonRequired]
         public List<App.Bsky.Actor.LabelerPrefItem>? Labelers { get; set; }

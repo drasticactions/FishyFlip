@@ -33,6 +33,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Generated endpoint for chat.bsky.moderation.getActorMetadata
         /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput?>> GetActorMetadataAsync (FishyFlip.Models.ATDid actor, CancellationToken cancellationToken = default)
         {
             return atp.GetActorMetadataAsync(actor, cancellationToken);
@@ -42,6 +44,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Generated endpoint for chat.bsky.moderation.getMessageContext
         /// </summary>
+        /// <param name="messageId"></param>
+        /// <param name="convoId"></param>
+        /// <param name="before"></param>
+        /// <param name="after"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput?>> GetMessageContextAsync (string messageId, string? convoId = default, int? before = 5, int? after = 5, CancellationToken cancellationToken = default)
         {
             return atp.GetMessageContextAsync(messageId, convoId, before, after, cancellationToken);
@@ -51,6 +58,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Generated endpoint for chat.bsky.moderation.updateActorAccess
         /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="allowAccess"></param>
+        /// <param name="@ref"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> UpdateActorAccessAsync (FishyFlip.Models.ATDid actor, bool allowAccess, string? @ref = default, CancellationToken cancellationToken = default)
         {
             return atp.UpdateActorAccessAsync(actor, allowAccess, @ref, cancellationToken);

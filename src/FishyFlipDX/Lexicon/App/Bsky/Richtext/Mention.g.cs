@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// <summary>
         /// Initializes a new instance of the <see cref="Mention"/> class.
         /// </summary>
+        /// <param name="did"></param>
         public Mention(FishyFlip.Models.ATDid? did = default)
         {
             this.Did = did;
@@ -37,6 +38,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

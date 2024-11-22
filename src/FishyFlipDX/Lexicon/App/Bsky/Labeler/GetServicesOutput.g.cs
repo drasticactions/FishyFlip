@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Initializes a new instance of the <see cref="GetServicesOutput"/> class.
         /// </summary>
+        /// <param name="views">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed"/> (app.bsky.labeler.defs#labelerViewDetailed)
+        /// </param>
         public GetServicesOutput(List<ATObject>? views = default)
         {
             this.Views = views;
@@ -34,6 +39,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["views"] is not null) this.Views = obj["views"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the views.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed"/> (app.bsky.labeler.defs#labelerViewDetailed)
+        /// </summary>
         [JsonPropertyName("views")]
         [JsonRequired]
         public List<ATObject>? Views { get; set; }

@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="Info"/> class.
         /// </summary>
+        /// <param name="name">
+        /// Known Values:
+        /// OutdatedCursor
+        /// </param>
+        /// <param name="message"></param>
         public Info(string? name = default, string? message = default)
         {
             this.Name = name;
@@ -32,14 +37,22 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         public Info(CBORObject obj)
         {
-            // enum
+            if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["message"] is not null) this.Message = obj["message"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// Known Values:
+        /// OutdatedCursor
+        /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the message.
+        /// </summary>
         [JsonPropertyName("message")]
         public string? Message { get; set; }
 

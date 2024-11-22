@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetStarterPacksOutput"/> class.
         /// </summary>
+        /// <param name="starterPacks"></param>
         public GetStarterPacksOutput(List<App.Bsky.Graph.StarterPackViewBasic>? starterPacks = default)
         {
             this.StarterPacks = starterPacks;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the starterPacks.
+        /// </summary>
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
         public List<App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }

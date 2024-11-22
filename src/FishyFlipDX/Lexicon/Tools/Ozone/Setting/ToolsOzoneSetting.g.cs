@@ -33,6 +33,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// List settings with optional filtering
         /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="scope"></param>
+        /// <param name="prefix"></param>
+        /// <param name="keys"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
         {
             return atp.ListOptionsAsync(limit, cursor, scope, prefix, keys, cancellationToken);
@@ -42,6 +48,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Delete settings by key
         /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="scope"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (List<string> keys, string scope, CancellationToken cancellationToken = default)
         {
             return atp.RemoveOptionsAsync(keys, scope, cancellationToken);
@@ -51,6 +60,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Create or update setting option
         /// </summary>
+        /// <param name="key"></param>
+        /// <param name="scope"></param>
+        /// <param name="value"></param>
+        /// <param name="description"></param>
+        /// <param name="managerRole"></param>
+        /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>> UpsertOptionAsync (string key, string scope, ATObject value, string? description = default, string? managerRole = default, CancellationToken cancellationToken = default)
         {
             return atp.UpsertOptionAsync(key, scope, value, description, managerRole, cancellationToken);

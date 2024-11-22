@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Entity"/> class.
         /// </summary>
+        /// <param name="index"></param>
+        /// <param name="type">Expected values are 'mention' and 'link'.</param>
+        /// <param name="value"></param>
         public Entity(App.Bsky.Feed.TextSlice? index = default, string? type = default, string? value = default)
         {
             this.Index = index;
@@ -41,17 +44,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the index.
+        /// </summary>
         [JsonPropertyName("index")]
         [JsonRequired]
         public App.Bsky.Feed.TextSlice? Index { get; set; }
 
         /// <summary>
+        /// Gets or sets the type.
         /// Expected values are 'mention' and 'link'.
         /// </summary>
         [JsonPropertyName("type")]
         [JsonRequired]
         public string? TypeValue { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public string? Value { get; set; }

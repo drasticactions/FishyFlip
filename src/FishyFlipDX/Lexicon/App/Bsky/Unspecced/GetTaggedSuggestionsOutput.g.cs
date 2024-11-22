@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTaggedSuggestionsOutput"/> class.
         /// </summary>
+        /// <param name="suggestions"></param>
         public GetTaggedSuggestionsOutput(List<App.Bsky.Unspecced.Suggestion>? suggestions = default)
         {
             this.Suggestions = suggestions;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new App.Bsky.Unspecced.Suggestion(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the suggestions.
+        /// </summary>
         [JsonPropertyName("suggestions")]
         [JsonRequired]
         public List<App.Bsky.Unspecced.Suggestion>? Suggestions { get; set; }

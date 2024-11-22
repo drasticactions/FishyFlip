@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <summary>
         /// Initializes a new instance of the <see cref="ListOptionsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="options"></param>
         public ListOptionsOutput(string? cursor = default, List<Tools.Ozone.Setting.Option>? options = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             if (obj["options"] is not null) this.Options = obj["options"].Values.Select(n =>new Tools.Ozone.Setting.Option(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the options.
+        /// </summary>
         [JsonPropertyName("options")]
         [JsonRequired]
         public List<Tools.Ozone.Setting.Option>? Options { get; set; }

@@ -145,10 +145,10 @@ public class PropertyGeneration
     private string GenerateCborProperty()
     {
         var property = this.PropertyDefinition;
-        if (property.KnownValues?.Length > 0)
-        {
-            return $"// enum";
-        }
+        // if (property.KnownValues?.Length > 0)
+        // {
+        //     return $"// enum";
+        // }
 
         var baseType = property.Type?.ToLower() switch
         {

@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchPostsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="hitsTotal">Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.</param>
+        /// <param name="posts"></param>
         public SearchPostsOutput(string? cursor = default, long? hitsTotal = default, List<App.Bsky.Feed.PostView>? posts = default)
         {
             this.Cursor = cursor;
@@ -38,15 +41,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new App.Bsky.Feed.PostView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
         /// <summary>
+        /// Gets or sets the hitsTotal.
         /// Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.
         /// </summary>
         [JsonPropertyName("hitsTotal")]
         public long? HitsTotal { get; set; }
 
+        /// <summary>
+        /// Gets or sets the posts.
+        /// </summary>
         [JsonPropertyName("posts")]
         [JsonRequired]
         public List<App.Bsky.Feed.PostView>? Posts { get; set; }

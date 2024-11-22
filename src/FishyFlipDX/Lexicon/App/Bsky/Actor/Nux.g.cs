@@ -15,6 +15,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="Nux"/> class.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="completed"></param>
+        /// <param name="data">Arbitrary data for the NUX. The structure is defined by the NUX itself. Limited to 300 characters.</param>
+        /// <param name="expiresAt">The date and time at which the NUX will expire and should be considered completed.</param>
         public Nux(string? id = default, bool? completed = default, string? data = default, DateTime? expiresAt = default)
         {
             this.Id = id;
@@ -43,21 +47,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["expiresAt"] is not null) this.ExpiresAt = obj["expiresAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         [JsonRequired]
         public string? Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the completed.
+        /// </summary>
         [JsonPropertyName("completed")]
         [JsonRequired]
         public bool? Completed { get; set; } = false;
 
         /// <summary>
+        /// Gets or sets the data.
         /// Arbitrary data for the NUX. The structure is defined by the NUX itself. Limited to 300 characters.
         /// </summary>
         [JsonPropertyName("data")]
         public string? Data { get; set; }
 
         /// <summary>
+        /// Gets or sets the expiresAt.
         /// The date and time at which the NUX will expire and should be considered completed.
         /// </summary>
         [JsonPropertyName("expiresAt")]

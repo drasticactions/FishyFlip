@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageRef"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="convoId"></param>
+        /// <param name="messageId"></param>
         public MessageRef(FishyFlip.Models.ATDid? did = default, string? convoId = default, string? messageId = default)
         {
             this.Did = did;
@@ -38,15 +41,24 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["messageId"] is not null) this.MessageId = obj["messageId"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the convoId.
+        /// </summary>
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string? ConvoId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the messageId.
+        /// </summary>
         [JsonPropertyName("messageId")]
         [JsonRequired]
         public string? MessageId { get; set; }

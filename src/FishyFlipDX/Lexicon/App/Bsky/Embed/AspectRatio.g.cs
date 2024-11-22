@@ -15,6 +15,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="AspectRatio"/> class.
         /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public AspectRatio(long? width = default, long? height = default)
         {
             this.Width = width;
@@ -39,10 +41,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["height"] is not null) this.Height = obj["height"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
         [JsonPropertyName("width")]
         [JsonRequired]
         public long? Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
         [JsonPropertyName("height")]
         [JsonRequired]
         public long? Height { get; set; }

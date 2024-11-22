@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="GetMessageContextOutput"/> class.
         /// </summary>
+        /// <param name="messages">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </param>
         public GetMessageContextOutput(List<ATObject>? messages = default)
         {
             this.Messages = messages;
@@ -34,6 +39,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             if (obj["messages"] is not null) this.Messages = obj["messages"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the messages.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// </summary>
         [JsonPropertyName("messages")]
         [JsonRequired]
         public List<ATObject>? Messages { get; set; }

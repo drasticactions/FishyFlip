@@ -12,6 +12,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileAssociated"/> class.
         /// </summary>
+        /// <param name="lists"></param>
+        /// <param name="feedgens"></param>
+        /// <param name="starterPacks"></param>
+        /// <param name="labeler"></param>
+        /// <param name="chat"></param>
         public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, App.Bsky.Actor.ProfileAssociatedChat? chat = default)
         {
             this.Lists = lists;
@@ -42,18 +47,33 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["chat"] is not null) this.Chat = new App.Bsky.Actor.ProfileAssociatedChat(obj["chat"]);
         }
 
+        /// <summary>
+        /// Gets or sets the lists.
+        /// </summary>
         [JsonPropertyName("lists")]
         public long? Lists { get; set; }
 
+        /// <summary>
+        /// Gets or sets the feedgens.
+        /// </summary>
         [JsonPropertyName("feedgens")]
         public long? Feedgens { get; set; }
 
+        /// <summary>
+        /// Gets or sets the starterPacks.
+        /// </summary>
         [JsonPropertyName("starterPacks")]
         public long? StarterPacks { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labeler.
+        /// </summary>
         [JsonPropertyName("labeler")]
         public bool? Labeler { get; set; }
 
+        /// <summary>
+        /// Gets or sets the chat.
+        /// </summary>
         [JsonPropertyName("chat")]
         public App.Bsky.Actor.ProfileAssociatedChat? Chat { get; set; }
 

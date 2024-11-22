@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreatSignature"/> class.
         /// </summary>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
         public ThreatSignature(string? property = default, string? value = default)
         {
             this.Property = property;
@@ -36,10 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the property.
+        /// </summary>
         [JsonPropertyName("property")]
         [JsonRequired]
         public string? Property { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public string? Value { get; set; }

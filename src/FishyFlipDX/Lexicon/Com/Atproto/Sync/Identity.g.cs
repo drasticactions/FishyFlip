@@ -15,6 +15,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="Identity"/> class.
         /// </summary>
+        /// <param name="seq"></param>
+        /// <param name="did"></param>
+        /// <param name="time"></param>
+        /// <param name="handle">The current handle for the account, or 'handle.invalid' if validation fails. This field is optional, might have been validated or passed-through from an upstream source. Semantics and behaviors for PDS vs Relay may evolve in the future; see atproto specs for more details.</param>
         public Identity(long? seq = default, FishyFlip.Models.ATDid? did = default, DateTime? time = default, FishyFlip.Models.ATHandle? handle = default)
         {
             this.Seq = seq;
@@ -43,20 +47,30 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
         }
 
+        /// <summary>
+        /// Gets or sets the seq.
+        /// </summary>
         [JsonPropertyName("seq")]
         [JsonRequired]
         public long? Seq { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time.
+        /// </summary>
         [JsonPropertyName("time")]
         [JsonRequired]
         public DateTime? Time { get; set; }
 
         /// <summary>
+        /// Gets or sets the handle.
         /// The current handle for the account, or 'handle.invalid' if validation fails. This field is optional, might have been validated or passed-through from an upstream source. Semantics and behaviors for PDS vs Relay may evolve in the future; see atproto specs for more details.
         /// </summary>
         [JsonPropertyName("handle")]

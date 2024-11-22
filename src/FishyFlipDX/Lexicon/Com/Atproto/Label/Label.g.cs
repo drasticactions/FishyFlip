@@ -15,6 +15,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="Label"/> class.
         /// </summary>
+        /// <param name="ver">The AT Protocol version of the label object.</param>
+        /// <param name="src">DID of the actor who created this label.</param>
+        /// <param name="uri">AT URI of the record, repository (account), or other resource that this label applies to.</param>
+        /// <param name="cid">Optionally, CID specifying the specific version of 'uri' resource this label applies to.</param>
+        /// <param name="val">The short string name of the value or type of this label.</param>
+        /// <param name="neg">If true, this is a negation label, overwriting a previous label.</param>
+        /// <param name="cts">Timestamp when this label was created.</param>
+        /// <param name="exp">Timestamp at which this label expires (no longer applies).</param>
+        /// <param name="sig">Signature of dag-cbor encoded label.</param>
         public Label(long? ver = default, FishyFlip.Models.ATDid? src = default, string? uri = default, string? cid = default, string? val = default, bool? neg = default, DateTime? cts = default, DateTime? exp = default, byte[]? sig = default)
         {
             this.Ver = ver;
@@ -54,12 +63,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         }
 
         /// <summary>
+        /// Gets or sets the ver.
         /// The AT Protocol version of the label object.
         /// </summary>
         [JsonPropertyName("ver")]
         public long? Ver { get; set; }
 
         /// <summary>
+        /// Gets or sets the src.
         /// DID of the actor who created this label.
         /// </summary>
         [JsonPropertyName("src")]
@@ -68,6 +79,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public FishyFlip.Models.ATDid? Src { get; set; }
 
         /// <summary>
+        /// Gets or sets the uri.
         /// AT URI of the record, repository (account), or other resource that this label applies to.
         /// </summary>
         [JsonPropertyName("uri")]
@@ -75,12 +87,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public string? Uri { get; set; }
 
         /// <summary>
+        /// Gets or sets the cid.
         /// Optionally, CID specifying the specific version of 'uri' resource this label applies to.
         /// </summary>
         [JsonPropertyName("cid")]
         public string? Cid { get; set; }
 
         /// <summary>
+        /// Gets or sets the val.
         /// The short string name of the value or type of this label.
         /// </summary>
         [JsonPropertyName("val")]
@@ -88,12 +102,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public string? Val { get; set; }
 
         /// <summary>
+        /// Gets or sets the neg.
         /// If true, this is a negation label, overwriting a previous label.
         /// </summary>
         [JsonPropertyName("neg")]
         public bool? Neg { get; set; }
 
         /// <summary>
+        /// Gets or sets the cts.
         /// Timestamp when this label was created.
         /// </summary>
         [JsonPropertyName("cts")]
@@ -101,12 +117,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public DateTime? Cts { get; set; }
 
         /// <summary>
+        /// Gets or sets the exp.
         /// Timestamp at which this label expires (no longer applies).
         /// </summary>
         [JsonPropertyName("exp")]
         public DateTime? Exp { get; set; }
 
         /// <summary>
+        /// Gets or sets the sig.
         /// Signature of dag-cbor encoded label.
         /// </summary>
         [JsonPropertyName("sig")]

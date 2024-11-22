@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="BlockedAuthor"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="viewer"></param>
         public BlockedAuthor(FishyFlip.Models.ATDid? did = default, App.Bsky.Actor.ViewerState? viewer = default)
         {
             this.Did = did;
@@ -36,11 +38,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Actor.ViewerState(obj["viewer"]);
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the viewer.
+        /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }
 

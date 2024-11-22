@@ -12,6 +12,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountView"/> class.
         /// </summary>
+        /// <param name="did"></param>
+        /// <param name="handle"></param>
+        /// <param name="email"></param>
+        /// <param name="relatedRecords"></param>
+        /// <param name="indexedAt"></param>
+        /// <param name="invitedBy"></param>
+        /// <param name="invites"></param>
+        /// <param name="invitesDisabled"></param>
+        /// <param name="emailConfirmedAt"></param>
+        /// <param name="inviteNote"></param>
+        /// <param name="deactivatedAt"></param>
+        /// <param name="threatSignatures"></param>
         public AccountView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? email = default, List<ATObject>? relatedRecords = default, DateTime? indexedAt = default, Com.Atproto.Server.InviteCode? invitedBy = default, List<Com.Atproto.Server.InviteCode>? invites = default, bool? invitesDisabled = default, DateTime? emailConfirmedAt = default, string? inviteNote = default, DateTime? deactivatedAt = default, List<Com.Atproto.Admin.ThreatSignature>? threatSignatures = default)
         {
             this.Did = did;
@@ -56,44 +68,80 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n =>new Com.Atproto.Admin.ThreatSignature(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handle.
+        /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
+        /// <summary>
+        /// Gets or sets the relatedRecords.
+        /// </summary>
         [JsonPropertyName("relatedRecords")]
         public List<ATObject>? RelatedRecords { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the invitedBy.
+        /// </summary>
         [JsonPropertyName("invitedBy")]
         public Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the invites.
+        /// </summary>
         [JsonPropertyName("invites")]
         public List<Com.Atproto.Server.InviteCode>? Invites { get; set; }
 
+        /// <summary>
+        /// Gets or sets the invitesDisabled.
+        /// </summary>
         [JsonPropertyName("invitesDisabled")]
         public bool? InvitesDisabled { get; set; }
 
+        /// <summary>
+        /// Gets or sets the emailConfirmedAt.
+        /// </summary>
         [JsonPropertyName("emailConfirmedAt")]
         public DateTime? EmailConfirmedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the inviteNote.
+        /// </summary>
         [JsonPropertyName("inviteNote")]
         public string? InviteNote { get; set; }
 
+        /// <summary>
+        /// Gets or sets the deactivatedAt.
+        /// </summary>
         [JsonPropertyName("deactivatedAt")]
         public DateTime? DeactivatedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the threatSignatures.
+        /// </summary>
         [JsonPropertyName("threatSignatures")]
         public List<Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
 

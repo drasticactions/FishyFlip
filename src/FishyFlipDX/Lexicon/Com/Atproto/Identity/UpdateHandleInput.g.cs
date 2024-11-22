@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateHandleInput"/> class.
         /// </summary>
+        /// <param name="handle">The new handle.</param>
         public UpdateHandleInput(FishyFlip.Models.ATHandle? handle = default)
         {
             this.Handle = handle;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         }
 
         /// <summary>
+        /// Gets or sets the handle.
         /// The new handle.
         /// </summary>
         [JsonPropertyName("handle")]

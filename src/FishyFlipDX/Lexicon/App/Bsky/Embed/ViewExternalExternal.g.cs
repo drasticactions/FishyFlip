@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewExternalExternal"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="thumb"></param>
         public ViewExternalExternal(string? uri = default, string? title = default, string? description = default, string? thumb = default)
         {
             this.Uri = uri;
@@ -40,18 +44,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["thumb"] is not null) this.Thumb = obj["thumb"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         public string? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
         [JsonPropertyName("title")]
         [JsonRequired]
         public string? Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         [JsonRequired]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the thumb.
+        /// </summary>
         [JsonPropertyName("thumb")]
         public string? Thumb { get; set; }
 

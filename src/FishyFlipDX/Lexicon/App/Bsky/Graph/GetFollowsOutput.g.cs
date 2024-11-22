@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetFollowsOutput"/> class.
         /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="cursor"></param>
+        /// <param name="follows"></param>
         public GetFollowsOutput(App.Bsky.Actor.ProfileView? subject = default, string? cursor = default, List<App.Bsky.Actor.ProfileView>? follows = default)
         {
             this.Subject = subject;
@@ -38,13 +41,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["follows"] is not null) this.Follows = obj["follows"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileView? Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the follows.
+        /// </summary>
         [JsonPropertyName("follows")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileView>? Follows { get; set; }

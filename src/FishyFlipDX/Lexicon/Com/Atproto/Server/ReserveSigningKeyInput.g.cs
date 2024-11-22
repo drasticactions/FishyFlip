@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="ReserveSigningKeyInput"/> class.
         /// </summary>
+        /// <param name="did">The DID to reserve a key for.</param>
         public ReserveSigningKeyInput(FishyFlip.Models.ATDid? did = default)
         {
             this.Did = did;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         }
 
         /// <summary>
+        /// Gets or sets the did.
         /// The DID to reserve a key for.
         /// </summary>
         [JsonPropertyName("did")]

@@ -12,6 +12,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="PutRecordOutput"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="commit"></param>
+        /// <param name="validationStatus">
+        /// Known Values:
+        /// valid
+        /// unknown
+        /// </param>
         public PutRecordOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, Com.Atproto.Repo.CommitMeta? commit = default, string? validationStatus = default)
         {
             this.Uri = uri;
@@ -37,21 +45,36 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["commit"] is not null) this.Commit = new Com.Atproto.Repo.CommitMeta(obj["commit"]);
-            // enum
+            if (obj["validationStatus"] is not null) this.ValidationStatus = obj["validationStatus"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the commit.
+        /// </summary>
         [JsonPropertyName("commit")]
         public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
+        /// <summary>
+        /// Gets or sets the validationStatus.
+        /// Known Values:
+        /// valid
+        /// unknown
+        /// </summary>
         [JsonPropertyName("validationStatus")]
         public string? ValidationStatus { get; set; }
 

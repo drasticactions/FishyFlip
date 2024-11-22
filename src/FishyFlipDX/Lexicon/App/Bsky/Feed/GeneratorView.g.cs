@@ -12,6 +12,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GeneratorView"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="did"></param>
+        /// <param name="creator"></param>
+        /// <param name="displayName"></param>
+        /// <param name="description"></param>
+        /// <param name="descriptionFacets"></param>
+        /// <param name="avatar"></param>
+        /// <param name="likeCount"></param>
+        /// <param name="acceptsInteractions"></param>
+        /// <param name="labels"></param>
+        /// <param name="viewer"></param>
+        /// <param name="indexedAt"></param>
         public GeneratorView(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Models.ATDid? did = default, App.Bsky.Actor.ProfileView? creator = default, string? displayName = default, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, string? avatar = default, long? likeCount = default, bool? acceptsInteractions = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Feed.GeneratorViewerState? viewer = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
@@ -58,49 +71,88 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the did.
+        /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
+        /// <summary>
+        /// Gets or sets the creator.
+        /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileView? Creator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the displayName.
+        /// </summary>
         [JsonPropertyName("displayName")]
         [JsonRequired]
         public string? DisplayName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the descriptionFacets.
+        /// </summary>
         [JsonPropertyName("descriptionFacets")]
         public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
+        /// <summary>
+        /// Gets or sets the avatar.
+        /// </summary>
         [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
 
+        /// <summary>
+        /// Gets or sets the likeCount.
+        /// </summary>
         [JsonPropertyName("likeCount")]
         public long? LikeCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the acceptsInteractions.
+        /// </summary>
         [JsonPropertyName("acceptsInteractions")]
         public bool? AcceptsInteractions { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the viewer.
+        /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }

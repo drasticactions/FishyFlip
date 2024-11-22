@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="GetMutesOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="mutes"></param>
         public GetMutesOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? mutes = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["mutes"] is not null) this.Mutes = obj["mutes"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the mutes.
+        /// </summary>
         [JsonPropertyName("mutes")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileView>? Mutes { get; set; }

@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="PutRecordInput"/> class.
         /// </summary>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
+        /// <param name="collection">The NSID of the record collection.</param>
+        /// <param name="rkey">The Record Key.</param>
+        /// <param name="validate">Can be set to 'false' to skip Lexicon schema validation of record data, 'true' to require it, or leave unset to validate only for known Lexicons.</param>
+        /// <param name="record">The record to write.</param>
+        /// <param name="swapRecord">Compare and swap with the previous record by CID. WARNING: nullable and optional field; may cause problems with golang implementation</param>
+        /// <param name="swapCommit">Compare and swap with the previous commit by CID.</param>
         public PutRecordInput(FishyFlip.Models.ATIdentifier? repo = default, string? collection = default, string? rkey = default, bool? validate = default, ATObject? record = default, string? swapRecord = default, string? swapCommit = default)
         {
             this.Repo = repo;
@@ -47,6 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         }
 
         /// <summary>
+        /// Gets or sets the repo.
         /// The handle or DID of the repo (aka, current account).
         /// </summary>
         [JsonPropertyName("repo")]
@@ -55,6 +63,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public FishyFlip.Models.ATIdentifier? Repo { get; set; }
 
         /// <summary>
+        /// Gets or sets the collection.
         /// The NSID of the record collection.
         /// </summary>
         [JsonPropertyName("collection")]
@@ -62,6 +71,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public string? Collection { get; set; }
 
         /// <summary>
+        /// Gets or sets the rkey.
         /// The Record Key.
         /// </summary>
         [JsonPropertyName("rkey")]
@@ -69,12 +79,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public string? Rkey { get; set; }
 
         /// <summary>
+        /// Gets or sets the validate.
         /// Can be set to 'false' to skip Lexicon schema validation of record data, 'true' to require it, or leave unset to validate only for known Lexicons.
         /// </summary>
         [JsonPropertyName("validate")]
         public bool? Validate { get; set; }
 
         /// <summary>
+        /// Gets or sets the record.
         /// The record to write.
         /// </summary>
         [JsonPropertyName("record")]
@@ -82,12 +94,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public ATObject? Record { get; set; }
 
         /// <summary>
+        /// Gets or sets the swapRecord.
         /// Compare and swap with the previous record by CID. WARNING: nullable and optional field; may cause problems with golang implementation
         /// </summary>
         [JsonPropertyName("swapRecord")]
         public string? SwapRecord { get; set; }
 
         /// <summary>
+        /// Gets or sets the swapCommit.
         /// Compare and swap with the previous commit by CID.
         /// </summary>
         [JsonPropertyName("swapCommit")]

@@ -12,6 +12,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRecommendedDidCredentialsOutput"/> class.
         /// </summary>
+        /// <param name="rotationKeys">Recommended rotation keys for PLC dids. Should be undefined (or ignored) for did:webs.</param>
+        /// <param name="alsoKnownAs"></param>
+        /// <param name="verificationMethods"></param>
+        /// <param name="services"></param>
         public GetRecommendedDidCredentialsOutput(List<string>? rotationKeys = default, List<string>? alsoKnownAs = default, ATObject? verificationMethods = default, ATObject? services = default)
         {
             this.RotationKeys = rotationKeys;
@@ -41,17 +45,27 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         }
 
         /// <summary>
+        /// Gets or sets the rotationKeys.
         /// Recommended rotation keys for PLC dids. Should be undefined (or ignored) for did:webs.
         /// </summary>
         [JsonPropertyName("rotationKeys")]
         public List<string>? RotationKeys { get; set; }
 
+        /// <summary>
+        /// Gets or sets the alsoKnownAs.
+        /// </summary>
         [JsonPropertyName("alsoKnownAs")]
         public List<string>? AlsoKnownAs { get; set; }
 
+        /// <summary>
+        /// Gets or sets the verificationMethods.
+        /// </summary>
         [JsonPropertyName("verificationMethods")]
         public ATObject? VerificationMethods { get; set; }
 
+        /// <summary>
+        /// Gets or sets the services.
+        /// </summary>
         [JsonPropertyName("services")]
         public ATObject? Services { get; set; }
 

@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <summary>
         /// Initializes a new instance of the <see cref="FindCorrelationOutput"/> class.
         /// </summary>
+        /// <param name="details"></param>
         public FindCorrelationOutput(List<Tools.Ozone.Signature.SigDetail>? details = default)
         {
             this.Details = details;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             if (obj["details"] is not null) this.Details = obj["details"].Values.Select(n =>new Tools.Ozone.Signature.SigDetail(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the details.
+        /// </summary>
         [JsonPropertyName("details")]
         [JsonRequired]
         public List<Tools.Ozone.Signature.SigDetail>? Details { get; set; }

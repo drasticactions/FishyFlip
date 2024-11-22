@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="Suggestion"/> class.
         /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="subjectType">
+        /// Known Values:
+        /// actor
+        /// feed
+        /// </param>
+        /// <param name="subject"></param>
         public Suggestion(string? tag = default, string? subjectType = default, string? subject = default)
         {
             this.Tag = tag;
@@ -34,18 +41,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public Suggestion(CBORObject obj)
         {
             if (obj["tag"] is not null) this.Tag = obj["tag"].AsString();
-            // enum
+            if (obj["subjectType"] is not null) this.SubjectType = obj["subjectType"].AsString();
             if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the tag.
+        /// </summary>
         [JsonPropertyName("tag")]
         [JsonRequired]
         public string? Tag { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subjectType.
+        /// Known Values:
+        /// actor
+        /// feed
+        /// </summary>
         [JsonPropertyName("subjectType")]
         [JsonRequired]
         public string? SubjectType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subject.
+        /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
         public string? Subject { get; set; }

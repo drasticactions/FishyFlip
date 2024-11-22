@@ -12,6 +12,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateTemplateInput"/> class.
         /// </summary>
+        /// <param name="id">ID of the template to be updated.</param>
+        /// <param name="name">Name of the template.</param>
+        /// <param name="lang">Message language.</param>
+        /// <param name="contentMarkdown">Content of the template, markdown supported, can contain variable placeholders.</param>
+        /// <param name="subject">Subject of the message, used in emails.</param>
+        /// <param name="updatedBy">DID of the user who is updating the template.</param>
+        /// <param name="disabled"></param>
         public UpdateTemplateInput(string? id = default, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default)
         {
             this.Id = id;
@@ -47,6 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         }
 
         /// <summary>
+        /// Gets or sets the id.
         /// ID of the template to be updated.
         /// </summary>
         [JsonPropertyName("id")]
@@ -54,36 +62,44 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public string? Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the name.
         /// Name of the template.
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the lang.
         /// Message language.
         /// </summary>
         [JsonPropertyName("lang")]
         public string? Lang { get; set; }
 
         /// <summary>
+        /// Gets or sets the contentMarkdown.
         /// Content of the template, markdown supported, can contain variable placeholders.
         /// </summary>
         [JsonPropertyName("contentMarkdown")]
         public string? ContentMarkdown { get; set; }
 
         /// <summary>
+        /// Gets or sets the subject.
         /// Subject of the message, used in emails.
         /// </summary>
         [JsonPropertyName("subject")]
         public string? Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets the updatedBy.
         /// DID of the user who is updating the template.
         /// </summary>
         [JsonPropertyName("updatedBy")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? UpdatedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the disabled.
+        /// </summary>
         [JsonPropertyName("disabled")]
         public bool? Disabled { get; set; }
 

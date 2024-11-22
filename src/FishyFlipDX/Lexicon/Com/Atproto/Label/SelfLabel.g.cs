@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <summary>
         /// Initializes a new instance of the <see cref="SelfLabel"/> class.
         /// </summary>
+        /// <param name="val">The short string name of the value or type of this label.</param>
         public SelfLabel(string? val = default)
         {
             this.Val = val;
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         }
 
         /// <summary>
+        /// Gets or sets the val.
         /// The short string name of the value or type of this label.
         /// </summary>
         [JsonPropertyName("val")]

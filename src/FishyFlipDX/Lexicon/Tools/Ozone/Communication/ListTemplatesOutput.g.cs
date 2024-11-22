@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <summary>
         /// Initializes a new instance of the <see cref="ListTemplatesOutput"/> class.
         /// </summary>
+        /// <param name="communicationTemplates"></param>
         public ListTemplatesOutput(List<Tools.Ozone.Communication.TemplateView>? communicationTemplates = default)
         {
             this.CommunicationTemplates = communicationTemplates;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             if (obj["communicationTemplates"] is not null) this.CommunicationTemplates = obj["communicationTemplates"].Values.Select(n =>new Tools.Ozone.Communication.TemplateView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the communicationTemplates.
+        /// </summary>
         [JsonPropertyName("communicationTemplates")]
         [JsonRequired]
         public List<Tools.Ozone.Communication.TemplateView>? CommunicationTemplates { get; set; }

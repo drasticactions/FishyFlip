@@ -15,6 +15,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <summary>
         /// Initializes a new instance of the <see cref="Create"/> class.
         /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="rkey"></param>
+        /// <param name="value"></param>
         public Create(string? collection = default, string? rkey = default, ATObject? value = default)
         {
             this.Collection = collection;
@@ -41,13 +44,22 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
         }
 
+        /// <summary>
+        /// Gets or sets the collection.
+        /// </summary>
         [JsonPropertyName("collection")]
         [JsonRequired]
         public string? Collection { get; set; }
 
+        /// <summary>
+        /// Gets or sets the rkey.
+        /// </summary>
         [JsonPropertyName("rkey")]
         public string? Rkey { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
         public ATObject? Value { get; set; }

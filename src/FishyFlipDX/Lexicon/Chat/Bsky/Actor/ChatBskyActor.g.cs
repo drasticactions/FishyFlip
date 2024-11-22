@@ -31,20 +31,22 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
 
         /// <summary>
-        /// Generated endpoint for chat.bsky.actor.exportAccountData
+        /// Generated endpoint for chat.bsky.actor.deleteAccount
         /// </summary>
-        public Task<Result<Success?>> ExportAccountDataAsync (CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (CancellationToken cancellationToken = default)
         {
-            return atp.ExportAccountDataAsync(cancellationToken);
+            return atp.DeleteAccountAsync(cancellationToken);
         }
 
 
         /// <summary>
-        /// Generated endpoint for chat.bsky.actor.deleteAccount
+        /// Generated endpoint for chat.bsky.actor.exportAccountData
         /// </summary>
-        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> ExportAccountDataAsync (CancellationToken cancellationToken = default)
         {
-            return atp.DeleteAccountAsync(cancellationToken);
+            return atp.ExportAccountDataAsync(cancellationToken);
         }
 
     }

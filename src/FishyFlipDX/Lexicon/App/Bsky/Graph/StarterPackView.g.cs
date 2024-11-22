@@ -12,6 +12,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <summary>
         /// Initializes a new instance of the <see cref="StarterPackView"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="record"></param>
+        /// <param name="creator"></param>
+        /// <param name="list"></param>
+        /// <param name="listItemsSample"></param>
+        /// <param name="feeds"></param>
+        /// <param name="joinedWeekCount"></param>
+        /// <param name="joinedAllTimeCount"></param>
+        /// <param name="labels"></param>
+        /// <param name="indexedAt"></param>
         public StarterPackView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, App.Bsky.Actor.ProfileViewBasic? creator = default, App.Bsky.Graph.ListViewBasic? list = default, List<App.Bsky.Graph.ListItemView>? listItemsSample = default, List<App.Bsky.Feed.GeneratorView>? feeds = default, long? joinedWeekCount = default, long? joinedAllTimeCount = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
@@ -54,41 +65,74 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]
         public string? Cid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the record.
+        /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
         public ATObject? Record { get; set; }
 
+        /// <summary>
+        /// Gets or sets the creator.
+        /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
         public App.Bsky.Actor.ProfileViewBasic? Creator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the list.
+        /// </summary>
         [JsonPropertyName("list")]
         public App.Bsky.Graph.ListViewBasic? List { get; set; }
 
+        /// <summary>
+        /// Gets or sets the listItemsSample.
+        /// </summary>
         [JsonPropertyName("listItemsSample")]
         public List<App.Bsky.Graph.ListItemView>? ListItemsSample { get; set; }
 
+        /// <summary>
+        /// Gets or sets the feeds.
+        /// </summary>
         [JsonPropertyName("feeds")]
         public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the joinedWeekCount.
+        /// </summary>
         [JsonPropertyName("joinedWeekCount")]
         public long? JoinedWeekCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the joinedAllTimeCount.
+        /// </summary>
         [JsonPropertyName("joinedAllTimeCount")]
         public long? JoinedAllTimeCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
         [JsonPropertyName("labels")]
         public List<Com.Atproto.Label.Label>? Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedAt.
+        /// </summary>
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }

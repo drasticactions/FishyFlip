@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchActorsOutput"/> class.
         /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="actors"></param>
         public SearchActorsOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? actors = default)
         {
             this.Cursor = cursor;
@@ -36,9 +38,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
+        /// <summary>
+        /// Gets or sets the cursor.
+        /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the actors.
+        /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
         public List<App.Bsky.Actor.ProfileView>? Actors { get; set; }

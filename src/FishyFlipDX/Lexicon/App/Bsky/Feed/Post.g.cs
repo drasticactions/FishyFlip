@@ -15,6 +15,24 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="Post"/> class.
         /// </summary>
+        /// <param name="text">The primary post content. May be an empty string, if there are embeds.</param>
+        /// <param name="facets">Annotations of text (mentions, URLs, hashtags, etc)</param>
+        /// <param name="reply"></param>
+        /// <param name="embed">
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia)
+        /// </param>
+        /// <param name="langs">Indicates human language of post primary text content.</param>
+        /// <param name="labels">Self-label values for this post. Effectively content warnings.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// </param>
+        /// <param name="tags">Additional hashtags, in addition to any included in post text and facets.</param>
+        /// <param name="createdAt">Client-declared timestamp when this post was originally created.</param>
         public Post(string? text, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Feed.ReplyRefDef? reply = default, ATObject? embed = default, List<string>? langs = default, Com.Atproto.Label.SelfLabels? labels = default, List<string>? tags = default, DateTime? createdAt = default)
         {
             this.Text = text;
@@ -52,42 +70,62 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         }
 
         /// <summary>
+        /// Gets or sets the text.
         /// The primary post content. May be an empty string, if there are embeds.
         /// </summary>
         [JsonPropertyName("text")]
         public string? Text { get; set; }
 
         /// <summary>
+        /// Gets or sets the facets.
         /// Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
         public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reply.
+        /// </summary>
         [JsonPropertyName("reply")]
         public App.Bsky.Feed.ReplyRefDef? Reply { get; set; }
 
+        /// <summary>
+        /// Gets or sets the embed.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record)
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia)
+        /// </summary>
         [JsonPropertyName("embed")]
         public ATObject? Embed { get; set; }
 
         /// <summary>
+        /// Gets or sets the langs.
         /// Indicates human language of post primary text content.
         /// </summary>
         [JsonPropertyName("langs")]
         public List<string>? Langs { get; set; }
 
         /// <summary>
+        /// Gets or sets the labels.
         /// Self-label values for this post. Effectively content warnings.
+        /// Union Types:
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
+        /// Gets or sets the tags.
         /// Additional hashtags, in addition to any included in post text and facets.
         /// </summary>
         [JsonPropertyName("tags")]
         public List<string>? Tags { get; set; }
 
         /// <summary>
+        /// Gets or sets the createdAt.
         /// Client-declared timestamp when this post was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]

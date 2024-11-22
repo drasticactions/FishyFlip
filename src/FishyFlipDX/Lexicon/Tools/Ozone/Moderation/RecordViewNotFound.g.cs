@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordViewNotFound"/> class.
         /// </summary>
+        /// <param name="uri"></param>
         public RecordViewNotFound(FishyFlip.Models.ATUri? uri = default)
         {
             this.Uri = uri;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
         }
 
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
         [JsonPropertyName("uri")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

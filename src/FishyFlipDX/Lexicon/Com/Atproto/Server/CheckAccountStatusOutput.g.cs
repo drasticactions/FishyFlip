@@ -12,6 +12,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckAccountStatusOutput"/> class.
         /// </summary>
+        /// <param name="activated"></param>
+        /// <param name="validDid"></param>
+        /// <param name="repoCommit"></param>
+        /// <param name="repoRev"></param>
+        /// <param name="repoBlocks"></param>
+        /// <param name="indexedRecords"></param>
+        /// <param name="privateStateValues"></param>
+        /// <param name="expectedBlobs"></param>
+        /// <param name="importedBlobs"></param>
         public CheckAccountStatusOutput(bool? activated = default, bool? validDid = default, string? repoCommit = default, string? repoRev = default, long? repoBlocks = default, long? indexedRecords = default, long? privateStateValues = default, long? expectedBlobs = default, long? importedBlobs = default)
         {
             this.Activated = activated;
@@ -50,38 +59,65 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["importedBlobs"] is not null) this.ImportedBlobs = obj["importedBlobs"].AsInt64Value();
         }
 
+        /// <summary>
+        /// Gets or sets the activated.
+        /// </summary>
         [JsonPropertyName("activated")]
         [JsonRequired]
         public bool? Activated { get; set; }
 
+        /// <summary>
+        /// Gets or sets the validDid.
+        /// </summary>
         [JsonPropertyName("validDid")]
         [JsonRequired]
         public bool? ValidDid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repoCommit.
+        /// </summary>
         [JsonPropertyName("repoCommit")]
         [JsonRequired]
         public string? RepoCommit { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repoRev.
+        /// </summary>
         [JsonPropertyName("repoRev")]
         [JsonRequired]
         public string? RepoRev { get; set; }
 
+        /// <summary>
+        /// Gets or sets the repoBlocks.
+        /// </summary>
         [JsonPropertyName("repoBlocks")]
         [JsonRequired]
         public long? RepoBlocks { get; set; }
 
+        /// <summary>
+        /// Gets or sets the indexedRecords.
+        /// </summary>
         [JsonPropertyName("indexedRecords")]
         [JsonRequired]
         public long? IndexedRecords { get; set; }
 
+        /// <summary>
+        /// Gets or sets the privateStateValues.
+        /// </summary>
         [JsonPropertyName("privateStateValues")]
         [JsonRequired]
         public long? PrivateStateValues { get; set; }
 
+        /// <summary>
+        /// Gets or sets the expectedBlobs.
+        /// </summary>
         [JsonPropertyName("expectedBlobs")]
         [JsonRequired]
         public long? ExpectedBlobs { get; set; }
 
+        /// <summary>
+        /// Gets or sets the importedBlobs.
+        /// </summary>
         [JsonPropertyName("importedBlobs")]
         [JsonRequired]
         public long? ImportedBlobs { get; set; }

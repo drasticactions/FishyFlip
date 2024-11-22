@@ -12,6 +12,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <summary>
         /// Initializes a new instance of the <see cref="EnableAccountInvitesInput"/> class.
         /// </summary>
+        /// <param name="account"></param>
+        /// <param name="note">Optional reason for enabled invites.</param>
         public EnableAccountInvitesInput(FishyFlip.Models.ATDid? account = default, string? note = default)
         {
             this.Account = account;
@@ -36,12 +38,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["note"] is not null) this.Note = obj["note"].AsString();
         }
 
+        /// <summary>
+        /// Gets or sets the account.
+        /// </summary>
         [JsonPropertyName("account")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Account { get; set; }
 
         /// <summary>
+        /// Gets or sets the note.
         /// Optional reason for enabled invites.
         /// </summary>
         [JsonPropertyName("note")]

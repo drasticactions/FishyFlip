@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="AdultContentPref"/> class.
         /// </summary>
+        /// <param name="enabled"></param>
         public AdultContentPref(bool? enabled = default)
         {
             this.Enabled = enabled;
@@ -34,6 +35,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["enabled"] is not null) this.Enabled = obj["enabled"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the enabled.
+        /// </summary>
         [JsonPropertyName("enabled")]
         [JsonRequired]
         public bool? Enabled { get; set; } = false;

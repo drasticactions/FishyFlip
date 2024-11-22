@@ -12,6 +12,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="GetFeedGeneratorOutput"/> class.
         /// </summary>
+        /// <param name="view"></param>
+        /// <param name="isOnline">Indicates whether the feed generator service has been online recently, or else seems to be inactive.</param>
+        /// <param name="isValid">Indicates whether the feed generator service is compatible with the record declaration.</param>
         public GetFeedGeneratorOutput(App.Bsky.Feed.GeneratorView? view = default, bool? isOnline = default, bool? isValid = default)
         {
             this.View = view;
@@ -38,11 +41,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["isValid"] is not null) this.IsValid = obj["isValid"].AsBoolean();
         }
 
+        /// <summary>
+        /// Gets or sets the view.
+        /// </summary>
         [JsonPropertyName("view")]
         [JsonRequired]
         public App.Bsky.Feed.GeneratorView? View { get; set; }
 
         /// <summary>
+        /// Gets or sets the isOnline.
         /// Indicates whether the feed generator service has been online recently, or else seems to be inactive.
         /// </summary>
         [JsonPropertyName("isOnline")]
@@ -50,6 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public bool? IsOnline { get; set; }
 
         /// <summary>
+        /// Gets or sets the isValid.
         /// Indicates whether the feed generator service is compatible with the record declaration.
         /// </summary>
         [JsonPropertyName("isValid")]

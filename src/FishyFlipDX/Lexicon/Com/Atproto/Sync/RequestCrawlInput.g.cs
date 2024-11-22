@@ -12,6 +12,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestCrawlInput"/> class.
         /// </summary>
+        /// <param name="hostname">Hostname of the current service (eg, PDS) that is requesting to be crawled.</param>
         public RequestCrawlInput(string? hostname = default)
         {
             this.Hostname = hostname;
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         }
 
         /// <summary>
+        /// Gets or sets the hostname.
         /// Hostname of the current service (eg, PDS) that is requesting to be crawled.
         /// </summary>
         [JsonPropertyName("hostname")]
