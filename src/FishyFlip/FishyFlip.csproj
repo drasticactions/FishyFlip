@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<Description>Access the ATProtocol and Bluesky through .NET.</Description>
+  <PropertyGroup>
+		<Description>Access the ATProtocol and Bluesky through .NET: Alpha Version, built with Source Generation.</Description>
 		<PackageTags>atproto atprotocol bluesky</PackageTags>
 		<RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
 		<PackageProjectUrl>https://drasticactions.github.io/FishyFlip</PackageProjectUrl>
-		<PackageReleaseNotes>https://github.com/drasticactions/FishyFlip/blob/main/src/FishyFlip/CHANGELOG.md</PackageReleaseNotes>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -14,13 +12,14 @@
 		<WarningsAsErrors>nullable</WarningsAsErrors>
 		<IsAotCompatible Condition="'$(TargetFramework)' == 'net8.0'">true</IsAotCompatible>
 		<NoWarn>$(NoWarn);SA0001;SA1518;SA1208;SA1210</NoWarn>
+		<RootNamespace>FishyFlip</RootNamespace>
 	</PropertyGroup>
-	<ItemGroup>
+  <ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 		<PackageReference Include="IpfsShipyard.Ipfs.Core" />
 		<PackageReference Include="PeterO.Cbor" />
-		<PackageReference Include="IdentityModel" />
+	    <PackageReference Include="IdentityModel" />
+	    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 		<PackageReference Include="GitVersion.MSBuild">
 			<PrivateAssets>All</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -33,6 +32,5 @@
 	</ItemGroup>
 	<ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
-		<None Include="$(MSBuildThisFileDirectory)CHANGELOG.md" Pack="true" PackagePath="" Visible="false" />
 	</ItemGroup>
 </Project>

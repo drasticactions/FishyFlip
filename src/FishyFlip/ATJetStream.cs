@@ -2,6 +2,10 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Events;
+using FishyFlip.Lexicon;
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -31,17 +35,7 @@ public sealed class ATJetStream : IDisposable
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters =
-            {
-                new AtUriJsonConverter(),
-                new AtHandlerJsonConverter(),
-                new AtDidJsonConverter(),
-                new EmbedConverter(),
-                new ATRecordJsonConverter(),
-                new ATCidConverter(),
-                new ATWebSocketCommitTypeConverter(),
-                new ATWebSocketEventConverter(),
-            },
+            Converters = { new ATUriJsonConverter() },
         };
         this.sourceGenerationContext = new SourceGenerationContext(this.jsonSerializerOptions);
     }
@@ -221,15 +215,28 @@ public sealed class ATJetStream : IDisposable
             return;
         }
 
-        var atWebSocketRecord = JsonSerializer.Deserialize<ATWebSocketRecord>(json, this.sourceGenerationContext.ATWebSocketRecord);
-        if (atWebSocketRecord is null)
+        try
         {
-            this.logger?.LogError("WSS: Failed to deserialize ATWebSocketRecord.");
-            this.logger?.LogError(json);
-            return;
-        }
+            var atWebSocketRecord = JsonSerializer.Deserialize<ATWebSocketRecord>(json, this.sourceGenerationContext.ATWebSocketRecord);
+            if (atWebSocketRecord is null)
+            {
+                this.logger?.LogError("WSS: Failed to deserialize ATWebSocketRecord.");
+                this.logger?.LogError(json);
+                return;
+            }
 
-        this.OnRecordReceived?.Invoke(this, new JetStreamATWebSocketRecordEventArgs(atWebSocketRecord));
+            this.OnRecordReceived?.Invoke(this, new JetStreamATWebSocketRecordEventArgs(atWebSocketRecord, json));
+        }
+        catch (JsonException ex)
+        {
+            this.logger?.LogError(ex, "WSS: Failed to deserialize ATWebSocketRecord.");
+            this.logger?.LogError(json);
+        }
+        catch (Exception ex)
+        {
+            this.logger?.LogError(ex, "WSS: An unknown error occurred.");
+            this.logger?.LogError(json);
+        }
     }
 
     /// <summary>

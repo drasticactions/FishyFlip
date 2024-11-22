@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firehose", "Firehose.csproj", "{6BF45A5A-22EE-4D17-B6B0-AC84370F0DD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishyFlipDX", "..\..\src\FishyFlipDX\FishyFlipDX.csproj", "{4C228EE0-4170-4A18-A7CF-2CEEB70D8E1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishyFlip", "..\..\src\FishyFlip\FishyFlip.csproj", "{4C228EE0-4170-4A18-A7CF-2CEEB70D8E1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

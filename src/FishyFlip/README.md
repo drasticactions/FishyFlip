@@ -4,6 +4,11 @@
 
 ![FishyFlip Logo](https://user-images.githubusercontent.com/898335/253740405-4b0ae177-cc49-4c26-b6b0-ab8e835a0e62.png)
 
+### **Version 3.0 Breaking Changes**
+
+Version 3.0 contains several breaking changes from previous versions in order to support new, ATProtocol Lexicon generated, types. Please review [this GitHub issue](https://github.com/drasticactions/FishyFlip/issues/97) for more information about the changes.
+
+
 FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, forked from [bluesky-net](https://github.com/dariogriffo/bluesky-net).
 
 For documentation, check out https://drasticactions.github.io/FishyFlip

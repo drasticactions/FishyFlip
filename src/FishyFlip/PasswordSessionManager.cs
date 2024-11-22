@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon.Com.Atproto.Server;
 using Microsoft.IdentityModel.Tokens;
 
 namespace FishyFlip;
@@ -102,17 +103,16 @@ internal class PasswordSessionManager : ISessionManager
     internal async Task<Session?> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
 #pragma warning disable CS0618
-        var sessionResult = await this.protocol.Server.CreateSessionAsync(identifier, password, cancellationToken);
+        var sessionResult = await this.protocol.CreateSessionAsync(identifier, password, cancellationToken: cancellationToken);
 #pragma warning restore CS0618
         Session? resultSession = null;
         sessionResult.Switch(
             session =>
         {
-            resultSession = session;
             if (this.protocol.Options.UseServiceEndpointUponLogin)
             {
                 var logger = this.protocol.Options.Logger;
-                var serviceUrl = session.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
+                var serviceUrl = session!.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
                 if (string.IsNullOrEmpty(serviceUrl))
                 {
                     logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
@@ -134,7 +134,14 @@ internal class PasswordSessionManager : ISessionManager
                 }
             }
 
-            this.SetSession(session);
+            resultSession = new Session(
+                session!.Did!,
+                session.DidDoc,
+                session.Handle!,
+                session.Email,
+                session.AccessJwt!,
+                session.RefreshJwt!);
+            this.SetSession(resultSession);
         },
             e => this.logger?.LogError(e.ToString()));
 
@@ -207,12 +214,22 @@ internal class PasswordSessionManager : ISessionManager
         {
             if (this.session is not null)
             {
-                Multiple<Session, ATError> result =
-                await this.protocol.ThrowIfNull().Server.RefreshSessionAsync(this.session, cancellationToken);
+                Multiple<RefreshSessionOutput?, ATError> result =
+                await this.protocol.ThrowIfNull().RefreshSessionAsync(cancellationToken);
 
                 result
                     .Switch(
-                    this.SetSession,
+                    d =>
+                    {
+                        var newSession = new Session(
+                            d!.Did!,
+                            d.DidDoc,
+                            d.Handle!,
+                            string.Empty,
+                            d.AccessJwt!,
+                            d.RefreshJwt!);
+                        this.SetSession(newSession);
+                    },
                     e =>
                     {
                         this.logger?.LogError(e.ToString());

@@ -21,6 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\FishyFlipDX\FishyFlipDX.csproj" />
+	  <ProjectReference Include="..\..\src\FishyFlip\FishyFlip.csproj" />
 	</ItemGroup>
 </Project>

@@ -2,11 +2,14 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip.Models;
 
 /// <summary>
 /// AT WebSocket Event.
 /// </summary>
+[JsonConverter(typeof(ATWebSocketEventConverter))]
 public enum ATWebSocketEvent
 {
     /// <summary>

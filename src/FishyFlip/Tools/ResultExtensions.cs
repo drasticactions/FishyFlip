@@ -10,7 +10,7 @@ namespace FishyFlip.Tools;
 public static class ResultExtensions
 {
     /// <summary>
-    /// Throw ATNetworkErrorException if Result is an ATError object..
+    /// Throw ATNetworkErrorException if Result is an ATError object.
     /// </summary>
     /// <typeparam name="T">Base object.</typeparam>
     /// <param name="result">Result object.</param>

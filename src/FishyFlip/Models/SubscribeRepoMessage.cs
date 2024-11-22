@@ -32,7 +32,7 @@ public class SubscribeRepoMessage
     /// <summary>
     /// Gets the record of the message.
     /// </summary>
-    public ATRecord? Record { get; internal set; }
+    public ATObject? Record { get; internal set; }
 
     /// <summary>
     /// Gets the atError of the message.

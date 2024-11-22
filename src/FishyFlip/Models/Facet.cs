@@ -2,56 +2,13 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-namespace FishyFlip.Models;
+namespace FishyFlip.Lexicon.App.Bsky.Richtext;
 
 /// <summary>
-/// Represents a facet in the FishyFlip application.
+/// Facets.
 /// </summary>
-public class Facet : ATRecord
+public partial class Facet
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Facet"/> class with the specified index and features.
-    /// </summary>
-    /// <param name="index">The index of the facet.</param>
-    /// <param name="features">The features of the facet.</param>
-    [JsonConstructor]
-    public Facet(FacetIndex? index, FacetFeature[] features)
-    {
-        this.Index = index;
-        this.Features = features;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Facet"/> class with the specified index and feature.
-    /// </summary>
-    /// <param name="index">The index of the facet.</param>
-    /// <param name="feature">The feature of the facet.</param>
-    public Facet(FacetIndex index, FacetFeature feature)
-    {
-        this.Index = index;
-        this.Features = new FacetFeature[] { feature };
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Facet"/> class from the specified CBOR object.
-    /// </summary>
-    /// <param name="obj">The CBOR object representing the facet.</param>
-    public Facet(CBORObject obj)
-    {
-        this.Index = obj["index"] is not null ? new FacetIndex(obj["index"]) : null;
-        this.Features = obj["features"] is not null ? obj["features"].Values.Select(n => new FacetFeature(n)).ToArray() : null;
-    }
-
-    /// <summary>
-    /// Gets the index of the facet.
-    /// </summary>
-    public FacetIndex? Index { get; }
-
-    /// <summary>
-    /// Gets the features of the facet.
-    /// </summary>
-    public FacetFeature[]? Features { get; }
-
     /// <summary>
     /// Creates a facet with a link feature.
     /// </summary>
@@ -60,7 +17,16 @@ public class Facet : ATRecord
     /// <param name="uri">The URI of the link.</param>
     /// <returns>The created facet.</returns>
     public static Facet CreateFacetLink(int start, int end, string uri)
-        => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateLink(uri) });
+    {
+        var facet = new Facet();
+        var link = new Link();
+        link.Uri = uri;
+        facet.Features = new List<ATObject> { link };
+        facet.Index = new ByteSlice();
+        facet.Index.ByteStart = start;
+        facet.Index.ByteEnd = end;
+        return facet;
+    }
 
     /// <summary>
     /// Creates a facet with a hashtag feature.
@@ -70,7 +36,16 @@ public class Facet : ATRecord
     /// <param name="hashtag">The hashtag value.</param>
     /// <returns>The created facet.</returns>
     public static Facet CreateFacetHashtag(int start, int end, string hashtag)
-        => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateHashtag(hashtag) });
+    {
+        var facet = new Facet();
+        var hashtagFeature = new Tag();
+        hashtagFeature.TagValue = hashtag;
+        facet.Features = new List<ATObject> { hashtagFeature };
+        facet.Index = new ByteSlice();
+        facet.Index.ByteStart = start;
+        facet.Index.ByteEnd = end;
+        return facet;
+    }
 
     /// <summary>
     /// Creates a facet with a mention feature.
@@ -80,7 +55,16 @@ public class Facet : ATRecord
     /// <param name="mention">The mention value.</param>
     /// <returns>The created facet.</returns>
     public static Facet CreateFacetMention(int start, int end, ATDid mention)
-        => new(new FacetIndex(start, end), new FacetFeature[] { FacetFeature.CreateMention(mention) });
+    {
+        var facet = new Facet();
+        var mentionFeature = new Mention();
+        mentionFeature.Did = mention;
+        facet.Features = new List<ATObject> { mentionFeature };
+        facet.Index = new ByteSlice();
+        facet.Index.ByteStart = start;
+        facet.Index.ByteEnd = end;
+        return facet;
+    }
 
     /// <summary>
     /// Creates an array of facets with link features for the URIs in the specified post.
@@ -199,7 +183,7 @@ public class Facet : ATRecord
     /// <param name="post">Post text.</param>
     /// <param name="actors">Actor profiles.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] ForMentions(string post, ActorProfile[] actors)
+    public static Facet[] ForMentions(string post, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed[] actors)
     {
         var actorList = new List<FacetActorIdentifier>();
         foreach (var actor in actors)
@@ -209,17 +193,12 @@ public class Facet : ATRecord
                 continue;
             }
 
-            if (!ATHandle.TryCreate(actor.Handle, out var atHandle))
+            if (actor.Handle is null || actor.Did is null)
             {
                 continue;
             }
 
-            if (atHandle is null || actor.Did is null)
-            {
-                continue;
-            }
-
-            actorList.Add(new FacetActorIdentifier(atHandle, actor.Did));
+            actorList.Add(new FacetActorIdentifier(actor.Handle, actor.Did));
         }
 
         return ForMentions(post, actorList.ToArray());
@@ -231,7 +210,7 @@ public class Facet : ATRecord
     /// <param name="post">Post text.</param>
     /// <param name="actors">Actor profiles.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] ForMentions(string post, FeedProfile[] actors)
+    public static Facet[] ForMentions(string post, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic[] actors)
     {
         var actorList = new List<FacetActorIdentifier>();
         foreach (var actor in actors)
@@ -241,17 +220,12 @@ public class Facet : ATRecord
                 continue;
             }
 
-            if (!ATHandle.TryCreate(actor.Handle, out var atHandle))
+            if (actor.Handle is null || actor.Did is null)
             {
                 continue;
             }
 
-            if (atHandle is null || actor.Did is null)
-            {
-                continue;
-            }
-
-            actorList.Add(new FacetActorIdentifier(atHandle, actor.Did));
+            actorList.Add(new FacetActorIdentifier(actor.Handle, actor.Did));
         }
 
         return ForMentions(post, actorList.ToArray());
@@ -263,16 +237,6 @@ public class Facet : ATRecord
     /// <param name="post">Post text.</param>
     /// <param name="actor">Actor profiles.</param>
     /// <returns>Array of Facets.</returns>
-    public static Facet[] ForMentions(string post, FeedProfile actor)
-        => ForMentions(post, new FeedProfile[] { actor });
-
-    /// <summary>
-    /// Returns a string that represents the current object.
-    /// </summary>
-    /// <returns>String.</returns>
-    public override string ToString()
-    {
-        var features = this.Features ?? Array.Empty<FacetFeature>();
-        return $"Facet: {this.Index}, Features: {string.Join(", ", features.Select(f => f.ToString()))}";
-    }
+    public static Facet[] ForMentions(string post, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic actor)
+        => ForMentions(post, new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic[] { actor });
 }
