@@ -1,6 +1,6 @@
 # `Result` and how to handle it
 
-FishyFlip implements a `Result`-based API for returning results from ATProtocol. Instead of throwing exceptions, calls to `ATProtocol` methods will result in either a `Success` object, with the data requested, or an `ATError` object with the error returned from the system. Handling this can be done in two ways.
+FishyFlip implements a `Result`-based API for returning results from ATProtocol. Instead of throwing exceptions, calls to `ATProtocol` methods will result in either a `Success` object, with the data requested, or an `ATError` object with the error returned from the system. Handling this can be done in several ways.
 
 **NOTE**: You should still handle exceptions from the library through other methods, such as with try/catch. The `ATError` object is intended for API calls, not general exceptions. If you hit other exceptions, those are most likely bugs within the library and should be filed.
 
@@ -27,6 +27,25 @@ error =>
    }
  );
  ```
+
+ ## Expand
+
+ You can also expand entries into their own nullable objects:
+
+ ```csharp
+ // Get a raw record from ATProtocol.
+ var postUri = ATUri.Create("at://did:plc:oio4hkxaop4ao4wz2pp3f4cr/app.bsky.feed.post/3lbhrggre422j");
+ var (success, error) = await atProtocol.Repo.GetRecordAsync(ATIdentifier.Create(postUri.Identity!)!, Post.RecordType, postUri.Rkey);
+
+if (success is GetRecordOutput output)
+{
+    Console.WriteLine(output.Uri);
+}
+else if (error != null)
+{
+    Console.WriteLine(error);
+}
+```
 
  ## HandleResult
 

@@ -21,7 +21,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Build and Pack Nugets
         run: dotnet pack src/FishyFlip.sln --configuration Release --output nupkg
@@ -42,7 +42,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Run FishyFlip.Tests
         run: dotnet test src/FishyFlip.Tests/FishyFlip.Tests.csproj -- --report-trx --results-directory ../../dotnet-test-results
@@ -68,7 +68,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Publish to NuGet
         run: |
