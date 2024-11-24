@@ -95,7 +95,8 @@ public partial class AppCommands
             }
         }
 
-        var records = AllClassesSored.Where(n => n.Definition.Type == "record").GroupBy(n => n.CSharpNamespace).ToList();
+        var records = AllClassesSored.Where(n => n.Definition.Type == "record").GroupBy(n => n.CSharpNamespace)
+            .ToList();
         foreach (var record in records)
         {
             await this.GenerateRecordStaticExtensionClass(record);
@@ -109,7 +110,8 @@ public partial class AppCommands
 
         var modelClasses = AllClassesSored.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record")
             .ToList();
-        var procedureClasses = AllClassesSored.Where(n => n.Definition.Type == "procedure" || n.Definition.Type == "query")
+        var procedureClasses = AllClassesSored
+            .Where(n => n.Definition.Type == "procedure" || n.Definition.Type == "query")
             .GroupBy(n => n.CSharpNamespace).ToList();
         foreach (var group in procedureClasses)
         {
@@ -1071,10 +1073,12 @@ public partial class AppCommands
         var requiredProperties = new List<string>();
         var optionalProperties = new List<string>();
         var requiredFields = classGeneration.Definition.Record?.Required?.ToList() ?? new List<string>();
+
         foreach (var prop in classGeneration.Properties)
         {
             var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
             var isRequired = requiredFields.Contains(prop.Key);
+
             if (prop.Key == "createdAt")
             {
                 isRequired = false;
@@ -1084,47 +1088,9 @@ public partial class AppCommands
             var returnType = prop.Type;
             var isArray = prop.PropertyDefinition.Type == "array";
             var arrayType = prop.PropertyDefinition.Items?.CSharpType;
-            Console.WriteLine(
-                $"Property: {prop.Key}, isRequired: {isRequired}, isArray: {isArray}, arrayType: {arrayType ?? "None"}, returnType: {returnType}");
-            if (isArray)
-            {
-                if (arrayType is not null)
-                {
-                    if (!isRequired)
-                    {
-                        propertyName += " = default";
-                        optionalProperties.Add($"{returnType} {propertyName}");
-                    }
-                    else
-                    {
-                        requiredProperties.Add($"{returnType} {propertyName}");
-                    }
-                }
-                else
-                {
-                    if (!isRequired)
-                    {
-                        propertyName += " = default";
-                        optionalProperties.Add($"{returnType} {propertyName}");
-                    }
-                    else
-                    {
-                        requiredProperties.Add($"{returnType} {propertyName}");
-                    }
-                }
-            }
-            else
-            {
-                if (!isRequired)
-                {
-                    propertyName += " = default";
-                    optionalProperties.Add($"{returnType} {propertyName}");
-                }
-                else
-                {
-                    requiredProperties.Add($"{returnType} {propertyName}");
-                }
-            }
+
+            propertyName += !isRequired ? " = default" : string.Empty;
+            (isRequired ? requiredProperties : optionalProperties).Add($"{returnType} {propertyName}");
         }
 
         if (isExtensionMethod)
@@ -1149,147 +1115,57 @@ public partial class AppCommands
         foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ??
                              new Dictionary<string, PropertyDefinition>())
         {
-            Console.WriteLine($"Property: {prop.Key}");
             var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
+            var returnType = prop.Value.CSharpType;
+
             if (prop.Value.Ref is not null)
             {
-                Console.WriteLine($"Property Ref: {prop.Value.Ref}");
-                var refString = prop.Value.Ref;
-                var refSplit = prop.Value.Ref.Split("#");
-                if (string.IsNullOrEmpty(refSplit[0]))
-                {
-                    refString = $"{classGeneration.Id}#{refSplit[1]}";
-                }
-
+                var refString = prop.Value.Ref.Split("#")[0] == string.Empty
+                    ? $"{classGeneration.Id}#{prop.Value.Ref.Split("#")[1]}"
+                    : prop.Value.Ref;
                 var classRef = FindClassFromRef(refString);
-
                 if (classRef is not null)
                 {
-                    var returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
-
-                    if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
-                    {
-                        optionalProperties.Add($"{returnType} {propertyName}");
-                    }
-                    else
-                    {
-                        requiredProperties.Add($"{returnType} {propertyName}");
-                    }
-
-                    Console.WriteLine($"{returnType} {propertyName}");
+                    returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
                 }
             }
-            else if (prop.Value.Type == "array")
+            else if (prop.Value.Type == "array" && prop.Value.Items?.Ref is not null)
             {
-                if (prop.Value.Items?.Ref is not null)
+                var refString = prop.Value.Items.Ref.Split("#")[0] == string.Empty
+                    ? $"{classGeneration.Id}#{prop.Value.Items.Ref.Split("#")[1]}"
+                    : prop.Value.Items.Ref;
+                var classRef = FindClassFromRef(refString);
+                if (classRef is not null)
                 {
-                    Console.WriteLine($"Property Array Ref: {prop.Value.Items.Ref}");
-                    var refString = prop.Value.Items.Ref;
-                    var refSplit = prop.Value.Items.Ref.Split("#");
-                    if (string.IsNullOrEmpty(refSplit[0]))
-                    {
-                        refString = $"{classGeneration.Id}#{refSplit[1]}";
-                    }
-
-                    var classRef = FindClassFromRef(refString);
-
-                    if (classRef is not null)
-                    {
-                        var returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
-                        if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
-                        {
-                            returnType += "?";
-                            propertyName += " = default";
-                            optionalProperties.Add($"List<{returnType}> {propertyName}");
-                        }
-                        else
-                        {
-                            requiredProperties.Add($"List<{returnType}> {propertyName}");
-                        }
-
-                        Console.WriteLine($"{returnType} {propertyName}");
-                    }
+                    returnType = $"List<{this.GenerateReturnTypeFromClassGeneration(classRef)}>";
                 }
-                else
-                {
-                    var returnType = prop.Value.CSharpType;
-                    if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
-                    {
-                        returnType += "?";
-                        switch (prop.Value.Type)
-                        {
-                            case "integer":
-                                propertyName += $" = {prop.Value.Default ?? 0}";
-                                break;
-                            default:
-                                propertyName += " = default";
-                                break;
-                        }
+            }
 
-                        optionalProperties.Add($"{returnType} {propertyName}");
-                    }
-                    else
-                    {
-                        requiredProperties.Add($"{returnType} {propertyName}");
-                    }
-
-                    Console.WriteLine($"{returnType} {propertyName}");
-                }
+            if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
+            {
+                returnType += "?";
+                propertyName += prop.Value.Type == "integer" ? $" = {prop.Value.Default ?? 0}" : " = default";
+                optionalProperties.Add($"{returnType} {propertyName}");
             }
             else
             {
-                var returnType = prop.Value.CSharpType;
-                if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
-                {
-                    returnType += "?";
-                    switch (prop.Value.Type)
-                    {
-                        case "integer":
-                            propertyName += $" = {prop.Value.Default ?? 0}";
-                            break;
-                        default:
-                            propertyName += " = default";
-                            break;
-                    }
-
-                    optionalProperties.Add($"{returnType} {propertyName}");
-                }
-                else
-                {
-                    requiredProperties.Add($"{returnType} {propertyName}");
-                }
-
-                Console.WriteLine($"{returnType} {propertyName}");
+                requiredProperties.Add($"{returnType} {propertyName}");
             }
         }
 
         if (classGeneration.Definition.Parameters is not null)
         {
-            Console.WriteLine($"Params Type: {classGeneration.Definition.Parameters.Type}");
             foreach (var param in classGeneration.Definition.Parameters.Properties)
             {
-                Console.WriteLine($"Param: {param.Key}");
-                if (param.Value.Description.ToLowerInvariant().Contains("deprecated"))
-                {
-                    Console.WriteLine($"Skipping deprecated param: {param.Key}");
-                    continue;
-                }
+                if (param.Value.Description.ToLowerInvariant().Contains("deprecated")) continue;
 
-                var returnType = param.Value.CSharpType;
                 var propertyName = this.PropertyNameToCSharpSafeValue(param.Key);
+                var returnType = param.Value.CSharpType;
+
                 if (!classGeneration.Definition.Parameters.Required.Contains(param.Key))
                 {
                     returnType += "?";
-                    switch (param.Value.Type)
-                    {
-                        case "integer":
-                            propertyName += $" = {param.Value.Default ?? 0}";
-                            break;
-                        default:
-                            propertyName += " = default";
-                            break;
-                    }
-
+                    propertyName += param.Value.Type == "integer" ? $" = {param.Value.Default ?? 0}" : " = default";
                     optionalProperties.Add($"{returnType} {propertyName}");
                 }
                 else
@@ -1299,12 +1175,8 @@ public partial class AppCommands
             }
         }
 
-        if (classGeneration.Definition.Input?.Encoding == "*/*")
-        {
-            requiredProperties.Add("StreamContent content");
-        }
-
-        if (classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
+        if (classGeneration.Definition.Input?.Encoding == "*/*" ||
+            classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
         {
             requiredProperties.Add("StreamContent content");
         }

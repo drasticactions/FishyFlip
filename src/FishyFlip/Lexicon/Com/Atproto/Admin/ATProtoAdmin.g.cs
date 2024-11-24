@@ -196,7 +196,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <param name="takedown"></param>
         /// <param name="deactivated"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>> UpdateSubjectStatusAsync (ATObject subject, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr takedown, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr deactivated, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>> UpdateSubjectStatusAsync (ATObject subject, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? takedown = default, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? deactivated = default, CancellationToken cancellationToken = default)
         {
             return atp.UpdateSubjectStatusAsync(subject, takedown, deactivated, cancellationToken);
         }

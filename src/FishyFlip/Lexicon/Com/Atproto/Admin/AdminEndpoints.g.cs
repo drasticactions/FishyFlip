@@ -339,7 +339,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <param name="deactivated"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>> UpdateSubjectStatusAsync (this FishyFlip.ATProtocol atp, ATObject subject, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr takedown, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr deactivated, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>> UpdateSubjectStatusAsync (this FishyFlip.ATProtocol atp, ATObject subject, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? takedown = default, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? deactivated = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateSubjectStatus.ToString();
             var inputItem = new UpdateSubjectStatusInput();
