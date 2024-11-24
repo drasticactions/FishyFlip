@@ -123,7 +123,6 @@ public partial class AppCommands
 
         await this.GenerateJsonSerializerContextFile(modelClasses);
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
-        // await this.GenerateATProtocolEndpointListAsync(procedureClasses.Select(n => n.Key).ToList());
 
         var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
@@ -156,7 +155,7 @@ public partial class AppCommands
             sb.AppendLine($"        /// {knownValue}");
             sb.AppendLine($"        /// </summary>");
             sb.AppendLine(
-                $"        public const string {(knownValue.Split("#").Last().ToClassSafe().ToPascalCase())} = \"{knownValue}\";");
+                $"        public const string {knownValue.Split("#").Last().ToClassSafe().ToPascalCase()} = \"{knownValue}\";");
             sb.AppendLine();
         }
 
@@ -190,7 +189,7 @@ public partial class AppCommands
         foreach (var group in groupList.OrderBy(n => n.Key))
         {
             var groupSplit = group.Key.Split(".");
-            var className = string.Empty;
+            string className;
             if (groupSplit[1] == "Atproto")
             {
                 className = $"ATProto{groupSplit.Last().ToPascalCase()}";
@@ -225,16 +224,7 @@ public partial class AppCommands
 
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
-
-    private void CreateAuthenticationCheck(StringBuilder sb, int spaces = 12)
-    {
-        sb.AppendLine($"{new string(' ', spaces)}if (!atp.IsAuthenticated)");
-        sb.AppendLine($"{new string(' ', spaces)}{{");
-        sb.AppendLine($"{new string(' ', spaces + 4)}throw new FFAuthenticationError();");
-        sb.AppendLine($"{new string(' ', spaces)}}}");
-        sb.AppendLine();
-    }
-
+    
     private async Task GenerateEndpointClassAsync(IGrouping<string, ClassGeneration> group)
     {
         Console.WriteLine($"Generating Endpoint Group: {group.Key}");
@@ -242,7 +232,7 @@ public partial class AppCommands
         this.GenerateHeader(sb);
         this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
         var groupSplit = group.Key.Split(".");
-        var className = string.Empty;
+        string className;
         if (groupSplit[1] == "Atproto")
         {
             className = $"ATProto{groupSplit.Last().ToPascalCase()}";
@@ -329,14 +319,6 @@ public partial class AppCommands
             sb.AppendLine($");");
             sb.AppendLine("        }");
             sb.AppendLine();
-        }
-
-        var id = group.Key.ToLowerInvariant();
-        switch (id)
-        {
-            case "com.atproto.repo":
-                // this.GenerateATProtocolRepoHelperMethods(sb);
-                break;
         }
 
         sb.AppendLine("    }");
@@ -798,10 +780,10 @@ public partial class AppCommands
             if (prop.PropertyDefinition.Type == "ref")
             {
                 sb.AppendLine();
-                var refString = prop.PropertyDefinition.Ref.Contains("#")
+                var refString = prop.PropertyDefinition.Ref?.Contains("#") ?? false
                     ? $"{item.Namespace}.defs#{prop.PropertyDefinition.Ref.Split("#")[1]}"
                     : prop.PropertyDefinition.Ref;
-                var cls2 = FindClassFromRef(refString);
+                var cls2 = FindClassFromRef(refString ?? string.Empty);
                 if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
                 {
                     sb.AppendLine(
@@ -923,10 +905,6 @@ public partial class AppCommands
 
             sb.AppendLine($")");
             sb.AppendLine("        {");
-            if (item.Definition.RequiresAuth)
-            {
-                // this.CreateAuthenticationCheck(sb);
-            }
 
             switch (item.Definition.Type)
             {
@@ -949,7 +927,6 @@ public partial class AppCommands
                             $"{item.CSharpNamespace.Replace(".", string.Empty)}{item.ClassName}Input";
                         for (int i = 1; i < inputProperties.Count - 1; i++)
                         {
-                            var typeName = inputProperties[i].Split(" ")[0];
                             var prop = inputProperties[i].Split(" ")[1];
                             sb.AppendLine(
                                 $"            inputItem.{prop.Replace("@", string.Empty).ToPascalCase()} = {prop};");
@@ -1086,8 +1063,6 @@ public partial class AppCommands
             }
 
             var returnType = prop.Type;
-            var isArray = prop.PropertyDefinition.Type == "array";
-            var arrayType = prop.PropertyDefinition.Items?.CSharpType;
 
             propertyName += !isRequired ? " = default" : string.Empty;
             (isRequired ? requiredProperties : optionalProperties).Add($"{returnType} {propertyName}");
@@ -1107,44 +1082,60 @@ public partial class AppCommands
     }
 
     private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputProperties(
-        ClassGeneration classGeneration, bool isExtensionMethod = false)
+    ClassGeneration classGeneration, bool isExtensionMethod = false)
+{
+    var requiredProperties = new List<string>();
+    var optionalProperties = new List<string>();
+
+    foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ?? new Dictionary<string, PropertyDefinition>())
     {
-        var requiredProperties = new List<string>();
-        var optionalProperties = new List<string>();
+        var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
+        var returnType = prop.Value.CSharpType;
 
-        foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ??
-                             new Dictionary<string, PropertyDefinition>())
+        if (prop.Value.Ref is not null)
         {
-            var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
-            var returnType = prop.Value.CSharpType;
-
-            if (prop.Value.Ref is not null)
+            var refString = prop.Value.Ref.Split("#")[0] == string.Empty ? $"{classGeneration.Id}#{prop.Value.Ref.Split("#")[1]}" : prop.Value.Ref;
+            var classRef = FindClassFromRef(refString);
+            if (classRef is not null)
             {
-                var refString = prop.Value.Ref.Split("#")[0] == string.Empty
-                    ? $"{classGeneration.Id}#{prop.Value.Ref.Split("#")[1]}"
-                    : prop.Value.Ref;
-                var classRef = FindClassFromRef(refString);
-                if (classRef is not null)
-                {
-                    returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
-                }
+                returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
             }
-            else if (prop.Value.Type == "array" && prop.Value.Items?.Ref is not null)
+        }
+        else if (prop.Value.Type == "array" && prop.Value.Items?.Ref is not null)
+        {
+            var refString = prop.Value.Items.Ref.Split("#")[0] == string.Empty ? $"{classGeneration.Id}#{prop.Value.Items.Ref.Split("#")[1]}" : prop.Value.Items.Ref;
+            var classRef = FindClassFromRef(refString);
+            if (classRef is not null)
             {
-                var refString = prop.Value.Items.Ref.Split("#")[0] == string.Empty
-                    ? $"{classGeneration.Id}#{prop.Value.Items.Ref.Split("#")[1]}"
-                    : prop.Value.Items.Ref;
-                var classRef = FindClassFromRef(refString);
-                if (classRef is not null)
-                {
-                    returnType = $"List<{this.GenerateReturnTypeFromClassGeneration(classRef)}>";
-                }
+                returnType = $"List<{this.GenerateReturnTypeFromClassGeneration(classRef)}>";
             }
+        }
 
-            if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
+        if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
+        {
+            returnType += "?";
+            propertyName += prop.Value.Type == "integer" ? $" = {prop.Value.Default ?? 0}" : " = default";
+            optionalProperties.Add($"{returnType} {propertyName}");
+        }
+        else
+        {
+            requiredProperties.Add($"{returnType} {propertyName}");
+        }
+    }
+
+    if (classGeneration.Definition.Parameters is not null)
+    {
+        foreach (var param in classGeneration.Definition.Parameters.Properties)
+        {
+            if (param.Value.Description.ToLowerInvariant().Contains("deprecated")) continue;
+
+            var propertyName = this.PropertyNameToCSharpSafeValue(param.Key);
+            var returnType = param.Value.CSharpType;
+
+            if (!classGeneration.Definition.Parameters.Required.Contains(param.Key))
             {
                 returnType += "?";
-                propertyName += prop.Value.Type == "integer" ? $" = {prop.Value.Default ?? 0}" : " = default";
+                propertyName += param.Value.Type == "integer" ? $" = {param.Value.Default ?? 0}" : " = default";
                 optionalProperties.Add($"{returnType} {propertyName}");
             }
             else
@@ -1152,49 +1143,27 @@ public partial class AppCommands
                 requiredProperties.Add($"{returnType} {propertyName}");
             }
         }
-
-        if (classGeneration.Definition.Parameters is not null)
-        {
-            foreach (var param in classGeneration.Definition.Parameters.Properties)
-            {
-                if (param.Value.Description.ToLowerInvariant().Contains("deprecated")) continue;
-
-                var propertyName = this.PropertyNameToCSharpSafeValue(param.Key);
-                var returnType = param.Value.CSharpType;
-
-                if (!classGeneration.Definition.Parameters.Required.Contains(param.Key))
-                {
-                    returnType += "?";
-                    propertyName += param.Value.Type == "integer" ? $" = {param.Value.Default ?? 0}" : " = default";
-                    optionalProperties.Add($"{returnType} {propertyName}");
-                }
-                else
-                {
-                    requiredProperties.Add($"{returnType} {propertyName}");
-                }
-            }
-        }
-
-        if (classGeneration.Definition.Input?.Encoding == "*/*" ||
-            classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
-        {
-            requiredProperties.Add("StreamContent content");
-        }
-
-        if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
-        {
-            requiredProperties.Add("OnCarDecoded onDecoded");
-        }
-
-        if (isExtensionMethod)
-        {
-            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
-        }
-
-        optionalProperties.Add("CancellationToken cancellationToken = default");
-
-        return (requiredProperties, optionalProperties);
     }
+
+    if (classGeneration.Definition.Input?.Encoding == "*/*" || classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
+    {
+        requiredProperties.Add("StreamContent content");
+    }
+
+    if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
+    {
+        requiredProperties.Add("OnCarDecoded onDecoded");
+    }
+
+    if (isExtensionMethod)
+    {
+        requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+    }
+
+    optionalProperties.Add("CancellationToken cancellationToken = default");
+
+    return (requiredProperties, optionalProperties);
+}
 
     private string FetchOutputProperties(ClassGeneration classGeneration)
     {
