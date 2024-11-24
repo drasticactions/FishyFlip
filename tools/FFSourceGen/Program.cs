@@ -33,10 +33,11 @@ public partial class AppCommands
     /// <param name="outputDir">-o, Output directory.</param>
     /// <param name="baseNamespace">-n, Base Namespace.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <param name="thirdPartyDirs">-t, Third Party Directories.</param>
     /// <returns>Task.</returns>
     [Command("generate")]
     public async Task GenerateAsync([Argument] string lexiconPath, string? outputDir = default,
-        string? baseNamespace = default, CancellationToken cancellationToken = default)
+        string? baseNamespace = default, CancellationToken cancellationToken = default, params string[] thirdPartyDirs)
     {
         this.baseNamespace = baseNamespace ??= this.baseNamespace;
         outputDir ??= AppDomain.CurrentDomain.BaseDirectory;
@@ -51,10 +52,63 @@ public partial class AppCommands
 
         Directory.CreateDirectory(this.basePath);
 
+        await this.GenerateClasses(lexiconPath);
+
+        foreach (var dir in thirdPartyDirs)
+        {
+            var directories = GetHighestLevelDirectories(dir);
+            foreach (var directory in directories.Where(n => !n.Contains("bsky") && !n.Contains("atproto")))
+            {
+                 await this.GenerateClasses(directory);
+            }
+        }
+
         await this.GenerateModelFiles(lexiconPath);
     }
 
-    private async Task GenerateModelFiles(string lexiconPath)
+    private List<string> GetHighestLevelDirectories(string path)
+    {
+        if (string.IsNullOrEmpty(path))
+        {
+            throw new ArgumentException("Path cannot be null or empty.", nameof(path));
+        }
+
+        if (!Directory.Exists(path))
+        {
+            throw new DirectoryNotFoundException($"The specified path does not exist: {path}");
+        }
+
+        // Initialize the list to store top-level directories
+        var highestLevelDirectories = new List<string>();
+
+        // Use a stack for Depth-First Search (DFS) traversal
+        var directoriesToProcess = new Stack<string>();
+        directoriesToProcess.Push(path);
+
+        while (directoriesToProcess.Count > 0)
+        {
+            var currentDirectory = directoriesToProcess.Pop();
+            var subdirectories = Directory.GetDirectories(currentDirectory);
+
+            // If no subdirectories exist, the current directory is a "highest level" directory
+            if (subdirectories.Length == 0)
+            {
+                highestLevelDirectories.Add(currentDirectory);
+            }
+            else
+            {
+                // Add subdirectories to the stack for further processing
+                foreach (var subdirectory in subdirectories)
+                {
+                    directoriesToProcess.Push(subdirectory);
+                }
+            }
+        }
+
+        return highestLevelDirectories;
+    }
+
+    private async Task GenerateClasses(string lexiconPath)
     {
         var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories).ToList();
         Console.WriteLine($"Found {files.Count()} files.");
@@ -80,7 +134,10 @@ public partial class AppCommands
             var filename = Path.GetFileNameWithoutExtension(jsonFile);
             await this.ProcessFile(jsonFile);
         }
+    }
 
+    private async Task GenerateModelFiles(string lexiconPath)
+    {
         foreach (var cls in AllClassesSored)
         {
             switch (cls.Definition.Type)
@@ -94,19 +151,6 @@ public partial class AppCommands
                     break;
             }
         }
-
-        var records = AllClassesSored.Where(n => n.Definition.Type == "record").GroupBy(n => n.CSharpNamespace)
-            .ToList();
-        foreach (var record in records)
-        {
-            await this.GenerateRecordStaticExtensionClass(record);
-            await this.GenerateRecordExtensionClass(record);
-        }
-
-        // var recordList = new string[] { "com.atproto.repo.createRecord", "com.atproto.repo.deleteRecord", "com.atproto.repo.putRecord", "com.atproto.repo.listRecords" };
-        // foreach (var item in records)
-        // {
-        // }
 
         var modelClasses = AllClassesSored.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record")
             .ToList();
@@ -133,6 +177,14 @@ public partial class AppCommands
         foreach (var cls in stringClassWithKnownValues)
         {
             await this.GenerateConstantKnownValueClass(cls);
+        }
+
+        var records = AllClassesSored.Where(n => n.Definition.Type == "record").GroupBy(n => n.CSharpNamespace)
+            .ToList();
+        foreach (var record in records)
+        {
+            await this.GenerateRecordStaticExtensionClass(record);
+            await this.GenerateRecordExtensionClass(record);
         }
     }
 
@@ -224,7 +276,7 @@ public partial class AppCommands
 
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
-    
+
     private async Task GenerateEndpointClassAsync(IGrouping<string, ClassGeneration> group)
     {
         Console.WriteLine($"Generating Endpoint Group: {group.Key}");
@@ -337,6 +389,15 @@ public partial class AppCommands
 
     private async Task GenerateRecordExtensionClass(IGrouping<string, ClassGeneration> group)
     {
+        var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(outputPath);
+
+        var classPath = Path.Combine(outputPath, $"{group.Key.Split(".").Last()}Extensions.g.cs");
+        if (File.Exists(classPath))
+        {
+            throw new Exception($"File already exists: {group.Key.Split(".").Last()}Extensions {classPath}");
+        }
+
         var groupSplit = group.Key.Split(".");
         var className = string.Empty;
         if (groupSplit[1] == "Atproto")
@@ -350,6 +411,12 @@ public partial class AppCommands
         else
         {
             className = string.Join(string.Empty, groupSplit.Select(n => n.ToPascalCase()).ToArray());
+        }
+
+        if (!File.Exists(Path.Combine(outputPath, $"{className}.g.cs")))
+        {
+            Console.WriteLine($"Skipping Record Extension Class: {group.Key}");
+            return;
         }
 
         var createRecord = AllClasses.First(n => n.Id == "com.atproto.repo.createRecord");
@@ -514,14 +581,6 @@ public partial class AppCommands
         sb.AppendLine("    }");
         sb.AppendLine("}");
         sb.AppendLine();
-        var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
-        Directory.CreateDirectory(outputPath);
-        var classPath = Path.Combine(outputPath, $"{group.Key.Split(".").Last()}Extensions.g.cs");
-        if (File.Exists(classPath))
-        {
-            throw new Exception($"File already exists: {group.Key.Split(".").Last()}Extensions {classPath}");
-        }
-
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
@@ -1083,59 +1142,38 @@ public partial class AppCommands
 
     private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputProperties(
     ClassGeneration classGeneration, bool isExtensionMethod = false)
-{
-    var requiredProperties = new List<string>();
-    var optionalProperties = new List<string>();
-
-    foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ?? new Dictionary<string, PropertyDefinition>())
     {
-        var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
-        var returnType = prop.Value.CSharpType;
+        var requiredProperties = new List<string>();
+        var optionalProperties = new List<string>();
 
-        if (prop.Value.Ref is not null)
+        foreach (var prop in classGeneration.Definition.Input?.Schema?.Properties ?? new Dictionary<string, PropertyDefinition>())
         {
-            var refString = prop.Value.Ref.Split("#")[0] == string.Empty ? $"{classGeneration.Id}#{prop.Value.Ref.Split("#")[1]}" : prop.Value.Ref;
-            var classRef = FindClassFromRef(refString);
-            if (classRef is not null)
+            var propertyName = this.PropertyNameToCSharpSafeValue(prop.Key);
+            var returnType = prop.Value.CSharpType;
+
+            if (prop.Value.Ref is not null)
             {
-                returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
+                var refString = prop.Value.Ref.Split("#")[0] == string.Empty ? $"{classGeneration.Id}#{prop.Value.Ref.Split("#")[1]}" : prop.Value.Ref;
+                var classRef = FindClassFromRef(refString);
+                if (classRef is not null)
+                {
+                    returnType = this.GenerateReturnTypeFromClassGeneration(classRef);
+                }
             }
-        }
-        else if (prop.Value.Type == "array" && prop.Value.Items?.Ref is not null)
-        {
-            var refString = prop.Value.Items.Ref.Split("#")[0] == string.Empty ? $"{classGeneration.Id}#{prop.Value.Items.Ref.Split("#")[1]}" : prop.Value.Items.Ref;
-            var classRef = FindClassFromRef(refString);
-            if (classRef is not null)
+            else if (prop.Value.Type == "array" && prop.Value.Items?.Ref is not null)
             {
-                returnType = $"List<{this.GenerateReturnTypeFromClassGeneration(classRef)}>";
+                var refString = prop.Value.Items.Ref.Split("#")[0] == string.Empty ? $"{classGeneration.Id}#{prop.Value.Items.Ref.Split("#")[1]}" : prop.Value.Items.Ref;
+                var classRef = FindClassFromRef(refString);
+                if (classRef is not null)
+                {
+                    returnType = $"List<{this.GenerateReturnTypeFromClassGeneration(classRef)}>";
+                }
             }
-        }
 
-        if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
-        {
-            returnType += "?";
-            propertyName += prop.Value.Type == "integer" ? $" = {prop.Value.Default ?? 0}" : " = default";
-            optionalProperties.Add($"{returnType} {propertyName}");
-        }
-        else
-        {
-            requiredProperties.Add($"{returnType} {propertyName}");
-        }
-    }
-
-    if (classGeneration.Definition.Parameters is not null)
-    {
-        foreach (var param in classGeneration.Definition.Parameters.Properties)
-        {
-            if (param.Value.Description.ToLowerInvariant().Contains("deprecated")) continue;
-
-            var propertyName = this.PropertyNameToCSharpSafeValue(param.Key);
-            var returnType = param.Value.CSharpType;
-
-            if (!classGeneration.Definition.Parameters.Required.Contains(param.Key))
+            if (!classGeneration.Definition.Input?.Schema?.Required.Contains(prop.Key) ?? false)
             {
                 returnType += "?";
-                propertyName += param.Value.Type == "integer" ? $" = {param.Value.Default ?? 0}" : " = default";
+                propertyName += prop.Value.Type == "integer" ? $" = {prop.Value.Default ?? 0}" : " = default";
                 optionalProperties.Add($"{returnType} {propertyName}");
             }
             else
@@ -1143,27 +1181,48 @@ public partial class AppCommands
                 requiredProperties.Add($"{returnType} {propertyName}");
             }
         }
+
+        if (classGeneration.Definition.Parameters is not null)
+        {
+            foreach (var param in classGeneration.Definition.Parameters.Properties)
+            {
+                if (param.Value.Description.ToLowerInvariant().Contains("deprecated")) continue;
+
+                var propertyName = this.PropertyNameToCSharpSafeValue(param.Key);
+                var returnType = param.Value.CSharpType;
+
+                if (!classGeneration.Definition.Parameters.Required.Contains(param.Key))
+                {
+                    returnType += "?";
+                    propertyName += param.Value.Type == "integer" ? $" = {param.Value.Default ?? 0}" : " = default";
+                    optionalProperties.Add($"{returnType} {propertyName}");
+                }
+                else
+                {
+                    requiredProperties.Add($"{returnType} {propertyName}");
+                }
+            }
+        }
+
+        if (classGeneration.Definition.Input?.Encoding == "*/*" || classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
+        {
+            requiredProperties.Add("StreamContent content");
+        }
+
+        if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
+        {
+            requiredProperties.Add("OnCarDecoded onDecoded");
+        }
+
+        if (isExtensionMethod)
+        {
+            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+        }
+
+        optionalProperties.Add("CancellationToken cancellationToken = default");
+
+        return (requiredProperties, optionalProperties);
     }
-
-    if (classGeneration.Definition.Input?.Encoding == "*/*" || classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
-    {
-        requiredProperties.Add("StreamContent content");
-    }
-
-    if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
-    {
-        requiredProperties.Add("OnCarDecoded onDecoded");
-    }
-
-    if (isExtensionMethod)
-    {
-        requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
-    }
-
-    optionalProperties.Add("CancellationToken cancellationToken = default");
-
-    return (requiredProperties, optionalProperties);
-}
 
     private string FetchOutputProperties(ClassGeneration classGeneration)
     {
@@ -1268,27 +1327,6 @@ public partial class AppCommands
         return AllClasses.FirstOrDefault(n => n.Id == refString);
     }
 
-    public static PropertyGeneration? FindPropertyFromRef(string refString)
-    {
-        var splitHashtag = refString.Split('#').Where(n => !string.IsNullOrEmpty(n)).ToArray();
-        if (splitHashtag.Length == 2)
-        {
-            var def = splitHashtag[0];
-            var key = splitHashtag[1];
-            var cls = AllClasses.FirstOrDefault(n => n.Id == def);
-            if (cls != null)
-            {
-                var prop = cls.Properties.FirstOrDefault(n => n.Key == key);
-                if (prop != null)
-                {
-                    return prop;
-                }
-            }
-        }
-
-        return null;
-    }
-
     private async Task ProcessFile(string defJsonPath)
     {
         var defJsonText = await File.ReadAllTextAsync(defJsonPath);
@@ -1297,6 +1335,12 @@ public partial class AppCommands
         if (schemaDocument == null)
         {
             throw new Exception($"Failed to deserialize {defJsonPath}.");
+        }
+
+        if (AllClasses.Any(n => n.Id == schemaDocument.Id))
+        {
+            Console.WriteLine($"Skipping duplicate class: {schemaDocument.Id}");
+            return;
         }
 
         var path = Path.Combine(schemaDocument.Id.Split('.').Take(schemaDocument.Id.Split('.').Length - 1)
