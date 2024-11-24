@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon
         /// </param>
         /// <param name="labels">
         /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// com.atproto.label.defs#selfLabels
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="rkey"></param>

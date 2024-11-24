@@ -147,14 +147,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="name"></param>
         /// <param name="privileged"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?>> CreateAppPasswordAsync (this FishyFlip.ATProtocol atp, string name, bool? privileged = default, CancellationToken cancellationToken = default)
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef?>> CreateAppPasswordAsync (this FishyFlip.ATProtocol atp, string name, bool? privileged = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateAppPassword.ToString();
             var inputItem = new CreateAppPasswordInput();
             inputItem.Name = name;
             inputItem.Privileged = privileged;
-            return atp.Client.Post<CreateAppPasswordInput, FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAppPasswordInput!, atp.Options.SourceGenerationContext.ComAtprotoServerAppPassword!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Client.Post<CreateAppPasswordInput, FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAppPasswordInput!, atp.Options.SourceGenerationContext.ComAtprotoServerAppPasswordDef!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
         }
 
 

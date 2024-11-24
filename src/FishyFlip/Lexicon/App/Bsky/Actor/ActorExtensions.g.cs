@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon
         /// <param name="banner">Larger horizontal image to display behind profile view.</param>
         /// <param name="labels">Self-label values, specific to the Bluesky application, on the overall account.
         /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// com.atproto.label.defs#selfLabels
         /// </param>
         /// <param name="joinedViaStarterPack">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
