@@ -70,6 +70,12 @@ public sealed partial class ATProtocol : IDisposable
     public PlcDirectory PlcDirectory => new(this);
 
     /// <summary>
+    /// Gets the OpenGraphParser.
+    /// Can be used to generate embeds from URLs.
+    /// </summary>
+    public OpenGraphParser OpenGraphParser => new(this);
+
+    /// <summary>
     /// Gets the current AuthSession.
     /// </summary>
     public AuthSession? AuthSession => this.sessionManager switch
