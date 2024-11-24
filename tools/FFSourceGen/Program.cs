@@ -1300,6 +1300,11 @@ public partial class AppCommands
             requiredProperties.Add("StreamContent content");
         }
 
+        if (classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
+        {
+            requiredProperties.Add("StreamContent content");
+        }
+
         if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
         {
             requiredProperties.Add("OnCarDecoded onDecoded");

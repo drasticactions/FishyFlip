@@ -160,12 +160,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// Import a repo in the form of a CAR file. Requires Content-Length HTTP header to be set.
         /// </summary>
         /// <param name="atp"></param>
+        /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> ImportRepoAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> ImportRepoAsync (this FishyFlip.ATProtocol atp, StreamContent content, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ImportRepo.ToString();
-            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, content, cancellationToken, atp.Options.Logger);
         }
 
 

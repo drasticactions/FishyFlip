@@ -18,6 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// newest
         /// most-likes
         /// random
+        /// hotness
         /// </param>
         /// <param name="prioritizeFollowedUsers">Show followed users at the top of all replies.</param>
         public ThreadViewPref(string? sort = default, bool? prioritizeFollowedUsers = default)
@@ -52,6 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// newest
         /// most-likes
         /// random
+        /// hotness
         /// </summary>
         [JsonPropertyName("sort")]
         public string? Sort { get; set; }
