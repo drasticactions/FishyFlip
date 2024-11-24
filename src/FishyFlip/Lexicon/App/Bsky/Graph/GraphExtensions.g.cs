@@ -179,9 +179,9 @@ namespace FishyFlip.Lexicon
         /// <param name="atp"></param>
         /// <param name="purpose">Defines the purpose of the list (aka, moderation-oriented or curration-oriented)
         /// Known Values:
-        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on.
-        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating.
-        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack.
+        /// app.bsky.graph.defs#modlist
+        /// app.bsky.graph.defs#curatelist
+        /// app.bsky.graph.defs#referencelist
         /// </param>
         /// <param name="name">Display name for list; can not be empty.</param>
         /// <param name="description"></param>
@@ -189,7 +189,7 @@ namespace FishyFlip.Lexicon
         /// <param name="avatar"></param>
         /// <param name="labels">
         /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// com.atproto.label.defs#selfLabels
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="rkey"></param>

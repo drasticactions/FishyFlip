@@ -87,7 +87,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="name"></param>
         /// <param name="privileged"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?>> CreateAppPasswordAsync (string name, bool? privileged = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef?>> CreateAppPasswordAsync (string name, bool? privileged = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateAppPasswordAsync(name, privileged, cancellationToken);
         }

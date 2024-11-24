@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon
         /// <param name="acceptsInteractions">Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions</param>
         /// <param name="labels">Self-label values
         /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// com.atproto.label.defs#selfLabels
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="rkey"></param>
@@ -210,7 +210,7 @@ namespace FishyFlip.Lexicon
         /// <param name="langs">Indicates human language of post primary text content.</param>
         /// <param name="labels">Self-label values for this post. Effectively content warnings.
         /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// com.atproto.label.defs#selfLabels
         /// </param>
         /// <param name="tags">Additional hashtags, in addition to any included in post text and facets.</param>
         /// <param name="createdAt">Client-declared timestamp when this post was originally created.</param>

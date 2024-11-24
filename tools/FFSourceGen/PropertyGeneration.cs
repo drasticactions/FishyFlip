@@ -107,9 +107,15 @@ public class PropertyGeneration
     public string GetDefaultValue()
     {
         var defaultValue = this.GetDefaultValueString(this.PropertyDefinition);
+
+        if (this.Type == "string?" || this.Type == "string")
+        {
+            return $"\"{defaultValue}\"";
+        }
+
         if (this.PropertyDefinition.KnownValues?.Length > 0)
         {
-            if (this.Type == "string?")
+            if (this.Type == "string?" || this.Type == "string")
             {
                 return $"\"{defaultValue}\"";
             }

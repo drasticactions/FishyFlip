@@ -81,10 +81,34 @@ public class ATProtocolOptions
     /// <returns><see cref="HttpClient"/>.</returns>
     internal HttpClient GenerateHttpClient(HttpMessageHandler? handler = default)
     {
-        var httpClient = new HttpClient(handler ?? new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue, AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate, });
+        HttpClient httpClient;
+        if (handler is not null)
+        {
+            httpClient = new HttpClient(handler);
+        }
+        else
+        {
+            var handle = new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue };
+            if (handle.SupportsAutomaticDecompression)
+            {
+                this.Logger?.LogDebug("Enabling GZip and Deflate decompression.");
+                handle.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            }
+            else
+            {
+                this.Logger?.LogDebug("Automatic decompression is not supported, disabled...");
+            }
+
+            httpClient = new HttpClient(handle);
+        }
+
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
         httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
         httpClient.BaseAddress = this.Url;
+#if NET8_0_OR_GREATER
+        // From https://github.com/drasticactions/FishyFlip/pull/107
+        httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
+#endif
         return httpClient;
     }
 }
