@@ -81,10 +81,27 @@ public class ATProtocolOptions
     /// <returns><see cref="HttpClient"/>.</returns>
     internal HttpClient GenerateHttpClient(HttpMessageHandler? handler = default)
     {
-        var httpClient = new HttpClient(handler ?? new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue, AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate, });
+#if NET8_0_OR_GREATER
+        bool isBrowser = OperatingSystem.IsBrowser();
+#else
+        bool isBrowser = false;
+#endif
+        if (isBrowser)
+        {
+            handler ??= new HttpClientHandler();
+        }
+        else
+        {
+            handler ??= new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue, AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate };
+        }
+
+        var httpClient = new HttpClient(handler);
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
         httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
         httpClient.BaseAddress = this.Url;
+#if NET8_0_OR_GREATER
+        httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
+#endif
         return httpClient;
     }
 }
