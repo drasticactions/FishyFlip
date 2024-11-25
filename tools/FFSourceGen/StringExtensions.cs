@@ -13,41 +13,6 @@ namespace FFSourceGen;
 /// </summary>
 internal static class StringExtensions
 {
-    /// <summary>
-    /// Convert a string to Pascal Case.
-    /// </summary>
-    /// <param name="input">String.</param>
-    /// <returns>String with Pascal Case.</returns>
-    public static string ToPascalCase(this string input)
-    {
-        if (string.IsNullOrEmpty(input))
-        {
-            return input;
-        }
-
-        StringBuilder result = new StringBuilder();
-        bool nextUpper = true;
-
-        for (int i = 0; i < input.Length; i++)
-        {
-            if (i > 0 && char.IsUpper(input[i]))
-            {
-                result.Append(input[i]);
-            }
-            else if (nextUpper)
-            {
-                result.Append(char.ToUpper(input[i]));
-                nextUpper = false;
-            }
-            else
-            {
-                result.Append(input[i]);
-            }
-        }
-
-        return result.ToString();
-    }
-
     public static string ToPreventClassPropertyNameClash(this string input, string className)
     {
         if (string.IsNullOrEmpty(input))

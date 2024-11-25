@@ -86,9 +86,47 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListBlocksAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListBlockAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "app.bsky.graph.block", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Block records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListBlockAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.block", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Block records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetBlockAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "app.bsky.graph.block", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Block records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetBlockAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.block", rkey, cid, cancellationToken);
         }
         /// <summary>
         /// Create a Follow record.
@@ -161,9 +199,47 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListFollowsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListFollowAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "app.bsky.graph.follow", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Follow records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListFollowAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.follow", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Follow records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetFollowAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "app.bsky.graph.follow", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Follow records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetFollowAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.follow", rkey, cid, cancellationToken);
         }
         /// <summary>
         /// Create a List record.
@@ -241,9 +317,47 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListListsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListListAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "app.bsky.graph.list", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List List records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListListAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.list", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get List records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetListAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "app.bsky.graph.list", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get List records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetListAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.list", rkey, cid, cancellationToken);
         }
         /// <summary>
         /// Create a Listblock record.
@@ -316,9 +430,47 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListListblocksAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListListblockAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "app.bsky.graph.listblock", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Listblock records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListListblockAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.listblock", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Listblock records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetListblockAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "app.bsky.graph.listblock", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Listblock records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetListblockAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.listblock", rkey, cid, cancellationToken);
         }
         /// <summary>
         /// Create a Listitem record.
@@ -392,9 +544,47 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListListitemsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListListitemAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "app.bsky.graph.listitem", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Listitem records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListListitemAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.listitem", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Listitem records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetListitemAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "app.bsky.graph.listitem", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Listitem records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetListitemAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.listitem", rkey, cid, cancellationToken);
         }
         /// <summary>
         /// Create a Starterpack record.
@@ -471,9 +661,47 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListStarterpacksAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListStarterpackAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "app.bsky.graph.starterpack", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Starterpack records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListStarterpackAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.starterpack", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Starterpack records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetStarterpackAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "app.bsky.graph.starterpack", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Starterpack records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetStarterpackAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.starterpack", rkey, cid, cancellationToken);
         }
     }
 }

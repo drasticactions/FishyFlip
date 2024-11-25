@@ -85,9 +85,47 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListDeclarationsAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListDeclarationAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "chat.bsky.actor.declaration", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Declaration records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListDeclarationAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Declaration records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetDeclarationAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "chat.bsky.actor.declaration", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Declaration records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetDeclarationAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", rkey, cid, cancellationToken);
         }
     }
 }
