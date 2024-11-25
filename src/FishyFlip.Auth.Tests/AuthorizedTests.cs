@@ -10,6 +10,7 @@ using FishyFlip.Lexicon.App.Bsky.Richtext;
 using FishyFlip.Models;
 using Microsoft.Extensions.Logging.Debug;
 using System.Net.Http;
+using FishyFlip.Lexicon.Com.Whtwnd.Blog;
 
 namespace FishyFlip.Tests;
 
@@ -484,5 +485,21 @@ public class AuthorizedTests
         Assert.IsNotNull(threadGate);
         Assert.IsNotNull(threadGate.Uri);
         Assert.IsNotNull(threadGate.Cid);
+    }
+
+    [TestMethod]
+    public async Task HandleCreateAndRemoveEntry()
+    {
+        var (result, error) = await AuthorizedTests.proto.ComWhtwndBlog.CreateEntryAsync(content: "Unit Test Content", visibility: "author", title: "Unit Test Title");
+        Assert.IsNull(error);
+        Assert.IsNotNull(result);
+        var (result2, error2) = await AuthorizedTests.proto.ComWhtwndBlog.GetEntryAsync(result.Uri!.Did!, result.Uri.Rkey);
+        Assert.IsNull(error2);
+        Assert.IsNotNull(result2);
+        Assert.AreEqual("Unit Test Content", ((Entry)result2.Value!).Content);
+        Assert.AreEqual("Unit Test Title", ((Entry)result2.Value!).Title);
+        var (result3, error3) = await AuthorizedTests.proto.ComWhtwndBlog.DeleteEntryAsync(result.Uri.Rkey);
+        Assert.IsNull(error3);
+        Assert.IsNotNull(result3);
     }
 }

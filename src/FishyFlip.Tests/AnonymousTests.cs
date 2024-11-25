@@ -1,3 +1,4 @@
+using FishyFlip.Lexicon;
 using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Lexicon.App.Bsky.Feed;
 using FishyFlip.Lexicon.App.Bsky.Richtext;
@@ -177,5 +178,15 @@ public class AnonymousTests
         Assert.IsTrue(baseUriFacets.Length == 1);
         var facets = handleFacets.Concat(hashtagFacets).Concat(uriFacets).Concat(baseUriFacets).ToArray();
         Assert.IsTrue(facets.Length == 11);
+    }
+
+    [TestMethod]
+    [DataRow("at://did:plc:fzkpgpjj7nki7r5rhtmgzrez/com.whtwnd.blog.entry/3kudrxp52ps2a")]
+    public async Task GetAuthorPostTest(string atDid)
+    {
+        var postUri = ATUri.Create(atDid);
+        var (result, error) = await AnonymousTests.proto.ComWhtwndBlog.GetEntryAsync(postUri.Did!, postUri.Rkey);
+        Assert.IsNull(error);
+        Assert.IsNotNull(result);
     }
 }

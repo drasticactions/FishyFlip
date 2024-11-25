@@ -104,6 +104,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Com.Atproto.Temp.ATProtoTemp Temp => new (this);
 
         /// <summary>
+        /// com.whtwnd.blog Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Com.Whtwnd.Blog.ComWhtwndBlog ComWhtwndBlog => new (this);
+
+        /// <summary>
         /// tools.ozone.communication Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Tools.Ozone.Communication.ToolsOzoneCommunication ToolsOzoneCommunication => new (this);
