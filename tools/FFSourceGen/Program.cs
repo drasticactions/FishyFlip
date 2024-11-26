@@ -186,6 +186,10 @@ public partial class AppCommands
             await this.GenerateRecordStaticExtensionClass(record);
             await this.GenerateRecordExtensionClass(record);
         }
+
+        var errors = AllClassesSored.SelectMany(n => n.Definition.Errors ?? Array.Empty<ErrorDefinition>()).Select(n => n.Name).Distinct().ToList();
+        await this.GenerateATErrorClasses(errors);
+        await this.GenerateATErrorObjects(errors);
     }
 
     private async Task GenerateConstantKnownValueClass(ClassGeneration cls)
@@ -2145,5 +2149,63 @@ public partial class AppCommands
             sb.AppendLine($"    /// {definition.Description}");
             sb.AppendLine($"    /// </summary>");
         }
+    }
+
+    private async Task GenerateATErrorClasses(List<string> errorCodes)
+    {
+        var errorPath = Path.Combine(this.basePath, "Errors");
+        Directory.CreateDirectory(errorPath);
+        foreach (var errorCode in errorCodes)
+        {
+            var sb = new StringBuilder();
+            this.GenerateHeader(sb);
+            this.GenerateNamespace(sb, this.baseNamespace);
+            sb.AppendLine("{");
+            sb.AppendLine($"    /// <summary>");
+            sb.AppendLine($"    /// FishyFlip ATError for {errorCode}.");
+            sb.AppendLine($"    /// </summary>");
+            sb.AppendLine($"    public class {errorCode.ToPascalCase()}Error : FishyFlip.Models.ATError");
+            sb.AppendLine("    {");
+            sb.AppendLine($"        public {errorCode.ToPascalCase()}Error(int statusCode, ErrorDetail detail) : base(statusCode, detail)");
+            sb.AppendLine("        {");
+            sb.AppendLine("        }");
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+            sb.AppendLine();
+            var outputPath = Path.Combine(errorPath, $"{errorCode.ToPascalCase()}Error.g.cs");
+            await File.WriteAllTextAsync(outputPath, sb.ToString());
+        }
+    }
+
+    private async Task GenerateATErrorObjects(List<string> errorCodes)
+    {
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, this.baseNamespace);
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Generates casted ATError messages if available.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public static class ATErrorGenerator");
+        sb.AppendLine("    {");
+        sb.AppendLine("        public static FishyFlip.Models.ATError Generate(int statusCode, ErrorDetail detail)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            switch (detail.Error)");
+        sb.AppendLine("            {");
+        foreach (var errorCode in errorCodes)
+        {
+            sb.AppendLine($"                case \"{errorCode}\":");
+            sb.AppendLine($"                    return new {errorCode.ToPascalCase()}Error(statusCode, detail);");
+        }
+
+        sb.AppendLine("                default:");
+        sb.AppendLine("                    return new FishyFlip.Models.ATError(statusCode, detail);");
+        sb.AppendLine("            }");
+        sb.AppendLine("        }");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, "ATErrorGenerator.g.cs");
+        await File.WriteAllTextAsync(outputPath, sb.ToString());
     }
 }

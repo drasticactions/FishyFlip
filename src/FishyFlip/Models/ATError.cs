@@ -5,8 +5,38 @@
 namespace FishyFlip.Models;
 
 /// <summary>
-/// Represents an atError with a status code and optional atError detail.
+/// ATProtocol Error Response.
+/// Returned when an error occurs in the ATProtocol.
 /// </summary>
-public record ATError(int StatusCode, ErrorDetail? Detail = default)
+public class ATError
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATError"/> class.
+    /// </summary>
+    public ATError()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ATError"/> class.
+    /// </summary>
+    /// <param name="statusCode">The status code.</param>
+    /// <param name="detail">The detail.</param>
+    public ATError(int statusCode, ErrorDetail? detail)
+    {
+        this.StatusCode = statusCode;
+        this.Detail = detail;
+    }
+
+    /// <summary>
+    /// Gets or sets the status code.
+    /// </summary>
+    [JsonPropertyName("statuscode")]
+    public int StatusCode { get; set; }
+
+    /// <summary>
+    /// Gets or sets the atError detail.
+    /// </summary>
+    [JsonPropertyName("detail")]
+    public ErrorDetail? Detail { get; set; }
 }
