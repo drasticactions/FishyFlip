@@ -10,6 +10,7 @@
     <PackageVersion Include="DotMake.CommandLine" Version="1.8.7" />
     <PackageVersion Include="IdentityModel.OidcClient" Version="6.0.0" />
     <PackageVersion Include="IdentityModel.OidcClient.DPoP" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />

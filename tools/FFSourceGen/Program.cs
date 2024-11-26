@@ -7,6 +7,10 @@ using System.Text.Json;
 using ConsoleAppFramework;
 using FFSourceGen;
 using FFSourceGen.Models;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
 
 var app = ConsoleApp.Create();
 app.Add<AppCommands>();
@@ -1593,6 +1597,9 @@ public partial class AppCommands
         this.GenerateFromJsonWithSourceGenerator(sb, cls);
 
         sb.AppendLine("    }");
+
+        this.GenerateErrors(sb, cls);
+
         sb.AppendLine("}");
         sb.AppendLine();
         var outputPath = Path.Combine(this.basePath, cls.Path);
@@ -1604,7 +1611,16 @@ public partial class AppCommands
             return;
         }
 
-        await File.WriteAllTextAsync(classPath, sb.ToString());
+        var tree = CSharpSyntaxTree.ParseText(sb.ToString());
+        if (await tree.GetRootAsync() is not CompilationUnitSyntax root)
+        {
+            throw new Exception("Failed to parse tree.");
+        }
+
+        var ret = root.NormalizeWhitespace().ToFullString();
+        var sourceText = SourceText.From(ret, Encoding.UTF8);
+
+        await File.WriteAllTextAsync(classPath, sourceText.ToString());
     }
 
     private void GenerateToJsonWithSourceGenerator(StringBuilder sb, ClassGeneration cls)
@@ -2106,6 +2122,48 @@ public partial class AppCommands
         sb.AppendLine("}");
         sb.AppendLine();
         return sb.ToString();
+    }
+
+    private void GenerateErrors(StringBuilder sb, ClassGeneration cls)
+    {
+        var mainRecord = cls.Document.Defs.FirstOrDefault(n => n.Key == "main");
+        if (mainRecord.Value is null)
+        {
+            return;
+        }
+
+        if (mainRecord.Value.Errors is null || mainRecord.Value.Errors.Length == 0)
+        {
+            return;
+        }
+
+        sb.AppendLine();
+        sb.AppendLine($"        /// <summary>");
+        sb.AppendLine($"        /// Possible error values for {cls.ClassName}.");
+        sb.AppendLine($"        /// </summary>");
+        sb.AppendLine($"        public enum {cls.ClassName}Errors");
+        sb.AppendLine($"        {{");
+        for (int i = 0; i < mainRecord.Value.Errors.Length; i++)
+        {
+            var error = mainRecord.Value.Errors[i];
+            if (!string.IsNullOrEmpty(error.Description))
+            {
+                sb.AppendLine($"        /// <summary>");
+                sb.AppendLine($"        /// {error.Description}");
+                sb.AppendLine($"        /// </summary>");
+            }
+
+            if (i < mainRecord.Value.Errors.Length - 1)
+            {
+                sb.AppendLine($"            {error.Name},");
+            }
+            else
+            {
+                sb.AppendLine($"            {error.Name}");
+            }
+        }
+
+        sb.AppendLine($"        }}");
     }
 
     private void GenerateTypeProperty(StringBuilder sb, string id)
