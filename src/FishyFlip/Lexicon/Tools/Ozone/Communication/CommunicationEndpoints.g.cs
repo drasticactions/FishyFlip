@@ -24,6 +24,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         /// <summary>
         /// Administrative action to create a new, re-usable communication (email for now) template.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.DuplicateTemplateNameError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="name"></param>
@@ -77,6 +79,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         /// <summary>
         /// Administrative action to update an existing communication template. Allows passing partial fields to patch specific fields only.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.DuplicateTemplateNameError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="id"></param>

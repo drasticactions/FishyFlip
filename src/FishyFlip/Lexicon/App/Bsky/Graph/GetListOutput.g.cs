@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the list.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView)
         /// </summary>
         [JsonPropertyName("list")]
         [JsonRequired]

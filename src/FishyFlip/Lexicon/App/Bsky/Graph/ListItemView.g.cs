@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the subject.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]

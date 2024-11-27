@@ -100,7 +100,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the creator.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
@@ -151,7 +151,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the viewer.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState"/> (app.bsky.feed.defs#generatorViewerState)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState"/> (app.bsky.feed.defs#generatorViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }

@@ -14,17 +14,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         /// <param name="key"></param>
         /// <param name="scope">
-        /// Known Values:
-        /// instance
-        /// personal
+        /// <br/> Known Values: <br/>
+        /// instance <br/>
+        /// personal <br/>
         /// </param>
         /// <param name="value"></param>
         /// <param name="description"></param>
         /// <param name="managerRole">
-        /// Known Values:
-        /// roleModerator - Moderator role. Can perform most actions.
-        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
-        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// <br/> Known Values: <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// </param>
         public UpsertOptionInput(string? key = default, string? scope = default, ATObject? value = default, string? description = default, string? managerRole = default)
         {
@@ -65,9 +65,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         /// <summary>
         /// Gets or sets the scope.
-        /// Known Values:
-        /// instance
-        /// personal
+        /// <br/> Known Values: <br/>
+        /// instance <br/>
+        /// personal <br/>
         /// </summary>
         [JsonPropertyName("scope")]
         [JsonRequired]
@@ -88,10 +88,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         /// <summary>
         /// Gets or sets the managerRole.
-        /// Known Values:
-        /// roleModerator - Moderator role. Can perform most actions.
-        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
-        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// <br/> Known Values: <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// </summary>
         [JsonPropertyName("managerRole")]
         public string? ManagerRole { get; set; }

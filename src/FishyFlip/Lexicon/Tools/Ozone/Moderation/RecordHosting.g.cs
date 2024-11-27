@@ -13,9 +13,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Initializes a new instance of the <see cref="RecordHosting"/> class.
         /// </summary>
         /// <param name="status">
-        /// Known Values:
-        /// deleted
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// deleted <br/>
+        /// unknown <br/>
         /// </param>
         /// <param name="updatedAt"></param>
         /// <param name="createdAt"></param>
@@ -50,9 +50,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the status.
-        /// Known Values:
-        /// deleted
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// deleted <br/>
+        /// unknown <br/>
         /// </summary>
         [JsonPropertyName("status")]
         [JsonRequired]

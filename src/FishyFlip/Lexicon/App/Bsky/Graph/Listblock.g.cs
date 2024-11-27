@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the subject.
-        /// Reference (AT-URI) to the mod list record.
+        /// <br/> Reference (AT-URI) to the mod list record.
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

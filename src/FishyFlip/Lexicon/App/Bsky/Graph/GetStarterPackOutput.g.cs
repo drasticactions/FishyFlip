@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the starterPack.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView"/> (app.bsky.graph.defs#starterPackView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView"/> (app.bsky.graph.defs#starterPackView)
         /// </summary>
         [JsonPropertyName("starterPack")]
         [JsonRequired]

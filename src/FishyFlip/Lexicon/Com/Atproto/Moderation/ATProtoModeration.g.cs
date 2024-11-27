@@ -34,14 +34,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth.
         /// </summary>
         /// <param name="reasonType">
-        /// Known Values:
-        /// reasonSpam
-        /// reasonViolation
-        /// reasonMisleading
-        /// reasonSexual
-        /// reasonRude
-        /// reasonOther
-        /// reasonAppeal
+        /// <br/> Known Values: <br/>
+        /// reasonSpam <br/>
+        /// reasonViolation <br/>
+        /// reasonMisleading <br/>
+        /// reasonSexual <br/>
+        /// reasonRude <br/>
+        /// reasonOther <br/>
+        /// reasonAppeal <br/>
         /// </param>
         /// <param name="subject"></param>
         /// <param name="reason"></param>

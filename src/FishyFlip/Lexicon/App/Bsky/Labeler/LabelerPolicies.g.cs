@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         /// <summary>
         /// Gets or sets the labelValues.
-        /// The label values which this labeler publishes. May include global or custom labels.
+        /// <br/> The label values which this labeler publishes. May include global or custom labels.
         /// </summary>
         [JsonPropertyName("labelValues")]
         [JsonRequired]
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         /// <summary>
         /// Gets or sets the labelValueDefinitions.
-        /// Label values created by this labeler and scoped exclusively to it. Labels defined here will override global label definitions for this labeler.
+        /// <br/> Label values created by this labeler and scoped exclusively to it. Labels defined here will override global label definitions for this labeler.
         /// </summary>
         [JsonPropertyName("labelValueDefinitions")]
         public List<Com.Atproto.Label.LabelValueDefinition>? LabelValueDefinitions { get; set; }

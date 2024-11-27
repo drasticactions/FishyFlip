@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the comment.
-        /// Describe reasoning behind the reversal.
+        /// <br/> Describe reasoning behind the reversal.
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }

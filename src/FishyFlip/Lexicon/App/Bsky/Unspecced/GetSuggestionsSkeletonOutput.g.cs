@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         /// <summary>
         /// Gets or sets the relativeToDid.
-        /// DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.
+        /// <br/> DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.
         /// </summary>
         [JsonPropertyName("relativeToDid")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

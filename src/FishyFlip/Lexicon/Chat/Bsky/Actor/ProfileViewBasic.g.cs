@@ -90,14 +90,14 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the associated.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated"/> (app.bsky.actor.defs#profileAssociated)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated"/> (app.bsky.actor.defs#profileAssociated)
         /// </summary>
         [JsonPropertyName("associated")]
         public App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
 
         /// <summary>
         /// Gets or sets the viewer.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }
@@ -110,7 +110,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the chatDisabled.
-        /// Set to true when the actor cannot actively participate in converations
+        /// <br/> Set to true when the actor cannot actively participate in converations
         /// </summary>
         [JsonPropertyName("chatDisabled")]
         public bool? ChatDisabled { get; set; }

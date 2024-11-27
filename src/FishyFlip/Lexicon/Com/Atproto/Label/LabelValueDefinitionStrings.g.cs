@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the lang.
-        /// The code of the language these strings are written in.
+        /// <br/> The code of the language these strings are written in.
         /// </summary>
         [JsonPropertyName("lang")]
         [JsonRequired]
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the name.
-        /// A short human-readable name for the label.
+        /// <br/> A short human-readable name for the label.
         /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the description.
-        /// A longer description of what the label means and why it might be applied.
+        /// <br/> A longer description of what the label means and why it might be applied.
         /// </summary>
         [JsonPropertyName("description")]
         [JsonRequired]

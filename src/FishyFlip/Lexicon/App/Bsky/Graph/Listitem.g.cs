@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the subject.
-        /// The account which is included on the list.
+        /// <br/> The account which is included on the list.
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the list.
-        /// Reference (AT-URI) to the list record (app.bsky.graph.list).
+        /// <br/> Reference (AT-URI) to the list record (app.bsky.graph.list).
         /// </summary>
         [JsonPropertyName("list")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

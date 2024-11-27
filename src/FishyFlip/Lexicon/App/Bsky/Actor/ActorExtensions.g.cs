@@ -38,8 +38,8 @@ namespace FishyFlip.Lexicon
         /// <param name="avatar">Small image to be displayed next to posts from account. AKA, 'profile picture'</param>
         /// <param name="banner">Larger horizontal image to display behind profile view.</param>
         /// <param name="labels">Self-label values, specific to the Bluesky application, on the overall account.
-        /// Union Types:
-        /// com.atproto.label.defs#selfLabels
+        /// <br/> Union Types: <br/>
+        /// com.atproto.label.defs#selfLabels <br/>
         /// </param>
         /// <param name="joinedViaStarterPack">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)

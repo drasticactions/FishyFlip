@@ -24,12 +24,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <param name="likeCount"></param>
         /// <param name="quoteCount"></param>
         /// <param name="embeds">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view) <br/>
         /// </param>
         /// <param name="indexedAt"></param>
         public ViewRecord(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? value = default, List<Com.Atproto.Label.Label>? labels = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, List<ATObject>? embeds = default, DateTime? indexedAt = default)
@@ -91,7 +91,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the author.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
@@ -99,7 +99,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the value.
-        /// The record data itself.
+        /// <br/> The record data itself.
         /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
@@ -137,12 +137,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the embeds.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view) <br/>
         /// </summary>
         [JsonPropertyName("embeds")]
         public List<ATObject>? Embeds { get; set; }

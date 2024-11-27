@@ -356,6 +356,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Enumerates public relationships between one account, and a list of other accounts. Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ActorNotFoundError"/> the primary actor at-identifier could not be resolved <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="actor"></param>

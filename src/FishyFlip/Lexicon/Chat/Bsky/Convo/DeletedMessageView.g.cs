@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         /// <summary>
         /// Gets or sets the sender.
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender"/> (chat.bsky.convo.defs#messageViewSender)
+        /// <br/> <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender"/> (chat.bsky.convo.defs#messageViewSender)
         /// </summary>
         [JsonPropertyName("sender")]
         [JsonRequired]

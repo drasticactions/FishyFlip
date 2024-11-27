@@ -15,10 +15,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="did"></param>
         /// <param name="active"></param>
         /// <param name="status">If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deactivated
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deactivated <br/>
         /// </param>
         /// <param name="rev">Optional field, the current rev of the repo, if active=true</param>
         public GetRepoStatusOutput(FishyFlip.Models.ATDid? did = default, bool? active = default, string? status = default, string? rev = default)
@@ -66,18 +66,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the status.
-        /// If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deactivated
+        /// <br/> If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deactivated <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 
         /// <summary>
         /// Gets or sets the rev.
-        /// Optional field, the current rev of the repo, if active=true
+        /// <br/> Optional field, the current rev of the repo, if active=true
         /// </summary>
         [JsonPropertyName("rev")]
         public string? Rev { get; set; }

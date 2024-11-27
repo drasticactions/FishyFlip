@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the val.
-        /// The short string name of the value or type of this label.
+        /// <br/> The short string name of the value or type of this label.
         /// </summary>
         [JsonPropertyName("val")]
         [JsonRequired]

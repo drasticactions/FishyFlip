@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         /// <summary>
         /// Gets or sets the message.
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput"/> (chat.bsky.convo.defs#messageInput)
+        /// <br/> <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput"/> (chat.bsky.convo.defs#messageInput)
         /// </summary>
         [JsonPropertyName("message")]
         [JsonRequired]

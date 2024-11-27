@@ -14,9 +14,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         /// <param name="post"></param>
         /// <param name="reason">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost"/> (app.bsky.feed.defs#skeletonReasonRepost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin"/> (app.bsky.feed.defs#skeletonReasonPin)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost"/> (app.bsky.feed.defs#skeletonReasonRepost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin"/> (app.bsky.feed.defs#skeletonReasonPin) <br/>
         /// </param>
         /// <param name="feedContext">Context that will be passed through to client and may be passed to feed generator back alongside interactions.</param>
         public SkeletonFeedPost(FishyFlip.Models.ATUri? post = default, ATObject? reason = default, string? feedContext = default)
@@ -55,16 +55,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the reason.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost"/> (app.bsky.feed.defs#skeletonReasonRepost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin"/> (app.bsky.feed.defs#skeletonReasonPin)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost"/> (app.bsky.feed.defs#skeletonReasonRepost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin"/> (app.bsky.feed.defs#skeletonReasonPin) <br/>
         /// </summary>
         [JsonPropertyName("reason")]
         public ATObject? Reason { get; set; }
 
         /// <summary>
         /// Gets or sets the feedContext.
-        /// Context that will be passed through to client and may be passed to feed generator back alongside interactions.
+        /// <br/> Context that will be passed through to client and may be passed to feed generator back alongside interactions.
         /// </summary>
         [JsonPropertyName("feedContext")]
         public string? FeedContext { get; set; }

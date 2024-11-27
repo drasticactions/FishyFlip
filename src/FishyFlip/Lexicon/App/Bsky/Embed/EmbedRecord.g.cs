@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the record.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]

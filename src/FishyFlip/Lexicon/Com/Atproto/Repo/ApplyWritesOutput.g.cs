@@ -16,10 +16,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </param>
         /// <param name="results">
-        /// Union Types:
-        /// #createResult
-        /// #updateResult
-        /// #deleteResult
+        /// <br/> Union Types: <br/>
+        /// #createResult <br/>
+        /// #updateResult <br/>
+        /// #deleteResult <br/>
         /// </param>
         public ApplyWritesOutput(Com.Atproto.Repo.CommitMeta? commit = default, List<ATObject>? results = default)
         {
@@ -47,17 +47,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the commit.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </summary>
         [JsonPropertyName("commit")]
         public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         /// <summary>
         /// Gets or sets the results.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CreateResult"/> (com.atproto.repo.applyWrites#createResult)
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.UpdateResult"/> (com.atproto.repo.applyWrites#updateResult)
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult"/> (com.atproto.repo.applyWrites#deleteResult)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CreateResult"/> (com.atproto.repo.applyWrites#createResult) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.UpdateResult"/> (com.atproto.repo.applyWrites#updateResult) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult"/> (com.atproto.repo.applyWrites#deleteResult) <br/>
         /// </summary>
         [JsonPropertyName("results")]
         public List<ATObject>? Results { get; set; }

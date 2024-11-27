@@ -18,9 +18,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </param>
         /// <param name="validationStatus">
-        /// Known Values:
-        /// valid
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// valid <br/>
+        /// unknown <br/>
         /// </param>
         public CreateRecordOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, Com.Atproto.Repo.CommitMeta? commit = default, string? validationStatus = default)
         {
@@ -67,16 +67,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the commit.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </summary>
         [JsonPropertyName("commit")]
         public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         /// <summary>
         /// Gets or sets the validationStatus.
-        /// Known Values:
-        /// valid
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// valid <br/>
+        /// unknown <br/>
         /// </summary>
         [JsonPropertyName("validationStatus")]
         public string? ValidationStatus { get; set; }

@@ -85,7 +85,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the creator.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]

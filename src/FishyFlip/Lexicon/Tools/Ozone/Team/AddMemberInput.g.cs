@@ -14,10 +14,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// </summary>
         /// <param name="did"></param>
         /// <param name="role">
-        /// Known Values:
-        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
-        /// roleModerator - Moderator role. Can perform most actions.
-        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// <br/> Known Values: <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
         /// </param>
         public AddMemberInput(FishyFlip.Models.ATDid? did = default, string? role = default)
         {
@@ -53,10 +53,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         /// <summary>
         /// Gets or sets the role.
-        /// Known Values:
-        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
-        /// roleModerator - Moderator role. Can perform most actions.
-        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
+        /// <br/> Known Values: <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
         /// </summary>
         [JsonPropertyName("role")]
         [JsonRequired]

@@ -16,16 +16,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
         /// </param>
         /// <param name="parent">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </param>
         /// <param name="replies">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </param>
         public ThreadViewPost(App.Bsky.Feed.PostView? post = default, ATObject? parent = default, List<ATObject>? replies = default)
         {
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the post.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
         /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
@@ -63,20 +63,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the parent.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </summary>
         [JsonPropertyName("parent")]
         public ATObject? Parent { get; set; }
 
         /// <summary>
         /// Gets or sets the replies.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </summary>
         [JsonPropertyName("replies")]
         public List<ATObject>? Replies { get; set; }

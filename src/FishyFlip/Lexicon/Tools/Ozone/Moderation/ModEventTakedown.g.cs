@@ -52,14 +52,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the durationInHours.
-        /// Indicates how long the takedown should be in effect before automatically expiring.
+        /// <br/> Indicates how long the takedown should be in effect before automatically expiring.
         /// </summary>
         [JsonPropertyName("durationInHours")]
         public long? DurationInHours { get; set; }
 
         /// <summary>
         /// Gets or sets the acknowledgeAccountSubjects.
-        /// If true, all other reports on content authored by this account will be resolved (acknowledged).
+        /// <br/> If true, all other reports on content authored by this account will be resolved (acknowledged).
         /// </summary>
         [JsonPropertyName("acknowledgeAccountSubjects")]
         public bool? AcknowledgeAccountSubjects { get; set; }

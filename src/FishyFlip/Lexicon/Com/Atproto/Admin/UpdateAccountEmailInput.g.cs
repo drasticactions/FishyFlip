@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         /// <summary>
         /// Gets or sets the account.
-        /// The handle or DID of the repo.
+        /// <br/> The handle or DID of the repo.
         /// </summary>
         [JsonPropertyName("account")]
         [JsonRequired]

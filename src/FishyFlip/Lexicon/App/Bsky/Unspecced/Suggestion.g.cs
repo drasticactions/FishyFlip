@@ -14,9 +14,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="subjectType">
-        /// Known Values:
-        /// actor
-        /// feed
+        /// <br/> Known Values: <br/>
+        /// actor <br/>
+        /// feed <br/>
         /// </param>
         /// <param name="subject"></param>
         public Suggestion(string? tag = default, string? subjectType = default, string? subject = default)
@@ -54,9 +54,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         /// <summary>
         /// Gets or sets the subjectType.
-        /// Known Values:
-        /// actor
-        /// feed
+        /// <br/> Known Values: <br/>
+        /// actor <br/>
+        /// feed <br/>
         /// </summary>
         [JsonPropertyName("subjectType")]
         [JsonRequired]

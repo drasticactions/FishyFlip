@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the subjectLine.
-        /// The subject line of the email sent to the user.
+        /// <br/> The subject line of the email sent to the user.
         /// </summary>
         [JsonPropertyName("subjectLine")]
         [JsonRequired]
@@ -54,14 +54,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the content.
-        /// The content of the email sent to the user.
+        /// <br/> The content of the email sent to the user.
         /// </summary>
         [JsonPropertyName("content")]
         public string? Content { get; set; }
 
         /// <summary>
         /// Gets or sets the comment.
-        /// Additional comment about the outgoing comm.
+        /// <br/> Additional comment about the outgoing comm.
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }

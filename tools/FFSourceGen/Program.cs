@@ -343,6 +343,7 @@ public partial class AppCommands
                 : $"Generated endpoint for {item.Id}";
             sb.AppendLine($"        /// <summary>");
             sb.AppendLine($"        /// {description}");
+            this.GenerateErrorConstructorDocs(sb, item.Definition.Errors);
             sb.AppendLine($"        /// </summary>");
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public Task<Result<{outputProperty}?>> {methodName} (");
@@ -907,7 +908,7 @@ public partial class AppCommands
                             (cls.Definition.Type == "array" && cls.Definition.Items?.Type == "union"))
                         {
                             sb.AppendLine();
-                            sb.AppendLine($"        /// Union Types:");
+                            sb.AppendLine($"        /// <br/> Union Types: <br/>");
                             var refs = cls.Definition.Refs ?? cls.Definition.Items?.Refs;
                             foreach (var unionType in refs!)
                             {
@@ -916,8 +917,8 @@ public partial class AppCommands
                                     : unionType;
                                 var cls2 = FindClassFromRef(refString);
                                 sb.AppendLine(cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object"
-                                    ? $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})"
-                                    : $"        /// {unionType}");
+                                    ? $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>"
+                                    : $"        /// {unionType} <br/>");
                             }
 
                             sb.AppendLine("        /// </param>");
@@ -925,7 +926,7 @@ public partial class AppCommands
                         else if (cls.Definition.KnownValues?.Any() ?? false)
                         {
                             sb.AppendLine();
-                            sb.AppendLine($"        /// Known Values:");
+                            sb.AppendLine($"        /// <br/> Known Values: <br/>");
                             foreach (var knownValue in cls.Definition.KnownValues)
                             {
                                 var refString = knownValue.Contains("#")
@@ -933,8 +934,8 @@ public partial class AppCommands
                                     : knownValue;
                                 var cls2 = FindClassFromRef(refString);
                                 sb.AppendLine(cls2 is not null
-                                    ? $"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}"
-                                    : $"        /// {knownValue.Split("#").Last()}");
+                                    ? $"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description} <br/>"
+                                    : $"        /// {knownValue.Split("#").Last()} <br/>");
                             }
 
                             sb.AppendLine("        /// </param>");
@@ -979,7 +980,7 @@ public partial class AppCommands
                 }
                 else if (cls2?.Definition.KnownValues?.Any() ?? false)
                 {
-                    sb.AppendLine($"        /// Known Values:");
+                    sb.AppendLine($"        /// <br/> Known Values: <br/>");
                     foreach (var knownValue in cls2.Definition.KnownValues)
                     {
                         var refString2 = knownValue.Contains("#")
@@ -987,8 +988,8 @@ public partial class AppCommands
                             : knownValue;
                         var cls3 = FindClassFromRef(refString2);
                         sb.AppendLine(cls3 is not null
-                            ? $"        /// {knownValue} - {cls3.Definition.Description}"
-                            : $"        /// {knownValue}");
+                            ? $"        /// {knownValue} - {cls3.Definition.Description} <br/>"
+                            : $"        /// {knownValue} <br/>");
                     }
                 }
                 else
@@ -1004,7 +1005,7 @@ public partial class AppCommands
                                                             prop.PropertyDefinition.Items?.Type == "union"))
             {
                 sb.AppendLine();
-                sb.AppendLine($"        /// Union Types:");
+                sb.AppendLine($"        /// <br/> Union Types: <br/>");
                 var refs = prop.PropertyDefinition.Refs ?? prop.PropertyDefinition.Items?.Refs;
                 foreach (var unionType in refs!)
                 {
@@ -1013,8 +1014,8 @@ public partial class AppCommands
                         : unionType;
                     var cls2 = FindClassFromRef(refString);
                     sb.AppendLine(cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object"
-                        ? $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})"
-                        : $"        /// {unionType}");
+                        ? $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>"
+                        : $"        /// {unionType} <br/>");
                 }
 
                 sb.AppendLine("        /// </param>");
@@ -1022,14 +1023,14 @@ public partial class AppCommands
             else if (prop.PropertyDefinition.KnownValues?.Any() ?? false)
             {
                 sb.AppendLine();
-                sb.AppendLine($"        /// Known Values:");
+                sb.AppendLine($"        /// <br/> Known Values: <br/>");
                 foreach (var knownValue in prop.PropertyDefinition.KnownValues)
                 {
                     var refString = knownValue.Contains("#") ? $"{item.Id}#{knownValue.Split("#")[1]}" : knownValue;
                     var cls2 = FindClassFromRef(refString);
                     sb.AppendLine(cls2 is not null
-                        ? $"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}"
-                        : $"        /// {knownValue.Split("#").Last()}");
+                        ? $"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description} <br/>"
+                        : $"        /// {knownValue.Split("#").Last()} <br/>");
                 }
 
                 sb.AppendLine("        /// </param>");
@@ -1038,6 +1039,20 @@ public partial class AppCommands
             {
                 sb.AppendLine("</param>");
             }
+        }
+    }
+
+    private void GenerateErrorConstructorDocs(StringBuilder sb, ErrorDefinition[]? errors)
+    {
+        if (errors is null || !errors.Any())
+        {
+            return;
+        }
+
+        sb.AppendLine("        /// <br/> Possible Errors: <br/>");
+        foreach (var error in errors)
+        {
+            sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{error.Name.ToPascalCase()}Error\"/> {error.Description} <br/>");
         }
     }
 
@@ -1078,6 +1093,7 @@ public partial class AppCommands
                 : $"Generated endpoint for {item.Id}";
             sb.AppendLine($"        /// <summary>");
             sb.AppendLine($"        /// {description}");
+            this.GenerateErrorConstructorDocs(sb, item.Definition.Errors);
             sb.AppendLine($"        /// </summary>");
             this.GenerateParams(sb, item, inputProperties);
             sb.AppendLine($"        /// <returns>Result of <see cref=\"{outputProperty}?\"/></returns>");
@@ -1695,7 +1711,7 @@ public partial class AppCommands
                 {
                     if (cls2?.Definition.KnownValues?.Any() ?? false)
                     {
-                        sb.AppendLine($"        /// Known Values:");
+                        sb.AppendLine($"        /// <br/> Known Values: <br/>");
                         foreach (var knownValue in cls2.Definition.KnownValues)
                         {
                             var refString2 = knownValue;
@@ -1708,17 +1724,17 @@ public partial class AppCommands
                             var cls3 = FindClassFromRef(refString2);
                             if (cls3 is not null)
                             {
-                                sb.AppendLine($"        /// {knownValue} - {cls3.Definition.Description}");
+                                sb.AppendLine($"        /// {knownValue} - {cls3.Definition.Description} <br/>");
                             }
                             else
                             {
-                                sb.AppendLine($"        /// {knownValue}");
+                                sb.AppendLine($"        /// {knownValue} <br/>");
                             }
                         }
                     }
                     else
                     {
-                        sb.AppendLine($"        /// {refString}");
+                        sb.AppendLine($"        /// {refString} <br/>");
                     }
                 }
 
@@ -1728,7 +1744,7 @@ public partial class AppCommands
                                                                   prop?.PropertyDefinition.Items?.Type == "union"))
             {
                 sb.AppendLine();
-                sb.AppendLine($"        /// Union Types:");
+                sb.AppendLine($"        /// <br/> Union Types: <br/>");
                 var refs = prop.PropertyDefinition.Refs ?? prop.PropertyDefinition.Items?.Refs;
                 foreach (var unionType in refs!)
                 {
@@ -1743,11 +1759,11 @@ public partial class AppCommands
                     if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
                     {
                         sb.AppendLine(
-                            $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                            $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>");
                     }
                     else
                     {
-                        sb.AppendLine($"        /// {unionType}");
+                        sb.AppendLine($"        /// {unionType} <br/>");
                     }
                 }
 
@@ -1756,7 +1772,7 @@ public partial class AppCommands
             else if (prop?.PropertyDefinition.KnownValues?.Any() ?? false)
             {
                 sb.AppendLine();
-                sb.AppendLine($"        /// Known Values:");
+                sb.AppendLine($"        /// <br/> Known Values: <br/>");
                 foreach (var knownValue in prop.PropertyDefinition.KnownValues)
                 {
                     var refString = knownValue;
@@ -1769,11 +1785,11 @@ public partial class AppCommands
                     var cls2 = FindClassFromRef(refString);
                     if (cls2 is not null)
                     {
-                        sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}");
+                        sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description} <br/>");
                     }
                     else
                     {
-                        sb.AppendLine($"        /// {knownValue.Split("#").Last()}");
+                        sb.AppendLine($"        /// {knownValue.Split("#").Last()} <br/>");
                     }
                 }
 
@@ -1836,7 +1852,7 @@ public partial class AppCommands
         // Add property documentation if available
         if (!string.IsNullOrEmpty(property.PropertyDefinition.Description))
         {
-            sb.AppendLine($"        /// {property.PropertyDefinition.Description}");
+            sb.AppendLine($"        /// <br/> {property.PropertyDefinition.Description}");
         }
 
         if (property?.PropertyDefinition.Type == "ref")
@@ -1851,13 +1867,13 @@ public partial class AppCommands
             var cls2 = FindClassFromRef(refString);
             if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
             {
-                sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                sb.AppendLine($"        /// <br/> <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
             }
             else
             {
                 if (cls2?.Definition.KnownValues?.Any() ?? false)
                 {
-                    sb.AppendLine($"        /// Known Values:");
+                    sb.AppendLine($"        /// <br/> Known Values: <br/>");
                     foreach (var knownValue in cls2.Definition.KnownValues)
                     {
                         var refString2 = knownValue;
@@ -1870,17 +1886,17 @@ public partial class AppCommands
                         var cls3 = FindClassFromRef(refString2);
                         if (cls3 is not null)
                         {
-                            sb.AppendLine($"        /// {knownValue} - {cls3.Definition.Description}");
+                            sb.AppendLine($"        /// {knownValue} - {cls3.Definition.Description} <br/>");
                         }
                         else
                         {
-                            sb.AppendLine($"        /// {knownValue}");
+                            sb.AppendLine($"        /// {knownValue} <br/>");
                         }
                     }
                 }
                 else
                 {
-                    sb.AppendLine($"        /// {refString}");
+                    sb.AppendLine($"        /// {refString} <br/>");
                 }
             }
         }
@@ -1888,7 +1904,7 @@ public partial class AppCommands
         if (property?.PropertyDefinition.Type == "union" || (property?.PropertyDefinition.Type == "array" &&
                                                              property?.PropertyDefinition.Items?.Type == "union"))
         {
-            sb.AppendLine($"        /// Union Types:");
+            sb.AppendLine($"        /// <br/> Union Types: <br/>");
             var refs = property.PropertyDefinition.Refs ?? property.PropertyDefinition.Items?.Refs;
             foreach (var unionType in refs!)
             {
@@ -1903,17 +1919,17 @@ public partial class AppCommands
                 if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
                 {
                     sb.AppendLine(
-                        $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                        $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>");
                 }
                 else
                 {
-                    sb.AppendLine($"        /// {unionType}");
+                    sb.AppendLine($"        /// {unionType} <br/>");
                 }
             }
         }
         else if (property?.PropertyDefinition.KnownValues?.Any() ?? false)
         {
-            sb.AppendLine($"        /// Known Values:");
+            sb.AppendLine($"        /// <br/> Known Values: <br/>");
             foreach (var knownValue in property.PropertyDefinition.KnownValues)
             {
                 var refString = knownValue;
@@ -1926,11 +1942,11 @@ public partial class AppCommands
                 var cls2 = FindClassFromRef(refString);
                 if (cls2 is not null)
                 {
-                    sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description}");
+                    sb.AppendLine($"        /// {knownValue.Split("#").Last()} - {cls2.Definition.Description} <br/>");
                 }
                 else
                 {
-                    sb.AppendLine($"        /// {knownValue.Split("#").Last()}");
+                    sb.AppendLine($"        /// {knownValue.Split("#").Last()} <br/>");
                 }
             }
         }

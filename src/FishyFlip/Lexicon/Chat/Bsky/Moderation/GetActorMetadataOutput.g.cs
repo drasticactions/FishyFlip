@@ -13,13 +13,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// Initializes a new instance of the <see cref="GetActorMetadataOutput"/> class.
         /// </summary>
         /// <param name="day">
-        /// chat.bsky.moderation.defs#metadata
+        /// chat.bsky.moderation.defs#metadata <br/>
         /// </param>
         /// <param name="month">
-        /// chat.bsky.moderation.defs#metadata
+        /// chat.bsky.moderation.defs#metadata <br/>
         /// </param>
         /// <param name="all">
-        /// chat.bsky.moderation.defs#metadata
+        /// chat.bsky.moderation.defs#metadata <br/>
         /// </param>
         public GetActorMetadataOutput(Chat.Bsky.Moderation.Metadata? day = default, Chat.Bsky.Moderation.Metadata? month = default, Chat.Bsky.Moderation.Metadata? all = default)
         {
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 
         /// <summary>
         /// Gets or sets the day.
-        /// chat.bsky.moderation.defs#metadata
+        /// chat.bsky.moderation.defs#metadata <br/>
         /// </summary>
         [JsonPropertyName("day")]
         [JsonRequired]
@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 
         /// <summary>
         /// Gets or sets the month.
-        /// chat.bsky.moderation.defs#metadata
+        /// chat.bsky.moderation.defs#metadata <br/>
         /// </summary>
         [JsonPropertyName("month")]
         [JsonRequired]
@@ -65,7 +65,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 
         /// <summary>
         /// Gets or sets the all.
-        /// chat.bsky.moderation.defs#metadata
+        /// chat.bsky.moderation.defs#metadata <br/>
         /// </summary>
         [JsonPropertyName("all")]
         [JsonRequired]

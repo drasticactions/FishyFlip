@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the handle.
-        /// Requested handle for the account.
+        /// <br/> Requested handle for the account.
         /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]
@@ -76,7 +76,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the did.
-        /// Pre-existing atproto DID, being imported to a new account.
+        /// <br/> Pre-existing atproto DID, being imported to a new account.
         /// </summary>
         [JsonPropertyName("did")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
@@ -102,21 +102,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the password.
-        /// Initial account password. May need to meet instance-specific password strength requirements.
+        /// <br/> Initial account password. May need to meet instance-specific password strength requirements.
         /// </summary>
         [JsonPropertyName("password")]
         public string? Password { get; set; }
 
         /// <summary>
         /// Gets or sets the recoveryKey.
-        /// DID PLC rotation key (aka, recovery key) to be included in PLC creation operation.
+        /// <br/> DID PLC rotation key (aka, recovery key) to be included in PLC creation operation.
         /// </summary>
         [JsonPropertyName("recoveryKey")]
         public string? RecoveryKey { get; set; }
 
         /// <summary>
         /// Gets or sets the plcOp.
-        /// A signed DID PLC operation to be submitted as part of importing an existing account to this instance. NOTE: this optional field may be updated when full account migration is implemented.
+        /// <br/> A signed DID PLC operation to be submitted as part of importing an existing account to this instance. NOTE: this optional field may be updated when full account migration is implemented.
         /// </summary>
         [JsonPropertyName("plcOp")]
         public ATObject? PlcOp { get; set; }

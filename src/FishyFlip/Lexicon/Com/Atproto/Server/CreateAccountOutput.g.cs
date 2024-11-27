@@ -74,7 +74,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the did.
-        /// The DID of the new account.
+        /// <br/> The DID of the new account.
         /// </summary>
         [JsonPropertyName("did")]
         [JsonRequired]
@@ -83,7 +83,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the didDoc.
-        /// Complete DID document.
+        /// <br/> Complete DID document.
         /// </summary>
         [JsonPropertyName("didDoc")]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }

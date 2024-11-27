@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         /// <summary>
         /// Gets or sets the note.
-        /// Optional reason for enabled invites.
+        /// <br/> Optional reason for enabled invites.
         /// </summary>
         [JsonPropertyName("note")]
         public string? Note { get; set; }

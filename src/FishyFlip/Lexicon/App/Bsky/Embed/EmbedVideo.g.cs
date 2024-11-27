@@ -61,14 +61,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the alt.
-        /// Alt text description of the video, for accessibility.
+        /// <br/> Alt text description of the video, for accessibility.
         /// </summary>
         [JsonPropertyName("alt")]
         public string? Alt { get; set; }
 
         /// <summary>
         /// Gets or sets the aspectRatio.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
         public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }

@@ -16,10 +16,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
         /// </param>
         /// <param name="media">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view) <br/>
         /// </param>
         public ViewRecordWithMedia(App.Bsky.Embed.ViewRecordDef? record = default, ATObject? media = default)
         {
@@ -47,7 +47,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the record.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view)
         /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
@@ -55,10 +55,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the media.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewImages"/> (app.bsky.embed.images#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo"/> (app.bsky.embed.video#view) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view) <br/>
         /// </summary>
         [JsonPropertyName("media")]
         [JsonRequired]

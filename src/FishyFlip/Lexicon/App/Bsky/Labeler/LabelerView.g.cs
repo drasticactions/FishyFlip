@@ -74,7 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         /// <summary>
         /// Gets or sets the creator.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
@@ -88,7 +88,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         /// <summary>
         /// Gets or sets the viewer.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState"/> (app.bsky.labeler.defs#labelerViewerState)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState"/> (app.bsky.labeler.defs#labelerViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Labeler.LabelerViewerState? Viewer { get; set; }

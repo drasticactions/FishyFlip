@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         /// <summary>
         /// Gets or sets the jobStatus.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Video.JobStatus"/> (app.bsky.video.defs#jobStatus)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Video.JobStatus"/> (app.bsky.video.defs#jobStatus)
         /// </summary>
         [JsonPropertyName("jobStatus")]
         [JsonRequired]

@@ -93,7 +93,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the creator.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
@@ -101,7 +101,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the list.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("list")]
         public App.Bsky.Graph.ListViewBasic? List { get; set; }

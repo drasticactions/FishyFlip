@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Initializes a new instance of the <see cref="PutPreferencesInput"/> class.
         /// </summary>
         /// <param name="preferences">
-        /// app.bsky.actor.defs#preferences
+        /// app.bsky.actor.defs#preferences <br/>
         /// </param>
         public PutPreferencesInput(List<ATObject>? preferences = default)
         {
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the preferences.
-        /// app.bsky.actor.defs#preferences
+        /// app.bsky.actor.defs#preferences <br/>
         /// </summary>
         [JsonPropertyName("preferences")]
         [JsonRequired]

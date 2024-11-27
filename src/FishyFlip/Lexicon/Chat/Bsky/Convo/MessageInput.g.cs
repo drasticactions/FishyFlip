@@ -15,8 +15,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <param name="text"></param>
         /// <param name="facets">Annotations of text (mentions, URLs, hashtags, etc)</param>
         /// <param name="embed">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
         /// </param>
         public MessageInput(string? text = default, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Embed.EmbedRecord? embed = default)
         {
@@ -53,15 +53,15 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         /// <summary>
         /// Gets or sets the facets.
-        /// Annotations of text (mentions, URLs, hashtags, etc)
+        /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
         public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
         /// Gets or sets the embed.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
         public App.Bsky.Embed.EmbedRecord? Embed { get; set; }

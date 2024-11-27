@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the hostname.
-        /// Hostname of the current service (usually a PDS) that is notifying of update.
+        /// <br/> Hostname of the current service (usually a PDS) that is notifying of update.
         /// </summary>
         [JsonPropertyName("hostname")]
         [JsonRequired]

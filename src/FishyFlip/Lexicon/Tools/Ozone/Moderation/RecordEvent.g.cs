@@ -17,10 +17,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         /// <param name="comment"></param>
         /// <param name="op">
-        /// Known Values:
-        /// create
-        /// update
-        /// delete
+        /// <br/> Known Values: <br/>
+        /// create <br/>
+        /// update <br/>
+        /// delete <br/>
         /// </param>
         /// <param name="cid"></param>
         /// <param name="timestamp"></param>
@@ -60,10 +60,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the op.
-        /// Known Values:
-        /// create
-        /// update
-        /// delete
+        /// <br/> Known Values: <br/>
+        /// create <br/>
+        /// update <br/>
+        /// delete <br/>
         /// </summary>
         [JsonPropertyName("op")]
         [JsonRequired]

@@ -22,10 +22,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="emailAuthFactor"></param>
         /// <param name="active"></param>
         /// <param name="status">If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deactivated
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deactivated <br/>
         /// </param>
         public CreateSessionOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, string? email = default, bool? emailConfirmed = default, bool? emailAuthFactor = default, bool? active = default, string? status = default)
         {
@@ -129,11 +129,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the status.
-        /// If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deactivated
+        /// <br/> If active=false, this optional field indicates a possible reason for why the account is not active. If active=false and no status is supplied, then the host makes no claim for why the repository is no longer being hosted.
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deactivated <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

@@ -19,10 +19,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="didDoc"></param>
         /// <param name="active"></param>
         /// <param name="status">Hosting status of the account. If not specified, then assume 'active'.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deactivated
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deactivated <br/>
         /// </param>
         public RefreshSessionOutput(string? accessJwt = default, string? refreshJwt = default, FishyFlip.Models.ATHandle? handle = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Models.DidDoc? didDoc = default, bool? active = default, string? status = default)
         {
@@ -102,11 +102,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the status.
-        /// Hosting status of the account. If not specified, then assume 'active'.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deactivated
+        /// <br/> Hosting status of the account. If not specified, then assume 'active'.
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deactivated <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

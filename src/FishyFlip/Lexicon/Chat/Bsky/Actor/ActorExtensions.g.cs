@@ -34,10 +34,10 @@ namespace FishyFlip.Lexicon
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="allowIncoming">
-        /// Known Values:
-        /// all
-        /// none
-        /// following
+        /// <br/> Known Values: <br/>
+        /// all <br/>
+        /// none <br/>
+        /// following <br/>
         /// </param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>

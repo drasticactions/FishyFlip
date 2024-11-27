@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
         /// <summary>
         /// Gets or sets the account.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.AccountView"/> (com.atproto.admin.defs#accountView)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.AccountView"/> (com.atproto.admin.defs#accountView)
         /// </summary>
         [JsonPropertyName("account")]
         [JsonRequired]

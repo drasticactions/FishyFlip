@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the name.
-        /// A short name for the App Password, to help distinguish them.
+        /// <br/> A short name for the App Password, to help distinguish them.
         /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the privileged.
-        /// If an app password has 'privileged' access to possibly sensitive account state. Meant for use with trusted clients.
+        /// <br/> If an app password has 'privileged' access to possibly sensitive account state. Meant for use with trusted clients.
         /// </summary>
         [JsonPropertyName("privileged")]
         public bool? Privileged { get; set; }

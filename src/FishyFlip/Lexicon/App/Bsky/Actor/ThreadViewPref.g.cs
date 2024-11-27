@@ -13,12 +13,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Initializes a new instance of the <see cref="ThreadViewPref"/> class.
         /// </summary>
         /// <param name="sort">Sorting mode for threads.
-        /// Known Values:
-        /// oldest
-        /// newest
-        /// most-likes
-        /// random
-        /// hotness
+        /// <br/> Known Values: <br/>
+        /// oldest <br/>
+        /// newest <br/>
+        /// most-likes <br/>
+        /// random <br/>
+        /// hotness <br/>
         /// </param>
         /// <param name="prioritizeFollowedUsers">Show followed users at the top of all replies.</param>
         public ThreadViewPref(string? sort = default, bool? prioritizeFollowedUsers = default)
@@ -47,20 +47,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the sort.
-        /// Sorting mode for threads.
-        /// Known Values:
-        /// oldest
-        /// newest
-        /// most-likes
-        /// random
-        /// hotness
+        /// <br/> Sorting mode for threads.
+        /// <br/> Known Values: <br/>
+        /// oldest <br/>
+        /// newest <br/>
+        /// most-likes <br/>
+        /// random <br/>
+        /// hotness <br/>
         /// </summary>
         [JsonPropertyName("sort")]
         public string? Sort { get; set; }
 
         /// <summary>
         /// Gets or sets the prioritizeFollowedUsers.
-        /// Show followed users at the top of all replies.
+        /// <br/> Show followed users at the top of all replies.
         /// </summary>
         [JsonPropertyName("prioritizeFollowedUsers")]
         public bool? PrioritizeFollowedUsers { get; set; }

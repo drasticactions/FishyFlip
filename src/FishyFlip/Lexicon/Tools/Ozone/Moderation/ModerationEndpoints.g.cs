@@ -34,6 +34,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Take a moderation action on an actor.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.SubjectHasActionError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="@event"></param>
@@ -75,6 +77,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Get details about a record.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RecordNotFoundError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="uri"></param>
@@ -119,6 +123,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Get details about a repository.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="did"></param>

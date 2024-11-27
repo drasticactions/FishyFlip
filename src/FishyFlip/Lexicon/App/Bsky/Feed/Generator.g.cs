@@ -22,8 +22,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="avatar"></param>
         /// <param name="acceptsInteractions">Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions</param>
         /// <param name="labels">Self-label values
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="createdAt"></param>
         public Generator(FishyFlip.Models.ATDid? did, string? displayName, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
@@ -95,16 +95,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the acceptsInteractions.
-        /// Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions
+        /// <br/> Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions
         /// </summary>
         [JsonPropertyName("acceptsInteractions")]
         public bool? AcceptsInteractions { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
-        /// Self-label values
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Self-label values
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }

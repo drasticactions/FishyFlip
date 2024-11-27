@@ -16,10 +16,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// Initializes a new instance of the <see cref="Declaration"/> class.
         /// </summary>
         /// <param name="allowIncoming">
-        /// Known Values:
-        /// all
-        /// none
-        /// following
+        /// <br/> Known Values: <br/>
+        /// all <br/>
+        /// none <br/>
+        /// following <br/>
         /// </param>
         public Declaration(string? allowIncoming)
         {
@@ -45,10 +45,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the allowIncoming.
-        /// Known Values:
-        /// all
-        /// none
-        /// following
+        /// <br/> Known Values: <br/>
+        /// all <br/>
+        /// none <br/>
+        /// following <br/>
         /// </summary>
         [JsonPropertyName("allowIncoming")]
         public string? AllowIncoming { get; set; }

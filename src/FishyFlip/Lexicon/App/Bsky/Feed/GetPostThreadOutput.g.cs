@@ -13,10 +13,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Initializes a new instance of the <see cref="GetPostThreadOutput"/> class.
         /// </summary>
         /// <param name="thread">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </param>
         /// <param name="threadgate">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
@@ -47,10 +47,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the thread.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost"/> (app.bsky.feed.defs#threadViewPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </summary>
         [JsonPropertyName("thread")]
         [JsonRequired]
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the threadgate.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </summary>
         [JsonPropertyName("threadgate")]
         public App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }

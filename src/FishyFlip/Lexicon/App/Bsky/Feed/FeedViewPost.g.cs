@@ -19,9 +19,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </param>
         /// <param name="reason">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost"/> (app.bsky.feed.defs#reasonRepost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost"/> (app.bsky.feed.defs#reasonRepost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin) <br/>
         /// </param>
         /// <param name="feedContext">Context provided by feed generator that may be passed back alongside interactions.</param>
         public FeedViewPost(App.Bsky.Feed.PostView? post = default, App.Bsky.Feed.ReplyRef? reply = default, ATObject? reason = default, string? feedContext = default)
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the post.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
         /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
@@ -62,23 +62,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the reply.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </summary>
         [JsonPropertyName("reply")]
         public App.Bsky.Feed.ReplyRef? Reply { get; set; }
 
         /// <summary>
         /// Gets or sets the reason.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost"/> (app.bsky.feed.defs#reasonRepost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost"/> (app.bsky.feed.defs#reasonRepost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin) <br/>
         /// </summary>
         [JsonPropertyName("reason")]
         public ATObject? Reason { get; set; }
 
         /// <summary>
         /// Gets or sets the feedContext.
-        /// Context provided by feed generator that may be passed back alongside interactions.
+        /// <br/> Context provided by feed generator that may be passed back alongside interactions.
         /// </summary>
         [JsonPropertyName("feedContext")]
         public string? FeedContext { get; set; }

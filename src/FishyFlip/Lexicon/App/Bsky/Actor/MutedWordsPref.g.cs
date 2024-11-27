@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the items.
-        /// A list of words the account owner has muted.
+        /// <br/> A list of words the account owner has muted.
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]

@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the signingKey.
-        /// The public key for the reserved signing key, in did:key serialization.
+        /// <br/> The public key for the reserved signing key, in did:key serialization.
         /// </summary>
         [JsonPropertyName("signingKey")]
         [JsonRequired]

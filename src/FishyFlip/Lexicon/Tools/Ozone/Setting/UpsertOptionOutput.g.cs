@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         /// <summary>
         /// Gets or sets the option.
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Setting.Option"/> (tools.ozone.setting.defs#option)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Setting.Option"/> (tools.ozone.setting.defs#option)
         /// </summary>
         [JsonPropertyName("option")]
         [JsonRequired]

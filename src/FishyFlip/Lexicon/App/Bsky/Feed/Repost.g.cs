@@ -45,7 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the subject.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("subject")]
         public Com.Atproto.Repo.StrongRef? Subject { get; set; }

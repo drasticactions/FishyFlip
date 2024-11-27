@@ -15,10 +15,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="serviceDid"></param>
         /// <param name="token"></param>
         /// <param name="platform">
-        /// Known Values:
-        /// ios
-        /// android
-        /// web
+        /// <br/> Known Values: <br/>
+        /// ios <br/>
+        /// android <br/>
+        /// web <br/>
         /// </param>
         /// <param name="appId"></param>
         public RegisterPushInput(FishyFlip.Models.ATDid? serviceDid = default, string? token = default, string? platform = default, string? appId = default)
@@ -66,10 +66,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         /// <summary>
         /// Gets or sets the platform.
-        /// Known Values:
-        /// ios
-        /// android
-        /// web
+        /// <br/> Known Values: <br/>
+        /// ios <br/>
+        /// android <br/>
+        /// web <br/>
         /// </summary>
         [JsonPropertyName("platform")]
         [JsonRequired]

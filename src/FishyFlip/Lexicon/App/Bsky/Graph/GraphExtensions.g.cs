@@ -256,18 +256,18 @@ namespace FishyFlip.Lexicon
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="purpose">Defines the purpose of the list (aka, moderation-oriented or curration-oriented)
-        /// Known Values:
-        /// app.bsky.graph.defs#modlist
-        /// app.bsky.graph.defs#curatelist
-        /// app.bsky.graph.defs#referencelist
+        /// <br/> Known Values: <br/>
+        /// app.bsky.graph.defs#modlist <br/>
+        /// app.bsky.graph.defs#curatelist <br/>
+        /// app.bsky.graph.defs#referencelist <br/>
         /// </param>
         /// <param name="name">Display name for list; can not be empty.</param>
         /// <param name="description"></param>
         /// <param name="descriptionFacets"></param>
         /// <param name="avatar"></param>
         /// <param name="labels">
-        /// Union Types:
-        /// com.atproto.label.defs#selfLabels
+        /// <br/> Union Types: <br/>
+        /// com.atproto.label.defs#selfLabels <br/>
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="rkey"></param>

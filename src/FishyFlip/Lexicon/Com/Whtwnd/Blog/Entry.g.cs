@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         /// <summary>
         /// Gets or sets the ogp.
-        /// <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp"/> (com.whtwnd.blog.defs#ogp)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp"/> (com.whtwnd.blog.defs#ogp)
         /// </summary>
         [JsonPropertyName("ogp")]
         public Com.Whtwnd.Blog.Ogp? Ogp { get; set; }
@@ -97,7 +97,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         /// <summary>
         /// Gets or sets the visibility.
-        /// Tells the visibility of the article to AppView.
+        /// <br/> Tells the visibility of the article to AppView.
         /// </summary>
         [JsonPropertyName("visibility")]
         public string? Visibility { get; set; } = "public";

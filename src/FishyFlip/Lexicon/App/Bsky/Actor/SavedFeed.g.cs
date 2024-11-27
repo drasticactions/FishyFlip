@@ -14,10 +14,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         /// <param name="id"></param>
         /// <param name="type">
-        /// Known Values:
-        /// feed
-        /// list
-        /// timeline
+        /// <br/> Known Values: <br/>
+        /// feed <br/>
+        /// list <br/>
+        /// timeline <br/>
         /// </param>
         /// <param name="value"></param>
         /// <param name="pinned"></param>
@@ -58,10 +58,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the type.
-        /// Known Values:
-        /// feed
-        /// list
-        /// timeline
+        /// <br/> Known Values: <br/>
+        /// feed <br/>
+        /// list <br/>
+        /// timeline <br/>
         /// </summary>
         [JsonPropertyName("type")]
         [JsonRequired]

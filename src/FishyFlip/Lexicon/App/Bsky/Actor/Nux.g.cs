@@ -63,14 +63,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the data.
-        /// Arbitrary data for the NUX. The structure is defined by the NUX itself. Limited to 300 characters.
+        /// <br/> Arbitrary data for the NUX. The structure is defined by the NUX itself. Limited to 300 characters.
         /// </summary>
         [JsonPropertyName("data")]
         public string? Data { get; set; }
 
         /// <summary>
         /// Gets or sets the expiresAt.
-        /// The date and time at which the NUX will expire and should be considered completed.
+        /// <br/> The date and time at which the NUX will expire and should be considered completed.
         /// </summary>
         [JsonPropertyName("expiresAt")]
         public DateTime? ExpiresAt { get; set; }

@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         /// <summary>
         /// Gets or sets the convo.
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView"/> (chat.bsky.convo.defs#convoView)
+        /// <br/> <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView"/> (chat.bsky.convo.defs#convoView)
         /// </summary>
         [JsonPropertyName("convo")]
         [JsonRequired]

@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         /// <summary>
         /// Gets or sets the comment.
-        /// Additional comment by the sender that won't be used in the email itself but helpful to provide more context for moderators/reviewers
+        /// <br/> Additional comment by the sender that won't be used in the email itself but helpful to provide more context for moderators/reviewers
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }

@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the birthDate.
-        /// The birth date of account owner.
+        /// <br/> The birth date of account owner.
         /// </summary>
         [JsonPropertyName("birthDate")]
         public DateTime? BirthDate { get; set; }

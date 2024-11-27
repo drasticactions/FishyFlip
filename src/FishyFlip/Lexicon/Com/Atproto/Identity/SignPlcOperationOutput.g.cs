@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         /// <summary>
         /// Gets or sets the operation.
-        /// A signed DID PLC operation.
+        /// <br/> A signed DID PLC operation.
         /// </summary>
         [JsonPropertyName("operation")]
         [JsonRequired]

@@ -107,7 +107,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the moderation.
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
         /// </summary>
         [JsonPropertyName("moderation")]
         [JsonRequired]
@@ -115,7 +115,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the invitedBy.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Server.InviteCode"/> (com.atproto.server.defs#inviteCode)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Server.InviteCode"/> (com.atproto.server.defs#inviteCode)
         /// </summary>
         [JsonPropertyName("invitedBy")]
         public Com.Atproto.Server.InviteCode? InvitedBy { get; set; }

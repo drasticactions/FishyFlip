@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the add.
-        /// Tags to be added to the subject. If already exists, won't be duplicated.
+        /// <br/> Tags to be added to the subject. If already exists, won't be duplicated.
         /// </summary>
         [JsonPropertyName("add")]
         [JsonRequired]
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the remove.
-        /// Tags to be removed to the subject. Ignores a tag If it doesn't exist, won't be duplicated.
+        /// <br/> Tags to be removed to the subject. Ignores a tag If it doesn't exist, won't be duplicated.
         /// </summary>
         [JsonPropertyName("remove")]
         [JsonRequired]
@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the comment.
-        /// Additional comment about added/removed tags.
+        /// <br/> Additional comment about added/removed tags.
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }

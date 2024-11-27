@@ -14,19 +14,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         /// <param name="item"></param>
         /// <param name="@event">
-        /// Known Values:
-        /// requestLess - Request that less content like the given feed item be shown in the feed
-        /// requestMore - Request that more content like the given feed item be shown in the feed
-        /// clickthroughItem - User clicked through to the feed item
-        /// clickthroughAuthor - User clicked through to the author of the feed item
-        /// clickthroughReposter - User clicked through to the reposter of the feed item
-        /// clickthroughEmbed - User clicked through to the embedded content of the feed item
-        /// interactionSeen - Feed item was seen by user
-        /// interactionLike - User liked the feed item
-        /// interactionRepost - User reposted the feed item
-        /// interactionReply - User replied to the feed item
-        /// interactionQuote - User quoted the feed item
-        /// interactionShare - User shared the feed item
+        /// <br/> Known Values: <br/>
+        /// requestLess - Request that less content like the given feed item be shown in the feed <br/>
+        /// requestMore - Request that more content like the given feed item be shown in the feed <br/>
+        /// clickthroughItem - User clicked through to the feed item <br/>
+        /// clickthroughAuthor - User clicked through to the author of the feed item <br/>
+        /// clickthroughReposter - User clicked through to the reposter of the feed item <br/>
+        /// clickthroughEmbed - User clicked through to the embedded content of the feed item <br/>
+        /// interactionSeen - Feed item was seen by user <br/>
+        /// interactionLike - User liked the feed item <br/>
+        /// interactionRepost - User reposted the feed item <br/>
+        /// interactionReply - User replied to the feed item <br/>
+        /// interactionQuote - User quoted the feed item <br/>
+        /// interactionShare - User shared the feed item <br/>
         /// </param>
         /// <param name="feedContext">Context on a feed item that was originally supplied by the feed generator on getFeedSkeleton.</param>
         public Interaction(FishyFlip.Models.ATUri? item = default, string? @event = default, string? feedContext = default)
@@ -64,26 +64,26 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the event.
-        /// Known Values:
-        /// requestLess - Request that less content like the given feed item be shown in the feed
-        /// requestMore - Request that more content like the given feed item be shown in the feed
-        /// clickthroughItem - User clicked through to the feed item
-        /// clickthroughAuthor - User clicked through to the author of the feed item
-        /// clickthroughReposter - User clicked through to the reposter of the feed item
-        /// clickthroughEmbed - User clicked through to the embedded content of the feed item
-        /// interactionSeen - Feed item was seen by user
-        /// interactionLike - User liked the feed item
-        /// interactionRepost - User reposted the feed item
-        /// interactionReply - User replied to the feed item
-        /// interactionQuote - User quoted the feed item
-        /// interactionShare - User shared the feed item
+        /// <br/> Known Values: <br/>
+        /// requestLess - Request that less content like the given feed item be shown in the feed <br/>
+        /// requestMore - Request that more content like the given feed item be shown in the feed <br/>
+        /// clickthroughItem - User clicked through to the feed item <br/>
+        /// clickthroughAuthor - User clicked through to the author of the feed item <br/>
+        /// clickthroughReposter - User clicked through to the reposter of the feed item <br/>
+        /// clickthroughEmbed - User clicked through to the embedded content of the feed item <br/>
+        /// interactionSeen - Feed item was seen by user <br/>
+        /// interactionLike - User liked the feed item <br/>
+        /// interactionRepost - User reposted the feed item <br/>
+        /// interactionReply - User replied to the feed item <br/>
+        /// interactionQuote - User quoted the feed item <br/>
+        /// interactionShare - User shared the feed item <br/>
         /// </summary>
         [JsonPropertyName("event")]
         public string? Event { get; set; }
 
         /// <summary>
         /// Gets or sets the feedContext.
-        /// Context on a feed item that was originally supplied by the feed generator on getFeedSkeleton.
+        /// <br/> Context on a feed item that was originally supplied by the feed generator on getFeedSkeleton.
         /// </summary>
         [JsonPropertyName("feedContext")]
         public string? FeedContext { get; set; }

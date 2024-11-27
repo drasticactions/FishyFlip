@@ -73,7 +73,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the mutedByList.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("mutedByList")]
         public App.Bsky.Graph.ListViewBasic? MutedByList { get; set; }
@@ -93,7 +93,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the blockingByList.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("blockingByList")]
         public App.Bsky.Graph.ListViewBasic? BlockingByList { get; set; }
@@ -114,7 +114,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the knownFollowers.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
         /// </summary>
         [JsonPropertyName("knownFollowers")]
         public App.Bsky.Actor.KnownFollowers? KnownFollowers { get; set; }

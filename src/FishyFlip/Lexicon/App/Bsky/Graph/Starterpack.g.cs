@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the name.
-        /// Display name for starter pack; can not be empty.
+        /// <br/> Display name for starter pack; can not be empty.
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
@@ -74,7 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the list.
-        /// Reference (AT-URI) to the list record.
+        /// <br/> Reference (AT-URI) to the list record.
         /// </summary>
         [JsonPropertyName("list")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]

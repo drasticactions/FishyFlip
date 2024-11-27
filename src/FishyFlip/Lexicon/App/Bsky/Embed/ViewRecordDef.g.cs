@@ -13,15 +13,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Initializes a new instance of the <see cref="ViewRecordDef"/> class.
         /// </summary>
         /// <param name="record">
-        /// Union Types:
-        /// #viewRecord
-        /// #viewNotFound
-        /// #viewBlocked
-        /// #viewDetached
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic)
+        /// <br/> Union Types: <br/>
+        /// #viewRecord <br/>
+        /// #viewNotFound <br/>
+        /// #viewBlocked <br/>
+        /// #viewDetached <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic) <br/>
         /// </param>
         public ViewRecordDef(ATObject? record = default)
         {
@@ -47,15 +47,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the record.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord"/> (app.bsky.embed.record#viewRecord)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound"/> (app.bsky.embed.record#viewNotFound)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked"/> (app.bsky.embed.record#viewBlocked)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached"/> (app.bsky.embed.record#viewDetached)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord"/> (app.bsky.embed.record#viewRecord) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound"/> (app.bsky.embed.record#viewNotFound) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked"/> (app.bsky.embed.record#viewBlocked) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached"/> (app.bsky.embed.record#viewDetached) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic) <br/>
         /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]

@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the durationInHours.
-        /// Indicates how long the subject should remain muted.
+        /// <br/> Indicates how long the subject should remain muted.
         /// </summary>
         [JsonPropertyName("durationInHours")]
         [JsonRequired]

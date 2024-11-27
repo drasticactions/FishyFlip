@@ -47,7 +47,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the isFallback.
-        /// If true, response has fallen-back to generic results, and is not scoped using relativeToDid
+        /// <br/> If true, response has fallen-back to generic results, and is not scoped using relativeToDid
         /// </summary>
         [JsonPropertyName("isFallback")]
         public bool? IsFallback { get; set; } = false;

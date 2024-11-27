@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the durationInHours.
-        /// Indicates how long the account should remain muted. Falsy value here means a permanent mute.
+        /// <br/> Indicates how long the account should remain muted. Falsy value here means a permanent mute.
         /// </summary>
         [JsonPropertyName("durationInHours")]
         public long? DurationInHours { get; set; }

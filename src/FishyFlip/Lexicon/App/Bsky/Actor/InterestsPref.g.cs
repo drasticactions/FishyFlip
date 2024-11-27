@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the tags.
-        /// A list of tags which describe the account owner's interests gathered during onboarding.
+        /// <br/> A list of tags which describe the account owner's interests gathered during onboarding.
         /// </summary>
         [JsonPropertyName("tags")]
         [JsonRequired]

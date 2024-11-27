@@ -21,17 +21,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </param>
         /// <param name="embed">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia) <br/>
         /// </param>
         /// <param name="langs">Indicates human language of post primary text content.</param>
         /// <param name="labels">Self-label values for this post. Effectively content warnings.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="tags">Additional hashtags, in addition to any included in post text and facets.</param>
         /// <param name="createdAt">Client-declared timestamp when this post was originally created.</param>
@@ -73,63 +73,63 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the text.
-        /// The primary post content. May be an empty string, if there are embeds.
+        /// <br/> The primary post content. May be an empty string, if there are embeds.
         /// </summary>
         [JsonPropertyName("text")]
         public string? Text { get; set; }
 
         /// <summary>
         /// Gets or sets the facets.
-        /// Annotations of text (mentions, URLs, hashtags, etc)
+        /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
         public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
         /// Gets or sets the reply.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </summary>
         [JsonPropertyName("reply")]
         public App.Bsky.Feed.ReplyRefDef? Reply { get; set; }
 
         /// <summary>
         /// Gets or sets the embed.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
         public ATObject? Embed { get; set; }
 
         /// <summary>
         /// Gets or sets the langs.
-        /// Indicates human language of post primary text content.
+        /// <br/> Indicates human language of post primary text content.
         /// </summary>
         [JsonPropertyName("langs")]
         public List<string>? Langs { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
-        /// Self-label values for this post. Effectively content warnings.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Self-label values for this post. Effectively content warnings.
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the tags.
-        /// Additional hashtags, in addition to any included in post text and facets.
+        /// <br/> Additional hashtags, in addition to any included in post text and facets.
         /// </summary>
         [JsonPropertyName("tags")]
         public List<string>? Tags { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
-        /// Client-declared timestamp when this post was originally created.
+        /// <br/> Client-declared timestamp when this post was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;

@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="did"></param>
         /// <param name="feeds"></param>
         /// <param name="links">
-        /// app.bsky.feed.defs#links
+        /// app.bsky.feed.defs#links <br/>
         /// </param>
         public DescribeFeedGeneratorOutput(FishyFlip.Models.ATDid? did = default, List<App.Bsky.Feed.Feed>? feeds = default, App.Bsky.Feed.Links? links = default)
         {
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the links.
-        /// app.bsky.feed.defs#links
+        /// app.bsky.feed.defs#links <br/>
         /// </summary>
         [JsonPropertyName("links")]
         public App.Bsky.Feed.Links? Links { get; set; }
