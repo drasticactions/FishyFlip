@@ -1,21 +1,28 @@
+// <copyright file="AnonymousTests.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 using FishyFlip.Lexicon;
 using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Lexicon.App.Bsky.Feed;
 using FishyFlip.Lexicon.App.Bsky.Richtext;
 using FishyFlip.Lexicon.Com.Atproto.Repo;
-using FishyFlip.Models;
-using FishyFlip.Tools;
 using Microsoft.Extensions.Logging.Debug;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static FishyFlip.Tools.CarDecoder;
 
 namespace FishyFlip.Tests;
 
+/// <summary>
+/// Tests for anonymous access to the ATProtocol API.
+/// </summary>
 [TestClass]
 public class AnonymousTests
 {
-    static ATProtocol proto;
+    private static ATProtocol? proto;
 
+    /// <summary>
+    /// Initialize the test class.
+    /// </summary>
+    /// <param name="context"><see cref="TestContext"/>.</param>
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
@@ -28,6 +35,12 @@ public class AnonymousTests
         AnonymousTests.proto = atProtocolBuilder.Build();
     }
 
+    /// <summary>
+    /// Test the GetRecordAsync method. Gets the posts and verifies the data.
+    /// </summary>
+    /// <param name="atUri">The ATUri.</param>
+    /// <param name="embedType">The type of data that should be embedded.</param>
+    /// <returns>Task.</returns>
     [TestMethod]
     [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3kv25q4gqbk2y", "")]
     [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxcq7bwwo2j", EmbedRecord.RecordType)]
@@ -37,7 +50,7 @@ public class AnonymousTests
     public async Task TestPostAsync(string atUri, string embedType)
     {
         var postUri = ATUri.Create(atUri);
-        var post = await AnonymousTests.proto.GetRecordAsync(postUri.Did!, Post.RecordType, postUri.Rkey);
+        var post = await AnonymousTests.proto!.GetRecordAsync(postUri.Did!, Post.RecordType, postUri.Rkey);
         post.Switch(
             success =>
             {
@@ -69,7 +82,7 @@ public class AnonymousTests
                             Assert.IsTrue(!string.IsNullOrEmpty(external.Uri));
                             Assert.IsNotNull(external.Thumb);
                             Assert.IsTrue(!string.IsNullOrEmpty(external.Thumb.MimeType));
-                            //Assert.IsTrue(!string.IsNullOrEmpty(external.Thumb.Type));
+                            Assert.IsTrue(!string.IsNullOrEmpty(external.Thumb.Type));
                             Assert.IsNotNull(external.Thumb.Ref);
                             Assert.IsNotNull(external.Thumb.Ref.Link);
                             break;
@@ -81,8 +94,8 @@ public class AnonymousTests
                             {
                                 Assert.IsNotNull(image);
                                 image.ThrowIfNull();
-                                //image?.Ref.ThrowIfNull();
-                                //ssert.IsTrue(!string.IsNullOrEmpty(image.Image?.MimeType));
+                                image?.ImageValue?.Ref.ThrowIfNull();
+                                Assert.IsTrue(!string.IsNullOrEmpty(image?.ImageValue?.MimeType));
                             }
 
                             break;
@@ -92,7 +105,7 @@ public class AnonymousTests
                             Assert.IsNotNull(videoEmbed.Video);
                             videoEmbed.Video?.Ref.ThrowIfNull();
                             Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.MimeType));
-                            // Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.Type));
+                            Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.Type));
                             Assert.IsNotNull(videoEmbed.AspectRatio);
                             Assert.IsTrue(videoEmbed.AspectRatio.Width > 0);
                             Assert.IsTrue(videoEmbed.AspectRatio.Height > 0);
@@ -109,18 +122,26 @@ public class AnonymousTests
             });
     }
 
+    /// <summary>
+    /// Tests DescribeRepoAsync to verify the repo exists.
+    /// </summary>
+    /// <param name="did">The DID to test.</param>
+    /// <returns>Task.</returns>
     [TestMethod]
     [DataRow("did:plc:okblbaji7rz243bluudjlgxt")]
     public async Task DescribeRepoTest(string did)
     {
         var repo = ATDid.Create(did);
-        var describe = (await AnonymousTests.proto.DescribeRepoAsync(repo)).HandleResult();
+        var describe = (await AnonymousTests.proto!.DescribeRepoAsync(repo!)).HandleResult();
         Assert.IsTrue(describe is not null);
         Assert.IsTrue(describe.HandleIsCorrect);
         Assert.IsTrue(describe.Did is not null);
-        Assert.AreEqual(describe.Did!.ToString(), repo.ToString());
+        Assert.AreEqual(describe.Did!.ToString(), repo!.ToString());
     }
 
+    /// <summary>
+    /// Verify Markdown post parsing.
+    /// </summary>
     [TestMethod]
     public void MarkdownPostTest()
     {
@@ -143,8 +164,11 @@ public class AnonymousTests
         Assert.IsTrue(post.Facets[2].Index!.ByteEnd == 36);
     }
 
+    /// <summary>
+    /// Validate Facet Helpers.
+    /// </summary>
     [TestMethod]
-    public async Task ValidateFacetHelpers()
+    public void ValidateFacetHelpers()
     {
         var daDev = new FacetActorIdentifier(ATHandle.Create("drasticactions.dev")!, ATDid.Create("did:plc:okblbaji7rz243bluudjlgxt")!);
         var daJp = new FacetActorIdentifier(ATHandle.Create("drasticactions.jp")!, ATDid.Create("did:plc:okblbaji7rz243bluudjl2bt")!);
@@ -180,12 +204,17 @@ public class AnonymousTests
         Assert.IsTrue(facets.Length == 11);
     }
 
+    /// <summary>
+    /// Tests the GetEntryAsync method and validates the post exists.
+    /// </summary>
+    /// <param name="atDid">The ATDid.</param>
+    /// <returns>Task.</returns>
     [TestMethod]
     [DataRow("at://did:plc:fzkpgpjj7nki7r5rhtmgzrez/com.whtwnd.blog.entry/3kudrxp52ps2a")]
     public async Task GetAuthorPostTest(string atDid)
     {
         var postUri = ATUri.Create(atDid);
-        var (result, error) = await AnonymousTests.proto.ComWhtwndBlog.GetEntryAsync(postUri.Did!, postUri.Rkey);
+        var (result, error) = await AnonymousTests.proto!.ComWhtwndBlog.GetEntryAsync(postUri.Did!, postUri.Rkey);
         Assert.IsNull(error);
         Assert.IsNotNull(result);
     }
