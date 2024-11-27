@@ -19,15 +19,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <param name="createdAt"></param>
         /// <param name="updatedAt"></param>
         /// <param name="managerRole">
-        /// Known Values:
-        /// roleModerator - Moderator role. Can perform most actions.
-        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
-        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// <br/> Known Values: <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// </param>
         /// <param name="scope">
-        /// Known Values:
-        /// instance
-        /// personal
+        /// <br/> Known Values: <br/>
+        /// instance <br/>
+        /// personal <br/>
         /// </param>
         /// <param name="createdBy"></param>
         /// <param name="lastUpdatedBy"></param>
@@ -113,19 +113,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         /// <summary>
         /// Gets or sets the managerRole.
-        /// Known Values:
-        /// roleModerator - Moderator role. Can perform most actions.
-        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues.
-        /// roleAdmin - Admin role. Highest level of access, can perform all actions.
+        /// <br/> Known Values: <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// </summary>
         [JsonPropertyName("managerRole")]
         public string? ManagerRole { get; set; }
 
         /// <summary>
         /// Gets or sets the scope.
-        /// Known Values:
-        /// instance
-        /// personal
+        /// <br/> Known Values: <br/>
+        /// instance <br/>
+        /// personal <br/>
         /// </summary>
         [JsonPropertyName("scope")]
         [JsonRequired]

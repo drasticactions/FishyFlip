@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the deleteAfter.
-        /// A recommendation to server as to how long they should hold onto the deactivated account before deleting.
+        /// <br/> A recommendation to server as to how long they should hold onto the deactivated account before deleting.
         /// </summary>
         [JsonPropertyName("deleteAfter")]
         public DateTime? DeleteAfter { get; set; }

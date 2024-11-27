@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the comment.
-        /// Describe resolution.
+        /// <br/> Describe resolution.
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }

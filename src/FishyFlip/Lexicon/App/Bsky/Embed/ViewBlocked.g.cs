@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the author.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor"/> (app.bsky.feed.defs#blockedAuthor)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor"/> (app.bsky.feed.defs#blockedAuthor)
         /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]

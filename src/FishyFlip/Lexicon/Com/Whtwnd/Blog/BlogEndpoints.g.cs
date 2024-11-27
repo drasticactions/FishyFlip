@@ -43,6 +43,8 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         /// <summary>
         /// Get AT URI by blog author and entry name. If there are multiple blog entries associated with the name, return the latest one.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.NotFoundError"/> If the associated name isn't registered in the author's repo, this error is returned <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="author"></param>

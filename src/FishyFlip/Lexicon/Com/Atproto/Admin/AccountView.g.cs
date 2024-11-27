@@ -107,7 +107,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         /// <summary>
         /// Gets or sets the invitedBy.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Server.InviteCode"/> (com.atproto.server.defs#inviteCode)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Server.InviteCode"/> (com.atproto.server.defs#inviteCode)
         /// </summary>
         [JsonPropertyName("invitedBy")]
         public Com.Atproto.Server.InviteCode? InvitedBy { get; set; }

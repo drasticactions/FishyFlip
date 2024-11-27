@@ -45,7 +45,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Gets or sets the set.
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.SetView"/> (tools.ozone.set.defs#setView)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.SetView"/> (tools.ozone.set.defs#setView)
         /// </summary>
         [JsonPropertyName("set")]
         [JsonRequired]

@@ -18,14 +18,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="comment"></param>
         /// <param name="isReporterMuted">Set to true if the reporter was muted from reporting at the time of the event. These reports won't impact the reviewState of the subject.</param>
         /// <param name="reportType">
-        /// Known Values:
-        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions
-        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service
-        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content
-        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content
-        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior
-        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category
-        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action
+        /// <br/> Known Values: <br/>
+        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions <br/>
+        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service <br/>
+        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content <br/>
+        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content <br/>
+        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior <br/>
+        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category <br/>
+        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action <br/>
         /// </param>
         public ModEventReport(string? comment = default, bool? isReporterMuted = default, string? reportType = default)
         {
@@ -61,21 +61,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the isReporterMuted.
-        /// Set to true if the reporter was muted from reporting at the time of the event. These reports won't impact the reviewState of the subject.
+        /// <br/> Set to true if the reporter was muted from reporting at the time of the event. These reports won't impact the reviewState of the subject.
         /// </summary>
         [JsonPropertyName("isReporterMuted")]
         public bool? IsReporterMuted { get; set; }
 
         /// <summary>
         /// Gets or sets the reportType.
-        /// Known Values:
-        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions
-        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service
-        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content
-        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content
-        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior
-        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category
-        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action
+        /// <br/> Known Values: <br/>
+        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions <br/>
+        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service <br/>
+        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content <br/>
+        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content <br/>
+        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior <br/>
+        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category <br/>
+        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action <br/>
         /// </summary>
         [JsonPropertyName("reportType")]
         [JsonRequired]

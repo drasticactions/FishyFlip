@@ -19,8 +19,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies"/> (app.bsky.labeler.defs#labelerPolicies)
         /// </param>
         /// <param name="labels">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="createdAt"></param>
         public Service(App.Bsky.Labeler.LabelerPolicies? policies, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
@@ -51,15 +51,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         /// <summary>
         /// Gets or sets the policies.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies"/> (app.bsky.labeler.defs#labelerPolicies)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies"/> (app.bsky.labeler.defs#labelerPolicies)
         /// </summary>
         [JsonPropertyName("policies")]
         public App.Bsky.Labeler.LabelerPolicies? Policies { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }

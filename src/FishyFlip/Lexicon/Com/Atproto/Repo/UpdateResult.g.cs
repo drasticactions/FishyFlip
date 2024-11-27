@@ -15,9 +15,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <param name="uri"></param>
         /// <param name="cid"></param>
         /// <param name="validationStatus">
-        /// Known Values:
-        /// valid
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// valid <br/>
+        /// unknown <br/>
         /// </param>
         public UpdateResult(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? validationStatus = default)
         {
@@ -62,9 +62,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the validationStatus.
-        /// Known Values:
-        /// valid
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// valid <br/>
+        /// unknown <br/>
         /// </summary>
         [JsonPropertyName("validationStatus")]
         public string? ValidationStatus { get; set; }

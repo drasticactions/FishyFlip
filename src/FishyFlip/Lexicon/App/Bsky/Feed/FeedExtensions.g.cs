@@ -40,8 +40,8 @@ namespace FishyFlip.Lexicon
         /// <param name="avatar"></param>
         /// <param name="acceptsInteractions">Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions</param>
         /// <param name="labels">Self-label values
-        /// Union Types:
-        /// com.atproto.label.defs#selfLabels
+        /// <br/> Union Types: <br/>
+        /// com.atproto.label.defs#selfLabels <br/>
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="rkey"></param>
@@ -278,17 +278,17 @@ namespace FishyFlip.Lexicon
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </param>
         /// <param name="embed">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages"/> (app.bsky.embed.images) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia) <br/>
         /// </param>
         /// <param name="langs">Indicates human language of post primary text content.</param>
         /// <param name="labels">Self-label values for this post. Effectively content warnings.
-        /// Union Types:
-        /// com.atproto.label.defs#selfLabels
+        /// <br/> Union Types: <br/>
+        /// com.atproto.label.defs#selfLabels <br/>
         /// </param>
         /// <param name="tags">Additional hashtags, in addition to any included in post text and facets.</param>
         /// <param name="createdAt">Client-declared timestamp when this post was originally created.</param>
@@ -411,8 +411,8 @@ namespace FishyFlip.Lexicon
         /// <param name="createdAt"></param>
         /// <param name="detachedEmbeddingUris">List of AT-URIs embedding this post that the author has detached from.</param>
         /// <param name="embeddingRules">
-        /// Union Types:
-        /// #disableRule
+        /// <br/> Union Types: <br/>
+        /// #disableRule <br/>
         /// </param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
@@ -640,10 +640,10 @@ namespace FishyFlip.Lexicon
         /// <param name="atp"></param>
         /// <param name="post">Reference (AT-URI) to the post record.</param>
         /// <param name="allow">
-        /// Union Types:
-        /// #mentionRule
-        /// #followingRule
-        /// #listRule
+        /// <br/> Union Types: <br/>
+        /// #mentionRule <br/>
+        /// #followingRule <br/>
+        /// #listRule <br/>
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="hiddenReplies">List of hidden reply URIs.</param>

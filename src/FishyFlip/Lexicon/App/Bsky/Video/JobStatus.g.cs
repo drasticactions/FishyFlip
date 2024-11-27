@@ -15,9 +15,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <param name="jobId"></param>
         /// <param name="did"></param>
         /// <param name="state">The state of the video processing job. All values not listed as a known value indicate that the job is in process.
-        /// Known Values:
-        /// JOB_STATE_COMPLETED
-        /// JOB_STATE_FAILED
+        /// <br/> Known Values: <br/>
+        /// JOB_STATE_COMPLETED <br/>
+        /// JOB_STATE_FAILED <br/>
         /// </param>
         /// <param name="progress">Progress within the current processing state.</param>
         /// <param name="blob"></param>
@@ -74,10 +74,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         /// <summary>
         /// Gets or sets the state.
-        /// The state of the video processing job. All values not listed as a known value indicate that the job is in process.
-        /// Known Values:
-        /// JOB_STATE_COMPLETED
-        /// JOB_STATE_FAILED
+        /// <br/> The state of the video processing job. All values not listed as a known value indicate that the job is in process.
+        /// <br/> Known Values: <br/>
+        /// JOB_STATE_COMPLETED <br/>
+        /// JOB_STATE_FAILED <br/>
         /// </summary>
         [JsonPropertyName("state")]
         [JsonRequired]
@@ -85,7 +85,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         /// <summary>
         /// Gets or sets the progress.
-        /// Progress within the current processing state.
+        /// <br/> Progress within the current processing state.
         /// </summary>
         [JsonPropertyName("progress")]
         public long? Progress { get; set; }

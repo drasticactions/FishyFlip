@@ -16,18 +16,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Initializes a new instance of the <see cref="List"/> class.
         /// </summary>
         /// <param name="purpose">Defines the purpose of the list (aka, moderation-oriented or curration-oriented)
-        /// Known Values:
-        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on.
-        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating.
-        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack.
+        /// <br/> Known Values: <br/>
+        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on. <br/>
+        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating. <br/>
+        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack. <br/>
         /// </param>
         /// <param name="name">Display name for list; can not be empty.</param>
         /// <param name="description"></param>
         /// <param name="descriptionFacets"></param>
         /// <param name="avatar"></param>
         /// <param name="labels">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="createdAt"></param>
         public List(string? purpose, string? name, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
@@ -66,18 +66,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the purpose.
-        /// Defines the purpose of the list (aka, moderation-oriented or curration-oriented)
-        /// Known Values:
-        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on.
-        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating.
-        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack.
+        /// <br/> Defines the purpose of the list (aka, moderation-oriented or curration-oriented)
+        /// <br/> Known Values: <br/>
+        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on. <br/>
+        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating. <br/>
+        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack. <br/>
         /// </summary>
         [JsonPropertyName("purpose")]
         public string? Purpose { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
-        /// Display name for list; can not be empty.
+        /// <br/> Display name for list; can not be empty.
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
@@ -102,8 +102,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the labels.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }

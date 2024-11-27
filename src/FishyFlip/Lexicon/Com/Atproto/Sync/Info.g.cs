@@ -13,8 +13,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// Initializes a new instance of the <see cref="Info"/> class.
         /// </summary>
         /// <param name="name">
-        /// Known Values:
-        /// OutdatedCursor
+        /// <br/> Known Values: <br/>
+        /// OutdatedCursor <br/>
         /// </param>
         /// <param name="message"></param>
         public Info(string? name = default, string? message = default)
@@ -43,8 +43,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the name.
-        /// Known Values:
-        /// OutdatedCursor
+        /// <br/> Known Values: <br/>
+        /// OutdatedCursor <br/>
         /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]

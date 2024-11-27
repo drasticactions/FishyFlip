@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the token.
-        /// Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.
+        /// <br/> Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.
         /// </summary>
         [JsonPropertyName("token")]
         public string? Token { get; set; }

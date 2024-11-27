@@ -104,7 +104,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the moderation.
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail"/> (tools.ozone.moderation.defs#moderationDetail)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail"/> (tools.ozone.moderation.defs#moderationDetail)
         /// </summary>
         [JsonPropertyName("moderation")]
         [JsonRequired]
@@ -112,7 +112,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the repo.
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView"/> (tools.ozone.moderation.defs#repoView)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView"/> (tools.ozone.moderation.defs#repoView)
         /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]

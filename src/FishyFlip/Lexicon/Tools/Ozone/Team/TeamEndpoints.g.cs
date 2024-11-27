@@ -24,6 +24,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         /// <summary>
         /// Add a member to the ozone team. Requires admin role.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.MemberAlreadyExistsError"/> Member already exists in the team. <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="did"></param>
@@ -42,6 +44,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         /// <summary>
         /// Delete a member from ozone team. Requires admin role.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.MemberNotFoundError"/> The member being deleted does not exist <br/>
+        /// <see cref="FishyFlip.Lexicon.CannotDeleteSelfError"/> You can not delete yourself from the team <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="did"></param>
@@ -86,6 +91,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         /// <summary>
         /// Update a member in the ozone service. Requires admin role.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.MemberNotFoundError"/> The member being updated does not exist in the team <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="did"></param>

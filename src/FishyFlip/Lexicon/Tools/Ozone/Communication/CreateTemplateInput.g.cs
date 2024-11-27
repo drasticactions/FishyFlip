@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         /// <summary>
         /// Gets or sets the name.
-        /// Name of the template.
+        /// <br/> Name of the template.
         /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         /// <summary>
         /// Gets or sets the contentMarkdown.
-        /// Content of the template, markdown supported, can contain variable placeholders.
+        /// <br/> Content of the template, markdown supported, can contain variable placeholders.
         /// </summary>
         [JsonPropertyName("contentMarkdown")]
         [JsonRequired]
@@ -65,7 +65,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         /// <summary>
         /// Gets or sets the subject.
-        /// Subject of the message, used in emails.
+        /// <br/> Subject of the message, used in emails.
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
@@ -73,14 +73,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         /// <summary>
         /// Gets or sets the lang.
-        /// Message language.
+        /// <br/> Message language.
         /// </summary>
         [JsonPropertyName("lang")]
         public string? Lang { get; set; }
 
         /// <summary>
         /// Gets or sets the createdBy.
-        /// DID of the user who is creating the template.
+        /// <br/> DID of the user who is creating the template.
         /// </summary>
         [JsonPropertyName("createdBy")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

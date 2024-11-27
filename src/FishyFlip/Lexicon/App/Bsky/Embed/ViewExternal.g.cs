@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Initializes a new instance of the <see cref="ViewExternal"/> class.
         /// </summary>
         /// <param name="external">
-        /// app.bsky.embed.defs#viewExternal
+        /// app.bsky.embed.defs#viewExternal <br/>
         /// </param>
         public ViewExternal(App.Bsky.Embed.ViewExternalExternal? external = default)
         {
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the external.
-        /// app.bsky.embed.defs#viewExternal
+        /// app.bsky.embed.defs#viewExternal <br/>
         /// </summary>
         [JsonPropertyName("external")]
         [JsonRequired]

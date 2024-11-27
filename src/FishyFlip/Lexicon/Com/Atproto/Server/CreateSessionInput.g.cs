@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the identifier.
-        /// Handle or other identifier supported by the server for the authenticating user.
+        /// <br/> Handle or other identifier supported by the server for the authenticating user.
         /// </summary>
         [JsonPropertyName("identifier")]
         [JsonRequired]

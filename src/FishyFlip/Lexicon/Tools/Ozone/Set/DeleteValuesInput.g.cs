@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Gets or sets the name.
-        /// Name of the set to delete values from
+        /// <br/> Name of the set to delete values from
         /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Gets or sets the values.
-        /// Array of string values to delete from the set
+        /// <br/> Array of string values to delete from the set
         /// </summary>
         [JsonPropertyName("values")]
         [JsonRequired]

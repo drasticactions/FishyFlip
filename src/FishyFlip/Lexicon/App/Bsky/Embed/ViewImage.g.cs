@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the thumb.
-        /// Fully-qualified URL where a thumbnail of the image can be fetched. For example, CDN location provided by the App View.
+        /// <br/> Fully-qualified URL where a thumbnail of the image can be fetched. For example, CDN location provided by the App View.
         /// </summary>
         [JsonPropertyName("thumb")]
         [JsonRequired]
@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the fullsize.
-        /// Fully-qualified URL where a large version of the image can be fetched. May or may not be the exact original blob. For example, CDN location provided by the App View.
+        /// <br/> Fully-qualified URL where a large version of the image can be fetched. May or may not be the exact original blob. For example, CDN location provided by the App View.
         /// </summary>
         [JsonPropertyName("fullsize")]
         [JsonRequired]
@@ -64,7 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the alt.
-        /// Alt text description of the image, for accessibility.
+        /// <br/> Alt text description of the image, for accessibility.
         /// </summary>
         [JsonPropertyName("alt")]
         [JsonRequired]
@@ -72,7 +72,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the aspectRatio.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
         public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }

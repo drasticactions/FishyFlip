@@ -15,11 +15,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="labelerDid">Which labeler does this preference apply to? If undefined, applies globally.</param>
         /// <param name="label"></param>
         /// <param name="visibility">
-        /// Known Values:
-        /// ignore
-        /// show
-        /// warn
-        /// hide
+        /// <br/> Known Values: <br/>
+        /// ignore <br/>
+        /// show <br/>
+        /// warn <br/>
+        /// hide <br/>
         /// </param>
         public ContentLabelPref(FishyFlip.Models.ATDid? labelerDid = default, string? label = default, string? visibility = default)
         {
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the labelerDid.
-        /// Which labeler does this preference apply to? If undefined, applies globally.
+        /// <br/> Which labeler does this preference apply to? If undefined, applies globally.
         /// </summary>
         [JsonPropertyName("labelerDid")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
@@ -64,11 +64,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the visibility.
-        /// Known Values:
-        /// ignore
-        /// show
-        /// warn
-        /// hide
+        /// <br/> Known Values: <br/>
+        /// ignore <br/>
+        /// show <br/>
+        /// warn <br/>
+        /// hide <br/>
         /// </summary>
         [JsonPropertyName("visibility")]
         [JsonRequired]

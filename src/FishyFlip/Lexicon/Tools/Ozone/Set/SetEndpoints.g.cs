@@ -46,6 +46,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Delete an entire set. Attempting to delete a set that does not exist will result in an error.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.SetNotFoundError"/> set with the given name does not exist <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="name"></param>
@@ -62,6 +64,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Delete values from a specific set. Attempting to delete values that are not in the set will not result in an error
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.SetNotFoundError"/> set with the given name does not exist <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="name"></param>
@@ -80,6 +84,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Get a specific set and its values
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.SetNotFoundError"/> set with the given name does not exist <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="name"></param>

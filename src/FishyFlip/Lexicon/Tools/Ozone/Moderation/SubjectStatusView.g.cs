@@ -14,25 +14,25 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         /// <param name="id"></param>
         /// <param name="subject">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </param>
         /// <param name="hosting">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting"/> (tools.ozone.moderation.defs#accountHosting)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting"/> (tools.ozone.moderation.defs#recordHosting)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting"/> (tools.ozone.moderation.defs#accountHosting) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting"/> (tools.ozone.moderation.defs#recordHosting) <br/>
         /// </param>
         /// <param name="subjectBlobCids"></param>
         /// <param name="subjectRepoHandle"></param>
         /// <param name="updatedAt">Timestamp referencing when the last update was made to the moderation status of the subject</param>
         /// <param name="createdAt">Timestamp referencing the first moderation status impacting event was emitted on the subject</param>
         /// <param name="reviewState">
-        /// Known Values:
-        /// #reviewOpen
-        /// #reviewEscalated
-        /// #reviewClosed
-        /// #reviewNone
+        /// <br/> Known Values: <br/>
+        /// #reviewOpen <br/>
+        /// #reviewEscalated <br/>
+        /// #reviewClosed <br/>
+        /// #reviewNone <br/>
         /// </param>
         /// <param name="comment">Sticky comment on the subject.</param>
         /// <param name="muteUntil"></param>
@@ -112,9 +112,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the subject.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
@@ -122,9 +122,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the hosting.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting"/> (tools.ozone.moderation.defs#accountHosting)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting"/> (tools.ozone.moderation.defs#recordHosting)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting"/> (tools.ozone.moderation.defs#accountHosting) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting"/> (tools.ozone.moderation.defs#recordHosting) <br/>
         /// </summary>
         [JsonPropertyName("hosting")]
         public ATObject? Hosting { get; set; }
@@ -143,7 +143,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the updatedAt.
-        /// Timestamp referencing when the last update was made to the moderation status of the subject
+        /// <br/> Timestamp referencing when the last update was made to the moderation status of the subject
         /// </summary>
         [JsonPropertyName("updatedAt")]
         [JsonRequired]
@@ -151,7 +151,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the createdAt.
-        /// Timestamp referencing the first moderation status impacting event was emitted on the subject
+        /// <br/> Timestamp referencing the first moderation status impacting event was emitted on the subject
         /// </summary>
         [JsonPropertyName("createdAt")]
         [JsonRequired]
@@ -159,11 +159,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the reviewState.
-        /// Known Values:
-        /// #reviewOpen
-        /// #reviewEscalated
-        /// #reviewClosed
-        /// #reviewNone
+        /// <br/> Known Values: <br/>
+        /// #reviewOpen <br/>
+        /// #reviewEscalated <br/>
+        /// #reviewClosed <br/>
+        /// #reviewNone <br/>
         /// </summary>
         [JsonPropertyName("reviewState")]
         [JsonRequired]
@@ -171,7 +171,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the comment.
-        /// Sticky comment on the subject.
+        /// <br/> Sticky comment on the subject.
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
@@ -209,7 +209,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the lastAppealedAt.
-        /// Timestamp referencing when the author of the subject appealed a moderation action
+        /// <br/> Timestamp referencing when the author of the subject appealed a moderation action
         /// </summary>
         [JsonPropertyName("lastAppealedAt")]
         public DateTime? LastAppealedAt { get; set; }
@@ -222,7 +222,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the appealed.
-        /// True indicates that the a previously taken moderator action was appealed against, by the author of the content. False indicates last appeal was resolved by moderators.
+        /// <br/> True indicates that the a previously taken moderator action was appealed against, by the author of the content. False indicates last appeal was resolved by moderators.
         /// </summary>
         [JsonPropertyName("appealed")]
         public bool? Appealed { get; set; }

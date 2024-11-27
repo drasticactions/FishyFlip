@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the hitsTotal.
-        /// Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.
+        /// <br/> Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.
         /// </summary>
         [JsonPropertyName("hitsTotal")]
         public long? HitsTotal { get; set; }

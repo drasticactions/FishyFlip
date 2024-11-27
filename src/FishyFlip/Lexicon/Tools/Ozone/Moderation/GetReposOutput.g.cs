@@ -13,9 +13,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Initializes a new instance of the <see cref="GetReposOutput"/> class.
         /// </summary>
         /// <param name="repos">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/> (tools.ozone.moderation.defs#repoViewDetail)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/> (tools.ozone.moderation.defs#repoViewDetail) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound) <br/>
         /// </param>
         public GetReposOutput(List<ATObject>? repos = default)
         {
@@ -41,9 +41,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the repos.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/> (tools.ozone.moderation.defs#repoViewDetail)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/> (tools.ozone.moderation.defs#repoViewDetail) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound) <br/>
         /// </summary>
         [JsonPropertyName("repos")]
         [JsonRequired]

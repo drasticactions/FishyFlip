@@ -65,7 +65,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the didDoc.
-        /// The complete DID document for this account.
+        /// <br/> The complete DID document for this account.
         /// </summary>
         [JsonPropertyName("didDoc")]
         [JsonRequired]
@@ -73,7 +73,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the collections.
-        /// List of all the collections (NSIDs) for which this repo contains at least one record.
+        /// <br/> List of all the collections (NSIDs) for which this repo contains at least one record.
         /// </summary>
         [JsonPropertyName("collections")]
         [JsonRequired]
@@ -81,7 +81,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the handleIsCorrect.
-        /// Indicates if handle is currently valid (resolves bi-directionally)
+        /// <br/> Indicates if handle is currently valid (resolves bi-directionally)
         /// </summary>
         [JsonPropertyName("handleIsCorrect")]
         [JsonRequired]

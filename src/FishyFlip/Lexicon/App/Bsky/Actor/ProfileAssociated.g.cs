@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the chat.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat"/> (app.bsky.actor.defs#profileAssociatedChat)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat"/> (app.bsky.actor.defs#profileAssociatedChat)
         /// </summary>
         [JsonPropertyName("chat")]
         public App.Bsky.Actor.ProfileAssociatedChat? Chat { get; set; }

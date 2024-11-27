@@ -347,8 +347,10 @@ public static class HttpClientExtensions
         {
             try
             {
-                detail = JsonSerializer.Deserialize<ErrorDetail>(response, ((SourceGenerationContext)options.TypeInfoResolver!).ErrorDetail);
-                atError = new ATError((int)message.StatusCode, detail);
+                detail = JsonSerializer.Deserialize<ErrorDetail>(response, ((SourceGenerationContext)options.TypeInfoResolver!).ErrorDetail) ??
+                         new ErrorDetail("UnknownError", response);
+
+                atError = FishyFlip.Lexicon.ATErrorGenerator.Generate((int)message.StatusCode, detail);
             }
             catch (Exception)
             {

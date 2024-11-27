@@ -13,16 +13,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Initializes a new instance of the <see cref="ReplyRef"/> class.
         /// </summary>
         /// <param name="root">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </param>
         /// <param name="parent">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </param>
         /// <param name="grandparentAuthor">When parent is a reply to another post, this is the author of that post.
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
@@ -55,10 +55,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the root.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </summary>
         [JsonPropertyName("root")]
         [JsonRequired]
@@ -66,10 +66,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the parent.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.PostView"/> (app.bsky.feed.defs#postView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </summary>
         [JsonPropertyName("parent")]
         [JsonRequired]
@@ -77,8 +77,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the grandparentAuthor.
-        /// When parent is a reply to another post, this is the author of that post.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
+        /// <br/> When parent is a reply to another post, this is the author of that post.
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </summary>
         [JsonPropertyName("grandparentAuthor")]
         public App.Bsky.Actor.ProfileViewBasic? GrandparentAuthor { get; set; }

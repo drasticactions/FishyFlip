@@ -13,9 +13,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Initializes a new instance of the <see cref="GetRecordsOutput"/> class.
         /// </summary>
         /// <param name="records">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/> (tools.ozone.moderation.defs#recordViewDetail)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/> (tools.ozone.moderation.defs#recordViewDetail) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound) <br/>
         /// </param>
         public GetRecordsOutput(List<ATObject>? records = default)
         {
@@ -41,9 +41,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the records.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/> (tools.ozone.moderation.defs#recordViewDetail)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/> (tools.ozone.moderation.defs#recordViewDetail) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound) <br/>
         /// </summary>
         [JsonPropertyName("records")]
         [JsonRequired]

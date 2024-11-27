@@ -20,8 +20,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="avatar">Small image to be displayed next to posts from account. AKA, 'profile picture'</param>
         /// <param name="banner">Larger horizontal image to display behind profile view.</param>
         /// <param name="labels">Self-label values, specific to the Bluesky application, on the overall account.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="joinedViaStarterPack">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
@@ -74,44 +74,44 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the description.
-        /// Free-form profile description text.
+        /// <br/> Free-form profile description text.
         /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
-        /// Small image to be displayed next to posts from account. AKA, 'profile picture'
+        /// <br/> Small image to be displayed next to posts from account. AKA, 'profile picture'
         /// </summary>
         [JsonPropertyName("avatar")]
         public Blob? Avatar { get; set; }
 
         /// <summary>
         /// Gets or sets the banner.
-        /// Larger horizontal image to display behind profile view.
+        /// <br/> Larger horizontal image to display behind profile view.
         /// </summary>
         [JsonPropertyName("banner")]
         public Blob? Banner { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
-        /// Self-label values, specific to the Bluesky application, on the overall account.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels)
+        /// <br/> Self-label values, specific to the Bluesky application, on the overall account.
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
         public Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedViaStarterPack.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("joinedViaStarterPack")]
         public Com.Atproto.Repo.StrongRef? JoinedViaStarterPack { get; set; }
 
         /// <summary>
         /// Gets or sets the pinnedPost.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("pinnedPost")]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }

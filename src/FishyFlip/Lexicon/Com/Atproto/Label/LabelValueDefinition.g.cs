@@ -17,22 +17,22 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         /// <param name="identifier">The value of the label being defined. Must only include lowercase ascii and the '-' character ([a-z-]+).</param>
         /// <param name="severity">How should a client visually convey this label? 'inform' means neutral and informational; 'alert' means negative and warning; 'none' means show nothing.
-        /// Known Values:
-        /// inform
-        /// alert
-        /// none
+        /// <br/> Known Values: <br/>
+        /// inform <br/>
+        /// alert <br/>
+        /// none <br/>
         /// </param>
         /// <param name="blurs">What should this label hide in the UI, if applied? 'content' hides all of the target; 'media' hides the images/video/audio; 'none' hides nothing.
-        /// Known Values:
-        /// content
-        /// media
-        /// none
+        /// <br/> Known Values: <br/>
+        /// content <br/>
+        /// media <br/>
+        /// none <br/>
         /// </param>
         /// <param name="defaultSetting">The default setting for this label.
-        /// Known Values:
-        /// ignore
-        /// warn
-        /// hide
+        /// <br/> Known Values: <br/>
+        /// ignore <br/>
+        /// warn <br/>
+        /// hide <br/>
         /// </param>
         /// <param name="adultOnly">Does the user need to have adult content enabled in order to configure this label?</param>
         /// <param name="locales"></param>
@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the identifier.
-        /// The value of the label being defined. Must only include lowercase ascii and the '-' character ([a-z-]+).
+        /// <br/> The value of the label being defined. Must only include lowercase ascii and the '-' character ([a-z-]+).
         /// </summary>
         [JsonPropertyName("identifier")]
         [JsonRequired]
@@ -78,11 +78,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the severity.
-        /// How should a client visually convey this label? 'inform' means neutral and informational; 'alert' means negative and warning; 'none' means show nothing.
-        /// Known Values:
-        /// inform
-        /// alert
-        /// none
+        /// <br/> How should a client visually convey this label? 'inform' means neutral and informational; 'alert' means negative and warning; 'none' means show nothing.
+        /// <br/> Known Values: <br/>
+        /// inform <br/>
+        /// alert <br/>
+        /// none <br/>
         /// </summary>
         [JsonPropertyName("severity")]
         [JsonRequired]
@@ -90,11 +90,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the blurs.
-        /// What should this label hide in the UI, if applied? 'content' hides all of the target; 'media' hides the images/video/audio; 'none' hides nothing.
-        /// Known Values:
-        /// content
-        /// media
-        /// none
+        /// <br/> What should this label hide in the UI, if applied? 'content' hides all of the target; 'media' hides the images/video/audio; 'none' hides nothing.
+        /// <br/> Known Values: <br/>
+        /// content <br/>
+        /// media <br/>
+        /// none <br/>
         /// </summary>
         [JsonPropertyName("blurs")]
         [JsonRequired]
@@ -102,18 +102,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         /// <summary>
         /// Gets or sets the defaultSetting.
-        /// The default setting for this label.
-        /// Known Values:
-        /// ignore
-        /// warn
-        /// hide
+        /// <br/> The default setting for this label.
+        /// <br/> Known Values: <br/>
+        /// ignore <br/>
+        /// warn <br/>
+        /// hide <br/>
         /// </summary>
         [JsonPropertyName("defaultSetting")]
         public string? DefaultSetting { get; set; } = "warn";
 
         /// <summary>
         /// Gets or sets the adultOnly.
-        /// Does the user need to have adult content enabled in order to configure this label?
+        /// <br/> Does the user need to have adult content enabled in order to configure this label?
         /// </summary>
         [JsonPropertyName("adultOnly")]
         public bool? AdultOnly { get; set; }

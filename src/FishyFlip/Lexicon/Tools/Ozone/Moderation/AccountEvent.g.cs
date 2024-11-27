@@ -18,13 +18,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="comment"></param>
         /// <param name="active">Indicates that the account has a repository which can be fetched from the host that emitted this event.</param>
         /// <param name="status">
-        /// Known Values:
-        /// unknown
-        /// deactivated
-        /// deleted
-        /// takendown
-        /// suspended
-        /// tombstoned
+        /// <br/> Known Values: <br/>
+        /// unknown <br/>
+        /// deactivated <br/>
+        /// deleted <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// tombstoned <br/>
         /// </param>
         /// <param name="timestamp"></param>
         public AccountEvent(string? comment = default, bool? active = default, string? status = default, DateTime? timestamp = default)
@@ -63,7 +63,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the active.
-        /// Indicates that the account has a repository which can be fetched from the host that emitted this event.
+        /// <br/> Indicates that the account has a repository which can be fetched from the host that emitted this event.
         /// </summary>
         [JsonPropertyName("active")]
         [JsonRequired]
@@ -71,13 +71,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the status.
-        /// Known Values:
-        /// unknown
-        /// deactivated
-        /// deleted
-        /// takendown
-        /// suspended
-        /// tombstoned
+        /// <br/> Known Values: <br/>
+        /// unknown <br/>
+        /// deactivated <br/>
+        /// deleted <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// tombstoned <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

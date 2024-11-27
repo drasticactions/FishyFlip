@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the subject.
-        /// DID of the account to be blocked.
+        /// <br/> DID of the account to be blocked.
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

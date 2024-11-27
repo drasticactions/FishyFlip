@@ -14,20 +14,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// </summary>
         /// <param name="id"></param>
         /// <param name="reasonType">
-        /// Known Values:
-        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions
-        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service
-        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content
-        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content
-        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior
-        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category
-        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action
+        /// <br/> Known Values: <br/>
+        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions <br/>
+        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service <br/>
+        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content <br/>
+        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content <br/>
+        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior <br/>
+        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category <br/>
+        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action <br/>
         /// </param>
         /// <param name="reason"></param>
         /// <param name="subject">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </param>
         /// <param name="reportedBy"></param>
         /// <param name="createdAt"></param>
@@ -72,14 +72,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
 
         /// <summary>
         /// Gets or sets the reasonType.
-        /// Known Values:
-        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions
-        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service
-        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content
-        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content
-        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior
-        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category
-        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action
+        /// <br/> Known Values: <br/>
+        /// com.atproto.moderation.defs#reasonSpam - Spam: frequent unwanted promotion, replies, mentions <br/>
+        /// com.atproto.moderation.defs#reasonViolation - Direct violation of server rules, laws, terms of service <br/>
+        /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content <br/>
+        /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content <br/>
+        /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior <br/>
+        /// com.atproto.moderation.defs#reasonOther - Other: reports not falling under another report category <br/>
+        /// com.atproto.moderation.defs#reasonAppeal - Appeal: appeal a previously taken moderation action <br/>
         /// </summary>
         [JsonPropertyName("reasonType")]
         [JsonRequired]
@@ -93,9 +93,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
 
         /// <summary>
         /// Gets or sets the subject.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef)
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]

@@ -37,8 +37,8 @@ namespace FishyFlip.Lexicon
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies"/> (app.bsky.labeler.defs#labelerPolicies)
         /// </param>
         /// <param name="labels">
-        /// Union Types:
-        /// com.atproto.label.defs#selfLabels
+        /// <br/> Union Types: <br/>
+        /// com.atproto.label.defs#selfLabels <br/>
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="rkey"></param>

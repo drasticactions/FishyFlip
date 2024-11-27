@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the subjectStatus.
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView"/> (tools.ozone.moderation.defs#subjectStatusView)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView"/> (tools.ozone.moderation.defs#subjectStatusView)
         /// </summary>
         [JsonPropertyName("subjectStatus")]
         public Tools.Ozone.Moderation.SubjectStatusView? SubjectStatus { get; set; }

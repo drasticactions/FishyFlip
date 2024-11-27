@@ -48,21 +48,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the activeProgressGuide.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide"/> (app.bsky.actor.defs#bskyAppProgressGuide)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide"/> (app.bsky.actor.defs#bskyAppProgressGuide)
         /// </summary>
         [JsonPropertyName("activeProgressGuide")]
         public App.Bsky.Actor.BskyAppProgressGuide? ActiveProgressGuide { get; set; }
 
         /// <summary>
         /// Gets or sets the queuedNudges.
-        /// An array of tokens which identify nudges (modals, popups, tours, highlight dots) that should be shown to the user.
+        /// <br/> An array of tokens which identify nudges (modals, popups, tours, highlight dots) that should be shown to the user.
         /// </summary>
         [JsonPropertyName("queuedNudges")]
         public List<string>? QueuedNudges { get; set; }
 
         /// <summary>
         /// Gets or sets the nuxs.
-        /// Storage for NUXs the user has encountered.
+        /// <br/> Storage for NUXs the user has encountered.
         /// </summary>
         [JsonPropertyName("nuxs")]
         public List<App.Bsky.Actor.Nux>? Nuxs { get; set; }

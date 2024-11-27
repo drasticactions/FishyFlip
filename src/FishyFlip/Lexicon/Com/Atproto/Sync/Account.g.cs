@@ -20,11 +20,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="time"></param>
         /// <param name="active">Indicates that the account has a repository which can be fetched from the host that emitted this event.</param>
         /// <param name="status">If active=false, this optional field indicates a reason for why the account is not active.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deleted
-        /// deactivated
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deleted <br/>
+        /// deactivated <br/>
         /// </param>
         public Account(long? seq = default, FishyFlip.Models.ATDid? did = default, DateTime? time = default, bool? active = default, string? status = default)
         {
@@ -80,7 +80,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the active.
-        /// Indicates that the account has a repository which can be fetched from the host that emitted this event.
+        /// <br/> Indicates that the account has a repository which can be fetched from the host that emitted this event.
         /// </summary>
         [JsonPropertyName("active")]
         [JsonRequired]
@@ -88,12 +88,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the status.
-        /// If active=false, this optional field indicates a reason for why the account is not active.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deleted
-        /// deactivated
+        /// <br/> If active=false, this optional field indicates a reason for why the account is not active.
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deleted <br/>
+        /// deactivated <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

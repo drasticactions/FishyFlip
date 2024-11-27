@@ -17,10 +17,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         /// <param name="post">Reference (AT-URI) to the post record.</param>
         /// <param name="allow">
-        /// Union Types:
-        /// #mentionRule
-        /// #followingRule
-        /// #listRule
+        /// <br/> Union Types: <br/>
+        /// #mentionRule <br/>
+        /// #followingRule <br/>
+        /// #listRule <br/>
         /// </param>
         /// <param name="createdAt"></param>
         /// <param name="hiddenReplies">List of hidden reply URIs.</param>
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the post.
-        /// Reference (AT-URI) to the post record.
+        /// <br/> Reference (AT-URI) to the post record.
         /// </summary>
         [JsonPropertyName("post")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
@@ -62,10 +62,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the allow.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.MentionRule"/> (app.bsky.feed.threadgate#mentionRule)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.MentionRule"/> (app.bsky.feed.threadgate#mentionRule) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule) <br/>
         /// </summary>
         [JsonPropertyName("allow")]
         public List<ATObject>? Allow { get; set; }
@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the hiddenReplies.
-        /// List of hidden reply URIs.
+        /// <br/> List of hidden reply URIs.
         /// </summary>
         [JsonPropertyName("hiddenReplies")]
         public List<FishyFlip.Models.ATUri>? HiddenReplies { get; set; }

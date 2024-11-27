@@ -112,19 +112,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="preferences">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.AdultContentPref"/> (app.bsky.actor.defs#adultContentPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ContentLabelPref"/> (app.bsky.actor.defs#contentLabelPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPref"/> (app.bsky.actor.defs#savedFeedsPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2"/> (app.bsky.actor.defs#savedFeedsPrefV2)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.PersonalDetailsPref"/> (app.bsky.actor.defs#personalDetailsPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref"/> (app.bsky.actor.defs#feedViewPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref"/> (app.bsky.actor.defs#threadViewPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref"/> (app.bsky.actor.defs#interestsPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref"/> (app.bsky.actor.defs#mutedWordsPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref"/> (app.bsky.actor.defs#hiddenPostsPref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref"/> (app.bsky.actor.defs#bskyAppStatePref)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref"/> (app.bsky.actor.defs#labelersPref)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.AdultContentPref"/> (app.bsky.actor.defs#adultContentPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ContentLabelPref"/> (app.bsky.actor.defs#contentLabelPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPref"/> (app.bsky.actor.defs#savedFeedsPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2"/> (app.bsky.actor.defs#savedFeedsPrefV2) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.PersonalDetailsPref"/> (app.bsky.actor.defs#personalDetailsPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref"/> (app.bsky.actor.defs#feedViewPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref"/> (app.bsky.actor.defs#threadViewPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref"/> (app.bsky.actor.defs#interestsPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref"/> (app.bsky.actor.defs#mutedWordsPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref"/> (app.bsky.actor.defs#hiddenPostsPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref"/> (app.bsky.actor.defs#bskyAppStatePref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref"/> (app.bsky.actor.defs#labelersPref) <br/>
         /// </param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>

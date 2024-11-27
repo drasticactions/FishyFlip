@@ -21,10 +21,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <param name="updatedAt"></param>
         /// <param name="lastUpdatedBy"></param>
         /// <param name="role">
-        /// Known Values:
-        /// roleAdmin
-        /// roleModerator
-        /// roleTriage
+        /// <br/> Known Values: <br/>
+        /// roleAdmin <br/>
+        /// roleModerator <br/>
+        /// roleTriage <br/>
         /// </param>
         public Member(FishyFlip.Models.ATDid? did = default, bool? disabled = default, App.Bsky.Actor.ProfileViewDetailed? profile = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? lastUpdatedBy = default, string? role = default)
         {
@@ -76,7 +76,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         /// <summary>
         /// Gets or sets the profile.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed"/> (app.bsky.actor.defs#profileViewDetailed)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed"/> (app.bsky.actor.defs#profileViewDetailed)
         /// </summary>
         [JsonPropertyName("profile")]
         public App.Bsky.Actor.ProfileViewDetailed? Profile { get; set; }
@@ -101,10 +101,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         /// <summary>
         /// Gets or sets the role.
-        /// Known Values:
-        /// roleAdmin
-        /// roleModerator
-        /// roleTriage
+        /// <br/> Known Values: <br/>
+        /// roleAdmin <br/>
+        /// roleModerator <br/>
+        /// roleTriage <br/>
         /// </summary>
         [JsonPropertyName("role")]
         [JsonRequired]

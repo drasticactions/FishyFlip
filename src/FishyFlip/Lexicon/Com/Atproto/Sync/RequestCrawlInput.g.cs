@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the hostname.
-        /// Hostname of the current service (eg, PDS) that is requesting to be crawled.
+        /// <br/> Hostname of the current service (eg, PDS) that is requesting to be crawled.
         /// </summary>
         [JsonPropertyName("hostname")]
         [JsonRequired]

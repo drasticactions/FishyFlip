@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the seq.
-        /// The stream sequence number of this message.
+        /// <br/> The stream sequence number of this message.
         /// </summary>
         [JsonPropertyName("seq")]
         [JsonRequired]
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the tooBig.
-        /// Indicates that this commit contained too many ops, or data size was too large. Consumers will need to make a separate request to get missing data.
+        /// <br/> Indicates that this commit contained too many ops, or data size was too large. Consumers will need to make a separate request to get missing data.
         /// </summary>
         [JsonPropertyName("tooBig")]
         [JsonRequired]
@@ -83,7 +83,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the repo.
-        /// The repo this event comes from.
+        /// <br/> The repo this event comes from.
         /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]
@@ -92,7 +92,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the commit.
-        /// Repo commit object CID.
+        /// <br/> Repo commit object CID.
         /// </summary>
         [JsonPropertyName("commit")]
         [JsonRequired]
@@ -101,7 +101,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the rev.
-        /// The rev of the emitted commit. Note that this information is also in the commit object included in blocks, unless this is a tooBig event.
+        /// <br/> The rev of the emitted commit. Note that this information is also in the commit object included in blocks, unless this is a tooBig event.
         /// </summary>
         [JsonPropertyName("rev")]
         [JsonRequired]
@@ -109,7 +109,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the since.
-        /// The rev of the last emitted commit from this repo (if any).
+        /// <br/> The rev of the last emitted commit from this repo (if any).
         /// </summary>
         [JsonPropertyName("since")]
         [JsonRequired]
@@ -117,7 +117,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the blocks.
-        /// CAR file containing relevant blocks, as a diff since the previous repo state.
+        /// <br/> CAR file containing relevant blocks, as a diff since the previous repo state.
         /// </summary>
         [JsonPropertyName("blocks")]
         [JsonRequired]
@@ -139,7 +139,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the time.
-        /// Timestamp of when this message was originally broadcast.
+        /// <br/> Timestamp of when this message was originally broadcast.
         /// </summary>
         [JsonPropertyName("time")]
         [JsonRequired]

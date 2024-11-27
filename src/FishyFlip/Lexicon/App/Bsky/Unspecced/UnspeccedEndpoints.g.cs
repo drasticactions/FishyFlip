@@ -130,6 +130,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         /// <summary>
         /// Backend Actors (profile) search, returns only skeleton.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="q"></param>
@@ -173,6 +175,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         /// <summary>
         /// Backend Posts search, returns only skeleton
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="q"></param>
@@ -264,6 +268,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         /// <summary>
         /// Backend Starter Pack search, returns only skeleton.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="q"></param>

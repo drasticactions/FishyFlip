@@ -13,9 +13,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// Initializes a new instance of the <see cref="GetMessageContextOutput"/> class.
         /// </summary>
         /// <param name="messages">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView) <br/>
         /// </param>
         public GetMessageContextOutput(List<ATObject>? messages = default)
         {
@@ -41,9 +41,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 
         /// <summary>
         /// Gets or sets the messages.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView) <br/>
         /// </summary>
         [JsonPropertyName("messages")]
         [JsonRequired]

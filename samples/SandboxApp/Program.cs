@@ -8,6 +8,9 @@
 
 using FishyFlip;
 using FishyFlip.Lexicon;
+using FishyFlip.Lexicon.App.Bsky.Actor;
+using FishyFlip.Lexicon.Com.Atproto.Repo;
+using FishyFlip.Lexicon.Com.Atproto.Sync;
 using FishyFlip.Models;
 using FishyFlip.Tools;
 using Microsoft.Extensions.Logging.Debug;

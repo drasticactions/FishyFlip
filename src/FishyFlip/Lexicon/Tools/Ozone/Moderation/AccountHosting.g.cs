@@ -13,12 +13,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Initializes a new instance of the <see cref="AccountHosting"/> class.
         /// </summary>
         /// <param name="status">
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deleted
-        /// deactivated
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deleted <br/>
+        /// deactivated <br/>
+        /// unknown <br/>
         /// </param>
         /// <param name="updatedAt"></param>
         /// <param name="createdAt"></param>
@@ -59,12 +59,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the status.
-        /// Known Values:
-        /// takendown
-        /// suspended
-        /// deleted
-        /// deactivated
-        /// unknown
+        /// <br/> Known Values: <br/>
+        /// takendown <br/>
+        /// suspended <br/>
+        /// deleted <br/>
+        /// deactivated <br/>
+        /// unknown <br/>
         /// </summary>
         [JsonPropertyName("status")]
         [JsonRequired]

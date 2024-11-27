@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Gets or sets the did.
-        /// The DID to reserve a key for.
+        /// <br/> The DID to reserve a key for.
         /// </summary>
         [JsonPropertyName("did")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]

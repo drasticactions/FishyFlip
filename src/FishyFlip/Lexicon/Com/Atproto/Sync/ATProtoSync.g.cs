@@ -32,6 +32,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Get a blob associated with a given account. Returns the full blob as originally uploaded. Does not require auth; implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BlobNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoTakendownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoSuspendedError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="cid"></param>
@@ -44,6 +50,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Get data blocks from a given repo, by CID. For example, intermediate MST nodes, or records. Does not require auth; implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BlockNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoTakendownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoSuspendedError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="cids"></param>
@@ -57,6 +69,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Get the current commit CID & revision of the specified repo. Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoTakendownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoSuspendedError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="cancellationToken"></param>
@@ -68,6 +85,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Get data blocks needed to prove the existence or non-existence of record in the current version of repo. Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RecordNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoTakendownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoSuspendedError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="collection"></param>
@@ -82,6 +105,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Download a repository export as CAR file. Optionally only a 'diff' since a previous revision. Does not require auth; implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoTakendownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoSuspendedError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="onDecoded"></param>
@@ -95,6 +123,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Get the hosting status for a repository, on this server. Expected to be implemented by PDS and Relay.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="cancellationToken"></param>
@@ -106,6 +136,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// List blob CIDs for an account, since some repo revision. Does not require auth; implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoTakendownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoSuspendedError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="since"></param>

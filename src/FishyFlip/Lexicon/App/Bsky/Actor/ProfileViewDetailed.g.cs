@@ -148,14 +148,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the associated.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated"/> (app.bsky.actor.defs#profileAssociated)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated"/> (app.bsky.actor.defs#profileAssociated)
         /// </summary>
         [JsonPropertyName("associated")]
         public App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedViaStarterPack.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic)
         /// </summary>
         [JsonPropertyName("joinedViaStarterPack")]
         public App.Bsky.Graph.StarterPackViewBasic? JoinedViaStarterPack { get; set; }
@@ -174,7 +174,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the viewer.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Actor.ViewerState? Viewer { get; set; }
@@ -187,7 +187,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the pinnedPost.
-        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("pinnedPost")]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }

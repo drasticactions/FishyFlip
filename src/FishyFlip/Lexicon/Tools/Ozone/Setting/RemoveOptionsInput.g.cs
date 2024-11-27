@@ -14,9 +14,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         /// <param name="keys"></param>
         /// <param name="scope">
-        /// Known Values:
-        /// instance
-        /// personal
+        /// <br/> Known Values: <br/>
+        /// instance <br/>
+        /// personal <br/>
         /// </param>
         public RemoveOptionsInput(List<string>? keys = default, string? scope = default)
         {
@@ -51,9 +51,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         /// <summary>
         /// Gets or sets the scope.
-        /// Known Values:
-        /// instance
-        /// personal
+        /// <br/> Known Values: <br/>
+        /// instance <br/>
+        /// personal <br/>
         /// </summary>
         [JsonPropertyName("scope")]
         [JsonRequired]

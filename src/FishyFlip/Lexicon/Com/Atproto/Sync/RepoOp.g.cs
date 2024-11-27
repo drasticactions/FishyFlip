@@ -16,10 +16,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// Initializes a new instance of the <see cref="RepoOp"/> class.
         /// </summary>
         /// <param name="action">
-        /// Known Values:
-        /// create
-        /// update
-        /// delete
+        /// <br/> Known Values: <br/>
+        /// create <br/>
+        /// update <br/>
+        /// delete <br/>
         /// </param>
         /// <param name="path"></param>
         /// <param name="cid">For creates and updates, the new record CID. For deletions, null.</param>
@@ -51,10 +51,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the action.
-        /// Known Values:
-        /// create
-        /// update
-        /// delete
+        /// <br/> Known Values: <br/>
+        /// create <br/>
+        /// update <br/>
+        /// delete <br/>
         /// </summary>
         [JsonPropertyName("action")]
         [JsonRequired]
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the cid.
-        /// For creates and updates, the new record CID. For deletions, null.
+        /// <br/> For creates and updates, the new record CID. For deletions, null.
         /// </summary>
         [JsonPropertyName("cid")]
         [JsonRequired]

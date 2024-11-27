@@ -55,6 +55,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Get a list of posts liked by an actor. Requires auth, actor must be the requesting account.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BlockedActorError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.BlockedByActorError"/>  <br/>
         /// </summary>
         /// <param name="actor"></param>
         /// <param name="limit"></param>
@@ -68,6 +71,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Get a view of an actor's 'author feed' (post and reposts by the author). Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BlockedActorError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.BlockedByActorError"/>  <br/>
         /// </summary>
         /// <param name="actor"></param>
         /// <param name="limit"></param>
@@ -83,6 +89,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Get a hydrated feed from an actor's selected feed generator. Implemented by App View.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.UnknownFeedError"/>  <br/>
         /// </summary>
         /// <param name="feed"></param>
         /// <param name="limit"></param>
@@ -118,6 +126,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Get a skeleton of a feed provided by a feed generator. Auth is optional, depending on provider requirements, and provides the DID of the requester. Implemented by Feed Generator Service.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.UnknownFeedError"/>  <br/>
         /// </summary>
         /// <param name="feed"></param>
         /// <param name="limit"></param>
@@ -145,6 +155,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Get a feed of recent posts from a list (posts and reposts from any actors on the list). Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.UnknownListError"/>  <br/>
         /// </summary>
         /// <param name="list"></param>
         /// <param name="limit"></param>
@@ -169,6 +181,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Get posts in a thread. Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.NotFoundError"/>  <br/>
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="depth"></param>
@@ -235,6 +249,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Find posts matching search criteria, returning views of those posts.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
         /// <param name="q"></param>
         /// <param name="sort"></param>

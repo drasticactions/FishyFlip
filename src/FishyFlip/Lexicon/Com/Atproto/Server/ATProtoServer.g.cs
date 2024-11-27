@@ -52,6 +52,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Confirm an email using a token from com.atproto.server.requestEmailConfirmation.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.AccountNotFoundError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidEmailError"/>  <br/>
         /// </summary>
         /// <param name="email"></param>
         /// <param name="token"></param>
@@ -64,6 +69,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Create an account. Implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidHandleError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidPasswordError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidInviteCodeError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.HandleNotAvailableError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.UnsupportedDomainError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.UnresolvableDidError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.IncompatibleDidDocError"/>  <br/>
         /// </summary>
         /// <param name="handle"></param>
         /// <param name="email"></param>
@@ -83,6 +96,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Create an App Password.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
         /// </summary>
         /// <param name="name"></param>
         /// <param name="privileged"></param>
@@ -120,6 +135,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Create an authentication session.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.AuthFactorTokenRequiredError"/>  <br/>
         /// </summary>
         /// <param name="identifier"></param>
         /// <param name="password"></param>
@@ -144,6 +162,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Delete an actor's account with a token and password. Can only be called after requesting a deletion token. Requires auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
         /// </summary>
         /// <param name="did"></param>
         /// <param name="password"></param>
@@ -177,6 +198,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Get all invite codes for the current account. Requires auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.DuplicateCreateError"/>  <br/>
         /// </summary>
         /// <param name="includeUsed"></param>
         /// <param name="createAvailable"></param>
@@ -189,6 +212,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Get a signed token on behalf of the requesting DID for the requested service.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadExpirationError"/> Indicates that the requested expiration date is not a valid. May be in the past or may be reliant on the requested scopes. <br/>
         /// </summary>
         /// <param name="aud"></param>
         /// <param name="exp"></param>
@@ -212,6 +237,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// List all App Passwords.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput?>> ListAppPasswordsAsync (CancellationToken cancellationToken = default)
@@ -222,6 +249,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Refresh an authentication session. Requires auth using the 'refreshJwt' (not the 'accessJwt').
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>> RefreshSessionAsync (CancellationToken cancellationToken = default)
@@ -284,6 +313,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Reset a user account password using a token.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
         /// </summary>
         /// <param name="token"></param>
         /// <param name="password"></param>
@@ -307,6 +339,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         /// <summary>
         /// Update an account's email.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.TokenRequiredError"/>  <br/>
         /// </summary>
         /// <param name="email"></param>
         /// <param name="emailAuthFactor"></param>

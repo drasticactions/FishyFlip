@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the sticky.
-        /// Make the comment persistent on the subject
+        /// <br/> Make the comment persistent on the subject
         /// </summary>
         [JsonPropertyName("sticky")]
         public bool? Sticky { get; set; }

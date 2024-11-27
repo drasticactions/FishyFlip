@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         /// <summary>
         /// Gets or sets the token.
-        /// A token received through com.atproto.identity.requestPlcOperationSignature
+        /// <br/> A token received through com.atproto.identity.requestPlcOperationSignature
         /// </summary>
         [JsonPropertyName("token")]
         public string? Token { get; set; }

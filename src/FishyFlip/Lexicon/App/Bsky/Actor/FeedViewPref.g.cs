@@ -52,7 +52,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the feed.
-        /// The URI of the feed, or an identifier which describes the feed.
+        /// <br/> The URI of the feed, or an identifier which describes the feed.
         /// </summary>
         [JsonPropertyName("feed")]
         [JsonRequired]
@@ -60,35 +60,35 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the hideReplies.
-        /// Hide replies in the feed.
+        /// <br/> Hide replies in the feed.
         /// </summary>
         [JsonPropertyName("hideReplies")]
         public bool? HideReplies { get; set; }
 
         /// <summary>
         /// Gets or sets the hideRepliesByUnfollowed.
-        /// Hide replies in the feed if they are not by followed users.
+        /// <br/> Hide replies in the feed if they are not by followed users.
         /// </summary>
         [JsonPropertyName("hideRepliesByUnfollowed")]
         public bool? HideRepliesByUnfollowed { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the hideRepliesByLikeCount.
-        /// Hide replies in the feed if they do not have this number of likes.
+        /// <br/> Hide replies in the feed if they do not have this number of likes.
         /// </summary>
         [JsonPropertyName("hideRepliesByLikeCount")]
         public long? HideRepliesByLikeCount { get; set; }
 
         /// <summary>
         /// Gets or sets the hideReposts.
-        /// Hide reposts in the feed.
+        /// <br/> Hide reposts in the feed.
         /// </summary>
         [JsonPropertyName("hideReposts")]
         public bool? HideReposts { get; set; }
 
         /// <summary>
         /// Gets or sets the hideQuotePosts.
-        /// Hide quote posts in the feed.
+        /// <br/> Hide quote posts in the feed.
         /// </summary>
         [JsonPropertyName("hideQuotePosts")]
         public bool? HideQuotePosts { get; set; }

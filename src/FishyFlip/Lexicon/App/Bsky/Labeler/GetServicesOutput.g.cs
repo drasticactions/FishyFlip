@@ -13,9 +13,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// Initializes a new instance of the <see cref="GetServicesOutput"/> class.
         /// </summary>
         /// <param name="views">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed"/> (app.bsky.labeler.defs#labelerViewDetailed)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed"/> (app.bsky.labeler.defs#labelerViewDetailed) <br/>
         /// </param>
         public GetServicesOutput(List<ATObject>? views = default)
         {
@@ -41,9 +41,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         /// <summary>
         /// Gets or sets the views.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView)
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed"/> (app.bsky.labeler.defs#labelerViewDetailed)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView"/> (app.bsky.labeler.defs#labelerView) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed"/> (app.bsky.labeler.defs#labelerViewDetailed) <br/>
         /// </summary>
         [JsonPropertyName("views")]
         [JsonRequired]

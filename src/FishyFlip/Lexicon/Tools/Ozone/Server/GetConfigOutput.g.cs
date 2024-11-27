@@ -13,19 +13,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
         /// </summary>
         /// <param name="appview">
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </param>
         /// <param name="pds">
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </param>
         /// <param name="blobDivert">
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </param>
         /// <param name="chat">
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </param>
         /// <param name="viewer">
-        /// tools.ozone.server.defs#viewerConfig
+        /// tools.ozone.server.defs#viewerConfig <br/>
         /// </param>
         public GetConfigOutput(Tools.Ozone.Server.ServiceConfig? appview = default, Tools.Ozone.Server.ServiceConfig? pds = default, Tools.Ozone.Server.ServiceConfig? blobDivert = default, Tools.Ozone.Server.ServiceConfig? chat = default, Tools.Ozone.Server.ViewerConfig? viewer = default)
         {
@@ -59,35 +59,35 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
 
         /// <summary>
         /// Gets or sets the appview.
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("appview")]
         public Tools.Ozone.Server.ServiceConfig? Appview { get; set; }
 
         /// <summary>
         /// Gets or sets the pds.
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("pds")]
         public Tools.Ozone.Server.ServiceConfig? Pds { get; set; }
 
         /// <summary>
         /// Gets or sets the blobDivert.
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("blobDivert")]
         public Tools.Ozone.Server.ServiceConfig? BlobDivert { get; set; }
 
         /// <summary>
         /// Gets or sets the chat.
-        /// tools.ozone.server.defs#serviceConfig
+        /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("chat")]
         public Tools.Ozone.Server.ServiceConfig? Chat { get; set; }
 
         /// <summary>
         /// Gets or sets the viewer.
-        /// tools.ozone.server.defs#viewerConfig
+        /// tools.ozone.server.defs#viewerConfig <br/>
         /// </summary>
         [JsonPropertyName("viewer")]
         public Tools.Ozone.Server.ViewerConfig? Viewer { get; set; }

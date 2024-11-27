@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the items.
-        /// A list of URIs of posts the account owner has hidden.
+        /// <br/> A list of URIs of posts the account owner has hidden.
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]

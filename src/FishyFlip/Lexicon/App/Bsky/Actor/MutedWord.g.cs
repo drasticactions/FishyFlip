@@ -19,9 +19,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="value">The muted word itself.</param>
         /// <param name="targets">The intended targets of the muted word.</param>
         /// <param name="actorTarget">Groups of users to apply the muted word to. If undefined, applies to all users.
-        /// Known Values:
-        /// all
-        /// exclude-following
+        /// <br/> Known Values: <br/>
+        /// all <br/>
+        /// exclude-following <br/>
         /// </param>
         /// <param name="expiresAt">The date and time at which the muted word will expire and no longer be applied.</param>
         public MutedWord(string? id = default, string? value = default, List<string>? targets = default, string? actorTarget = default, DateTime? expiresAt = default)
@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the value.
-        /// The muted word itself.
+        /// <br/> The muted word itself.
         /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the targets.
-        /// The intended targets of the muted word.
+        /// <br/> The intended targets of the muted word.
         /// </summary>
         [JsonPropertyName("targets")]
         [JsonRequired]
@@ -78,17 +78,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the actorTarget.
-        /// Groups of users to apply the muted word to. If undefined, applies to all users.
-        /// Known Values:
-        /// all
-        /// exclude-following
+        /// <br/> Groups of users to apply the muted word to. If undefined, applies to all users.
+        /// <br/> Known Values: <br/>
+        /// all <br/>
+        /// exclude-following <br/>
         /// </summary>
         [JsonPropertyName("actorTarget")]
         public string? ActorTarget { get; set; } = "all";
 
         /// <summary>
         /// Gets or sets the expiresAt.
-        /// The date and time at which the muted word will expire and no longer be applied.
+        /// <br/> The date and time at which the muted word will expire and no longer be applied.
         /// </summary>
         [JsonPropertyName("expiresAt")]
         public DateTime? ExpiresAt { get; set; }

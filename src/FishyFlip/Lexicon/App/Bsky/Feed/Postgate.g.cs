@@ -19,8 +19,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="createdAt"></param>
         /// <param name="detachedEmbeddingUris">List of AT-URIs embedding this post that the author has detached from.</param>
         /// <param name="embeddingRules">
-        /// Union Types:
-        /// #disableRule
+        /// <br/> Union Types: <br/>
+        /// #disableRule <br/>
         /// </param>
         public Postgate(FishyFlip.Models.ATUri? post, DateTime? createdAt = default, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default)
         {
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the post.
-        /// Reference (AT-URI) to the post record.
+        /// <br/> Reference (AT-URI) to the post record.
         /// </summary>
         [JsonPropertyName("post")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
@@ -66,15 +66,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the detachedEmbeddingUris.
-        /// List of AT-URIs embedding this post that the author has detached from.
+        /// <br/> List of AT-URIs embedding this post that the author has detached from.
         /// </summary>
         [JsonPropertyName("detachedEmbeddingUris")]
         public List<FishyFlip.Models.ATUri>? DetachedEmbeddingUris { get; set; }
 
         /// <summary>
         /// Gets or sets the embeddingRules.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule) <br/>
         /// </summary>
         [JsonPropertyName("embeddingRules")]
         public List<App.Bsky.Feed.DisableRule>? EmbeddingRules { get; set; }

@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         /// <summary>
         /// Gets or sets the rotationKeys.
-        /// Recommended rotation keys for PLC dids. Should be undefined (or ignored) for did:webs.
+        /// <br/> Recommended rotation keys for PLC dids. Should be undefined (or ignored) for did:webs.
         /// </summary>
         [JsonPropertyName("rotationKeys")]
         public List<string>? RotationKeys { get; set; }

@@ -21,14 +21,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="reasonType">
-        /// Known Values:
-        /// reasonSpam
-        /// reasonViolation
-        /// reasonMisleading
-        /// reasonSexual
-        /// reasonRude
-        /// reasonOther
-        /// reasonAppeal
+        /// <br/> Known Values: <br/>
+        /// reasonSpam <br/>
+        /// reasonViolation <br/>
+        /// reasonMisleading <br/>
+        /// reasonSexual <br/>
+        /// reasonRude <br/>
+        /// reasonOther <br/>
+        /// reasonAppeal <br/>
         /// </param>
         /// <param name="subject"></param>
         /// <param name="reason"></param>

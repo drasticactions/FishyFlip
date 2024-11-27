@@ -52,7 +52,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the repo.
-        /// The handle or DID of the repo (aka, current account).
+        /// <br/> The handle or DID of the repo (aka, current account).
         /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the collection.
-        /// The NSID of the record collection.
+        /// <br/> The NSID of the record collection.
         /// </summary>
         [JsonPropertyName("collection")]
         [JsonRequired]
@@ -69,21 +69,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the rkey.
-        /// The Record Key.
+        /// <br/> The Record Key.
         /// </summary>
         [JsonPropertyName("rkey")]
         public string? Rkey { get; set; }
 
         /// <summary>
         /// Gets or sets the validate.
-        /// Can be set to 'false' to skip Lexicon schema validation of record data, 'true' to require it, or leave unset to validate only for known Lexicons.
+        /// <br/> Can be set to 'false' to skip Lexicon schema validation of record data, 'true' to require it, or leave unset to validate only for known Lexicons.
         /// </summary>
         [JsonPropertyName("validate")]
         public bool? Validate { get; set; }
 
         /// <summary>
         /// Gets or sets the record.
-        /// The record itself. Must contain a $type field.
+        /// <br/> The record itself. Must contain a $type field.
         /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
@@ -91,7 +91,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the swapCommit.
-        /// Compare and swap with the previous commit by CID.
+        /// <br/> Compare and swap with the previous commit by CID.
         /// </summary>
         [JsonPropertyName("swapCommit")]
         public string? SwapCommit { get; set; }

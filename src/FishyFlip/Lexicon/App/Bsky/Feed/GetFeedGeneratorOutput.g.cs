@@ -45,7 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the view.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView"/> (app.bsky.feed.defs#generatorView)
         /// </summary>
         [JsonPropertyName("view")]
         [JsonRequired]
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the isOnline.
-        /// Indicates whether the feed generator service has been online recently, or else seems to be inactive.
+        /// <br/> Indicates whether the feed generator service has been online recently, or else seems to be inactive.
         /// </summary>
         [JsonPropertyName("isOnline")]
         [JsonRequired]
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the isValid.
-        /// Indicates whether the feed generator service is compatible with the record declaration.
+        /// <br/> Indicates whether the feed generator service is compatible with the record declaration.
         /// </summary>
         [JsonPropertyName("isValid")]
         [JsonRequired]

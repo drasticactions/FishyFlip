@@ -17,9 +17,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="size"></param>
         /// <param name="createdAt"></param>
         /// <param name="details">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails"/> (tools.ozone.moderation.defs#imageDetails)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails"/> (tools.ozone.moderation.defs#videoDetails)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails"/> (tools.ozone.moderation.defs#imageDetails) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails"/> (tools.ozone.moderation.defs#videoDetails) <br/>
         /// </param>
         /// <param name="moderation">
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
@@ -86,16 +86,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the details.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails"/> (tools.ozone.moderation.defs#imageDetails)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails"/> (tools.ozone.moderation.defs#videoDetails)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails"/> (tools.ozone.moderation.defs#imageDetails) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails"/> (tools.ozone.moderation.defs#videoDetails) <br/>
         /// </summary>
         [JsonPropertyName("details")]
         public ATObject? Details { get; set; }
 
         /// <summary>
         /// Gets or sets the moderation.
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
         /// </summary>
         [JsonPropertyName("moderation")]
         public Tools.Ozone.Moderation.Moderation? Moderation { get; set; }

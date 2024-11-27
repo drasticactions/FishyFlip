@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the repo.
-        /// The handle or DID of the repo (aka, current account).
+        /// <br/> The handle or DID of the repo (aka, current account).
         /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the collection.
-        /// The NSID of the record collection.
+        /// <br/> The NSID of the record collection.
         /// </summary>
         [JsonPropertyName("collection")]
         [JsonRequired]
@@ -66,7 +66,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the rkey.
-        /// The Record Key.
+        /// <br/> The Record Key.
         /// </summary>
         [JsonPropertyName("rkey")]
         [JsonRequired]
@@ -74,14 +74,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the swapRecord.
-        /// Compare and swap with the previous record by CID.
+        /// <br/> Compare and swap with the previous record by CID.
         /// </summary>
         [JsonPropertyName("swapRecord")]
         public string? SwapRecord { get; set; }
 
         /// <summary>
         /// Gets or sets the swapCommit.
-        /// Compare and swap with the previous commit by CID.
+        /// <br/> Compare and swap with the previous commit by CID.
         /// </summary>
         [JsonPropertyName("swapCommit")]
         public string? SwapCommit { get; set; }

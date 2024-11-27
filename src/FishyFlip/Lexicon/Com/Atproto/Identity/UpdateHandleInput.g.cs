@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         /// <summary>
         /// Gets or sets the handle.
-        /// The new handle.
+        /// <br/> The new handle.
         /// </summary>
         [JsonPropertyName("handle")]
         [JsonRequired]

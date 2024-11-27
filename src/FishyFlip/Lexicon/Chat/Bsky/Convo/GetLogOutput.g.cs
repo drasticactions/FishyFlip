@@ -14,11 +14,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="logs">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage) <br/>
         /// </param>
         public GetLogOutput(string? cursor = default, List<ATObject>? logs = default)
         {
@@ -52,11 +52,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         /// <summary>
         /// Gets or sets the logs.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage)
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage) <br/>
         /// </summary>
         [JsonPropertyName("logs")]
         [JsonRequired]

@@ -14,32 +14,32 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         /// <param name="id"></param>
         /// <param name="@event">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown"/> (tools.ozone.moderation.defs#modEventTakedown)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown"/> (tools.ozone.moderation.defs#modEventReverseTakedown)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment"/> (tools.ozone.moderation.defs#modEventComment)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport"/> (tools.ozone.moderation.defs#modEventReport)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel"/> (tools.ozone.moderation.defs#modEventLabel)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge"/> (tools.ozone.moderation.defs#modEventAcknowledge)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate"/> (tools.ozone.moderation.defs#modEventEscalate)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute"/> (tools.ozone.moderation.defs#modEventMute)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute"/> (tools.ozone.moderation.defs#modEventUnmute)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter"/> (tools.ozone.moderation.defs#modEventMuteReporter)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter"/> (tools.ozone.moderation.defs#modEventUnmuteReporter)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail"/> (tools.ozone.moderation.defs#modEventEmail)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal"/> (tools.ozone.moderation.defs#modEventResolveAppeal)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventDivert"/> (tools.ozone.moderation.defs#modEventDivert)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTag"/> (tools.ozone.moderation.defs#modEventTag)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent"/> (tools.ozone.moderation.defs#accountEvent)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown"/> (tools.ozone.moderation.defs#modEventTakedown) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown"/> (tools.ozone.moderation.defs#modEventReverseTakedown) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment"/> (tools.ozone.moderation.defs#modEventComment) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport"/> (tools.ozone.moderation.defs#modEventReport) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel"/> (tools.ozone.moderation.defs#modEventLabel) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge"/> (tools.ozone.moderation.defs#modEventAcknowledge) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate"/> (tools.ozone.moderation.defs#modEventEscalate) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute"/> (tools.ozone.moderation.defs#modEventMute) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute"/> (tools.ozone.moderation.defs#modEventUnmute) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter"/> (tools.ozone.moderation.defs#modEventMuteReporter) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter"/> (tools.ozone.moderation.defs#modEventUnmuteReporter) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail"/> (tools.ozone.moderation.defs#modEventEmail) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal"/> (tools.ozone.moderation.defs#modEventResolveAppeal) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventDivert"/> (tools.ozone.moderation.defs#modEventDivert) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTag"/> (tools.ozone.moderation.defs#modEventTag) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent"/> (tools.ozone.moderation.defs#accountEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent) <br/>
         /// </param>
         /// <param name="subject">
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView"/> (tools.ozone.moderation.defs#repoView)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordView"/> (tools.ozone.moderation.defs#recordView)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView"/> (tools.ozone.moderation.defs#repoView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordView"/> (tools.ozone.moderation.defs#recordView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound) <br/>
         /// </param>
         /// <param name="subjectBlobs"></param>
         /// <param name="createdBy"></param>
@@ -85,25 +85,25 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the event.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown"/> (tools.ozone.moderation.defs#modEventTakedown)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown"/> (tools.ozone.moderation.defs#modEventReverseTakedown)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment"/> (tools.ozone.moderation.defs#modEventComment)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport"/> (tools.ozone.moderation.defs#modEventReport)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel"/> (tools.ozone.moderation.defs#modEventLabel)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge"/> (tools.ozone.moderation.defs#modEventAcknowledge)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate"/> (tools.ozone.moderation.defs#modEventEscalate)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute"/> (tools.ozone.moderation.defs#modEventMute)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute"/> (tools.ozone.moderation.defs#modEventUnmute)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter"/> (tools.ozone.moderation.defs#modEventMuteReporter)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter"/> (tools.ozone.moderation.defs#modEventUnmuteReporter)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail"/> (tools.ozone.moderation.defs#modEventEmail)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal"/> (tools.ozone.moderation.defs#modEventResolveAppeal)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventDivert"/> (tools.ozone.moderation.defs#modEventDivert)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTag"/> (tools.ozone.moderation.defs#modEventTag)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent"/> (tools.ozone.moderation.defs#accountEvent)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown"/> (tools.ozone.moderation.defs#modEventTakedown) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown"/> (tools.ozone.moderation.defs#modEventReverseTakedown) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment"/> (tools.ozone.moderation.defs#modEventComment) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport"/> (tools.ozone.moderation.defs#modEventReport) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel"/> (tools.ozone.moderation.defs#modEventLabel) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge"/> (tools.ozone.moderation.defs#modEventAcknowledge) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate"/> (tools.ozone.moderation.defs#modEventEscalate) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute"/> (tools.ozone.moderation.defs#modEventMute) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute"/> (tools.ozone.moderation.defs#modEventUnmute) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter"/> (tools.ozone.moderation.defs#modEventMuteReporter) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter"/> (tools.ozone.moderation.defs#modEventUnmuteReporter) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail"/> (tools.ozone.moderation.defs#modEventEmail) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal"/> (tools.ozone.moderation.defs#modEventResolveAppeal) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventDivert"/> (tools.ozone.moderation.defs#modEventDivert) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTag"/> (tools.ozone.moderation.defs#modEventTag) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent"/> (tools.ozone.moderation.defs#accountEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent) <br/>
         /// </summary>
         [JsonPropertyName("event")]
         [JsonRequired]
@@ -111,11 +111,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the subject.
-        /// Union Types:
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView"/> (tools.ozone.moderation.defs#repoView)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordView"/> (tools.ozone.moderation.defs#recordView)
-        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound)
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView"/> (tools.ozone.moderation.defs#repoView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordView"/> (tools.ozone.moderation.defs#recordView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound"/> (tools.ozone.moderation.defs#recordViewNotFound) <br/>
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]

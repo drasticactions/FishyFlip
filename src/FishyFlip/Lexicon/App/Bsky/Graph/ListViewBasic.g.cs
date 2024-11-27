@@ -16,10 +16,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="cid"></param>
         /// <param name="name"></param>
         /// <param name="purpose">
-        /// Known Values:
-        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on.
-        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating.
-        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack.
+        /// <br/> Known Values: <br/>
+        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on. <br/>
+        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating. <br/>
+        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack. <br/>
         /// </param>
         /// <param name="avatar"></param>
         /// <param name="listItemCount"></param>
@@ -90,10 +90,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the purpose.
-        /// Known Values:
-        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on.
-        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating.
-        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack.
+        /// <br/> Known Values: <br/>
+        /// app.bsky.graph.defs#modlist - A list of actors to apply an aggregate moderation action (mute/block) on. <br/>
+        /// app.bsky.graph.defs#curatelist - A list of actors used for curation purposes such as list feeds or interaction gating. <br/>
+        /// app.bsky.graph.defs#referencelist - A list of actors used for only for reference purposes such as within a starter pack. <br/>
         /// </summary>
         [JsonPropertyName("purpose")]
         [JsonRequired]
@@ -119,7 +119,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         /// <summary>
         /// Gets or sets the viewer.
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState"/> (app.bsky.graph.defs#listViewerState)
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState"/> (app.bsky.graph.defs#listViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
         public App.Bsky.Graph.ListViewerState? Viewer { get; set; }

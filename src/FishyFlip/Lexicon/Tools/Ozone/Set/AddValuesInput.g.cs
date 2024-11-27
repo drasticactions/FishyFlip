@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Gets or sets the name.
-        /// Name of the set to add values to
+        /// <br/> Name of the set to add values to
         /// </summary>
         [JsonPropertyName("name")]
         [JsonRequired]
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         /// <summary>
         /// Gets or sets the values.
-        /// Array of string values to add to the set
+        /// <br/> Array of string values to add to the set
         /// </summary>
         [JsonPropertyName("values")]
         [JsonRequired]

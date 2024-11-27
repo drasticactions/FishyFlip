@@ -36,6 +36,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Apply a batch transaction of repository creates, updates, and deletes. Requires auth, implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/> Indicates that the 'swapCommit' parameter did not match current commit. <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="repo"></param>
@@ -58,6 +60,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Create a single new repository record. Requires auth, implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/> Indicates that 'swapCommit' didn't match current repo commit. <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="repo"></param>
@@ -84,6 +88,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Delete a repository record, or ensure it doesn't exist. Requires auth, implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="repo"></param>
@@ -127,6 +133,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Get a single record from a repository. Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RecordNotFoundError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="repo"></param>
@@ -240,6 +248,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Write a repository record, creating or updating it as needed. Requires auth, implemented by PDS.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="repo"></param>
