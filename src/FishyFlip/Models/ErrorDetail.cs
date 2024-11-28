@@ -38,4 +38,13 @@ public class ErrorDetail
     /// </summary>
     [JsonPropertyName("message")]
     public string? Message { get; set; }
+
+    /// <summary>
+    /// ToString override.
+    /// </summary>
+    /// <returns>String.</returns>
+    public override string ToString()
+    {
+        return $"{this.Error} - {this.Message}";
+    }
 }
