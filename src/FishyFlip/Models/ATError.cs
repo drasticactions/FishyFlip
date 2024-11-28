@@ -39,4 +39,13 @@ public class ATError
     /// </summary>
     [JsonPropertyName("detail")]
     public ErrorDetail? Detail { get; set; }
+
+    /// <summary>
+    /// ToString override.
+    /// </summary>
+    /// <returns>String.</returns>
+    public override string ToString()
+    {
+        return $"StatusCode: {this.StatusCode}, {this.Detail}";
+    }
 }
