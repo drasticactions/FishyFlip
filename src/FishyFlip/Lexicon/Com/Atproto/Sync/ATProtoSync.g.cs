@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="did"></param>
         /// <param name="cid"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<Success?>> GetBlobAsync (FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
+        public Task<Result<byte[]?>> GetBlobAsync (FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
         {
             return atp.GetBlobAsync(did, cid, cancellationToken);
         }

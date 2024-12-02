@@ -1201,6 +1201,11 @@ public partial class AppCommands
                         sb.AppendLine(
                             $"            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);");
                     }
+                    else if (outputProperty == "byte[]")
+                    {
+                        sb.AppendLine(
+                            $"            return atp.Client.GetBlob(endpointUrl, SourceGenerationContext.Default.Options, cancellationToken, atp.Options.Logger);");
+                    }
                     else
                     {
                         sb.AppendLine(
@@ -1371,6 +1376,11 @@ public partial class AppCommands
 
     private string FetchOutputProperties(ClassGeneration classGeneration)
     {
+        if (classGeneration.Definition.Output?.Encoding == "*/*")
+        {
+            return "byte[]";
+        }
+
         if (classGeneration.Definition.Output?.Schema is null)
         {
             return "Success";

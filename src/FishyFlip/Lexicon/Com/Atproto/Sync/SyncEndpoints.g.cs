@@ -47,8 +47,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="did"></param>
         /// <param name="cid"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> GetBlobAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
+        /// <returns>Result of <see cref="byte[]?"/></returns>
+        public static Task<Result<byte[]?>> GetBlobAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetBlob.ToString();
             endpointUrl += "?";
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("cid=" + cid);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Client.GetBlob(endpointUrl, SourceGenerationContext.Default.Options, cancellationToken, atp.Options.Logger);
         }
 
 
