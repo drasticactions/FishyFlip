@@ -73,7 +73,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<Success?>> ActivateAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ActivateAccount.ToString();
-            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
         }
 
 
@@ -86,7 +86,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput?>> CheckAccountStatusAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CheckAccountStatus.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCheckAccountStatusOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCheckAccountStatusOutput!, cancellationToken);
         }
 
 
@@ -109,7 +109,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var inputItem = new ConfirmEmailInput();
             inputItem.Email = email;
             inputItem.Token = token;
-            return atp.Client.Post<ConfirmEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerConfirmEmailInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<ConfirmEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerConfirmEmailInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -149,7 +149,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             inputItem.Password = password;
             inputItem.RecoveryKey = recoveryKey;
             inputItem.PlcOp = plcOp;
-            return atp.Client.Post<CreateAccountInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<CreateAccountInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountOutput!, inputItem, cancellationToken);
         }
 
 
@@ -169,7 +169,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var inputItem = new CreateAppPasswordInput();
             inputItem.Name = name;
             inputItem.Privileged = privileged;
-            return atp.Client.Post<CreateAppPasswordInput, FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAppPasswordInput!, atp.Options.SourceGenerationContext.ComAtprotoServerAppPasswordDef!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<CreateAppPasswordInput, FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAppPasswordInput!, atp.Options.SourceGenerationContext.ComAtprotoServerAppPasswordDef!, inputItem, cancellationToken);
         }
 
 
@@ -187,7 +187,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var inputItem = new CreateInviteCodeInput();
             inputItem.UseCount = useCount;
             inputItem.ForAccount = forAccount;
-            return atp.Client.Post<CreateInviteCodeInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodeInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodeOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<CreateInviteCodeInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodeInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodeOutput!, inputItem, cancellationToken);
         }
 
 
@@ -207,7 +207,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             inputItem.CodeCount = codeCount;
             inputItem.UseCount = useCount;
             inputItem.ForAccounts = forAccounts;
-            return atp.Client.Post<CreateInviteCodesInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodesInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodesOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<CreateInviteCodesInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodesInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateInviteCodesOutput!, inputItem, cancellationToken);
         }
 
 
@@ -230,7 +230,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             inputItem.Identifier = identifier;
             inputItem.Password = password;
             inputItem.AuthFactorToken = authFactorToken;
-            return atp.Client.Post<CreateSessionInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<CreateSessionInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionOutput!, inputItem, cancellationToken);
         }
 
 
@@ -246,7 +246,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var endpointUrl = DeactivateAccount.ToString();
             var inputItem = new DeactivateAccountInput();
             inputItem.DeleteAfter = deleteAfter;
-            return atp.Client.Post<DeactivateAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDeactivateAccountInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DeactivateAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDeactivateAccountInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -269,7 +269,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             inputItem.Did = did;
             inputItem.Password = password;
             inputItem.Token = token;
-            return atp.Client.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -282,7 +282,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<Success?>> DeleteSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteSession.ToString();
-            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
         }
 
 
@@ -295,7 +295,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput?>> DescribeServerAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DescribeServer.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDescribeServerOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDescribeServerOutput!, cancellationToken);
         }
 
 
@@ -325,7 +325,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetAccountInviteCodesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetAccountInviteCodesOutput!, cancellationToken);
         }
 
 
@@ -358,7 +358,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetServiceAuthOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetServiceAuthOutput!, cancellationToken);
         }
 
 
@@ -371,7 +371,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput?>> GetSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSession.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetSessionOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetSessionOutput!, cancellationToken);
         }
 
 
@@ -386,7 +386,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput?>> ListAppPasswordsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListAppPasswords.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerListAppPasswordsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerListAppPasswordsOutput!, cancellationToken);
         }
 
 
@@ -401,7 +401,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>> RefreshSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RefreshSession.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRefreshSessionOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRefreshSessionOutput!, cancellationToken);
         }
 
 
@@ -414,7 +414,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<Success?>> RequestAccountDeleteAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestAccountDelete.ToString();
-            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
         }
 
 
@@ -427,7 +427,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<Success?>> RequestEmailConfirmationAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestEmailConfirmation.ToString();
-            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
         }
 
 
@@ -440,7 +440,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput?>> RequestEmailUpdateAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestEmailUpdate.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRequestEmailUpdateOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRequestEmailUpdateOutput!, cancellationToken);
         }
 
 
@@ -456,7 +456,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var endpointUrl = RequestPasswordReset.ToString();
             var inputItem = new RequestPasswordResetInput();
             inputItem.Email = email;
-            return atp.Client.Post<RequestPasswordResetInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRequestPasswordResetInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<RequestPasswordResetInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRequestPasswordResetInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -472,7 +472,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var endpointUrl = ReserveSigningKey.ToString();
             var inputItem = new ReserveSigningKeyInput();
             inputItem.Did = did;
-            return atp.Client.Post<ReserveSigningKeyInput, FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerReserveSigningKeyInput!, atp.Options.SourceGenerationContext.ComAtprotoServerReserveSigningKeyOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<ReserveSigningKeyInput, FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerReserveSigningKeyInput!, atp.Options.SourceGenerationContext.ComAtprotoServerReserveSigningKeyOutput!, inputItem, cancellationToken);
         }
 
 
@@ -493,7 +493,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var inputItem = new ResetPasswordInput();
             inputItem.Token = token;
             inputItem.Password = password;
-            return atp.Client.Post<ResetPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerResetPasswordInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<ResetPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerResetPasswordInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -509,7 +509,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             var endpointUrl = RevokeAppPassword.ToString();
             var inputItem = new RevokeAppPasswordInput();
             inputItem.Name = name;
-            return atp.Client.Post<RevokeAppPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRevokeAppPasswordInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<RevokeAppPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerRevokeAppPasswordInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -533,7 +533,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             inputItem.Email = email;
             inputItem.EmailAuthFactor = emailAuthFactor;
             inputItem.Token = token;
-            return atp.Client.Post<UpdateEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerUpdateEmailInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerUpdateEmailInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
     }

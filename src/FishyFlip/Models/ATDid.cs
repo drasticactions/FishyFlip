@@ -25,6 +25,11 @@ public class ATDid : ATIdentifier
     public string Handler { get; }
 
     /// <summary>
+    /// Gets the type of DID.
+    /// </summary>
+    public string Type => this.Handler.Split(':')[1].ToLowerInvariant();
+
+    /// <summary>
     /// Create a new ATDid.
     /// </summary>
     /// <param name="uri">Uri.</param>
@@ -56,8 +61,14 @@ public class ATDid : ATIdentifier
     {
         try
         {
-            atDid = new ATDid(uri);
-            return true;
+            if (ATDid.IsValid(uri))
+            {
+                atDid = new ATDid(uri);
+                return true;
+            }
+
+            atDid = null;
+            return false;
         }
         catch (Exception)
         {

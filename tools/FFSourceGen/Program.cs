@@ -1117,12 +1117,12 @@ public partial class AppCommands
                     if (inputProperties.Count <= 2)
                     {
                         sb.AppendLine(
-                            $"            return atp.Client.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken);");
                     }
                     else if (inputProperties[1].Contains("StreamContent"))
                     {
                         sb.AppendLine(
-                            $"            return atp.Client.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, {inputProperties[1].Split(" ").Last()}, cancellationToken, atp.Options.Logger);");
+                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, {inputProperties[1].Split(" ").Last()}, cancellationToken);");
                     }
                     else
                     {
@@ -1136,9 +1136,8 @@ public partial class AppCommands
                                 $"            inputItem.{prop.Replace("@", string.Empty).ToPascalCase()} = {prop};");
                         }
 
-                        // return atp.Client.Post<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput?, FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateAccountOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
                         sb.AppendLine(
-                            $"            return atp.Client.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{inputSourceContext}!, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);");
+                            $"            return atp.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{inputSourceContext}!, atp.Options.SourceGenerationContext.{sourceContext}!, inputItem, cancellationToken);");
                     }
 
                     break;
@@ -1199,17 +1198,17 @@ public partial class AppCommands
                     if (inputProperties.Any(n => n.Contains("OnCarDecoded")))
                     {
                         sb.AppendLine(
-                            $"            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);");
+                            $"            return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);");
                     }
                     else if (outputProperty == "byte[]")
                     {
                         sb.AppendLine(
-                            $"            return atp.Client.GetBlob(endpointUrl, SourceGenerationContext.Default.Options, cancellationToken, atp.Options.Logger);");
+                            $"            return atp.GetBlob(endpointUrl, cancellationToken);");
                     }
                     else
                     {
                         sb.AppendLine(
-                            $"            return atp.Client.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);");
+                            $"            return atp.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken);");
                     }
 
                     break;

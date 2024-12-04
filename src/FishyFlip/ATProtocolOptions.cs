@@ -104,7 +104,6 @@ public class ATProtocolOptions
 
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
         httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
-        httpClient.BaseAddress = this.Url;
 #if NET8_0_OR_GREATER
         // From https://github.com/drasticactions/FishyFlip/pull/107
         httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;

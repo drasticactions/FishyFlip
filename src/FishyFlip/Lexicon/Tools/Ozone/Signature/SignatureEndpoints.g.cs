@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindCorrelationOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindCorrelationOutput!, cancellationToken);
         }
 
 
@@ -66,7 +66,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindRelatedAccountsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindRelatedAccountsOutput!, cancellationToken);
         }
 
 
@@ -97,7 +97,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, cancellationToken);
         }
 
     }

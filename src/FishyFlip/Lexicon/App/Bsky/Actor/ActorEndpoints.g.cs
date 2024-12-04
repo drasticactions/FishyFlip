@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput?>> GetPreferencesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPreferences.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetPreferencesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetPreferencesOutput!, cancellationToken);
         }
 
 
@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             queryStrings.Add("actor=" + actor);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorProfileViewDetailed!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorProfileViewDetailed!, cancellationToken);
         }
 
 
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, cancellationToken);
         }
 
 
@@ -103,7 +103,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetSuggestionsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetSuggestionsOutput!, cancellationToken);
         }
 
 
@@ -133,7 +133,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             var endpointUrl = PutPreferences.ToString();
             var inputItem = new PutPreferencesInput();
             inputItem.Preferences = preferences;
-            return atp.Client.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -167,7 +167,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsOutput!, cancellationToken);
         }
 
 
@@ -195,7 +195,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsTypeaheadOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsTypeaheadOutput!, cancellationToken);
         }
 
     }

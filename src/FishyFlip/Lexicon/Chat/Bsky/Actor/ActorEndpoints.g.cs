@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteAccount.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, cancellationToken);
         }
 
 
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         public static Task<Result<Success?>> ExportAccountDataAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ExportAccountData.ToString();
-            return atp.Client.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
         }
 
     }

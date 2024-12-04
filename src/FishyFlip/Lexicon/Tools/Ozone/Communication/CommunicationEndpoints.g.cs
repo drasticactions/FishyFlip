@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             inputItem.Subject = subject;
             inputItem.Lang = lang;
             inputItem.CreatedBy = createdBy;
-            return atp.Client.Post<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationCreateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationCreateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken);
         }
 
 
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             var endpointUrl = DeleteTemplate.ToString();
             var inputItem = new DeleteTemplateInput();
             inputItem.Id = id;
-            return atp.Client.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -73,7 +73,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?>> ListTemplatesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListTemplates.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationListTemplatesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationListTemplatesOutput!, cancellationToken);
         }
 
 
@@ -103,7 +103,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             inputItem.Subject = subject;
             inputItem.UpdatedBy = updatedBy;
             inputItem.Disabled = disabled;
-            return atp.Client.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken);
         }
 
     }

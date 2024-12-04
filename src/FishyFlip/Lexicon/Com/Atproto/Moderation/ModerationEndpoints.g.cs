@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             inputItem.ReasonType = reasonType;
             inputItem.Subject = subject;
             inputItem.Reason = reason;
-            return atp.Client.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, inputItem, cancellationToken);
         }
 
     }

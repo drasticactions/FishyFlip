@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             var inputItem = new AddValuesInput();
             inputItem.Name = name;
             inputItem.Values = values;
-            return atp.Client.Post<AddValuesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetAddValuesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<AddValuesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetAddValuesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             var endpointUrl = DeleteSet.ToString();
             var inputItem = new DeleteSetInput();
             inputItem.Name = name;
-            return atp.Client.Post<DeleteSetInput, FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetInput!, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DeleteSetInput, FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetInput!, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteSetOutput!, inputItem, cancellationToken);
         }
 
 
@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             var inputItem = new DeleteValuesInput();
             inputItem.Name = name;
             inputItem.Values = values;
-            return atp.Client.Post<DeleteValuesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteValuesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DeleteValuesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetDeleteValuesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -111,7 +111,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetGetValuesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetGetValuesOutput!, cancellationToken);
         }
 
 
@@ -157,7 +157,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetQuerySetsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetQuerySetsOutput!, cancellationToken);
         }
 
 
@@ -170,7 +170,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpsertSet.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetSetView!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetSetView!, cancellationToken);
         }
 
     }

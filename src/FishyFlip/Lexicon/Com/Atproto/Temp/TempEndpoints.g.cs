@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             var endpointUrl = AddReservedHandle.ToString();
             var inputItem = new AddReservedHandleInput();
             inputItem.Handle = handle;
-            return atp.Client.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, inputItem, cancellationToken);
         }
 
 
@@ -45,7 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?>> CheckSignupQueueAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CheckSignupQueue.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken);
         }
 
 
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             var endpointUrl = RequestPhoneVerification.ToString();
             var inputItem = new RequestPhoneVerificationInput();
             inputItem.PhoneNumber = phoneNumber;
-            return atp.Client.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
     }

@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             queryStrings.Add("jobId=" + jobId);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetJobStatusOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetJobStatusOutput!, cancellationToken);
         }
 
 
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput?>> GetUploadLimitsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetUploadLimits.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetUploadLimitsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetUploadLimitsOutput!, cancellationToken);
         }
 
 
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UploadVideo.ToString();
-            return atp.Client.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, cancellationToken);
         }
 
     }

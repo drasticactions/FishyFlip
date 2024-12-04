@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("cid=" + cid);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetBlob(endpointUrl, SourceGenerationContext.Default.Options, cancellationToken, atp.Options.Logger);
+            return atp.GetBlob(endpointUrl, cancellationToken);
         }
 
 
@@ -89,7 +89,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("onDecoded=" + onDecoded);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+            return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
 
 
@@ -113,7 +113,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("did=" + did);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, cancellationToken);
         }
 
 
@@ -147,7 +147,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("onDecoded=" + onDecoded);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+            return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
 
 
@@ -180,7 +180,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.GetCarAsync(endpointUrl, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger, onDecoded);
+            return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
 
 
@@ -201,7 +201,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("did=" + did);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, cancellationToken);
         }
 
 
@@ -243,7 +243,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListBlobsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListBlobsOutput!, cancellationToken);
         }
 
 
@@ -271,7 +271,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposOutput!, cancellationToken);
         }
 
 
@@ -287,7 +287,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             var endpointUrl = NotifyOfUpdate.ToString();
             var inputItem = new NotifyOfUpdateInput();
             inputItem.Hostname = hostname;
-            return atp.Client.Post<NotifyOfUpdateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncNotifyOfUpdateInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<NotifyOfUpdateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncNotifyOfUpdateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -303,7 +303,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             var endpointUrl = RequestCrawl.ToString();
             var inputItem = new RequestCrawlInput();
             inputItem.Hostname = hostname;
-            return atp.Client.Post<RequestCrawlInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncRequestCrawlInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<RequestCrawlInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncRequestCrawlInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
     }

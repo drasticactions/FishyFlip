@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingListOptionsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingListOptionsOutput!, cancellationToken);
         }
 
 
@@ -80,7 +80,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             var inputItem = new RemoveOptionsInput();
             inputItem.Keys = keys;
             inputItem.Scope = scope;
-            return atp.Client.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsOutput!, inputItem, cancellationToken);
         }
 
 
@@ -104,7 +104,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             inputItem.Value = value;
             inputItem.Description = description;
             inputItem.ManagerRole = managerRole;
-            return atp.Client.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionOutput!, inputItem, cancellationToken);
         }
 
     }
