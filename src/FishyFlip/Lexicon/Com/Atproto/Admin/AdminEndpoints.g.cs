@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var endpointUrl = DeleteAccount.ToString();
             var inputItem = new DeleteAccountInput();
             inputItem.Did = did;
-            return atp.Client.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -72,7 +72,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new DisableAccountInvitesInput();
             inputItem.Account = account;
             inputItem.Note = note;
-            return atp.Client.Post<DisableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DisableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -90,7 +90,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new DisableInviteCodesInput();
             inputItem.Codes = codes;
             inputItem.Accounts = accounts;
-            return atp.Client.Post<DisableInviteCodesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableInviteCodesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DisableInviteCodesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableInviteCodesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -108,7 +108,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new EnableAccountInvitesInput();
             inputItem.Account = account;
             inputItem.Note = note;
-            return atp.Client.Post<EnableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminEnableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<EnableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminEnableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -127,7 +127,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             queryStrings.Add("did=" + did);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminAccountView!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminAccountView!, cancellationToken);
         }
 
 
@@ -146,7 +146,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetAccountInfosOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetAccountInfosOutput!, cancellationToken);
         }
 
 
@@ -180,7 +180,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetInviteCodesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetInviteCodesOutput!, cancellationToken);
         }
 
 
@@ -214,7 +214,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetSubjectStatusOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetSubjectStatusOutput!, cancellationToken);
         }
 
 
@@ -248,7 +248,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSearchAccountsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSearchAccountsOutput!, cancellationToken);
         }
 
 
@@ -272,7 +272,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             inputItem.SenderDid = senderDid;
             inputItem.Subject = subject;
             inputItem.Comment = comment;
-            return atp.Client.Post<SendEmailInput, FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<SendEmailInput, FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailOutput!, inputItem, cancellationToken);
         }
 
 
@@ -290,7 +290,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new UpdateAccountEmailInput();
             inputItem.Account = account;
             inputItem.Email = email;
-            return atp.Client.Post<UpdateAccountEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountEmailInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateAccountEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountEmailInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -308,7 +308,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new UpdateAccountHandleInput();
             inputItem.Did = did;
             inputItem.Handle = handle;
-            return atp.Client.Post<UpdateAccountHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountHandleInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateAccountHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -326,7 +326,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new UpdateAccountPasswordInput();
             inputItem.Did = did;
             inputItem.Password = password;
-            return atp.Client.Post<UpdateAccountPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountPasswordInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateAccountPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountPasswordInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -346,7 +346,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             inputItem.Subject = subject;
             inputItem.Takedown = takedown;
             inputItem.Deactivated = deactivated;
-            return atp.Client.Post<UpdateSubjectStatusInput, FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateSubjectStatusInput, FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusOutput!, inputItem, cancellationToken);
         }
 
     }

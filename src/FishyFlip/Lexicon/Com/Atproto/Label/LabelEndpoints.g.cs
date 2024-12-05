@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, cancellationToken);
         }
 
     }

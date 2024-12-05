@@ -70,6 +70,11 @@ public class ATProtocolOptions
     public bool UseServiceEndpointUponLogin { get; internal set; } = true;
 
     /// <summary>
+    /// Gets the Did Cache.
+    /// </summary>
+    internal Dictionary<string, string> DidCache { get; } = new Dictionary<string, string>();
+
+    /// <summary>
     /// Gets the source generation context.
     /// </summary>
     internal SourceGenerationContext SourceGenerationContext { get; }
@@ -104,7 +109,6 @@ public class ATProtocolOptions
 
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
         httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
-        httpClient.BaseAddress = this.Url;
 #if NET8_0_OR_GREATER
         // From https://github.com/drasticactions/FishyFlip/pull/107
         httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;

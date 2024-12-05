@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon.Com.Atproto.Identity;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -57,12 +59,16 @@ public sealed partial class ATProtocol : IDisposable
     /// <summary>
     /// Gets the current OAuth session, if any is active.
     /// </summary>
-    public AuthSession? OAuthSession => this.sessionManager is OAuth2SessionManager oAuth2SessionManager ? oAuth2SessionManager.OAuthSession : null;
+    public AuthSession? OAuthSession => this.sessionManager is OAuth2SessionManager oAuth2SessionManager
+        ? oAuth2SessionManager.OAuthSession
+        : null;
 
     /// <summary>
     /// Gets the current PasswordSession session, if any is active.
     /// </summary>
-    public AuthSession? PasswordSession => this.sessionManager is PasswordSessionManager passwordSessionManager ? passwordSessionManager.PasswordSession : null;
+    public AuthSession? PasswordSession => this.sessionManager is PasswordSessionManager passwordSessionManager
+        ? passwordSessionManager.PasswordSession
+        : null;
 
     /// <summary>
     /// Gets the PclDirectory Methods.
@@ -207,6 +213,118 @@ public sealed partial class ATProtocol : IDisposable
         }
     }
 
+    /// <summary>
+    /// Resolves an ATHandle to a host address.
+    /// </summary>
+    /// <param name="handle"><see cref="ATHandle"/>.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
+    public async Task<string?> ResolveATHandleHostAsync(ATHandle handle, CancellationToken? token = default)
+    {
+        string? host = this.options.DidCache.FirstOrDefault(n => n.Key == handle.ToString()).Value;
+        if (!string.IsNullOrEmpty(host))
+        {
+            this.options.Logger?.LogDebug($"Resolved handle from cache: {handle} to {host}");
+            return host;
+        }
+
+        if (this.IsAuthenticated && this.Session?.Handle.ToString() == handle.ToString())
+        {
+            host = this.Session?.DidDoc?.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)?.ServiceEndpoint;
+            if (!string.IsNullOrEmpty(host))
+            {
+                this.options.DidCache[handle.ToString()] = host!;
+                this.options.Logger?.LogDebug($"Resolved handle: {handle} to {host}, adding to cache.");
+                return host;
+            }
+
+            this.options.Logger?.LogError($"Failed to resolve Self User handle: {handle}, missing Service Handle.");
+        }
+
+        try
+        {
+            var endpointUrl = $"{Constants.Urls.ATProtoServer.SocialApi}{IdentityEndpoints.ResolveHandle}?handle={handle}";
+            var result = await this.Client.GetAsync(endpointUrl, token ?? CancellationToken.None);
+            if (result.IsSuccessStatusCode)
+            {
+                var resolveHandle = JsonSerializer.Deserialize<ResolveHandleOutput>(
+                    await result.Content.ReadAsStringAsync(),
+                    this.options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput);
+                if (resolveHandle?.Did is not null)
+                {
+                    host = await this.ResolveATDidHostAsync(resolveHandle.Did, token);
+                    if (!string.IsNullOrEmpty(host))
+                    {
+                        this.options.DidCache[handle.ToString()] = host!;
+                        this.options.Logger?.LogDebug($"Resolved handle: {handle} to {host}, adding to cache.");
+                    }
+                    else
+                    {
+                        this.options.Logger?.LogError($"Failed to resolve Handle: {handle}, missing Service Handle.");
+                    }
+                }
+                else
+                {
+                    this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. Missing DID.");
+                }
+            }
+            else
+            {
+                this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {result.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {ex.Message}");
+        }
+
+        return host;
+    }
+
+    /// <summary>
+    /// Resolves an ATDid to a host address.
+    /// </summary>
+    /// <param name="did"><see cref="ATDid"/>.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
+    public async Task<string?> ResolveATDidHostAsync(ATDid did, CancellationToken? token = default)
+    {
+        string? host = this.options.DidCache.FirstOrDefault(n => n.Key == did.ToString()).Value;
+        if (!string.IsNullOrEmpty(host))
+        {
+            this.options.Logger?.LogDebug($"Resolved DID from cache: {did} to {host}");
+            return host;
+        }
+
+        try
+        {
+            switch (did.Type)
+            {
+                case "plc":
+                    host = await this.ResolvePlcDidAsync(did, token);
+                    break;
+                case "web":
+                    host = await this.ResolveWebDidAsync(did, token);
+                    break;
+                default:
+                    this.options.Logger?.LogError($"DID type could not be resolved: {did}");
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(host))
+            {
+                this.options.DidCache[did.ToString()] = host!;
+                this.options.Logger?.LogDebug($"Resolved DID: {did} to {host}, adding to cache.");
+            }
+        }
+        catch (Exception ex)
+        {
+            this.options.Logger?.LogError($"Failed to resolve DID: {did}. {ex.Message}");
+        }
+
+        return host;
+    }
+
     /// <inheritdoc/>
     public void Dispose()
     {
@@ -230,5 +348,83 @@ public sealed partial class ATProtocol : IDisposable
     private void OnSessionUpdated(object? sender, SessionUpdatedEventArgs e)
     {
         this.SessionUpdated?.Invoke(sender, e);
+    }
+
+    private async Task<string?> ResolvePlcDidAsync(ATDid did, CancellationToken? token)
+    {
+        string? host = null;
+        if (this.IsAuthenticated && this.Session?.Did.ToString() == did.ToString())
+        {
+            host = this.Session?.DidDoc?.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)
+                ?.ServiceEndpoint;
+            if (!string.IsNullOrEmpty(host))
+            {
+                this.options.DidCache[did.ToString()] = host!;
+                this.options.Logger?.LogDebug($"Resolved DID: {did} to {host}, adding to cache.");
+            }
+            else
+            {
+                this.options.Logger?.LogError($"Failed to resolve Self User DID: {did}, missing Service Handle.");
+            }
+        }
+
+        var (resolveHandle, error) = await this.PlcDirectory.GetDidDocAsync(did!, token ?? CancellationToken.None);
+        if (resolveHandle is not null)
+        {
+            host = resolveHandle.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)
+                ?.ServiceEndpoint;
+            if (string.IsNullOrEmpty(host))
+            {
+                this.options.Logger?.LogError($"Failed to resolve DID: {did}, missing Service Handle.");
+            }
+        }
+        else
+        {
+            this.options.Logger?.LogError($"Failed to resolve plc DID: {did}. {error?.ToString()}");
+        }
+
+        return host;
+    }
+
+    private async Task<string?> ResolveWebDidAsync(ATDid did, CancellationToken? token)
+    {
+        string? host = null;
+        var baseUri = did.ToString().Split(':').Last();
+        if (!baseUri.Contains("http"))
+        {
+            baseUri = $"https://{baseUri}";
+        }
+
+        if (Uri.TryCreate(baseUri, UriKind.Absolute, out var uri))
+        {
+            var result = await this.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
+            if (result.IsSuccessStatusCode)
+            {
+                var didDoc = JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
+                if (didDoc is not null)
+                {
+                    host = didDoc.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)
+                        ?.ServiceEndpoint;
+                    if (string.IsNullOrEmpty(host))
+                    {
+                        this.options.Logger?.LogError($"Failed to resolve DID: {did}, missing Service Handle.");
+                    }
+                }
+                else
+                {
+                    this.options.Logger?.LogError($"Failed to resolve DID: {did}, missing DID Doc.");
+                }
+            }
+            else
+            {
+                this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
+            }
+        }
+        else
+        {
+            this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
+        }
+
+        return host;
     }
 }

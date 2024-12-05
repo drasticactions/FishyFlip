@@ -52,7 +52,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             inputItem.Subject = subject;
             inputItem.CreatedBy = createdBy;
             inputItem.SubjectBlobCids = subjectBlobCids;
-            return atp.Client.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken);
         }
 
 
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add("id=" + id);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventViewDetail!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventViewDetail!, cancellationToken);
         }
 
 
@@ -98,7 +98,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRecordViewDetail!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRecordViewDetail!, cancellationToken);
         }
 
 
@@ -117,7 +117,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetRecordsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetRecordsOutput!, cancellationToken);
         }
 
 
@@ -138,7 +138,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add("did=" + did);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRepoViewDetail!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRepoViewDetail!, cancellationToken);
         }
 
 
@@ -157,7 +157,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReposOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReposOutput!, cancellationToken);
         }
 
 
@@ -281,7 +281,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryEventsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryEventsOutput!, cancellationToken);
         }
 
 
@@ -459,7 +459,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryStatusesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryStatusesOutput!, cancellationToken);
         }
 
 
@@ -493,7 +493,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationSearchReposOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationSearchReposOutput!, cancellationToken);
         }
 
     }

@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             queryStrings.Add("actor=" + actor);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetActorMetadataOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetActorMetadataOutput!, cancellationToken);
         }
 
 
@@ -72,7 +72,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetMessageContextOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetMessageContextOutput!, cancellationToken);
         }
 
 
@@ -92,7 +92,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             inputItem.Actor = actor;
             inputItem.AllowAccess = allowAccess;
             inputItem.Ref = @ref;
-            return atp.Client.Post<UpdateActorAccessInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationUpdateActorAccessInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateActorAccessInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationUpdateActorAccessInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
     }

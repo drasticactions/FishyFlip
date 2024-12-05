@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             var inputItem = new AddMemberInput();
             inputItem.Did = did;
             inputItem.Role = role;
-            return atp.Client.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamAddMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamAddMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, inputItem, cancellationToken);
         }
 
 
@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             var endpointUrl = DeleteMember.ToString();
             var inputItem = new DeleteMemberInput();
             inputItem.Did = did;
-            return atp.Client.Post<DeleteMemberInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamDeleteMemberInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<DeleteMemberInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamDeleteMemberInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -85,7 +85,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamListMembersOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamListMembersOutput!, cancellationToken);
         }
 
 
@@ -107,7 +107,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             inputItem.Did = did;
             inputItem.Disabled = disabled;
             inputItem.Role = role;
-            return atp.Client.Post<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamUpdateMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamUpdateMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, inputItem, cancellationToken);
         }
 
     }

@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput?>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetConfig.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetConfigOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetConfigOutput!, cancellationToken);
         }
 
 
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, cancellationToken);
         }
 
 
@@ -111,7 +111,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestionsSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestionsSkeletonOutput!, cancellationToken);
         }
 
 
@@ -124,7 +124,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput?>> GetTaggedSuggestionsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetTaggedSuggestions.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTaggedSuggestionsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTaggedSuggestionsOutput!, cancellationToken);
         }
 
 
@@ -169,7 +169,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchActorsSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchActorsSkeletonOutput!, cancellationToken);
         }
 
 
@@ -262,7 +262,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchPostsSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchPostsSkeletonOutput!, cancellationToken);
         }
 
 
@@ -301,7 +301,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchStarterPacksSkeletonOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchStarterPacksSkeletonOutput!, cancellationToken);
         }
 
     }

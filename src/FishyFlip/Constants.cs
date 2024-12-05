@@ -7,6 +7,8 @@ namespace FishyFlip;
 #pragma warning disable SA1600 // Elements should be documented
 public static class Constants
 {
+    internal const string DidJson = ".well-known/did.json";
+    internal const string AtprotoPersonalDataServer = "AtprotoPersonalDataServer";
     internal const string BlueskyApiClient = "FishyFlip";
     internal const string ContentMediaType = "application/json";
     internal const string AcceptedMediaType = "application/json";

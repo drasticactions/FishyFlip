@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, cancellationToken);
         }
 
 
@@ -88,7 +88,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListNotificationsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListNotificationsOutput!, cancellationToken);
         }
 
 
@@ -104,7 +104,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             var endpointUrl = PutPreferences.ToString();
             var inputItem = new PutPreferencesInput();
             inputItem.Priority = priority;
-            return atp.Client.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -126,7 +126,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             inputItem.Token = token;
             inputItem.Platform = platform;
             inputItem.AppId = appId;
-            return atp.Client.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -142,7 +142,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             var endpointUrl = UpdateSeen.ToString();
             var inputItem = new UpdateSeenInput();
             inputItem.SeenAt = seenAt;
-            return atp.Client.Post<UpdateSeenInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUpdateSeenInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateSeenInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUpdateSeenInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
     }

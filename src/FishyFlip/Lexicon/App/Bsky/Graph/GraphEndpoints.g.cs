@@ -83,7 +83,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetActorStarterPacksOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetActorStarterPacksOutput!, cancellationToken);
         }
 
 
@@ -111,7 +111,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetBlocksOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetBlocksOutput!, cancellationToken);
         }
 
 
@@ -142,7 +142,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowersOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowersOutput!, cancellationToken);
         }
 
 
@@ -173,7 +173,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowsOutput!, cancellationToken);
         }
 
 
@@ -204,7 +204,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetKnownFollowersOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetKnownFollowersOutput!, cancellationToken);
         }
 
 
@@ -235,7 +235,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListOutput!, cancellationToken);
         }
 
 
@@ -263,7 +263,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListBlocksOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListBlocksOutput!, cancellationToken);
         }
 
 
@@ -291,7 +291,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListMutesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListMutesOutput!, cancellationToken);
         }
 
 
@@ -322,7 +322,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListsOutput!, cancellationToken);
         }
 
 
@@ -350,7 +350,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetMutesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetMutesOutput!, cancellationToken);
         }
 
 
@@ -377,7 +377,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetRelationshipsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetRelationshipsOutput!, cancellationToken);
         }
 
 
@@ -396,7 +396,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             queryStrings.Add("starterPack=" + starterPack);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPackOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPackOutput!, cancellationToken);
         }
 
 
@@ -415,7 +415,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksOutput!, cancellationToken);
         }
 
 
@@ -434,7 +434,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             queryStrings.Add("actor=" + actor);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetSuggestedFollowsByActorOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetSuggestedFollowsByActorOutput!, cancellationToken);
         }
 
 
@@ -450,7 +450,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var endpointUrl = MuteActor.ToString();
             var inputItem = new MuteActorInput();
             inputItem.Actor = actor;
-            return atp.Client.Post<MuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<MuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -466,7 +466,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var endpointUrl = MuteActorList.ToString();
             var inputItem = new MuteActorListInput();
             inputItem.List = list;
-            return atp.Client.Post<MuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorListInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<MuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -482,7 +482,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var endpointUrl = MuteThread.ToString();
             var inputItem = new MuteThreadInput();
             inputItem.Root = root;
-            return atp.Client.Post<MuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteThreadInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<MuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -513,7 +513,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphSearchStarterPacksOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphSearchStarterPacksOutput!, cancellationToken);
         }
 
 
@@ -529,7 +529,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var endpointUrl = UnmuteActor.ToString();
             var inputItem = new UnmuteActorInput();
             inputItem.Actor = actor;
-            return atp.Client.Post<UnmuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UnmuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -545,7 +545,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var endpointUrl = UnmuteActorList.ToString();
             var inputItem = new UnmuteActorListInput();
             inputItem.List = list;
-            return atp.Client.Post<UnmuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorListInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UnmuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -561,7 +561,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var endpointUrl = UnmuteThread.ToString();
             var inputItem = new UnmuteThreadInput();
             inputItem.Root = root;
-            return atp.Client.Post<UnmuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteThreadInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UnmuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
     }

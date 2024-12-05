@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             }
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyLabelerGetServicesOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyLabelerGetServicesOutput!, cancellationToken);
         }
 
     }

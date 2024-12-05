@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput?>> GetRecommendedDidCredentialsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRecommendedDidCredentials.ToString();
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityGetRecommendedDidCredentialsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityGetRecommendedDidCredentialsOutput!, cancellationToken);
         }
 
 
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public static Task<Result<Success?>> RequestPlcOperationSignatureAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestPlcOperationSignature.ToString();
-            return atp.Client.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
         }
 
 
@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             queryStrings.Add("handle=" + handle);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput!, cancellationToken);
         }
 
 
@@ -91,7 +91,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             inputItem.AlsoKnownAs = alsoKnownAs;
             inputItem.VerificationMethods = verificationMethods;
             inputItem.Services = services;
-            return atp.Client.Post<SignPlcOperationInput, FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationInput!, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<SignPlcOperationInput, FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationInput!, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationOutput!, inputItem, cancellationToken);
         }
 
 
@@ -107,7 +107,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             var endpointUrl = SubmitPlcOperation.ToString();
             var inputItem = new SubmitPlcOperationInput();
             inputItem.Operation = operation;
-            return atp.Client.Post<SubmitPlcOperationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySubmitPlcOperationInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<SubmitPlcOperationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySubmitPlcOperationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
 
@@ -123,7 +123,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             var endpointUrl = UpdateHandle.ToString();
             var inputItem = new UpdateHandleInput();
             inputItem.Handle = handle;
-            return atp.Client.Post<UpdateHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityUpdateHandleInput!, atp.Options.SourceGenerationContext.Success!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<UpdateHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityUpdateHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
         }
 
     }

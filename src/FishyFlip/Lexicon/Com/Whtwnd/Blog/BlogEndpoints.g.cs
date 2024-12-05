@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             queryStrings.Add("author=" + author);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetAuthorPostsOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetAuthorPostsOutput!, cancellationToken);
         }
 
 
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             queryStrings.Add("entryTitle=" + entryTitle);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetEntryMetadataByNameOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetEntryMetadataByNameOutput!, cancellationToken);
         }
 
 
@@ -80,7 +80,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             queryStrings.Add("postUri=" + postUri);
 
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Client.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetMentionsByEntryOutput!, atp.Options.JsonSerializerOptions, cancellationToken, atp.Options.Logger);
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetMentionsByEntryOutput!, cancellationToken);
         }
 
 
@@ -96,7 +96,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             var endpointUrl = NotifyOfNewEntry.ToString();
             var inputItem = new NotifyOfNewEntryInput();
             inputItem.EntryUri = entryUri;
-            return atp.Client.Post<NotifyOfNewEntryInput, FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryInput!, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryOutput!, atp.Options.JsonSerializerOptions, inputItem, cancellationToken, atp.Options.Logger);
+            return atp.Post<NotifyOfNewEntryInput, FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryInput!, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryOutput!, inputItem, cancellationToken);
         }
 
     }
