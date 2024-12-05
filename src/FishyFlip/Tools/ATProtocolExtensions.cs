@@ -159,7 +159,7 @@ public static class ATProtocolExtensions
         if (pathAndQueryString.Contains("repo"))
         {
             // repo name is a query string value of "repo"
-            var repoName = pathAndQueryString.Split('&').FirstOrDefault(x => x.Contains("repo"));
+            var repoName = pathAndQueryString.Split('&').FirstOrDefault(x => x.Contains("repo="));
             if (!string.IsNullOrEmpty(repoName))
             {
                 var repo = repoName.Split('=')[1];
