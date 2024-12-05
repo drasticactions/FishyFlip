@@ -167,6 +167,10 @@ public static class ATProtocolExtensions
                 {
                     host = await protocol.ResolveATDidHostAsync(did!) ?? string.Empty;
                 }
+                else if (ATHandle.TryCreate(repo, out ATHandle? handle))
+                {
+                    host = await protocol.ResolveATHandleHostAsync(handle!) ?? string.Empty;
+                }
             }
         }
 

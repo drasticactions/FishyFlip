@@ -86,6 +86,38 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Adds a cache set of ATDid values with their respective service endpoint URIs.
+    /// Use this to cache the service endpoints for the ATDid values to avoid having to look them up.
+    /// </summary>
+    /// <param name="didCache">Cache values.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithATDidCache(Dictionary<ATDid, Uri> didCache)
+    {
+        foreach (var item in didCache)
+        {
+            this.atProtocolOptions.DidCache[item.Key.ToString()] = item.Value.ToString();
+        }
+
+        return this;
+    }
+
+    /// <summary>
+    /// Adds a cache set of ATHandle values with their respective service endpoint URIs.
+    /// Use this to cache the service endpoints for the ATHandle values to avoid having to look them up.
+    /// </summary>
+    /// <param name="didCache">Cache values.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithATHandleCache(Dictionary<ATHandle, Uri> didCache)
+    {
+        foreach (var item in didCache)
+        {
+            this.atProtocolOptions.DidCache[item.Key.ToString()] = item.Value.ToString();
+        }
+
+        return this;
+    }
+
+    /// <summary>
     /// Sets the session refresh interval.
     /// </summary>
     /// <param name="interval">Interval to refresh at.</param>

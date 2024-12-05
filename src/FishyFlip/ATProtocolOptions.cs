@@ -70,6 +70,11 @@ public class ATProtocolOptions
     public bool UseServiceEndpointUponLogin { get; internal set; } = true;
 
     /// <summary>
+    /// Gets the Did Cache.
+    /// </summary>
+    internal Dictionary<string, string> DidCache { get; } = new Dictionary<string, string>();
+
+    /// <summary>
     /// Gets the source generation context.
     /// </summary>
     internal SourceGenerationContext SourceGenerationContext { get; }
