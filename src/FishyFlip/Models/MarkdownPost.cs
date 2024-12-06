@@ -133,30 +133,57 @@ public class MarkdownPost
 
         var links = new List<MarkdownLink>();
         var strippedMarkdown = StripMarkdown(markdown);
+        var strippedMarkdownBytes = Encoding.UTF8.GetBytes(strippedMarkdown);
 
         // Regular expression to match Markdown links, excluding image links
         var linkRegex = new Regex(@"(?<!!)\[([^\]]+)\]\(([^\)]+)\)");
 
         var matches = linkRegex.Matches(markdown);
-
+        var startIndex = 0;
         foreach (Match match in matches)
         {
             var text = match.Groups[1].Value;
             var url = match.Groups[2].Value;
 
             // Find where this text appears in the final stripped version
-            var textStartIndex = strippedMarkdown.IndexOf(text);
+            var textBytes = Encoding.UTF8.GetBytes(text);
+            var textPosition = FindPattern(strippedMarkdownBytes, textBytes, startIndex);
 
             // Create the link object with indices based on where the text would appear
             // in the fully stripped version
             links.Add(new MarkdownLink(
                 text: text,
                 url: url,
-                startIndex: textStartIndex,
-                endIndex: textStartIndex + text.Length));
+                startIndex: textPosition.Start,
+                endIndex: textPosition.End));
+
+            startIndex = textPosition.End;
         }
 
         return links.ToArray();
+    }
+
+    private static (int Start, int End) FindPattern(byte[] source, byte[] pattern, int startIndex = 0)
+    {
+        return FindPattern(source.AsSpan(), pattern.AsSpan(), startIndex);
+    }
+
+    private static (int Start, int End) FindPattern(ReadOnlySpan<byte> source, ReadOnlySpan<byte> pattern, int startIndex = 0)
+    {
+        if (pattern.IsEmpty || pattern.Length > source.Length)
+        {
+            return (0, 0);
+        }
+
+        for (int i = startIndex; i <= source.Length - pattern.Length; i++)
+        {
+            if (source.Slice(i, pattern.Length).SequenceEqual(pattern))
+            {
+                return (i, i + pattern.Length);
+            }
+        }
+
+        return (0, 0);
     }
 
     private class MarkdownLink
