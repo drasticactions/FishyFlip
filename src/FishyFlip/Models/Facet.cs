@@ -74,7 +74,7 @@ public partial class Facet
     public static Facet[] ForUris(string post)
     {
         var facets = new List<Facet>();
-        var matches = Regex.Matches(post, @"(https?://[^\s]+)").DistinctBy(n => n.Value);
+        var matches = Regex.Matches(post, @"(https?://[^\s]+)");
         var postBytes = Encoding.UTF8.GetBytes(post);
         var startIndex = 0;
         foreach (Match match in matches)
@@ -98,7 +98,7 @@ public partial class Facet
     public static Facet[] ForUris(string post, string baseText, string uri)
     {
         var facets = new List<Facet>();
-        var matches = Regex.Matches(post, baseText).DistinctBy(n => n.Value);
+        var matches = Regex.Matches(post, baseText);
         var postBytes = Encoding.UTF8.GetBytes(post);
         var startIndex = 0;
         foreach (Match match in matches)
