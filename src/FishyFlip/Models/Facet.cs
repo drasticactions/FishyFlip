@@ -75,12 +75,14 @@ public partial class Facet
     {
         var facets = new List<Facet>();
         var matches = Regex.Matches(post, @"(https?://[^\s]+)");
+        var postBytes = Encoding.UTF8.GetBytes(post);
+        var startIndex = 0;
         foreach (Match match in matches)
         {
-            var start = match.Index;
-            var end = match.Index + match.Length;
-            var uri = match.Value;
-            facets.Add(CreateFacetLink(start, end, uri));
+            var matchBytes = Encoding.UTF8.GetBytes(match.Value);
+            var position = FindPattern(postBytes, matchBytes, startIndex);
+            startIndex = position.End;
+            facets.Add(CreateFacetLink(position.Start, position.End, match.Value));
         }
 
         return facets.ToArray();
@@ -97,11 +99,14 @@ public partial class Facet
     {
         var facets = new List<Facet>();
         var matches = Regex.Matches(post, baseText);
+        var postBytes = Encoding.UTF8.GetBytes(post);
+        var startIndex = 0;
         foreach (Match match in matches)
         {
-            var start = match.Index;
-            var end = match.Index + match.Length;
-            facets.Add(CreateFacetLink(start, end, uri));
+            var matchBytes = Encoding.UTF8.GetBytes(match.Value);
+            var position = FindPattern(postBytes, matchBytes, startIndex);
+            startIndex = position.End;
+            facets.Add(CreateFacetLink(position.Start, position.End, uri));
         }
 
         return facets.ToArray();
@@ -118,10 +123,13 @@ public partial class Facet
 
         // Match all hashtags in the post that are not part of a URL.
         var matches = Regex.Matches(post, @"(?<![@\w/])#(?!\s)[\w\u0080-\uFFFF]+");
+        var postBytes = Encoding.UTF8.GetBytes(post);
+        var startIndex = 0;
         foreach (Match match in matches)
         {
-            var start = match.Index;
-            var end = match.Index + match.Length;
+            var matchBytes = Encoding.UTF8.GetBytes(match.Value);
+            var position = FindPattern(postBytes, matchBytes, startIndex);
+
             var hashtag = match.Value;
 
             if (hashtag.StartsWith("#"))
@@ -129,12 +137,8 @@ public partial class Facet
                 hashtag = hashtag.Substring(1);
             }
 
-            if (string.IsNullOrEmpty(hashtag))
-            {
-                continue;
-            }
-
-            facets.Add(CreateFacetHashtag(start, end, hashtag));
+            facets.Add(CreateFacetHashtag(position.Start, position.End, hashtag));
+            startIndex = position.End;
         }
 
         return facets.ToArray();
@@ -152,10 +156,13 @@ public partial class Facet
 
         // Match all mentions in the post that are not part of a URL.
         var matches = Regex.Matches(post, @"@(?!http)[a-zA-Z0-9][-a-zA-Z0-9_.]{1,}");
+        var postBytes = Encoding.UTF8.GetBytes(post);
+        var startIndex = 0;
         foreach (Match match in matches)
         {
-            var start = match.Index;
-            var end = match.Index + match.Length;
+            var matchBytes = Encoding.UTF8.GetBytes(match.Value);
+            var position = FindPattern(postBytes, matchBytes, startIndex);
+
             var mention = match.Value;
             if (mention.StartsWith("@"))
             {
@@ -170,8 +177,10 @@ public partial class Facet
             var actor = actors.FirstOrDefault(n => n.Handle.ToString() == mention);
             if (actor?.Did is not null)
             {
-                facets.Add(CreateFacetMention(start, end, actor.Did));
+                facets.Add(CreateFacetMention(position.Start, position.End, actor.Did));
             }
+
+            startIndex = position.End;
         }
 
         return facets.ToArray();
@@ -239,4 +248,55 @@ public partial class Facet
     /// <returns>Array of Facets.</returns>
     public static Facet[] ForMentions(string post, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic actor)
         => ForMentions(post, new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic[] { actor });
+
+    /// <summary>
+    /// Parses a post and returns an array of facets.
+    /// </summary>
+    /// <param name="post">The post text.</param>
+    /// <param name="actors">Optional list of Actor DID values, used for creating Mention Facets.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] Parse(string post, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic[]? actors = null)
+    {
+        var uriFacets = ForUris(post);
+        var hashtagFacets = ForHashtags(post);
+        var mentionFacets = ForMentions(post, actors ?? Array.Empty<Actor.ProfileViewBasic>());
+        return uriFacets.Concat(hashtagFacets).Concat(mentionFacets).ToArray();
+    }
+
+    /// <summary>
+    /// Parses a post and returns an array of facets.
+    /// </summary>
+    /// <param name="post">The post text.</param>
+    /// <param name="actors">Optional list of Actor DID values, used for creating Mention Facets.</param>
+    /// <returns>Array of Facets.</returns>
+    public static Facet[] Parse(string post, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed[]? actors = null)
+    {
+        var uriFacets = ForUris(post);
+        var hashtagFacets = ForHashtags(post);
+        var mentionFacets = ForMentions(post, actors ?? Array.Empty<Actor.ProfileViewDetailed>());
+        return uriFacets.Concat(hashtagFacets).Concat(mentionFacets).ToArray();
+    }
+
+    private static (int Start, int End) FindPattern(byte[] source, byte[] pattern, int startIndex = 0)
+    {
+        return FindPattern(source.AsSpan(), pattern.AsSpan(), startIndex);
+    }
+
+    private static (int Start, int End) FindPattern(ReadOnlySpan<byte> source, ReadOnlySpan<byte> pattern, int startIndex = 0)
+    {
+        if (pattern.IsEmpty || pattern.Length > source.Length)
+        {
+            return (0, 0);
+        }
+
+        for (int i = startIndex; i <= source.Length - pattern.Length; i++)
+        {
+            if (source.Slice(i, pattern.Length).SequenceEqual(pattern))
+            {
+                return (i, i + pattern.Length);
+            }
+        }
+
+        return (0, 0);
+    }
 }
