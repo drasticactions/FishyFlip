@@ -32,6 +32,7 @@ function RemoveDirectory {
 function Install-GitVersion {
     Write-Host "Installing GitVersion.Tool..."
     dotnet tool install --global GitVersion.Tool
+    dotnet-gitversion /output buildserver
 }
 
 # Build for Windows (x64)
@@ -75,7 +76,6 @@ switch ($Target) {
         Build-WindowsX64
     }
     'all' {
-        Install-GitVersion
         Build-WindowsX64
     }
     default {
