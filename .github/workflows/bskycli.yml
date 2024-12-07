@@ -1,0 +1,107 @@
+name: bskycli
+
+on:
+  push:
+    branches: [ "main", release-*, develop ]
+  pull_request:
+    branches: [ "main", release-*, develop ]
+  workflow_dispatch:
+
+jobs:
+    Linux:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+
+        - name: Setup .NET Core
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: 9.x
+
+        - name: Install GitVersion
+          uses: gittools/actions/gitversion/setup@v3.0.3
+          with:
+            versionSpec: '6.x'
+
+        - name: Run make linux-x64
+          run: make bskycli_linux
+
+        - name: Determine Version
+          id:   gitversion
+          uses: gittools/actions/gitversion/execute@v3.0.3
+
+        - name: Upload package x64
+          uses: actions/upload-artifact@v4
+          with:
+            name: bskycli-linux-x64-${{ steps.gitversion.outputs.FullSemVer }}
+            path: artifacts/linux-x64
+
+    MacOS:
+      runs-on: macos-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+
+        - name: Setup .NET Core
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: 9.x
+        
+        - name: Install GitVersion
+          uses: gittools/actions/gitversion/setup@v3.0.3
+          with:
+            versionSpec: '6.x'
+
+        - name: Run make osx
+          run: make bskycli_macos
+
+        - name: Determine Version
+          id:   gitversion
+          uses: gittools/actions/gitversion/execute@v3.0.3
+
+        - name: Upload package arm64
+          uses: actions/upload-artifact@v4
+          with:
+            name: bskycli-osx-arm64-${{ steps.gitversion.outputs.FullSemVer }}
+            path: artifacts/osx-arm64
+            
+        - name: Upload package x64
+          uses: actions/upload-artifact@v4
+          with:
+            name: bskycli-osx-x64-${{ steps.gitversion.outputs.FullSemVer }}
+            path: artifacts/osx-x64
+
+    Windows:
+        runs-on: windows-latest
+        steps:
+          - uses: actions/checkout@v3
+            with:
+              fetch-depth: 0
+  
+          - name: Setup .NET Core
+            uses: actions/setup-dotnet@v4
+            with:
+              dotnet-version: 9.x
+
+          - name: Install GitVersion
+            uses: gittools/actions/gitversion/setup@v3.0.3
+            with:
+              versionSpec: '6.x'
+
+          - name: Run powershell script
+            run: |
+              .\bskycli_publish.ps1
+
+          - name: Determine Version
+            id:   gitversion
+            uses: gittools/actions/gitversion/execute@v3.0.3
+
+          - name: Upload package x64
+            uses: actions/upload-artifact@v4
+            with:
+              name: bskycli-win-x64-${{ steps.gitversion.outputs.FullSemVer }}
+              path: artifacts/win-x64
+        
