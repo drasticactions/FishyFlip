@@ -12,7 +12,6 @@ using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Models;
 using FishyFlip.Tools;
 using Microsoft.Extensions.Logging;
-using Org.BouncyCastle.Crypto.Tls;
 
 var app = ConsoleApp.Create();
 app.Add<AppCommands>();
