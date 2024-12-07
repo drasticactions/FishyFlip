@@ -33,8 +33,6 @@ public class AppCommands
     /// <param name="password">-p, Password.</param>
     /// <param name="embedRecord">-r, The record to embed in the post.</param>
     /// <param name="embedRecordCid">-c, The CID of the record to embed in the post. Required if embedding record.</param>
-    /// <param name="width">-w, The width of the video. If less than or equal to 0, will be generated via ffmpeg.</param>
-    /// <param name="height">-h, The height of the video. If less than or equal to 0, will be generated via ffmpeg.</param>
     /// <param name="alt">-a, The alt text for the video.</param>
     /// <param name="vttFiles">-vtt, The VTT files for the video.</param>
     /// <param name="vttFileLanaguages">-vttl, The languages for the VTT files.</param>
@@ -45,7 +43,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("post video")]
-    public async Task CreatePostWithVideoAsync([Argument] string videoPath, string username, string password, string? embedRecord = default, string? embedRecordCid = default, int width = 0, int height = 0, string? alt = default, string[]? vttFiles = default, string[]? vttFileLanaguages = default, string? post = default, string[]? languages = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task CreatePostWithVideoAsync([Argument] string videoPath, string username, string password, string? embedRecord = default, string? embedRecordCid = default, string? alt = default, string[]? vttFiles = default, string[]? vttFileLanaguages = default, string? post = default, string[]? languages = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         ATUri? atUri = null;
@@ -110,10 +108,7 @@ public class AppCommands
             }
         }
 
-        if (width <= 0 || height <= 0)
-        {
-            (width, height) = this.GetVideoDimensions(videoPath);
-        }
+        var (width, height) = this.GetDimensions(videoPath);
 
         using var videoStream = File.OpenRead(videoPath);
         var videoContentStream = new StreamContent(videoStream);
@@ -185,6 +180,13 @@ public class AppCommands
             return;
         }
 
+        if (!this.IsFFmpegInstalled() || !this.IsFFprobeInstalled())
+        {
+            // TODO: Add a more complete error message.
+            consoleLog.LogError("FFmpeg is not installed.");
+            return;
+        }
+
         var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
 
         foreach (var imagePath in imagePaths)
@@ -207,6 +209,7 @@ public class AppCommands
         for (int i = 0; i < imagePaths.Length; i++)
         {
             string? imagePath = imagePaths[i];
+            var (width, height) = this.GetDimensions(imagePath);
             using var imageStream = File.OpenRead(imagePath);
             var imageContentStream = new StreamContent(imageStream);
             imageContentStream.Headers.ContentLength = imageStream.Length;
@@ -225,7 +228,7 @@ public class AppCommands
                 return;
             }
 
-            images.Add(new Image(image: imageResult!.Blob, alt: imageAlts?[i].Trim() ?? string.Empty));
+            images.Add(new Image(image: imageResult!.Blob, aspectRatio: new(width, height), alt: imageAlts?[i].Trim() ?? string.Empty));
         }
 
         var markdownPost = MarkdownPost.Parse(post ?? string.Empty);
@@ -465,7 +468,7 @@ public class AppCommands
         return atProtocol;
     }
 
-    private (int width, int height) GetVideoDimensions(string videoPath)
+    private (int width, int height) GetDimensions(string videoPath)
     {
         using var process = new Process();
         process.StartInfo.FileName = "ffprobe";
