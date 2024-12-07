@@ -9,7 +9,6 @@ $ROOT = $PSScriptRoot
 $BSKYCLI_ROOT = Join-Path $ROOT "apps\bskycli"
 $BSKYCLI_PROJECT = Join-Path $BSKYCLI_ROOT "bskycli.csproj"
 $BUILD_TYPE = "Release"
-$OUTPUT_DIR = Join-Path $ROOT "output"
 $ARTIFACTS_DIR = Join-Path $ROOT "artifacts"
 
 # Helper function to create directory if it doesn't exist
@@ -40,21 +39,11 @@ function Build-WindowsX64 {
     Write-Host "Building for Windows x64..."
     
     # Clean previous build
-    RemoveDirectory "$OUTPUT_DIR\win-x64"
     RemoveDirectory "$ARTIFACTS_DIR\win-x64"
     
     # Build and publish
     dotnet build $BSKYCLI_PROJECT -c $BUILD_TYPE -r win-x64
-    dotnet publish $BSKYCLI_PROJECT -c $BUILD_TYPE -r win-x64 -o "$OUTPUT_DIR\win-x64"
-    
-    # Create zip file
-    Write-Host "Creating zip file..."
-    EnsureDirectory "$ARTIFACTS_DIR\win-x64"
-    
-    $version = (dotnet-gitversion /showvariable AssemblySemFileVer).Trim()
-    $zipPath = Join-Path $ARTIFACTS_DIR "win-x64\bskycli-win-x64-$version.zip"
-    
-    Compress-Archive -Path "$OUTPUT_DIR\win-x64\*" -DestinationPath $zipPath -Force
+    dotnet publish $BSKYCLI_PROJECT -c $BUILD_TYPE -r win-x64 -o "$ARTIFACTS_DIR\win-x64"
 }
 
 # Clean build artifacts
