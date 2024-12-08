@@ -169,7 +169,7 @@ public class PropertyGeneration
             "bytes" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].EncodeToBytes();",
             "cid-link" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATCid();",
             "unknown" => this.GenerateCborPropertyForUnknownType(property),
-            "object" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
+            "object" => this.GenericObjectToCborType(property),
             "record" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();",
             "union" when property.Refs?.Length > 0 => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = {this.GetCborUnionType(property, this.Key)};",
             "blob" => $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = new FishyFlip.Models.Blob(obj[\"{this.Key}\"]);",
@@ -181,6 +181,17 @@ public class PropertyGeneration
         };
 
         return baseType;
+    }
+
+    private string GenericObjectToCborType(PropertyDefinition property)
+    {
+        var classDef = AppCommands.AllClasses.FirstOrDefault(n => n.Key == this.Key);
+        if (classDef is not null)
+        {
+            return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].ToATObject();";
+        }
+
+        return $"// Temp {this.Key}";
     }
 
     private string GetCborUnionType(PropertyDefinition property, string key)
@@ -323,7 +334,7 @@ public class PropertyGeneration
             "cid-link" => "Ipfs.Cid",
             "array" when property.Items != null => this.GetListPropertyName(className, name, property),
             "unknown" => this.GetUnknownObjectType(property),
-            "object" => "ATObject",
+            "object" => this.GetObjectType(property),
             "record" => "ATObject",
             "union" => this.GetUnionType(property), // Could be expanded to generate union types
             "ref" when !string.IsNullOrEmpty(property.Ref) && !property.Ref.Equals("com.atproto.repo.strongRef") => this.GetClassNameFromRef(property.Ref),
@@ -338,6 +349,19 @@ public class PropertyGeneration
         }
 
         return $"{baseType}?";
+    }
+
+    private string GetObjectType(PropertyDefinition property)
+    {
+        var classDef = AppCommands.AllClasses.FirstOrDefault(n => n.Key == this.Key);
+        if (classDef is not null)
+        {
+            return "ATObject";
+        }
+
+        var fullClassNamespace = this.Class!.CSharpNamespace;
+
+        return $"{fullClassNamespace}.{this.Key.ToPascalCase()}";
     }
 
     private string GetUnionType(PropertyDefinition property)

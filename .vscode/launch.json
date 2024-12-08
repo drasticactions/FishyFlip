@@ -7,8 +7,40 @@
             "request": "launch",
             "preLaunchTask": "build_ffsourcegen",
             "program": "${workspaceFolder}/tools/FFSourceGen/bin/Debug/net9.0/FFSourceGen.dll",
-            "args": [ "generate", "${workspaceFolder}/../atproto/lexicons", "-o", "${workspaceFolder}/src/FishyFlip/", "-t", "${workspaceFolder}/../whitewind-blog/lexicons/com/whtwnd" ],
+            "args": [ "generate", "${workspaceFolder}/../atproto/lexicons", "-o", "${workspaceFolder}/src/FishyFlip/", "-t", "${workspaceFolder}/../whitewind-blog/lexicons/com/whtwnd", "${workspaceFolder}/../atfile/blue/zio" ],
             "cwd": "${workspaceFolder}/tools/FFSourceGen",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "atfile_list",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_bskycli",
+            "program": "${workspaceFolder}/apps/bskycli/bin/Debug/net9.0/bskycli.dll",
+            "args": [ 
+                "atfile",
+                "list",
+                "did:web:zio.sh",
+                "-v"
+            ],
+            "cwd": "${workspaceFolder}/apps/bskycli",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "atfile_png",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_bskycli",
+            "program": "${workspaceFolder}/apps/bskycli/bin/Debug/net9.0/bskycli.dll",
+            "args": [ 
+                "atfile",
+                "download",
+                "at://did:web:zio.sh/blue.zio.atfile.upload/avatar-mod-no",
+                "-v"
+            ],
+            "cwd": "${workspaceFolder}/apps/bskycli",
             "console": "internalConsole",
             "stopAtEntry": false
         },

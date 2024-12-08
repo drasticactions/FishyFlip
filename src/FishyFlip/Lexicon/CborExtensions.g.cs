@@ -71,6 +71,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.BlockedPost(obj);
                 case "com.whtwnd.blog.defs#blogEntry":
                     return new Com.Whtwnd.Blog.BlogEntry(obj);
+                case "blue.zio.atfile.finger#browser":
+                    return new Blue.Zio.Atfile.Browser(obj);
                 case "app.bsky.actor.defs#bskyAppProgressGuide":
                     return new App.Bsky.Actor.BskyAppProgressGuide(obj);
                 case "app.bsky.actor.defs#bskyAppStatePref":
@@ -443,6 +445,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.LogDeleteMessage(obj);
                 case "chat.bsky.convo.defs#logLeaveConvo":
                     return new Chat.Bsky.Convo.LogLeaveConvo(obj);
+                case "blue.zio.atfile.finger#machine":
+                    return new Blue.Zio.Atfile.Machine(obj);
                 case "tools.ozone.team.defs#member":
                     return new Tools.Ozone.Team.Member(obj);
                 case "app.bsky.richtext.facet#mention":
@@ -539,6 +543,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.PostView(obj);
                 case "app.bsky.actor.profile":
                     return new App.Bsky.Actor.Profile(obj);
+                case "blue.zio.meta.profile":
+                    return new Blue.Zio.Meta.Profile(obj);
                 case "app.bsky.actor.defs#profileAssociated":
                     return new App.Bsky.Actor.ProfileAssociated(obj);
                 case "app.bsky.actor.defs#profileAssociatedChat":
@@ -737,6 +743,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.ThreadViewPref(obj);
                 case "com.atproto.admin.defs#threatSignature":
                     return new Com.Atproto.Admin.ThreatSignature(obj);
+                case "blue.zio.atfile.meta#unknown":
+                    return new Blue.Zio.Atfile.Unknown(obj);
                 case "app.bsky.graph.unmuteActor#UnmuteActorInput":
                     return new App.Bsky.Graph.UnmuteActorInput(obj);
                 case "app.bsky.graph.unmuteActorList#UnmuteActorListInput":
@@ -777,6 +785,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.UpdateSubjectStatusOutput(obj);
                 case "tools.ozone.communication.updateTemplate#UpdateTemplateInput":
                     return new Tools.Ozone.Communication.UpdateTemplateInput(obj);
+                case "blue.zio.atfile.upload":
+                    return new Blue.Zio.Atfile.Upload(obj);
                 case "com.atproto.repo.uploadBlob#UploadBlobOutput":
                     return new Com.Atproto.Repo.UploadBlobOutput(obj);
                 case "app.bsky.video.uploadVideo#UploadVideoOutput":

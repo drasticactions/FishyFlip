@@ -13,9 +13,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Initializes a new instance of the <see cref="ModEventAcknowledge"/> class.
         /// </summary>
         /// <param name="comment"></param>
-        public ModEventAcknowledge(string? comment = default)
+        /// <param name="acknowledgeAccountSubjects">If true, all other reports on content authored by this account will be resolved (acknowledged).</param>
+        public ModEventAcknowledge(string? comment = default, bool? acknowledgeAccountSubjects = default)
         {
             this.Comment = comment;
+            this.AcknowledgeAccountSubjects = acknowledgeAccountSubjects;
         }
 
 
@@ -33,6 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventAcknowledge(CBORObject obj)
         {
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["acknowledgeAccountSubjects"] is not null) this.AcknowledgeAccountSubjects = obj["acknowledgeAccountSubjects"].AsBoolean();
         }
 
         /// <summary>
@@ -40,6 +43,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the acknowledgeAccountSubjects.
+        /// <br/> If true, all other reports on content authored by this account will be resolved (acknowledged).
+        /// </summary>
+        [JsonPropertyName("acknowledgeAccountSubjects")]
+        public bool? AcknowledgeAccountSubjects { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
