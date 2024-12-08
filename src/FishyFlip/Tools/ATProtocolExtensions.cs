@@ -173,6 +173,19 @@ public static class ATProtocolExtensions
                 }
             }
         }
+        else if (pathAndQueryString.Contains("did"))
+        {
+            // did is a query string value of "did"
+            var didName = pathAndQueryString.Split('&').FirstOrDefault(x => x.Contains("did="));
+            if (!string.IsNullOrEmpty(didName))
+            {
+                var did = didName.Split('=')[1];
+                if (ATDid.TryCreate(did, out ATDid? atdid))
+                {
+                    host = await protocol.ResolveATDidHostAsync(atdid!) ?? string.Empty;
+                }
+            }
+        }
 
         if (string.IsNullOrEmpty(host))
         {

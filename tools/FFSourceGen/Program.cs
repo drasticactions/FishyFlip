@@ -1622,6 +1622,27 @@ public partial class AppCommands
         this.GenerateFromJsonWithSourceGenerator(sb, cls);
 
         sb.AppendLine("    }");
+
+        var nonAtObjectProperties = cls.Properties.Where(n => n.PropertyDefinition.Type == "object" && !AllClasses.Any(y => y.Key == n.Key)).ToList();
+        foreach (var prop in nonAtObjectProperties)
+        {
+            sb.AppendLine();
+            sb.AppendLine($"    public partial class {prop.ClassName}");
+            sb.AppendLine("    {");
+            foreach (var prop2 in prop.PropertyDefinition.Properties)
+            {
+                var newProp = new PropertyGeneration(prop2.Value, prop2.Key, cls);
+                this.GenerateProperty(sb, newProp, cls);
+            }
+            // foreach (var prop2 in prop.PropertyDefinition.Properties!)
+            // {
+            //     sb.AppendLine($"        [JsonPropertyName(\"{prop2.Key}\")]");
+            //     sb.AppendLine($"        public {prop2.Value.CSharpType} {prop2.Value.} {{ get; set; }}");
+            // }
+
+            sb.AppendLine("    }");
+        }
+
         sb.AppendLine("}");
         sb.AppendLine();
         var outputPath = Path.Combine(this.basePath, cls.Path);

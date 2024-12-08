@@ -4,14 +4,17 @@
 
 using System.Diagnostics;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using Bskycli;
 using ConsoleAppFramework;
 using FishyFlip;
 using FishyFlip.Lexicon;
 using FishyFlip.Lexicon.App.Bsky.Embed;
+using FishyFlip.Lexicon.Blue.Zio.Atfile;
 using FishyFlip.Models;
 using FishyFlip.Tools;
 using Microsoft.Extensions.Logging;
+using File = System.IO.File;
 
 var app = ConsoleApp.Create();
 app.Add<AppCommands>();
@@ -421,6 +424,148 @@ public class AppCommands
         await using var fileStream = file.OpenWrite();
         await fileStream.WriteAsync(result!, cancellationToken);
         consoleLog.Log($"Downloaded blob to {file.FullName}.");
+    }
+
+    /// <summary>
+    /// Download an ATFile file from a repository.
+    /// </summary>
+    /// <param name="atDidString">The ATDid.</param>
+    /// <param name="rkey">The Record Key (rkey).</param>
+    /// <param name="outputName">-o, The file output name. Defaults to a generated value.</param>
+    /// <param name="instanceUrl">-i, Instance URL.</param>
+    /// <param name="verbose">-v, Verbose logging.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Task.</returns>
+    [Command("atfile download")]
+    public async Task DownloadATFileAsync([Argument] string atDidString, [Argument] string rkey, string? outputName = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+        var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
+        if (!ATDid.TryCreate(atDidString, out var atUri))
+        {
+            consoleLog.LogError("Invalid ATDid.");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(rkey))
+        {
+            consoleLog.LogError("RKey is required.");
+            return;
+        }
+
+        consoleLog.Log($"Fetching Record: {atUri}");
+        var (uploadRecord, error) = await atProtocol.GetUploadAsync(repo: atUri!, rkey: rkey, cancellationToken: cancellationToken);
+        if (error is not null)
+        {
+            consoleLog.LogError(error.ToString());
+            return;
+        }
+
+        var upload = (Upload)uploadRecord!.Value!;
+        consoleLog.Log($"Downloading Blob...");
+
+        var cid = upload.Blob!.Ref!.Link!;
+        (var result, var error2) = await atProtocol.Sync.GetBlobAsync(atUri!, cid, cancellationToken);
+        if (error2 != null)
+        {
+            consoleLog.LogError(error2.ToString());
+            return;
+        }
+
+        var directory = Path.GetDirectoryName(outputName);
+        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        outputName = outputName ?? $"{upload.File?.Name}" ?? $"{cid}.bin";
+
+        if (upload.Checksum is not null)
+        {
+            var computedHash = string.Empty;
+            switch (upload.Checksum.Algo)
+            {
+                case "md5":
+                    var md5 = MD5.Create();
+                    computedHash = BitConverter.ToString(md5.ComputeHash(result!)).Replace("-", string.Empty);
+                    break;
+                case "sha256":
+                    var sha256 = SHA256.Create();
+                    computedHash = BitConverter.ToString(sha256.ComputeHash(result!)).Replace("-", string.Empty);
+                    break;
+                case "sha512":
+                    var sha512 = SHA512.Create();
+                    computedHash = BitConverter.ToString(sha512.ComputeHash(result!)).Replace("-", string.Empty);
+                    break;
+                case "sha1":
+                    var sha1 = SHA1.Create();
+                    computedHash = BitConverter.ToString(sha1.ComputeHash(result!)).Replace("-", string.Empty);
+                    break;
+                case "sha384":
+                    var sha384 = SHA384.Create();
+                    computedHash = BitConverter.ToString(sha384.ComputeHash(result!)).Replace("-", string.Empty);
+                    break;
+                default:
+                    consoleLog.LogWarning($"Unsupported checksum algorithm, ignoring...: {upload.Checksum.Algo}");
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(computedHash) && computedHash.Equals(upload.Checksum.Hash, StringComparison.OrdinalIgnoreCase) == false)
+            {
+                consoleLog.LogError($"Checksum mismatch: Type - {upload.Checksum.Algo}, Download - {computedHash}, ATFile - {upload.Checksum.Hash}");
+                return;
+            }
+        }
+
+        var file = new FileInfo(outputName);
+        await using var fileStream = file.OpenWrite();
+        await fileStream.WriteAsync(result!, cancellationToken);
+        consoleLog.Log($"Downloaded blob to {file.FullName}.");
+    }
+
+    /// <summary>
+    /// List ATFile files in a repository.
+    /// </summary>
+    /// <param name="atDid">The repo to download from.</param>
+    /// <param name="instanceUrl">-i, Instance URL.</param>
+    /// <param name="verbose">-v, Verbose logging.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Task.</returns>
+    [Command("atfile list")]
+    public async Task ListATFilesAsync([Argument] string atDid, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+        var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
+        if (!ATDid.TryCreate(atDid, out var atUri))
+        {
+            consoleLog.LogError("Invalid DID.");
+            return;
+        }
+
+        var cursor = string.Empty;
+        do
+        {
+            (var result, var error) = await atProtocol.ListUploadAsync(repo: atUri!, cursor: cursor, cancellationToken: cancellationToken);
+            if (error != null)
+            {
+                consoleLog.LogError(error.ToString());
+                return;
+            }
+
+            cursor = result!.Cursor;
+
+            foreach (var file in result!.Records!)
+            {
+                var upload = file.Value as Upload;
+                if (upload is null)
+                {
+                    continue;
+                }
+
+                consoleLog.Log($"{file.Uri!.Rkey} - Cid: {file.Cid} - Name: {upload.File?.Name ?? "Unknown"} - Type: {upload.File?.MimeType ?? "Unknown Type"} -  Uploaded: {upload.CreatedAt}");
+            }
+        }
+        while (!string.IsNullOrEmpty(cursor));
     }
 
     private async Task<bool> AuthenticateWithAppPasswordAsync(string username, string password, ATProtocol atProtocol, ConsoleLog consoleLog)
