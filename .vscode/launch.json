@@ -7,7 +7,7 @@
             "request": "launch",
             "preLaunchTask": "build_ffsourcegen",
             "program": "${workspaceFolder}/tools/FFSourceGen/bin/Debug/net9.0/FFSourceGen.dll",
-            "args": [ "generate", "${workspaceFolder}/../atproto/lexicons", "-o", "${workspaceFolder}/src/FishyFlip/", "-t", "${workspaceFolder}/../whitewind-blog/lexicons/com/whtwnd", "${workspaceFolder}/../atfile/blue/zio" ],
+            "args": [ "generate", "${workspaceFolder}/../atproto/lexicons", "-o", "${workspaceFolder}/src/FishyFlip/" ],
             "cwd": "${workspaceFolder}/tools/FFSourceGen",
             "console": "internalConsole",
             "stopAtEntry": false
@@ -37,7 +37,8 @@
             "args": [ 
                 "atfile",
                 "download",
-                "at://did:web:zio.sh/blue.zio.atfile.upload/avatar-mod-no",
+                "did:web:zio.sh",
+                "avatar-mod-no",
                 "-v"
             ],
             "cwd": "${workspaceFolder}/apps/bskycli",
