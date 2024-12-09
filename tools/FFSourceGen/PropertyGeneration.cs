@@ -278,7 +278,7 @@ public class PropertyGeneration
             "long" => "AsInt64Value()",
             "bool" => "AsBoolean()",
             "byte[]" => "EncodeToBytes()",
-            "datetime" => "AsDateTime()",
+            "datetime" => "ToDateTime() ?? default",
             "ipfs.cid" => "ToATCid()!",
             _ => throw new InvalidOperationException($"Unknown type: {type}"),
         };
