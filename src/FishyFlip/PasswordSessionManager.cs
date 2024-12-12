@@ -100,14 +100,12 @@ internal class PasswordSessionManager : ISessionManager
     /// <param name="password">The password of the user.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    internal async Task<Session?> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
+    internal async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
 #pragma warning disable CS0618
-        var sessionResult = await this.protocol.CreateSessionAsync(identifier, password, cancellationToken: cancellationToken);
+        var (session, error) = await this.protocol.CreateSessionAsync(identifier, password, cancellationToken: cancellationToken);
 #pragma warning restore CS0618
-        Session? resultSession = null;
-        sessionResult.Switch(
-            session =>
+        if (session is not null)
         {
             if (this.protocol.Options.UseServiceEndpointUponLogin)
             {
@@ -134,7 +132,7 @@ internal class PasswordSessionManager : ISessionManager
                 }
             }
 
-            resultSession = new Session(
+            var resultSession = new Session(
                 session!.Did!,
                 session.DidDoc,
                 session.Handle!,
@@ -142,10 +140,16 @@ internal class PasswordSessionManager : ISessionManager
                 session.AccessJwt!,
                 session.RefreshJwt!);
             this.SetSession(resultSession);
-        },
-            e => this.logger?.LogError(e.ToString()));
+            return resultSession;
+        }
 
-        return resultSession;
+        if (error is not null)
+        {
+            this.logger?.LogError(error.ToString());
+            return error;
+        }
+
+        throw new ATProtocolUnknownError($"Unknown error in Password CreateSessionAsync.");
     }
 
     /// <summary>
