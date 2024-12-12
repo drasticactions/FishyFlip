@@ -116,12 +116,27 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="password">The password of the user.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Session?> AuthenticateWithPasswordAsync(string identifier, string password, CancellationToken cancellationToken = default)
+    public async Task<Result<Session?>> AuthenticateWithPasswordResultAsync(string identifier, string password, CancellationToken cancellationToken = default)
     {
         var passwordSessionManager = new PasswordSessionManager(this);
         this.SessionManager = passwordSessionManager;
 
         return await passwordSessionManager.CreateSessionAsync(identifier, password, cancellationToken);
+    }
+
+    /// <summary>
+    /// Asynchronously creates a new session manager using a password.
+    /// </summary>
+    /// <param name="identifier">The identifier of the user.</param>
+    /// <param name="password">The password of the user.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    [Obsolete("Use AuthenticateWithPasswordResultAsync instead.")]
+    public async Task<Session?> AuthenticateWithPasswordAsync(string identifier, string password, CancellationToken cancellationToken = default)
+    {
+        // The error is logged in the AuthenticateWithPasswordResultAsync method.
+        var (result, _) = await this.AuthenticateWithPasswordResultAsync(identifier, password, cancellationToken);
+        return result;
     }
 
     /// <summary>

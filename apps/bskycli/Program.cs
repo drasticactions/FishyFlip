@@ -576,7 +576,7 @@ public class AppCommands
             return false;
         }
 
-        var result = await atProtocol.AuthenticateWithPasswordAsync(username, password);
+        var (result, error) = await atProtocol.AuthenticateWithPasswordResultAsync(username, password);
         if (result is null)
         {
             consoleLog.LogError($"Failed to authenticate as {username}.");

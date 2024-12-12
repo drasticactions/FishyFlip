@@ -2,14 +2,14 @@
 
 - There are two methods for logging in: OAuth and App Passwords. App Passwords were the original method for authentication, with OAuth being its replacement. However, the ATProtocol OAuth implementation is still being worked on and not totally final. If building a new application with authentication in mind, you may wish to design with OAuth for the future, but use app passwords today.
 
-- To log in with an App Password, you can call `AuthenticateWithPasswordAsync`
+- To log in with an App Password, you can call `AuthenticateWithPasswordResultAsync`
 
 ```csharp
 var atProtocol = new ATProtocolBuilder()
             .WithLogger(new DebugLoggerProvider().CreateLogger("FishyFlip"))
             .Build();
 
-var session = await atProtocol.AuthenticateWithPasswordAsync(identifier, password, cancellationToken);
+var (session, error) = await atProtocol.AuthenticateWithPasswordResultAsync(identifier, password, cancellationToken);
 if (session is null)
 {
     Console.WriteLine("Failed to authenticate.");

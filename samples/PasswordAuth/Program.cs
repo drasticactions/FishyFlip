@@ -31,7 +31,7 @@ public class AppCommands
             .WithLogger(new DebugLoggerProvider().CreateLogger("FishyFlip"))
             .Build();
 
-        var session = await protocol.AuthenticateWithPasswordAsync(identifier, password, cancellationToken);
+        var (session, error) = await protocol.AuthenticateWithPasswordResultAsync(identifier, password, cancellationToken);
         if (session is null)
         {
             Console.WriteLine("Failed to authenticate.");

@@ -36,7 +36,7 @@ public class AuthorizedTests
             .WithInstanceUrl(new Uri(instance))
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
         AuthorizedTests.proto = atProtocolBuilder.Build();
-        AuthorizedTests.proto!.AuthenticateWithPasswordAsync(handle, password).Wait();
+        AuthorizedTests.proto!.AuthenticateWithPasswordResultAsync(handle, password).Wait();
     }
 
     /// <summary>
