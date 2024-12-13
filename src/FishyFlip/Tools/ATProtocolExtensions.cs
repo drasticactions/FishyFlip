@@ -189,8 +189,29 @@ public static class ATProtocolExtensions
 
         if (string.IsNullOrEmpty(host))
         {
-            host = protocol.Options.Url.ToString();
-            logger?.LogDebug($"Host was empty, using default host {host}");
+            if (protocol.IsAuthenticated)
+            {
+                host = protocol.SessionManager.Session?.DidDoc?.GetServiceEndpointUrl()?.ToString() ?? throw new InvalidOperationException("Session did doc is required.");
+                logger?.LogDebug($"Using PDS host {host}");
+            }
+            else
+            {
+                host = protocol.Options.Url.ToString();
+                if (host.Contains(Constants.Urls.ATProtoServer.PublicApi) && pathAndQueryString.Contains(FishyFlip.Lexicon.Com.Atproto.Server.ServerEndpoints.CreateSession))
+                {
+                    host = Constants.Urls.ATProtoServer.SocialApi;
+                    logger?.LogDebug($"Trying to authenticate with PublicAPI endpoint, switching to Social: {host}");
+                }
+                else
+                {
+                    logger?.LogDebug($"Host was empty, using default host {host}");
+                }
+            }
+        }
+
+        if (string.IsNullOrEmpty(host))
+        {
+            throw new InvalidOperationException("Host is required.");
         }
 
         if (host.EndsWith("/") && pathAndQueryString.StartsWith("/"))

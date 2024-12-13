@@ -26,11 +26,9 @@ public class AnonymousTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        string instance = "https://bsky.social";
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)
-            .WithInstanceUrl(new Uri(instance))
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
         AnonymousTests.proto = atProtocolBuilder.Build();
     }
