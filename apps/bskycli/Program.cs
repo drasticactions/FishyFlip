@@ -45,7 +45,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("post video")]
-    public async Task CreatePostWithVideoAsync([Argument] string videoPath, string username, string password, string? embedRecord = default, string? embedRecordCid = default, string? alt = default, string[]? vttFiles = default, string[]? vttFileLanaguages = default, string? post = default, string[]? languages = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task CreatePostWithVideoAsync([Argument] string videoPath, string username, string password, string? embedRecord = default, string? embedRecordCid = default, string? alt = default, string[]? vttFiles = default, string[]? vttFileLanaguages = default, string? post = default, string[]? languages = default, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         ATUri? atUri = null;
@@ -165,7 +165,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("post image")]
-    public async Task CreatePostWithImagesAsync([Argument] string[] imagePaths, string username, string password, string? embedRecord = default, string? embedRecordCid = default, string[]? imageAlts = default, string? post = default, string[]? languages = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task CreatePostWithImagesAsync([Argument] string[] imagePaths, string username, string password, string? embedRecord = default, string? embedRecordCid = default, string[]? imageAlts = default, string? post = default, string[]? languages = default, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
 
@@ -264,7 +264,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("post")]
-    public async Task CreatePostAsync([Argument] string post, string username, string password, string? embedRecord = default, string? embedRecordCid = default, string? embeddedUrl = default, string[]? languages = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task CreatePostAsync([Argument] string post, string username, string password, string? embedRecord = default, string? embedRecordCid = default, string? embeddedUrl = default, string[]? languages = default, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
 
@@ -335,7 +335,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("did-doc")]
-    public async Task GetDidDocAsync([Argument] string did, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task GetDidDocAsync([Argument] string did, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
@@ -364,7 +364,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("resolve-handle")]
-    public async Task ResolveHandleAsync([Argument] string handle, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task ResolveHandleAsync([Argument] string handle, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
@@ -395,7 +395,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("download")]
-    public async Task DownloadBlobAsync([Argument] string atDid, [Argument] string cid, string? outputName = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task DownloadBlobAsync([Argument] string atDid, [Argument] string cid, string? outputName = default, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
@@ -437,7 +437,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("atfile download")]
-    public async Task DownloadATFileAsync([Argument] string atDidString, [Argument] string rkey, string? outputName = default, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task DownloadATFileAsync([Argument] string atDidString, [Argument] string rkey, string? outputName = default, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
@@ -532,7 +532,7 @@ public class AppCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     [Command("atfile list")]
-    public async Task ListATFilesAsync([Argument] string atDid, string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task ListATFilesAsync([Argument] string atDid, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);

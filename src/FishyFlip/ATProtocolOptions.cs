@@ -19,7 +19,7 @@ public class ATProtocolOptions
     /// <param name="customAtRecordConverters">Customer JSON Converters for ATRecord.</param>
     public ATProtocolOptions()
     {
-        this.Url = new Uri(Constants.Urls.ATProtoServer.SocialApi);
+        this.Url = new Uri(Constants.Urls.ATProtoServer.PublicApi);
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,

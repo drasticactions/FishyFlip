@@ -26,7 +26,7 @@ public class AnonymousTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        string instance = "https://bsky.social";
+        string instance = Constants.Urls.ATProtoServer.PublicApi;
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)
@@ -217,5 +217,38 @@ public class AnonymousTests
         var (result, error) = await AnonymousTests.proto!.ComWhtwndBlog.GetEntryAsync(postUri.Did!, postUri.Rkey);
         Assert.IsNull(error);
         Assert.IsNotNull(result);
+    }
+
+    /// <summary>
+    /// Gets the DID document.
+    /// </summary>
+    /// <param name="atDidString">ATDid.</param>
+    /// <returns>Task.</returns>
+    [TestMethod]
+    [DataRow("did:plc:s4ncxuatu3eyu6qus6brmf7o")]
+    [DataRow("did:web:zio.sh")]
+    [DataRow("did:web:yot.wtf")]
+    public async Task GetDidDocFromATDidTest(string atDidString)
+    {
+        var atDid = ATDid.Create(atDidString);
+        var (didDoc, error) = await AnonymousTests.proto!.ResolveATDidAsync(atDid!);
+        Assert.IsNull(error);
+        Assert.IsNotNull(didDoc);
+    }
+
+    /// <summary>
+    /// Gets the DID document.
+    /// </summary>
+    /// <param name="atHandleString">ATHandle.</param>
+    /// <returns>Task.</returns>
+    [TestMethod]
+    [DataRow("drasticactions.dev")]
+    [DataRow("drasticactions.jp")]
+    public async Task GetDidDocFromATHandleTest(string atHandleString)
+    {
+        var atHandle = ATHandle.Create(atHandleString);
+        var (didDoc, error) = await AnonymousTests.proto!.ResolveATHandleAsync(atHandle!);
+        Assert.IsNull(error);
+        Assert.IsNotNull(didDoc);
     }
 }

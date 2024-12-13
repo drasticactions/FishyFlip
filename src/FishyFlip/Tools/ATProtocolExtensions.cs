@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon.Com.Atproto.Identity;
+
 namespace FishyFlip.Tools;
 
 /// <summary>
@@ -154,6 +156,15 @@ public static class ATProtocolExtensions
     {
         var logger = protocol.Options.Logger;
         string host = string.Empty;
+
+        if (pathAndQueryString == FishyFlip.Lexicon.Com.Atproto.Server.ServerEndpoints.CreateSession)
+        {
+            if (protocol.Options.Url.ToString().Contains(Constants.Urls.ATProtoServer.PublicApi))
+            {
+                protocol.Options.Logger?.LogDebug("Switching to Social API for auth.");
+                host = Constants.Urls.ATProtoServer.SocialApi;
+            }
+        }
 
         // Find repo name in pathAndQueryString
         if (pathAndQueryString.Contains("repo"))

@@ -29,7 +29,7 @@ public class AuthorizedTests
     {
         string handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
         string password = (string?)context.Properties["BLUESKY_TEST_PASSWORD"] ?? throw new ArgumentNullException();
-        string instance = "https://bsky.social";
+        string instance = Constants.Urls.ATProtoServer.SocialApi;
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder()
             .EnableAutoRenewSession(false)

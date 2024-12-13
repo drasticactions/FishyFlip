@@ -354,7 +354,7 @@ public static class HttpClientExtensions
             }
             catch (Exception)
             {
-                atError = new ATError((int)message.StatusCode, null);
+                atError = new ATError((int)message.StatusCode);
             }
         }
 
