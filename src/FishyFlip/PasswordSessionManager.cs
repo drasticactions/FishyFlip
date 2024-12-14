@@ -98,12 +98,13 @@ internal class PasswordSessionManager : ISessionManager
     /// </summary>
     /// <param name="identifier">The identifier of the user.</param>
     /// <param name="password">The password of the user.</param>
+    /// <param name="authFactorToken">2-Factor Auth Token, optional.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    internal async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, CancellationToken cancellationToken = default)
+    internal async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, string? authFactorToken = default,  CancellationToken cancellationToken = default)
     {
 #pragma warning disable CS0618
-        var (session, error) = await this.protocol.CreateSessionAsync(identifier, password, cancellationToken: cancellationToken);
+        var (session, error) = await this.protocol.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken: cancellationToken);
 #pragma warning restore CS0618
         if (session is not null)
         {
