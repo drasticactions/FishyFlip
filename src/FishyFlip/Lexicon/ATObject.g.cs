@@ -278,7 +278,6 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(App.Bsky.Feed.Postgate), typeDiscriminator: "app.bsky.feed.postgate")]
     [JsonDerivedType(typeof(App.Bsky.Feed.PostView), typeDiscriminator: "app.bsky.feed.defs#postView")]
     [JsonDerivedType(typeof(App.Bsky.Actor.Profile), typeDiscriminator: "app.bsky.actor.profile")]
-    [JsonDerivedType(typeof(Blue.Zio.Meta.Profile), typeDiscriminator: "blue.zio.meta.profile")]
     [JsonDerivedType(typeof(Social.Psky.Actor.Profile), typeDiscriminator: "social.psky.actor.profile")]
     [JsonDerivedType(typeof(App.Bsky.Actor.ProfileAssociated), typeDiscriminator: "app.bsky.actor.defs#profileAssociated")]
     [JsonDerivedType(typeof(App.Bsky.Actor.ProfileAssociatedChat), typeDiscriminator: "app.bsky.actor.defs#profileAssociatedChat")]

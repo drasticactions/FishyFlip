@@ -571,8 +571,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.PostView(obj);
                 case "app.bsky.actor.profile":
                     return new App.Bsky.Actor.Profile(obj);
-                case "blue.zio.meta.profile":
-                    return new Blue.Zio.Meta.Profile(obj);
                 case "social.psky.actor.profile":
                     return new Social.Psky.Actor.Profile(obj);
                 case "app.bsky.actor.defs#profileAssociated":
