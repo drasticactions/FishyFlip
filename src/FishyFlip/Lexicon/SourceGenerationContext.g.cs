@@ -567,8 +567,6 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Feed.PostView>), TypeInfoPropertyName = "ListAppBskyFeedPostView")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Actor.Profile), TypeInfoPropertyName = "AppBskyActorProfile")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Actor.Profile>), TypeInfoPropertyName = "ListAppBskyActorProfile")]
-    [JsonSerializable(typeof(FishyFlip.Lexicon.Blue.Zio.Meta.Profile), TypeInfoPropertyName = "BlueZioMetaProfile")]
-    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Blue.Zio.Meta.Profile>), TypeInfoPropertyName = "ListBlueZioMetaProfile")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Social.Psky.Actor.Profile), TypeInfoPropertyName = "SocialPskyActorProfile")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Social.Psky.Actor.Profile>), TypeInfoPropertyName = "ListSocialPskyActorProfile")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated), TypeInfoPropertyName = "AppBskyActorProfileAssociated")]

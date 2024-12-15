@@ -56,17 +56,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// Enumerate notifications for the requesting account. Requires auth.
         /// </summary>
         /// <param name="atp"></param>
+        /// <param name="reasons"></param>
         /// <param name="limit"></param>
         /// <param name="priority"></param>
         /// <param name="cursor"></param>
         /// <param name="seenAt"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?>> ListNotificationsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?>> ListNotificationsAsync (this FishyFlip.ATProtocol atp, List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListNotifications.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
+            if (reasons != null)
+            {
+                queryStrings.Add(string.Join("&", reasons.Select(n => "reasons=" + n)));
+            }
+
             if (limit != null)
             {
                 queryStrings.Add("limit=" + limit);
