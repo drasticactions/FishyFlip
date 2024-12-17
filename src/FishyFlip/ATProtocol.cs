@@ -235,7 +235,7 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="handle"><see cref="ATHandle"/>.</param>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
-    public async Task<string?> ResolveATHandleHostAsync(ATHandle handle, CancellationToken? token = default)
+    public async Task<Result<string?>> ResolveATHandleHostAsync(ATHandle handle, CancellationToken? token = default)
     {
         string? host = this.options.DidCache.FirstOrDefault(n => n.Key == handle.ToString()).Value;
         if (!string.IsNullOrEmpty(host))
@@ -259,7 +259,7 @@ public sealed partial class ATProtocol : IDisposable
 
         try
         {
-            var endpointUrl = $"{Constants.Urls.ATProtoServer.SocialApi}{IdentityEndpoints.ResolveHandle}?handle={handle}";
+            var endpointUrl = $"{Constants.Urls.ATProtoServer.PublicApi}{IdentityEndpoints.ResolveHandle}?handle={handle}";
             var result = await this.Client.GetAsync(endpointUrl, token ?? CancellationToken.None);
             if (result.IsSuccessStatusCode)
             {
@@ -268,7 +268,7 @@ public sealed partial class ATProtocol : IDisposable
                     this.options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput);
                 if (resolveHandle?.Did is not null)
                 {
-                    host = await this.ResolveATDidHostAsync(resolveHandle.Did, token);
+                    (host, var error) = await this.ResolveATDidHostAsync(resolveHandle.Did, token);
                     if (!string.IsNullOrEmpty(host))
                     {
                         this.options.DidCache[handle.ToString()] = host!;
@@ -277,6 +277,7 @@ public sealed partial class ATProtocol : IDisposable
                     else
                     {
                         this.options.Logger?.LogError($"Failed to resolve Handle: {handle}, missing Service Handle.");
+                        return error;
                     }
                 }
                 else
@@ -286,6 +287,15 @@ public sealed partial class ATProtocol : IDisposable
             }
             else
             {
+                var resolveError = JsonSerializer.Deserialize<ATError>(
+                    await result.Content.ReadAsStringAsync(),
+                    this.options.SourceGenerationContext.ATError);
+                if (resolveError is not null)
+                {
+                    this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {resolveError}");
+                    return resolveError;
+                }
+
                 this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {result.StatusCode}");
             }
         }
@@ -303,7 +313,7 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="did"><see cref="ATDid"/>.</param>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
-    public async Task<string?> ResolveATDidHostAsync(ATDid did, CancellationToken? token = default)
+    public async Task<Result<string?>> ResolveATDidHostAsync(ATDid did, CancellationToken? token = default)
     {
         string? host = this.options.DidCache.FirstOrDefault(n => n.Key == did.ToString()).Value;
         if (!string.IsNullOrEmpty(host))
@@ -317,7 +327,12 @@ public sealed partial class ATProtocol : IDisposable
             switch (did.Type)
             {
                 case "plc":
-                    host = await this.ResolvePlcDidAsync(did, token);
+                    (host, var error) = await this.ResolvePlcDidAsync(did, token);
+                    if (error is not null)
+                    {
+                        return error;
+                    }
+
                     break;
                 case "web":
                     host = await this.ResolveWebDidAsync(did, token);
@@ -366,7 +381,7 @@ public sealed partial class ATProtocol : IDisposable
         this.SessionUpdated?.Invoke(sender, e);
     }
 
-    private async Task<string?> ResolvePlcDidAsync(ATDid did, CancellationToken? token)
+    private async Task<Result<string?>> ResolvePlcDidAsync(ATDid did, CancellationToken? token)
     {
         string? host = null;
         if (this.IsAuthenticated && this.Session?.Did.ToString() == did.ToString())
@@ -397,6 +412,7 @@ public sealed partial class ATProtocol : IDisposable
         else
         {
             this.options.Logger?.LogError($"Failed to resolve plc DID: {did}. {error?.ToString()}");
+            return error;
         }
 
         return host;

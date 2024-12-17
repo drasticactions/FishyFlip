@@ -153,7 +153,7 @@ public static class ATProtocolExtensions
     private static async Task<string> ResolveHostUri(this ATProtocol protocol, string pathAndQueryString)
     {
         var logger = protocol.Options.Logger;
-        string host = string.Empty;
+        string? host = null;
 
         // Find repo name in pathAndQueryString
         if (pathAndQueryString.Contains("repo"))
@@ -165,11 +165,11 @@ public static class ATProtocolExtensions
                 var repo = repoName.Split('=')[1];
                 if (ATDid.TryCreate(repo, out ATDid? did))
                 {
-                    host = await protocol.ResolveATDidHostAsync(did!) ?? string.Empty;
+                    (host, _) = await protocol.ResolveATDidHostAsync(did!);
                 }
                 else if (ATHandle.TryCreate(repo, out ATHandle? handle))
                 {
-                    host = await protocol.ResolveATHandleHostAsync(handle!) ?? string.Empty;
+                    (host, _) = await protocol.ResolveATHandleHostAsync(handle!);
                 }
             }
         }
@@ -182,7 +182,7 @@ public static class ATProtocolExtensions
                 var did = didName.Split('=')[1];
                 if (ATDid.TryCreate(did, out ATDid? atdid))
                 {
-                    host = await protocol.ResolveATDidHostAsync(atdid!) ?? string.Empty;
+                    (host, _) = await protocol.ResolveATDidHostAsync(atdid!);
                 }
             }
         }
@@ -214,7 +214,7 @@ public static class ATProtocolExtensions
             throw new InvalidOperationException("Host is required.");
         }
 
-        if (host.EndsWith("/") && pathAndQueryString.StartsWith("/"))
+        if (host!.EndsWith("/") && pathAndQueryString.StartsWith("/"))
         {
             host = host[0..^1];
         }
