@@ -103,6 +103,52 @@ internal class PasswordSessionManager : ISessionManager
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
     internal async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, string? authFactorToken = default,  CancellationToken cancellationToken = default)
     {
+        var host = this.protocol.Options.Url.ToString();
+        var usingPublicApi = host.Contains(Constants.Urls.ATProtoServer.PublicApi);
+        if (usingPublicApi)
+        {
+            this.logger?.LogInformation($"Using public server {host} to login, resolving identifier to find host.");
+            var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (emailRegex.IsMatch(identifier))
+            {
+                this.logger?.LogWarning($"Using email address {identifier} to login to {host}. This is not recommended. Please use your handle instead.");
+            }
+            else if (ATIdentifier.TryCreate(identifier, out var ident))
+            {
+                string? resolveHost = null;
+                if (ident is ATHandle handle)
+                {
+                    (resolveHost, var resolveHandleError) = await this.protocol.ResolveATHandleHostAsync(handle, cancellationToken);
+                    if (resolveHandleError is not null)
+                    {
+                        this.logger?.LogError($"Error resolving handle {identifier}: {resolveHandleError}");
+                    }
+                }
+                else if (ident is ATDid did)
+                {
+                    (resolveHost, var resolveDidError) = await this.protocol.ResolveATDidHostAsync(did, cancellationToken);
+                    if (resolveDidError is not null)
+                    {
+                        this.logger?.LogError($"Error resolving did {identifier}: {resolveDidError}");
+                    }
+                }
+
+                if (Uri.TryCreate(resolveHost, UriKind.Absolute, out var uri))
+                {
+                    this.protocol.Options.Url = uri;
+                    this.logger?.LogInformation($"Resolved handle {identifier} to {uri}, setting for authentication");
+                }
+                else
+                {
+                    this.logger?.LogWarning($"Could not resolve identifier {identifier} to a valid host.");
+                }
+            }
+            else
+            {
+                this.logger?.LogWarning($"Could not validate identifier: {identifier}");
+            }
+        }
+
 #pragma warning disable CS0618
         var (session, error) = await this.protocol.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken: cancellationToken);
 #pragma warning restore CS0618
@@ -147,6 +193,12 @@ internal class PasswordSessionManager : ISessionManager
         if (error is not null)
         {
             this.logger?.LogError(error.ToString());
+            if (usingPublicApi)
+            {
+                this.logger?.LogInformation($"Login failed, Resetting to public server {Constants.Urls.ATProtoServer.PublicApi}.");
+                this.protocol.Options.Url = new Uri(Constants.Urls.ATProtoServer.PublicApi);
+            }
+
             return error;
         }
 

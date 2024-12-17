@@ -23,6 +23,8 @@ Console.WriteLine($"Session Handle: {session.Handle}");
 Console.WriteLine($"Session Token: {session.AccessJwt}");
 ```
 
+If you don't override the Instance URL in `ATProtocolBuilder.WithInstanceUrl` the users PDS Host will be resolved before the authentication attempt is made and will be used for authentication and future requests. If you have set it, the authentication request will be resolved against that endpoint. 
+
 - OAuth authentication is more complex. There is a full example showing a [local user authentication session](https://github.com/drasticactions/BSkyOAuthTokenGenerator/tree/main/src/BSkyOAuthTokenGenerator) but in short, you must:
   - Starting the session with `atProtocol.GenerateOAuth2AuthenticationUrlAsync`
   - Sending the user to a web browser to log in
