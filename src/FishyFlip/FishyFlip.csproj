@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-		<Description>Access the ATProtocol and Bluesky through .NET: Alpha Version, built with Source Generation.</Description>
+		<Description>Access the ATProtocol and Bluesky through .NET: built with Source Generation.</Description>
 		<PackageTags>atproto atprotocol bluesky</PackageTags>
 		<RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
 		<PackageProjectUrl>https://drasticactions.github.io/FishyFlip</PackageProjectUrl>

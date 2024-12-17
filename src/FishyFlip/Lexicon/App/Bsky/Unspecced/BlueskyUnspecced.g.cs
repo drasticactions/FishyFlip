@@ -78,6 +78,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// Get a list of trending topics
+        /// </summary>
+        /// <param name="viewer"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?>> GetTrendingTopicsAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetTrendingTopicsAsync(viewer, limit, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Backend Actors (profile) search, returns only skeleton.
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>

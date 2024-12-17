@@ -345,6 +345,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.GetTaggedSuggestionsOutput(obj);
                 case "app.bsky.feed.getTimeline#GetTimelineOutput":
                     return new App.Bsky.Feed.GetTimelineOutput(obj);
+                case "app.bsky.unspecced.getTrendingTopics#GetTrendingTopicsOutput":
+                    return new App.Bsky.Unspecced.GetTrendingTopicsOutput(obj);
                 case "app.bsky.notification.getUnreadCount#GetUnreadCountOutput":
                     return new App.Bsky.Notification.GetUnreadCountOutput(obj);
                 case "app.bsky.video.getUploadLimits#GetUploadLimitsOutput":
@@ -781,6 +783,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.ThreadViewPref(obj);
                 case "com.atproto.admin.defs#threatSignature":
                     return new Com.Atproto.Admin.ThreatSignature(obj);
+                case "app.bsky.unspecced.defs#trendingTopic":
+                    return new App.Bsky.Unspecced.TrendingTopic(obj);
                 case "blue.zio.atfile.meta#unknown":
                     return new Blue.Zio.Atfile.Unknown(obj);
                 case "app.bsky.graph.unmuteActor#UnmuteActorInput":
