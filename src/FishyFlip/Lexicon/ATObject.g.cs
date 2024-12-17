@@ -369,6 +369,7 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(App.Bsky.Unspecced.SkeletonSearchActor), typeDiscriminator: "app.bsky.unspecced.defs#skeletonSearchActor")]
     [JsonDerivedType(typeof(App.Bsky.Unspecced.SkeletonSearchPost), typeDiscriminator: "app.bsky.unspecced.defs#skeletonSearchPost")]
     [JsonDerivedType(typeof(App.Bsky.Unspecced.SkeletonSearchStarterPack), typeDiscriminator: "app.bsky.unspecced.defs#skeletonSearchStarterPack")]
+    [JsonDerivedType(typeof(Link.Pastesphere.Snippet), typeDiscriminator: "link.pastesphere.snippet")]
     [JsonDerivedType(typeof(App.Bsky.Graph.Starterpack), typeDiscriminator: "app.bsky.graph.starterpack")]
     [JsonDerivedType(typeof(App.Bsky.Graph.StarterPackView), typeDiscriminator: "app.bsky.graph.defs#starterPackView")]
     [JsonDerivedType(typeof(App.Bsky.Graph.StarterPackViewBasic), typeDiscriminator: "app.bsky.graph.defs#starterPackViewBasic")]

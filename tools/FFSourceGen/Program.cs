@@ -498,7 +498,7 @@ public partial class AppCommands
             sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
             for (int i = 0; i < item.Properties.Count(); i++)
             {
-                var prop = item.Properties[i].ClassName;
+                var prop = item.Properties[i].PropertyName;
                 var key = item.Properties[i].Key;
                 if (key == "createdAt")
                 {
@@ -722,7 +722,7 @@ public partial class AppCommands
             sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
             for (int i = 0; i < item.Properties.Count(); i++)
             {
-                var prop = item.Properties[i].ClassName;
+                var prop = item.Properties[i].PropertyName;
                 var key = item.Properties[i].Key;
                 if (key == "createdAt")
                 {
