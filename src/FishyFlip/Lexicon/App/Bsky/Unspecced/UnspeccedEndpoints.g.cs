@@ -21,6 +21,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GetTaggedSuggestions = "/xrpc/app.bsky.unspecced.getTaggedSuggestions";
 
+       public const string GetTrendingTopics = "/xrpc/app.bsky.unspecced.getTrendingTopics";
+
        public const string SearchActorsSkeleton = "/xrpc/app.bsky.unspecced.searchActorsSkeleton";
 
        public const string SearchPostsSkeleton = "/xrpc/app.bsky.unspecced.searchPostsSkeleton";
@@ -125,6 +127,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             var endpointUrl = GetTaggedSuggestions.ToString();
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTaggedSuggestionsOutput!, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of trending topics
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="viewer"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?>> GetTrendingTopicsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetTrendingTopics.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendingTopicsOutput!, cancellationToken);
         }
 
 
