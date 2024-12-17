@@ -753,6 +753,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SkeletonSearchPost(obj);
                 case "app.bsky.unspecced.defs#skeletonSearchStarterPack":
                     return new App.Bsky.Unspecced.SkeletonSearchStarterPack(obj);
+                case "link.pastesphere.snippet":
+                    return new Link.Pastesphere.Snippet(obj);
                 case "app.bsky.graph.starterpack":
                     return new App.Bsky.Graph.Starterpack(obj);
                 case "app.bsky.graph.defs#starterPackView":

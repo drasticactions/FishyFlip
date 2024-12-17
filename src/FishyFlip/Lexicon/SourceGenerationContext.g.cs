@@ -749,6 +749,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>), TypeInfoPropertyName = "ListAppBskyUnspeccedSkeletonSearchPost")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack), TypeInfoPropertyName = "AppBskyUnspeccedSkeletonSearchStarterPack")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack>), TypeInfoPropertyName = "ListAppBskyUnspeccedSkeletonSearchStarterPack")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.Link.Pastesphere.Snippet), TypeInfoPropertyName = "LinkPastesphereSnippet")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Link.Pastesphere.Snippet>), TypeInfoPropertyName = "ListLinkPastesphereSnippet")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.Starterpack), TypeInfoPropertyName = "AppBskyGraphStarterpack")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.Starterpack>), TypeInfoPropertyName = "ListAppBskyGraphStarterpack")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView), TypeInfoPropertyName = "AppBskyGraphStarterPackView")]
