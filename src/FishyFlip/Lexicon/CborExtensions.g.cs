@@ -761,8 +761,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackView(obj);
                 case "app.bsky.graph.defs#starterPackViewBasic":
                     return new App.Bsky.Graph.StarterPackViewBasic(obj);
+                case "app.netlify.aniblue.status":
+                    return new App.Netlify.Aniblue.Status(obj);
                 case "com.atproto.admin.defs#statusAttr":
                     return new Com.Atproto.Admin.StatusAttr(obj);
+                case "app.netlify.aniblue.status#status":
+                    return new App.Netlify.Aniblue.StatusDef(obj);
                 case "com.atproto.repo.strongRef":
                     return new Com.Atproto.Repo.StrongRef(obj);
                 case "tools.ozone.moderation.defs#subjectStatusView":
