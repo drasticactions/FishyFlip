@@ -221,15 +221,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="identifier"></param>
         /// <param name="password"></param>
         /// <param name="authFactorToken"></param>
+        /// <param name="allowTakendown"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (this FishyFlip.ATProtocol atp, string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (this FishyFlip.ATProtocol atp, string identifier, string password, string? authFactorToken = default, bool? allowTakendown = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateSession.ToString();
             var inputItem = new CreateSessionInput();
             inputItem.Identifier = identifier;
             inputItem.Password = password;
             inputItem.AuthFactorToken = authFactorToken;
+            inputItem.AllowTakendown = allowTakendown;
             return atp.Post<CreateSessionInput, FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionInput!, atp.Options.SourceGenerationContext.ComAtprotoServerCreateSessionOutput!, inputItem, cancellationToken);
         }
 
