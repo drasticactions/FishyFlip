@@ -73,6 +73,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Whtwnd.Blog.BlogEntry(obj);
                 case "blue.linkat.board":
                     return new Blue.Linkat.Board(obj);
+                case "community.lexicon.bookmarks.bookmark":
+                    return new Community.Lexicon.Bookmarks.Bookmark(obj);
                 case "blue.zio.atfile.finger#browser":
                     return new Blue.Zio.Atfile.Browser(obj);
                 case "app.bsky.actor.defs#bskyAppProgressGuide":
@@ -229,6 +231,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.GetAccountInfosOutput(obj);
                 case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
                     return new Com.Atproto.Server.GetAccountInviteCodesOutput(obj);
+                case "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput":
+                    return new Community.Lexicon.Bookmarks.GetActorBookmarksOutput(obj);
                 case "app.bsky.feed.getActorFeeds#GetActorFeedsOutput":
                     return new App.Bsky.Feed.GetActorFeedsOutput(obj);
                 case "app.bsky.feed.getActorLikes#GetActorLikesOutput":

@@ -16,6 +16,7 @@ REPOS=(
     "https://github.com/Gregoor/skylights.git"
     "https://github.com/echo8/pastesphere.git"
     "https://github.com/marukun712/AniBlue.git"
+    "https://github.com/lexicon-community/lexicon.git"
 )
 
 PWD=$(pwd)
@@ -58,6 +59,8 @@ do
             REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/lexicons/fyi")
         elif [ "$target_dir" == "Gregoor-skylights" ]; then
             REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/web/lexicons")
+        elif [ "$target_dir" == "lexicon-community-lexicon" ]; then
+            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/community/lexicon")
         else
             REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/lexicons")
         fi

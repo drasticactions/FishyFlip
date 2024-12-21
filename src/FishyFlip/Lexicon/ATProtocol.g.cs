@@ -109,6 +109,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Com.Whtwnd.Blog.ComWhtwndBlog ComWhtwndBlog => new (this);
 
         /// <summary>
+        /// community.lexicon.bookmarks Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Community.Lexicon.Bookmarks.CommunityLexiconBookmarks CommunityLexiconBookmarks => new (this);
+
+        /// <summary>
         /// tools.ozone.communication Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Tools.Ozone.Communication.ToolsOzoneCommunication ToolsOzoneCommunication => new (this);
