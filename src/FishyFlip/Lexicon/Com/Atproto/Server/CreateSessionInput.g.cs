@@ -15,11 +15,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="identifier">Handle or other identifier supported by the server for the authenticating user.</param>
         /// <param name="password"></param>
         /// <param name="authFactorToken"></param>
-        public CreateSessionInput(string? identifier = default, string? password = default, string? authFactorToken = default)
+        /// <param name="allowTakendown">When true, instead of throwing error for takendown accounts, a valid response with a narrow scoped token will be returned</param>
+        public CreateSessionInput(string? identifier = default, string? password = default, string? authFactorToken = default, bool? allowTakendown = default)
         {
             this.Identifier = identifier;
             this.Password = password;
             this.AuthFactorToken = authFactorToken;
+            this.AllowTakendown = allowTakendown;
         }
 
 
@@ -39,6 +41,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["identifier"] is not null) this.Identifier = obj["identifier"].AsString();
             if (obj["password"] is not null) this.Password = obj["password"].AsString();
             if (obj["authFactorToken"] is not null) this.AuthFactorToken = obj["authFactorToken"].AsString();
+            if (obj["allowTakendown"] is not null) this.AllowTakendown = obj["allowTakendown"].AsBoolean();
         }
 
         /// <summary>
@@ -61,6 +64,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("authFactorToken")]
         public string? AuthFactorToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowTakendown.
+        /// <br/> When true, instead of throwing error for takendown accounts, a valid response with a narrow scoped token will be returned
+        /// </summary>
+        [JsonPropertyName("allowTakendown")]
+        public bool? AllowTakendown { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.

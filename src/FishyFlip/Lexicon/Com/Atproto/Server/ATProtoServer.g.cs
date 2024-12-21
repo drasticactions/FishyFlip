@@ -142,10 +142,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="identifier"></param>
         /// <param name="password"></param>
         /// <param name="authFactorToken"></param>
+        /// <param name="allowTakendown"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (string identifier, string password, string? authFactorToken = default, bool? allowTakendown = default, CancellationToken cancellationToken = default)
         {
-            return atp.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken);
+            return atp.CreateSessionAsync(identifier, password, authFactorToken, allowTakendown, cancellationToken);
         }
 
 
