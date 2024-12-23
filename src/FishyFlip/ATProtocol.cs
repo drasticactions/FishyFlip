@@ -246,7 +246,7 @@ public sealed partial class ATProtocol : IDisposable
 
         if (this.IsAuthenticated && this.Session?.Handle.ToString() == handle.ToString())
         {
-            host = this.Session?.DidDoc?.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)?.ServiceEndpoint;
+            host = this.Session?.DidDoc?.GetPDSEndpointUrl(this.options.Logger)?.ToString();
             if (!string.IsNullOrEmpty(host))
             {
                 this.options.DidCache[handle.ToString()] = host!;
@@ -386,8 +386,7 @@ public sealed partial class ATProtocol : IDisposable
         string? host = null;
         if (this.IsAuthenticated && this.Session?.Did.ToString() == did.ToString())
         {
-            host = this.Session?.DidDoc?.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)
-                ?.ServiceEndpoint;
+            host = this.Session?.DidDoc?.GetPDSEndpointUrl(this.options.Logger)?.ToString();
             if (!string.IsNullOrEmpty(host))
             {
                 this.options.DidCache[did.ToString()] = host!;
@@ -402,8 +401,7 @@ public sealed partial class ATProtocol : IDisposable
         var (resolveHandle, error) = await this.PlcDirectory.GetDidDocAsync(did!, token ?? CancellationToken.None);
         if (resolveHandle is not null)
         {
-            host = resolveHandle.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)
-                ?.ServiceEndpoint;
+            host = resolveHandle.GetPDSEndpointUrl(this.options.Logger)?.ToString();
             if (string.IsNullOrEmpty(host))
             {
                 this.options.Logger?.LogError($"Failed to resolve DID: {did}, missing Service Handle.");
@@ -435,8 +433,7 @@ public sealed partial class ATProtocol : IDisposable
                 var didDoc = JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
                 if (didDoc is not null)
                 {
-                    host = didDoc.Service.FirstOrDefault(n => n.Type == Constants.AtprotoPersonalDataServer)
-                        ?.ServiceEndpoint;
+                    host = didDoc.GetPDSEndpointUrl(this.options.Logger)?.ToString();
                     if (string.IsNullOrEmpty(host))
                     {
                         this.options.Logger?.LogError($"Failed to resolve DID: {did}, missing Service Handle.");

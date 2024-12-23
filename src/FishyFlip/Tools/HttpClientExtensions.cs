@@ -329,6 +329,38 @@ public static class HttpClientExtensions
         return JsonSerializer.Deserialize<T>(response, type);
     }
 
+    /// <summary>
+    /// Gets the DID Document for the given DID.
+    /// </summary>
+    /// <param name="client">HttpClient.</param>
+    /// <param name="did">ATDid.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <param name="logger">Logger.</param>
+    /// <returns>Result of DidDoc.</returns>
+    /// <exception cref="NotImplementedException">Thrown if DID is not supported.</exception>
+    public static async Task<Result<DidDoc?>> GetDidDocAsync(this HttpClient client, ATDid did, CancellationToken? cancellationToken = default, ILogger? logger = default)
+    {
+        var token = cancellationToken ??= CancellationToken.None;
+        string url = did.Type switch
+        {
+            "plc" => $"https://plc.directory/{did}",
+            "web" => $"https://{did.ToString().Split(':').Last()}/.well-known/did.json",
+            _ => throw new NotImplementedException(),
+        };
+
+        logger?.LogDebug($"GET {url}");
+        using var message = await client.GetAsync(url, cancellationToken: token);
+        if (!message.IsSuccessStatusCode)
+        {
+            ATError atError = await CreateError(message!, new JsonSerializerOptions(), token, logger);
+            return atError!;
+        }
+
+        var result = await message.Content.ReadAsStringAsync();
+        logger?.LogDebug($"GET {url}: {result}");
+        return JsonSerializer.Deserialize<DidDoc>(result, SourceGenerationContext.Default.DidDoc);
+    }
+
     private static async Task<ATError> CreateError(HttpResponseMessage message, JsonSerializerOptions options, CancellationToken cancellationToken, ILogger? logger = default)
     {
 #if NETSTANDARD
