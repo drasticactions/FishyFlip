@@ -42,6 +42,43 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Set the instance url to connect to by resolving the ATDid to a <see cref="DidDoc"/>.
+    /// </summary>
+    /// <param name="atDid"><see cref="ATDid"/>.</param>
+    /// <param name="serviceType">Service Type.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithInstanceUrl(ATDid atDid, string serviceType = Constants.AtprotoPersonalDataServerId, CancellationToken? cancellationToken = null)
+        => this.WithInstanceUrlAsync(atDid, serviceType).GetAwaiter().GetResult();
+
+    /// <summary>
+    /// Set the instance url to connect to by resolving the ATDid to a <see cref="DidDoc"/>.
+    /// </summary>
+    /// <param name="atDid"><see cref="ATDid"/>.</param>
+    /// <param name="serviceType">Service Type, defaults to ATProtocol PDS.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public async Task<ATProtocolBuilder> WithInstanceUrlAsync(ATDid atDid, string serviceType = Constants.AtprotoPersonalDataServerId, CancellationToken? cancellationToken = null)
+    {
+        using var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.atProtocolOptions.UserAgent);
+        var (didDoc, error) = await httpClient.GetDidDocAsync(atDid, cancellationToken, this.atProtocolOptions.Logger);
+        if (error is not null)
+        {
+            throw new Exception($"Failed to resolve ATDid {atDid} to a DidDoc. {error}");
+        }
+
+        var url = didDoc!.GetServiceEndpointUrl(serviceType, this.atProtocolOptions.Logger);
+        if (url is null)
+        {
+            throw new Exception($"Failed to resolve ATDid {atDid} to a DidDoc. DidDoc does not contain a service endpoint for {serviceType}");
+        }
+
+        this.atProtocolOptions.Url = url;
+        return this;
+    }
+
+    /// <summary>
     /// Sets the user agent.
     /// </summary>
     /// <param name="userAgent">User Agent.</param>

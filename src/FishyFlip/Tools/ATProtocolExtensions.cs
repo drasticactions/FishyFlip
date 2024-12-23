@@ -191,7 +191,7 @@ public static class ATProtocolExtensions
         {
             if (protocol.IsAuthenticated)
             {
-                host = protocol.SessionManager.Session?.DidDoc?.GetServiceEndpointUrl()?.ToString() ?? throw new InvalidOperationException("Session did doc is required.");
+                host = protocol.SessionManager.Session?.DidDoc?.GetPDSEndpointUrl()?.ToString() ?? throw new InvalidOperationException("Session did doc is required.");
                 logger?.LogDebug($"Using PDS host {host}");
             }
             else
