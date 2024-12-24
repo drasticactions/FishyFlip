@@ -18,6 +18,10 @@ The code flow for this repo is:
 
 For 99.9% of PRs, you should target `develop`
 
+### Bump the Bindings
+
+If you wish to bump the bindings (or run the source generator), use the `build_bindings.sh` script, which will build FFSourceGen and run it against the listed repos.
+
 ### Third-Party Libraries
 
 - [GitVersion](https://github.com/GitTools/GitVersion)

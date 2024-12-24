@@ -232,7 +232,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (includeAllUserRecords != null)
             {
-                queryStrings.Add("includeAllUserRecords=" + includeAllUserRecords);
+                queryStrings.Add("includeAllUserRecords=" + (includeAllUserRecords.Value ? "true" : "false"));
             }
 
             if (limit != null)
@@ -242,7 +242,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (hasComment != null)
             {
-                queryStrings.Add("hasComment=" + hasComment);
+                queryStrings.Add("hasComment=" + (hasComment.Value ? "true" : "false"));
             }
 
             if (comment != null)
@@ -289,6 +289,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// View moderation statuses of subjects (record or repo).
         /// </summary>
         /// <param name="atp"></param>
+        /// <param name="queueCount"></param>
+        /// <param name="queueIndex"></param>
+        /// <param name="queueSeed"></param>
         /// <param name="includeAllUserRecords"></param>
         /// <param name="subject"></param>
         /// <param name="comment"></param>
@@ -318,14 +321,29 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="subjectType"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryStatuses.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
+            if (queueCount != null)
+            {
+                queryStrings.Add("queueCount=" + queueCount);
+            }
+
+            if (queueIndex != null)
+            {
+                queryStrings.Add("queueIndex=" + queueIndex);
+            }
+
+            if (queueSeed != null)
+            {
+                queryStrings.Add("queueSeed=" + queueSeed);
+            }
+
             if (includeAllUserRecords != null)
             {
-                queryStrings.Add("includeAllUserRecords=" + includeAllUserRecords);
+                queryStrings.Add("includeAllUserRecords=" + (includeAllUserRecords.Value ? "true" : "false"));
             }
 
             if (subject != null)
@@ -385,12 +403,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (includeMuted != null)
             {
-                queryStrings.Add("includeMuted=" + includeMuted);
+                queryStrings.Add("includeMuted=" + (includeMuted.Value ? "true" : "false"));
             }
 
             if (onlyMuted != null)
             {
-                queryStrings.Add("onlyMuted=" + onlyMuted);
+                queryStrings.Add("onlyMuted=" + (onlyMuted.Value ? "true" : "false"));
             }
 
             if (reviewState != null)
@@ -420,12 +438,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
             if (takendown != null)
             {
-                queryStrings.Add("takendown=" + takendown);
+                queryStrings.Add("takendown=" + (takendown.Value ? "true" : "false"));
             }
 
             if (appealed != null)
             {
-                queryStrings.Add("appealed=" + appealed);
+                queryStrings.Add("appealed=" + (appealed.Value ? "true" : "false"));
             }
 
             if (limit != null)

@@ -318,12 +318,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             List<string> queryStrings = new();
             if (includeUsed != null)
             {
-                queryStrings.Add("includeUsed=" + includeUsed);
+                queryStrings.Add("includeUsed=" + (includeUsed.Value ? "true" : "false"));
             }
 
             if (createAvailable != null)
             {
-                queryStrings.Add("createAvailable=" + createAvailable);
+                queryStrings.Add("createAvailable=" + (createAvailable.Value ? "true" : "false"));
             }
 
             endpointUrl += string.Join("&", queryStrings);

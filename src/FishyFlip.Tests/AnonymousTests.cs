@@ -5,6 +5,7 @@
 using FishyFlip.Lexicon;
 using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Lexicon.App.Bsky.Feed;
+using FishyFlip.Lexicon.App.Bsky.Labeler;
 using FishyFlip.Lexicon.App.Bsky.Richtext;
 using FishyFlip.Lexicon.Com.Atproto.Repo;
 using Microsoft.Extensions.Logging.Debug;
@@ -215,5 +216,29 @@ public class AnonymousTests
         var (result, error) = await AnonymousTests.proto!.ComWhtwndBlog.GetEntryAsync(postUri.Did!, postUri.Rkey);
         Assert.IsNull(error);
         Assert.IsNotNull(result);
+    }
+
+    /// <summary>
+    /// Tests the labeler.
+    /// </summary>
+    /// <param name="atDid">The ATDid.</param>
+    /// <returns>Task.</returns>
+    [TestMethod]
+    public async Task LabelDetails()
+    {
+        var did1 = ATDid.Create("did:plc:hysbs7znfgxyb4tsvetzo4sk")!;
+        var (result, error) = await AnonymousTests.proto!.Labeler.GetServicesAsync([did1]);
+        Assert.IsNull(error);
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Views?.Count == 1);
+        var labelerView = (LabelerView)result.Views![0];
+        Assert.IsNull(labelerView.Viewer);
+
+        (result, error) = await AnonymousTests.proto!.Labeler.GetServicesAsync([did1], true);
+        Assert.IsNull(error);
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Views?.Count == 1);
+        var labelerViewDetailed = (LabelerViewDetailed)result.Views![0];
+        Assert.IsTrue(labelerViewDetailed.Policies?.LabelValues?.Any());
     }
 }

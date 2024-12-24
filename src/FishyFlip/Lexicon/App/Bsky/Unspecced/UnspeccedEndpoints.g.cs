@@ -185,7 +185,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
             if (typeahead != null)
             {
-                queryStrings.Add("typeahead=" + typeahead);
+                queryStrings.Add("typeahead=" + (typeahead.Value ? "true" : "false"));
             }
 
             if (limit != null)

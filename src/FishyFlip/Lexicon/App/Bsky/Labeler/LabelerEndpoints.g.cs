@@ -33,7 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
             if (detailed != null)
             {
-                queryStrings.Add("detailed=" + detailed);
+                queryStrings.Add("detailed=" + (detailed.Value ? "true" : "false"));
             }
 
             endpointUrl += string.Join("&", queryStrings);

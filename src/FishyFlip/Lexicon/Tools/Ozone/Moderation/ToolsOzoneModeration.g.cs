@@ -137,6 +137,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// View moderation statuses of subjects (record or repo).
         /// </summary>
+        /// <param name="queueCount"></param>
+        /// <param name="queueIndex"></param>
+        /// <param name="queueSeed"></param>
         /// <param name="includeAllUserRecords"></param>
         /// <param name="subject"></param>
         /// <param name="comment"></param>
@@ -165,9 +168,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="collections"></param>
         /// <param name="subjectType"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
         {
-            return atp.QueryStatusesAsync(includeAllUserRecords, subject, comment, reportedAfter, reportedBefore, reviewedAfter, hostingDeletedAfter, hostingDeletedBefore, hostingUpdatedAfter, hostingUpdatedBefore, hostingStatuses, reviewedBefore, includeMuted, onlyMuted, reviewState, ignoreSubjects, lastReviewedBy, sortField, sortDirection, takendown, appealed, limit, tags, excludeTags, cursor, collections, subjectType, cancellationToken);
+            return atp.QueryStatusesAsync(queueCount, queueIndex, queueSeed, includeAllUserRecords, subject, comment, reportedAfter, reportedBefore, reviewedAfter, hostingDeletedAfter, hostingDeletedBefore, hostingUpdatedAfter, hostingUpdatedBefore, hostingStatuses, reviewedBefore, includeMuted, onlyMuted, reviewState, ignoreSubjects, lastReviewedBy, sortField, sortDirection, takendown, appealed, limit, tags, excludeTags, cursor, collections, subjectType, cancellationToken);
         }
 
 

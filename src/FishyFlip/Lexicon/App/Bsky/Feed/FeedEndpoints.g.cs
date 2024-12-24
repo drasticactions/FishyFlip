@@ -166,7 +166,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
             if (includePins != null)
             {
-                queryStrings.Add("includePins=" + includePins);
+                queryStrings.Add("includePins=" + (includePins.Value ? "true" : "false"));
             }
 
             endpointUrl += string.Join("&", queryStrings);
