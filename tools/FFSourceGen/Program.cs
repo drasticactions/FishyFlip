@@ -59,7 +59,7 @@ public partial class AppCommands
             var directories = GetHighestLevelDirectories(dir);
             foreach (var directory in directories.Where(n => !n.Contains("bsky") && !n.Contains("atproto")))
             {
-                 await this.GenerateClasses(directory);
+                await this.GenerateClasses(directory);
             }
         }
 
@@ -1178,13 +1178,28 @@ public partial class AppCommands
                             {
                                 sb.AppendLine($"            if ({prop} != null)");
                                 sb.AppendLine("            {");
-                                sb.AppendLine($"                queryStrings.Add(\"{prop}=\" + {prop});");
+                                if (typeName.StartsWith("bool"))
+                                {
+                                    sb.AppendLine($"                queryStrings.Add(\"{prop}=\" + ({prop}.Value ? \"true\" : \"false\"));");
+                                }
+                                else
+                                {
+                                    sb.AppendLine($"                queryStrings.Add(\"{prop}=\" + {prop});");
+                                }
+
                                 sb.AppendLine("            }");
                                 sb.AppendLine();
                             }
                             else
                             {
-                                sb.AppendLine($"            queryStrings.Add(\"{prop}=\" + {prop});");
+                                if (typeName.StartsWith("bool"))
+                                {
+                                    sb.AppendLine($"            queryStrings.Add(\"{prop}=\" + ({prop} ? \"true\" : \"false\"));");
+                                }
+                                else
+                                {
+                                    sb.AppendLine($"            queryStrings.Add(\"{prop}=\" + {prop});");
+                                }
                                 sb.AppendLine();
                             }
                         }
