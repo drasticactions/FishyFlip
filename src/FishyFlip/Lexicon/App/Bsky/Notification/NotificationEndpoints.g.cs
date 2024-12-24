@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             List<string> queryStrings = new();
             if (priority != null)
             {
-                queryStrings.Add("priority=" + priority);
+                queryStrings.Add("priority=" + (priority.Value ? "true" : "false"));
             }
 
             if (seenAt != null)
@@ -80,7 +80,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
             if (priority != null)
             {
-                queryStrings.Add("priority=" + priority);
+                queryStrings.Add("priority=" + (priority.Value ? "true" : "false"));
             }
 
             if (cursor != null)

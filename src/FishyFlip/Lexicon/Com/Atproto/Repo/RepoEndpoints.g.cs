@@ -238,7 +238,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
             if (reverse != null)
             {
-                queryStrings.Add("reverse=" + reverse);
+                queryStrings.Add("reverse=" + (reverse.Value ? "true" : "false"));
             }
 
             endpointUrl += string.Join("&", queryStrings);
