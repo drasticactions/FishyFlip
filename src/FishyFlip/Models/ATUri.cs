@@ -146,6 +146,23 @@ public class ATUri
         return match.Success;
     }
 
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        if (obj is ATUri atUri)
+        {
+            return this.ToString() == atUri.ToString();
+        }
+
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public override int GetHashCode()
+    {
+        return this.ToString().GetHashCode();
+    }
+
     /// <summary>
     /// Returns a string representation of the AT URI.
     /// </summary>
@@ -156,14 +173,7 @@ public class ATUri
         buffer.Append("at://");
         buffer.Append(this.host);
 
-        if (!this.Pathname.StartsWith("/"))
-        {
-            buffer.Append($"/{this.Pathname}");
-        }
-        else
-        {
-            buffer.Append(this.Pathname);
-        }
+        buffer.Append(!this.Pathname.StartsWith("/") ? $"/{this.Pathname}" : this.Pathname);
 
         if (!string.IsNullOrEmpty(this.Hash) && !this.Hash.StartsWith("#"))
         {

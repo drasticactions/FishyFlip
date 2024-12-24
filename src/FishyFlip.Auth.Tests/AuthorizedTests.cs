@@ -92,7 +92,7 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.AreEqual(atUri.ToString(), success!.View!.Uri!.ToString());
+                Assert.AreEqual(atUri, success!.View!.Uri!);
             },
             failed =>
             {
@@ -114,7 +114,7 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.AreEqual(success!.Handle!.ToString(), handle1);
+                Assert.AreEqual(success!.Handle!, ATHandle.Create(handle1));
             },
             failed =>
             {
@@ -136,8 +136,8 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.AreEqual(handle1, success!.Profiles![0]!.Handle!.ToString());
-                Assert.AreEqual(handle2, success!.Profiles![1]!.Handle!.ToString());
+                Assert.AreEqual(ATHandle.Create(handle1), success!.Profiles![0]!.Handle!);
+                Assert.AreEqual(ATHandle.Create(handle2), success!.Profiles![1]!.Handle!);
             },
             failed =>
             {
@@ -161,8 +161,8 @@ public class AuthorizedTests
         result.Switch(
             success =>
             {
-                Assert.AreEqual(test1did!.ToString(), success!.Profiles![0]!.Did!.ToString());
-                Assert.AreEqual(test2did!.ToString(), success!.Profiles![1]!.Did!.ToString());
+                Assert.AreEqual(test1did!, success!.Profiles![0]!.Did!);
+                Assert.AreEqual(test2did!, success!.Profiles![1]!.Did!);
             },
             failed =>
             {
@@ -186,8 +186,8 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), success!.Posts![0].Uri!.ToString());
-                Assert.AreEqual(postUri2.ToString(), success!.Posts[1].Uri!.ToString());
+                Assert.AreEqual(postUri, success!.Posts![0].Uri!);
+                Assert.AreEqual(postUri2, success!.Posts[1].Uri!);
             },
             failed =>
             {
@@ -209,7 +209,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
                        {
-                           Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!)!.Post!.Uri!.ToString());
+                           Assert.AreEqual(postUri, ((ThreadViewPost)success!.Thread!)!.Post!.Uri!);
                        },
             failed =>
                         {
@@ -232,9 +232,9 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri!.ToString());
+                Assert.AreEqual(postUri, ((ThreadViewPost)success!.Thread!).Post!.Uri!);
                 var embedRecord = (ViewRecordDef)((ThreadViewPost)success!.Thread!).Post!.Embed!;
-                Assert.AreEqual(quotePost2, ((ViewRecord)embedRecord.Record!).Uri!.ToString());
+                Assert.AreEqual(ATUri.Create(quotePost2), ((ViewRecord)embedRecord.Record!).Uri!);
             },
             failed =>
             {
@@ -256,7 +256,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri!.ToString());
+                Assert.AreEqual(postUri, ((ThreadViewPost)success!.Thread!).Post!.Uri!);
             },
             failed =>
             {
@@ -278,7 +278,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri!.ToString());
+                Assert.AreEqual(postUri, ((ThreadViewPost)success!.Thread!).Post!.Uri!);
             },
             failed =>
             {
@@ -300,7 +300,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri!.ToString());
+                Assert.AreEqual(postUri, ((ThreadViewPost)success!.Thread!).Post!.Uri!);
             },
             failed =>
             {
@@ -322,7 +322,7 @@ public class AuthorizedTests
         postThreadResult.Switch(
             success =>
             {
-                Assert.AreEqual(postUri.ToString(), ((ThreadViewPost)success!.Thread!).Post!.Uri!.ToString());
+                Assert.AreEqual(postUri, ((ThreadViewPost)success!.Thread!).Post!.Uri!);
                 Assert.IsTrue(((ThreadViewPost)success!.Thread!).Replies!.Count() > 0);
             },
             failed =>
@@ -451,8 +451,8 @@ public class AuthorizedTests
     [DataRow("did:plc:nrfz3bngz57p7g7yg6pbkyqr")]
     public async Task CreateAndRemoveListTest(string followDid)
     {
-        var randomName = Guid.NewGuid().ToString();
-        var list = new FishyFlip.Lexicon.App.Bsky.Graph.List(ListPurpose.Curatelist, randomName, "Test List", createdAt: DateTime.UtcNow);
+        var randomName = Guid.NewGuid();
+        var list = new FishyFlip.Lexicon.App.Bsky.Graph.List(ListPurpose.Curatelist, randomName.ToString(), "Test List", createdAt: DateTime.UtcNow);
         var createList = (await AuthorizedTests.proto!.Graph.CreateListAsync(list)).HandleResult();
         Assert.IsTrue(createList!.Cid is not null);
         Assert.IsTrue(createList!.Uri is not null);
@@ -486,8 +486,8 @@ public class AuthorizedTests
     [TestMethod]
     public async Task CreateAndRemovePostTest()
     {
-        var randomName = Guid.NewGuid().ToString();
-        var create = (await AuthorizedTests.proto!.Feed.CreatePostAsync(randomName)).HandleResult();
+        var randomName = Guid.NewGuid();
+        var create = (await AuthorizedTests.proto!.Feed.CreatePostAsync(randomName.ToString())).HandleResult();
         Assert.IsTrue(create!.Cid is not null);
         Assert.IsTrue(create!.Uri is not null);
         var repo = AuthorizedTests.proto!.Session!.Did;
@@ -502,8 +502,8 @@ public class AuthorizedTests
     [TestMethod]
     public async Task CreateAndRemoveRepostTest()
     {
-        var randomName = Guid.NewGuid().ToString();
-        var create = (await AuthorizedTests.proto!.Feed.CreatePostAsync(randomName)).HandleResult();
+        var randomName = Guid.NewGuid();
+        var create = (await AuthorizedTests.proto!.Feed.CreatePostAsync(randomName.ToString())).HandleResult();
         Assert.IsTrue(create!.Cid is not null);
         Assert.IsTrue(create!.Uri is not null);
 
@@ -526,8 +526,8 @@ public class AuthorizedTests
     [TestMethod]
     public async Task CreateAndRemoveLikeTest()
     {
-        var randomName = Guid.NewGuid().ToString();
-        var create = (await AuthorizedTests.proto!.Feed.CreatePostAsync(randomName)).HandleResult();
+        var randomName = Guid.NewGuid();
+        var create = (await AuthorizedTests.proto!.Feed.CreatePostAsync(randomName.ToString())).HandleResult();
         Assert.IsTrue(create!.Cid is not null);
         Assert.IsTrue(create!.Uri is not null);
 
@@ -590,7 +590,7 @@ public class AuthorizedTests
         Assert.IsTrue(describe is not null);
         Assert.IsTrue(describe.HandleIsCorrect);
         Assert.IsTrue(describe.Did is not null);
-        Assert.IsTrue(describe.Did!.ToString() == repo.ToString());
+        Assert.AreEqual(describe.Did!, repo);
     }
 
     /// <summary>
