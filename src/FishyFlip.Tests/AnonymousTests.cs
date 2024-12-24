@@ -54,7 +54,7 @@ public class AnonymousTests
             success =>
             {
                 var value = (Post)success!.Value!;
-                Assert.AreEqual(postUri.ToString(), success!.Uri!.ToString());
+                Assert.AreEqual(postUri, success!.Uri!);
                 Assert.IsNotNull(success.Value);
                 Assert.AreEqual(success.Value.Type, Post.RecordType);
 
@@ -135,7 +135,7 @@ public class AnonymousTests
         Assert.IsTrue(describe is not null);
         Assert.IsTrue(describe.HandleIsCorrect);
         Assert.IsTrue(describe.Did is not null);
-        Assert.AreEqual(describe.Did!.ToString(), repo!.ToString());
+        Assert.AreEqual(describe.Did!, repo!);
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public class AnonymousTests
         Assert.IsTrue(post.Facets[0].Index!.ByteStart == 15);
         Assert.IsTrue(post.Facets[0].Index!.ByteEnd == 24);
         Assert.IsTrue(post.Facets[1].Features![0]!.Type == FishyFlip.Lexicon.App.Bsky.Richtext.Mention.RecordType);
-        Assert.IsTrue(((Mention)post.Facets[1].Features![0]!).Did!.ToString() == "did:plc:yhgc5rlqhoezrx6fbawajxlh");
+        Assert.IsTrue(Equals(((Mention)post.Facets[1].Features![0]!).Did!, ATDid.Create("did:plc:yhgc5rlqhoezrx6fbawajxlh")!));
         Assert.IsTrue(post.Facets[1].Index!.ByteStart == 38);
         Assert.IsTrue(post.Facets[1].Index!.ByteEnd == 57);
         Assert.IsTrue(post.Facets[2].Features![0]!.Type == FishyFlip.Lexicon.App.Bsky.Richtext.Tag.RecordType);
@@ -240,5 +240,30 @@ public class AnonymousTests
         Assert.IsTrue(result.Views?.Count == 1);
         var labelerViewDetailed = (LabelerViewDetailed)result.Views![0];
         Assert.IsTrue(labelerViewDetailed.Policies?.LabelValues?.Any());
+    }
+
+    /// <summary>
+    /// Validate ATUri.
+    /// </summary>
+    [TestMethod]
+    public void ATUriValidation()
+    {
+        var atUri = ATUri.Create("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3kv25q4gqbk2y");
+        var atUri2 = ATUri.Create("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxcq7bwwo2j");
+        var test = atUri.Equals(atUri);
+        Assert.AreEqual(atUri, atUri);
+        Assert.AreNotEqual(atUri, atUri2);
+
+        var atDid = ATDid.Create("did:plc:okblbaji7rz243bluudjlgxt");
+        var atDid2 = ATDid.Create("did:web:drasticactions.dev");
+
+        Assert.AreEqual(atDid, atDid);
+        Assert.AreNotEqual(atDid, atDid2);
+
+        var atHandle = ATHandle.Create("drasticactions.dev");
+        var atHandle2 = ATHandle.Create("drasticactions.jp");
+
+        Assert.AreEqual(atHandle, atHandle);
+        Assert.AreNotEqual(atHandle, atHandle2);
     }
 }

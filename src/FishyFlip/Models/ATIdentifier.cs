@@ -60,4 +60,21 @@ public abstract class ATIdentifier
             return false;
         }
     }
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return obj switch
+        {
+            ATDid atDid => this.ToString() == atDid.ToString(),
+            ATHandle atHandle => this.ToString() == atHandle.ToString(),
+            _ => obj?.ToString() == this.ToString(),
+        };
+    }
+
+    /// <inheritdoc/>
+    public override int GetHashCode()
+    {
+        return this.ToString()?.GetHashCode() ?? 0;
+    }
 }
