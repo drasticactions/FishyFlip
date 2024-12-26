@@ -35,7 +35,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput?>> GetRecommendedDidCredentialsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRecommendedDidCredentials.ToString();
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityGetRecommendedDidCredentialsOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityGetRecommendedDidCredentialsOutput!, cancellationToken, headers);
         }
 
 
@@ -66,8 +68,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             List<string> queryStrings = new();
             queryStrings.Add("handle=" + handle);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput!, cancellationToken, headers);
         }
 
 

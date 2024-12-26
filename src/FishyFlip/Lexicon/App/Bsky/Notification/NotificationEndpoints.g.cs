@@ -47,8 +47,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
                 queryStrings.Add("seenAt=" + seenAt);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, cancellationToken, headers);
         }
 
 
@@ -93,8 +95,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
                 queryStrings.Add("seenAt=" + seenAt);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListNotificationsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListNotificationsOutput!, cancellationToken, headers);
         }
 
 

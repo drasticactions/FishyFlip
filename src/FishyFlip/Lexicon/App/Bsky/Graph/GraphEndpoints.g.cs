@@ -82,8 +82,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetActorStarterPacksOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetActorStarterPacksOutput!, cancellationToken, headers);
         }
 
 
@@ -110,8 +112,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetBlocksOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetBlocksOutput!, cancellationToken, headers);
         }
 
 
@@ -141,8 +145,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowersOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowersOutput!, cancellationToken, headers);
         }
 
 
@@ -172,8 +178,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowsOutput!, cancellationToken, headers);
         }
 
 
@@ -203,8 +211,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetKnownFollowersOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetKnownFollowersOutput!, cancellationToken, headers);
         }
 
 
@@ -234,8 +244,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListOutput!, cancellationToken, headers);
         }
 
 
@@ -262,8 +274,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListBlocksOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListBlocksOutput!, cancellationToken, headers);
         }
 
 
@@ -290,8 +304,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListMutesOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListMutesOutput!, cancellationToken, headers);
         }
 
 
@@ -321,8 +337,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListsOutput!, cancellationToken, headers);
         }
 
 
@@ -349,8 +367,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetMutesOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetMutesOutput!, cancellationToken, headers);
         }
 
 
@@ -376,8 +396,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add(string.Join("&", others.Select(n => "others=" + n)));
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetRelationshipsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetRelationshipsOutput!, cancellationToken, headers);
         }
 
 
@@ -395,8 +417,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             List<string> queryStrings = new();
             queryStrings.Add("starterPack=" + starterPack);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPackOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPackOutput!, cancellationToken, headers);
         }
 
 
@@ -414,8 +438,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             List<string> queryStrings = new();
             queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksOutput!, cancellationToken, headers);
         }
 
 
@@ -433,8 +459,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             List<string> queryStrings = new();
             queryStrings.Add("actor=" + actor);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetSuggestedFollowsByActorOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetSuggestedFollowsByActorOutput!, cancellationToken, headers);
         }
 
 
@@ -512,8 +540,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphSearchStarterPacksOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphSearchStarterPacksOutput!, cancellationToken, headers);
         }
 
 

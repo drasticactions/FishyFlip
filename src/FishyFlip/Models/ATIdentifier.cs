@@ -75,6 +75,7 @@ public abstract class ATIdentifier
     /// <inheritdoc/>
     public override int GetHashCode()
     {
+        var test = this.ToString()?.GetHashCode();
         return this.ToString()?.GetHashCode() ?? 0;
     }
 }

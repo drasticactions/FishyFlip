@@ -13,6 +13,13 @@ public static class Constants
     internal const string BlueskyApiClient = "FishyFlip";
     internal const string ContentMediaType = "application/json";
     internal const string AcceptedMediaType = "application/json";
+    internal const string AtProtoAcceptLabelers = "atproto-accept-labelers";
+    internal const string AtProtoContentLabelers = "atproto-content-labelers";
+    internal const string AtProtoProxy = "atproto-proxy";
+    internal const string BlueskyChatProxy = "did:web:api.bsky.chat#bsky_chat";
+    internal const string BlueskyModerationServiceDid = "did:plc:ar7c4by46qjdydhdevvrndac";
+
+    internal const string RedactParameter = "redact";
 
     public static class Urls
     {

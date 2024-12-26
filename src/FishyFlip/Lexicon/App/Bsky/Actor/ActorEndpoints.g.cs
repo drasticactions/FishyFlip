@@ -37,7 +37,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput?>> GetPreferencesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPreferences.ToString();
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetPreferencesOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetPreferencesOutput!, cancellationToken, headers);
         }
 
 
@@ -55,8 +57,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             List<string> queryStrings = new();
             queryStrings.Add("actor=" + actor);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorProfileViewDetailed!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorProfileViewDetailed!, cancellationToken, headers);
         }
 
 
@@ -74,8 +78,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             List<string> queryStrings = new();
             queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetProfilesOutput!, cancellationToken, headers);
         }
 
 
@@ -102,8 +108,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetSuggestionsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorGetSuggestionsOutput!, cancellationToken, headers);
         }
 
 
@@ -166,8 +174,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsOutput!, cancellationToken, headers);
         }
 
 
@@ -194,8 +204,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
                 queryStrings.Add("limit=" + limit);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsTypeaheadOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorSearchActorsTypeaheadOutput!, cancellationToken, headers);
         }
 
     }

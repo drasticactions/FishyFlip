@@ -64,6 +64,11 @@ public class ATProtocolOptions
     public JsonSerializerOptions JsonSerializerOptions { get; internal set; }
 
     /// <summary>
+    /// Gets the label parameters.
+    /// </summary>
+    public HashSet<LabelParameter> LabelParameters { get; internal set; } = new HashSet<LabelParameter>();
+
+    /// <summary>
     /// Gets a value indicating whether to switch to the service endpoint upon login, if available.
     /// If it's not available, the original instance URL will be used.
     /// </summary>
@@ -78,6 +83,11 @@ public class ATProtocolOptions
     /// Gets the source generation context.
     /// </summary>
     internal SourceGenerationContext SourceGenerationContext { get; }
+
+    /// <summary>
+    /// Gets the label definitions header.
+    /// </summary>
+    internal string LabelDefinitionsHeader => string.Join(", ", this.LabelParameters.Select(p => p.ToString()));
 
     /// <summary>
     /// Generates an HttpClient based on the options.

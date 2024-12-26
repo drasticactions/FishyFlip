@@ -73,7 +73,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?>> ListTemplatesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListTemplates.ToString();
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationListTemplatesOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationListTemplatesOutput!, cancellationToken, headers);
         }
 
 

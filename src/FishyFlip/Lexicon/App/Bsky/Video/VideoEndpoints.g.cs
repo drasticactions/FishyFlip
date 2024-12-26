@@ -34,8 +34,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             List<string> queryStrings = new();
             queryStrings.Add("jobId=" + jobId);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetJobStatusOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetJobStatusOutput!, cancellationToken, headers);
         }
 
 
@@ -48,7 +50,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput?>> GetUploadLimitsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetUploadLimits.ToString();
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetUploadLimitsOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetUploadLimitsOutput!, cancellationToken, headers);
         }
 
 

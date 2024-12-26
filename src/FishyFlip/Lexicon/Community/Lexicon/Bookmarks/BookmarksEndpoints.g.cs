@@ -45,8 +45,10 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(endpointUrl, atp.Options.SourceGenerationContext.CommunityLexiconBookmarksGetActorBookmarksOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(endpointUrl, atp.Options.SourceGenerationContext.CommunityLexiconBookmarksGetActorBookmarksOutput!, cancellationToken, headers);
         }
 
     }

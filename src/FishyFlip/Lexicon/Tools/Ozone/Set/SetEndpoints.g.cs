@@ -110,8 +110,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetGetValuesOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetGetValuesOutput!, cancellationToken, headers);
         }
 
 
@@ -156,8 +158,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
                 queryStrings.Add("sortDirection=" + sortDirection);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetQuerySetsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetQuerySetsOutput!, cancellationToken, headers);
         }
 
 
