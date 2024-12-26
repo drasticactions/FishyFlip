@@ -57,6 +57,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
             queryStrings.Add("cid=" + cid);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetBlob(endpointUrl, cancellationToken);
         }
@@ -88,6 +90,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
             queryStrings.Add("onDecoded=" + onDecoded);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
@@ -112,8 +116,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             List<string> queryStrings = new();
             queryStrings.Add("did=" + did);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, cancellationToken, headers);
         }
 
 
@@ -146,6 +152,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
             queryStrings.Add("onDecoded=" + onDecoded);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
@@ -179,6 +187,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
                 queryStrings.Add("since=" + since);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
@@ -200,8 +210,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             List<string> queryStrings = new();
             queryStrings.Add("did=" + did);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, cancellationToken, headers);
         }
 
 
@@ -242,8 +254,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListBlobsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListBlobsOutput!, cancellationToken, headers);
         }
 
 
@@ -270,8 +284,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposOutput!, cancellationToken, headers);
         }
 
 

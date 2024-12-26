@@ -34,8 +34,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             List<string> queryStrings = new();
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindCorrelationOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindCorrelationOutput!, cancellationToken, headers);
         }
 
 
@@ -65,8 +67,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
                 queryStrings.Add("limit=" + limit);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindRelatedAccountsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindRelatedAccountsOutput!, cancellationToken, headers);
         }
 
 
@@ -96,8 +100,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
                 queryStrings.Add("limit=" + limit);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, cancellationToken, headers);
         }
 
     }

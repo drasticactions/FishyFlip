@@ -126,8 +126,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             List<string> queryStrings = new();
             queryStrings.Add("repo=" + repo);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDescribeRepoOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDescribeRepoOutput!, cancellationToken, headers);
         }
 
 
@@ -159,8 +161,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
                 queryStrings.Add("cid=" + cid);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoGetRecordOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoGetRecordOutput!, cancellationToken, headers);
         }
 
 
@@ -201,8 +205,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListMissingBlobsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListMissingBlobsOutput!, cancellationToken, headers);
         }
 
 
@@ -241,8 +247,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
                 queryStrings.Add("reverse=" + (reverse.Value ? "true" : "false"));
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListRecordsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListRecordsOutput!, cancellationToken, headers);
         }
 
 

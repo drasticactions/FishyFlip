@@ -25,7 +25,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput?>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetConfig.ToString();
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneServerGetConfigOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneServerGetConfigOutput!, cancellationToken, headers);
         }
 
     }

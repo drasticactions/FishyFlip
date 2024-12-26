@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon.App.Bsky.Actor;
 using FishyFlip.Lexicon.Com.Atproto.Identity;
 
 namespace FishyFlip;
@@ -227,6 +228,34 @@ public sealed partial class ATProtocol : IDisposable
             default:
                 return null;
         }
+    }
+
+    /// <summary>
+    /// Calls GetPreferencesAsync to fetch the user's preferences.
+    /// Then gets the labels from the user, and creates a list of LabelParameters.
+    /// That are then added to the ATProtocol Options.
+    /// </summary>
+    /// <returns>List of LabelParameter.</returns>
+    public async Task<Result<List<LabelParameter>?>> SetDefaultLabelsAsync()
+    {
+        var (preferences, error) = await this.Actor.GetPreferencesAsync();
+        if (error is not null)
+        {
+            return error;
+        }
+
+        var labels = preferences?.Preferences?.FirstOrDefault(x => x.Type == "app.bsky.actor.defs#labelersPref") as LabelersPref;
+        if (labels?.Labelers is null)
+        {
+            return new List<LabelParameter>();
+        }
+
+        foreach (var label in labels.Labelers)
+        {
+            this.options.LabelParameters.Add(new LabelParameter(label.Did!));
+        }
+
+        return this.options.LabelParameters.ToList();
     }
 
     /// <summary>

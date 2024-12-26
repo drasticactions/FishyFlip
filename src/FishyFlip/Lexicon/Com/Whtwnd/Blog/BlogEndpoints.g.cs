@@ -36,8 +36,10 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             List<string> queryStrings = new();
             queryStrings.Add("author=" + author);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetAuthorPostsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetAuthorPostsOutput!, cancellationToken, headers);
         }
 
 
@@ -60,8 +62,10 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
             queryStrings.Add("entryTitle=" + entryTitle);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetEntryMetadataByNameOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetEntryMetadataByNameOutput!, cancellationToken, headers);
         }
 
 
@@ -79,8 +83,10 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             List<string> queryStrings = new();
             queryStrings.Add("postUri=" + postUri);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetMentionsByEntryOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetMentionsByEntryOutput!, cancellationToken, headers);
         }
 
 

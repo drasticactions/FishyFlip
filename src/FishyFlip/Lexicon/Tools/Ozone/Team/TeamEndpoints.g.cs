@@ -84,8 +84,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamListMembersOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamListMembersOutput!, cancellationToken, headers);
         }
 
 

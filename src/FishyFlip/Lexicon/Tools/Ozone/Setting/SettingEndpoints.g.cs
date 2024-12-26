@@ -61,8 +61,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
                 queryStrings.Add(string.Join("&", keys.Select(n => "keys=" + n)));
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingListOptionsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingListOptionsOutput!, cancellationToken, headers);
         }
 
 

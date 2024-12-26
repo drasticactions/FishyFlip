@@ -70,8 +70,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             List<string> queryStrings = new();
             queryStrings.Add("convoId=" + convoId);
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoOutput!, cancellationToken, headers);
         }
 
 
@@ -89,8 +91,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             List<string> queryStrings = new();
             queryStrings.Add(string.Join("&", members.Select(n => "members=" + n)));
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoForMembersOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoForMembersOutput!, cancellationToken, headers);
         }
 
 
@@ -111,8 +115,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetLogOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetLogOutput!, cancellationToken, headers);
         }
 
 
@@ -142,8 +148,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetMessagesOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetMessagesOutput!, cancellationToken, headers);
         }
 
 
@@ -186,8 +194,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoListConvosOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoListConvosOutput!, cancellationToken, headers);
         }
 
 

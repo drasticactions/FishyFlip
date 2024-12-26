@@ -101,13 +101,23 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
-    /// Enable auto renewing sessions.
+    /// Enable auto-renewing sessions.
     /// </summary>
     /// <param name="autoRenewSession">Auto Renew Session.</param>
     /// <returns><see cref="ATProtocolBuilder"/>.</returns>
     public ATProtocolBuilder EnableAutoRenewSession(bool autoRenewSession)
     {
         this.atProtocolOptions.AutoRenewSession = autoRenewSession;
+        return this;
+    }
+
+    /// <summary>
+    /// Include the Bluesky Moderation service label by default.
+    /// </summary>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder EnableBlueskyModerationService()
+    {
+        this.atProtocolOptions.LabelParameters.Add(LabelParameter.BlueskyModeration);
         return this;
     }
 

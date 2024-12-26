@@ -36,8 +36,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
                 queryStrings.Add("detailed=" + (detailed.Value ? "true" : "false"));
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyLabelerGetServicesOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyLabelerGetServicesOutput!, cancellationToken, headers);
         }
 
     }

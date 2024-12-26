@@ -40,7 +40,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         public static Task<Result<Success?>> ExportAccountDataAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ExportAccountData.ToString();
-            return atp.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken, headers);
         }
 
     }

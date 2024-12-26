@@ -48,8 +48,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, cancellationToken, headers);
         }
 
     }

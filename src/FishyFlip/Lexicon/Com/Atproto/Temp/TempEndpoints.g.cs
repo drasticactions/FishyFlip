@@ -45,7 +45,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?>> CheckSignupQueueAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CheckSignupQueue.ToString();
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken, headers);
         }
 
 

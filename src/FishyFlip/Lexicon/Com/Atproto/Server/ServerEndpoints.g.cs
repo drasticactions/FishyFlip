@@ -86,7 +86,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput?>> CheckAccountStatusAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CheckAccountStatus.ToString();
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCheckAccountStatusOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerCheckAccountStatusOutput!, cancellationToken, headers);
         }
 
 
@@ -297,7 +299,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput?>> DescribeServerAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DescribeServer.ToString();
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDescribeServerOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerDescribeServerOutput!, cancellationToken, headers);
         }
 
 
@@ -326,8 +330,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
                 queryStrings.Add("createAvailable=" + (createAvailable.Value ? "true" : "false"));
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetAccountInviteCodesOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetAccountInviteCodesOutput!, cancellationToken, headers);
         }
 
 
@@ -359,8 +365,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
                 queryStrings.Add("lxm=" + lxm);
             }
 
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetServiceAuthOutput!, cancellationToken);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetServiceAuthOutput!, cancellationToken, headers);
         }
 
 
@@ -373,7 +381,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput?>> GetSessionAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSession.ToString();
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetSessionOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.GetSessionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerGetSessionOutput!, cancellationToken, headers);
         }
 
 
@@ -388,7 +398,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput?>> ListAppPasswordsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListAppPasswords.ToString();
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerListAppPasswordsOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoServerListAppPasswordsOutput!, cancellationToken, headers);
         }
 
 
