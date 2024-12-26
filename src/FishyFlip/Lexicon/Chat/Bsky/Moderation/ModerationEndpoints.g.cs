@@ -35,6 +35,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             queryStrings.Add("actor=" + actor);
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetActorMetadataOutput!, cancellationToken, headers);
@@ -74,6 +75,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             }
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetMessageContextOutput!, cancellationToken, headers);

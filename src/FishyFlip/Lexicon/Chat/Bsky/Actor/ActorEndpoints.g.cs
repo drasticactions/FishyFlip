@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         {
             var endpointUrl = ExportAccountData.ToString();
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             return atp.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken, headers);
         }

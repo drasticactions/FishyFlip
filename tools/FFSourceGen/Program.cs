@@ -1206,7 +1206,7 @@ public partial class AppCommands
                     }
 
                     sb.AppendLine($"            var headers = new Dictionary<string, string>();");
-                    if (group.Key.Contains("chat.bsky.convo"))
+                    if (item.Id.Contains("chat"))
                     {
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);");
                     }
