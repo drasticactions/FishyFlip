@@ -1205,6 +1205,14 @@ public partial class AppCommands
                         }
                     }
 
+                    sb.AppendLine($"            var headers = new Dictionary<string, string>();");
+                    if (group.Key.Contains("chat.bsky.convo"))
+                    {
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);");
+                    }
+
+                    sb.AppendLine($"            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);");
+
                     if (inputProperties.Count > 2)
                     {
                         sb.AppendLine("            endpointUrl += string.Join(\"&\", queryStrings);");
@@ -1223,7 +1231,7 @@ public partial class AppCommands
                     else
                     {
                         sb.AppendLine(
-                            $"            return atp.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken);");
+                            $"            return atp.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken, headers);");
                     }
 
                     break;
