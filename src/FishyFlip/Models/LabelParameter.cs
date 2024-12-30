@@ -12,7 +12,7 @@ public class LabelParameter
     /// <summary>
     /// Initializes a new instance of the <see cref="LabelParameter"/> class.
     /// </summary>
-    /// <param name="labelDid">The label did.</param>
+    /// <param name="labelDid">The labeler did.</param>
     /// <param name="parameters">Optional list of parameters for the label.</param>
     internal LabelParameter(ATDid labelDid, List<string>? parameters = null)
     {
@@ -38,7 +38,7 @@ public class LabelParameter
     /// <summary>
     /// Creates a new label parameter.
     /// </summary>
-    /// <param name="labelDid">The label did.</param>
+    /// <param name="labelDid">The labeler did.</param>
     /// <param name="parameters">Optional list of parameters for the label.</param>
     /// <returns>LabelParameter.</returns>
     public static LabelParameter Create(string labelDid, List<string>? parameters = null)
