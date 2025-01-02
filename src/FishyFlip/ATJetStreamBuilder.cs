@@ -51,6 +51,16 @@ public class ATJetStreamBuilder
     }
 
     /// <summary>
+    /// Enables stream compression.
+    /// </summary>
+    /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
+    public ATJetStreamBuilder WithCompression()
+    {
+        this.atProtocolOptions.Compression = true;
+        return this;
+    }
+
+    /// <summary>
     /// Returns the ATWebSocketProtocolOptions.
     /// </summary>
     /// <returns>ATJetStreamBuilder.</returns>
