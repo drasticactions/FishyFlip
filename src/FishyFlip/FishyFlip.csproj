@@ -34,23 +34,4 @@
 	<ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
 	</ItemGroup>
-	<ItemGroup>
-		<None Include="..\..\zstd_dictionary" Pack="true" PackagePath="content">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-	<Target Name="CopyBinaryContent" BeforeTargets="Build">
-		<ItemGroup>
-			<BinaryContent Include="$(MSBuildThisFileDirectory)\..\..\zstd_dictionary" />
-		</ItemGroup>
-		<Copy SourceFiles="@(BinaryContent)" DestinationFolder="$(TargetDir)" />
-	</Target>
-	<ItemGroup>
-		<Content Include="..\..\zstd_dictionary">
-			<Pack>true</Pack>
-			<PackagePath>contentFiles\any\any</PackagePath>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<BuildAction>Content</BuildAction>
-		</Content>
-	</ItemGroup>
 </Project>

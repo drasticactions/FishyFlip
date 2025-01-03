@@ -2,7 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System.Diagnostics;
 using FishyFlip.Events;
 using FishyFlip.Lexicon;
 using FishyFlip.Tools.Json;
@@ -23,6 +22,7 @@ public sealed class ATJetStream : IDisposable
     private ILogger? logger;
     private Uri instanceUri;
     private bool compression;
+    private byte[]? dictionary;
     private Decompressor? decompressor;
 
     /// <summary>
@@ -34,6 +34,7 @@ public sealed class ATJetStream : IDisposable
         this.logger = options.Logger;
         this.instanceUri = options.Url;
         this.compression = options.Compression;
+        this.dictionary = options.Dictionary;
         this.client = new ClientWebSocket();
         this.jsonSerializerOptions = new JsonSerializerOptions()
         {
@@ -99,22 +100,12 @@ public sealed class ATJetStream : IDisposable
             try
             {
                 this.decompressor = new Decompressor();
-                var process = Process.GetCurrentProcess();
-                var fullPath = process.MainModule?.FileName;
-                if (fullPath == null)
+                if (this.dictionary == null)
                 {
-                    throw new NullReferenceException("Unable to find running process location.");
+                    throw new NullReferenceException("dictionary is null");
                 }
 
-                var directoryName = Path.GetDirectoryName(fullPath);
-                if (directoryName == null)
-                {
-                    throw new NullReferenceException("Unable to parse running process location.");
-                }
-
-                var blobPath = Path.Combine(directoryName, "zstd_dictionary");
-                var data = File.ReadAllBytes(blobPath);
-                this.decompressor.LoadDictionary(data);
+                this.decompressor.LoadDictionary(this.dictionary);
                 subscribe += $"compress=true&";
             }
             catch (Exception e)

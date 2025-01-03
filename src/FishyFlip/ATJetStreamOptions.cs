@@ -32,4 +32,9 @@ public class ATJetStreamOptions
     /// Gets a value indicating whether stream compression is used.
     /// </summary>
     public bool Compression { get; internal set; }
+
+    /// <summary>
+    /// Gets the zstd dictionary.
+    /// </summary>
+    public byte[]? Dictionary { get; internal set; }
 }

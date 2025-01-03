@@ -51,12 +51,15 @@ public class ATJetStreamBuilder
     }
 
     /// <summary>
-    /// Enables stream compression.
+    /// <para>Enables stream compression.</para>
+    /// Requires a valid copy of the zstd dictionary to function, you can find it here: <see href="https://github.com/bluesky-social/jetstream/blob/main/pkg/models/zstd_dictionary"/>.
     /// </summary>
+    /// <param name="dictionary">zstd dictionary used for decompression.</param>
     /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
-    public ATJetStreamBuilder WithCompression()
+    public ATJetStreamBuilder WithCompression(byte[] dictionary)
     {
         this.atProtocolOptions.Compression = true;
+        this.atProtocolOptions.Dictionary = dictionary;
         return this;
     }
 
