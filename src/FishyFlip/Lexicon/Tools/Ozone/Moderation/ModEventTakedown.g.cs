@@ -18,11 +18,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="comment"></param>
         /// <param name="durationInHours">Indicates how long the takedown should be in effect before automatically expiring.</param>
         /// <param name="acknowledgeAccountSubjects">If true, all other reports on content authored by this account will be resolved (acknowledged).</param>
-        public ModEventTakedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default)
+        /// <param name="policies">Names/Keywords of the policies that drove the decision.</param>
+        public ModEventTakedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default, List<string>? policies = default)
         {
             this.Comment = comment;
             this.DurationInHours = durationInHours;
             this.AcknowledgeAccountSubjects = acknowledgeAccountSubjects;
+            this.Policies = policies;
         }
 
 
@@ -42,6 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
             if (obj["durationInHours"] is not null) this.DurationInHours = obj["durationInHours"].AsInt64Value();
             if (obj["acknowledgeAccountSubjects"] is not null) this.AcknowledgeAccountSubjects = obj["acknowledgeAccountSubjects"].AsBoolean();
+            if (obj["policies"] is not null) this.Policies = obj["policies"].Values.Select(n =>n.AsString()).ToList();
         }
 
         /// <summary>
@@ -63,6 +66,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("acknowledgeAccountSubjects")]
         public bool? AcknowledgeAccountSubjects { get; set; }
+
+        /// <summary>
+        /// Gets or sets the policies.
+        /// <br/> Names/Keywords of the policies that drove the decision.
+        /// </summary>
+        [JsonPropertyName("policies")]
+        public List<string>? Policies { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
