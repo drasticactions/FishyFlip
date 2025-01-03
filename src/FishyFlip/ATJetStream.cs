@@ -5,6 +5,7 @@
 using FishyFlip.Events;
 using FishyFlip.Lexicon;
 using FishyFlip.Tools.Json;
+using ZstdSharp;
 
 namespace FishyFlip;
 
@@ -20,6 +21,9 @@ public sealed class ATJetStream : IDisposable
     private bool disposedValue;
     private ILogger? logger;
     private Uri instanceUri;
+    private bool compression;
+    private byte[]? dictionary;
+    private Decompressor? decompressor;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATJetStream"/> class.
@@ -29,6 +33,8 @@ public sealed class ATJetStream : IDisposable
     {
         this.logger = options.Logger;
         this.instanceUri = options.Url;
+        this.compression = options.Compression;
+        this.dictionary = options.Dictionary;
         this.client = new ClientWebSocket();
         this.jsonSerializerOptions = new JsonSerializerOptions()
         {
@@ -86,6 +92,28 @@ public sealed class ATJetStream : IDisposable
             foreach (var did in wantedDids)
             {
                 subscribe += $"wantedDids={did}&";
+            }
+        }
+
+        if (this.compression)
+        {
+            try
+            {
+                this.decompressor = new Decompressor();
+                if (this.dictionary == null)
+                {
+                    throw new NullReferenceException("dictionary is null");
+                }
+
+                this.decompressor.LoadDictionary(this.dictionary);
+                subscribe += $"compress=true&";
+            }
+            catch (Exception e)
+            {
+                this.logger?.LogError(e, "Failed to setup compression, falling back.");
+                this.compression = false;
+                this.decompressor = null;
+                throw;
             }
         }
 
@@ -168,27 +196,46 @@ public sealed class ATJetStream : IDisposable
         {
             try
             {
+                var messageType = this.compression ? WebSocketMessageType.Binary : WebSocketMessageType.Text;
 #if NETSTANDARD
                 var result =
                     await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
-                if (result is not { MessageType: WebSocketMessageType.Text, EndOfMessage: true })
+                if (result.MessageType != messageType && !result.EndOfMessage)
                 {
                     continue;
                 }
 
-                byte[] newArray = new byte[result.Count];
-                Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                byte[] newArray;
+                if (!this.compression)
+                {
+                    newArray = new byte[result.Count];
+                    Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                }
+                else
+                {
+                    var receiveSpan = receiveBuffer.AsSpan(0, result.Count);
+                    newArray = this.decompressor!.Unwrap(receiveSpan).ToArray();
+                }
 #else
                 var result =
                     await webSocket.ReceiveAsync(new Memory<byte>(receiveBuffer), token);
-                if (result is not { MessageType: WebSocketMessageType.Text, EndOfMessage: true })
+                if (result.MessageType != messageType && !result.EndOfMessage)
                 {
                     continue;
                 }
 
                 // Convert result to string
-                byte[] newArray = new byte[result.Count];
-                Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                byte[] newArray;
+                if (!this.compression)
+                {
+                    newArray = new byte[result.Count];
+                    Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                }
+                else
+                {
+                    var receiveSpan = receiveBuffer.AsSpan(0, result.Count);
+                    newArray = this.decompressor!.Unwrap(receiveSpan).ToArray();
+                }
 #endif
                 var message = Encoding.UTF8.GetString(newArray);
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
@@ -249,6 +296,7 @@ public sealed class ATJetStream : IDisposable
         {
             if (disposing)
             {
+                this.decompressor?.Dispose();
                 this.client.Dispose();
             }
 

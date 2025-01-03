@@ -43,5 +43,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
+    <PackageVersion Include="ZstdSharp.Port" Version="0.8.4" />
   </ItemGroup>
 </Project>

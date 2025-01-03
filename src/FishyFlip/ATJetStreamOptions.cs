@@ -15,6 +15,7 @@ public class ATJetStreamOptions
     public ATJetStreamOptions()
     {
         this.Url = new Uri("https://jetstream.atproto.tools");
+        this.Compression = false;
     }
 
     /// <summary>
@@ -26,4 +27,14 @@ public class ATJetStreamOptions
     /// Gets the logger.
     /// </summary>
     public ILogger? Logger { get; internal set; }
+
+    /// <summary>
+    /// Gets a value indicating whether stream compression is used.
+    /// </summary>
+    public bool Compression { get; internal set; }
+
+    /// <summary>
+    /// Gets the zstd dictionary.
+    /// </summary>
+    public byte[]? Dictionary { get; internal set; }
 }
