@@ -126,11 +126,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="addedTags"></param>
         /// <param name="removedTags"></param>
         /// <param name="reportTypes"></param>
+        /// <param name="policies"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.QueryEventsAsync(types, createdBy, sortDirection, createdAfter, createdBefore, subject, collections, subjectType, includeAllUserRecords, limit, hasComment, comment, addedLabels, removedLabels, addedTags, removedTags, reportTypes, cursor, cancellationToken);
+            return atp.QueryEventsAsync(types, createdBy, sortDirection, createdAfter, createdBefore, subject, collections, subjectType, includeAllUserRecords, limit, hasComment, comment, addedLabels, removedLabels, addedTags, removedTags, reportTypes, policies, cursor, cancellationToken);
         }
 
 
