@@ -1211,6 +1211,11 @@ public partial class AppCommands
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);");
                     }
 
+                    if (item.Id.Contains("ozone"))
+                    {
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                    }
+
                     sb.AppendLine($"            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);");
 
                     if (inputProperties.Count > 2)

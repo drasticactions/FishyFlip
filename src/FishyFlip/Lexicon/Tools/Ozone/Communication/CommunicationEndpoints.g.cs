@@ -74,6 +74,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         {
             var endpointUrl = ListTemplates.ToString();
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationListTemplatesOutput!, cancellationToken, headers);
         }

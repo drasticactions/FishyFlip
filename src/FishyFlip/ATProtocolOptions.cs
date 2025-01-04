@@ -75,6 +75,11 @@ public class ATProtocolOptions
     public bool UseServiceEndpointUponLogin { get; internal set; } = true;
 
     /// <summary>
+    /// Gets the Ozone Proxy Header.
+    /// </summary>
+    public string OzoneProxyHeader { get; internal set; } = string.Empty;
+
+    /// <summary>
     /// Gets the Did Cache.
     /// </summary>
     internal Dictionary<string, string> DidCache { get; } = new Dictionary<string, string>();

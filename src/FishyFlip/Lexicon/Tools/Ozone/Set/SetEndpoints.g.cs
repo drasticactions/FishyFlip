@@ -111,6 +111,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             }
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetGetValuesOutput!, cancellationToken, headers);
@@ -159,6 +160,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             }
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetQuerySetsOutput!, cancellationToken, headers);

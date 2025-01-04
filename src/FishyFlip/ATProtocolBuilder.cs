@@ -122,6 +122,17 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Sets the ATProtocol Ozone Proxy header.
+    /// </summary>
+    /// <param name="did">The ATDid of the labeler service. This DID should include an #at_labeler that points to the ozone instance to resolve to.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithOzoneProxy(ATDid did)
+    {
+        this.atProtocolOptions.OzoneProxyHeader = $"{did}{Constants.AtLabeler}";
+        return this;
+    }
+
+    /// <summary>
     /// Adds a logger.
     /// </summary>
     /// <param name="logger">Logger.</param>

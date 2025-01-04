@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         {
             var endpointUrl = GetConfig.ToString();
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneServerGetConfigOutput!, cancellationToken, headers);
         }

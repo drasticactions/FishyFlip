@@ -16,6 +16,8 @@ public static class Constants
     internal const string AtProtoAcceptLabelers = "atproto-accept-labelers";
     internal const string AtProtoContentLabelers = "atproto-content-labelers";
     internal const string AtProtoProxy = "atproto-proxy";
+
+    internal const string AtLabeler = "#atproto_labeler";
     internal const string BlueskyChatProxy = "did:web:api.bsky.chat#bsky_chat";
     internal const string BlueskyModerationServiceDid = "did:plc:ar7c4by46qjdydhdevvrndac";
 
