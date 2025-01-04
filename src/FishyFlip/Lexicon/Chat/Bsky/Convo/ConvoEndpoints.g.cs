@@ -49,10 +49,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView?>> DeleteMessageForSelfAsync (this FishyFlip.ATProtocol atp, string convoId, string messageId, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteMessageForSelf.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new DeleteMessageForSelfInput();
             inputItem.ConvoId = convoId;
             inputItem.MessageId = messageId;
-            return atp.Post<DeleteMessageForSelfInput, FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoDeleteMessageForSelfInput!, atp.Options.SourceGenerationContext.ChatBskyConvoDeletedMessageView!, inputItem, cancellationToken);
+            return atp.Post<DeleteMessageForSelfInput, FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoDeleteMessageForSelfInput!, atp.Options.SourceGenerationContext.ChatBskyConvoDeletedMessageView!, inputItem, cancellationToken, headers);
         }
 
 
@@ -169,9 +171,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput?>> LeaveConvoAsync (this FishyFlip.ATProtocol atp, string convoId, CancellationToken cancellationToken = default)
         {
             var endpointUrl = LeaveConvo.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new LeaveConvoInput();
             inputItem.ConvoId = convoId;
-            return atp.Post<LeaveConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoLeaveConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoLeaveConvoOutput!, inputItem, cancellationToken);
+            return atp.Post<LeaveConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoLeaveConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoLeaveConvoOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -216,9 +220,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput?>> MuteConvoAsync (this FishyFlip.ATProtocol atp, string convoId, CancellationToken cancellationToken = default)
         {
             var endpointUrl = MuteConvo.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new MuteConvoInput();
             inputItem.ConvoId = convoId;
-            return atp.Post<MuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoOutput!, inputItem, cancellationToken);
+            return atp.Post<MuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -233,10 +239,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView?>> SendMessageAsync (this FishyFlip.ATProtocol atp, string convoId, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput message, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SendMessage.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new SendMessageInput();
             inputItem.ConvoId = convoId;
             inputItem.Message = message;
-            return atp.Post<SendMessageInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageInput!, atp.Options.SourceGenerationContext.ChatBskyConvoMessageView!, inputItem, cancellationToken);
+            return atp.Post<SendMessageInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageInput!, atp.Options.SourceGenerationContext.ChatBskyConvoMessageView!, inputItem, cancellationToken, headers);
         }
 
 
@@ -250,9 +258,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>> SendMessageBatchAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem> items, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SendMessageBatch.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new SendMessageBatchInput();
             inputItem.Items = items;
-            return atp.Post<SendMessageBatchInput, FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageBatchInput!, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageBatchOutput!, inputItem, cancellationToken);
+            return atp.Post<SendMessageBatchInput, FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageBatchInput!, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageBatchOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -266,9 +276,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput?>> UnmuteConvoAsync (this FishyFlip.ATProtocol atp, string convoId, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UnmuteConvo.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new UnmuteConvoInput();
             inputItem.ConvoId = convoId;
-            return atp.Post<UnmuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoOutput!, inputItem, cancellationToken);
+            return atp.Post<UnmuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -283,10 +295,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput?>> UpdateReadAsync (this FishyFlip.ATProtocol atp, string convoId, string? messageId = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateRead.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new UpdateReadInput();
             inputItem.ConvoId = convoId;
             inputItem.MessageId = messageId;
-            return atp.Post<UpdateReadInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateReadInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateReadOutput!, inputItem, cancellationToken);
+            return atp.Post<UpdateReadInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateReadInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateReadOutput!, inputItem, cancellationToken, headers);
         }
 
     }

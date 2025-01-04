@@ -100,9 +100,10 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         public static Task<Result<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput?>> NotifyOfNewEntryAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri entryUri, CancellationToken cancellationToken = default)
         {
             var endpointUrl = NotifyOfNewEntry.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new NotifyOfNewEntryInput();
             inputItem.EntryUri = entryUri;
-            return atp.Post<NotifyOfNewEntryInput, FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryInput!, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryOutput!, inputItem, cancellationToken);
+            return atp.Post<NotifyOfNewEntryInput, FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryInput!, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryOutput!, inputItem, cancellationToken, headers);
         }
 
     }

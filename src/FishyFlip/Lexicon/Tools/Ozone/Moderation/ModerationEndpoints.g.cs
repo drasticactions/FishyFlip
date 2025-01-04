@@ -47,12 +47,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (this FishyFlip.ATProtocol atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = EmitEvent.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new EmitEventInput();
             inputItem.Event = @event;
             inputItem.Subject = subject;
             inputItem.CreatedBy = createdBy;
             inputItem.SubjectBlobCids = subjectBlobCids;
-            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken);
+            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken, headers);
         }
 
 
@@ -71,6 +73,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add("id=" + id);
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventViewDetail!, cancellationToken, headers);
@@ -100,6 +103,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRecordViewDetail!, cancellationToken, headers);
@@ -121,6 +125,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetRecordsOutput!, cancellationToken, headers);
@@ -144,6 +149,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add("did=" + did);
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRepoViewDetail!, cancellationToken, headers);
@@ -165,6 +171,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReposOutput!, cancellationToken, headers);
@@ -297,6 +304,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryEventsOutput!, cancellationToken, headers);
@@ -495,6 +503,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryStatusesOutput!, cancellationToken, headers);
@@ -531,6 +540,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationSearchReposOutput!, cancellationToken, headers);

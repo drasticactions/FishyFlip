@@ -1114,15 +1114,24 @@ public partial class AppCommands
             {
                 case "procedure":
                     sb.AppendLine($"            var endpointUrl = {item.ClassName}.ToString();");
+                    sb.AppendLine($"            var headers = new Dictionary<string, string>();");
+                    if (item.Id.Contains("ozone"))
+                    {
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                    }
+                    if (item.Id.Contains("chat"))
+                    {
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);");
+                    }
                     if (inputProperties.Count <= 2)
                     {
                         sb.AppendLine(
-                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken);");
+                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken, headers);");
                     }
                     else if (inputProperties[1].Contains("StreamContent"))
                     {
                         sb.AppendLine(
-                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, {inputProperties[1].Split(" ").Last()}, cancellationToken);");
+                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, {inputProperties[1].Split(" ").Last()}, cancellationToken, headers);");
                     }
                     else
                     {
@@ -1137,7 +1146,7 @@ public partial class AppCommands
                         }
 
                         sb.AppendLine(
-                            $"            return atp.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{inputSourceContext}!, atp.Options.SourceGenerationContext.{sourceContext}!, inputItem, cancellationToken);");
+                            $"            return atp.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{inputSourceContext}!, atp.Options.SourceGenerationContext.{sourceContext}!, inputItem, cancellationToken, headers);");
                     }
 
                     break;
@@ -1209,6 +1218,11 @@ public partial class AppCommands
                     if (item.Id.Contains("chat"))
                     {
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);");
+                    }
+
+                    if (item.Id.Contains("ozone"))
+                    {
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
                     }
 
                     sb.AppendLine($"            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);");

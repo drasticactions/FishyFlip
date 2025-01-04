@@ -301,9 +301,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public static Task<Result<Success?>> NotifyOfUpdateAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
         {
             var endpointUrl = NotifyOfUpdate.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new NotifyOfUpdateInput();
             inputItem.Hostname = hostname;
-            return atp.Post<NotifyOfUpdateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncNotifyOfUpdateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<NotifyOfUpdateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncNotifyOfUpdateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -317,9 +318,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public static Task<Result<Success?>> RequestCrawlAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestCrawl.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new RequestCrawlInput();
             inputItem.Hostname = hostname;
-            return atp.Post<RequestCrawlInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncRequestCrawlInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<RequestCrawlInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncRequestCrawlInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
     }

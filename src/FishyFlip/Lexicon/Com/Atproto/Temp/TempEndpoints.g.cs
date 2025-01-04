@@ -30,9 +30,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>> AddReservedHandleAsync (this FishyFlip.ATProtocol atp, string handle, CancellationToken cancellationToken = default)
         {
             var endpointUrl = AddReservedHandle.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new AddReservedHandleInput();
             inputItem.Handle = handle;
-            return atp.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, inputItem, cancellationToken);
+            return atp.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -61,9 +62,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public static Task<Result<Success?>> RequestPhoneVerificationAsync (this FishyFlip.ATProtocol atp, string phoneNumber, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestPhoneVerification.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new RequestPhoneVerificationInput();
             inputItem.PhoneNumber = phoneNumber;
-            return atp.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
     }

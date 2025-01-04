@@ -139,9 +139,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, List<ATObject> preferences, CancellationToken cancellationToken = default)
         {
             var endpointUrl = PutPreferences.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new PutPreferencesInput();
             inputItem.Preferences = preferences;
-            return atp.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyActorPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 

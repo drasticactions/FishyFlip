@@ -65,7 +65,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UploadVideo.ToString();
-            return atp.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            return atp.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, cancellationToken, headers);
         }
 
     }

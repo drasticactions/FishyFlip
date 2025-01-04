@@ -37,11 +37,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (this FishyFlip.ATProtocol atp, string reasonType, ATObject subject, string? reason = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateReport.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new CreateReportInput();
             inputItem.ReasonType = reasonType;
             inputItem.Subject = subject;
             inputItem.Reason = reason;
-            return atp.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, inputItem, cancellationToken);
+            return atp.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, inputItem, cancellationToken, headers);
         }
 
     }

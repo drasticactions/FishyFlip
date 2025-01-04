@@ -385,6 +385,16 @@ public sealed partial class ATProtocol : IDisposable
         return host;
     }
 
+    /// <summary>
+    /// Sets the Ozone Proxy Header.
+    /// </summary>
+    /// <param name="did">The ATDid of the labeler service. This DID should include an #at_labeler that points to the ozone instance to resolve to.</param>
+    /// <remarks>Sets the Ozone Proxy Header to the given DID.</remarks>
+    public void SetOzoneProxy(ATDid did)
+    {
+        this.options.OzoneProxyHeader = $"{did}{Constants.AtLabeler}";
+    }
+
     /// <inheritdoc/>
     public void Dispose()
     {

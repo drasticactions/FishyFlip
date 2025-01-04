@@ -125,6 +125,7 @@ public static class HttpClientExtensions
     /// <param name="options">The JsonSerializerOptions for the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <param name="headers">Custom headers to include with the request.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     public static async Task<Result<TK>> Post<TK>(
         this HttpClient client,
@@ -132,10 +133,20 @@ public static class HttpClientExtensions
         JsonTypeInfo<TK> type,
         JsonSerializerOptions options,
         CancellationToken cancellationToken,
-        ILogger? logger = default)
+        ILogger? logger = default,
+        Dictionary<string, string>? headers = default)
     {
         logger?.LogDebug($"POST {client.BaseAddress}{url}");
-        using var message = await client.PostAsync(url, null, cancellationToken: cancellationToken);
+        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+        }
+
+        using var message = await client.SendAsync(request, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);

@@ -49,12 +49,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>> ApplyWritesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, List<ATObject> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ApplyWrites.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new ApplyWritesInput();
             inputItem.Repo = repo;
             inputItem.Writes = writes;
             inputItem.Validate = validate;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<ApplyWritesInput, FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesOutput!, inputItem, cancellationToken);
+            return atp.Post<ApplyWritesInput, FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -75,6 +76,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>> CreateRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, ATObject record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateRecord.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new CreateRecordInput();
             inputItem.Repo = repo;
             inputItem.Collection = collection;
@@ -82,7 +84,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             inputItem.Rkey = rkey;
             inputItem.Validate = validate;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<CreateRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordOutput!, inputItem, cancellationToken);
+            return atp.Post<CreateRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -102,13 +104,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>> DeleteRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteRecord.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new DeleteRecordInput();
             inputItem.Repo = repo;
             inputItem.Collection = collection;
             inputItem.Rkey = rkey;
             inputItem.SwapRecord = swapRecord;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<DeleteRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordOutput!, inputItem, cancellationToken);
+            return atp.Post<DeleteRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -178,7 +181,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public static Task<Result<Success?>> ImportRepoAsync (this FishyFlip.ATProtocol atp, StreamContent content, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ImportRepo.ToString();
-            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, content, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, content, cancellationToken, headers);
         }
 
 
@@ -272,6 +276,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>> PutRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, ATObject record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = PutRecord.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new PutRecordInput();
             inputItem.Repo = repo;
             inputItem.Collection = collection;
@@ -280,7 +285,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             inputItem.Validate = validate;
             inputItem.SwapRecord = swapRecord;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<PutRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordOutput!, inputItem, cancellationToken);
+            return atp.Post<PutRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -294,7 +299,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>> UploadBlobAsync (this FishyFlip.ATProtocol atp, StreamContent content, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UploadBlob.ToString();
-            return atp.Post<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoUploadBlobOutput!, content, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            return atp.Post<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoUploadBlobOutput!, content, cancellationToken, headers);
         }
 
     }
