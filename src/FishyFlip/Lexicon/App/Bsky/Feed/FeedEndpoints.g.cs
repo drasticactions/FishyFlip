@@ -667,9 +667,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SendInteractions.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new SendInteractionsInput();
             inputItem.Interactions = interactions;
-            return atp.Post<SendInteractionsInput, FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyFeedSendInteractionsInput!, atp.Options.SourceGenerationContext.AppBskyFeedSendInteractionsOutput!, inputItem, cancellationToken);
+            return atp.Post<SendInteractionsInput, FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyFeedSendInteractionsInput!, atp.Options.SourceGenerationContext.AppBskyFeedSendInteractionsOutput!, inputItem, cancellationToken, headers);
         }
 
     }

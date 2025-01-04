@@ -52,9 +52,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<Success?>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteAccount.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new DeleteAccountInput();
             inputItem.Did = did;
-            return atp.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -69,10 +70,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<Success?>> DisableAccountInvitesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid account, string? note = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DisableAccountInvites.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new DisableAccountInvitesInput();
             inputItem.Account = account;
             inputItem.Note = note;
-            return atp.Post<DisableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<DisableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -87,10 +89,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<Success?>> DisableInviteCodesAsync (this FishyFlip.ATProtocol atp, List<string>? codes = default, List<string>? accounts = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DisableInviteCodes.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new DisableInviteCodesInput();
             inputItem.Codes = codes;
             inputItem.Accounts = accounts;
-            return atp.Post<DisableInviteCodesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableInviteCodesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<DisableInviteCodesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableInviteCodesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -105,10 +108,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<Success?>> EnableAccountInvitesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid account, string? note = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = EnableAccountInvites.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new EnableAccountInvitesInput();
             inputItem.Account = account;
             inputItem.Note = note;
-            return atp.Post<EnableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminEnableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<EnableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminEnableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -276,13 +280,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>> SendEmailAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid recipientDid, string content, FishyFlip.Models.ATDid senderDid, string? subject = default, string? comment = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SendEmail.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new SendEmailInput();
             inputItem.RecipientDid = recipientDid;
             inputItem.Content = content;
             inputItem.SenderDid = senderDid;
             inputItem.Subject = subject;
             inputItem.Comment = comment;
-            return atp.Post<SendEmailInput, FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailOutput!, inputItem, cancellationToken);
+            return atp.Post<SendEmailInput, FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -297,10 +302,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<Success?>> UpdateAccountEmailAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier account, string email, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateAccountEmail.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UpdateAccountEmailInput();
             inputItem.Account = account;
             inputItem.Email = email;
-            return atp.Post<UpdateAccountEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountEmailInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UpdateAccountEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountEmailInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -315,10 +321,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<Success?>> UpdateAccountHandleAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateAccountHandle.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UpdateAccountHandleInput();
             inputItem.Did = did;
             inputItem.Handle = handle;
-            return atp.Post<UpdateAccountHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UpdateAccountHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -333,10 +340,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<Success?>> UpdateAccountPasswordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string password, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateAccountPassword.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UpdateAccountPasswordInput();
             inputItem.Did = did;
             inputItem.Password = password;
-            return atp.Post<UpdateAccountPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountPasswordInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UpdateAccountPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountPasswordInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -352,11 +360,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>> UpdateSubjectStatusAsync (this FishyFlip.ATProtocol atp, ATObject subject, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? takedown = default, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? deactivated = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateSubjectStatus.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UpdateSubjectStatusInput();
             inputItem.Subject = subject;
             inputItem.Takedown = takedown;
             inputItem.Deactivated = deactivated;
-            return atp.Post<UpdateSubjectStatusInput, FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusOutput!, inputItem, cancellationToken);
+            return atp.Post<UpdateSubjectStatusInput, FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusOutput!, inputItem, cancellationToken, headers);
         }
 
     }

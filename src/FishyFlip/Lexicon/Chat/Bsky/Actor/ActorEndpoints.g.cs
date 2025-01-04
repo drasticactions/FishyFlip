@@ -27,7 +27,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteAccount.ToString();
-            return atp.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
+            return atp.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, cancellationToken, headers);
         }
 
 

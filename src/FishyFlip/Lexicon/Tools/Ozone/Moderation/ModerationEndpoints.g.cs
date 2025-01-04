@@ -47,12 +47,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (this FishyFlip.ATProtocol atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = EmitEvent.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new EmitEventInput();
             inputItem.Event = @event;
             inputItem.Subject = subject;
             inputItem.CreatedBy = createdBy;
             inputItem.SubjectBlobCids = subjectBlobCids;
-            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken);
+            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken, headers);
         }
 
 

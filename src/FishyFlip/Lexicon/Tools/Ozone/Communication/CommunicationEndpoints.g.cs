@@ -38,13 +38,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> CreateTemplateAsync (this FishyFlip.ATProtocol atp, string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateTemplate.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new CreateTemplateInput();
             inputItem.Name = name;
             inputItem.ContentMarkdown = contentMarkdown;
             inputItem.Subject = subject;
             inputItem.Lang = lang;
             inputItem.CreatedBy = createdBy;
-            return atp.Post<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationCreateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken);
+            return atp.Post<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationCreateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
         }
 
 
@@ -58,9 +60,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public static Task<Result<Success?>> DeleteTemplateAsync (this FishyFlip.ATProtocol atp, string id, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteTemplate.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new DeleteTemplateInput();
             inputItem.Id = id;
-            return atp.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -98,6 +102,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (this FishyFlip.ATProtocol atp, string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateTemplate.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new UpdateTemplateInput();
             inputItem.Id = id;
             inputItem.Name = name;
@@ -106,7 +112,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             inputItem.Subject = subject;
             inputItem.UpdatedBy = updatedBy;
             inputItem.Disabled = disabled;
-            return atp.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken);
+            return atp.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
         }
 
     }

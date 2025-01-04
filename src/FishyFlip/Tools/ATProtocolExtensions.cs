@@ -92,15 +92,17 @@ public static class ATProtocolExtensions
     /// <param name="url">The Uri the request is sent to.</param>
     /// <param name="type">The JsonTypeInfo of the response body.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="headers">Custom headers to include with the request.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     public static async Task<Result<TK>> Post<TK>(
         this ATProtocol protocol,
         string url,
         JsonTypeInfo<TK> type,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        Dictionary<string, string>? headers = null)
     {
         var result = await protocol.ResolveHostUri(url);
-        return await protocol.Client.Post<TK>(result, type, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger);
+        return await protocol.Client.Post<TK>(result, type, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger, headers);
     }
 
     /// <summary>
@@ -112,15 +114,25 @@ public static class ATProtocolExtensions
     /// <param name="type">The JsonTypeInfo of the response body.</param>
     /// <param name="body">The StreamContent request body.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="headers">Custom headers to include with the request.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     public static async Task<Result<TK>> Post<TK>(
        this ATProtocol protocol,
        string url,
        JsonTypeInfo<TK> type,
        StreamContent body,
-       CancellationToken cancellationToken)
+       CancellationToken cancellationToken,
+       Dictionary<string, string>? headers = default)
     {
         var result = await protocol.ResolveHostUri(url);
+        if (headers is not null)
+        {
+            foreach (var header in headers)
+            {
+                body.Headers.Add(header.Key, header.Value);
+            }
+        }
+
         return await protocol.Client.Post<TK>(result, type, protocol.Options.JsonSerializerOptions, body, cancellationToken, protocol.Options.Logger);
     }
 

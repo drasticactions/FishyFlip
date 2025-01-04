@@ -94,11 +94,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         public static Task<Result<Success?>> UpdateActorAccessAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid actor, bool allowAccess, string? @ref = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateActorAccess.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new UpdateActorAccessInput();
             inputItem.Actor = actor;
             inputItem.AllowAccess = allowAccess;
             inputItem.Ref = @ref;
-            return atp.Post<UpdateActorAccessInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationUpdateActorAccessInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UpdateActorAccessInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationUpdateActorAccessInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
     }

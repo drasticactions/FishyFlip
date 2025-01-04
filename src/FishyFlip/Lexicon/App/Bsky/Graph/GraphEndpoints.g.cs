@@ -476,9 +476,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public static Task<Result<Success?>> MuteActorAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
         {
             var endpointUrl = MuteActor.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new MuteActorInput();
             inputItem.Actor = actor;
-            return atp.Post<MuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<MuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -492,9 +493,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public static Task<Result<Success?>> MuteActorListAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri list, CancellationToken cancellationToken = default)
         {
             var endpointUrl = MuteActorList.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new MuteActorListInput();
             inputItem.List = list;
-            return atp.Post<MuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<MuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -508,9 +510,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public static Task<Result<Success?>> MuteThreadAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri root, CancellationToken cancellationToken = default)
         {
             var endpointUrl = MuteThread.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new MuteThreadInput();
             inputItem.Root = root;
-            return atp.Post<MuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<MuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -557,9 +560,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public static Task<Result<Success?>> UnmuteActorAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UnmuteActor.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UnmuteActorInput();
             inputItem.Actor = actor;
-            return atp.Post<UnmuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UnmuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -573,9 +577,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public static Task<Result<Success?>> UnmuteActorListAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri list, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UnmuteActorList.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UnmuteActorListInput();
             inputItem.List = list;
-            return atp.Post<UnmuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UnmuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -589,9 +594,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public static Task<Result<Success?>> UnmuteThreadAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri root, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UnmuteThread.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UnmuteThreadInput();
             inputItem.Root = root;
-            return atp.Post<UnmuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UnmuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
     }

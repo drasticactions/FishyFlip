@@ -80,10 +80,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (this FishyFlip.ATProtocol atp, List<string> keys, string scope, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RemoveOptions.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new RemoveOptionsInput();
             inputItem.Keys = keys;
             inputItem.Scope = scope;
-            return atp.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsOutput!, inputItem, cancellationToken);
+            return atp.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -101,13 +103,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>> UpsertOptionAsync (this FishyFlip.ATProtocol atp, string key, string scope, ATObject value, string? description = default, string? managerRole = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpsertOption.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new UpsertOptionInput();
             inputItem.Key = key;
             inputItem.Scope = scope;
             inputItem.Value = value;
             inputItem.Description = description;
             inputItem.ManagerRole = managerRole;
-            return atp.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionOutput!, inputItem, cancellationToken);
+            return atp.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionOutput!, inputItem, cancellationToken, headers);
         }
 
     }

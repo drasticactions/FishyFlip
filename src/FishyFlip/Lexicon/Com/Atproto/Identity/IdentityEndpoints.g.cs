@@ -50,7 +50,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public static Task<Result<Success?>> RequestPlcOperationSignatureAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestPlcOperationSignature.ToString();
-            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken);
+            var headers = new Dictionary<string, string>();
+            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken, headers);
         }
 
 
@@ -89,13 +90,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput?>> SignPlcOperationAsync (this FishyFlip.ATProtocol atp, string? token = default, List<string>? rotationKeys = default, List<string>? alsoKnownAs = default, ATObject? verificationMethods = default, ATObject? services = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SignPlcOperation.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new SignPlcOperationInput();
             inputItem.Token = token;
             inputItem.RotationKeys = rotationKeys;
             inputItem.AlsoKnownAs = alsoKnownAs;
             inputItem.VerificationMethods = verificationMethods;
             inputItem.Services = services;
-            return atp.Post<SignPlcOperationInput, FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationInput!, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationOutput!, inputItem, cancellationToken);
+            return atp.Post<SignPlcOperationInput, FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationInput!, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -109,9 +111,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public static Task<Result<Success?>> SubmitPlcOperationAsync (this FishyFlip.ATProtocol atp, ATObject operation, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SubmitPlcOperation.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new SubmitPlcOperationInput();
             inputItem.Operation = operation;
-            return atp.Post<SubmitPlcOperationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySubmitPlcOperationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<SubmitPlcOperationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySubmitPlcOperationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -125,9 +128,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public static Task<Result<Success?>> UpdateHandleAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateHandle.ToString();
+            var headers = new Dictionary<string, string>();
             var inputItem = new UpdateHandleInput();
             inputItem.Handle = handle;
-            return atp.Post<UpdateHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityUpdateHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken);
+            return atp.Post<UpdateHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityUpdateHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
     }
