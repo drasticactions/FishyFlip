@@ -49,7 +49,8 @@ public class ATProtocolOptions
     public string UserAgent { get; internal set; }
 
     /// <summary>
-    /// Gets a value indicating whether to auto renew sessions.
+    /// Gets a value indicating whether to auto-renew password-based sessions.
+    /// This does not affect OAuth sessions. These will always be renewed.
     /// </summary>
     public bool AutoRenewSession { get; internal set; } = false;
 
