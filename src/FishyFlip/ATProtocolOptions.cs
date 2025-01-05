@@ -95,27 +95,17 @@ public class ATProtocolOptions
     /// <param name="protocol">Protocol.</param>
     /// <param name="handler">Handler.</param>
     /// <returns><see cref="HttpClient"/>.</returns>
-    internal ATProtocolHttpClient GenerateHttpClient(ATProtocol protocol, HttpMessageHandler? handler = default)
+    internal HttpClient GenerateHttpClient(ATProtocol protocol, HttpMessageHandler? handler = default)
     {
-        ATProtocolHttpClient httpClient;
+        HttpClient httpClient;
         if (handler is not null)
         {
-            httpClient = new ATProtocolHttpClient(protocol, handler);
+            httpClient = new HttpClient(handler);
         }
         else
         {
-            var handle = new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue };
-            if (handle.SupportsAutomaticDecompression)
-            {
-                this.Logger?.LogDebug("Enabling GZip and Deflate decompression.");
-                handle.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-            }
-            else
-            {
-                this.Logger?.LogDebug("Automatic decompression is not supported, disabled...");
-            }
-
-            httpClient = new ATProtocolHttpClient(protocol, handle);
+            var test = new ATProtocolDelegatingHandler(protocol);
+            httpClient = new HttpClient(test);
         }
 
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);

@@ -19,7 +19,7 @@ namespace FishyFlip;
 internal class OAuth2SessionManager : ISessionManager
 {
     private bool disposedValue;
-    private ATProtocolHttpClient client;
+    private HttpClient client;
     private OidcClient? oidcClient;
     private AuthorizeState? state;
     private ILogger? logger;
@@ -43,7 +43,7 @@ internal class OAuth2SessionManager : ISessionManager
     public event EventHandler<SessionUpdatedEventArgs>? SessionUpdated;
 
     /// <inheritdoc/>
-    public ATProtocolHttpClient Client => this.client;
+    public HttpClient Client => this.client;
 
     /// <inheritdoc/>
     public bool IsAuthenticated => this.session != null;

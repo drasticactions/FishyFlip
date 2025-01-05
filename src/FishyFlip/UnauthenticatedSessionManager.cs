@@ -16,7 +16,7 @@ internal class UnauthenticatedSessionManager : ISessionManager
 {
     private bool disposedValue;
     private ATProtocol protocol;
-    private ATProtocolHttpClient client;
+    private HttpClient client;
     private ILogger? logger;
 
     /// <summary>
@@ -41,7 +41,7 @@ internal class UnauthenticatedSessionManager : ISessionManager
     public Session? Session => null;
 
     /// <inheritdoc/>
-    public ATProtocolHttpClient Client => this.client;
+    public HttpClient Client => this.client;
 
     /// <inheritdoc/>
     public Task<Result<RefreshSessionOutput?>> RefreshSessionAsync(CancellationToken cancellationToken = default)

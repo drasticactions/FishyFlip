@@ -32,7 +32,7 @@ internal class PasswordSessionManager : ISessionManager
         },
     };
 
-    private ATProtocolHttpClient client;
+    private HttpClient client;
     private ATProtocol protocol;
     private Session? session;
     private bool disposed;
@@ -77,7 +77,7 @@ internal class PasswordSessionManager : ISessionManager
     public Session? Session => this.session;
 
     /// <inheritdoc/>
-    public ATProtocolHttpClient Client => this.client;
+    public HttpClient Client => this.client;
 
     /// <summary>
     /// Gets the password Auth Session.
@@ -87,27 +87,41 @@ internal class PasswordSessionManager : ISessionManager
     /// <inheritdoc/>
     public async Task<Result<RefreshSessionOutput?>> RefreshSessionAsync(CancellationToken cancellationToken = default)
     {
-        var (d, error) = await this.protocol.ThrowIfNull().RefreshSessionAsync(cancellationToken);
-
-        if (error != null)
+        try
         {
-            return error;
-        }
+            if (this.session is null)
+            {
+                throw new ArgumentNullException(nameof(this.session));
+            }
 
-        if (d is not null)
+            this.UpdateBearerTokenForRefresh(this.session);
+            var (d, error) = await this.protocol.ThrowIfNull().RefreshSessionAsync(cancellationToken);
+
+            if (error != null)
+            {
+                return error;
+            }
+
+            if (d is not null)
+            {
+                var newSession = new Session(
+                    d!.Did!,
+                    d.DidDoc,
+                    d.Handle!,
+                    string.Empty,
+                    d.AccessJwt!,
+                    d.RefreshJwt!,
+                    this.GetTimeToNextRenewal(d.AccessJwt!));
+                this.SetSession(newSession);
+            }
+
+            return d;
+        }
+        catch (Exception e)
         {
-            var newSession = new Session(
-                            d!.Did!,
-                            d.DidDoc,
-                            d.Handle!,
-                            string.Empty,
-                            d.AccessJwt!,
-                            d.RefreshJwt!,
-                            this.GetTimeToNextRenewal(d.AccessJwt!));
-            this.SetSession(newSession);
+            this.logger?.LogError(e, "Error refreshing session.");
+            throw;
         }
-
-        return d;
     }
 
     /// <inheritdoc/>
@@ -255,6 +269,18 @@ internal class PasswordSessionManager : ISessionManager
                 .DefaultRequestHeaders
                 .Authorization =
             new AuthenticationHeaderValue("Bearer", session.AccessJwt);
+    }
+
+    /// <summary>
+    /// Updates the bearer token for the session.
+    /// </summary>
+    /// <param name="session">The updated session.</param>
+    internal void UpdateBearerTokenForRefresh(Session session)
+    {
+        this.client
+                .DefaultRequestHeaders
+                .Authorization =
+            new AuthenticationHeaderValue("Bearer", session.RefreshJwt);
     }
 
     /// <summary>
