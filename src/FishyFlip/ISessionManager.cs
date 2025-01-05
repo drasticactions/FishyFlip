@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon.Com.Atproto.Server;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +22,7 @@ internal interface ISessionManager : IDisposable
     /// <summary>
     /// Gets the HttpClient used to make calls into ATProtocol.
     /// </summary>
-    public HttpClient Client { get; }
+    public ATProtocolHttpClient Client { get; }
 
     /// <summary>
     /// Gets a value indicating whether the session is authenticated.
@@ -38,5 +39,5 @@ internal interface ISessionManager : IDisposable
     /// </summary>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
-    public Task RefreshSessionAsync(CancellationToken cancellationToken = default);
+    public Task<Result<RefreshSessionOutput?>> RefreshSessionAsync(CancellationToken cancellationToken = default);
 }

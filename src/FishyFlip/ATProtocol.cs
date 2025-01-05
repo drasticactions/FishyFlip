@@ -24,7 +24,7 @@ public sealed partial class ATProtocol : IDisposable
     public ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
-        this.sessionManager = new UnauthenticatedSessionManager(options);
+        this.sessionManager = new UnauthenticatedSessionManager(this, options);
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public sealed partial class ATProtocol : IDisposable
     /// <summary>
     /// Gets the HttpClient.
     /// </summary>
-    public HttpClient Client => this.sessionManager.Client;
+    public ATProtocolHttpClient Client => this.sessionManager.Client;
 
     /// <summary>
     /// Gets the current OAuth session, if any is active.

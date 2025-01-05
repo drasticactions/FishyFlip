@@ -28,7 +28,7 @@ public static class HttpClientExtensions
     /// <param name="headers">Custom headers to include with the request.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     public static async Task<Result<TK>> Post<T, TK>(
-       this HttpClient client,
+       this ATProtocolHttpClient client,
        string url,
        JsonTypeInfo<T> typeT,
        JsonTypeInfo<TK> typeTK,
@@ -49,7 +49,9 @@ public static class HttpClientExtensions
         }
 
         logger?.LogDebug($"POST {client.BaseAddress}{url}: {jsonContent}");
-        using var message = await client.PostAsync(url, content, cancellationToken);
+        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        request.Content = content;
+        using var message = await client.SendAsync(request, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
@@ -84,7 +86,7 @@ public static class HttpClientExtensions
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     public static async Task<Result<TK>> Post<TK>(
-       this HttpClient client,
+       this ATProtocolHttpClient client,
        string url,
        JsonTypeInfo<TK> type,
        JsonSerializerOptions options,
@@ -93,7 +95,9 @@ public static class HttpClientExtensions
        ILogger? logger = default)
     {
         logger?.LogDebug($"POST STREAM {client.BaseAddress}{url}: {body.Headers.ContentType}");
-        using var message = await client.PostAsync(url, body, cancellationToken);
+        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        request.Content = body;
+        using var message = await client.SendAsync(request, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
@@ -128,7 +132,7 @@ public static class HttpClientExtensions
     /// <param name="headers">Custom headers to include with the request.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
     public static async Task<Result<TK>> Post<TK>(
-        this HttpClient client,
+        this ATProtocolHttpClient client,
         string url,
         JsonTypeInfo<TK> type,
         JsonSerializerOptions options,
@@ -178,14 +182,15 @@ public static class HttpClientExtensions
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Blob response message as the result.</returns>
     public static async Task<Result<byte[]?>> GetBlob(
-       this HttpClient client,
+       this ATProtocolHttpClient client,
        string url,
        JsonSerializerOptions options,
        CancellationToken cancellationToken,
        ILogger? logger = default)
     {
         logger?.LogDebug($"GET {client.BaseAddress}{url}");
-        using var message = await client.GetAsync(url, cancellationToken);
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        using var message = await client.SendAsync(request, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
@@ -215,7 +220,7 @@ public static class HttpClientExtensions
     /// <param name="progress">The progress reporter for the decoding process. This is optional and defaults to null.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Success response message as the result.</returns>
     public static async Task<Result<Success?>> GetCarAsync(
-        this HttpClient client,
+        this ATProtocolHttpClient client,
         string url,
         JsonSerializerOptions options,
         CancellationToken cancellationToken,
@@ -251,7 +256,7 @@ public static class HttpClientExtensions
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Success response message as the result.</returns>
     public static async Task<Result<Success?>> DownloadCarAsync(
-        this HttpClient client,
+        this ATProtocolHttpClient client,
         string url,
         string filePath,
         string fileName,
@@ -282,6 +287,62 @@ public static class HttpClientExtensions
 #endif
 
         return new Success();
+    }
+
+    /// <summary>
+    /// Sends a GET request to the specified Uri as an asynchronous operation and deserializes the response.
+    /// </summary>
+    /// <typeparam name="T">The type of the response body.</typeparam>
+    /// <param name="client">The HttpClient instance.</param>
+    /// <param name="url">The Uri the request is sent to.</param>
+    /// <param name="type">The JsonTypeInfo of the response body.</param>
+    /// <param name="options">The JsonSerializerOptions for the request.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+    /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
+    /// <param name="headers">Custom headers to include with the request.</param>
+    /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Http response message as the result.</returns>
+    public static async Task<Result<T?>> Get<T>(
+        this ATProtocolHttpClient client,
+        string url,
+        JsonTypeInfo<T> type,
+        JsonSerializerOptions options,
+        CancellationToken cancellationToken,
+        ILogger? logger = default,
+        Dictionary<string, string>? headers = default)
+    {
+        logger?.LogDebug($"GET {client.BaseAddress}{url}");
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+        }
+
+        using var message = await client.SendAsync(request, cancellationToken);
+
+        if (!message.IsSuccessStatusCode)
+        {
+            ATError atError = await CreateError(message!, options, cancellationToken, logger);
+            return atError!;
+        }
+
+#if NETSTANDARD
+        string response = await message.Content.ReadAsStringAsync();
+#else
+        string response = await message.Content.ReadAsStringAsync(cancellationToken);
+#endif
+        if (response.IsNullOrEmpty() && message.IsSuccessStatusCode)
+        {
+            response = "{ }";
+        }
+
+        // BUG: Sometimes, ATProtocol does not set $type as the first property in the JSON response.
+        // That causes the deserialization to fail. This is a workaround to reorder the $type property.
+        response = JsonTypeReorderer.ReorderTypeProperty(response);
+        logger?.LogDebug($"GET {client.BaseAddress}{url}: {response}");
+        return JsonSerializer.Deserialize<T>(response, type);
     }
 
     /// <summary>
@@ -360,7 +421,8 @@ public static class HttpClientExtensions
         };
 
         logger?.LogDebug($"GET {url}");
-        using var message = await client.GetAsync(url, cancellationToken: token);
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        using var message = await client.SendAsync(request, cancellationToken: token);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, new JsonSerializerOptions(), token, logger);

@@ -32,12 +32,10 @@ internal class PasswordSessionManager : ISessionManager
         },
     };
 
-    private HttpClient client;
+    private ATProtocolHttpClient client;
     private ATProtocol protocol;
     private Session? session;
     private bool disposed;
-    private System.Timers.Timer? timer;
-    private int refreshing;
     private ILogger? logger;
     private AuthSession? authSession;
 
@@ -48,7 +46,7 @@ internal class PasswordSessionManager : ISessionManager
     public PasswordSessionManager(ATProtocol protocol)
     {
         this.protocol = protocol;
-        this.client = protocol.Options.GenerateHttpClient();
+        this.client = protocol.Options.GenerateHttpClient(this.protocol);
         this.logger = this.protocol.Options.Logger;
     }
 
@@ -60,7 +58,7 @@ internal class PasswordSessionManager : ISessionManager
     public PasswordSessionManager(ATProtocol protocol, Session session)
     {
         this.protocol = protocol;
-        this.client = protocol.Options.GenerateHttpClient();
+        this.client = protocol.Options.GenerateHttpClient(this.protocol);
         this.logger = this.protocol.Options.Logger;
         this.SetSession(session);
     }
@@ -79,7 +77,7 @@ internal class PasswordSessionManager : ISessionManager
     public Session? Session => this.session;
 
     /// <inheritdoc/>
-    public HttpClient Client => this.client;
+    public ATProtocolHttpClient Client => this.client;
 
     /// <summary>
     /// Gets the password Auth Session.
@@ -87,8 +85,30 @@ internal class PasswordSessionManager : ISessionManager
     public AuthSession? PasswordSession => this.authSession;
 
     /// <inheritdoc/>
-    public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
-        => this.RefreshTokenAsync(cancellationToken);
+    public async Task<Result<RefreshSessionOutput?>> RefreshSessionAsync(CancellationToken cancellationToken = default)
+    {
+        var (d, error) = await this.protocol.ThrowIfNull().RefreshSessionAsync(cancellationToken);
+
+        if (error != null)
+        {
+            return error;
+        }
+
+        if (d is not null)
+        {
+            var newSession = new Session(
+                            d!.Did!,
+                            d.DidDoc,
+                            d.Handle!,
+                            string.Empty,
+                            d.AccessJwt!,
+                            d.RefreshJwt!,
+                            this.GetTimeToNextRenewal(d.AccessJwt!));
+            this.SetSession(newSession);
+        }
+
+        return d;
+    }
 
     /// <inheritdoc/>
     public void Dispose() => this.Dispose(true);
@@ -173,7 +193,7 @@ internal class PasswordSessionManager : ISessionManager
                     {
                         this.protocol.Options.Url = uriResult;
                         this.client.Dispose();
-                        this.client = this.protocol.Options.GenerateHttpClient();
+                        this.client = this.protocol.Options.GenerateHttpClient(this.protocol);
                         logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
                     }
                 }
@@ -185,7 +205,8 @@ internal class PasswordSessionManager : ISessionManager
                 session.Handle!,
                 session.Email,
                 session.AccessJwt!,
-                session.RefreshJwt!);
+                session.RefreshJwt!,
+                this.GetTimeToNextRenewal(session.AccessJwt!));
             this.SetSession(resultSession);
             return resultSession;
         }
@@ -222,17 +243,6 @@ internal class PasswordSessionManager : ISessionManager
         }
 
         this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.authSession, this.protocol.Options.Url));
-
-        if (!this.protocol.Options.AutoRenewSession)
-        {
-            this.logger?.LogDebug("AutoRenewSession is disabled.");
-            return;
-        }
-
-        this.logger?.LogDebug("AutoRenewSession is enabled.");
-        this.timer ??= new System.Timers.Timer();
-
-        this.ConfigureRefreshTokenTimer();
     }
 
     /// <summary>
@@ -248,117 +258,31 @@ internal class PasswordSessionManager : ISessionManager
     }
 
     /// <summary>
-    /// Refresh session token.
-    /// </summary>
-    /// <param name="cancellationToken">Cancellation Token.</param>
-    /// <returns>Task.</returns>
-    internal async Task RefreshTokenAsync(CancellationToken cancellationToken = default)
-    {
-        if (Interlocked.Increment(ref this.refreshing) > 1)
-        {
-            this.logger?.LogDebug("Already refreshing.");
-            Interlocked.Decrement(ref this.refreshing);
-            return;
-        }
-
-        this.logger?.LogDebug("Refreshing session.");
-        if (this.timer is not null)
-        {
-            this.timer.Enabled = false;
-        }
-
-        try
-        {
-            if (this.session is not null)
-            {
-                Multiple<RefreshSessionOutput?, ATError> result =
-                await this.protocol.ThrowIfNull().RefreshSessionAsync(cancellationToken);
-
-                result
-                    .Switch(
-                    d =>
-                    {
-                        var newSession = new Session(
-                            d!.Did!,
-                            d.DidDoc,
-                            d.Handle!,
-                            string.Empty,
-                            d.AccessJwt!,
-                            d.RefreshJwt!);
-                        this.SetSession(newSession);
-                    },
-                    e =>
-                    {
-                        this.logger?.LogError(e.ToString());
-                    });
-            }
-            else
-            {
-                this.logger?.LogInformation("Session is null, skipping refresh.");
-            }
-        }
-        finally
-        {
-            Interlocked.Decrement(ref this.refreshing);
-            this.logger?.LogDebug("Session refreshed.");
-        }
-    }
-
-    /// <summary>
     /// Dispose.
     /// </summary>
     /// <param name="disposing">Is disposing.</param>
     protected virtual void Dispose(bool disposing)
     {
-        if (this.disposed || this.timer is null)
+        if (this.disposed)
         {
             return;
         }
 
         if (disposing)
         {
-            this.timer.Enabled = false;
-            this.timer.Dispose();
-            this.timer = null;
             this.client?.Dispose();
         }
 
         this.disposed = true;
     }
 
-    private void ConfigureRefreshTokenTimer()
-    {
-        this.timer.ThrowIfNull();
-        TimeSpan timeToNextRenewal = this.protocol.Options.SessionRefreshInterval ?? this.GetTimeToNextRenewal(this.session.ThrowIfNull());
-
-        // If less than 10,000 Milliseconds or negative, force refresh. Once it does, it should then set the timer.
-        if (timeToNextRenewal.TotalMilliseconds < 10000)
-        {
-            this.RefreshTokenAsync().FireAndForgetSafeAsync(this.logger);
-            return;
-        }
-
-        var seconds = timeToNextRenewal.TotalMilliseconds >= int.MaxValue ? int.MaxValue : timeToNextRenewal.TotalMilliseconds;
-        this.logger?.LogDebug($"Next renewal in {seconds}.");
-        if (this.timer is not null)
-        {
-            this.timer.Elapsed += this.RefreshToken;
-            this.timer.Interval = seconds;
-            this.timer.Enabled = true;
-            this.timer.Start();
-        }
-    }
-
-    private TimeSpan GetTimeToNextRenewal(Session session)
+    private DateTime GetTimeToNextRenewal(string accessJwt)
     {
         this.jwtSecurityTokenHandler
             .ValidateToken(
-                session.AccessJwt,
+                accessJwt,
                 this.defaultTokenValidationParameters,
                 out SecurityToken token);
-        return token.ValidTo.ToUniversalTime() - DateTime.UtcNow;
+        return token.ValidTo;
     }
-
-    private void RefreshToken(object? sender, ElapsedEventArgs e)
-        => this.RefreshTokenAsync().FireAndForgetSafeAsync(this.logger);
 }

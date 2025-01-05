@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Lexicon.Com.Atproto.Server;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,16 +15,19 @@ namespace FishyFlip;
 internal class UnauthenticatedSessionManager : ISessionManager
 {
     private bool disposedValue;
-    private HttpClient client;
+    private ATProtocol protocol;
+    private ATProtocolHttpClient client;
     private ILogger? logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnauthenticatedSessionManager"/> class.
     /// </summary>
+    /// <param name="protocol">ATProtocol.</param>
     /// <param name="options">ATProtocol Options.</param>
-    public UnauthenticatedSessionManager(ATProtocolOptions options)
+    public UnauthenticatedSessionManager(ATProtocol protocol, ATProtocolOptions options)
     {
-        this.client = options.GenerateHttpClient();
+        this.protocol = protocol;
+        this.client = options.GenerateHttpClient(this.protocol);
         this.logger = options.Logger;
     }
 
@@ -37,12 +41,12 @@ internal class UnauthenticatedSessionManager : ISessionManager
     public Session? Session => null;
 
     /// <inheritdoc/>
-    public HttpClient Client => this.client;
+    public ATProtocolHttpClient Client => this.client;
 
     /// <inheritdoc/>
-    public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
+    public Task<Result<RefreshSessionOutput?>> RefreshSessionAsync(CancellationToken cancellationToken = default)
     {
-        return Task.CompletedTask;
+        return Task.FromResult<Result<RefreshSessionOutput?>>(new RefreshSessionOutput());
     }
 
     /// <inheritdoc/>

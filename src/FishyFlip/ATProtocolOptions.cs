@@ -54,11 +54,6 @@ public class ATProtocolOptions
     public bool AutoRenewSession { get; internal set; } = false;
 
     /// <summary>
-    /// Gets the session refresh interval.
-    /// </summary>
-    public TimeSpan? SessionRefreshInterval { get; internal set; }
-
-    /// <summary>
     /// Gets the JsonSerializerOptions.
     /// </summary>
     public JsonSerializerOptions JsonSerializerOptions { get; internal set; }
@@ -97,14 +92,15 @@ public class ATProtocolOptions
     /// <summary>
     /// Generates an HttpClient based on the options.
     /// </summary>
+    /// <param name="protocol">Protocol.</param>
     /// <param name="handler">Handler.</param>
     /// <returns><see cref="HttpClient"/>.</returns>
-    internal HttpClient GenerateHttpClient(HttpMessageHandler? handler = default)
+    internal ATProtocolHttpClient GenerateHttpClient(ATProtocol protocol, HttpMessageHandler? handler = default)
     {
-        HttpClient httpClient;
+        ATProtocolHttpClient httpClient;
         if (handler is not null)
         {
-            httpClient = new HttpClient(handler);
+            httpClient = new ATProtocolHttpClient(protocol, handler);
         }
         else
         {
@@ -119,7 +115,7 @@ public class ATProtocolOptions
                 this.Logger?.LogDebug("Automatic decompression is not supported, disabled...");
             }
 
-            httpClient = new HttpClient(handle);
+            httpClient = new ATProtocolHttpClient(protocol, handle);
         }
 
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
