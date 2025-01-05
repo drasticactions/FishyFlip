@@ -49,14 +49,10 @@ public class ATProtocolOptions
     public string UserAgent { get; internal set; }
 
     /// <summary>
-    /// Gets a value indicating whether to auto renew sessions.
+    /// Gets a value indicating whether to auto-renew password-based sessions.
+    /// This does not affect OAuth sessions. These will always be renewed.
     /// </summary>
     public bool AutoRenewSession { get; internal set; } = false;
-
-    /// <summary>
-    /// Gets the session refresh interval.
-    /// </summary>
-    public TimeSpan? SessionRefreshInterval { get; internal set; }
 
     /// <summary>
     /// Gets the JsonSerializerOptions.
@@ -97,30 +93,12 @@ public class ATProtocolOptions
     /// <summary>
     /// Generates an HttpClient based on the options.
     /// </summary>
+    /// <param name="protocol">Protocol.</param>
     /// <param name="handler">Handler.</param>
     /// <returns><see cref="HttpClient"/>.</returns>
-    internal HttpClient GenerateHttpClient(HttpMessageHandler? handler = default)
+    internal HttpClient GenerateHttpClient(ATProtocol protocol, HttpMessageHandler? handler = null)
     {
-        HttpClient httpClient;
-        if (handler is not null)
-        {
-            httpClient = new HttpClient(handler);
-        }
-        else
-        {
-            var handle = new HttpClientHandler { MaxRequestContentBufferSize = int.MaxValue };
-            if (handle.SupportsAutomaticDecompression)
-            {
-                this.Logger?.LogDebug("Enabling GZip and Deflate decompression.");
-                handle.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-            }
-            else
-            {
-                this.Logger?.LogDebug("Automatic decompression is not supported, disabled...");
-            }
-
-            httpClient = new HttpClient(handle);
-        }
+        var httpClient = handler is not null ? new HttpClient(handler) : new HttpClient(new ATProtocolDelegatingHandler(protocol));
 
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
         httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);

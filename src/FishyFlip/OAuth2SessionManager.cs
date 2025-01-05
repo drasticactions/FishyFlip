@@ -3,6 +3,7 @@
 // </copyright>
 
 using FishyFlip.Lexicon.Com.Atproto.Repo;
+using FishyFlip.Lexicon.Com.Atproto.Server;
 using FishyFlip.Tools;
 using IdentityModel.Client;
 using IdentityModel.OidcClient;
@@ -34,7 +35,7 @@ internal class OAuth2SessionManager : ISessionManager
     public OAuth2SessionManager(ATProtocol protocol)
     {
         this.protocol = protocol;
-        this.client = this.protocol.Options.GenerateHttpClient();
+        this.client = this.protocol.Options.GenerateHttpClient(this.protocol);
         this.logger = this.protocol.Options.Logger;
     }
 
@@ -176,7 +177,7 @@ internal class OAuth2SessionManager : ISessionManager
         var subValue = sub!.ToString();
         var didSub = ATDid.Create(subValue)!;
         var describeRepo = (await this.protocol.DescribeRepoAsync(didSub, cancellationToken)).HandleResult();
-        var session = new Session(describeRepo!.Did!, describeRepo.DidDoc, describeRepo.Handle!, null, result.AccessToken, result.RefreshToken);
+        var session = new Session(describeRepo!.Did!, describeRepo.DidDoc, describeRepo.Handle!, null, result.AccessToken, result.RefreshToken, result.AccessTokenExpiration.DateTime);
         this.delegatingHandler = (RefreshTokenDelegatingHandler)result.RefreshTokenHandler;
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
         this.SetSession(session);
@@ -185,8 +186,32 @@ internal class OAuth2SessionManager : ISessionManager
     }
 
     /// <inheritdoc/>
-    public Task RefreshSessionAsync(CancellationToken cancellationToken = default)
-        => this.RefreshTokenAsync(cancellationToken);
+    public async Task<Result<RefreshSessionOutput?>> RefreshSessionAsync(CancellationToken cancellationToken = default)
+    {
+        if (this.session is null)
+        {
+            throw new OAuth2Exception("Session is null.");
+        }
+
+        var result = await this.RefreshTokenAsync(cancellationToken);
+        if (result is null)
+        {
+            throw new OAuth2Exception("Failed to refresh token.");
+        }
+
+        if (result.IsError)
+        {
+            return new ATError(401, new ErrorDetail("OAuth Error", result.Error));
+        }
+
+        var refreshSessionOutput = new RefreshSessionOutput();
+        refreshSessionOutput.Active = true;
+        refreshSessionOutput.AccessJwt = result.AccessToken;
+        refreshSessionOutput.RefreshJwt = result.RefreshToken;
+        refreshSessionOutput.Did = this.session.Did;
+        refreshSessionOutput.DidDoc = this.session.DidDoc;
+        return refreshSessionOutput;
+    }
 
     /// <inheritdoc/>
     public void Dispose()
@@ -221,7 +246,7 @@ internal class OAuth2SessionManager : ISessionManager
                 {
                     this.protocol.Options.Url = uriResult;
                     this.client.Dispose();
-                    this.client = this.protocol.Options.GenerateHttpClient(this.delegatingHandler);
+                    this.client = this.protocol.Options.GenerateHttpClient(this.protocol, this.delegatingHandler);
                     logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
                 }
             }
@@ -256,7 +281,9 @@ internal class OAuth2SessionManager : ISessionManager
 
         lock (this.session)
         {
-            this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, refreshResult.AccessToken, refreshResult.RefreshToken);
+            var expiresIn = refreshResult.ExpiresIn;
+            var expiresInDatetimeFromNow = DateTime.UtcNow.AddSeconds(expiresIn);
+            this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, refreshResult.AccessToken, refreshResult.RefreshToken, expiresInDatetimeFromNow);
         }
 
         return refreshResult;
@@ -303,7 +330,9 @@ internal class OAuth2SessionManager : ISessionManager
 
         lock (this.session)
         {
-            this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, e.AccessToken, e.RefreshToken);
+            var expiresIn = e.ExpiresIn;
+            var expiresInDatetimeFromNow = DateTime.UtcNow.AddSeconds(expiresIn);
+            this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, e.AccessToken, e.RefreshToken, expiresInDatetimeFromNow);
             this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.OAuthSession!, this.protocol.Options.Url));
         }
     }

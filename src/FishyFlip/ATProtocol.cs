@@ -24,7 +24,7 @@ public sealed partial class ATProtocol : IDisposable
     public ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
-        this.sessionManager = new UnauthenticatedSessionManager(options);
+        this.sessionManager = new UnauthenticatedSessionManager(this, options);
     }
 
     /// <summary>

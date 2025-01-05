@@ -180,14 +180,9 @@ public class ATProtocolBuilder
     /// </summary>
     /// <param name="interval">Interval to refresh at.</param>
     /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    [Obsolete("Value is no longer used. The session with refresh automatically when the token has expired and EnableAutoRenewSession is enabled")]
     public ATProtocolBuilder WithSessionRefreshInterval(TimeSpan interval)
     {
-        if (interval.TotalMinutes < 1)
-        {
-            throw new ArgumentException("Session refresh interval must be at least 1 minute.");
-        }
-
-        this.atProtocolOptions.SessionRefreshInterval = interval;
         return this;
     }
 

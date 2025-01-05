@@ -49,7 +49,9 @@ public static class HttpClientExtensions
         }
 
         logger?.LogDebug($"POST {client.BaseAddress}{url}: {jsonContent}");
-        using var message = await client.PostAsync(url, content, cancellationToken);
+        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        request.Content = content;
+        using var message = await client.SendAsync(request, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
@@ -93,7 +95,9 @@ public static class HttpClientExtensions
        ILogger? logger = default)
     {
         logger?.LogDebug($"POST STREAM {client.BaseAddress}{url}: {body.Headers.ContentType}");
-        using var message = await client.PostAsync(url, body, cancellationToken);
+        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        request.Content = body;
+        using var message = await client.SendAsync(request, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
@@ -185,7 +189,8 @@ public static class HttpClientExtensions
        ILogger? logger = default)
     {
         logger?.LogDebug($"GET {client.BaseAddress}{url}");
-        using var message = await client.GetAsync(url, cancellationToken);
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        using var message = await client.SendAsync(request, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
@@ -360,7 +365,8 @@ public static class HttpClientExtensions
         };
 
         logger?.LogDebug($"GET {url}");
-        using var message = await client.GetAsync(url, cancellationToken: token);
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        using var message = await client.SendAsync(request, cancellationToken: token);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, new JsonSerializerOptions(), token, logger);
@@ -372,7 +378,15 @@ public static class HttpClientExtensions
         return JsonSerializer.Deserialize<DidDoc>(result, SourceGenerationContext.Default.DidDoc);
     }
 
-    private static async Task<ATError> CreateError(HttpResponseMessage message, JsonSerializerOptions options, CancellationToken cancellationToken, ILogger? logger = default)
+    /// <summary>
+    /// Creates an ATError from an HttpResponseMessage.
+    /// </summary>
+    /// <param name="message">Message.</param>
+    /// <param name="options">Options.</param>
+    /// <param name="cancellationToken">CancellationToken.</param>
+    /// <param name="logger">Logger.</param>
+    /// <returns>ATError.</returns>
+    internal static async Task<ATError> CreateError(HttpResponseMessage message, JsonSerializerOptions options, CancellationToken cancellationToken, ILogger? logger = default)
     {
 #if NETSTANDARD
         string response = await message.Content.ReadAsStringAsync();

@@ -20,6 +20,7 @@ public class Session
     /// <param name="email">The email associated with the session.</param>
     /// <param name="accessJwt">The access JWT associated with the session.</param>
     /// <param name="refreshJwt">The refresh JWT associated with the session.</param>
+    /// <param name="expiresIn">The expiration time of the access token.</param>
     [JsonConstructor]
     public Session(
         ATDid did,
@@ -27,7 +28,8 @@ public class Session
         ATHandle handle,
         string? email,
         string accessJwt,
-        string refreshJwt)
+        string refreshJwt,
+        DateTime expiresIn)
     {
         this.Did = did;
         this.DidDoc = didDoc;
@@ -35,6 +37,7 @@ public class Session
         this.Email = email;
         this.AccessJwt = accessJwt;
         this.RefreshJwt = refreshJwt;
+        this.ExpiresIn = expiresIn;
     }
 
     /// <summary>
@@ -67,4 +70,9 @@ public class Session
     /// Gets the refresh JWT associated with the session.
     /// </summary>
     public string RefreshJwt { get; }
+
+    /// <summary>
+    /// Gets the expiration time of the access token.
+    /// </summary>
+    public DateTime ExpiresIn { get; }
 }
