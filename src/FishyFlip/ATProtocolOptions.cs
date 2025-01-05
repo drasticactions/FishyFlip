@@ -96,18 +96,9 @@ public class ATProtocolOptions
     /// <param name="protocol">Protocol.</param>
     /// <param name="handler">Handler.</param>
     /// <returns><see cref="HttpClient"/>.</returns>
-    internal HttpClient GenerateHttpClient(ATProtocol protocol, HttpMessageHandler? handler = default)
+    internal HttpClient GenerateHttpClient(ATProtocol protocol, HttpMessageHandler? handler = null)
     {
-        HttpClient httpClient;
-        if (handler is not null)
-        {
-            httpClient = new HttpClient(handler);
-        }
-        else
-        {
-            var test = new ATProtocolDelegatingHandler(protocol);
-            httpClient = new HttpClient(test);
-        }
+        var httpClient = handler is not null ? new HttpClient(handler) : new HttpClient(new ATProtocolDelegatingHandler(protocol));
 
         httpClient.DefaultRequestHeaders.Add(Constants.HeaderNames.UserAgent, this.UserAgent);
         httpClient.DefaultRequestHeaders.Add("Accept", Constants.AcceptedMediaType);
