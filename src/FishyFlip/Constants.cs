@@ -23,6 +23,10 @@ public static class Constants
 
     internal const string RedactParameter = "redact";
 
+    internal const string TokenHasExpired = "Token has expired";
+    internal const string TokenHasBeenRevoked = "Token has been revoked";
+    internal const string ExpiredToken = "ExpiredToken";
+
     public static class Urls
     {
         public static class ATProtoServer

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FishyFlip.Lexicon.Com.Atproto.Server;
 
 namespace FishyFlip.Tools;
 
@@ -32,11 +33,25 @@ public class ATProtocolHttpClient : HttpClient
         var result = await base.SendAsync(request, cancellationToken);
         if (!result.IsSuccessStatusCode)
         {
-            // If token has expired, refresh it and return the request.
-            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            if (request.RequestUri?.AbsolutePath.Contains(ServerEndpoints.RefreshSession) ?? false)
             {
-                await this.atProtocol.SessionManager.RefreshSessionAsync(cancellationToken);
-                return await base.SendAsync(request, cancellationToken);
+                return result;
+            }
+
+#if NETSTANDARD
+            string response = await result.Content.ReadAsStringAsync();
+#else
+            string response = await result.Content.ReadAsStringAsync(cancellationToken);
+#endif
+
+            var atError = JsonSerializer.Deserialize<ATError>(response, SourceGenerationContext.Default.ATError);
+            if (atError is not null)
+            {
+                if (atError is { StatusCode: 400, Detail: { Error: Constants.ExpiredToken, Message: Constants.TokenHasExpired } })
+                {
+                    await this.atProtocol.SessionManager.RefreshSessionAsync(cancellationToken);
+                    return await base.SendAsync(request, cancellationToken);
+                }
             }
         }
 
