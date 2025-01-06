@@ -1115,15 +1115,15 @@ public partial class AppCommands
                 case "procedure":
                     sb.AppendLine($"            var endpointUrl = {item.ClassName}.ToString();");
                     sb.AppendLine($"            var headers = new Dictionary<string, string>();");
-                    if (item.Id.Contains("chat"))
+                    if (item.Id.Contains("moderation"))
+                    {
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                    }
+                    else if (item.Id.Contains("chat"))
                     {
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);");
                     }
                     else if (item.Id.Contains("ozone"))
-                    {
-                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
-                    }
-                    else if (item.Id.Contains("atproto.moderation"))
                     {
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
                     }
@@ -1219,15 +1219,15 @@ public partial class AppCommands
                     }
 
                     sb.AppendLine($"            var headers = new Dictionary<string, string>();");
-                    if (item.Id.Contains("chat"))
+                    if (item.Id.Contains("moderation"))
+                    {
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                    }
+                    else if (item.Id.Contains("chat"))
                     {
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);");
                     }
                     else if (item.Id.Contains("ozone"))
-                    {
-                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
-                    }
-                    else if (item.Id.Contains("atproto.moderation"))
                     {
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
                     }
