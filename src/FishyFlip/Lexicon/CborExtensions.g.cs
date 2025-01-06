@@ -57,6 +57,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.AppPasswordDef(obj);
                 case "app.bsky.embed.defs#aspectRatio":
                     return new App.Bsky.Embed.AspectRatio(obj);
+                case "com.shinolabs.pinksea.appViewDefs#author":
+                    return new Com.Shinolabs.Pinksea.Author(obj);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return new Chat.Bsky.Convo.BatchItem(obj);
                 case "com.whtwnd.blog.defs#blobMetadata":
@@ -243,8 +245,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetActorStarterPacksOutput(obj);
                 case "app.bsky.feed.getAuthorFeed#GetAuthorFeedOutput":
                     return new App.Bsky.Feed.GetAuthorFeedOutput(obj);
+                case "com.shinolabs.pinksea.getAuthorFeed#GetAuthorFeedOutput":
+                    return new Com.Shinolabs.Pinksea.GetAuthorFeedOutput(obj);
                 case "com.whtwnd.blog.getAuthorPosts#GetAuthorPostsOutput":
                     return new Com.Whtwnd.Blog.GetAuthorPostsOutput(obj);
+                case "com.shinolabs.pinksea.getAuthorReplies#GetAuthorRepliesOutput":
+                    return new Com.Shinolabs.Pinksea.GetAuthorRepliesOutput(obj);
                 case "app.bsky.graph.getBlocks#GetBlocksOutput":
                     return new App.Bsky.Graph.GetBlocksOutput(obj);
                 case "tools.ozone.server.getConfig#GetConfigOutput":
@@ -269,6 +275,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetFollowersOutput(obj);
                 case "app.bsky.graph.getFollows#GetFollowsOutput":
                     return new App.Bsky.Graph.GetFollowsOutput(obj);
+                case "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput":
+                    return new Com.Shinolabs.Pinksea.GetHandleFromDidOutput(obj);
+                case "com.shinolabs.pinksea.getIdentity#GetIdentityOutput":
+                    return new Com.Shinolabs.Pinksea.GetIdentityOutput(obj);
                 case "com.atproto.admin.getInviteCodes#GetInviteCodesOutput":
                     return new Com.Atproto.Admin.GetInviteCodesOutput(obj);
                 case "app.bsky.video.getJobStatus#GetJobStatusOutput":
@@ -299,6 +309,10 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.GetMessagesOutput(obj);
                 case "app.bsky.graph.getMutes#GetMutesOutput":
                     return new App.Bsky.Graph.GetMutesOutput(obj);
+                case "com.shinolabs.pinksea.getOekaki#GetOekakiOutput":
+                    return new Com.Shinolabs.Pinksea.GetOekakiOutput(obj);
+                case "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput":
+                    return new Com.Shinolabs.Pinksea.GetParentForReplyOutput(obj);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -311,6 +325,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.GetProfilesOutput(obj);
                 case "app.bsky.feed.getQuotes#GetQuotesOutput":
                     return new App.Bsky.Feed.GetQuotesOutput(obj);
+                case "com.shinolabs.pinksea.getRecent#GetRecentOutput":
+                    return new Com.Shinolabs.Pinksea.GetRecentOutput(obj);
                 case "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput":
                     return new Com.Atproto.Identity.GetRecommendedDidCredentialsOutput(obj);
                 case "com.atproto.repo.getRecord#GetRecordOutput":
@@ -345,6 +361,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.GetSuggestionsOutput(obj);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
                     return new App.Bsky.Unspecced.GetSuggestionsSkeletonOutput(obj);
+                case "com.shinolabs.pinksea.getTagFeed#GetTagFeedOutput":
+                    return new Com.Shinolabs.Pinksea.GetTagFeedOutput(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput":
                     return new App.Bsky.Unspecced.GetTaggedSuggestionsOutput(obj);
                 case "app.bsky.feed.getTimeline#GetTimelineOutput":
@@ -359,6 +377,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Set.GetValuesOutput(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
+                case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
+                    return new Com.Shinolabs.Pinksea.HydratedOekaki(obj);
                 case "com.atproto.sync.subscribeRepos#identity":
                     return new Com.Atproto.Sync.Identity(obj);
                 case "tools.ozone.moderation.defs#identityEvent":
@@ -561,6 +581,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.Nux(obj);
                 case "com.shinolabs.pinksea.oekaki":
                     return new Com.Shinolabs.Pinksea.Oekaki(obj);
+                case "com.shinolabs.pinksea.appViewDefs#oekakiTombstone":
+                    return new Com.Shinolabs.Pinksea.OekakiTombstone(obj);
                 case "com.whtwnd.blog.defs#ogp":
                     return new Com.Whtwnd.Blog.Ogp(obj);
                 case "tools.ozone.setting.defs#option":
