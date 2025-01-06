@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         {
             var endpointUrl = CreateReport.ToString();
             var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new CreateReportInput();
             inputItem.ReasonType = reasonType;
             inputItem.Subject = subject;
