@@ -50,7 +50,40 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new EmitEventInput();
+            switch (@event.Type)
+            {
+                case "tools.ozone.moderation.defs#modEventTakedown":
+                case "tools.ozone.moderation.defs#modEventAcknowledge":
+                case "tools.ozone.moderation.defs#modEventEscalate":
+                case "tools.ozone.moderation.defs#modEventComment":
+                case "tools.ozone.moderation.defs#modEventLabel":
+                case "tools.ozone.moderation.defs#modEventReport":
+                case "tools.ozone.moderation.defs#modEventMute":
+                case "tools.ozone.moderation.defs#modEventUnmute":
+                case "tools.ozone.moderation.defs#modEventMuteReporter":
+                case "tools.ozone.moderation.defs#modEventUnmuteReporter":
+                case "tools.ozone.moderation.defs#modEventReverseTakedown":
+                case "tools.ozone.moderation.defs#modEventResolveAppeal":
+                case "tools.ozone.moderation.defs#modEventEmail":
+                case "tools.ozone.moderation.defs#modEventTag":
+                case "tools.ozone.moderation.defs#accountEvent":
+                case "tools.ozone.moderation.defs#identityEvent":
+                case "tools.ozone.moderation.defs#recordEvent":
+                    break;
+                default:
+                    atp.Options.Logger?.LogWarning($"Unknown @event type for union: " + @event.Type);
+                    break;
+            }
             inputItem.Event = @event;
+            switch (subject.Type)
+            {
+                case "com.atproto.admin.defs#repoRef":
+                case "com.atproto.repo.strongRef":
+                    break;
+                default:
+                    atp.Options.Logger?.LogWarning($"Unknown subject type for union: " + subject.Type);
+                    break;
+            }
             inputItem.Subject = subject;
             inputItem.CreatedBy = createdBy;
             inputItem.SubjectBlobCids = subjectBlobCids;

@@ -41,6 +41,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new CreateReportInput();
             inputItem.ReasonType = reasonType;
+            switch (subject.Type)
+            {
+                case "com.atproto.admin.defs#repoRef":
+                case "com.atproto.repo.strongRef":
+                    break;
+                default:
+                    atp.Options.Logger?.LogWarning($"Unknown subject type for union: " + subject.Type);
+                    break;
+            }
             inputItem.Subject = subject;
             inputItem.Reason = reason;
             return atp.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, inputItem, cancellationToken, headers);
