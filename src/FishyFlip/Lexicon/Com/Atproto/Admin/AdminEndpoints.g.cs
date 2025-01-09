@@ -362,6 +362,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var endpointUrl = UpdateSubjectStatus.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new UpdateSubjectStatusInput();
+            switch (subject.Type)
+            {
+                case "com.atproto.admin.defs#repoRef":
+                case "com.atproto.repo.strongRef":
+                case "com.atproto.admin.defs#repoBlobRef":
+                    break;
+                default:
+                    atp.Options.Logger?.LogWarning($"Unknown subject type for union: " + subject.Type);
+                    break;
+            }
             inputItem.Subject = subject;
             inputItem.Takedown = takedown;
             inputItem.Deactivated = deactivated;

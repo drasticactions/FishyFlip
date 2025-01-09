@@ -1145,8 +1145,32 @@ public partial class AppCommands
                         for (int i = 1; i < inputProperties.Count - 1; i++)
                         {
                             var prop = inputProperties[i].Split(" ")[1];
+                            var realName = prop.Replace("@", string.Empty);
+                            var property = item.Definition.Input?.Schema?.Properties.FirstOrDefault(n => n.Key == realName).Value;
+                            if (property?.Type == "union")
+                            {
+                                if (property?.Refs?.Any() ?? false)
+                                {
+                                    // Switch statement to take test the {prop}.Type and check if its listed in any of the refs. If not, warn the user.
+                                    sb.AppendLine($"            switch ({prop}.Type)");
+                                    sb.AppendLine("            {");
+                                    foreach (var unionType in property.Refs!)
+                                    {
+                                        sb.AppendLine($"                case \"{unionType}\":");
+                                    }
+
+                                    sb.AppendLine("                    break;");
+
+                                    sb.AppendLine("                default:");
+                                    var name =
+                                    sb.AppendLine(
+                                        $"                    atp.Options.Logger?.LogWarning($\"Unknown {prop} type for union: \" + {prop}.Type);");
+                                    sb.AppendLine("                    break;");
+                                    sb.AppendLine("            }");
+                                }
+                            }
                             sb.AppendLine(
-                                $"            inputItem.{prop.Replace("@", string.Empty).ToPascalCase()} = {prop};");
+                                $"            inputItem.{realName.ToPascalCase()} = {prop};");
                         }
 
                         sb.AppendLine(
