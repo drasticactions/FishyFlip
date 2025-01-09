@@ -3,6 +3,7 @@
 // </copyright>
 
 using FishyFlip.Tools.Json;
+using System.Collections.Concurrent;
 using System.Net;
 
 namespace FishyFlip;
@@ -78,7 +79,7 @@ public class ATProtocolOptions
     /// <summary>
     /// Gets the Did Cache.
     /// </summary>
-    internal Dictionary<string, string> DidCache { get; } = new Dictionary<string, string>();
+    internal ConcurrentDictionary<string, string> DidCache { get; } = new();
 
     /// <summary>
     /// Gets the source generation context.

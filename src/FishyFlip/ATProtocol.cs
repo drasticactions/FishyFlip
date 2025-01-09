@@ -266,8 +266,7 @@ public sealed partial class ATProtocol : IDisposable
     /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
     public async Task<Result<string?>> ResolveATHandleHostAsync(ATHandle handle, CancellationToken? token = default)
     {
-        string? host = this.options.DidCache.FirstOrDefault(n => n.Key == handle.ToString()).Value;
-        if (!string.IsNullOrEmpty(host))
+        if (this.options.DidCache.TryGetValue(handle.ToString(), out var host) && !string.IsNullOrEmpty(host))
         {
             this.options.Logger?.LogDebug($"Resolved handle from cache: {handle} to {host}");
             return host;
@@ -344,8 +343,7 @@ public sealed partial class ATProtocol : IDisposable
     /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
     public async Task<Result<string?>> ResolveATDidHostAsync(ATDid did, CancellationToken? token = default)
     {
-        string? host = this.options.DidCache.FirstOrDefault(n => n.Key == did.ToString()).Value;
-        if (!string.IsNullOrEmpty(host))
+        if (this.options.DidCache.TryGetValue(did.ToString(), out var host) && !string.IsNullOrEmpty(host))
         {
             this.options.Logger?.LogDebug($"Resolved DID from cache: {did} to {host}");
             return host;
