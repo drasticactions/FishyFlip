@@ -799,6 +799,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.SubjectStatusView(obj);
                 case "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput":
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
+                case "ma.tokono.byov.subscription":
+                    return new Ma.Tokono.Byov.Subscription(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
                     return new App.Bsky.Unspecced.Suggestion(obj);
                 case "app.bsky.richtext.facet#tag":
@@ -871,6 +873,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
                 case "my.skylights.rel#urlItem":
                     return new My.Skylights.UrlItem(obj);
+                case "ma.tokono.byov.video":
+                    return new Ma.Tokono.Byov.Video(obj);
                 case "tools.ozone.moderation.defs#videoDetails":
                     return new Tools.Ozone.Moderation.VideoDetails(obj);
                 case "app.bsky.embed.record#viewBlocked":
