@@ -22,13 +22,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <param name="atp"></param>
         /// <param name="reasonType">
         /// <br/> Known Values: <br/>
-        /// reasonSpam <br/>
-        /// reasonViolation <br/>
-        /// reasonMisleading <br/>
-        /// reasonSexual <br/>
-        /// reasonRude <br/>
-        /// reasonOther <br/>
-        /// reasonAppeal <br/>
+        /// reasonSpam - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonViolation - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonMisleading - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonSexual - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonRude - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonAppeal - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// </param>
         /// <param name="subject"></param>
         /// <param name="reason"></param>

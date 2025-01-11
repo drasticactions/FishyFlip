@@ -1546,7 +1546,14 @@ public partial class AppCommands
 
     public static ClassGeneration? FindClassFromRef(string refString)
     {
-        return AllClasses.FirstOrDefault(n => n.Id == refString);
+        var record = AllClasses.FirstOrDefault(n => n.Id == refString);
+        if (record is null)
+        {
+            refString = refString.Contains("#") ? refString.Split("#")[0] : refString;
+            record = AllClasses.FirstOrDefault(n => n.Id == refString);
+        }
+
+        return record;
     }
 
     private async Task ProcessFile(string defJsonPath)

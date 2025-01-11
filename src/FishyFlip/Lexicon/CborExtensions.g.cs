@@ -75,6 +75,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Whtwnd.Blog.BlogEntry(obj);
                 case "blue.linkat.board":
                     return new Blue.Linkat.Board(obj);
+                case "buzz.bookhive.book":
+                    return new Buzz.Bookhive.Book(obj);
                 case "community.lexicon.bookmarks.bookmark":
                     return new Community.Lexicon.Bookmarks.Bookmark(obj);
                 case "blue.zio.atfile.finger#browser":
@@ -207,6 +209,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Richtext.Facet(obj);
                 case "social.psky.richtext.facet":
                     return new Social.Psky.Richtext.Facet(obj);
+                case "fm.teal.alpha.actor.profile#featuredItem":
+                    return new Fm.Teal.Alpha.Actor.FeaturedItem(obj);
                 case "app.bsky.feed.describeFeedGenerator#feed":
                     return new App.Bsky.Feed.Feed(obj);
                 case "app.bsky.graph.starterpack#feedItem":
@@ -377,6 +381,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Set.GetValuesOutput(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
+                case "buzz.bookhive.hiveBook":
+                    return new Buzz.Bookhive.HiveBook(obj);
                 case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
                     return new Com.Shinolabs.Pinksea.HydratedOekaki(obj);
                 case "com.atproto.sync.subscribeRepos#identity":
@@ -589,6 +595,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.Option(obj);
                 case "app.bsky.actor.defs#personalDetailsPref":
                     return new App.Bsky.Actor.PersonalDetailsPref(obj);
+                case "fm.teal.alpha.play":
+                    return new Fm.Teal.Alpha.Play(obj);
                 case "app.bsky.feed.post":
                     return new App.Bsky.Feed.Post(obj);
                 case "fyi.unravel.frontpage.post":
@@ -601,6 +609,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.Profile(obj);
                 case "social.psky.actor.profile":
                     return new Social.Psky.Actor.Profile(obj);
+                case "fm.teal.alpha.actor.profile":
+                    return new Fm.Teal.Alpha.Actor.Profile(obj);
                 case "app.bsky.actor.defs#profileAssociated":
                     return new App.Bsky.Actor.ProfileAssociated(obj);
                 case "app.bsky.actor.defs#profileAssociatedChat":
@@ -725,6 +735,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
                 case "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput":
                     return new App.Bsky.Actor.SearchActorsTypeaheadOutput(obj);
+                case "buzz.bookhive.searchBooks#SearchBooksOutput":
+                    return new Buzz.Bookhive.SearchBooksOutput(obj);
                 case "app.bsky.feed.searchPosts#SearchPostsOutput":
                     return new App.Bsky.Feed.SearchPostsOutput(obj);
                 case "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput":
@@ -789,6 +801,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackViewBasic(obj);
                 case "app.netlify.aniblue.status":
                     return new App.Netlify.Aniblue.Status(obj);
+                case "xyz.statusphere.status":
+                    return new Xyz.Statusphere.Status(obj);
+                case "fm.teal.alpha.actor.status":
+                    return new Fm.Teal.Alpha.Actor.Status(obj);
                 case "com.atproto.admin.defs#statusAttr":
                     return new Com.Atproto.Admin.StatusAttr(obj);
                 case "app.netlify.aniblue.status#status":

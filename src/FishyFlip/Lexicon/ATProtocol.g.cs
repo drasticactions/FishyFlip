@@ -49,6 +49,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.App.Bsky.Video.BlueskyVideo Video => new (this);
 
         /// <summary>
+        /// buzz.bookhive Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Buzz.Bookhive.BuzzBookhive BuzzBookhive => new (this);
+
+        /// <summary>
         /// chat.bsky.actor Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor ChatBskyActor => new (this);
