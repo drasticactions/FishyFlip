@@ -11,6 +11,7 @@ using FishyFlip;
 using FishyFlip.Lexicon;
 using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Lexicon.Blue.Zio.Atfile;
+using FishyFlip.Lexicon.Chat.Bsky.Convo;
 using FishyFlip.Models;
 using FishyFlip.Tools;
 using Microsoft.Extensions.Logging;
@@ -247,6 +248,112 @@ public class AppCommands
         }
 
         consoleLog.Log($"Post created: {result!.Uri}.");
+    }
+
+    /// <summary>
+    /// Create a new chat message.
+    /// </summary>
+    /// <param name="chatPost">The post to create, can be written using a subset of markdown.</param>
+    /// <param name="convoId">-c, The conversation ID.</param>
+    /// <param name="username">-u, Username.</param>
+    /// <param name="password">-p, Password.</param>
+    /// <param name="instanceUrl">-i, Instance URL.</param>
+    /// <param name="verbose">-v, Verbose logging.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Task.</returns>
+    [Command("chat post")]
+    public async Task CreateChatMessageAsync([Argument] string chatPost, string convoId, string username, string password, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+
+        var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
+
+        if (await this.AuthenticateWithAppPasswordAsync(username, password, atProtocol, consoleLog) == false)
+        {
+            return;
+        }
+
+        var markdownPost = MarkdownPost.Parse(chatPost);
+        if (markdownPost is null)
+        {
+            consoleLog.LogError("Invalid post.");
+            return;
+        }
+
+        var messageInput = new MessageInput(text: markdownPost.Post, facets: markdownPost.Facets);
+
+        (var result, var error) = await atProtocol.ChatBskyConvo.SendMessageAsync(convoId, messageInput, cancellationToken);
+
+        if (error != null)
+        {
+            consoleLog.LogError(error.ToString());
+            return;
+        }
+
+        consoleLog.Log($"Chat Message created: {result!.Id}.");
+    }
+
+    /// <summary>
+    /// Gets the chat conversation ID for a list of members.
+    /// </summary>
+    /// <param name="members">List of members of the conversation.</param>
+    /// <param name="username">-u, Username.</param>
+    /// <param name="password">-p, Password.</param>
+    /// <param name="instanceUrl">-i, Instance URL.</param>
+    /// <param name="verbose">-v, Verbose logging.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Task.</returns>
+    [Command("chat id")]
+    public async Task GetConvoForMembersAsync([Argument] string[] members, string username, string password, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+        var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
+
+        if (await this.AuthenticateWithAppPasswordAsync(username, password, atProtocol, consoleLog) == false)
+        {
+            return;
+        }
+
+        List<ATDid> memberList = new List<ATDid>();
+        foreach (var item in members)
+        {
+            if (ATIdentifier.TryCreate(item, out var atIdentifier) && atIdentifier is ATDid atDid)
+            {
+                memberList.Add(atDid);
+            }
+            else if (atIdentifier is ATHandle atHandle)
+            {
+                var (result, error) = await atProtocol.Identity.ResolveHandleAsync(atHandle, cancellationToken);
+                if (error != null)
+                {
+                    consoleLog.LogError(error.ToString());
+                    return;
+                }
+
+                memberList.Add(result!.Did!);
+            }
+            else
+            {
+                consoleLog.LogError($"Invalid member: {item}.");
+                return;
+            }
+        }
+
+        (var resultConvo, var errorConvo) = await atProtocol.ChatBskyConvo.GetConvoForMembersAsync(memberList, cancellationToken);
+        if (errorConvo != null)
+        {
+            consoleLog.LogError(errorConvo.ToString());
+            return;
+        }
+
+        if (resultConvo?.Convo is null)
+        {
+            consoleLog.LogError("Failed to get conversation ID.");
+            return;
+        }
+
+        consoleLog.LogDebug(resultConvo.ToJson());
+        consoleLog.Log($"Conversation ID: {resultConvo!.Convo.Id}.");
     }
 
     /// <summary>
