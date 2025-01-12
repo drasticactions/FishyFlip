@@ -25,6 +25,16 @@ public static class CarDecoder
     /// </summary>
     /// <param name="bytes">Byte Array.</param>
     /// <param name="progress">Fires when a car file is decoded.</param>
+    public static void DecodeCar(byte[] bytes, OnCarDecoded? progress = null)
+    {
+        DecodeCar(bytes.AsSpan(), progress);
+    }
+
+    /// <summary>
+    /// Decodes CAR ReadOnlySpan.
+    /// </summary>
+    /// <param name="bytes">Bytes to decode.</param>
+    /// <param name="progress">Fires when a car file is decoded.</param>
     public static void DecodeCar(ReadOnlySpan<byte> bytes, OnCarDecoded? progress = null)
     {
         int bytesLength = bytes.Length;
