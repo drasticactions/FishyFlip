@@ -2,6 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "OAuth Start",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_oauth",
+            "program": "${workspaceFolder}/samples/OAuth/bin/Debug/net9.0/OAuth.dll",
+            "args": [ "start" ],
+            "cwd": "${workspaceFolder}/samples/OAuth",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "FFSourceGen",
             "type": "coreclr",
             "request": "launch",
