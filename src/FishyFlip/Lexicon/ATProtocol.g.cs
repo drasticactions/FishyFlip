@@ -124,6 +124,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Community.Lexicon.Bookmarks.CommunityLexiconBookmarks CommunityLexiconBookmarks => new (this);
 
         /// <summary>
+        /// fm.teal.alpha.feed Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.FmTealAlphaFeed FmTealAlphaFeed => new (this);
+
+        /// <summary>
         /// tools.ozone.communication Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Tools.Ozone.Communication.ToolsOzoneCommunication ToolsOzoneCommunication => new (this);

@@ -4,19 +4,19 @@
 
 #nullable enable
 
-namespace FishyFlip.Lexicon.Fm.Teal.Alpha
+namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 {
-    public partial class Play : ATObject
+    public partial class PlayView : ATObject
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Play"/> class.
+        /// Initializes a new instance of the <see cref="PlayView"/> class.
         /// </summary>
         /// <param name="trackName">The name of the track</param>
-        /// <param name="artistName">The name of the artist</param>
         /// <param name="trackMbId">The Musicbrainz ID of the track</param>
         /// <param name="recordingMbId">The Musicbrainz recording ID of the track</param>
         /// <param name="duration">The length of the track in seconds</param>
+        /// <param name="artistNames">Array of artist names in order of original appearance.</param>
         /// <param name="artistMbIds">Array of Musicbrainz artist IDs</param>
         /// <param name="releaseName">The name of the release/album</param>
         /// <param name="releaseMbId">The Musicbrainz release ID</param>
@@ -25,13 +25,13 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha
         /// <param name="musicServiceBaseDomain">The base domain of the music service. e.g. music.apple.com, tidal.com, spotify.com. Defaults to 'local' if not provided.</param>
         /// <param name="submissionClientAgent">A user-agent style string specifying the user agent. e.g. tealtracker/0.0.1b (Linux; Android 13; SM-A715F). Defaults to 'manual/unknown' if not provided.</param>
         /// <param name="playedTime">The unix timestamp of when the track was played</param>
-        public Play(string? trackName, string? artistName, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistMbIds = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default)
+        public PlayView(string? trackName = default, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistNames = default, List<string>? artistMbIds = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default)
         {
             this.TrackName = trackName;
             this.TrackMbId = trackMbId;
             this.RecordingMbId = recordingMbId;
             this.Duration = duration;
-            this.ArtistName = artistName;
+            this.ArtistNames = artistNames;
             this.ArtistMbIds = artistMbIds;
             this.ReleaseName = releaseName;
             this.ReleaseMbId = releaseMbId;
@@ -44,23 +44,23 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Play"/> class.
+        /// Initializes a new instance of the <see cref="PlayView"/> class.
         /// </summary>
-        public Play()
+        public PlayView()
         {
         }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Play"/> class.
+        /// Initializes a new instance of the <see cref="PlayView"/> class.
         /// </summary>
-        public Play(CBORObject obj)
+        public PlayView(CBORObject obj)
         {
             if (obj["trackName"] is not null) this.TrackName = obj["trackName"].AsString();
             if (obj["trackMbId"] is not null) this.TrackMbId = obj["trackMbId"].AsString();
             if (obj["recordingMbId"] is not null) this.RecordingMbId = obj["recordingMbId"].AsString();
             if (obj["duration"] is not null) this.Duration = obj["duration"].AsInt64Value();
-            if (obj["artistName"] is not null) this.ArtistName = obj["artistName"].AsString();
+            if (obj["artistNames"] is not null) this.ArtistNames = obj["artistNames"].Values.Select(n =>n.AsString()).ToList();
             if (obj["artistMbIds"] is not null) this.ArtistMbIds = obj["artistMbIds"].Values.Select(n =>n.AsString()).ToList();
             if (obj["releaseName"] is not null) this.ReleaseName = obj["releaseName"].AsString();
             if (obj["releaseMbId"] is not null) this.ReleaseMbId = obj["releaseMbId"].AsString();
@@ -76,6 +76,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha
         /// <br/> The name of the track
         /// </summary>
         [JsonPropertyName("trackName")]
+        [JsonRequired]
         public string? TrackName { get; set; }
 
         /// <summary>
@@ -100,11 +101,12 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha
         public long? Duration { get; set; }
 
         /// <summary>
-        /// Gets or sets the artistName.
-        /// <br/> The name of the artist
+        /// Gets or sets the artistNames.
+        /// <br/> Array of artist names in order of original appearance.
         /// </summary>
-        [JsonPropertyName("artistName")]
-        public string? ArtistName { get; set; }
+        [JsonPropertyName("artistNames")]
+        [JsonRequired]
+        public List<string>? ArtistNames { get; set; }
 
         /// <summary>
         /// Gets or sets the artistMbIds.
@@ -166,18 +168,18 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha
         /// Gets the ATRecord Type.
         /// </summary>
         [JsonPropertyName("$type")]
-        public override string Type => "fm.teal.alpha.play";
+        public override string Type => "fm.teal.alpha.feed.defs#playView";
 
-        public const string RecordType = "fm.teal.alpha.play";
+        public const string RecordType = "fm.teal.alpha.feed.defs#playView";
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fm.Teal.Alpha.Play>(this, (JsonTypeInfo<Fm.Teal.Alpha.Play>)SourceGenerationContext.Default.FmTealAlphaPlay)!;
+            return JsonSerializer.Serialize<Fm.Teal.Alpha.Feed.PlayView>(this, (JsonTypeInfo<Fm.Teal.Alpha.Feed.PlayView>)SourceGenerationContext.Default.FmTealAlphaFeedPlayView)!;
         }
 
-        public static Play FromJson(string json)
+        public static PlayView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fm.Teal.Alpha.Play>(json, (JsonTypeInfo<Fm.Teal.Alpha.Play>)SourceGenerationContext.Default.FmTealAlphaPlay)!;
+            return JsonSerializer.Deserialize<Fm.Teal.Alpha.Feed.PlayView>(json, (JsonTypeInfo<Fm.Teal.Alpha.Feed.PlayView>)SourceGenerationContext.Default.FmTealAlphaFeedPlayView)!;
         }
     }
 }

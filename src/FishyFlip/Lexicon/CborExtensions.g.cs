@@ -239,6 +239,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.GetAccountInviteCodesOutput(obj);
                 case "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput":
                     return new Community.Lexicon.Bookmarks.GetActorBookmarksOutput(obj);
+                case "fm.teal.alpha.feed.getActorFeed#GetActorFeedOutput":
+                    return new Fm.Teal.Alpha.Feed.GetActorFeedOutput(obj);
                 case "app.bsky.feed.getActorFeeds#GetActorFeedsOutput":
                     return new App.Bsky.Feed.GetActorFeedsOutput(obj);
                 case "app.bsky.feed.getActorLikes#GetActorLikesOutput":
@@ -317,6 +319,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Shinolabs.Pinksea.GetOekakiOutput(obj);
                 case "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput":
                     return new Com.Shinolabs.Pinksea.GetParentForReplyOutput(obj);
+                case "fm.teal.alpha.feed.getPlay#GetPlayOutput":
+                    return new Fm.Teal.Alpha.Feed.GetPlayOutput(obj);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -595,8 +599,10 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.Option(obj);
                 case "app.bsky.actor.defs#personalDetailsPref":
                     return new App.Bsky.Actor.PersonalDetailsPref(obj);
-                case "fm.teal.alpha.play":
-                    return new Fm.Teal.Alpha.Play(obj);
+                case "fm.teal.alpha.feed.play":
+                    return new Fm.Teal.Alpha.Feed.Play(obj);
+                case "fm.teal.alpha.feed.defs#playView":
+                    return new Fm.Teal.Alpha.Feed.PlayView(obj);
                 case "app.bsky.feed.post":
                     return new App.Bsky.Feed.Post(obj);
                 case "fyi.unravel.frontpage.post":
@@ -801,8 +807,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackViewBasic(obj);
                 case "app.netlify.aniblue.status":
                     return new App.Netlify.Aniblue.Status(obj);
-                case "xyz.statusphere.status":
-                    return new Xyz.Statusphere.Status(obj);
                 case "fm.teal.alpha.actor.status":
                     return new Fm.Teal.Alpha.Actor.Status(obj);
                 case "com.atproto.admin.defs#statusAttr":

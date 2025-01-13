@@ -17,10 +17,9 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// </summary>
         /// <param name="time">The unix timestamp of when the item was recorded</param>
         /// <param name="item">
-        /// <br/> Union Types: <br/>
-        /// <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Play"/> (fm.teal.alpha.play#record) <br/>
+        /// <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView"/> (fm.teal.alpha.feed.defs#playView)
         /// </param>
-        public Status(DateTime? time, Fm.Teal.Alpha.Play? item)
+        public Status(DateTime? time, Fm.Teal.Alpha.Feed.PlayView? item)
         {
             this.Time = time;
             this.Item = item;
@@ -41,7 +40,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         public Status(CBORObject obj)
         {
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
-            if (obj["item"] is not null) this.Item = new Fm.Teal.Alpha.Play(obj["item"]);
+            if (obj["item"] is not null) this.Item = new Fm.Teal.Alpha.Feed.PlayView(obj["item"]);
         }
 
         /// <summary>
@@ -53,11 +52,10 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 
         /// <summary>
         /// Gets or sets the item.
-        /// <br/> Union Types: <br/>
-        /// <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Play"/> (fm.teal.alpha.play#record) <br/>
+        /// <br/> <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView"/> (fm.teal.alpha.feed.defs#playView)
         /// </summary>
         [JsonPropertyName("item")]
-        public Fm.Teal.Alpha.Play? Item { get; set; }
+        public Fm.Teal.Alpha.Feed.PlayView? Item { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
