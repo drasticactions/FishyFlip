@@ -60,7 +60,7 @@ namespace IdentityModel.OidcClient.Infrastructure
         private static string Serialize<T>(T logObject)
         {
             return Enabled ?
-                JsonSerializer.Serialize(logObject, (JsonTypeInfo<T>)SourceGenerationContext.Default.GetTypeInfo(typeof(T))!) :
+                JsonSerializer.Serialize(logObject, (JsonTypeInfo<T>)IdentityModel.OidcClient.OidcClientSourceGenerationContext.Default.GetTypeInfo(typeof(T))!) :
                 "Logging has been disabled";
 		}
     }
