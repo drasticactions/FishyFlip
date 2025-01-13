@@ -157,7 +157,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, DateTime? time, Fm.Teal.Alpha.Play? item, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, DateTime? time, Fm.Teal.Alpha.Feed.PlayView? item, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status();
             record.Time = time;
