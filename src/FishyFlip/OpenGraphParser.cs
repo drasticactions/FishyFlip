@@ -117,6 +117,12 @@ public class OpenGraphParser : IDisposable
             urlEmbed = tag1;
         }
 
+        // These three fields are all required, according to the lexicon.
+        if (urlEmbed == null || title == null || description == null)
+        {
+            return null;
+        }
+
         var external = new External(urlEmbed, title, description, image);
         return new EmbedExternal(external);
     }

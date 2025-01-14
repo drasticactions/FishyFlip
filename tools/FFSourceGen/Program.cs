@@ -2252,7 +2252,8 @@ public partial class AppCommands
         sb.AppendLine();
 
         // Add #nullable
-        sb.AppendLine("#nullable enable");
+        sb.AppendLine("#nullable enable annotations");
+        sb.AppendLine("#nullable disable warnings");
         sb.AppendLine();
     }
 
