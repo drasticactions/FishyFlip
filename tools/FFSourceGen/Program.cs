@@ -2204,7 +2204,7 @@ public partial class AppCommands
         foreach (var cls in classes)
         {
             sb.AppendLine(
-                $"    [JsonDerivedType(typeof({cls.CSharpNamespace}.{cls.ClassName}), typeDiscriminator: \"{cls.Id}\")]");
+                $"    [JsonDerivedType(typeof({AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}), typeDiscriminator: \"{cls.Id}\")]");
         }
 
         sb.AppendLine($"    [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: \"blob\")]");
