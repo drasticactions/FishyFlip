@@ -100,7 +100,7 @@ public class PropertyGeneration
 
     public bool IsDefinitionFile => this.Document.Id.EndsWith("defs");
 
-    public string Type => this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition);
+    public string Type => this.GetPropertyType(this.ClassName, this.ClassName, this.PropertyDefinition, this.Class, this.Key);
 
     public bool IsBaseType => this._IsBaseType(this.Type);
 
@@ -318,7 +318,7 @@ public class PropertyGeneration
         return "ATObject";
     }
 
-    private string GetPropertyType(string className, string name, PropertyDefinition property)
+    private string GetPropertyType(string className, string name, PropertyDefinition property, ClassGeneration? ownerClass = null, string? jsonName = null)
     {
         var baseType = property.Type?.ToLower() switch
         {
@@ -350,7 +350,12 @@ public class PropertyGeneration
             throw new InvalidOperationException("Base Type is null or empty.");
         }
 
-        return $"{baseType}?";
+        if (ownerClass?.Definition?.Required.Contains(jsonName!) == true && baseType != "DateTime")
+        {
+            return baseType;
+        }
+
+        return property.Required ? baseType : $"{baseType}?";
     }
 
     private string GetObjectType(PropertyDefinition property)

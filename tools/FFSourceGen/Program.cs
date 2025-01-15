@@ -502,11 +502,11 @@ public partial class AppCommands
                 var key = item.Properties[i].Key;
                 if (key == "createdAt")
                 {
-                    sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)} ?? DateTime.UtcNow;");
                 }
                 else
                 {
-                    sb.AppendLine($"            record.{prop} = {key};");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)};");
                 }
             }
 
@@ -726,11 +726,11 @@ public partial class AppCommands
                 var key = item.Properties[i].Key;
                 if (key == "createdAt")
                 {
-                    sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)} ?? DateTime.UtcNow;");
                 }
                 else
                 {
-                    sb.AppendLine($"            record.{prop} = {key};");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)};");
                 }
             }
 
@@ -2069,55 +2069,57 @@ public partial class AppCommands
 
         if (property.PropertyDefinition.Type == "array" && !property.IsBaseType)
         {
-            if (property.RawType == "FishyFlip.Models.ATUri?")
+            var nonNullableRawType = property.RawType.Replace("?", null);
+            if (nonNullableRawType == "FishyFlip.Models.ATUri")
             {
                 sb.AppendLine(
                     $"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATUriJsonConverter>))]");
             }
-            else if (property.RawType == "Ipfs.Cid?")
+            else if (nonNullableRawType == "Ipfs.Cid")
             {
                 sb.AppendLine(
                     $"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATCidJsonConverter>))]");
             }
-            else if (property.RawType == "FishyFlip.Models.ATHandle?")
+            else if (nonNullableRawType == "FishyFlip.Models.ATHandle")
             {
                 sb.AppendLine(
                     $"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATHandleJsonConverter>))]");
             }
-            else if (property.RawType == "FishyFlip.Models.ATDid?")
+            else if (nonNullableRawType == "FishyFlip.Models.ATDid")
             {
                 sb.AppendLine(
                     $"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATDidJsonConverter>))]");
             }
-            else if (property.RawType == "FishyFlip.Models.ATIdentifier?")
+            else if (nonNullableRawType == "FishyFlip.Models.ATIdentifier")
             {
                 sb.AppendLine(
                     $"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATIdentifierJsonConverter>))]");
             }
         }
 
+        var nonNullablePropertyType = property.Type.Replace("?", null);
         // Add Converter for various AT Object types (Ex. ATDid, ATUri, etc.)
-        if (property.Type == "FishyFlip.Models.ATUri?")
+        if (nonNullablePropertyType == "FishyFlip.Models.ATUri")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]");
         }
 
-        if (property.Type == "Ipfs.Cid?")
+        if (nonNullablePropertyType == "Ipfs.Cid")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]");
         }
 
-        if (property.Type == "FishyFlip.Models.ATHandle?")
+        if (nonNullablePropertyType == "FishyFlip.Models.ATHandle")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]");
         }
 
-        if (property.Type == "FishyFlip.Models.ATDid?")
+        if (nonNullablePropertyType == "FishyFlip.Models.ATDid")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]");
         }
 
-        if (property.RawType == "FishyFlip.Models.ATIdentifier")
+        if (nonNullablePropertyType == "FishyFlip.Models.ATIdentifier")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter))]");
         }
@@ -2252,7 +2254,8 @@ public partial class AppCommands
         sb.AppendLine();
 
         // Add #nullable
-        sb.AppendLine("#nullable enable");
+        sb.AppendLine("#nullable enable annotations");
+        sb.AppendLine("#nullable disable warnings");
         sb.AppendLine();
     }
 

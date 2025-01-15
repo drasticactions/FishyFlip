@@ -53,30 +53,30 @@ do
     target_dir="${username}-${repo_name}"
     if [ "$target_dir" != "bluesky-social-atproto" ]; then
         if [ "$target_dir" == "whtwnd-whitewind-blog" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/lexicons/com/whtwnd")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/com/whtwnd")
         elif [ "$target_dir" == "ziodotsh-lexicons" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/blue/zio")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/blue/zio")
         elif [ "$target_dir" == "shinolabs-PinkSea" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/PinkSea.Lexicons/com")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/PinkSea.Lexicons/com")
         elif [ "$target_dir" == "likeandscribe-frontpage" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/lexicons/fyi")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/fyi")
         elif [ "$target_dir" == "Gregoor-skylights" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/web/lexicons")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/web/lexicons")
         elif [ "$target_dir" == "lexicon-community-lexicon" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/community/lexicon")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/community/lexicon")
         elif [ "$target_dir" == "teal-fm-teal" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/packages/lexicons/real")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/packages/lexicons/real")
         elif [ "$target_dir" == "icidasset-radical-edward" ]; then
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/apps/byov/lexicons/ma/tokono/byov")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/apps/byov/lexicons/ma/tokono/byov")
         else
-            REPO_DIRS+=("$(PWD)/../fflexicons/$target_dir/lexicons")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons")
         fi
     fi
 done
     
 # Build FFSourceGen
 dotnet build tools/FFSourceGen/FFSourceGen.csproj
-dotnet run --project tools/FFSourceGen/FFSourceGen.csproj -- generate $(PWD)/../fflexicons/bluesky-social-atproto/lexicons -o $(PWD)/src/FishyFlip/ -t "${REPO_DIRS[@]}"
+dotnet run --project tools/FFSourceGen/FFSourceGen.csproj -- generate $PWD/../fflexicons/bluesky-social-atproto/lexicons -o $PWD/src/FishyFlip/ -t "${REPO_DIRS[@]}"
 
 # Build FishyFlip to verify the bindings compile
 
