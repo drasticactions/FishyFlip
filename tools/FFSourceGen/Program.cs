@@ -1566,15 +1566,6 @@ public partial class AppCommands
             throw new Exception($"Failed to deserialize {defJsonPath}.");
         }
 
-        if (defJsonPath.Replace("\\", "/").EndsWith("/blue/zio/atfile/lock.json"))
-        {
-            // There's a typo in the original file.
-            // The generation output depends on the file system enumeration order
-            // since there's a second blue.zio.atfile.upload
-            // https://github.com/ziodotsh/lexicons/pull/2
-            schemaDocument.Id = "blue.zio.atfile.lock";
-        }
-
         if (AllClasses.Any(n => n.Id == schemaDocument.Id))
         {
             Console.WriteLine($"Skipping duplicate class: {schemaDocument.Id}");
