@@ -180,7 +180,13 @@ internal static class CborExtensions
             {
                 case CBORType.ByteString:
                     var cid = obj.GetByteString();
-                    return Cid.Read(cid);
+                    if (cid[0] != 0)
+                    {
+                        logger?.LogError("ATCid CBOR bytes should start with 0.");
+                        return null;
+                    }
+
+                    return Cid.Read(cid.AsSpan(1).ToArray());
                 case CBORType.TextString:
                     return Cid.Decode(obj.AsString());
             }
