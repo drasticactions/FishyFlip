@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="subjectStatuses"></param>
-        public QueryStatusesOutput(string? cursor = default, List<Tools.Ozone.Moderation.SubjectStatusView>? subjectStatuses = default)
+        public QueryStatusesOutput(string? cursor = default, List<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>? subjectStatuses = default)
         {
             this.Cursor = cursor;
             this.SubjectStatuses = subjectStatuses;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public QueryStatusesOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["subjectStatuses"] is not null) this.SubjectStatuses = obj["subjectStatuses"].Values.Select(n =>new Tools.Ozone.Moderation.SubjectStatusView(n)).ToList();
+            if (obj["subjectStatuses"] is not null) this.SubjectStatuses = obj["subjectStatuses"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("subjectStatuses")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.SubjectStatusView>? SubjectStatuses { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>? SubjectStatuses { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.QueryStatusesOutput>(this, (JsonTypeInfo<Tools.Ozone.Moderation.QueryStatusesOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryStatusesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryStatusesOutput)!;
         }
 
         public static QueryStatusesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.QueryStatusesOutput>(json, (JsonTypeInfo<Tools.Ozone.Moderation.QueryStatusesOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryStatusesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryStatusesOutput)!;
         }
     }
 }

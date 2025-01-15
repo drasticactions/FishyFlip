@@ -75,12 +75,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.Update>(this, (JsonTypeInfo<Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.Update>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
         }
 
         public static Update FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.Update>(json, (JsonTypeInfo<Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Update>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Initializes a new instance of the <see cref="GetFeedGeneratorsOutput"/> class.
         /// </summary>
         /// <param name="feeds"></param>
-        public GetFeedGeneratorsOutput(List<App.Bsky.Feed.GeneratorView>? feeds = default)
+        public GetFeedGeneratorsOutput(List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? feeds = default)
         {
             this.Feeds = feeds;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetFeedGeneratorsOutput(CBORObject obj)
         {
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("feeds")]
         [JsonRequired]
-        public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GetFeedGeneratorsOutput>(this, (JsonTypeInfo<App.Bsky.Feed.GetFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorsOutput)!;
         }
 
         public static GetFeedGeneratorsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GetFeedGeneratorsOutput>(json, (JsonTypeInfo<App.Bsky.Feed.GetFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorsOutput)!;
         }
     }
 }

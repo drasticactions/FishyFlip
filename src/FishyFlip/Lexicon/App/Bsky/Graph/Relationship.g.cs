@@ -78,12 +78,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.Relationship>(this, (JsonTypeInfo<App.Bsky.Graph.Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship)!;
         }
 
         public static Relationship FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.Relationship>(json, (JsonTypeInfo<App.Bsky.Graph.Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship)!;
         }
     }
 }

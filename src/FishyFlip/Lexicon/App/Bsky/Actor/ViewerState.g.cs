@@ -29,7 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="knownFollowers">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
         /// </param>
-        public ViewerState(bool? muted = default, App.Bsky.Graph.ListViewBasic? mutedByList = default, bool? blockedBy = default, FishyFlip.Models.ATUri? blocking = default, App.Bsky.Graph.ListViewBasic? blockingByList = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, App.Bsky.Actor.KnownFollowers? knownFollowers = default)
+        public ViewerState(bool? muted = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? mutedByList = default, bool? blockedBy = default, FishyFlip.Models.ATUri? blocking = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? blockingByList = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? knownFollowers = default)
         {
             this.Muted = muted;
             this.MutedByList = mutedByList;
@@ -56,13 +56,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public ViewerState(CBORObject obj)
         {
             if (obj["muted"] is not null) this.Muted = obj["muted"].AsBoolean();
-            if (obj["mutedByList"] is not null) this.MutedByList = new App.Bsky.Graph.ListViewBasic(obj["mutedByList"]);
+            if (obj["mutedByList"] is not null) this.MutedByList = new FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic(obj["mutedByList"]);
             if (obj["blockedBy"] is not null) this.BlockedBy = obj["blockedBy"].AsBoolean();
             if (obj["blocking"] is not null) this.Blocking = obj["blocking"].ToATUri();
-            if (obj["blockingByList"] is not null) this.BlockingByList = new App.Bsky.Graph.ListViewBasic(obj["blockingByList"]);
+            if (obj["blockingByList"] is not null) this.BlockingByList = new FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic(obj["blockingByList"]);
             if (obj["following"] is not null) this.Following = obj["following"].ToATUri();
             if (obj["followedBy"] is not null) this.FollowedBy = obj["followedBy"].ToATUri();
-            if (obj["knownFollowers"] is not null) this.KnownFollowers = new App.Bsky.Actor.KnownFollowers(obj["knownFollowers"]);
+            if (obj["knownFollowers"] is not null) this.KnownFollowers = new FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers(obj["knownFollowers"]);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("mutedByList")]
-        public App.Bsky.Graph.ListViewBasic? MutedByList { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? MutedByList { get; set; }
 
         /// <summary>
         /// Gets or sets the blockedBy.
@@ -96,7 +96,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("blockingByList")]
-        public App.Bsky.Graph.ListViewBasic? BlockingByList { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? BlockingByList { get; set; }
 
         /// <summary>
         /// Gets or sets the following.
@@ -117,7 +117,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
         /// </summary>
         [JsonPropertyName("knownFollowers")]
-        public App.Bsky.Actor.KnownFollowers? KnownFollowers { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? KnownFollowers { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -129,12 +129,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.ViewerState>(this, (JsonTypeInfo<App.Bsky.Actor.ViewerState>)SourceGenerationContext.Default.AppBskyActorViewerState)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ViewerState>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ViewerState>)SourceGenerationContext.Default.AppBskyActorViewerState)!;
         }
 
         public static ViewerState FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.ViewerState>(json, (JsonTypeInfo<App.Bsky.Actor.ViewerState>)SourceGenerationContext.Default.AppBskyActorViewerState)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ViewerState>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ViewerState>)SourceGenerationContext.Default.AppBskyActorViewerState)!;
         }
     }
 }

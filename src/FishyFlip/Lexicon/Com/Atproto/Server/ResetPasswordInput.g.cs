@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.ResetPasswordInput>(this, (JsonTypeInfo<Com.Atproto.Server.ResetPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerResetPasswordInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.ResetPasswordInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ResetPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerResetPasswordInput)!;
         }
 
         public static ResetPasswordInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.ResetPasswordInput>(json, (JsonTypeInfo<Com.Atproto.Server.ResetPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerResetPasswordInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ResetPasswordInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ResetPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerResetPasswordInput)!;
         }
     }
 }

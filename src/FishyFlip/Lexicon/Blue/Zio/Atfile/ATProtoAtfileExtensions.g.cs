@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateUploadAsync(this FishyFlip.ATProtocol atp, Blue.Zio.Atfile.Upload record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateUploadAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Blue.Zio.Atfile.Upload record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "blue.zio.atfile.upload", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateUploadAsync(this FishyFlip.ATProtocol atp, Blob? blob = default, Blue.Zio.Atfile.Checksum? checksum = default, DateTime? createdAt = default, Blue.Zio.Atfile.File? file = default, ATObject? finger = default, Blue.Zio.Atfile.Unknown? meta = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateUploadAsync(this FishyFlip.ATProtocol atp, Blob? blob = default, Blue.Zio.Atfile.Checksum? checksum = default, DateTime? createdAt = default, Blue.Zio.Atfile.File? file = default, ATObject? finger = default, FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown? meta = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Blue.Zio.Atfile.Upload();
             record.Blob = blob;
@@ -76,7 +76,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutUploadAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Blue.Zio.Atfile.Upload record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutUploadAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Blue.Zio.Atfile.Upload record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "blue.zio.atfile.upload", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

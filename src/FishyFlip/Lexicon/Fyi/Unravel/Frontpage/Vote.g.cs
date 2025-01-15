@@ -67,12 +67,12 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fyi.Unravel.Frontpage.Vote>(this, (JsonTypeInfo<Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote)!;
         }
 
         public static Vote FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fyi.Unravel.Frontpage.Vote>(json, (JsonTypeInfo<Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote)!;
         }
     }
 }

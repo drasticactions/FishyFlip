@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="createdBy"></param>
         /// <param name="createdAt"></param>
         /// <param name="uses"></param>
-        public InviteCode(string? code = default, long? available = default, bool? disabled = default, string? forAccount = default, string? createdBy = default, DateTime? createdAt = default, List<Com.Atproto.Server.InviteCodeUse>? uses = default)
+        public InviteCode(string? code = default, long? available = default, bool? disabled = default, string? forAccount = default, string? createdBy = default, DateTime? createdAt = default, List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse>? uses = default)
         {
             this.Code = code;
             this.Available = available;
@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["forAccount"] is not null) this.ForAccount = obj["forAccount"].AsString();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
-            if (obj["uses"] is not null) this.Uses = obj["uses"].Values.Select(n =>new Com.Atproto.Server.InviteCodeUse(n)).ToList();
+            if (obj["uses"] is not null) this.Uses = obj["uses"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse(n)).ToList();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("uses")]
         [JsonRequired]
-        public List<Com.Atproto.Server.InviteCodeUse>? Uses { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse>? Uses { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -112,12 +112,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.InviteCode>(this, (JsonTypeInfo<Com.Atproto.Server.InviteCode>)SourceGenerationContext.Default.ComAtprotoServerInviteCode)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>)SourceGenerationContext.Default.ComAtprotoServerInviteCode)!;
         }
 
         public static InviteCode FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.InviteCode>(json, (JsonTypeInfo<Com.Atproto.Server.InviteCode>)SourceGenerationContext.Default.ComAtprotoServerInviteCode)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>)SourceGenerationContext.Default.ComAtprotoServerInviteCode)!;
         }
     }
 }

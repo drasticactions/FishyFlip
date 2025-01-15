@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="subject">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </param>
-        public ListItemView(FishyFlip.Models.ATUri? uri = default, App.Bsky.Actor.ProfileView? subject = default)
+        public ListItemView(FishyFlip.Models.ATUri? uri = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? subject = default)
         {
             this.Uri = uri;
             this.Subject = subject;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public ListItemView(CBORObject obj)
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
-            if (obj["subject"] is not null) this.Subject = new App.Bsky.Actor.ProfileView(obj["subject"]);
+            if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["subject"]);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileView? Subject { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Subject { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -66,12 +66,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.ListItemView>(this, (JsonTypeInfo<App.Bsky.Graph.ListItemView>)SourceGenerationContext.Default.AppBskyGraphListItemView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>)SourceGenerationContext.Default.AppBskyGraphListItemView)!;
         }
 
         public static ListItemView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.ListItemView>(json, (JsonTypeInfo<App.Bsky.Graph.ListItemView>)SourceGenerationContext.Default.AppBskyGraphListItemView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>)SourceGenerationContext.Default.AppBskyGraphListItemView)!;
         }
     }
 }

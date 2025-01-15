@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// Initializes a new instance of the <see cref="Board"/> class.
         /// </summary>
         /// <param name="cards">List of cards in the board.</param>
-        public Board(List<Blue.Linkat.Card>? cards)
+        public Board(List<FishyFlip.Lexicon.Blue.Linkat.Card>? cards)
         {
             this.Cards = cards;
         }
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// </summary>
         public Board(CBORObject obj)
         {
-            if (obj["cards"] is not null) this.Cards = obj["cards"].Values.Select(n =>new Blue.Linkat.Card(n)).ToList();
+            if (obj["cards"] is not null) this.Cards = obj["cards"].Values.Select(n =>new FishyFlip.Lexicon.Blue.Linkat.Card(n)).ToList();
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <br/> List of cards in the board.
         /// </summary>
         [JsonPropertyName("cards")]
-        public List<Blue.Linkat.Card>? Cards { get; set; }
+        public List<FishyFlip.Lexicon.Blue.Linkat.Card>? Cards { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -55,12 +55,12 @@ namespace FishyFlip.Lexicon.Blue.Linkat
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Blue.Linkat.Board>(this, (JsonTypeInfo<Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Linkat.Board>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
         }
 
         public static Board FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Blue.Linkat.Board>(json, (JsonTypeInfo<Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Linkat.Board>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
         }
     }
 }

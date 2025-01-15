@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.CommitMeta>(this, (JsonTypeInfo<Com.Atproto.Repo.CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta)!;
         }
 
         public static CommitMeta FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.CommitMeta>(json, (JsonTypeInfo<Com.Atproto.Repo.CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta)!;
         }
     }
 }

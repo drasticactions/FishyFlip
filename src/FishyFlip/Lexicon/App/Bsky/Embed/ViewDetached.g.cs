@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.ViewDetached>(this, (JsonTypeInfo<App.Bsky.Embed.ViewDetached>)SourceGenerationContext.Default.AppBskyEmbedViewDetached)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached>)SourceGenerationContext.Default.AppBskyEmbedViewDetached)!;
         }
 
         public static ViewDetached FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.ViewDetached>(json, (JsonTypeInfo<App.Bsky.Embed.ViewDetached>)SourceGenerationContext.Default.AppBskyEmbedViewDetached)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewDetached>)SourceGenerationContext.Default.AppBskyEmbedViewDetached)!;
         }
     }
 }

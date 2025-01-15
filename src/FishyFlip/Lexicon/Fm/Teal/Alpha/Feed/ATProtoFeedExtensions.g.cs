@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreatePlayAsync(this FishyFlip.ATProtocol atp, Fm.Teal.Alpha.Feed.Play record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePlayAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fm.teal.alpha.feed.play", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -83,7 +83,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutPlayAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Fm.Teal.Alpha.Feed.Play record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutPlayAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "fm.teal.alpha.feed.play", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

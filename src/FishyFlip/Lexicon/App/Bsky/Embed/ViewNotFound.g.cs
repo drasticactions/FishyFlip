@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.ViewNotFound>(this, (JsonTypeInfo<App.Bsky.Embed.ViewNotFound>)SourceGenerationContext.Default.AppBskyEmbedViewNotFound)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound>)SourceGenerationContext.Default.AppBskyEmbedViewNotFound)!;
         }
 
         public static ViewNotFound FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.ViewNotFound>(json, (JsonTypeInfo<App.Bsky.Embed.ViewNotFound>)SourceGenerationContext.Default.AppBskyEmbedViewNotFound)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound>)SourceGenerationContext.Default.AppBskyEmbedViewNotFound)!;
         }
     }
 }

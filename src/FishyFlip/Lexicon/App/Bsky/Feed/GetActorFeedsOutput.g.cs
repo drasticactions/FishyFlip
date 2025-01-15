@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="feeds"></param>
-        public GetActorFeedsOutput(string? cursor = default, List<App.Bsky.Feed.GeneratorView>? feeds = default)
+        public GetActorFeedsOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? feeds = default)
         {
             this.Cursor = cursor;
             this.Feeds = feeds;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GetActorFeedsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("feeds")]
         [JsonRequired]
-        public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GetActorFeedsOutput>(this, (JsonTypeInfo<App.Bsky.Feed.GetActorFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorFeedsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorFeedsOutput)!;
         }
 
         public static GetActorFeedsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GetActorFeedsOutput>(json, (JsonTypeInfo<App.Bsky.Feed.GetActorFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorFeedsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorFeedsOutput)!;
         }
     }
 }

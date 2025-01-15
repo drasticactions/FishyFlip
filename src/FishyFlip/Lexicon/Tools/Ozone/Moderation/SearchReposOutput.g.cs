@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="repos"></param>
-        public SearchReposOutput(string? cursor = default, List<Tools.Ozone.Moderation.RepoView>? repos = default)
+        public SearchReposOutput(string? cursor = default, List<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>? repos = default)
         {
             this.Cursor = cursor;
             this.Repos = repos;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public SearchReposOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n =>new Tools.Ozone.Moderation.RepoView(n)).ToList();
+            if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("repos")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.RepoView>? Repos { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>? Repos { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.SearchReposOutput>(this, (JsonTypeInfo<Tools.Ozone.Moderation.SearchReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationSearchReposOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationSearchReposOutput)!;
         }
 
         public static SearchReposOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.SearchReposOutput>(json, (JsonTypeInfo<Tools.Ozone.Moderation.SearchReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationSearchReposOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationSearchReposOutput)!;
         }
     }
 }

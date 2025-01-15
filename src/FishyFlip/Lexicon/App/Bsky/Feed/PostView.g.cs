@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="threadgate">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </param>
-        public PostView(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? record = default, ATObject? embed = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, DateTime? indexedAt = default, App.Bsky.Feed.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Feed.ThreadgateView? threadgate = default)
+        public PostView(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? record = default, ATObject? embed = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, DateTime? indexedAt = default, FishyFlip.Lexicon.App.Bsky.Feed.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
-            if (obj["author"] is not null) this.Author = new App.Bsky.Actor.ProfileViewBasic(obj["author"]);
+            if (obj["author"] is not null) this.Author = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["author"]);
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["embed"] is not null) this.Embed = obj["embed"].ToATObject();
             if (obj["replyCount"] is not null) this.ReplyCount = obj["replyCount"].AsInt64Value();
@@ -79,9 +79,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
             if (obj["quoteCount"] is not null) this.QuoteCount = obj["quoteCount"].AsInt64Value();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Feed.ViewerState(obj["viewer"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
-            if (obj["threadgate"] is not null) this.Threadgate = new App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Feed.ViewerState(obj["viewer"]);
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
+            if (obj["threadgate"] is not null) this.Threadgate = new FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileViewBasic? Author { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? Author { get; set; }
 
         /// <summary>
         /// Gets or sets the record.
@@ -162,20 +162,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ViewerState"/> (app.bsky.feed.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
-        public App.Bsky.Feed.ViewerState? Viewer { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.ViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the threadgate.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </summary>
         [JsonPropertyName("threadgate")]
-        public App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -187,12 +187,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.PostView>(this, (JsonTypeInfo<App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.PostView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
         }
 
         public static PostView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.PostView>(json, (JsonTypeInfo<App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.PostView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
         }
     }
 }

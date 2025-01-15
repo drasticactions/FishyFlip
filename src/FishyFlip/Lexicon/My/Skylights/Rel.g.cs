@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// my.skylights.defs#note <br/>
         /// </param>
         /// <param name="finishedAt"></param>
-        public Rel(ATObject? item, My.Skylights.Rating? rating = default, My.Skylights.Note? note = default, List<DateTime>? finishedAt = default)
+        public Rel(ATObject? item, FishyFlip.Lexicon.My.Skylights.Rating? rating = default, FishyFlip.Lexicon.My.Skylights.Note? note = default, List<DateTime>? finishedAt = default)
         {
             this.Item = item;
             this.Rating = rating;
@@ -47,8 +47,8 @@ namespace FishyFlip.Lexicon.My.Skylights
         public Rel(CBORObject obj)
         {
             if (obj["item"] is not null) this.Item = obj["item"].ToATObject();
-            if (obj["rating"] is not null) this.Rating = new My.Skylights.Rating(obj["rating"]);
-            if (obj["note"] is not null) this.Note = new My.Skylights.Note(obj["note"]);
+            if (obj["rating"] is not null) this.Rating = new FishyFlip.Lexicon.My.Skylights.Rating(obj["rating"]);
+            if (obj["note"] is not null) this.Note = new FishyFlip.Lexicon.My.Skylights.Note(obj["note"]);
             if (obj["finishedAt"] is not null) this.FinishedAt = obj["finishedAt"].Values.Select(n =>n.ToDateTime() ?? default).ToList();
         }
 
@@ -66,14 +66,14 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// my.skylights.defs#rating <br/>
         /// </summary>
         [JsonPropertyName("rating")]
-        public My.Skylights.Rating? Rating { get; set; }
+        public FishyFlip.Lexicon.My.Skylights.Rating? Rating { get; set; }
 
         /// <summary>
         /// Gets or sets the note.
         /// my.skylights.defs#note <br/>
         /// </summary>
         [JsonPropertyName("note")]
-        public My.Skylights.Note? Note { get; set; }
+        public FishyFlip.Lexicon.My.Skylights.Note? Note { get; set; }
 
         /// <summary>
         /// Gets or sets the finishedAt.
@@ -91,12 +91,12 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<My.Skylights.Rel>(this, (JsonTypeInfo<My.Skylights.Rel>)SourceGenerationContext.Default.MySkylightsRel)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.My.Skylights.Rel>(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rel>)SourceGenerationContext.Default.MySkylightsRel)!;
         }
 
         public static Rel FromJson(string json)
         {
-            return JsonSerializer.Deserialize<My.Skylights.Rel>(json, (JsonTypeInfo<My.Skylights.Rel>)SourceGenerationContext.Default.MySkylightsRel)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Rel>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rel>)SourceGenerationContext.Default.MySkylightsRel)!;
         }
     }
 }

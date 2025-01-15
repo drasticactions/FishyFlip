@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view) <br/>
         /// </param>
         /// <param name="indexedAt"></param>
-        public ViewRecord(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? value = default, List<Com.Atproto.Label.Label>? labels = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, List<ATObject>? embeds = default, DateTime? indexedAt = default)
+        public ViewRecord(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? author = default, ATObject? value = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, List<ATObject>? embeds = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -63,9 +63,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
-            if (obj["author"] is not null) this.Author = new App.Bsky.Actor.ProfileViewBasic(obj["author"]);
+            if (obj["author"] is not null) this.Author = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["author"]);
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["replyCount"] is not null) this.ReplyCount = obj["replyCount"].AsInt64Value();
             if (obj["repostCount"] is not null) this.RepostCount = obj["repostCount"].AsInt64Value();
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
@@ -95,7 +95,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileViewBasic? Author { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? Author { get; set; }
 
         /// <summary>
         /// Gets or sets the value.
@@ -109,7 +109,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the replyCount.
@@ -164,12 +164,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.ViewRecord>(this, (JsonTypeInfo<App.Bsky.Embed.ViewRecord>)SourceGenerationContext.Default.AppBskyEmbedViewRecord)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord>)SourceGenerationContext.Default.AppBskyEmbedViewRecord)!;
         }
 
         public static ViewRecord FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.ViewRecord>(json, (JsonTypeInfo<App.Bsky.Embed.ViewRecord>)SourceGenerationContext.Default.AppBskyEmbedViewRecord)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord>)SourceGenerationContext.Default.AppBskyEmbedViewRecord)!;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender"/> (chat.bsky.convo.defs#messageViewSender)
         /// </param>
         /// <param name="sentAt"></param>
-        public DeletedMessageView(string? id = default, string? rev = default, Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
+        public DeletedMessageView(string? id = default, string? rev = default, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
         {
             this.Id = id;
             this.Rev = rev;
@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
-            if (obj["sender"] is not null) this.Sender = new Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
+            if (obj["sender"] is not null) this.Sender = new FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
         }
 
@@ -66,7 +66,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         [JsonPropertyName("sender")]
         [JsonRequired]
-        public Chat.Bsky.Convo.MessageViewSender? Sender { get; set; }
+        public FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender? Sender { get; set; }
 
         /// <summary>
         /// Gets or sets the sentAt.
@@ -85,12 +85,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.DeletedMessageView>(this, (JsonTypeInfo<Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView)!;
         }
 
         public static DeletedMessageView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.DeletedMessageView>(json, (JsonTypeInfo<Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView)!;
         }
     }
 }

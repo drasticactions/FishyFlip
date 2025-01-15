@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="joinedAllTimeCount"></param>
         /// <param name="labels"></param>
         /// <param name="indexedAt"></param>
-        public StarterPackView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, App.Bsky.Actor.ProfileViewBasic? creator = default, App.Bsky.Graph.ListViewBasic? list = default, List<App.Bsky.Graph.ListItemView>? listItemsSample = default, List<App.Bsky.Feed.GeneratorView>? feeds = default, long? joinedWeekCount = default, long? joinedAllTimeCount = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default)
+        public StarterPackView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? creator = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? list = default, List<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>? listItemsSample = default, List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? feeds = default, long? joinedWeekCount = default, long? joinedAllTimeCount = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -59,13 +59,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
-            if (obj["creator"] is not null) this.Creator = new App.Bsky.Actor.ProfileViewBasic(obj["creator"]);
-            if (obj["list"] is not null) this.List = new App.Bsky.Graph.ListViewBasic(obj["list"]);
-            if (obj["listItemsSample"] is not null) this.ListItemsSample = obj["listItemsSample"].Values.Select(n =>new App.Bsky.Graph.ListItemView(n)).ToList();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
+            if (obj["creator"] is not null) this.Creator = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["creator"]);
+            if (obj["list"] is not null) this.List = new FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic(obj["list"]);
+            if (obj["listItemsSample"] is not null) this.ListItemsSample = obj["listItemsSample"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.ListItemView(n)).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView(n)).ToList();
             if (obj["joinedWeekCount"] is not null) this.JoinedWeekCount = obj["joinedWeekCount"].AsInt64Value();
             if (obj["joinedAllTimeCount"] is not null) this.JoinedAllTimeCount = obj["joinedAllTimeCount"].AsInt64Value();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
@@ -97,26 +97,26 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileViewBasic? Creator { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? Creator { get; set; }
 
         /// <summary>
         /// Gets or sets the list.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("list")]
-        public App.Bsky.Graph.ListViewBasic? List { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? List { get; set; }
 
         /// <summary>
         /// Gets or sets the listItemsSample.
         /// </summary>
         [JsonPropertyName("listItemsSample")]
-        public List<App.Bsky.Graph.ListItemView>? ListItemsSample { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>? ListItemsSample { get; set; }
 
         /// <summary>
         /// Gets or sets the feeds.
         /// </summary>
         [JsonPropertyName("feeds")]
-        public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedWeekCount.
@@ -134,7 +134,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
@@ -153,12 +153,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.StarterPackView>(this, (JsonTypeInfo<App.Bsky.Graph.StarterPackView>)SourceGenerationContext.Default.AppBskyGraphStarterPackView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView>)SourceGenerationContext.Default.AppBskyGraphStarterPackView)!;
         }
 
         public static StarterPackView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.StarterPackView>(json, (JsonTypeInfo<App.Bsky.Graph.StarterPackView>)SourceGenerationContext.Default.AppBskyGraphStarterPackView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView>)SourceGenerationContext.Default.AppBskyGraphStarterPackView)!;
         }
     }
 }

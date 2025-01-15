@@ -103,12 +103,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.MutedWord>(this, (JsonTypeInfo<App.Bsky.Actor.MutedWord>)SourceGenerationContext.Default.AppBskyActorMutedWord)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>)SourceGenerationContext.Default.AppBskyActorMutedWord)!;
         }
 
         public static MutedWord FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.MutedWord>(json, (JsonTypeInfo<App.Bsky.Actor.MutedWord>)SourceGenerationContext.Default.AppBskyActorMutedWord)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>)SourceGenerationContext.Default.AppBskyActorMutedWord)!;
         }
     }
 }

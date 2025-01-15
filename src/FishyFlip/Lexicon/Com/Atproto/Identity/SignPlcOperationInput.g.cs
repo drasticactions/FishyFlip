@@ -88,12 +88,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Identity.SignPlcOperationInput>(this, (JsonTypeInfo<Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput)!;
         }
 
         public static SignPlcOperationInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Identity.SignPlcOperationInput>(json, (JsonTypeInfo<Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput)!;
         }
     }
 }

@@ -93,12 +93,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.Threadgate>(this, (JsonTypeInfo<App.Bsky.Feed.Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate)!;
         }
 
         public static Threadgate FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.Threadgate>(json, (JsonTypeInfo<App.Bsky.Feed.Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate)!;
         }
     }
 }

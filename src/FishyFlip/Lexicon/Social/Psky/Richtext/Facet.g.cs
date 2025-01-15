@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// #link <br/>
         /// #room <br/>
         /// </param>
-        public Facet(Social.Psky.Richtext.ByteSlice? index = default, List<ATObject>? features = default)
+        public Facet(FishyFlip.Lexicon.Social.Psky.Richtext.ByteSlice? index = default, List<ATObject>? features = default)
         {
             this.Index = index;
             this.Features = features;
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// </summary>
         public Facet(CBORObject obj)
         {
-            if (obj["index"] is not null) this.Index = new Social.Psky.Richtext.ByteSlice(obj["index"]);
+            if (obj["index"] is not null) this.Index = new FishyFlip.Lexicon.Social.Psky.Richtext.ByteSlice(obj["index"]);
             if (obj["features"] is not null) this.Features = obj["features"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// </summary>
         [JsonPropertyName("index")]
         [JsonRequired]
-        public Social.Psky.Richtext.ByteSlice? Index { get; set; }
+        public FishyFlip.Lexicon.Social.Psky.Richtext.ByteSlice? Index { get; set; }
 
         /// <summary>
         /// Gets or sets the features.
@@ -77,12 +77,12 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Social.Psky.Richtext.Facet>(this, (JsonTypeInfo<Social.Psky.Richtext.Facet>)SourceGenerationContext.Default.SocialPskyRichtextFacet)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>)SourceGenerationContext.Default.SocialPskyRichtextFacet)!;
         }
 
         public static Facet FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Social.Psky.Richtext.Facet>(json, (JsonTypeInfo<Social.Psky.Richtext.Facet>)SourceGenerationContext.Default.SocialPskyRichtextFacet)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>)SourceGenerationContext.Default.SocialPskyRichtextFacet)!;
         }
     }
 }

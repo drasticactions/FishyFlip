@@ -56,12 +56,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Label.SelfLabel>(this, (JsonTypeInfo<Com.Atproto.Label.SelfLabel>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabel)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabel)!;
         }
 
         public static SelfLabel FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Label.SelfLabel>(json, (JsonTypeInfo<Com.Atproto.Label.SelfLabel>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabel)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabel)!;
         }
     }
 }

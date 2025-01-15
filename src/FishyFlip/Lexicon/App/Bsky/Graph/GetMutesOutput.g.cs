@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="mutes"></param>
-        public GetMutesOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? mutes = default)
+        public GetMutesOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? mutes = default)
         {
             this.Cursor = cursor;
             this.Mutes = mutes;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetMutesOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["mutes"] is not null) this.Mutes = obj["mutes"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["mutes"] is not null) this.Mutes = obj["mutes"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("mutes")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView>? Mutes { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? Mutes { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.GetMutesOutput>(this, (JsonTypeInfo<App.Bsky.Graph.GetMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetMutesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetMutesOutput)!;
         }
 
         public static GetMutesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.GetMutesOutput>(json, (JsonTypeInfo<App.Bsky.Graph.GetMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetMutesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetMutesOutput)!;
         }
     }
 }

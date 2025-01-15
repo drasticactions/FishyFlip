@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="cid"></param>
         /// <param name="cursor"></param>
         /// <param name="posts"></param>
-        public GetQuotesOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<App.Bsky.Feed.PostView>? posts = default)
+        public GetQuotesOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Feed.PostView>? posts = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new App.Bsky.Feed.PostView(n)).ToList();
+            if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.PostView(n)).ToList();
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("posts")]
         [JsonRequired]
-        public List<App.Bsky.Feed.PostView>? Posts { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.PostView>? Posts { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -81,12 +81,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GetQuotesOutput>(this, (JsonTypeInfo<App.Bsky.Feed.GetQuotesOutput>)SourceGenerationContext.Default.AppBskyFeedGetQuotesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>)SourceGenerationContext.Default.AppBskyFeedGetQuotesOutput)!;
         }
 
         public static GetQuotesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GetQuotesOutput>(json, (JsonTypeInfo<App.Bsky.Feed.GetQuotesOutput>)SourceGenerationContext.Default.AppBskyFeedGetQuotesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>)SourceGenerationContext.Default.AppBskyFeedGetQuotesOutput)!;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="denylist">List of users disallowed to send messages in the room.
         /// social.psky.chat.defs#modlistRef <br/>
         /// </param>
-        public Room(string? name, List<string>? languages = default, string? topic = default, List<string>? tags = default, Social.Psky.Chat.ModlistRef? allowlist = default, Social.Psky.Chat.ModlistRef? denylist = default)
+        public Room(string? name, List<string>? languages = default, string? topic = default, List<string>? tags = default, FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? allowlist = default, FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? denylist = default)
         {
             this.Name = name;
             this.Languages = languages;
@@ -53,8 +53,8 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             if (obj["languages"] is not null) this.Languages = obj["languages"].Values.Select(n =>n.AsString()).ToList();
             if (obj["topic"] is not null) this.Topic = obj["topic"].AsString();
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
-            if (obj["allowlist"] is not null) this.Allowlist = new Social.Psky.Chat.ModlistRef(obj["allowlist"]);
-            if (obj["denylist"] is not null) this.Denylist = new Social.Psky.Chat.ModlistRef(obj["denylist"]);
+            if (obj["allowlist"] is not null) this.Allowlist = new FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef(obj["allowlist"]);
+            if (obj["denylist"] is not null) this.Denylist = new FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef(obj["denylist"]);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// social.psky.chat.defs#modlistRef <br/>
         /// </summary>
         [JsonPropertyName("allowlist")]
-        public Social.Psky.Chat.ModlistRef? Allowlist { get; set; }
+        public FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? Allowlist { get; set; }
 
         /// <summary>
         /// Gets or sets the denylist.
@@ -96,7 +96,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// social.psky.chat.defs#modlistRef <br/>
         /// </summary>
         [JsonPropertyName("denylist")]
-        public Social.Psky.Chat.ModlistRef? Denylist { get; set; }
+        public FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? Denylist { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -108,12 +108,12 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Social.Psky.Chat.Room>(this, (JsonTypeInfo<Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Chat.Room>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom)!;
         }
 
         public static Room FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Social.Psky.Chat.Room>(json, (JsonTypeInfo<Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Room>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom)!;
         }
     }
 }

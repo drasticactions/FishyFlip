@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.AspectRatio>(this, (JsonTypeInfo<App.Bsky.Embed.AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio)!;
         }
 
         public static AspectRatio FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.AspectRatio>(json, (JsonTypeInfo<App.Bsky.Embed.AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio)!;
         }
     }
 }

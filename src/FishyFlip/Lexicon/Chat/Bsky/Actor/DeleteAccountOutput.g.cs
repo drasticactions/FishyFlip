@@ -34,12 +34,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Actor.DeleteAccountOutput>(this, (JsonTypeInfo<Chat.Bsky.Actor.DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput)!;
         }
 
         public static DeleteAccountOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Actor.DeleteAccountOutput>(json, (JsonTypeInfo<Chat.Bsky.Actor.DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput)!;
         }
     }
 }

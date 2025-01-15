@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// Initializes a new instance of the <see cref="GetActorFeedOutput"/> class.
         /// </summary>
         /// <param name="plays"></param>
-        public GetActorFeedOutput(List<Fm.Teal.Alpha.Feed.PlayView>? plays = default)
+        public GetActorFeedOutput(List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView>? plays = default)
         {
             this.Plays = plays;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// </summary>
         public GetActorFeedOutput(CBORObject obj)
         {
-            if (obj["plays"] is not null) this.Plays = obj["plays"].Values.Select(n =>new Fm.Teal.Alpha.Feed.PlayView(n)).ToList();
+            if (obj["plays"] is not null) this.Plays = obj["plays"].Values.Select(n =>new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// </summary>
         [JsonPropertyName("plays")]
         [JsonRequired]
-        public List<Fm.Teal.Alpha.Feed.PlayView>? Plays { get; set; }
+        public List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView>? Plays { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fm.Teal.Alpha.Feed.GetActorFeedOutput>(this, (JsonTypeInfo<Fm.Teal.Alpha.Feed.GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput)!;
         }
 
         public static GetActorFeedOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fm.Teal.Alpha.Feed.GetActorFeedOutput>(json, (JsonTypeInfo<Fm.Teal.Alpha.Feed.GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput)!;
         }
     }
 }

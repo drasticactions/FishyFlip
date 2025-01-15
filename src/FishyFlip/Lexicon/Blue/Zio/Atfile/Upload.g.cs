@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown"/> (blue.zio.atfile.meta#unknown) <br/>
         /// </param>
-        public Upload(Blob? blob = default, Blue.Zio.Atfile.Checksum? checksum = default, DateTime? createdAt = default, Blue.Zio.Atfile.File? file = default, ATObject? finger = default, Blue.Zio.Atfile.Unknown? meta = default)
+        public Upload(Blob? blob = default, Blue.Zio.Atfile.Checksum? checksum = default, DateTime? createdAt = default, Blue.Zio.Atfile.File? file = default, ATObject? finger = default, FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown? meta = default)
         {
             this.Blob = blob;
             this.Checksum = checksum;
@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             // Temp file
             if (obj["finger"] is not null) this.Finger = obj["finger"].ToATObject();
-            if (obj["meta"] is not null) this.Meta = new Blue.Zio.Atfile.Unknown(obj["meta"]);
+            if (obj["meta"] is not null) this.Meta = new FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown(obj["meta"]);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// <see cref="FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown"/> (blue.zio.atfile.meta#unknown) <br/>
         /// </summary>
         [JsonPropertyName("meta")]
-        public Blue.Zio.Atfile.Unknown? Meta { get; set; }
+        public FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown? Meta { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -111,12 +111,12 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Blue.Zio.Atfile.Upload>(this, (JsonTypeInfo<Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
         }
 
         public static Upload FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Blue.Zio.Atfile.Upload>(json, (JsonTypeInfo<Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
         }
     }
 

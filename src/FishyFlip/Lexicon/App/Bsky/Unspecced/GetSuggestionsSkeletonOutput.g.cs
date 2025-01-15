@@ -15,11 +15,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="cursor"></param>
         /// <param name="actors"></param>
         /// <param name="relativeToDid">DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.</param>
-        public GetSuggestionsSkeletonOutput(string? cursor = default, List<App.Bsky.Unspecced.SkeletonSearchActor>? actors = default, FishyFlip.Models.ATDid? relativeToDid = default)
+        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestionsSkeletonOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>? actors = default, FishyFlip.Models.ATDid? relativeToDid = default, long? recId = default)
         {
             this.Cursor = cursor;
             this.Actors = actors;
             this.RelativeToDid = relativeToDid;
+            this.RecId = recId;
         }
 
 
@@ -37,8 +39,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetSuggestionsSkeletonOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
+            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
             if (obj["relativeToDid"] is not null) this.RelativeToDid = obj["relativeToDid"].ToATDid();
+            if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
         }
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }
 
         /// <summary>
         /// Gets or sets the relativeToDid.
@@ -61,6 +64,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("relativeToDid")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? RelativeToDid { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recId.
+        /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
+        /// </summary>
+        [JsonPropertyName("recId")]
+        public long? RecId { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -72,12 +82,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(this, (JsonTypeInfo<App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput)!;
         }
 
         public static GetSuggestionsSkeletonOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(json, (JsonTypeInfo<App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput)!;
         }
     }
 }

@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.RepoRef>(this, (JsonTypeInfo<Com.Atproto.Admin.RepoRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoRef)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoRef)!;
         }
 
         public static RepoRef FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.RepoRef>(json, (JsonTypeInfo<Com.Atproto.Admin.RepoRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoRef)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoRef)!;
         }
     }
 }

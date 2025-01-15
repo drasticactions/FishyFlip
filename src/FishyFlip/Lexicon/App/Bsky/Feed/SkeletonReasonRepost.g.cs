@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.SkeletonReasonRepost>(this, (JsonTypeInfo<App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost)!;
         }
 
         public static SkeletonReasonRepost FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.SkeletonReasonRepost>(json, (JsonTypeInfo<App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost)!;
         }
     }
 }

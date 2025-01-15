@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateSnippetAsync(this FishyFlip.ATProtocol atp, Link.Pastesphere.Snippet record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateSnippetAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Link.Pastesphere.Snippet record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "link.pastesphere.snippet", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutSnippetAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Link.Pastesphere.Snippet record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutSnippetAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Link.Pastesphere.Snippet record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "link.pastesphere.snippet", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

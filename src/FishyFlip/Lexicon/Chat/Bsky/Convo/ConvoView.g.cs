@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <param name="muted"></param>
         /// <param name="opened"></param>
         /// <param name="unreadCount"></param>
-        public ConvoView(string? id = default, string? rev = default, List<Chat.Bsky.Actor.ProfileViewBasic>? members = default, ATObject? lastMessage = default, bool? muted = default, bool? opened = default, long? unreadCount = default)
+        public ConvoView(string? id = default, string? rev = default, List<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>? members = default, ATObject? lastMessage = default, bool? muted = default, bool? opened = default, long? unreadCount = default)
         {
             this.Id = id;
             this.Rev = rev;
@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
-            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new Chat.Bsky.Actor.ProfileViewBasic(n)).ToList();
+            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic(n)).ToList();
             if (obj["lastMessage"] is not null) this.LastMessage = obj["lastMessage"].ToATObject();
             if (obj["muted"] is not null) this.Muted = obj["muted"].AsBoolean();
             if (obj["opened"] is not null) this.Opened = obj["opened"].AsBoolean();
@@ -76,7 +76,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         [JsonPropertyName("members")]
         [JsonRequired]
-        public List<Chat.Bsky.Actor.ProfileViewBasic>? Members { get; set; }
+        public List<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>? Members { get; set; }
 
         /// <summary>
         /// Gets or sets the lastMessage.
@@ -117,12 +117,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.ConvoView>(this, (JsonTypeInfo<Chat.Bsky.Convo.ConvoView>)SourceGenerationContext.Default.ChatBskyConvoConvoView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>)SourceGenerationContext.Default.ChatBskyConvoConvoView)!;
         }
 
         public static ConvoView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.ConvoView>(json, (JsonTypeInfo<Chat.Bsky.Convo.ConvoView>)SourceGenerationContext.Default.ChatBskyConvoConvoView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>)SourceGenerationContext.Default.ChatBskyConvoConvoView)!;
         }
     }
 }

@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.ConfirmEmailInput>(this, (JsonTypeInfo<Com.Atproto.Server.ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput)!;
         }
 
         public static ConfirmEmailInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.ConfirmEmailInput>(json, (JsonTypeInfo<Com.Atproto.Server.ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput)!;
         }
     }
 }

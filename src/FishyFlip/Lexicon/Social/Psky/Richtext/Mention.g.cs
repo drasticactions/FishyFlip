@@ -56,12 +56,12 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Social.Psky.Richtext.Mention>(this, (JsonTypeInfo<Social.Psky.Richtext.Mention>)SourceGenerationContext.Default.SocialPskyRichtextMention)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Richtext.Mention>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Mention>)SourceGenerationContext.Default.SocialPskyRichtextMention)!;
         }
 
         public static Mention FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Social.Psky.Richtext.Mention>(json, (JsonTypeInfo<Social.Psky.Richtext.Mention>)SourceGenerationContext.Default.SocialPskyRichtextMention)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Richtext.Mention>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Mention>)SourceGenerationContext.Default.SocialPskyRichtextMention)!;
         }
     }
 }

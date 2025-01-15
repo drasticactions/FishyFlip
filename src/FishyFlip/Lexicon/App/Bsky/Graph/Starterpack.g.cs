@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="descriptionFacets"></param>
         /// <param name="feeds"></param>
         /// <param name="createdAt"></param>
-        public Starterpack(string? name, FishyFlip.Models.ATUri? list, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, List<App.Bsky.Graph.FeedItem>? feeds = default, DateTime? createdAt = default)
+        public Starterpack(string? name, FishyFlip.Models.ATUri? list, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, List<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>? feeds = default, DateTime? createdAt = default)
         {
             this.Name = name;
             this.Description = description;
@@ -47,9 +47,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["list"] is not null) this.List = obj["list"].ToATUri();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Graph.FeedItem(n)).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.FeedItem(n)).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the descriptionFacets.
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
-        public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the list.
@@ -84,7 +84,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the feeds.
         /// </summary>
         [JsonPropertyName("feeds")]
-        public List<App.Bsky.Graph.FeedItem>? Feeds { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>? Feeds { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
@@ -102,12 +102,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.Starterpack>(this, (JsonTypeInfo<App.Bsky.Graph.Starterpack>)SourceGenerationContext.Default.AppBskyGraphStarterpack)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.Starterpack>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Starterpack>)SourceGenerationContext.Default.AppBskyGraphStarterpack)!;
         }
 
         public static Starterpack FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.Starterpack>(json, (JsonTypeInfo<App.Bsky.Graph.Starterpack>)SourceGenerationContext.Default.AppBskyGraphStarterpack)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Starterpack>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Starterpack>)SourceGenerationContext.Default.AppBskyGraphStarterpack)!;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="events"></param>
-        public QueryEventsOutput(string? cursor = default, List<Tools.Ozone.Moderation.ModEventView>? events = default)
+        public QueryEventsOutput(string? cursor = default, List<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>? events = default)
         {
             this.Cursor = cursor;
             this.Events = events;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public QueryEventsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["events"] is not null) this.Events = obj["events"].Values.Select(n =>new Tools.Ozone.Moderation.ModEventView(n)).ToList();
+            if (obj["events"] is not null) this.Events = obj["events"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("events")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.ModEventView>? Events { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>? Events { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.QueryEventsOutput>(this, (JsonTypeInfo<Tools.Ozone.Moderation.QueryEventsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput)!;
         }
 
         public static QueryEventsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.QueryEventsOutput>(json, (JsonTypeInfo<Tools.Ozone.Moderation.QueryEventsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput)!;
         }
     }
 }

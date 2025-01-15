@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="feeds"></param>
-        public GetPopularFeedGeneratorsOutput(string? cursor = default, List<App.Bsky.Feed.GeneratorView>? feeds = default)
+        public GetPopularFeedGeneratorsOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? feeds = default)
         {
             this.Cursor = cursor;
             this.Feeds = feeds;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetPopularFeedGeneratorsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.GeneratorView(n)).ToList();
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("feeds")]
         [JsonRequired]
-        public List<App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(this, (JsonTypeInfo<App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput)!;
         }
 
         public static GetPopularFeedGeneratorsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(json, (JsonTypeInfo<App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput)!;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="nsfw">Is this oekaki NSFW?</param>
         /// <param name="tags">An array of tags this image had.</param>
         /// <param name="alt">Alt text description of the image, for accessibility.</param>
-        public HydratedOekaki(Com.Shinolabs.Pinksea.Author? author = default, string? image = default, string? at = default, string? cid = default, DateTime? creationTime = default, bool? nsfw = default, List<string>? tags = default, string? alt = default)
+        public HydratedOekaki(FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author? author = default, string? image = default, string? at = default, string? cid = default, DateTime? creationTime = default, bool? nsfw = default, List<string>? tags = default, string? alt = default)
         {
             this.Author = author;
             this.Image = image;
@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public HydratedOekaki(CBORObject obj)
         {
-            if (obj["author"] is not null) this.Author = new Com.Shinolabs.Pinksea.Author(obj["author"]);
+            if (obj["author"] is not null) this.Author = new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author(obj["author"]);
             if (obj["image"] is not null) this.Image = obj["image"].AsString();
             if (obj["at"] is not null) this.At = obj["at"].AsString();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
-        public Com.Shinolabs.Pinksea.Author? Author { get; set; }
+        public FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author? Author { get; set; }
 
         /// <summary>
         /// Gets or sets the image.
@@ -133,12 +133,12 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Shinolabs.Pinksea.HydratedOekaki>(this, (JsonTypeInfo<Com.Shinolabs.Pinksea.HydratedOekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaHydratedOekaki)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaHydratedOekaki)!;
         }
 
         public static HydratedOekaki FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Shinolabs.Pinksea.HydratedOekaki>(json, (JsonTypeInfo<Com.Shinolabs.Pinksea.HydratedOekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaHydratedOekaki)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaHydratedOekaki)!;
         }
     }
 }

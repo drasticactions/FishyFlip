@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </param>
         /// <param name="createdAt"></param>
-        public Profile(string? displayName = default, string? description = default, Blob? avatar = default, Blob? banner = default, Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default)
+        public Profile(string? displayName = default, string? description = default, Blob? avatar = default, Blob? banner = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default)
         {
             this.DisplayName = displayName;
             this.Description = description;
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
             if (obj["banner"] is not null) this.Banner = new FishyFlip.Models.Blob(obj["banner"]);
-            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
+            if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["joinedViaStarterPack"] is not null) this.JoinedViaStarterPack = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["joinedViaStarterPack"]);
             if (obj["pinnedPost"] is not null) this.PinnedPost = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["pinnedPost"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
@@ -100,7 +100,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
-        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedViaStarterPack.
@@ -132,12 +132,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.Profile>(this, (JsonTypeInfo<App.Bsky.Actor.Profile>)SourceGenerationContext.Default.AppBskyActorProfile)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.Profile>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Profile>)SourceGenerationContext.Default.AppBskyActorProfile)!;
         }
 
         public static Profile FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.Profile>(json, (JsonTypeInfo<App.Bsky.Actor.Profile>)SourceGenerationContext.Default.AppBskyActorProfile)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Profile>)SourceGenerationContext.Default.AppBskyActorProfile)!;
         }
     }
 }

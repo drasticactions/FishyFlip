@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="starterPacks"></param>
-        public SearchStarterPacksOutput(string? cursor = default, List<App.Bsky.Graph.StarterPackViewBasic>? starterPacks = default)
+        public SearchStarterPacksOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>? starterPacks = default)
         {
             this.Cursor = cursor;
             this.StarterPacks = starterPacks;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public SearchStarterPacksOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
+            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
-        public List<App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.SearchStarterPacksOutput>(this, (JsonTypeInfo<App.Bsky.Graph.SearchStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphSearchStarterPacksOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphSearchStarterPacksOutput)!;
         }
 
         public static SearchStarterPacksOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.SearchStarterPacksOutput>(json, (JsonTypeInfo<App.Bsky.Graph.SearchStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphSearchStarterPacksOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphSearchStarterPacksOutput)!;
         }
     }
 }

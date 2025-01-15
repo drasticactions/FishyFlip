@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
         /// </param>
-        public MessageInput(string? text = default, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Embed.EmbedRecord? embed = default)
+        public MessageInput(string? text = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? facets = default, FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord? embed = default)
         {
             this.Text = text;
             this.Facets = facets;
@@ -40,8 +40,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public MessageInput(CBORObject obj)
         {
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
-            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
-            if (obj["embed"] is not null) this.Embed = new App.Bsky.Embed.EmbedRecord(obj["embed"]);
+            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["embed"] is not null) this.Embed = new FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord(obj["embed"]);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
         /// Gets or sets the embed.
@@ -64,7 +64,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
-        public App.Bsky.Embed.EmbedRecord? Embed { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord? Embed { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -76,12 +76,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.MessageInput>(this, (JsonTypeInfo<Chat.Bsky.Convo.MessageInput>)SourceGenerationContext.Default.ChatBskyConvoMessageInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput>)SourceGenerationContext.Default.ChatBskyConvoMessageInput)!;
         }
 
         public static MessageInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.MessageInput>(json, (JsonTypeInfo<Chat.Bsky.Convo.MessageInput>)SourceGenerationContext.Default.ChatBskyConvoMessageInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput>)SourceGenerationContext.Default.ChatBskyConvoMessageInput)!;
         }
     }
 }

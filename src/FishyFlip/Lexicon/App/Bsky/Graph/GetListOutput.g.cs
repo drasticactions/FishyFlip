@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListView"/> (app.bsky.graph.defs#listView)
         /// </param>
         /// <param name="items"></param>
-        public GetListOutput(string? cursor = default, App.Bsky.Graph.ListView? list = default, List<App.Bsky.Graph.ListItemView>? items = default)
+        public GetListOutput(string? cursor = default, FishyFlip.Lexicon.App.Bsky.Graph.ListView? list = default, List<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>? items = default)
         {
             this.Cursor = cursor;
             this.List = list;
@@ -39,8 +39,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetListOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["list"] is not null) this.List = new App.Bsky.Graph.ListView(obj["list"]);
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new App.Bsky.Graph.ListItemView(n)).ToList();
+            if (obj["list"] is not null) this.List = new FishyFlip.Lexicon.App.Bsky.Graph.ListView(obj["list"]);
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.ListItemView(n)).ToList();
         }
 
         /// <summary>
@@ -55,14 +55,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("list")]
         [JsonRequired]
-        public App.Bsky.Graph.ListView? List { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Graph.ListView? List { get; set; }
 
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<App.Bsky.Graph.ListItemView>? Items { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -74,12 +74,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.GetListOutput>(this, (JsonTypeInfo<App.Bsky.Graph.GetListOutput>)SourceGenerationContext.Default.AppBskyGraphGetListOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>)SourceGenerationContext.Default.AppBskyGraphGetListOutput)!;
         }
 
         public static GetListOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.GetListOutput>(json, (JsonTypeInfo<App.Bsky.Graph.GetListOutput>)SourceGenerationContext.Default.AppBskyGraphGetListOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>)SourceGenerationContext.Default.AppBskyGraphGetListOutput)!;
         }
     }
 }

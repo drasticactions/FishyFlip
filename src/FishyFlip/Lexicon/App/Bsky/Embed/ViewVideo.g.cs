@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <param name="aspectRatio">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </param>
-        public ViewVideo(string? cid = default, string? playlist = default, string? thumbnail = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
+        public ViewVideo(string? cid = default, string? playlist = default, string? thumbnail = default, string? alt = default, FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? aspectRatio = default)
         {
             this.Cid = cid;
             this.Playlist = playlist;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["playlist"] is not null) this.Playlist = obj["playlist"].AsString();
             if (obj["thumbnail"] is not null) this.Thumbnail = obj["thumbnail"].AsString();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
-            if (obj["aspectRatio"] is not null) this.AspectRatio = new App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
+            if (obj["aspectRatio"] is not null) this.AspectRatio = new FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
-        public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -92,12 +92,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.ViewVideo>(this, (JsonTypeInfo<App.Bsky.Embed.ViewVideo>)SourceGenerationContext.Default.AppBskyEmbedViewVideo)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>)SourceGenerationContext.Default.AppBskyEmbedViewVideo)!;
         }
 
         public static ViewVideo FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.ViewVideo>(json, (JsonTypeInfo<App.Bsky.Embed.ViewVideo>)SourceGenerationContext.Default.AppBskyEmbedViewVideo)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>)SourceGenerationContext.Default.AppBskyEmbedViewVideo)!;
         }
     }
 }

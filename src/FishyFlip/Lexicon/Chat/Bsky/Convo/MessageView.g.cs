@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender"/> (chat.bsky.convo.defs#messageViewSender)
         /// </param>
         /// <param name="sentAt"></param>
-        public MessageView(string? id = default, string? rev = default, string? text = default, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Embed.ViewRecordDef? embed = default, Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
+        public MessageView(string? id = default, string? rev = default, string? text = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? facets = default, FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef? embed = default, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender? sender = default, DateTime? sentAt = default)
         {
             this.Id = id;
             this.Rev = rev;
@@ -52,9 +52,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
-            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
-            if (obj["embed"] is not null) this.Embed = new App.Bsky.Embed.ViewRecordDef(obj["embed"]);
-            if (obj["sender"] is not null) this.Sender = new Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
+            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["embed"] is not null) this.Embed = new FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef(obj["embed"]);
+            if (obj["sender"] is not null) this.Sender = new FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
         }
 
@@ -84,7 +84,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
         /// Gets or sets the embed.
@@ -92,7 +92,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
-        public App.Bsky.Embed.ViewRecordDef? Embed { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef? Embed { get; set; }
 
         /// <summary>
         /// Gets or sets the sender.
@@ -100,7 +100,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         [JsonPropertyName("sender")]
         [JsonRequired]
-        public Chat.Bsky.Convo.MessageViewSender? Sender { get; set; }
+        public FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender? Sender { get; set; }
 
         /// <summary>
         /// Gets or sets the sentAt.
@@ -119,12 +119,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.MessageView>(this, (JsonTypeInfo<Chat.Bsky.Convo.MessageView>)SourceGenerationContext.Default.ChatBskyConvoMessageView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>)SourceGenerationContext.Default.ChatBskyConvoMessageView)!;
         }
 
         public static MessageView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.MessageView>(json, (JsonTypeInfo<Chat.Bsky.Convo.MessageView>)SourceGenerationContext.Default.ChatBskyConvoMessageView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>)SourceGenerationContext.Default.ChatBskyConvoMessageView)!;
         }
     }
 }

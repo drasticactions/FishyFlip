@@ -157,12 +157,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Setting.Option>(this, (JsonTypeInfo<Tools.Ozone.Setting.Option>)SourceGenerationContext.Default.ToolsOzoneSettingOption)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Setting.Option>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.Option>)SourceGenerationContext.Default.ToolsOzoneSettingOption)!;
         }
 
         public static Option FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Setting.Option>(json, (JsonTypeInfo<Tools.Ozone.Setting.Option>)SourceGenerationContext.Default.ToolsOzoneSettingOption)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.Option>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.Option>)SourceGenerationContext.Default.ToolsOzoneSettingOption)!;
         }
     }
 }

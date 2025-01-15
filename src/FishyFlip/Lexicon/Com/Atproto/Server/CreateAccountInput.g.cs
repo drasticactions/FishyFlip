@@ -131,12 +131,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.CreateAccountInput>(this, (JsonTypeInfo<Com.Atproto.Server.CreateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountInput)!;
         }
 
         public static CreateAccountInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.CreateAccountInput>(json, (JsonTypeInfo<Com.Atproto.Server.CreateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountInput)!;
         }
     }
 }

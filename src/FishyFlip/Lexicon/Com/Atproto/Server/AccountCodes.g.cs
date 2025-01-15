@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.AccountCodes>(this, (JsonTypeInfo<Com.Atproto.Server.AccountCodes>)SourceGenerationContext.Default.ComAtprotoServerAccountCodes)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>)SourceGenerationContext.Default.ComAtprotoServerAccountCodes)!;
         }
 
         public static AccountCodes FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.AccountCodes>(json, (JsonTypeInfo<Com.Atproto.Server.AccountCodes>)SourceGenerationContext.Default.ComAtprotoServerAccountCodes)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>)SourceGenerationContext.Default.ComAtprotoServerAccountCodes)!;
         }
     }
 }

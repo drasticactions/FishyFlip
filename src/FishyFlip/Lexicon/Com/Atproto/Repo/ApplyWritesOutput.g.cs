@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// #updateResult <br/>
         /// #deleteResult <br/>
         /// </param>
-        public ApplyWritesOutput(Com.Atproto.Repo.CommitMeta? commit = default, List<ATObject>? results = default)
+        public ApplyWritesOutput(FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? commit = default, List<ATObject>? results = default)
         {
             this.Commit = commit;
             this.Results = results;
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public ApplyWritesOutput(CBORObject obj)
         {
-            if (obj["commit"] is not null) this.Commit = new Com.Atproto.Repo.CommitMeta(obj["commit"]);
+            if (obj["commit"] is not null) this.Commit = new FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta(obj["commit"]);
             if (obj["results"] is not null) this.Results = obj["results"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </summary>
         [JsonPropertyName("commit")]
-        public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         /// <summary>
         /// Gets or sets the results.
@@ -72,12 +72,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.ApplyWritesOutput>(this, (JsonTypeInfo<Com.Atproto.Repo.ApplyWritesOutput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesOutput)!;
         }
 
         public static ApplyWritesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.ApplyWritesOutput>(json, (JsonTypeInfo<Com.Atproto.Repo.ApplyWritesOutput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesOutput)!;
         }
     }
 }

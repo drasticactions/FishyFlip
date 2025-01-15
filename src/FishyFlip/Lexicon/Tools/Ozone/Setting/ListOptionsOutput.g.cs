@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="options"></param>
-        public ListOptionsOutput(string? cursor = default, List<Tools.Ozone.Setting.Option>? options = default)
+        public ListOptionsOutput(string? cursor = default, List<FishyFlip.Lexicon.Tools.Ozone.Setting.Option>? options = default)
         {
             this.Cursor = cursor;
             this.Options = options;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public ListOptionsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["options"] is not null) this.Options = obj["options"].Values.Select(n =>new Tools.Ozone.Setting.Option(n)).ToList();
+            if (obj["options"] is not null) this.Options = obj["options"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Setting.Option(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         [JsonPropertyName("options")]
         [JsonRequired]
-        public List<Tools.Ozone.Setting.Option>? Options { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Setting.Option>? Options { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Setting.ListOptionsOutput>(this, (JsonTypeInfo<Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput)!;
         }
 
         public static ListOptionsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Setting.ListOptionsOutput>(json, (JsonTypeInfo<Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput)!;
         }
     }
 }

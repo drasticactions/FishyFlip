@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Communication.DeleteTemplateInput>(this, (JsonTypeInfo<Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput)!;
         }
 
         public static DeleteTemplateInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Communication.DeleteTemplateInput>(json, (JsonTypeInfo<Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput)!;
         }
     }
 }

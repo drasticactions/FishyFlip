@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Notification.UpdateSeenInput>(this, (JsonTypeInfo<App.Bsky.Notification.UpdateSeenInput>)SourceGenerationContext.Default.AppBskyNotificationUpdateSeenInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Notification.UpdateSeenInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.UpdateSeenInput>)SourceGenerationContext.Default.AppBskyNotificationUpdateSeenInput)!;
         }
 
         public static UpdateSeenInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Notification.UpdateSeenInput>(json, (JsonTypeInfo<App.Bsky.Notification.UpdateSeenInput>)SourceGenerationContext.Default.AppBskyNotificationUpdateSeenInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.UpdateSeenInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.UpdateSeenInput>)SourceGenerationContext.Default.AppBskyNotificationUpdateSeenInput)!;
         }
     }
 }

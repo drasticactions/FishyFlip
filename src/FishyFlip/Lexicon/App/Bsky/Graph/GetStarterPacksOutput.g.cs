@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Initializes a new instance of the <see cref="GetStarterPacksOutput"/> class.
         /// </summary>
         /// <param name="starterPacks"></param>
-        public GetStarterPacksOutput(List<App.Bsky.Graph.StarterPackViewBasic>? starterPacks = default)
+        public GetStarterPacksOutput(List<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>? starterPacks = default)
         {
             this.StarterPacks = starterPacks;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetStarterPacksOutput(CBORObject obj)
         {
-            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
+            if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
-        public List<App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>? StarterPacks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.GetStarterPacksOutput>(this, (JsonTypeInfo<App.Bsky.Graph.GetStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetStarterPacksOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetStarterPacksOutput)!;
         }
 
         public static GetStarterPacksOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.GetStarterPacksOutput>(json, (JsonTypeInfo<App.Bsky.Graph.GetStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetStarterPacksOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetStarterPacksOutput)!;
         }
     }
 }

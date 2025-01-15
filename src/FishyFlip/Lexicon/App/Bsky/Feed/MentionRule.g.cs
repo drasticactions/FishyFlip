@@ -37,12 +37,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.MentionRule>(this, (JsonTypeInfo<App.Bsky.Feed.MentionRule>)SourceGenerationContext.Default.AppBskyFeedMentionRule)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.MentionRule>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.MentionRule>)SourceGenerationContext.Default.AppBskyFeedMentionRule)!;
         }
 
         public static MentionRule FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.MentionRule>(json, (JsonTypeInfo<App.Bsky.Feed.MentionRule>)SourceGenerationContext.Default.AppBskyFeedMentionRule)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.MentionRule>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.MentionRule>)SourceGenerationContext.Default.AppBskyFeedMentionRule)!;
         }
     }
 }

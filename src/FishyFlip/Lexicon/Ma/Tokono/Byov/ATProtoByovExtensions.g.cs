@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateSubscriptionAsync(this FishyFlip.ATProtocol atp, Ma.Tokono.Byov.Subscription record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateSubscriptionAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "ma.tokono.byov.subscription", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -72,7 +72,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutSubscriptionAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Ma.Tokono.Byov.Subscription record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutSubscriptionAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "ma.tokono.byov.subscription", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
@@ -137,7 +137,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateVideoAsync(this FishyFlip.ATProtocol atp, Ma.Tokono.Byov.Video record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateVideoAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Ma.Tokono.Byov.Video record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "ma.tokono.byov.video", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -188,7 +188,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutVideoAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Ma.Tokono.Byov.Video record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutVideoAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Ma.Tokono.Byov.Video record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "ma.tokono.byov.video", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

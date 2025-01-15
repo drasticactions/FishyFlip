@@ -81,12 +81,12 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Blue.Zio.Atfile.Machine>(this, (JsonTypeInfo<Blue.Zio.Atfile.Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine)!;
         }
 
         public static Machine FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Blue.Zio.Atfile.Machine>(json, (JsonTypeInfo<Blue.Zio.Atfile.Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine)!;
         }
     }
 }

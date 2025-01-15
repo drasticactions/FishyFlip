@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateMessageAsync(this FishyFlip.ATProtocol atp, Social.Psky.Chat.Message record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateMessageAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Social.Psky.Chat.Message record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "social.psky.chat.message", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateMessageAsync(this FishyFlip.ATProtocol atp, string? content, FishyFlip.Models.ATUri? room, List<Social.Psky.Richtext.Facet>? facets = default, Com.Atproto.Repo.StrongRef? reply = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateMessageAsync(this FishyFlip.ATProtocol atp, string? content, FishyFlip.Models.ATUri? room, List<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>? facets = default, Com.Atproto.Repo.StrongRef? reply = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Social.Psky.Chat.Message();
             record.Content = content;
@@ -74,7 +74,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutMessageAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Social.Psky.Chat.Message record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutMessageAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Social.Psky.Chat.Message record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "social.psky.chat.message", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
@@ -139,7 +139,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateRoomAsync(this FishyFlip.ATProtocol atp, Social.Psky.Chat.Room record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateRoomAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Social.Psky.Chat.Room record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "social.psky.chat.room", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -154,7 +154,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateRoomAsync(this FishyFlip.ATProtocol atp, string? name, List<string>? languages = default, string? topic = default, List<string>? tags = default, Social.Psky.Chat.ModlistRef? allowlist = default, Social.Psky.Chat.ModlistRef? denylist = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateRoomAsync(this FishyFlip.ATProtocol atp, string? name, List<string>? languages = default, string? topic = default, List<string>? tags = default, FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? allowlist = default, FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? denylist = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Social.Psky.Chat.Room();
             record.Name = name;
@@ -191,7 +191,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutRoomAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Social.Psky.Chat.Room record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutRoomAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Social.Psky.Chat.Room record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "social.psky.chat.room", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

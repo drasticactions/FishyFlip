@@ -60,12 +60,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Server.ViewerConfig>(this, (JsonTypeInfo<Tools.Ozone.Server.ViewerConfig>)SourceGenerationContext.Default.ToolsOzoneServerViewerConfig)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig>)SourceGenerationContext.Default.ToolsOzoneServerViewerConfig)!;
         }
 
         public static ViewerConfig FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Server.ViewerConfig>(json, (JsonTypeInfo<Tools.Ozone.Server.ViewerConfig>)SourceGenerationContext.Default.ToolsOzoneServerViewerConfig)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig>)SourceGenerationContext.Default.ToolsOzoneServerViewerConfig)!;
         }
     }
 }

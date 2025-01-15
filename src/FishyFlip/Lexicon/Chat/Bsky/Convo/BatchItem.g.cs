@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <param name="message">
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput"/> (chat.bsky.convo.defs#messageInput)
         /// </param>
-        public BatchItem(string? convoId = default, Chat.Bsky.Convo.MessageInput? message = default)
+        public BatchItem(string? convoId = default, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput? message = default)
         {
             this.ConvoId = convoId;
             this.Message = message;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public BatchItem(CBORObject obj)
         {
             if (obj["convoId"] is not null) this.ConvoId = obj["convoId"].AsString();
-            if (obj["message"] is not null) this.Message = new Chat.Bsky.Convo.MessageInput(obj["message"]);
+            if (obj["message"] is not null) this.Message = new FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput(obj["message"]);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         [JsonPropertyName("message")]
         [JsonRequired]
-        public Chat.Bsky.Convo.MessageInput? Message { get; set; }
+        public FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput? Message { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.BatchItem>(this, (JsonTypeInfo<Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem)!;
         }
 
         public static BatchItem FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.BatchItem>(json, (JsonTypeInfo<Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem)!;
         }
     }
 }

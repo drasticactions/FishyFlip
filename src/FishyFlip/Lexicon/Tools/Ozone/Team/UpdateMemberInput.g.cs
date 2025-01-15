@@ -80,12 +80,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Team.UpdateMemberInput>(this, (JsonTypeInfo<Tools.Ozone.Team.UpdateMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamUpdateMemberInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamUpdateMemberInput)!;
         }
 
         public static UpdateMemberInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Team.UpdateMemberInput>(json, (JsonTypeInfo<Tools.Ozone.Team.UpdateMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamUpdateMemberInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamUpdateMemberInput)!;
         }
     }
 }

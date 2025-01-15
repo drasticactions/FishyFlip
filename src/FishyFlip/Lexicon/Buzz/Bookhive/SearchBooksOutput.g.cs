@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         /// <param name="offset">The next offset to use for pagination (result of limit + offset)</param>
         /// <param name="books"></param>
-        public SearchBooksOutput(long? offset = default, List<Buzz.Bookhive.HiveBook>? books = default)
+        public SearchBooksOutput(long? offset = default, List<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>? books = default)
         {
             this.Offset = offset;
             this.Books = books;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         public SearchBooksOutput(CBORObject obj)
         {
             if (obj["offset"] is not null) this.Offset = obj["offset"].AsInt64Value();
-            if (obj["books"] is not null) this.Books = obj["books"].Values.Select(n =>new Buzz.Bookhive.HiveBook(n)).ToList();
+            if (obj["books"] is not null) this.Books = obj["books"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.HiveBook(n)).ToList();
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         [JsonPropertyName("books")]
         [JsonRequired]
-        public List<Buzz.Bookhive.HiveBook>? Books { get; set; }
+        public List<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>? Books { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Buzz.Bookhive.SearchBooksOutput>(this, (JsonTypeInfo<Buzz.Bookhive.SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput)!;
         }
 
         public static SearchBooksOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Buzz.Bookhive.SearchBooksOutput>(json, (JsonTypeInfo<Buzz.Bookhive.SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput)!;
         }
     }
 }

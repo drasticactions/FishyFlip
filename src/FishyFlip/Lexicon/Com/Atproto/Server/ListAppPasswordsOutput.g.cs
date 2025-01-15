@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Initializes a new instance of the <see cref="ListAppPasswordsOutput"/> class.
         /// </summary>
         /// <param name="passwords"></param>
-        public ListAppPasswordsOutput(List<Com.Atproto.Server.AppPassword>? passwords = default)
+        public ListAppPasswordsOutput(List<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>? passwords = default)
         {
             this.Passwords = passwords;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ListAppPasswordsOutput(CBORObject obj)
         {
-            if (obj["passwords"] is not null) this.Passwords = obj["passwords"].Values.Select(n =>new Com.Atproto.Server.AppPassword(n)).ToList();
+            if (obj["passwords"] is not null) this.Passwords = obj["passwords"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Server.AppPassword(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("passwords")]
         [JsonRequired]
-        public List<Com.Atproto.Server.AppPassword>? Passwords { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>? Passwords { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.ListAppPasswordsOutput>(this, (JsonTypeInfo<Com.Atproto.Server.ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput)!;
         }
 
         public static ListAppPasswordsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.ListAppPasswordsOutput>(json, (JsonTypeInfo<Com.Atproto.Server.ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput)!;
         }
     }
 }

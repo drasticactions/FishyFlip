@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// Initializes a new instance of the <see cref="GetAuthorPostsOutput"/> class.
         /// </summary>
         /// <param name="post"></param>
-        public GetAuthorPostsOutput(List<Com.Whtwnd.Blog.BlogEntry>? post = default)
+        public GetAuthorPostsOutput(List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry>? post = default)
         {
             this.Post = post;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public GetAuthorPostsOutput(CBORObject obj)
         {
-            if (obj["post"] is not null) this.Post = obj["post"].Values.Select(n =>new Com.Whtwnd.Blog.BlogEntry(n)).ToList();
+            if (obj["post"] is not null) this.Post = obj["post"].Values.Select(n =>new FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
-        public List<Com.Whtwnd.Blog.BlogEntry>? Post { get; set; }
+        public List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry>? Post { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Whtwnd.Blog.GetAuthorPostsOutput>(this, (JsonTypeInfo<Com.Whtwnd.Blog.GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput)!;
         }
 
         public static GetAuthorPostsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Whtwnd.Blog.GetAuthorPostsOutput>(json, (JsonTypeInfo<Com.Whtwnd.Blog.GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput)!;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="members"></param>
-        public ListMembersOutput(string? cursor = default, List<Tools.Ozone.Team.Member>? members = default)
+        public ListMembersOutput(string? cursor = default, List<FishyFlip.Lexicon.Tools.Ozone.Team.Member>? members = default)
         {
             this.Cursor = cursor;
             this.Members = members;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         public ListMembersOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new Tools.Ozone.Team.Member(n)).ToList();
+            if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Team.Member(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// </summary>
         [JsonPropertyName("members")]
         [JsonRequired]
-        public List<Tools.Ozone.Team.Member>? Members { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Team.Member>? Members { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Team.ListMembersOutput>(this, (JsonTypeInfo<Tools.Ozone.Team.ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput)!;
         }
 
         public static ListMembersOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Team.ListMembersOutput>(json, (JsonTypeInfo<Tools.Ozone.Team.ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput)!;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// #link <br/>
         /// #tag <br/>
         /// </param>
-        public Facet(App.Bsky.Richtext.ByteSlice? index = default, List<ATObject>? features = default)
+        public Facet(FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice? index = default, List<ATObject>? features = default)
         {
             this.Index = index;
             this.Features = features;
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// </summary>
         public Facet(CBORObject obj)
         {
-            if (obj["index"] is not null) this.Index = new App.Bsky.Richtext.ByteSlice(obj["index"]);
+            if (obj["index"] is not null) this.Index = new FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice(obj["index"]);
             if (obj["features"] is not null) this.Features = obj["features"].Values.Select(n =>n.ToATObject()).ToList();
         }
 
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// </summary>
         [JsonPropertyName("index")]
         [JsonRequired]
-        public App.Bsky.Richtext.ByteSlice? Index { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice? Index { get; set; }
 
         /// <summary>
         /// Gets or sets the features.
@@ -77,12 +77,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Richtext.Facet>(this, (JsonTypeInfo<App.Bsky.Richtext.Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet)!;
         }
 
         public static Facet FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Richtext.Facet>(json, (JsonTypeInfo<App.Bsky.Richtext.Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet)!;
         }
     }
 }

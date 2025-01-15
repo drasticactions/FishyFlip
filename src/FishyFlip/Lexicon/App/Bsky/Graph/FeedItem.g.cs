@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.FeedItem>(this, (JsonTypeInfo<App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem)!;
         }
 
         public static FeedItem FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.FeedItem>(json, (JsonTypeInfo<App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem)!;
         }
     }
 }

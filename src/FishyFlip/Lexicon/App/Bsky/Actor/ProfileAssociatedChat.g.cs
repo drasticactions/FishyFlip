@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.ProfileAssociatedChat>(this, (JsonTypeInfo<App.Bsky.Actor.ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat)!;
         }
 
         public static ProfileAssociatedChat FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.ProfileAssociatedChat>(json, (JsonTypeInfo<App.Bsky.Actor.ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat)!;
         }
     }
 }

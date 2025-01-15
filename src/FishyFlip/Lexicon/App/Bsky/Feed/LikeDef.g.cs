@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="actor">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </param>
-        public LikeDef(DateTime? indexedAt = default, DateTime? createdAt = default, App.Bsky.Actor.ProfileView? actor = default)
+        public LikeDef(DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? actor = default)
         {
             this.IndexedAt = indexedAt;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
-            if (obj["actor"] is not null) this.Actor = new App.Bsky.Actor.ProfileView(obj["actor"]);
+            if (obj["actor"] is not null) this.Actor = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["actor"]);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("actor")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileView? Actor { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Actor { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -75,12 +75,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.LikeDef>(this, (JsonTypeInfo<App.Bsky.Feed.LikeDef>)SourceGenerationContext.Default.AppBskyFeedLikeDef)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>)SourceGenerationContext.Default.AppBskyFeedLikeDef)!;
         }
 
         public static LikeDef FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.LikeDef>(json, (JsonTypeInfo<App.Bsky.Feed.LikeDef>)SourceGenerationContext.Default.AppBskyFeedLikeDef)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>)SourceGenerationContext.Default.AppBskyFeedLikeDef)!;
         }
     }
 }

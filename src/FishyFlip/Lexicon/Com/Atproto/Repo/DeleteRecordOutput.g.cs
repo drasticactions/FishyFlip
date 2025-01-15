@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <param name="commit">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </param>
-        public DeleteRecordOutput(Com.Atproto.Repo.CommitMeta? commit = default)
+        public DeleteRecordOutput(FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? commit = default)
         {
             this.Commit = commit;
         }
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public DeleteRecordOutput(CBORObject obj)
         {
-            if (obj["commit"] is not null) this.Commit = new Com.Atproto.Repo.CommitMeta(obj["commit"]);
+            if (obj["commit"] is not null) this.Commit = new FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta(obj["commit"]);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </summary>
         [JsonPropertyName("commit")]
-        public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -54,12 +54,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.DeleteRecordOutput>(this, (JsonTypeInfo<Com.Atproto.Repo.DeleteRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoDeleteRecordOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoDeleteRecordOutput)!;
         }
 
         public static DeleteRecordOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.DeleteRecordOutput>(json, (JsonTypeInfo<Com.Atproto.Repo.DeleteRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoDeleteRecordOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoDeleteRecordOutput)!;
         }
     }
 }

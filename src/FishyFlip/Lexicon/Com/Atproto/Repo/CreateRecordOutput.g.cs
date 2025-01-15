@@ -22,7 +22,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// valid <br/>
         /// unknown <br/>
         /// </param>
-        public CreateRecordOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, Com.Atproto.Repo.CommitMeta? commit = default, string? validationStatus = default)
+        public CreateRecordOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? commit = default, string? validationStatus = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
-            if (obj["commit"] is not null) this.Commit = new Com.Atproto.Repo.CommitMeta(obj["commit"]);
+            if (obj["commit"] is not null) this.Commit = new FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta(obj["commit"]);
             if (obj["validationStatus"] is not null) this.ValidationStatus = obj["validationStatus"].AsString();
         }
 
@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </summary>
         [JsonPropertyName("commit")]
-        public Com.Atproto.Repo.CommitMeta? Commit { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         /// <summary>
         /// Gets or sets the validationStatus.
@@ -91,12 +91,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.CreateRecordOutput>(this, (JsonTypeInfo<Com.Atproto.Repo.CreateRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordOutput)!;
         }
 
         public static CreateRecordOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.CreateRecordOutput>(json, (JsonTypeInfo<Com.Atproto.Repo.CreateRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordOutput)!;
         }
     }
 }

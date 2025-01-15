@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="actors"></param>
-        public SearchActorsOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? actors = default)
+        public SearchActorsOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? actors = default)
         {
             this.Cursor = cursor;
             this.Actors = actors;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public SearchActorsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView>? Actors { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? Actors { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.SearchActorsOutput>(this, (JsonTypeInfo<App.Bsky.Actor.SearchActorsOutput>)SourceGenerationContext.Default.AppBskyActorSearchActorsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>)SourceGenerationContext.Default.AppBskyActorSearchActorsOutput)!;
         }
 
         public static SearchActorsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.SearchActorsOutput>(json, (JsonTypeInfo<App.Bsky.Actor.SearchActorsOutput>)SourceGenerationContext.Default.AppBskyActorSearchActorsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>)SourceGenerationContext.Default.AppBskyActorSearchActorsOutput)!;
         }
     }
 }

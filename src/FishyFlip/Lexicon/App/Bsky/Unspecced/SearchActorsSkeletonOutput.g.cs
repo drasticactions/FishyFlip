@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="cursor"></param>
         /// <param name="hitsTotal">Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.</param>
         /// <param name="actors"></param>
-        public SearchActorsSkeletonOutput(string? cursor = default, long? hitsTotal = default, List<App.Bsky.Unspecced.SkeletonSearchActor>? actors = default)
+        public SearchActorsSkeletonOutput(string? cursor = default, long? hitsTotal = default, List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>? actors = default)
         {
             this.Cursor = cursor;
             this.HitsTotal = hitsTotal;
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["hitsTotal"] is not null) this.HitsTotal = obj["hitsTotal"].AsInt64Value();
-            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
+            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>? Actors { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -71,12 +71,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.SearchActorsSkeletonOutput>(this, (JsonTypeInfo<App.Bsky.Unspecced.SearchActorsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchActorsSkeletonOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchActorsSkeletonOutput)!;
         }
 
         public static SearchActorsSkeletonOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.SearchActorsSkeletonOutput>(json, (JsonTypeInfo<App.Bsky.Unspecced.SearchActorsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchActorsSkeletonOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchActorsSkeletonOutput)!;
         }
     }
 }

@@ -81,12 +81,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.External>(this, (JsonTypeInfo<App.Bsky.Embed.External>)SourceGenerationContext.Default.AppBskyEmbedExternal)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.External>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.External>)SourceGenerationContext.Default.AppBskyEmbedExternal)!;
         }
 
         public static External FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.External>(json, (JsonTypeInfo<App.Bsky.Embed.External>)SourceGenerationContext.Default.AppBskyEmbedExternal)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.External>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.External>)SourceGenerationContext.Default.AppBskyEmbedExternal)!;
         }
     }
 }

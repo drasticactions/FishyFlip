@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <param name="jobStatus">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Video.JobStatus"/> (app.bsky.video.defs#jobStatus)
         /// </param>
-        public GetJobStatusOutput(App.Bsky.Video.JobStatus? jobStatus = default)
+        public GetJobStatusOutput(FishyFlip.Lexicon.App.Bsky.Video.JobStatus? jobStatus = default)
         {
             this.JobStatus = jobStatus;
         }
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         public GetJobStatusOutput(CBORObject obj)
         {
-            if (obj["jobStatus"] is not null) this.JobStatus = new App.Bsky.Video.JobStatus(obj["jobStatus"]);
+            if (obj["jobStatus"] is not null) this.JobStatus = new FishyFlip.Lexicon.App.Bsky.Video.JobStatus(obj["jobStatus"]);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         [JsonPropertyName("jobStatus")]
         [JsonRequired]
-        public App.Bsky.Video.JobStatus? JobStatus { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Video.JobStatus? JobStatus { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -55,12 +55,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Video.GetJobStatusOutput>(this, (JsonTypeInfo<App.Bsky.Video.GetJobStatusOutput>)SourceGenerationContext.Default.AppBskyVideoGetJobStatusOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>)SourceGenerationContext.Default.AppBskyVideoGetJobStatusOutput)!;
         }
 
         public static GetJobStatusOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Video.GetJobStatusOutput>(json, (JsonTypeInfo<App.Bsky.Video.GetJobStatusOutput>)SourceGenerationContext.Default.AppBskyVideoGetJobStatusOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>)SourceGenerationContext.Default.AppBskyVideoGetJobStatusOutput)!;
         }
     }
 }

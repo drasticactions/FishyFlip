@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="repo">
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView"/> (tools.ozone.moderation.defs#repoView)
         /// </param>
-        public RecordViewDetail(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? value = default, List<Tools.Ozone.Moderation.BlobView>? blobs = default, List<Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default, Tools.Ozone.Moderation.ModerationDetail? moderation = default, Tools.Ozone.Moderation.RepoView? repo = default)
+        public RecordViewDetail(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? value = default, List<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>? blobs = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, DateTime? indexedAt = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail? moderation = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView? repo = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -53,11 +53,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
-            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new Tools.Ozone.Moderation.BlobView(n)).ToList();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView(n)).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["moderation"] is not null) this.Moderation = new Tools.Ozone.Moderation.ModerationDetail(obj["moderation"]);
-            if (obj["repo"] is not null) this.Repo = new Tools.Ozone.Moderation.RepoView(obj["repo"]);
+            if (obj["moderation"] is not null) this.Moderation = new FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail(obj["moderation"]);
+            if (obj["repo"] is not null) this.Repo = new FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView(obj["repo"]);
         }
 
         /// <summary>
@@ -87,13 +87,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("blobs")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.BlobView>? Blobs { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>? Blobs { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
@@ -108,7 +108,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("moderation")]
         [JsonRequired]
-        public Tools.Ozone.Moderation.ModerationDetail? Moderation { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail? Moderation { get; set; }
 
         /// <summary>
         /// Gets or sets the repo.
@@ -116,7 +116,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]
-        public Tools.Ozone.Moderation.RepoView? Repo { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView? Repo { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -128,12 +128,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.RecordViewDetail>(this, (JsonTypeInfo<Tools.Ozone.Moderation.RecordViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewDetail)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewDetail)!;
         }
 
         public static RecordViewDetail FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.RecordViewDetail>(json, (JsonTypeInfo<Tools.Ozone.Moderation.RecordViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewDetail)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewDetail)!;
         }
     }
 }

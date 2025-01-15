@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="subjectStatus">
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView"/> (tools.ozone.moderation.defs#subjectStatusView)
         /// </param>
-        public ModerationDetail(Tools.Ozone.Moderation.SubjectStatusView? subjectStatus = default)
+        public ModerationDetail(FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView? subjectStatus = default)
         {
             this.SubjectStatus = subjectStatus;
         }
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModerationDetail(CBORObject obj)
         {
-            if (obj["subjectStatus"] is not null) this.SubjectStatus = new Tools.Ozone.Moderation.SubjectStatusView(obj["subjectStatus"]);
+            if (obj["subjectStatus"] is not null) this.SubjectStatus = new FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView(obj["subjectStatus"]);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView"/> (tools.ozone.moderation.defs#subjectStatusView)
         /// </summary>
         [JsonPropertyName("subjectStatus")]
-        public Tools.Ozone.Moderation.SubjectStatusView? SubjectStatus { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView? SubjectStatus { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -54,12 +54,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.ModerationDetail>(this, (JsonTypeInfo<Tools.Ozone.Moderation.ModerationDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModerationDetail)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModerationDetail)!;
         }
 
         public static ModerationDetail FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.ModerationDetail>(json, (JsonTypeInfo<Tools.Ozone.Moderation.ModerationDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModerationDetail)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModerationDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModerationDetail)!;
         }
     }
 }

@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.Listblock>(this, (JsonTypeInfo<App.Bsky.Graph.Listblock>)SourceGenerationContext.Default.AppBskyGraphListblock)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.Listblock>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Listblock>)SourceGenerationContext.Default.AppBskyGraphListblock)!;
         }
 
         public static Listblock FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.Listblock>(json, (JsonTypeInfo<App.Bsky.Graph.Listblock>)SourceGenerationContext.Default.AppBskyGraphListblock)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Listblock>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Listblock>)SourceGenerationContext.Default.AppBskyGraphListblock)!;
         }
     }
 }

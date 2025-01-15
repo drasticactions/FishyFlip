@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Ma.Tokono.Byov.Subscription>(this, (JsonTypeInfo<Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(this, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
         }
 
         public static Subscription FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Ma.Tokono.Byov.Subscription>(json, (JsonTypeInfo<Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(json, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
         }
     }
 }

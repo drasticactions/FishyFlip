@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         /// <param name="topics"></param>
         /// <param name="suggested"></param>
-        public GetTrendingTopicsOutput(List<App.Bsky.Unspecced.TrendingTopic>? topics = default, List<App.Bsky.Unspecced.TrendingTopic>? suggested = default)
+        public GetTrendingTopicsOutput(List<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>? topics = default, List<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>? suggested = default)
         {
             this.Topics = topics;
             this.Suggested = suggested;
@@ -34,8 +34,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetTrendingTopicsOutput(CBORObject obj)
         {
-            if (obj["topics"] is not null) this.Topics = obj["topics"].Values.Select(n =>new App.Bsky.Unspecced.TrendingTopic(n)).ToList();
-            if (obj["suggested"] is not null) this.Suggested = obj["suggested"].Values.Select(n =>new App.Bsky.Unspecced.TrendingTopic(n)).ToList();
+            if (obj["topics"] is not null) this.Topics = obj["topics"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic(n)).ToList();
+            if (obj["suggested"] is not null) this.Suggested = obj["suggested"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic(n)).ToList();
         }
 
         /// <summary>
@@ -43,14 +43,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("topics")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.TrendingTopic>? Topics { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>? Topics { get; set; }
 
         /// <summary>
         /// Gets or sets the suggested.
         /// </summary>
         [JsonPropertyName("suggested")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.TrendingTopic>? Suggested { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>? Suggested { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.GetTrendingTopicsOutput>(this, (JsonTypeInfo<App.Bsky.Unspecced.GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput)!;
         }
 
         public static GetTrendingTopicsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.GetTrendingTopicsOutput>(json, (JsonTypeInfo<App.Bsky.Unspecced.GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput)!;
         }
     }
 }

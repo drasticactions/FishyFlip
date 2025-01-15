@@ -73,12 +73,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.DeleteAccountInput>(this, (JsonTypeInfo<Com.Atproto.Server.DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeleteAccountInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.DeleteAccountInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeleteAccountInput)!;
         }
 
         public static DeleteAccountInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.DeleteAccountInput>(json, (JsonTypeInfo<Com.Atproto.Server.DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeleteAccountInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.DeleteAccountInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeleteAccountInput)!;
         }
     }
 }

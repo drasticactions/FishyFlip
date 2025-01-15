@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="cid"></param>
         /// <param name="record"></param>
         /// <param name="lists"></param>
-        public ThreadgateView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, List<App.Bsky.Graph.ListViewBasic>? lists = default)
+        public ThreadgateView(FishyFlip.Models.ATUri? uri = default, string? cid = default, ATObject? record = default, List<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>? lists = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
-            if (obj["lists"] is not null) this.Lists = obj["lists"].Values.Select(n =>new App.Bsky.Graph.ListViewBasic(n)).ToList();
+            if (obj["lists"] is not null) this.Lists = obj["lists"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic(n)).ToList();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the lists.
         /// </summary>
         [JsonPropertyName("lists")]
-        public List<App.Bsky.Graph.ListViewBasic>? Lists { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>? Lists { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -79,12 +79,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.ThreadgateView>(this, (JsonTypeInfo<App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView)!;
         }
 
         public static ThreadgateView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.ThreadgateView>(json, (JsonTypeInfo<App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView)!;
         }
     }
 }

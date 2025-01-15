@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <param name="inviteNote"></param>
         /// <param name="deactivatedAt"></param>
         /// <param name="threatSignatures"></param>
-        public AccountView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? email = default, List<ATObject>? relatedRecords = default, DateTime? indexedAt = default, Com.Atproto.Server.InviteCode? invitedBy = default, List<Com.Atproto.Server.InviteCode>? invites = default, bool? invitesDisabled = default, DateTime? emailConfirmedAt = default, string? inviteNote = default, DateTime? deactivatedAt = default, List<Com.Atproto.Admin.ThreatSignature>? threatSignatures = default)
+        public AccountView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? email = default, List<ATObject>? relatedRecords = default, DateTime? indexedAt = default, FishyFlip.Lexicon.Com.Atproto.Server.InviteCode? invitedBy = default, List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>? invites = default, bool? invitesDisabled = default, DateTime? emailConfirmedAt = default, string? inviteNote = default, DateTime? deactivatedAt = default, List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>? threatSignatures = default)
         {
             this.Did = did;
             this.Handle = handle;
@@ -61,13 +61,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["email"] is not null) this.Email = obj["email"].AsString();
             if (obj["relatedRecords"] is not null) this.RelatedRecords = obj["relatedRecords"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["invitedBy"] is not null) this.InvitedBy = new Com.Atproto.Server.InviteCode(obj["invitedBy"]);
-            if (obj["invites"] is not null) this.Invites = obj["invites"].Values.Select(n =>new Com.Atproto.Server.InviteCode(n)).ToList();
+            if (obj["invitedBy"] is not null) this.InvitedBy = new FishyFlip.Lexicon.Com.Atproto.Server.InviteCode(obj["invitedBy"]);
+            if (obj["invites"] is not null) this.Invites = obj["invites"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Server.InviteCode(n)).ToList();
             if (obj["invitesDisabled"] is not null) this.InvitesDisabled = obj["invitesDisabled"].AsBoolean();
             if (obj["emailConfirmedAt"] is not null) this.EmailConfirmedAt = obj["emailConfirmedAt"].ToDateTime();
             if (obj["inviteNote"] is not null) this.InviteNote = obj["inviteNote"].AsString();
             if (obj["deactivatedAt"] is not null) this.DeactivatedAt = obj["deactivatedAt"].ToDateTime();
-            if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n =>new Com.Atproto.Admin.ThreatSignature(n)).ToList();
+            if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature(n)).ToList();
         }
 
         /// <summary>
@@ -110,13 +110,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Server.InviteCode"/> (com.atproto.server.defs#inviteCode)
         /// </summary>
         [JsonPropertyName("invitedBy")]
-        public Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the invites.
         /// </summary>
         [JsonPropertyName("invites")]
-        public List<Com.Atproto.Server.InviteCode>? Invites { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>? Invites { get; set; }
 
         /// <summary>
         /// Gets or sets the invitesDisabled.
@@ -146,7 +146,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Gets or sets the threatSignatures.
         /// </summary>
         [JsonPropertyName("threatSignatures")]
-        public List<Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -158,12 +158,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.AccountView>(this, (JsonTypeInfo<Com.Atproto.Admin.AccountView>)SourceGenerationContext.Default.ComAtprotoAdminAccountView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>)SourceGenerationContext.Default.ComAtprotoAdminAccountView)!;
         }
 
         public static AccountView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.AccountView>(json, (JsonTypeInfo<Com.Atproto.Admin.AccountView>)SourceGenerationContext.Default.ComAtprotoAdminAccountView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>)SourceGenerationContext.Default.ComAtprotoAdminAccountView)!;
         }
     }
 }

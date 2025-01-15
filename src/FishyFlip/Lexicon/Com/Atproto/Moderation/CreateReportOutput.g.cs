@@ -126,12 +126,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Moderation.CreateReportOutput>(this, (JsonTypeInfo<Com.Atproto.Moderation.CreateReportOutput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportOutput)!;
         }
 
         public static CreateReportOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Moderation.CreateReportOutput>(json, (JsonTypeInfo<Com.Atproto.Moderation.CreateReportOutput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportOutput)!;
         }
     }
 }

@@ -51,12 +51,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.Contact>(this, (JsonTypeInfo<Com.Atproto.Server.Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.Contact>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;
         }
 
         public static Contact FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.Contact>(json, (JsonTypeInfo<Com.Atproto.Server.Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.Contact>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;
         }
     }
 }

@@ -90,12 +90,12 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Link.Pastesphere.Snippet>(this, (JsonTypeInfo<Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(this, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
         }
 
         public static Snippet FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Link.Pastesphere.Snippet>(json, (JsonTypeInfo<Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(json, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
         }
     }
 }

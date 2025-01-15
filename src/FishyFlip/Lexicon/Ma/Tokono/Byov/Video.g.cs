@@ -90,12 +90,12 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Ma.Tokono.Byov.Video>(this, (JsonTypeInfo<Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>(this, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;
         }
 
         public static Video FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Ma.Tokono.Byov.Video>(json, (JsonTypeInfo<Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>(json, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;
         }
     }
 }

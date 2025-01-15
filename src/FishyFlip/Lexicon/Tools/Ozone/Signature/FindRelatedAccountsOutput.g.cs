@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="accounts"></param>
-        public FindRelatedAccountsOutput(string? cursor = default, List<Tools.Ozone.Signature.RelatedAccount>? accounts = default)
+        public FindRelatedAccountsOutput(string? cursor = default, List<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>? accounts = default)
         {
             this.Cursor = cursor;
             this.Accounts = accounts;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public FindRelatedAccountsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new Tools.Ozone.Signature.RelatedAccount(n)).ToList();
+            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         [JsonPropertyName("accounts")]
         [JsonRequired]
-        public List<Tools.Ozone.Signature.RelatedAccount>? Accounts { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>? Accounts { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Signature.FindRelatedAccountsOutput>(this, (JsonTypeInfo<Tools.Ozone.Signature.FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput)!;
         }
 
         public static FindRelatedAccountsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Signature.FindRelatedAccountsOutput>(json, (JsonTypeInfo<Tools.Ozone.Signature.FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput)!;
         }
     }
 }

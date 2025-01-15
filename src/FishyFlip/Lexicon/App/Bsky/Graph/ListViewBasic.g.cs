@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState"/> (app.bsky.graph.defs#listViewerState)
         /// </param>
         /// <param name="indexedAt"></param>
-        public ListViewBasic(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? name = default, string? purpose = default, string? avatar = default, long? listItemCount = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Graph.ListViewerState? viewer = default, DateTime? indexedAt = default)
+        public ListViewBasic(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? name = default, string? purpose = default, string? avatar = default, long? listItemCount = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState? viewer = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -61,8 +61,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["purpose"] is not null) this.Purpose = obj["purpose"].AsString();
             if (obj["avatar"] is not null) this.Avatar = obj["avatar"].AsString();
             if (obj["listItemCount"] is not null) this.ListItemCount = obj["listItemCount"].AsInt64Value();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
-            if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Graph.ListViewerState(obj["viewer"]);
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState(obj["viewer"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
@@ -115,14 +115,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the viewer.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState"/> (app.bsky.graph.defs#listViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
-        public App.Bsky.Graph.ListViewerState? Viewer { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
@@ -140,12 +140,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.ListViewBasic>(this, (JsonTypeInfo<App.Bsky.Graph.ListViewBasic>)SourceGenerationContext.Default.AppBskyGraphListViewBasic)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>)SourceGenerationContext.Default.AppBskyGraphListViewBasic)!;
         }
 
         public static ListViewBasic FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.ListViewBasic>(json, (JsonTypeInfo<App.Bsky.Graph.ListViewBasic>)SourceGenerationContext.Default.AppBskyGraphListViewBasic)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>)SourceGenerationContext.Default.AppBskyGraphListViewBasic)!;
         }
     }
 }

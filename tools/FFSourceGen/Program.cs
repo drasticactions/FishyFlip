@@ -19,7 +19,7 @@ app.Run(args);
 public partial class AppCommands
 #pragma warning restore SA1649 // File name should match first type name
 {
-    private string baseNamespace { get; set; } = "FishyFlip.Lexicon";
+    public static string baseNamespace { get; set; } = "FishyFlip.Lexicon";
     private string basePath { get; set; }
 
     public static List<ClassGeneration> AllClasses { get; } = new();
@@ -39,7 +39,7 @@ public partial class AppCommands
     public async Task GenerateAsync([Argument] string lexiconPath, string? outputDir = default,
         string? baseNamespace = default, CancellationToken cancellationToken = default, params string[] thirdPartyDirs)
     {
-        this.baseNamespace = baseNamespace ??= this.baseNamespace;
+        baseNamespace = baseNamespace ??= baseNamespace;
         outputDir ??= AppDomain.CurrentDomain.BaseDirectory;
         Console.WriteLine($"Lexicon Path: {lexiconPath}");
         Console.WriteLine($"Output Directory: {outputDir}");
@@ -168,7 +168,7 @@ public partial class AppCommands
         await this.GenerateJsonSerializerContextFile(modelClasses);
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
 
-        var atRecordSource = this.GenerateATObjectSource(this.baseNamespace, modelClasses);
+        var atRecordSource = this.GenerateATObjectSource(baseNamespace, modelClasses);
         var atRecordPath = Path.Combine(this.basePath, "ATObject.g.cs");
         await File.WriteAllTextAsync(atRecordPath, atRecordSource);
 
@@ -196,7 +196,7 @@ public partial class AppCommands
     {
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, $"{this.baseNamespace}.{cls.CSharpNamespace}");
+        this.GenerateNamespace(sb, $"{baseNamespace}.{cls.CSharpNamespace}");
         sb.AppendLine("{");
         sb.AppendLine();
         sb.AppendLine($"    /// <summary>");
@@ -263,7 +263,7 @@ public partial class AppCommands
             sb.AppendLine($"        /// {group.Key.ToLower()} Endpoint Group.");
             sb.AppendLine($"        /// </summary>");
             sb.AppendLine(
-                $"        public {this.baseNamespace}.{group.Key}.{className} {className.Replace("ATProto", string.Empty).Replace("Bluesky", string.Empty)} => new (this);");
+                $"        public {baseNamespace}.{group.Key}.{className} {className.Replace("ATProto", string.Empty).Replace("Bluesky", string.Empty)} => new (this);");
             sb.AppendLine();
         }
 
@@ -286,7 +286,7 @@ public partial class AppCommands
         Console.WriteLine($"Generating Endpoint Group: {group.Key}");
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
+        this.GenerateNamespace(sb, $"{baseNamespace}.{group.Key}");
         var groupSplit = group.Key.Split(".");
         string className;
         if (groupSplit[1] == "Atproto")
@@ -433,7 +433,7 @@ public partial class AppCommands
         this.GenerateHeader(sb);
         sb.AppendLine($"using FishyFlip.Lexicon.Com.Atproto.Repo;");
         sb.AppendLine();
-        this.GenerateNamespace(sb, this.baseNamespace);
+        this.GenerateNamespace(sb, baseNamespace);
         sb.AppendLine("{");
         sb.AppendLine();
         sb.AppendLine($"    /// <summary>");
@@ -451,9 +451,9 @@ public partial class AppCommands
             var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
             inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             inputProperties[inputProperties.IndexOf("ATObject record")] =
-                $"{this.baseNamespace}.{item.FullClassName} record";
+                $"{baseNamespace}.{item.FullClassName} record";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -483,7 +483,7 @@ public partial class AppCommands
             var totalRequiredProperties = propertyRequiredProperties.Concat(requiredProperties).ToList();
             var totalOptionalProperties = propertyOptionalProperties.Concat(optionalProperties).ToList();
             inputProperties = totalRequiredProperties.Concat(totalOptionalProperties).ToList();
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -495,7 +495,7 @@ public partial class AppCommands
                 $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
-            sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
+            sb.AppendLine($"            var record = new {baseNamespace}.{item.FullClassName}();");
             for (int i = 0; i < item.Properties.Count(); i++)
             {
                 var prop = item.Properties[i].PropertyName;
@@ -519,7 +519,7 @@ public partial class AppCommands
             sb.AppendLine("        /// </summary>");
             (requiredProperties, optionalProperties) = this.FetchInputProperties(deleteRecord, true);
             inputProperties = requiredProperties.Concat(optionalProperties).ToList();
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
             inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
             this.GenerateParams(sb, item, inputProperties);
@@ -543,9 +543,9 @@ public partial class AppCommands
             inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
             inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             inputProperties[inputProperties.IndexOf("ATObject record")] =
-                $"{this.baseNamespace}.{item.FullClassName} record";
+                $"{baseNamespace}.{item.FullClassName} record";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -568,7 +568,7 @@ public partial class AppCommands
             inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
             inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -589,7 +589,7 @@ public partial class AppCommands
             (requiredProperties, optionalProperties) = this.FetchInputProperties(listRecords, true);
             inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<ListRecordsOutput?>> List{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -609,7 +609,7 @@ public partial class AppCommands
             inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
             inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<GetRecordOutput?>> Get{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -630,7 +630,7 @@ public partial class AppCommands
             (requiredProperties, optionalProperties) = this.FetchInputProperties(getRecord, true);
             inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
-            inputProperties[0] = $"this {this.baseNamespace}.{item.CSharpNamespace}.{className} atp";
+            inputProperties[0] = $"this {baseNamespace}.{item.CSharpNamespace}.{className} atp";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<GetRecordOutput?>> Get{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -661,7 +661,7 @@ public partial class AppCommands
         this.GenerateHeader(sb);
         sb.AppendLine($"using FishyFlip.Lexicon.Com.Atproto.Repo;");
         sb.AppendLine();
-        this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
+        this.GenerateNamespace(sb, $"{baseNamespace}.{group.Key}");
         sb.AppendLine("{");
         sb.AppendLine();
         sb.AppendLine($"    /// <summary>");
@@ -678,7 +678,7 @@ public partial class AppCommands
             var (requiredProperties, optionalProperties) = this.FetchInputProperties(createRecord, true);
             var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
-            inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
+            inputProperties[inputProperties.IndexOf("ATObject record")] = $"{baseNamespace}.{item.FullClassName} record";
             inputProperties.Remove(inputProperties.First(n => n == "FishyFlip.Models.ATIdentifier repo"));
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<CreateRecordOutput?>> Create{item.ClassName}Async(");
@@ -719,7 +719,7 @@ public partial class AppCommands
                 $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
-            sb.AppendLine($"            var record = new {this.baseNamespace}.{item.FullClassName}();");
+            sb.AppendLine($"            var record = new {baseNamespace}.{item.FullClassName}();");
             for (int i = 0; i < item.Properties.Count(); i++)
             {
                 var prop = item.Properties[i].PropertyName;
@@ -762,7 +762,7 @@ public partial class AppCommands
             (requiredProperties, optionalProperties) = this.FetchInputProperties(putRecord, true);
             inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             inputProperties.Remove(inputProperties.First(n => n == "string collection"));
-            inputProperties[inputProperties.IndexOf("ATObject record")] = $"{item.FullClassName} record";
+            inputProperties[inputProperties.IndexOf("ATObject record")] = $"{baseNamespace}.{item.FullClassName} record";
             this.GenerateParams(sb, item, inputProperties);
             sb.Append($"        public static Task<Result<PutRecordOutput?>> Put{item.ClassName}Async(");
             this.GenerateInputProperties(sb, inputProperties);
@@ -917,7 +917,7 @@ public partial class AppCommands
                                     : unionType;
                                 var cls2 = FindClassFromRef(refString);
                                 sb.AppendLine(cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object"
-                                    ? $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>"
+                                    ? $"        /// <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>"
                                     : $"        /// {unionType} <br/>");
                             }
 
@@ -976,7 +976,7 @@ public partial class AppCommands
                 if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
                 {
                     sb.AppendLine(
-                        $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                        $"        /// <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
                 }
                 else if (cls2?.Definition.KnownValues?.Any() ?? false)
                 {
@@ -1014,7 +1014,7 @@ public partial class AppCommands
                         : unionType;
                     var cls2 = FindClassFromRef(refString);
                     sb.AppendLine(cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object"
-                        ? $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>"
+                        ? $"        /// <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>"
                         : $"        /// {unionType} <br/>");
                 }
 
@@ -1052,7 +1052,7 @@ public partial class AppCommands
         sb.AppendLine("        /// <br/> Possible Errors: <br/>");
         foreach (var error in errors)
         {
-            sb.AppendLine($"        /// <see cref=\"{this.baseNamespace}.{error.Name.ToPascalCase()}Error\"/> {error.Description} <br/>");
+            sb.AppendLine($"        /// <see cref=\"{baseNamespace}.{error.Name.ToPascalCase()}Error\"/> {error.Description} <br/>");
         }
     }
 
@@ -1061,7 +1061,7 @@ public partial class AppCommands
         Console.WriteLine($"Generating Endpoint Group: {group.Key}");
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, $"{this.baseNamespace}.{group.Key}");
+        this.GenerateNamespace(sb, $"{baseNamespace}.{group.Key}");
         var className = $"{group.Key.Split(".").Last()}Endpoints";
         sb.AppendLine("{");
         sb.AppendLine();
@@ -1510,7 +1510,7 @@ public partial class AppCommands
             };
         }
 
-        return $"{this.baseNamespace}.{classRef.CSharpNamespace}.{classRef.ClassName}";
+        return $"{baseNamespace}.{classRef.CSharpNamespace}.{classRef.ClassName}";
     }
 
     private List<string> GetMainRecordJsonFiles(List<string> jsonFiles)
@@ -1606,7 +1606,7 @@ public partial class AppCommands
     {
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, this.baseNamespace);
+        this.GenerateNamespace(sb, baseNamespace);
         sb.AppendLine("{");
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// ATProtocol Message Source Generation Context.");
@@ -1628,7 +1628,7 @@ public partial class AppCommands
             $"        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]");
         foreach (var cls in classes)
         {
-            var typeName = $"{this.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}";
+            var typeName = $"{baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}";
             var typeInfoPropertyName = $"{cls.CSharpNamespace}.{cls.ClassName}".Replace(".", string.Empty);
             sb.AppendLine(
                 $"    [JsonSerializable(typeof({typeName}), TypeInfoPropertyName = \"{typeInfoPropertyName}\")]");
@@ -1672,7 +1672,7 @@ public partial class AppCommands
 
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, $"{this.baseNamespace}.{cls.CSharpNamespace}");
+        this.GenerateNamespace(sb, $"{baseNamespace}.{cls.CSharpNamespace}");
         sb.AppendLine("{");
 
         this.GenerateClassDocumentation(sb, cls.Definition);
@@ -1737,7 +1737,7 @@ public partial class AppCommands
         sb.AppendLine($"        public override string ToJson()");
         sb.AppendLine("        {");
         sb.AppendLine(
-            $"            return JsonSerializer.Serialize<{cls.CSharpNamespace}.{cls.ClassName}>(this, (JsonTypeInfo<{cls.CSharpNamespace}.{cls.ClassName}>)SourceGenerationContext.Default.{$"{cls.CSharpNamespace}".Replace(".", string.Empty)}{cls.ClassName})!;");
+            $"            return JsonSerializer.Serialize<{baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>(this, (JsonTypeInfo<{baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>)SourceGenerationContext.Default.{$"{cls.CSharpNamespace}".Replace(".", string.Empty)}{cls.ClassName})!;");
         sb.AppendLine("        }");
     }
 
@@ -1746,7 +1746,7 @@ public partial class AppCommands
         sb.AppendLine($"        public static {cls.ClassName} FromJson(string json)");
         sb.AppendLine("        {");
         sb.AppendLine(
-            $"            return JsonSerializer.Deserialize<{cls.CSharpNamespace}.{cls.ClassName}>(json, (JsonTypeInfo<{cls.CSharpNamespace}.{cls.ClassName}>)SourceGenerationContext.Default.{$"{cls.CSharpNamespace}".Replace(".", string.Empty)}{cls.ClassName})!;");
+            $"            return JsonSerializer.Deserialize<{baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>(json, (JsonTypeInfo<{baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>)SourceGenerationContext.Default.{$"{cls.CSharpNamespace}".Replace(".", string.Empty)}{cls.ClassName})!;");
         sb.AppendLine("        }");
     }
 
@@ -1810,7 +1810,7 @@ public partial class AppCommands
                 if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
                 {
                     sb.AppendLine(
-                        $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                        $"        /// <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
                 }
                 else
                 {
@@ -1864,7 +1864,7 @@ public partial class AppCommands
                     if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
                     {
                         sb.AppendLine(
-                            $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>");
+                            $"        /// <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>");
                     }
                     else
                     {
@@ -1972,7 +1972,7 @@ public partial class AppCommands
             var cls2 = FindClassFromRef(refString);
             if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
             {
-                sb.AppendLine($"        /// <br/> <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
+                sb.AppendLine($"        /// <br/> <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString})");
             }
             else
             {
@@ -2024,7 +2024,7 @@ public partial class AppCommands
                 if (cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object")
                 {
                     sb.AppendLine(
-                        $"        /// <see cref=\"{this.baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>");
+                        $"        /// <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>");
                 }
                 else
                 {
@@ -2204,7 +2204,7 @@ public partial class AppCommands
         foreach (var cls in classes)
         {
             sb.AppendLine(
-                $"    [JsonDerivedType(typeof({cls.CSharpNamespace}.{cls.ClassName}), typeDiscriminator: \"{cls.Id}\")]");
+                $"    [JsonDerivedType(typeof({AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}), typeDiscriminator: \"{cls.Id}\")]");
         }
 
         sb.AppendLine($"    [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: \"blob\")]");
@@ -2280,7 +2280,7 @@ public partial class AppCommands
         {
             var sb = new StringBuilder();
             this.GenerateHeader(sb);
-            this.GenerateNamespace(sb, this.baseNamespace);
+            this.GenerateNamespace(sb, baseNamespace);
             sb.AppendLine("{");
             sb.AppendLine($"    /// <summary>");
             sb.AppendLine($"    /// FishyFlip ATError for {errorCode}.");
@@ -2302,7 +2302,7 @@ public partial class AppCommands
     {
         var sb = new StringBuilder();
         this.GenerateHeader(sb);
-        this.GenerateNamespace(sb, this.baseNamespace);
+        this.GenerateNamespace(sb, baseNamespace);
         sb.AppendLine("{");
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// Generates casted ATError messages if available.");

@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// Initializes a new instance of the <see cref="FindCorrelationOutput"/> class.
         /// </summary>
         /// <param name="details"></param>
-        public FindCorrelationOutput(List<Tools.Ozone.Signature.SigDetail>? details = default)
+        public FindCorrelationOutput(List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>? details = default)
         {
             this.Details = details;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         public FindCorrelationOutput(CBORObject obj)
         {
-            if (obj["details"] is not null) this.Details = obj["details"].Values.Select(n =>new Tools.Ozone.Signature.SigDetail(n)).ToList();
+            if (obj["details"] is not null) this.Details = obj["details"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         [JsonPropertyName("details")]
         [JsonRequired]
-        public List<Tools.Ozone.Signature.SigDetail>? Details { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>? Details { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Signature.FindCorrelationOutput>(this, (JsonTypeInfo<Tools.Ozone.Signature.FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput)!;
         }
 
         public static FindCorrelationOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Signature.FindCorrelationOutput>(json, (JsonTypeInfo<Tools.Ozone.Signature.FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput)!;
         }
     }
 }

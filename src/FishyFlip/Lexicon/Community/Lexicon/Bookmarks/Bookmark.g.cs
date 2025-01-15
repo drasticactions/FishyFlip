@@ -73,12 +73,12 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Community.Lexicon.Bookmarks.Bookmark>(this, (JsonTypeInfo<Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
         }
 
         public static Bookmark FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Community.Lexicon.Bookmarks.Bookmark>(json, (JsonTypeInfo<Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
         }
     }
 }

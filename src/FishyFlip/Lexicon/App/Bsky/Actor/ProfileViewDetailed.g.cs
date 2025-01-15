@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="pinnedPost">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </param>
-        public ProfileViewDetailed(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? description = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, App.Bsky.Actor.ProfileAssociated? associated = default, App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, App.Bsky.Actor.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default)
+        public ProfileViewDetailed(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? description = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default)
         {
             this.Did = did;
             this.Handle = handle;
@@ -79,12 +79,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["followersCount"] is not null) this.FollowersCount = obj["followersCount"].AsInt64Value();
             if (obj["followsCount"] is not null) this.FollowsCount = obj["followsCount"].AsInt64Value();
             if (obj["postsCount"] is not null) this.PostsCount = obj["postsCount"].AsInt64Value();
-            if (obj["associated"] is not null) this.Associated = new App.Bsky.Actor.ProfileAssociated(obj["associated"]);
-            if (obj["joinedViaStarterPack"] is not null) this.JoinedViaStarterPack = new App.Bsky.Graph.StarterPackViewBasic(obj["joinedViaStarterPack"]);
+            if (obj["associated"] is not null) this.Associated = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated(obj["associated"]);
+            if (obj["joinedViaStarterPack"] is not null) this.JoinedViaStarterPack = new FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic(obj["joinedViaStarterPack"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
-            if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Actor.ViewerState(obj["viewer"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Actor.ViewerState(obj["viewer"]);
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["pinnedPost"] is not null) this.PinnedPost = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["pinnedPost"]);
         }
 
@@ -151,14 +151,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated"/> (app.bsky.actor.defs#profileAssociated)
         /// </summary>
         [JsonPropertyName("associated")]
-        public App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedViaStarterPack.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic"/> (app.bsky.graph.defs#starterPackViewBasic)
         /// </summary>
         [JsonPropertyName("joinedViaStarterPack")]
-        public App.Bsky.Graph.StarterPackViewBasic? JoinedViaStarterPack { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? JoinedViaStarterPack { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
@@ -177,13 +177,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
-        public App.Bsky.Actor.ViewerState? Viewer { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the pinnedPost.
@@ -202,12 +202,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.ProfileViewDetailed>(this, (JsonTypeInfo<App.Bsky.Actor.ProfileViewDetailed>)SourceGenerationContext.Default.AppBskyActorProfileViewDetailed)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>)SourceGenerationContext.Default.AppBskyActorProfileViewDetailed)!;
         }
 
         public static ProfileViewDetailed FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.ProfileViewDetailed>(json, (JsonTypeInfo<App.Bsky.Actor.ProfileViewDetailed>)SourceGenerationContext.Default.AppBskyActorProfileViewDetailed)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>)SourceGenerationContext.Default.AppBskyActorProfileViewDetailed)!;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="bookmarks"></param>
-        public GetActorBookmarksOutput(string? cursor = default, List<Community.Lexicon.Bookmarks.Bookmark>? bookmarks = default)
+        public GetActorBookmarksOutput(string? cursor = default, List<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>? bookmarks = default)
         {
             this.Cursor = cursor;
             this.Bookmarks = bookmarks;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         public GetActorBookmarksOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["bookmarks"] is not null) this.Bookmarks = obj["bookmarks"].Values.Select(n =>new Community.Lexicon.Bookmarks.Bookmark(n)).ToList();
+            if (obj["bookmarks"] is not null) this.Bookmarks = obj["bookmarks"].Values.Select(n =>new FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// </summary>
         [JsonPropertyName("bookmarks")]
         [JsonRequired]
-        public List<Community.Lexicon.Bookmarks.Bookmark>? Bookmarks { get; set; }
+        public List<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>? Bookmarks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(this, (JsonTypeInfo<Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
         }
 
         public static GetActorBookmarksOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(json, (JsonTypeInfo<Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
         }
     }
 }

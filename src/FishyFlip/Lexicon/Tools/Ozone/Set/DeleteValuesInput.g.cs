@@ -64,12 +64,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Set.DeleteValuesInput>(this, (JsonTypeInfo<Tools.Ozone.Set.DeleteValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetDeleteValuesInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetDeleteValuesInput)!;
         }
 
         public static DeleteValuesInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Set.DeleteValuesInput>(json, (JsonTypeInfo<Tools.Ozone.Set.DeleteValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetDeleteValuesInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetDeleteValuesInput)!;
         }
     }
 }

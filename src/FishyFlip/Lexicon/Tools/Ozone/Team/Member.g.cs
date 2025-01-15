@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// roleModerator <br/>
         /// roleTriage <br/>
         /// </param>
-        public Member(FishyFlip.Models.ATDid? did = default, bool? disabled = default, App.Bsky.Actor.ProfileViewDetailed? profile = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? lastUpdatedBy = default, string? role = default)
+        public Member(FishyFlip.Models.ATDid? did = default, bool? disabled = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed? profile = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? lastUpdatedBy = default, string? role = default)
         {
             this.Did = did;
             this.Disabled = disabled;
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["disabled"] is not null) this.Disabled = obj["disabled"].AsBoolean();
-            if (obj["profile"] is not null) this.Profile = new App.Bsky.Actor.ProfileViewDetailed(obj["profile"]);
+            if (obj["profile"] is not null) this.Profile = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed(obj["profile"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
             if (obj["lastUpdatedBy"] is not null) this.LastUpdatedBy = obj["lastUpdatedBy"].AsString();
@@ -79,7 +79,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed"/> (app.bsky.actor.defs#profileViewDetailed)
         /// </summary>
         [JsonPropertyName("profile")]
-        public App.Bsky.Actor.ProfileViewDetailed? Profile { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed? Profile { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
@@ -120,12 +120,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Team.Member>(this, (JsonTypeInfo<Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Team.Member>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember)!;
         }
 
         public static Member FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Team.Member>(json, (JsonTypeInfo<Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Team.Member>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember)!;
         }
     }
 }

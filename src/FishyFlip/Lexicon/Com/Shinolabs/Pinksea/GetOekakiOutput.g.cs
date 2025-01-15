@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone"/> (com.shinolabs.pinksea.appViewDefs#oekakiTombstone) <br/>
         /// </param>
         /// <param name="children"></param>
-        public GetOekakiOutput(ATObject? parent = default, List<Com.Shinolabs.Pinksea.HydratedOekaki>? children = default)
+        public GetOekakiOutput(ATObject? parent = default, List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>? children = default)
         {
             this.Parent = parent;
             this.Children = children;
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public GetOekakiOutput(CBORObject obj)
         {
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
-            if (obj["children"] is not null) this.Children = obj["children"].Values.Select(n =>new Com.Shinolabs.Pinksea.HydratedOekaki(n)).ToList();
+            if (obj["children"] is not null) this.Children = obj["children"].Values.Select(n =>new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki(n)).ToList();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         [JsonPropertyName("children")]
         [JsonRequired]
-        public List<Com.Shinolabs.Pinksea.HydratedOekaki>? Children { get; set; }
+        public List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>? Children { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -69,12 +69,12 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Shinolabs.Pinksea.GetOekakiOutput>(this, (JsonTypeInfo<Com.Shinolabs.Pinksea.GetOekakiOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetOekakiOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetOekakiOutput)!;
         }
 
         public static GetOekakiOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Shinolabs.Pinksea.GetOekakiOutput>(json, (JsonTypeInfo<Com.Shinolabs.Pinksea.GetOekakiOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetOekakiOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetOekakiOutput)!;
         }
     }
 }

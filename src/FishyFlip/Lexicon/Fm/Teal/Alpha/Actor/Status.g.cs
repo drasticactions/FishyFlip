@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="item">
         /// <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView"/> (fm.teal.alpha.feed.defs#playView)
         /// </param>
-        public Status(DateTime? time, Fm.Teal.Alpha.Feed.PlayView? item)
+        public Status(DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item)
         {
             this.Time = time;
             this.Item = item;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         public Status(CBORObject obj)
         {
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
-            if (obj["item"] is not null) this.Item = new Fm.Teal.Alpha.Feed.PlayView(obj["item"]);
+            if (obj["item"] is not null) this.Item = new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView(obj["item"]);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView"/> (fm.teal.alpha.feed.defs#playView)
         /// </summary>
         [JsonPropertyName("item")]
-        public Fm.Teal.Alpha.Feed.PlayView? Item { get; set; }
+        public FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? Item { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -67,12 +67,12 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fm.Teal.Alpha.Actor.Status>(this, (JsonTypeInfo<Fm.Teal.Alpha.Actor.Status>)SourceGenerationContext.Default.FmTealAlphaActorStatus)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>)SourceGenerationContext.Default.FmTealAlphaActorStatus)!;
         }
 
         public static Status FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fm.Teal.Alpha.Actor.Status>(json, (JsonTypeInfo<Fm.Teal.Alpha.Actor.Status>)SourceGenerationContext.Default.FmTealAlphaActorStatus)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>)SourceGenerationContext.Default.FmTealAlphaActorStatus)!;
         }
     }
 }

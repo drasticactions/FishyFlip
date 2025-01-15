@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="subjectBlobs"></param>
         /// <param name="createdBy"></param>
         /// <param name="createdAt"></param>
-        public ModEventViewDetail(long? id = default, ATObject? @event = default, ATObject? subject = default, List<Tools.Ozone.Moderation.BlobView>? subjectBlobs = default, FishyFlip.Models.ATDid? createdBy = default, DateTime? createdAt = default)
+        public ModEventViewDetail(long? id = default, ATObject? @event = default, ATObject? subject = default, List<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>? subjectBlobs = default, FishyFlip.Models.ATDid? createdBy = default, DateTime? createdAt = default)
         {
             this.Id = id;
             this.Event = @event;
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["id"] is not null) this.Id = obj["id"].AsInt64Value();
             if (obj["event"] is not null) this.Event = obj["event"].ToATObject();
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
-            if (obj["subjectBlobs"] is not null) this.SubjectBlobs = obj["subjectBlobs"].Values.Select(n =>new Tools.Ozone.Moderation.BlobView(n)).ToList();
+            if (obj["subjectBlobs"] is not null) this.SubjectBlobs = obj["subjectBlobs"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView(n)).ToList();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
@@ -126,7 +126,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("subjectBlobs")]
         [JsonRequired]
-        public List<Tools.Ozone.Moderation.BlobView>? SubjectBlobs { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>? SubjectBlobs { get; set; }
 
         /// <summary>
         /// Gets or sets the createdBy.
@@ -153,12 +153,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.ModEventViewDetail>(this, (JsonTypeInfo<Tools.Ozone.Moderation.ModEventViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventViewDetail)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventViewDetail)!;
         }
 
         public static ModEventViewDetail FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.ModEventViewDetail>(json, (JsonTypeInfo<Tools.Ozone.Moderation.ModEventViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventViewDetail)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventViewDetail)!;
         }
     }
 }

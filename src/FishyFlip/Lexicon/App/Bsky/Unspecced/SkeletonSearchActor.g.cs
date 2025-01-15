@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.SkeletonSearchActor>(this, (JsonTypeInfo<App.Bsky.Unspecced.SkeletonSearchActor>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchActor)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchActor)!;
         }
 
         public static SkeletonSearchActor FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.SkeletonSearchActor>(json, (JsonTypeInfo<App.Bsky.Unspecced.SkeletonSearchActor>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchActor)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchActor)!;
         }
     }
 }

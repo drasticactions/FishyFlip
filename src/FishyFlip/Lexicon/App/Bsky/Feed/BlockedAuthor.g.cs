@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="viewer">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </param>
-        public BlockedAuthor(FishyFlip.Models.ATDid? did = default, App.Bsky.Actor.ViewerState? viewer = default)
+        public BlockedAuthor(FishyFlip.Models.ATDid? did = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default)
         {
             this.Did = did;
             this.Viewer = viewer;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public BlockedAuthor(CBORObject obj)
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
-            if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Actor.ViewerState(obj["viewer"]);
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Actor.ViewerState(obj["viewer"]);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
-        public App.Bsky.Actor.ViewerState? Viewer { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.BlockedAuthor>(this, (JsonTypeInfo<App.Bsky.Feed.BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor)!;
         }
 
         public static BlockedAuthor FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.BlockedAuthor>(json, (JsonTypeInfo<App.Bsky.Feed.BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor)!;
         }
     }
 }

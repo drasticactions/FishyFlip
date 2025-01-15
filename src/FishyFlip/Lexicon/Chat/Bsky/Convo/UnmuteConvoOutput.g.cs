@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <param name="convo">
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView"/> (chat.bsky.convo.defs#convoView)
         /// </param>
-        public UnmuteConvoOutput(Chat.Bsky.Convo.ConvoView? convo = default)
+        public UnmuteConvoOutput(FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView? convo = default)
         {
             this.Convo = convo;
         }
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public UnmuteConvoOutput(CBORObject obj)
         {
-            if (obj["convo"] is not null) this.Convo = new Chat.Bsky.Convo.ConvoView(obj["convo"]);
+            if (obj["convo"] is not null) this.Convo = new FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView(obj["convo"]);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         [JsonPropertyName("convo")]
         [JsonRequired]
-        public Chat.Bsky.Convo.ConvoView? Convo { get; set; }
+        public FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView? Convo { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -55,12 +55,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.UnmuteConvoOutput>(this, (JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoOutput)!;
         }
 
         public static UnmuteConvoOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.UnmuteConvoOutput>(json, (JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoOutput)!;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="createdAt"></param>
-        public Service(App.Bsky.Labeler.LabelerPolicies? policies, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
+        public Service(FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies? policies, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
         {
             this.Policies = policies;
             this.Labels = labels;
@@ -44,8 +44,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public Service(CBORObject obj)
         {
-            if (obj["policies"] is not null) this.Policies = new App.Bsky.Labeler.LabelerPolicies(obj["policies"]);
-            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
+            if (obj["policies"] is not null) this.Policies = new FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies(obj["policies"]);
+            if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies"/> (app.bsky.labeler.defs#labelerPolicies)
         /// </summary>
         [JsonPropertyName("policies")]
-        public App.Bsky.Labeler.LabelerPolicies? Policies { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies? Policies { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
-        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
@@ -80,12 +80,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Labeler.Service>(this, (JsonTypeInfo<App.Bsky.Labeler.Service>)SourceGenerationContext.Default.AppBskyLabelerService)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Labeler.Service>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.Service>)SourceGenerationContext.Default.AppBskyLabelerService)!;
         }
 
         public static Service FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Labeler.Service>(json, (JsonTypeInfo<App.Bsky.Labeler.Service>)SourceGenerationContext.Default.AppBskyLabelerService)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Labeler.Service>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.Service>)SourceGenerationContext.Default.AppBskyLabelerService)!;
         }
     }
 }

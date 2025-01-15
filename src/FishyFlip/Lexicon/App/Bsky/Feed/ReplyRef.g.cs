@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="grandparentAuthor">When parent is a reply to another post, this is the author of that post.
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </param>
-        public ReplyRef(ATObject? root = default, ATObject? parent = default, App.Bsky.Actor.ProfileViewBasic? grandparentAuthor = default)
+        public ReplyRef(ATObject? root = default, ATObject? parent = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? grandparentAuthor = default)
         {
             this.Root = root;
             this.Parent = parent;
@@ -50,7 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["root"] is not null) this.Root = obj["root"].ToATObject();
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
-            if (obj["grandparentAuthor"] is not null) this.GrandparentAuthor = new App.Bsky.Actor.ProfileViewBasic(obj["grandparentAuthor"]);
+            if (obj["grandparentAuthor"] is not null) this.GrandparentAuthor = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["grandparentAuthor"]);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </summary>
         [JsonPropertyName("grandparentAuthor")]
-        public App.Bsky.Actor.ProfileViewBasic? GrandparentAuthor { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? GrandparentAuthor { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -93,12 +93,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.ReplyRef>(this, (JsonTypeInfo<App.Bsky.Feed.ReplyRef>)SourceGenerationContext.Default.AppBskyFeedReplyRef)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef>)SourceGenerationContext.Default.AppBskyFeedReplyRef)!;
         }
 
         public static ReplyRef FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.ReplyRef>(json, (JsonTypeInfo<App.Bsky.Feed.ReplyRef>)SourceGenerationContext.Default.AppBskyFeedReplyRef)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef>)SourceGenerationContext.Default.AppBskyFeedReplyRef)!;
         }
     }
 }
