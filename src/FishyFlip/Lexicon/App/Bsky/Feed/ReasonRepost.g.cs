@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </param>
         /// <param name="indexedAt"></param>
-        public ReasonRepost(App.Bsky.Actor.ProfileViewBasic? by = default, DateTime? indexedAt = default)
+        public ReasonRepost(FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? by = default, DateTime? indexedAt = default)
         {
             this.By = by;
             this.IndexedAt = indexedAt;
@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ReasonRepost(CBORObject obj)
         {
-            if (obj["by"] is not null) this.By = new App.Bsky.Actor.ProfileViewBasic(obj["by"]);
+            if (obj["by"] is not null) this.By = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["by"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("by")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileViewBasic? By { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? By { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.ReasonRepost>(this, (JsonTypeInfo<App.Bsky.Feed.ReasonRepost>)SourceGenerationContext.Default.AppBskyFeedReasonRepost)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost>)SourceGenerationContext.Default.AppBskyFeedReasonRepost)!;
         }
 
         public static ReasonRepost FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.ReasonRepost>(json, (JsonTypeInfo<App.Bsky.Feed.ReasonRepost>)SourceGenerationContext.Default.AppBskyFeedReasonRepost)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost>)SourceGenerationContext.Default.AppBskyFeedReasonRepost)!;
         }
     }
 }

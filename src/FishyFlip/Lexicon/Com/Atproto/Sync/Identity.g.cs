@@ -87,12 +87,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Sync.Identity>(this, (JsonTypeInfo<Com.Atproto.Sync.Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity)!;
         }
 
         public static Identity FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Sync.Identity>(json, (JsonTypeInfo<Com.Atproto.Sync.Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity)!;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateBookmarkAsync(this FishyFlip.ATProtocol atp, Community.Lexicon.Bookmarks.Bookmark record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateBookmarkAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "community.lexicon.bookmarks.bookmark", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -73,7 +73,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutBookmarkAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Community.Lexicon.Bookmarks.Bookmark record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutBookmarkAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "community.lexicon.bookmarks.bookmark", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

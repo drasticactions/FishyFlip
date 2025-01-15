@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.ListViewerState>(this, (JsonTypeInfo<App.Bsky.Graph.ListViewerState>)SourceGenerationContext.Default.AppBskyGraphListViewerState)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState>)SourceGenerationContext.Default.AppBskyGraphListViewerState)!;
         }
 
         public static ListViewerState FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.ListViewerState>(json, (JsonTypeInfo<App.Bsky.Graph.ListViewerState>)SourceGenerationContext.Default.AppBskyGraphListViewerState)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState>)SourceGenerationContext.Default.AppBskyGraphListViewerState)!;
         }
     }
 }

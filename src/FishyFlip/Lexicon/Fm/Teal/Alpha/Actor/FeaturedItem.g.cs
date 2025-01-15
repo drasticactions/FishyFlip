@@ -64,12 +64,12 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fm.Teal.Alpha.Actor.FeaturedItem>(this, (JsonTypeInfo<Fm.Teal.Alpha.Actor.FeaturedItem>)SourceGenerationContext.Default.FmTealAlphaActorFeaturedItem)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>)SourceGenerationContext.Default.FmTealAlphaActorFeaturedItem)!;
         }
 
         public static FeaturedItem FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fm.Teal.Alpha.Actor.FeaturedItem>(json, (JsonTypeInfo<Fm.Teal.Alpha.Actor.FeaturedItem>)SourceGenerationContext.Default.FmTealAlphaActorFeaturedItem)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>)SourceGenerationContext.Default.FmTealAlphaActorFeaturedItem)!;
         }
     }
 }

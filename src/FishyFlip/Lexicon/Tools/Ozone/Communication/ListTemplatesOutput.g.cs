@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// Initializes a new instance of the <see cref="ListTemplatesOutput"/> class.
         /// </summary>
         /// <param name="communicationTemplates"></param>
-        public ListTemplatesOutput(List<Tools.Ozone.Communication.TemplateView>? communicationTemplates = default)
+        public ListTemplatesOutput(List<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>? communicationTemplates = default)
         {
             this.CommunicationTemplates = communicationTemplates;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         public ListTemplatesOutput(CBORObject obj)
         {
-            if (obj["communicationTemplates"] is not null) this.CommunicationTemplates = obj["communicationTemplates"].Values.Select(n =>new Tools.Ozone.Communication.TemplateView(n)).ToList();
+            if (obj["communicationTemplates"] is not null) this.CommunicationTemplates = obj["communicationTemplates"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         [JsonPropertyName("communicationTemplates")]
         [JsonRequired]
-        public List<Tools.Ozone.Communication.TemplateView>? CommunicationTemplates { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>? CommunicationTemplates { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Communication.ListTemplatesOutput>(this, (JsonTypeInfo<Tools.Ozone.Communication.ListTemplatesOutput>)SourceGenerationContext.Default.ToolsOzoneCommunicationListTemplatesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>)SourceGenerationContext.Default.ToolsOzoneCommunicationListTemplatesOutput)!;
         }
 
         public static ListTemplatesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Communication.ListTemplatesOutput>(json, (JsonTypeInfo<Tools.Ozone.Communication.ListTemplatesOutput>)SourceGenerationContext.Default.ToolsOzoneCommunicationListTemplatesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>)SourceGenerationContext.Default.ToolsOzoneCommunicationListTemplatesOutput)!;
         }
     }
 }

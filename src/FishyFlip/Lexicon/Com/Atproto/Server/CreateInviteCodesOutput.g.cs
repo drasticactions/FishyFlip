@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Initializes a new instance of the <see cref="CreateInviteCodesOutput"/> class.
         /// </summary>
         /// <param name="codes"></param>
-        public CreateInviteCodesOutput(List<Com.Atproto.Server.AccountCodes>? codes = default)
+        public CreateInviteCodesOutput(List<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>? codes = default)
         {
             this.Codes = codes;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateInviteCodesOutput(CBORObject obj)
         {
-            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>new Com.Atproto.Server.AccountCodes(n)).ToList();
+            if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("codes")]
         [JsonRequired]
-        public List<Com.Atproto.Server.AccountCodes>? Codes { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>? Codes { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.CreateInviteCodesOutput>(this, (JsonTypeInfo<Com.Atproto.Server.CreateInviteCodesOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodesOutput)!;
         }
 
         public static CreateInviteCodesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.CreateInviteCodesOutput>(json, (JsonTypeInfo<Com.Atproto.Server.CreateInviteCodesOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodesOutput)!;
         }
     }
 }

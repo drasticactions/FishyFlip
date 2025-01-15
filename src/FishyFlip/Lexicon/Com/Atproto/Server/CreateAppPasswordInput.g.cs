@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.CreateAppPasswordInput>(this, (JsonTypeInfo<Com.Atproto.Server.CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput)!;
         }
 
         public static CreateAppPasswordInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.CreateAppPasswordInput>(json, (JsonTypeInfo<Com.Atproto.Server.CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput)!;
         }
     }
 }

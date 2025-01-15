@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.EnableAccountInvitesInput>(this, (JsonTypeInfo<Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput)!;
         }
 
         public static EnableAccountInvitesInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.EnableAccountInvitesInput>(json, (JsonTypeInfo<Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput)!;
         }
     }
 }

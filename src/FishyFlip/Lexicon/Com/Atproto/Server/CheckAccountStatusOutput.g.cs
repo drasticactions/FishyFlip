@@ -132,12 +132,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.CheckAccountStatusOutput>(this, (JsonTypeInfo<Com.Atproto.Server.CheckAccountStatusOutput>)SourceGenerationContext.Default.ComAtprotoServerCheckAccountStatusOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>)SourceGenerationContext.Default.ComAtprotoServerCheckAccountStatusOutput)!;
         }
 
         public static CheckAccountStatusOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.CheckAccountStatusOutput>(json, (JsonTypeInfo<Com.Atproto.Server.CheckAccountStatusOutput>)SourceGenerationContext.Default.ComAtprotoServerCheckAccountStatusOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>)SourceGenerationContext.Default.ComAtprotoServerCheckAccountStatusOutput)!;
         }
     }
 }

@@ -91,12 +91,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Set.SetView>(this, (JsonTypeInfo<Tools.Ozone.Set.SetView>)SourceGenerationContext.Default.ToolsOzoneSetSetView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>)SourceGenerationContext.Default.ToolsOzoneSetSetView)!;
         }
 
         public static SetView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Set.SetView>(json, (JsonTypeInfo<Tools.Ozone.Set.SetView>)SourceGenerationContext.Default.ToolsOzoneSetSetView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>)SourceGenerationContext.Default.ToolsOzoneSetSetView)!;
         }
     }
 }

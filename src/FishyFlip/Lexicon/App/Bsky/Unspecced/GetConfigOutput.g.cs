@@ -51,12 +51,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.GetConfigOutput>(this, (JsonTypeInfo<App.Bsky.Unspecced.GetConfigOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetConfigOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetConfigOutput)!;
         }
 
         public static GetConfigOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.GetConfigOutput>(json, (JsonTypeInfo<App.Bsky.Unspecced.GetConfigOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetConfigOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetConfigOutput)!;
         }
     }
 }

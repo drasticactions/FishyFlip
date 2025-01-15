@@ -72,12 +72,12 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<My.Skylights.Note>(this, (JsonTypeInfo<My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.My.Skylights.Note>(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;
         }
 
         public static Note FromJson(string json)
         {
-            return JsonSerializer.Deserialize<My.Skylights.Note>(json, (JsonTypeInfo<My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Note>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;
         }
     }
 }

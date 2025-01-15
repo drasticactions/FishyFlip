@@ -64,12 +64,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.Follow>(this, (JsonTypeInfo<App.Bsky.Graph.Follow>)SourceGenerationContext.Default.AppBskyGraphFollow)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.Follow>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Follow>)SourceGenerationContext.Default.AppBskyGraphFollow)!;
         }
 
         public static Follow FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.Follow>(json, (JsonTypeInfo<App.Bsky.Graph.Follow>)SourceGenerationContext.Default.AppBskyGraphFollow)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Follow>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Follow>)SourceGenerationContext.Default.AppBskyGraphFollow)!;
         }
     }
 }

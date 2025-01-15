@@ -126,12 +126,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.EmitEventInput>(this, (JsonTypeInfo<Tools.Ozone.Moderation.EmitEventInput>)SourceGenerationContext.Default.ToolsOzoneModerationEmitEventInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>)SourceGenerationContext.Default.ToolsOzoneModerationEmitEventInput)!;
         }
 
         public static EmitEventInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.EmitEventInput>(json, (JsonTypeInfo<Tools.Ozone.Moderation.EmitEventInput>)SourceGenerationContext.Default.ToolsOzoneModerationEmitEventInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>)SourceGenerationContext.Default.ToolsOzoneModerationEmitEventInput)!;
         }
     }
 }

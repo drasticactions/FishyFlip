@@ -106,12 +106,12 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Netlify.Aniblue.StatusDef>(this, (JsonTypeInfo<App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
         }
 
         public static StatusDef FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Netlify.Aniblue.StatusDef>(json, (JsonTypeInfo<App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
         }
     }
 }

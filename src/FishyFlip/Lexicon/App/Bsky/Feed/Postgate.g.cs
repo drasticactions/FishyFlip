@@ -22,7 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Union Types: <br/>
         /// #disableRule <br/>
         /// </param>
-        public Postgate(FishyFlip.Models.ATUri? post, DateTime? createdAt = default, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<App.Bsky.Feed.DisableRule>? embeddingRules = default)
+        public Postgate(FishyFlip.Models.ATUri? post, DateTime? createdAt = default, List<FishyFlip.Models.ATUri>? detachedEmbeddingUris = default, List<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>? embeddingRules = default)
         {
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Post = post;
@@ -47,7 +47,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["post"] is not null) this.Post = obj["post"].ToATUri();
             if (obj["detachedEmbeddingUris"] is not null) this.DetachedEmbeddingUris = obj["detachedEmbeddingUris"].Values.Select(n =>n.ToATUri()!).ToList();
-            if (obj["embeddingRules"] is not null) this.EmbeddingRules = obj["embeddingRules"].Values.Select(n =>new App.Bsky.Feed.DisableRule(n)).ToList();
+            if (obj["embeddingRules"] is not null) this.EmbeddingRules = obj["embeddingRules"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.DisableRule(n)).ToList();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule) <br/>
         /// </summary>
         [JsonPropertyName("embeddingRules")]
-        public List<App.Bsky.Feed.DisableRule>? EmbeddingRules { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>? EmbeddingRules { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -89,12 +89,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.Postgate>(this, (JsonTypeInfo<App.Bsky.Feed.Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate)!;
         }
 
         public static Postgate FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.Postgate>(json, (JsonTypeInfo<App.Bsky.Feed.Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate)!;
         }
     }
 }

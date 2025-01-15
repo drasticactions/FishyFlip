@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </param>
         /// <param name="indexedAt"></param>
         /// <param name="labels"></param>
-        public LabelerView(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileView? creator = default, long? likeCount = default, App.Bsky.Labeler.LabelerViewerState? viewer = default, DateTime? indexedAt = default, List<Com.Atproto.Label.Label>? labels = default)
+        public LabelerView(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? creator = default, long? likeCount = default, FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState? viewer = default, DateTime? indexedAt = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -50,11 +50,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
-            if (obj["creator"] is not null) this.Creator = new App.Bsky.Actor.ProfileView(obj["creator"]);
+            if (obj["creator"] is not null) this.Creator = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["creator"]);
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
-            if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Labeler.LabelerViewerState(obj["viewer"]);
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState(obj["viewer"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileView? Creator { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Creator { get; set; }
 
         /// <summary>
         /// Gets or sets the likeCount.
@@ -91,7 +91,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState"/> (app.bsky.labeler.defs#labelerViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
-        public App.Bsky.Labeler.LabelerViewerState? Viewer { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
@@ -104,7 +104,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -116,12 +116,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Labeler.LabelerView>(this, (JsonTypeInfo<App.Bsky.Labeler.LabelerView>)SourceGenerationContext.Default.AppBskyLabelerLabelerView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>)SourceGenerationContext.Default.AppBskyLabelerLabelerView)!;
         }
 
         public static LabelerView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Labeler.LabelerView>(json, (JsonTypeInfo<App.Bsky.Labeler.LabelerView>)SourceGenerationContext.Default.AppBskyLabelerLabelerView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>)SourceGenerationContext.Default.AppBskyLabelerLabelerView)!;
         }
     }
 }

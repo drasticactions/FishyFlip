@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateBookAsync(this FishyFlip.ATProtocol atp, Buzz.Bookhive.Book record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateBookAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Buzz.Bookhive.Book record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "buzz.bookhive.book", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -80,7 +80,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutBookAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Buzz.Bookhive.Book record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutBookAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Buzz.Bookhive.Book record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "buzz.bookhive.book", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
@@ -137,6 +137,121 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "buzz.bookhive.book", rkey, cid, cancellationToken);
         }
         /// <summary>
+        /// Create a Buzz record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="record"></param>
+        /// <param name="rkey"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<CreateRecordOutput?>> CreateBuzzAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Buzz.Bookhive.Buzz record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "buzz.bookhive.buzz", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a Buzz record.
+        /// </summary>
+        /// <param name="repo"></param>
+        /// <param name="collection"></param>
+        /// <param name="record"></param>
+        /// <param name="rkey"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<CreateRecordOutput?>> CreateBuzzAsync(this FishyFlip.ATProtocol atp, string? comment, Com.Atproto.Repo.StrongRef? parent, Com.Atproto.Repo.StrongRef? book, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.Buzz.Bookhive.Buzz();
+            record.Comment = comment;
+            record.CreatedAt = createdAt ?? DateTime.UtcNow;
+            record.Parent = parent;
+            record.Book = book;
+            return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "buzz.bookhive.buzz", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete a Buzz record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="swapRecord"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<DeleteRecordOutput?>> DeleteBuzzAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.DeleteRecordAsync(repo, "buzz.bookhive.buzz", rkey, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Put a Buzz record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="record"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapRecord"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<PutRecordOutput?>> PutBuzzAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Buzz.Bookhive.Buzz record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.PutRecordAsync(repo, "buzz.bookhive.buzz", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Buzz records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListBuzzAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(repo, "buzz.bookhive.buzz", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Buzz records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListBuzzAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "buzz.bookhive.buzz", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Buzz records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetBuzzAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(repo, "buzz.bookhive.buzz", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Buzz records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetBuzzAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "buzz.bookhive.buzz", rkey, cid, cancellationToken);
+        }
+        /// <summary>
         /// Create a HiveBook record.
         /// </summary>
         /// <param name="atp"></param>
@@ -145,7 +260,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateHiveBookAsync(this FishyFlip.ATProtocol atp, Buzz.Bookhive.HiveBook record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateHiveBookAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Buzz.Bookhive.HiveBook record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "buzz.bookhive.hiveBook", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -204,7 +319,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutHiveBookAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Buzz.Bookhive.HiveBook record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutHiveBookAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Buzz.Bookhive.HiveBook record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "buzz.bookhive.hiveBook", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

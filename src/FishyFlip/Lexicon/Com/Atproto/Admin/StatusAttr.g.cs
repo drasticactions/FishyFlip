@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.StatusAttr>(this, (JsonTypeInfo<Com.Atproto.Admin.StatusAttr>)SourceGenerationContext.Default.ComAtprotoAdminStatusAttr)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr>)SourceGenerationContext.Default.ComAtprotoAdminStatusAttr)!;
         }
 
         public static StatusAttr FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.StatusAttr>(json, (JsonTypeInfo<Com.Atproto.Admin.StatusAttr>)SourceGenerationContext.Default.ComAtprotoAdminStatusAttr)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr>)SourceGenerationContext.Default.ComAtprotoAdminStatusAttr)!;
         }
     }
 }

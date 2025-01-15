@@ -34,12 +34,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.SkeletonReasonPin>(this, (JsonTypeInfo<App.Bsky.Feed.SkeletonReasonPin>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonPin)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonPin)!;
         }
 
         public static SkeletonReasonPin FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.SkeletonReasonPin>(json, (JsonTypeInfo<App.Bsky.Feed.SkeletonReasonPin>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonPin)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonPin)!;
         }
     }
 }

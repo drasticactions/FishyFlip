@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateOekakiAsync(this FishyFlip.ATProtocol atp, Com.Shinolabs.Pinksea.Oekaki record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateOekakiAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.shinolabs.pinksea.oekaki", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateOekakiAsync(this FishyFlip.ATProtocol atp, Com.Shinolabs.Pinksea.Image? image, DateTime? createdAt = default, List<string>? tags = default, Com.Atproto.Repo.StrongRef? inResponseTo = default, bool? nsfw = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateOekakiAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image? image, DateTime? createdAt = default, List<string>? tags = default, Com.Atproto.Repo.StrongRef? inResponseTo = default, bool? nsfw = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki();
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutOekakiAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Com.Shinolabs.Pinksea.Oekaki record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutOekakiAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "com.shinolabs.pinksea.oekaki", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

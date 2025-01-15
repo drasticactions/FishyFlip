@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </param>
         /// <param name="isOnline">Indicates whether the feed generator service has been online recently, or else seems to be inactive.</param>
         /// <param name="isValid">Indicates whether the feed generator service is compatible with the record declaration.</param>
-        public GetFeedGeneratorOutput(App.Bsky.Feed.GeneratorView? view = default, bool? isOnline = default, bool? isValid = default)
+        public GetFeedGeneratorOutput(FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView? view = default, bool? isOnline = default, bool? isValid = default)
         {
             this.View = view;
             this.IsOnline = isOnline;
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetFeedGeneratorOutput(CBORObject obj)
         {
-            if (obj["view"] is not null) this.View = new App.Bsky.Feed.GeneratorView(obj["view"]);
+            if (obj["view"] is not null) this.View = new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView(obj["view"]);
             if (obj["isOnline"] is not null) this.IsOnline = obj["isOnline"].AsBoolean();
             if (obj["isValid"] is not null) this.IsValid = obj["isValid"].AsBoolean();
         }
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("view")]
         [JsonRequired]
-        public App.Bsky.Feed.GeneratorView? View { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView? View { get; set; }
 
         /// <summary>
         /// Gets or sets the isOnline.
@@ -77,12 +77,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GetFeedGeneratorOutput>(this, (JsonTypeInfo<App.Bsky.Feed.GetFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorOutput)!;
         }
 
         public static GetFeedGeneratorOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GetFeedGeneratorOutput>(json, (JsonTypeInfo<App.Bsky.Feed.GetFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorOutput)!;
         }
     }
 }

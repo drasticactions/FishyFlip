@@ -85,12 +85,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.Nux>(this, (JsonTypeInfo<App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.Nux>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux)!;
         }
 
         public static Nux FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.Nux>(json, (JsonTypeInfo<App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Nux>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux)!;
         }
     }
 }

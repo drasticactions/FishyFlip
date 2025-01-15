@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         /// <param name="labelValues">The label values which this labeler publishes. May include global or custom labels.</param>
         /// <param name="labelValueDefinitions">Label values created by this labeler and scoped exclusively to it. Labels defined here will override global label definitions for this labeler.</param>
-        public LabelerPolicies(List<string>? labelValues = default, List<Com.Atproto.Label.LabelValueDefinition>? labelValueDefinitions = default)
+        public LabelerPolicies(List<string>? labelValues = default, List<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>? labelValueDefinitions = default)
         {
             this.LabelValues = labelValues;
             this.LabelValueDefinitions = labelValueDefinitions;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public LabelerPolicies(CBORObject obj)
         {
             if (obj["labelValues"] is not null) this.LabelValues = obj["labelValues"].Values.Select(n =>n.AsString()).ToList();
-            if (obj["labelValueDefinitions"] is not null) this.LabelValueDefinitions = obj["labelValueDefinitions"].Values.Select(n =>new Com.Atproto.Label.LabelValueDefinition(n)).ToList();
+            if (obj["labelValueDefinitions"] is not null) this.LabelValueDefinitions = obj["labelValueDefinitions"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition(n)).ToList();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> Label values created by this labeler and scoped exclusively to it. Labels defined here will override global label definitions for this labeler.
         /// </summary>
         [JsonPropertyName("labelValueDefinitions")]
-        public List<Com.Atproto.Label.LabelValueDefinition>? LabelValueDefinitions { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>? LabelValueDefinitions { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Labeler.LabelerPolicies>(this, (JsonTypeInfo<App.Bsky.Labeler.LabelerPolicies>)SourceGenerationContext.Default.AppBskyLabelerLabelerPolicies)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies>)SourceGenerationContext.Default.AppBskyLabelerLabelerPolicies)!;
         }
 
         public static LabelerPolicies FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Labeler.LabelerPolicies>(json, (JsonTypeInfo<App.Bsky.Labeler.LabelerPolicies>)SourceGenerationContext.Default.AppBskyLabelerLabelerPolicies)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies>)SourceGenerationContext.Default.AppBskyLabelerLabelerPolicies)!;
         }
     }
 }

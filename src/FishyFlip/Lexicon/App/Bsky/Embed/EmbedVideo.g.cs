@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <param name="aspectRatio">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </param>
-        public EmbedVideo(Blob? video = default, List<App.Bsky.Embed.Caption>? captions = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
+        public EmbedVideo(Blob? video = default, List<FishyFlip.Lexicon.App.Bsky.Embed.Caption>? captions = default, string? alt = default, FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? aspectRatio = default)
         {
             this.Video = video;
             this.Captions = captions;
@@ -41,9 +41,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public EmbedVideo(CBORObject obj)
         {
             if (obj["video"] is not null) this.Video = new FishyFlip.Models.Blob(obj["video"]);
-            if (obj["captions"] is not null) this.Captions = obj["captions"].Values.Select(n =>new App.Bsky.Embed.Caption(n)).ToList();
+            if (obj["captions"] is not null) this.Captions = obj["captions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Embed.Caption(n)).ToList();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
-            if (obj["aspectRatio"] is not null) this.AspectRatio = new App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
+            if (obj["aspectRatio"] is not null) this.AspectRatio = new FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Gets or sets the captions.
         /// </summary>
         [JsonPropertyName("captions")]
-        public List<App.Bsky.Embed.Caption>? Captions { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Embed.Caption>? Captions { get; set; }
 
         /// <summary>
         /// Gets or sets the alt.
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
-        public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -83,12 +83,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.EmbedVideo>(this, (JsonTypeInfo<App.Bsky.Embed.EmbedVideo>)SourceGenerationContext.Default.AppBskyEmbedEmbedVideo)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo>)SourceGenerationContext.Default.AppBskyEmbedEmbedVideo)!;
         }
 
         public static EmbedVideo FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.EmbedVideo>(json, (JsonTypeInfo<App.Bsky.Embed.EmbedVideo>)SourceGenerationContext.Default.AppBskyEmbedEmbedVideo)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo>)SourceGenerationContext.Default.AppBskyEmbedEmbedVideo)!;
         }
     }
 }

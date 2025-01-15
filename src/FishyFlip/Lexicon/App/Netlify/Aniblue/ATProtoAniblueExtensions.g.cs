@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, App.Netlify.Aniblue.Status record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.App.Netlify.Aniblue.Status record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.netlify.aniblue.status", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, List<App.Netlify.Aniblue.StatusDef>? status, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>? status, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Netlify.Aniblue.Status();
             record.StatusValue = status;
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutStatusAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, App.Netlify.Aniblue.Status record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutStatusAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.App.Netlify.Aniblue.Status record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "app.netlify.aniblue.status", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

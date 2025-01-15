@@ -71,12 +71,12 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(this, (JsonTypeInfo<Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput)!;
         }
 
         public static GetEntryMetadataByNameOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(json, (JsonTypeInfo<Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput)!;
         }
     }
 }

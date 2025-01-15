@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="blocks"></param>
-        public GetBlocksOutput(string? cursor = default, List<App.Bsky.Actor.ProfileView>? blocks = default)
+        public GetBlocksOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? blocks = default)
         {
             this.Cursor = cursor;
             this.Blocks = blocks;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetBlocksOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["blocks"] is not null) this.Blocks = obj["blocks"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["blocks"] is not null) this.Blocks = obj["blocks"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("blocks")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView>? Blocks { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? Blocks { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.GetBlocksOutput>(this, (JsonTypeInfo<App.Bsky.Graph.GetBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetBlocksOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetBlocksOutput)!;
         }
 
         public static GetBlocksOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.GetBlocksOutput>(json, (JsonTypeInfo<App.Bsky.Graph.GetBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetBlocksOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetBlocksOutput)!;
         }
     }
 }

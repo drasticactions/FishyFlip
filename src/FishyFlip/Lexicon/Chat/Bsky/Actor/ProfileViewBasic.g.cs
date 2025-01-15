@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// </param>
         /// <param name="labels"></param>
         /// <param name="chatDisabled">Set to true when the actor cannot actively participate in converations</param>
-        public ProfileViewBasic(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? avatar = default, App.Bsky.Actor.ProfileAssociated? associated = default, App.Bsky.Actor.ViewerState? viewer = default, List<Com.Atproto.Label.Label>? labels = default, bool? chatDisabled = default)
+        public ProfileViewBasic(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? displayName = default, string? avatar = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, bool? chatDisabled = default)
         {
             this.Did = did;
             this.Handle = handle;
@@ -54,9 +54,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
             if (obj["avatar"] is not null) this.Avatar = obj["avatar"].AsString();
-            if (obj["associated"] is not null) this.Associated = new App.Bsky.Actor.ProfileAssociated(obj["associated"]);
-            if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Actor.ViewerState(obj["viewer"]);
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["associated"] is not null) this.Associated = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated(obj["associated"]);
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Actor.ViewerState(obj["viewer"]);
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["chatDisabled"] is not null) this.ChatDisabled = obj["chatDisabled"].AsBoolean();
         }
 
@@ -93,20 +93,20 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated"/> (app.bsky.actor.defs#profileAssociated)
         /// </summary>
         [JsonPropertyName("associated")]
-        public App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
 
         /// <summary>
         /// Gets or sets the viewer.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
-        public App.Bsky.Actor.ViewerState? Viewer { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the chatDisabled.
@@ -125,12 +125,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Actor.ProfileViewBasic>(this, (JsonTypeInfo<Chat.Bsky.Actor.ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic)!;
         }
 
         public static ProfileViewBasic FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Actor.ProfileViewBasic>(json, (JsonTypeInfo<Chat.Bsky.Actor.ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic)!;
         }
     }
 }

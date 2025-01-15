@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Temp.RequestPhoneVerificationInput>(this, (JsonTypeInfo<Com.Atproto.Temp.RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput)!;
         }
 
         public static RequestPhoneVerificationInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Temp.RequestPhoneVerificationInput>(json, (JsonTypeInfo<Com.Atproto.Temp.RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput)!;
         }
     }
 }

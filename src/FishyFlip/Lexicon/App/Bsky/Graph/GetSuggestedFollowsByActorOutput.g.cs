@@ -14,10 +14,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         /// <param name="suggestions"></param>
         /// <param name="isFallback">If true, response has fallen-back to generic results, and is not scoped using relativeToDid</param>
-        public GetSuggestedFollowsByActorOutput(List<App.Bsky.Actor.ProfileView>? suggestions = default, bool? isFallback = default)
+        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestedFollowsByActorOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? suggestions = default, bool? isFallback = default, long? recId = default)
         {
             this.Suggestions = suggestions;
             this.IsFallback = isFallback;
+            this.RecId = recId;
         }
 
 
@@ -34,8 +36,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetSuggestedFollowsByActorOutput(CBORObject obj)
         {
-            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
             if (obj["isFallback"] is not null) this.IsFallback = obj["isFallback"].AsBoolean();
+            if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
         }
 
         /// <summary>
@@ -43,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("suggestions")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView>? Suggestions { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? Suggestions { get; set; }
 
         /// <summary>
         /// Gets or sets the isFallback.
@@ -51,6 +54,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("isFallback")]
         public bool? IsFallback { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the recId.
+        /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
+        /// </summary>
+        [JsonPropertyName("recId")]
+        public long? RecId { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -62,12 +72,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(this, (JsonTypeInfo<App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
         }
 
         public static GetSuggestedFollowsByActorOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(json, (JsonTypeInfo<App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
         }
     }
 }

@@ -75,12 +75,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.ThreadViewPref>(this, (JsonTypeInfo<App.Bsky.Actor.ThreadViewPref>)SourceGenerationContext.Default.AppBskyActorThreadViewPref)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref>)SourceGenerationContext.Default.AppBskyActorThreadViewPref)!;
         }
 
         public static ThreadViewPref FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.ThreadViewPref>(json, (JsonTypeInfo<App.Bsky.Actor.ThreadViewPref>)SourceGenerationContext.Default.AppBskyActorThreadViewPref)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref>)SourceGenerationContext.Default.AppBskyActorThreadViewPref)!;
         }
     }
 }

@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.ThreatSignature>(this, (JsonTypeInfo<Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
         }
 
         public static ThreatSignature FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.ThreatSignature>(json, (JsonTypeInfo<Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="cid"></param>
         /// <param name="cursor"></param>
         /// <param name="repostedBy"></param>
-        public GetRepostedByOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<App.Bsky.Actor.ProfileView>? repostedBy = default)
+        public GetRepostedByOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? repostedBy = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["repostedBy"] is not null) this.RepostedBy = obj["repostedBy"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["repostedBy"] is not null) this.RepostedBy = obj["repostedBy"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("repostedBy")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView>? RepostedBy { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? RepostedBy { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -81,12 +81,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GetRepostedByOutput>(this, (JsonTypeInfo<App.Bsky.Feed.GetRepostedByOutput>)SourceGenerationContext.Default.AppBskyFeedGetRepostedByOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>)SourceGenerationContext.Default.AppBskyFeedGetRepostedByOutput)!;
         }
 
         public static GetRepostedByOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GetRepostedByOutput>(json, (JsonTypeInfo<App.Bsky.Feed.GetRepostedByOutput>)SourceGenerationContext.Default.AppBskyFeedGetRepostedByOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>)SourceGenerationContext.Default.AppBskyFeedGetRepostedByOutput)!;
         }
     }
 }

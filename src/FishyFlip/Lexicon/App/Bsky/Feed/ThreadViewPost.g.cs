@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </param>
-        public ThreadViewPost(App.Bsky.Feed.PostView? post = default, ATObject? parent = default, List<ATObject>? replies = default)
+        public ThreadViewPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView? post = default, ATObject? parent = default, List<ATObject>? replies = default)
         {
             this.Post = post;
             this.Parent = parent;
@@ -48,7 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ThreadViewPost(CBORObject obj)
         {
-            if (obj["post"] is not null) this.Post = new App.Bsky.Feed.PostView(obj["post"]);
+            if (obj["post"] is not null) this.Post = new FishyFlip.Lexicon.App.Bsky.Feed.PostView(obj["post"]);
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
             if (obj["replies"] is not null) this.Replies = obj["replies"].Values.Select(n =>n.ToATObject()).ToList();
         }
@@ -59,7 +59,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
-        public App.Bsky.Feed.PostView? Post { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.PostView? Post { get; set; }
 
         /// <summary>
         /// Gets or sets the parent.
@@ -91,12 +91,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.ThreadViewPost>(this, (JsonTypeInfo<App.Bsky.Feed.ThreadViewPost>)SourceGenerationContext.Default.AppBskyFeedThreadViewPost)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost>)SourceGenerationContext.Default.AppBskyFeedThreadViewPost)!;
         }
 
         public static ThreadViewPost FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.ThreadViewPost>(json, (JsonTypeInfo<App.Bsky.Feed.ThreadViewPost>)SourceGenerationContext.Default.AppBskyFeedThreadViewPost)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost>)SourceGenerationContext.Default.AppBskyFeedThreadViewPost)!;
         }
     }
 }

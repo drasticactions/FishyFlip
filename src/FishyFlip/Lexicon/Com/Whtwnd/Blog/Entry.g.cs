@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <param name="theme"></param>
         /// <param name="blobs"></param>
         /// <param name="visibility">Tells the visibility of the article to AppView.</param>
-        public Entry(string? content, DateTime? createdAt = default, string? title = default, Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default)
+        public Entry(string? content, DateTime? createdAt = default, string? title = default, FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default)
         {
             this.Content = content;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
@@ -52,9 +52,9 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             if (obj["content"] is not null) this.Content = obj["content"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
-            if (obj["ogp"] is not null) this.Ogp = new Com.Whtwnd.Blog.Ogp(obj["ogp"]);
+            if (obj["ogp"] is not null) this.Ogp = new FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp(obj["ogp"]);
             if (obj["theme"] is not null) this.Theme = obj["theme"].AsString();
-            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new Com.Whtwnd.Blog.BlobMetadata(n)).ToList();
+            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata(n)).ToList();
             if (obj["visibility"] is not null) this.Visibility = obj["visibility"].AsString();
         }
 
@@ -81,7 +81,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp"/> (com.whtwnd.blog.defs#ogp)
         /// </summary>
         [JsonPropertyName("ogp")]
-        public Com.Whtwnd.Blog.Ogp? Ogp { get; set; }
+        public FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? Ogp { get; set; }
 
         /// <summary>
         /// Gets or sets the theme.
@@ -93,7 +93,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// Gets or sets the blobs.
         /// </summary>
         [JsonPropertyName("blobs")]
-        public List<Com.Whtwnd.Blog.BlobMetadata>? Blobs { get; set; }
+        public List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? Blobs { get; set; }
 
         /// <summary>
         /// Gets or sets the visibility.
@@ -112,12 +112,12 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Whtwnd.Blog.Entry>(this, (JsonTypeInfo<Com.Whtwnd.Blog.Entry>)SourceGenerationContext.Default.ComWhtwndBlogEntry)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>)SourceGenerationContext.Default.ComWhtwndBlogEntry)!;
         }
 
         public static Entry FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Whtwnd.Blog.Entry>(json, (JsonTypeInfo<Com.Whtwnd.Blog.Entry>)SourceGenerationContext.Default.ComWhtwndBlogEntry)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>)SourceGenerationContext.Default.ComWhtwndBlogEntry)!;
         }
     }
 }

@@ -66,12 +66,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.NotFoundActor>(this, (JsonTypeInfo<App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor)!;
         }
 
         public static NotFoundActor FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.NotFoundActor>(json, (JsonTypeInfo<App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor)!;
         }
     }
 }

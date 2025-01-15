@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="accounts"></param>
-        public SearchAccountsOutput(string? cursor = default, List<Com.Atproto.Admin.AccountView>? accounts = default)
+        public SearchAccountsOutput(string? cursor = default, List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>? accounts = default)
         {
             this.Cursor = cursor;
             this.Accounts = accounts;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public SearchAccountsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new Com.Atproto.Admin.AccountView(n)).ToList();
+            if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Admin.AccountView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         [JsonPropertyName("accounts")]
         [JsonRequired]
-        public List<Com.Atproto.Admin.AccountView>? Accounts { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>? Accounts { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.SearchAccountsOutput>(this, (JsonTypeInfo<Com.Atproto.Admin.SearchAccountsOutput>)SourceGenerationContext.Default.ComAtprotoAdminSearchAccountsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>)SourceGenerationContext.Default.ComAtprotoAdminSearchAccountsOutput)!;
         }
 
         public static SearchAccountsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.SearchAccountsOutput>(json, (JsonTypeInfo<Com.Atproto.Admin.SearchAccountsOutput>)SourceGenerationContext.Default.ComAtprotoAdminSearchAccountsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>)SourceGenerationContext.Default.ComAtprotoAdminSearchAccountsOutput)!;
         }
     }
 }

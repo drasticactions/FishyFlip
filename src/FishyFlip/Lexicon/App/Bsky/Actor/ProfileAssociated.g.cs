@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="chat">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat"/> (app.bsky.actor.defs#profileAssociatedChat)
         /// </param>
-        public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, App.Bsky.Actor.ProfileAssociatedChat? chat = default)
+        public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? chat = default)
         {
             this.Lists = lists;
             this.Feedgens = feedgens;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["feedgens"] is not null) this.Feedgens = obj["feedgens"].AsInt64Value();
             if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].AsInt64Value();
             if (obj["labeler"] is not null) this.Labeler = obj["labeler"].AsBoolean();
-            if (obj["chat"] is not null) this.Chat = new App.Bsky.Actor.ProfileAssociatedChat(obj["chat"]);
+            if (obj["chat"] is not null) this.Chat = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat(obj["chat"]);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat"/> (app.bsky.actor.defs#profileAssociatedChat)
         /// </summary>
         [JsonPropertyName("chat")]
-        public App.Bsky.Actor.ProfileAssociatedChat? Chat { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? Chat { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -90,12 +90,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.ProfileAssociated>(this, (JsonTypeInfo<App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated)!;
         }
 
         public static ProfileAssociated FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.ProfileAssociated>(json, (JsonTypeInfo<App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated)!;
         }
     }
 }

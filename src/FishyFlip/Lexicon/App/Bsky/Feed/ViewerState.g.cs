@@ -101,12 +101,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.ViewerState>(this, (JsonTypeInfo<App.Bsky.Feed.ViewerState>)SourceGenerationContext.Default.AppBskyFeedViewerState)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ViewerState>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ViewerState>)SourceGenerationContext.Default.AppBskyFeedViewerState)!;
         }
 
         public static ViewerState FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.ViewerState>(json, (JsonTypeInfo<App.Bsky.Feed.ViewerState>)SourceGenerationContext.Default.AppBskyFeedViewerState)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ViewerState>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ViewerState>)SourceGenerationContext.Default.AppBskyFeedViewerState)!;
         }
     }
 }

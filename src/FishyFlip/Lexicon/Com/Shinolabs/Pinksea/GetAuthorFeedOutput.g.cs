@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// Initializes a new instance of the <see cref="GetAuthorFeedOutput"/> class.
         /// </summary>
         /// <param name="oekaki"></param>
-        public GetAuthorFeedOutput(List<Com.Shinolabs.Pinksea.HydratedOekaki>? oekaki = default)
+        public GetAuthorFeedOutput(List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>? oekaki = default)
         {
             this.Oekaki = oekaki;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public GetAuthorFeedOutput(CBORObject obj)
         {
-            if (obj["oekaki"] is not null) this.Oekaki = obj["oekaki"].Values.Select(n =>new Com.Shinolabs.Pinksea.HydratedOekaki(n)).ToList();
+            if (obj["oekaki"] is not null) this.Oekaki = obj["oekaki"].Values.Select(n =>new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         [JsonPropertyName("oekaki")]
         [JsonRequired]
-        public List<Com.Shinolabs.Pinksea.HydratedOekaki>? Oekaki { get; set; }
+        public List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>? Oekaki { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(this, (JsonTypeInfo<Com.Shinolabs.Pinksea.GetAuthorFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorFeedOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorFeedOutput)!;
         }
 
         public static GetAuthorFeedOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(json, (JsonTypeInfo<Com.Shinolabs.Pinksea.GetAuthorFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorFeedOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorFeedOutput)!;
         }
     }
 }

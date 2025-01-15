@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Notification.GetUnreadCountOutput>(this, (JsonTypeInfo<App.Bsky.Notification.GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput)!;
         }
 
         public static GetUnreadCountOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Notification.GetUnreadCountOutput>(json, (JsonTypeInfo<App.Bsky.Notification.GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput)!;
         }
     }
 }

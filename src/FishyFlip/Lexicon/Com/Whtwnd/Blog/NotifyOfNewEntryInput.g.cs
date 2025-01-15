@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Whtwnd.Blog.NotifyOfNewEntryInput>(this, (JsonTypeInfo<Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput)!;
         }
 
         public static NotifyOfNewEntryInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Whtwnd.Blog.NotifyOfNewEntryInput>(json, (JsonTypeInfo<Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput)!;
         }
     }
 }

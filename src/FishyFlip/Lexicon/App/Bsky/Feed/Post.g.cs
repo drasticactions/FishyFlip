@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </param>
         /// <param name="tags">Additional hashtags, in addition to any included in post text and facets.</param>
         /// <param name="createdAt">Client-declared timestamp when this post was originally created.</param>
-        public Post(string? text, List<App.Bsky.Richtext.Facet>? facets = default, App.Bsky.Feed.ReplyRefDef? reply = default, ATObject? embed = default, List<string>? langs = default, Com.Atproto.Label.SelfLabels? labels = default, List<string>? tags = default, DateTime? createdAt = default)
+        public Post(string? text, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? facets = default, FishyFlip.Lexicon.App.Bsky.Feed.ReplyRefDef? reply = default, ATObject? embed = default, List<string>? langs = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, List<string>? tags = default, DateTime? createdAt = default)
         {
             this.Text = text;
             this.Facets = facets;
@@ -62,11 +62,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Post(CBORObject obj)
         {
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
-            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
-            if (obj["reply"] is not null) this.Reply = new App.Bsky.Feed.ReplyRefDef(obj["reply"]);
+            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["reply"] is not null) this.Reply = new FishyFlip.Lexicon.App.Bsky.Feed.ReplyRefDef(obj["reply"]);
             if (obj["embed"] is not null) this.Embed = obj["embed"].ToATObject();
             if (obj["langs"] is not null) this.Langs = obj["langs"].Values.Select(n =>n.AsString()).ToList();
-            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
+            if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
@@ -83,14 +83,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<App.Bsky.Richtext.Facet>? Facets { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
         /// Gets or sets the reply.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </summary>
         [JsonPropertyName("reply")]
-        public App.Bsky.Feed.ReplyRefDef? Reply { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.ReplyRefDef? Reply { get; set; }
 
         /// <summary>
         /// Gets or sets the embed.
@@ -118,7 +118,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
-        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the tags.
@@ -144,12 +144,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.Post>(this, (JsonTypeInfo<App.Bsky.Feed.Post>)SourceGenerationContext.Default.AppBskyFeedPost)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Post>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Post>)SourceGenerationContext.Default.AppBskyFeedPost)!;
         }
 
         public static Post FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.Post>(json, (JsonTypeInfo<App.Bsky.Feed.Post>)SourceGenerationContext.Default.AppBskyFeedPost)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Post>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Post>)SourceGenerationContext.Default.AppBskyFeedPost)!;
         }
     }
 }

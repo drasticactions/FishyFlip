@@ -54,12 +54,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Identity.UpdateHandleInput>(this, (JsonTypeInfo<Com.Atproto.Identity.UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput)!;
         }
 
         public static UpdateHandleInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Identity.UpdateHandleInput>(json, (JsonTypeInfo<Com.Atproto.Identity.UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput)!;
         }
     }
 }

@@ -92,12 +92,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Notification.RegisterPushInput>(this, (JsonTypeInfo<App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
         }
 
         public static RegisterPushInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Notification.RegisterPushInput>(json, (JsonTypeInfo<App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
         }
     }
 }

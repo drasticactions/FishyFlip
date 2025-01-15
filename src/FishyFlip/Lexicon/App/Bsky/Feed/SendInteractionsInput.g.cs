@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Initializes a new instance of the <see cref="SendInteractionsInput"/> class.
         /// </summary>
         /// <param name="interactions"></param>
-        public SendInteractionsInput(List<App.Bsky.Feed.Interaction>? interactions = default)
+        public SendInteractionsInput(List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>? interactions = default)
         {
             this.Interactions = interactions;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SendInteractionsInput(CBORObject obj)
         {
-            if (obj["interactions"] is not null) this.Interactions = obj["interactions"].Values.Select(n =>new App.Bsky.Feed.Interaction(n)).ToList();
+            if (obj["interactions"] is not null) this.Interactions = obj["interactions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.Interaction(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("interactions")]
         [JsonRequired]
-        public List<App.Bsky.Feed.Interaction>? Interactions { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>? Interactions { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.SendInteractionsInput>(this, (JsonTypeInfo<App.Bsky.Feed.SendInteractionsInput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsInput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsInput)!;
         }
 
         public static SendInteractionsInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.SendInteractionsInput>(json, (JsonTypeInfo<App.Bsky.Feed.SendInteractionsInput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsInput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsInput)!;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <param name="viewer">
         /// tools.ozone.server.defs#viewerConfig <br/>
         /// </param>
-        public GetConfigOutput(Tools.Ozone.Server.ServiceConfig? appview = default, Tools.Ozone.Server.ServiceConfig? pds = default, Tools.Ozone.Server.ServiceConfig? blobDivert = default, Tools.Ozone.Server.ServiceConfig? chat = default, Tools.Ozone.Server.ViewerConfig? viewer = default)
+        public GetConfigOutput(FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? appview = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? pds = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? blobDivert = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? chat = default, FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig? viewer = default)
         {
             this.Appview = appview;
             this.Pds = pds;
@@ -50,11 +50,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         public GetConfigOutput(CBORObject obj)
         {
-            if (obj["appview"] is not null) this.Appview = new Tools.Ozone.Server.ServiceConfig(obj["appview"]);
-            if (obj["pds"] is not null) this.Pds = new Tools.Ozone.Server.ServiceConfig(obj["pds"]);
-            if (obj["blobDivert"] is not null) this.BlobDivert = new Tools.Ozone.Server.ServiceConfig(obj["blobDivert"]);
-            if (obj["chat"] is not null) this.Chat = new Tools.Ozone.Server.ServiceConfig(obj["chat"]);
-            if (obj["viewer"] is not null) this.Viewer = new Tools.Ozone.Server.ViewerConfig(obj["viewer"]);
+            if (obj["appview"] is not null) this.Appview = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["appview"]);
+            if (obj["pds"] is not null) this.Pds = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["pds"]);
+            if (obj["blobDivert"] is not null) this.BlobDivert = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["blobDivert"]);
+            if (obj["chat"] is not null) this.Chat = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["chat"]);
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig(obj["viewer"]);
         }
 
         /// <summary>
@@ -62,35 +62,35 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("appview")]
-        public Tools.Ozone.Server.ServiceConfig? Appview { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? Appview { get; set; }
 
         /// <summary>
         /// Gets or sets the pds.
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("pds")]
-        public Tools.Ozone.Server.ServiceConfig? Pds { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? Pds { get; set; }
 
         /// <summary>
         /// Gets or sets the blobDivert.
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("blobDivert")]
-        public Tools.Ozone.Server.ServiceConfig? BlobDivert { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? BlobDivert { get; set; }
 
         /// <summary>
         /// Gets or sets the chat.
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("chat")]
-        public Tools.Ozone.Server.ServiceConfig? Chat { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? Chat { get; set; }
 
         /// <summary>
         /// Gets or sets the viewer.
         /// tools.ozone.server.defs#viewerConfig <br/>
         /// </summary>
         [JsonPropertyName("viewer")]
-        public Tools.Ozone.Server.ViewerConfig? Viewer { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig? Viewer { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -102,12 +102,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Server.GetConfigOutput>(this, (JsonTypeInfo<Tools.Ozone.Server.GetConfigOutput>)SourceGenerationContext.Default.ToolsOzoneServerGetConfigOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>)SourceGenerationContext.Default.ToolsOzoneServerGetConfigOutput)!;
         }
 
         public static GetConfigOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Server.GetConfigOutput>(json, (JsonTypeInfo<Tools.Ozone.Server.GetConfigOutput>)SourceGenerationContext.Default.ToolsOzoneServerGetConfigOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>)SourceGenerationContext.Default.ToolsOzoneServerGetConfigOutput)!;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="avatar">Small image to be displayed next to posts from account. AKA, 'profile picture'</param>
         /// <param name="banner">Larger horizontal image to display behind profile view.</param>
         /// <param name="createdAt"></param>
-        public Profile(string? displayName = default, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Fm.Teal.Alpha.Actor.FeaturedItem? featuredItem = default, Blob? avatar = default, Blob? banner = default, DateTime? createdAt = default)
+        public Profile(string? displayName = default, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem? featuredItem = default, Blob? avatar = default, Blob? banner = default, DateTime? createdAt = default)
         {
             this.DisplayName = displayName;
             this.Description = description;
@@ -51,8 +51,8 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         {
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
-            if (obj["featuredItem"] is not null) this.FeaturedItem = new Fm.Teal.Alpha.Actor.FeaturedItem(obj["featuredItem"]);
+            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["featuredItem"] is not null) this.FeaturedItem = new FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem(obj["featuredItem"]);
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
             if (obj["banner"] is not null) this.Banner = new FishyFlip.Models.Blob(obj["banner"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
@@ -76,7 +76,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> Annotations of text in the profile description (mentions, URLs, hashtags, etc).
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
-        public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the featuredItem.
@@ -84,7 +84,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// fm.teal.alpha.actor.defs#featuredItem <br/>
         /// </summary>
         [JsonPropertyName("featuredItem")]
-        public Fm.Teal.Alpha.Actor.FeaturedItem? FeaturedItem { get; set; }
+        public FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem? FeaturedItem { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
@@ -116,12 +116,12 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fm.Teal.Alpha.Actor.Profile>(this, (JsonTypeInfo<Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
         }
 
         public static Profile FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fm.Teal.Alpha.Actor.Profile>(json, (JsonTypeInfo<Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
         }
     }
 }

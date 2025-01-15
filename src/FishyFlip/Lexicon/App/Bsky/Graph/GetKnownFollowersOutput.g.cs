@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </param>
         /// <param name="cursor"></param>
         /// <param name="followers"></param>
-        public GetKnownFollowersOutput(App.Bsky.Actor.ProfileView? subject = default, string? cursor = default, List<App.Bsky.Actor.ProfileView>? followers = default)
+        public GetKnownFollowersOutput(FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? subject = default, string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? followers = default)
         {
             this.Subject = subject;
             this.Cursor = cursor;
@@ -38,9 +38,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetKnownFollowersOutput(CBORObject obj)
         {
-            if (obj["subject"] is not null) this.Subject = new App.Bsky.Actor.ProfileView(obj["subject"]);
+            if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["subject"]);
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileView? Subject { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Subject { get; set; }
 
         /// <summary>
         /// Gets or sets the cursor.
@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("followers")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileView>? Followers { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>? Followers { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -74,12 +74,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.GetKnownFollowersOutput>(this, (JsonTypeInfo<App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput)!;
         }
 
         public static GetKnownFollowersOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.GetKnownFollowersOutput>(json, (JsonTypeInfo<App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput)!;
         }
     }
 }

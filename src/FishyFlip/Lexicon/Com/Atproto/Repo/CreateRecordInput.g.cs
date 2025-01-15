@@ -106,12 +106,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.CreateRecordInput>(this, (JsonTypeInfo<Com.Atproto.Repo.CreateRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordInput)!;
         }
 
         public static CreateRecordInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.CreateRecordInput>(json, (JsonTypeInfo<Com.Atproto.Repo.CreateRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordInput)!;
         }
     }
 }

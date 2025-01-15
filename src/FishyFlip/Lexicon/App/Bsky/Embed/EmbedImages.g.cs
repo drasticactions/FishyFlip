@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Initializes a new instance of the <see cref="EmbedImages"/> class.
         /// </summary>
         /// <param name="images"></param>
-        public EmbedImages(List<App.Bsky.Embed.Image>? images = default)
+        public EmbedImages(List<FishyFlip.Lexicon.App.Bsky.Embed.Image>? images = default)
         {
             this.Images = images;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public EmbedImages(CBORObject obj)
         {
-            if (obj["images"] is not null) this.Images = obj["images"].Values.Select(n =>new App.Bsky.Embed.Image(n)).ToList();
+            if (obj["images"] is not null) this.Images = obj["images"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Embed.Image(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         [JsonPropertyName("images")]
         [JsonRequired]
-        public List<App.Bsky.Embed.Image>? Images { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Embed.Image>? Images { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.EmbedImages>(this, (JsonTypeInfo<App.Bsky.Embed.EmbedImages>)SourceGenerationContext.Default.AppBskyEmbedEmbedImages)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages>)SourceGenerationContext.Default.AppBskyEmbedEmbedImages)!;
         }
 
         public static EmbedImages FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.EmbedImages>(json, (JsonTypeInfo<App.Bsky.Embed.EmbedImages>)SourceGenerationContext.Default.AppBskyEmbedEmbedImages)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages>)SourceGenerationContext.Default.AppBskyEmbedEmbedImages)!;
         }
     }
 }

@@ -98,12 +98,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.Interaction>(this, (JsonTypeInfo<App.Bsky.Feed.Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction)!;
         }
 
         public static Interaction FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.Interaction>(json, (JsonTypeInfo<App.Bsky.Feed.Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction)!;
         }
     }
 }

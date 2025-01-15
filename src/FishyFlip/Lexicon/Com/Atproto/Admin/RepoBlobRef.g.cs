@@ -73,12 +73,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.RepoBlobRef>(this, (JsonTypeInfo<Com.Atproto.Admin.RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef)!;
         }
 
         public static RepoBlobRef FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.RepoBlobRef>(json, (JsonTypeInfo<Com.Atproto.Admin.RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef)!;
         }
     }
 }

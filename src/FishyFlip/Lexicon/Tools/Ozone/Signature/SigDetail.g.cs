@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Signature.SigDetail>(this, (JsonTypeInfo<Tools.Ozone.Signature.SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail)!;
         }
 
         public static SigDetail FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Signature.SigDetail>(json, (JsonTypeInfo<Tools.Ozone.Signature.SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail)!;
         }
     }
 }

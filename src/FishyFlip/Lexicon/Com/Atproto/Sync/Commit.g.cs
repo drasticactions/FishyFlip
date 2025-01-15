@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="ops"></param>
         /// <param name="blobs"></param>
         /// <param name="time">Timestamp of when this message was originally broadcast.</param>
-        public Commit(long? seq = default, bool? tooBig = default, FishyFlip.Models.ATDid? repo = default, Ipfs.Cid? commit = default, string? rev = default, string? since = default, byte[]? blocks = default, List<Com.Atproto.Sync.RepoOp>? ops = default, List<Ipfs.Cid>? blobs = default, DateTime? time = default)
+        public Commit(long? seq = default, bool? tooBig = default, FishyFlip.Models.ATDid? repo = default, Ipfs.Cid? commit = default, string? rev = default, string? since = default, byte[]? blocks = default, List<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>? ops = default, List<Ipfs.Cid>? blobs = default, DateTime? time = default)
         {
             this.Seq = seq;
             this.TooBig = tooBig;
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["since"] is not null) this.Since = obj["since"].AsString();
             if (obj["blocks"] is not null) this.Blocks = obj["blocks"].EncodeToBytes();
-            if (obj["ops"] is not null) this.Ops = obj["ops"].Values.Select(n =>new Com.Atproto.Sync.RepoOp(n)).ToList();
+            if (obj["ops"] is not null) this.Ops = obj["ops"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp(n)).ToList();
             if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>n.ToATCid()!).ToList();
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
         }
@@ -128,7 +128,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         [JsonPropertyName("ops")]
         [JsonRequired]
-        public List<Com.Atproto.Sync.RepoOp>? Ops { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>? Ops { get; set; }
 
         /// <summary>
         /// Gets or sets the blobs.
@@ -155,12 +155,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Sync.Commit>(this, (JsonTypeInfo<Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit)!;
         }
 
         public static Commit FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Sync.Commit>(json, (JsonTypeInfo<Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit)!;
         }
     }
 }

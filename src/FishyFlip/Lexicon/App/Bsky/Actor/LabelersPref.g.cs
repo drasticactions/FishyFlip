@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Initializes a new instance of the <see cref="LabelersPref"/> class.
         /// </summary>
         /// <param name="labelers"></param>
-        public LabelersPref(List<App.Bsky.Actor.LabelerPrefItem>? labelers = default)
+        public LabelersPref(List<FishyFlip.Lexicon.App.Bsky.Actor.LabelerPrefItem>? labelers = default)
         {
             this.Labelers = labelers;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public LabelersPref(CBORObject obj)
         {
-            if (obj["labelers"] is not null) this.Labelers = obj["labelers"].Values.Select(n =>new App.Bsky.Actor.LabelerPrefItem(n)).ToList();
+            if (obj["labelers"] is not null) this.Labelers = obj["labelers"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.LabelerPrefItem(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("labelers")]
         [JsonRequired]
-        public List<App.Bsky.Actor.LabelerPrefItem>? Labelers { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.LabelerPrefItem>? Labelers { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.LabelersPref>(this, (JsonTypeInfo<App.Bsky.Actor.LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref)!;
         }
 
         public static LabelersPref FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.LabelersPref>(json, (JsonTypeInfo<App.Bsky.Actor.LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref)!;
         }
     }
 }

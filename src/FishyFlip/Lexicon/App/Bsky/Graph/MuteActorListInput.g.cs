@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.MuteActorListInput>(this, (JsonTypeInfo<App.Bsky.Graph.MuteActorListInput>)SourceGenerationContext.Default.AppBskyGraphMuteActorListInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.MuteActorListInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.MuteActorListInput>)SourceGenerationContext.Default.AppBskyGraphMuteActorListInput)!;
         }
 
         public static MuteActorListInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.MuteActorListInput>(json, (JsonTypeInfo<App.Bsky.Graph.MuteActorListInput>)SourceGenerationContext.Default.AppBskyGraphMuteActorListInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.MuteActorListInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.MuteActorListInput>)SourceGenerationContext.Default.AppBskyGraphMuteActorListInput)!;
         }
     }
 }

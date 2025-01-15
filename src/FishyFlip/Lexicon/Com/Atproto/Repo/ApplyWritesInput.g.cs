@@ -93,12 +93,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.ApplyWritesInput>(this, (JsonTypeInfo<Com.Atproto.Repo.ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput)!;
         }
 
         public static ApplyWritesInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.ApplyWritesInput>(json, (JsonTypeInfo<Com.Atproto.Repo.ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput)!;
         }
     }
 }

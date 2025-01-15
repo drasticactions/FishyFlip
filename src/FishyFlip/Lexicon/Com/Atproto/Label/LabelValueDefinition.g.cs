@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </param>
         /// <param name="adultOnly">Does the user need to have adult content enabled in order to configure this label?</param>
         /// <param name="locales"></param>
-        public LabelValueDefinition(string? identifier = default, string? severity = default, string? blurs = default, string? defaultSetting = default, bool? adultOnly = default, List<Com.Atproto.Label.LabelValueDefinitionStrings>? locales = default)
+        public LabelValueDefinition(string? identifier = default, string? severity = default, string? blurs = default, string? defaultSetting = default, bool? adultOnly = default, List<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>? locales = default)
         {
             this.Identifier = identifier;
             this.Severity = severity;
@@ -65,7 +65,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             if (obj["blurs"] is not null) this.Blurs = obj["blurs"].AsString();
             if (obj["defaultSetting"] is not null) this.DefaultSetting = obj["defaultSetting"].AsString();
             if (obj["adultOnly"] is not null) this.AdultOnly = obj["adultOnly"].AsBoolean();
-            if (obj["locales"] is not null) this.Locales = obj["locales"].Values.Select(n =>new Com.Atproto.Label.LabelValueDefinitionStrings(n)).ToList();
+            if (obj["locales"] is not null) this.Locales = obj["locales"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings(n)).ToList();
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         [JsonPropertyName("locales")]
         [JsonRequired]
-        public List<Com.Atproto.Label.LabelValueDefinitionStrings>? Locales { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>? Locales { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -135,12 +135,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Label.LabelValueDefinition>(this, (JsonTypeInfo<Com.Atproto.Label.LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition)!;
         }
 
         public static LabelValueDefinition FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Label.LabelValueDefinition>(json, (JsonTypeInfo<Com.Atproto.Label.LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition)!;
         }
     }
 }

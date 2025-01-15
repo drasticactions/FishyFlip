@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.HiddenPostsPref>(this, (JsonTypeInfo<App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref)!;
         }
 
         public static HiddenPostsPref FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.HiddenPostsPref>(json, (JsonTypeInfo<App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref)!;
         }
     }
 }

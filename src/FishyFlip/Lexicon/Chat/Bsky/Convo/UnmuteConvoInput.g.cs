@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.UnmuteConvoInput>(this, (JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoInput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoInput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoInput)!;
         }
 
         public static UnmuteConvoInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.UnmuteConvoInput>(json, (JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoInput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoInput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoInput)!;
         }
     }
 }

@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.ImageDetails>(this, (JsonTypeInfo<Tools.Ozone.Moderation.ImageDetails>)SourceGenerationContext.Default.ToolsOzoneModerationImageDetails)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>)SourceGenerationContext.Default.ToolsOzoneModerationImageDetails)!;
         }
 
         public static ImageDetails FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.ImageDetails>(json, (JsonTypeInfo<Tools.Ozone.Moderation.ImageDetails>)SourceGenerationContext.Default.ToolsOzoneModerationImageDetails)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>)SourceGenerationContext.Default.ToolsOzoneModerationImageDetails)!;
         }
     }
 }

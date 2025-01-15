@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <param name="reply">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </param>
-        public Message(string? content, FishyFlip.Models.ATUri? room, List<Social.Psky.Richtext.Facet>? facets = default, Com.Atproto.Repo.StrongRef? reply = default)
+        public Message(string? content, FishyFlip.Models.ATUri? room, List<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>? facets = default, Com.Atproto.Repo.StrongRef? reply = default)
         {
             this.Content = content;
             this.Room = room;
@@ -45,7 +45,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         {
             if (obj["content"] is not null) this.Content = obj["content"].AsString();
             if (obj["room"] is not null) this.Room = obj["room"].ToATUri();
-            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new Social.Psky.Richtext.Facet(n)).ToList();
+            if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new FishyFlip.Lexicon.Social.Psky.Richtext.Facet(n)).ToList();
             if (obj["reply"] is not null) this.Reply = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["reply"]);
         }
 
@@ -68,7 +68,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
-        public List<Social.Psky.Richtext.Facet>? Facets { get; set; }
+        public List<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
         /// Gets or sets the reply.
@@ -87,12 +87,12 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Social.Psky.Chat.Message>(this, (JsonTypeInfo<Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Chat.Message>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
         }
 
         public static Message FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Social.Psky.Chat.Message>(json, (JsonTypeInfo<Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Message>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
         }
     }
 }

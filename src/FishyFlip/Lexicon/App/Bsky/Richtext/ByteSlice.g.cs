@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Richtext.ByteSlice>(this, (JsonTypeInfo<App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
         }
 
         public static ByteSlice FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Richtext.ByteSlice>(json, (JsonTypeInfo<App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
         }
     }
 }

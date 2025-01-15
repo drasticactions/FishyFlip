@@ -156,12 +156,12 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Buzz.Bookhive.Book>(this, (JsonTypeInfo<Buzz.Bookhive.Book>)SourceGenerationContext.Default.BuzzBookhiveBook)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Buzz.Bookhive.Book>(this, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Book>)SourceGenerationContext.Default.BuzzBookhiveBook)!;
         }
 
         public static Book FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Buzz.Bookhive.Book>(json, (JsonTypeInfo<Buzz.Bookhive.Book>)SourceGenerationContext.Default.BuzzBookhiveBook)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.Book>(json, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Book>)SourceGenerationContext.Default.BuzzBookhiveBook)!;
         }
     }
 }

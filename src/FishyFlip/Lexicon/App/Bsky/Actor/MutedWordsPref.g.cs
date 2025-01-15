@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Initializes a new instance of the <see cref="MutedWordsPref"/> class.
         /// </summary>
         /// <param name="items">A list of words the account owner has muted.</param>
-        public MutedWordsPref(List<App.Bsky.Actor.MutedWord>? items = default)
+        public MutedWordsPref(List<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>? items = default)
         {
             this.Items = items;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public MutedWordsPref(CBORObject obj)
         {
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new App.Bsky.Actor.MutedWord(n)).ToList();
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.MutedWord(n)).ToList();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<App.Bsky.Actor.MutedWord>? Items { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.MutedWordsPref>(this, (JsonTypeInfo<App.Bsky.Actor.MutedWordsPref>)SourceGenerationContext.Default.AppBskyActorMutedWordsPref)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref>)SourceGenerationContext.Default.AppBskyActorMutedWordsPref)!;
         }
 
         public static MutedWordsPref FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.MutedWordsPref>(json, (JsonTypeInfo<App.Bsky.Actor.MutedWordsPref>)SourceGenerationContext.Default.AppBskyActorMutedWordsPref)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref>)SourceGenerationContext.Default.AppBskyActorMutedWordsPref)!;
         }
     }
 }

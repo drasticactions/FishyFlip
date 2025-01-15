@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin) <br/>
         /// </param>
         /// <param name="feedContext">Context provided by feed generator that may be passed back alongside interactions.</param>
-        public FeedViewPost(App.Bsky.Feed.PostView? post = default, App.Bsky.Feed.ReplyRef? reply = default, ATObject? reason = default, string? feedContext = default)
+        public FeedViewPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView? post = default, FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef? reply = default, ATObject? reason = default, string? feedContext = default)
         {
             this.Post = post;
             this.Reply = reply;
@@ -46,8 +46,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public FeedViewPost(CBORObject obj)
         {
-            if (obj["post"] is not null) this.Post = new App.Bsky.Feed.PostView(obj["post"]);
-            if (obj["reply"] is not null) this.Reply = new App.Bsky.Feed.ReplyRef(obj["reply"]);
+            if (obj["post"] is not null) this.Post = new FishyFlip.Lexicon.App.Bsky.Feed.PostView(obj["post"]);
+            if (obj["reply"] is not null) this.Reply = new FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef(obj["reply"]);
             if (obj["reason"] is not null) this.Reason = obj["reason"].ToATObject();
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
         }
@@ -58,14 +58,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("post")]
         [JsonRequired]
-        public App.Bsky.Feed.PostView? Post { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.PostView? Post { get; set; }
 
         /// <summary>
         /// Gets or sets the reply.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </summary>
         [JsonPropertyName("reply")]
-        public App.Bsky.Feed.ReplyRef? Reply { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef? Reply { get; set; }
 
         /// <summary>
         /// Gets or sets the reason.
@@ -93,12 +93,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.FeedViewPost>(this, (JsonTypeInfo<App.Bsky.Feed.FeedViewPost>)SourceGenerationContext.Default.AppBskyFeedFeedViewPost)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>)SourceGenerationContext.Default.AppBskyFeedFeedViewPost)!;
         }
 
         public static FeedViewPost FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.FeedViewPost>(json, (JsonTypeInfo<App.Bsky.Feed.FeedViewPost>)SourceGenerationContext.Default.AppBskyFeedFeedViewPost)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>)SourceGenerationContext.Default.AppBskyFeedFeedViewPost)!;
         }
     }
 }

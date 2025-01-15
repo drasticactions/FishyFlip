@@ -54,12 +54,12 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Social.Psky.Actor.Profile>(this, (JsonTypeInfo<Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Actor.Profile>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
         }
 
         public static Profile FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Social.Psky.Actor.Profile>(json, (JsonTypeInfo<Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
         }
     }
 }

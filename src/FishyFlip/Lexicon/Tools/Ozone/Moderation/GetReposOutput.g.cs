@@ -59,12 +59,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.GetReposOutput>(this, (JsonTypeInfo<Tools.Ozone.Moderation.GetReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput)!;
         }
 
         public static GetReposOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.GetReposOutput>(json, (JsonTypeInfo<Tools.Ozone.Moderation.GetReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput)!;
         }
     }
 }

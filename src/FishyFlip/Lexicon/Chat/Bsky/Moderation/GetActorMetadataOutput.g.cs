@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <param name="all">
         /// chat.bsky.moderation.defs#metadata <br/>
         /// </param>
-        public GetActorMetadataOutput(Chat.Bsky.Moderation.Metadata? day = default, Chat.Bsky.Moderation.Metadata? month = default, Chat.Bsky.Moderation.Metadata? all = default)
+        public GetActorMetadataOutput(FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata? day = default, FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata? month = default, FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata? all = default)
         {
             this.Day = day;
             this.Month = month;
@@ -42,9 +42,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         public GetActorMetadataOutput(CBORObject obj)
         {
-            if (obj["day"] is not null) this.Day = new Chat.Bsky.Moderation.Metadata(obj["day"]);
-            if (obj["month"] is not null) this.Month = new Chat.Bsky.Moderation.Metadata(obj["month"]);
-            if (obj["all"] is not null) this.All = new Chat.Bsky.Moderation.Metadata(obj["all"]);
+            if (obj["day"] is not null) this.Day = new FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata(obj["day"]);
+            if (obj["month"] is not null) this.Month = new FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata(obj["month"]);
+            if (obj["all"] is not null) this.All = new FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata(obj["all"]);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         [JsonPropertyName("day")]
         [JsonRequired]
-        public Chat.Bsky.Moderation.Metadata? Day { get; set; }
+        public FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata? Day { get; set; }
 
         /// <summary>
         /// Gets or sets the month.
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         [JsonPropertyName("month")]
         [JsonRequired]
-        public Chat.Bsky.Moderation.Metadata? Month { get; set; }
+        public FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata? Month { get; set; }
 
         /// <summary>
         /// Gets or sets the all.
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         [JsonPropertyName("all")]
         [JsonRequired]
-        public Chat.Bsky.Moderation.Metadata? All { get; set; }
+        public FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata? All { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -81,12 +81,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Moderation.GetActorMetadataOutput>(this, (JsonTypeInfo<Chat.Bsky.Moderation.GetActorMetadataOutput>)SourceGenerationContext.Default.ChatBskyModerationGetActorMetadataOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>)SourceGenerationContext.Default.ChatBskyModerationGetActorMetadataOutput)!;
         }
 
         public static GetActorMetadataOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Moderation.GetActorMetadataOutput>(json, (JsonTypeInfo<Chat.Bsky.Moderation.GetActorMetadataOutput>)SourceGenerationContext.Default.ChatBskyModerationGetActorMetadataOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>)SourceGenerationContext.Default.ChatBskyModerationGetActorMetadataOutput)!;
         }
     }
 }

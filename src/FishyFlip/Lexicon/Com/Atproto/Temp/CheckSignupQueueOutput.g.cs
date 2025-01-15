@@ -70,12 +70,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Temp.CheckSignupQueueOutput>(this, (JsonTypeInfo<Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput)!;
         }
 
         public static CheckSignupQueueOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Temp.CheckSignupQueueOutput>(json, (JsonTypeInfo<Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput)!;
         }
     }
 }

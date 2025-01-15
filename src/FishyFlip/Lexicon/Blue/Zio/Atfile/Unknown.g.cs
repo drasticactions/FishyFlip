@@ -54,12 +54,12 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Blue.Zio.Atfile.Unknown>(this, (JsonTypeInfo<Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
         }
 
         public static Unknown FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Blue.Zio.Atfile.Unknown>(json, (JsonTypeInfo<Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
         }
     }
 }

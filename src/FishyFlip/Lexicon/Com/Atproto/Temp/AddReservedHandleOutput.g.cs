@@ -34,12 +34,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Temp.AddReservedHandleOutput>(this, (JsonTypeInfo<Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
         }
 
         public static AddReservedHandleOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Temp.AddReservedHandleOutput>(json, (JsonTypeInfo<Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
         }
     }
 }

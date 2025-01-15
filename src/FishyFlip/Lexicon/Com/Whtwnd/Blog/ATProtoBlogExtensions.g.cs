@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateEntryAsync(this FishyFlip.ATProtocol atp, Com.Whtwnd.Blog.Entry record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateEntryAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.whtwnd.blog.entry", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateEntryAsync(this FishyFlip.ATProtocol atp, string? content, DateTime? createdAt = default, string? title = default, Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateEntryAsync(this FishyFlip.ATProtocol atp, string? content, DateTime? createdAt = default, string? title = default, FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry();
             record.Content = content;
@@ -77,7 +77,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutEntryAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Com.Whtwnd.Blog.Entry record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutEntryAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "com.whtwnd.blog.entry", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

@@ -72,12 +72,12 @@ namespace FishyFlip.Lexicon.Blue.Linkat
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Blue.Linkat.Card>(this, (JsonTypeInfo<Blue.Linkat.Card>)SourceGenerationContext.Default.BlueLinkatCard)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Linkat.Card>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Card>)SourceGenerationContext.Default.BlueLinkatCard)!;
         }
 
         public static Card FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Blue.Linkat.Card>(json, (JsonTypeInfo<Blue.Linkat.Card>)SourceGenerationContext.Default.BlueLinkatCard)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Linkat.Card>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Card>)SourceGenerationContext.Default.BlueLinkatCard)!;
         }
     }
 }

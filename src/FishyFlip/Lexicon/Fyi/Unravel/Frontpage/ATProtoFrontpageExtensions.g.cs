@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateCommentAsync(this FishyFlip.ATProtocol atp, Fyi.Unravel.Frontpage.Comment record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateCommentAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Comment record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fyi.unravel.frontpage.comment", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -74,7 +74,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutCommentAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Fyi.Unravel.Frontpage.Comment record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutCommentAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Comment record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "fyi.unravel.frontpage.comment", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
@@ -139,7 +139,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreatePostAsync(this FishyFlip.ATProtocol atp, Fyi.Unravel.Frontpage.Post record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePostAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fyi.unravel.frontpage.post", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -188,7 +188,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutPostAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Fyi.Unravel.Frontpage.Post record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutPostAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "fyi.unravel.frontpage.post", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
@@ -253,7 +253,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateVoteAsync(this FishyFlip.ATProtocol atp, Fyi.Unravel.Frontpage.Vote record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateVoteAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fyi.unravel.frontpage.vote", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -301,7 +301,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutVoteAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Fyi.Unravel.Frontpage.Vote record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutVoteAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "fyi.unravel.frontpage.vote", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

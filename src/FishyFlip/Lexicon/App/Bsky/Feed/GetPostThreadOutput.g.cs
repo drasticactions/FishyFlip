@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="threadgate">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </param>
-        public GetPostThreadOutput(ATObject? thread = default, App.Bsky.Feed.ThreadgateView? threadgate = default)
+        public GetPostThreadOutput(ATObject? thread = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default)
         {
             this.Thread = thread;
             this.Threadgate = threadgate;
@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GetPostThreadOutput(CBORObject obj)
         {
             if (obj["thread"] is not null) this.Thread = obj["thread"].ToATObject();
-            if (obj["threadgate"] is not null) this.Threadgate = new App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
+            if (obj["threadgate"] is not null) this.Threadgate = new FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </summary>
         [JsonPropertyName("threadgate")]
-        public App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -73,12 +73,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GetPostThreadOutput>(this, (JsonTypeInfo<App.Bsky.Feed.GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput)!;
         }
 
         public static GetPostThreadOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GetPostThreadOutput>(json, (JsonTypeInfo<App.Bsky.Feed.GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput)!;
         }
     }
 }

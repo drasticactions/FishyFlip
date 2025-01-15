@@ -82,12 +82,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.CreateSessionInput>(this, (JsonTypeInfo<Com.Atproto.Server.CreateSessionInput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionInput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionInput)!;
         }
 
         public static CreateSessionInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.CreateSessionInput>(json, (JsonTypeInfo<Com.Atproto.Server.CreateSessionInput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionInput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionInput)!;
         }
     }
 }

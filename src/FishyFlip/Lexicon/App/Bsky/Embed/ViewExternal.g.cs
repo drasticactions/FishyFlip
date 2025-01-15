@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <param name="external">
         /// app.bsky.embed.defs#viewExternal <br/>
         /// </param>
-        public ViewExternal(App.Bsky.Embed.ViewExternalExternal? external = default)
+        public ViewExternal(FishyFlip.Lexicon.App.Bsky.Embed.ViewExternalExternal? external = default)
         {
             this.External = external;
         }
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewExternal(CBORObject obj)
         {
-            if (obj["external"] is not null) this.External = new App.Bsky.Embed.ViewExternalExternal(obj["external"]);
+            if (obj["external"] is not null) this.External = new FishyFlip.Lexicon.App.Bsky.Embed.ViewExternalExternal(obj["external"]);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         [JsonPropertyName("external")]
         [JsonRequired]
-        public App.Bsky.Embed.ViewExternalExternal? External { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Embed.ViewExternalExternal? External { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -55,12 +55,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.ViewExternal>(this, (JsonTypeInfo<App.Bsky.Embed.ViewExternal>)SourceGenerationContext.Default.AppBskyEmbedViewExternal)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal>)SourceGenerationContext.Default.AppBskyEmbedViewExternal)!;
         }
 
         public static ViewExternal FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.ViewExternal>(json, (JsonTypeInfo<App.Bsky.Embed.ViewExternal>)SourceGenerationContext.Default.AppBskyEmbedViewExternal)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal>)SourceGenerationContext.Default.AppBskyEmbedViewExternal)!;
         }
     }
 }

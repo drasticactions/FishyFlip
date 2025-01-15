@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <param name="jobStatus">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Video.JobStatus"/> (app.bsky.video.defs#jobStatus)
         /// </param>
-        public UploadVideoOutput(App.Bsky.Video.JobStatus? jobStatus = default)
+        public UploadVideoOutput(FishyFlip.Lexicon.App.Bsky.Video.JobStatus? jobStatus = default)
         {
             this.JobStatus = jobStatus;
         }
@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         public UploadVideoOutput(CBORObject obj)
         {
-            if (obj["jobStatus"] is not null) this.JobStatus = new App.Bsky.Video.JobStatus(obj["jobStatus"]);
+            if (obj["jobStatus"] is not null) this.JobStatus = new FishyFlip.Lexicon.App.Bsky.Video.JobStatus(obj["jobStatus"]);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         [JsonPropertyName("jobStatus")]
         [JsonRequired]
-        public App.Bsky.Video.JobStatus? JobStatus { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Video.JobStatus? JobStatus { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -55,12 +55,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Video.UploadVideoOutput>(this, (JsonTypeInfo<App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput)!;
         }
 
         public static UploadVideoOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Video.UploadVideoOutput>(json, (JsonTypeInfo<App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput)!;
         }
     }
 }

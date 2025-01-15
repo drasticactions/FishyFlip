@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         /// <param name="count"></param>
         /// <param name="followers"></param>
-        public KnownFollowers(long? count = default, List<App.Bsky.Actor.ProfileViewBasic>? followers = default)
+        public KnownFollowers(long? count = default, List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic>? followers = default)
         {
             this.Count = count;
             this.Followers = followers;
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public KnownFollowers(CBORObject obj)
         {
             if (obj["count"] is not null) this.Count = obj["count"].AsInt64Value();
-            if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new App.Bsky.Actor.ProfileViewBasic(n)).ToList();
+            if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(n)).ToList();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("followers")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileViewBasic>? Followers { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic>? Followers { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.KnownFollowers>(this, (JsonTypeInfo<App.Bsky.Actor.KnownFollowers>)SourceGenerationContext.Default.AppBskyActorKnownFollowers)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers>)SourceGenerationContext.Default.AppBskyActorKnownFollowers)!;
         }
 
         public static KnownFollowers FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.KnownFollowers>(json, (JsonTypeInfo<App.Bsky.Actor.KnownFollowers>)SourceGenerationContext.Default.AppBskyActorKnownFollowers)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers>)SourceGenerationContext.Default.AppBskyActorKnownFollowers)!;
         }
     }
 }

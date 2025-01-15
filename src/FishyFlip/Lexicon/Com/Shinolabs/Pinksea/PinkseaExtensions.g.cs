@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateOekakiAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, Com.Shinolabs.Pinksea.Image? image, DateTime? createdAt = default, List<string>? tags = default, Com.Atproto.Repo.StrongRef? inResponseTo = default, bool? nsfw = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateOekakiAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image? image, DateTime? createdAt = default, List<string>? tags = default, Com.Atproto.Repo.StrongRef? inResponseTo = default, bool? nsfw = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki();
             record.CreatedAt = createdAt ?? DateTime.UtcNow;

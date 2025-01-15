@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="cid"></param>
         /// <param name="cursor"></param>
         /// <param name="likes"></param>
-        public GetLikesOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<App.Bsky.Feed.LikeDef>? likes = default)
+        public GetLikesOutput(FishyFlip.Models.ATUri? uri = default, string? cid = default, string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>? likes = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["likes"] is not null) this.Likes = obj["likes"].Values.Select(n =>new App.Bsky.Feed.LikeDef(n)).ToList();
+            if (obj["likes"] is not null) this.Likes = obj["likes"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.LikeDef(n)).ToList();
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("likes")]
         [JsonRequired]
-        public List<App.Bsky.Feed.LikeDef>? Likes { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>? Likes { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -81,12 +81,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GetLikesOutput>(this, (JsonTypeInfo<App.Bsky.Feed.GetLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetLikesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetLikesOutput)!;
         }
 
         public static GetLikesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GetLikesOutput>(json, (JsonTypeInfo<App.Bsky.Feed.GetLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetLikesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetLikesOutput)!;
         }
     }
 }

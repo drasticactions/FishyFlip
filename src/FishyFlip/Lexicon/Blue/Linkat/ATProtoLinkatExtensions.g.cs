@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateBoardAsync(this FishyFlip.ATProtocol atp, Blue.Linkat.Board record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateBoardAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Blue.Linkat.Board record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "blue.linkat.board", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateBoardAsync(this FishyFlip.ATProtocol atp, List<Blue.Linkat.Card>? cards, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateBoardAsync(this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.Blue.Linkat.Card>? cards, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Blue.Linkat.Board();
             record.Cards = cards;
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutBoardAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Blue.Linkat.Board record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutBoardAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Blue.Linkat.Board record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "blue.linkat.board", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

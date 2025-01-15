@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="imageLink">
         /// com.shinolabs.pinksea.defs#imageLink <br/>
         /// </param>
-        public Image(Blob? blob = default, Com.Shinolabs.Pinksea.ImageLink? imageLink = default)
+        public Image(Blob? blob = default, FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink? imageLink = default)
         {
             this.Blob = blob;
             this.ImageLink = imageLink;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public Image(CBORObject obj)
         {
             if (obj["blob"] is not null) this.Blob = new FishyFlip.Models.Blob(obj["blob"]);
-            if (obj["imageLink"] is not null) this.ImageLink = new Com.Shinolabs.Pinksea.ImageLink(obj["imageLink"]);
+            if (obj["imageLink"] is not null) this.ImageLink = new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink(obj["imageLink"]);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         [JsonPropertyName("imageLink")]
         [JsonRequired]
-        public Com.Shinolabs.Pinksea.ImageLink? ImageLink { get; set; }
+        public FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink? ImageLink { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -66,12 +66,12 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Shinolabs.Pinksea.Image>(this, (JsonTypeInfo<Com.Shinolabs.Pinksea.Image>)SourceGenerationContext.Default.ComShinolabsPinkseaImage)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image>)SourceGenerationContext.Default.ComShinolabsPinkseaImage)!;
         }
 
         public static Image FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Shinolabs.Pinksea.Image>(json, (JsonTypeInfo<Com.Shinolabs.Pinksea.Image>)SourceGenerationContext.Default.ComShinolabsPinkseaImage)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image>)SourceGenerationContext.Default.ComShinolabsPinkseaImage)!;
         }
     }
 }

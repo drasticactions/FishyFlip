@@ -88,12 +88,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Video.GetUploadLimitsOutput>(this, (JsonTypeInfo<App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput)!;
         }
 
         public static GetUploadLimitsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Video.GetUploadLimitsOutput>(json, (JsonTypeInfo<App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput)!;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.ATProtocol atp, Fm.Teal.Alpha.Actor.Profile record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fm.teal.alpha.actor.profile", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.ATProtocol atp, string? displayName = default, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Fm.Teal.Alpha.Actor.FeaturedItem? featuredItem = default, Blob? avatar = default, Blob? banner = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.ATProtocol atp, string? displayName = default, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem? featuredItem = default, Blob? avatar = default, Blob? banner = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile();
             record.DisplayName = displayName;
@@ -77,7 +77,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutProfileAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Fm.Teal.Alpha.Actor.Profile record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutProfileAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "fm.teal.alpha.actor.profile", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
@@ -142,7 +142,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, Fm.Teal.Alpha.Actor.Status record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fm.teal.alpha.actor.status", record, rkey, validate, swapCommit, cancellationToken);
         }
@@ -157,7 +157,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, DateTime? time, Fm.Teal.Alpha.Feed.PlayView? item, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status();
             record.Time = time;
@@ -190,7 +190,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutStatusAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, Fm.Teal.Alpha.Actor.Status record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutStatusAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "fm.teal.alpha.actor.status", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }

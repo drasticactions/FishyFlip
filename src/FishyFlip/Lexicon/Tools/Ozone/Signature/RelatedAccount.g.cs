@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.AccountView"/> (com.atproto.admin.defs#accountView)
         /// </param>
         /// <param name="similarities"></param>
-        public RelatedAccount(Com.Atproto.Admin.AccountView? account = default, List<Tools.Ozone.Signature.SigDetail>? similarities = default)
+        public RelatedAccount(FishyFlip.Lexicon.Com.Atproto.Admin.AccountView? account = default, List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>? similarities = default)
         {
             this.Account = account;
             this.Similarities = similarities;
@@ -36,8 +36,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         public RelatedAccount(CBORObject obj)
         {
-            if (obj["account"] is not null) this.Account = new Com.Atproto.Admin.AccountView(obj["account"]);
-            if (obj["similarities"] is not null) this.Similarities = obj["similarities"].Values.Select(n =>new Tools.Ozone.Signature.SigDetail(n)).ToList();
+            if (obj["account"] is not null) this.Account = new FishyFlip.Lexicon.Com.Atproto.Admin.AccountView(obj["account"]);
+            if (obj["similarities"] is not null) this.Similarities = obj["similarities"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail(n)).ToList();
         }
 
         /// <summary>
@@ -46,13 +46,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         [JsonPropertyName("account")]
         [JsonRequired]
-        public Com.Atproto.Admin.AccountView? Account { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Admin.AccountView? Account { get; set; }
 
         /// <summary>
         /// Gets or sets the similarities.
         /// </summary>
         [JsonPropertyName("similarities")]
-        public List<Tools.Ozone.Signature.SigDetail>? Similarities { get; set; }
+        public List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>? Similarities { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -64,12 +64,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Signature.RelatedAccount>(this, (JsonTypeInfo<Tools.Ozone.Signature.RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount)!;
         }
 
         public static RelatedAccount FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Signature.RelatedAccount>(json, (JsonTypeInfo<Tools.Ozone.Signature.RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount)!;
         }
     }
 }

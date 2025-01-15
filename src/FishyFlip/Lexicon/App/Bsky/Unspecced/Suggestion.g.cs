@@ -79,12 +79,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.Suggestion>(this, (JsonTypeInfo<App.Bsky.Unspecced.Suggestion>)SourceGenerationContext.Default.AppBskyUnspeccedSuggestion)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>)SourceGenerationContext.Default.AppBskyUnspeccedSuggestion)!;
         }
 
         public static Suggestion FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.Suggestion>(json, (JsonTypeInfo<App.Bsky.Unspecced.Suggestion>)SourceGenerationContext.Default.AppBskyUnspeccedSuggestion)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>)SourceGenerationContext.Default.AppBskyUnspeccedSuggestion)!;
         }
     }
 }

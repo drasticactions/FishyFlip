@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="records"></param>
-        public ListRecordsOutput(string? cursor = default, List<Com.Atproto.Repo.Record>? records = default)
+        public ListRecordsOutput(string? cursor = default, List<FishyFlip.Lexicon.Com.Atproto.Repo.Record>? records = default)
         {
             this.Cursor = cursor;
             this.Records = records;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public ListRecordsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n =>new Com.Atproto.Repo.Record(n)).ToList();
+            if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Repo.Record(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("records")]
         [JsonRequired]
-        public List<Com.Atproto.Repo.Record>? Records { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Repo.Record>? Records { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.ListRecordsOutput>(this, (JsonTypeInfo<Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput)!;
         }
 
         public static ListRecordsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.ListRecordsOutput>(json, (JsonTypeInfo<Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput)!;
         }
     }
 }

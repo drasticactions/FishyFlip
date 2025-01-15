@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </param>
         /// <param name="values"></param>
         /// <param name="cursor"></param>
-        public GetValuesOutput(Tools.Ozone.Set.SetView? set = default, List<string>? values = default, string? cursor = default)
+        public GetValuesOutput(FishyFlip.Lexicon.Tools.Ozone.Set.SetView? set = default, List<string>? values = default, string? cursor = default)
         {
             this.Set = set;
             this.Values = values;
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public GetValuesOutput(CBORObject obj)
         {
-            if (obj["set"] is not null) this.Set = new Tools.Ozone.Set.SetView(obj["set"]);
+            if (obj["set"] is not null) this.Set = new FishyFlip.Lexicon.Tools.Ozone.Set.SetView(obj["set"]);
             if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n =>n.AsString()).ToList();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
         }
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         [JsonPropertyName("set")]
         [JsonRequired]
-        public Tools.Ozone.Set.SetView? Set { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Set.SetView? Set { get; set; }
 
         /// <summary>
         /// Gets or sets the values.
@@ -74,12 +74,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Set.GetValuesOutput>(this, (JsonTypeInfo<Tools.Ozone.Set.GetValuesOutput>)SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>)SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput)!;
         }
 
         public static GetValuesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Set.GetValuesOutput>(json, (JsonTypeInfo<Tools.Ozone.Set.GetValuesOutput>)SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>)SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput)!;
         }
     }
 }

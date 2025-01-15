@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.RecordViewNotFound>(this, (JsonTypeInfo<Tools.Ozone.Moderation.RecordViewNotFound>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewNotFound)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewNotFound)!;
         }
 
         public static RecordViewNotFound FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.RecordViewNotFound>(json, (JsonTypeInfo<Tools.Ozone.Moderation.RecordViewNotFound>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewNotFound)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewNotFound)!;
         }
     }
 }

@@ -34,12 +34,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.DeleteResult>(this, (JsonTypeInfo<Com.Atproto.Repo.DeleteResult>)SourceGenerationContext.Default.ComAtprotoRepoDeleteResult)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult>)SourceGenerationContext.Default.ComAtprotoRepoDeleteResult)!;
         }
 
         public static DeleteResult FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.DeleteResult>(json, (JsonTypeInfo<Com.Atproto.Repo.DeleteResult>)SourceGenerationContext.Default.ComAtprotoRepoDeleteResult)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult>)SourceGenerationContext.Default.ComAtprotoRepoDeleteResult)!;
         }
     }
 }

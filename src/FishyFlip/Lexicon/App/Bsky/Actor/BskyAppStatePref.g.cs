@@ -20,7 +20,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </param>
         /// <param name="queuedNudges">An array of tokens which identify nudges (modals, popups, tours, highlight dots) that should be shown to the user.</param>
         /// <param name="nuxs">Storage for NUXs the user has encountered.</param>
-        public BskyAppStatePref(App.Bsky.Actor.BskyAppProgressGuide? activeProgressGuide = default, List<string>? queuedNudges = default, List<App.Bsky.Actor.Nux>? nuxs = default)
+        public BskyAppStatePref(FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide? activeProgressGuide = default, List<string>? queuedNudges = default, List<FishyFlip.Lexicon.App.Bsky.Actor.Nux>? nuxs = default)
         {
             this.ActiveProgressGuide = activeProgressGuide;
             this.QueuedNudges = queuedNudges;
@@ -41,9 +41,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public BskyAppStatePref(CBORObject obj)
         {
-            if (obj["activeProgressGuide"] is not null) this.ActiveProgressGuide = new App.Bsky.Actor.BskyAppProgressGuide(obj["activeProgressGuide"]);
+            if (obj["activeProgressGuide"] is not null) this.ActiveProgressGuide = new FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide(obj["activeProgressGuide"]);
             if (obj["queuedNudges"] is not null) this.QueuedNudges = obj["queuedNudges"].Values.Select(n =>n.AsString()).ToList();
-            if (obj["nuxs"] is not null) this.Nuxs = obj["nuxs"].Values.Select(n =>new App.Bsky.Actor.Nux(n)).ToList();
+            if (obj["nuxs"] is not null) this.Nuxs = obj["nuxs"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.Nux(n)).ToList();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide"/> (app.bsky.actor.defs#bskyAppProgressGuide)
         /// </summary>
         [JsonPropertyName("activeProgressGuide")]
-        public App.Bsky.Actor.BskyAppProgressGuide? ActiveProgressGuide { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide? ActiveProgressGuide { get; set; }
 
         /// <summary>
         /// Gets or sets the queuedNudges.
@@ -65,7 +65,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Storage for NUXs the user has encountered.
         /// </summary>
         [JsonPropertyName("nuxs")]
-        public List<App.Bsky.Actor.Nux>? Nuxs { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.Nux>? Nuxs { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -77,12 +77,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.BskyAppStatePref>(this, (JsonTypeInfo<App.Bsky.Actor.BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref)!;
         }
 
         public static BskyAppStatePref FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.BskyAppStatePref>(json, (JsonTypeInfo<App.Bsky.Actor.BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref)!;
         }
     }
 }

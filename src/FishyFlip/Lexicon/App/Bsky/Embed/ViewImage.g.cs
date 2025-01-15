@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <param name="aspectRatio">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </param>
-        public ViewImage(string? thumb = default, string? fullsize = default, string? alt = default, App.Bsky.Embed.AspectRatio? aspectRatio = default)
+        public ViewImage(string? thumb = default, string? fullsize = default, string? alt = default, FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? aspectRatio = default)
         {
             this.Thumb = thumb;
             this.Fullsize = fullsize;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["thumb"] is not null) this.Thumb = obj["thumb"].AsString();
             if (obj["fullsize"] is not null) this.Fullsize = obj["fullsize"].AsString();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
-            if (obj["aspectRatio"] is not null) this.AspectRatio = new App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
+            if (obj["aspectRatio"] is not null) this.AspectRatio = new FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
-        public App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -87,12 +87,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.ViewImage>(this, (JsonTypeInfo<App.Bsky.Embed.ViewImage>)SourceGenerationContext.Default.AppBskyEmbedViewImage)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewImage>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewImage>)SourceGenerationContext.Default.AppBskyEmbedViewImage)!;
         }
 
         public static ViewImage FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.ViewImage>(json, (JsonTypeInfo<App.Bsky.Embed.ViewImage>)SourceGenerationContext.Default.AppBskyEmbedViewImage)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewImage>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewImage>)SourceGenerationContext.Default.AppBskyEmbedViewImage)!;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState"/> (app.bsky.feed.defs#generatorViewerState)
         /// </param>
         /// <param name="indexedAt"></param>
-        public GeneratorView(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Models.ATDid? did = default, App.Bsky.Actor.ProfileView? creator = default, string? displayName = default, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, string? avatar = default, long? likeCount = default, bool? acceptsInteractions = default, List<Com.Atproto.Label.Label>? labels = default, App.Bsky.Feed.GeneratorViewerState? viewer = default, DateTime? indexedAt = default)
+        public GeneratorView(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Models.ATDid? did = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? creator = default, string? displayName = default, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, string? avatar = default, long? likeCount = default, bool? acceptsInteractions = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState? viewer = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -63,15 +63,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
-            if (obj["creator"] is not null) this.Creator = new App.Bsky.Actor.ProfileView(obj["creator"]);
+            if (obj["creator"] is not null) this.Creator = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["creator"]);
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["avatar"] is not null) this.Avatar = obj["avatar"].AsString();
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
             if (obj["acceptsInteractions"] is not null) this.AcceptsInteractions = obj["acceptsInteractions"].AsBoolean();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
-            if (obj["viewer"] is not null) this.Viewer = new App.Bsky.Feed.GeneratorViewerState(obj["viewer"]);
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
+            if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState(obj["viewer"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
@@ -104,7 +104,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("creator")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileView? Creator { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Creator { get; set; }
 
         /// <summary>
         /// Gets or sets the displayName.
@@ -123,7 +123,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the descriptionFacets.
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
-        public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
@@ -147,14 +147,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the viewer.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState"/> (app.bsky.feed.defs#generatorViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
-        public App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
@@ -173,12 +173,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.GeneratorView>(this, (JsonTypeInfo<App.Bsky.Feed.GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView)!;
         }
 
         public static GeneratorView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.GeneratorView>(json, (JsonTypeInfo<App.Bsky.Feed.GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView)!;
         }
     }
 }

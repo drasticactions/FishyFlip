@@ -62,12 +62,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.LogLeaveConvo>(this, (JsonTypeInfo<Chat.Bsky.Convo.LogLeaveConvo>)SourceGenerationContext.Default.ChatBskyConvoLogLeaveConvo)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>)SourceGenerationContext.Default.ChatBskyConvoLogLeaveConvo)!;
         }
 
         public static LogLeaveConvo FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.LogLeaveConvo>(json, (JsonTypeInfo<Chat.Bsky.Convo.LogLeaveConvo>)SourceGenerationContext.Default.ChatBskyConvoLogLeaveConvo)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>)SourceGenerationContext.Default.ChatBskyConvoLogLeaveConvo)!;
         }
     }
 }

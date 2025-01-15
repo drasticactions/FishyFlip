@@ -75,12 +75,12 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fyi.Unravel.Frontpage.Post>(this, (JsonTypeInfo<Fyi.Unravel.Frontpage.Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost)!;
         }
 
         public static Post FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fyi.Unravel.Frontpage.Post>(json, (JsonTypeInfo<Fyi.Unravel.Frontpage.Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost)!;
         }
     }
 }

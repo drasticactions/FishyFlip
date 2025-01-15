@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="blobs"></param>
-        public ListMissingBlobsOutput(string? cursor = default, List<Com.Atproto.Repo.RecordBlob>? blobs = default)
+        public ListMissingBlobsOutput(string? cursor = default, List<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>? blobs = default)
         {
             this.Cursor = cursor;
             this.Blobs = blobs;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public ListMissingBlobsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new Com.Atproto.Repo.RecordBlob(n)).ToList();
+            if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("blobs")]
         [JsonRequired]
-        public List<Com.Atproto.Repo.RecordBlob>? Blobs { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>? Blobs { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.ListMissingBlobsOutput>(this, (JsonTypeInfo<Com.Atproto.Repo.ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput)!;
         }
 
         public static ListMissingBlobsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.ListMissingBlobsOutput>(json, (JsonTypeInfo<Com.Atproto.Repo.ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput)!;
         }
     }
 }

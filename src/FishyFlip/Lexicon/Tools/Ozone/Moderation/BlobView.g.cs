@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="moderation">
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
         /// </param>
-        public BlobView(string? cid = default, string? mimeType = default, long? size = default, DateTime? createdAt = default, ATObject? details = default, Tools.Ozone.Moderation.Moderation? moderation = default)
+        public BlobView(string? cid = default, string? mimeType = default, long? size = default, DateTime? createdAt = default, ATObject? details = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation? moderation = default)
         {
             this.Cid = cid;
             this.MimeType = mimeType;
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["size"] is not null) this.Size = obj["size"].AsInt64Value();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["details"] is not null) this.Details = obj["details"].ToATObject();
-            if (obj["moderation"] is not null) this.Moderation = new Tools.Ozone.Moderation.Moderation(obj["moderation"]);
+            if (obj["moderation"] is not null) this.Moderation = new FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation(obj["moderation"]);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
         /// </summary>
         [JsonPropertyName("moderation")]
-        public Tools.Ozone.Moderation.Moderation? Moderation { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation? Moderation { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -110,12 +110,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.BlobView>(this, (JsonTypeInfo<Tools.Ozone.Moderation.BlobView>)SourceGenerationContext.Default.ToolsOzoneModerationBlobView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>)SourceGenerationContext.Default.ToolsOzoneModerationBlobView)!;
         }
 
         public static BlobView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.BlobView>(json, (JsonTypeInfo<Tools.Ozone.Moderation.BlobView>)SourceGenerationContext.Default.ToolsOzoneModerationBlobView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>)SourceGenerationContext.Default.ToolsOzoneModerationBlobView)!;
         }
     }
 }

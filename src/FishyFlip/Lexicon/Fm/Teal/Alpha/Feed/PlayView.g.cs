@@ -174,12 +174,12 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Fm.Teal.Alpha.Feed.PlayView>(this, (JsonTypeInfo<Fm.Teal.Alpha.Feed.PlayView>)SourceGenerationContext.Default.FmTealAlphaFeedPlayView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView>)SourceGenerationContext.Default.FmTealAlphaFeedPlayView)!;
         }
 
         public static PlayView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Fm.Teal.Alpha.Feed.PlayView>(json, (JsonTypeInfo<Fm.Teal.Alpha.Feed.PlayView>)SourceGenerationContext.Default.FmTealAlphaFeedPlayView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView>)SourceGenerationContext.Default.FmTealAlphaFeedPlayView)!;
         }
     }
 }

@@ -85,6 +85,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.BskyAppProgressGuide(obj);
                 case "app.bsky.actor.defs#bskyAppStatePref":
                     return new App.Bsky.Actor.BskyAppStatePref(obj);
+                case "buzz.bookhive.buzz":
+                    return new Buzz.Bookhive.Buzz(obj);
                 case "app.bsky.richtext.facet#byteSlice":
                     return new App.Bsky.Richtext.ByteSlice(obj);
                 case "social.psky.richtext.facet#byteSlice":
@@ -731,6 +733,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.SavedFeedsPref(obj);
                 case "app.bsky.actor.defs#savedFeedsPrefV2":
                     return new App.Bsky.Actor.SavedFeedsPrefV2(obj);
+                case "com.atproto.lexicon.schema":
+                    return new Com.Atproto.Lexicon.Schema(obj);
                 case "tools.ozone.signature.searchAccounts#SearchAccountsOutput":
                     return new Tools.Ozone.Signature.SearchAccountsOutput(obj);
                 case "com.atproto.admin.searchAccounts#SearchAccountsOutput":

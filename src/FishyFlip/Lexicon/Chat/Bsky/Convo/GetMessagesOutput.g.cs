@@ -68,12 +68,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.GetMessagesOutput>(this, (JsonTypeInfo<Chat.Bsky.Convo.GetMessagesOutput>)SourceGenerationContext.Default.ChatBskyConvoGetMessagesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>)SourceGenerationContext.Default.ChatBskyConvoGetMessagesOutput)!;
         }
 
         public static GetMessagesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.GetMessagesOutput>(json, (JsonTypeInfo<Chat.Bsky.Convo.GetMessagesOutput>)SourceGenerationContext.Default.ChatBskyConvoGetMessagesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>)SourceGenerationContext.Default.ChatBskyConvoGetMessagesOutput)!;
         }
     }
 }

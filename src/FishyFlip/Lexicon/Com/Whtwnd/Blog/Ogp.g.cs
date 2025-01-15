@@ -70,12 +70,12 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Whtwnd.Blog.Ogp>(this, (JsonTypeInfo<Com.Whtwnd.Blog.Ogp>)SourceGenerationContext.Default.ComWhtwndBlogOgp)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp>)SourceGenerationContext.Default.ComWhtwndBlogOgp)!;
         }
 
         public static Ogp FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Whtwnd.Blog.Ogp>(json, (JsonTypeInfo<Com.Whtwnd.Blog.Ogp>)SourceGenerationContext.Default.ComWhtwndBlogOgp)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp>)SourceGenerationContext.Default.ComWhtwndBlogOgp)!;
         }
     }
 }

@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.RecordBlob>(this, (JsonTypeInfo<Com.Atproto.Repo.RecordBlob>)SourceGenerationContext.Default.ComAtprotoRepoRecordBlob)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>)SourceGenerationContext.Default.ComAtprotoRepoRecordBlob)!;
         }
 
         public static RecordBlob FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.RecordBlob>(json, (JsonTypeInfo<Com.Atproto.Repo.RecordBlob>)SourceGenerationContext.Default.ComAtprotoRepoRecordBlob)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>)SourceGenerationContext.Default.ComAtprotoRepoRecordBlob)!;
         }
     }
 }

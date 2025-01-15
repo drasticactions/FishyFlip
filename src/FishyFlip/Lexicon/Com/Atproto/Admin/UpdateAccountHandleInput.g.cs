@@ -64,12 +64,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.UpdateAccountHandleInput>(this, (JsonTypeInfo<Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput)!;
         }
 
         public static UpdateAccountHandleInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.UpdateAccountHandleInput>(json, (JsonTypeInfo<Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput)!;
         }
     }
 }

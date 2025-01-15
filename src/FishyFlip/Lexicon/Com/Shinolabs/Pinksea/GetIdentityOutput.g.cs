@@ -66,12 +66,12 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Shinolabs.Pinksea.GetIdentityOutput>(this, (JsonTypeInfo<Com.Shinolabs.Pinksea.GetIdentityOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetIdentityOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetIdentityOutput)!;
         }
 
         public static GetIdentityOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Shinolabs.Pinksea.GetIdentityOutput>(json, (JsonTypeInfo<Com.Shinolabs.Pinksea.GetIdentityOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetIdentityOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetIdentityOutput)!;
         }
     }
 }

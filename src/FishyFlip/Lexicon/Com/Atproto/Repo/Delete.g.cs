@@ -65,12 +65,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Repo.Delete>(this, (JsonTypeInfo<Com.Atproto.Repo.Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete)!;
         }
 
         public static Delete FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Repo.Delete>(json, (JsonTypeInfo<Com.Atproto.Repo.Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete)!;
         }
     }
 }

@@ -79,12 +79,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Convo.LogDeleteMessage>(this, (JsonTypeInfo<Chat.Bsky.Convo.LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage)!;
         }
 
         public static LogDeleteMessage FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Convo.LogDeleteMessage>(json, (JsonTypeInfo<Chat.Bsky.Convo.LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage)!;
         }
     }
 }

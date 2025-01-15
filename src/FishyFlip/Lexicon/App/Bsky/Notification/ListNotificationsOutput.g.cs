@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="notifications"></param>
         /// <param name="priority"></param>
         /// <param name="seenAt"></param>
-        public ListNotificationsOutput(string? cursor = default, List<App.Bsky.Notification.Notification>? notifications = default, bool? priority = default, DateTime? seenAt = default)
+        public ListNotificationsOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Notification.Notification>? notifications = default, bool? priority = default, DateTime? seenAt = default)
         {
             this.Cursor = cursor;
             this.Notifications = notifications;
@@ -39,7 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public ListNotificationsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["notifications"] is not null) this.Notifications = obj["notifications"].Values.Select(n =>new App.Bsky.Notification.Notification(n)).ToList();
+            if (obj["notifications"] is not null) this.Notifications = obj["notifications"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Notification.Notification(n)).ToList();
             if (obj["priority"] is not null) this.Priority = obj["priority"].AsBoolean();
             if (obj["seenAt"] is not null) this.SeenAt = obj["seenAt"].ToDateTime();
         }
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         [JsonPropertyName("notifications")]
         [JsonRequired]
-        public List<App.Bsky.Notification.Notification>? Notifications { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Notification.Notification>? Notifications { get; set; }
 
         /// <summary>
         /// Gets or sets the priority.
@@ -79,12 +79,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Notification.ListNotificationsOutput>(this, (JsonTypeInfo<App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput)!;
         }
 
         public static ListNotificationsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Notification.ListNotificationsOutput>(json, (JsonTypeInfo<App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput)!;
         }
     }
 }

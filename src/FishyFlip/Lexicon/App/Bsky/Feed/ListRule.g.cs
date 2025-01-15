@@ -56,12 +56,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.ListRule>(this, (JsonTypeInfo<App.Bsky.Feed.ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule)!;
         }
 
         public static ListRule FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.ListRule>(json, (JsonTypeInfo<App.Bsky.Feed.ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule)!;
         }
     }
 }

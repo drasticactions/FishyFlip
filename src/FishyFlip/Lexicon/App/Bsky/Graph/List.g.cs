@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="createdAt"></param>
-        public List(string? purpose, string? name, string? description = default, List<App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
+        public List(string? purpose, string? name, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
         {
             this.Purpose = purpose;
             this.Name = name;
@@ -58,9 +58,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["purpose"] is not null) this.Purpose = obj["purpose"].AsString();
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
-            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new App.Bsky.Richtext.Facet(n)).ToList();
+            if (obj["descriptionFacets"] is not null) this.DescriptionFacets = obj["descriptionFacets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
-            if (obj["labels"] is not null) this.Labels = new Com.Atproto.Label.SelfLabels(obj["labels"]);
+            if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -92,7 +92,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the descriptionFacets.
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
-        public List<App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
@@ -106,7 +106,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
-        public Com.Atproto.Label.SelfLabels? Labels { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
@@ -124,12 +124,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Graph.List>(this, (JsonTypeInfo<App.Bsky.Graph.List>)SourceGenerationContext.Default.AppBskyGraphList)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.List>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.List>)SourceGenerationContext.Default.AppBskyGraphList)!;
         }
 
         public static List FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Graph.List>(json, (JsonTypeInfo<App.Bsky.Graph.List>)SourceGenerationContext.Default.AppBskyGraphList)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.List>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.List>)SourceGenerationContext.Default.AppBskyGraphList)!;
         }
     }
 }

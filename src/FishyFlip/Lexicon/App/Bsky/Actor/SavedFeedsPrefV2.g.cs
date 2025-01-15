@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Initializes a new instance of the <see cref="SavedFeedsPrefV2"/> class.
         /// </summary>
         /// <param name="items"></param>
-        public SavedFeedsPrefV2(List<App.Bsky.Actor.SavedFeed>? items = default)
+        public SavedFeedsPrefV2(List<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed>? items = default)
         {
             this.Items = items;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public SavedFeedsPrefV2(CBORObject obj)
         {
-            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new App.Bsky.Actor.SavedFeed(n)).ToList();
+            if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("items")]
         [JsonRequired]
-        public List<App.Bsky.Actor.SavedFeed>? Items { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed>? Items { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.SavedFeedsPrefV2>(this, (JsonTypeInfo<App.Bsky.Actor.SavedFeedsPrefV2>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPrefV2)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPrefV2)!;
         }
 
         public static SavedFeedsPrefV2 FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.SavedFeedsPrefV2>(json, (JsonTypeInfo<App.Bsky.Actor.SavedFeedsPrefV2>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPrefV2)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPrefV2)!;
         }
     }
 }

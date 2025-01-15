@@ -34,12 +34,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Setting.RemoveOptionsOutput>(this, (JsonTypeInfo<Tools.Ozone.Setting.RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput)!;
         }
 
         public static RemoveOptionsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Setting.RemoveOptionsOutput>(json, (JsonTypeInfo<Tools.Ozone.Setting.RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput)!;
         }
     }
 }

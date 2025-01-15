@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.ReserveSigningKeyInput>(this, (JsonTypeInfo<Com.Atproto.Server.ReserveSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyInput)!;
         }
 
         public static ReserveSigningKeyInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.ReserveSigningKeyInput>(json, (JsonTypeInfo<Com.Atproto.Server.ReserveSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyInput)!;
         }
     }
 }

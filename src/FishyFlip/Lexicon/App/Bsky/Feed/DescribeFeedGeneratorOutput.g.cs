@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="links">
         /// app.bsky.feed.defs#links <br/>
         /// </param>
-        public DescribeFeedGeneratorOutput(FishyFlip.Models.ATDid? did = default, List<App.Bsky.Feed.Feed>? feeds = default, App.Bsky.Feed.Links? links = default)
+        public DescribeFeedGeneratorOutput(FishyFlip.Models.ATDid? did = default, List<FishyFlip.Lexicon.App.Bsky.Feed.Feed>? feeds = default, FishyFlip.Lexicon.App.Bsky.Feed.Links? links = default)
         {
             this.Did = did;
             this.Feeds = feeds;
@@ -39,8 +39,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public DescribeFeedGeneratorOutput(CBORObject obj)
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
-            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new App.Bsky.Feed.Feed(n)).ToList();
-            if (obj["links"] is not null) this.Links = new App.Bsky.Feed.Links(obj["links"]);
+            if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.Feed(n)).ToList();
+            if (obj["links"] is not null) this.Links = new FishyFlip.Lexicon.App.Bsky.Feed.Links(obj["links"]);
         }
 
         /// <summary>
@@ -56,14 +56,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("feeds")]
         [JsonRequired]
-        public List<App.Bsky.Feed.Feed>? Feeds { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Feed.Feed>? Feeds { get; set; }
 
         /// <summary>
         /// Gets or sets the links.
         /// app.bsky.feed.defs#links <br/>
         /// </summary>
         [JsonPropertyName("links")]
-        public App.Bsky.Feed.Links? Links { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Feed.Links? Links { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -75,12 +75,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.DescribeFeedGeneratorOutput>(this, (JsonTypeInfo<App.Bsky.Feed.DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput)!;
         }
 
         public static DescribeFeedGeneratorOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.DescribeFeedGeneratorOutput>(json, (JsonTypeInfo<App.Bsky.Feed.DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput)!;
         }
     }
 }

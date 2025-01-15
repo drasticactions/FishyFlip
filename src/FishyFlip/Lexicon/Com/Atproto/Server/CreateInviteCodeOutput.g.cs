@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.CreateInviteCodeOutput>(this, (JsonTypeInfo<Com.Atproto.Server.CreateInviteCodeOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeOutput)!;
         }
 
         public static CreateInviteCodeOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.CreateInviteCodeOutput>(json, (JsonTypeInfo<Com.Atproto.Server.CreateInviteCodeOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeOutput)!;
         }
     }
 }

@@ -57,12 +57,12 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Shinolabs.Pinksea.OekakiTombstone>(this, (JsonTypeInfo<Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone)!;
         }
 
         public static OekakiTombstone FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Shinolabs.Pinksea.OekakiTombstone>(json, (JsonTypeInfo<Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone)!;
         }
     }
 }

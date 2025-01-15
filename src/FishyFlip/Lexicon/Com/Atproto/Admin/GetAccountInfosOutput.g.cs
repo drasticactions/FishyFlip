@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Initializes a new instance of the <see cref="GetAccountInfosOutput"/> class.
         /// </summary>
         /// <param name="infos"></param>
-        public GetAccountInfosOutput(List<Com.Atproto.Admin.AccountView>? infos = default)
+        public GetAccountInfosOutput(List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>? infos = default)
         {
             this.Infos = infos;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public GetAccountInfosOutput(CBORObject obj)
         {
-            if (obj["infos"] is not null) this.Infos = obj["infos"].Values.Select(n =>new Com.Atproto.Admin.AccountView(n)).ToList();
+            if (obj["infos"] is not null) this.Infos = obj["infos"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Admin.AccountView(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         [JsonPropertyName("infos")]
         [JsonRequired]
-        public List<Com.Atproto.Admin.AccountView>? Infos { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>? Infos { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.GetAccountInfosOutput>(this, (JsonTypeInfo<Com.Atproto.Admin.GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput)!;
         }
 
         public static GetAccountInfosOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.GetAccountInfosOutput>(json, (JsonTypeInfo<Com.Atproto.Admin.GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput)!;
         }
     }
 }

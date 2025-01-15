@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="inviteNote"></param>
         /// <param name="deactivatedAt"></param>
         /// <param name="threatSignatures"></param>
-        public RepoView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? email = default, List<ATObject>? relatedRecords = default, DateTime? indexedAt = default, Tools.Ozone.Moderation.Moderation? moderation = default, Com.Atproto.Server.InviteCode? invitedBy = default, bool? invitesDisabled = default, string? inviteNote = default, DateTime? deactivatedAt = default, List<Com.Atproto.Admin.ThreatSignature>? threatSignatures = default)
+        public RepoView(FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATHandle? handle = default, string? email = default, List<ATObject>? relatedRecords = default, DateTime? indexedAt = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation? moderation = default, FishyFlip.Lexicon.Com.Atproto.Server.InviteCode? invitedBy = default, bool? invitesDisabled = default, string? inviteNote = default, DateTime? deactivatedAt = default, List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>? threatSignatures = default)
         {
             this.Did = did;
             this.Handle = handle;
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["email"] is not null) this.Email = obj["email"].AsString();
             if (obj["relatedRecords"] is not null) this.RelatedRecords = obj["relatedRecords"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["moderation"] is not null) this.Moderation = new Tools.Ozone.Moderation.Moderation(obj["moderation"]);
-            if (obj["invitedBy"] is not null) this.InvitedBy = new Com.Atproto.Server.InviteCode(obj["invitedBy"]);
+            if (obj["moderation"] is not null) this.Moderation = new FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation(obj["moderation"]);
+            if (obj["invitedBy"] is not null) this.InvitedBy = new FishyFlip.Lexicon.Com.Atproto.Server.InviteCode(obj["invitedBy"]);
             if (obj["invitesDisabled"] is not null) this.InvitesDisabled = obj["invitesDisabled"].AsBoolean();
             if (obj["inviteNote"] is not null) this.InviteNote = obj["inviteNote"].AsString();
             if (obj["deactivatedAt"] is not null) this.DeactivatedAt = obj["deactivatedAt"].ToDateTime();
-            if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n =>new Com.Atproto.Admin.ThreatSignature(n)).ToList();
+            if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature(n)).ToList();
         }
 
         /// <summary>
@@ -111,14 +111,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("moderation")]
         [JsonRequired]
-        public Tools.Ozone.Moderation.Moderation? Moderation { get; set; }
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation? Moderation { get; set; }
 
         /// <summary>
         /// Gets or sets the invitedBy.
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Server.InviteCode"/> (com.atproto.server.defs#inviteCode)
         /// </summary>
         [JsonPropertyName("invitedBy")]
-        public Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the invitesDisabled.
@@ -142,7 +142,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the threatSignatures.
         /// </summary>
         [JsonPropertyName("threatSignatures")]
-        public List<Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -154,12 +154,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Moderation.RepoView>(this, (JsonTypeInfo<Tools.Ozone.Moderation.RepoView>)SourceGenerationContext.Default.ToolsOzoneModerationRepoView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>)SourceGenerationContext.Default.ToolsOzoneModerationRepoView)!;
         }
 
         public static RepoView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Moderation.RepoView>(json, (JsonTypeInfo<Tools.Ozone.Moderation.RepoView>)SourceGenerationContext.Default.ToolsOzoneModerationRepoView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>)SourceGenerationContext.Default.ToolsOzoneModerationRepoView)!;
         }
     }
 }

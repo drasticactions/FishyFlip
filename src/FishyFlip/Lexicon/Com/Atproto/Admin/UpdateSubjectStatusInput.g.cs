@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <param name="deactivated">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr"/> (com.atproto.admin.defs#statusAttr)
         /// </param>
-        public UpdateSubjectStatusInput(ATObject? subject = default, Com.Atproto.Admin.StatusAttr? takedown = default, Com.Atproto.Admin.StatusAttr? deactivated = default)
+        public UpdateSubjectStatusInput(ATObject? subject = default, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? takedown = default, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? deactivated = default)
         {
             this.Subject = subject;
             this.Takedown = takedown;
@@ -46,8 +46,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public UpdateSubjectStatusInput(CBORObject obj)
         {
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
-            if (obj["takedown"] is not null) this.Takedown = new Com.Atproto.Admin.StatusAttr(obj["takedown"]);
-            if (obj["deactivated"] is not null) this.Deactivated = new Com.Atproto.Admin.StatusAttr(obj["deactivated"]);
+            if (obj["takedown"] is not null) this.Takedown = new FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr(obj["takedown"]);
+            if (obj["deactivated"] is not null) this.Deactivated = new FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr(obj["deactivated"]);
         }
 
         /// <summary>
@@ -66,14 +66,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr"/> (com.atproto.admin.defs#statusAttr)
         /// </summary>
         [JsonPropertyName("takedown")]
-        public Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
 
         /// <summary>
         /// Gets or sets the deactivated.
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr"/> (com.atproto.admin.defs#statusAttr)
         /// </summary>
         [JsonPropertyName("deactivated")]
-        public Com.Atproto.Admin.StatusAttr? Deactivated { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? Deactivated { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -85,12 +85,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.UpdateSubjectStatusInput>(this, (JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusInput)!;
         }
 
         public static UpdateSubjectStatusInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.UpdateSubjectStatusInput>(json, (JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusInput)!;
         }
     }
 }

@@ -383,7 +383,6 @@ public class PropertyGeneration
             throw new InvalidOperationException("Property does not have items.");
         }
         var propertyName = this.GetPropertyType(className, name, property.Items);
-        var propertyNamePascal = !this._IsBaseType(propertyName) ? string.Join(".", propertyName.Split('.').Select(n => n.ToPascalCase())) : propertyName;
         var item = $"List<{propertyName.Replace("?", string.Empty)}>";
         Console.WriteLine($"List Property: {item}");
         return item;
@@ -418,7 +417,7 @@ public class PropertyGeneration
                 return "List<ATObject>";
             }
 
-            return $"{mainRef.CSharpNamespace}.{mainRef.ClassName}";
+            return $"{AppCommands.baseNamespace}.{mainRef.CSharpNamespace}.{mainRef.ClassName}";
         }
 
         if (string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(idName))
@@ -434,7 +433,7 @@ public class PropertyGeneration
                 case "string":
                     return "string";
                 case "object":
-                    return idName.ToPascalCase();
+                    return AppCommands.baseNamespace + "." + idName.ToPascalCase();
                 default:
                     Console.WriteLine($"Local Ref: {localRef.Type}");
                     break;
@@ -443,23 +442,23 @@ public class PropertyGeneration
 
         if (string.IsNullOrEmpty(namespaceName) && !string.IsNullOrEmpty(idName))
         {
-            return idName.ToPascalCase();
+            return AppCommands.baseNamespace + "." + idName.ToPascalCase();
         }
 
         if (!string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(idName))
         {
             // Ref is in another namespace.
-            return string.Join(".", namespaceName.Split('.').Select(n => n.ToPascalCase()));
+            return string.Join(".",  AppCommands.baseNamespace, namespaceName.Split('.').Select(n => n.ToPascalCase()));
         }
 
         if (idName.Contains("."))
         {
-            return string.Join(".", idName.Split('.').Select(n => n.ToPascalCase()));
+            return string.Join(".",  AppCommands.baseNamespace, idName.Split('.').Select(n => n.ToPascalCase()));
         }
 
         if (!string.IsNullOrEmpty(namespaceName) && !string.IsNullOrEmpty(idName))
         {
-            return $"{string.Join(".", namespaceName.Split('.').Select(n => n.ToPascalCase()))}.{idName.ToPascalCase()}";
+            return $"{string.Join(".",  AppCommands.baseNamespace, namespaceName.Split('.').Select(n => n.ToPascalCase()))}.{idName.ToPascalCase()}";
         }
 
         return "ATObject";

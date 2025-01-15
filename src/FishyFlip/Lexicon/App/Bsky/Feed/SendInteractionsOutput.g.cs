@@ -34,12 +34,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Feed.SendInteractionsOutput>(this, (JsonTypeInfo<App.Bsky.Feed.SendInteractionsOutput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsOutput)!;
         }
 
         public static SendInteractionsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Feed.SendInteractionsOutput>(json, (JsonTypeInfo<App.Bsky.Feed.SendInteractionsOutput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsOutput)!;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetTaggedSuggestionsOutput"/> class.
         /// </summary>
         /// <param name="suggestions"></param>
-        public GetTaggedSuggestionsOutput(List<App.Bsky.Unspecced.Suggestion>? suggestions = default)
+        public GetTaggedSuggestionsOutput(List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>? suggestions = default)
         {
             this.Suggestions = suggestions;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetTaggedSuggestionsOutput(CBORObject obj)
         {
-            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new App.Bsky.Unspecced.Suggestion(n)).ToList();
+            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("suggestions")]
         [JsonRequired]
-        public List<App.Bsky.Unspecced.Suggestion>? Suggestions { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>? Suggestions { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(this, (JsonTypeInfo<App.Bsky.Unspecced.GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput)!;
         }
 
         public static GetTaggedSuggestionsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(json, (JsonTypeInfo<App.Bsky.Unspecced.GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput)!;
         }
     }
 }

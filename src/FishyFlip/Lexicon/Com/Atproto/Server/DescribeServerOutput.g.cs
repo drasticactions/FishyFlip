@@ -22,7 +22,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// com.atproto.server.defs#contact <br/>
         /// </param>
         /// <param name="did"></param>
-        public DescribeServerOutput(bool? inviteCodeRequired = default, bool? phoneVerificationRequired = default, List<string>? availableUserDomains = default, Com.Atproto.Server.Links? links = default, Com.Atproto.Server.Contact? contact = default, FishyFlip.Models.ATDid? did = default)
+        public DescribeServerOutput(bool? inviteCodeRequired = default, bool? phoneVerificationRequired = default, List<string>? availableUserDomains = default, FishyFlip.Lexicon.Com.Atproto.Server.Links? links = default, FishyFlip.Lexicon.Com.Atproto.Server.Contact? contact = default, FishyFlip.Models.ATDid? did = default)
         {
             this.InviteCodeRequired = inviteCodeRequired;
             this.PhoneVerificationRequired = phoneVerificationRequired;
@@ -49,8 +49,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["inviteCodeRequired"] is not null) this.InviteCodeRequired = obj["inviteCodeRequired"].AsBoolean();
             if (obj["phoneVerificationRequired"] is not null) this.PhoneVerificationRequired = obj["phoneVerificationRequired"].AsBoolean();
             if (obj["availableUserDomains"] is not null) this.AvailableUserDomains = obj["availableUserDomains"].Values.Select(n =>n.AsString()).ToList();
-            if (obj["links"] is not null) this.Links = new Com.Atproto.Server.Links(obj["links"]);
-            if (obj["contact"] is not null) this.Contact = new Com.Atproto.Server.Contact(obj["contact"]);
+            if (obj["links"] is not null) this.Links = new FishyFlip.Lexicon.Com.Atproto.Server.Links(obj["links"]);
+            if (obj["contact"] is not null) this.Contact = new FishyFlip.Lexicon.Com.Atproto.Server.Contact(obj["contact"]);
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
         }
 
@@ -82,7 +82,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// com.atproto.server.defs#links <br/>
         /// </summary>
         [JsonPropertyName("links")]
-        public Com.Atproto.Server.Links? Links { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Server.Links? Links { get; set; }
 
         /// <summary>
         /// Gets or sets the contact.
@@ -90,7 +90,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// com.atproto.server.defs#contact <br/>
         /// </summary>
         [JsonPropertyName("contact")]
-        public Com.Atproto.Server.Contact? Contact { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Server.Contact? Contact { get; set; }
 
         /// <summary>
         /// Gets or sets the did.
@@ -110,12 +110,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.DescribeServerOutput>(this, (JsonTypeInfo<Com.Atproto.Server.DescribeServerOutput>)SourceGenerationContext.Default.ComAtprotoServerDescribeServerOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>)SourceGenerationContext.Default.ComAtprotoServerDescribeServerOutput)!;
         }
 
         public static DescribeServerOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.DescribeServerOutput>(json, (JsonTypeInfo<Com.Atproto.Server.DescribeServerOutput>)SourceGenerationContext.Default.ComAtprotoServerDescribeServerOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>)SourceGenerationContext.Default.ComAtprotoServerDescribeServerOutput)!;
         }
     }
 }

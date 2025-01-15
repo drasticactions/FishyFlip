@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedVideo"/> (app.bsky.embed.video) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external) <br/>
         /// </param>
-        public RecordWithMedia(App.Bsky.Embed.EmbedRecord? record = default, ATObject? media = default)
+        public RecordWithMedia(FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord? record = default, ATObject? media = default)
         {
             this.Record = record;
             this.Media = media;
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public RecordWithMedia(CBORObject obj)
         {
-            if (obj["record"] is not null) this.Record = new App.Bsky.Embed.EmbedRecord(obj["record"]);
+            if (obj["record"] is not null) this.Record = new FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord(obj["record"]);
             if (obj["media"] is not null) this.Media = obj["media"].ToATObject();
         }
 
@@ -51,7 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         [JsonPropertyName("record")]
         [JsonRequired]
-        public App.Bsky.Embed.EmbedRecord? Record { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord? Record { get; set; }
 
         /// <summary>
         /// Gets or sets the media.
@@ -74,12 +74,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Embed.RecordWithMedia>(this, (JsonTypeInfo<App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia)!;
         }
 
         public static RecordWithMedia FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Embed.RecordWithMedia>(json, (JsonTypeInfo<App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia)!;
         }
     }
 }

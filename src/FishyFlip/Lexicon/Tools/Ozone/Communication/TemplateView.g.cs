@@ -136,12 +136,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Tools.Ozone.Communication.TemplateView>(this, (JsonTypeInfo<Tools.Ozone.Communication.TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView)!;
         }
 
         public static TemplateView FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Tools.Ozone.Communication.TemplateView>(json, (JsonTypeInfo<Tools.Ozone.Communication.TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView)!;
         }
     }
 }

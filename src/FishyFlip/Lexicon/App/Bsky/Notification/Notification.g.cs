@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="isRead"></param>
         /// <param name="indexedAt"></param>
         /// <param name="labels"></param>
-        public Notification(FishyFlip.Models.ATUri? uri = default, string? cid = default, App.Bsky.Actor.ProfileView? author = default, string? reason = default, FishyFlip.Models.ATUri? reasonSubject = default, ATObject? record = default, bool? isRead = default, DateTime? indexedAt = default, List<Com.Atproto.Label.Label>? labels = default)
+        public Notification(FishyFlip.Models.ATUri? uri = default, string? cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? author = default, string? reason = default, FishyFlip.Models.ATUri? reasonSubject = default, ATObject? record = default, bool? isRead = default, DateTime? indexedAt = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -61,13 +61,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
-            if (obj["author"] is not null) this.Author = new App.Bsky.Actor.ProfileView(obj["author"]);
+            if (obj["author"] is not null) this.Author = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["author"]);
             if (obj["reason"] is not null) this.Reason = obj["reason"].AsString();
             if (obj["reasonSubject"] is not null) this.ReasonSubject = obj["reasonSubject"].ToATUri();
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["isRead"] is not null) this.IsRead = obj["isRead"].AsBoolean();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         [JsonPropertyName("author")]
         [JsonRequired]
-        public App.Bsky.Actor.ProfileView? Author { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Author { get; set; }
 
         /// <summary>
         /// Gets or sets the reason.
@@ -141,7 +141,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -153,12 +153,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Notification.Notification>(this, (JsonTypeInfo<App.Bsky.Notification.Notification>)SourceGenerationContext.Default.AppBskyNotificationNotification)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Notification.Notification>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Notification>)SourceGenerationContext.Default.AppBskyNotificationNotification)!;
         }
 
         public static Notification FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Notification.Notification>(json, (JsonTypeInfo<App.Bsky.Notification.Notification>)SourceGenerationContext.Default.AppBskyNotificationNotification)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.Notification>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Notification>)SourceGenerationContext.Default.AppBskyNotificationNotification)!;
         }
     }
 }

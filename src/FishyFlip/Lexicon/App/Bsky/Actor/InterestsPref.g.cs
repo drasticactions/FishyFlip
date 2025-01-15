@@ -53,12 +53,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.InterestsPref>(this, (JsonTypeInfo<App.Bsky.Actor.InterestsPref>)SourceGenerationContext.Default.AppBskyActorInterestsPref)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>)SourceGenerationContext.Default.AppBskyActorInterestsPref)!;
         }
 
         public static InterestsPref FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.InterestsPref>(json, (JsonTypeInfo<App.Bsky.Actor.InterestsPref>)SourceGenerationContext.Default.AppBskyActorInterestsPref)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>)SourceGenerationContext.Default.AppBskyActorInterestsPref)!;
         }
     }
 }

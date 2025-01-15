@@ -71,12 +71,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.UpdateEmailInput>(this, (JsonTypeInfo<Com.Atproto.Server.UpdateEmailInput>)SourceGenerationContext.Default.ComAtprotoServerUpdateEmailInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>)SourceGenerationContext.Default.ComAtprotoServerUpdateEmailInput)!;
         }
 
         public static UpdateEmailInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.UpdateEmailInput>(json, (JsonTypeInfo<Com.Atproto.Server.UpdateEmailInput>)SourceGenerationContext.Default.ComAtprotoServerUpdateEmailInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>)SourceGenerationContext.Default.ComAtprotoServerUpdateEmailInput)!;
         }
     }
 }

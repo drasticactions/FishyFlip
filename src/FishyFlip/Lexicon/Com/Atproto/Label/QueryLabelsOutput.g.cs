@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="labels"></param>
-        public QueryLabelsOutput(string? cursor = default, List<Com.Atproto.Label.Label>? labels = default)
+        public QueryLabelsOutput(string? cursor = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default)
         {
             this.Cursor = cursor;
             this.Labels = labels;
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public QueryLabelsOutput(CBORObject obj)
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
-            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new Com.Atproto.Label.Label(n)).ToList();
+            if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         [JsonPropertyName("labels")]
         [JsonRequired]
-        public List<Com.Atproto.Label.Label>? Labels { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -61,12 +61,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Label.QueryLabelsOutput>(this, (JsonTypeInfo<Com.Atproto.Label.QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput)!;
         }
 
         public static QueryLabelsOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Label.QueryLabelsOutput>(json, (JsonTypeInfo<Com.Atproto.Label.QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput)!;
         }
     }
 }

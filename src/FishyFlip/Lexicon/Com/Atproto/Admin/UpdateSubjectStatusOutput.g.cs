@@ -21,7 +21,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <param name="takedown">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr"/> (com.atproto.admin.defs#statusAttr)
         /// </param>
-        public UpdateSubjectStatusOutput(ATObject? subject = default, Com.Atproto.Admin.StatusAttr? takedown = default)
+        public UpdateSubjectStatusOutput(ATObject? subject = default, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? takedown = default)
         {
             this.Subject = subject;
             this.Takedown = takedown;
@@ -42,7 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public UpdateSubjectStatusOutput(CBORObject obj)
         {
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
-            if (obj["takedown"] is not null) this.Takedown = new Com.Atproto.Admin.StatusAttr(obj["takedown"]);
+            if (obj["takedown"] is not null) this.Takedown = new FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr(obj["takedown"]);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr"/> (com.atproto.admin.defs#statusAttr)
         /// </summary>
         [JsonPropertyName("takedown")]
-        public Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
+        public FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -73,12 +73,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Admin.UpdateSubjectStatusOutput>(this, (JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusOutput)!;
         }
 
         public static UpdateSubjectStatusOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Admin.UpdateSubjectStatusOutput>(json, (JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusOutput)!;
         }
     }
 }

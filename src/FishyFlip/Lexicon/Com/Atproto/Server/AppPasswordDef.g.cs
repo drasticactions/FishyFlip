@@ -81,12 +81,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Com.Atproto.Server.AppPasswordDef>(this, (JsonTypeInfo<Com.Atproto.Server.AppPasswordDef>)SourceGenerationContext.Default.ComAtprotoServerAppPasswordDef)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef>)SourceGenerationContext.Default.ComAtprotoServerAppPasswordDef)!;
         }
 
         public static AppPasswordDef FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Com.Atproto.Server.AppPasswordDef>(json, (JsonTypeInfo<Com.Atproto.Server.AppPasswordDef>)SourceGenerationContext.Default.ComAtprotoServerAppPasswordDef)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef>)SourceGenerationContext.Default.ComAtprotoServerAppPasswordDef)!;
         }
     }
 }

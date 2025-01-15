@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Initializes a new instance of the <see cref="GetProfilesOutput"/> class.
         /// </summary>
         /// <param name="profiles"></param>
-        public GetProfilesOutput(List<App.Bsky.Actor.ProfileViewDetailed>? profiles = default)
+        public GetProfilesOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>? profiles = default)
         {
             this.Profiles = profiles;
         }
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public GetProfilesOutput(CBORObject obj)
         {
-            if (obj["profiles"] is not null) this.Profiles = obj["profiles"].Values.Select(n =>new App.Bsky.Actor.ProfileViewDetailed(n)).ToList();
+            if (obj["profiles"] is not null) this.Profiles = obj["profiles"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed(n)).ToList();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("profiles")]
         [JsonRequired]
-        public List<App.Bsky.Actor.ProfileViewDetailed>? Profiles { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>? Profiles { get; set; }
 
         /// <summary>
         /// Gets the ATRecord Type.
@@ -52,12 +52,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<App.Bsky.Actor.GetProfilesOutput>(this, (JsonTypeInfo<App.Bsky.Actor.GetProfilesOutput>)SourceGenerationContext.Default.AppBskyActorGetProfilesOutput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>)SourceGenerationContext.Default.AppBskyActorGetProfilesOutput)!;
         }
 
         public static GetProfilesOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<App.Bsky.Actor.GetProfilesOutput>(json, (JsonTypeInfo<App.Bsky.Actor.GetProfilesOutput>)SourceGenerationContext.Default.AppBskyActorGetProfilesOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>)SourceGenerationContext.Default.AppBskyActorGetProfilesOutput)!;
         }
     }
 }

@@ -72,12 +72,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize<Chat.Bsky.Moderation.UpdateActorAccessInput>(this, (JsonTypeInfo<Chat.Bsky.Moderation.UpdateActorAccessInput>)SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput)!;
+            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>)SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput)!;
         }
 
         public static UpdateActorAccessInput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<Chat.Bsky.Moderation.UpdateActorAccessInput>(json, (JsonTypeInfo<Chat.Bsky.Moderation.UpdateActorAccessInput>)SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>)SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput)!;
         }
     }
 }
