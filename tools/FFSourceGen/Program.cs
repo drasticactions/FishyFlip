@@ -502,11 +502,11 @@ public partial class AppCommands
                 var key = item.Properties[i].Key;
                 if (key == "createdAt")
                 {
-                    sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)} ?? DateTime.UtcNow;");
                 }
                 else
                 {
-                    sb.AppendLine($"            record.{prop} = {key};");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)};");
                 }
             }
 
@@ -726,11 +726,11 @@ public partial class AppCommands
                 var key = item.Properties[i].Key;
                 if (key == "createdAt")
                 {
-                    sb.AppendLine($"            record.{prop} = {key} ?? DateTime.UtcNow;");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)} ?? DateTime.UtcNow;");
                 }
                 else
                 {
-                    sb.AppendLine($"            record.{prop} = {key};");
+                    sb.AppendLine($"            record.{prop} = {this.PropertyNameToCSharpSafeValue(key)};");
                 }
             }
 
