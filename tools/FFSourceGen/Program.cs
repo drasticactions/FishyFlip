@@ -110,7 +110,7 @@ public partial class AppCommands
 
     private async Task GenerateClasses(string lexiconPath)
     {
-        var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories).ToList();
+        var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories).OrderBy(n => n).ToList();
         Console.WriteLine($"Found {files.Count()} files.");
 
         var defs = files.Where(n => n.Contains("defs.json")).ToList();
