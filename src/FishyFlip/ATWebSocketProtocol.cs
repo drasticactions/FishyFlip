@@ -323,12 +323,12 @@ public sealed class ATWebSocketProtocol : IDisposable
                     switch (result.MessageType)
                     {
                         case WebSocketMessageType.Binary:
-                            this.HandleMessage(completeMessage);
+                            Task.Run(() => this.HandleMessage(completeMessage)).FireAndForgetSafeAsync(this.logger);
                             break;
 
                         case WebSocketMessageType.Text:
                             string textMessage = Encoding.UTF8.GetString(completeMessage);
-                            this.HandleTextMessage(textMessage);
+                            Task.Run(() => this.HandleTextMessage(textMessage)).FireAndForgetSafeAsync(this.logger);
                             break;
                     }
 

@@ -15,8 +15,14 @@ public class FrameError
     /// <param name="obj">The CBOR object containing the atError information.</param>
     public FrameError(CBORObject obj)
     {
-        this.Error = obj["atError"].AsString();
-        this.Message = obj["message"].AsString();
+        try
+        {
+            this.Error = obj["atError"].AsString();
+            this.Message = obj["message"].AsString();
+        }
+        catch
+        {
+        }
     }
 
     /// <summary>
