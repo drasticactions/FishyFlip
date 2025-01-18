@@ -169,30 +169,46 @@ public sealed class ATWebSocketProtocol : IDisposable
 
     private void HandleMessage(byte[] byteArray)
     {
+        if (byteArray.Length == 0)
+        {
+            this.logger?.LogDebug("WSS: ATError reading message. Empty byte array.");
+            return;
+        }
+
         using var stream = new MemoryStream(byteArray);
-        CBORObject[]? objects = null;
+        CBORObject? frameHeaderCbor = null;
+        CBORObject? frameBodyCbor = null;
         try
         {
-            objects = CBORObject.ReadSequence(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
+            // Read the first 15 bytes to get the frame header.
+            frameHeaderCbor = CBORObject.Read(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
+
+            if (stream.Position == stream.Length)
+            {
+                return;
+            }
+
+            // Read the rest of the bytes to get the frame body.
+            frameBodyCbor = CBORObject.Read(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
         }
         catch (Exception e)
         {
             this.logger?.LogError(e, "WSS: ATError reading message.");
+
+            if (frameHeaderCbor is not null)
+            {
+                this.logger?.LogDebug($"FrameHeader: {frameHeaderCbor.ToJSONString()}");
+            }
         }
 
-        if (objects is null)
-        {
-            return;
-        }
-
-        if (objects.Length != 2)
+        if (frameHeaderCbor is null || frameBodyCbor is null)
         {
             return;
         }
 
         var message = new SubscribeRepoMessage();
 
-        var frameHeader = new FrameHeader(objects[0]);
+        var frameHeader = new FrameHeader(frameHeaderCbor);
 
         // this.logger?.LogDebug($"FrameHeader: {objects[0].ToJSONString()}");
         message.Header = frameHeader;
@@ -206,7 +222,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                 switch (frameType)
                 {
                     case "#commit":
-                        var frameCommit = new FrameCommit(objects[1], this.logger);
+                        var frameCommit = new FrameCommit(frameBodyCbor, this.logger);
 
                         // this.logger?.LogDebug($"FrameBody: {objects[1].ToJSONString()}");
                         message.Commit = frameCommit;
@@ -238,35 +254,35 @@ public sealed class ATWebSocketProtocol : IDisposable
 
                         break;
                     case "#handle":
-                        var frameHandle = new FrameHandle(objects[1]);
+                        var frameHandle = new FrameHandle(frameBodyCbor);
                         message.Handle = frameHandle;
                         break;
                     case "#repoOp":
-                        message.RepoOp = new FrameRepoOp(objects[1]);
+                        message.RepoOp = new FrameRepoOp(frameBodyCbor);
                         break;
                     case "#info":
-                        message.Info = new FrameInfo(objects[1]);
+                        message.Info = new FrameInfo(frameBodyCbor);
                         break;
                     case "#tombstone":
-                        message.Tombstone = new FrameTombstone(objects[1]);
+                        message.Tombstone = new FrameTombstone(frameBodyCbor);
                         break;
                     case "#migrate":
-                        message.Migrate = new FrameMigrate(objects[1]);
+                        message.Migrate = new FrameMigrate(frameBodyCbor);
                         break;
                     case "#account":
-                        message.Account = new FrameAccount(objects[1]);
+                        message.Account = new FrameAccount(frameBodyCbor);
                         break;
                     case "#identity":
-                        message.Identity = new FrameIdentity(objects[1]);
+                        message.Identity = new FrameIdentity(frameBodyCbor);
                         break;
                     default:
-                        this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
+                        this.logger?.LogDebug($"Unknown Frame: {frameBodyCbor.ToJSONString()}");
                         break;
                 }
 
                 break;
             case FrameHeaderOperation.Error:
-                var frameError = new FrameError(objects[1]);
+                var frameError = new FrameError(frameBodyCbor);
                 message.Error = frameError;
                 this.logger?.LogError($"WSS: ATError: {frameError.Message}");
                 this.CloseAsync(WebSocketCloseStatus.InternalServerError, frameError.Message ?? string.Empty).FireAndForgetSafeAsync(this.logger);
@@ -286,25 +302,21 @@ public sealed class ATWebSocketProtocol : IDisposable
             try
             {
 #if NETSTANDARD
-                var result =
-                    await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
+                var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
                 if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
                 {
                     continue;
                 }
 
-                byte[] newArray = new byte[result.Count];
-                Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                var newArray = receiveBuffer.AsSpan(0, result.Count).ToArray();
 #else
-                var result =
-                    await webSocket.ReceiveAsync(new Memory<byte>(receiveBuffer), token);
+                var result = await webSocket.ReceiveAsync(receiveBuffer, token);
                 if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
                 {
                     continue;
                 }
 
-                byte[] newArray = new byte[result.Count];
-                Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                var newArray = receiveBuffer.AsSpan(0, result.Count).ToArray();
 #endif
 
                 Task.Run(() => this.HandleMessage(newArray)).FireAndForgetSafeAsync(this.logger);
