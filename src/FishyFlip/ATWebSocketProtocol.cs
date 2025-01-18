@@ -175,11 +175,10 @@ public sealed class ATWebSocketProtocol : IDisposable
             return;
         }
 
-        using var stream = new MemoryStream(byteArray);
         CBORObject[]? objects = null;
         try
         {
-            objects = CBORObject.ReadSequence(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
+            objects = CBORObject.DecodeSequenceFromBytes(byteArray, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
         }
         catch (Exception e)
         {
@@ -286,41 +285,88 @@ public sealed class ATWebSocketProtocol : IDisposable
 
     private async Task ReceiveMessages(ClientWebSocket webSocket, CancellationToken token)
     {
-        byte[] receiveBuffer = new byte[ReceiveBufferSize];
+        const int InitialBufferSize = 4096;
+        using var memoryStream = new MemoryStream();
+
         while (webSocket.State == WebSocketState.Open)
         {
             try
             {
+                var messageBuffer = new byte[InitialBufferSize];
+                WebSocketReceiveResult result;
+
+                // Keep receiving until we get a complete message
+                do
+                {
 #if NETSTANDARD
-                var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
-                if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
-                {
-                    continue;
-                }
-
-                var newArray = receiveBuffer.AsSpan(0, result.Count).ToArray();
+                    result = await webSocket.ReceiveAsync(new ArraySegment<byte>(messageBuffer), token);
 #else
-                var result = await webSocket.ReceiveAsync(receiveBuffer, token);
-                if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
-                {
-                    continue;
-                }
-
-                var newArray = receiveBuffer.AsSpan(0, result.Count).ToArray();
+                    result = await webSocket.ReceiveAsync(messageBuffer, token);
 #endif
 
-                Task.Run(() => this.HandleMessage(newArray)).FireAndForgetSafeAsync(this.logger);
+                    if (result.MessageType == WebSocketMessageType.Close)
+                    {
+                        await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", token);
+                        break;
+                    }
+
+                    // Write received data to memory stream
+                    await memoryStream.WriteAsync(messageBuffer, 0, result.Count, token);
+                }
+                while (!result.EndOfMessage);
+
+                // Process the complete message
+                if (memoryStream.Length > 0)
+                {
+                    byte[] completeMessage = memoryStream.ToArray();
+
+                    switch (result.MessageType)
+                    {
+                        case WebSocketMessageType.Binary:
+                            this.HandleMessage(completeMessage);
+                            break;
+
+                        case WebSocketMessageType.Text:
+                            string textMessage = Encoding.UTF8.GetString(completeMessage);
+                            this.HandleTextMessage(textMessage);
+                            break;
+                    }
+
+                    // Reset stream for next message
+                    memoryStream.SetLength(0);
+                }
             }
             catch (OperationCanceledException)
             {
                 this.logger?.LogDebug("WSS: Operation Canceled.");
+                break;
+            }
+            catch (WebSocketException wsEx)
+            {
+                this.logger?.LogError(wsEx, "WSS: WebSocket error occurred.");
+                break;
             }
             catch (Exception e)
             {
-                this.logger?.LogError(e, "WSS: ATError receiving message.");
+                this.logger?.LogError(e, "WSS: Error receiving message.");
+
+                await Task.Delay(1000, token);
             }
         }
 
+        // Connection status update
         this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(webSocket.State));
+    }
+
+    private void HandleTextMessage(string message)
+    {
+        try
+        {
+            this.logger?.LogDebug($"WSS: Received text message: {message}");
+        }
+        catch (Exception ex)
+        {
+            this.logger?.LogError(ex, "WSS: Error handling text message");
+        }
     }
 }
