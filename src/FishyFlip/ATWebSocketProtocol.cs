@@ -176,39 +176,29 @@ public sealed class ATWebSocketProtocol : IDisposable
         }
 
         using var stream = new MemoryStream(byteArray);
-        CBORObject? frameHeaderCbor = null;
-        CBORObject? frameBodyCbor = null;
+        CBORObject[]? objects = null;
         try
         {
-            // Read the first 15 bytes to get the frame header.
-            frameHeaderCbor = CBORObject.Read(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
-
-            if (stream.Position == stream.Length)
-            {
-                return;
-            }
-
-            // Read the rest of the bytes to get the frame body.
-            frameBodyCbor = CBORObject.Read(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
+            objects = CBORObject.ReadSequence(stream, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
         }
         catch (Exception e)
         {
             this.logger?.LogError(e, "WSS: ATError reading message.");
-
-            if (frameHeaderCbor is not null)
-            {
-                this.logger?.LogDebug($"FrameHeader: {frameHeaderCbor.ToJSONString()}");
-            }
         }
 
-        if (frameHeaderCbor is null || frameBodyCbor is null)
+        if (objects is null)
+        {
+            return;
+        }
+
+        if (objects.Length != 2)
         {
             return;
         }
 
         var message = new SubscribeRepoMessage();
 
-        var frameHeader = new FrameHeader(frameHeaderCbor);
+        var frameHeader = new FrameHeader(objects[0]);
 
         // this.logger?.LogDebug($"FrameHeader: {objects[0].ToJSONString()}");
         message.Header = frameHeader;
@@ -222,7 +212,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                 switch (frameType)
                 {
                     case "#commit":
-                        var frameCommit = new FrameCommit(frameBodyCbor, this.logger);
+                        var frameCommit = new FrameCommit(objects[1], this.logger);
 
                         // this.logger?.LogDebug($"FrameBody: {objects[1].ToJSONString()}");
                         message.Commit = frameCommit;
@@ -254,35 +244,35 @@ public sealed class ATWebSocketProtocol : IDisposable
 
                         break;
                     case "#handle":
-                        var frameHandle = new FrameHandle(frameBodyCbor);
+                        var frameHandle = new FrameHandle(objects[1]);
                         message.Handle = frameHandle;
                         break;
                     case "#repoOp":
-                        message.RepoOp = new FrameRepoOp(frameBodyCbor);
+                        message.RepoOp = new FrameRepoOp(objects[1]);
                         break;
                     case "#info":
-                        message.Info = new FrameInfo(frameBodyCbor);
+                        message.Info = new FrameInfo(objects[1]);
                         break;
                     case "#tombstone":
-                        message.Tombstone = new FrameTombstone(frameBodyCbor);
+                        message.Tombstone = new FrameTombstone(objects[1]);
                         break;
                     case "#migrate":
-                        message.Migrate = new FrameMigrate(frameBodyCbor);
+                        message.Migrate = new FrameMigrate(objects[1]);
                         break;
                     case "#account":
-                        message.Account = new FrameAccount(frameBodyCbor);
+                        message.Account = new FrameAccount(objects[1]);
                         break;
                     case "#identity":
-                        message.Identity = new FrameIdentity(frameBodyCbor);
+                        message.Identity = new FrameIdentity(objects[1]);
                         break;
                     default:
-                        this.logger?.LogDebug($"Unknown Frame: {frameBodyCbor.ToJSONString()}");
+                        this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
                         break;
                 }
 
                 break;
             case FrameHeaderOperation.Error:
-                var frameError = new FrameError(frameBodyCbor);
+                var frameError = new FrameError(objects[1]);
                 message.Error = frameError;
                 this.logger?.LogError($"WSS: ATError: {frameError.Message}");
                 this.CloseAsync(WebSocketCloseStatus.InternalServerError, frameError.Message ?? string.Empty).FireAndForgetSafeAsync(this.logger);
