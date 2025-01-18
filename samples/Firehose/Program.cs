@@ -33,7 +33,7 @@ atWebProtocol.OnSubscribedRepoMessage += (sender, args) =>
 
 await atWebProtocol.StartSubscribeReposAsync();
 
-var key = Console.ReadKey();
+var key = Console.Read();
 
 await atWebProtocol.StopSubscriptionAsync();
 

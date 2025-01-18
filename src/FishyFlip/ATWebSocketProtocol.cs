@@ -253,6 +253,12 @@ public sealed class ATWebSocketProtocol : IDisposable
                     case "#migrate":
                         message.Migrate = new FrameMigrate(objects[1]);
                         break;
+                    case "#account":
+                        message.Account = new FrameAccount(objects[1]);
+                        break;
+                    case "#identity":
+                        message.Identity = new FrameIdentity(objects[1]);
+                        break;
                     default:
                         this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
                         break;

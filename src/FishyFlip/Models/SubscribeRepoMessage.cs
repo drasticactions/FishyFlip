@@ -60,6 +60,16 @@ public class SubscribeRepoMessage
     public FrameTombstone? Tombstone { get; internal set; }
 
     /// <summary>
+    /// Gets the account of the message.
+    /// </summary>
+    public FrameAccount? Account { get; internal set; }
+
+    /// <summary>
+    /// Gets the identity of the message.
+    /// </summary>
+    public FrameIdentity? Identity { get; internal set; }
+
+    /// <summary>
     /// Gets the list of nodes in the message.
     /// </summary>
     public List<FrameNode> Nodes { get; } = new List<FrameNode>();
