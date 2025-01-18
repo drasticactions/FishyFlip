@@ -15,6 +15,11 @@ public class FrameHeader
     /// <param name="obj">The CBOR Object.</param>
     public FrameHeader(CBORObject obj)
     {
+        if (obj.Count <= 0)
+        {
+            return;
+        }
+
         this.Operation = (FrameHeaderOperation)(obj["op"]?.AsInt32() ?? 0);
         this.Type = obj["t"]?.AsString();
     }

@@ -169,6 +169,12 @@ public sealed class ATWebSocketProtocol : IDisposable
 
     private void HandleMessage(byte[] byteArray)
     {
+        if (byteArray.Length == 0)
+        {
+            this.logger?.LogDebug("WSS: ATError reading message. Empty byte array.");
+            return;
+        }
+
         using var stream = new MemoryStream(byteArray);
         CBORObject[]? objects = null;
         try
@@ -286,25 +292,21 @@ public sealed class ATWebSocketProtocol : IDisposable
             try
             {
 #if NETSTANDARD
-                var result =
-                    await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
+                var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
                 if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
                 {
                     continue;
                 }
 
-                byte[] newArray = new byte[result.Count];
-                Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                var newArray = receiveBuffer.AsSpan(0, result.Count).ToArray();
 #else
-                var result =
-                    await webSocket.ReceiveAsync(new Memory<byte>(receiveBuffer), token);
+                var result = await webSocket.ReceiveAsync(receiveBuffer, token);
                 if (result is not { MessageType: WebSocketMessageType.Binary, EndOfMessage: true })
                 {
                     continue;
                 }
 
-                byte[] newArray = new byte[result.Count];
-                Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                var newArray = receiveBuffer.AsSpan(0, result.Count).ToArray();
 #endif
 
                 Task.Run(() => this.HandleMessage(newArray)).FireAndForgetSafeAsync(this.logger);
