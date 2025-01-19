@@ -157,7 +157,7 @@ public sealed class ATWebSocketProtocol : IDisposable
         {
             if (disposing)
             {
-                // this.webSocketWrapper.DisposeAsync();
+                this.webSocketWrapper.DisposeAsync().GetAwaiter().GetResult();
             }
 
             this.disposedValue = true;
@@ -281,7 +281,13 @@ public sealed class ATWebSocketProtocol : IDisposable
     private Task OnMessageReceived(ReadOnlySequence<byte> message)
     {
         var newMessage = message.ToArray();
-        Task.Run(() => this.HandleMessage(newMessage)).FireAndForgetSafeAsync(this.logger);
+        Task.Run(() =>
+        {
+            if (this.IsConnected)
+            {
+                this.HandleMessage(newMessage);
+            }
+        }).FireAndForgetSafeAsync(this.logger);
         return Task.CompletedTask;
     }
 
@@ -323,6 +329,11 @@ public sealed class ATWebSocketProtocol : IDisposable
 
         public async Task CloseAsync(CancellationToken cancellationToken = default)
         {
+            if (this.webSocket.State == WebSocketState.Closed || this.webSocket.State == WebSocketState.Aborted)
+            {
+                return;
+            }
+
             this.logger?.LogInformation("WSS: Closing WebSocket connection.");
             await this.webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
         }
@@ -351,7 +362,7 @@ public sealed class ATWebSocketProtocol : IDisposable
         {
             try
             {
-                while (!this.cts.Token.IsCancellationRequested && this.webSocket.State == WebSocketState.Open)
+                while (!this.cts.Token.IsCancellationRequested || this.webSocket.State == WebSocketState.Open)
                 {
                     var memory = this.pipe.Writer.GetMemory(8192);
 #if NETSTANDARD
