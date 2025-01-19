@@ -86,6 +86,11 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task CloseAsync(WebSocketCloseStatus status = WebSocketCloseStatus.NormalClosure, string disconnectReason = "Client disconnecting", CancellationToken? token = default)
     {
+        if (!this.IsConnected)
+        {
+            return;
+        }
+
         var endToken = token ?? CancellationToken.None;
         this.logger?.LogInformation($"WSS: Disconnecting");
         try
@@ -157,7 +162,7 @@ public sealed class ATWebSocketProtocol : IDisposable
         {
             if (disposing)
             {
-                this.webSocketWrapper.DisposeAsync().GetAwaiter().GetResult();
+                this.webSocketWrapper.Dispose();
             }
 
             this.disposedValue = true;
@@ -283,15 +288,12 @@ public sealed class ATWebSocketProtocol : IDisposable
         var newMessage = message.ToArray();
         Task.Run(() =>
         {
-            if (this.IsConnected)
-            {
-                this.HandleMessage(newMessage);
-            }
+            this.HandleMessage(newMessage);
         }).FireAndForgetSafeAsync(this.logger);
         return Task.CompletedTask;
     }
 
-    private class WebSocketWrapper : IAsyncDisposable
+    private class WebSocketWrapper : IDisposable
     {
         private readonly ClientWebSocket webSocket;
         private readonly Pipe pipe;
@@ -324,6 +326,7 @@ public sealed class ATWebSocketProtocol : IDisposable
 
             this.logger?.LogInformation("WSS: Connecting to WebSocket.");
             await this.webSocket.ConnectAsync(uri, cancellationToken);
+            this.receiveTask?.Dispose();
             this.receiveTask = this.StartReceiveLoop();
         }
 
@@ -338,31 +341,19 @@ public sealed class ATWebSocketProtocol : IDisposable
             await this.webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
         }
 
-        public async ValueTask DisposeAsync()
+        public void Dispose()
         {
             this.cts.Cancel();
-
-            try
-            {
-                if (this.webSocket.State == WebSocketState.Open)
-                {
-                    this.logger?.LogInformation("WSS: Closing WebSocket connection.");
-                    await this.webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
-                }
-            }
-            finally
-            {
-                this.webSocket.Dispose();
-                this.cts.Dispose();
-                this.receiveTask?.Dispose();
-            }
+            this.webSocket.Dispose();
+            this.cts.Dispose();
+            this.receiveTask?.Dispose();
         }
 
         private async Task StartReceiveLoop()
         {
             try
             {
-                while (!this.cts.Token.IsCancellationRequested || this.webSocket.State == WebSocketState.Open)
+                while (this.webSocket.State == WebSocketState.Open)
                 {
                     var memory = this.pipe.Writer.GetMemory(8192);
 #if NETSTANDARD
@@ -374,17 +365,17 @@ public sealed class ATWebSocketProtocol : IDisposable
                         memory, this.cts.Token);
 #endif
 
-                    if (result.MessageType == WebSocketMessageType.Close)
-                    {
-                        break;
-                    }
-
                     this.pipe.Writer.Advance(result.Count);
 
                     if (result.EndOfMessage)
                     {
                         await this.pipe.Writer.FlushAsync(this.cts.Token);
                         await this.ProcessMessageAsync();
+                    }
+
+                    if (result.MessageType == WebSocketMessageType.Close || this.webSocket.State == WebSocketState.Aborted)
+                    {
+                        break;
                     }
                 }
             }
@@ -412,7 +403,10 @@ public sealed class ATWebSocketProtocol : IDisposable
             {
                 if (this.OnMessageReceived != null)
                 {
-                    await this.OnMessageReceived(buffer);
+                    if (this.webSocket.State == WebSocketState.Open)
+                    {
+                        await this.OnMessageReceived(buffer);
+                    }
                 }
             }
             finally
