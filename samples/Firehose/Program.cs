@@ -12,10 +12,22 @@ using System.Text;
 using FishyFlip.Lexicon.App.Bsky.Embed;
 using FishyFlip.Lexicon.App.Bsky.Feed;
 using FishyFlip.Lexicon.Com.Atproto.Repo;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Options;
+using Org.BouncyCastle.Asn1.Cms;
 
 Console.WriteLine("Hello, ATProtocol Firehose!");
 
-var debugLog = new DebugLoggerProvider();
+var options = new ConsoleLoggerOptions();
+var debugLog = new ConsoleLoggerProvider(new OptionsMonitor<ConsoleLoggerOptions>(
+    new OptionsFactory<ConsoleLoggerOptions>(
+        Array.Empty<IConfigureOptions<ConsoleLoggerOptions>>(),
+        Array.Empty<IPostConfigureOptions<ConsoleLoggerOptions>>()),
+    Array.Empty<IOptionsChangeTokenSource<ConsoleLoggerOptions>>(),
+    new OptionsCache<ConsoleLoggerOptions>()));
+
+var log = debugLog.CreateLogger("FishyFlip");
 
 // You can set a custom url with WithInstanceUrl
 var atWebProtocolBuilder = new ATWebSocketProtocolBuilder()
@@ -26,9 +38,14 @@ var atProtocolBuilder = new ATProtocolBuilder()
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
 
-atWebProtocol.OnSubscribedRepoMessage += (sender, args) =>
+atWebProtocol.OnConnectionUpdated += (sender, e) =>
 {
-    Task.Run(() => HandleMessageAsync(args.Message)).FireAndForget();
+    log.LogInformation($"Connection Updated: {e.State}");
+};
+
+atWebProtocol.OnSubscribedRepoMessage += (sender, e) =>
+{
+    log.LogInformation($"Message: {DateTime.UtcNow.Ticks}");
 };
 
 await atWebProtocol.StartSubscribeReposAsync();
