@@ -29,8 +29,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="viewer">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState"/> (app.bsky.feed.defs#generatorViewerState)
         /// </param>
+        /// <param name="contentMode">
+        /// <br/> Known Values: <br/>
+        /// contentModeUnspecified - Declares the feed generator returns any types of posts. <br/>
+        /// contentModeVideo - Declares the feed generator returns posts containing app.bsky.embed.video embeds. <br/>
+        /// </param>
         /// <param name="indexedAt"></param>
-        public GeneratorView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Models.ATDid did = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView creator = default, string displayName = default, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, string? avatar = default, long? likeCount = default, bool? acceptsInteractions = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState? viewer = default, DateTime? indexedAt = default)
+        public GeneratorView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Models.ATDid did = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView creator = default, string displayName = default, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, string? avatar = default, long? likeCount = default, bool? acceptsInteractions = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState? viewer = default, string? contentMode = default, DateTime? indexedAt = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -44,6 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.AcceptsInteractions = acceptsInteractions;
             this.Labels = labels;
             this.Viewer = viewer;
+            this.ContentMode = contentMode;
             this.IndexedAt = indexedAt;
         }
 
@@ -73,6 +79,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["acceptsInteractions"] is not null) this.AcceptsInteractions = obj["acceptsInteractions"].AsBoolean();
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState(obj["viewer"]);
+            if (obj["contentMode"] is not null) this.ContentMode = obj["contentMode"].AsString();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
         }
 
@@ -156,6 +163,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("viewer")]
         public FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }
+
+        /// <summary>
+        /// Gets or sets the contentMode.
+        /// <br/> Known Values: <br/>
+        /// contentModeUnspecified - Declares the feed generator returns any types of posts. <br/>
+        /// contentModeVideo - Declares the feed generator returns posts containing app.bsky.embed.video embeds. <br/>
+        /// </summary>
+        [JsonPropertyName("contentMode")]
+        public string? ContentMode { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
