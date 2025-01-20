@@ -44,12 +44,17 @@ namespace FishyFlip.Lexicon
         /// <br/> Union Types: <br/>
         /// com.atproto.label.defs#selfLabels <br/>
         /// </param>
+        /// <param name="contentMode">
+        /// <br/> Known Values: <br/>
+        /// contentModeUnspecified - Record declaring of the existence of a feed generator, and containing metadata about it. The record can exist in any repository. <br/>
+        /// contentModeVideo - Record declaring of the existence of a feed generator, and containing metadata about it. The record can exist in any repository. <br/>
+        /// </param>
         /// <param name="createdAt"></param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateGeneratorAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATDid? did, string? displayName, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateGeneratorAsync(this FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed atp, FishyFlip.Models.ATDid? did, string? displayName, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, string? contentMode = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Feed.Generator();
             record.Did = did;
@@ -59,6 +64,7 @@ namespace FishyFlip.Lexicon
             record.Avatar = avatar;
             record.AcceptsInteractions = acceptsInteractions;
             record.Labels = labels;
+            record.ContentMode = contentMode;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
             return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.generator", record, rkey, validate, swapCommit, cancellationToken);
         }

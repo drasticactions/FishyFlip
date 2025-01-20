@@ -26,8 +26,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
+        /// <param name="contentMode">
+        /// <br/> Known Values: <br/>
+        /// contentModeUnspecified - Declares the feed generator returns any types of posts. <br/>
+        /// contentModeVideo - Declares the feed generator returns posts containing app.bsky.embed.video embeds. <br/>
+        /// </param>
         /// <param name="createdAt"></param>
-        public Generator(FishyFlip.Models.ATDid? did, string? displayName, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
+        public Generator(FishyFlip.Models.ATDid? did, string? displayName, string? description = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? descriptionFacets = default, Blob? avatar = default, bool? acceptsInteractions = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, string? contentMode = default, DateTime? createdAt = default)
         {
             this.Did = did;
             this.DisplayName = displayName;
@@ -36,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Avatar = avatar;
             this.AcceptsInteractions = acceptsInteractions;
             this.Labels = labels;
+            this.ContentMode = contentMode;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
         }
 
@@ -60,6 +66,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
             if (obj["acceptsInteractions"] is not null) this.AcceptsInteractions = obj["acceptsInteractions"].AsBoolean();
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
+            if (obj["contentMode"] is not null) this.ContentMode = obj["contentMode"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
         }
 
@@ -109,6 +116,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("labels")]
         public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the contentMode.
+        /// <br/> Known Values: <br/>
+        /// contentModeUnspecified - Declares the feed generator returns any types of posts. <br/>
+        /// contentModeVideo - Declares the feed generator returns posts containing app.bsky.embed.video embeds. <br/>
+        /// </summary>
+        [JsonPropertyName("contentMode")]
+        public string? ContentMode { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
