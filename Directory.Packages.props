@@ -10,10 +10,10 @@
     <PackageVersion Include="DotMake.CommandLine" Version="1.8.7" />
     <PackageVersion Include="IdentityModel.OidcClient" Version="6.0.0" />
     <PackageVersion Include="IdentityModel.OidcClient.DPoP" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.1" />
     <PackageVersion Include="Microsoft.Identity.Client" Version="4.64.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.4.0" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.6.0" />
