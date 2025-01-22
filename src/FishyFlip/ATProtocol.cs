@@ -147,6 +147,28 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="clientId">ClientID, must be a URL.</param>
     /// <param name="redirectUrl">RedirectUrl.</param>
     /// <param name="scopes">ATProtocol Scopes.</param>
+    /// <param name="identifier">ATIdentifier used for login hint.</param>
+    /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Authorization URL to call.</returns>
+    public async Task<string?> GenerateOAuth2AuthenticationUrlAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, ATIdentifier? identifier = null, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    {
+        if (identifier is null)
+        {
+            return await this.GenerateOAuth2AuthenticationUrlAsync(clientId, redirectUrl, scopes, instanceUrl, cancellationToken);
+        }
+
+        var oAuth2SessionManager = new OAuth2SessionManager(this);
+        this.SessionManager = oAuth2SessionManager;
+        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, identifier.ToString(), instanceUrl, cancellationToken);
+    }
+
+    /// <summary>
+    /// Starts the OAuth2 authentication process asynchronously.
+    /// </summary>
+    /// <param name="clientId">ClientID, must be a URL.</param>
+    /// <param name="redirectUrl">RedirectUrl.</param>
+    /// <param name="scopes">ATProtocol Scopes.</param>
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
@@ -154,7 +176,7 @@ public sealed partial class ATProtocol : IDisposable
     {
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.SessionManager = oAuth2SessionManager;
-        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, instanceUrl, cancellationToken);
+        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, null, instanceUrl, cancellationToken);
     }
 
     /// <summary>
@@ -256,6 +278,26 @@ public sealed partial class ATProtocol : IDisposable
         }
 
         return this.options.LabelParameters.ToList();
+    }
+
+    /// <summary>
+    /// Resolves an ATIdentifier to a host address.
+    /// </summary>
+    /// <param name="identifier"><see cref="ATIdentifier"/>.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
+    public async Task<Result<string?>> ResolveATIdentifierAsync(ATIdentifier identifier, CancellationToken? token = default)
+    {
+        if (identifier is ATHandle handle)
+        {
+            return await this.ResolveATHandleHostAsync(handle, token);
+        }
+        else if (identifier is ATDid did)
+        {
+            return await this.ResolveATDidHostAsync(did, token);
+        }
+
+        return string.Empty;
     }
 
     /// <summary>

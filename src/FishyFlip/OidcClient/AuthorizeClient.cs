@@ -139,7 +139,7 @@ namespace IdentityModel.OidcClient
             {
                 Address = _options.ProviderInformation.PushedAuthorizationRequestEndpoint,
                 ClientId = _options.ClientId,
-                
+                LoginHint = _options.LoginHint,
                 ClientSecret = _options.ClientSecret,
                 ClientAssertion = await _options.GetClientAssertionAsync(),
                 Parameters = CreateAuthorizeParameters(state, codeChallenge, frontChannelParameters),

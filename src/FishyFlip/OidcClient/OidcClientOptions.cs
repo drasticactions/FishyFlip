@@ -63,6 +63,11 @@ namespace IdentityModel.OidcClient
         public string ClientSecret { get; set; }
 
         /// <summary>
+        /// Gets or sets the login_hint protocol parameter.
+        /// </summary>
+        public string LoginHint { get; set; }
+
+        /// <summary>
         /// Gets or sets the client assertion (if needed).
         /// </summary>
         /// <value>

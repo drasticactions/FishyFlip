@@ -109,10 +109,11 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="clientId">ClientID, must be a URL.</param>
     /// <param name="redirectUrl">RedirectUrl.</param>
     /// <param name="scopes">ATProtocol Scopes.</param>
+    /// <param name="loginHint">LoginHint.</param>
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<string> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public async Task<string> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? loginHint = default,  string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
@@ -122,6 +123,7 @@ internal class OAuth2SessionManager : ISessionManager
             Scope = string.Join(" ", scopes),
             RedirectUri = redirectUrl,
             LoadProfile = false,
+            LoginHint = loginHint,
         };
         this.proofKey = JsonWebKeys.CreateRsaJson();
         options.ConfigureDPoP(this.proofKey);
