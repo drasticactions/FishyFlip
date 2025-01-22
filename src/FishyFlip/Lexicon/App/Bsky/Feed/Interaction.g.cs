@@ -35,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Item = item;
             this.Event = @event;
             this.FeedContext = feedContext;
+            this.Type = "app.bsky.feed.defs#interaction";
         }
 
 
@@ -43,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Interaction()
         {
+            this.Type = "app.bsky.feed.defs#interaction";
         }
 
 
@@ -89,18 +91,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("feedContext")]
         public string? FeedContext { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#interaction";
-
         public const string RecordType = "app.bsky.feed.defs#interaction";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction)!;
-        }
 
         public static Interaction FromJson(string json)
         {

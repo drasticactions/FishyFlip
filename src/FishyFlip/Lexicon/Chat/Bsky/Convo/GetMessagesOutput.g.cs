@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.Cursor = cursor;
             this.Messages = messages;
+            this.Type = "chat.bsky.convo.getMessages#GetMessagesOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public GetMessagesOutput()
         {
+            this.Type = "chat.bsky.convo.getMessages#GetMessagesOutput";
         }
 
 
@@ -59,18 +61,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public List<ATObject> Messages { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.getMessages#GetMessagesOutput";
-
         public const string RecordType = "chat.bsky.convo.getMessages#GetMessagesOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>)SourceGenerationContext.Default.ChatBskyConvoGetMessagesOutput)!;
-        }
 
         public static GetMessagesOutput FromJson(string json)
         {

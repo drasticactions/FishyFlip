@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             this.Blob = blob;
             this.ImageLink = imageLink;
+            this.Type = "com.shinolabs.pinksea.oekaki#image";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public Image()
         {
+            this.Type = "com.shinolabs.pinksea.oekaki#image";
         }
 
 
@@ -57,18 +59,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonRequired]
         public FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink ImageLink { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.oekaki#image";
-
         public const string RecordType = "com.shinolabs.pinksea.oekaki#image";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image>)SourceGenerationContext.Default.ComShinolabsPinkseaImage)!;
-        }
 
         public static Image FromJson(string json)
         {

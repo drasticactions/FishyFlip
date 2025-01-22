@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.SubjectBlobs = subjectBlobs;
             this.CreatedBy = createdBy;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "tools.ozone.moderation.defs#modEventViewDetail";
         }
 
 
@@ -61,6 +62,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventViewDetail()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventViewDetail";
         }
 
 
@@ -144,18 +146,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventViewDetail";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventViewDetail";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventViewDetail)!;
-        }
 
         public static ModEventViewDetail FromJson(string json)
         {

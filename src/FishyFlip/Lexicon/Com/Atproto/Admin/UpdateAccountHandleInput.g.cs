@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Did = did;
             this.Handle = handle;
+            this.Type = "com.atproto.admin.updateAccountHandle#UpdateAccountHandleInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public UpdateAccountHandleInput()
         {
+            this.Type = "com.atproto.admin.updateAccountHandle#UpdateAccountHandleInput";
         }
 
 
@@ -55,18 +57,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle Handle { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.updateAccountHandle#UpdateAccountHandleInput";
-
         public const string RecordType = "com.atproto.admin.updateAccountHandle#UpdateAccountHandleInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput)!;
-        }
 
         public static UpdateAccountHandleInput FromJson(string json)
         {

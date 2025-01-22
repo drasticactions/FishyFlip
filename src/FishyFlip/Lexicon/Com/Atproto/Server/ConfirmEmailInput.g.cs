@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             this.Email = email;
             this.Token = token;
+            this.Type = "com.atproto.server.confirmEmail#ConfirmEmailInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ConfirmEmailInput()
         {
+            this.Type = "com.atproto.server.confirmEmail#ConfirmEmailInput";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         public string Token { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.confirmEmail#ConfirmEmailInput";
-
         public const string RecordType = "com.atproto.server.confirmEmail#ConfirmEmailInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput)!;
-        }
 
         public static ConfirmEmailInput FromJson(string json)
         {

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public SendMessageBatchOutput(List<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView> items = default)
         {
             this.Items = items;
+            this.Type = "chat.bsky.convo.sendMessageBatch#SendMessageBatchOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public SendMessageBatchOutput()
         {
+            this.Type = "chat.bsky.convo.sendMessageBatch#SendMessageBatchOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public List<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView> Items { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.sendMessageBatch#SendMessageBatchOutput";
-
         public const string RecordType = "chat.bsky.convo.sendMessageBatch#SendMessageBatchOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchOutput)!;
-        }
 
         public static SendMessageBatchOutput FromJson(string json)
         {

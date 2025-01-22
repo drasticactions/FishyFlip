@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public LabelersPref(List<FishyFlip.Lexicon.App.Bsky.Actor.LabelerPrefItem> labelers = default)
         {
             this.Labelers = labelers;
+            this.Type = "app.bsky.actor.defs#labelersPref";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public LabelersPref()
         {
+            this.Type = "app.bsky.actor.defs#labelersPref";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.LabelerPrefItem> Labelers { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#labelersPref";
-
         public const string RecordType = "app.bsky.actor.defs#labelersPref";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref)!;
-        }
 
         public static LabelersPref FromJson(string json)
         {

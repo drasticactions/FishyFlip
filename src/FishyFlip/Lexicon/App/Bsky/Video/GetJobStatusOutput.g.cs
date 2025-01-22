@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public GetJobStatusOutput(FishyFlip.Lexicon.App.Bsky.Video.JobStatus jobStatus = default)
         {
             this.JobStatus = jobStatus;
+            this.Type = "app.bsky.video.getJobStatus#GetJobStatusOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         public GetJobStatusOutput()
         {
+            this.Type = "app.bsky.video.getJobStatus#GetJobStatusOutput";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Video.JobStatus JobStatus { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.video.getJobStatus#GetJobStatusOutput";
-
         public const string RecordType = "app.bsky.video.getJobStatus#GetJobStatusOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>)SourceGenerationContext.Default.AppBskyVideoGetJobStatusOutput)!;
-        }
 
         public static GetJobStatusOutput FromJson(string json)
         {

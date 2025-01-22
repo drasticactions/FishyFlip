@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public NotifyOfUpdateInput(string hostname = default)
         {
             this.Hostname = hostname;
+            this.Type = "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public NotifyOfUpdateInput()
         {
+            this.Type = "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonRequired]
         public string Hostname { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput";
-
         public const string RecordType = "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.NotifyOfUpdateInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.NotifyOfUpdateInput>)SourceGenerationContext.Default.ComAtprotoSyncNotifyOfUpdateInput)!;
-        }
 
         public static NotifyOfUpdateInput FromJson(string json)
         {

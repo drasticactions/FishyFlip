@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             this.Rev = rev;
             this.ConvoId = convoId;
             this.Message = message;
+            this.Type = "chat.bsky.convo.defs#logDeleteMessage";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public LogDeleteMessage()
         {
+            this.Type = "chat.bsky.convo.defs#logDeleteMessage";
         }
 
 
@@ -70,18 +72,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public ATObject Message { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#logDeleteMessage";
-
         public const string RecordType = "chat.bsky.convo.defs#logDeleteMessage";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage)!;
-        }
 
         public static LogDeleteMessage FromJson(string json)
         {

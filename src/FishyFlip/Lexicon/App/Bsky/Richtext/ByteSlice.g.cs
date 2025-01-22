@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         {
             this.ByteStart = byteStart;
             this.ByteEnd = byteEnd;
+            this.Type = "app.bsky.richtext.facet#byteSlice";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// </summary>
         public ByteSlice()
         {
+            this.Type = "app.bsky.richtext.facet#byteSlice";
         }
 
 
@@ -56,18 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         [JsonRequired]
         public long ByteEnd { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.richtext.facet#byteSlice";
-
         public const string RecordType = "app.bsky.richtext.facet#byteSlice";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
-        }
 
         public static ByteSlice FromJson(string json)
         {

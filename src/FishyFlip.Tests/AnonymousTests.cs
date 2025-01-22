@@ -115,10 +115,7 @@ public class AnonymousTests
                     }
                 }
             },
-            failed =>
-            {
-                Assert.Fail($"{failed.StatusCode}: {failed.Detail}");
-            });
+            failed => { Assert.Fail($"{failed.StatusCode}: {failed.Detail}"); });
     }
 
     /// <summary>
@@ -144,7 +141,8 @@ public class AnonymousTests
     [TestMethod]
     public void MarkdownPostTest()
     {
-        var markdownPost = @"Markdown Test: [FishyFlip](https://drasticactions.github.io/FishyFlip), #FishyFlip, [@drasticactions.dev](did:plc:yhgc5rlqhoezrx6fbawajxlh)";
+        var markdownPost =
+            @"Markdown Test: [FishyFlip](https://drasticactions.github.io/FishyFlip), #FishyFlip, [@drasticactions.dev](did:plc:yhgc5rlqhoezrx6fbawajxlh)";
         var post = MarkdownPost.Parse(markdownPost);
         Assert.IsTrue(post.OriginalMarkdown == markdownPost);
         Assert.IsTrue(post.Post == "Markdown Test: FishyFlip, #FishyFlip, @drasticactions.dev");
@@ -172,7 +170,8 @@ public class AnonymousTests
         var daDev = new FacetActorIdentifier(ATHandle.Create("drasticactions.dev")!, ATDid.Create("did:plc:okblbaji7rz243bluudjlgxt")!);
         var daJp = new FacetActorIdentifier(ATHandle.Create("drasticactions.jp")!, ATDid.Create("did:plc:okblbaji7rz243bluudjl2bt")!);
 
-        var postText = "@drasticactions.dev This is a #test #test of #testing the #FishyFlip #API. https://github.com/drasticactions DAHome. @drasticactions.jp https://github.com/drasticactions/FishyFlip @drasticactions.dev Weee!";
+        var postText =
+            "@drasticactions.dev This is a #test #test of #testing the #FishyFlip #API. https://github.com/drasticactions DAHome. @drasticactions.jp https://github.com/drasticactions/FishyFlip @drasticactions.dev Weee!";
         var postHandles = ATHandle.FromPostText(postText);
         Assert.IsTrue(postHandles.Length == 2);
         Assert.IsTrue(postHandles[0].Handle == "drasticactions.dev");
@@ -265,5 +264,22 @@ public class AnonymousTests
 
         Assert.AreEqual(atHandle, atHandle);
         Assert.AreNotEqual(atHandle, atHandle2);
+    }
+
+    /// <summary>
+    /// Validate JSON.
+    /// </summary>
+    /// <returns>Task.</returns>
+    [TestMethod]
+    public async Task JsonValidation()
+    {
+        var postUri = ATUri.Create("at://gooffkings.bsky.social/app.bsky.feed.post/3lgcbxwyj6s2t")!;
+        (var post, var error) = await AnonymousTests.proto!.Feed.GetPostThreadAsync(postUri);
+        Assert.IsNull(error);
+        Assert.IsNotNull(post);
+        var testing1 = post.ToJson();
+        var test2 = GetPostThreadOutput.FromJson(testing1);
+        Assert.IsNotNull(test2);
+        Assert.IsTrue(((ThreadViewPost)post.Thread).Replies!.Count == ((ThreadViewPost)test2!.Thread).Replies!.Count);
     }
 }

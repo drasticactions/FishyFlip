@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         public AddReservedHandleOutput()
         {
+            this.Type = "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";
-
         public const string RecordType = "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
-        }
 
         public static AddReservedHandleOutput FromJson(string json)
         {

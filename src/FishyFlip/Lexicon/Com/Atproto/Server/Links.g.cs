@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             this.PrivacyPolicy = privacyPolicy;
             this.TermsOfService = termsOfService;
+            this.Type = "com.atproto.server.describeServer#links";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public Links()
         {
+            this.Type = "com.atproto.server.describeServer#links";
         }
 
 
@@ -51,18 +53,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("termsOfService")]
         public string? TermsOfService { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.describeServer#links";
-
         public const string RecordType = "com.atproto.server.describeServer#links";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.Links>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Links>)SourceGenerationContext.Default.ComAtprotoServerLinks)!;
-        }
 
         public static Links FromJson(string json)
         {

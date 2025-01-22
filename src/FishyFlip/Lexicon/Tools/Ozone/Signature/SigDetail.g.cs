@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         {
             this.Property = property;
             this.Value = value;
+            this.Type = "tools.ozone.signature.defs#sigDetail";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         public SigDetail()
         {
+            this.Type = "tools.ozone.signature.defs#sigDetail";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         [JsonRequired]
         public string Value { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.signature.defs#sigDetail";
-
         public const string RecordType = "tools.ozone.signature.defs#sigDetail";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail)!;
-        }
 
         public static SigDetail FromJson(string json)
         {

@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.DidDoc = didDoc;
             this.Active = active;
             this.Status = status;
+            this.Type = "com.atproto.server.refreshSession#RefreshSessionOutput";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public RefreshSessionOutput()
         {
+            this.Type = "com.atproto.server.refreshSession#RefreshSessionOutput";
         }
 
 
@@ -112,18 +114,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.refreshSession#RefreshSessionOutput";
-
         public const string RecordType = "com.atproto.server.refreshSession#RefreshSessionOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerRefreshSessionOutput)!;
-        }
 
         public static RefreshSessionOutput FromJson(string json)
         {

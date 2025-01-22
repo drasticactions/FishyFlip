@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Did = did;
             this.Viewer = viewer;
+            this.Type = "app.bsky.feed.defs#blockedAuthor";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public BlockedAuthor()
         {
+            this.Type = "app.bsky.feed.defs#blockedAuthor";
         }
 
 
@@ -56,18 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("viewer")]
         public FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#blockedAuthor";
-
         public const string RecordType = "app.bsky.feed.defs#blockedAuthor";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor)!;
-        }
 
         public static BlockedAuthor FromJson(string json)
         {

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             this.Did = did;
             this.Handle = handle;
+            this.Type = "com.shinolabs.pinksea.getIdentity#GetIdentityOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public GetIdentityOutput()
         {
+            this.Type = "com.shinolabs.pinksea.getIdentity#GetIdentityOutput";
         }
 
 
@@ -57,18 +59,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle Handle { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.getIdentity#GetIdentityOutput";
-
         public const string RecordType = "com.shinolabs.pinksea.getIdentity#GetIdentityOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetIdentityOutput)!;
-        }
 
         public static GetIdentityOutput FromJson(string json)
         {

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Property = property;
             this.Value = value;
+            this.Type = "com.atproto.admin.defs#threatSignature";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public ThreatSignature()
         {
+            this.Type = "com.atproto.admin.defs#threatSignature";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonRequired]
         public string Value { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.defs#threatSignature";
-
         public const string RecordType = "com.atproto.admin.defs#threatSignature";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
-        }
 
         public static ThreatSignature FromJson(string json)
         {

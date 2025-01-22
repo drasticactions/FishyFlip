@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Cid = cid;
             this.Record = record;
             this.Lists = lists;
+            this.Type = "app.bsky.feed.defs#threadgateView";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ThreadgateView()
         {
+            this.Type = "app.bsky.feed.defs#threadgateView";
         }
 
 
@@ -70,18 +72,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("lists")]
         public List<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>? Lists { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#threadgateView";
-
         public const string RecordType = "app.bsky.feed.defs#threadgateView";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView)!;
-        }
 
         public static ThreadgateView FromJson(string json)
         {

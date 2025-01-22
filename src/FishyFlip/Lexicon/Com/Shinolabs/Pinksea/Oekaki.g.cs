@@ -32,6 +32,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             this.Tags = tags;
             this.InResponseTo = inResponseTo;
             this.Nsfw = nsfw;
+            this.Type = "com.shinolabs.pinksea.oekaki";
         }
 
 
@@ -40,6 +41,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public Oekaki()
         {
+            this.Type = "com.shinolabs.pinksea.oekaki";
         }
 
 
@@ -91,18 +93,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonPropertyName("nsfw")]
         public bool? Nsfw { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.oekaki";
-
         public const string RecordType = "com.shinolabs.pinksea.oekaki";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaOekaki)!;
-        }
 
         public static Oekaki FromJson(string json)
         {

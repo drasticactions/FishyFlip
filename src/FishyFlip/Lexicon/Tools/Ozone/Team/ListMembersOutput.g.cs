@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         {
             this.Cursor = cursor;
             this.Members = members;
+            this.Type = "tools.ozone.team.listMembers#ListMembersOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// </summary>
         public ListMembersOutput()
         {
+            this.Type = "tools.ozone.team.listMembers#ListMembersOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Team.Member> Members { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.team.listMembers#ListMembersOutput";
-
         public const string RecordType = "tools.ozone.team.listMembers#ListMembersOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput)!;
-        }
 
         public static ListMembersOutput FromJson(string json)
         {

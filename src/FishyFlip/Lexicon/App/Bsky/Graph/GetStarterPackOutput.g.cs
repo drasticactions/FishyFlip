@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetStarterPackOutput(FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView starterPack = default)
         {
             this.StarterPack = starterPack;
+            this.Type = "app.bsky.graph.getStarterPack#GetStarterPackOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetStarterPackOutput()
         {
+            this.Type = "app.bsky.graph.getStarterPack#GetStarterPackOutput";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView StarterPack { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getStarterPack#GetStarterPackOutput";
-
         public const string RecordType = "app.bsky.graph.getStarterPack#GetStarterPackOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>)SourceGenerationContext.Default.AppBskyGraphGetStarterPackOutput)!;
-        }
 
         public static GetStarterPackOutput FromJson(string json)
         {

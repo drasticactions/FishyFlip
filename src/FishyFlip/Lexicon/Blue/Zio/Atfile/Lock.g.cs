@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         public Lock(bool? @lock = default)
         {
             this.LockValue = @lock;
+            this.Type = "blue.zio.atfile.lock";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// </summary>
         public Lock()
         {
+            this.Type = "blue.zio.atfile.lock";
         }
 
 
@@ -45,18 +47,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         [JsonPropertyName("lock")]
         public bool? LockValue { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "blue.zio.atfile.lock";
-
         public const string RecordType = "blue.zio.atfile.lock";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Lock>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Lock>)SourceGenerationContext.Default.BlueZioAtfileLock)!;
-        }
 
         public static Lock FromJson(string json)
         {

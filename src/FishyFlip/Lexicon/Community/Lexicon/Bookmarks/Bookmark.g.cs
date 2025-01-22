@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
             this.Subject = subject;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Tags = tags;
+            this.Type = "community.lexicon.bookmarks.bookmark";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// </summary>
         public Bookmark()
         {
+            this.Type = "community.lexicon.bookmarks.bookmark";
         }
 
 
@@ -64,18 +66,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         [JsonPropertyName("tags")]
         public List<string>? Tags { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "community.lexicon.bookmarks.bookmark";
-
         public const string RecordType = "community.lexicon.bookmarks.bookmark";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
-        }
 
         public static Bookmark FromJson(string json)
         {

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         {
             this.Cursor = cursor;
             this.Labels = labels;
+            this.Type = "com.atproto.label.queryLabels#QueryLabelsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         public QueryLabelsOutput()
         {
+            this.Type = "com.atproto.label.queryLabels#QueryLabelsOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label> Labels { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.label.queryLabels#QueryLabelsOutput";
-
         public const string RecordType = "com.atproto.label.queryLabels#QueryLabelsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput)!;
-        }
 
         public static QueryLabelsOutput FromJson(string json)
         {

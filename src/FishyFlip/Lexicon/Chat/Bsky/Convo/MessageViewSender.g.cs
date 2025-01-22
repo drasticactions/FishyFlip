@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public MessageViewSender(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "chat.bsky.convo.defs#messageViewSender";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public MessageViewSender()
         {
+            this.Type = "chat.bsky.convo.defs#messageViewSender";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#messageViewSender";
-
         public const string RecordType = "chat.bsky.convo.defs#messageViewSender";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender>)SourceGenerationContext.Default.ChatBskyConvoMessageViewSender)!;
-        }
 
         public static MessageViewSender FromJson(string json)
         {

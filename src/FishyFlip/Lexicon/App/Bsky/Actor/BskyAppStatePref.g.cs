@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.ActiveProgressGuide = activeProgressGuide;
             this.QueuedNudges = queuedNudges;
             this.Nuxs = nuxs;
+            this.Type = "app.bsky.actor.defs#bskyAppStatePref";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public BskyAppStatePref()
         {
+            this.Type = "app.bsky.actor.defs#bskyAppStatePref";
         }
 
 
@@ -68,18 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("nuxs")]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.Nux>? Nuxs { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#bskyAppStatePref";
-
         public const string RecordType = "app.bsky.actor.defs#bskyAppStatePref";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref)!;
-        }
 
         public static BskyAppStatePref FromJson(string json)
         {

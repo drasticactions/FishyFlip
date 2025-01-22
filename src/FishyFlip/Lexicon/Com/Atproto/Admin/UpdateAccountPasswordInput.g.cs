@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Did = did;
             this.Password = password;
+            this.Type = "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public UpdateAccountPasswordInput()
         {
+            this.Type = "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput";
         }
 
 
@@ -54,18 +56,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonRequired]
         public string Password { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput";
-
         public const string RecordType = "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountPasswordInput)!;
-        }
 
         public static UpdateAccountPasswordInput FromJson(string json)
         {

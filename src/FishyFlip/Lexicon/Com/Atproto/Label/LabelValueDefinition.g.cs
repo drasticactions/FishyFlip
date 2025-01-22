@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             this.DefaultSetting = defaultSetting;
             this.AdultOnly = adultOnly;
             this.Locales = locales;
+            this.Type = "com.atproto.label.defs#labelValueDefinition";
         }
 
 
@@ -53,6 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         public LabelValueDefinition()
         {
+            this.Type = "com.atproto.label.defs#labelValueDefinition";
         }
 
 
@@ -126,18 +128,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings> Locales { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.label.defs#labelValueDefinition";
-
         public const string RecordType = "com.atproto.label.defs#labelValueDefinition";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition)!;
-        }
 
         public static LabelValueDefinition FromJson(string json)
         {

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             this.Topics = topics;
             this.Suggested = suggested;
+            this.Type = "app.bsky.unspecced.getTrendingTopics#GetTrendingTopicsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetTrendingTopicsOutput()
         {
+            this.Type = "app.bsky.unspecced.getTrendingTopics#GetTrendingTopicsOutput";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic> Suggested { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.getTrendingTopics#GetTrendingTopicsOutput";
-
         public const string RecordType = "app.bsky.unspecced.getTrendingTopics#GetTrendingTopicsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput)!;
-        }
 
         public static GetTrendingTopicsOutput FromJson(string json)
         {

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public DeactivateAccountInput(DateTime? deleteAfter = default)
         {
             this.DeleteAfter = deleteAfter;
+            this.Type = "com.atproto.server.deactivateAccount#DeactivateAccountInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public DeactivateAccountInput()
         {
+            this.Type = "com.atproto.server.deactivateAccount#DeactivateAccountInput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("deleteAfter")]
         public DateTime? DeleteAfter { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.deactivateAccount#DeactivateAccountInput";
-
         public const string RecordType = "com.atproto.server.deactivateAccount#DeactivateAccountInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.DeactivateAccountInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DeactivateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeactivateAccountInput)!;
-        }
 
         public static DeactivateAccountInput FromJson(string json)
         {

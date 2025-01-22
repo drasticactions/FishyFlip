@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.Did = did;
             this.Following = following;
             this.FollowedBy = followedBy;
+            this.Type = "app.bsky.graph.defs#relationship";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public Relationship()
         {
+            this.Type = "app.bsky.graph.defs#relationship";
         }
 
 
@@ -69,18 +71,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? FollowedBy { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.defs#relationship";
-
         public const string RecordType = "app.bsky.graph.defs#relationship";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship)!;
-        }
 
         public static Relationship FromJson(string json)
         {

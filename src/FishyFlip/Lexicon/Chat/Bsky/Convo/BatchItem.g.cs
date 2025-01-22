@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.ConvoId = convoId;
             this.Message = message;
+            this.Type = "chat.bsky.convo.sendMessageBatch#batchItem";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public BatchItem()
         {
+            this.Type = "chat.bsky.convo.sendMessageBatch#batchItem";
         }
 
 
@@ -56,18 +58,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput Message { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.sendMessageBatch#batchItem";
-
         public const string RecordType = "chat.bsky.convo.sendMessageBatch#batchItem";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem)!;
-        }
 
         public static BatchItem FromJson(string json)
         {

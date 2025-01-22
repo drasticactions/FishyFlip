@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             this.DisplayName = displayName;
             this.Description = description;
             this.Link = link;
+            this.Type = "app.bsky.unspecced.defs#trendingTopic";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public TrendingTopic()
         {
+            this.Type = "app.bsky.unspecced.defs#trendingTopic";
         }
 
 
@@ -71,18 +73,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonRequired]
         public string Link { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.defs#trendingTopic";
-
         public const string RecordType = "app.bsky.unspecced.defs#trendingTopic";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>)SourceGenerationContext.Default.AppBskyUnspeccedTrendingTopic)!;
-        }
 
         public static TrendingTopic FromJson(string json)
         {

@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public ListRule(FishyFlip.Models.ATUri list = default)
         {
             this.List = list;
+            this.Type = "app.bsky.feed.threadgate#listRule";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ListRule()
         {
+            this.Type = "app.bsky.feed.threadgate#listRule";
         }
 
 
@@ -47,18 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri List { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.threadgate#listRule";
-
         public const string RecordType = "app.bsky.feed.threadgate#listRule";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule)!;
-        }
 
         public static ListRule FromJson(string json)
         {

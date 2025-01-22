@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         {
             this.Name = name;
             this.Description = description;
+            this.Type = "tools.ozone.set.defs#set";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public Set()
         {
+            this.Type = "tools.ozone.set.defs#set";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.set.defs#set";
-
         public const string RecordType = "tools.ozone.set.defs#set";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Set.Set>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.Set>)SourceGenerationContext.Default.ToolsOzoneSetSet)!;
-        }
 
         public static Set FromJson(string json)
         {

@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         {
             this.Id = id;
             this.UserAgent = userAgent;
+            this.Type = "blue.zio.atfile.finger#browser";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// </summary>
         public Browser()
         {
+            this.Type = "blue.zio.atfile.finger#browser";
         }
 
 
@@ -54,18 +56,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         [JsonPropertyName("userAgent")]
         public string? UserAgent { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "blue.zio.atfile.finger#browser";
-
         public const string RecordType = "blue.zio.atfile.finger#browser";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>)SourceGenerationContext.Default.BlueZioAtfileBrowser)!;
-        }
 
         public static Browser FromJson(string json)
         {

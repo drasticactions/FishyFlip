@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             this.ImageValue = image;
             this.Alt = alt;
             this.AspectRatio = aspectRatio;
+            this.Type = "app.bsky.embed.images#image";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public Image()
         {
+            this.Type = "app.bsky.embed.images#image";
         }
 
 
@@ -66,18 +68,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("aspectRatio")]
         public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.images#image";
-
         public const string RecordType = "app.bsky.embed.images#image";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.Image>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Image>)SourceGenerationContext.Default.AppBskyEmbedImage)!;
-        }
 
         public static Image FromJson(string json)
         {

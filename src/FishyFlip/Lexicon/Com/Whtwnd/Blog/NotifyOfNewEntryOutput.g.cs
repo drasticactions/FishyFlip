@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public NotifyOfNewEntryOutput()
         {
+            this.Type = "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryOutput";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryOutput";
-
         public const string RecordType = "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryOutput)!;
-        }
 
         public static NotifyOfNewEntryOutput FromJson(string json)
         {

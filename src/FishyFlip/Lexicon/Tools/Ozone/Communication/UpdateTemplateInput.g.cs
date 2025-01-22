@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             this.Subject = subject;
             this.UpdatedBy = updatedBy;
             this.Disabled = disabled;
+            this.Type = "tools.ozone.communication.updateTemplate#UpdateTemplateInput";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         public UpdateTemplateInput()
         {
+            this.Type = "tools.ozone.communication.updateTemplate#UpdateTemplateInput";
         }
 
 
@@ -104,18 +106,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         [JsonPropertyName("disabled")]
         public bool? Disabled { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.communication.updateTemplate#UpdateTemplateInput";
-
         public const string RecordType = "tools.ozone.communication.updateTemplate#UpdateTemplateInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Communication.UpdateTemplateInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.UpdateTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationUpdateTemplateInput)!;
-        }
 
         public static UpdateTemplateInput FromJson(string json)
         {

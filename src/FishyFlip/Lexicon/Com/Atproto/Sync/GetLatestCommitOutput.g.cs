@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             this.Cid = cid;
             this.Rev = rev;
+            this.Type = "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public GetLatestCommitOutput()
         {
+            this.Type = "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonRequired]
         public string Rev { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
-
         public const string RecordType = "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>)SourceGenerationContext.Default.ComAtprotoSyncGetLatestCommitOutput)!;
-        }
 
         public static GetLatestCommitOutput FromJson(string json)
         {

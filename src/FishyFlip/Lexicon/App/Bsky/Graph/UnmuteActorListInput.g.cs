@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public UnmuteActorListInput(FishyFlip.Models.ATUri list = default)
         {
             this.List = list;
+            this.Type = "app.bsky.graph.unmuteActorList#UnmuteActorListInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public UnmuteActorListInput()
         {
+            this.Type = "app.bsky.graph.unmuteActorList#UnmuteActorListInput";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri List { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.unmuteActorList#UnmuteActorListInput";
-
         public const string RecordType = "app.bsky.graph.unmuteActorList#UnmuteActorListInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorListInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorListInput>)SourceGenerationContext.Default.AppBskyGraphUnmuteActorListInput)!;
-        }
 
         public static UnmuteActorListInput FromJson(string json)
         {

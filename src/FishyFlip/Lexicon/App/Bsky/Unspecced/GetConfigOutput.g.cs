@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetConfigOutput(bool? checkEmailConfirmed = default)
         {
             this.CheckEmailConfirmed = checkEmailConfirmed;
+            this.Type = "app.bsky.unspecced.getConfig#GetConfigOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetConfigOutput()
         {
+            this.Type = "app.bsky.unspecced.getConfig#GetConfigOutput";
         }
 
 
@@ -42,18 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("checkEmailConfirmed")]
         public bool? CheckEmailConfirmed { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.getConfig#GetConfigOutput";
-
         public const string RecordType = "app.bsky.unspecced.getConfig#GetConfigOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetConfigOutput)!;
-        }
 
         public static GetConfigOutput FromJson(string json)
         {

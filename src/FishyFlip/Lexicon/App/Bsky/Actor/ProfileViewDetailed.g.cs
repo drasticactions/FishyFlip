@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Viewer = viewer;
             this.Labels = labels;
             this.PinnedPost = pinnedPost;
+            this.Type = "app.bsky.actor.defs#profileViewDetailed";
         }
 
 
@@ -63,6 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ProfileViewDetailed()
         {
+            this.Type = "app.bsky.actor.defs#profileViewDetailed";
         }
 
 
@@ -193,18 +195,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("pinnedPost")]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#profileViewDetailed";
-
         public const string RecordType = "app.bsky.actor.defs#profileViewDetailed";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>)SourceGenerationContext.Default.AppBskyActorProfileViewDetailed)!;
-        }
 
         public static ProfileViewDetailed FromJson(string json)
         {

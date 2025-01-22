@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Post = post;
             this.DetachedEmbeddingUris = detachedEmbeddingUris;
             this.EmbeddingRules = embeddingRules;
+            this.Type = "app.bsky.feed.postgate";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Postgate()
         {
+            this.Type = "app.bsky.feed.postgate";
         }
 
 
@@ -80,18 +82,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("embeddingRules")]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>? EmbeddingRules { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.postgate";
-
         public const string RecordType = "app.bsky.feed.postgate";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate)!;
-        }
 
         public static Postgate FromJson(string json)
         {

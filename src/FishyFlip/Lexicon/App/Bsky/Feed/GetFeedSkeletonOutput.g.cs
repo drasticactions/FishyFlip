@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Cursor = cursor;
             this.Feed = feed;
+            this.Type = "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetFeedSkeletonOutput()
         {
+            this.Type = "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonFeedPost> Feed { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput";
-
         public const string RecordType = "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedSkeletonOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedSkeletonOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedSkeletonOutput)!;
-        }
 
         public static GetFeedSkeletonOutput FromJson(string json)
         {

@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             this.Day = day;
             this.Month = month;
             this.All = all;
+            this.Type = "chat.bsky.moderation.getActorMetadata#GetActorMetadataOutput";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         public GetActorMetadataOutput()
         {
+            this.Type = "chat.bsky.moderation.getActorMetadata#GetActorMetadataOutput";
         }
 
 
@@ -72,18 +74,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         [JsonRequired]
         public FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata All { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.moderation.getActorMetadata#GetActorMetadataOutput";
-
         public const string RecordType = "chat.bsky.moderation.getActorMetadata#GetActorMetadataOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>)SourceGenerationContext.Default.ChatBskyModerationGetActorMetadataOutput)!;
-        }
 
         public static GetActorMetadataOutput FromJson(string json)
         {

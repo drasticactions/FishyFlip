@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
             this.Avatar = avatar;
             this.Banner = banner;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "fm.teal.alpha.actor.profile";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// </summary>
         public Profile()
         {
+            this.Type = "fm.teal.alpha.actor.profile";
         }
 
 
@@ -107,18 +109,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fm.teal.alpha.actor.profile";
-
         public const string RecordType = "fm.teal.alpha.actor.profile";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
-        }
 
         public static Profile FromJson(string json)
         {

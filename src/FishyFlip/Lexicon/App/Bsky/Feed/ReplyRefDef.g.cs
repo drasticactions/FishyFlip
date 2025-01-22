@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Root = root;
             this.Parent = parent;
+            this.Type = "app.bsky.feed.post#replyRef";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ReplyRefDef()
         {
+            this.Type = "app.bsky.feed.post#replyRef";
         }
 
 
@@ -59,18 +61,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public Com.Atproto.Repo.StrongRef Parent { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.post#replyRef";
-
         public const string RecordType = "app.bsky.feed.post#replyRef";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRefDef>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRefDef>)SourceGenerationContext.Default.AppBskyFeedReplyRefDef)!;
-        }
 
         public static ReplyRefDef FromJson(string json)
         {

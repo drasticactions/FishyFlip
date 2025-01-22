@@ -30,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             this.Subject = subject;
             this.Takedown = takedown;
             this.Deactivated = deactivated;
+            this.Type = "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput";
         }
 
 
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public GetSubjectStatusOutput()
         {
+            this.Type = "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput";
         }
 
 
@@ -76,18 +78,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonPropertyName("deactivated")]
         public FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? Deactivated { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput";
-
         public const string RecordType = "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetSubjectStatusOutput)!;
-        }
 
         public static GetSubjectStatusOutput FromJson(string json)
         {

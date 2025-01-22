@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Active = active;
             this.Status = status;
             this.Timestamp = timestamp;
+            this.Type = "tools.ozone.moderation.defs#accountEvent";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public AccountEvent()
         {
+            this.Type = "tools.ozone.moderation.defs#accountEvent";
         }
 
 
@@ -90,18 +92,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         public DateTime? Timestamp { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#accountEvent";
-
         public const string RecordType = "tools.ozone.moderation.defs#accountEvent";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAccountEvent)!;
-        }
 
         public static AccountEvent FromJson(string json)
         {

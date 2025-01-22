@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.My.Skylights
             this.Value = value;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.UpdatedAt = updatedAt;
+            this.Type = "my.skylights.rel#note";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// </summary>
         public Note()
         {
+            this.Type = "my.skylights.rel#note";
         }
 
 
@@ -63,18 +65,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         [JsonRequired]
         public DateTime? UpdatedAt { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "my.skylights.rel#note";
-
         public const string RecordType = "my.skylights.rel#note";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.My.Skylights.Note>(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;
-        }
 
         public static Note FromJson(string json)
         {

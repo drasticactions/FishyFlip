@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             this.Collection = collection;
             this.Rkey = rkey;
+            this.Type = "com.atproto.repo.applyWrites#delete";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public Delete()
         {
+            this.Type = "com.atproto.repo.applyWrites#delete";
         }
 
 
@@ -56,18 +58,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonRequired]
         public string Rkey { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.applyWrites#delete";
-
         public const string RecordType = "com.atproto.repo.applyWrites#delete";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete)!;
-        }
 
         public static Delete FromJson(string json)
         {

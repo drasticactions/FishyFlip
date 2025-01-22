@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ReasonPin()
         {
+            this.Type = "app.bsky.feed.defs#reasonPin";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#reasonPin";
-
         public const string RecordType = "app.bsky.feed.defs#reasonPin";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin>)SourceGenerationContext.Default.AppBskyFeedReasonPin)!;
-        }
 
         public static ReasonPin FromJson(string json)
         {

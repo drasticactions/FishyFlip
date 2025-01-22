@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             this.Parent = parent;
             this.Children = children;
+            this.Type = "com.shinolabs.pinksea.getOekaki#GetOekakiOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public GetOekakiOutput()
         {
+            this.Type = "com.shinolabs.pinksea.getOekaki#GetOekakiOutput";
         }
 
 
@@ -60,18 +62,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki> Children { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.getOekaki#GetOekakiOutput";
-
         public const string RecordType = "com.shinolabs.pinksea.getOekaki#GetOekakiOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetOekakiOutput)!;
-        }
 
         public static GetOekakiOutput FromJson(string json)
         {

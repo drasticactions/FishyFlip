@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public SubmitPlcOperationInput(ATObject operation = default)
         {
             this.Operation = operation;
+            this.Type = "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// </summary>
         public SubmitPlcOperationInput()
         {
+            this.Type = "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         [JsonRequired]
         public ATObject Operation { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput";
-
         public const string RecordType = "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySubmitPlcOperationInput)!;
-        }
 
         public static SubmitPlcOperationInput FromJson(string json)
         {

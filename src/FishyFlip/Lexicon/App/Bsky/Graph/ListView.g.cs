@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.Labels = labels;
             this.Viewer = viewer;
             this.IndexedAt = indexedAt;
+            this.Type = "app.bsky.graph.defs#listView";
         }
 
 
@@ -56,6 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public ListView()
         {
+            this.Type = "app.bsky.graph.defs#listView";
         }
 
 
@@ -163,18 +165,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.defs#listView";
-
         public const string RecordType = "app.bsky.graph.defs#listView";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.ListView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListView>)SourceGenerationContext.Default.AppBskyGraphListView)!;
-        }
 
         public static ListView FromJson(string json)
         {

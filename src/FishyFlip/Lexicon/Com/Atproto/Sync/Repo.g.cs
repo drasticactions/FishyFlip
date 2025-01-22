@@ -30,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             this.Rev = rev;
             this.Active = active;
             this.Status = status;
+            this.Type = "com.atproto.sync.listRepos#repo";
         }
 
 
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public Repo()
         {
+            this.Type = "com.atproto.sync.listRepos#repo";
         }
 
 
@@ -93,18 +95,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.listRepos#repo";
-
         public const string RecordType = "com.atproto.sync.listRepos#repo";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.Repo>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Repo>)SourceGenerationContext.Default.ComAtprotoSyncRepo)!;
-        }
 
         public static Repo FromJson(string json)
         {

@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.Collection = collection;
             this.Rkey = rkey;
             this.Value = value;
+            this.Type = "com.atproto.repo.applyWrites#update";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public Update()
         {
+            this.Type = "com.atproto.repo.applyWrites#update";
         }
 
 
@@ -66,18 +68,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonRequired]
         public ATObject Value { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.applyWrites#update";
-
         public const string RecordType = "com.atproto.repo.applyWrites#update";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.Update>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
-        }
 
         public static Update FromJson(string json)
         {

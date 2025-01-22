@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             this.Blob = blob;
             this.Error = error;
             this.Message = message;
+            this.Type = "app.bsky.video.defs#jobStatus";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         public JobStatus()
         {
+            this.Type = "app.bsky.video.defs#jobStatus";
         }
 
 
@@ -109,18 +111,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         [JsonPropertyName("message")]
         public string? Message { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.video.defs#jobStatus";
-
         public const string RecordType = "app.bsky.video.defs#jobStatus";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Video.JobStatus>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.JobStatus>)SourceGenerationContext.Default.AppBskyVideoJobStatus)!;
-        }
 
         public static JobStatus FromJson(string json)
         {

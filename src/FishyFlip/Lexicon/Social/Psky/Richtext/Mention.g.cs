@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         public Mention(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "social.psky.richtext.facet#mention";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// </summary>
         public Mention()
         {
+            this.Type = "social.psky.richtext.facet#mention";
         }
 
 
@@ -47,18 +49,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.richtext.facet#mention";
-
         public const string RecordType = "social.psky.richtext.facet#mention";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Richtext.Mention>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Mention>)SourceGenerationContext.Default.SocialPskyRichtextMention)!;
-        }
 
         public static Mention FromJson(string json)
         {

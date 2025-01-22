@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventResolveAppeal(string? comment = default)
         {
             this.Comment = comment;
+            this.Type = "tools.ozone.moderation.defs#modEventResolveAppeal";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventResolveAppeal()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventResolveAppeal";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventResolveAppeal";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventResolveAppeal";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal>)SourceGenerationContext.Default.ToolsOzoneModerationModEventResolveAppeal)!;
-        }
 
         public static ModEventResolveAppeal FromJson(string json)
         {

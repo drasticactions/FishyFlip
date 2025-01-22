@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SendInteractionsOutput()
         {
+            this.Type = "app.bsky.feed.sendInteractions#SendInteractionsOutput";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.sendInteractions#SendInteractionsOutput";
-
         public const string RecordType = "app.bsky.feed.sendInteractions#SendInteractionsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>)SourceGenerationContext.Default.AppBskyFeedSendInteractionsOutput)!;
-        }
 
         public static SendInteractionsOutput FromJson(string json)
         {

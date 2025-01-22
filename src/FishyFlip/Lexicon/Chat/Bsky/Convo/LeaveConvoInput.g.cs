@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public LeaveConvoInput(string convoId = default)
         {
             this.ConvoId = convoId;
+            this.Type = "chat.bsky.convo.leaveConvo#LeaveConvoInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public LeaveConvoInput()
         {
+            this.Type = "chat.bsky.convo.leaveConvo#LeaveConvoInput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public string ConvoId { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.leaveConvo#LeaveConvoInput";
-
         public const string RecordType = "chat.bsky.convo.leaveConvo#LeaveConvoInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoInput>)SourceGenerationContext.Default.ChatBskyConvoLeaveConvoInput)!;
-        }
 
         public static LeaveConvoInput FromJson(string json)
         {

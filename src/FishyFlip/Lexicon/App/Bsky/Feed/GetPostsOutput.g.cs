@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GetPostsOutput(List<FishyFlip.Lexicon.App.Bsky.Feed.PostView> posts = default)
         {
             this.Posts = posts;
+            this.Type = "app.bsky.feed.getPosts#GetPostsOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetPostsOutput()
         {
+            this.Type = "app.bsky.feed.getPosts#GetPostsOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.PostView> Posts { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getPosts#GetPostsOutput";
-
         public const string RecordType = "app.bsky.feed.getPosts#GetPostsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostsOutput)!;
-        }
 
         public static GetPostsOutput FromJson(string json)
         {

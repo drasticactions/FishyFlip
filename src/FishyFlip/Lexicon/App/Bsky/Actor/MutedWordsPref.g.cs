@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public MutedWordsPref(List<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord> items = default)
         {
             this.Items = items;
+            this.Type = "app.bsky.actor.defs#mutedWordsPref";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public MutedWordsPref()
         {
+            this.Type = "app.bsky.actor.defs#mutedWordsPref";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord> Items { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#mutedWordsPref";
-
         public const string RecordType = "app.bsky.actor.defs#mutedWordsPref";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.MutedWordsPref>)SourceGenerationContext.Default.AppBskyActorMutedWordsPref)!;
-        }
 
         public static MutedWordsPref FromJson(string json)
         {

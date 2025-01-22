@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public DeleteAccountInput(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "com.atproto.admin.deleteAccount#DeleteAccountInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public DeleteAccountInput()
         {
+            this.Type = "com.atproto.admin.deleteAccount#DeleteAccountInput";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.deleteAccount#DeleteAccountInput";
-
         public const string RecordType = "com.atproto.admin.deleteAccount#DeleteAccountInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.DeleteAccountInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoAdminDeleteAccountInput)!;
-        }
 
         public static DeleteAccountInput FromJson(string json)
         {

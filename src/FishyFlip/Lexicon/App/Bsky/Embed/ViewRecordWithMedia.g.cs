@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             this.Record = record;
             this.Media = media;
+            this.Type = "app.bsky.embed.recordWithMedia#view";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewRecordWithMedia()
         {
+            this.Type = "app.bsky.embed.recordWithMedia#view";
         }
 
 
@@ -65,18 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonRequired]
         public ATObject Media { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.recordWithMedia#view";
-
         public const string RecordType = "app.bsky.embed.recordWithMedia#view";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedViewRecordWithMedia)!;
-        }
 
         public static ViewRecordWithMedia FromJson(string json)
         {

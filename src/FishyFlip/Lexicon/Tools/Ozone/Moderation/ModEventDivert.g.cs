@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventDivert(string? comment = default)
         {
             this.Comment = comment;
+            this.Type = "tools.ozone.moderation.defs#modEventDivert";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventDivert()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventDivert";
         }
 
 
@@ -45,18 +47,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventDivert";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventDivert";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventDivert>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventDivert>)SourceGenerationContext.Default.ToolsOzoneModerationModEventDivert)!;
-        }
 
         public static ModEventDivert FromJson(string json)
         {

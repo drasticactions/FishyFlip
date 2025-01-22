@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Labels = labels;
             this.Tags = tags;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "app.bsky.feed.post";
         }
 
 
@@ -54,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Post()
         {
+            this.Type = "app.bsky.feed.post";
         }
 
 
@@ -135,18 +137,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.post";
-
         public const string RecordType = "app.bsky.feed.post";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Post>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Post>)SourceGenerationContext.Default.AppBskyFeedPost)!;
-        }
 
         public static Post FromJson(string json)
         {

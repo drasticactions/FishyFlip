@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             this.Did = did;
             this.Handle = handle;
+            this.Type = "com.shinolabs.pinksea.appViewDefs#author";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public Author()
         {
+            this.Type = "com.shinolabs.pinksea.appViewDefs#author";
         }
 
 
@@ -60,18 +62,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle Handle { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.appViewDefs#author";
-
         public const string RecordType = "com.shinolabs.pinksea.appViewDefs#author";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author>)SourceGenerationContext.Default.ComShinolabsPinkseaAuthor)!;
-        }
 
         public static Author FromJson(string json)
         {

@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         {
             this.ByteStart = byteStart;
             this.ByteEnd = byteEnd;
+            this.Type = "social.psky.richtext.facet#byteSlice";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// </summary>
         public ByteSlice()
         {
+            this.Type = "social.psky.richtext.facet#byteSlice";
         }
 
 
@@ -56,18 +58,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         [JsonRequired]
         public long ByteEnd { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.richtext.facet#byteSlice";
-
         public const string RecordType = "social.psky.richtext.facet#byteSlice";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Richtext.ByteSlice>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.ByteSlice>)SourceGenerationContext.Default.SocialPskyRichtextByteSlice)!;
-        }
 
         public static ByteSlice FromJson(string json)
         {

@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public DeleteSetOutput()
         {
+            this.Type = "tools.ozone.set.deleteSet#DeleteSetOutput";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.set.deleteSet#DeleteSetOutput";
-
         public const string RecordType = "tools.ozone.set.deleteSet#DeleteSetOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput>)SourceGenerationContext.Default.ToolsOzoneSetDeleteSetOutput)!;
-        }
 
         public static DeleteSetOutput FromJson(string json)
         {

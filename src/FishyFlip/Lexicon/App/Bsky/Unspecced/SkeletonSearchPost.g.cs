@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public SkeletonSearchPost(FishyFlip.Models.ATUri uri = default)
         {
             this.Uri = uri;
+            this.Type = "app.bsky.unspecced.defs#skeletonSearchPost";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public SkeletonSearchPost()
         {
+            this.Type = "app.bsky.unspecced.defs#skeletonSearchPost";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri Uri { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.defs#skeletonSearchPost";
-
         public const string RecordType = "app.bsky.unspecced.defs#skeletonSearchPost";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchPost)!;
-        }
 
         public static SkeletonSearchPost FromJson(string json)
         {

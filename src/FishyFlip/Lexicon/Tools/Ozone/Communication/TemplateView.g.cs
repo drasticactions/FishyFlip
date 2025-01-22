@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             this.LastUpdatedBy = lastUpdatedBy;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.UpdatedAt = updatedAt;
+            this.Type = "tools.ozone.communication.defs#templateView";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         public TemplateView()
         {
+            this.Type = "tools.ozone.communication.defs#templateView";
         }
 
 
@@ -127,18 +129,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         [JsonRequired]
         public DateTime? UpdatedAt { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.communication.defs#templateView";
-
         public const string RecordType = "tools.ozone.communication.defs#templateView";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView)!;
-        }
 
         public static TemplateView FromJson(string json)
         {

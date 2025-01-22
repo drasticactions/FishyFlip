@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public GetRecordsOutput(List<ATObject> records = default)
         {
             this.Records = records;
+            this.Type = "tools.ozone.moderation.getRecords#GetRecordsOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public GetRecordsOutput()
         {
+            this.Type = "tools.ozone.moderation.getRecords#GetRecordsOutput";
         }
 
 
@@ -50,18 +52,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         public List<ATObject> Records { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.getRecords#GetRecordsOutput";
-
         public const string RecordType = "tools.ozone.moderation.getRecords#GetRecordsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput)!;
-        }
 
         public static GetRecordsOutput FromJson(string json)
         {

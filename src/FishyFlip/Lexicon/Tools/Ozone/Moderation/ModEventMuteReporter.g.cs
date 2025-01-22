@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Comment = comment;
             this.DurationInHours = durationInHours;
+            this.Type = "tools.ozone.moderation.defs#modEventMuteReporter";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventMuteReporter()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventMuteReporter";
         }
 
 
@@ -55,18 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("durationInHours")]
         public long? DurationInHours { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventMuteReporter";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventMuteReporter";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventMuteReporter)!;
-        }
 
         public static ModEventMuteReporter FromJson(string json)
         {

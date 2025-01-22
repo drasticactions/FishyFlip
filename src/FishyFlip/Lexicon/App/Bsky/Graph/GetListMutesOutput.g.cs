@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Cursor = cursor;
             this.Lists = lists;
+            this.Type = "app.bsky.graph.getListMutes#GetListMutesOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetListMutesOutput()
         {
+            this.Type = "app.bsky.graph.getListMutes#GetListMutesOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Graph.ListView> Lists { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getListMutes#GetListMutesOutput";
-
         public const string RecordType = "app.bsky.graph.getListMutes#GetListMutesOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetListMutesOutput)!;
-        }
 
         public static GetListMutesOutput FromJson(string json)
         {

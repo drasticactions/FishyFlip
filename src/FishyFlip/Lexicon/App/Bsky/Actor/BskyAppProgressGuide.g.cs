@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public BskyAppProgressGuide(string guide = default)
         {
             this.Guide = guide;
+            this.Type = "app.bsky.actor.defs#bskyAppProgressGuide";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public BskyAppProgressGuide()
         {
+            this.Type = "app.bsky.actor.defs#bskyAppProgressGuide";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public string Guide { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#bskyAppProgressGuide";
-
         public const string RecordType = "app.bsky.actor.defs#bskyAppProgressGuide";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide)!;
-        }
 
         public static BskyAppProgressGuide FromJson(string json)
         {

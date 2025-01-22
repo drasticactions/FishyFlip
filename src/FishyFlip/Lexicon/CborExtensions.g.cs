@@ -36,6 +36,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.AccountEvent(obj);
                 case "tools.ozone.moderation.defs#accountHosting":
                     return new Tools.Ozone.Moderation.AccountHosting(obj);
+                case "tools.ozone.moderation.defs#accountStats":
+                    return new Tools.Ozone.Moderation.AccountStats(obj);
                 case "com.atproto.admin.defs#accountView":
                     return new Com.Atproto.Admin.AccountView(obj);
                 case "tools.ozone.team.addMember#AddMemberInput":
@@ -664,6 +666,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.RecordEvent(obj);
                 case "tools.ozone.moderation.defs#recordHosting":
                     return new Tools.Ozone.Moderation.RecordHosting(obj);
+                case "tools.ozone.moderation.defs#recordsStats":
+                    return new Tools.Ozone.Moderation.RecordsStats(obj);
                 case "tools.ozone.moderation.defs#recordView":
                     return new Tools.Ozone.Moderation.RecordView(obj);
                 case "tools.ozone.moderation.defs#recordViewDetail":
@@ -834,6 +838,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Richtext.Tag(obj);
                 case "tools.ozone.communication.defs#templateView":
                     return new Tools.Ozone.Communication.TemplateView(obj);
+                case "app.bsky.feed.defs#threadContext":
+                    return new App.Bsky.Feed.ThreadContext(obj);
                 case "app.bsky.feed.threadgate":
                     return new App.Bsky.Feed.Threadgate(obj);
                 case "app.bsky.feed.defs#threadgateView":

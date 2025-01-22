@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Viewer = viewer;
             this.Labels = labels;
             this.Threadgate = threadgate;
+            this.Type = "app.bsky.feed.defs#postView";
         }
 
 
@@ -62,6 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public PostView()
         {
+            this.Type = "app.bsky.feed.defs#postView";
         }
 
 
@@ -178,18 +180,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("threadgate")]
         public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#postView";
-
         public const string RecordType = "app.bsky.feed.defs#postView";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.PostView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
-        }
 
         public static PostView FromJson(string json)
         {

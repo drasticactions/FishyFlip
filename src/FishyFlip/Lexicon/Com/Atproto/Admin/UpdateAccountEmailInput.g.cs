@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Account = account;
             this.Email = email;
+            this.Type = "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public UpdateAccountEmailInput()
         {
+            this.Type = "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput";
         }
 
 
@@ -55,18 +57,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonRequired]
         public string Email { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput";
-
         public const string RecordType = "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountEmailInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountEmailInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountEmailInput)!;
-        }
 
         public static UpdateAccountEmailInput FromJson(string json)
         {

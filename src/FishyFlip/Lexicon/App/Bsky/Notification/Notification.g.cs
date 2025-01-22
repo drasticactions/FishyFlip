@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             this.IsRead = isRead;
             this.IndexedAt = indexedAt;
             this.Labels = labels;
+            this.Type = "app.bsky.notification.listNotifications#notification";
         }
 
 
@@ -52,6 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public Notification()
         {
+            this.Type = "app.bsky.notification.listNotifications#notification";
         }
 
 
@@ -144,18 +146,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         [JsonPropertyName("labels")]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.notification.listNotifications#notification";
-
         public const string RecordType = "app.bsky.notification.listNotifications#notification";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Notification.Notification>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Notification>)SourceGenerationContext.Default.AppBskyNotificationNotification)!;
-        }
 
         public static Notification FromJson(string json)
         {

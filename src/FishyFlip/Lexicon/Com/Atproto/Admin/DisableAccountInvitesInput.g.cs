@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Account = account;
             this.Note = note;
+            this.Type = "com.atproto.admin.disableAccountInvites#DisableAccountInvitesInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public DisableAccountInvitesInput()
         {
+            this.Type = "com.atproto.admin.disableAccountInvites#DisableAccountInvitesInput";
         }
 
 
@@ -54,18 +56,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonPropertyName("note")]
         public string? Note { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.disableAccountInvites#DisableAccountInvitesInput";
-
         public const string RecordType = "com.atproto.admin.disableAccountInvites#DisableAccountInvitesInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.DisableAccountInvitesInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.DisableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminDisableAccountInvitesInput)!;
-        }
 
         public static DisableAccountInvitesInput FromJson(string json)
         {

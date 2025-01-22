@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.Cid = cid;
             this.Commit = commit;
             this.ValidationStatus = validationStatus;
+            this.Type = "com.atproto.repo.createRecord#CreateRecordOutput";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public CreateRecordOutput()
         {
+            this.Type = "com.atproto.repo.createRecord#CreateRecordOutput";
         }
 
 
@@ -82,18 +84,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonPropertyName("validationStatus")]
         public string? ValidationStatus { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.createRecord#CreateRecordOutput";
-
         public const string RecordType = "com.atproto.repo.createRecord#CreateRecordOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoCreateRecordOutput)!;
-        }
 
         public static CreateRecordOutput FromJson(string json)
         {

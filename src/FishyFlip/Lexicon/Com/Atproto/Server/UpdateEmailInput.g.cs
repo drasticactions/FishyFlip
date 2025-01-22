@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.Email = email;
             this.EmailAuthFactor = emailAuthFactor;
             this.Token = token;
+            this.Type = "com.atproto.server.updateEmail#UpdateEmailInput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public UpdateEmailInput()
         {
+            this.Type = "com.atproto.server.updateEmail#UpdateEmailInput";
         }
 
 
@@ -62,18 +64,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("token")]
         public string? Token { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.updateEmail#UpdateEmailInput";
-
         public const string RecordType = "com.atproto.server.updateEmail#UpdateEmailInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>)SourceGenerationContext.Default.ComAtprotoServerUpdateEmailInput)!;
-        }
 
         public static UpdateEmailInput FromJson(string json)
         {

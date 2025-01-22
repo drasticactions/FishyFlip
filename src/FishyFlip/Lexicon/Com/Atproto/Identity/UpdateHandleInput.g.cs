@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public UpdateHandleInput(FishyFlip.Models.ATHandle handle = default)
         {
             this.Handle = handle;
+            this.Type = "com.atproto.identity.updateHandle#UpdateHandleInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// </summary>
         public UpdateHandleInput()
         {
+            this.Type = "com.atproto.identity.updateHandle#UpdateHandleInput";
         }
 
 
@@ -45,18 +47,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle Handle { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.identity.updateHandle#UpdateHandleInput";
-
         public const string RecordType = "com.atproto.identity.updateHandle#UpdateHandleInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput)!;
-        }
 
         public static UpdateHandleInput FromJson(string json)
         {

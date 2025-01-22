@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             this.Uri = uri;
             this.Blocked = blocked;
             this.Author = author;
+            this.Type = "app.bsky.embed.record#viewBlocked";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewBlocked()
         {
+            this.Type = "app.bsky.embed.record#viewBlocked";
         }
 
 
@@ -67,18 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor Author { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.record#viewBlocked";
-
         public const string RecordType = "app.bsky.embed.record#viewBlocked";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked>)SourceGenerationContext.Default.AppBskyEmbedViewBlocked)!;
-        }
 
         public static ViewBlocked FromJson(string json)
         {

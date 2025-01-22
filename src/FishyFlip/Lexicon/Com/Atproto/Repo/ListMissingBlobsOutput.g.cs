@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             this.Cursor = cursor;
             this.Blobs = blobs;
+            this.Type = "com.atproto.repo.listMissingBlobs#ListMissingBlobsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public ListMissingBlobsOutput()
         {
+            this.Type = "com.atproto.repo.listMissingBlobs#ListMissingBlobsOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob> Blobs { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.listMissingBlobs#ListMissingBlobsOutput";
-
         public const string RecordType = "com.atproto.repo.listMissingBlobs#ListMissingBlobsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput)!;
-        }
 
         public static ListMissingBlobsOutput FromJson(string json)
         {

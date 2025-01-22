@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             this.Name = name;
             this.Privileged = privileged;
+            this.Type = "com.atproto.server.createAppPassword#CreateAppPasswordInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateAppPasswordInput()
         {
+            this.Type = "com.atproto.server.createAppPassword#CreateAppPasswordInput";
         }
 
 
@@ -54,18 +56,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("privileged")]
         public bool? Privileged { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createAppPassword#CreateAppPasswordInput";
-
         public const string RecordType = "com.atproto.server.createAppPassword#CreateAppPasswordInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput)!;
-        }
 
         public static CreateAppPasswordInput FromJson(string json)
         {

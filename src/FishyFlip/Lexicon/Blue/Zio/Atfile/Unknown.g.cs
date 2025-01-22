@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         public Unknown(string? reason = default)
         {
             this.Reason = reason;
+            this.Type = "blue.zio.atfile.meta#unknown";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// </summary>
         public Unknown()
         {
+            this.Type = "blue.zio.atfile.meta#unknown";
         }
 
 
@@ -45,18 +47,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         [JsonPropertyName("reason")]
         public string? Reason { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "blue.zio.atfile.meta#unknown";
-
         public const string RecordType = "blue.zio.atfile.meta#unknown";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
-        }
 
         public static Unknown FromJson(string json)
         {

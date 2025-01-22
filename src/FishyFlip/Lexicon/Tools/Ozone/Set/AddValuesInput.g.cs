@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         {
             this.Name = name;
             this.Values = values;
+            this.Type = "tools.ozone.set.addValues#AddValuesInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public AddValuesInput()
         {
+            this.Type = "tools.ozone.set.addValues#AddValuesInput";
         }
 
 
@@ -55,18 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         [JsonRequired]
         public List<string> Values { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.set.addValues#AddValuesInput";
-
         public const string RecordType = "tools.ozone.set.addValues#AddValuesInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput)!;
-        }
 
         public static AddValuesInput FromJson(string json)
         {

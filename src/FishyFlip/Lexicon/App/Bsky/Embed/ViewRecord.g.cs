@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             this.QuoteCount = quoteCount;
             this.Embeds = embeds;
             this.IndexedAt = indexedAt;
+            this.Type = "app.bsky.embed.record#viewRecord";
         }
 
 
@@ -54,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewRecord()
         {
+            this.Type = "app.bsky.embed.record#viewRecord";
         }
 
 
@@ -155,18 +157,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.record#viewRecord";
-
         public const string RecordType = "app.bsky.embed.record#viewRecord";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecord>)SourceGenerationContext.Default.AppBskyEmbedViewRecord)!;
-        }
 
         public static ViewRecord FromJson(string json)
         {

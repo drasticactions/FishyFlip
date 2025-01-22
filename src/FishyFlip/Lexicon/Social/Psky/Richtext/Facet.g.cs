@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         {
             this.Index = index;
             this.Features = features;
+            this.Type = "social.psky.richtext.facet";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// </summary>
         public Facet()
         {
+            this.Type = "social.psky.richtext.facet";
         }
 
 
@@ -68,18 +70,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         [JsonRequired]
         public List<ATObject> Features { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.richtext.facet";
-
         public const string RecordType = "social.psky.richtext.facet";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>)SourceGenerationContext.Default.SocialPskyRichtextFacet)!;
-        }
 
         public static Facet FromJson(string json)
         {

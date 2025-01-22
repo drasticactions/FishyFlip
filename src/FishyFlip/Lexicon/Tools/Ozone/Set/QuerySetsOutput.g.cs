@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         {
             this.Sets = sets;
             this.Cursor = cursor;
+            this.Type = "tools.ozone.set.querySets#QuerySetsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public QuerySetsOutput()
         {
+            this.Type = "tools.ozone.set.querySets#QuerySetsOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.set.querySets#QuerySetsOutput";
-
         public const string RecordType = "tools.ozone.set.querySets#QuerySetsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>)SourceGenerationContext.Default.ToolsOzoneSetQuerySetsOutput)!;
-        }
 
         public static QuerySetsOutput FromJson(string json)
         {

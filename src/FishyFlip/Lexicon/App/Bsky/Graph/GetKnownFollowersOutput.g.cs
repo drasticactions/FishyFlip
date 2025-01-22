@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.Subject = subject;
             this.Cursor = cursor;
             this.Followers = followers;
+            this.Type = "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetKnownFollowersOutput()
         {
+            this.Type = "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput";
         }
 
 
@@ -65,18 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Followers { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput";
-
         public const string RecordType = "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput)!;
-        }
 
         public static GetKnownFollowersOutput FromJson(string json)
         {

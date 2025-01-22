@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Subject = subject;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "app.bsky.feed.repost";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Repost()
         {
+            this.Type = "app.bsky.feed.repost";
         }
 
 
@@ -57,18 +59,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.repost";
-
         public const string RecordType = "app.bsky.feed.repost";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Repost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Repost>)SourceGenerationContext.Default.AppBskyFeedRepost)!;
-        }
 
         public static Repost FromJson(string json)
         {

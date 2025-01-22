@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         public Tag(string tag = default)
         {
             this.TagValue = tag;
+            this.Type = "app.bsky.richtext.facet#tag";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// </summary>
         public Tag()
         {
+            this.Type = "app.bsky.richtext.facet#tag";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         [JsonRequired]
         public string TagValue { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.richtext.facet#tag";
-
         public const string RecordType = "app.bsky.richtext.facet#tag";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>)SourceGenerationContext.Default.AppBskyRichtextTag)!;
-        }
 
         public static Tag FromJson(string json)
         {

@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             this.Theme = theme;
             this.Blobs = blobs;
             this.Visibility = visibility;
+            this.Type = "com.whtwnd.blog.entry";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public Entry()
         {
+            this.Type = "com.whtwnd.blog.entry";
         }
 
 
@@ -103,18 +105,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         [JsonPropertyName("visibility")]
         public string? Visibility { get; set; } = "public";
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.entry";
-
         public const string RecordType = "com.whtwnd.blog.entry";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>)SourceGenerationContext.Default.ComWhtwndBlogEntry)!;
-        }
 
         public static Entry FromJson(string json)
         {

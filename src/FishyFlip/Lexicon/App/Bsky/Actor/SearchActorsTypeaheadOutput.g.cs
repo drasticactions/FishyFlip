@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public SearchActorsTypeaheadOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic> actors = default)
         {
             this.Actors = actors;
+            this.Type = "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public SearchActorsTypeaheadOutput()
         {
+            this.Type = "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic> Actors { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput";
-
         public const string RecordType = "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>)SourceGenerationContext.Default.AppBskyActorSearchActorsTypeaheadOutput)!;
-        }
 
         public static SearchActorsTypeaheadOutput FromJson(string json)
         {

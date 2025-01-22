@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Viewer = viewer;
             this.Labels = labels;
+            this.Type = "app.bsky.actor.defs#profileView";
         }
 
 
@@ -47,6 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ProfileView()
         {
+            this.Type = "app.bsky.actor.defs#profileView";
         }
 
 
@@ -133,18 +135,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("labels")]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#profileView";
-
         public const string RecordType = "app.bsky.actor.defs#profileView";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>)SourceGenerationContext.Default.AppBskyActorProfileView)!;
-        }
 
         public static ProfileView FromJson(string json)
         {

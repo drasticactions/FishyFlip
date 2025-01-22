@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         public Board(List<FishyFlip.Lexicon.Blue.Linkat.Card>? cards)
         {
             this.Cards = cards;
+            this.Type = "blue.linkat.board";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// </summary>
         public Board()
         {
+            this.Type = "blue.linkat.board";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         [JsonPropertyName("cards")]
         public List<FishyFlip.Lexicon.Blue.Linkat.Card>? Cards { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "blue.linkat.board";
-
         public const string RecordType = "blue.linkat.board";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Linkat.Board>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
-        }
 
         public static Board FromJson(string json)
         {

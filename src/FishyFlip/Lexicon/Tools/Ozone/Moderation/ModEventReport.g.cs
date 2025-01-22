@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Comment = comment;
             this.IsReporterMuted = isReporterMuted;
             this.ReportType = reportType;
+            this.Type = "tools.ozone.moderation.defs#modEventReport";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventReport()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventReport";
         }
 
 
@@ -82,18 +84,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         public string ReportType { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventReport";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventReport";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReport)!;
-        }
 
         public static ModEventReport FromJson(string json)
         {

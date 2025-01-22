@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public RequestCrawlInput(string hostname = default)
         {
             this.Hostname = hostname;
+            this.Type = "com.atproto.sync.requestCrawl#RequestCrawlInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public RequestCrawlInput()
         {
+            this.Type = "com.atproto.sync.requestCrawl#RequestCrawlInput";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonRequired]
         public string Hostname { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.requestCrawl#RequestCrawlInput";
-
         public const string RecordType = "com.atproto.sync.requestCrawl#RequestCrawlInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.RequestCrawlInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RequestCrawlInput>)SourceGenerationContext.Default.ComAtprotoSyncRequestCrawlInput)!;
-        }
 
         public static RequestCrawlInput FromJson(string json)
         {

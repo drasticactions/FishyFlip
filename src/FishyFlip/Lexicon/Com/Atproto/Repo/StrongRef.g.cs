@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             this.Uri = uri;
             this.Cid = cid;
+            this.Type = "com.atproto.repo.strongRef";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public StrongRef()
         {
+            this.Type = "com.atproto.repo.strongRef";
         }
 
 
@@ -54,18 +56,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonRequired]
         public string Cid { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.strongRef";
-
         public const string RecordType = "com.atproto.repo.strongRef";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef>)SourceGenerationContext.Default.ComAtprotoRepoStrongRef)!;
-        }
 
         public static StrongRef FromJson(string json)
         {

@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Subject = subject;
             this.SubjectBlobCids = subjectBlobCids;
             this.CreatedBy = createdBy;
+            this.Type = "tools.ozone.moderation.emitEvent#EmitEventInput";
         }
 
 
@@ -54,6 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public EmitEventInput()
         {
+            this.Type = "tools.ozone.moderation.emitEvent#EmitEventInput";
         }
 
 
@@ -117,18 +119,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid CreatedBy { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.emitEvent#EmitEventInput";
-
         public const string RecordType = "tools.ozone.moderation.emitEvent#EmitEventInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>)SourceGenerationContext.Default.ToolsOzoneModerationEmitEventInput)!;
-        }
 
         public static EmitEventInput FromJson(string json)
         {

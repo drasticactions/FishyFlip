@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Cursor = cursor;
             this.Lists = lists;
+            this.Type = "app.bsky.graph.getLists#GetListsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetListsOutput()
         {
+            this.Type = "app.bsky.graph.getLists#GetListsOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Graph.ListView> Lists { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getLists#GetListsOutput";
-
         public const string RecordType = "app.bsky.graph.getLists#GetListsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>)SourceGenerationContext.Default.AppBskyGraphGetListsOutput)!;
-        }
 
         public static GetListsOutput FromJson(string json)
         {

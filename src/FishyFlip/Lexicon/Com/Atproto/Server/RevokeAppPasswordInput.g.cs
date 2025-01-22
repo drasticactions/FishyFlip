@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public RevokeAppPasswordInput(string name = default)
         {
             this.Name = name;
+            this.Type = "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public RevokeAppPasswordInput()
         {
+            this.Type = "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput";
-
         public const string RecordType = "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerRevokeAppPasswordInput)!;
-        }
 
         public static RevokeAppPasswordInput FromJson(string json)
         {

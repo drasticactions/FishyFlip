@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public GetPreferencesOutput(List<ATObject> preferences = default)
         {
             this.Preferences = preferences;
+            this.Type = "app.bsky.actor.getPreferences#GetPreferencesOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public GetPreferencesOutput()
         {
+            this.Type = "app.bsky.actor.getPreferences#GetPreferencesOutput";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public List<ATObject> Preferences { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.getPreferences#GetPreferencesOutput";
-
         public const string RecordType = "app.bsky.actor.getPreferences#GetPreferencesOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>)SourceGenerationContext.Default.AppBskyActorGetPreferencesOutput)!;
-        }
 
         public static GetPreferencesOutput FromJson(string json)
         {

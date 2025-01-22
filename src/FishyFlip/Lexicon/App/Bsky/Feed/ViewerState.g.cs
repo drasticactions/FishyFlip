@@ -30,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.ReplyDisabled = replyDisabled;
             this.EmbeddingDisabled = embeddingDisabled;
             this.Pinned = pinned;
+            this.Type = "app.bsky.feed.defs#viewerState";
         }
 
 
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ViewerState()
         {
+            this.Type = "app.bsky.feed.defs#viewerState";
         }
 
 
@@ -92,18 +94,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("pinned")]
         public bool? Pinned { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#viewerState";
-
         public const string RecordType = "app.bsky.feed.defs#viewerState";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.ViewerState>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ViewerState>)SourceGenerationContext.Default.AppBskyFeedViewerState)!;
-        }
 
         public static ViewerState FromJson(string json)
         {

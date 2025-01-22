@@ -37,6 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             this.Viewer = viewer;
             this.IndexedAt = indexedAt;
             this.Labels = labels;
+            this.Type = "app.bsky.labeler.defs#labelerViewDetailed";
         }
 
 
@@ -45,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public LabelerViewDetailed()
         {
+            this.Type = "app.bsky.labeler.defs#labelerViewDetailed";
         }
 
 
@@ -120,18 +122,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         [JsonPropertyName("labels")]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.labeler.defs#labelerViewDetailed";
-
         public const string RecordType = "app.bsky.labeler.defs#labelerViewDetailed";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewDetailed>)SourceGenerationContext.Default.AppBskyLabelerLabelerViewDetailed)!;
-        }
 
         public static LabelerViewDetailed FromJson(string json)
         {

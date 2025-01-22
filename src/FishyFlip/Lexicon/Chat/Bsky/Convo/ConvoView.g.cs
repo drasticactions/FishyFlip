@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             this.Muted = muted;
             this.Opened = opened;
             this.UnreadCount = unreadCount;
+            this.Type = "chat.bsky.convo.defs#convoView";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public ConvoView()
         {
+            this.Type = "chat.bsky.convo.defs#convoView";
         }
 
 
@@ -108,18 +110,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public long UnreadCount { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#convoView";
-
         public const string RecordType = "chat.bsky.convo.defs#convoView";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>)SourceGenerationContext.Default.ChatBskyConvoConvoView)!;
-        }
 
         public static ConvoView FromJson(string json)
         {

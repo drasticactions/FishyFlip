@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.StarterPacks = starterPacks;
             this.Labeler = labeler;
             this.Chat = chat;
+            this.Type = "app.bsky.actor.defs#profileAssociated";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ProfileAssociated()
         {
+            this.Type = "app.bsky.actor.defs#profileAssociated";
         }
 
 
@@ -81,18 +83,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("chat")]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? Chat { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#profileAssociated";
-
         public const string RecordType = "app.bsky.actor.defs#profileAssociated";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated)!;
-        }
 
         public static ProfileAssociated FromJson(string json)
         {

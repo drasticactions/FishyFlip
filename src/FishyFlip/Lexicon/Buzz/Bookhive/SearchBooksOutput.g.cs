@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         {
             this.Offset = offset;
             this.Books = books;
+            this.Type = "buzz.bookhive.searchBooks#SearchBooksOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         public SearchBooksOutput()
         {
+            this.Type = "buzz.bookhive.searchBooks#SearchBooksOutput";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         [JsonRequired]
         public List<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook> Books { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "buzz.bookhive.searchBooks#SearchBooksOutput";
-
         public const string RecordType = "buzz.bookhive.searchBooks#SearchBooksOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput)!;
-        }
 
         public static SearchBooksOutput FromJson(string json)
         {

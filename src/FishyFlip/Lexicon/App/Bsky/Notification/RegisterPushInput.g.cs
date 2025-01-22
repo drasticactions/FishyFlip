@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             this.Token = token;
             this.Platform = platform;
             this.AppId = appId;
+            this.Type = "app.bsky.notification.registerPush#RegisterPushInput";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public RegisterPushInput()
         {
+            this.Type = "app.bsky.notification.registerPush#RegisterPushInput";
         }
 
 
@@ -83,18 +85,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         [JsonRequired]
         public string AppId { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.notification.registerPush#RegisterPushInput";
-
         public const string RecordType = "app.bsky.notification.registerPush#RegisterPushInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
-        }
 
         public static RegisterPushInput FromJson(string json)
         {

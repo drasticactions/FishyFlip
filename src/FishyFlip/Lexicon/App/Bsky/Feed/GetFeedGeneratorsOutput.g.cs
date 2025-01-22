@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GetFeedGeneratorsOutput(List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView> feeds = default)
         {
             this.Feeds = feeds;
+            this.Type = "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetFeedGeneratorsOutput()
         {
+            this.Type = "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView> Feeds { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput";
-
         public const string RecordType = "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorsOutput)!;
-        }
 
         public static GetFeedGeneratorsOutput FromJson(string json)
         {

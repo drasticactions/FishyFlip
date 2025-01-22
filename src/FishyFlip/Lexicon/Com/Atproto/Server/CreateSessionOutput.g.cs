@@ -40,6 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.EmailAuthFactor = emailAuthFactor;
             this.Active = active;
             this.Status = status;
+            this.Type = "com.atproto.server.createSession#CreateSessionOutput";
         }
 
 
@@ -48,6 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateSessionOutput()
         {
+            this.Type = "com.atproto.server.createSession#CreateSessionOutput";
         }
 
 
@@ -139,18 +141,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createSession#CreateSessionOutput";
-
         public const string RecordType = "com.atproto.server.createSession#CreateSessionOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionOutput)!;
-        }
 
         public static CreateSessionOutput FromJson(string json)
         {

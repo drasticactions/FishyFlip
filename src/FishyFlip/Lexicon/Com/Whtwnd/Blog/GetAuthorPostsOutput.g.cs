@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         public GetAuthorPostsOutput(List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry> post = default)
         {
             this.Post = post;
+            this.Type = "com.whtwnd.blog.getAuthorPosts#GetAuthorPostsOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public GetAuthorPostsOutput()
         {
+            this.Type = "com.whtwnd.blog.getAuthorPosts#GetAuthorPostsOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry> Post { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.getAuthorPosts#GetAuthorPostsOutput";
-
         public const string RecordType = "com.whtwnd.blog.getAuthorPosts#GetAuthorPostsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput)!;
-        }
 
         public static GetAuthorPostsOutput FromJson(string json)
         {

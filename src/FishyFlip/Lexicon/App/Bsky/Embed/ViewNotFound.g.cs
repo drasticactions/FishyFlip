@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             this.Uri = uri;
             this.NotFound = notFound;
+            this.Type = "app.bsky.embed.record#viewNotFound";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewNotFound()
         {
+            this.Type = "app.bsky.embed.record#viewNotFound";
         }
 
 
@@ -54,18 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonRequired]
         public bool NotFound { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.record#viewNotFound";
-
         public const string RecordType = "app.bsky.embed.record#viewNotFound";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewNotFound>)SourceGenerationContext.Default.AppBskyEmbedViewNotFound)!;
-        }
 
         public static ViewNotFound FromJson(string json)
         {

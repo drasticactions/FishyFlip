@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public GetReposOutput(List<ATObject> repos = default)
         {
             this.Repos = repos;
+            this.Type = "tools.ozone.moderation.getRepos#GetReposOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public GetReposOutput()
         {
+            this.Type = "tools.ozone.moderation.getRepos#GetReposOutput";
         }
 
 
@@ -50,18 +52,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         public List<ATObject> Repos { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.getRepos#GetReposOutput";
-
         public const string RecordType = "tools.ozone.moderation.getRepos#GetReposOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput)!;
-        }
 
         public static GetReposOutput FromJson(string json)
         {

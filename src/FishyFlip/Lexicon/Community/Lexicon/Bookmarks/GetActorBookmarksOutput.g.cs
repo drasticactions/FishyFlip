@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         {
             this.Cursor = cursor;
             this.Bookmarks = bookmarks;
+            this.Type = "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// </summary>
         public GetActorBookmarksOutput()
         {
+            this.Type = "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         [JsonRequired]
         public List<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark> Bookmarks { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput";
-
         public const string RecordType = "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
-        }
 
         public static GetActorBookmarksOutput FromJson(string json)
         {

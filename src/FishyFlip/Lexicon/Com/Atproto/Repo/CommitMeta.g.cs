@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             this.Cid = cid;
             this.Rev = rev;
+            this.Type = "com.atproto.repo.defs#commitMeta";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public CommitMeta()
         {
+            this.Type = "com.atproto.repo.defs#commitMeta";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonRequired]
         public string Rev { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.defs#commitMeta";
-
         public const string RecordType = "com.atproto.repo.defs#commitMeta";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta)!;
-        }
 
         public static CommitMeta FromJson(string json)
         {

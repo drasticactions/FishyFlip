@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public RemoveOptionsOutput()
         {
+            this.Type = "tools.ozone.setting.removeOptions#RemoveOptionsOutput";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.setting.removeOptions#RemoveOptionsOutput";
-
         public const string RecordType = "tools.ozone.setting.removeOptions#RemoveOptionsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput)!;
-        }
 
         public static RemoveOptionsOutput FromJson(string json)
         {

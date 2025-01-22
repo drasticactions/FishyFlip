@@ -35,6 +35,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             this.Viewer = viewer;
             this.Labels = labels;
             this.ChatDisabled = chatDisabled;
+            this.Type = "chat.bsky.actor.defs#profileViewBasic";
         }
 
 
@@ -43,6 +44,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// </summary>
         public ProfileViewBasic()
         {
+            this.Type = "chat.bsky.actor.defs#profileViewBasic";
         }
 
 
@@ -116,18 +118,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         [JsonPropertyName("chatDisabled")]
         public bool? ChatDisabled { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.actor.defs#profileViewBasic";
-
         public const string RecordType = "chat.bsky.actor.defs#profileViewBasic";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic)!;
-        }
 
         public static ProfileViewBasic FromJson(string json)
         {

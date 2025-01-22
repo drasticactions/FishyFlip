@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Width = width;
             this.Height = height;
+            this.Type = "tools.ozone.moderation.defs#imageDetails";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ImageDetails()
         {
+            this.Type = "tools.ozone.moderation.defs#imageDetails";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         public long Height { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#imageDetails";
-
         public const string RecordType = "tools.ozone.moderation.defs#imageDetails";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>)SourceGenerationContext.Default.ToolsOzoneModerationImageDetails)!;
-        }
 
         public static ImageDetails FromJson(string json)
         {

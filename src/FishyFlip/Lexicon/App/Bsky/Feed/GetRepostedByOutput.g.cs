@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Cid = cid;
             this.Cursor = cursor;
             this.RepostedBy = repostedBy;
+            this.Type = "app.bsky.feed.getRepostedBy#GetRepostedByOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetRepostedByOutput()
         {
+            this.Type = "app.bsky.feed.getRepostedBy#GetRepostedByOutput";
         }
 
 
@@ -72,18 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> RepostedBy { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getRepostedBy#GetRepostedByOutput";
-
         public const string RecordType = "app.bsky.feed.getRepostedBy#GetRepostedByOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>)SourceGenerationContext.Default.AppBskyFeedGetRepostedByOutput)!;
-        }
 
         public static GetRepostedByOutput FromJson(string json)
         {

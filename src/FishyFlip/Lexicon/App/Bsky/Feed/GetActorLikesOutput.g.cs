@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Cursor = cursor;
             this.Feed = feed;
+            this.Type = "app.bsky.feed.getActorLikes#GetActorLikesOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetActorLikesOutput()
         {
+            this.Type = "app.bsky.feed.getActorLikes#GetActorLikesOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost> Feed { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getActorLikes#GetActorLikesOutput";
-
         public const string RecordType = "app.bsky.feed.getActorLikes#GetActorLikesOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorLikesOutput)!;
-        }
 
         public static GetActorLikesOutput FromJson(string json)
         {

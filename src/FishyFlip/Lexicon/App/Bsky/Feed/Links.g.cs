@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.PrivacyPolicy = privacyPolicy;
             this.TermsOfService = termsOfService;
+            this.Type = "app.bsky.feed.describeFeedGenerator#links";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Links()
         {
+            this.Type = "app.bsky.feed.describeFeedGenerator#links";
         }
 
 
@@ -51,18 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("termsOfService")]
         public string? TermsOfService { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.describeFeedGenerator#links";
-
         public const string RecordType = "app.bsky.feed.describeFeedGenerator#links";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.Links>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Links>)SourceGenerationContext.Default.AppBskyFeedLinks)!;
-        }
 
         public static Links FromJson(string json)
         {

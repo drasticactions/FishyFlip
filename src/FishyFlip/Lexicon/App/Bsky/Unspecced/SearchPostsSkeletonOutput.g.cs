@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             this.Cursor = cursor;
             this.HitsTotal = hitsTotal;
             this.Posts = posts;
+            this.Type = "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public SearchPostsSkeletonOutput()
         {
+            this.Type = "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput";
         }
 
 
@@ -62,18 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost> Posts { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput";
-
         public const string RecordType = "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchPostsSkeletonOutput)!;
-        }
 
         public static SearchPostsSkeletonOutput FromJson(string json)
         {

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         {
             this.Cursor = cursor;
             this.Accounts = accounts;
+            this.Type = "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         public FindRelatedAccountsOutput()
         {
+            this.Type = "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput";
         }
 
 
@@ -52,18 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount> Accounts { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput";
-
         public const string RecordType = "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput)!;
-        }
 
         public static FindRelatedAccountsOutput FromJson(string json)
         {

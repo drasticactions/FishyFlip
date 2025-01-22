@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.LabelerDid = labelerDid;
             this.Label = label;
             this.Visibility = visibility;
+            this.Type = "app.bsky.actor.defs#contentLabelPref";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ContentLabelPref()
         {
+            this.Type = "app.bsky.actor.defs#contentLabelPref";
         }
 
 
@@ -75,18 +77,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public string Visibility { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#contentLabelPref";
-
         public const string RecordType = "app.bsky.actor.defs#contentLabelPref";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.ContentLabelPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ContentLabelPref>)SourceGenerationContext.Default.AppBskyActorContentLabelPref)!;
-        }
 
         public static ContentLabelPref FromJson(string json)
         {

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public LabelerViewerState(FishyFlip.Models.ATUri? like = default)
         {
             this.Like = like;
+            this.Type = "app.bsky.labeler.defs#labelerViewerState";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public LabelerViewerState()
         {
+            this.Type = "app.bsky.labeler.defs#labelerViewerState";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Like { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.labeler.defs#labelerViewerState";
-
         public const string RecordType = "app.bsky.labeler.defs#labelerViewerState";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState>)SourceGenerationContext.Default.AppBskyLabelerLabelerViewerState)!;
-        }
 
         public static LabelerViewerState FromJson(string json)
         {

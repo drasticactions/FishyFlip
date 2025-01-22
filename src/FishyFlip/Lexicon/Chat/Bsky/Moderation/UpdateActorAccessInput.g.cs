@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             this.Actor = actor;
             this.AllowAccess = allowAccess;
             this.Ref = @ref;
+            this.Type = "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         public UpdateActorAccessInput()
         {
+            this.Type = "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput";
         }
 
 
@@ -63,18 +65,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         [JsonPropertyName("ref")]
         public string? Ref { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput";
-
         public const string RecordType = "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>)SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput)!;
-        }
 
         public static UpdateActorAccessInput FromJson(string json)
         {

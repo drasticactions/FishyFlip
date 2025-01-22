@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Uri = uri;
             this.Blocked = blocked;
             this.Author = author;
+            this.Type = "app.bsky.feed.defs#blockedPost";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public BlockedPost()
         {
+            this.Type = "app.bsky.feed.defs#blockedPost";
         }
 
 
@@ -67,18 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor Author { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#blockedPost";
-
         public const string RecordType = "app.bsky.feed.defs#blockedPost";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost>)SourceGenerationContext.Default.AppBskyFeedBlockedPost)!;
-        }
 
         public static BlockedPost FromJson(string json)
         {

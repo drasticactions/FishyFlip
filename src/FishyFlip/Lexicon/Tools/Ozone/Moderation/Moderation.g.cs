@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public Moderation(FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView? subjectStatus = default)
         {
             this.SubjectStatus = subjectStatus;
+            this.Type = "tools.ozone.moderation.defs#moderation";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public Moderation()
         {
+            this.Type = "tools.ozone.moderation.defs#moderation";
         }
 
 
@@ -45,18 +47,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("subjectStatus")]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView? SubjectStatus { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#moderation";
-
         public const string RecordType = "tools.ozone.moderation.defs#moderation";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation>)SourceGenerationContext.Default.ToolsOzoneModerationModeration)!;
-        }
 
         public static Moderation FromJson(string json)
         {

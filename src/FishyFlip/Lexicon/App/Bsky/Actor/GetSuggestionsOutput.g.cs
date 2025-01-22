@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Cursor = cursor;
             this.Actors = actors;
             this.RecId = recId;
+            this.Type = "app.bsky.actor.getSuggestions#GetSuggestionsOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public GetSuggestionsOutput()
         {
+            this.Type = "app.bsky.actor.getSuggestions#GetSuggestionsOutput";
         }
 
 
@@ -62,18 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("recId")]
         public long? RecId { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.getSuggestions#GetSuggestionsOutput";
-
         public const string RecordType = "app.bsky.actor.getSuggestions#GetSuggestionsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>)SourceGenerationContext.Default.AppBskyActorGetSuggestionsOutput)!;
-        }
 
         public static GetSuggestionsOutput FromJson(string json)
         {

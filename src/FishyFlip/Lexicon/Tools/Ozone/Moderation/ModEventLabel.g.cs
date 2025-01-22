@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Comment = comment;
             this.CreateLabelVals = createLabelVals;
             this.NegateLabelVals = negateLabelVals;
+            this.Type = "tools.ozone.moderation.defs#modEventLabel";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventLabel()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventLabel";
         }
 
 
@@ -65,18 +67,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         public List<string> NegateLabelVals { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventLabel";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventLabel";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventLabel>)SourceGenerationContext.Default.ToolsOzoneModerationModEventLabel)!;
-        }
 
         public static ModEventLabel FromJson(string json)
         {

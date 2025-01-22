@@ -18,6 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public DisableRule()
         {
+            this.Type = "app.bsky.feed.postgate#disableRule";
         }
 
 
@@ -28,18 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.postgate#disableRule";
-
         public const string RecordType = "app.bsky.feed.postgate#disableRule";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>)SourceGenerationContext.Default.AppBskyFeedDisableRule)!;
-        }
 
         public static DisableRule FromJson(string json)
         {

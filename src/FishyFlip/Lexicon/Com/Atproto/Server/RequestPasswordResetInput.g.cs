@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public RequestPasswordResetInput(string email = default)
         {
             this.Email = email;
+            this.Type = "com.atproto.server.requestPasswordReset#RequestPasswordResetInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public RequestPasswordResetInput()
         {
+            this.Type = "com.atproto.server.requestPasswordReset#RequestPasswordResetInput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         public string Email { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.requestPasswordReset#RequestPasswordResetInput";
-
         public const string RecordType = "com.atproto.server.requestPasswordReset#RequestPasswordResetInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.RequestPasswordResetInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RequestPasswordResetInput>)SourceGenerationContext.Default.ComAtprotoServerRequestPasswordResetInput)!;
-        }
 
         public static RequestPasswordResetInput FromJson(string json)
         {

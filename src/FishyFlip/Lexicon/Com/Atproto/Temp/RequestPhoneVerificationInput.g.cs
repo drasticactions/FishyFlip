@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public RequestPhoneVerificationInput(string phoneNumber = default)
         {
             this.PhoneNumber = phoneNumber;
+            this.Type = "com.atproto.temp.requestPhoneVerification#RequestPhoneVerificationInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         public RequestPhoneVerificationInput()
         {
+            this.Type = "com.atproto.temp.requestPhoneVerification#RequestPhoneVerificationInput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         [JsonRequired]
         public string PhoneNumber { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.temp.requestPhoneVerification#RequestPhoneVerificationInput";
-
         public const string RecordType = "com.atproto.temp.requestPhoneVerification#RequestPhoneVerificationInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput)!;
-        }
 
         public static RequestPhoneVerificationInput FromJson(string json)
         {

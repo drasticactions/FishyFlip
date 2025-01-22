@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Actor = actor;
             this.NotFound = notFound;
+            this.Type = "app.bsky.graph.defs#notFoundActor";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public NotFoundActor()
         {
+            this.Type = "app.bsky.graph.defs#notFoundActor";
         }
 
 
@@ -57,18 +59,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         public bool NotFound { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.defs#notFoundActor";
-
         public const string RecordType = "app.bsky.graph.defs#notFoundActor";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor)!;
-        }
 
         public static NotFoundActor FromJson(string json)
         {

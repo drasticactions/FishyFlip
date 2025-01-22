@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
             this.Status = status;
             this.EpisodeText = episode_text;
             this.Favorite = favorite;
+            this.Type = "app.netlify.aniblue.status#status";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// </summary>
         public StatusDef()
         {
+            this.Type = "app.netlify.aniblue.status#status";
         }
 
 
@@ -97,18 +99,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         [JsonPropertyName("favorite")]
         public bool? Favorite { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.netlify.aniblue.status#status";
-
         public const string RecordType = "app.netlify.aniblue.status#status";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
-        }
 
         public static StatusDef FromJson(string json)
         {

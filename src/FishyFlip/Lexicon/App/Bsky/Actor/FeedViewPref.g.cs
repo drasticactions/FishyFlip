@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.HideRepliesByLikeCount = hideRepliesByLikeCount;
             this.HideReposts = hideReposts;
             this.HideQuotePosts = hideQuotePosts;
+            this.Type = "app.bsky.actor.defs#feedViewPref";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public FeedViewPref()
         {
+            this.Type = "app.bsky.actor.defs#feedViewPref";
         }
 
 
@@ -94,18 +96,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("hideQuotePosts")]
         public bool? HideQuotePosts { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#feedViewPref";
-
         public const string RecordType = "app.bsky.actor.defs#feedViewPref";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref>)SourceGenerationContext.Default.AppBskyActorFeedViewPref)!;
-        }
 
         public static FeedViewPref FromJson(string json)
         {

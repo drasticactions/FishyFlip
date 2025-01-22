@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             this.MusicServiceBaseDomain = musicServiceBaseDomain;
             this.SubmissionClientAgent = submissionClientAgent;
             this.PlayedTime = playedTime;
+            this.Type = "fm.teal.alpha.feed.play";
         }
 
 
@@ -49,6 +50,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// </summary>
         public Play()
         {
+            this.Type = "fm.teal.alpha.feed.play";
         }
 
 
@@ -163,18 +165,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         [JsonPropertyName("playedTime")]
         public DateTime? PlayedTime { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fm.teal.alpha.feed.play";
-
         public const string RecordType = "fm.teal.alpha.feed.play";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play>)SourceGenerationContext.Default.FmTealAlphaFeedPlay)!;
-        }
 
         public static Play FromJson(string json)
         {

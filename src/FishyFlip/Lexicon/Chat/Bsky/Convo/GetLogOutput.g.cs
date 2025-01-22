@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.Cursor = cursor;
             this.Logs = logs;
+            this.Type = "chat.bsky.convo.getLog#GetLogOutput";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public GetLogOutput()
         {
+            this.Type = "chat.bsky.convo.getLog#GetLogOutput";
         }
 
 
@@ -63,18 +65,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public List<ATObject> Logs { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.getLog#GetLogOutput";
-
         public const string RecordType = "chat.bsky.convo.getLog#GetLogOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>)SourceGenerationContext.Default.ChatBskyConvoGetLogOutput)!;
-        }
 
         public static GetLogOutput FromJson(string json)
         {

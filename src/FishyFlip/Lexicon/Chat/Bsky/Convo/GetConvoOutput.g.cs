@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public GetConvoOutput(FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView convo = default)
         {
             this.Convo = convo;
+            this.Type = "chat.bsky.convo.getConvo#GetConvoOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public GetConvoOutput()
         {
+            this.Type = "chat.bsky.convo.getConvo#GetConvoOutput";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView Convo { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.getConvo#GetConvoOutput";
-
         public const string RecordType = "chat.bsky.convo.getConvo#GetConvoOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoGetConvoOutput)!;
-        }
 
         public static GetConvoOutput FromJson(string json)
         {

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public HiddenPostsPref(List<FishyFlip.Models.ATUri> items = default)
         {
             this.Items = items;
+            this.Type = "app.bsky.actor.defs#hiddenPostsPref";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public HiddenPostsPref()
         {
+            this.Type = "app.bsky.actor.defs#hiddenPostsPref";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public List<FishyFlip.Models.ATUri> Items { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#hiddenPostsPref";
-
         public const string RecordType = "app.bsky.actor.defs#hiddenPostsPref";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref)!;
-        }
 
         public static HiddenPostsPref FromJson(string json)
         {

@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventUnmuteReporter(string? comment = default)
         {
             this.Comment = comment;
+            this.Type = "tools.ozone.moderation.defs#modEventUnmuteReporter";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventUnmuteReporter()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventUnmuteReporter";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventUnmuteReporter";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventUnmuteReporter";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmuteReporter)!;
-        }
 
         public static ModEventUnmuteReporter FromJson(string json)
         {

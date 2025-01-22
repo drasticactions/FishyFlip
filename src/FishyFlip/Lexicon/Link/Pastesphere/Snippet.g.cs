@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
             this.TypeValue = type;
             this.Body = body;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "link.pastesphere.snippet";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
         /// </summary>
         public Snippet()
         {
+            this.Type = "link.pastesphere.snippet";
         }
 
 
@@ -81,18 +83,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "link.pastesphere.snippet";
-
         public const string RecordType = "link.pastesphere.snippet";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(this, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
-        }
 
         public static Snippet FromJson(string json)
         {

@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         public Declaration(string? allowIncoming)
         {
             this.AllowIncoming = allowIncoming;
+            this.Type = "chat.bsky.actor.declaration";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// </summary>
         public Declaration()
         {
+            this.Type = "chat.bsky.actor.declaration";
         }
 
 
@@ -54,18 +56,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         [JsonPropertyName("allowIncoming")]
         public string? AllowIncoming { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.actor.declaration";
-
         public const string RecordType = "chat.bsky.actor.declaration";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration)!;
-        }
 
         public static Declaration FromJson(string json)
         {

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public RequestEmailUpdateOutput(bool tokenRequired = default)
         {
             this.TokenRequired = tokenRequired;
+            this.Type = "com.atproto.server.requestEmailUpdate#RequestEmailUpdateOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public RequestEmailUpdateOutput()
         {
+            this.Type = "com.atproto.server.requestEmailUpdate#RequestEmailUpdateOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         public bool TokenRequired { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.requestEmailUpdate#RequestEmailUpdateOutput";
-
         public const string RecordType = "com.atproto.server.requestEmailUpdate#RequestEmailUpdateOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput>)SourceGenerationContext.Default.ComAtprotoServerRequestEmailUpdateOutput)!;
-        }
 
         public static RequestEmailUpdateOutput FromJson(string json)
         {

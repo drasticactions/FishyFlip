@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Comment = comment;
             this.Sticky = sticky;
+            this.Type = "tools.ozone.moderation.defs#modEventComment";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventComment()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventComment";
         }
 
 
@@ -56,18 +58,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("sticky")]
         public bool? Sticky { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventComment";
-
         public const string RecordType = "tools.ozone.moderation.defs#modEventComment";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventComment>)SourceGenerationContext.Default.ToolsOzoneModerationModEventComment)!;
-        }
 
         public static ModEventComment FromJson(string json)
         {

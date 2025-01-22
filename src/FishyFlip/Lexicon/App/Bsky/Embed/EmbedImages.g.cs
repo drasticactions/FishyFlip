@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public EmbedImages(List<FishyFlip.Lexicon.App.Bsky.Embed.Image> images = default)
         {
             this.Images = images;
+            this.Type = "app.bsky.embed.images";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public EmbedImages()
         {
+            this.Type = "app.bsky.embed.images";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Embed.Image> Images { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.images";
-
         public const string RecordType = "app.bsky.embed.images";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.EmbedImages>)SourceGenerationContext.Default.AppBskyEmbedEmbedImages)!;
-        }
 
         public static EmbedImages FromJson(string json)
         {

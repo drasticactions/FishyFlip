@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Actor = actor;
             this.Relationships = relationships;
+            this.Type = "app.bsky.graph.getRelationships#GetRelationshipsOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetRelationshipsOutput()
         {
+            this.Type = "app.bsky.graph.getRelationships#GetRelationshipsOutput";
         }
 
 
@@ -60,18 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         public List<ATObject> Relationships { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getRelationships#GetRelationshipsOutput";
-
         public const string RecordType = "app.bsky.graph.getRelationships#GetRelationshipsOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>)SourceGenerationContext.Default.AppBskyGraphGetRelationshipsOutput)!;
-        }
 
         public static GetRelationshipsOutput FromJson(string json)
         {

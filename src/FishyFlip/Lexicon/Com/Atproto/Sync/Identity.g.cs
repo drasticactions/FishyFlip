@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             this.Did = did;
             this.Time = time;
             this.Handle = handle;
+            this.Type = "com.atproto.sync.subscribeRepos#identity";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public Identity()
         {
+            this.Type = "com.atproto.sync.subscribeRepos#identity";
         }
 
 
@@ -78,18 +80,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.subscribeRepos#identity";
-
         public const string RecordType = "com.atproto.sync.subscribeRepos#identity";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity)!;
-        }
 
         public static Identity FromJson(string json)
         {

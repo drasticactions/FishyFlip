@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             this.Policies = policies;
             this.Labels = labels;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "app.bsky.labeler.service";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public Service()
         {
+            this.Type = "app.bsky.labeler.service";
         }
 
 
@@ -71,18 +73,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.labeler.service";
-
         public const string RecordType = "app.bsky.labeler.service";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Labeler.Service>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.Service>)SourceGenerationContext.Default.AppBskyLabelerService)!;
-        }
 
         public static Service FromJson(string json)
         {

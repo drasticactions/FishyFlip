@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public SignPlcOperationOutput(ATObject operation = default)
         {
             this.Operation = operation;
+            this.Type = "com.atproto.identity.signPlcOperation#SignPlcOperationOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// </summary>
         public SignPlcOperationOutput()
         {
+            this.Type = "com.atproto.identity.signPlcOperation#SignPlcOperationOutput";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         [JsonRequired]
         public ATObject Operation { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.identity.signPlcOperation#SignPlcOperationOutput";
-
         public const string RecordType = "com.atproto.identity.signPlcOperation#SignPlcOperationOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationOutput)!;
-        }
 
         public static SignPlcOperationOutput FromJson(string json)
         {

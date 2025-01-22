@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// </summary>
         public DeleteAccountOutput()
         {
+            this.Type = "chat.bsky.actor.deleteAccount#DeleteAccountOutput";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.actor.deleteAccount#DeleteAccountOutput";
-
         public const string RecordType = "chat.bsky.actor.deleteAccount#DeleteAccountOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput)!;
-        }
 
         public static DeleteAccountOutput FromJson(string json)
         {

@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.Validate = validate;
             this.Writes = writes;
             this.SwapCommit = swapCommit;
+            this.Type = "com.atproto.repo.applyWrites#ApplyWritesInput";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public ApplyWritesInput()
         {
+            this.Type = "com.atproto.repo.applyWrites#ApplyWritesInput";
         }
 
 
@@ -84,18 +86,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonPropertyName("swapCommit")]
         public string? SwapCommit { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.applyWrites#ApplyWritesInput";
-
         public const string RecordType = "com.atproto.repo.applyWrites#ApplyWritesInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput)!;
-        }
 
         public static ApplyWritesInput FromJson(string json)
         {

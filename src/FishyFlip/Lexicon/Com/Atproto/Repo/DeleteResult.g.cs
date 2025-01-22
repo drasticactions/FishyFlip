@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public DeleteResult()
         {
+            this.Type = "com.atproto.repo.applyWrites#deleteResult";
         }
 
 
@@ -25,18 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
         }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.applyWrites#deleteResult";
-
         public const string RecordType = "com.atproto.repo.applyWrites#deleteResult";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult>)SourceGenerationContext.Default.ComAtprotoRepoDeleteResult)!;
-        }
 
         public static DeleteResult FromJson(string json)
         {

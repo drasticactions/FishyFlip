@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         public GetActorFeedOutput(List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView> plays = default)
         {
             this.Plays = plays;
+            this.Type = "fm.teal.alpha.feed.getActorFeed#GetActorFeedOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// </summary>
         public GetActorFeedOutput()
         {
+            this.Type = "fm.teal.alpha.feed.getActorFeed#GetActorFeedOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         [JsonRequired]
         public List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView> Plays { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fm.teal.alpha.feed.getActorFeed#GetActorFeedOutput";
-
         public const string RecordType = "fm.teal.alpha.feed.getActorFeed#GetActorFeedOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput)!;
-        }
 
         public static GetActorFeedOutput FromJson(string json)
         {

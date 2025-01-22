@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public ReserveSigningKeyInput(FishyFlip.Models.ATDid? did = default)
         {
             this.Did = did;
+            this.Type = "com.atproto.server.reserveSigningKey#ReserveSigningKeyInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ReserveSigningKeyInput()
         {
+            this.Type = "com.atproto.server.reserveSigningKey#ReserveSigningKeyInput";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.reserveSigningKey#ReserveSigningKeyInput";
-
         public const string RecordType = "com.atproto.server.reserveSigningKey#ReserveSigningKeyInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyInput)!;
-        }
 
         public static ReserveSigningKeyInput FromJson(string json)
         {

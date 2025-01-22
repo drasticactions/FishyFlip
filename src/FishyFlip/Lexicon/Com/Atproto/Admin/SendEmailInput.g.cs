@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             this.Subject = subject;
             this.SenderDid = senderDid;
             this.Comment = comment;
+            this.Type = "com.atproto.admin.sendEmail#SendEmailInput";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public SendEmailInput()
         {
+            this.Type = "com.atproto.admin.sendEmail#SendEmailInput";
         }
 
 
@@ -84,18 +86,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.sendEmail#SendEmailInput";
-
         public const string RecordType = "com.atproto.admin.sendEmail#SendEmailInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailInput>)SourceGenerationContext.Default.ComAtprotoAdminSendEmailInput)!;
-        }
 
         public static SendEmailInput FromJson(string json)
         {

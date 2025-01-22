@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             this.ReasonType = reasonType;
             this.Reason = reason;
             this.Subject = subject;
+            this.Type = "com.atproto.moderation.createReport#CreateReportInput";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// </summary>
         public CreateReportInput()
         {
+            this.Type = "com.atproto.moderation.createReport#CreateReportInput";
         }
 
 
@@ -88,18 +90,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         [JsonRequired]
         public ATObject Subject { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.moderation.createReport#CreateReportInput";
-
         public const string RecordType = "com.atproto.moderation.createReport#CreateReportInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportInput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportInput)!;
-        }
 
         public static CreateReportInput FromJson(string json)
         {

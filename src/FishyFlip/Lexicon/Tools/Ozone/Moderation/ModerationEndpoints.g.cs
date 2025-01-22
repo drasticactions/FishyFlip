@@ -379,9 +379,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="cursor"></param>
         /// <param name="collections"></param>
         /// <param name="subjectType"></param>
+        /// <param name="minAccountSuspendCount"></param>
+        /// <param name="minReportedRecordsCount"></param>
+        /// <param name="minTakendownRecordsCount"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, int? minAccountSuspendCount = 0, int? minReportedRecordsCount = 0, int? minTakendownRecordsCount = 0, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryStatuses.ToString();
             endpointUrl += "?";
@@ -534,6 +537,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (subjectType != null)
             {
                 queryStrings.Add("subjectType=" + subjectType);
+            }
+
+            if (minAccountSuspendCount != null)
+            {
+                queryStrings.Add("minAccountSuspendCount=" + minAccountSuspendCount);
+            }
+
+            if (minReportedRecordsCount != null)
+            {
+                queryStrings.Add("minReportedRecordsCount=" + minReportedRecordsCount);
+            }
+
+            if (minTakendownRecordsCount != null)
+            {
+                queryStrings.Add("minTakendownRecordsCount=" + minTakendownRecordsCount);
             }
 
             var headers = new Dictionary<string, string>();

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public GetServiceAuthOutput(string token = default)
         {
             this.Token = token;
+            this.Type = "com.atproto.server.getServiceAuth#GetServiceAuthOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public GetServiceAuthOutput()
         {
+            this.Type = "com.atproto.server.getServiceAuth#GetServiceAuthOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         public string Token { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.getServiceAuth#GetServiceAuthOutput";
-
         public const string RecordType = "com.atproto.server.getServiceAuth#GetServiceAuthOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>)SourceGenerationContext.Default.ComAtprotoServerGetServiceAuthOutput)!;
-        }
 
         public static GetServiceAuthOutput FromJson(string json)
         {

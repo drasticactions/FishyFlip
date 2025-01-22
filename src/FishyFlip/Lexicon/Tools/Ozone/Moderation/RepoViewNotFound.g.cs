@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public RepoViewNotFound(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "tools.ozone.moderation.defs#repoViewNotFound";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public RepoViewNotFound()
         {
+            this.Type = "tools.ozone.moderation.defs#repoViewNotFound";
         }
 
 
@@ -44,18 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#repoViewNotFound";
-
         public const string RecordType = "tools.ozone.moderation.defs#repoViewNotFound";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound>)SourceGenerationContext.Default.ToolsOzoneModerationRepoViewNotFound)!;
-        }
 
         public static RepoViewNotFound FromJson(string json)
         {

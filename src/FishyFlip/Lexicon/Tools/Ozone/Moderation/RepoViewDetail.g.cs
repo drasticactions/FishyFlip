@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.EmailConfirmedAt = emailConfirmedAt;
             this.DeactivatedAt = deactivatedAt;
             this.ThreatSignatures = threatSignatures;
+            this.Type = "tools.ozone.moderation.defs#repoViewDetail";
         }
 
 
@@ -55,6 +56,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public RepoViewDetail()
         {
+            this.Type = "tools.ozone.moderation.defs#repoViewDetail";
         }
 
 
@@ -172,18 +174,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("threatSignatures")]
         public List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#repoViewDetail";
-
         public const string RecordType = "tools.ozone.moderation.defs#repoViewDetail";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRepoViewDetail)!;
-        }
 
         public static RepoViewDetail FromJson(string json)
         {

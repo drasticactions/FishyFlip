@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             this.Status = status;
             this.Stars = stars;
             this.Review = review;
+            this.Type = "buzz.bookhive.book";
         }
 
 
@@ -53,6 +54,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         public Book()
         {
+            this.Type = "buzz.bookhive.book";
         }
 
 
@@ -147,18 +149,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         [JsonPropertyName("review")]
         public string? Review { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "buzz.bookhive.book";
-
         public const string RecordType = "buzz.bookhive.book";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Buzz.Bookhive.Book>(this, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Book>)SourceGenerationContext.Default.BuzzBookhiveBook)!;
-        }
 
         public static Book FromJson(string json)
         {

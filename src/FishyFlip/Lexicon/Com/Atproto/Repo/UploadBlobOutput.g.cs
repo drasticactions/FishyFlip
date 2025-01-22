@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public UploadBlobOutput(Blob blob = default)
         {
             this.Blob = blob;
+            this.Type = "com.atproto.repo.uploadBlob#UploadBlobOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public UploadBlobOutput()
         {
+            this.Type = "com.atproto.repo.uploadBlob#UploadBlobOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonRequired]
         public Blob Blob { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.uploadBlob#UploadBlobOutput";
-
         public const string RecordType = "com.atproto.repo.uploadBlob#UploadBlobOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput>)SourceGenerationContext.Default.ComAtprotoRepoUploadBlobOutput)!;
-        }
 
         public static UploadBlobOutput FromJson(string json)
         {

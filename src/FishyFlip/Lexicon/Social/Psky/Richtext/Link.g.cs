@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         public Link(string uri = default)
         {
             this.Uri = uri;
+            this.Type = "social.psky.richtext.facet#link";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// </summary>
         public Link()
         {
+            this.Type = "social.psky.richtext.facet#link";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         [JsonRequired]
         public string Uri { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.richtext.facet#link";
-
         public const string RecordType = "social.psky.richtext.facet#link";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Richtext.Link>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Link>)SourceGenerationContext.Default.SocialPskyRichtextLink)!;
-        }
 
         public static Link FromJson(string json)
         {

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public PutPreferencesInput(List<ATObject> preferences = default)
         {
             this.Preferences = preferences;
+            this.Type = "app.bsky.actor.putPreferences#PutPreferencesInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public PutPreferencesInput()
         {
+            this.Type = "app.bsky.actor.putPreferences#PutPreferencesInput";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         public List<ATObject> Preferences { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.putPreferences#PutPreferencesInput";
-
         public const string RecordType = "app.bsky.actor.putPreferences#PutPreferencesInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Actor.PutPreferencesInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PutPreferencesInput>)SourceGenerationContext.Default.AppBskyActorPutPreferencesInput)!;
-        }
 
         public static PutPreferencesInput FromJson(string json)
         {

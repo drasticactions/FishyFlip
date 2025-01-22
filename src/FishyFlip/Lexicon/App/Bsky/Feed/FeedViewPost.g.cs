@@ -31,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Reply = reply;
             this.Reason = reason;
             this.FeedContext = feedContext;
+            this.Type = "app.bsky.feed.defs#feedViewPost";
         }
 
 
@@ -39,6 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public FeedViewPost()
         {
+            this.Type = "app.bsky.feed.defs#feedViewPost";
         }
 
 
@@ -84,18 +86,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("feedContext")]
         public string? FeedContext { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#feedViewPost";
-
         public const string RecordType = "app.bsky.feed.defs#feedViewPost";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>)SourceGenerationContext.Default.AppBskyFeedFeedViewPost)!;
-        }
 
         public static FeedViewPost FromJson(string json)
         {

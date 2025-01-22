@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Thread = thread;
             this.Threadgate = threadgate;
+            this.Type = "app.bsky.feed.getPostThread#GetPostThreadOutput";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetPostThreadOutput()
         {
+            this.Type = "app.bsky.feed.getPostThread#GetPostThreadOutput";
         }
 
 
@@ -64,18 +66,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("threadgate")]
         public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getPostThread#GetPostThreadOutput";
-
         public const string RecordType = "app.bsky.feed.getPostThread#GetPostThreadOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput)!;
-        }
 
         public static GetPostThreadOutput FromJson(string json)
         {

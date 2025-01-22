@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         {
             this.Seq = seq;
             this.LabelsValue = labels;
+            this.Type = "com.atproto.label.subscribeLabels#labels";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         public Labels()
         {
+            this.Type = "com.atproto.label.subscribeLabels#labels";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label> LabelsValue { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.label.subscribeLabels#labels";
-
         public const string RecordType = "com.atproto.label.subscribeLabels#labels";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Label.Labels>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.Labels>)SourceGenerationContext.Default.ComAtprotoLabelLabels)!;
-        }
 
         public static Labels FromJson(string json)
         {

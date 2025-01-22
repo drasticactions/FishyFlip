@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public CreateInviteCodeOutput(string code = default)
         {
             this.Code = code;
+            this.Type = "com.atproto.server.createInviteCode#CreateInviteCodeOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateInviteCodeOutput()
         {
+            this.Type = "com.atproto.server.createInviteCode#CreateInviteCodeOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         public string Code { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createInviteCode#CreateInviteCodeOutput";
-
         public const string RecordType = "com.atproto.server.createInviteCode#CreateInviteCodeOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeOutput)!;
-        }
 
         public static CreateInviteCodeOutput FromJson(string json)
         {

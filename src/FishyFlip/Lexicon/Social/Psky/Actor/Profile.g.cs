@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
         public Profile(string? nickname = default)
         {
             this.Nickname = nickname;
+            this.Type = "social.psky.actor.profile";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
         /// </summary>
         public Profile()
         {
+            this.Type = "social.psky.actor.profile";
         }
 
 
@@ -45,18 +47,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
         [JsonPropertyName("nickname")]
         public string? Nickname { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.actor.profile";
-
         public const string RecordType = "social.psky.actor.profile";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Actor.Profile>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
-        }
 
         public static Profile FromJson(string json)
         {

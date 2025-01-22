@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             this.Host = host;
             this.Id = id;
             this.Os = os;
+            this.Type = "blue.zio.atfile.finger#machine";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// </summary>
         public Machine()
         {
+            this.Type = "blue.zio.atfile.finger#machine";
         }
 
 
@@ -72,18 +74,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         [JsonPropertyName("os")]
         public string? Os { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "blue.zio.atfile.finger#machine";
-
         public const string RecordType = "blue.zio.atfile.finger#machine";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine)!;
-        }
 
         public static Machine FromJson(string json)
         {

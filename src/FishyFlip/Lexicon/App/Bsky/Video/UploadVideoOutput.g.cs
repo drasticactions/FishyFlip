@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public UploadVideoOutput(FishyFlip.Lexicon.App.Bsky.Video.JobStatus jobStatus = default)
         {
             this.JobStatus = jobStatus;
+            this.Type = "app.bsky.video.uploadVideo#UploadVideoOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         public UploadVideoOutput()
         {
+            this.Type = "app.bsky.video.uploadVideo#UploadVideoOutput";
         }
 
 
@@ -46,18 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Video.JobStatus JobStatus { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.video.uploadVideo#UploadVideoOutput";
-
         public const string RecordType = "app.bsky.video.uploadVideo#UploadVideoOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput)!;
-        }
 
         public static UploadVideoOutput FromJson(string json)
         {

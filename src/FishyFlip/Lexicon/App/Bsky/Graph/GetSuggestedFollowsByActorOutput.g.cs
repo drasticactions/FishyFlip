@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.Suggestions = suggestions;
             this.IsFallback = isFallback;
             this.RecId = recId;
+            this.Type = "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetSuggestedFollowsByActorOutput()
         {
+            this.Type = "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";
         }
 
 
@@ -63,18 +65,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("recId")]
         public long? RecId { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";
-
         public const string RecordType = "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
-        }
 
         public static GetSuggestedFollowsByActorOutput FromJson(string json)
         {

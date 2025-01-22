@@ -46,7 +46,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="appealed">True indicates that the a previously taken moderator action was appealed against, by the author of the content. False indicates last appeal was resolved by moderators.</param>
         /// <param name="suspendUntil"></param>
         /// <param name="tags"></param>
-        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default)
+        /// <param name="accountStats">Statistics related to the account subject
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats"/> (tools.ozone.moderation.defs#accountStats)
+        /// </param>
+        /// <param name="recordsStats">Statistics related to the record subjects authored by the subject's account
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats"/> (tools.ozone.moderation.defs#recordsStats)
+        /// </param>
+        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? accountStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? recordsStats = default)
         {
             this.Id = id;
             this.Subject = subject;
@@ -67,6 +73,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Appealed = appealed;
             this.SuspendUntil = suspendUntil;
             this.Tags = tags;
+            this.AccountStats = accountStats;
+            this.RecordsStats = recordsStats;
+            this.Type = "tools.ozone.moderation.defs#subjectStatusView";
         }
 
 
@@ -75,6 +84,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public SubjectStatusView()
         {
+            this.Type = "tools.ozone.moderation.defs#subjectStatusView";
         }
 
 
@@ -102,6 +112,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["appealed"] is not null) this.Appealed = obj["appealed"].AsBoolean();
             if (obj["suspendUntil"] is not null) this.SuspendUntil = obj["suspendUntil"].ToDateTime();
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["accountStats"] is not null) this.AccountStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats(obj["accountStats"]);
+            if (obj["recordsStats"] is not null) this.RecordsStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats(obj["recordsStats"]);
         }
 
         /// <summary>
@@ -241,17 +253,22 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public List<string>? Tags { get; set; }
 
         /// <summary>
-        /// Gets the ATRecord Type.
+        /// Gets or sets the accountStats.
+        /// <br/> Statistics related to the account subject
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats"/> (tools.ozone.moderation.defs#accountStats)
         /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#subjectStatusView";
+        [JsonPropertyName("accountStats")]
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? AccountStats { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recordsStats.
+        /// <br/> Statistics related to the record subjects authored by the subject's account
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats"/> (tools.ozone.moderation.defs#recordsStats)
+        /// </summary>
+        [JsonPropertyName("recordsStats")]
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? RecordsStats { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#subjectStatusView";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectStatusView)!;
-        }
 
         public static SubjectStatusView FromJson(string json)
         {

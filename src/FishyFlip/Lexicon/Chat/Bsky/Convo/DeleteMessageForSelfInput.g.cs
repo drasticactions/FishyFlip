@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.ConvoId = convoId;
             this.MessageId = messageId;
+            this.Type = "chat.bsky.convo.deleteMessageForSelf#DeleteMessageForSelfInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public DeleteMessageForSelfInput()
         {
+            this.Type = "chat.bsky.convo.deleteMessageForSelf#DeleteMessageForSelfInput";
         }
 
 
@@ -53,18 +55,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonRequired]
         public string MessageId { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.deleteMessageForSelf#DeleteMessageForSelfInput";
-
         public const string RecordType = "chat.bsky.convo.deleteMessageForSelf#DeleteMessageForSelfInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Chat.Bsky.Convo.DeleteMessageForSelfInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeleteMessageForSelfInput>)SourceGenerationContext.Default.ChatBskyConvoDeleteMessageForSelfInput)!;
-        }
 
         public static DeleteMessageForSelfInput FromJson(string json)
         {

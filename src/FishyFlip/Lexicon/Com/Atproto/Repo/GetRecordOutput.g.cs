@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.Uri = uri;
             this.Cid = cid;
             this.Value = value;
+            this.Type = "com.atproto.repo.getRecord#GetRecordOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public GetRecordOutput()
         {
+            this.Type = "com.atproto.repo.getRecord#GetRecordOutput";
         }
 
 
@@ -63,18 +65,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonRequired]
         public ATObject Value { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.getRecord#GetRecordOutput";
-
         public const string RecordType = "com.atproto.repo.getRecord#GetRecordOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoGetRecordOutput)!;
-        }
 
         public static GetRecordOutput FromJson(string json)
         {

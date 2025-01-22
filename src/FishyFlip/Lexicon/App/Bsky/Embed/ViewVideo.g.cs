@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             this.Thumbnail = thumbnail;
             this.Alt = alt;
             this.AspectRatio = aspectRatio;
+            this.Type = "app.bsky.embed.video#view";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewVideo()
         {
+            this.Type = "app.bsky.embed.video#view";
         }
 
 
@@ -83,18 +85,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("aspectRatio")]
         public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.video#view";
-
         public const string RecordType = "app.bsky.embed.video#view";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>)SourceGenerationContext.Default.AppBskyEmbedViewVideo)!;
-        }
 
         public static ViewVideo FromJson(string json)
         {

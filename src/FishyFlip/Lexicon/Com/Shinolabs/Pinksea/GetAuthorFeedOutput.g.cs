@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public GetAuthorFeedOutput(List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki> oekaki = default)
         {
             this.Oekaki = oekaki;
+            this.Type = "com.shinolabs.pinksea.getAuthorFeed#GetAuthorFeedOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public GetAuthorFeedOutput()
         {
+            this.Type = "com.shinolabs.pinksea.getAuthorFeed#GetAuthorFeedOutput";
         }
 
 
@@ -43,18 +45,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki> Oekaki { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.getAuthorFeed#GetAuthorFeedOutput";
-
         public const string RecordType = "com.shinolabs.pinksea.getAuthorFeed#GetAuthorFeedOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorFeedOutput)!;
-        }
 
         public static GetAuthorFeedOutput FromJson(string json)
         {

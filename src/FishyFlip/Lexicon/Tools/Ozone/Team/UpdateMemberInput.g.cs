@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             this.Did = did;
             this.Disabled = disabled;
             this.Role = role;
+            this.Type = "tools.ozone.team.updateMember#UpdateMemberInput";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// </summary>
         public UpdateMemberInput()
         {
+            this.Type = "tools.ozone.team.updateMember#UpdateMemberInput";
         }
 
 
@@ -71,18 +73,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         [JsonPropertyName("role")]
         public string? Role { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.team.updateMember#UpdateMemberInput";
-
         public const string RecordType = "tools.ozone.team.updateMember#UpdateMemberInput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamUpdateMemberInput)!;
-        }
 
         public static UpdateMemberInput FromJson(string json)
         {

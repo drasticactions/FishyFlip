@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         public ServiceConfig(string? url = default)
         {
             this.Url = url;
+            this.Type = "tools.ozone.server.getConfig#serviceConfig";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         public ServiceConfig()
         {
+            this.Type = "tools.ozone.server.getConfig#serviceConfig";
         }
 
 
@@ -42,18 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         [JsonPropertyName("url")]
         public string? Url { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.server.getConfig#serviceConfig";
-
         public const string RecordType = "tools.ozone.server.getConfig#serviceConfig";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig>)SourceGenerationContext.Default.ToolsOzoneServerServiceConfig)!;
-        }
 
         public static ServiceConfig FromJson(string json)
         {

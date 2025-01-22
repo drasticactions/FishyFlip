@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             this.Active = active;
             this.Status = status;
             this.Rev = rev;
+            this.Type = "com.atproto.sync.getRepoStatus#GetRepoStatusOutput";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public GetRepoStatusOutput()
         {
+            this.Type = "com.atproto.sync.getRepoStatus#GetRepoStatusOutput";
         }
 
 
@@ -83,18 +85,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("rev")]
         public string? Rev { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.getRepoStatus#GetRepoStatusOutput";
-
         public const string RecordType = "com.atproto.sync.getRepoStatus#GetRepoStatusOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>)SourceGenerationContext.Default.ComAtprotoSyncGetRepoStatusOutput)!;
-        }
 
         public static GetRepoStatusOutput FromJson(string json)
         {

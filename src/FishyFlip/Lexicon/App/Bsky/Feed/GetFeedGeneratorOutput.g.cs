@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.View = view;
             this.IsOnline = isOnline;
             this.IsValid = isValid;
+            this.Type = "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetFeedGeneratorOutput()
         {
+            this.Type = "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput";
         }
 
 
@@ -68,18 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         public bool IsValid { get; set; }
 
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput";
-
         public const string RecordType = "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput";
-
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedGeneratorOutput)!;
-        }
 
         public static GetFeedGeneratorOutput FromJson(string json)
         {
