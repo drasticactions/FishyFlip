@@ -5,6 +5,7 @@
 using ConsoleAppFramework;
 using FishyFlip;
 using FishyFlip.Models;
+using FishyFlip.Tools;
 using Microsoft.Extensions.Logging.Debug;
 using OAuth;
 
@@ -160,6 +161,7 @@ public class OAuthCommands
     /// </summary>
     /// <param name="clientId">-c, Client ID.</param>
     /// <param name="redirectUrl">-r, Redirect URL.</param>
+    /// <param name="identity">-id, Identity.</param>
     /// <param name="instanceUrl">-i, Instance URL.</param>
     /// <param name="port">-p, Port.</param>
     /// <param name="scopes">-s, Scopes.</param>
@@ -168,7 +170,7 @@ public class OAuthCommands
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/>.</returns>
     [Command("start")]
-    public async Task StartSessionAsync(string clientId = "http://localhost", string? redirectUrl = default, string instanceUrl = "https://bsky.social", int port = 0, string scopes = "atproto", string outputName = "session.json", bool verbose = false, CancellationToken cancellationToken = default)
+    public async Task StartSessionAsync(string clientId = "http://localhost", string? redirectUrl = default, string? identity = default, string instanceUrl = "https://bsky.social", int port = 0, string scopes = "atproto", string outputName = "session.json", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
         Uri.TryCreate(instanceUrl, UriKind.Absolute, out var iUrl);
@@ -177,6 +179,18 @@ public class OAuthCommands
         if (!outputName.EndsWith(".json"))
         {
             outputName += ".json";
+        }
+
+        ATIdentifier? identityId = null;
+
+        if (!string.IsNullOrEmpty(identity))
+        {
+            identityId = ATIdentifier.Create(identity);
+            if (identityId is null)
+            {
+                consoleLog.LogError("Invalid Identity");
+                return;
+            }
         }
 
         if (iUrl is null)
@@ -206,7 +220,7 @@ public class OAuthCommands
 
         var protocol = this.GenerateProtocol(iUrl);
         consoleLog.Log($"Starting OAuth2 Authentication for {instanceUrl}");
-        var url = await protocol.GenerateOAuth2AuthenticationUrlAsync(clientId, redirectUrl, scopeList, instanceUrl.ToString(), cancellationToken);
+        var url = await protocol.GenerateOAuth2AuthenticationUrlAsync(clientId, redirectUrl, scopeList, identityId, instanceUrl, cancellationToken);
         var result = await browser.InvokeAsync(url, cancellationToken);
         if (result.IsError)
         {
