@@ -106,11 +106,6 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public const string RecordType = "blue.zio.atfile.upload";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
-        }
-
         public static Upload FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;

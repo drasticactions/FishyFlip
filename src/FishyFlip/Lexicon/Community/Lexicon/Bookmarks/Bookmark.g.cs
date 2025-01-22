@@ -68,11 +68,6 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
 
         public const string RecordType = "community.lexicon.bookmarks.bookmark";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
-        }
-
         public static Bookmark FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;

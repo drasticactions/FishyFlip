@@ -76,11 +76,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.getLikes#GetLikesOutput";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetLikesOutput)!;
-        }
-
         public static GetLikesOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetLikesOutput)!;

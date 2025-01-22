@@ -91,11 +91,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         public const string RecordType = "tools.ozone.communication.createTemplate#CreateTemplateInput";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationCreateTemplateInput)!;
-        }
-
         public static CreateTemplateInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationCreateTemplateInput)!;

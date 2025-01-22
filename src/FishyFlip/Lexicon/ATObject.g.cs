@@ -476,11 +476,12 @@ namespace FishyFlip.Lexicon
         /// Gets or sets the ATRecord Type.
         /// </summary>
         [JsonPropertyName("$type")]
+        [JsonPropertyOrder(-1)]
         public string Type { get; set; } = string.Empty;
 
         public virtual string ToJson()
         {
-            return JsonSerializer.Serialize<ATObject>(this, (JsonTypeInfo<ATObject>)SourceGenerationContext.Default.ATObject)!;
+            return (JsonSerializer.SerializeToNode<ATObject>(this, (JsonTypeInfo<ATObject>)SourceGenerationContext.Default.ATObject)).RemoveDuplicateTypeLines()!;
         }
     }
 }

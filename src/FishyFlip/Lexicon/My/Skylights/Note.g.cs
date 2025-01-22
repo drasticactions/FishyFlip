@@ -67,11 +67,6 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public const string RecordType = "my.skylights.rel#note";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.My.Skylights.Note>(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;
-        }
-
         public static Note FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Note>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;

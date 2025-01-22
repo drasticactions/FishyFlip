@@ -38,6 +38,39 @@ internal static class JsonTypeReorderer
         return jsonNode.ToJsonString(options);
     }
 
+    /// <summary>
+    /// Fixes multiple $type properties in JSON objects.
+    /// Tries to work around https://github.com/dotnet/runtime/issues/92780.
+    /// </summary>
+    /// <param name="node">JsonNode.</param>
+    /// <returns>string.</returns>
+    public static string RemoveDuplicateTypeLines(this JsonNode node)
+    {
+        var input = node.ToJsonString(SourceGenerationContext.Default.Options);
+
+        if (string.IsNullOrEmpty(input))
+        {
+            return input;
+        }
+
+        var lines = input.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+        var result = new StringBuilder();
+        string? previousLine = null;
+
+        foreach (var line in lines)
+        {
+            if (line.Contains("\"$type\"") && line == previousLine)
+            {
+                continue;
+            }
+
+            result.AppendLine(line);
+            previousLine = line;
+        }
+
+        return result.ToString();
+    }
+
     private static void ProcessNode(JsonNode node)
     {
         if (node is JsonObject obj)

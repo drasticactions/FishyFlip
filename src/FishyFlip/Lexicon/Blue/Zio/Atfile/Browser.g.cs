@@ -58,11 +58,6 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public const string RecordType = "blue.zio.atfile.finger#browser";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>)SourceGenerationContext.Default.BlueZioAtfileBrowser)!;
-        }
-
         public static Browser FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>)SourceGenerationContext.Default.BlueZioAtfileBrowser)!;

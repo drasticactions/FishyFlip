@@ -135,11 +135,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         public const string RecordType = "com.atproto.label.defs#label";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Label.Label>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.Label>)SourceGenerationContext.Default.ComAtprotoLabelLabel)!;
-        }
-
         public static Label FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.Label>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.Label>)SourceGenerationContext.Default.ComAtprotoLabelLabel)!;

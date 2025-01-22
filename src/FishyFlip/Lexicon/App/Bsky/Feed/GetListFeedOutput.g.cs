@@ -56,11 +56,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.getListFeed#GetListFeedOutput";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput>)SourceGenerationContext.Default.AppBskyFeedGetListFeedOutput)!;
-        }
-
         public static GetListFeedOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput>)SourceGenerationContext.Default.AppBskyFeedGetListFeedOutput)!;

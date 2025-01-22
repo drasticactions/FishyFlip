@@ -49,11 +49,6 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
 
         public const string RecordType = "app.netlify.aniblue.status";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Netlify.Aniblue.Status>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.Status>)SourceGenerationContext.Default.AppNetlifyAniblueStatus)!;
-        }
-
         public static Status FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Netlify.Aniblue.Status>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.Status>)SourceGenerationContext.Default.AppNetlifyAniblueStatus)!;

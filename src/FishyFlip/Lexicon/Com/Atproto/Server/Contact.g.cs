@@ -46,11 +46,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public const string RecordType = "com.atproto.server.describeServer#contact";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Com.Atproto.Server.Contact>(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;
-        }
-
         public static Contact FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.Contact>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;

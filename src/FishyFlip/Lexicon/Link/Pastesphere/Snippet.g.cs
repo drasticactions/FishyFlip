@@ -85,11 +85,6 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
 
         public const string RecordType = "link.pastesphere.snippet";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(this, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
-        }
-
         public static Snippet FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(json, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;

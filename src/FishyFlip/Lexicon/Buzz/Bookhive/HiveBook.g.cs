@@ -168,11 +168,6 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
 
         public const string RecordType = "buzz.bookhive.hiveBook";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>(this, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>)SourceGenerationContext.Default.BuzzBookhiveHiveBook)!;
-        }
-
         public static HiveBook FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>(json, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>)SourceGenerationContext.Default.BuzzBookhiveHiveBook)!;

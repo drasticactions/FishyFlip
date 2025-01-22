@@ -67,11 +67,6 @@ namespace FishyFlip.Lexicon.Blue.Linkat
 
         public const string RecordType = "blue.linkat.board#card";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Blue.Linkat.Card>(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Card>)SourceGenerationContext.Default.BlueLinkatCard)!;
-        }
-
         public static Card FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Linkat.Card>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Card>)SourceGenerationContext.Default.BlueLinkatCard)!;

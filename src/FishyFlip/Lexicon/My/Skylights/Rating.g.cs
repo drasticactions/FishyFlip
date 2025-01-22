@@ -57,11 +57,6 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public const string RecordType = "my.skylights.rel#rating";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.My.Skylights.Rating>(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rating>)SourceGenerationContext.Default.MySkylightsRating)!;
-        }
-
         public static Rating FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Rating>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rating>)SourceGenerationContext.Default.MySkylightsRating)!;

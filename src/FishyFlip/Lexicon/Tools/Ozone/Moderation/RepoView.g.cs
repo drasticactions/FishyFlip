@@ -149,11 +149,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public const string RecordType = "tools.ozone.moderation.defs#repoView";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>)SourceGenerationContext.Default.ToolsOzoneModerationRepoView)!;
-        }
-
         public static RepoView FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>)SourceGenerationContext.Default.ToolsOzoneModerationRepoView)!;

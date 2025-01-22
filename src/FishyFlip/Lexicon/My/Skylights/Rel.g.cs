@@ -86,11 +86,6 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public const string RecordType = "my.skylights.rel";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.My.Skylights.Rel>(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rel>)SourceGenerationContext.Default.MySkylightsRel)!;
-        }
-
         public static Rel FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Rel>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rel>)SourceGenerationContext.Default.MySkylightsRel)!;

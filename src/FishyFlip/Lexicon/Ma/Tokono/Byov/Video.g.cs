@@ -85,11 +85,6 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
 
         public const string RecordType = "ma.tokono.byov.video";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>(this, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;
-        }
-
         public static Video FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>(json, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;

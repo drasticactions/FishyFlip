@@ -82,11 +82,6 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
 
         public const string RecordType = "social.psky.chat.message";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Social.Psky.Chat.Message>(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
-        }
-
         public static Message FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Message>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;

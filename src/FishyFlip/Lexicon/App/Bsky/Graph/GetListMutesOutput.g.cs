@@ -56,11 +56,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.getListMutes#GetListMutesOutput";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetListMutesOutput)!;
-        }
-
         public static GetListMutesOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetListMutesOutput)!;

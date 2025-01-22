@@ -58,11 +58,6 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
 
         public const string RecordType = "ma.tokono.byov.subscription";
 
-        public override string ToJson()
-        {
-            return JsonSerializer.Serialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(this, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
-        }
-
         public static Subscription FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(json, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
