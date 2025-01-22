@@ -40,6 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Following = following;
             this.FollowedBy = followedBy;
             this.KnownFollowers = knownFollowers;
+            this.Type = "app.bsky.actor.defs#viewerState";
         }
 
 
@@ -48,6 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ViewerState()
         {
+            this.Type = "app.bsky.actor.defs#viewerState";
         }
 
 
@@ -119,12 +121,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("knownFollowers")]
         public FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? KnownFollowers { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#viewerState";
 
         public const string RecordType = "app.bsky.actor.defs#viewerState";
 

@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             this.Embed = embed;
             this.Sender = sender;
             this.SentAt = sentAt;
+            this.Type = "chat.bsky.convo.defs#messageView";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public MessageView()
         {
+            this.Type = "chat.bsky.convo.defs#messageView";
         }
 
 
@@ -109,12 +111,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("sentAt")]
         [JsonRequired]
         public DateTime? SentAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#messageView";
 
         public const string RecordType = "chat.bsky.convo.defs#messageView";
 

@@ -30,6 +30,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Parent = parent;
             this.Post = post;
+            this.Type = "fyi.unravel.frontpage.comment";
         }
 
 
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// </summary>
         public Comment()
         {
+            this.Type = "fyi.unravel.frontpage.comment";
         }
 
 
@@ -79,12 +81,6 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// </summary>
         [JsonPropertyName("post")]
         public Com.Atproto.Repo.StrongRef? Post { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fyi.unravel.frontpage.comment";
 
         public const string RecordType = "fyi.unravel.frontpage.comment";
 

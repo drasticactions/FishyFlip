@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         {
             this.Time = time;
             this.Item = item;
+            this.Type = "fm.teal.alpha.actor.status";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// </summary>
         public Status()
         {
+            this.Type = "fm.teal.alpha.actor.status";
         }
 
 
@@ -57,12 +59,6 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// </summary>
         [JsonPropertyName("item")]
         public FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? Item { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fm.teal.alpha.actor.status";
 
         public const string RecordType = "fm.teal.alpha.actor.status";
 

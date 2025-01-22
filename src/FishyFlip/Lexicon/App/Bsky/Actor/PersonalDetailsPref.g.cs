@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public PersonalDetailsPref(DateTime? birthDate = default)
         {
             this.BirthDate = birthDate;
+            this.Type = "app.bsky.actor.defs#personalDetailsPref";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public PersonalDetailsPref()
         {
+            this.Type = "app.bsky.actor.defs#personalDetailsPref";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("birthDate")]
         public DateTime? BirthDate { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#personalDetailsPref";
 
         public const string RecordType = "app.bsky.actor.defs#personalDetailsPref";
 

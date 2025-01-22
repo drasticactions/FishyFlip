@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             this.Record = record;
             this.Media = media;
+            this.Type = "app.bsky.embed.recordWithMedia";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public RecordWithMedia()
         {
+            this.Type = "app.bsky.embed.recordWithMedia";
         }
 
 
@@ -64,12 +66,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("media")]
         [JsonRequired]
         public ATObject Media { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.recordWithMedia";
 
         public const string RecordType = "app.bsky.embed.recordWithMedia";
 

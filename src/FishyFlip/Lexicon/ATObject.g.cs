@@ -11,6 +11,7 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes), typeDiscriminator: "com.atproto.server.createInviteCodes#accountCodes")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent), typeDiscriminator: "tools.ozone.moderation.defs#accountEvent")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting), typeDiscriminator: "tools.ozone.moderation.defs#accountHosting")]
+    [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats), typeDiscriminator: "tools.ozone.moderation.defs#accountStats")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Com.Atproto.Admin.AccountView), typeDiscriminator: "com.atproto.admin.defs#accountView")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Team.AddMemberInput), typeDiscriminator: "tools.ozone.team.addMember#AddMemberInput")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput), typeDiscriminator: "com.atproto.temp.addReservedHandle#AddReservedHandleInput")]
@@ -325,6 +326,7 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob), typeDiscriminator: "com.atproto.repo.listMissingBlobs#recordBlob")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent), typeDiscriminator: "tools.ozone.moderation.defs#recordEvent")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting), typeDiscriminator: "tools.ozone.moderation.defs#recordHosting")]
+    [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats), typeDiscriminator: "tools.ozone.moderation.defs#recordsStats")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordView), typeDiscriminator: "tools.ozone.moderation.defs#recordView")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail), typeDiscriminator: "tools.ozone.moderation.defs#recordViewDetail")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound), typeDiscriminator: "tools.ozone.moderation.defs#recordViewNotFound")]
@@ -410,6 +412,7 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion), typeDiscriminator: "app.bsky.unspecced.getTaggedSuggestions#suggestion")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.App.Bsky.Richtext.Tag), typeDiscriminator: "app.bsky.richtext.facet#tag")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView), typeDiscriminator: "tools.ozone.communication.defs#templateView")]
+    [JsonDerivedType(typeof(FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext), typeDiscriminator: "app.bsky.feed.defs#threadContext")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.App.Bsky.Feed.Threadgate), typeDiscriminator: "app.bsky.feed.threadgate")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView), typeDiscriminator: "app.bsky.feed.defs#threadgateView")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost), typeDiscriminator: "app.bsky.feed.defs#threadViewPost")]
@@ -470,10 +473,10 @@ namespace FishyFlip.Lexicon
 
         public ATObject() { }
         /// <summary>
-        /// Gets the ATRecord Type.
+        /// Gets or sets the ATRecord Type.
         /// </summary>
         [JsonPropertyName("$type")]
-        public virtual string Type { get; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
 
         public virtual string ToJson()
         {

@@ -31,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Allow = allow;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.HiddenReplies = hiddenReplies;
+            this.Type = "app.bsky.feed.threadgate";
         }
 
 
@@ -39,6 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Threadgate()
         {
+            this.Type = "app.bsky.feed.threadgate";
         }
 
 
@@ -83,12 +85,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("hiddenReplies")]
         public List<FishyFlip.Models.ATUri>? HiddenReplies { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.threadgate";
 
         public const string RecordType = "app.bsky.feed.threadgate";
 

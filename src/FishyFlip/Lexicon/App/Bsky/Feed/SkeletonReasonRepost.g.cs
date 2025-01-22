@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public SkeletonReasonRepost(FishyFlip.Models.ATUri repost = default)
         {
             this.Repost = repost;
+            this.Type = "app.bsky.feed.defs#skeletonReasonRepost";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SkeletonReasonRepost()
         {
+            this.Type = "app.bsky.feed.defs#skeletonReasonRepost";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri Repost { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#skeletonReasonRepost";
 
         public const string RecordType = "app.bsky.feed.defs#skeletonReasonRepost";
 

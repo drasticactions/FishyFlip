@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         public AddReservedHandleOutput()
         {
+            this.Type = "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";
         }
 
 
@@ -24,12 +25,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public AddReservedHandleOutput(CBORObject obj)
         {
         }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";
 
         public const string RecordType = "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";
 

@@ -35,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Viewer = viewer;
             this.Labels = labels;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "app.bsky.actor.defs#profileViewBasic";
         }
 
 
@@ -43,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ProfileViewBasic()
         {
+            this.Type = "app.bsky.actor.defs#profileViewBasic";
         }
 
 
@@ -114,12 +116,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#profileViewBasic";
 
         public const string RecordType = "app.bsky.actor.defs#profileViewBasic";
 

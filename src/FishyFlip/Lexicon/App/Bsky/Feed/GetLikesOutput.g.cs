@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Cid = cid;
             this.Cursor = cursor;
             this.Likes = likes;
+            this.Type = "app.bsky.feed.getLikes#GetLikesOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetLikesOutput()
         {
+            this.Type = "app.bsky.feed.getLikes#GetLikesOutput";
         }
 
 
@@ -71,12 +73,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("likes")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef> Likes { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getLikes#GetLikesOutput";
 
         public const string RecordType = "app.bsky.feed.getLikes#GetLikesOutput";
 

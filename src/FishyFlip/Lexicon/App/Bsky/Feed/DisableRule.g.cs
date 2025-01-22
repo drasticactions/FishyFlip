@@ -18,6 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public DisableRule()
         {
+            this.Type = "app.bsky.feed.postgate#disableRule";
         }
 
 
@@ -27,12 +28,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public DisableRule(CBORObject obj)
         {
         }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.postgate#disableRule";
 
         public const string RecordType = "app.bsky.feed.postgate#disableRule";
 

@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             this.Actors = actors;
             this.RelativeToDid = relativeToDid;
             this.RecId = recId;
+            this.Type = "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetSuggestionsSkeletonOutput()
         {
+            this.Type = "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";
         }
 
 
@@ -72,12 +74,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("recId")]
         public long? RecId { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";
 
         public const string RecordType = "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Cursor = cursor;
             this.Accounts = accounts;
+            this.Type = "com.atproto.admin.searchAccounts#SearchAccountsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public SearchAccountsOutput()
         {
+            this.Type = "com.atproto.admin.searchAccounts#SearchAccountsOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonPropertyName("accounts")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView> Accounts { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.searchAccounts#SearchAccountsOutput";
 
         public const string RecordType = "com.atproto.admin.searchAccounts#SearchAccountsOutput";
 

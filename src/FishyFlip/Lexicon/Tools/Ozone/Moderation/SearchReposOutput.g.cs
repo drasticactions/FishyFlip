@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Cursor = cursor;
             this.Repos = repos;
+            this.Type = "tools.ozone.moderation.searchRepos#SearchReposOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public SearchReposOutput()
         {
+            this.Type = "tools.ozone.moderation.searchRepos#SearchReposOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("repos")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView> Repos { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.searchRepos#SearchReposOutput";
 
         public const string RecordType = "tools.ozone.moderation.searchRepos#SearchReposOutput";
 

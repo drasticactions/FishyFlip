@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public EmbedExternal(FishyFlip.Lexicon.App.Bsky.Embed.External external = default)
         {
             this.External = external;
+            this.Type = "app.bsky.embed.external";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public EmbedExternal()
         {
+            this.Type = "app.bsky.embed.external";
         }
 
 
@@ -48,12 +50,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("external")]
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Embed.External External { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.external";
 
         public const string RecordType = "app.bsky.embed.external";
 

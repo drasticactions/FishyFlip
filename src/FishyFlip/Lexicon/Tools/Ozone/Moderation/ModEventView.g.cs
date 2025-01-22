@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.CreatorHandle = creatorHandle;
             this.SubjectHandle = subjectHandle;
+            this.Type = "tools.ozone.moderation.defs#modEventView";
         }
 
 
@@ -64,6 +65,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventView()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventView";
         }
 
 
@@ -159,12 +161,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("subjectHandle")]
         public string? SubjectHandle { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventView";
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventView";
 

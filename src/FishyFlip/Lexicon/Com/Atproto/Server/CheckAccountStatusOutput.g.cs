@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.PrivateStateValues = privateStateValues;
             this.ExpectedBlobs = expectedBlobs;
             this.ImportedBlobs = importedBlobs;
+            this.Type = "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CheckAccountStatusOutput()
         {
+            this.Type = "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput";
         }
 
 
@@ -122,12 +124,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("importedBlobs")]
         [JsonRequired]
         public long ImportedBlobs { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput";
 
         public const string RecordType = "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput";
 

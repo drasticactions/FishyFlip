@@ -37,6 +37,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             this.File = file;
             this.Finger = finger;
             this.Meta = meta;
+            this.Type = "blue.zio.atfile.upload";
         }
 
 
@@ -45,6 +46,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// </summary>
         public Upload()
         {
+            this.Type = "blue.zio.atfile.upload";
         }
 
 
@@ -101,12 +103,6 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// </summary>
         [JsonPropertyName("meta")]
         public FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown? Meta { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "blue.zio.atfile.upload";
 
         public const string RecordType = "blue.zio.atfile.upload";
 

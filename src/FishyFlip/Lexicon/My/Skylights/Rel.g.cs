@@ -31,6 +31,7 @@ namespace FishyFlip.Lexicon.My.Skylights
             this.Rating = rating;
             this.Note = note;
             this.FinishedAt = finishedAt;
+            this.Type = "my.skylights.rel";
         }
 
 
@@ -39,6 +40,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// </summary>
         public Rel()
         {
+            this.Type = "my.skylights.rel";
         }
 
 
@@ -81,12 +83,6 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// </summary>
         [JsonPropertyName("finishedAt")]
         public List<DateTime>? FinishedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "my.skylights.rel";
 
         public const string RecordType = "my.skylights.rel";
 

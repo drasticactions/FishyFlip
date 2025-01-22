@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         public ViewerConfig(string? role = default)
         {
             this.Role = role;
+            this.Type = "tools.ozone.server.getConfig#viewerConfig";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         public ViewerConfig()
         {
+            this.Type = "tools.ozone.server.getConfig#viewerConfig";
         }
 
 
@@ -50,12 +52,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         [JsonPropertyName("role")]
         public string? Role { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.server.getConfig#viewerConfig";
 
         public const string RecordType = "tools.ozone.server.getConfig#viewerConfig";
 

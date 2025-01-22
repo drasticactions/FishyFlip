@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             this.Rev = rev;
             this.Sender = sender;
             this.SentAt = sentAt;
+            this.Type = "chat.bsky.convo.defs#deletedMessageView";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public DeletedMessageView()
         {
+            this.Type = "chat.bsky.convo.defs#deletedMessageView";
         }
 
 
@@ -75,12 +77,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("sentAt")]
         [JsonRequired]
         public DateTime? SentAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#deletedMessageView";
 
         public const string RecordType = "chat.bsky.convo.defs#deletedMessageView";
 

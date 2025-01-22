@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             this.Cursor = cursor;
             this.Repos = repos;
+            this.Type = "com.atproto.sync.listRepos#ListReposOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public ListReposOutput()
         {
+            this.Type = "com.atproto.sync.listRepos#ListReposOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("repos")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Sync.Repo> Repos { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.listRepos#ListReposOutput";
 
         public const string RecordType = "com.atproto.sync.listRepos#ListReposOutput";
 

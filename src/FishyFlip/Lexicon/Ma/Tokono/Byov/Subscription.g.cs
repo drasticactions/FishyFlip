@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         {
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Subject = subject;
+            this.Type = "ma.tokono.byov.subscription";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// </summary>
         public Subscription()
         {
+            this.Type = "ma.tokono.byov.subscription";
         }
 
 
@@ -53,12 +55,6 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// </summary>
         [JsonPropertyName("subject")]
         public string? Subject { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "ma.tokono.byov.subscription";
 
         public const string RecordType = "ma.tokono.byov.subscription";
 

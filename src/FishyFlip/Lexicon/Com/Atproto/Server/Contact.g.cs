@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public Contact(string? email = default)
         {
             this.Email = email;
+            this.Type = "com.atproto.server.describeServer#contact";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public Contact()
         {
+            this.Type = "com.atproto.server.describeServer#contact";
         }
 
 
@@ -41,12 +43,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("email")]
         public string? Email { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.describeServer#contact";
 
         public const string RecordType = "com.atproto.server.describeServer#contact";
 

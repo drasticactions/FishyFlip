@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Add = add;
             this.Remove = remove;
             this.Comment = comment;
+            this.Type = "tools.ozone.moderation.defs#modEventTag";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventTag()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventTag";
         }
 
 
@@ -67,12 +69,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventTag";
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventTag";
 

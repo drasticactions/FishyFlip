@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         public Link(string uri = default)
         {
             this.Uri = uri;
+            this.Type = "app.bsky.richtext.facet#link";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// </summary>
         public Link()
         {
+            this.Type = "app.bsky.richtext.facet#link";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         [JsonPropertyName("uri")]
         [JsonRequired]
         public string Uri { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.richtext.facet#link";
 
         public const string RecordType = "app.bsky.richtext.facet#link";
 

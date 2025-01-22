@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Cursor = cursor;
             this.Codes = codes;
+            this.Type = "com.atproto.admin.getInviteCodes#GetInviteCodesOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public GetInviteCodesOutput()
         {
+            this.Type = "com.atproto.admin.getInviteCodes#GetInviteCodesOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonPropertyName("codes")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode> Codes { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.getInviteCodes#GetInviteCodesOutput";
 
         public const string RecordType = "com.atproto.admin.getInviteCodes#GetInviteCodesOutput";
 

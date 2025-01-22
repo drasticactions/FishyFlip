@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             this.Cursor = cursor;
             this.Cids = cids;
+            this.Type = "com.atproto.sync.listBlobs#ListBlobsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public ListBlobsOutput()
         {
+            this.Type = "com.atproto.sync.listBlobs#ListBlobsOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("cids")]
         [JsonRequired]
         public List<string> Cids { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.listBlobs#ListBlobsOutput";
 
         public const string RecordType = "com.atproto.sync.listBlobs#ListBlobsOutput";
 

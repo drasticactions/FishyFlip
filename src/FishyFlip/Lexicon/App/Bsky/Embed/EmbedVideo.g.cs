@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             this.Captions = captions;
             this.Alt = alt;
             this.AspectRatio = aspectRatio;
+            this.Type = "app.bsky.embed.video";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public EmbedVideo()
         {
+            this.Type = "app.bsky.embed.video";
         }
 
 
@@ -73,12 +75,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         [JsonPropertyName("aspectRatio")]
         public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.video";
 
         public const string RecordType = "app.bsky.embed.video";
 

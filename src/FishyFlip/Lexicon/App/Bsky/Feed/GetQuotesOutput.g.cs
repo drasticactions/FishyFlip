@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Cid = cid;
             this.Cursor = cursor;
             this.Posts = posts;
+            this.Type = "app.bsky.feed.getQuotes#GetQuotesOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetQuotesOutput()
         {
+            this.Type = "app.bsky.feed.getQuotes#GetQuotesOutput";
         }
 
 
@@ -71,12 +73,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("posts")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.PostView> Posts { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getQuotes#GetQuotesOutput";
 
         public const string RecordType = "app.bsky.feed.getQuotes#GetQuotesOutput";
 

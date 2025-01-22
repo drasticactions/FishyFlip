@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             this.InviteNote = inviteNote;
             this.DeactivatedAt = deactivatedAt;
             this.ThreatSignatures = threatSignatures;
+            this.Type = "com.atproto.admin.defs#accountView";
         }
 
 
@@ -49,6 +50,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public AccountView()
         {
+            this.Type = "com.atproto.admin.defs#accountView";
         }
 
 
@@ -148,12 +150,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         [JsonPropertyName("threatSignatures")]
         public List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.defs#accountView";
 
         public const string RecordType = "com.atproto.admin.defs#accountView";
 

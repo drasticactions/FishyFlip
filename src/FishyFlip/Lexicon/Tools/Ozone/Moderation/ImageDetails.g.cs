@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Width = width;
             this.Height = height;
+            this.Type = "tools.ozone.moderation.defs#imageDetails";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ImageDetails()
         {
+            this.Type = "tools.ozone.moderation.defs#imageDetails";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("height")]
         [JsonRequired]
         public long Height { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#imageDetails";
 
         public const string RecordType = "tools.ozone.moderation.defs#imageDetails";
 

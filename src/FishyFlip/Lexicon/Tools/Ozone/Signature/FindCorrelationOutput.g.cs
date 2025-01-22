@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public FindCorrelationOutput(List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail> details = default)
         {
             this.Details = details;
+            this.Type = "tools.ozone.signature.findCorrelation#FindCorrelationOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         public FindCorrelationOutput()
         {
+            this.Type = "tools.ozone.signature.findCorrelation#FindCorrelationOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         [JsonPropertyName("details")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail> Details { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.signature.findCorrelation#FindCorrelationOutput";
 
         public const string RecordType = "tools.ozone.signature.findCorrelation#FindCorrelationOutput";
 

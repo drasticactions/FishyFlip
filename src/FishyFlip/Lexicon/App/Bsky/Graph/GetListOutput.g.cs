@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.Cursor = cursor;
             this.List = list;
             this.Items = items;
+            this.Type = "app.bsky.graph.getList#GetListOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetListOutput()
         {
+            this.Type = "app.bsky.graph.getList#GetListOutput";
         }
 
 
@@ -64,12 +66,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("items")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView> Items { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getList#GetListOutput";
 
         public const string RecordType = "app.bsky.graph.getList#GetListOutput";
 

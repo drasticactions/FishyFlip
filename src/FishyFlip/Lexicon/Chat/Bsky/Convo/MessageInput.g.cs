@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             this.Text = text;
             this.Facets = facets;
             this.Embed = embed;
+            this.Type = "chat.bsky.convo.defs#messageInput";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public MessageInput()
         {
+            this.Type = "chat.bsky.convo.defs#messageInput";
         }
 
 
@@ -66,12 +68,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         [JsonPropertyName("embed")]
         public FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord? Embed { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#messageInput";
 
         public const string RecordType = "chat.bsky.convo.defs#messageInput";
 

@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             this.Tags = tags;
             this.Allowlist = allowlist;
             this.Denylist = denylist;
+            this.Type = "social.psky.chat.room";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// </summary>
         public Room()
         {
+            this.Type = "social.psky.chat.room";
         }
 
 
@@ -98,12 +100,6 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// </summary>
         [JsonPropertyName("denylist")]
         public FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? Denylist { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.chat.room";
 
         public const string RecordType = "social.psky.chat.room";
 

@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             this.Ops = ops;
             this.Blobs = blobs;
             this.Time = time;
+            this.Type = "com.atproto.sync.subscribeRepos#commit";
         }
 
 
@@ -46,6 +47,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public Commit()
         {
+            this.Type = "com.atproto.sync.subscribeRepos#commit";
         }
 
 
@@ -145,12 +147,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("time")]
         [JsonRequired]
         public DateTime? Time { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.subscribeRepos#commit";
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#commit";
 

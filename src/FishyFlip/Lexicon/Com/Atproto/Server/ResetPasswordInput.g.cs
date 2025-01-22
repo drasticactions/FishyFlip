@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             this.Token = token;
             this.Password = password;
+            this.Type = "com.atproto.server.resetPassword#ResetPasswordInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ResetPasswordInput()
         {
+            this.Type = "com.atproto.server.resetPassword#ResetPasswordInput";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("password")]
         [JsonRequired]
         public string Password { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.resetPassword#ResetPasswordInput";
 
         public const string RecordType = "com.atproto.server.resetPassword#ResetPasswordInput";
 

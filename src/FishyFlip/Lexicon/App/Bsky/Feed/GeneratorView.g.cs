@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Viewer = viewer;
             this.ContentMode = contentMode;
             this.IndexedAt = indexedAt;
+            this.Type = "app.bsky.feed.defs#generatorView";
         }
 
 
@@ -59,6 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GeneratorView()
         {
+            this.Type = "app.bsky.feed.defs#generatorView";
         }
 
 
@@ -179,12 +181,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#generatorView";
 
         public const string RecordType = "app.bsky.feed.defs#generatorView";
 

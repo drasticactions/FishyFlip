@@ -32,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Targets = targets;
             this.ActorTarget = actorTarget;
             this.ExpiresAt = expiresAt;
+            this.Type = "app.bsky.actor.defs#mutedWord";
         }
 
 
@@ -40,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public MutedWord()
         {
+            this.Type = "app.bsky.actor.defs#mutedWord";
         }
 
 
@@ -93,12 +95,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("expiresAt")]
         public DateTime? ExpiresAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#mutedWord";
 
         public const string RecordType = "app.bsky.actor.defs#mutedWord";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         {
             this.Mbid = mbid;
             this.TypeValue = type;
+            this.Type = "fm.teal.alpha.actor.profile#featuredItem";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// </summary>
         public FeaturedItem()
         {
+            this.Type = "fm.teal.alpha.actor.profile#featuredItem";
         }
 
 
@@ -54,12 +56,6 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         [JsonPropertyName("type")]
         [JsonRequired]
         public string TypeValue { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fm.teal.alpha.actor.profile#featuredItem";
 
         public const string RecordType = "fm.teal.alpha.actor.profile#featuredItem";
 

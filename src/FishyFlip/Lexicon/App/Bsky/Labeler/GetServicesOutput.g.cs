@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public GetServicesOutput(List<ATObject> views = default)
         {
             this.Views = views;
+            this.Type = "app.bsky.labeler.getServices#GetServicesOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public GetServicesOutput()
         {
+            this.Type = "app.bsky.labeler.getServices#GetServicesOutput";
         }
 
 
@@ -49,12 +51,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         [JsonPropertyName("views")]
         [JsonRequired]
         public List<ATObject> Views { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.labeler.getServices#GetServicesOutput";
 
         public const string RecordType = "app.bsky.labeler.getServices#GetServicesOutput";
 

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetTaggedSuggestionsOutput(List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion> suggestions = default)
         {
             this.Suggestions = suggestions;
+            this.Type = "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetTaggedSuggestionsOutput()
         {
+            this.Type = "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("suggestions")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion> Suggestions { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput";
 
         public const string RecordType = "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput";
 

@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.JoinedAllTimeCount = joinedAllTimeCount;
             this.Labels = labels;
             this.IndexedAt = indexedAt;
+            this.Type = "app.bsky.graph.defs#starterPackView";
         }
 
 
@@ -49,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public StarterPackView()
         {
+            this.Type = "app.bsky.graph.defs#starterPackView";
         }
 
 
@@ -143,12 +145,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.defs#starterPackView";
 
         public const string RecordType = "app.bsky.graph.defs#starterPackView";
 

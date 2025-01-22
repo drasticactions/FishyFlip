@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             this.Commit = commit;
             this.Results = results;
+            this.Type = "com.atproto.repo.applyWrites#ApplyWritesOutput";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public ApplyWritesOutput()
         {
+            this.Type = "com.atproto.repo.applyWrites#ApplyWritesOutput";
         }
 
 
@@ -62,12 +64,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("results")]
         public List<ATObject>? Results { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.applyWrites#ApplyWritesOutput";
 
         public const string RecordType = "com.atproto.repo.applyWrites#ApplyWritesOutput";
 

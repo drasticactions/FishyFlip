@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public DeleteTemplateInput(string id = default)
         {
             this.Id = id;
+            this.Type = "tools.ozone.communication.deleteTemplate#DeleteTemplateInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         public DeleteTemplateInput()
         {
+            this.Type = "tools.ozone.communication.deleteTemplate#DeleteTemplateInput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         [JsonPropertyName("id")]
         [JsonRequired]
         public string Id { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.communication.deleteTemplate#DeleteTemplateInput";
 
         public const string RecordType = "tools.ozone.communication.deleteTemplate#DeleteTemplateInput";
 

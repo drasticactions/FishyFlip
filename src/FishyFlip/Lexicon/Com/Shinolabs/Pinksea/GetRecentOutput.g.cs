@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public GetRecentOutput(List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki> oekaki = default)
         {
             this.Oekaki = oekaki;
+            this.Type = "com.shinolabs.pinksea.getRecent#GetRecentOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public GetRecentOutput()
         {
+            this.Type = "com.shinolabs.pinksea.getRecent#GetRecentOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonPropertyName("oekaki")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki> Oekaki { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.getRecent#GetRecentOutput";
 
         public const string RecordType = "com.shinolabs.pinksea.getRecent#GetRecentOutput";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         {
             this.Cursor = cursor;
             this.Options = options;
+            this.Type = "tools.ozone.setting.listOptions#ListOptionsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public ListOptionsOutput()
         {
+            this.Type = "tools.ozone.setting.listOptions#ListOptionsOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         [JsonPropertyName("options")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Setting.Option> Options { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.setting.listOptions#ListOptionsOutput";
 
         public const string RecordType = "tools.ozone.setting.listOptions#ListOptionsOutput";
 

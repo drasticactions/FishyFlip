@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.UpdatedAt = updatedAt;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.DeletedAt = deletedAt;
+            this.Type = "tools.ozone.moderation.defs#recordHosting";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public RecordHosting()
         {
+            this.Type = "tools.ozone.moderation.defs#recordHosting";
         }
 
 
@@ -76,12 +78,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("deletedAt")]
         public DateTime? DeletedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#recordHosting";
 
         public const string RecordType = "tools.ozone.moderation.defs#recordHosting";
 

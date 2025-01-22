@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public SavedFeedsPrefV2(List<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed> items = default)
         {
             this.Items = items;
+            this.Type = "app.bsky.actor.defs#savedFeedsPrefV2";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public SavedFeedsPrefV2()
         {
+            this.Type = "app.bsky.actor.defs#savedFeedsPrefV2";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("items")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed> Items { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#savedFeedsPrefV2";
 
         public const string RecordType = "app.bsky.actor.defs#savedFeedsPrefV2";
 

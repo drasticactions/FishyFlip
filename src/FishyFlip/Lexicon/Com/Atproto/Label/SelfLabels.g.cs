@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public SelfLabels(List<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel> values = default)
         {
             this.Values = values;
+            this.Type = "com.atproto.label.defs#selfLabels";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         public SelfLabels()
         {
+            this.Type = "com.atproto.label.defs#selfLabels";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         [JsonPropertyName("values")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel> Values { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.label.defs#selfLabels";
 
         public const string RecordType = "com.atproto.label.defs#selfLabels";
 

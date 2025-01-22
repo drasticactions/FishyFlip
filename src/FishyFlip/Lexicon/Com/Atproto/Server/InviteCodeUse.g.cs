@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             this.UsedBy = usedBy;
             this.UsedAt = usedAt;
+            this.Type = "com.atproto.server.defs#inviteCodeUse";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public InviteCodeUse()
         {
+            this.Type = "com.atproto.server.defs#inviteCodeUse";
         }
 
 
@@ -53,12 +55,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("usedAt")]
         [JsonRequired]
         public DateTime? UsedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.defs#inviteCodeUse";
 
         public const string RecordType = "com.atproto.server.defs#inviteCodeUse";
 

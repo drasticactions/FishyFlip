@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         {
             this.Ref = @ref;
             this.Value = value;
+            this.Type = "my.skylights.rel#refItem";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// </summary>
         public RefItem()
         {
+            this.Type = "my.skylights.rel#refItem";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.My.Skylights
         [JsonPropertyName("value")]
         [JsonRequired]
         public string Value { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "my.skylights.rel#refItem";
 
         public const string RecordType = "my.skylights.rel#refItem";
 

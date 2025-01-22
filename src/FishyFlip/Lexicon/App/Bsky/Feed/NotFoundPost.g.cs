@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Uri = uri;
             this.NotFound = notFound;
+            this.Type = "app.bsky.feed.defs#notFoundPost";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public NotFoundPost()
         {
+            this.Type = "app.bsky.feed.defs#notFoundPost";
         }
 
 
@@ -53,12 +55,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("notFound")]
         [JsonRequired]
         public bool NotFound { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#notFoundPost";
 
         public const string RecordType = "app.bsky.feed.defs#notFoundPost";
 

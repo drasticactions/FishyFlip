@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Root = root;
             this.Parent = parent;
             this.GrandparentAuthor = grandparentAuthor;
+            this.Type = "app.bsky.feed.defs#replyRef";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ReplyRef()
         {
+            this.Type = "app.bsky.feed.defs#replyRef";
         }
 
 
@@ -83,12 +85,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("grandparentAuthor")]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? GrandparentAuthor { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#replyRef";
 
         public const string RecordType = "app.bsky.feed.defs#replyRef";
 

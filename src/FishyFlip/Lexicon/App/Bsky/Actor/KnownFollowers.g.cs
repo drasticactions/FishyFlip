@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             this.Count = count;
             this.Followers = followers;
+            this.Type = "app.bsky.actor.defs#knownFollowers";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public KnownFollowers()
         {
+            this.Type = "app.bsky.actor.defs#knownFollowers";
         }
 
 
@@ -55,12 +57,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("followers")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic> Followers { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#knownFollowers";
 
         public const string RecordType = "app.bsky.actor.defs#knownFollowers";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             this.UseCount = useCount;
             this.ForAccount = forAccount;
+            this.Type = "com.atproto.server.createInviteCode#CreateInviteCodeInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateInviteCodeInput()
         {
+            this.Type = "com.atproto.server.createInviteCode#CreateInviteCodeInput";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("forAccount")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? ForAccount { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createInviteCode#CreateInviteCodeInput";
 
         public const string RecordType = "com.atproto.server.createInviteCode#CreateInviteCodeInput";
 

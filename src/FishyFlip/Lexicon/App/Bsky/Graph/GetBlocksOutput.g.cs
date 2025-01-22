@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Cursor = cursor;
             this.Blocks = blocks;
+            this.Type = "app.bsky.graph.getBlocks#GetBlocksOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetBlocksOutput()
         {
+            this.Type = "app.bsky.graph.getBlocks#GetBlocksOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("blocks")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Blocks { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getBlocks#GetBlocksOutput";
 
         public const string RecordType = "app.bsky.graph.getBlocks#GetBlocksOutput";
 

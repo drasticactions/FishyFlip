@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.DeletedAt = deletedAt;
             this.DeactivatedAt = deactivatedAt;
             this.ReactivatedAt = reactivatedAt;
+            this.Type = "tools.ozone.moderation.defs#accountHosting";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public AccountHosting()
         {
+            this.Type = "tools.ozone.moderation.defs#accountHosting";
         }
 
 
@@ -100,12 +102,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("reactivatedAt")]
         public DateTime? ReactivatedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#accountHosting";
 
         public const string RecordType = "tools.ozone.moderation.defs#accountHosting";
 

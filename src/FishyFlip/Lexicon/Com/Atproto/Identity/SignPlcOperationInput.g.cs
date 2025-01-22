@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             this.AlsoKnownAs = alsoKnownAs;
             this.VerificationMethods = verificationMethods;
             this.Services = services;
+            this.Type = "com.atproto.identity.signPlcOperation#SignPlcOperationInput";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// </summary>
         public SignPlcOperationInput()
         {
+            this.Type = "com.atproto.identity.signPlcOperation#SignPlcOperationInput";
         }
 
 
@@ -78,12 +80,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// </summary>
         [JsonPropertyName("services")]
         public ATObject? Services { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.identity.signPlcOperation#SignPlcOperationInput";
 
         public const string RecordType = "com.atproto.identity.signPlcOperation#SignPlcOperationInput";
 

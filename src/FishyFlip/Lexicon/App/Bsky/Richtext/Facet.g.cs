@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         {
             this.Index = index;
             this.Features = features;
+            this.Type = "app.bsky.richtext.facet";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// </summary>
         public Facet()
         {
+            this.Type = "app.bsky.richtext.facet";
         }
 
 
@@ -67,12 +69,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         [JsonPropertyName("features")]
         [JsonRequired]
         public List<ATObject> Features { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.richtext.facet";
 
         public const string RecordType = "app.bsky.richtext.facet";
 

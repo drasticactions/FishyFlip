@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public Feed(FishyFlip.Models.ATUri uri = default)
         {
             this.Uri = uri;
+            this.Type = "app.bsky.feed.describeFeedGenerator#feed";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Feed()
         {
+            this.Type = "app.bsky.feed.describeFeedGenerator#feed";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri Uri { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.describeFeedGenerator#feed";
 
         public const string RecordType = "app.bsky.feed.describeFeedGenerator#feed";
 

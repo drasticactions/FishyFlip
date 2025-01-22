@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             this.Width = width;
             this.Height = height;
+            this.Type = "app.bsky.embed.defs#aspectRatio";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public AspectRatio()
         {
+            this.Type = "app.bsky.embed.defs#aspectRatio";
         }
 
 
@@ -55,12 +57,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("height")]
         [JsonRequired]
         public long Height { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.defs#aspectRatio";
 
         public const string RecordType = "app.bsky.embed.defs#aspectRatio";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public DeleteRecordOutput(FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? commit = default)
         {
             this.Commit = commit;
+            this.Type = "com.atproto.repo.deleteRecord#DeleteRecordOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public DeleteRecordOutput()
         {
+            this.Type = "com.atproto.repo.deleteRecord#DeleteRecordOutput";
         }
 
 
@@ -44,12 +46,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("commit")]
         public FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? Commit { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.deleteRecord#DeleteRecordOutput";
 
         public const string RecordType = "com.atproto.repo.deleteRecord#DeleteRecordOutput";
 

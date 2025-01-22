@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             this.SetSize = setSize;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.UpdatedAt = updatedAt;
+            this.Type = "tools.ozone.set.defs#setView";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public SetView()
         {
+            this.Type = "tools.ozone.set.defs#setView";
         }
 
 
@@ -81,12 +83,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         [JsonPropertyName("updatedAt")]
         [JsonRequired]
         public DateTime? UpdatedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.set.defs#setView";
 
         public const string RecordType = "tools.ozone.set.defs#setView";
 

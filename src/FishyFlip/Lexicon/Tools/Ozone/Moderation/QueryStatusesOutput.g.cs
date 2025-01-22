@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Cursor = cursor;
             this.SubjectStatuses = subjectStatuses;
+            this.Type = "tools.ozone.moderation.queryStatuses#QueryStatusesOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public QueryStatusesOutput()
         {
+            this.Type = "tools.ozone.moderation.queryStatuses#QueryStatusesOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("subjectStatuses")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView> SubjectStatuses { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.queryStatuses#QueryStatusesOutput";
 
         public const string RecordType = "tools.ozone.moderation.queryStatuses#QueryStatusesOutput";
 

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public UnmuteConvoInput(string convoId = default)
         {
             this.ConvoId = convoId;
+            this.Type = "chat.bsky.convo.unmuteConvo#UnmuteConvoInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public UnmuteConvoInput()
         {
+            this.Type = "chat.bsky.convo.unmuteConvo#UnmuteConvoInput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string ConvoId { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.unmuteConvo#UnmuteConvoInput";
 
         public const string RecordType = "chat.bsky.convo.unmuteConvo#UnmuteConvoInput";
 

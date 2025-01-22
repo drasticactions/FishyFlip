@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.Handle = handle;
             this.Did = did;
             this.DidDoc = didDoc;
+            this.Type = "com.atproto.server.createAccount#CreateAccountOutput";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateAccountOutput()
         {
+            this.Type = "com.atproto.server.createAccount#CreateAccountOutput";
         }
 
 
@@ -88,12 +90,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("didDoc")]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createAccount#CreateAccountOutput";
 
         public const string RecordType = "com.atproto.server.createAccount#CreateAccountOutput";
 

@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             this.Did = did;
             this.ConvoId = convoId;
             this.MessageId = messageId;
+            this.Type = "chat.bsky.convo.defs#messageRef";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public MessageRef()
         {
+            this.Type = "chat.bsky.convo.defs#messageRef";
         }
 
 
@@ -63,12 +65,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("messageId")]
         [JsonRequired]
         public string MessageId { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#messageRef";
 
         public const string RecordType = "chat.bsky.convo.defs#messageRef";
 

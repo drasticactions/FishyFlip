@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             this.Cursor = cursor;
             this.Feeds = feeds;
+            this.Type = "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetPopularFeedGeneratorsOutput()
         {
+            this.Type = "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("feeds")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView> Feeds { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput";
 
         public const string RecordType = "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput";
 

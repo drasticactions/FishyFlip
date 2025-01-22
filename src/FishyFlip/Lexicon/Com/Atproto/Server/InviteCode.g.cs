@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.CreatedBy = createdBy;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Uses = uses;
+            this.Type = "com.atproto.server.defs#inviteCode";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public InviteCode()
         {
+            this.Type = "com.atproto.server.defs#inviteCode";
         }
 
 
@@ -102,12 +104,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("uses")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse> Uses { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.defs#inviteCode";
 
         public const string RecordType = "com.atproto.server.defs#inviteCode";
 

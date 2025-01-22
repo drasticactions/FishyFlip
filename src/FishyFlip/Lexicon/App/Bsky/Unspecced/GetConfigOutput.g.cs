@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetConfigOutput(bool? checkEmailConfirmed = default)
         {
             this.CheckEmailConfirmed = checkEmailConfirmed;
+            this.Type = "app.bsky.unspecced.getConfig#GetConfigOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetConfigOutput()
         {
+            this.Type = "app.bsky.unspecced.getConfig#GetConfigOutput";
         }
 
 
@@ -41,12 +43,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("checkEmailConfirmed")]
         public bool? CheckEmailConfirmed { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.getConfig#GetConfigOutput";
 
         public const string RecordType = "app.bsky.unspecced.getConfig#GetConfigOutput";
 

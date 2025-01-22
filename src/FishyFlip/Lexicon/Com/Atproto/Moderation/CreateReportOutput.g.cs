@@ -40,6 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             this.Subject = subject;
             this.ReportedBy = reportedBy;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "com.atproto.moderation.createReport#CreateReportOutput";
         }
 
 
@@ -48,6 +49,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// </summary>
         public CreateReportOutput()
         {
+            this.Type = "com.atproto.moderation.createReport#CreateReportOutput";
         }
 
 
@@ -116,12 +118,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.moderation.createReport#CreateReportOutput";
 
         public const string RecordType = "com.atproto.moderation.createReport#CreateReportOutput";
 

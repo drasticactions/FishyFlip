@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             this.Cts = cts;
             this.Exp = exp;
             this.Sig = sig;
+            this.Type = "com.atproto.label.defs#label";
         }
 
 
@@ -44,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         public Label()
         {
+            this.Type = "com.atproto.label.defs#label";
         }
 
 
@@ -130,12 +132,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// </summary>
         [JsonPropertyName("sig")]
         public byte[]? Sig { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.label.defs#label";
 
         public const string RecordType = "com.atproto.label.defs#label";
 

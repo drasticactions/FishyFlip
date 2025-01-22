@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             this.Status = status;
             this.Stars = stars;
             this.Review = review;
+            this.Type = "buzz.bookhive.book";
         }
 
 
@@ -53,6 +54,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         public Book()
         {
+            this.Type = "buzz.bookhive.book";
         }
 
 
@@ -146,12 +148,6 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         [JsonPropertyName("review")]
         public string? Review { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "buzz.bookhive.book";
 
         public const string RecordType = "buzz.bookhive.book";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Cursor = cursor;
             this.Mutes = mutes;
+            this.Type = "app.bsky.graph.getMutes#GetMutesOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetMutesOutput()
         {
+            this.Type = "app.bsky.graph.getMutes#GetMutesOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("mutes")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Mutes { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getMutes#GetMutesOutput";
 
         public const string RecordType = "app.bsky.graph.getMutes#GetMutesOutput";
 

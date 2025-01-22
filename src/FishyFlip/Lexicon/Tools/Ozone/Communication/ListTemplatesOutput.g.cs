@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public ListTemplatesOutput(List<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView> communicationTemplates = default)
         {
             this.CommunicationTemplates = communicationTemplates;
+            this.Type = "tools.ozone.communication.listTemplates#ListTemplatesOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         public ListTemplatesOutput()
         {
+            this.Type = "tools.ozone.communication.listTemplates#ListTemplatesOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         [JsonPropertyName("communicationTemplates")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView> CommunicationTemplates { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.communication.listTemplates#ListTemplatesOutput";
 
         public const string RecordType = "tools.ozone.communication.listTemplates#ListTemplatesOutput";
 

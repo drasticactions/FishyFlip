@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             this.Value = value;
             this.Description = description;
             this.ManagerRole = managerRole;
+            this.Type = "tools.ozone.setting.upsertOption#UpsertOptionInput";
         }
 
 
@@ -42,6 +43,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public UpsertOptionInput()
         {
+            this.Type = "tools.ozone.setting.upsertOption#UpsertOptionInput";
         }
 
 
@@ -96,12 +98,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         [JsonPropertyName("managerRole")]
         public string? ManagerRole { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.setting.upsertOption#UpsertOptionInput";
 
         public const string RecordType = "tools.ozone.setting.upsertOption#UpsertOptionInput";
 

@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Subject = subject;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "app.bsky.feed.like";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public Like()
         {
+            this.Type = "app.bsky.feed.like";
         }
 
 
@@ -56,12 +58,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.like";
 
         public const string RecordType = "app.bsky.feed.like";
 

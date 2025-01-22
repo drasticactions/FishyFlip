@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Cursor = cursor;
             this.HitsTotal = hitsTotal;
             this.Posts = posts;
+            this.Type = "app.bsky.feed.searchPosts#SearchPostsOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SearchPostsOutput()
         {
+            this.Type = "app.bsky.feed.searchPosts#SearchPostsOutput";
         }
 
 
@@ -61,12 +63,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("posts")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.PostView> Posts { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.searchPosts#SearchPostsOutput";
 
         public const string RecordType = "app.bsky.feed.searchPosts#SearchPostsOutput";
 

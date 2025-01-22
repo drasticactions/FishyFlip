@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             this.Action = action;
             this.Path = path;
             this.Cid = cid;
+            this.Type = "com.atproto.sync.subscribeRepos#repoOp";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public RepoOp()
         {
+            this.Type = "com.atproto.sync.subscribeRepos#repoOp";
         }
 
 
@@ -76,12 +78,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
         public Ipfs.Cid Cid { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.subscribeRepos#repoOp";
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#repoOp";
 

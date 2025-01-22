@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             this.Name = name;
             this.Message = message;
+            this.Type = "com.atproto.sync.subscribeRepos#info";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public Info()
         {
+            this.Type = "com.atproto.sync.subscribeRepos#info";
         }
 
 
@@ -56,12 +58,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         [JsonPropertyName("message")]
         public string? Message { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.subscribeRepos#info";
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#info";
 

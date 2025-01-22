@@ -29,6 +29,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.Record = record;
             this.SwapRecord = swapRecord;
             this.SwapCommit = swapCommit;
+            this.Type = "com.atproto.repo.putRecord#PutRecordInput";
         }
 
 
@@ -37,6 +38,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public PutRecordInput()
         {
+            this.Type = "com.atproto.repo.putRecord#PutRecordInput";
         }
 
 
@@ -107,12 +109,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("swapCommit")]
         public string? SwapCommit { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.putRecord#PutRecordInput";
 
         public const string RecordType = "com.atproto.repo.putRecord#PutRecordInput";
 

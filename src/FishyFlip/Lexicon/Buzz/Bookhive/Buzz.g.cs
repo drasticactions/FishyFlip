@@ -30,6 +30,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Parent = parent;
             this.Book = book;
+            this.Type = "buzz.bookhive.buzz";
         }
 
 
@@ -38,6 +39,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         public Buzz()
         {
+            this.Type = "buzz.bookhive.buzz";
         }
 
 
@@ -79,12 +81,6 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         [JsonPropertyName("book")]
         public Com.Atproto.Repo.StrongRef? Book { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "buzz.bookhive.buzz";
 
         public const string RecordType = "buzz.bookhive.buzz";
 

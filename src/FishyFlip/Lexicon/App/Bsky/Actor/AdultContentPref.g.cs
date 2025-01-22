@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public AdultContentPref(bool enabled = default)
         {
             this.Enabled = enabled;
+            this.Type = "app.bsky.actor.defs#adultContentPref";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public AdultContentPref()
         {
+            this.Type = "app.bsky.actor.defs#adultContentPref";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("enabled")]
         [JsonRequired]
         public bool Enabled { get; set; } = false;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#adultContentPref";
 
         public const string RecordType = "app.bsky.actor.defs#adultContentPref";
 

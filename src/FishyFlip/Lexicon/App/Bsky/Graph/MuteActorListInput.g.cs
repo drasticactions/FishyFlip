@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public MuteActorListInput(FishyFlip.Models.ATUri list = default)
         {
             this.List = list;
+            this.Type = "app.bsky.graph.muteActorList#MuteActorListInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public MuteActorListInput()
         {
+            this.Type = "app.bsky.graph.muteActorList#MuteActorListInput";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri List { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.muteActorList#MuteActorListInput";
 
         public const string RecordType = "app.bsky.graph.muteActorList#MuteActorListInput";
 

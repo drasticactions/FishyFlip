@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.Rkey = rkey;
             this.SwapRecord = swapRecord;
             this.SwapCommit = swapCommit;
+            this.Type = "com.atproto.repo.deleteRecord#DeleteRecordInput";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public DeleteRecordInput()
         {
+            this.Type = "com.atproto.repo.deleteRecord#DeleteRecordInput";
         }
 
 
@@ -86,12 +88,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("swapCommit")]
         public string? SwapCommit { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.deleteRecord#DeleteRecordInput";
 
         public const string RecordType = "com.atproto.repo.deleteRecord#DeleteRecordInput";
 

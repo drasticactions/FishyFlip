@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.Rev = rev;
             this.ConvoId = convoId;
+            this.Type = "chat.bsky.convo.defs#logBeginConvo";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public LogBeginConvo()
         {
+            this.Type = "chat.bsky.convo.defs#logBeginConvo";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("convoId")]
         [JsonRequired]
         public string ConvoId { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.defs#logBeginConvo";
 
         public const string RecordType = "chat.bsky.convo.defs#logBeginConvo";
 

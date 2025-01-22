@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public PutPreferencesInput(bool priority = default)
         {
             this.Priority = priority;
+            this.Type = "app.bsky.notification.putPreferences#PutPreferencesInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public PutPreferencesInput()
         {
+            this.Type = "app.bsky.notification.putPreferences#PutPreferencesInput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         [JsonPropertyName("priority")]
         [JsonRequired]
         public bool Priority { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.notification.putPreferences#PutPreferencesInput";
 
         public const string RecordType = "app.bsky.notification.putPreferences#PutPreferencesInput";
 

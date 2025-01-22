@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public InterestsPref(List<string> tags = default)
         {
             this.Tags = tags;
+            this.Type = "app.bsky.actor.defs#interestsPref";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public InterestsPref()
         {
+            this.Type = "app.bsky.actor.defs#interestsPref";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("tags")]
         [JsonRequired]
         public List<string> Tags { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#interestsPref";
 
         public const string RecordType = "app.bsky.actor.defs#interestsPref";
 

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         public DeleteMemberInput(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "tools.ozone.team.deleteMember#DeleteMemberInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// </summary>
         public DeleteMemberInput()
         {
+            this.Type = "tools.ozone.team.deleteMember#DeleteMemberInput";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.team.deleteMember#DeleteMemberInput";
 
         public const string RecordType = "tools.ozone.team.deleteMember#DeleteMemberInput";
 

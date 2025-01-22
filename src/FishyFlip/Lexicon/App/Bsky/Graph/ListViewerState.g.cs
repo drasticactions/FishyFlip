@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Muted = muted;
             this.Blocked = blocked;
+            this.Type = "app.bsky.graph.defs#listViewerState";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public ListViewerState()
         {
+            this.Type = "app.bsky.graph.defs#listViewerState";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("blocked")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Blocked { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.defs#listViewerState";
 
         public const string RecordType = "app.bsky.graph.defs#listViewerState";
 

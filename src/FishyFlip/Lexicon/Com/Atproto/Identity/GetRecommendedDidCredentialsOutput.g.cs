@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             this.AlsoKnownAs = alsoKnownAs;
             this.VerificationMethods = verificationMethods;
             this.Services = services;
+            this.Type = "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// </summary>
         public GetRecommendedDidCredentialsOutput()
         {
+            this.Type = "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput";
         }
 
 
@@ -69,12 +71,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// </summary>
         [JsonPropertyName("services")]
         public ATObject? Services { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput";
 
         public const string RecordType = "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput";
 

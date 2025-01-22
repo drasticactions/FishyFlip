@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         {
             this.Keys = keys;
             this.Scope = scope;
+            this.Type = "tools.ozone.setting.removeOptions#RemoveOptionsInput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public RemoveOptionsInput()
         {
+            this.Type = "tools.ozone.setting.removeOptions#RemoveOptionsInput";
         }
 
 
@@ -59,12 +61,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         [JsonPropertyName("scope")]
         [JsonRequired]
         public string Scope { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.setting.removeOptions#RemoveOptionsInput";
 
         public const string RecordType = "tools.ozone.setting.removeOptions#RemoveOptionsInput";
 

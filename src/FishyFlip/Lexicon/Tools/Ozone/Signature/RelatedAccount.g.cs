@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         {
             this.Account = account;
             this.Similarities = similarities;
+            this.Type = "tools.ozone.signature.findRelatedAccounts#relatedAccount";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         public RelatedAccount()
         {
+            this.Type = "tools.ozone.signature.findRelatedAccounts#relatedAccount";
         }
 
 
@@ -54,12 +56,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// </summary>
         [JsonPropertyName("similarities")]
         public List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>? Similarities { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.signature.findRelatedAccounts#relatedAccount";
 
         public const string RecordType = "tools.ozone.signature.findRelatedAccounts#relatedAccount";
 

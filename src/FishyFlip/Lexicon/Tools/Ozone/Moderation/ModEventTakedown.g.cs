@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.DurationInHours = durationInHours;
             this.AcknowledgeAccountSubjects = acknowledgeAccountSubjects;
             this.Policies = policies;
+            this.Type = "tools.ozone.moderation.defs#modEventTakedown";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventTakedown()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventTakedown";
         }
 
 
@@ -74,12 +76,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("policies")]
         public List<string>? Policies { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventTakedown";
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventTakedown";
 

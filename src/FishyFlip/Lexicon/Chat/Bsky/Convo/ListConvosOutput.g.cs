@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.Cursor = cursor;
             this.Convos = convos;
+            this.Type = "chat.bsky.convo.listConvos#ListConvosOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public ListConvosOutput()
         {
+            this.Type = "chat.bsky.convo.listConvos#ListConvosOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("convos")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView> Convos { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.listConvos#ListConvosOutput";
 
         public const string RecordType = "chat.bsky.convo.listConvos#ListConvosOutput";
 

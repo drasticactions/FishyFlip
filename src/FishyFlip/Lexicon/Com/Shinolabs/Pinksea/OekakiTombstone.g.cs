@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public OekakiTombstone(FishyFlip.Models.ATUri formerAt = default)
         {
             this.FormerAt = formerAt;
+            this.Type = "com.shinolabs.pinksea.appViewDefs#oekakiTombstone";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public OekakiTombstone()
         {
+            this.Type = "com.shinolabs.pinksea.appViewDefs#oekakiTombstone";
         }
 
 
@@ -47,12 +49,6 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri FormerAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.appViewDefs#oekakiTombstone";
 
         public const string RecordType = "com.shinolabs.pinksea.appViewDefs#oekakiTombstone";
 

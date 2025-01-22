@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.ConvoId = convoId;
             this.Message = message;
+            this.Type = "chat.bsky.convo.sendMessage#SendMessageInput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public SendMessageInput()
         {
+            this.Type = "chat.bsky.convo.sendMessage#SendMessageInput";
         }
 
 
@@ -55,12 +57,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("message")]
         [JsonRequired]
         public FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput Message { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.sendMessage#SendMessageInput";
 
         public const string RecordType = "chat.bsky.convo.sendMessage#SendMessageInput";
 

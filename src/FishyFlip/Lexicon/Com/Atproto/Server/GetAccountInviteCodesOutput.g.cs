@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public GetAccountInviteCodesOutput(List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode> codes = default)
         {
             this.Codes = codes;
+            this.Type = "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public GetAccountInviteCodesOutput()
         {
+            this.Type = "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("codes")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode> Codes { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput";
 
         public const string RecordType = "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput";
 

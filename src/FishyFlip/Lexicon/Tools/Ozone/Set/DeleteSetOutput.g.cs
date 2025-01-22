@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public DeleteSetOutput()
         {
+            this.Type = "tools.ozone.set.deleteSet#DeleteSetOutput";
         }
 
 
@@ -24,12 +25,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         public DeleteSetOutput(CBORObject obj)
         {
         }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.set.deleteSet#DeleteSetOutput";
 
         public const string RecordType = "tools.ozone.set.deleteSet#DeleteSetOutput";
 

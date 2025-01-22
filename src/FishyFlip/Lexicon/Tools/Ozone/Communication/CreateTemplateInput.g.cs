@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             this.Subject = subject;
             this.Lang = lang;
             this.CreatedBy = createdBy;
+            this.Type = "tools.ozone.communication.createTemplate#CreateTemplateInput";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// </summary>
         public CreateTemplateInput()
         {
+            this.Type = "tools.ozone.communication.createTemplate#CreateTemplateInput";
         }
 
 
@@ -86,12 +88,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         [JsonPropertyName("createdBy")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? CreatedBy { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.communication.createTemplate#CreateTemplateInput";
 
         public const string RecordType = "tools.ozone.communication.createTemplate#CreateTemplateInput";
 

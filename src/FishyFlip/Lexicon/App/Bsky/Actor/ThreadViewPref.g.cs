@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             this.Sort = sort;
             this.PrioritizeFollowedUsers = prioritizeFollowedUsers;
+            this.Type = "app.bsky.actor.defs#threadViewPref";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ThreadViewPref()
         {
+            this.Type = "app.bsky.actor.defs#threadViewPref";
         }
 
 
@@ -65,12 +67,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("prioritizeFollowedUsers")]
         public bool? PrioritizeFollowedUsers { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#threadViewPref";
 
         public const string RecordType = "app.bsky.actor.defs#threadViewPref";
 

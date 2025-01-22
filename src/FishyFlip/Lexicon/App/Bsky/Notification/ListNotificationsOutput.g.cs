@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             this.Notifications = notifications;
             this.Priority = priority;
             this.SeenAt = seenAt;
+            this.Type = "app.bsky.notification.listNotifications#ListNotificationsOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public ListNotificationsOutput()
         {
+            this.Type = "app.bsky.notification.listNotifications#ListNotificationsOutput";
         }
 
 
@@ -69,12 +71,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         [JsonPropertyName("seenAt")]
         public DateTime? SeenAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.notification.listNotifications#ListNotificationsOutput";
 
         public const string RecordType = "app.bsky.notification.listNotifications#ListNotificationsOutput";
 

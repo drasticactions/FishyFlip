@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Account = account;
             this.Note = note;
+            this.Type = "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public EnableAccountInvitesInput()
         {
+            this.Type = "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput";
         }
 
 
@@ -53,12 +55,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         [JsonPropertyName("note")]
         public string? Note { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput";
 
         public const string RecordType = "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput";
 

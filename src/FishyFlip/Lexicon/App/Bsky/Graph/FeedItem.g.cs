@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public FeedItem(FishyFlip.Models.ATUri uri = default)
         {
             this.Uri = uri;
+            this.Type = "app.bsky.graph.starterpack#feedItem";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public FeedItem()
         {
+            this.Type = "app.bsky.graph.starterpack#feedItem";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri Uri { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.starterpack#feedItem";
 
         public const string RecordType = "app.bsky.graph.starterpack#feedItem";
 

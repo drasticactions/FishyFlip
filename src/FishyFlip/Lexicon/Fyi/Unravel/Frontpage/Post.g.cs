@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
             this.Title = title;
             this.Url = url;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "fyi.unravel.frontpage.post";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// </summary>
         public Post()
         {
+            this.Type = "fyi.unravel.frontpage.post";
         }
 
 
@@ -65,12 +67,6 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fyi.unravel.frontpage.post";
 
         public const string RecordType = "fyi.unravel.frontpage.post";
 

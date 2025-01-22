@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.DidDoc = didDoc;
             this.Collections = collections;
             this.HandleIsCorrect = handleIsCorrect;
+            this.Type = "com.atproto.repo.describeRepo#DescribeRepoOutput";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public DescribeRepoOutput()
         {
+            this.Type = "com.atproto.repo.describeRepo#DescribeRepoOutput";
         }
 
 
@@ -87,12 +89,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonPropertyName("handleIsCorrect")]
         [JsonRequired]
         public bool HandleIsCorrect { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.describeRepo#DescribeRepoOutput";
 
         public const string RecordType = "com.atproto.repo.describeRepo#DescribeRepoOutput";
 

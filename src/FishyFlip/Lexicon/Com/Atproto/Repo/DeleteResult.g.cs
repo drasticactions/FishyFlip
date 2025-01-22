@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public DeleteResult()
         {
+            this.Type = "com.atproto.repo.applyWrites#deleteResult";
         }
 
 
@@ -24,12 +25,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public DeleteResult(CBORObject obj)
         {
         }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.applyWrites#deleteResult";
 
         public const string RecordType = "com.atproto.repo.applyWrites#deleteResult";
 

@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Details = details;
             this.Moderation = moderation;
+            this.Type = "tools.ozone.moderation.defs#blobView";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public BlobView()
         {
+            this.Type = "tools.ozone.moderation.defs#blobView";
         }
 
 
@@ -100,12 +102,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("moderation")]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation? Moderation { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#blobView";
 
         public const string RecordType = "tools.ozone.moderation.defs#blobView";
 

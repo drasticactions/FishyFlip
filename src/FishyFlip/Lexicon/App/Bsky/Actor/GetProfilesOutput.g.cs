@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public GetProfilesOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed> profiles = default)
         {
             this.Profiles = profiles;
+            this.Type = "app.bsky.actor.getProfiles#GetProfilesOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public GetProfilesOutput()
         {
+            this.Type = "app.bsky.actor.getProfiles#GetProfilesOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("profiles")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed> Profiles { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.getProfiles#GetProfilesOutput";
 
         public const string RecordType = "app.bsky.actor.getProfiles#GetProfilesOutput";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Cursor = cursor;
             this.Events = events;
+            this.Type = "tools.ozone.moderation.queryEvents#QueryEventsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public QueryEventsOutput()
         {
+            this.Type = "tools.ozone.moderation.queryEvents#QueryEventsOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("events")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView> Events { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.queryEvents#QueryEventsOutput";
 
         public const string RecordType = "tools.ozone.moderation.queryEvents#QueryEventsOutput";
 

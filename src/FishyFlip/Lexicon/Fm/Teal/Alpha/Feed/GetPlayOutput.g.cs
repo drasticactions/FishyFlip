@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         public GetPlayOutput(FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView play = default)
         {
             this.Play = play;
+            this.Type = "fm.teal.alpha.feed.getPlay#GetPlayOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// </summary>
         public GetPlayOutput()
         {
+            this.Type = "fm.teal.alpha.feed.getPlay#GetPlayOutput";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         [JsonPropertyName("play")]
         [JsonRequired]
         public FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView Play { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fm.teal.alpha.feed.getPlay#GetPlayOutput";
 
         public const string RecordType = "fm.teal.alpha.feed.getPlay#GetPlayOutput";
 

@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             this.Nsfw = nsfw;
             this.Tags = tags;
             this.Alt = alt;
+            this.Type = "com.shinolabs.pinksea.appViewDefs#hydratedOekaki";
         }
 
 
@@ -44,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public HydratedOekaki()
         {
+            this.Type = "com.shinolabs.pinksea.appViewDefs#hydratedOekaki";
         }
 
 
@@ -123,12 +125,6 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         [JsonPropertyName("alt")]
         public string? Alt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.appViewDefs#hydratedOekaki";
 
         public const string RecordType = "com.shinolabs.pinksea.appViewDefs#hydratedOekaki";
 

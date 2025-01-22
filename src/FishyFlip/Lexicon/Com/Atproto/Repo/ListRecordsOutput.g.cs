@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             this.Cursor = cursor;
             this.Records = records;
+            this.Type = "com.atproto.repo.listRecords#ListRecordsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public ListRecordsOutput()
         {
+            this.Type = "com.atproto.repo.listRecords#ListRecordsOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         [JsonPropertyName("records")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Repo.Record> Records { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.listRecords#ListRecordsOutput";
 
         public const string RecordType = "com.atproto.repo.listRecords#ListRecordsOutput";
 

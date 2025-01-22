@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public LabelerPrefItem(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "app.bsky.actor.defs#labelerPrefItem";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public LabelerPrefItem()
         {
+            this.Type = "app.bsky.actor.defs#labelerPrefItem";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#labelerPrefItem";
 
         public const string RecordType = "app.bsky.actor.defs#labelerPrefItem";
 

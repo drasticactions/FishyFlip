@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             this.Uri = uri;
             this.Detached = detached;
+            this.Type = "app.bsky.embed.record#viewDetached";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewDetached()
         {
+            this.Type = "app.bsky.embed.record#viewDetached";
         }
 
 
@@ -53,12 +55,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("detached")]
         [JsonRequired]
         public bool Detached { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.record#viewDetached";
 
         public const string RecordType = "app.bsky.embed.record#viewDetached";
 

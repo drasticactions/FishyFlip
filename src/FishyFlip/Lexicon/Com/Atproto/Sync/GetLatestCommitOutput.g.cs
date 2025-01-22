@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             this.Cid = cid;
             this.Rev = rev;
+            this.Type = "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         public GetLatestCommitOutput()
         {
+            this.Type = "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string Rev { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
 
         public const string RecordType = "com.atproto.sync.getLatestCommit#GetLatestCommitOutput";
 

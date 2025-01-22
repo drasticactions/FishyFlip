@@ -18,6 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public MentionRule()
         {
+            this.Type = "app.bsky.feed.threadgate#mentionRule";
         }
 
 
@@ -27,12 +28,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public MentionRule(CBORObject obj)
         {
         }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.threadgate#mentionRule";
 
         public const string RecordType = "app.bsky.feed.threadgate#mentionRule";
 

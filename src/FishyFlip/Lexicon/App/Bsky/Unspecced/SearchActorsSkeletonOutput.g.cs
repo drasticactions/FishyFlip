@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             this.Cursor = cursor;
             this.HitsTotal = hitsTotal;
             this.Actors = actors;
+            this.Type = "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public SearchActorsSkeletonOutput()
         {
+            this.Type = "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput";
         }
 
 
@@ -61,12 +63,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("actors")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor> Actors { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput";
 
         public const string RecordType = "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput";
 

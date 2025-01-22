@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         {
             this.Value = value;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "my.skylights.rel#rating";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// </summary>
         public Rating()
         {
+            this.Type = "my.skylights.rel#rating";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.My.Skylights
         [JsonPropertyName("createdAt")]
         [JsonRequired]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "my.skylights.rel#rating";
 
         public const string RecordType = "my.skylights.rel#rating";
 

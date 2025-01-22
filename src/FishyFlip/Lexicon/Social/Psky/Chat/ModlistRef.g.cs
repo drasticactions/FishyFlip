@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         {
             this.Active = active;
             this.Users = users;
+            this.Type = "social.psky.chat.room#modlistRef";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// </summary>
         public ModlistRef()
         {
+            this.Type = "social.psky.chat.room#modlistRef";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         [JsonPropertyName("users")]
         [JsonRequired]
         public List<FishyFlip.Models.ATDid> Users { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.chat.room#modlistRef";
 
         public const string RecordType = "social.psky.chat.room#modlistRef";
 

@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             this.EntryUri = entryUri;
             this.LastUpdate = lastUpdate;
             this.Cid = cid;
+            this.Type = "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public GetEntryMetadataByNameOutput()
         {
+            this.Type = "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput";
         }
 
 
@@ -61,12 +63,6 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         [JsonPropertyName("cid")]
         public string? Cid { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput";
 
         public const string RecordType = "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput";
 

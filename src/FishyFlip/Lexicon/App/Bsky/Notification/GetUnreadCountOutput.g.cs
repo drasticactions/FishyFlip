@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public GetUnreadCountOutput(long count = default)
         {
             this.Count = count;
+            this.Type = "app.bsky.notification.getUnreadCount#GetUnreadCountOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public GetUnreadCountOutput()
         {
+            this.Type = "app.bsky.notification.getUnreadCount#GetUnreadCountOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         [JsonPropertyName("count")]
         [JsonRequired]
         public long Count { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.notification.getUnreadCount#GetUnreadCountOutput";
 
         public const string RecordType = "app.bsky.notification.getUnreadCount#GetUnreadCountOutput";
 

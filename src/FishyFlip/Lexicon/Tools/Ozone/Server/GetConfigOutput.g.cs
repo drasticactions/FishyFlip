@@ -35,6 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             this.BlobDivert = blobDivert;
             this.Chat = chat;
             this.Viewer = viewer;
+            this.Type = "tools.ozone.server.getConfig#GetConfigOutput";
         }
 
 
@@ -43,6 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         public GetConfigOutput()
         {
+            this.Type = "tools.ozone.server.getConfig#GetConfigOutput";
         }
 
 
@@ -92,12 +94,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         [JsonPropertyName("viewer")]
         public FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig? Viewer { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.server.getConfig#GetConfigOutput";
 
         public const string RecordType = "tools.ozone.server.getConfig#GetConfigOutput";
 

@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public ProfileAssociatedChat(string allowIncoming = default)
         {
             this.AllowIncoming = allowIncoming;
+            this.Type = "app.bsky.actor.defs#profileAssociatedChat";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public ProfileAssociatedChat()
         {
+            this.Type = "app.bsky.actor.defs#profileAssociatedChat";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("allowIncoming")]
         [JsonRequired]
         public string AllowIncoming { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#profileAssociatedChat";
 
         public const string RecordType = "app.bsky.actor.defs#profileAssociatedChat";
 

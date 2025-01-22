@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Pinned = pinned;
             this.Saved = saved;
             this.TimelineIndex = timelineIndex;
+            this.Type = "app.bsky.actor.defs#savedFeedsPref";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public SavedFeedsPref()
         {
+            this.Type = "app.bsky.actor.defs#savedFeedsPref";
         }
 
 
@@ -61,12 +63,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("timelineIndex")]
         public long? TimelineIndex { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#savedFeedsPref";
 
         public const string RecordType = "app.bsky.actor.defs#savedFeedsPref";
 

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public SendInteractionsInput(List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions = default)
         {
             this.Interactions = interactions;
+            this.Type = "app.bsky.feed.sendInteractions#SendInteractionsInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SendInteractionsInput()
         {
+            this.Type = "app.bsky.feed.sendInteractions#SendInteractionsInput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("interactions")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> Interactions { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.sendInteractions#SendInteractionsInput";
 
         public const string RecordType = "app.bsky.feed.sendInteractions#SendInteractionsInput";
 

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         public GetMentionsByEntryOutput(List<FishyFlip.Models.ATUri> mentions = default)
         {
             this.Mentions = mentions;
+            this.Type = "com.whtwnd.blog.getMentionsByEntry#GetMentionsByEntryOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public GetMentionsByEntryOutput()
         {
+            this.Type = "com.whtwnd.blog.getMentionsByEntry#GetMentionsByEntryOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         [JsonPropertyName("mentions")]
         [JsonRequired]
         public List<FishyFlip.Models.ATUri> Mentions { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.getMentionsByEntry#GetMentionsByEntryOutput";
 
         public const string RecordType = "com.whtwnd.blog.getMentionsByEntry#GetMentionsByEntryOutput";
 

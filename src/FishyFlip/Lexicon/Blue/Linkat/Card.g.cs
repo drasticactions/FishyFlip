@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
             this.Url = url;
             this.Text = text;
             this.Emoji = emoji;
+            this.Type = "blue.linkat.board#card";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// </summary>
         public Card()
         {
+            this.Type = "blue.linkat.board#card";
         }
 
 
@@ -62,12 +64,6 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// </summary>
         [JsonPropertyName("emoji")]
         public string? Emoji { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "blue.linkat.board#card";
 
         public const string RecordType = "blue.linkat.board#card";
 

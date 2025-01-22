@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             this.Url = url;
             this.Width = width;
             this.Height = height;
+            this.Type = "com.whtwnd.blog.defs#ogp";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public Ogp()
         {
+            this.Type = "com.whtwnd.blog.defs#ogp";
         }
 
 
@@ -60,12 +62,6 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         [JsonPropertyName("height")]
         public long? Height { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.defs#ogp";
 
         public const string RecordType = "com.whtwnd.blog.defs#ogp";
 

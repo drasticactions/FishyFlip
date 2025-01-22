@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.IndexedAt = indexedAt;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Actor = actor;
+            this.Type = "app.bsky.feed.getLikes#like";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public LikeDef()
         {
+            this.Type = "app.bsky.feed.getLikes#like";
         }
 
 
@@ -65,12 +67,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("actor")]
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView Actor { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getLikes#like";
 
         public const string RecordType = "app.bsky.feed.getLikes#like";
 

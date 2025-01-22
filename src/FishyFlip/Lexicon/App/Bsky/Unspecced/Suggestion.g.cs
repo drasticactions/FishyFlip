@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             this.Tag = tag;
             this.SubjectType = subjectType;
             this.Subject = subject;
+            this.Type = "app.bsky.unspecced.getTaggedSuggestions#suggestion";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public Suggestion()
         {
+            this.Type = "app.bsky.unspecced.getTaggedSuggestions#suggestion";
         }
 
 
@@ -69,12 +71,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("subject")]
         [JsonRequired]
         public string Subject { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.getTaggedSuggestions#suggestion";
 
         public const string RecordType = "app.bsky.unspecced.getTaggedSuggestions#suggestion";
 

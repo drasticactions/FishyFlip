@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventReverseTakedown(string? comment = default)
         {
             this.Comment = comment;
+            this.Type = "tools.ozone.moderation.defs#modEventReverseTakedown";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventReverseTakedown()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventReverseTakedown";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventReverseTakedown";
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventReverseTakedown";
 

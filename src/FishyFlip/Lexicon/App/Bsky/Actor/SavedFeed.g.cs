@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.TypeValue = type;
             this.Value = value;
             this.Pinned = pinned;
+            this.Type = "app.bsky.actor.defs#savedFeed";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public SavedFeed()
         {
+            this.Type = "app.bsky.actor.defs#savedFeed";
         }
 
 
@@ -81,12 +83,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("pinned")]
         [JsonRequired]
         public bool Pinned { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#savedFeed";
 
         public const string RecordType = "app.bsky.actor.defs#savedFeed";
 

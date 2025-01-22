@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public UpdateSeenInput(DateTime? seenAt = default)
         {
             this.SeenAt = seenAt;
+            this.Type = "app.bsky.notification.updateSeen#UpdateSeenInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public UpdateSeenInput()
         {
+            this.Type = "app.bsky.notification.updateSeen#UpdateSeenInput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         [JsonPropertyName("seenAt")]
         [JsonRequired]
         public DateTime? SeenAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.notification.updateSeen#UpdateSeenInput";
 
         public const string RecordType = "app.bsky.notification.updateSeen#UpdateSeenInput";
 

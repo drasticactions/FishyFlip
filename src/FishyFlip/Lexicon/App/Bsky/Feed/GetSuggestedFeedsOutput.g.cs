@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.Cursor = cursor;
             this.Feeds = feeds;
+            this.Type = "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GetSuggestedFeedsOutput()
         {
+            this.Type = "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("feeds")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView> Feeds { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput";
 
         public const string RecordType = "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput";
 

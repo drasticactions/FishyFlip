@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             this.RatingsCount = ratingsCount;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.UpdatedAt = updatedAt;
+            this.Type = "buzz.bookhive.hiveBook";
         }
 
 
@@ -52,6 +53,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         public HiveBook()
         {
+            this.Type = "buzz.bookhive.hiveBook";
         }
 
 
@@ -163,12 +165,6 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "buzz.bookhive.hiveBook";
 
         public const string RecordType = "buzz.bookhive.hiveBook";
 

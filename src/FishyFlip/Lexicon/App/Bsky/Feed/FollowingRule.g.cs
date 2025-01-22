@@ -18,6 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public FollowingRule()
         {
+            this.Type = "app.bsky.feed.threadgate#followingRule";
         }
 
 
@@ -27,12 +28,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public FollowingRule(CBORObject obj)
         {
         }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.threadgate#followingRule";
 
         public const string RecordType = "app.bsky.feed.threadgate#followingRule";
 

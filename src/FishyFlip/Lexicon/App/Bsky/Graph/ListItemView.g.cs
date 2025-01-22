@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Uri = uri;
             this.Subject = subject;
+            this.Type = "app.bsky.graph.defs#listItemView";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public ListItemView()
         {
+            this.Type = "app.bsky.graph.defs#listItemView";
         }
 
 
@@ -56,12 +58,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("subject")]
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView Subject { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.defs#listItemView";
 
         public const string RecordType = "app.bsky.graph.defs#listItemView";
 

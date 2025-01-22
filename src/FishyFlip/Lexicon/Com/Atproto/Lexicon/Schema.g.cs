@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Lexicon
         public Schema(long? lexicon)
         {
             this.Lexicon = lexicon;
+            this.Type = "com.atproto.lexicon.schema";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Lexicon
         /// </summary>
         public Schema()
         {
+            this.Type = "com.atproto.lexicon.schema";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Lexicon
         /// </summary>
         [JsonPropertyName("lexicon")]
         public long? Lexicon { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.lexicon.schema";
 
         public const string RecordType = "com.atproto.lexicon.schema";
 

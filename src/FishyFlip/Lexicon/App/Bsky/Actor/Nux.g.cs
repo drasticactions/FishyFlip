@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Completed = completed;
             this.Data = data;
             this.ExpiresAt = expiresAt;
+            this.Type = "app.bsky.actor.defs#nux";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public Nux()
         {
+            this.Type = "app.bsky.actor.defs#nux";
         }
 
 
@@ -75,12 +77,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("expiresAt")]
         public DateTime? ExpiresAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.defs#nux";
 
         public const string RecordType = "app.bsky.actor.defs#nux";
 

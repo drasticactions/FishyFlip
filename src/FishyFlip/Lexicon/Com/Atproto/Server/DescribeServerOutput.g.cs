@@ -31,6 +31,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.Links = links;
             this.Contact = contact;
             this.Did = did;
+            this.Type = "com.atproto.server.describeServer#DescribeServerOutput";
         }
 
 
@@ -39,6 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public DescribeServerOutput()
         {
+            this.Type = "com.atproto.server.describeServer#DescribeServerOutput";
         }
 
 
@@ -100,12 +102,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.describeServer#DescribeServerOutput";
 
         public const string RecordType = "com.atproto.server.describeServer#DescribeServerOutput";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         {
             this.LabelValues = labelValues;
             this.LabelValueDefinitions = labelValueDefinitions;
+            this.Type = "app.bsky.labeler.defs#labelerPolicies";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         public LabelerPolicies()
         {
+            this.Type = "app.bsky.labeler.defs#labelerPolicies";
         }
 
 
@@ -53,12 +55,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         [JsonPropertyName("labelValueDefinitions")]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>? LabelValueDefinitions { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.labeler.defs#labelerPolicies";
 
         public const string RecordType = "app.bsky.labeler.defs#labelerPolicies";
 

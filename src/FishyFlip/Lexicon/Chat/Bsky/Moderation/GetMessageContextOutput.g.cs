@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         public GetMessageContextOutput(List<ATObject> messages = default)
         {
             this.Messages = messages;
+            this.Type = "chat.bsky.moderation.getMessageContext#GetMessageContextOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         public GetMessageContextOutput()
         {
+            this.Type = "chat.bsky.moderation.getMessageContext#GetMessageContextOutput";
         }
 
 
@@ -49,12 +51,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         [JsonPropertyName("messages")]
         [JsonRequired]
         public List<ATObject> Messages { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.moderation.getMessageContext#GetMessageContextOutput";
 
         public const string RecordType = "chat.bsky.moderation.getMessageContext#GetMessageContextOutput";
 

@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         public Mention(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "app.bsky.richtext.facet#mention";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         /// </summary>
         public Mention()
         {
+            this.Type = "app.bsky.richtext.facet#mention";
         }
 
 
@@ -46,12 +48,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.richtext.facet#mention";
 
         public const string RecordType = "app.bsky.richtext.facet#mention";
 

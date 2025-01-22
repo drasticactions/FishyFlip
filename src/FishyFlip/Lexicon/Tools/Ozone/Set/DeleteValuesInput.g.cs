@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         {
             this.Name = name;
             this.Values = values;
+            this.Type = "tools.ozone.set.deleteValues#DeleteValuesInput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public DeleteValuesInput()
         {
+            this.Type = "tools.ozone.set.deleteValues#DeleteValuesInput";
         }
 
 
@@ -54,12 +56,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         [JsonPropertyName("values")]
         [JsonRequired]
         public List<string> Values { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.set.deleteValues#DeleteValuesInput";
 
         public const string RecordType = "tools.ozone.set.deleteValues#DeleteValuesInput";
 

@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.PdsHost = pdsHost;
             this.Tombstone = tombstone;
             this.Timestamp = timestamp;
+            this.Type = "tools.ozone.moderation.defs#identityEvent";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public IdentityEvent()
         {
+            this.Type = "tools.ozone.moderation.defs#identityEvent";
         }
 
 
@@ -82,12 +84,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("timestamp")]
         [JsonRequired]
         public DateTime? Timestamp { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#identityEvent";
 
         public const string RecordType = "tools.ozone.moderation.defs#identityEvent";
 

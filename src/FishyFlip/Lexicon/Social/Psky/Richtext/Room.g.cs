@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         public Room(string room = default)
         {
             this.RoomValue = room;
+            this.Type = "social.psky.richtext.facet#room";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         /// </summary>
         public Room()
         {
+            this.Type = "social.psky.richtext.facet#room";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         [JsonPropertyName("room")]
         [JsonRequired]
         public string RoomValue { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.richtext.facet#room";
 
         public const string RecordType = "social.psky.richtext.facet#room";
 

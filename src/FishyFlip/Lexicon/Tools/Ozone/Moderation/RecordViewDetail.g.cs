@@ -35,6 +35,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.IndexedAt = indexedAt;
             this.Moderation = moderation;
             this.Repo = repo;
+            this.Type = "tools.ozone.moderation.defs#recordViewDetail";
         }
 
 
@@ -43,6 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public RecordViewDetail()
         {
+            this.Type = "tools.ozone.moderation.defs#recordViewDetail";
         }
 
 
@@ -118,12 +120,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("repo")]
         [JsonRequired]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView Repo { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#recordViewDetail";
 
         public const string RecordType = "tools.ozone.moderation.defs#recordViewDetail";
 

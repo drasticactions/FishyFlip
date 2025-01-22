@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             this.Subject = subject;
             this.Cursor = cursor;
             this.Follows = follows;
+            this.Type = "app.bsky.graph.getFollows#GetFollowsOutput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public GetFollowsOutput()
         {
+            this.Type = "app.bsky.graph.getFollows#GetFollowsOutput";
         }
 
 
@@ -64,12 +66,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("follows")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Follows { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.getFollows#GetFollowsOutput";
 
         public const string RecordType = "app.bsky.graph.getFollows#GetFollowsOutput";
 

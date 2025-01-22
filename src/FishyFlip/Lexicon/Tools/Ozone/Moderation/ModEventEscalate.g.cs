@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventEscalate(string? comment = default)
         {
             this.Comment = comment;
+            this.Type = "tools.ozone.moderation.defs#modEventEscalate";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventEscalate()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventEscalate";
         }
 
 
@@ -41,12 +43,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventEscalate";
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventEscalate";
 

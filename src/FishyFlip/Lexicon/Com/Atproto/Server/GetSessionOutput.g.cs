@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.DidDoc = didDoc;
             this.Active = active;
             this.Status = status;
+            this.Type = "com.atproto.server.getSession#GetSessionOutput";
         }
 
 
@@ -44,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public GetSessionOutput()
         {
+            this.Type = "com.atproto.server.getSession#GetSessionOutput";
         }
 
 
@@ -118,12 +120,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.getSession#GetSessionOutput";
 
         public const string RecordType = "com.atproto.server.getSession#GetSessionOutput";
 

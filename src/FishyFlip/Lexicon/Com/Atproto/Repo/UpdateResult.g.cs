@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             this.Uri = uri;
             this.Cid = cid;
             this.ValidationStatus = validationStatus;
+            this.Type = "com.atproto.repo.applyWrites#updateResult";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public UpdateResult()
         {
+            this.Type = "com.atproto.repo.applyWrites#updateResult";
         }
 
 
@@ -69,12 +71,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         [JsonPropertyName("validationStatus")]
         public string? ValidationStatus { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.repo.applyWrites#updateResult";
 
         public const string RecordType = "com.atproto.repo.applyWrites#updateResult";
 

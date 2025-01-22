@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public RecordViewNotFound(FishyFlip.Models.ATUri uri = default)
         {
             this.Uri = uri;
+            this.Type = "tools.ozone.moderation.defs#recordViewNotFound";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public RecordViewNotFound()
         {
+            this.Type = "tools.ozone.moderation.defs#recordViewNotFound";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri Uri { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#recordViewNotFound";
 
         public const string RecordType = "tools.ozone.moderation.defs#recordViewNotFound";
 

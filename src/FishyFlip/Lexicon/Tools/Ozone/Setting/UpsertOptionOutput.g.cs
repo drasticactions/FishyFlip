@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public UpsertOptionOutput(FishyFlip.Lexicon.Tools.Ozone.Setting.Option option = default)
         {
             this.Option = option;
+            this.Type = "tools.ozone.setting.upsertOption#UpsertOptionOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public UpsertOptionOutput()
         {
+            this.Type = "tools.ozone.setting.upsertOption#UpsertOptionOutput";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         [JsonPropertyName("option")]
         [JsonRequired]
         public FishyFlip.Lexicon.Tools.Ozone.Setting.Option Option { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.setting.upsertOption#UpsertOptionOutput";
 
         public const string RecordType = "tools.ozone.setting.upsertOption#UpsertOptionOutput";
 

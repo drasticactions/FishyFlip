@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public ReserveSigningKeyOutput(string signingKey = default)
         {
             this.SigningKey = signingKey;
+            this.Type = "com.atproto.server.reserveSigningKey#ReserveSigningKeyOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ReserveSigningKeyOutput()
         {
+            this.Type = "com.atproto.server.reserveSigningKey#ReserveSigningKeyOutput";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("signingKey")]
         [JsonRequired]
         public string SigningKey { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.reserveSigningKey#ReserveSigningKeyOutput";
 
         public const string RecordType = "com.atproto.server.reserveSigningKey#ReserveSigningKeyOutput";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             this.Lang = lang;
             this.File = file;
+            this.Type = "app.bsky.embed.video#caption";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public Caption()
         {
+            this.Type = "app.bsky.embed.video#caption";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("file")]
         [JsonRequired]
         public Blob File { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.video#caption";
 
         public const string RecordType = "app.bsky.embed.video#caption";
 

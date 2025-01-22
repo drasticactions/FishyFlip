@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             this.MessagesReceived = messagesReceived;
             this.Convos = convos;
             this.ConvosStarted = convosStarted;
+            this.Type = "chat.bsky.moderation.getActorMetadata#metadata";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// </summary>
         public Metadata()
         {
+            this.Type = "chat.bsky.moderation.getActorMetadata#metadata";
         }
 
 
@@ -72,12 +74,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         [JsonPropertyName("convosStarted")]
         [JsonRequired]
         public long ConvosStarted { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.moderation.getActorMetadata#metadata";
 
         public const string RecordType = "chat.bsky.moderation.getActorMetadata#metadata";
 

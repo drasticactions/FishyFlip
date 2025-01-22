@@ -15,6 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SendInteractionsOutput()
         {
+            this.Type = "app.bsky.feed.sendInteractions#SendInteractionsOutput";
         }
 
 
@@ -24,12 +25,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public SendInteractionsOutput(CBORObject obj)
         {
         }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.sendInteractions#SendInteractionsOutput";
 
         public const string RecordType = "app.bsky.feed.sendInteractions#SendInteractionsOutput";
 

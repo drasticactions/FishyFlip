@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public SendMessageBatchInput(List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem> items = default)
         {
             this.Items = items;
+            this.Type = "chat.bsky.convo.sendMessageBatch#SendMessageBatchInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public SendMessageBatchInput()
         {
+            this.Type = "chat.bsky.convo.sendMessageBatch#SendMessageBatchInput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("items")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem> Items { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.sendMessageBatch#SendMessageBatchInput";
 
         public const string RecordType = "chat.bsky.convo.sendMessageBatch#SendMessageBatchInput";
 

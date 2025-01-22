@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public EmbedRecord(Com.Atproto.Repo.StrongRef record = default)
         {
             this.Record = record;
+            this.Type = "app.bsky.embed.record";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public EmbedRecord()
         {
+            this.Type = "app.bsky.embed.record";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("record")]
         [JsonRequired]
         public Com.Atproto.Repo.StrongRef Record { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.record";
 
         public const string RecordType = "app.bsky.embed.record";
 

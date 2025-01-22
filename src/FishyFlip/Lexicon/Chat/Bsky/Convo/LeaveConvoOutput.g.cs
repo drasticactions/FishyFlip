@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             this.ConvoId = convoId;
             this.Rev = rev;
+            this.Type = "chat.bsky.convo.leaveConvo#LeaveConvoOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         public LeaveConvoOutput()
         {
+            this.Type = "chat.bsky.convo.leaveConvo#LeaveConvoOutput";
         }
 
 
@@ -52,12 +54,6 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("rev")]
         [JsonRequired]
         public string Rev { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "chat.bsky.convo.leaveConvo#LeaveConvoOutput";
 
         public const string RecordType = "chat.bsky.convo.leaveConvo#LeaveConvoOutput";
 

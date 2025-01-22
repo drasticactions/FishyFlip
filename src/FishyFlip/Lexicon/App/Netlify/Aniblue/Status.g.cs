@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         public Status(List<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>? status)
         {
             this.StatusValue = status;
+            this.Type = "app.netlify.aniblue.status";
         }
 
 
@@ -28,6 +29,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// </summary>
         public Status()
         {
+            this.Type = "app.netlify.aniblue.status";
         }
 
 
@@ -44,12 +46,6 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// </summary>
         [JsonPropertyName("status")]
         public List<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>? StatusValue { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.netlify.aniblue.status";
 
         public const string RecordType = "app.netlify.aniblue.status";
 

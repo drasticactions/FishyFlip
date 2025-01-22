@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             this.Did = did;
             this.Cid = cid;
             this.RecordUri = recordUri;
+            this.Type = "com.atproto.admin.defs#repoBlobRef";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public RepoBlobRef()
         {
+            this.Type = "com.atproto.admin.defs#repoBlobRef";
         }
 
 
@@ -63,12 +65,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonPropertyName("recordUri")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? RecordUri { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.defs#repoBlobRef";
 
         public const string RecordType = "com.atproto.admin.defs#repoBlobRef";
 

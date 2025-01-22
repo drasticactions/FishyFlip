@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public AddReservedHandleInput(string handle = default)
         {
             this.Handle = handle;
+            this.Type = "com.atproto.temp.addReservedHandle#AddReservedHandleInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         public AddReservedHandleInput()
         {
+            this.Type = "com.atproto.temp.addReservedHandle#AddReservedHandleInput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         [JsonPropertyName("handle")]
         [JsonRequired]
         public string Handle { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.temp.addReservedHandle#AddReservedHandleInput";
 
         public const string RecordType = "com.atproto.temp.addReservedHandle#AddReservedHandleInput";
 

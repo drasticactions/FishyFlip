@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public ViewRecordDef(ATObject record = default)
         {
             this.Record = record;
+            this.Type = "app.bsky.embed.record#view";
         }
 
 
@@ -35,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewRecordDef()
         {
+            this.Type = "app.bsky.embed.record#view";
         }
 
 
@@ -61,12 +63,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("record")]
         [JsonRequired]
         public ATObject Record { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.record#view";
 
         public const string RecordType = "app.bsky.embed.record#view";
 

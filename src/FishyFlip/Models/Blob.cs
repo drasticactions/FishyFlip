@@ -22,6 +22,7 @@ public class Blob : ATObject
     /// </summary>
     public Blob()
     {
+        this.Type = "blob";
     }
 
     /// <summary>
@@ -33,6 +34,7 @@ public class Blob : ATObject
         this.MimeType = obj["mimeType"].AsString();
         this.Size = obj["size"].AsInt32();
         this.Ref = new ATLinkRef(obj["ref"]);
+        this.Type = "blob";
     }
 
     /// <summary>
@@ -52,12 +54,6 @@ public class Blob : ATObject
     /// </summary>
     [JsonPropertyName("ref")]
     public ATLinkRef? Ref { get; set; }
-
-    /// <summary>
-    /// Gets the ATRecord Type.
-    /// </summary>
-    [JsonPropertyName("$type")]
-    public override string Type => "blob";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Blob"/> class.

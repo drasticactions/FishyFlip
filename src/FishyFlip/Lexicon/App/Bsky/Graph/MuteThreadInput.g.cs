@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public MuteThreadInput(FishyFlip.Models.ATUri root = default)
         {
             this.Root = root;
+            this.Type = "app.bsky.graph.muteThread#MuteThreadInput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public MuteThreadInput()
         {
+            this.Type = "app.bsky.graph.muteThread#MuteThreadInput";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri Root { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.muteThread#MuteThreadInput";
 
         public const string RecordType = "app.bsky.graph.muteThread#MuteThreadInput";
 

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public ListAppPasswordsOutput(List<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef> passwords = default)
         {
             this.Passwords = passwords;
+            this.Type = "com.atproto.server.listAppPasswords#ListAppPasswordsOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public ListAppPasswordsOutput()
         {
+            this.Type = "com.atproto.server.listAppPasswords#ListAppPasswordsOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("passwords")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef> Passwords { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.listAppPasswords#ListAppPasswordsOutput";
 
         public const string RecordType = "com.atproto.server.listAppPasswords#ListAppPasswordsOutput";
 

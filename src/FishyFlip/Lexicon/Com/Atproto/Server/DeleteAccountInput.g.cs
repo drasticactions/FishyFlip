@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.Did = did;
             this.Password = password;
             this.Token = token;
+            this.Type = "com.atproto.server.deleteAccount#DeleteAccountInput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public DeleteAccountInput()
         {
+            this.Type = "com.atproto.server.deleteAccount#DeleteAccountInput";
         }
 
 
@@ -63,12 +65,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("token")]
         [JsonRequired]
         public string Token { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.deleteAccount#DeleteAccountInput";
 
         public const string RecordType = "com.atproto.server.deleteAccount#DeleteAccountInput";
 

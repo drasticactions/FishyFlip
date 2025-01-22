@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Subject = subject;
             this.Takedown = takedown;
+            this.Type = "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusOutput";
         }
 
 
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public UpdateSubjectStatusOutput()
         {
+            this.Type = "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusOutput";
         }
 
 
@@ -63,12 +65,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         [JsonPropertyName("takedown")]
         public FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusOutput";
 
         public const string RecordType = "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusOutput";
 

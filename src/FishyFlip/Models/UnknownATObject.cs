@@ -24,6 +24,7 @@ public class UnknownATObject : ATObject
     /// </summary>
     public UnknownATObject()
     {
+        this.Type = "#unknown";
     }
 
     /// <summary>
@@ -34,12 +35,6 @@ public class UnknownATObject : ATObject
     {
         this.Type = obj["$type"]?.AsString() ?? "#unknown";
     }
-
-    /// <summary>
-    /// Gets the ATRecord Type.
-    /// </summary>
-    [JsonPropertyName("$type")]
-    public override string Type { get; } = "#unknown";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnknownATObject"/> class.

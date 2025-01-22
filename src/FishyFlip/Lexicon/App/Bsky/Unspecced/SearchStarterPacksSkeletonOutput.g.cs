@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             this.Cursor = cursor;
             this.HitsTotal = hitsTotal;
             this.StarterPacks = starterPacks;
+            this.Type = "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public SearchStarterPacksSkeletonOutput()
         {
+            this.Type = "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput";
         }
 
 
@@ -61,12 +63,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack> StarterPacks { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput";
 
         public const string RecordType = "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput";
 

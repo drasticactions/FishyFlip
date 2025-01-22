@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         {
             this.Subject = subject;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "fyi.unravel.frontpage.vote";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// </summary>
         public Vote()
         {
+            this.Type = "fyi.unravel.frontpage.vote";
         }
 
 
@@ -57,12 +59,6 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "fyi.unravel.frontpage.vote";
 
         public const string RecordType = "fyi.unravel.frontpage.vote";
 

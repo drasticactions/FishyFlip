@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             this.Did = did;
             this.Rkey = rkey;
+            this.Type = "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public GetParentForReplyOutput()
         {
+            this.Type = "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput";
         }
 
 
@@ -55,12 +57,6 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonPropertyName("rkey")]
         [JsonRequired]
         public string Rkey { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput";
 
         public const string RecordType = "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput";
 

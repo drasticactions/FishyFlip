@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         {
             this.Content = content;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "com.whtwnd.blog.defs#blogEntry";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public BlogEntry()
         {
+            this.Type = "com.whtwnd.blog.defs#blogEntry";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.defs#blogEntry";
 
         public const string RecordType = "com.whtwnd.blog.defs#blogEntry";
 

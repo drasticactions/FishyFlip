@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             this.RemainingDailyBytes = remainingDailyBytes;
             this.Message = message;
             this.Error = error;
+            this.Type = "app.bsky.video.getUploadLimits#GetUploadLimitsOutput";
         }
 
 
@@ -33,6 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         public GetUploadLimitsOutput()
         {
+            this.Type = "app.bsky.video.getUploadLimits#GetUploadLimitsOutput";
         }
 
 
@@ -78,12 +80,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// </summary>
         [JsonPropertyName("error")]
         public string? Error { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.video.getUploadLimits#GetUploadLimitsOutput";
 
         public const string RecordType = "app.bsky.video.getUploadLimits#GetUploadLimitsOutput";
 

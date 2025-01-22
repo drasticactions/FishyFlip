@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             this.Scope = scope;
             this.CreatedBy = createdBy;
             this.LastUpdatedBy = lastUpdatedBy;
+            this.Type = "tools.ozone.setting.defs#option";
         }
 
 
@@ -52,6 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public Option()
         {
+            this.Type = "tools.ozone.setting.defs#option";
         }
 
 
@@ -147,12 +149,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid LastUpdatedBy { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.setting.defs#option";
 
         public const string RecordType = "tools.ozone.setting.defs#option";
 

@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public GetHandleFromDidOutput(FishyFlip.Models.ATHandle handle = default)
         {
             this.Handle = handle;
+            this.Type = "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public GetHandleFromDidOutput()
         {
+            this.Type = "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput";
         }
 
 
@@ -44,12 +46,6 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle Handle { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput";
 
         public const string RecordType = "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput";
 

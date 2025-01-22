@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             this.By = by;
             this.IndexedAt = indexedAt;
+            this.Type = "app.bsky.feed.defs#reasonRepost";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ReasonRepost()
         {
+            this.Type = "app.bsky.feed.defs#reasonRepost";
         }
 
 
@@ -55,12 +57,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("indexedAt")]
         [JsonRequired]
         public DateTime? IndexedAt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#reasonRepost";
 
         public const string RecordType = "app.bsky.feed.defs#reasonRepost";
 

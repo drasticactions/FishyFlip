@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             this.Room = room;
             this.Facets = facets;
             this.Reply = reply;
+            this.Type = "social.psky.chat.message";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// </summary>
         public Message()
         {
+            this.Type = "social.psky.chat.message";
         }
 
 
@@ -77,12 +79,6 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// </summary>
         [JsonPropertyName("reply")]
         public Com.Atproto.Repo.StrongRef? Reply { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "social.psky.chat.message";
 
         public const string RecordType = "social.psky.chat.message";
 

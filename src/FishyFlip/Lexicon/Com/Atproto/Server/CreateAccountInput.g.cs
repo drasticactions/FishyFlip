@@ -33,6 +33,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.Password = password;
             this.RecoveryKey = recoveryKey;
             this.PlcOp = plcOp;
+            this.Type = "com.atproto.server.createAccount#CreateAccountInput";
         }
 
 
@@ -41,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateAccountInput()
         {
+            this.Type = "com.atproto.server.createAccount#CreateAccountInput";
         }
 
 
@@ -121,12 +123,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("plcOp")]
         public ATObject? PlcOp { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createAccount#CreateAccountInput";
 
         public const string RecordType = "com.atproto.server.createAccount#CreateAccountInput";
 

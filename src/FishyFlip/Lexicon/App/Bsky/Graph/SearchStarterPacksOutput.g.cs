@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Cursor = cursor;
             this.StarterPacks = starterPacks;
+            this.Type = "app.bsky.graph.searchStarterPacks#SearchStarterPacksOutput";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public SearchStarterPacksOutput()
         {
+            this.Type = "app.bsky.graph.searchStarterPacks#SearchStarterPacksOutput";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("starterPacks")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic> StarterPacks { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.searchStarterPacks#SearchStarterPacksOutput";
 
         public const string RecordType = "app.bsky.graph.searchStarterPacks#SearchStarterPacksOutput";
 

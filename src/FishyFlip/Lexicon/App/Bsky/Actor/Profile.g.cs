@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.JoinedViaStarterPack = joinedViaStarterPack;
             this.PinnedPost = pinnedPost;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "app.bsky.actor.profile";
         }
 
 
@@ -49,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public Profile()
         {
+            this.Type = "app.bsky.actor.profile";
         }
 
 
@@ -122,12 +124,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.actor.profile";
 
         public const string RecordType = "app.bsky.actor.profile";
 

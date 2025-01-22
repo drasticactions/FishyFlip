@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public SkeletonSearchActor(FishyFlip.Models.ATDid did = default)
         {
             this.Did = did;
+            this.Type = "app.bsky.unspecced.defs#skeletonSearchActor";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public SkeletonSearchActor()
         {
+            this.Type = "app.bsky.unspecced.defs#skeletonSearchActor";
         }
 
 
@@ -43,12 +45,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid Did { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.unspecced.defs#skeletonSearchActor";
 
         public const string RecordType = "app.bsky.unspecced.defs#skeletonSearchActor";
 

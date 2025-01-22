@@ -28,11 +28,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost"/> (app.bsky.feed.defs#notFoundPost) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </param>
-        public ThreadViewPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView post = default, ATObject? parent = default, List<ATObject>? replies = default)
+        /// <param name="threadContext">
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext"/> (app.bsky.feed.defs#threadContext)
+        /// </param>
+        public ThreadViewPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView post = default, ATObject? parent = default, List<ATObject>? replies = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext? threadContext = default)
         {
             this.Post = post;
             this.Parent = parent;
             this.Replies = replies;
+            this.ThreadContext = threadContext;
+            this.Type = "app.bsky.feed.defs#threadViewPost";
         }
 
 
@@ -41,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public ThreadViewPost()
         {
+            this.Type = "app.bsky.feed.defs#threadViewPost";
         }
 
 
@@ -52,6 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["post"] is not null) this.Post = new FishyFlip.Lexicon.App.Bsky.Feed.PostView(obj["post"]);
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
             if (obj["replies"] is not null) this.Replies = obj["replies"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["threadContext"] is not null) this.ThreadContext = new FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext(obj["threadContext"]);
         }
 
         /// <summary>
@@ -83,10 +90,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public List<ATObject>? Replies { get; set; }
 
         /// <summary>
-        /// Gets the ATRecord Type.
+        /// Gets or sets the threadContext.
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext"/> (app.bsky.feed.defs#threadContext)
         /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#threadViewPost";
+        [JsonPropertyName("threadContext")]
+        public FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext? ThreadContext { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#threadViewPost";
 

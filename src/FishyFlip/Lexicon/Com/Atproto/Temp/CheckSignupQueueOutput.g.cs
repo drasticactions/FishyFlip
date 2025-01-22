@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             this.Activated = activated;
             this.PlaceInQueue = placeInQueue;
             this.EstimatedTimeMs = estimatedTimeMs;
+            this.Type = "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput";
         }
 
 
@@ -29,6 +30,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         public CheckSignupQueueOutput()
         {
+            this.Type = "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput";
         }
 
 
@@ -60,12 +62,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         [JsonPropertyName("estimatedTimeMs")]
         public long? EstimatedTimeMs { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput";
 
         public const string RecordType = "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput";
 

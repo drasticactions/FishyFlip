@@ -23,6 +23,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             this.Password = password;
             this.AuthFactorToken = authFactorToken;
             this.AllowTakendown = allowTakendown;
+            this.Type = "com.atproto.server.createSession#CreateSessionInput";
         }
 
 
@@ -31,6 +32,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         public CreateSessionInput()
         {
+            this.Type = "com.atproto.server.createSession#CreateSessionInput";
         }
 
 
@@ -72,12 +74,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         [JsonPropertyName("allowTakendown")]
         public bool? AllowTakendown { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.server.createSession#CreateSessionInput";
 
         public const string RecordType = "com.atproto.server.createSession#CreateSessionInput";
 

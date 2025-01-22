@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public ViewExternal(FishyFlip.Lexicon.App.Bsky.Embed.ViewExternalExternal external = default)
         {
             this.External = external;
+            this.Type = "app.bsky.embed.external#view";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// </summary>
         public ViewExternal()
         {
+            this.Type = "app.bsky.embed.external#view";
         }
 
 
@@ -45,12 +47,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("external")]
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Embed.ViewExternalExternal External { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.embed.external#view";
 
         public const string RecordType = "app.bsky.embed.external#view";
 

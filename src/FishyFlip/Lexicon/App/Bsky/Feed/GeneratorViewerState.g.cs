@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GeneratorViewerState(FishyFlip.Models.ATUri? like = default)
         {
             this.Like = like;
+            this.Type = "app.bsky.feed.defs#generatorViewerState";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public GeneratorViewerState()
         {
+            this.Type = "app.bsky.feed.defs#generatorViewerState";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("like")]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Like { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.feed.defs#generatorViewerState";
 
         public const string RecordType = "app.bsky.feed.defs#generatorViewerState";
 

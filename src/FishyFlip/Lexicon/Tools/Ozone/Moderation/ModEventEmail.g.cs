@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.SubjectLine = subjectLine;
             this.Content = content;
             this.Comment = comment;
+            this.Type = "tools.ozone.moderation.defs#modEventEmail";
         }
 
 
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventEmail()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventEmail";
         }
 
 
@@ -66,12 +68,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventEmail";
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventEmail";
 

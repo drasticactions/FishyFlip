@@ -1681,7 +1681,7 @@ public partial class AppCommands
         sb.AppendLine("    {");
 
         this.GenerateClassConstructor(sb, cls);
-        this.GenerateEmptyClassConstructor(sb, cls.ClassName);
+        this.GenerateEmptyClassConstructor(sb, cls);
         this.GenerateCBorObjectClassConstructor(sb, cls);
         foreach (var property in cls.Properties)
         {
@@ -1932,18 +1932,20 @@ public partial class AppCommands
             }
         }
 
+        sb.AppendLine($"            this.Type = \"{cls.Id}\";");
         sb.AppendLine("        }");
         sb.AppendLine();
     }
 
-    private void GenerateEmptyClassConstructor(StringBuilder sb, string className)
+    private void GenerateEmptyClassConstructor(StringBuilder sb, ClassGeneration cls)
     {
         sb.AppendLine();
         sb.AppendLine("        /// <summary>");
-        sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{className}\"/> class.");
+        sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{cls.ClassName}\"/> class.");
         sb.AppendLine("        /// </summary>");
-        sb.AppendLine($"        public {className}()");
+        sb.AppendLine($"        public {cls.ClassName}()");
         sb.AppendLine("        {");
+        sb.AppendLine($"            this.Type = \"{cls.Id}\";");
         sb.AppendLine("        }");
         sb.AppendLine();
     }
@@ -2219,10 +2221,10 @@ public partial class AppCommands
         sb.AppendLine();
         sb.AppendLine("        public ATObject() { }");
         sb.AppendLine($"        /// <summary>");
-        sb.AppendLine($"        /// Gets the ATRecord Type.");
+        sb.AppendLine($"        /// Gets or sets the ATRecord Type.");
         sb.AppendLine($"        /// </summary>");
         sb.AppendLine($"        [JsonPropertyName(\"$type\")]");
-        sb.AppendLine($"        public virtual string Type {{ get; }} = string.Empty;");
+        sb.AppendLine($"        public string Type {{ get; set; }} = string.Empty;");
         sb.AppendLine();
         sb.AppendLine($"        public virtual string ToJson()");
         sb.AppendLine("        {");
@@ -2237,12 +2239,6 @@ public partial class AppCommands
 
     private void GenerateTypeProperty(StringBuilder sb, string id)
     {
-        sb.AppendLine($"        /// <summary>");
-        sb.AppendLine($"        /// Gets the ATRecord Type.");
-        sb.AppendLine($"        /// </summary>");
-        sb.AppendLine($"        [JsonPropertyName(\"$type\")]");
-        sb.AppendLine($"        public override string Type => \"{id}\";");
-        sb.AppendLine();
         sb.AppendLine($"        public const string RecordType = \"{id}\";");
     }
 

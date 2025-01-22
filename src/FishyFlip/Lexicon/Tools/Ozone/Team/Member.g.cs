@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             this.UpdatedAt = updatedAt;
             this.LastUpdatedBy = lastUpdatedBy;
             this.Role = role;
+            this.Type = "tools.ozone.team.defs#member";
         }
 
 
@@ -44,6 +45,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// </summary>
         public Member()
         {
+            this.Type = "tools.ozone.team.defs#member";
         }
 
 
@@ -110,12 +112,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         [JsonPropertyName("role")]
         [JsonRequired]
         public string Role { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.team.defs#member";
 
         public const string RecordType = "tools.ozone.team.defs#member";
 

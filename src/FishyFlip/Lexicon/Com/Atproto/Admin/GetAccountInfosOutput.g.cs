@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public GetAccountInfosOutput(List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView> infos = default)
         {
             this.Infos = infos;
+            this.Type = "com.atproto.admin.getAccountInfos#GetAccountInfosOutput";
         }
 
 
@@ -25,6 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public GetAccountInfosOutput()
         {
+            this.Type = "com.atproto.admin.getAccountInfos#GetAccountInfosOutput";
         }
 
 
@@ -42,12 +44,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         [JsonPropertyName("infos")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView> Infos { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.getAccountInfos#GetAccountInfosOutput";
 
         public const string RecordType = "com.atproto.admin.getAccountInfos#GetAccountInfosOutput";
 

@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             this.Applied = applied;
             this.Ref = @ref;
+            this.Type = "com.atproto.admin.defs#statusAttr";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         public StatusAttr()
         {
+            this.Type = "com.atproto.admin.defs#statusAttr";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         [JsonPropertyName("ref")]
         public string? Ref { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.atproto.admin.defs#statusAttr";
 
         public const string RecordType = "com.atproto.admin.defs#statusAttr";
 

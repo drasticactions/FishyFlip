@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         {
             this.Blobref = blobref;
             this.Name = name;
+            this.Type = "com.whtwnd.blog.defs#blobMetadata";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public BlobMetadata()
         {
+            this.Type = "com.whtwnd.blog.defs#blobMetadata";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.whtwnd.blog.defs#blobMetadata";
 
         public const string RecordType = "com.whtwnd.blog.defs#blobMetadata";
 

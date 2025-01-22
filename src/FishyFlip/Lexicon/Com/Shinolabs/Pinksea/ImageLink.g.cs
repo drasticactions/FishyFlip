@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             this.Fullsize = fullsize;
             this.Alt = alt;
+            this.Type = "com.shinolabs.pinksea.oekaki#imageLink";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public ImageLink()
         {
+            this.Type = "com.shinolabs.pinksea.oekaki#imageLink";
         }
 
 
@@ -56,12 +58,6 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         [JsonPropertyName("alt")]
         public string? Alt { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.oekaki#imageLink";
 
         public const string RecordType = "com.shinolabs.pinksea.oekaki#imageLink";
 

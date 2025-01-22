@@ -22,6 +22,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             this.Subject = subject;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Type = "app.bsky.graph.follow";
         }
 
 
@@ -30,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         public Follow()
         {
+            this.Type = "app.bsky.graph.follow";
         }
 
 
@@ -54,12 +56,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "app.bsky.graph.follow";
 
         public const string RecordType = "app.bsky.graph.follow";
 

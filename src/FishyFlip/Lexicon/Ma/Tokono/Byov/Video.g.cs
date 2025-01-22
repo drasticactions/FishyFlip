@@ -28,6 +28,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
             this.Id = id;
             this.ServiceProvider = serviceProvider;
             this.Title = title;
+            this.Type = "ma.tokono.byov.video";
         }
 
 
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// </summary>
         public Video()
         {
+            this.Type = "ma.tokono.byov.video";
         }
 
 
@@ -80,12 +82,6 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// </summary>
         [JsonPropertyName("title")]
         public string? Title { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "ma.tokono.byov.video";
 
         public const string RecordType = "ma.tokono.byov.video";
 

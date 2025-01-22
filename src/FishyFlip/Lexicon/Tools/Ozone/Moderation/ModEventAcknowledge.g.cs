@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             this.Comment = comment;
             this.AcknowledgeAccountSubjects = acknowledgeAccountSubjects;
+            this.Type = "tools.ozone.moderation.defs#modEventAcknowledge";
         }
 
 
@@ -27,6 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         public ModEventAcknowledge()
         {
+            this.Type = "tools.ozone.moderation.defs#modEventAcknowledge";
         }
 
 
@@ -51,12 +53,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("acknowledgeAccountSubjects")]
         public bool? AcknowledgeAccountSubjects { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "tools.ozone.moderation.defs#modEventAcknowledge";
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventAcknowledge";
 

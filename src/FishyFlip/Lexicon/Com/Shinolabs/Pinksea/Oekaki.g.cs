@@ -32,6 +32,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             this.Tags = tags;
             this.InResponseTo = inResponseTo;
             this.Nsfw = nsfw;
+            this.Type = "com.shinolabs.pinksea.oekaki";
         }
 
 
@@ -40,6 +41,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public Oekaki()
         {
+            this.Type = "com.shinolabs.pinksea.oekaki";
         }
 
 
@@ -90,12 +92,6 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         [JsonPropertyName("nsfw")]
         public bool? Nsfw { get; set; }
-
-        /// <summary>
-        /// Gets the ATRecord Type.
-        /// </summary>
-        [JsonPropertyName("$type")]
-        public override string Type => "com.shinolabs.pinksea.oekaki";
 
         public const string RecordType = "com.shinolabs.pinksea.oekaki";
 
