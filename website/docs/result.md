@@ -28,7 +28,7 @@ error =>
  );
  ```
 
- ## Expand
+ ## Deconstruct
 
  You can also expand entries into their own nullable objects:
 

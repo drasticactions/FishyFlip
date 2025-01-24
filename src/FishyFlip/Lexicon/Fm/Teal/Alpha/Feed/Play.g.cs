@@ -23,8 +23,8 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <param name="releaseMbId">The Musicbrainz release ID</param>
         /// <param name="isrc">The ISRC code associated with the recording</param>
         /// <param name="originUrl">The URL associated with this track</param>
-        /// <param name="musicServiceBaseDomain">The base domain of the music service. e.g. music.apple.com, tidal.com, spotify.com. Defaults to 'local' if not provided.</param>
-        /// <param name="submissionClientAgent">A user-agent style string specifying the user agent. e.g. tealtracker/0.0.1b (Linux; Android 13; SM-A715F). Defaults to 'manual/unknown' if not provided.</param>
+        /// <param name="musicServiceBaseDomain">The base domain of the music service. e.g. music.apple.com, tidal.com, spotify.com. Defaults to 'local' if unavailable or not provided.</param>
+        /// <param name="submissionClientAgent">A metadata string specifying the user agent where the format is `<app-identifier>/<version> (<kernel/OS-base>; <platform/OS-version>; <device-model>)`. If string is provided, only `app-identifier` and `version` are required. `app-identifier` is recommended to be in reverse dns format. Defaults to 'manual/unknown' if unavailable or not provided.</param>
         /// <param name="playedTime">The unix timestamp of when the track was played</param>
         public Play(string? trackName, List<string>? artistNames, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistMbIds = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default)
         {
@@ -146,14 +146,14 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 
         /// <summary>
         /// Gets or sets the musicServiceBaseDomain.
-        /// <br/> The base domain of the music service. e.g. music.apple.com, tidal.com, spotify.com. Defaults to 'local' if not provided.
+        /// <br/> The base domain of the music service. e.g. music.apple.com, tidal.com, spotify.com. Defaults to 'local' if unavailable or not provided.
         /// </summary>
         [JsonPropertyName("musicServiceBaseDomain")]
         public string? MusicServiceBaseDomain { get; set; }
 
         /// <summary>
         /// Gets or sets the submissionClientAgent.
-        /// <br/> A user-agent style string specifying the user agent. e.g. tealtracker/0.0.1b (Linux; Android 13; SM-A715F). Defaults to 'manual/unknown' if not provided.
+        /// <br/> A metadata string specifying the user agent where the format is `<app-identifier>/<version> (<kernel/OS-base>; <platform/OS-version>; <device-model>)`. If string is provided, only `app-identifier` and `version` are required. `app-identifier` is recommended to be in reverse dns format. Defaults to 'manual/unknown' if unavailable or not provided.
         /// </summary>
         [JsonPropertyName("submissionClientAgent")]
         public string? SubmissionClientAgent { get; set; }

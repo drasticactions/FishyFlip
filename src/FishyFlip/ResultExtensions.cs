@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-namespace FishyFlip.Tools;
+namespace FishyFlip;
 
 /// <summary>
 /// Result Extensions.
