@@ -23,20 +23,26 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// Generated endpoint for fm.teal.alpha.feed.getActorFeed
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="cursor"></param>
         /// <param name="authorDID"></param>
+        /// <param name="cursor"></param>
+        /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput?>> GetActorFeedAsync (this FishyFlip.ATProtocol atp, string cursor, FishyFlip.Models.ATIdentifier? authorDID = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput?>> GetActorFeedAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier authorDID, string? cursor = default, int? limit = 0, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetActorFeed.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
-            queryStrings.Add("cursor=" + cursor);
+            queryStrings.Add("authorDID=" + authorDID);
 
-            if (authorDID != null)
+            if (cursor != null)
             {
-                queryStrings.Add("authorDID=" + authorDID);
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
             }
 
             var headers = new Dictionary<string, string>();

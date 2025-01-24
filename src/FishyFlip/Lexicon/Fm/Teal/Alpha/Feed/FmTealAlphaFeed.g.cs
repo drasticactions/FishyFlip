@@ -34,12 +34,13 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <summary>
         /// Generated endpoint for fm.teal.alpha.feed.getActorFeed
         /// </summary>
-        /// <param name="cursor"></param>
         /// <param name="authorDID"></param>
+        /// <param name="cursor"></param>
+        /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput?>> GetActorFeedAsync (string cursor, FishyFlip.Models.ATIdentifier? authorDID = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput?>> GetActorFeedAsync (FishyFlip.Models.ATIdentifier authorDID, string? cursor = default, int? limit = 0, CancellationToken cancellationToken = default)
         {
-            return atp.GetActorFeedAsync(cursor, authorDID, cancellationToken);
+            return atp.GetActorFeedAsync(authorDID, cursor, limit, cancellationToken);
         }
 
 
