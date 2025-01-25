@@ -951,6 +951,7 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(FishyFlip.Models.Session))]
     [JsonSerializable(typeof(FishyFlip.Models.Success))]
     [JsonSerializable(typeof(FishyFlip.Models.UnknownATObject))]
+    [JsonSerializable(typeof(FishyFlip.Models.OAuthClientMetadata))]
     [JsonSerializable(typeof(OidcClientOptions))]
     [JsonSerializable(typeof(DPoPProofPayload))]
     [JsonSerializable(typeof(Dictionary<string, JsonElement>))]

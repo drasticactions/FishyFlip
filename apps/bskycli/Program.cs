@@ -28,6 +28,42 @@ public class AppCommands
 #pragma warning restore SA1649 // File name should match first type name
 {
     /// <summary>
+    /// Validate OAuth Client Metadata.
+    /// </summary>
+    /// <param name="oauthJsonPath">OAuth Metadata JSON path.</param>
+    /// <param name="verbose">-v, Verbose logging.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Task.</returns>
+    [Command("oauth-metadata")]
+    public async Task ValidateOauthClientMetadataAsync([Argument] string oauthJsonPath, bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+        if (!File.Exists(oauthJsonPath))
+        {
+            consoleLog.LogError("OAuth Metadata JSON file does not exist.");
+            return;
+        }
+
+        var oauthJson = await File.ReadAllTextAsync(oauthJsonPath, cancellationToken);
+        try
+        {
+            var metadata = FishyFlip.Models.OAuthClientMetadata.FromJson(oauthJson);
+            if (metadata is null)
+            {
+                consoleLog.LogError("Failed to deserialize OAuth Metadata JSON.");
+                return;
+            }
+
+            consoleLog.Log("OAuth Metadata JSON is valid.");
+            consoleLog.Log(metadata.ToString());
+        }
+        catch (Exception ex)
+        {
+            consoleLog.LogError($"Failed to deserialize OAuth Metadata JSON: {ex.Message}");
+        }
+    }
+
+    /// <summary>
     /// Create a new post with a video.
     /// </summary>
     /// <param name="videoPath">Path to video.</param>
