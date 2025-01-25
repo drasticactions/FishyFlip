@@ -1651,6 +1651,7 @@ public partial class AppCommands
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Session))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Success))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.UnknownATObject))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.OAuthClientMetadata))]");
         sb.AppendLine($"    [JsonSerializable(typeof(OidcClientOptions))]");
         sb.AppendLine($"    [JsonSerializable(typeof(DPoPProofPayload))]");
         sb.AppendLine($"    [JsonSerializable(typeof(Dictionary<string, JsonElement>))]");
