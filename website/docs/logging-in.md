@@ -25,11 +25,11 @@ Console.WriteLine($"Session Token: {session.AccessJwt}");
 
 If you don't override the Instance URL in `ATProtocolBuilder.WithInstanceUrl` the users PDS Host will be resolved before the authentication attempt is made and will be used for authentication and future requests. If you have set it, the authentication request will be resolved against that endpoint. 
 
-- OAuth authentication is more complex. There is a full example showing a [local user authentication session](https://github.com/drasticactions/BSkyOAuthTokenGenerator/tree/main/src/BSkyOAuthTokenGenerator) but in short, you must:
-  - Starting the session with `atProtocol.GenerateOAuth2AuthenticationUrlAsync`
+- OAuth authentication is more complex. There is a full example showing a [local user authentication session](https://github.com/drasticactions/FishyFlip/tree/develop/samples/OAuth) but in short, you must:
+  - Starting the session with `atProtocol.GenerateOAuth2AuthenticationUrlResultAsync`
   - Sending the user to a web browser to log in
   - Handling the callback with the return URI, 
-  - Sending that URI to `atProtocol.AuthenticateWithOAuth2CallbackAsync` to generate the session.
+  - Sending that URI to `atProtocol.AuthenticateWithOAuth2CallbackResultAsync` to generate the session.
 
 ```csharp
 var scopeList = scopes.Split(',').Select(n => n.Trim()).ToArray();
@@ -41,7 +41,19 @@ if (scopeList.Length == 0)
 
 var atProtocol = this.GenerateProtocol(iUrl);
 consoleLog.Log($"Starting OAuth2 Authentication for {instanceUrl}");
-var url = await atProtocol.GenerateOAuth2AuthenticationUrlAsync(clientId, "http://127.0.0.1", scopeList, instanceUrl.ToString(), cancellationToken);
+
+// The InstanceUrl should be for where the Users PDS is.
+// For example, if they're hosted with the bsky.network domains, it should be bsky.social.
+// You can also pass in an ATIdentifier to automatically resolve the PDS url so it can handle the OAuth request.
+
+var (url, error) = await atProtocol.GenerateOAuth2AuthenticationUrlResultAsync(clientId, "http://127.0.0.1", scopeList, instanceUrl.ToString(), cancellationToken);
+
+if (url is null)
+{
+    consoleLog.LogError("Failed to authenticate, url is null");
+    return;
+}
+
 consoleLog.Log($"Login URL: {url}");
 consoleLog.Log("Please login and copy the URL of the page you are redirected to.");
 var redirectUrl = Console.ReadLine();
@@ -52,7 +64,7 @@ if (string.IsNullOrEmpty(redirectUrl))
 }
 
 consoleLog.Log($"Got redirect url, finishing OAuth2 Authentication on {instanceUrl}");
-var session = await atProtocol.AuthenticateWithOAuth2CallbackAsync(redirectUrl, cancellationToken);
+var (session, error) = await atProtocol.AuthenticateWithOAuth2CallbackResultAsync(redirectUrl, cancellationToken);
 
 if (session is null)
 {

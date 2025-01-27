@@ -48,7 +48,7 @@ public class OAuthCommands
         }
 
         consoleLog.Log($"Starting OAuth2 Refresh");
-        var session = await protocol.AuthenticateWithOAuth2SessionAsync(oauthSession, "http://localhost");
+        var (session, _) = await protocol.AuthenticateWithOAuth2SessionResultAsync(oauthSession, "http://localhost");
         if (session is null)
         {
             consoleLog.LogError("Failed to refresh session, session is null");
@@ -118,7 +118,7 @@ public class OAuthCommands
 
         var protocol = this.GenerateProtocol(iUrl);
         consoleLog.Log($"Starting OAuth2 Authentication for {instanceUrl}");
-        var url = await protocol.GenerateOAuth2AuthenticationUrlAsync(clientId, "http://127.0.0.1", scopeList, instanceUrl.ToString(), cancellationToken);
+        var (url, _) = await protocol.GenerateOAuth2AuthenticationUrlResultAsync(clientId, "http://127.0.0.1", scopeList, instanceUrl.ToString(), cancellationToken);
         consoleLog.Log($"Login URL: {url}");
         consoleLog.Log("Please login and copy the URL of the page you are redirected to.");
         var redirectUrl = Console.ReadLine();
@@ -129,7 +129,7 @@ public class OAuthCommands
         }
 
         consoleLog.Log($"Got redirect url, finishing OAuth2 Authentication on {instanceUrl}");
-        var session = await protocol.AuthenticateWithOAuth2CallbackAsync(redirectUrl, cancellationToken);
+        var (session, _) = await protocol.AuthenticateWithOAuth2CallbackResultAsync(redirectUrl, cancellationToken);
 
         if (session is null)
         {
@@ -220,7 +220,34 @@ public class OAuthCommands
 
         var protocol = this.GenerateProtocol(iUrl);
         consoleLog.Log($"Starting OAuth2 Authentication for {instanceUrl}");
-        var url = await protocol.GenerateOAuth2AuthenticationUrlAsync(clientId, redirectUrl, scopeList, identityId, instanceUrl, cancellationToken);
+
+        string? url;
+        if (identityId is not null)
+        {
+            consoleLog.Log($"Using Identity: {identityId}");
+            (url, var error) = await protocol.GenerateOAuth2AuthenticationUrlResultAsync(clientId, redirectUrl, scopeList, identityId, cancellationToken);
+            if (error is not null)
+            {
+                consoleLog.LogError(error.ToString());
+                return;
+            }
+        }
+        else
+        {
+            (url, var error2) = await protocol.GenerateOAuth2AuthenticationUrlResultAsync(clientId, redirectUrl, scopeList, instanceUrl, cancellationToken);
+            if (error2 is not null)
+            {
+                consoleLog.LogError(error2.ToString());
+                return;
+            }
+        }
+
+        if (url is null)
+        {
+            consoleLog.LogError("Failed to generate OAuth2 URL");
+            return;
+        }
+
         var result = await browser.InvokeAsync(url, cancellationToken);
         if (result.IsError)
         {
@@ -230,7 +257,7 @@ public class OAuthCommands
 
         consoleLog.Log($"Got session, finishing OAuth2 Authentication on {instanceUrl}");
 
-        var session = await protocol.AuthenticateWithOAuth2CallbackAsync(result.Response, cancellationToken);
+        var (session, _) = await protocol.AuthenticateWithOAuth2CallbackResultAsync(result.Response, cancellationToken);
         if (session is null)
         {
             consoleLog.LogError("Failed to authenticate, session is null");

@@ -66,7 +66,9 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <exception cref="OAuth2Exception">Thrown if missing OAuth2 information.</exception>
     /// <returns>Task.</returns>
-    public Task<AuthSession> StartSessionAsync(AuthSession session, string clientId, string? instanceUrl = default, CancellationToken cancellationToken = default)
+#pragma warning disable CS1998
+    public async Task<Result<AuthSession?>> StartSessionAsync(AuthSession session, string clientId, string? instanceUrl = default, CancellationToken cancellationToken = default)
+#pragma warning restore CS1998
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
@@ -80,12 +82,12 @@ internal class OAuth2SessionManager : ISessionManager
 
         if (this.proofKey is null)
         {
-            throw new OAuth2Exception("ProofKey is null. This must be set from the previous session.");
+            return new ATError(new OAuth2Exception("ProofKey is null. This must be set from the previous session."));
         }
 
         if (string.IsNullOrEmpty(session.Session.RefreshJwt))
         {
-            throw new OAuth2Exception("RefreshJwt is null. This must be set from the previous session.");
+            return new ATError(new OAuth2Exception("RefreshJwt is null. This must be set from the previous session."));
         }
 
         options.ConfigureDPoP(this.proofKey);
@@ -98,7 +100,7 @@ internal class OAuth2SessionManager : ISessionManager
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
 
         this.SetSession(session.Session);
-        return Task.FromResult(session);
+        return session;
     }
 
     /// <summary>
@@ -113,7 +115,7 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<string> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? loginHint = default,  string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public async Task<Result<string?>> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? loginHint = default,  string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
@@ -134,12 +136,12 @@ internal class OAuth2SessionManager : ISessionManager
         this.state = await this.oidcClient.PrepareLoginAsync(cancellationToken: cancellationToken);
         if (this.state == null)
         {
-            throw new OAuth2Exception("Failed to prepare login.");
+            return new ATError(new OAuth2Exception("Failed to prepare login."));
         }
 
         if (this.state.IsError)
         {
-            throw new OAuth2Exception(this.state.Error);
+            return new ATError(new OAuth2Exception($"Failed to prepare login: {this.state.Error} - {this.state.ErrorDescription}"));
         }
 
         return this.state.StartUrl;
@@ -152,33 +154,38 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
     /// <exception cref="OAuth2Exception">Thrown if Login fails.</exception>
-    public async Task<Session> CompleteAuthorizationAsync(string data, CancellationToken cancellationToken = default)
+    public async Task<Result<Session?>> CompleteAuthorizationAsync(string data, CancellationToken cancellationToken = default)
     {
         if (this.oidcClient is null)
         {
-            throw new OAuth2Exception("Client is null. Call StartAuthorizationAsync first.");
+            return new ATError(new OAuth2Exception("Client is null. Call StartAuthorizationAsync first."));
         }
 
         if (this.state is null)
         {
-            throw new OAuth2Exception("State is null. Call StartAuthorizationAsync first.");
+            return new ATError(new OAuth2Exception("State is null. Call StartAuthorizationAsync first."));
         }
 
         if (string.IsNullOrEmpty(data))
         {
-            throw new OAuth2Exception("Data is null or empty.");
+            return new ATError(new OAuth2Exception("Data is null or empty."));
         }
 
         var result = await this.oidcClient.ProcessResponseAsync(data, this.state);
         if (result.IsError)
         {
-            throw new OAuth2Exception(result.Error);
+            return new ATError(new OAuth2Exception(result.Error));
         }
 
         var sub = result.TokenResponse!.Json!.Value!.TryGetValue("sub");
         var subValue = sub!.ToString();
         var didSub = ATDid.Create(subValue)!;
-        var describeRepo = (await this.protocol.DescribeRepoAsync(didSub, cancellationToken)).HandleResult();
+        (var describeRepo, var error) = await this.protocol.DescribeRepoAsync(didSub, cancellationToken);
+        if (error is not null)
+        {
+            return error;
+        }
+
         var session = new Session(describeRepo!.Did!, describeRepo.DidDoc, describeRepo.Handle!, null, result.AccessToken, result.RefreshToken, result.AccessTokenExpiration.DateTime);
         this.delegatingHandler = (RefreshTokenDelegatingHandler)result.RefreshTokenHandler;
         this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;

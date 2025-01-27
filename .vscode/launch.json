@@ -22,7 +22,7 @@
             "request": "launch",
             "preLaunchTask": "build_oauth",
             "program": "${workspaceFolder}/samples/OAuth/bin/Debug/net9.0/OAuth.dll",
-            "args": [ "start" ],
+            "args": [ "start", "-id", "drasticactions.dev" ],
             "cwd": "${workspaceFolder}/samples/OAuth",
             "console": "internalConsole",
             "stopAtEntry": false

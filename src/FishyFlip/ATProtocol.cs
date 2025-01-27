@@ -147,16 +147,22 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="clientId">ClientID, must be a URL.</param>
     /// <param name="redirectUrl">RedirectUrl.</param>
     /// <param name="scopes">ATProtocol Scopes.</param>
-    /// <param name="identifier">ATIdentifier used for login hint.</param>
-    /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
+    /// <param name="identifier">ATIdentifier, used for LoginHint and InstanceUrl.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<string?> GenerateOAuth2AuthenticationUrlAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, ATIdentifier? identifier = null, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public async Task<Result<string?>> GenerateOAuth2AuthenticationUrlResultAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, ATIdentifier identifier, CancellationToken cancellationToken = default)
     {
-        if (identifier is null)
+        var (hostUrl, error) = await this.ResolveATIdentifierAsync(identifier, cancellationToken);
+
+        if (error is not null)
         {
-            return await this.GenerateOAuth2AuthenticationUrlAsync(clientId, redirectUrl, scopes, instanceUrl, cancellationToken);
+            return error;
         }
+
+        var uri = new Uri(hostUrl!);
+
+        // If the uri contains bsky.network, we need to use the bsky.social instance.
+        var instanceUrl = uri.Host.Contains("bsky.network") ? Constants.Urls.ATProtoServer.SocialApi : uri.ToString();
 
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.SessionManager = oAuth2SessionManager;
@@ -172,11 +178,26 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<string> GenerateOAuth2AuthenticationUrlAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public async Task<Result<string?>> GenerateOAuth2AuthenticationUrlResultAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.SessionManager = oAuth2SessionManager;
         return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, null, instanceUrl, cancellationToken);
+    }
+
+    /// <summary>
+    /// Starts the OAuth2 authentication process asynchronously.
+    /// </summary>
+    /// <param name="clientId">ClientID, must be a URL.</param>
+    /// <param name="redirectUrl">RedirectUrl.</param>
+    /// <param name="scopes">ATProtocol Scopes.</param>
+    /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Authorization URL to call.</returns>
+    [Obsolete("Use GenerateOAuth2AuthenticationUrlResultAsync instead.")]
+    public async Task<string> GenerateOAuth2AuthenticationUrlAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    {
+        return (await this.GenerateOAuth2AuthenticationUrlResultAsync(clientId, redirectUrl, scopes, instanceUrl, cancellationToken)).HandleResult()!;
     }
 
     /// <summary>
@@ -185,14 +206,26 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="callbackData">The callback data received from the OAuth2 provider.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Session?> AuthenticateWithOAuth2CallbackAsync(string callbackData, CancellationToken cancellationToken = default)
+    public async Task<Result<Session?>> AuthenticateWithOAuth2CallbackResultAsync(string callbackData, CancellationToken cancellationToken = default)
     {
         if (this.SessionManager is not OAuth2SessionManager oAuth2SessionManager)
         {
-            throw new OAuth2Exception("Session manager is not an OAuth2 session manager.");
+            return new ATError(new OAuth2Exception("Session manager is not an OAuth2 session manager."));
         }
 
         return await oAuth2SessionManager.CompleteAuthorizationAsync(callbackData, cancellationToken);
+    }
+
+    /// <summary>
+    /// Authenticates with OAuth2 callback asynchronously.
+    /// </summary>
+    /// <param name="callbackData">The callback data received from the OAuth2 provider.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
+    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    [Obsolete("Use AuthenticateWithOAuth2CallbackResultAsync instead.")]
+    public async Task<Session?> AuthenticateWithOAuth2CallbackAsync(string callbackData, CancellationToken cancellationToken = default)
+    {
+        return (await this.AuthenticateWithOAuth2CallbackResultAsync(callbackData, cancellationToken)).HandleResult();
     }
 
     /// <summary>
@@ -201,16 +234,28 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="session">The password session.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
     /// <exception cref="OAuth2Exception">Thrown if ProofKey was included in AuthSession.</exception>
-    public async Task<Session?> AuthenticateWithPasswordSessionAsync(AuthSession session)
+    public async Task<Result<Session?>> AuthenticateWithPasswordSessionResultAsync(AuthSession session)
     {
         if (!string.IsNullOrEmpty(session.ProofKey))
         {
-            throw new OAuth2Exception("Proof key is not required for password sessions. Is this an OAuth2 session?");
+            return new ATError(new OAuth2Exception("Proof key is not required for password sessions. Is this an OAuth2 session?"));
         }
 
         var passwordSessionManager = new PasswordSessionManager(this, session.Session);
         this.SessionManager = passwordSessionManager;
         return await Task.FromResult<Session?>(passwordSessionManager.Session);
+    }
+
+    /// <summary>
+    /// Authenticates with password session asynchronously.
+    /// </summary>
+    /// <param name="session">The password session.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    /// <exception cref="OAuth2Exception">Thrown if ProofKey was included in AuthSession.</exception>
+    [Obsolete("Use AuthenticateWithPasswordSessionResultAsync instead.")]
+    public async Task<Session?> AuthenticateWithPasswordSessionAsync(AuthSession session)
+    {
+        return (await this.AuthenticateWithPasswordSessionResultAsync(session)).HandleResult();
     }
 
     /// <summary>
@@ -220,16 +265,35 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="clientId">The client ID.</param>
     /// <param name="instanceUrl">Optional. The instance URL. If null, uses https://bsky.social.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Session?> AuthenticateWithOAuth2SessionAsync(AuthSession session, string clientId, string? instanceUrl = default)
+    public async Task<Result<Session?>> AuthenticateWithOAuth2SessionResultAsync(AuthSession session, string clientId, string? instanceUrl = default)
     {
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.SessionManager = oAuth2SessionManager;
         if (string.IsNullOrEmpty(session.ProofKey))
         {
-            throw new OAuth2Exception("Proof key is required for OAuth2 sessions.");
+            return new ATError(new OAuth2Exception("Proof key is required for OAuth2 sessions."));
         }
 
-        return (await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl)).Session;
+        var (session2, error2) = await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl);
+        if (error2 is not null)
+        {
+            return error2;
+        }
+
+        return session2!.Session;
+    }
+
+    /// <summary>
+    /// Authenticates with OAuth2 session asynchronously.
+    /// </summary>
+    /// <param name="session">The OAuth session.</param>
+    /// <param name="clientId">The client ID.</param>
+    /// <param name="instanceUrl">Optional. The instance URL. If null, uses https://bsky.social.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
+    [Obsolete("Use AuthenticateWithOAuth2SessionResultAsync instead.")]
+    public async Task<Session?> AuthenticateWithOAuth2SessionAsync(AuthSession session, string clientId, string? instanceUrl = default)
+    {
+        return (await this.AuthenticateWithOAuth2SessionResultAsync(session, clientId, instanceUrl)).HandleResult();
     }
 
     /// <summary>

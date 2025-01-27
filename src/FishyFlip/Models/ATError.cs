@@ -29,6 +29,21 @@ public class ATError
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="ATError"/> class.
+    /// </summary>
+    /// <param name="exception">The exception.</param>
+    /// <returns>ATError.</returns>
+    public ATError(Exception exception)
+    {
+        this.StatusCode = 500;
+        this.Detail = new ErrorDetail()
+        {
+            Message = exception.Message,
+            StackTrace = exception.StackTrace,
+        };
+    }
+
+    /// <summary>
     /// Gets or sets the status code.
     /// </summary>
     [JsonPropertyName("statuscode")]
