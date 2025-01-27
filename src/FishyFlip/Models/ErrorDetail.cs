@@ -40,6 +40,11 @@ public class ErrorDetail
     public string? Message { get; set; }
 
     /// <summary>
+    /// Gets or sets the atError stack trace.
+    /// </summary>
+    public string? StackTrace { get; set; }
+
+    /// <summary>
     /// ToString override.
     /// </summary>
     /// <returns>String.</returns>
