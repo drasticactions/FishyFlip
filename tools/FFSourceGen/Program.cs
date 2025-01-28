@@ -337,7 +337,7 @@ public partial class AppCommands
             var outputProperty = this.FetchOutputProperties(item);
             var sourceContext = outputProperty == "Success"
                 ? "Success"
-                : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
+                : $"{item.CSharpNamespace}.{outputProperty.Split(".").Last()}";
             var description = !string.IsNullOrEmpty(item.Definition.Description)
                 ? item.Definition.Description
                 : $"Generated endpoint for {item.Id}";
@@ -1087,7 +1087,7 @@ public partial class AppCommands
             var outputProperty = this.FetchOutputProperties(item);
             var sourceContext = outputProperty == "Success"
                 ? "Success"
-                : $"{item.CSharpNamespace.Replace(".", string.Empty)}{outputProperty.Split(".").Last()}";
+                : $"{item.CSharpNamespace}.{outputProperty.Split(".").Last()}";
             var description = !string.IsNullOrEmpty(item.Definition.Description)
                 ? item.Definition.Description
                 : $"Generated endpoint for {item.Id}";
@@ -1130,18 +1130,22 @@ public partial class AppCommands
                     if (inputProperties.Count <= 2)
                     {
                         sb.AppendLine(
-                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken, headers);");
+                            $"            JsonTypeInfo<{sourceContext}> jsonTypeInfo = (JsonTypeInfo<{sourceContext}>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof({sourceContext}), atp.Options.JsonSerializerOptions)!;");
+                        sb.AppendLine(
+                            $"            return atp.Post<{outputProperty}?>(endpointUrl, jsonTypeInfo, cancellationToken, headers);");
                     }
                     else if (inputProperties[1].Contains("StreamContent"))
                     {
                         sb.AppendLine(
-                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, {inputProperties[1].Split(" ").Last()}, cancellationToken, headers);");
+                            $"            JsonTypeInfo<{sourceContext}> jsonTypeInfo = (JsonTypeInfo<{sourceContext}>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof({sourceContext}), atp.Options.JsonSerializerOptions)!;");
+                        sb.AppendLine(
+                            $"            return atp.Post<{outputProperty}?>(endpointUrl, jsonTypeInfo, {inputProperties[1].Split(" ").Last()}, cancellationToken, headers);");
                     }
                     else
                     {
                         sb.AppendLine($"            var inputItem = new {item.ClassName}Input();");
                         var inputSourceContext =
-                            $"{item.CSharpNamespace.Replace(".", string.Empty)}{item.ClassName}Input";
+                            $"{item.CSharpNamespace}.{item.ClassName}Input";
                         for (int i = 1; i < inputProperties.Count - 1; i++)
                         {
                             var prop = inputProperties[i].Split(" ")[1];
@@ -1172,9 +1176,10 @@ public partial class AppCommands
                             sb.AppendLine(
                                 $"            inputItem.{realName.ToPascalCase()} = {prop};");
                         }
-
+                        sb.AppendLine($"            JsonTypeInfo<{inputSourceContext}> jsonTypeInfo = (JsonTypeInfo<{inputSourceContext}>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof({inputSourceContext}), atp.Options.JsonSerializerOptions)!;");
+                        sb.AppendLine($"            JsonTypeInfo<{sourceContext}> jsonTypeInfo2 = (JsonTypeInfo<{sourceContext}>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof({sourceContext}), atp.Options.JsonSerializerOptions)!;");
                         sb.AppendLine(
-                            $"            return atp.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{inputSourceContext}!, atp.Options.SourceGenerationContext.{sourceContext}!, inputItem, cancellationToken, headers);");
+                            $"            return atp.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);");
                     }
 
                     break;
@@ -1276,7 +1281,9 @@ public partial class AppCommands
                     else
                     {
                         sb.AppendLine(
-                            $"            return atp.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken, headers);");
+                            $"            JsonTypeInfo<{sourceContext}> jsonTypeInfo = (JsonTypeInfo<{sourceContext}>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof({sourceContext}), atp.Options.JsonSerializerOptions)!;");
+                        sb.AppendLine(
+                            $"            return atp.Get<{outputProperty}>(endpointUrl, jsonTypeInfo, cancellationToken, headers);");
                     }
 
                     break;

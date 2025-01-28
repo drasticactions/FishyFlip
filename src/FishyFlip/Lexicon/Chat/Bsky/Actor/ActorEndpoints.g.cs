@@ -30,7 +30,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             var endpointUrl = DeleteAccount.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
-            return atp.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Actor.DeleteAccountOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Actor.DeleteAccountOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Actor.DeleteAccountOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -46,7 +47,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken, headers);
+            JsonTypeInfo<Success> jsonTypeInfo = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<Success>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

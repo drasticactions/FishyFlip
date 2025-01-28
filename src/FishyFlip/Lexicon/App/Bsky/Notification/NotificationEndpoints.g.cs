@@ -51,7 +51,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Notification.GetUnreadCountOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Notification.GetUnreadCountOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Notification.GetUnreadCountOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -99,7 +100,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListNotificationsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Notification.ListNotificationsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Notification.ListNotificationsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Notification.ListNotificationsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -116,7 +118,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             var headers = new Dictionary<string, string>();
             var inputItem = new PutPreferencesInput();
             inputItem.Priority = priority;
-            return atp.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Notification.PutPreferencesInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Notification.PutPreferencesInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Notification.PutPreferencesInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<PutPreferencesInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -139,7 +143,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             inputItem.Token = token;
             inputItem.Platform = platform;
             inputItem.AppId = appId;
-            return atp.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Notification.RegisterPushInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Notification.RegisterPushInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Notification.RegisterPushInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<RegisterPushInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -156,7 +162,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             var headers = new Dictionary<string, string>();
             var inputItem = new UpdateSeenInput();
             inputItem.SeenAt = seenAt;
-            return atp.Post<UpdateSeenInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUpdateSeenInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Notification.UpdateSeenInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Notification.UpdateSeenInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Notification.UpdateSeenInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateSeenInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

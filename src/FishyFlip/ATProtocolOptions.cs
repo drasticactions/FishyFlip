@@ -84,7 +84,7 @@ public class ATProtocolOptions
     /// <summary>
     /// Gets the source generation context.
     /// </summary>
-    internal SourceGenerationContext SourceGenerationContext { get; }
+    internal IJsonTypeInfoResolver SourceGenerationContext { get; private set; }
 
     /// <summary>
     /// Gets the label definitions header.

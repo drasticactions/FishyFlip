@@ -88,7 +88,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             inputItem.Subject = subject;
             inputItem.CreatedBy = createdBy;
             inputItem.SubjectBlobCids = subjectBlobCids;
-            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.EmitEventInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.EmitEventInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.EmitEventInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Tools.Ozone.Moderation.ModEventView> jsonTypeInfo2 = (JsonTypeInfo<Tools.Ozone.Moderation.ModEventView>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.ModEventView), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -110,7 +112,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventViewDetail!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.ModEventViewDetail> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.ModEventViewDetail>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.ModEventViewDetail), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -140,7 +143,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRecordViewDetail!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.RecordViewDetail> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.RecordViewDetail>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.RecordViewDetail), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -162,7 +166,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetRecordsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.GetRecordsOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.GetRecordsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.GetRecordsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -186,7 +191,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRepoViewDetail!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.RepoViewDetail> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.RepoViewDetail>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.RepoViewDetail), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -208,7 +214,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReposOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.GetReposOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.GetReposOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.GetReposOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -341,7 +348,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryEventsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.QueryEventsOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.QueryEventsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.QueryEventsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -558,7 +566,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryStatusesOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.QueryStatusesOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.QueryStatusesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.QueryStatusesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -595,7 +604,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationSearchReposOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Moderation.SearchReposOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Moderation.SearchReposOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Moderation.SearchReposOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

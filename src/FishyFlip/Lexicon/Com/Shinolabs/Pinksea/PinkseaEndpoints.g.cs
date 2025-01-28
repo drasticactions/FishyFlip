@@ -60,7 +60,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetAuthorFeedOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetAuthorFeedOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetAuthorFeedOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetAuthorFeedOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -93,7 +94,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetAuthorRepliesOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetAuthorRepliesOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetAuthorRepliesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -114,7 +116,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetHandleFromDidOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetHandleFromDidOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetHandleFromDidOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetHandleFromDidOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -129,7 +132,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var endpointUrl = GetIdentity.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetIdentityOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetIdentityOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetIdentityOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetIdentityOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -153,7 +157,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetOekakiOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetOekakiOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetOekakiOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetOekakiOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -177,7 +182,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetParentForReplyOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetParentForReplyOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetParentForReplyOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetParentForReplyOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetParentForReplyOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetParentForReplyOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -207,7 +213,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetRecentOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetRecentOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetRecentOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetRecentOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetRecentOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetRecentOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -240,7 +247,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetTagFeedOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Shinolabs.Pinksea.GetTagFeedOutput> jsonTypeInfo = (JsonTypeInfo<Com.Shinolabs.Pinksea.GetTagFeedOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Shinolabs.Pinksea.GetTagFeedOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

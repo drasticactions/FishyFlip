@@ -40,7 +40,8 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetAuthorPostsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Whtwnd.Blog.GetAuthorPostsOutput> jsonTypeInfo = (JsonTypeInfo<Com.Whtwnd.Blog.GetAuthorPostsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Whtwnd.Blog.GetAuthorPostsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -66,7 +67,8 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetEntryMetadataByNameOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Whtwnd.Blog.GetEntryMetadataByNameOutput> jsonTypeInfo = (JsonTypeInfo<Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Whtwnd.Blog.GetEntryMetadataByNameOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -87,7 +89,8 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetMentionsByEntryOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Whtwnd.Blog.GetMentionsByEntryOutput> jsonTypeInfo = (JsonTypeInfo<Com.Whtwnd.Blog.GetMentionsByEntryOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Whtwnd.Blog.GetMentionsByEntryOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -104,7 +107,9 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             var headers = new Dictionary<string, string>();
             var inputItem = new NotifyOfNewEntryInput();
             inputItem.EntryUri = entryUri;
-            return atp.Post<NotifyOfNewEntryInput, FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryInput!, atp.Options.SourceGenerationContext.ComWhtwndBlogNotifyOfNewEntryOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Whtwnd.Blog.NotifyOfNewEntryInput> jsonTypeInfo = (JsonTypeInfo<Com.Whtwnd.Blog.NotifyOfNewEntryInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Whtwnd.Blog.NotifyOfNewEntryInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Whtwnd.Blog.NotifyOfNewEntryOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Whtwnd.Blog.NotifyOfNewEntryOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Whtwnd.Blog.NotifyOfNewEntryOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<NotifyOfNewEntryInput, FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

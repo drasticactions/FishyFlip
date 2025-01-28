@@ -48,7 +48,8 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>(endpointUrl, atp.Options.SourceGenerationContext.FmTealAlphaFeedGetActorFeedOutput!, cancellationToken, headers);
+            JsonTypeInfo<Fm.Teal.Alpha.Feed.GetActorFeedOutput> jsonTypeInfo = (JsonTypeInfo<Fm.Teal.Alpha.Feed.GetActorFeedOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Fm.Teal.Alpha.Feed.GetActorFeedOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -72,7 +73,8 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput>(endpointUrl, atp.Options.SourceGenerationContext.FmTealAlphaFeedGetPlayOutput!, cancellationToken, headers);
+            JsonTypeInfo<Fm.Teal.Alpha.Feed.GetPlayOutput> jsonTypeInfo = (JsonTypeInfo<Fm.Teal.Alpha.Feed.GetPlayOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Fm.Teal.Alpha.Feed.GetPlayOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

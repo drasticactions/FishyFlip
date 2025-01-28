@@ -42,7 +42,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var endpointUrl = GetConfig.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetConfigOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.GetConfigOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.GetConfigOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.GetConfigOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -78,7 +79,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -120,7 +122,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestionsSkeletonOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.GetSuggestionsSkeletonOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.GetSuggestionsSkeletonOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -135,7 +138,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var endpointUrl = GetTaggedSuggestions.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTaggedSuggestionsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.GetTaggedSuggestionsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.GetTaggedSuggestionsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.GetTaggedSuggestionsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -165,7 +169,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendingTopicsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.GetTrendingTopicsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.GetTrendingTopicsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.GetTrendingTopicsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -212,7 +217,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchActorsSkeletonOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.SearchActorsSkeletonOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.SearchActorsSkeletonOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.SearchActorsSkeletonOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -307,7 +313,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchPostsSkeletonOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.SearchPostsSkeletonOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.SearchPostsSkeletonOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.SearchPostsSkeletonOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -348,7 +355,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchStarterPacksSkeletonOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

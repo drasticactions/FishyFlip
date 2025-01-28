@@ -56,7 +56,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             inputItem.Writes = writes;
             inputItem.Validate = validate;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<ApplyWritesInput, FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoApplyWritesOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.ApplyWritesInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.ApplyWritesInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.ApplyWritesInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Repo.ApplyWritesOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Repo.ApplyWritesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.ApplyWritesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<ApplyWritesInput, FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -85,7 +87,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             inputItem.Rkey = rkey;
             inputItem.Validate = validate;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<CreateRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoCreateRecordOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.CreateRecordInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.CreateRecordInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.CreateRecordInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Repo.CreateRecordOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Repo.CreateRecordOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.CreateRecordOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<CreateRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -112,7 +116,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             inputItem.Rkey = rkey;
             inputItem.SwapRecord = swapRecord;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<DeleteRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoDeleteRecordOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.DeleteRecordInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.DeleteRecordInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.DeleteRecordInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Repo.DeleteRecordOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Repo.DeleteRecordOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.DeleteRecordOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<DeleteRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -133,7 +139,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoDescribeRepoOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.DescribeRepoOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.DescribeRepoOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.DescribeRepoOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -168,7 +175,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoGetRecordOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.GetRecordOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.GetRecordOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.GetRecordOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -183,7 +191,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             var endpointUrl = ImportRepo.ToString();
             var headers = new Dictionary<string, string>();
-            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, content, cancellationToken, headers);
+            JsonTypeInfo<Success> jsonTypeInfo = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<Success?>(endpointUrl, jsonTypeInfo, content, cancellationToken, headers);
         }
 
 
@@ -213,7 +222,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListMissingBlobsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.ListMissingBlobsOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.ListMissingBlobsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.ListMissingBlobsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -255,7 +265,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoListRecordsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.ListRecordsOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.ListRecordsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.ListRecordsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -286,7 +297,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             inputItem.Validate = validate;
             inputItem.SwapRecord = swapRecord;
             inputItem.SwapCommit = swapCommit;
-            return atp.Post<PutRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordInput!, atp.Options.SourceGenerationContext.ComAtprotoRepoPutRecordOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.PutRecordInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.PutRecordInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.PutRecordInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Repo.PutRecordOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Repo.PutRecordOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.PutRecordOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<PutRecordInput, FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -301,7 +314,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             var endpointUrl = UploadBlob.ToString();
             var headers = new Dictionary<string, string>();
-            return atp.Post<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoRepoUploadBlobOutput!, content, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Repo.UploadBlobOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Repo.UploadBlobOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Repo.UploadBlobOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput?>(endpointUrl, jsonTypeInfo, content, cancellationToken, headers);
         }
 
     }

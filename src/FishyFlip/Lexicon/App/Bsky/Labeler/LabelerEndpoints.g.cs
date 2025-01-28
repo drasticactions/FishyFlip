@@ -40,7 +40,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyLabelerGetServicesOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Labeler.GetServicesOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Labeler.GetServicesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Labeler.GetServicesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

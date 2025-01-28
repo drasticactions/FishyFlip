@@ -56,7 +56,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var headers = new Dictionary<string, string>();
             var inputItem = new DeleteAccountInput();
             inputItem.Did = did;
-            return atp.Post<DeleteAccountInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDeleteAccountInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.DeleteAccountInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.DeleteAccountInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.DeleteAccountInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<DeleteAccountInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -75,7 +77,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new DisableAccountInvitesInput();
             inputItem.Account = account;
             inputItem.Note = note;
-            return atp.Post<DisableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.DisableAccountInvitesInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.DisableAccountInvitesInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.DisableAccountInvitesInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<DisableAccountInvitesInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -94,7 +98,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new DisableInviteCodesInput();
             inputItem.Codes = codes;
             inputItem.Accounts = accounts;
-            return atp.Post<DisableInviteCodesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminDisableInviteCodesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.DisableInviteCodesInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.DisableInviteCodesInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.DisableInviteCodesInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<DisableInviteCodesInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -113,7 +119,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new EnableAccountInvitesInput();
             inputItem.Account = account;
             inputItem.Note = note;
-            return atp.Post<EnableAccountInvitesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminEnableAccountInvitesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.EnableAccountInvitesInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.EnableAccountInvitesInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.EnableAccountInvitesInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<EnableAccountInvitesInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -134,7 +142,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminAccountView!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.AccountView> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.AccountView>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.AccountView), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -155,7 +164,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetAccountInfosOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.GetAccountInfosOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.GetAccountInfosOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.GetAccountInfosOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -191,7 +201,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetInviteCodesOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.GetInviteCodesOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.GetInviteCodesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.GetInviteCodesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -227,7 +238,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetSubjectStatusOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.GetSubjectStatusOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.GetSubjectStatusOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.GetSubjectStatusOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -263,7 +275,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSearchAccountsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.SearchAccountsOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.SearchAccountsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.SearchAccountsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -288,7 +301,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             inputItem.SenderDid = senderDid;
             inputItem.Subject = subject;
             inputItem.Comment = comment;
-            return atp.Post<SendEmailInput, FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminSendEmailOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.SendEmailInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.SendEmailInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.SendEmailInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Admin.SendEmailOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Admin.SendEmailOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.SendEmailOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<SendEmailInput, FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -307,7 +322,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new UpdateAccountEmailInput();
             inputItem.Account = account;
             inputItem.Email = email;
-            return atp.Post<UpdateAccountEmailInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountEmailInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.UpdateAccountEmailInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.UpdateAccountEmailInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.UpdateAccountEmailInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateAccountEmailInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -326,7 +343,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new UpdateAccountHandleInput();
             inputItem.Did = did;
             inputItem.Handle = handle;
-            return atp.Post<UpdateAccountHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.UpdateAccountHandleInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.UpdateAccountHandleInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.UpdateAccountHandleInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateAccountHandleInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -345,7 +364,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             var inputItem = new UpdateAccountPasswordInput();
             inputItem.Did = did;
             inputItem.Password = password;
-            return atp.Post<UpdateAccountPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountPasswordInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.UpdateAccountPasswordInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.UpdateAccountPasswordInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.UpdateAccountPasswordInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateAccountPasswordInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -376,7 +397,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             inputItem.Subject = subject;
             inputItem.Takedown = takedown;
             inputItem.Deactivated = deactivated;
-            return atp.Post<UpdateSubjectStatusInput, FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusInput!, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateSubjectStatusOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.UpdateSubjectStatusInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Admin.UpdateSubjectStatusOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Admin.UpdateSubjectStatusOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateSubjectStatusInput, FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

@@ -29,7 +29,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneServerGetConfigOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Server.GetConfigOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Server.GetConfigOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Server.GetConfigOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

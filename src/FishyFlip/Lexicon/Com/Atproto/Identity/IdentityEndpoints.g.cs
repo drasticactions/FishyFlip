@@ -38,7 +38,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             var endpointUrl = GetRecommendedDidCredentials.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityGetRecommendedDidCredentialsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Identity.GetRecommendedDidCredentialsOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Identity.GetRecommendedDidCredentialsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -52,7 +53,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         {
             var endpointUrl = RequestPlcOperationSignature.ToString();
             var headers = new Dictionary<string, string>();
-            return atp.Post<Success?>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken, headers);
+            JsonTypeInfo<Success> jsonTypeInfo = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<Success?>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -73,7 +75,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Identity.ResolveHandleOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Identity.ResolveHandleOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Identity.ResolveHandleOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -98,7 +101,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             inputItem.AlsoKnownAs = alsoKnownAs;
             inputItem.VerificationMethods = verificationMethods;
             inputItem.Services = services;
-            return atp.Post<SignPlcOperationInput, FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationInput!, atp.Options.SourceGenerationContext.ComAtprotoIdentitySignPlcOperationOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Identity.SignPlcOperationInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Identity.SignPlcOperationInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Identity.SignPlcOperationInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Identity.SignPlcOperationOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Identity.SignPlcOperationOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Identity.SignPlcOperationOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<SignPlcOperationInput, FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -115,7 +120,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             var headers = new Dictionary<string, string>();
             var inputItem = new SubmitPlcOperationInput();
             inputItem.Operation = operation;
-            return atp.Post<SubmitPlcOperationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentitySubmitPlcOperationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Identity.SubmitPlcOperationInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Identity.SubmitPlcOperationInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Identity.SubmitPlcOperationInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<SubmitPlcOperationInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -132,7 +139,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             var headers = new Dictionary<string, string>();
             var inputItem = new UpdateHandleInput();
             inputItem.Handle = handle;
-            return atp.Post<UpdateHandleInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoIdentityUpdateHandleInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Identity.UpdateHandleInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Identity.UpdateHandleInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Identity.UpdateHandleInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateHandleInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

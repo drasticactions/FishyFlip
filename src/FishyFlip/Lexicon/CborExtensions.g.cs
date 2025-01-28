@@ -78,8 +78,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Whtwnd.Blog.BlogEntry(obj);
                 case "blue.linkat.board":
                     return new Blue.Linkat.Board(obj);
-                case "buzz.bookhive.book":
-                    return new Buzz.Bookhive.Book(obj);
                 case "community.lexicon.bookmarks.bookmark":
                     return new Community.Lexicon.Bookmarks.Bookmark(obj);
                 case "blue.zio.atfile.finger#browser":
@@ -88,8 +86,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.BskyAppProgressGuide(obj);
                 case "app.bsky.actor.defs#bskyAppStatePref":
                     return new App.Bsky.Actor.BskyAppStatePref(obj);
-                case "buzz.bookhive.buzz":
-                    return new Buzz.Bookhive.Buzz(obj);
                 case "app.bsky.richtext.facet#byteSlice":
                     return new App.Bsky.Richtext.ByteSlice(obj);
                 case "social.psky.richtext.facet#byteSlice":
@@ -390,8 +386,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Set.GetValuesOutput(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
-                case "buzz.bookhive.hiveBook":
-                    return new Buzz.Bookhive.HiveBook(obj);
                 case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
                     return new Com.Shinolabs.Pinksea.HydratedOekaki(obj);
                 case "com.atproto.sync.subscribeRepos#identity":
@@ -752,8 +746,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
                 case "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput":
                     return new App.Bsky.Actor.SearchActorsTypeaheadOutput(obj);
-                case "buzz.bookhive.searchBooks#SearchBooksOutput":
-                    return new Buzz.Bookhive.SearchBooksOutput(obj);
                 case "app.bsky.feed.searchPosts#SearchPostsOutput":
                     return new App.Bsky.Feed.SearchPostsOutput(obj);
                 case "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput":

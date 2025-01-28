@@ -52,7 +52,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Label.QueryLabelsOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Label.QueryLabelsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Label.QueryLabelsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

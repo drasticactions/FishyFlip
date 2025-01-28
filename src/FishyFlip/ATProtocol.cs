@@ -399,7 +399,7 @@ public sealed partial class ATProtocol : IDisposable
             {
                 var resolveHandle = JsonSerializer.Deserialize<ResolveHandleOutput>(
                     await result.Content.ReadAsStringAsync(),
-                    this.options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput);
+                    (JsonTypeInfo<ResolveHandleOutput>)this.Options.SourceGenerationContext.GetTypeInfo(typeof(ResolveHandleOutput), this.Options.JsonSerializerOptions)!);
                 if (resolveHandle?.Did is not null)
                 {
                     (host, var error) = await this.ResolveATDidHostAsync(resolveHandle.Did, token);
@@ -423,7 +423,7 @@ public sealed partial class ATProtocol : IDisposable
             {
                 var resolveError = JsonSerializer.Deserialize<ATError>(
                     await result.Content.ReadAsStringAsync(),
-                    this.options.SourceGenerationContext.ATError);
+                    (JsonTypeInfo<ATError>)this.Options.SourceGenerationContext.GetTypeInfo(typeof(ATError), this.Options.JsonSerializerOptions)!);
                 if (resolveError is not null)
                 {
                     this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {resolveError}");
@@ -573,7 +573,7 @@ public sealed partial class ATProtocol : IDisposable
             var result = await this.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
             if (result.IsSuccessStatusCode)
             {
-                var didDoc = JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
+                var didDoc = JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), (JsonTypeInfo<DidDoc>)this.Options.SourceGenerationContext.GetTypeInfo(typeof(DidDoc), this.Options.JsonSerializerOptions)!);
                 if (didDoc is not null)
                 {
                     host = didDoc.GetPDSEndpointUrl(this.options.Logger)?.ToString();

@@ -66,7 +66,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingListOptionsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Setting.ListOptionsOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Setting.ListOptionsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Setting.ListOptionsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -86,7 +87,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             var inputItem = new RemoveOptionsInput();
             inputItem.Keys = keys;
             inputItem.Scope = scope;
-            return atp.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Setting.RemoveOptionsInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Setting.RemoveOptionsInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Setting.RemoveOptionsInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Tools.Ozone.Setting.RemoveOptionsOutput> jsonTypeInfo2 = (JsonTypeInfo<Tools.Ozone.Setting.RemoveOptionsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Setting.RemoveOptionsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -112,7 +115,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             inputItem.Value = value;
             inputItem.Description = description;
             inputItem.ManagerRole = managerRole;
-            return atp.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Setting.UpsertOptionInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Setting.UpsertOptionInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Setting.UpsertOptionInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Tools.Ozone.Setting.UpsertOptionOutput> jsonTypeInfo2 = (JsonTypeInfo<Tools.Ozone.Setting.UpsertOptionOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Setting.UpsertOptionOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

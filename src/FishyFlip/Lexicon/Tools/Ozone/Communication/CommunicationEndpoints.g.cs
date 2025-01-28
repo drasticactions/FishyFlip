@@ -47,7 +47,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             inputItem.Subject = subject;
             inputItem.Lang = lang;
             inputItem.CreatedBy = createdBy;
-            return atp.Post<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationCreateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Communication.CreateTemplateInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Communication.CreateTemplateInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Communication.CreateTemplateInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Tools.Ozone.Communication.TemplateView> jsonTypeInfo2 = (JsonTypeInfo<Tools.Ozone.Communication.TemplateView>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Communication.TemplateView), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -65,7 +67,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new DeleteTemplateInput();
             inputItem.Id = id;
-            return atp.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Communication.DeleteTemplateInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Communication.DeleteTemplateInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Communication.DeleteTemplateInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<DeleteTemplateInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -81,7 +85,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationListTemplatesOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Communication.ListTemplatesOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Communication.ListTemplatesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Communication.ListTemplatesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -113,7 +118,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             inputItem.Subject = subject;
             inputItem.UpdatedBy = updatedBy;
             inputItem.Disabled = disabled;
-            return atp.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Communication.UpdateTemplateInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Communication.UpdateTemplateInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Communication.UpdateTemplateInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Tools.Ozone.Communication.TemplateView> jsonTypeInfo2 = (JsonTypeInfo<Tools.Ozone.Communication.TemplateView>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Communication.TemplateView), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

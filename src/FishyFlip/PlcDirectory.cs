@@ -34,7 +34,8 @@ public sealed class PlcDirectory : IDisposable
     {
         // Url: https://plc.directory/{identifier}
         string url = $"/{identifier}";
-        return await this.client.Get<DidDoc?>(url, this.Options.SourceGenerationContext.DidDoc!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        var item = (JsonTypeInfo<DidDoc>)this.Options.SourceGenerationContext.GetTypeInfo(typeof(DidDoc), this.Options.JsonSerializerOptions)!;
+        return await this.client.Get<DidDoc?>(url, item!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     /// <summary>

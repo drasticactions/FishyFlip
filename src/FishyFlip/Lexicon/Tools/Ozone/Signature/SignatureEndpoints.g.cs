@@ -39,7 +39,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindCorrelationOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Signature.FindCorrelationOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Signature.FindCorrelationOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Signature.FindCorrelationOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -73,7 +74,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindRelatedAccountsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Signature.FindRelatedAccountsOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Signature.FindRelatedAccountsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Signature.FindRelatedAccountsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -107,7 +109,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Signature.SearchAccountsOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Signature.SearchAccountsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Signature.SearchAccountsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

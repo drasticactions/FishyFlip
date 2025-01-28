@@ -55,7 +55,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             var inputItem = new DeleteMessageForSelfInput();
             inputItem.ConvoId = convoId;
             inputItem.MessageId = messageId;
-            return atp.Post<DeleteMessageForSelfInput, FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoDeleteMessageForSelfInput!, atp.Options.SourceGenerationContext.ChatBskyConvoDeletedMessageView!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.DeleteMessageForSelfInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.DeleteMessageForSelfInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.DeleteMessageForSelfInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Chat.Bsky.Convo.DeletedMessageView> jsonTypeInfo2 = (JsonTypeInfo<Chat.Bsky.Convo.DeletedMessageView>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.DeletedMessageView), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<DeleteMessageForSelfInput, FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -77,7 +79,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.GetConvoOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.GetConvoOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.GetConvoOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -99,7 +102,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoForMembersOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.GetConvoForMembersOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.GetConvoForMembersOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.GetConvoForMembersOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -124,7 +128,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetLogOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.GetLogOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.GetLogOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.GetLogOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -158,7 +163,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetMessagesOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.GetMessagesOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.GetMessagesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.GetMessagesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -176,7 +182,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new LeaveConvoInput();
             inputItem.ConvoId = convoId;
-            return atp.Post<LeaveConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoLeaveConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoLeaveConvoOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.LeaveConvoInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.LeaveConvoInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.LeaveConvoInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Chat.Bsky.Convo.LeaveConvoOutput> jsonTypeInfo2 = (JsonTypeInfo<Chat.Bsky.Convo.LeaveConvoOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.LeaveConvoOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<LeaveConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -207,7 +215,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoListConvosOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.ListConvosOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.ListConvosOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.ListConvosOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -225,7 +234,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new MuteConvoInput();
             inputItem.ConvoId = convoId;
-            return atp.Post<MuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.MuteConvoInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.MuteConvoInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.MuteConvoInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Chat.Bsky.Convo.MuteConvoOutput> jsonTypeInfo2 = (JsonTypeInfo<Chat.Bsky.Convo.MuteConvoOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.MuteConvoOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<MuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -245,7 +256,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             var inputItem = new SendMessageInput();
             inputItem.ConvoId = convoId;
             inputItem.Message = message;
-            return atp.Post<SendMessageInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageInput!, atp.Options.SourceGenerationContext.ChatBskyConvoMessageView!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.SendMessageInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.SendMessageInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.SendMessageInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Chat.Bsky.Convo.MessageView> jsonTypeInfo2 = (JsonTypeInfo<Chat.Bsky.Convo.MessageView>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.MessageView), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<SendMessageInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -263,7 +276,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new SendMessageBatchInput();
             inputItem.Items = items;
-            return atp.Post<SendMessageBatchInput, FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageBatchInput!, atp.Options.SourceGenerationContext.ChatBskyConvoSendMessageBatchOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.SendMessageBatchInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.SendMessageBatchInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.SendMessageBatchInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Chat.Bsky.Convo.SendMessageBatchOutput> jsonTypeInfo2 = (JsonTypeInfo<Chat.Bsky.Convo.SendMessageBatchOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.SendMessageBatchOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<SendMessageBatchInput, FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -281,7 +296,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
             var inputItem = new UnmuteConvoInput();
             inputItem.ConvoId = convoId;
-            return atp.Post<UnmuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.UnmuteConvoInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoOutput> jsonTypeInfo2 = (JsonTypeInfo<Chat.Bsky.Convo.UnmuteConvoOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.UnmuteConvoOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UnmuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -301,7 +318,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             var inputItem = new UpdateReadInput();
             inputItem.ConvoId = convoId;
             inputItem.MessageId = messageId;
-            return atp.Post<UpdateReadInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateReadInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateReadOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Convo.UpdateReadInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Convo.UpdateReadInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.UpdateReadInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Chat.Bsky.Convo.UpdateReadOutput> jsonTypeInfo2 = (JsonTypeInfo<Chat.Bsky.Convo.UpdateReadOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Convo.UpdateReadOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateReadInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

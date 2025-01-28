@@ -38,7 +38,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetJobStatusOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Video.GetJobStatusOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Video.GetJobStatusOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Video.GetJobStatusOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -53,7 +54,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             var endpointUrl = GetUploadLimits.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetUploadLimitsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Video.GetUploadLimitsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Video.GetUploadLimitsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Video.GetUploadLimitsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -67,7 +69,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         {
             var endpointUrl = UploadVideo.ToString();
             var headers = new Dictionary<string, string>();
-            return atp.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Video.UploadVideoOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Video.UploadVideoOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Video.UploadVideoOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

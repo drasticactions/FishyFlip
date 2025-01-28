@@ -41,7 +41,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             var inputItem = new AddMemberInput();
             inputItem.Did = did;
             inputItem.Role = role;
-            return atp.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamAddMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Team.AddMemberInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Team.AddMemberInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Team.AddMemberInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Tools.Ozone.Team.Member> jsonTypeInfo2 = (JsonTypeInfo<Tools.Ozone.Team.Member>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Team.Member), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -62,7 +64,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             var inputItem = new DeleteMemberInput();
             inputItem.Did = did;
-            return atp.Post<DeleteMemberInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamDeleteMemberInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Team.DeleteMemberInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Team.DeleteMemberInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Team.DeleteMemberInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<DeleteMemberInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -93,7 +97,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamListMembersOutput!, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Team.ListMembersOutput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Team.ListMembersOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Team.ListMembersOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -117,7 +122,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             inputItem.Did = did;
             inputItem.Disabled = disabled;
             inputItem.Role = role;
-            return atp.Post<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamUpdateMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Tools.Ozone.Team.UpdateMemberInput> jsonTypeInfo = (JsonTypeInfo<Tools.Ozone.Team.UpdateMemberInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Team.UpdateMemberInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Tools.Ozone.Team.Member> jsonTypeInfo2 = (JsonTypeInfo<Tools.Ozone.Team.Member>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Tools.Ozone.Team.Member), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

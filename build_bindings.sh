@@ -18,7 +18,6 @@ REPOS=(
     "https://github.com/marukun712/AniBlue.git"
     "https://github.com/lexicon-community/lexicon.git"
     "https://github.com/icidasset/radical-edward.git"
-    "https://github.com/nperez0111/bookhive.git"
     "https://github.com/teal-fm/teal.git"
 )
 

@@ -39,7 +39,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetActorMetadataOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Moderation.GetActorMetadataOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Moderation.GetActorMetadataOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Moderation.GetActorMetadataOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -79,7 +80,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetMessageContextOutput!, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Moderation.GetMessageContextOutput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Moderation.GetMessageContextOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Moderation.GetMessageContextOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -101,7 +103,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             inputItem.Actor = actor;
             inputItem.AllowAccess = allowAccess;
             inputItem.Ref = @ref;
-            return atp.Post<UpdateActorAccessInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationUpdateActorAccessInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Chat.Bsky.Moderation.UpdateActorAccessInput> jsonTypeInfo = (JsonTypeInfo<Chat.Bsky.Moderation.UpdateActorAccessInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Chat.Bsky.Moderation.UpdateActorAccessInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UpdateActorAccessInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

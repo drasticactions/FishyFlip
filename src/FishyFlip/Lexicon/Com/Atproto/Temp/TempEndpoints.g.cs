@@ -34,7 +34,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             var headers = new Dictionary<string, string>();
             var inputItem = new AddReservedHandleInput();
             inputItem.Handle = handle;
-            return atp.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Temp.AddReservedHandleInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Temp.AddReservedHandleInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Temp.AddReservedHandleInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Com.Atproto.Temp.AddReservedHandleOutput> jsonTypeInfo2 = (JsonTypeInfo<Com.Atproto.Temp.AddReservedHandleOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Temp.AddReservedHandleOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -49,7 +51,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             var endpointUrl = CheckSignupQueue.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Temp.CheckSignupQueueOutput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Temp.CheckSignupQueueOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Temp.CheckSignupQueueOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -66,7 +69,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             var headers = new Dictionary<string, string>();
             var inputItem = new RequestPhoneVerificationInput();
             inputItem.PhoneNumber = phoneNumber;
-            return atp.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<Com.Atproto.Temp.RequestPhoneVerificationInput> jsonTypeInfo = (JsonTypeInfo<Com.Atproto.Temp.RequestPhoneVerificationInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Com.Atproto.Temp.RequestPhoneVerificationInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }

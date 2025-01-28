@@ -49,7 +49,8 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(endpointUrl, atp.Options.SourceGenerationContext.CommunityLexiconBookmarksGetActorBookmarksOutput!, cancellationToken, headers);
+            JsonTypeInfo<Community.Lexicon.Bookmarks.GetActorBookmarksOutput> jsonTypeInfo = (JsonTypeInfo<Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Community.Lexicon.Bookmarks.GetActorBookmarksOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
     }

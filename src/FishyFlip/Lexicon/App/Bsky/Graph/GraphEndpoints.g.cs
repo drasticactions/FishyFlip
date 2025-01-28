@@ -86,7 +86,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetActorStarterPacksOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetActorStarterPacksOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetActorStarterPacksOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetActorStarterPacksOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -116,7 +117,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetBlocksOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetBlocksOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetBlocksOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetBlocksOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -149,7 +151,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowersOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetFollowersOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetFollowersOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetFollowersOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -182,7 +185,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetFollowsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetFollowsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetFollowsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetFollowsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -215,7 +219,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetKnownFollowersOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetKnownFollowersOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetKnownFollowersOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetKnownFollowersOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -248,7 +253,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetListOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetListOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetListOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -278,7 +284,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListBlocksOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetListBlocksOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetListBlocksOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetListBlocksOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -308,7 +315,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListMutesOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetListMutesOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetListMutesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetListMutesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -341,7 +349,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetListsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetListsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetListsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -371,7 +380,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetMutesOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetMutesOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetMutesOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetMutesOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -400,7 +410,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetRelationshipsOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetRelationshipsOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetRelationshipsOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetRelationshipsOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -421,7 +432,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPackOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetStarterPackOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetStarterPackOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetStarterPackOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -442,7 +454,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetStarterPacksOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetStarterPacksOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetStarterPacksOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -463,7 +476,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetSuggestedFollowsByActorOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.GetSuggestedFollowsByActorOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.GetSuggestedFollowsByActorOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -480,7 +494,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             var inputItem = new MuteActorInput();
             inputItem.Actor = actor;
-            return atp.Post<MuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.MuteActorInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.MuteActorInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.MuteActorInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<MuteActorInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -497,7 +513,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             var inputItem = new MuteActorListInput();
             inputItem.List = list;
-            return atp.Post<MuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.MuteActorListInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.MuteActorListInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.MuteActorListInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<MuteActorListInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -514,7 +532,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             var inputItem = new MuteThreadInput();
             inputItem.Root = root;
-            return atp.Post<MuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphMuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.MuteThreadInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.MuteThreadInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.MuteThreadInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<MuteThreadInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -547,7 +567,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphSearchStarterPacksOutput!, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.SearchStarterPacksOutput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.SearchStarterPacksOutput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.SearchStarterPacksOutput), atp.Options.JsonSerializerOptions)!;
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>(endpointUrl, jsonTypeInfo, cancellationToken, headers);
         }
 
 
@@ -564,7 +585,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             var inputItem = new UnmuteActorInput();
             inputItem.Actor = actor;
-            return atp.Post<UnmuteActorInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.UnmuteActorInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.UnmuteActorInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.UnmuteActorInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UnmuteActorInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -581,7 +604,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             var inputItem = new UnmuteActorListInput();
             inputItem.List = list;
-            return atp.Post<UnmuteActorListInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteActorListInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.UnmuteActorListInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.UnmuteActorListInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.UnmuteActorListInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UnmuteActorListInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
 
@@ -598,7 +623,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             var headers = new Dictionary<string, string>();
             var inputItem = new UnmuteThreadInput();
             inputItem.Root = root;
-            return atp.Post<UnmuteThreadInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphUnmuteThreadInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            JsonTypeInfo<App.Bsky.Graph.UnmuteThreadInput> jsonTypeInfo = (JsonTypeInfo<App.Bsky.Graph.UnmuteThreadInput>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(App.Bsky.Graph.UnmuteThreadInput), atp.Options.JsonSerializerOptions)!;
+            JsonTypeInfo<Success> jsonTypeInfo2 = (JsonTypeInfo<Success>)atp.Options.SourceGenerationContext.GetTypeInfo(typeof(Success), atp.Options.JsonSerializerOptions)!;
+            return atp.Post<UnmuteThreadInput, Success?>(endpointUrl, jsonTypeInfo, jsonTypeInfo2, inputItem, cancellationToken, headers);
         }
 
     }
