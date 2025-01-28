@@ -32,22 +32,3 @@ var atWebProtocol = atWebProtocolBuilder.Build();
 var atProtocolBuilder = new ATProtocolBuilder()
  .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
-
-var (test, error) = await atProtocol.Repo.ListRecordsAsync(ATIdentifier.Create("drasticactions.xn--q9jyb4c")!, "com.mackerelmedia.media");
-
-if (error != null)
-{
- Console.WriteLine($"Error: {error}");
- return;
-}
-
-if (test == null)
-{
- Console.WriteLine("No records found.");
- return;
-}
-
-foreach (var record in test.Records)
-{
- Console.WriteLine($"Record: {record.Value}");
-}
