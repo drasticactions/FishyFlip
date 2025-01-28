@@ -26,7 +26,7 @@ public class ATProtocolOptions
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters = { new ATUriJsonConverter() },
+            Converters = { new ATUriJsonConverter(), new ATObjectJsonConverter() },
         };
 
         this.SourceGenerationContext = new SourceGenerationContext(this.JsonSerializerOptions);

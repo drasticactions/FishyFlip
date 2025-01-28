@@ -21,6 +21,7 @@ namespace FishyFlip.Lexicon
             typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter),
             typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),
             typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),
+            typeof(FishyFlip.Tools.Json.ATObjectJsonConverter),
         },
         PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]
