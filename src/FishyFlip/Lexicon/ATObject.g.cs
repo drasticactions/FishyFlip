@@ -464,7 +464,7 @@ namespace FishyFlip.Lexicon
     [JsonDerivedType(typeof(FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo), typeDiscriminator: "app.bsky.embed.video#view")]
     [JsonDerivedType(typeof(FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote), typeDiscriminator: "fyi.unravel.frontpage.vote")]
     [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: "blob")]
-    [JsonPolymorphic(IgnoreUnrecognizedTypeDiscriminators = true)]
+    [JsonPolymorphic(IgnoreUnrecognizedTypeDiscriminators = true, UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
     /// <summary>
     /// The base class for FishyFlip ATProtocol Objects.
     /// </summary>

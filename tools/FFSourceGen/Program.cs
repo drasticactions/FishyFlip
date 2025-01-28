@@ -2202,7 +2202,7 @@ public partial class AppCommands
         }
 
         sb.AppendLine($"    [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: \"blob\")]");
-        sb.AppendLine($"    [JsonPolymorphic(IgnoreUnrecognizedTypeDiscriminators = true)]");
+        sb.AppendLine($"    [JsonPolymorphic(IgnoreUnrecognizedTypeDiscriminators = true, UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]");
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// The base class for FishyFlip ATProtocol Objects.");
         sb.AppendLine($"    /// </summary>");
