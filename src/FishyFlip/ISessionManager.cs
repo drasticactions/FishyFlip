@@ -12,7 +12,7 @@ namespace FishyFlip;
 /// <summary>
 /// Manage ATProtocol sessions.
 /// </summary>
-internal interface ISessionManager : IDisposable
+public interface ISessionManager : IDisposable
 {
     /// <summary>
     /// Fires when a session is updated.
