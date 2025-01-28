@@ -2227,18 +2227,34 @@ public partial class AppCommands
         sb.AppendLine("            }");
         sb.AppendLine("        }");
         sb.AppendLine();
-        sb.AppendLine("        internal static ATObject? ToATObject(ref Utf8JsonReader reader, string type)");
+        sb.AppendLine($"        internal byte[]? ToUtf8Json()");
+        sb.AppendLine("        {");
+        sb.AppendLine("            switch (this.Type)");
+        sb.AppendLine("            {");
+                foreach (var cls in classes)
+        {
+            sb.AppendLine($"                case \"{cls.Id}\":");
+            sb.AppendLine($"                    return JsonSerializer.SerializeToUtf8Bytes(({AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName})this, SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName});");
+        }
+
+        sb.AppendLine($"                case \"blob\":");
+        sb.AppendLine($"                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Models.Blob)this, SourceGenerationContext.Default.Blob);");
+        sb.AppendLine("                default:");
+        sb.AppendLine("                    return null;");
+        sb.AppendLine("            }");
+        sb.AppendLine("        }");
+        sb.AppendLine("        internal static ATObject? ToATObject(string text, string type)");
         sb.AppendLine("        {");
         sb.AppendLine("            switch (type)");
         sb.AppendLine("            {");
         foreach (var cls in classes)
         {
             sb.AppendLine($"                case \"{cls.Id}\":");
-            sb.AppendLine($"                    return JsonSerializer.Deserialize<{AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>(ref reader, (JsonTypeInfo<{AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>)SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName});");
+            sb.AppendLine($"                    return JsonSerializer.Deserialize<{AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>(text, (JsonTypeInfo<{AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>)SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName});");
         }
 
         sb.AppendLine($"                case \"blob\":");
-        sb.AppendLine($"                    return JsonSerializer.Deserialize<FishyFlip.Models.Blob>(ref reader, (JsonTypeInfo<FishyFlip.Models.Blob>)SourceGenerationContext.Default.Blob);");
+        sb.AppendLine($"                    return JsonSerializer.Deserialize<FishyFlip.Models.Blob>(text, (JsonTypeInfo<FishyFlip.Models.Blob>)SourceGenerationContext.Default.Blob);");
         sb.AppendLine("                default:");
         sb.AppendLine("                    return null;");
         sb.AppendLine("            }");

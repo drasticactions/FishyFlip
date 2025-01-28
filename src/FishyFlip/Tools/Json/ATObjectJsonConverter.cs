@@ -29,65 +29,61 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
     }
 
     /// <inheritdoc/>
-    public override ATObject? Read(ref Utf8JsonReader clonedReader, Type typeToConvert, JsonSerializerOptions options)
+    public override ATObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         // Rewind to start of object for full deserialization
-        Utf8JsonReader reader = clonedReader;
-
         ATObject? atObject = null;
 
-        if (reader.TokenType != JsonTokenType.StartObject)
+        if (JsonDocument.TryParseValue(ref reader, out var doc))
         {
-            throw new JsonException("Expected start of object");
-        }
-
-        // Read the first property which should be $type
-        reader.Read();
-        if (reader.TokenType != JsonTokenType.PropertyName)
-        {
-            throw new JsonException("Expected property name");
-        }
-
-        string? propertyName = reader.GetString();
-        if (propertyName != "$type")
-        {
-            throw new JsonException("First property must be $type");
-        }
-
-        // Read the type value
-        reader.Read();
-        if (reader.TokenType != JsonTokenType.String)
-        {
-            throw new JsonException("Expected string value for $type");
-        }
-
-        string typeValue = reader.GetString() ?? throw new JsonException("$type value cannot be null");
-
-        atObject = ATObject.ToATObject(ref clonedReader, typeValue);
-
-        if (atObject is not null)
-        {
-            return atObject;
-        }
-
-        foreach (var converter in this.converters)
-        {
-            if (converter.SupportedTypes.Contains(typeValue))
+            var rawText = doc.RootElement.GetRawText();
+            if (doc.RootElement.TryGetProperty("$type", out var type))
             {
-                atObject = converter.Read(clonedReader, typeValue, options);
-                break;
+                var text = type.GetString()?.Trim() ?? string.Empty;
+                atObject = ATObject.ToATObject(rawText, text);
+
+                if (atObject is not null)
+                {
+                    return atObject;
+                }
+
+                foreach (var converter in this.converters)
+                {
+                    if (converter.SupportedTypes.Contains(text))
+                    {
+                        atObject = converter.Read(rawText, text, options);
+                        break;
+                    }
+                }
+
+                return atObject ?? new UnknownATObject() { Type = text };
             }
         }
 
-        return atObject ?? new UnknownATObject() { Type = typeValue };
+        return atObject;
     }
 
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, ATObject? value, JsonSerializerOptions options)
     {
-        if (value is not null)
+        if (value is null)
         {
-            writer.WriteStringValue(value.ToJson());
+            return;
+        }
+
+        var bytes = value.ToUtf8Json();
+        if (bytes is not null)
+        {
+            writer.WriteRawValue(bytes);
+        }
+
+        foreach (var converter in this.converters)
+        {
+            if (converter.SupportedTypes.Contains(value.Type))
+            {
+                converter.Write(writer, value, options);
+                return;
+            }
         }
     }
 }

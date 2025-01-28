@@ -17,11 +17,11 @@ public interface ICustomATObjectConverter
     /// <summary>
     /// Reads and converts the JSON into an <see cref="ATObject"/> object.
     /// </summary>
-    /// <param name="reader">The reader for reading the JSON.</param>
+    /// <param name="text">The JSON text.</param>
     /// <param name="type">The type of ATObject to deserialize.</param>
     /// <param name="options">Options for the serializer.</param>
     /// <returns>An <see cref="ATObject"/> object or null if the conversion is not possible.</returns>
-    ATObject? Read(Utf8JsonReader reader, string type, JsonSerializerOptions options);
+    ATObject? Read(string text, string type, JsonSerializerOptions options);
 
     /// <summary>
     /// Writes the <see cref="ATObject"/> object to the JSON writer.
