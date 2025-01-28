@@ -35,6 +35,11 @@ public class SubscribeRepoMessage
     public ATObject? Record { get; internal set; }
 
     /// <summary>
+    /// Gets the JSON record of the message.
+    /// </summary>
+    public string? JSONRecord { get; internal set; }
+
+    /// <summary>
     /// Gets the atError of the message.
     /// </summary>
     public FrameError? Error { get; internal set; }
