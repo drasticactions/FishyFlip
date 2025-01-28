@@ -43,10 +43,15 @@ atWebProtocol.OnConnectionUpdated += (sender, e) =>
     log.LogInformation($"Connection Updated: {e.State}");
 };
 
-atWebProtocol.OnSubscribedRepoMessage += (sender, e) =>
+atWebProtocol.OnMessageReceived += (sender, e) =>
 {
-    log.LogInformation($"Message: {DateTime.UtcNow.Ticks}");
+    Console.WriteLine($"Date: {DateTime.UtcNow.Ticks}");
 };
+
+// atWebProtocol.OnSubscribedRepoMessage += (sender, e) =>
+// {
+//     log.LogInformation($"Message: {DateTime.UtcNow.Ticks}");
+// };
 
 await atWebProtocol.StartSubscribeReposAsync();
 
