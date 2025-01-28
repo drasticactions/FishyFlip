@@ -93,13 +93,13 @@ public sealed partial class ATProtocol : IDisposable
     };
 
     /// <summary>
-    /// Gets or sets the internal session manager.
+    /// Gets the session manager.
     /// </summary>
-    internal ISessionManager SessionManager
+    public ISessionManager SessionManager
     {
         get => this.sessionManager;
 
-        set
+        internal set
         {
             this.sessionManager.SessionUpdated -= this.OnSessionUpdated;
             this.sessionManager.Dispose();
