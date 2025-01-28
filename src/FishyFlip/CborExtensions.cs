@@ -7,7 +7,7 @@ namespace FishyFlip.Lexicon;
 /// <summary>
 /// CBOR Extensions.
 /// </summary>
-internal static class CborExtensions
+public static class CborExtensions
 {
     /// <summary>
     /// Cast CBOR to DateTime.

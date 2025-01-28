@@ -16,9 +16,8 @@ public class ATProtocolOptions
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtocolOptions"/> class.
     /// </summary>
-    /// <param name="customEmbedConverters">Customer JSON Converters for Embed.</param>
-    /// <param name="customAtRecordConverters">Customer JSON Converters for ATRecord.</param>
-    public ATProtocolOptions()
+    /// <param name="customAtObjectConverters">Customer JSON Converters for ATRecord.</param>
+    public ATProtocolOptions(IReadOnlyList<ICustomATObjectConverter>? customAtObjectConverters = null)
     {
         this.Url = new Uri(Constants.Urls.ATProtoServer.PublicApi);
         this.JsonSerializerOptions = new JsonSerializerOptions()
@@ -26,7 +25,7 @@ public class ATProtocolOptions
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters = { new ATUriJsonConverter(), new ATObjectJsonConverter() },
+            Converters = { new ATUriJsonConverter(), new ATObjectJsonConverter(customAtObjectConverters) },
         };
 
         this.SourceGenerationContext = new SourceGenerationContext(this.JsonSerializerOptions);
