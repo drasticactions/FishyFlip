@@ -227,6 +227,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             if (blockObj["$type"] is not null)
                             {
                                 message.Record = blockObj.ToATObject();
+                                message.JSONRecord = blockObj.ToJSONString();
                                 this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
                             }
                             else if (blockObj["sig"] is not null)
