@@ -27,7 +27,10 @@ if (error != null)
 
 foreach (var record in listRecords!.Records)
 {
-    Console.WriteLine($"Record: {record}");
+    if (record.Value is Status status)
+    {
+        Console.WriteLine($"Status: {status.StatusValue}");
+    }
 }
 
 // This does a checkout of the repo, which uses CBORObjects.

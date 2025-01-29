@@ -34,7 +34,20 @@ public class UnknownATObject : ATObject
     public UnknownATObject(CBORObject obj)
     {
         this.Type = obj["$type"]?.AsString() ?? "#unknown";
+        this.CBORObject = obj;
     }
+
+    /// <summary>
+    /// Gets or sets the Raw Json from the original object.
+    /// </summary>
+    [JsonIgnore]
+    public string? Json { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Raw CBOR from the original object.
+    /// </summary>
+    [JsonIgnore]
+    public CBORObject? CBORObject { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnknownATObject"/> class.

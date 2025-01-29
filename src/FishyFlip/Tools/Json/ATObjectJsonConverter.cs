@@ -55,7 +55,7 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
                         }
                     }
 
-                    return atObject ?? new UnknownATObject() { Type = text };
+                    return atObject ?? new UnknownATObject() { Type = text, Json = rawText };
                 }
             }
         }

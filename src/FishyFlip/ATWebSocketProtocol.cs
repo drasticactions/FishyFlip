@@ -230,7 +230,6 @@ public sealed class ATWebSocketProtocol : IDisposable
                             {
                                 var type = blockObj["$type"].AsString();
                                 message.Record = blockObj.ToATObject(this.customConverters);
-                                message.JSONRecord = blockObj.ToJSONString();
 
                                 this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
                             }

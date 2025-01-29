@@ -180,6 +180,13 @@ foreach (var record in listRecords!.Records)
     {
         Console.WriteLine($"Status: {status.StatusValue}");
     }
+
+    // If the record is unknown, you can get the raw JSON.
+    if (record is UnknownATObject unknown)
+    {
+        Console.WriteLine($"Unknown Type: {unknown.Type}");
+        Console.WriteLine($"Unknown Type JSON: {unknown?.Json}");
+    }
 }
 ```
 
@@ -227,6 +234,13 @@ async void HandleProgressStatus(CarProgressStatusEvent e)
 
             // Break out of the app
             Environment.Exit(0);
+        }
+
+        // If the record is unknown, you can get the raw CBORObject.
+        if (record is UnknownATObject unknown)
+        {
+            Console.WriteLine($"Unknown Type: {unknown.Type}");
+            Console.WriteLine($"Unknown Type CBORObject: {unknown?.CBORObject}");
         }
     }
 }
