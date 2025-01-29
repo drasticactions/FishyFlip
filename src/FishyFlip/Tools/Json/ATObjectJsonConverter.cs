@@ -29,9 +29,8 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
     }
 
     /// <inheritdoc/>
-    public override ATObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ATObject Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        ATObject? atObject = null;
         try
         {
             if (JsonDocument.TryParseValue(ref reader, out var doc))
@@ -40,7 +39,7 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
                 if (doc.RootElement.TryGetProperty("$type", out var type))
                 {
                     var text = type.GetString()?.Trim() ?? string.Empty;
-                    atObject = ATObject.ToATObject(rawText, text);
+                    var atObject = ATObject.ToATObject(rawText, text);
 
                     if (atObject is not null)
                     {

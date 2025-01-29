@@ -4,7 +4,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace CustomTypes;
+namespace FishyFlip.Tests;
 
 /// <summary>
 /// ATProtocol Message Source Generation Context.

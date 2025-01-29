@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using FishyFlip.Lexicon;
 using PeterO.Cbor;
 
-namespace CustomTypes;
+namespace FishyFlip.Tests;
 
 /// <summary>
 /// Status.

@@ -6,7 +6,7 @@ using System.Text.Json;
 using FishyFlip.Lexicon;
 using FishyFlip.Tools.Json;
 
-namespace CustomTypes;
+namespace FishyFlip.Tests;
 
 /// <summary>
 /// Status Converter.
