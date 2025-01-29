@@ -9,15 +9,15 @@ namespace FishyFlip.Tools.Json;
 /// </summary>
 public class ATObjectJsonConverter : JsonConverter<ATObject?>
 {
-    private readonly IReadOnlyList<ICustomATObjectConverter> converters;
+    private readonly IReadOnlyList<ICustomATObjectJsonConverter> converters;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATObjectJsonConverter"/> class.
     /// </summary>
     /// <param name="converters">A read-only list of JSON converters specific to <see cref="ATObject"/> types. If null, initializes to an empty list.</param>
-    public ATObjectJsonConverter(IReadOnlyList<ICustomATObjectConverter>? converters = null)
+    public ATObjectJsonConverter(IReadOnlyList<ICustomATObjectJsonConverter>? converters = null)
     {
-        this.converters = converters ?? new List<ICustomATObjectConverter>();
+        this.converters = converters ?? new List<ICustomATObjectJsonConverter>();
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
     /// </summary>
     public ATObjectJsonConverter()
     {
-        this.converters = new List<ICustomATObjectConverter>();
+        this.converters = new List<ICustomATObjectJsonConverter>();
     }
 
     /// <inheritdoc/>

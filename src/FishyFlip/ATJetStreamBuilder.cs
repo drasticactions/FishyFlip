@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -14,7 +16,8 @@ public class ATJetStreamBuilder
     /// <summary>
     /// Initializes a new instance of the <see cref="ATJetStreamBuilder"/> class.
     /// </summary>
-    public ATJetStreamBuilder()
+    /// <param name="customAtObjectConverters">Customer JSON Converters for ATObject.</param>
+    public ATJetStreamBuilder(IReadOnlyList<ICustomATObjectJsonConverter>? customAtObjectConverters = null)
     {
         this.atProtocolOptions = new ATJetStreamOptions();
     }

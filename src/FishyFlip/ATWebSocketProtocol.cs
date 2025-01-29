@@ -13,6 +13,7 @@ namespace FishyFlip;
 public sealed class ATWebSocketProtocol : IDisposable
 {
     private WebSocketWrapper webSocketWrapper;
+    private IReadOnlyList<ICustomATObjectCBORConverter> customConverters;
     private bool disposedValue;
     private ILogger? logger;
     private Uri instanceUri;
@@ -23,6 +24,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <param name="options"><see cref="ATWebSocketProtocolOptions"/>.</param>
     public ATWebSocketProtocol(ATWebSocketProtocolOptions options)
     {
+        this.customConverters = options.CustomConverters;
         this.logger = options.Logger;
         this.instanceUri = options.Url;
         this.webSocketWrapper = new WebSocketWrapper(this.logger);
@@ -226,8 +228,10 @@ public sealed class ATWebSocketProtocol : IDisposable
                             var blockObj = CBORObject.Read(blockStream);
                             if (blockObj["$type"] is not null)
                             {
-                                message.Record = blockObj.ToATObject();
+                                var type = blockObj["$type"].AsString();
+                                message.Record = blockObj.ToATObject(this.customConverters);
                                 message.JSONRecord = blockObj.ToJSONString();
+
                                 this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
                             }
                             else if (blockObj["sig"] is not null)
@@ -365,6 +369,11 @@ public sealed class ATWebSocketProtocol : IDisposable
                     var result = await this.webSocket.ReceiveAsync(
                         memory, this.cts.Token);
 #endif
+
+                    if (result.Count <= 0)
+                    {
+                        continue;
+                    }
 
                     this.pipe.Writer.Advance(result.Count);
 

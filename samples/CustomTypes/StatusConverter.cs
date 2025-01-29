@@ -7,7 +7,7 @@ namespace CustomTypes;
 /// <summary>
 /// Status Converter.
 /// </summary>
-public class StatusConverter : ICustomATObjectConverter
+public class StatusConverter : ICustomATObjectJsonConverter
 {
     private readonly SourceGenerationContext context;
 

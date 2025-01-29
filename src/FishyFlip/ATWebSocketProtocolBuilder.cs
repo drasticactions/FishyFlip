@@ -40,6 +40,17 @@ public class ATWebSocketProtocolBuilder
     }
 
     /// <summary>
+    /// Adds Custom CBOR Converters.
+    /// </summary>
+    /// <param name="converters">Converters.</param>
+    /// <returns><see cref="ATWebSocketProtocolBuilder"/>.</returns>
+    public ATWebSocketProtocolBuilder WithCustomConverters(IReadOnlyList<ICustomATObjectCBORConverter> converters)
+    {
+        this.atProtocolOptions.CustomConverters = converters;
+        return this;
+    }
+
+    /// <summary>
     /// Adds a logger.
     /// </summary>
     /// <param name="logger">Logger.</param>

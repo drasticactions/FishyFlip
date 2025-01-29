@@ -17,7 +17,7 @@ public class ATProtocolOptions
     /// Initializes a new instance of the <see cref="ATProtocolOptions"/> class.
     /// </summary>
     /// <param name="customAtObjectConverters">Customer JSON Converters for ATRecord.</param>
-    public ATProtocolOptions(IReadOnlyList<ICustomATObjectConverter>? customAtObjectConverters = null)
+    public ATProtocolOptions(IReadOnlyList<ICustomATObjectJsonConverter>? customAtObjectConverters = null)
     {
         this.Url = new Uri(Constants.Urls.ATProtoServer.PublicApi);
         this.JsonSerializerOptions = new JsonSerializerOptions()

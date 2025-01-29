@@ -26,4 +26,9 @@ public class ATWebSocketProtocolOptions
     /// Gets the logger.
     /// </summary>
     public ILogger? Logger { get; internal set; }
+
+    /// <summary>
+    /// Gets the custom converters.
+    /// </summary>
+    public IReadOnlyList<ICustomATObjectCBORConverter> CustomConverters { get; internal set; } = new List<ICustomATObjectCBORConverter>();
 }

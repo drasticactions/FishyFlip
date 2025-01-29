@@ -1,4 +1,4 @@
-// <copyright file="ICustomATObjectConverter.cs" company="Drastic Actions">
+// <copyright file="ICustomATObjectJsonConverter.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace FishyFlip.Tools.Json;
 /// <summary>
 /// Defines the interface for custom ATObject converters used in JSON serialization and deserialization.
 /// </summary>
-public interface ICustomATObjectConverter
+public interface ICustomATObjectJsonConverter
 {
     /// <summary>
     /// Gets the list of supported types by the converter.

@@ -2148,7 +2148,7 @@ public partial class AppCommands
         sb.AppendLine("            return obj?.ContainsKey(\"$type\") ?? false;");
         sb.AppendLine("        }");
         sb.AppendLine();
-        sb.AppendLine("        public static ATObject ToATObject(this CBORObject obj)");
+        sb.AppendLine("        public static ATObject ToATObject(this CBORObject obj, IReadOnlyList<ICustomATObjectCBORConverter> converters = null)");
         sb.AppendLine("        {");
         sb.AppendLine("            if (obj == null)");
         sb.AppendLine("            {");
@@ -2165,6 +2165,17 @@ public partial class AppCommands
         }
 
         sb.AppendLine("                default:");
+        sb.AppendLine("                    if (converters != null)");
+        sb.AppendLine("                    {");
+        sb.AppendLine("                        foreach (var converter in converters)");
+        sb.AppendLine("                        {");
+        sb.AppendLine("                            if (converter.SupportedTypes.Contains(type))");
+        sb.AppendLine("                            {");
+        sb.AppendLine("                                return converter.Read(obj, type);");
+        sb.AppendLine("                            }");
+        sb.AppendLine("                        }");
+        sb.AppendLine("                    }");
+        sb.AppendLine();
         sb.AppendLine("                    return new FishyFlip.Models.UnknownATObject(obj);");
         sb.AppendLine("            }");
         sb.AppendLine("        }");

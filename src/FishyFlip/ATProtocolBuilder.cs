@@ -18,7 +18,7 @@ public class ATProtocolBuilder
     /// Initializes a new instance of the <see cref="ATProtocolBuilder"/> class.
     /// </summary>
     /// <param name="customAtObjectConverters">Customer JSON Converters for ATObject.</param>
-    public ATProtocolBuilder(IReadOnlyList<ICustomATObjectConverter>? customAtObjectConverters = null)
+    public ATProtocolBuilder(IReadOnlyList<ICustomATObjectJsonConverter>? customAtObjectConverters = null)
     {
         this.atProtocolOptions = new ATProtocolOptions(customAtObjectConverters);
     }
