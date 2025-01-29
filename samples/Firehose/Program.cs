@@ -53,6 +53,11 @@ atWebProtocol.OnMessageReceived += (sender, e) =>
     log.LogInformation($"Byte Message: {DateTime.UtcNow.Ticks}");
 };
 
+atWebProtocol.OnRecordReceived += (sender, e) =>
+{
+    log.LogInformation($"Record: {e.Record?.Type}");
+};
+
 await atWebProtocol.StartSubscribeReposAsync();
 
 var key = Console.Read();
