@@ -31,9 +31,7 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
     /// <inheritdoc/>
     public override ATObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        // Rewind to start of object for full deserialization
         ATObject? atObject = null;
-
         try
         {
             if (JsonDocument.TryParseValue(ref reader, out var doc))
@@ -67,7 +65,7 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
             System.Diagnostics.Debug.WriteLine(e);
         }
 
-        return atObject;
+        return new UnknownATObject();
     }
 
     /// <inheritdoc/>
