@@ -941,7 +941,7 @@ namespace FishyFlip.Lexicon
                 case "fyi.unravel.frontpage.vote":
                     return new Fyi.Unravel.Frontpage.Vote(obj);
                 default:
-                    if (converters is not null)
+                    if (converters != null)
                     {
                         foreach (var converter in converters)
                         {
@@ -952,7 +952,7 @@ namespace FishyFlip.Lexicon
                         }
                     }
 
-                    return new UnknownATObject(obj);
+                    return new FishyFlip.Models.UnknownATObject(obj);
             }
         }
 
