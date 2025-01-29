@@ -14,9 +14,10 @@ public class ATWebSocketProtocolBuilder
     /// <summary>
     /// Initializes a new instance of the <see cref="ATWebSocketProtocolBuilder"/> class.
     /// </summary>
-    public ATWebSocketProtocolBuilder()
+    /// <param name="converters">Converters.</param>
+    public ATWebSocketProtocolBuilder(IReadOnlyList<ICustomATObjectCBORConverter> converters)
     {
-        this.atProtocolOptions = new ATWebSocketProtocolOptions();
+        this.atProtocolOptions = new ATWebSocketProtocolOptions(converters);
     }
 
     /// <summary>
@@ -36,17 +37,6 @@ public class ATWebSocketProtocolBuilder
     public ATWebSocketProtocolBuilder WithInstanceUrl(Uri url)
     {
         this.atProtocolOptions.Url = url;
-        return this;
-    }
-
-    /// <summary>
-    /// Adds Custom CBOR Converters.
-    /// </summary>
-    /// <param name="converters">Converters.</param>
-    /// <returns><see cref="ATWebSocketProtocolBuilder"/>.</returns>
-    public ATWebSocketProtocolBuilder WithCustomConverters(IReadOnlyList<ICustomATObjectCBORConverter> converters)
-    {
-        this.atProtocolOptions.CustomConverters = converters;
         return this;
     }
 
