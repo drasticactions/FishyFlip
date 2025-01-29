@@ -34,30 +34,37 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
         // Rewind to start of object for full deserialization
         ATObject? atObject = null;
 
-        if (JsonDocument.TryParseValue(ref reader, out var doc))
+        try
         {
-            var rawText = doc.RootElement.GetRawText();
-            if (doc.RootElement.TryGetProperty("$type", out var type))
+            if (JsonDocument.TryParseValue(ref reader, out var doc))
             {
-                var text = type.GetString()?.Trim() ?? string.Empty;
-                atObject = ATObject.ToATObject(rawText, text);
-
-                if (atObject is not null)
+                var rawText = doc.RootElement.GetRawText();
+                if (doc.RootElement.TryGetProperty("$type", out var type))
                 {
-                    return atObject;
-                }
+                    var text = type.GetString()?.Trim() ?? string.Empty;
+                    atObject = ATObject.ToATObject(rawText, text);
 
-                foreach (var converter in this.converters)
-                {
-                    if (converter.SupportedTypes.Contains(text))
+                    if (atObject is not null)
                     {
-                        atObject = converter.Read(rawText, text, options);
-                        break;
+                        return atObject;
                     }
-                }
 
-                return atObject ?? new UnknownATObject() { Type = text };
+                    foreach (var converter in this.converters)
+                    {
+                        if (converter.SupportedTypes.Contains(text))
+                        {
+                            atObject = converter.Read(rawText, text, options);
+                            break;
+                        }
+                    }
+
+                    return atObject ?? new UnknownATObject() { Type = text };
+                }
             }
+        }
+        catch (Exception e)
+        {
+            System.Diagnostics.Debug.WriteLine(e);
         }
 
         return atObject;
