@@ -1622,6 +1622,7 @@ public partial class AppCommands
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATIdentifierJsonConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketCommitTypeConverter),");
         sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATWebSocketEventConverter),");
+        sb.AppendLine($"            typeof(FishyFlip.Tools.Json.ATObjectJsonConverter),");
         sb.AppendLine("        },");
         sb.AppendLine($"        PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,");
         sb.AppendLine(
@@ -2147,7 +2148,7 @@ public partial class AppCommands
         sb.AppendLine("            return obj?.ContainsKey(\"$type\") ?? false;");
         sb.AppendLine("        }");
         sb.AppendLine();
-        sb.AppendLine("        public static ATObject ToATObject(this CBORObject obj)");
+        sb.AppendLine("        public static ATObject ToATObject(this CBORObject obj, IReadOnlyList<ICustomATObjectCBORConverter> converters = null)");
         sb.AppendLine("        {");
         sb.AppendLine("            if (obj == null)");
         sb.AppendLine("            {");
@@ -2164,6 +2165,17 @@ public partial class AppCommands
         }
 
         sb.AppendLine("                default:");
+        sb.AppendLine("                    if (converters != null)");
+        sb.AppendLine("                    {");
+        sb.AppendLine("                        foreach (var converter in converters)");
+        sb.AppendLine("                        {");
+        sb.AppendLine("                            if (converter.SupportedTypes.Contains(type))");
+        sb.AppendLine("                            {");
+        sb.AppendLine("                                return converter.Read(obj, type);");
+        sb.AppendLine("                            }");
+        sb.AppendLine("                        }");
+        sb.AppendLine("                    }");
+        sb.AppendLine();
         sb.AppendLine("                    return new FishyFlip.Models.UnknownATObject(obj);");
         sb.AppendLine("            }");
         sb.AppendLine("        }");
@@ -2195,14 +2207,6 @@ public partial class AppCommands
         this.GenerateHeader(sb);
         this.GenerateNamespace(sb, ns);
         sb.AppendLine("{");
-        foreach (var cls in classes)
-        {
-            sb.AppendLine(
-                $"    [JsonDerivedType(typeof({AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}), typeDiscriminator: \"{cls.Id}\")]");
-        }
-
-        sb.AppendLine($"    [JsonDerivedType(typeof(FishyFlip.Models.Blob), typeDiscriminator: \"blob\")]");
-        sb.AppendLine($"    [JsonPolymorphic(IgnoreUnrecognizedTypeDiscriminators = true)]");
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// The base class for FishyFlip ATProtocol Objects.");
         sb.AppendLine($"    /// </summary>");
@@ -2219,8 +2223,52 @@ public partial class AppCommands
         sb.AppendLine();
         sb.AppendLine($"        public virtual string ToJson()");
         sb.AppendLine("        {");
-        sb.AppendLine(
-            $"            return (JsonSerializer.SerializeToNode<ATObject>(this, (JsonTypeInfo<ATObject>)SourceGenerationContext.Default.ATObject)).RemoveDuplicateTypeLines()!;");
+        sb.AppendLine("            switch (this.Type)");
+        sb.AppendLine("            {");
+        foreach (var cls in classes)
+        {
+            sb.AppendLine($"                case \"{cls.Id}\":");
+            sb.AppendLine($"                    return JsonSerializer.Serialize(({AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName})this, SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName});");
+        }
+
+        sb.AppendLine($"                case \"blob\":");
+        sb.AppendLine($"                    return JsonSerializer.Serialize((FishyFlip.Models.Blob)this, SourceGenerationContext.Default.Blob);");
+        sb.AppendLine("                default:");
+        sb.AppendLine("                    return JsonSerializer.Serialize(this, SourceGenerationContext.Default.ATObject);");
+        sb.AppendLine("            }");
+        sb.AppendLine("        }");
+        sb.AppendLine();
+        sb.AppendLine($"        internal byte[]? ToUtf8Json()");
+        sb.AppendLine("        {");
+        sb.AppendLine("            switch (this.Type)");
+        sb.AppendLine("            {");
+                foreach (var cls in classes)
+        {
+            sb.AppendLine($"                case \"{cls.Id}\":");
+            sb.AppendLine($"                    return JsonSerializer.SerializeToUtf8Bytes(({AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName})this, SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName});");
+        }
+
+        sb.AppendLine($"                case \"blob\":");
+        sb.AppendLine($"                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Models.Blob)this, SourceGenerationContext.Default.Blob);");
+        sb.AppendLine("                default:");
+        sb.AppendLine("                    return null;");
+        sb.AppendLine("            }");
+        sb.AppendLine("        }");
+        sb.AppendLine("        internal static ATObject? ToATObject(string text, string type)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            switch (type)");
+        sb.AppendLine("            {");
+        foreach (var cls in classes)
+        {
+            sb.AppendLine($"                case \"{cls.Id}\":");
+            sb.AppendLine($"                    return JsonSerializer.Deserialize<{AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>(text, (JsonTypeInfo<{AppCommands.baseNamespace}.{cls.CSharpNamespace}.{cls.ClassName}>)SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName});");
+        }
+
+        sb.AppendLine($"                case \"blob\":");
+        sb.AppendLine($"                    return JsonSerializer.Deserialize<FishyFlip.Models.Blob>(text, (JsonTypeInfo<FishyFlip.Models.Blob>)SourceGenerationContext.Default.Blob);");
+        sb.AppendLine("                default:");
+        sb.AppendLine("                    return null;");
+        sb.AppendLine("            }");
         sb.AppendLine("        }");
         sb.AppendLine("    }");
         sb.AppendLine("}");

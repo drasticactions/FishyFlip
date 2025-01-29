@@ -38,7 +38,7 @@ public static class HttpClientExtensions
        ILogger? logger = default,
        Dictionary<string, string>? headers = default)
     {
-        var jsonContent = JsonSerializer.SerializeToNode(body, typeT)!.RemoveDuplicateTypeLines();
+        var jsonContent = JsonSerializer.Serialize(body, typeT)!;
         StringContent content = new(jsonContent, Encoding.UTF8, "application/json");
         if (headers != null)
         {

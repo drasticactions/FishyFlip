@@ -30,7 +30,7 @@ public class AuthorizedTests
         string handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
         string password = (string?)context.Properties["BLUESKY_TEST_PASSWORD"] ?? throw new ArgumentNullException();
         var debugLog = new DebugLoggerProvider();
-        var atProtocolBuilder = new ATProtocolBuilder()
+        var atProtocolBuilder = new ATProtocolBuilder([new StatusConverter(SourceGenerationContext.Default)])
             .EnableAutoRenewSession(false)
             .WithLogger(debugLog.CreateLogger("FishyFlipTests"));
         AuthorizedTests.proto = atProtocolBuilder.Build();
@@ -627,6 +627,26 @@ public class AuthorizedTests
         Assert.AreEqual("Unit Test Content", ((Entry)result2.Value!).Content);
         Assert.AreEqual("Unit Test Title", ((Entry)result2.Value!).Title);
         var (result3, error3) = await AuthorizedTests.proto!.ComWhtwndBlog.DeleteEntryAsync(result.Uri.Rkey);
+        Assert.IsNull(error3);
+        Assert.IsNotNull(result3);
+    }
+
+    /// <summary>
+    /// Handle create and remove entry.
+    /// </summary>
+    /// <returns>Task.</returns>
+    [TestMethod]
+    public async Task HandleCreateAndRemoveStatus()
+    {
+        var status = new Status("Unit Test Status");
+        var (result, error) = await AuthorizedTests.proto!.Repo.CreateRecordAsync(AuthorizedTests.proto!.Session!.Did, Status.RecordType, status);
+        Assert.IsNull(error);
+        Assert.IsNotNull(result);
+        var (result2, error2) = await AuthorizedTests.proto!.Repo.GetRecordAsync(AuthorizedTests.proto!.Session!.Did, Status.RecordType, result.Uri.Rkey);
+        Assert.IsNull(error2);
+        Assert.IsNotNull(result2);
+        Assert.AreEqual("Unit Test Status", ((Status)result2.Value!).StatusValue);
+        var (result3, error3) = await AuthorizedTests.proto!.Repo.DeleteRecordAsync(AuthorizedTests.proto!.Session!.Did, Status.RecordType, result.Uri.Rkey);
         Assert.IsNull(error3);
         Assert.IsNotNull(result3);
     }

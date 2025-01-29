@@ -36,14 +36,8 @@ public sealed class ATJetStream : IDisposable
         this.compression = options.Compression;
         this.dictionary = options.Dictionary;
         this.client = new ClientWebSocket();
-        this.jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
-            Converters = { new ATUriJsonConverter() },
-        };
-        this.sourceGenerationContext = new SourceGenerationContext(this.jsonSerializerOptions);
+        this.jsonSerializerOptions = options.JsonSerializerOptions;
+        this.sourceGenerationContext = options.SourceGenerationContext;
     }
 
     /// <summary>

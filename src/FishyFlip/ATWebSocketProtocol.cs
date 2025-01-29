@@ -13,6 +13,7 @@ namespace FishyFlip;
 public sealed class ATWebSocketProtocol : IDisposable
 {
     private WebSocketWrapper webSocketWrapper;
+    private IReadOnlyList<ICustomATObjectCBORConverter> customConverters;
     private bool disposedValue;
     private ILogger? logger;
     private Uri instanceUri;
@@ -23,10 +24,11 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <param name="options"><see cref="ATWebSocketProtocolOptions"/>.</param>
     public ATWebSocketProtocol(ATWebSocketProtocolOptions options)
     {
+        this.customConverters = options.CustomConverters;
         this.logger = options.Logger;
         this.instanceUri = options.Url;
         this.webSocketWrapper = new WebSocketWrapper(this.logger);
-        this.webSocketWrapper.OnMessageReceived += this.OnMessageReceived;
+        this.webSocketWrapper.OnMessageReceived += this.OnInternalMessageReceived;
     }
 
     /// <summary>
@@ -47,6 +49,11 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// Event for when a subscribed repo message is received.
     /// </summary>
     public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
+
+    /// <summary>
+    /// Event for when a message is received.
+    /// </summary>
+    public event EventHandler<ReadOnlySequence<byte>>? OnMessageReceived;
 
     /// <summary>
     /// Gets a value indicating whether the object is disposed.
@@ -226,8 +233,9 @@ public sealed class ATWebSocketProtocol : IDisposable
                             var blockObj = CBORObject.Read(blockStream);
                             if (blockObj["$type"] is not null)
                             {
-                                message.Record = blockObj.ToATObject();
-                                message.JSONRecord = blockObj.ToJSONString();
+                                var type = blockObj["$type"].AsString();
+                                message.Record = blockObj.ToATObject(this.customConverters);
+
                                 this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
                             }
                             else if (blockObj["sig"] is not null)
@@ -284,13 +292,15 @@ public sealed class ATWebSocketProtocol : IDisposable
         this.OnSubscribedRepoMessage?.Invoke(this, new SubscribedRepoEventArgs(message));
     }
 
-    private Task OnMessageReceived(ReadOnlySequence<byte> message)
+    private Task OnInternalMessageReceived(ReadOnlySequence<byte> message)
     {
-        var newMessage = message.ToArray();
-        Task.Run(() =>
+        this.OnMessageReceived?.Invoke(this, message);
+        if (this.OnRecordReceived is not null || this.OnSubscribedRepoMessage is not null)
         {
-            this.HandleMessage(newMessage);
-        }).FireAndForgetSafeAsync(this.logger);
+            var newMessage = message.ToArray();
+            Task.Run(() => { this.HandleMessage(newMessage); }).FireAndForgetSafeAsync(this.logger);
+        }
+
         return Task.CompletedTask;
     }
 
@@ -365,6 +375,11 @@ public sealed class ATWebSocketProtocol : IDisposable
                     var result = await this.webSocket.ReceiveAsync(
                         memory, this.cts.Token);
 #endif
+
+                    if (result.Count <= 0)
+                    {
+                        continue;
+                    }
 
                     this.pipe.Writer.Advance(result.Count);
 

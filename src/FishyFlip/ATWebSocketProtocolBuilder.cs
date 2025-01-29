@@ -14,9 +14,10 @@ public class ATWebSocketProtocolBuilder
     /// <summary>
     /// Initializes a new instance of the <see cref="ATWebSocketProtocolBuilder"/> class.
     /// </summary>
-    public ATWebSocketProtocolBuilder()
+    /// <param name="converters">Converters.</param>
+    public ATWebSocketProtocolBuilder(IReadOnlyList<ICustomATObjectCBORConverter>? converters = null)
     {
-        this.atProtocolOptions = new ATWebSocketProtocolOptions();
+        this.atProtocolOptions = new ATWebSocketProtocolOptions(converters);
     }
 
     /// <summary>

@@ -34,21 +34,24 @@ public class UnknownATObject : ATObject
     public UnknownATObject(CBORObject obj)
     {
         this.Type = obj["$type"]?.AsString() ?? "#unknown";
+        this.CBORObject = obj;
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="UnknownATObject"/> class.
+    /// Gets or sets the Raw Json from the original object.
     /// </summary>
-    /// <param name="json">Json.</param>
-    /// <returns>UnknownATObject.</returns>
-    public static UnknownATObject FromJson(string json)
-    {
-        return JsonSerializer.Deserialize<UnknownATObject>(json, (JsonTypeInfo<UnknownATObject>)SourceGenerationContext.Default.UnknownATObject)!;
-    }
+    [JsonIgnore]
+    public string? Json { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Raw CBOR from the original object.
+    /// </summary>
+    [JsonIgnore]
+    public CBORObject? CBORObject { get; set; }
 
     /// <inheritdoc/>
     public override string ToJson()
     {
-        return JsonSerializer.Serialize<UnknownATObject>(this, (JsonTypeInfo<UnknownATObject>)SourceGenerationContext.Default.UnknownATObject)!;
+        return this.Json ?? this.CBORObject?.ToJSONString() ?? string.Empty;
     }
 }

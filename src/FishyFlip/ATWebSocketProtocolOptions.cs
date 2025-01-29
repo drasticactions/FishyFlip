@@ -12,9 +12,11 @@ public class ATWebSocketProtocolOptions
     /// <summary>
     /// Initializes a new instance of the <see cref="ATWebSocketProtocolOptions"/> class.
     /// </summary>
-    public ATWebSocketProtocolOptions()
+    /// <param name="converters">Converters.</param>
+    public ATWebSocketProtocolOptions(IReadOnlyList<ICustomATObjectCBORConverter>? converters = null)
     {
         this.Url = new Uri("https://bsky.network");
+        this.CustomConverters = converters ?? new List<ICustomATObjectCBORConverter>();
     }
 
     /// <summary>
@@ -26,4 +28,9 @@ public class ATWebSocketProtocolOptions
     /// Gets the logger.
     /// </summary>
     public ILogger? Logger { get; internal set; }
+
+    /// <summary>
+    /// Gets the custom converters.
+    /// </summary>
+    public IReadOnlyList<ICustomATObjectCBORConverter> CustomConverters { get; internal set; }
 }

@@ -50,12 +50,8 @@ async Task HandleMessageAsync(SubscribeRepoMessage message)
 - `Sync` endpoints generally encode their output as [IPFS Car](https://car.ipfs.io/) files. Here, we can process them as they are streaming so instead of needing to download a whole file to process it, we can do it as it is downloading. This is done by using the `OnCarDecoded` delegate.
 
 ```csharp
-// Downloading Repo files requires the PDS of the given user.
-// You can get that from https://plc.directory
-// Or it is automatically set if downloading your own Repo.
 var debugLog = new DebugLoggerProvider();
 var atProtocolBuilder = new ATProtocolBuilder()
- .WithInstanceUrl(new Uri("https://puffball.us-east.host.bsky.network"))
  .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
 

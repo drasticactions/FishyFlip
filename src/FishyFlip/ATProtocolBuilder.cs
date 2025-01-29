@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Security.Cryptography.X509Certificates;
+using FishyFlip.Tools.Json;
 
 namespace FishyFlip;
 
@@ -16,9 +17,10 @@ public class ATProtocolBuilder
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtocolBuilder"/> class.
     /// </summary>
-    public ATProtocolBuilder()
+    /// <param name="customAtObjectConverters">Customer JSON Converters for ATObject.</param>
+    public ATProtocolBuilder(IReadOnlyList<ICustomATObjectJsonConverter>? customAtObjectConverters = null)
     {
-        this.atProtocolOptions = new ATProtocolOptions();
+        this.atProtocolOptions = new ATProtocolOptions(customAtObjectConverters);
     }
 
     /// <summary>

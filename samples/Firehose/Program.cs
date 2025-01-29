@@ -48,6 +48,11 @@ atWebProtocol.OnSubscribedRepoMessage += (sender, e) =>
     log.LogInformation($"Message: {DateTime.UtcNow.Ticks}");
 };
 
+atWebProtocol.OnMessageReceived += (sender, e) =>
+{
+    log.LogInformation($"Byte Message: {DateTime.UtcNow.Ticks}");
+};
+
 await atWebProtocol.StartSubscribeReposAsync();
 
 var key = Console.Read();

@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon
             return obj?.ContainsKey("$type") ?? false;
         }
 
-        public static ATObject ToATObject(this CBORObject obj)
+        public static ATObject ToATObject(this CBORObject obj, IReadOnlyList<ICustomATObjectCBORConverter> converters = null)
         {
             if (obj == null)
             {
@@ -941,6 +941,17 @@ namespace FishyFlip.Lexicon
                 case "fyi.unravel.frontpage.vote":
                     return new Fyi.Unravel.Frontpage.Vote(obj);
                 default:
+                    if (converters != null)
+                    {
+                        foreach (var converter in converters)
+                        {
+                            if (converter.SupportedTypes.Contains(type))
+                            {
+                                return converter.Read(obj, type);
+                            }
+                        }
+                    }
+
                     return new FishyFlip.Models.UnknownATObject(obj);
             }
         }

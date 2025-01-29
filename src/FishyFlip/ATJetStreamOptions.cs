@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Tools.Json;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -12,10 +14,20 @@ public class ATJetStreamOptions
     /// <summary>
     /// Initializes a new instance of the <see cref="ATJetStreamOptions"/> class.
     /// </summary>
-    public ATJetStreamOptions()
+    /// <param name="customAtObjectConverters">Customer JSON Converters for ATObject.</param>
+    public ATJetStreamOptions(IReadOnlyList<ICustomATObjectJsonConverter>? customAtObjectConverters = null)
     {
         this.Url = new Uri("https://jetstream.atproto.tools");
         this.Compression = false;
+        this.JsonSerializerOptions = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault,
+            Converters = { new ATUriJsonConverter(), new ATObjectJsonConverter(customAtObjectConverters) },
+        };
+
+        this.SourceGenerationContext = new SourceGenerationContext(this.JsonSerializerOptions);
     }
 
     /// <summary>
@@ -37,4 +49,14 @@ public class ATJetStreamOptions
     /// Gets the zstd dictionary.
     /// </summary>
     public byte[]? Dictionary { get; internal set; }
+
+    /// <summary>
+    /// Gets the JsonSerializerOptions.
+    /// </summary>
+    public JsonSerializerOptions JsonSerializerOptions { get; internal set; }
+
+    /// <summary>
+    /// Gets the source generation context.
+    /// </summary>
+    internal SourceGenerationContext SourceGenerationContext { get; }
 }
