@@ -33,13 +33,32 @@ foreach (var record in listRecords!.Records)
     }
 }
 
+// Unknown ATObject that has not been registered.
+// We can still get the object and print it out.
+(listRecords, error) = await atProtocol.Repo.ListRecordsAsync(pfrazee, "com.example.status");
+
+if (error != null)
+{
+    Console.WriteLine($"Error: {error}");
+    return;
+}
+
+foreach (var record in listRecords!.Records)
+{
+    if (record.Value is UnknownATObject status)
+    {
+        // From UnknownATObject.Json
+        Console.WriteLine($"Unknown: {status.ToJson()}");
+    }
+}
+
 // This does a checkout of the repo, which uses CBORObjects.
 // We can get the custom type with a ICustomATObjectCBORConverter.
 // And using it in the ToATObject method.
 var cborConverter = new StatusCBORConverter();
 var checkoutResult = await atProtocol.Sync.GetRepoAsync(pfrazee!, HandleProgressStatus);
 
-async void HandleProgressStatus(CarProgressStatusEvent e)
+void HandleProgressStatus(CarProgressStatusEvent e)
 {
     var cid = e.Cid;
     var bytes = e.Bytes;
@@ -58,6 +77,11 @@ async void HandleProgressStatus(CarProgressStatusEvent e)
             // Break out of the app
             Environment.Exit(0);
         }
+
+        if (record is UnknownATObject unknown)
+        {
+            // From UnknownATObject.CBORObject
+            Console.WriteLine($"Unknown: {unknown.ToJson()}");
+        }
     }
 }
-

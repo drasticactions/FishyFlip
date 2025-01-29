@@ -49,19 +49,9 @@ public class UnknownATObject : ATObject
     [JsonIgnore]
     public CBORObject? CBORObject { get; set; }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UnknownATObject"/> class.
-    /// </summary>
-    /// <param name="json">Json.</param>
-    /// <returns>UnknownATObject.</returns>
-    public static UnknownATObject FromJson(string json)
-    {
-        return JsonSerializer.Deserialize<UnknownATObject>(json, (JsonTypeInfo<UnknownATObject>)SourceGenerationContext.Default.UnknownATObject)!;
-    }
-
     /// <inheritdoc/>
     public override string ToJson()
     {
-        return JsonSerializer.Serialize<UnknownATObject>(this, (JsonTypeInfo<UnknownATObject>)SourceGenerationContext.Default.UnknownATObject)!;
+        return this.Json ?? this.CBORObject?.ToJSONString() ?? string.Empty;
     }
 }
