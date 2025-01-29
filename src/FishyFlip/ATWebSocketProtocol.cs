@@ -235,7 +235,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             {
                                 var type = blockObj["$type"].AsString();
                                 message.Record = blockObj.ToATObject(this.customConverters);
-
+                                message.Record!.Type = type;
                                 this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
                             }
                             else if (blockObj["sig"] is not null)
