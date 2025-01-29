@@ -28,7 +28,7 @@ public sealed class ATWebSocketProtocol : IDisposable
         this.logger = options.Logger;
         this.instanceUri = options.Url;
         this.webSocketWrapper = new WebSocketWrapper(this.logger);
-        this.webSocketWrapper.OnMessageReceived += this.OnMessageReceived;
+        this.webSocketWrapper.OnMessageReceived += this.OnInternalMessageReceived;
     }
 
     /// <summary>
@@ -49,6 +49,11 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// Event for when a subscribed repo message is received.
     /// </summary>
     public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
+
+    /// <summary>
+    /// Event for when a message is received.
+    /// </summary>
+    public event EventHandler<ReadOnlySequence<byte>>? OnMessageReceived;
 
     /// <summary>
     /// Gets a value indicating whether the object is disposed.
@@ -287,13 +292,15 @@ public sealed class ATWebSocketProtocol : IDisposable
         this.OnSubscribedRepoMessage?.Invoke(this, new SubscribedRepoEventArgs(message));
     }
 
-    private Task OnMessageReceived(ReadOnlySequence<byte> message)
+    private Task OnInternalMessageReceived(ReadOnlySequence<byte> message)
     {
-        var newMessage = message.ToArray();
-        Task.Run(() =>
+        this.OnMessageReceived?.Invoke(this, message);
+        if (this.OnRecordReceived is not null || this.OnSubscribedRepoMessage is not null)
         {
-            this.HandleMessage(newMessage);
-        }).FireAndForgetSafeAsync(this.logger);
+            var newMessage = message.ToArray();
+            Task.Run(() => { this.HandleMessage(newMessage); }).FireAndForgetSafeAsync(this.logger);
+        }
+
         return Task.CompletedTask;
     }
 
