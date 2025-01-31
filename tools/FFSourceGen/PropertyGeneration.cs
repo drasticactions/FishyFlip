@@ -281,6 +281,7 @@ public class PropertyGeneration
             "byte[]" => "EncodeToBytes()",
             "datetime" => "ToDateTime() ?? default",
             "ipfs.cid" => "ToATCid()!",
+            "blob" => "ToBlob()",
             _ => throw new InvalidOperationException($"Unknown type: {type}"),
         };
     }
@@ -410,6 +411,16 @@ public class PropertyGeneration
             if (mainRef.Definition.Type == "string")
             {
                 return "string";
+            }
+
+            if (mainRef.Definition.Type == "blob")
+            {
+                return "Blob";
+            }
+
+            if (mainRef.Definition.Type == "bytes")
+            {
+                return "byte[]";
             }
 
             if (mainRef.Definition.Type == "array" && mainRef.Definition.Items?.Type == "string")

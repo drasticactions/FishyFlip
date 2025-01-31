@@ -40,6 +40,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.AccountStats(obj);
                 case "com.atproto.admin.defs#accountView":
                     return new Com.Atproto.Admin.AccountView(obj);
+                case "blue.maril.stellar.getActorReactions#actorReaction":
+                    return new Blue.Maril.Stellar.ActorReaction(obj);
                 case "tools.ozone.team.addMember#AddMemberInput":
                     return new Tools.Ozone.Team.AddMemberInput(obj);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleInput":
@@ -102,6 +104,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.CheckAccountStatusOutput(obj);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
                     return new Com.Atproto.Temp.CheckSignupQueueOutput(obj);
+                case "blue.moji.collection.defs#collectionView":
+                    return new Blue.Moji.Collection.CollectionView(obj);
                 case "com.whtwnd.blog.defs#comment":
                     return new Com.Whtwnd.Blog.Comment(obj);
                 case "fyi.unravel.frontpage.comment":
@@ -204,6 +208,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.EmbedVideo(obj);
                 case "tools.ozone.moderation.emitEvent#EmitEventInput":
                     return new Tools.Ozone.Moderation.EmitEventInput(obj);
+                case "blue.maril.stellar.reaction#emojiRef":
+                    return new Blue.Maril.Stellar.EmojiRef(obj);
                 case "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput":
                     return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
                 case "com.whtwnd.blog.entry":
@@ -214,6 +220,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Richtext.Facet(obj);
                 case "social.psky.richtext.facet":
                     return new Social.Psky.Richtext.Facet(obj);
+                case "blue.moji.richtext.facet":
+                    return new Blue.Moji.Richtext.Facet(obj);
                 case "fm.teal.alpha.actor.profile#featuredItem":
                     return new Fm.Teal.Alpha.Actor.FeaturedItem(obj);
                 case "app.bsky.feed.describeFeedGenerator#feed":
@@ -232,6 +240,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.Follow(obj);
                 case "app.bsky.feed.threadgate#followingRule":
                     return new App.Bsky.Feed.FollowingRule(obj);
+                case "blue.moji.richtext.facet#formats_v0":
+                    return new Blue.Moji.Richtext.FormatsV0(obj);
+                case "blue.moji.collection.item#formats_v0":
+                    return new Blue.Moji.Collection.FormatsV0(obj);
                 case "app.bsky.feed.generator":
                     return new App.Bsky.Feed.Generator(obj);
                 case "app.bsky.feed.defs#generatorView":
@@ -252,6 +264,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.GetActorLikesOutput(obj);
                 case "chat.bsky.moderation.getActorMetadata#GetActorMetadataOutput":
                     return new Chat.Bsky.Moderation.GetActorMetadataOutput(obj);
+                case "blue.moji.packs.getActorPacks#GetActorPacksOutput":
+                    return new Blue.Moji.Packs.GetActorPacksOutput(obj);
+                case "blue.maril.stellar.getActorReactions#GetActorReactionsOutput":
+                    return new Blue.Maril.Stellar.GetActorReactionsOutput(obj);
                 case "app.bsky.graph.getActorStarterPacks#GetActorStarterPacksOutput":
                     return new App.Bsky.Graph.GetActorStarterPacksOutput(obj);
                 case "app.bsky.feed.getAuthorFeed#GetAuthorFeedOutput":
@@ -292,6 +308,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Shinolabs.Pinksea.GetIdentityOutput(obj);
                 case "com.atproto.admin.getInviteCodes#GetInviteCodesOutput":
                     return new Com.Atproto.Admin.GetInviteCodesOutput(obj);
+                case "blue.moji.collection.getItem#GetItemOutput":
+                    return new Blue.Moji.Collection.GetItemOutput(obj);
                 case "app.bsky.video.getJobStatus#GetJobStatusOutput":
                     return new App.Bsky.Video.GetJobStatusOutput(obj);
                 case "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput":
@@ -322,6 +340,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetMutesOutput(obj);
                 case "com.shinolabs.pinksea.getOekaki#GetOekakiOutput":
                     return new Com.Shinolabs.Pinksea.GetOekakiOutput(obj);
+                case "blue.moji.packs.getPack#GetPackOutput":
+                    return new Blue.Moji.Packs.GetPackOutput(obj);
+                case "blue.moji.packs.getPacks#GetPacksOutput":
+                    return new Blue.Moji.Packs.GetPacksOutput(obj);
                 case "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput":
                     return new Com.Shinolabs.Pinksea.GetParentForReplyOutput(obj);
                 case "fm.teal.alpha.feed.getPlay#GetPlayOutput":
@@ -338,6 +360,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.GetProfilesOutput(obj);
                 case "app.bsky.feed.getQuotes#GetQuotesOutput":
                     return new App.Bsky.Feed.GetQuotesOutput(obj);
+                case "blue.maril.stellar.getReactions#GetReactionsOutput":
+                    return new Blue.Maril.Stellar.GetReactionsOutput(obj);
                 case "com.shinolabs.pinksea.getRecent#GetRecentOutput":
                     return new Com.Shinolabs.Pinksea.GetRecentOutput(obj);
                 case "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput":
@@ -418,6 +442,12 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.InviteCode(obj);
                 case "com.atproto.server.defs#inviteCodeUse":
                     return new Com.Atproto.Server.InviteCodeUse(obj);
+                case "blue.moji.collection.item":
+                    return new Blue.Moji.Collection.Item(obj);
+                case "blue.moji.collection.item#itemView":
+                    return new Blue.Moji.Collection.ItemView(obj);
+                case "blue.moji.collection.listCollection#itemView":
+                    return new Blue.Moji.Collection.ItemViewDef(obj);
                 case "app.bsky.video.defs#jobStatus":
                     return new App.Bsky.Video.JobStatus(obj);
                 case "app.bsky.actor.defs#knownFollowers":
@@ -466,6 +496,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.ListBlobsOutput(obj);
                 case "app.bsky.graph.listblock":
                     return new App.Bsky.Graph.Listblock(obj);
+                case "blue.moji.collection.listCollection#ListCollectionOutput":
+                    return new Blue.Moji.Collection.ListCollectionOutput(obj);
                 case "chat.bsky.convo.listConvos#ListConvosOutput":
                     return new Chat.Bsky.Convo.ListConvosOutput(obj);
                 case "app.bsky.graph.listitem":
@@ -604,6 +636,18 @@ namespace FishyFlip.Lexicon
                     return new Com.Whtwnd.Blog.Ogp(obj);
                 case "tools.ozone.setting.defs#option":
                     return new Tools.Ozone.Setting.Option(obj);
+                case "blue.moji.packs.pack":
+                    return new Blue.Moji.Packs.Pack(obj);
+                case "blue.moji.packs.packitem":
+                    return new Blue.Moji.Packs.Packitem(obj);
+                case "blue.moji.packs.defs#packItemView":
+                    return new Blue.Moji.Packs.PackItemView(obj);
+                case "blue.moji.packs.defs#packView":
+                    return new Blue.Moji.Packs.PackView(obj);
+                case "blue.moji.packs.defs#packViewBasic":
+                    return new Blue.Moji.Packs.PackViewBasic(obj);
+                case "blue.moji.packs.defs#packViewerState":
+                    return new Blue.Moji.Packs.PackViewerState(obj);
                 case "app.bsky.actor.defs#personalDetailsPref":
                     return new App.Bsky.Actor.PersonalDetailsPref(obj);
                 case "fm.teal.alpha.feed.play":
@@ -636,6 +680,10 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Actor.ProfileViewBasic(obj);
                 case "app.bsky.actor.defs#profileViewDetailed":
                     return new App.Bsky.Actor.ProfileViewDetailed(obj);
+                case "blue.moji.collection.putItem#PutItemInput":
+                    return new Blue.Moji.Collection.PutItemInput(obj);
+                case "blue.moji.collection.putItem#PutItemOutput":
+                    return new Blue.Moji.Collection.PutItemOutput(obj);
                 case "app.bsky.actor.putPreferences#PutPreferencesInput":
                     return new App.Bsky.Actor.PutPreferencesInput(obj);
                 case "app.bsky.notification.putPreferences#PutPreferencesInput":
@@ -654,6 +702,10 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.QueryStatusesOutput(obj);
                 case "my.skylights.rel#rating":
                     return new My.Skylights.Rating(obj);
+                case "blue.maril.stellar.reaction":
+                    return new Blue.Maril.Stellar.Reaction(obj);
+                case "blue.maril.stellar.getReactions#reaction":
+                    return new Blue.Maril.Stellar.ReactionDef(obj);
                 case "app.bsky.feed.defs#reasonPin":
                     return new App.Bsky.Feed.ReasonPin(obj);
                 case "app.bsky.feed.defs#reasonRepost":
@@ -740,6 +792,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.SavedFeedsPref(obj);
                 case "app.bsky.actor.defs#savedFeedsPrefV2":
                     return new App.Bsky.Actor.SavedFeedsPrefV2(obj);
+                case "blue.moji.collection.saveToCollection#SaveToCollectionInput":
+                    return new Blue.Moji.Collection.SaveToCollectionInput(obj);
+                case "blue.moji.collection.saveToCollection#SaveToCollectionOutput":
+                    return new Blue.Moji.Collection.SaveToCollectionOutput(obj);
                 case "com.atproto.lexicon.schema":
                     return new Com.Atproto.Lexicon.Schema(obj);
                 case "com.atproto.admin.searchAccounts#SearchAccountsOutput":

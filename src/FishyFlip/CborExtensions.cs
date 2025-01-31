@@ -157,6 +157,36 @@ public static class CborExtensions
     }
 
     /// <summary>
+    /// CBOR to Blob.
+    /// </summary>
+    /// <param name="obj">CBORObject.</param>
+    /// <param name="logger">Logger.</param>
+    /// <returns>Blob.</returns>
+    public static Blob? ToBlob(this CBORObject? obj, ILogger? logger = default)
+    {
+        if (obj is null)
+        {
+            return null;
+        }
+
+        if (obj.IsNull)
+        {
+            return null;
+        }
+
+        try
+        {
+            return new Blob(obj);
+        }
+        catch (Exception ex)
+        {
+            logger?.LogError(ex, "Failed to convert to Blob.");
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// CBOR to ATCid.
     /// </summary>
     /// <param name="obj">Nullable CBOR Object.</param>
