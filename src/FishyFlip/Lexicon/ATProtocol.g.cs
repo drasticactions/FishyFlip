@@ -50,6 +50,21 @@ namespace FishyFlip
         public FishyFlip.Lexicon.App.Bsky.Video.BlueskyVideo Video => new (this);
 
         /// <summary>
+        /// blue.maril.stellar Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Blue.Maril.Stellar.BlueMarilStellar BlueMarilStellar => new (this);
+
+        /// <summary>
+        /// blue.moji.collection Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Blue.Moji.Collection.BlueMojiCollection BlueMojiCollection => new (this);
+
+        /// <summary>
+        /// blue.moji.packs Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Blue.Moji.Packs.BlueMojiPacks BlueMojiPacks => new (this);
+
+        /// <summary>
         /// buzz.bookhive Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Buzz.Bookhive.BuzzBookhive BuzzBookhive => new (this);

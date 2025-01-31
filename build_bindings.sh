@@ -20,6 +20,7 @@ REPOS=(
     "https://github.com/icidasset/radical-edward.git"
     "https://github.com/nperez0111/bookhive.git"
     "https://github.com/teal-fm/teal.git"
+    "https://github.com/marukun712/stellar.git"
 )
 
 PWD=$(pwd)
@@ -54,6 +55,8 @@ do
     if [ "$target_dir" != "bluesky-social-atproto" ]; then
         if [ "$target_dir" == "whtwnd-whitewind-blog" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/com/whtwnd")
+        elif [ "$target_dir" == "marukun712-stellar" ]; then
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/blue")
         elif [ "$target_dir" == "ziodotsh-lexicons" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/blue/zio")
         elif [ "$target_dir" == "shinolabs-PinkSea" ]; then
@@ -77,6 +80,11 @@ done
 # Build FFSourceGen
 dotnet build tools/FFSourceGen/FFSourceGen.csproj
 dotnet run --project tools/FFSourceGen/FFSourceGen.csproj -- generate $PWD/../fflexicons/bluesky-social-atproto/lexicons -o $PWD/src/FishyFlip/ -t "${REPO_DIRS[@]}"
+
+if [ $? -ne 0 ]; then
+    echo "FFSourceGen failed to generate bindings"
+    exit 1
+fi
 
 # Build FishyFlip to verify the bindings compile
 
