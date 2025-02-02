@@ -19,11 +19,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="comment"></param>
         /// <param name="createLabelVals"></param>
         /// <param name="negateLabelVals"></param>
-        public ModEventLabel(string? comment = default, List<string> createLabelVals = default, List<string> negateLabelVals = default)
+        /// <param name="durationInHours">Indicates how long the label will remain on the subject. Only applies on labels that are being added.</param>
+        public ModEventLabel(string? comment = default, List<string> createLabelVals = default, List<string> negateLabelVals = default, long? durationInHours = default)
         {
             this.Comment = comment;
             this.CreateLabelVals = createLabelVals;
             this.NegateLabelVals = negateLabelVals;
+            this.DurationInHours = durationInHours;
             this.Type = "tools.ozone.moderation.defs#modEventLabel";
         }
 
@@ -45,6 +47,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
             if (obj["createLabelVals"] is not null) this.CreateLabelVals = obj["createLabelVals"].Values.Select(n =>n.AsString()).ToList();
             if (obj["negateLabelVals"] is not null) this.NegateLabelVals = obj["negateLabelVals"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["durationInHours"] is not null) this.DurationInHours = obj["durationInHours"].AsInt64Value();
         }
 
         /// <summary>
@@ -66,6 +69,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("negateLabelVals")]
         [JsonRequired]
         public List<string> NegateLabelVals { get; set; }
+
+        /// <summary>
+        /// Gets or sets the durationInHours.
+        /// <br/> Indicates how long the label will remain on the subject. Only applies on labels that are being added.
+        /// </summary>
+        [JsonPropertyName("durationInHours")]
+        public long? DurationInHours { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventLabel";
 
