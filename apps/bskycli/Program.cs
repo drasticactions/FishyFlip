@@ -497,6 +497,50 @@ public class AppCommands
     }
 
     /// <summary>
+    /// Create a new random message.
+    /// </summary>
+    /// <param name="postTxtFilePath">Path to the text file of posts to pick from.</param>
+    /// <param name="username">-u, Username.</param>
+    /// <param name="password">-p, Password.</param>
+    /// <param name="instanceUrl">-i, Instance URL.</param>
+    /// <param name="verbose">-v, Verbose logging.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Task.</returns>
+    [Command("random")]
+    public async Task CreateRandomPostAsync([Argument] string postTxtFilePath, string username, string password, string instanceUrl = "https://public.api.bsky.app", bool verbose = false, CancellationToken cancellationToken = default)
+    {
+        var consoleLog = new ConsoleLog(verbose);
+
+        if (!File.Exists(postTxtFilePath))
+        {
+            consoleLog.LogError("Post text file does not exist.");
+            return;
+        }
+
+        var posts = File.ReadAllLines(postTxtFilePath);
+
+        var atProtocol = this.GenerateProtocol(instanceUrl, consoleLog);
+
+        if (await this.AuthenticateWithAppPasswordAsync(username, password, atProtocol, consoleLog) == false)
+        {
+            return;
+        }
+
+        var index = new Random().Next(0, posts.Length);
+        var post = MarkdownPost.Parse(posts[index]);
+
+        var (result, error) = await atProtocol.Feed.CreatePostAsync(post.Post, post.Facets, cancellationToken: cancellationToken);
+
+        if (error is not null)
+        {
+            consoleLog.LogError($"Failed to create post: {error}");
+            return;
+        }
+
+        consoleLog.Log($"Post created: {result!.Uri} - {result!.Cid}");
+    }
+
+    /// <summary>
     /// Download a blob from a repository.
     /// </summary>
     /// <param name="atDid">The repo to download from.</param>

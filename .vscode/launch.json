@@ -72,6 +72,23 @@
             "stopAtEntry": false
         },
         {
+            "name": "random",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_bskycli",
+            "program": "${workspaceFolder}/apps/bskycli/bin/Debug/net9.0/bskycli.dll",
+            "args": [ 
+                "random",
+                "${workspaceFolder}/../larry2.txt",
+                "-u",
+                "${env:BLUESKY_DM_TEST_HANDLE}",
+                "-p",
+                "${env:BLUESKY_DM_TEST_PASSWORD}" ],
+            "cwd": "${workspaceFolder}/apps/bskycli",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "dm",
             "type": "coreclr",
             "request": "launch",
