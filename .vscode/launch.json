@@ -72,6 +72,29 @@
             "stopAtEntry": false
         },
         {
+            "name": "dm",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_bskycli",
+            "program": "${workspaceFolder}/apps/bskycli/bin/Debug/net9.0/bskycli.dll",
+            "args": [ 
+                "dm",
+                "Testing ホゲ, etc",
+                "-id",
+                "drasticactions.xn--q9jyb4c",
+                "-r",
+                "at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3lc2xksbvhw2f",
+                "-c",
+                "bafyreicwud4br5p54vikac7bprpszbca2jjc5ysjkszhtmextdrhgbozoa",
+                "-u",
+                "${env:BLUESKY_DM_TEST_HANDLE}",
+                "-p",
+                "${env:BLUESKY_DM_TEST_PASSWORD}" ],
+            "cwd": "${workspaceFolder}/apps/bskycli",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "post",
             "type": "coreclr",
             "request": "launch",
