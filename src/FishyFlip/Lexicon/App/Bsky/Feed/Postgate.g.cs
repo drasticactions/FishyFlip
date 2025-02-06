@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="post">Reference (AT-URI) to the post record.</param>
         /// <param name="createdAt"></param>
         /// <param name="detachedEmbeddingUris">List of AT-URIs embedding this post that the author has detached from.</param>
-        /// <param name="embeddingRules">
+        /// <param name="embeddingRules">List of rules defining who can embed this post. If value is an empty array or is undefined, no particular rules apply and anyone can embed.
         /// <br/> Union Types: <br/>
         /// #disableRule <br/>
         /// </param>
@@ -76,6 +76,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the embeddingRules.
+        /// <br/> List of rules defining who can embed this post. If value is an empty array or is undefined, no particular rules apply and anyone can embed.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule) <br/>
         /// </summary>

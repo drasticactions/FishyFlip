@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Initializes a new instance of the <see cref="Threadgate"/> class.
         /// </summary>
         /// <param name="post">Reference (AT-URI) to the post record.</param>
-        /// <param name="allow">
+        /// <param name="allow">List of rules defining who can reply to this post. If value is an empty array, no one can reply. If value is undefined, anyone can reply.
         /// <br/> Union Types: <br/>
         /// #mentionRule <br/>
         /// #followingRule <br/>
@@ -65,6 +65,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         /// <summary>
         /// Gets or sets the allow.
+        /// <br/> List of rules defining who can reply to this post. If value is an empty array, no one can reply. If value is undefined, anyone can reply.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.MentionRule"/> (app.bsky.feed.threadgate#mentionRule) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule) <br/>

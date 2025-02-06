@@ -417,7 +417,7 @@ namespace FishyFlip.Lexicon
         /// <param name="post">Reference (AT-URI) to the post record.</param>
         /// <param name="createdAt"></param>
         /// <param name="detachedEmbeddingUris">List of AT-URIs embedding this post that the author has detached from.</param>
-        /// <param name="embeddingRules">
+        /// <param name="embeddingRules">List of rules defining who can embed this post. If value is an empty array or is undefined, no particular rules apply and anyone can embed.
         /// <br/> Union Types: <br/>
         /// #disableRule <br/>
         /// </param>
@@ -646,7 +646,7 @@ namespace FishyFlip.Lexicon
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="post">Reference (AT-URI) to the post record.</param>
-        /// <param name="allow">
+        /// <param name="allow">List of rules defining who can reply to this post. If value is an empty array, no one can reply. If value is undefined, anyone can reply.
         /// <br/> Union Types: <br/>
         /// #mentionRule <br/>
         /// #followingRule <br/>

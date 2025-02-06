@@ -45,6 +45,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput)this, SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleInput);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput)this, SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput);
+                case "community.lexicon.location.address":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Community.Lexicon.Location.Address)this, SourceGenerationContext.Default.CommunityLexiconLocationAddress);
                 case "tools.ozone.set.addValues#AddValuesInput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput)this, SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput);
                 case "app.bsky.actor.defs#adultContentPref":
@@ -211,6 +213,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput)this, SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput);
                 case "com.whtwnd.blog.entry":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry)this, SourceGenerationContext.Default.ComWhtwndBlogEntry);
+                case "community.lexicon.calendar.event":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Community.Lexicon.Calendar.Event)this, SourceGenerationContext.Default.CommunityLexiconCalendarEvent);
                 case "app.bsky.embed.external#external":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Embed.External)this, SourceGenerationContext.Default.AppBskyEmbedExternal);
                 case "app.bsky.richtext.facet":
@@ -241,12 +245,16 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Blue.Moji.Richtext.FormatsV0)this, SourceGenerationContext.Default.BlueMojiRichtextFormatsV0);
                 case "blue.moji.collection.item#formats_v0":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Blue.Moji.Collection.FormatsV0)this, SourceGenerationContext.Default.BlueMojiCollectionFormatsV0);
+                case "community.lexicon.location.fsq":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Community.Lexicon.Location.Fsq)this, SourceGenerationContext.Default.CommunityLexiconLocationFsq);
                 case "app.bsky.feed.generator":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.Generator)this, SourceGenerationContext.Default.AppBskyFeedGenerator);
                 case "app.bsky.feed.defs#generatorView":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView)this, SourceGenerationContext.Default.AppBskyFeedGeneratorView);
                 case "app.bsky.feed.defs#generatorViewerState":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState)this, SourceGenerationContext.Default.AppBskyFeedGeneratorViewerState);
+                case "community.lexicon.location.geo":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Community.Lexicon.Location.Geo)this, SourceGenerationContext.Default.CommunityLexiconLocationGeo);
                 case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput)this, SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput);
                 case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
@@ -409,6 +417,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput)this, SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput);
                 case "tools.ozone.set.getValues#GetValuesOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput)this, SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput);
+                case "community.lexicon.location.h3":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Community.Lexicon.Location.H3)this, SourceGenerationContext.Default.CommunityLexiconLocationH3);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref)this, SourceGenerationContext.Default.AppBskyActorHiddenPostsPref);
                 case "buzz.bookhive.hiveBook":
@@ -657,6 +667,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post)this, SourceGenerationContext.Default.FyiUnravelFrontpagePost);
                 case "app.bsky.feed.postgate":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.Postgate)this, SourceGenerationContext.Default.AppBskyFeedPostgate);
+                case "app.bsky.actor.defs#postInteractionSettingsPref":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref)this, SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref);
                 case "app.bsky.feed.defs#postView":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.PostView)this, SourceGenerationContext.Default.AppBskyFeedPostView);
                 case "app.bsky.actor.profile":
@@ -783,6 +795,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Social.Psky.Richtext.Room)this, SourceGenerationContext.Default.SocialPskyRichtextRoom);
                 case "social.psky.chat.room":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Social.Psky.Chat.Room)this, SourceGenerationContext.Default.SocialPskyChatRoom);
+                case "community.lexicon.calendar.rsvp":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp)this, SourceGenerationContext.Default.CommunityLexiconCalendarRsvp);
                 case "app.bsky.actor.defs#savedFeed":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed)this, SourceGenerationContext.Default.AppBskyActorSavedFeed);
                 case "app.bsky.actor.defs#savedFeedsPref":
@@ -957,6 +971,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput)this, SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput);
                 case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput)this, SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionOutput);
+                case "community.lexicon.calendar.event#uri":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri)this, SourceGenerationContext.Default.CommunityLexiconCalendarUri);
                 case "my.skylights.rel#urlItem":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.My.Skylights.UrlItem)this, SourceGenerationContext.Default.MySkylightsUrlItem);
                 case "ma.tokono.byov.video":
@@ -1024,6 +1040,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput)this, SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleInput);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput)this, SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput);
+                case "community.lexicon.location.address":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Community.Lexicon.Location.Address)this, SourceGenerationContext.Default.CommunityLexiconLocationAddress);
                 case "tools.ozone.set.addValues#AddValuesInput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput)this, SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput);
                 case "app.bsky.actor.defs#adultContentPref":
@@ -1190,6 +1208,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput)this, SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput);
                 case "com.whtwnd.blog.entry":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry)this, SourceGenerationContext.Default.ComWhtwndBlogEntry);
+                case "community.lexicon.calendar.event":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Community.Lexicon.Calendar.Event)this, SourceGenerationContext.Default.CommunityLexiconCalendarEvent);
                 case "app.bsky.embed.external#external":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Embed.External)this, SourceGenerationContext.Default.AppBskyEmbedExternal);
                 case "app.bsky.richtext.facet":
@@ -1220,12 +1240,16 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Blue.Moji.Richtext.FormatsV0)this, SourceGenerationContext.Default.BlueMojiRichtextFormatsV0);
                 case "blue.moji.collection.item#formats_v0":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Blue.Moji.Collection.FormatsV0)this, SourceGenerationContext.Default.BlueMojiCollectionFormatsV0);
+                case "community.lexicon.location.fsq":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Community.Lexicon.Location.Fsq)this, SourceGenerationContext.Default.CommunityLexiconLocationFsq);
                 case "app.bsky.feed.generator":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.Generator)this, SourceGenerationContext.Default.AppBskyFeedGenerator);
                 case "app.bsky.feed.defs#generatorView":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView)this, SourceGenerationContext.Default.AppBskyFeedGeneratorView);
                 case "app.bsky.feed.defs#generatorViewerState":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState)this, SourceGenerationContext.Default.AppBskyFeedGeneratorViewerState);
+                case "community.lexicon.location.geo":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Community.Lexicon.Location.Geo)this, SourceGenerationContext.Default.CommunityLexiconLocationGeo);
                 case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput)this, SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput);
                 case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
@@ -1388,6 +1412,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput)this, SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput);
                 case "tools.ozone.set.getValues#GetValuesOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput)this, SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput);
+                case "community.lexicon.location.h3":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Community.Lexicon.Location.H3)this, SourceGenerationContext.Default.CommunityLexiconLocationH3);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref)this, SourceGenerationContext.Default.AppBskyActorHiddenPostsPref);
                 case "buzz.bookhive.hiveBook":
@@ -1636,6 +1662,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post)this, SourceGenerationContext.Default.FyiUnravelFrontpagePost);
                 case "app.bsky.feed.postgate":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.Postgate)this, SourceGenerationContext.Default.AppBskyFeedPostgate);
+                case "app.bsky.actor.defs#postInteractionSettingsPref":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref)this, SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref);
                 case "app.bsky.feed.defs#postView":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.PostView)this, SourceGenerationContext.Default.AppBskyFeedPostView);
                 case "app.bsky.actor.profile":
@@ -1762,6 +1790,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Social.Psky.Richtext.Room)this, SourceGenerationContext.Default.SocialPskyRichtextRoom);
                 case "social.psky.chat.room":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Social.Psky.Chat.Room)this, SourceGenerationContext.Default.SocialPskyChatRoom);
+                case "community.lexicon.calendar.rsvp":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp)this, SourceGenerationContext.Default.CommunityLexiconCalendarRsvp);
                 case "app.bsky.actor.defs#savedFeed":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed)this, SourceGenerationContext.Default.AppBskyActorSavedFeed);
                 case "app.bsky.actor.defs#savedFeedsPref":
@@ -1936,6 +1966,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput)this, SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput);
                 case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput)this, SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionOutput);
+                case "community.lexicon.calendar.event#uri":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri)this, SourceGenerationContext.Default.CommunityLexiconCalendarUri);
                 case "my.skylights.rel#urlItem":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.My.Skylights.UrlItem)this, SourceGenerationContext.Default.MySkylightsUrlItem);
                 case "ma.tokono.byov.video":
@@ -2002,6 +2034,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleInput);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput);
+                case "community.lexicon.location.address":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Address>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Address>)SourceGenerationContext.Default.CommunityLexiconLocationAddress);
                 case "tools.ozone.set.addValues#AddValuesInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput);
                 case "app.bsky.actor.defs#adultContentPref":
@@ -2168,6 +2202,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput);
                 case "com.whtwnd.blog.entry":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry>)SourceGenerationContext.Default.ComWhtwndBlogEntry);
+                case "community.lexicon.calendar.event":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Event>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Event>)SourceGenerationContext.Default.CommunityLexiconCalendarEvent);
                 case "app.bsky.embed.external#external":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.External>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.External>)SourceGenerationContext.Default.AppBskyEmbedExternal);
                 case "app.bsky.richtext.facet":
@@ -2198,12 +2234,16 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Richtext.FormatsV0>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Richtext.FormatsV0>)SourceGenerationContext.Default.BlueMojiRichtextFormatsV0);
                 case "blue.moji.collection.item#formats_v0":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.FormatsV0>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.FormatsV0>)SourceGenerationContext.Default.BlueMojiCollectionFormatsV0);
+                case "community.lexicon.location.fsq":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Fsq>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Fsq>)SourceGenerationContext.Default.CommunityLexiconLocationFsq);
                 case "app.bsky.feed.generator":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Generator>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Generator>)SourceGenerationContext.Default.AppBskyFeedGenerator);
                 case "app.bsky.feed.defs#generatorView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView);
                 case "app.bsky.feed.defs#generatorViewerState":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState>)SourceGenerationContext.Default.AppBskyFeedGeneratorViewerState);
+                case "community.lexicon.location.geo":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Geo>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Geo>)SourceGenerationContext.Default.CommunityLexiconLocationGeo);
                 case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput);
                 case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
@@ -2366,6 +2406,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput);
                 case "tools.ozone.set.getValues#GetValuesOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>)SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput);
+                case "community.lexicon.location.h3":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.H3>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref);
                 case "buzz.bookhive.hiveBook":
@@ -2614,6 +2656,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>(text, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost);
                 case "app.bsky.feed.postgate":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate);
+                case "app.bsky.actor.defs#postInteractionSettingsPref":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref);
                 case "app.bsky.feed.defs#postView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.PostView>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView);
                 case "app.bsky.actor.profile":
@@ -2740,6 +2784,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Richtext.Room>(text, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Room>)SourceGenerationContext.Default.SocialPskyRichtextRoom);
                 case "social.psky.chat.room":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Room>(text, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom);
+                case "community.lexicon.calendar.rsvp":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>)SourceGenerationContext.Default.CommunityLexiconCalendarRsvp);
                 case "app.bsky.actor.defs#savedFeed":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed>)SourceGenerationContext.Default.AppBskyActorSavedFeed);
                 case "app.bsky.actor.defs#savedFeedsPref":
@@ -2914,6 +2960,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput);
                 case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionOutput);
+                case "community.lexicon.calendar.event#uri":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>)SourceGenerationContext.Default.CommunityLexiconCalendarUri);
                 case "my.skylights.rel#urlItem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.UrlItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.UrlItem>)SourceGenerationContext.Default.MySkylightsUrlItem);
                 case "ma.tokono.byov.video":
