@@ -134,6 +134,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref"/> (app.bsky.actor.defs#hiddenPostsPref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref"/> (app.bsky.actor.defs#bskyAppStatePref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref"/> (app.bsky.actor.defs#labelersPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref"/> (app.bsky.actor.defs#postInteractionSettingsPref) <br/>
         /// </param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>

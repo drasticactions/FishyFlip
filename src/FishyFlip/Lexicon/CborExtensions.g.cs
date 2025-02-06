@@ -48,6 +48,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.AddReservedHandleInput(obj);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
                     return new Com.Atproto.Temp.AddReservedHandleOutput(obj);
+                case "community.lexicon.location.address":
+                    return new Community.Lexicon.Location.Address(obj);
                 case "tools.ozone.set.addValues#AddValuesInput":
                     return new Tools.Ozone.Set.AddValuesInput(obj);
                 case "app.bsky.actor.defs#adultContentPref":
@@ -214,6 +216,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
                 case "com.whtwnd.blog.entry":
                     return new Com.Whtwnd.Blog.Entry(obj);
+                case "community.lexicon.calendar.event":
+                    return new Community.Lexicon.Calendar.Event(obj);
                 case "app.bsky.embed.external#external":
                     return new App.Bsky.Embed.External(obj);
                 case "app.bsky.richtext.facet":
@@ -244,12 +248,16 @@ namespace FishyFlip.Lexicon
                     return new Blue.Moji.Richtext.FormatsV0(obj);
                 case "blue.moji.collection.item#formats_v0":
                     return new Blue.Moji.Collection.FormatsV0(obj);
+                case "community.lexicon.location.fsq":
+                    return new Community.Lexicon.Location.Fsq(obj);
                 case "app.bsky.feed.generator":
                     return new App.Bsky.Feed.Generator(obj);
                 case "app.bsky.feed.defs#generatorView":
                     return new App.Bsky.Feed.GeneratorView(obj);
                 case "app.bsky.feed.defs#generatorViewerState":
                     return new App.Bsky.Feed.GeneratorViewerState(obj);
+                case "community.lexicon.location.geo":
+                    return new Community.Lexicon.Location.Geo(obj);
                 case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
                     return new Com.Atproto.Admin.GetAccountInfosOutput(obj);
                 case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
@@ -412,6 +420,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Video.GetUploadLimitsOutput(obj);
                 case "tools.ozone.set.getValues#GetValuesOutput":
                     return new Tools.Ozone.Set.GetValuesOutput(obj);
+                case "community.lexicon.location.h3":
+                    return new Community.Lexicon.Location.H3(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
                 case "buzz.bookhive.hiveBook":
@@ -660,6 +670,8 @@ namespace FishyFlip.Lexicon
                     return new Fyi.Unravel.Frontpage.Post(obj);
                 case "app.bsky.feed.postgate":
                     return new App.Bsky.Feed.Postgate(obj);
+                case "app.bsky.actor.defs#postInteractionSettingsPref":
+                    return new App.Bsky.Actor.PostInteractionSettingsPref(obj);
                 case "app.bsky.feed.defs#postView":
                     return new App.Bsky.Feed.PostView(obj);
                 case "app.bsky.actor.profile":
@@ -786,6 +798,8 @@ namespace FishyFlip.Lexicon
                     return new Social.Psky.Richtext.Room(obj);
                 case "social.psky.chat.room":
                     return new Social.Psky.Chat.Room(obj);
+                case "community.lexicon.calendar.rsvp":
+                    return new Community.Lexicon.Calendar.Rsvp(obj);
                 case "app.bsky.actor.defs#savedFeed":
                     return new App.Bsky.Actor.SavedFeed(obj);
                 case "app.bsky.actor.defs#savedFeedsPref":
@@ -960,6 +974,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.UpsertOptionInput(obj);
                 case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
                     return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
+                case "community.lexicon.calendar.event#uri":
+                    return new Community.Lexicon.Calendar.Uri(obj);
                 case "my.skylights.rel#urlItem":
                     return new My.Skylights.UrlItem(obj);
                 case "ma.tokono.byov.video":
