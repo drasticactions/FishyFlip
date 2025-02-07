@@ -1,4 +1,4 @@
-﻿// <copyright file="SubscribeRepoMessage.cs" company="Drastic Actions">
+// <copyright file="SubscribeRepoMessage.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -68,6 +68,11 @@ public class SubscribeRepoMessage
     /// Gets the identity of the message.
     /// </summary>
     public FrameIdentity? Identity { get; internal set; }
+
+    /// <summary>
+    /// Gets the labels of the message.
+    /// </summary>
+    public FishyFlip.Lexicon.Com.Atproto.Label.Labels? Labels { get; internal set; }
 
     /// <summary>
     /// Gets the list of nodes in the message.

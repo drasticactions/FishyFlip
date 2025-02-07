@@ -273,6 +273,9 @@ public sealed class ATWebSocketProtocol : IDisposable
                     case "#identity":
                         message.Identity = new FrameIdentity(objects[1]);
                         break;
+                    case "#labels":
+                        message.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.Labels(objects[1]);
+                        break;
                     default:
                         this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
                         break;
