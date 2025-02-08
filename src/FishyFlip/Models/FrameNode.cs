@@ -6,6 +6,7 @@ namespace FishyFlip.Models;
 
 /// <summary>
 /// Represents a node in a frame, containing data.
+/// https://atproto.com/ja/specs/repository.
 /// </summary>
 public class FrameNode
 {
@@ -15,11 +16,17 @@ public class FrameNode
     /// <param name="obj">The CBOR object to initialize the node with.</param>
     public FrameNode(CBORObject obj)
     {
-        this.Data = obj?.EncodeToBytes();
+        this.Left = obj["l"]?.ToATCid();
+        this.Entries = obj["e"]?.Values.Select(n => new FrameEntry(n)).ToArray();
     }
 
     /// <summary>
-    /// Gets the data contained in the node.
+    /// Gets the link to sub-tree Node on a lower level and with all keys sorting before keys at this node.
     /// </summary>
-    public byte[]? Data { get; }
+    public ATCid? Left { get; }
+
+    /// <summary>
+    /// Gets an ordered list of TreeEntry objects.
+    /// </summary>
+    public FrameEntry[]? Entries { get; }
 }
