@@ -12,6 +12,7 @@ namespace FishyFlip;
 /// </summary>
 public sealed class ATWebSocketProtocol : IDisposable
 {
+    private bool subscribedLabels;
     private WebSocketWrapper webSocketWrapper;
     private IReadOnlyList<ICustomATObjectCBORConverter> customConverters;
     private bool disposedValue;
@@ -51,6 +52,11 @@ public sealed class ATWebSocketProtocol : IDisposable
     public event EventHandler<SubscribedRepoEventArgs>? OnSubscribedRepoMessage;
 
     /// <summary>
+    /// Event for when a subscribed label message is received.
+    /// </summary>
+    public event EventHandler<SubscribedLabelEventArgs>? OnSubscribedLabelMessage;
+
+    /// <summary>
     /// Event for when a message is received.
     /// </summary>
     public event EventHandler<ReadOnlySequence<byte>>? OnMessageReceived;
@@ -75,6 +81,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     {
         if (this.IsConnected)
         {
+            this.logger?.LogInformation("WSS: Already connected.");
             return;
         }
 
@@ -110,6 +117,7 @@ public sealed class ATWebSocketProtocol : IDisposable
         }
 
         this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.webSocketWrapper.State));
+        this.subscribedLabels = false;
     }
 
     /// <summary>
@@ -126,7 +134,10 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task StartSubscribeLabelsAsync(CancellationToken? token = default)
-        => this.ConnectAsync("/xrpc/com.atproto.label.subscribeLabels", token);
+    {
+        this.subscribedLabels = true;
+        return this.ConnectAsync("/xrpc/com.atproto.sync.subscribeLabels", token);
+    }
 
     /// <summary>
     /// Stops the ATProtocol Subscription session.
@@ -205,22 +216,69 @@ public sealed class ATWebSocketProtocol : IDisposable
             return;
         }
 
-        var message = new SubscribeRepoMessage();
-
         var frameHeader = new FrameHeader(objects[0]);
 
-        message.Header = frameHeader;
+        if (this.subscribedLabels)
+        {
+            this.HandleLabelMessage(frameHeader, objects[1]);
+        }
+        else
+        {
+            this.HandleRepoMessage(frameHeader, objects[1]);
+        }
+    }
 
-        switch (frameHeader.Operation)
+    private void HandleLabelMessage(FrameHeader header, CBORObject obj)
+    {
+        var message = new SubscribeLabelMessage();
+        message.Header = header;
+        switch (header.Operation)
         {
             case FrameHeaderOperation.Unknown:
                 break;
             case FrameHeaderOperation.Frame:
-                var frameType = frameHeader.Type;
+                var frameType = header.Type;
+                switch (frameType)
+                {
+                    case "#labels":
+                        message.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.Labels(obj);
+                        break;
+                    case "#info":
+                        message.Info = new FrameInfo(obj);
+                        break;
+                    default:
+                        this.logger?.LogDebug($"Unknown Frame: {obj.ToJSONString()}");
+                        break;
+                }
+
+                break;
+            case FrameHeaderOperation.Error:
+                var frameError = new FrameError(obj);
+                message.Error = frameError;
+                this.logger?.LogError($"WSS: ATError: {frameError.Message}");
+                this.CloseAsync(WebSocketCloseStatus.InternalServerError, frameError.Message ?? string.Empty).FireAndForgetSafeAsync(this.logger);
+                break;
+            default:
+                break;
+        }
+
+        this.OnSubscribedLabelMessage?.Invoke(this, new SubscribedLabelEventArgs(message));
+    }
+
+    private void HandleRepoMessage(FrameHeader header, CBORObject obj)
+    {
+        var message = new SubscribeRepoMessage();
+        message.Header = header;
+        switch (header.Operation)
+        {
+            case FrameHeaderOperation.Unknown:
+                break;
+            case FrameHeaderOperation.Frame:
+                var frameType = header.Type;
                 switch (frameType)
                 {
                     case "#commit":
-                        var frameCommit = new FrameCommit(objects[1], this.logger);
+                        var frameCommit = new FrameCommit(obj, this.logger);
                         message.Commit = frameCommit;
                         if (frameCommit.Blocks is null)
                         {
@@ -252,35 +310,35 @@ public sealed class ATWebSocketProtocol : IDisposable
 
                         break;
                     case "#handle":
-                        var frameHandle = new FrameHandle(objects[1]);
+                        var frameHandle = new FrameHandle(obj);
                         message.Handle = frameHandle;
                         break;
                     case "#repoOp":
-                        message.RepoOp = new FrameRepoOp(objects[1]);
+                        message.RepoOp = new FrameRepoOp(obj);
                         break;
                     case "#info":
-                        message.Info = new FrameInfo(objects[1]);
+                        message.Info = new FrameInfo(obj);
                         break;
                     case "#tombstone":
-                        message.Tombstone = new FrameTombstone(objects[1]);
+                        message.Tombstone = new FrameTombstone(obj);
                         break;
                     case "#migrate":
-                        message.Migrate = new FrameMigrate(objects[1]);
+                        message.Migrate = new FrameMigrate(obj);
                         break;
                     case "#account":
-                        message.Account = new FrameAccount(objects[1]);
+                        message.Account = new FrameAccount(obj);
                         break;
                     case "#identity":
-                        message.Identity = new FrameIdentity(objects[1]);
+                        message.Identity = new FrameIdentity(obj);
                         break;
                     default:
-                        this.logger?.LogDebug($"Unknown Frame: {objects[1].ToJSONString()}");
+                        this.logger?.LogDebug($"Unknown Frame: {obj.ToJSONString()}");
                         break;
                 }
 
                 break;
             case FrameHeaderOperation.Error:
-                var frameError = new FrameError(objects[1]);
+                var frameError = new FrameError(obj);
                 message.Error = frameError;
                 this.logger?.LogError($"WSS: ATError: {frameError.Message}");
                 this.CloseAsync(WebSocketCloseStatus.InternalServerError, frameError.Message ?? string.Empty).FireAndForgetSafeAsync(this.logger);
@@ -295,7 +353,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     private Task OnInternalMessageReceived(ReadOnlySequence<byte> message)
     {
         this.OnMessageReceived?.Invoke(this, message);
-        if (this.OnRecordReceived is not null || this.OnSubscribedRepoMessage is not null)
+        if (this.OnRecordReceived is not null || this.OnSubscribedRepoMessage is not null || this.OnSubscribedLabelMessage is not null)
         {
             var newMessage = message.ToArray();
             Task.Run(() => { this.HandleMessage(newMessage); }).FireAndForgetSafeAsync(this.logger);
