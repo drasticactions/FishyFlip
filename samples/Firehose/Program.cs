@@ -68,7 +68,7 @@ atWebProtocol.OnRecordReceived += (sender, e) =>
     log.LogInformation($"Record: {e.Record?.Type}");
 };
 
-await atLabelWebProtocol.StartSubscribeLabelsAsync();
+await atLabelWebProtocol.StartSubscribeLabelsAsync(0);
 
 var key = Console.Read();
 

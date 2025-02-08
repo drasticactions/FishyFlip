@@ -146,7 +146,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     public Task StartSubscribeLabelsAsync(long? cursor = default, CancellationToken? token = default)
     {
         this.subscribedLabels = true;
-        var endPoint = "/xrpc/com.atproto.sync.subscribeLabels";
+        var endPoint = "/xrpc/com.atproto.label.subscribeLabels";
         if (cursor is not null)
         {
             endPoint += $"?cursor={cursor}";
