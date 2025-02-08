@@ -20,7 +20,7 @@ public class FrameFooter
         this.Version = obj["version"].AsInt32();
         this.Prev = obj["prev"].ToATCid(logger);
         this.Data = obj["data"].ToATCid(logger);
-        this.Sig = obj["sig"].GetByteString();
+        this.Sig = obj["sig"].EncodeToBytes();
     }
 
     /// <summary>
