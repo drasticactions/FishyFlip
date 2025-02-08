@@ -15,21 +15,6 @@ public class SubscribeLabelMessage
     public FrameHeader? Header { get; internal set; }
 
     /// <summary>
-    /// Gets the commit of the message.
-    /// </summary>
-    public FrameCommit? Commit { get; internal set; }
-
-    /// <summary>
-    /// Gets the handle of the message.
-    /// </summary>
-    public FrameHandle? Handle { get; internal set; }
-
-    /// <summary>
-    /// Gets the footer of the message.
-    /// </summary>
-    public FrameFooter? Footer { get; internal set; }
-
-    /// <summary>
     /// Gets the atError of the message.
     /// </summary>
     public FrameError? Error { get; internal set; }
@@ -38,11 +23,6 @@ public class SubscribeLabelMessage
     /// Gets the info of the message.
     /// </summary>
     public FrameInfo? Info { get; internal set; }
-
-    /// <summary>
-    /// Gets the list of nodes in the message.
-    /// </summary>
-    public List<FrameNode> Nodes { get; } = new List<FrameNode>();
 
     /// <summary>
     /// Gets the labels of the message.

@@ -123,20 +123,36 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <summary>
     /// Start the ATProtocol SubscribeRepos sync session.
     /// </summary>
+    /// <param name="cursor">The last known event seq number to backfill from.</param>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public Task StartSubscribeReposAsync(CancellationToken? token = default)
-        => this.ConnectAsync("/xrpc/com.atproto.sync.subscribeRepos", token);
+    public Task StartSubscribeReposAsync(int? cursor = default, CancellationToken? token = default)
+    {
+        var endPoint = "/xrpc/com.atproto.sync.subscribeRepos";
+        if (cursor is not null)
+        {
+            endPoint += $"?cursor={cursor}";
+        }
+
+        return this.ConnectAsync(endPoint, token);
+    }
 
     /// <summary>
     /// Start the ATProtocol SubscribeRepos sync session.
     /// </summary>
+    /// <param name="cursor">The last known event seq number to backfill from.</param>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public Task StartSubscribeLabelsAsync(CancellationToken? token = default)
+    public Task StartSubscribeLabelsAsync(int? cursor = default, CancellationToken? token = default)
     {
         this.subscribedLabels = true;
-        return this.ConnectAsync("/xrpc/com.atproto.sync.subscribeLabels", token);
+        var endPoint = "/xrpc/com.atproto.sync.subscribeLabels";
+        if (cursor is not null)
+        {
+            endPoint += $"?cursor={cursor}";
+        }
+
+        return this.ConnectAsync(endPoint, token);
     }
 
     /// <summary>
