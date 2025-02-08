@@ -126,7 +126,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <param name="cursor">The last known event seq number to backfill from.</param>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public Task StartSubscribeReposAsync(int? cursor = default, CancellationToken? token = default)
+    public Task StartSubscribeReposAsync(long? cursor = default, CancellationToken? token = default)
     {
         var endPoint = "/xrpc/com.atproto.sync.subscribeRepos";
         if (cursor is not null)
@@ -143,7 +143,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <param name="cursor">The last known event seq number to backfill from.</param>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public Task StartSubscribeLabelsAsync(int? cursor = default, CancellationToken? token = default)
+    public Task StartSubscribeLabelsAsync(long? cursor = default, CancellationToken? token = default)
     {
         this.subscribedLabels = true;
         var endPoint = "/xrpc/com.atproto.sync.subscribeLabels";
