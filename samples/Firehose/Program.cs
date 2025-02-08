@@ -34,6 +34,11 @@ var atWebProtocolBuilder = new ATWebSocketProtocolBuilder()
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atWebProtocol = atWebProtocolBuilder.Build();
 
+var atLabelWebProtocolBuilder = new ATWebSocketProtocolBuilder()
+    .WithInstanceUrl(new Uri("https://mod.bsky.app"))
+    .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
+var atLabelWebProtocol = atLabelWebProtocolBuilder.Build();
+
 var atProtocolBuilder = new ATProtocolBuilder()
     .WithLogger(debugLog.CreateLogger("FishyFlipDebug"));
 var atProtocol = atProtocolBuilder.Build();
@@ -48,6 +53,11 @@ atWebProtocol.OnSubscribedRepoMessage += (sender, e) =>
     log.LogInformation($"Message: {DateTime.UtcNow.Ticks}");
 };
 
+atLabelWebProtocol.OnSubscribedLabelMessage += (sender, e) =>
+{
+    log.LogInformation($"Message: {DateTime.UtcNow.Ticks}");
+};
+
 atWebProtocol.OnMessageReceived += (sender, e) =>
 {
     log.LogInformation($"Byte Message: {DateTime.UtcNow.Ticks}");
@@ -58,7 +68,7 @@ atWebProtocol.OnRecordReceived += (sender, e) =>
     log.LogInformation($"Record: {e.Record?.Type}");
 };
 
-await atWebProtocol.StartSubscribeReposAsync();
+await atLabelWebProtocol.StartSubscribeLabelsAsync(0);
 
 var key = Console.Read();
 
