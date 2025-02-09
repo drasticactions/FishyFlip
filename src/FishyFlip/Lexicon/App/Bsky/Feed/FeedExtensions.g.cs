@@ -649,6 +649,7 @@ namespace FishyFlip.Lexicon
         /// <param name="allow">List of rules defining who can reply to this post. If value is an empty array, no one can reply. If value is undefined, anyone can reply.
         /// <br/> Union Types: <br/>
         /// #mentionRule <br/>
+        /// #followerRule <br/>
         /// #followingRule <br/>
         /// #listRule <br/>
         /// </param>

@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
                 case "tools.ozone.moderation.defs#accountEvent":
                 case "tools.ozone.moderation.defs#identityEvent":
                 case "tools.ozone.moderation.defs#recordEvent":
+                case "tools.ozone.moderation.defs#modEventPriorityScore":
                     break;
                 default:
                     atp.Options.Logger?.LogWarning($"Unknown @event type for union: " + @event.Type);
@@ -382,9 +383,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="minAccountSuspendCount"></param>
         /// <param name="minReportedRecordsCount"></param>
         /// <param name="minTakendownRecordsCount"></param>
+        /// <param name="minPriorityScore"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, int? minAccountSuspendCount = 0, int? minReportedRecordsCount = 0, int? minTakendownRecordsCount = 0, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, int? minAccountSuspendCount = 0, int? minReportedRecordsCount = 0, int? minTakendownRecordsCount = 0, int? minPriorityScore = 0, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryStatuses.ToString();
             endpointUrl += "?";
@@ -552,6 +554,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (minTakendownRecordsCount != null)
             {
                 queryStrings.Add("minTakendownRecordsCount=" + minTakendownRecordsCount);
+            }
+
+            if (minPriorityScore != null)
+            {
+                queryStrings.Add("minPriorityScore=" + minPriorityScore);
             }
 
             var headers = new Dictionary<string, string>();

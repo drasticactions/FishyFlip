@@ -239,6 +239,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput)this, SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput);
                 case "app.bsky.graph.follow":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Graph.Follow)this, SourceGenerationContext.Default.AppBskyGraphFollow);
+                case "app.bsky.feed.threadgate#followerRule":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule)this, SourceGenerationContext.Default.AppBskyFeedFollowerRule);
                 case "app.bsky.feed.threadgate#followingRule":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule)this, SourceGenerationContext.Default.AppBskyFeedFollowingRule);
                 case "blue.moji.richtext.facet#formats_v0":
@@ -585,6 +587,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventMute);
                 case "tools.ozone.moderation.defs#modEventMuteReporter":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventMuteReporter);
+                case "tools.ozone.moderation.defs#modEventPriorityScore":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventPriorityScore);
                 case "tools.ozone.moderation.defs#modEventReport":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventReport);
                 case "tools.ozone.moderation.defs#modEventResolveAppeal":
@@ -1234,6 +1238,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput)this, SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput);
                 case "app.bsky.graph.follow":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Graph.Follow)this, SourceGenerationContext.Default.AppBskyGraphFollow);
+                case "app.bsky.feed.threadgate#followerRule":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule)this, SourceGenerationContext.Default.AppBskyFeedFollowerRule);
                 case "app.bsky.feed.threadgate#followingRule":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule)this, SourceGenerationContext.Default.AppBskyFeedFollowingRule);
                 case "blue.moji.richtext.facet#formats_v0":
@@ -1580,6 +1586,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventMute);
                 case "tools.ozone.moderation.defs#modEventMuteReporter":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventMuteReporter);
+                case "tools.ozone.moderation.defs#modEventPriorityScore":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventPriorityScore);
                 case "tools.ozone.moderation.defs#modEventReport":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport)this, SourceGenerationContext.Default.ToolsOzoneModerationModEventReport);
                 case "tools.ozone.moderation.defs#modEventResolveAppeal":
@@ -2228,6 +2236,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput);
                 case "app.bsky.graph.follow":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Follow>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Follow>)SourceGenerationContext.Default.AppBskyGraphFollow);
+                case "app.bsky.feed.threadgate#followerRule":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule>)SourceGenerationContext.Default.AppBskyFeedFollowerRule);
                 case "app.bsky.feed.threadgate#followingRule":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule>)SourceGenerationContext.Default.AppBskyFeedFollowingRule);
                 case "blue.moji.richtext.facet#formats_v0":
@@ -2574,6 +2584,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMute>)SourceGenerationContext.Default.ToolsOzoneModerationModEventMute);
                 case "tools.ozone.moderation.defs#modEventMuteReporter":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventMuteReporter);
+                case "tools.ozone.moderation.defs#modEventPriorityScore":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore>)SourceGenerationContext.Default.ToolsOzoneModerationModEventPriorityScore);
                 case "tools.ozone.moderation.defs#modEventReport":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReport>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReport);
                 case "tools.ozone.moderation.defs#modEventResolveAppeal":

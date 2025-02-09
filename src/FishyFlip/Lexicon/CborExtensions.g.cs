@@ -242,6 +242,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Signature.FindRelatedAccountsOutput(obj);
                 case "app.bsky.graph.follow":
                     return new App.Bsky.Graph.Follow(obj);
+                case "app.bsky.feed.threadgate#followerRule":
+                    return new App.Bsky.Feed.FollowerRule(obj);
                 case "app.bsky.feed.threadgate#followingRule":
                     return new App.Bsky.Feed.FollowingRule(obj);
                 case "blue.moji.richtext.facet#formats_v0":
@@ -588,6 +590,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.ModEventMute(obj);
                 case "tools.ozone.moderation.defs#modEventMuteReporter":
                     return new Tools.Ozone.Moderation.ModEventMuteReporter(obj);
+                case "tools.ozone.moderation.defs#modEventPriorityScore":
+                    return new Tools.Ozone.Moderation.ModEventPriorityScore(obj);
                 case "tools.ozone.moderation.defs#modEventReport":
                     return new Tools.Ozone.Moderation.ModEventReport(obj);
                 case "tools.ozone.moderation.defs#modEventResolveAppeal":
