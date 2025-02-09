@@ -25,7 +25,7 @@ Console.WriteLine($"Session Token: {session.AccessJwt}");
 
 If you don't override the Instance URL in `ATProtocolBuilder.WithInstanceUrl` the users PDS Host will be resolved before the authentication attempt is made and will be used for authentication and future requests. If you have set it, the authentication request will be resolved against that endpoint. 
 
-- OAuth authentication is more complex. There is a full example showing a [local user authentication session](https://github.com/drasticactions/FishyFlip/tree/develop/samples/OAuth) but in short, you must:
+- OAuth authentication is more complex. There is a full example showing a [local user authentication session](https://github.com/drasticactions/ffexamples/tree/main/samples/OAuth) but in short, you must:
   - Starting the session with `atProtocol.GenerateOAuth2AuthenticationUrlResultAsync`
   - Sending the user to a web browser to log in
   - Handling the callback with the return URI, 

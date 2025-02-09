@@ -2,7 +2,7 @@
 
 With ATProtocol, you can post, list, and delete arbitrary ATObject’s to a users PDS through the `Repo` namespace methods. However, in order to consume these, they need to be bound and available to FishyFlip. Some third-party types are bound within the library, and you can extend FishyFlip further by adding custom serialization code to allow your own types.
 
-A full example of this is contained with `samples/CustomTypes`
+A full example of this is contained with [`samples/CustomTypes`](https://github.com/drasticactions/ffexamples/tree/main/samples/CustomTypes)
 
 First, we create our `ATObject`. We will use [statusphere-example-app](https://github.com/bluesky-social/statusphere-example-app/tree/main). It contains one unique object, [`status`](https://github.com/bluesky-social/statusphere-example-app/blob/main/lexicons/status.json).
 
