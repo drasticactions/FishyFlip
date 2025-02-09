@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// #reviewNone <br/>
         /// </param>
         /// <param name="comment">Sticky comment on the subject.</param>
+        /// <param name="priorityScore">Numeric value representing the level of priority. Higher score means higher priority.</param>
         /// <param name="muteUntil"></param>
         /// <param name="muteReportingUntil"></param>
         /// <param name="lastReviewedBy"></param>
@@ -52,7 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="recordsStats">Statistics related to the record subjects authored by the subject's account
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats"/> (tools.ozone.moderation.defs#recordsStats)
         /// </param>
-        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? accountStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? recordsStats = default)
+        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, long? priorityScore = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? accountStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? recordsStats = default)
         {
             this.Id = id;
             this.Subject = subject;
@@ -63,6 +64,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.ReviewState = reviewState;
             this.Comment = comment;
+            this.PriorityScore = priorityScore;
             this.MuteUntil = muteUntil;
             this.MuteReportingUntil = muteReportingUntil;
             this.LastReviewedBy = lastReviewedBy;
@@ -102,6 +104,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["reviewState"] is not null) this.ReviewState = obj["reviewState"].AsString();
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["priorityScore"] is not null) this.PriorityScore = obj["priorityScore"].AsInt64Value();
             if (obj["muteUntil"] is not null) this.MuteUntil = obj["muteUntil"].ToDateTime();
             if (obj["muteReportingUntil"] is not null) this.MuteReportingUntil = obj["muteReportingUntil"].ToDateTime();
             if (obj["lastReviewedBy"] is not null) this.LastReviewedBy = obj["lastReviewedBy"].ToATDid();
@@ -188,6 +191,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the priorityScore.
+        /// <br/> Numeric value representing the level of priority. Higher score means higher priority.
+        /// </summary>
+        [JsonPropertyName("priorityScore")]
+        public long? PriorityScore { get; set; }
 
         /// <summary>
         /// Gets or sets the muteUntil.

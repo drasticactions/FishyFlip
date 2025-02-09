@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="threadgateAllowRules">Matches threadgate record. List of rules defining who can reply to this users posts. If value is an empty array, no one can reply. If value is undefined, anyone can reply.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.MentionRule"/> (app.bsky.feed.threadgate#mentionRule) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule"/> (app.bsky.feed.threadgate#followerRule) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule) <br/>
         /// </param>
@@ -57,6 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Matches threadgate record. List of rules defining who can reply to this users posts. If value is an empty array, no one can reply. If value is undefined, anyone can reply.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.MentionRule"/> (app.bsky.feed.threadgate#mentionRule) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule"/> (app.bsky.feed.threadgate#followerRule) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule) <br/>
         /// </summary>
