@@ -7,8 +7,8 @@
     <PackageVersion Include="CaseConverter" Version="2.0.1" />
     <PackageVersion Include="IdentityModel.OidcClient" Version="6.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
     <PackageVersion Include="Microsoft.Identity.Client" Version="4.64.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.4.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
