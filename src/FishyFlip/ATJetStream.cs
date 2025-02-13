@@ -15,6 +15,8 @@ namespace FishyFlip;
 public sealed class ATJetStream : IDisposable
 {
     private const int ReceiveBufferSize = 32768;
+    private readonly ATJetStreamOptions options;
+
     private readonly JsonSerializerOptions jsonSerializerOptions;
     private readonly SourceGenerationContext sourceGenerationContext;
     private ClientWebSocket client;
@@ -38,6 +40,7 @@ public sealed class ATJetStream : IDisposable
         this.client = new ClientWebSocket();
         this.jsonSerializerOptions = options.JsonSerializerOptions;
         this.sourceGenerationContext = options.SourceGenerationContext;
+        this.options = options;
     }
 
     /// <summary>
@@ -65,11 +68,68 @@ public sealed class ATJetStream : IDisposable
     /// <summary>
     /// Connect to the JetStream instance via a WebSocket connection.
     /// </summary>
+    /// <param name="token">CancellationToken.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public Task ConnectAsync(CancellationToken? token = default)
+    {
+        var subscribe = new StringBuilder("/subscribe?");
+
+        foreach (var collection in this.options.WantedCollections)
+        {
+            subscribe.Append($"wantedCollections={collection}&");
+        }
+
+        foreach (var did in this.options.WantedDids)
+        {
+            subscribe.Append($"wantedDids={did}&");
+        }
+
+        if (this.options.Cursor is not null)
+        {
+            subscribe.Append($"cursor={this.options.Cursor}&");
+        }
+
+        if (this.compression)
+        {
+            try
+            {
+                this.decompressor = new Decompressor();
+                if (this.dictionary == null)
+                {
+                    throw new NullReferenceException("dictionary is null");
+                }
+
+                this.decompressor.LoadDictionary(this.dictionary);
+                subscribe.Append("compress=true&");
+            }
+            catch (Exception e)
+            {
+                this.logger?.LogError(e, "Failed to setup compression, falling back.");
+                this.compression = false;
+                this.decompressor = null;
+                throw;
+            }
+        }
+
+        if (subscribe[^1] == '&')
+        {
+            subscribe.Length--; // Remove the trailing '&'
+        }
+
+        this.logger?.LogInformation($"WSS: Connecting to {this.instanceUri}{subscribe}");
+
+        return this.ConnectAsync(subscribe.ToString(), token);
+    }
+
+    /// <summary>
+    /// Connect to the JetStream instance via a WebSocket connection.
+    /// </summary>
     /// <param name="wantedCollections">List of collection namespaces (ex. app.bsky.feed.post) you want to receive. Defaults to all.</param>
     /// <param name="wantedDids">List of User ATDids to filter for. Defaults to All Repos.</param>
     /// <param name="cursor">A unix microseconds timestamp cursor to begin playback from. Set the value from a previous <see cref="ATWebSocketRecord.TimeUs"/> value to start stream from this point. Defaults to live tail.</param>
     /// <param name="token">CancellationToken.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    [Obsolete("Use ConnectAsync(CancellationToken? token = default) instead.")]
     public Task ConnectAsync(string[]? wantedCollections = default, string[]? wantedDids = default, long cursor = 0, CancellationToken? token = default)
     {
         var subscribe = "/subscribe?";

@@ -2,6 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+#nullable enable annotations
+#nullable disable warnings
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -52,7 +55,7 @@ public class ATHandle : ATIdentifier
     /// <param name="uri">String based URI.</param>
     /// <param name="atHandle">A new instance of the <see cref="ATHandle"/> class.</param>
     /// <returns>Bool if ATHandle is valid.</returns>
-    public static bool TryCreate(string uri, out ATHandle? atHandle)
+    public static bool TryCreate(string uri, out ATHandle atHandle)
     {
         try
         {

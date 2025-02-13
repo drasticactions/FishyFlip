@@ -51,6 +51,31 @@ public class ATJetStreamOptions
     public byte[]? Dictionary { get; internal set; }
 
     /// <summary>
+    /// Gets the wanted collections.
+    /// </summary>
+    public string[] WantedCollections { get; internal set; } = Array.Empty<string>();
+
+    /// <summary>
+    /// Gets the wanted DIDs.
+    /// </summary>
+    public ATDid[] WantedDids { get; internal set; } = Array.Empty<ATDid>();
+
+    /// <summary>
+    /// Gets the max message size in bytes.
+    /// </summary>
+    public int MaxMessageSizeBytes { get; internal set; } = 0;
+
+    /// <summary>
+    /// Gets the cursor.
+    /// </summary>
+    public long? Cursor { get; internal set; }
+
+    /// <summary>
+    /// Gets a value indicating whether to require a pause replay/live-tail until the server recevies a SubscriberOptionsUpdatePayload over the socket in a Subscriber Sourced Message.
+    /// </summary>
+    public bool RequireHello { get; internal set; } = false;
+
+    /// <summary>
     /// Gets the JsonSerializerOptions.
     /// </summary>
     public JsonSerializerOptions JsonSerializerOptions { get; internal set; }

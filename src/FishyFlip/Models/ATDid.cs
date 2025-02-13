@@ -2,6 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+#nullable enable annotations
+#nullable disable warnings
+
 namespace FishyFlip.Models;
 
 /// <summary>
@@ -57,7 +60,7 @@ public class ATDid : ATIdentifier
     /// <param name="uri">String based URI.</param>
     /// <param name="atDid">A new instance of the <see cref="ATDid"/> class.</param>
     /// <returns>Bool if ATDid is valid.</returns>
-    public static bool TryCreate(string uri, out ATDid? atDid)
+    public static bool TryCreate(string uri, out ATDid atDid)
     {
         try
         {
