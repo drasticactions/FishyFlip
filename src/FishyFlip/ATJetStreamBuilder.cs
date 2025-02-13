@@ -67,6 +67,71 @@ public class ATJetStreamBuilder
     }
 
     /// <summary>
+    /// Sets the wanted collections, up to 100.
+    /// </summary>
+    /// <param name="collections">NSID Collection types.</param>
+    /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
+    public ATJetStreamBuilder WithWantedCollections(params string[] collections)
+    {
+        if (collections.Length > 100)
+        {
+            throw new ArgumentOutOfRangeException("Collections cannot exceed 100.");
+        }
+
+        this.atProtocolOptions.WantedCollections = collections;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the wanted DIDs, up to 10,000.
+    /// </summary>
+    /// <param name="dids">ATDids.</param>
+    /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
+    public ATJetStreamBuilder WithWantedDids(params ATDid[] dids)
+    {
+        if (dids.Length > 10000)
+        {
+            throw new ArgumentOutOfRangeException("DIDs cannot exceed 10,000.");
+        }
+
+        this.atProtocolOptions.WantedDids = dids;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the max message size in bytes.
+    /// </summary>
+    /// <param name="maxMessageSizeBytes">Max message size in bytes.</param>
+    /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
+    public ATJetStreamBuilder SetMaxMessageSizeBytes(int maxMessageSizeBytes)
+    {
+        this.atProtocolOptions.MaxMessageSizeBytes = maxMessageSizeBytes;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the require hello value.
+    /// </summary>
+    /// <param name="requireHello">Require Hello.</param>
+    /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
+    public ATJetStreamBuilder SetRequireHello(bool requireHello)
+    {
+        this.atProtocolOptions.RequireHello = requireHello;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the cursor.
+    /// </summary>
+    /// <param name="cursor">Cursor.</param>
+    /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
+    public ATJetStreamBuilder WithCursor(long cursor)
+    {
+        this.atProtocolOptions.Cursor = cursor;
+        return this;
+    }
+
+    /// <summary>
     /// Returns the ATWebSocketProtocolOptions.
     /// </summary>
     /// <returns>ATJetStreamBuilder.</returns>
