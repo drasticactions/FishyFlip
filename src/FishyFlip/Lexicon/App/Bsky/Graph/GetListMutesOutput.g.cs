@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetListMutesOutput : ATObject
+    public partial class GetListMutesOutput : ATObject, IBatchItem
     {
 
         /// <summary>

@@ -22,7 +22,7 @@ public interface IATObjectCollection<T> : IReadOnlyList<T>, IAsyncEnumerable<T>,
     /// <summary>
     /// Gets the cursor.
     /// </summary>
-    string Cursor { get; }
+    string? Cursor { get; }
 
     /// <summary>
     /// Gets the cancellation token.
@@ -37,7 +37,7 @@ public interface IATObjectCollection<T> : IReadOnlyList<T>, IAsyncEnumerable<T>,
     /// <summary>
     /// Gets the limit of items to return.
     /// </summary>
-    int Limit { get; }
+    int? Limit { get; }
 
     /// <summary>
     /// Refreshes the items.

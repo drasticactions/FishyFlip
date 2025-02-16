@@ -96,6 +96,8 @@ public class ClassGeneration
 
     public bool HasCursor => this.Properties.Any(n => n.PropertyName == "Cursor");
 
+    public bool HasLimit => this.Properties.Any(n => n.PropertyName == "Limit");
+
     public bool HasOutputList => this.Properties.Any(n => n.IsArray);
 
     public PropertyGeneration? OutputList => this.Properties.FirstOrDefault(n => n.IsArray);

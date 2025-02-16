@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Collection
 {
-    public partial class ListCollectionOutput : ATObject
+    public partial class ListCollectionOutput : ATObject, IBatchItem
     {
 
         /// <summary>

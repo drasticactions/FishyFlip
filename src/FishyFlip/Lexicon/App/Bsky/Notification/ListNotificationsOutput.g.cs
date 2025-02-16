@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class ListNotificationsOutput : ATObject
+    public partial class ListNotificationsOutput : ATObject, IBatchItem
     {
 
         /// <summary>

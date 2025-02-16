@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetLikesOutput : ATObject
+    public partial class GetLikesOutput : ATObject, IBatchItem
     {
 
         /// <summary>

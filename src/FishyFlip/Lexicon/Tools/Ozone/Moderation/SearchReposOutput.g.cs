@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class SearchReposOutput : ATObject
+    public partial class SearchReposOutput : ATObject, IBatchItem
     {
 
         /// <summary>

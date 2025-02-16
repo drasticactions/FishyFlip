@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
 {
-    public partial class GetActorBookmarksOutput : ATObject
+    public partial class GetActorBookmarksOutput : ATObject, IBatchItem
     {
 
         /// <summary>

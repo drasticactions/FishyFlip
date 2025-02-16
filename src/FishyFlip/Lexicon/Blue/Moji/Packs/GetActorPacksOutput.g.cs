@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Packs
 {
-    public partial class GetActorPacksOutput : ATObject
+    public partial class GetActorPacksOutput : ATObject, IBatchItem
     {
 
         /// <summary>

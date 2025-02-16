@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class SearchAccountsOutput : ATObject
+    public partial class SearchAccountsOutput : ATObject, IBatchItem
     {
 
         /// <summary>

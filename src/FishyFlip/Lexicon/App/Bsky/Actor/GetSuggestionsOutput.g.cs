@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class GetSuggestionsOutput : ATObject
+    public partial class GetSuggestionsOutput : ATObject, IBatchItem
     {
 
         /// <summary>

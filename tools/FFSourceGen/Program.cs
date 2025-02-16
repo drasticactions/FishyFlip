@@ -382,6 +382,50 @@ public partial class AppCommands
             sb.AppendLine($");");
             sb.AppendLine("        }");
             sb.AppendLine();
+
+            var outputClass = this.GetOutputClassGeneration(item);
+            if (outputClass is not null)
+            {
+                if (outputClass.IsOutput && outputClass.HasCursor && outputClass.HasLimit && outputClass.HasOutputList && !outputClass.IsBaseType)
+                {
+                    var cursorBasedClassName = $"{outputClass.ClassName}Collection";
+                    sb.AppendLine($"        /// <summary>");
+                    sb.AppendLine($"        /// {description}");
+                    this.GenerateErrorConstructorDocs(sb, item.Definition.Errors);
+                    sb.AppendLine($"        /// </summary>");
+                    this.GenerateParams(sb, item, inputProperties);
+                    sb.Append($"        public {cursorBasedClassName} Create{outputClass.ClassName}CollectionAsync (");
+                    for (int i = 0; i < inputProperties.Count; i++)
+                    {
+                        sb.Append($"{inputProperties[i]}");
+                        if (i < inputProperties.Count - 1)
+                        {
+                            sb.Append(", ");
+                        }
+                    }
+
+                    sb.AppendLine($")");
+                    sb.AppendLine("        {");
+                    if (item.Definition.RequiresAuth)
+                    {
+                        // this.CreateAuthenticationCheck(sb);
+                    }
+
+                    sb.Append($"            return new {cursorBasedClassName}(atp, ");
+                    for (int i = 0; i < inputProperties.Count; i++)
+                    {
+                        sb.Append($"{inputProperties[i].Split(" ")[1]}");
+                        if (i < inputProperties.Count - 1)
+                        {
+                            sb.Append(", ");
+                        }
+                    }
+
+                    sb.AppendLine($");");
+                    sb.AppendLine("        }");
+                    sb.AppendLine();
+                }
+            }
         }
 
         sb.AppendLine("    }");
@@ -1104,7 +1148,7 @@ public partial class AppCommands
         var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
         //this.GenerateParams(sb, cls, inputProperties);
         sb.Append($"        public {className}(");
-        this.GenerateInputProperties(sb, inputProperties, false, true);
+        this.GenerateInputProperties(sb, inputProperties, false, false);
         sb.AppendLine(")");
         sb.AppendLine("             : base(atp)");
         sb.AppendLine("        {");
@@ -1164,6 +1208,31 @@ public partial class AppCommands
         sb.AppendLine("            }");
         sb.AppendLine();
         sb.AppendLine($"            return (result.{cls.OutputList.PropertyName}, result.Cursor ?? string.Empty);");
+        sb.AppendLine("        }");
+
+        sb.AppendLine();
+
+        sb.Append($"        public static {className} Create(");
+        this.GenerateInputProperties(sb, inputProperties, false, false);
+        sb.AppendLine(")");
+        sb.AppendLine("        {");
+        sb.Append("            return new(");
+         for (int i = 0; i < inputProperties.Count; i++)
+        {
+            var typeName = inputProperties[i].Split(" ")[0];
+            var prop = inputProperties[i].Split(" ")[1];
+            if (prop == "limit" || prop == "cursor" || prop == "cancellationToken")
+            {
+                continue;
+            }
+
+            sb.Append($"{prop}: {prop}, ");
+        }
+        if (inputProperties.Any(n => n.Contains("limit")))
+        {
+            sb.Append("limit: limit, ");
+        }
+        sb.AppendLine("cursor: cursor, cancellationToken: cancellationToken);");
         sb.AppendLine("        }");
 
         sb.AppendLine("    }");
@@ -1566,6 +1635,37 @@ public partial class AppCommands
         return (requiredProperties, optionalProperties);
     }
 
+    private ClassGeneration? GetOutputClassGeneration(ClassGeneration classGeneration)
+    {
+        if (classGeneration.Definition.Output?.Schema is null)
+        {
+            return null;
+        }
+
+        if (classGeneration.Definition.Output.Schema.Type == "ref")
+        {
+            var refString = classGeneration.Definition.Output.Schema.Ref;
+            var classRef = FindClassFromRef(refString);
+            if (classRef is not null)
+            {
+                return classRef;
+            }
+        }
+
+        if (classGeneration.Definition.Output.Schema.Type == "object")
+        {
+            // Find the generated Output ref.
+            var outputRef = $"{classGeneration.Id}#{classGeneration.ClassName}Output";
+            var classRef = FindClassFromRef(outputRef);
+            if (classRef is not null)
+            {
+                return classRef;
+            }
+        }
+
+        return null;
+    }
+
     private string FetchOutputProperties(ClassGeneration classGeneration)
     {
         if (classGeneration.Definition.Output?.Encoding == "*/*")
@@ -1804,7 +1904,13 @@ public partial class AppCommands
 
         this.GenerateClassDocumentation(sb, cls.Definition);
 
-        sb.AppendLine($"    public partial class {cls.ClassName} : ATObject");
+        sb.Append($"    public partial class {cls.ClassName} : ATObject");
+        if (cls.IsOutput && cls.HasCursor && cls.HasCursor && !cls.IsBaseType)
+        {
+            sb.Append($", IBatchItem");
+        }
+
+        sb.AppendLine();
         sb.AppendLine("    {");
 
         this.GenerateClassConstructor(sb, cls);

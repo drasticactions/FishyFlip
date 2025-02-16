@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Team
 {
-    public partial class ListMembersOutput : ATObject
+    public partial class ListMembersOutput : ATObject, IBatchItem
     {
 
         /// <summary>

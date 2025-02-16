@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class ListConvosOutput : ATObject
+    public partial class ListConvosOutput : ATObject, IBatchItem
     {
 
         /// <summary>

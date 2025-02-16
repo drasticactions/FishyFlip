@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetFeedSkeletonOutput : ATObject
+    public partial class GetFeedSkeletonOutput : ATObject, IBatchItem
     {
 
         /// <summary>

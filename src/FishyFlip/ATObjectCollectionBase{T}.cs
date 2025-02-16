@@ -40,10 +40,10 @@ public abstract class ATObjectCollectionBase<T> : IATObjectCollection<T>
     }
 
     /// <inheritdoc/>
-    public string Cursor { get; protected set; } = string.Empty;
+    public string? Cursor { get; protected set; } = string.Empty;
 
     /// <inheritdoc/>
-    public int Limit { get; protected set; }
+    public int? Limit { get; protected set; }
 
     /// <inheritdoc/>
     public CancellationToken? CancellationToken { get; protected set; }

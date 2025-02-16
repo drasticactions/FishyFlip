@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class ListMissingBlobsOutput : ATObject
+    public partial class ListMissingBlobsOutput : ATObject, IBatchItem
     {
 
         /// <summary>

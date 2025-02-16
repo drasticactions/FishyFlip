@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Set
 {
-    public partial class QuerySetsOutput : ATObject
+    public partial class QuerySetsOutput : ATObject, IBatchItem
     {
 
         /// <summary>

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class QueryEventsOutput : ATObject
+    public partial class QueryEventsOutput : ATObject, IBatchItem
     {
 
         /// <summary>
