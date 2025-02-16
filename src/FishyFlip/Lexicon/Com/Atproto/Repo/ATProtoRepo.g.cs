@@ -131,6 +131,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return atp.ListMissingBlobsAsync(limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Returns a list of missing blobs for the requesting account. Intended to be used in the account migration flow.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public ListMissingBlobsOutputCollection ListMissingBlobsCollectionAsync (int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new ListMissingBlobsOutputCollection(atp, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// List a range of records in a repository, matching a specific collection. Does not require auth.
@@ -144,6 +155,20 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput?>> ListRecordsAsync (FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, collection, limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List a range of records in a repository, matching a specific collection. Does not require auth.
+        /// </summary>
+        /// <param name="repo"></param>
+        /// <param name="collection"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public ListRecordsOutputCollection ListRecordsCollectionAsync (FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return new ListRecordsOutputCollection(atp, repo, collection, limit, cursor, reverse, cancellationToken);
         }
 
 

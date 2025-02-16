@@ -45,6 +45,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             return atp.ListOptionsAsync(limit, cursor, scope, prefix, keys, cancellationToken);
         }
 
+        /// <summary>
+        /// List settings with optional filtering
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="scope"></param>
+        /// <param name="prefix"></param>
+        /// <param name="keys"></param>
+        /// <param name="cancellationToken"></param>
+        public ListOptionsOutputCollection ListOptionsCollectionAsync (int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
+        {
+            return new ListOptionsOutputCollection(atp, limit, cursor, scope, prefix, keys, cancellationToken);
+        }
+
 
         /// <summary>
         /// Delete settings by key

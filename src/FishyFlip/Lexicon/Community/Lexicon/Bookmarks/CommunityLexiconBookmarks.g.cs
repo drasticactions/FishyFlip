@@ -43,6 +43,18 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
             return atp.GetActorBookmarksAsync(tags, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Get a list of bookmarks by actor. Optionally add a list of tags to include, default will be all bookmarks. Requires auth, actor must be the requesting account.
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetActorBookmarksOutputCollection GetActorBookmarksCollectionAsync (List<string>? tags = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetActorBookmarksOutputCollection(atp, tags, limit, cursor, cancellationToken);
+        }
+
     }
 }
 

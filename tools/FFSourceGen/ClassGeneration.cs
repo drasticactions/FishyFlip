@@ -68,6 +68,8 @@ public class ClassGeneration
 
     public string FullClassName => $"{this.CSharpNamespace}.{this.ClassName}";
 
+    public bool IsOutput => this.Key.Contains("Output");
+
     public bool IsArray => this.Definition.Type == "array";
 
     public bool IsBaseType => this.Definition.Type == "string" || this.Definition.Type == "number" || this.Definition.Type == "boolean";
@@ -91,6 +93,14 @@ public class ClassGeneration
     public string Key { get; }
 
     public string CBorProperty { get; }
+
+    public bool HasCursor => this.Properties.Any(n => n.PropertyName == "Cursor");
+
+    public bool HasLimit => this.Properties.Any(n => n.PropertyName == "Limit");
+
+    public bool HasOutputList => this.Properties.Any(n => n.IsArray);
+
+    public PropertyGeneration? OutputList => this.Properties.FirstOrDefault(n => n.IsArray);
 
     public bool IsEndpoint => this.Definition.Type == "procedure";
 

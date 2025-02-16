@@ -70,6 +70,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             return atp.ListMembersAsync(limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// List all members with access to the ozone service.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public ListMembersOutputCollection ListMembersCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new ListMembersOutputCollection(atp, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Update a member in the ozone service. Requires admin role.

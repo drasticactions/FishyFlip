@@ -43,6 +43,18 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             return atp.GetActorReactionsAsync(actor, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Get a list of posts reaction by an actor. Requires auth, actor must be the requesting account.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetActorReactionsOutputCollection GetActorReactionsCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetActorReactionsOutputCollection(atp, actor, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Get reaction records which reference a subject (by AT-URI and CID).
@@ -55,6 +67,19 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         public Task<Result<FishyFlip.Lexicon.Blue.Maril.Stellar.GetReactionsOutput?>> GetReactionsAsync (FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.GetReactionsAsync(uri, cid, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get reaction records which reference a subject (by AT-URI and CID).
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetReactionsOutputCollection GetReactionsCollectionAsync (FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetReactionsOutputCollection(atp, uri, cid, limit, cursor, cancellationToken);
         }
 
     }

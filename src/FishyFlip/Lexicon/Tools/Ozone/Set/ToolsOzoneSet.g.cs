@@ -99,6 +99,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             return atp.QuerySetsAsync(limit, cursor, namePrefix, sortBy, sortDirection, cancellationToken);
         }
 
+        /// <summary>
+        /// Query available sets
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="namePrefix"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="cancellationToken"></param>
+        public QuerySetsOutputCollection QuerySetsCollectionAsync (int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        {
+            return new QuerySetsOutputCollection(atp, limit, cursor, namePrefix, sortBy, sortDirection, cancellationToken);
+        }
+
 
         /// <summary>
         /// Create or update set metadata
