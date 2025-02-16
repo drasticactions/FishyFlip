@@ -53,6 +53,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return atp.GetPopularFeedGeneratorsAsync(limit, cursor, query, cancellationToken);
         }
 
+        /// <summary>
+        /// An unspecced view of globally popular feed generators.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        public GetPopularFeedGeneratorsOutputCollection GetPopularFeedGeneratorsCollectionAsync (int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
+        {
+            return new GetPopularFeedGeneratorsOutputCollection(atp, limit, cursor, query, cancellationToken);
+        }
+
 
         /// <summary>
         /// Get a skeleton of suggested actors. Intended to be called and then hydrated through app.bsky.actor.getSuggestions
@@ -65,6 +77,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput?>> GetSuggestionsSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
         {
             return atp.GetSuggestionsSkeletonAsync(viewer, limit, cursor, relativeToDid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get a skeleton of suggested actors. Intended to be called and then hydrated through app.bsky.actor.getSuggestions
+        /// </summary>
+        /// <param name="viewer"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="relativeToDid"></param>
+        /// <param name="cancellationToken"></param>
+        public GetSuggestionsSkeletonOutputCollection GetSuggestionsSkeletonCollectionAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
+        {
+            return new GetSuggestionsSkeletonOutputCollection(atp, viewer, limit, cursor, relativeToDid, cancellationToken);
         }
 
 
@@ -106,6 +131,22 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return atp.SearchActorsSkeletonAsync(q, viewer, typeahead, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Backend Actors (profile) search, returns only skeleton.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="viewer"></param>
+        /// <param name="typeahead"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public SearchActorsSkeletonOutputCollection SearchActorsSkeletonCollectionAsync (string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new SearchActorsSkeletonOutputCollection(atp, q, viewer, typeahead, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Backend Posts search, returns only skeleton
@@ -131,6 +172,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return atp.SearchPostsSkeletonAsync(q, sort, since, until, mentions, author, lang, domain, url, tag, viewer, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Backend Posts search, returns only skeleton
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="sort"></param>
+        /// <param name="since"></param>
+        /// <param name="until"></param>
+        /// <param name="mentions"></param>
+        /// <param name="author"></param>
+        /// <param name="lang"></param>
+        /// <param name="domain"></param>
+        /// <param name="url"></param>
+        /// <param name="tag"></param>
+        /// <param name="viewer"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public SearchPostsSkeletonOutputCollection SearchPostsSkeletonCollectionAsync (string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new SearchPostsSkeletonOutputCollection(atp, q, sort, since, until, mentions, author, lang, domain, url, tag, viewer, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Backend Starter Pack search, returns only skeleton.
@@ -145,6 +210,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput?>> SearchStarterPacksSkeletonAsync (string q, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.SearchStarterPacksSkeletonAsync(q, viewer, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Backend Starter Pack search, returns only skeleton.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="viewer"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public SearchStarterPacksSkeletonOutputCollection SearchStarterPacksSkeletonCollectionAsync (string q, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new SearchStarterPacksSkeletonOutputCollection(atp, q, viewer, limit, cursor, cancellationToken);
         }
 
     }

@@ -43,17 +43,17 @@ public interface IATObjectCollection<T> : IReadOnlyList<T>, IAsyncEnumerable<T>,
     /// Refreshes the items.
     /// </summary>
     /// <param name="limit">Limit of items to fetch.</param>
-    /// <param name="token">Cancellation Token.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
-    Task RefreshAsync(int? limit = null, CancellationToken? token = default);
+    Task RefreshAsync(int? limit = null, CancellationToken? cancellationToken = default);
 
     /// <summary>
     /// Gets more items.
     /// </summary>
     /// <param name="limit">Limit of items to fetch.</param>
-    /// <param name="token">Cancellation Token.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Task.</returns>
-    Task GetMoreItemsAsync(int? limit = null, CancellationToken? token = default);
+    Task GetMoreItemsAsync(int? limit = null, CancellationToken? cancellationToken = default);
 
     /// <summary>
     /// Clears the items.

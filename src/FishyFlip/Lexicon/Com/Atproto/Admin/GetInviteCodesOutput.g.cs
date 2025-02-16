@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class GetInviteCodesOutput : ATObject, IBatchItem
+    public partial class GetInviteCodesOutput : ATObject
     {
 
         /// <summary>

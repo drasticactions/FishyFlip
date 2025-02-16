@@ -43,6 +43,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return atp.GetActorStarterPacksAsync(actor, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Get a list of starter packs created by the actor.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetActorStarterPacksOutputCollection GetActorStarterPacksCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetActorStarterPacksOutputCollection(atp, actor, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Enumerates which accounts the requesting account is currently blocking. Requires auth.
@@ -53,6 +65,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput?>> GetBlocksAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.GetBlocksAsync(limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates which accounts the requesting account is currently blocking. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetBlocksOutputCollection GetBlocksCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetBlocksOutputCollection(atp, limit, cursor, cancellationToken);
         }
 
 
@@ -68,6 +91,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return atp.GetFollowersAsync(actor, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Enumerates accounts which follow a specified account (actor).
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetFollowersOutputCollection GetFollowersCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetFollowersOutputCollection(atp, actor, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Enumerates accounts which a specified account (actor) follows.
@@ -79,6 +114,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput?>> GetFollowsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.GetFollowsAsync(actor, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates accounts which a specified account (actor) follows.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetFollowsOutputCollection GetFollowsCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetFollowsOutputCollection(atp, actor, limit, cursor, cancellationToken);
         }
 
 
@@ -94,6 +141,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return atp.GetKnownFollowersAsync(actor, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Enumerates accounts which follow a specified account (actor) and are followed by the viewer.
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetKnownFollowersOutputCollection GetKnownFollowersCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetKnownFollowersOutputCollection(atp, actor, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Gets a 'view' (with additional context) of a specified list.
@@ -105,6 +164,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput?>> GetListAsync (FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.GetListAsync(list, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets a 'view' (with additional context) of a specified list.
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetListOutputCollection GetListCollectionAsync (FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetListOutputCollection(atp, list, limit, cursor, cancellationToken);
         }
 
 
@@ -119,6 +190,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return atp.GetListBlocksAsync(limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Get mod lists that the requesting account (actor) is blocking. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetListBlocksOutputCollection GetListBlocksCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetListBlocksOutputCollection(atp, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Enumerates mod lists that the requesting account (actor) currently has muted. Requires auth.
@@ -129,6 +211,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput?>> GetListMutesAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.GetListMutesAsync(limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates mod lists that the requesting account (actor) currently has muted. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetListMutesOutputCollection GetListMutesCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetListMutesOutputCollection(atp, limit, cursor, cancellationToken);
         }
 
 
@@ -144,6 +237,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return atp.GetListsAsync(actor, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Enumerates the lists created by a specified account (actor).
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetListsOutputCollection GetListsCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetListsOutputCollection(atp, actor, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
@@ -154,6 +259,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput?>> GetMutesAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.GetMutesAsync(limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetMutesOutputCollection GetMutesCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetMutesOutputCollection(atp, limit, cursor, cancellationToken);
         }
 
 
@@ -247,6 +363,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput?>> SearchStarterPacksAsync (string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.SearchStarterPacksAsync(q, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Find starter packs matching search criteria. Does not require auth.
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public SearchStarterPacksOutputCollection SearchStarterPacksCollectionAsync (string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new SearchStarterPacksOutputCollection(atp, q, limit, cursor, cancellationToken);
         }
 
 

@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 namespace FishyFlip;
 
 /// <summary>
-/// Extensions for <see cref="IBatchItem" />.
 /// Taken from https://github.com/Tyrrrz/YoutubeExplode/blob/master/YoutubeExplode/Common/IBatchItem.cs.
 /// </summary>
 public static class BatchItemExtensions
@@ -19,7 +18,7 @@ public static class BatchItemExtensions
     /// <param name="source">The asynchronous sequence to collect elements from.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a read-only list of the collected elements.</returns>
     public static async ValueTask<IReadOnlyList<T>> CollectAsync<T>(this IAsyncEnumerable<T> source)
-        where T : IBatchItem => await source.ToListAsync();
+        where T : ATObject => await source.ToListAsync();
 
     /// <summary>
     /// Collects a specified number of items from an asynchronous enumerable sequence and returns them as a read-only list.
@@ -31,9 +30,9 @@ public static class BatchItemExtensions
     public static async ValueTask<IReadOnlyList<T>> CollectAsync<T>(
         this IAsyncEnumerable<T> source,
         int count)
-        where T : IBatchItem => await source.TakeAsync(count).ToListAsync();
+        where T : ATObject => await source.TakeAsync(count).ToListAsync();
 
     /// <inheritdoc cref="CollectAsync{T}(System.Collections.Generic.IAsyncEnumerable{T})" />
     public static ValueTaskAwaiter<IReadOnlyList<T>> GetAwaiter<T>(this IAsyncEnumerable<T> source)
-        where T : IBatchItem => source.CollectAsync().GetAwaiter();
+        where T : ATObject => source.CollectAsync().GetAwaiter();
 }

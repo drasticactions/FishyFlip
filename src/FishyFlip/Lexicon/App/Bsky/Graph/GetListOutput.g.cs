@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetListOutput : ATObject, IBatchItem
+    public partial class GetListOutput : ATObject
     {
 
         /// <summary>

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class ListReposOutput : ATObject, IBatchItem
+    public partial class ListReposOutput : ATObject
     {
 
         /// <summary>

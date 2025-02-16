@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class SearchActorsOutput : ATObject, IBatchItem
+    public partial class SearchActorsOutput : ATObject
     {
 
         /// <summary>

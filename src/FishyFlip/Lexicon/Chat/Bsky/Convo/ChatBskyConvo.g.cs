@@ -75,6 +75,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return atp.GetLogAsync(cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Generated endpoint for chat.bsky.convo.getLog
+        /// </summary>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetLogOutputCollection GetLogCollectionAsync (string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetLogOutputCollection(atp, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Generated endpoint for chat.bsky.convo.getMessages
@@ -86,6 +96,18 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput?>> GetMessagesAsync (string convoId, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.GetMessagesAsync(convoId, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Generated endpoint for chat.bsky.convo.getMessages
+        /// </summary>
+        /// <param name="convoId"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetMessagesOutputCollection GetMessagesCollectionAsync (string convoId, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetMessagesOutputCollection(atp, convoId, limit, cursor, cancellationToken);
         }
 
 
@@ -109,6 +131,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput?>> ListConvosAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.ListConvosAsync(limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Generated endpoint for chat.bsky.convo.listConvos
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public ListConvosOutputCollection ListConvosCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new ListConvosOutputCollection(atp, limit, cursor, cancellationToken);
         }
 
 

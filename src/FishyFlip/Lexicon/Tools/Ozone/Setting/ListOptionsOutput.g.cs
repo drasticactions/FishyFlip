@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 {
-    public partial class ListOptionsOutput : ATObject, IBatchItem
+    public partial class ListOptionsOutput : ATObject
     {
 
         /// <summary>

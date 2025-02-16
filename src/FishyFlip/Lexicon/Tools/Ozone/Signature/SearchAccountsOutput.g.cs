@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 {
-    public partial class SearchAccountsOutput : ATObject, IBatchItem
+    public partial class SearchAccountsOutput : ATObject
     {
 
         /// <summary>

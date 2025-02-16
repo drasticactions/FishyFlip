@@ -49,7 +49,7 @@ public abstract class ATObjectCollectionBase<T> : IATObjectCollection<T>
     public CancellationToken? CancellationToken { get; protected set; }
 
     /// <inheritdoc/>
-    public bool HasMoreItems { get; protected set; }
+    public bool HasMoreItems { get; protected set; } = true;
 
     /// <inheritdoc/>
     public int Count => this.items.Count;
@@ -63,24 +63,29 @@ public abstract class ATObjectCollectionBase<T> : IATObjectCollection<T>
     public T this[int index] => this.items[index];
 
     /// <inheritdoc/>
-    public virtual Task RefreshAsync(int? limit = null, CancellationToken? token = default)
+    public virtual Task RefreshAsync(int? limit = null, CancellationToken? cancellationToken = default)
     {
         this.Clear();
-        return this.GetMoreItemsAsync(limit, token);
+        return this.GetMoreItemsAsync(limit, cancellationToken);
     }
 
     /// <summary>
     /// Gets records.
     /// </summary>
     /// <param name="limit">Limit.</param>
-    /// <param name="token">Token.</param>
+    /// <param name="cancellationToken">Token.</param>
     /// <returns>Result of T.</returns>
-    public abstract Task<(IList<T> Posts, string Cursor)> GetRecordsAsync(int? limit = null, CancellationToken? token = default);
+    public abstract Task<(IList<T> Posts, string Cursor)> GetRecordsAsync(int? limit = null, CancellationToken? cancellationToken = default);
 
     /// <inheritdoc/>
-    public virtual async Task GetMoreItemsAsync(int? limit = null, CancellationToken? token = default)
+    public virtual async Task GetMoreItemsAsync(int? limit = null, CancellationToken? cancellationToken = default)
     {
-        var (postViews, cursor) = await this.GetRecordsAsync(limit, token);
+        if (!this.HasMoreItems)
+        {
+            return;
+        }
+
+        var (postViews, cursor) = await this.GetRecordsAsync(limit, cancellationToken);
         foreach (var postView in postViews)
         {
             this.AddItem(postView);
@@ -95,7 +100,7 @@ public abstract class ATObjectCollectionBase<T> : IATObjectCollection<T>
     {
         this.items.Clear();
         this.Cursor = string.Empty;
-        this.HasMoreItems = false;
+        this.HasMoreItems = true;
     }
 
     /// <inheritdoc/>
@@ -114,13 +119,9 @@ public abstract class ATObjectCollectionBase<T> : IATObjectCollection<T>
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
     /// <inheritdoc/>
-    public async IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+    public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
     {
-        foreach (var item in this.items)
-        {
-            yield return item;
-            await Task.CompletedTask;
-        }
+        return new ATObjectCollectionAsyncEnumerator<T>(this, cancellationToken);
     }
 
     /// <summary>

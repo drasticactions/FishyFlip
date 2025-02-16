@@ -57,6 +57,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             return atp.ListNotificationsAsync(reasons, limit, priority, cursor, seenAt, cancellationToken);
         }
 
+        /// <summary>
+        /// Enumerate notifications for the requesting account. Requires auth.
+        /// </summary>
+        /// <param name="reasons"></param>
+        /// <param name="limit"></param>
+        /// <param name="priority"></param>
+        /// <param name="cursor"></param>
+        /// <param name="seenAt"></param>
+        /// <param name="cancellationToken"></param>
+        public ListNotificationsOutputCollection ListNotificationsCollectionAsync (List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        {
+            return new ListNotificationsOutputCollection(atp, reasons, limit, priority, cursor, seenAt, cancellationToken);
+        }
+
 
         /// <summary>
         /// Set notification-related preferences for an account. Requires auth.

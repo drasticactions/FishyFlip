@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Label
 {
-    public partial class QueryLabelsOutput : ATObject, IBatchItem
+    public partial class QueryLabelsOutput : ATObject
     {
 
         /// <summary>

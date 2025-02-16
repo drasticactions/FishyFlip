@@ -165,6 +165,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return atp.ListReposAsync(limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Enumerates all the DID, rev, and commit CID for all repos hosted by this service. Does not require auth; implemented by PDS and Relay.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public ListReposOutputCollection ListReposCollectionAsync (int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new ListReposOutputCollection(atp, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Notify a crawling service of a recent update, and that crawling should resume. Intended use is after a gap between repo stream events caused the crawling service to disconnect. Does not require auth; implemented by Relay.

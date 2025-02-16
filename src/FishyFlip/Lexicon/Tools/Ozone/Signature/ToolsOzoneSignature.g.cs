@@ -54,6 +54,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             return atp.FindRelatedAccountsAsync(did, cursor, limit, cancellationToken);
         }
 
+        /// <summary>
+        /// Get accounts that share some matching threat signatures with the root account.
+        /// </summary>
+        /// <param name="did"></param>
+        /// <param name="cursor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public FindRelatedAccountsOutputCollection FindRelatedAccountsCollectionAsync (FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        {
+            return new FindRelatedAccountsOutputCollection(atp, did, cursor, limit, cancellationToken);
+        }
+
 
         /// <summary>
         /// Search for accounts that match one or more threat signature values.
@@ -65,6 +77,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             return atp.SearchAccountsAsync(values, cursor, limit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Search for accounts that match one or more threat signature values.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="cursor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public SearchAccountsOutputCollection SearchAccountsCollectionAsync (List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        {
+            return new SearchAccountsOutputCollection(atp, values, cursor, limit, cancellationToken);
         }
 
     }

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 {
-    public partial class GetActorReactionsOutput : ATObject, IBatchItem
+    public partial class GetActorReactionsOutput : ATObject
     {
 
         /// <summary>

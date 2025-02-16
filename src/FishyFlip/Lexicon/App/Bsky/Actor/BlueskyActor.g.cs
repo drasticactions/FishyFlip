@@ -74,6 +74,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return atp.GetSuggestionsAsync(limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Get a list of suggested actors. Expected use is discovery of accounts to follow during new account onboarding.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetSuggestionsOutputCollection GetSuggestionsCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetSuggestionsOutputCollection(atp, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Set the private preferences attached to the account.
@@ -111,6 +122,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput?>> SearchActorsAsync (string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return atp.SearchActorsAsync(q, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Find actors (profiles) matching search criteria. Does not require auth.
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public SearchActorsOutputCollection SearchActorsCollectionAsync (string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new SearchActorsOutputCollection(atp, q, limit, cursor, cancellationToken);
         }
 
 

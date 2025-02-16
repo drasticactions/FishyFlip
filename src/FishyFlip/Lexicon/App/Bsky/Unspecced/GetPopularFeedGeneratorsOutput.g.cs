@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetPopularFeedGeneratorsOutput : ATObject, IBatchItem
+    public partial class GetPopularFeedGeneratorsOutput : ATObject
     {
 
         /// <summary>

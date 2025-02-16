@@ -55,6 +55,18 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             return atp.ListCollectionAsync(limit, cursor, reverse, cancellationToken);
         }
 
+        /// <summary>
+        /// List a range of Bluemoji in a repository, matching a specific collection. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public ListCollectionOutputCollection ListCollectionCollectionAsync (int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return new ListCollectionOutputCollection(atp, limit, cursor, reverse, cancellationToken);
+        }
+
 
         /// <summary>
         /// Write a Bluemoji record, creating or updating it as needed. Requires auth, implemented by AppView.

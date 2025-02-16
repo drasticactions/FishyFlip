@@ -112,6 +112,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return atp.GetInviteCodesAsync(sort, limit, cursor, cancellationToken);
         }
 
+        /// <summary>
+        /// Get an admin view of invite codes.
+        /// </summary>
+        /// <param name="sort"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetInviteCodesOutputCollection GetInviteCodesCollectionAsync (string? sort = default, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetInviteCodesOutputCollection(atp, sort, limit, cursor, cancellationToken);
+        }
+
 
         /// <summary>
         /// Get the service-specific admin status of a subject (account, record, or blob).
@@ -136,6 +148,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput?>> SearchAccountsAsync (string? email = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             return atp.SearchAccountsAsync(email, cursor, limit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get list of accounts that matches your search query.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="cursor"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public SearchAccountsOutputCollection SearchAccountsCollectionAsync (string? email = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        {
+            return new SearchAccountsOutputCollection(atp, email, cursor, limit, cancellationToken);
         }
 
 

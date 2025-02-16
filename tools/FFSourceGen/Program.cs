@@ -386,15 +386,20 @@ public partial class AppCommands
             var outputClass = this.GetOutputClassGeneration(item);
             if (outputClass is not null)
             {
-                if (outputClass.IsOutput && outputClass.HasCursor && outputClass.HasLimit && outputClass.HasOutputList && !outputClass.IsBaseType)
+                if (outputClass.IsOutput && outputClass.HasCursor && outputClass.HasOutputList && !outputClass.IsBaseType)
                 {
+                    if (outputClass.OutputList?.IsBaseType ?? false)
+                    {
+                        continue;
+                    }
+
                     var cursorBasedClassName = $"{outputClass.ClassName}Collection";
                     sb.AppendLine($"        /// <summary>");
                     sb.AppendLine($"        /// {description}");
                     this.GenerateErrorConstructorDocs(sb, item.Definition.Errors);
                     sb.AppendLine($"        /// </summary>");
                     this.GenerateParams(sb, item, inputProperties);
-                    sb.Append($"        public {cursorBasedClassName} Create{outputClass.ClassName}CollectionAsync (");
+                    sb.Append($"        public {cursorBasedClassName} {item.ClassName}CollectionAsync (");
                     for (int i = 0; i < inputProperties.Count; i++)
                     {
                         sb.Append($"{inputProperties[i]}");
@@ -1904,13 +1909,7 @@ public partial class AppCommands
 
         this.GenerateClassDocumentation(sb, cls.Definition);
 
-        sb.Append($"    public partial class {cls.ClassName} : ATObject");
-        if (cls.IsOutput && cls.HasCursor && cls.HasCursor && !cls.IsBaseType)
-        {
-            sb.Append($", IBatchItem");
-        }
-
-        sb.AppendLine();
+        sb.AppendLine($"    public partial class {cls.ClassName} : ATObject");
         sb.AppendLine("    {");
 
         this.GenerateClassConstructor(sb, cls);
