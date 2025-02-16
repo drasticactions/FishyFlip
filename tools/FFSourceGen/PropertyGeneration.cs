@@ -86,6 +86,8 @@ public class PropertyGeneration
 
     public bool IsATObject => this.Type.Contains("ATObject");
 
+    public bool IsArray => this.Type.Contains("List<");
+
     public string PropertyName { get; }
 
     public string Key { get; }

@@ -163,6 +163,12 @@ public partial class AppCommands
             await this.GenerateEndpointClassAsync(group);
         }
 
+        var cursorBasedClasses = AllClassesSored.Where(n => n.IsOutput && n.HasCursor && n.HasOutputList);
+        foreach (var cls in cursorBasedClasses)
+        {
+            await this.GenerateCursorBasedCollectionClassAsync(cls);
+        }
+
         await this.GenerateEndpointClassListForATProtoCS(procedureClasses);
 
         await this.GenerateJsonSerializerContextFile(modelClasses);
@@ -872,12 +878,13 @@ public partial class AppCommands
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
-    private void GenerateInputProperties(StringBuilder sb, List<string> inputProperties, bool removeStatic = false)
+    private void GenerateInputProperties(StringBuilder sb, List<string> inputProperties, bool removeStatic = false, bool removeNullable = false)
     {
         var start = removeStatic ? 1 : 0;
         for (int i = start; i < inputProperties.Count; i++)
         {
-            sb.Append($"{inputProperties[i]}");
+            var value = removeNullable ? inputProperties[i].Replace("?", string.Empty) : inputProperties[i];
+            sb.Append($"{value}");
             if (i < inputProperties.Count - 1)
             {
                 sb.Append(", ");
@@ -1054,6 +1061,124 @@ public partial class AppCommands
         {
             sb.AppendLine($"        /// <see cref=\"{baseNamespace}.{error.Name.ToPascalCase()}Error\"/> {error.Description} <br/>");
         }
+    }
+    
+    private async Task GenerateCursorBasedCollectionClassAsync(ClassGeneration cls)
+    {
+        Console.WriteLine($"Generating Collection Item: {cls.Key}");
+        var inputClassName = cls.ClassName.Replace("Output", string.Empty);
+        var inputClass = AllClasses.FirstOrDefault(n => n.ClassName == inputClassName && n.CSharpNamespace == cls.CSharpNamespace);
+        if (inputClass is null)
+        {
+            throw new Exception($"Could not find input class for {cls.ClassName}");
+        }
+
+        if (cls.OutputList is null)
+        {
+            throw new Exception($"OutputList is null for {cls.ClassName}");
+        }
+
+        // Remove List<> wrapper from type name
+        var rawType = cls.OutputList.Type.Split("<").Last().Split(">").First();
+
+        if (cls.OutputList.IsBaseType)
+        {
+            return;
+        }
+
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, $"{baseNamespace}.{cls.CSharpNamespace}");
+        var className = $"{cls.ClassName}Collection";
+        sb.AppendLine("{");
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// {cls.ClassName} Collection.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public class {className} : ATObjectCollectionBase<{rawType}>, IAsyncEnumerable<{rawType}>");
+        sb.AppendLine("    {");
+        sb.AppendLine();
+        // Generate the input properties
+        var (requiredProperties, optionalProperties) = this.FetchInputProperties(inputClass);
+        // Add ATProtocol to Required
+        requiredProperties.Insert(0, "FishyFlip.ATProtocol atp");
+        var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+        //this.GenerateParams(sb, cls, inputProperties);
+        sb.Append($"        public {className}(");
+        this.GenerateInputProperties(sb, inputProperties, false, true);
+        sb.AppendLine(")");
+        sb.AppendLine("             : base(atp)");
+        sb.AppendLine("        {");
+        for (int i = 1; i < inputProperties.Count; i++)
+        {
+            var typeName = inputProperties[i].Split(" ")[0];
+            var prop = inputProperties[i].Split(" ")[1];
+            sb.AppendLine($"            this.{prop.ToPascalCase()} = {PropertyNameToCSharpSafeValue(prop)};");
+        }
+
+        sb.AppendLine("        }");
+        sb.AppendLine();
+        // Generate getters for the properties except for ATProtocol, Limit, Cursor, and CancellationToken.
+        for (int i = 1; i < inputProperties.Count; i++)
+        {
+            var typeName = inputProperties[i].Split(" ")[0];
+            var prop = inputProperties[i].Split(" ")[1];
+            if (prop == "limit" || prop == "cursor" || prop == "cancellationToken")
+            {
+                continue;
+            }
+
+            // sb.AppendLine($"        /// <summary>");
+            // sb.AppendLine($"        /// {prop}.");
+            // sb.AppendLine($"        /// </summary>");
+            sb.AppendLine($"        public {typeName} {prop.ToPascalCase()} {{ get; }}");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine($"        /// <inheritdoc/>");
+        sb.AppendLine($"        public override async Task<(IList<{rawType}> Posts, string Cursor)> GetRecordsAsync(int? limit = null, CancellationToken? token = default)");
+        sb.AppendLine("        {");
+        sb.AppendLine($"            token = token ?? this.CancellationToken ?? System.Threading.CancellationToken.None;");
+        sb.Append($"            var (result, error) = await this.ATProtocol.{inputClass.ClassName}Async(");
+        for (int i = 1; i < inputProperties.Count; i++)
+        {
+            var typeName = inputProperties[i].Split(" ")[0];
+            var prop = inputProperties[i].Split(" ")[1];
+            if (prop == "limit" || prop == "cursor" || prop == "cancellationToken")
+            {
+                continue;
+            }
+
+            sb.Append($"{prop}: this.{prop.ToPascalCase()}, ");
+        }
+        if (inputProperties.Any(n => n.Contains("limit")))
+        {
+            sb.Append("limit: limit, ");
+        }
+        sb.AppendLine("cursor: this.Cursor, cancellationToken: token.Value!);");
+        sb.AppendLine();
+        sb.AppendLine("            this.HandleATError(error);");
+        sb.AppendLine();
+        sb.AppendLine($"            if (result == null || result.{cls.OutputList.PropertyName} == null)");
+        sb.AppendLine("            {");
+        sb.AppendLine("                throw new InvalidOperationException(\"The result or its properties cannot be null.\");");
+        sb.AppendLine("            }");
+        sb.AppendLine();
+        sb.AppendLine($"            return (result.{cls.OutputList.PropertyName}, result.Cursor ?? string.Empty);");
+        sb.AppendLine("        }");
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, cls.CSharpNamespace.Replace('.', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"{className}.g.cs");
+        if (File.Exists(classPath))
+        {
+            throw new Exception($"File already exists: {className} {classPath}");
+        }
+
+        await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
