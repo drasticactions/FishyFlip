@@ -7,18 +7,19 @@
     <Company>Drastic Actions</Company>
     <Copyright>Copyright (C) Drastic Actions</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<DebugType>embedded</DebugType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
     <IncludeSymbols>true</IncludeSymbols>
     <NoWarn>$(NoWarn);SA1208;SA0001;NU5104</NoWarn>
     <GitVersionTargetFramework>net8.0</GitVersionTargetFramework>
   </PropertyGroup>
 
   <ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
-		<None Include="$(MSBuildThisFileDirectory)favicon.png" Pack="true" PackagePath="" Visible="false" />
-	</ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)favicon.png" Pack="true" PackagePath=""
+      Visible="false" />
+  </ItemGroup>
 
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
@@ -38,7 +39,8 @@
   </ItemGroup>
   <Target Name="AddInternalsVisibleTo" BeforeTargets="BeforeCompile">
     <!-- Add default suffix if there is no InternalsVisibleTo or InternalsVisibleToSuffix defined -->
-    <ItemGroup Condition="@(InternalsVisibleToSuffix-&gt;Count()) == 0 AND @(InternalsVisibleTo-&gt;Count()) == 0">
+    <ItemGroup
+      Condition="@(InternalsVisibleToSuffix-&gt;Count()) == 0 AND @(InternalsVisibleTo-&gt;Count()) == 0">
       <InternalsVisibleToSuffix Include=".Tests" />
       <InternalsVisibleToSuffix Include=".DebugApp" />
     </ItemGroup>
