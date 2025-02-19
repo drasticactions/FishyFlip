@@ -382,6 +382,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.GetRecordsOutput(obj);
                 case "app.bsky.graph.getRelationships#GetRelationshipsOutput":
                     return new App.Bsky.Graph.GetRelationshipsOutput(obj);
+                case "tools.ozone.moderation.getReporterStats#GetReporterStatsOutput":
+                    return new Tools.Ozone.Moderation.GetReporterStatsOutput(obj);
                 case "tools.ozone.moderation.getRepos#GetReposOutput":
                     return new Tools.Ozone.Moderation.GetReposOutput(obj);
                 case "com.atproto.sync.getRepoStatus#GetRepoStatusOutput":
@@ -526,6 +528,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.ListOptionsOutput(obj);
                 case "com.atproto.repo.listRecords#ListRecordsOutput":
                     return new Com.Atproto.Repo.ListRecordsOutput(obj);
+                case "com.atproto.sync.listReposByCollection#ListReposByCollectionOutput":
+                    return new Com.Atproto.Sync.ListReposByCollectionOutput(obj);
                 case "com.atproto.sync.listRepos#ListReposOutput":
                     return new Com.Atproto.Sync.ListReposOutput(obj);
                 case "app.bsky.feed.threadgate#listRule":
@@ -768,10 +772,14 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.Repo(obj);
                 case "com.atproto.admin.defs#repoBlobRef":
                     return new Com.Atproto.Admin.RepoBlobRef(obj);
+                case "com.atproto.sync.listReposByCollection#repo":
+                    return new Com.Atproto.Sync.RepoDef(obj);
                 case "com.atproto.sync.subscribeRepos#repoOp":
                     return new Com.Atproto.Sync.RepoOp(obj);
                 case "com.atproto.admin.defs#repoRef":
                     return new Com.Atproto.Admin.RepoRef(obj);
+                case "tools.ozone.moderation.defs#reporterStats":
+                    return new Tools.Ozone.Moderation.ReporterStats(obj);
                 case "app.bsky.feed.repost":
                     return new App.Bsky.Feed.Repost(obj);
                 case "tools.ozone.moderation.defs#repoView":

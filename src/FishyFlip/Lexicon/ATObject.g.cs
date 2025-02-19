@@ -379,6 +379,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput)this, SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput);
                 case "app.bsky.graph.getRelationships#GetRelationshipsOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput)this, SourceGenerationContext.Default.AppBskyGraphGetRelationshipsOutput);
+                case "tools.ozone.moderation.getReporterStats#GetReporterStatsOutput":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput)this, SourceGenerationContext.Default.ToolsOzoneModerationGetReporterStatsOutput);
                 case "tools.ozone.moderation.getRepos#GetReposOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput)this, SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput);
                 case "com.atproto.sync.getRepoStatus#GetRepoStatusOutput":
@@ -523,6 +525,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput)this, SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput);
                 case "com.atproto.repo.listRecords#ListRecordsOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput)this, SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput);
+                case "com.atproto.sync.listReposByCollection#ListReposByCollectionOutput":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput)this, SourceGenerationContext.Default.ComAtprotoSyncListReposByCollectionOutput);
                 case "com.atproto.sync.listRepos#ListReposOutput":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput)this, SourceGenerationContext.Default.ComAtprotoSyncListReposOutput);
                 case "app.bsky.feed.threadgate#listRule":
@@ -765,10 +769,14 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Sync.Repo)this, SourceGenerationContext.Default.ComAtprotoSyncRepo);
                 case "com.atproto.admin.defs#repoBlobRef":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef)this, SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef);
+                case "com.atproto.sync.listReposByCollection#repo":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef)this, SourceGenerationContext.Default.ComAtprotoSyncRepoDef);
                 case "com.atproto.sync.subscribeRepos#repoOp":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp)this, SourceGenerationContext.Default.ComAtprotoSyncRepoOp);
                 case "com.atproto.admin.defs#repoRef":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef)this, SourceGenerationContext.Default.ComAtprotoAdminRepoRef);
+                case "tools.ozone.moderation.defs#reporterStats":
+                    return JsonSerializer.Serialize((FishyFlip.Lexicon.Tools.Ozone.Moderation.ReporterStats)this, SourceGenerationContext.Default.ToolsOzoneModerationReporterStats);
                 case "app.bsky.feed.repost":
                     return JsonSerializer.Serialize((FishyFlip.Lexicon.App.Bsky.Feed.Repost)this, SourceGenerationContext.Default.AppBskyFeedRepost);
                 case "tools.ozone.moderation.defs#repoView":
@@ -1378,6 +1386,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput)this, SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput);
                 case "app.bsky.graph.getRelationships#GetRelationshipsOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput)this, SourceGenerationContext.Default.AppBskyGraphGetRelationshipsOutput);
+                case "tools.ozone.moderation.getReporterStats#GetReporterStatsOutput":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput)this, SourceGenerationContext.Default.ToolsOzoneModerationGetReporterStatsOutput);
                 case "tools.ozone.moderation.getRepos#GetReposOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput)this, SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput);
                 case "com.atproto.sync.getRepoStatus#GetRepoStatusOutput":
@@ -1522,6 +1532,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput)this, SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput);
                 case "com.atproto.repo.listRecords#ListRecordsOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput)this, SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput);
+                case "com.atproto.sync.listReposByCollection#ListReposByCollectionOutput":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput)this, SourceGenerationContext.Default.ComAtprotoSyncListReposByCollectionOutput);
                 case "com.atproto.sync.listRepos#ListReposOutput":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput)this, SourceGenerationContext.Default.ComAtprotoSyncListReposOutput);
                 case "app.bsky.feed.threadgate#listRule":
@@ -1764,10 +1776,14 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Sync.Repo)this, SourceGenerationContext.Default.ComAtprotoSyncRepo);
                 case "com.atproto.admin.defs#repoBlobRef":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef)this, SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef);
+                case "com.atproto.sync.listReposByCollection#repo":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef)this, SourceGenerationContext.Default.ComAtprotoSyncRepoDef);
                 case "com.atproto.sync.subscribeRepos#repoOp":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp)this, SourceGenerationContext.Default.ComAtprotoSyncRepoOp);
                 case "com.atproto.admin.defs#repoRef":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef)this, SourceGenerationContext.Default.ComAtprotoAdminRepoRef);
+                case "tools.ozone.moderation.defs#reporterStats":
+                    return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.Tools.Ozone.Moderation.ReporterStats)this, SourceGenerationContext.Default.ToolsOzoneModerationReporterStats);
                 case "app.bsky.feed.repost":
                     return JsonSerializer.SerializeToUtf8Bytes((FishyFlip.Lexicon.App.Bsky.Feed.Repost)this, SourceGenerationContext.Default.AppBskyFeedRepost);
                 case "tools.ozone.moderation.defs#repoView":
@@ -2376,6 +2392,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput);
                 case "app.bsky.graph.getRelationships#GetRelationshipsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>)SourceGenerationContext.Default.AppBskyGraphGetRelationshipsOutput);
+                case "tools.ozone.moderation.getReporterStats#GetReporterStatsOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetReporterStatsOutput);
                 case "tools.ozone.moderation.getRepos#GetReposOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput);
                 case "com.atproto.sync.getRepoStatus#GetRepoStatusOutput":
@@ -2520,6 +2538,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput);
                 case "com.atproto.repo.listRecords#ListRecordsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput);
+                case "com.atproto.sync.listReposByCollection#ListReposByCollectionOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>)SourceGenerationContext.Default.ComAtprotoSyncListReposByCollectionOutput);
                 case "com.atproto.sync.listRepos#ListReposOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>)SourceGenerationContext.Default.ComAtprotoSyncListReposOutput);
                 case "app.bsky.feed.threadgate#listRule":
@@ -2762,10 +2782,14 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Repo>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Repo>)SourceGenerationContext.Default.ComAtprotoSyncRepo);
                 case "com.atproto.admin.defs#repoBlobRef":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef);
+                case "com.atproto.sync.listReposByCollection#repo":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>)SourceGenerationContext.Default.ComAtprotoSyncRepoDef);
                 case "com.atproto.sync.subscribeRepos#repoOp":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>)SourceGenerationContext.Default.ComAtprotoSyncRepoOp);
                 case "com.atproto.admin.defs#repoRef":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoRef);
+                case "tools.ozone.moderation.defs#reporterStats":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ReporterStats>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ReporterStats>)SourceGenerationContext.Default.ToolsOzoneModerationReporterStats);
                 case "app.bsky.feed.repost":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Repost>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Repost>)SourceGenerationContext.Default.AppBskyFeedRepost);
                 case "tools.ozone.moderation.defs#repoView":

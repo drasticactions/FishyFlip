@@ -24,6 +24,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
        public const string GetRepo = "/xrpc/tools.ozone.moderation.getRepo";
 
+       public const string GetReporterStats = "/xrpc/tools.ozone.moderation.getReporterStats";
+
        public const string GetRepos = "/xrpc/tools.ozone.moderation.getRepos";
 
        public const string QueryEvents = "/xrpc/tools.ozone.moderation.queryEvents";
@@ -188,6 +190,28 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRepoViewDetail!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get reporter stats for a list of users.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="dids"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput?>> GetReporterStatsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetReporterStats.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReporterStatsOutput!, cancellationToken, headers);
         }
 
 
