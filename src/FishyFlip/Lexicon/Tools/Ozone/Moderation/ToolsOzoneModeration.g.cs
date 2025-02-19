@@ -97,6 +97,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
 
         /// <summary>
+        /// Get reporter stats for a list of users.
+        /// </summary>
+        /// <param name="dids"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput?>> GetReporterStatsAsync (List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        {
+            return atp.GetReporterStatsAsync(dids, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get details about some repositories.
         /// </summary>
         /// <param name="dids"></param>

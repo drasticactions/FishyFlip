@@ -30,6 +30,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
        public const string ListRepos = "/xrpc/com.atproto.sync.listRepos";
 
+       public const string ListReposByCollection = "/xrpc/com.atproto.sync.listReposByCollection";
+
        public const string NotifyOfUpdate = "/xrpc/com.atproto.sync.notifyOfUpdate";
 
        public const string RequestCrawl = "/xrpc/com.atproto.sync.requestCrawl";
@@ -289,6 +291,39 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Enumerates all the DIDs which have records with the given collection NSID.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="collection"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput?>> ListReposByCollectionAsync (this FishyFlip.ATProtocol atp, string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = ListReposByCollection.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("collection=" + collection);
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposByCollectionOutput!, cancellationToken, headers);
         }
 
 

@@ -178,6 +178,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
+        /// Enumerates all the DIDs which have records with the given collection NSID.
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput?>> ListReposByCollectionAsync (string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListReposByCollectionAsync(collection, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates all the DIDs which have records with the given collection NSID.
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public ListReposByCollectionOutputCollection ListReposByCollectionCollectionAsync (string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new ListReposByCollectionOutputCollection(atp, collection, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Notify a crawling service of a recent update, and that crawling should resume. Intended use is after a gap between repo stream events caused the crawling service to disconnect. Does not require auth; implemented by Relay.
         /// </summary>
         /// <param name="hostname"></param>
