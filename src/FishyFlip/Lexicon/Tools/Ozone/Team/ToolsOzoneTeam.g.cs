@@ -62,23 +62,27 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// List all members with access to the ozone service.
         /// </summary>
+        /// <param name="disabled"></param>
+        /// <param name="roles"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListMembersAsync(limit, cursor, cancellationToken);
+            return atp.ListMembersAsync(disabled, roles, limit, cursor, cancellationToken);
         }
 
         /// <summary>
         /// List all members with access to the ozone service.
         /// </summary>
+        /// <param name="disabled"></param>
+        /// <param name="roles"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
-        public ListMembersOutputCollection ListMembersCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListMembersOutputCollection ListMembersCollectionAsync (bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return new ListMembersOutputCollection(atp, limit, cursor, cancellationToken);
+            return new ListMembersOutputCollection(atp, disabled, roles, limit, cursor, cancellationToken);
         }
 
 
