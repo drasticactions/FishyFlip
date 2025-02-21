@@ -23,9 +23,9 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// Generated endpoint for fm.teal.alpha.feed.getActorFeed
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="authorDID"></param>
-        /// <param name="cursor"></param>
-        /// <param name="limit"></param>
+        /// <param name="authorDID">The author's DID for the play</param>
+        /// <param name="cursor">The cursor to start the query from</param>
+        /// <param name="limit">The upper limit of tracks to get per request. Default is 20, max is 50.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput?>> GetActorFeedAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier authorDID, string? cursor = default, int? limit = 0, CancellationToken cancellationToken = default)
@@ -56,8 +56,8 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// Generated endpoint for fm.teal.alpha.feed.getPlay
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="authorDID"></param>
-        /// <param name="rkey"></param>
+        /// <param name="authorDID">The author's DID for the play</param>
+        /// <param name="rkey">The record key of the play</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput?>> GetPlayAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier authorDID, string rkey, CancellationToken cancellationToken = default)

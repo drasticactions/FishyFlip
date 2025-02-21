@@ -86,10 +86,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Get a skeleton of suggested actors. Intended to be called and then hydrated through app.bsky.actor.getSuggestions
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="viewer"></param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries). Used to boost followed accounts in ranking.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
-        /// <param name="relativeToDid"></param>
+        /// <param name="relativeToDid">DID of the account to get suggestions relative to. If not provided, suggestions will be based on the viewer.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput?>> GetSuggestionsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
@@ -143,7 +143,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Get a list of trending topics
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="viewer"></param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries). Used to boost followed accounts in ranking.</param>
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?"/></returns>
@@ -175,11 +175,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="q"></param>
-        /// <param name="viewer"></param>
-        /// <param name="typeahead"></param>
+        /// <param name="q">Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended. For typeahead search, only simple term match is supported, not full syntax.</param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries). Used to boost followed accounts in ranking.</param>
+        /// <param name="typeahead">If true, acts as fast/simple 'typeahead' query.</param>
         /// <param name="limit"></param>
-        /// <param name="cursor"></param>
+        /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput?>> SearchActorsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
@@ -222,19 +222,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="q"></param>
-        /// <param name="sort"></param>
-        /// <param name="since"></param>
-        /// <param name="until"></param>
-        /// <param name="mentions"></param>
-        /// <param name="author"></param>
-        /// <param name="lang"></param>
-        /// <param name="domain"></param>
-        /// <param name="url"></param>
-        /// <param name="tag"></param>
-        /// <param name="viewer"></param>
+        /// <param name="q">Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
+        /// <param name="sort">Specifies the ranking order of results.</param>
+        /// <param name="since">Filter results for posts after the indicated datetime (inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYYY-MM-DD).</param>
+        /// <param name="until">Filter results for posts before the indicated datetime (not inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYY-MM-DD).</param>
+        /// <param name="mentions">Filter to posts which mention the given account. Handles are resolved to DID before query-time. Only matches rich-text facet mentions.</param>
+        /// <param name="author">Filter to posts by the given account. Handles are resolved to DID before query-time.</param>
+        /// <param name="lang">Filter to posts in the given language. Expected to be based on post language field, though server may override language detection.</param>
+        /// <param name="domain">Filter to posts with URLs (facet links or embeds) linking to the given domain (hostname). Server may apply hostname normalization.</param>
+        /// <param name="url">Filter to posts with links (facet links or embeds) pointing to this URL. Server may apply URL normalization or fuzzy matching.</param>
+        /// <param name="tag">Filter to posts with the given tag (hashtag), based on rich-text facet or tag field. Do not include the hash (#) prefix. Multiple tags can be specified, with 'AND' matching.</param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries). Used for 'from:me' queries.</param>
         /// <param name="limit"></param>
-        /// <param name="cursor"></param>
+        /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput?>> SearchPostsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
@@ -317,10 +317,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="q"></param>
-        /// <param name="viewer"></param>
+        /// <param name="q">Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
         /// <param name="limit"></param>
-        /// <param name="cursor"></param>
+        /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput?>> SearchStarterPacksSkeletonAsync (this FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)

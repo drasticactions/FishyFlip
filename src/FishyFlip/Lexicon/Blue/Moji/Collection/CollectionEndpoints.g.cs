@@ -27,8 +27,8 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// Get a single emoji from a repository. Requires auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
-        /// <param name="name"></param>
+        /// <param name="repo">The handle or DID of the repo.</param>
+        /// <param name="name">The Bluemoji alias/rkey.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.GetItemOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Blue.Moji.Collection.GetItemOutput?>> GetItemAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string name, CancellationToken cancellationToken = default)
@@ -51,9 +51,9 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// List a range of Bluemoji in a repository, matching a specific collection. Requires auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="limit"></param>
+        /// <param name="limit">The number of records to return.</param>
         /// <param name="cursor"></param>
-        /// <param name="reverse"></param>
+        /// <param name="reverse">Flag to reverse the order of the returned records.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput?>> ListCollectionAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
@@ -87,9 +87,9 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// Write a Bluemoji record, creating or updating it as needed. Requires auth, implemented by AppView.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
         /// <param name="item"></param>
-        /// <param name="validate"></param>
+        /// <param name="validate">Can be set to 'false' to skip Lexicon schema validation of record data.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput?>> PutItemAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, FishyFlip.Lexicon.Blue.Moji.Collection.ItemView item, bool? validate = default, CancellationToken cancellationToken = default)
@@ -111,9 +111,9 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// <see cref="FishyFlip.Lexicon.DestinationExistsError"/> Indicates another Bluemoji with the same name already exists in the source repo. Set renameTo to rename. <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="source"></param>
-        /// <param name="name"></param>
-        /// <param name="renameTo"></param>
+        /// <param name="source">The handle or DID of the repo to copy from.</param>
+        /// <param name="name">The source Bluemoji name/rkey.</param>
+        /// <param name="renameTo">The alias to save the Bluemoji to in the current logged-in user's repo.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionOutput?>> SaveToCollectionAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier source, string name, string? renameTo = default, CancellationToken cancellationToken = default)

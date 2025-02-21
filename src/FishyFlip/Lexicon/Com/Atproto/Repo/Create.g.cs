@@ -17,7 +17,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// Initializes a new instance of the <see cref="Create"/> class.
         /// </summary>
         /// <param name="collection"></param>
-        /// <param name="rkey"></param>
+        /// <param name="rkey">NOTE: maxLength is redundant with record-key format. Keeping it temporarily to ensure backwards compatibility.</param>
         /// <param name="value"></param>
         public Create(string collection = default, string? rkey = default, ATObject value = default)
         {
@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         /// <summary>
         /// Gets or sets the rkey.
+        /// <br/> NOTE: maxLength is redundant with record-key format. Keeping it temporarily to ensure backwards compatibility.
         /// </summary>
         [JsonPropertyName("rkey")]
         public string? Rkey { get; set; }

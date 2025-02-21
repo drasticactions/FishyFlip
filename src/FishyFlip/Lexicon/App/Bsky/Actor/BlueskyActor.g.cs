@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Get detailed profile view of an actor. Does not require auth, but contains relevant metadata with auth.
         /// </summary>
-        /// <param name="actor"></param>
+        /// <param name="actor">Handle or DID of account to fetch profile of.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed?>> GetProfileAsync (FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default)
         {
@@ -115,7 +115,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Find actors (profiles) matching search criteria. Does not require auth.
         /// </summary>
-        /// <param name="q"></param>
+        /// <param name="q">Search query string. Syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -127,7 +127,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Find actors (profiles) matching search criteria. Does not require auth.
         /// </summary>
-        /// <param name="q"></param>
+        /// <param name="q">Search query string. Syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -140,7 +140,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Find actor suggestions for a prefix search term. Expected use is for auto-completion during text field entry. Does not require auth.
         /// </summary>
-        /// <param name="q"></param>
+        /// <param name="q">Search query prefix; not a full query string.</param>
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput?>> SearchActorsTypeaheadAsync (string? q = default, int? limit = 10, CancellationToken cancellationToken = default)

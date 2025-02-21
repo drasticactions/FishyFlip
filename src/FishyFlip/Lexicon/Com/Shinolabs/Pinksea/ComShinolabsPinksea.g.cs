@@ -34,9 +34,9 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Gets the feed for a given author.
         /// </summary>
-        /// <param name="did"></param>
-        /// <param name="since"></param>
-        /// <param name="limit"></param>
+        /// <param name="did">The DID of the author.</param>
+        /// <param name="since">Since when should the query begin?</param>
+        /// <param name="limit">The limit on posts to fetch.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput?>> GetAuthorFeedAsync (FishyFlip.Models.ATIdentifier did, DateTime? since = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
@@ -47,9 +47,9 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Gets the replies for an author.
         /// </summary>
-        /// <param name="did"></param>
-        /// <param name="since"></param>
-        /// <param name="limit"></param>
+        /// <param name="did">The DID of the author.</param>
+        /// <param name="since">Since when should the query begin?</param>
+        /// <param name="limit">The limit on posts to fetch.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput?>> GetAuthorRepliesAsync (FishyFlip.Models.ATIdentifier did, DateTime? since = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Gets the handle for a DID.
         /// </summary>
-        /// <param name="did"></param>
+        /// <param name="did">The DID.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput?>> GetHandleFromDidAsync (FishyFlip.Models.ATIdentifier did, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Gets the data about an oekaki post, with its children
         /// </summary>
-        /// <param name="did"></param>
-        /// <param name="rkey"></param>
+        /// <param name="did">The DID of the author.</param>
+        /// <param name="rkey">The record key.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput?>> GetOekakiAsync (FishyFlip.Models.ATIdentifier did, string rkey, CancellationToken cancellationToken = default)
         {
@@ -93,8 +93,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Gets the parent for a reply.
         /// </summary>
-        /// <param name="did"></param>
-        /// <param name="rkey"></param>
+        /// <param name="did">The DID of the author.</param>
+        /// <param name="rkey">The record key.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetParentForReplyOutput?>> GetParentForReplyAsync (FishyFlip.Models.ATIdentifier did, string rkey, CancellationToken cancellationToken = default)
         {
@@ -105,8 +105,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Gets the most recent posts on the timeline, in reverse chronological order.
         /// </summary>
-        /// <param name="since"></param>
-        /// <param name="limit"></param>
+        /// <param name="since">Since when should the query begin?</param>
+        /// <param name="limit">The limit on posts to fetch.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetRecentOutput?>> GetRecentAsync (DateTime? since = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
@@ -117,9 +117,9 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Gets the feed for a given tag.
         /// </summary>
-        /// <param name="tag"></param>
-        /// <param name="since"></param>
-        /// <param name="limit"></param>
+        /// <param name="tag">The tag to fetch posts for.</param>
+        /// <param name="since">Since when should the query begin?</param>
+        /// <param name="limit">The limit on posts to fetch.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput?>> GetTagFeedAsync (string tag, DateTime? since = default, int? limit = 50, CancellationToken cancellationToken = default)
         {

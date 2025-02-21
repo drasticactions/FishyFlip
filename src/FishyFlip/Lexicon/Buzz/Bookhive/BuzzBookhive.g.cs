@@ -34,10 +34,10 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <summary>
         /// Find books matching the search criteria. Requires authentication.
         /// </summary>
-        /// <param name="q"></param>
+        /// <param name="q">Search query string. Will be matched against title and authors fields.</param>
         /// <param name="limit"></param>
-        /// <param name="offset"></param>
-        /// <param name="id"></param>
+        /// <param name="offset">Offset for pagination into the result set</param>
+        /// <param name="id">The ID of the book within the hive.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput?>> SearchBooksAsync (string q, int? limit = 25, int? offset = 0, string? id = default, CancellationToken cancellationToken = default)
         {

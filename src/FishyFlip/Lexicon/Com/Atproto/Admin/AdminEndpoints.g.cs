@@ -65,7 +65,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="account"></param>
-        /// <param name="note"></param>
+        /// <param name="note">Optional reason for disabled invites.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> DisableAccountInvitesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid account, string? note = default, CancellationToken cancellationToken = default)
@@ -103,7 +103,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="account"></param>
-        /// <param name="note"></param>
+        /// <param name="note">Optional reason for enabled invites.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> EnableAccountInvitesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid account, string? note = default, CancellationToken cancellationToken = default)
@@ -275,7 +275,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <param name="content"></param>
         /// <param name="senderDid"></param>
         /// <param name="subject"></param>
-        /// <param name="comment"></param>
+        /// <param name="comment">Additional comment by the sender that won't be used in the email itself but helpful to provide more context for moderators/reviewers</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput?>> SendEmailAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid recipientDid, string content, FishyFlip.Models.ATDid senderDid, string? subject = default, string? comment = default, CancellationToken cancellationToken = default)
@@ -296,7 +296,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Administrative action to update an account's email.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="account"></param>
+        /// <param name="account">The handle or DID of the repo.</param>
         /// <param name="email"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
@@ -353,7 +353,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Update the service-specific admin status of a subject (account, record, or blob).
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="subject"></param>
+        /// <param name="subject">
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef"/> (com.atproto.admin.defs#repoBlobRef) <br/>
+        /// </param>
         /// <param name="takedown"></param>
         /// <param name="deactivated"></param>
         /// <param name="cancellationToken"></param>

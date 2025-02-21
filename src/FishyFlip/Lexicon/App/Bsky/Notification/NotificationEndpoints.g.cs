@@ -59,7 +59,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// Enumerate notifications for the requesting account. Requires auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="reasons"></param>
+        /// <param name="reasons">Notification reasons to include in response.</param>
         /// <param name="limit"></param>
         /// <param name="priority"></param>
         /// <param name="cursor"></param>

@@ -950,7 +950,7 @@ public partial class AppCommands
             var propName = testName.Replace("@", string.Empty);
             var prop = item.Properties.FirstOrDefault(n => n.Key == propName);
 
-            if (prop is null && (item.Definition.Input?.Schema?.Properties.Any() ?? false))
+            if (prop is null && (item.Definition?.Input?.Schema?.Properties.Any() ?? false))
             {
                 var prop3 = item.Definition.Input.Schema.Properties.FirstOrDefault(n => n.Key == propName);
                 if (prop3.Value?.Ref is not null)
@@ -1006,9 +1006,31 @@ public partial class AppCommands
                         sb.AppendLine("</param>");
                     }
                 }
+                else if (prop3.Value?.Refs is not null)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine($"        /// <br/> Union Types: <br/>");
+                    foreach (var unionType in prop3.Value.Refs)
+                    {
+                        var refString = unionType.Contains("#")
+                            ? $"{item.Namespace}.defs#{unionType.Split("#")[1]}"
+                            : unionType;
+                        var cls2 = FindClassFromRef(refString);
+                        sb.AppendLine(cls2?.Definition.Type == "record" || cls2?.Definition.Type == "object"
+                            ? $"        /// <see cref=\"{baseNamespace}.{cls2.FullClassName}\"/> ({refString}) <br/>"
+                            : $"        /// {unionType} <br/>");
+                    }
+
+                    sb.AppendLine("        /// </param>");
+                }
+                else if (!string.IsNullOrEmpty(prop3.Value?.Description))
+                {
+                    sb.Append(prop3.Value.Description);
+                    sb.AppendLine("</param>");
+                }
                 else
                 {
-                    sb.AppendLine("</param>");
+                     sb.AppendLine("</param>");
                 }
 
                 continue;
@@ -1016,7 +1038,24 @@ public partial class AppCommands
 
             if (prop is null)
             {
-                sb.AppendLine("</param>");
+                if (item.Definition?.Parameters?.Properties.Any() ?? false)
+                {
+                    var prop3 = item.Definition.Parameters.Properties.FirstOrDefault(n => n.Key == propName);
+                    if (prop3.Value is not null)
+                    {
+                        if (!string.IsNullOrEmpty(prop3.Value.Description))
+                        {
+                            sb.Append(prop3.Value.Description);
+                        }
+                    }
+
+                    sb.AppendLine("</param>");
+                }
+                else
+                {
+                    sb.AppendLine("</param>");
+                }
+
                 continue;
             }
 

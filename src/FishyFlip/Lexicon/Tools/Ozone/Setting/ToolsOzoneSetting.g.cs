@@ -37,8 +37,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="scope"></param>
-        /// <param name="prefix"></param>
-        /// <param name="keys"></param>
+        /// <param name="prefix">Filter keys by prefix</param>
+        /// <param name="keys">Filter for only the specified keys. Ignored if prefix is provided</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
         {
@@ -51,8 +51,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="scope"></param>
-        /// <param name="prefix"></param>
-        /// <param name="keys"></param>
+        /// <param name="prefix">Filter keys by prefix</param>
+        /// <param name="keys">Filter for only the specified keys. Ignored if prefix is provided</param>
         /// <param name="cancellationToken"></param>
         public ListOptionsOutputCollection ListOptionsCollectionAsync (int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
         {
