@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 {
-    public partial class GetHandleFromDidOutput : ATObject
+    public partial class GetHandleFromDidOutput : ATObject, ICBOREncodable<GetHandleFromDidOutput>, IJsonEncodable<GetHandleFromDidOutput>
     {
 
         /// <summary>
@@ -49,10 +49,34 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public const string RecordType = "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput";
 
-        public static GetHandleFromDidOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetHandleFromDidOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetHandleFromDidOutput);
+        }
+
+        public static new GetHandleFromDidOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetHandleFromDidOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetHandleFromDidOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetHandleFromDidOutput(obj);
+        }
+
     }
 }
 

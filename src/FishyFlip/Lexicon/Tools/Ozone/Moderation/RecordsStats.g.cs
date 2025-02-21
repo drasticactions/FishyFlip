@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Statistics about a set of record subject items
     /// </summary>
-    public partial class RecordsStats : ATObject
+    public partial class RecordsStats : ATObject, ICBOREncodable<RecordsStats>, IJsonEncodable<RecordsStats>
     {
 
         /// <summary>
@@ -120,10 +120,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public const string RecordType = "tools.ozone.moderation.defs#recordsStats";
 
-        public static RecordsStats FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats>)SourceGenerationContext.Default.ToolsOzoneModerationRecordsStats);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats>)SourceGenerationContext.Default.ToolsOzoneModerationRecordsStats);
+        }
+
+        public static new RecordsStats FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats>)SourceGenerationContext.Default.ToolsOzoneModerationRecordsStats)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new RecordsStats FromCBORObject(CBORObject obj)
+        {
+            return new RecordsStats(obj);
+        }
+
     }
 }
 

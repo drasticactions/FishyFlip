@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
     /// <summary>
     /// This lexicon is in a not officially released state. It is subject to change. | A declaration of the status of the actor. Only one can be shown at a time. If there are multiple, the latest record should be picked and earlier records should be deleted or tombstoned.
     /// </summary>
-    public partial class Status : ATObject
+    public partial class Status : ATObject, ICBOREncodable<Status>, IJsonEncodable<Status>
     {
 
         /// <summary>
@@ -62,10 +62,34 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 
         public const string RecordType = "fm.teal.alpha.actor.status";
 
-        public static Status FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>)SourceGenerationContext.Default.FmTealAlphaActorStatus);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>)SourceGenerationContext.Default.FmTealAlphaActorStatus);
+        }
+
+        public static new Status FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status>)SourceGenerationContext.Default.FmTealAlphaActorStatus)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Status FromCBORObject(CBORObject obj)
+        {
+            return new Status(obj);
+        }
+
     }
 }
 

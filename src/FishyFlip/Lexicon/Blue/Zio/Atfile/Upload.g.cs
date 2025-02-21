@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
     /// <summary>
     /// A reference to an uploaded blob.
     /// </summary>
-    public partial class Upload : ATObject
+    public partial class Upload : ATObject, ICBOREncodable<Upload>, IJsonEncodable<Upload>
     {
 
         /// <summary>
@@ -106,10 +106,34 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public const string RecordType = "blue.zio.atfile.upload";
 
-        public static Upload FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload);
+        }
+
+        public static new Upload FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Upload FromCBORObject(CBORObject obj)
+        {
+            return new Upload(obj);
+        }
+
     }
 
     public partial class Checksum

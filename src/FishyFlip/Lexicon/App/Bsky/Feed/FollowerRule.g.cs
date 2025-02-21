@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Allow replies from actors who follow you.
     /// </summary>
-    public partial class FollowerRule : ATObject
+    public partial class FollowerRule : ATObject, ICBOREncodable<FollowerRule>, IJsonEncodable<FollowerRule>
     {
 
         /// <summary>
@@ -31,10 +31,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.threadgate#followerRule";
 
-        public static FollowerRule FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule>)SourceGenerationContext.Default.AppBskyFeedFollowerRule);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule>)SourceGenerationContext.Default.AppBskyFeedFollowerRule);
+        }
+
+        public static new FollowerRule FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FollowerRule>)SourceGenerationContext.Default.AppBskyFeedFollowerRule)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new FollowerRule FromCBORObject(CBORObject obj)
+        {
+            return new FollowerRule(obj);
+        }
+
     }
 }
 

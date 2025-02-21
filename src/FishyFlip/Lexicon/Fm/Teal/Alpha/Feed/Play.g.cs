@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 {
-    public partial class Play : ATObject
+    public partial class Play : ATObject, ICBOREncodable<Play>, IJsonEncodable<Play>
     {
 
         /// <summary>
@@ -167,10 +167,34 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 
         public const string RecordType = "fm.teal.alpha.feed.play";
 
-        public static Play FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play>)SourceGenerationContext.Default.FmTealAlphaFeedPlay);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play>)SourceGenerationContext.Default.FmTealAlphaFeedPlay);
+        }
+
+        public static new Play FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play>)SourceGenerationContext.Default.FmTealAlphaFeedPlay)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Play FromCBORObject(CBORObject obj)
+        {
+            return new Play(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class SendMessageBatchInput : ATObject
+    public partial class SendMessageBatchInput : ATObject, ICBOREncodable<SendMessageBatchInput>, IJsonEncodable<SendMessageBatchInput>
     {
 
         /// <summary>
@@ -47,10 +47,34 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public const string RecordType = "chat.bsky.convo.sendMessageBatch#SendMessageBatchInput";
 
-        public static SendMessageBatchInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchInput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchInput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchInput);
+        }
+
+        public static new SendMessageBatchInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchInput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SendMessageBatchInput FromCBORObject(CBORObject obj)
+        {
+            return new SendMessageBatchInput(obj);
+        }
+
     }
 }
 

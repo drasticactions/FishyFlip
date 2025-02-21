@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Video
 {
-    public partial class UploadVideoOutput : ATObject
+    public partial class UploadVideoOutput : ATObject, ICBOREncodable<UploadVideoOutput>, IJsonEncodable<UploadVideoOutput>
     {
 
         /// <summary>
@@ -50,10 +50,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         public const string RecordType = "app.bsky.video.uploadVideo#UploadVideoOutput";
 
-        public static UploadVideoOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput);
+        }
+
+        public static new UploadVideoOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>)SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new UploadVideoOutput FromCBORObject(CBORObject obj)
+        {
+            return new UploadVideoOutput(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Collection
 {
-    public partial class PutItemOutput : ATObject
+    public partial class PutItemOutput : ATObject, ICBOREncodable<PutItemOutput>, IJsonEncodable<PutItemOutput>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
 
         public const string RecordType = "blue.moji.collection.putItem#PutItemOutput";
 
-        public static PutItemOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput>)SourceGenerationContext.Default.BlueMojiCollectionPutItemOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput>)SourceGenerationContext.Default.BlueMojiCollectionPutItemOutput);
+        }
+
+        public static new PutItemOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput>)SourceGenerationContext.Default.BlueMojiCollectionPutItemOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new PutItemOutput FromCBORObject(CBORObject obj)
+        {
+            return new PutItemOutput(obj);
+        }
+
     }
 }
 

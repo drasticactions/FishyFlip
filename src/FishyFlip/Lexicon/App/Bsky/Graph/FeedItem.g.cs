@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class FeedItem : ATObject
+    public partial class FeedItem : ATObject, ICBOREncodable<FeedItem>, IJsonEncodable<FeedItem>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.starterpack#feedItem";
 
-        public static FeedItem FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem);
+        }
+
+        public static new FeedItem FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new FeedItem FromCBORObject(CBORObject obj)
+        {
+            return new FeedItem(obj);
+        }
+
     }
 }
 

@@ -13,19 +13,25 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
     public class ListConvosOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>, IAsyncEnumerable<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>
     {
 
-        public ListConvosOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListConvosOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
             this.Cursor = cursor;
+            this.ReadState = readState;
+            this.Status = status;
             this.CancellationToken = cancellationToken;
         }
+
+        public string? ReadState { get; }
+
+        public string? Status { get; }
 
         /// <inheritdoc/>
         public override async Task<(IList<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView> Posts, string Cursor)> GetRecordsAsync(int? limit = null, CancellationToken? token = default)
         {
             token = token ?? this.CancellationToken ?? System.Threading.CancellationToken.None;
-            var (result, error) = await this.ATProtocol.ListConvosAsync(limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
+            var (result, error) = await this.ATProtocol.ListConvosAsync(readState: this.ReadState, status: this.Status, limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
 
             this.HandleATError(error);
 
@@ -37,9 +43,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return (result.Convos, result.Cursor ?? string.Empty);
         }
 
-        public static ListConvosOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static ListConvosOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
         {
-            return new(atp: atp, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
+            return new(atp: atp, readState: readState, status: status, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }
     }
 }

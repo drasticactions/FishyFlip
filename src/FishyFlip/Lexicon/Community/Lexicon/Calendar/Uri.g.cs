@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
     /// <summary>
     /// A URI associated with the event.
     /// </summary>
-    public partial class Uri : ATObject
+    public partial class Uri : ATObject, ICBOREncodable<Uri>, IJsonEncodable<Uri>
     {
 
         /// <summary>
@@ -60,10 +60,34 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
 
         public const string RecordType = "community.lexicon.calendar.event#uri";
 
-        public static Uri FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>)SourceGenerationContext.Default.CommunityLexiconCalendarUri);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>)SourceGenerationContext.Default.CommunityLexiconCalendarUri);
+        }
+
+        public static new Uri FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>)SourceGenerationContext.Default.CommunityLexiconCalendarUri)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Uri FromCBORObject(CBORObject obj)
+        {
+            return new Uri(obj);
+        }
+
     }
 }
 

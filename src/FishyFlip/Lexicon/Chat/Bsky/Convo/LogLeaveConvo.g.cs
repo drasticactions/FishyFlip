@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class LogLeaveConvo : ATObject
+    public partial class LogLeaveConvo : ATObject, ICBOREncodable<LogLeaveConvo>, IJsonEncodable<LogLeaveConvo>
     {
 
         /// <summary>
@@ -57,10 +57,34 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public const string RecordType = "chat.bsky.convo.defs#logLeaveConvo";
 
-        public static LogLeaveConvo FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>)SourceGenerationContext.Default.ChatBskyConvoLogLeaveConvo);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>)SourceGenerationContext.Default.ChatBskyConvoLogLeaveConvo);
+        }
+
+        public static new LogLeaveConvo FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo>)SourceGenerationContext.Default.ChatBskyConvoLogLeaveConvo)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new LogLeaveConvo FromCBORObject(CBORObject obj)
+        {
+            return new LogLeaveConvo(obj);
+        }
+
     }
 }
 

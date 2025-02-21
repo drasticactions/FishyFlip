@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
     /// <summary>
     /// An RSVP for an event.
     /// </summary>
-    public partial class Rsvp : ATObject
+    public partial class Rsvp : ATObject, ICBOREncodable<Rsvp>, IJsonEncodable<Rsvp>
     {
 
         /// <summary>
@@ -70,10 +70,34 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
 
         public const string RecordType = "community.lexicon.calendar.rsvp";
 
-        public static Rsvp FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>)SourceGenerationContext.Default.CommunityLexiconCalendarRsvp);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>)SourceGenerationContext.Default.CommunityLexiconCalendarRsvp);
+        }
+
+        public static new Rsvp FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>)SourceGenerationContext.Default.CommunityLexiconCalendarRsvp)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Rsvp FromCBORObject(CBORObject obj)
+        {
+            return new Rsvp(obj);
+        }
+
     }
 }
 

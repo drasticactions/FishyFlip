@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Packs
 {
-    public partial class GetPacksOutput : ATObject
+    public partial class GetPacksOutput : ATObject, ICBOREncodable<GetPacksOutput>, IJsonEncodable<GetPacksOutput>
     {
 
         /// <summary>
@@ -47,10 +47,34 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
 
         public const string RecordType = "blue.moji.packs.getPacks#GetPacksOutput";
 
-        public static GetPacksOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput>)SourceGenerationContext.Default.BlueMojiPacksGetPacksOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput>)SourceGenerationContext.Default.BlueMojiPacksGetPacksOutput);
+        }
+
+        public static new GetPacksOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput>)SourceGenerationContext.Default.BlueMojiPacksGetPacksOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetPacksOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetPacksOutput(obj);
+        }
+
     }
 }
 

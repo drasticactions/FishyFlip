@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
     /// <summary>
     /// A custom emoji
     /// </summary>
-    public partial class Item : ATObject
+    public partial class Item : ATObject, ICBOREncodable<Item>, IJsonEncodable<Item>
     {
 
         /// <summary>
@@ -126,10 +126,34 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
 
         public const string RecordType = "blue.moji.collection.item";
 
-        public static Item FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.Item>)SourceGenerationContext.Default.BlueMojiCollectionItem);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.Item>)SourceGenerationContext.Default.BlueMojiCollectionItem);
+        }
+
+        public static new Item FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.Item>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.Item>)SourceGenerationContext.Default.BlueMojiCollectionItem)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Item FromCBORObject(CBORObject obj)
+        {
+            return new Item(obj);
+        }
+
     }
 }
 

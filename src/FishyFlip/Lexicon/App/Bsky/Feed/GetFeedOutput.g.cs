@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetFeedOutput : ATObject
+    public partial class GetFeedOutput : ATObject, ICBOREncodable<GetFeedOutput>, IJsonEncodable<GetFeedOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.getFeed#GetFeedOutput";
 
-        public static GetFeedOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedOutput);
+        }
+
+        public static new GetFeedOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput>)SourceGenerationContext.Default.AppBskyFeedGetFeedOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetFeedOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetFeedOutput(obj);
+        }
+
     }
 }
 

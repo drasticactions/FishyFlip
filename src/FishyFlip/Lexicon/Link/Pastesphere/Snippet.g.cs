@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
     /// <summary>
     /// Record representing a text snippet.
     /// </summary>
-    public partial class Snippet : ATObject
+    public partial class Snippet : ATObject, ICBOREncodable<Snippet>, IJsonEncodable<Snippet>
     {
 
         /// <summary>
@@ -85,10 +85,34 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
 
         public const string RecordType = "link.pastesphere.snippet";
 
-        public static Snippet FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet);
+        }
+
+        public static new Snippet FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(json, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Snippet FromCBORObject(CBORObject obj)
+        {
+            return new Snippet(obj);
+        }
+
     }
 }
 

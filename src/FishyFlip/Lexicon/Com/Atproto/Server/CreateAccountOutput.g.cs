@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
     /// <summary>
     /// Account login session returned on successful account creation.
     /// </summary>
-    public partial class CreateAccountOutput : ATObject
+    public partial class CreateAccountOutput : ATObject, ICBOREncodable<CreateAccountOutput>, IJsonEncodable<CreateAccountOutput>
     {
 
         /// <summary>
@@ -93,10 +93,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public const string RecordType = "com.atproto.server.createAccount#CreateAccountOutput";
 
-        public static CreateAccountOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountOutput);
+        }
+
+        public static new CreateAccountOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new CreateAccountOutput FromCBORObject(CBORObject obj)
+        {
+            return new CreateAccountOutput(obj);
+        }
+
     }
 }
 

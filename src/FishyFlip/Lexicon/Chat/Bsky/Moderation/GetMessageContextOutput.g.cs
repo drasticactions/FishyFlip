@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 {
-    public partial class GetMessageContextOutput : ATObject
+    public partial class GetMessageContextOutput : ATObject, ICBOREncodable<GetMessageContextOutput>, IJsonEncodable<GetMessageContextOutput>
     {
 
         /// <summary>
@@ -54,10 +54,34 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 
         public const string RecordType = "chat.bsky.moderation.getMessageContext#GetMessageContextOutput";
 
-        public static GetMessageContextOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>)SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>)SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput);
+        }
+
+        public static new GetMessageContextOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>)SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetMessageContextOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetMessageContextOutput(obj);
+        }
+
     }
 }
 

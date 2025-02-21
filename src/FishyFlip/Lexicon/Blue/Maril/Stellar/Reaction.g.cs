@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
     /// <summary>
     /// Record declaring a emoji reaction of a subject content.
     /// </summary>
-    public partial class Reaction : ATObject
+    public partial class Reaction : ATObject, ICBOREncodable<Reaction>, IJsonEncodable<Reaction>
     {
 
         /// <summary>
@@ -64,10 +64,34 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 
         public const string RecordType = "blue.maril.stellar.reaction";
 
-        public static Reaction FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.Reaction>)SourceGenerationContext.Default.BlueMarilStellarReaction);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.Reaction>)SourceGenerationContext.Default.BlueMarilStellarReaction);
+        }
+
+        public static new Reaction FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.Reaction>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.Reaction>)SourceGenerationContext.Default.BlueMarilStellarReaction)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Reaction FromCBORObject(CBORObject obj)
+        {
+            return new Reaction(obj);
+        }
+
     }
 }
 

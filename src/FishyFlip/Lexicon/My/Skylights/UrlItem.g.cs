@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.My.Skylights
 {
-    public partial class UrlItem : ATObject
+    public partial class UrlItem : ATObject, ICBOREncodable<UrlItem>, IJsonEncodable<UrlItem>
     {
 
         /// <summary>
@@ -47,10 +47,34 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public const string RecordType = "my.skylights.rel#urlItem";
 
-        public static UrlItem FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.UrlItem>)SourceGenerationContext.Default.MySkylightsUrlItem);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.UrlItem>)SourceGenerationContext.Default.MySkylightsUrlItem);
+        }
+
+        public static new UrlItem FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.UrlItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.UrlItem>)SourceGenerationContext.Default.MySkylightsUrlItem)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new UrlItem FromCBORObject(CBORObject obj)
+        {
+            return new UrlItem(obj);
+        }
+
     }
 }
 

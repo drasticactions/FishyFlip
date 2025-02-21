@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Collection
 {
-    public partial class SaveToCollectionInput : ATObject
+    public partial class SaveToCollectionInput : ATObject, ICBOREncodable<SaveToCollectionInput>, IJsonEncodable<SaveToCollectionInput>
     {
 
         /// <summary>
@@ -70,10 +70,34 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
 
         public const string RecordType = "blue.moji.collection.saveToCollection#SaveToCollectionInput";
 
-        public static SaveToCollectionInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionInput>)SourceGenerationContext.Default.BlueMojiCollectionSaveToCollectionInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionInput>)SourceGenerationContext.Default.BlueMojiCollectionSaveToCollectionInput);
+        }
+
+        public static new SaveToCollectionInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionInput>)SourceGenerationContext.Default.BlueMojiCollectionSaveToCollectionInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SaveToCollectionInput FromCBORObject(CBORObject obj)
+        {
+            return new SaveToCollectionInput(obj);
+        }
+
     }
 }
 

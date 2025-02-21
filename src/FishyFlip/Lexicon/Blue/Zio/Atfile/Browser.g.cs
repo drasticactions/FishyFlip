@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
     /// <summary>
     /// A fingerprint of a browser upload.
     /// </summary>
-    public partial class Browser : ATObject
+    public partial class Browser : ATObject, ICBOREncodable<Browser>, IJsonEncodable<Browser>
     {
 
         /// <summary>
@@ -58,10 +58,34 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public const string RecordType = "blue.zio.atfile.finger#browser";
 
-        public static Browser FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>)SourceGenerationContext.Default.BlueZioAtfileBrowser);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>)SourceGenerationContext.Default.BlueZioAtfileBrowser);
+        }
+
+        public static new Browser FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Browser>)SourceGenerationContext.Default.BlueZioAtfileBrowser)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Browser FromCBORObject(CBORObject obj)
+        {
+            return new Browser(obj);
+        }
+
     }
 }
 

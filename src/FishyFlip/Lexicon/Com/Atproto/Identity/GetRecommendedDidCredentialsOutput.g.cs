@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class GetRecommendedDidCredentialsOutput : ATObject
+    public partial class GetRecommendedDidCredentialsOutput : ATObject, ICBOREncodable<GetRecommendedDidCredentialsOutput>, IJsonEncodable<GetRecommendedDidCredentialsOutput>
     {
 
         /// <summary>
@@ -74,10 +74,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         public const string RecordType = "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput";
 
-        public static GetRecommendedDidCredentialsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>)SourceGenerationContext.Default.ComAtprotoIdentityGetRecommendedDidCredentialsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>)SourceGenerationContext.Default.ComAtprotoIdentityGetRecommendedDidCredentialsOutput);
+        }
+
+        public static new GetRecommendedDidCredentialsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>)SourceGenerationContext.Default.ComAtprotoIdentityGetRecommendedDidCredentialsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetRecommendedDidCredentialsOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetRecommendedDidCredentialsOutput(obj);
+        }
+
     }
 }
 

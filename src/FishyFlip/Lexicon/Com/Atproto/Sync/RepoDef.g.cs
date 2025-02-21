@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class RepoDef : ATObject
+    public partial class RepoDef : ATObject, ICBOREncodable<RepoDef>, IJsonEncodable<RepoDef>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         public const string RecordType = "com.atproto.sync.listReposByCollection#repo";
 
-        public static RepoDef FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>)SourceGenerationContext.Default.ComAtprotoSyncRepoDef);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>)SourceGenerationContext.Default.ComAtprotoSyncRepoDef);
+        }
+
+        public static new RepoDef FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>)SourceGenerationContext.Default.ComAtprotoSyncRepoDef)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new RepoDef FromCBORObject(CBORObject obj)
+        {
+            return new RepoDef(obj);
+        }
+
     }
 }
 

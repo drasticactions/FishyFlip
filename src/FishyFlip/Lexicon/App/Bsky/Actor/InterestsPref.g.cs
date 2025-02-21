@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class InterestsPref : ATObject
+    public partial class InterestsPref : ATObject, ICBOREncodable<InterestsPref>, IJsonEncodable<InterestsPref>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public const string RecordType = "app.bsky.actor.defs#interestsPref";
 
-        public static InterestsPref FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>)SourceGenerationContext.Default.AppBskyActorInterestsPref);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>)SourceGenerationContext.Default.AppBskyActorInterestsPref);
+        }
+
+        public static new InterestsPref FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref>)SourceGenerationContext.Default.AppBskyActorInterestsPref)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new InterestsPref FromCBORObject(CBORObject obj)
+        {
+            return new InterestsPref(obj);
+        }
+
     }
 }
 

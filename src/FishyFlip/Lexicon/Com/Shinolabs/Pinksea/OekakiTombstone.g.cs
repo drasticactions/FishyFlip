@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
     /// <summary>
     /// A tombstone for a missing oekaki.
     /// </summary>
-    public partial class OekakiTombstone : ATObject
+    public partial class OekakiTombstone : ATObject, ICBOREncodable<OekakiTombstone>, IJsonEncodable<OekakiTombstone>
     {
 
         /// <summary>
@@ -52,10 +52,34 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public const string RecordType = "com.shinolabs.pinksea.appViewDefs#oekakiTombstone";
 
-        public static OekakiTombstone FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone);
+        }
+
+        public static new OekakiTombstone FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new OekakiTombstone FromCBORObject(CBORObject obj)
+        {
+            return new OekakiTombstone(obj);
+        }
+
     }
 }
 

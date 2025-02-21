@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class RegisterPushInput : ATObject
+    public partial class RegisterPushInput : ATObject, ICBOREncodable<RegisterPushInput>, IJsonEncodable<RegisterPushInput>
     {
 
         /// <summary>
@@ -87,10 +87,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public const string RecordType = "app.bsky.notification.registerPush#RegisterPushInput";
 
-        public static RegisterPushInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput);
+        }
+
+        public static new RegisterPushInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new RegisterPushInput FromCBORObject(CBORObject obj)
+        {
+            return new RegisterPushInput(obj);
+        }
+
     }
 }
 

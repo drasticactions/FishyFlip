@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
     /// <summary>
     /// A physical location in the form of a H3 encoded location.
     /// </summary>
-    public partial class H3 : ATObject
+    public partial class H3 : ATObject, ICBOREncodable<H3>, IJsonEncodable<H3>
     {
 
         /// <summary>
@@ -61,10 +61,34 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
 
         public const string RecordType = "community.lexicon.location.h3";
 
-        public static H3 FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3);
+        }
+
+        public static new H3 FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.H3>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new H3 FromCBORObject(CBORObject obj)
+        {
+            return new H3(obj);
+        }
+
     }
 }
 

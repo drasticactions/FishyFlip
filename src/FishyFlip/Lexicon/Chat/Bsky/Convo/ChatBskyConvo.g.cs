@@ -32,6 +32,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
 
         /// <summary>
+        /// Generated endpoint for chat.bsky.convo.acceptConvo
+        /// </summary>
+        /// <param name="convoId"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput?>> AcceptConvoAsync (string convoId, CancellationToken cancellationToken = default)
+        {
+            return atp.AcceptConvoAsync(convoId, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Generated endpoint for chat.bsky.convo.deleteMessageForSelf
         /// </summary>
         /// <param name="convoId"></param>
@@ -51,6 +62,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput?>> GetConvoAsync (string convoId, CancellationToken cancellationToken = default)
         {
             return atp.GetConvoAsync(convoId, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get whether the requester and the other members can chat. If an existing convo is found for these members, it is returned.
+        /// </summary>
+        /// <param name="members"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoAvailabilityOutput?>> GetConvoAvailabilityAsync (List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default)
+        {
+            return atp.GetConvoAvailabilityAsync(members, cancellationToken);
         }
 
 
@@ -127,10 +149,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
+        /// <param name="readState"></param>
+        /// <param name="status"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput?>> ListConvosAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput?>> ListConvosAsync (int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListConvosAsync(limit, cursor, cancellationToken);
+            return atp.ListConvosAsync(limit, cursor, readState, status, cancellationToken);
         }
 
         /// <summary>
@@ -138,10 +162,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
+        /// <param name="readState"></param>
+        /// <param name="status"></param>
         /// <param name="cancellationToken"></param>
-        public ListConvosOutputCollection ListConvosCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListConvosOutputCollection ListConvosCollectionAsync (int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
         {
-            return new ListConvosOutputCollection(atp, limit, cursor, cancellationToken);
+            return new ListConvosOutputCollection(atp, limit, cursor, readState, status, cancellationToken);
         }
 
 

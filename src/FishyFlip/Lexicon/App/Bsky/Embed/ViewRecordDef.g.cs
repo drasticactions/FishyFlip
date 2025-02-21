@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class ViewRecordDef : ATObject
+    public partial class ViewRecordDef : ATObject, ICBOREncodable<ViewRecordDef>, IJsonEncodable<ViewRecordDef>
     {
 
         /// <summary>
@@ -66,10 +66,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public const string RecordType = "app.bsky.embed.record#view";
 
-        public static ViewRecordDef FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef>)SourceGenerationContext.Default.AppBskyEmbedViewRecordDef);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef>)SourceGenerationContext.Default.AppBskyEmbedViewRecordDef);
+        }
+
+        public static new ViewRecordDef FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef>)SourceGenerationContext.Default.AppBskyEmbedViewRecordDef)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ViewRecordDef FromCBORObject(CBORObject obj)
+        {
+            return new ViewRecordDef(obj);
+        }
+
     }
 }
 

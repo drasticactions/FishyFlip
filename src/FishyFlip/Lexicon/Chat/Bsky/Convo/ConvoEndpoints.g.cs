@@ -14,9 +14,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
     public static class ConvoEndpoints
     {
 
+       public const string AcceptConvo = "/xrpc/chat.bsky.convo.acceptConvo";
+
        public const string DeleteMessageForSelf = "/xrpc/chat.bsky.convo.deleteMessageForSelf";
 
        public const string GetConvo = "/xrpc/chat.bsky.convo.getConvo";
+
+       public const string GetConvoAvailability = "/xrpc/chat.bsky.convo.getConvoAvailability";
 
        public const string GetConvoForMembers = "/xrpc/chat.bsky.convo.getConvoForMembers";
 
@@ -37,6 +41,24 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
        public const string UnmuteConvo = "/xrpc/chat.bsky.convo.unmuteConvo";
 
        public const string UpdateRead = "/xrpc/chat.bsky.convo.updateRead";
+
+
+        /// <summary>
+        /// Generated endpoint for chat.bsky.convo.acceptConvo
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="convoId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput?>> AcceptConvoAsync (this FishyFlip.ATProtocol atp, string convoId, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = AcceptConvo.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
+            var inputItem = new AcceptConvoInput();
+            inputItem.ConvoId = convoId;
+            return atp.Post<AcceptConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoAcceptConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoAcceptConvoOutput!, inputItem, cancellationToken, headers);
+        }
 
 
         /// <summary>
@@ -78,6 +100,28 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get whether the requester and the other members can chat. If an existing convo is found for these members, it is returned.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="members"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoAvailabilityOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoAvailabilityOutput?>> GetConvoAvailabilityAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetConvoAvailability.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add(string.Join("&", members.Select(n => "members=" + n)));
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoAvailabilityOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoGetConvoAvailabilityOutput!, cancellationToken, headers);
         }
 
 
@@ -186,9 +230,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <param name="atp"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
+        /// <param name="readState"></param>
+        /// <param name="status"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput?>> ListConvosAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput?>> ListConvosAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListConvos.ToString();
             endpointUrl += "?";
@@ -201,6 +247,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (cursor != null)
             {
                 queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (readState != null)
+            {
+                queryStrings.Add("readState=" + readState);
+            }
+
+            if (status != null)
+            {
+                queryStrings.Add("status=" + status);
             }
 
             var headers = new Dictionary<string, string>();

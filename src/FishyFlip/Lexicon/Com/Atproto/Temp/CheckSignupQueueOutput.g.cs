@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
-    public partial class CheckSignupQueueOutput : ATObject
+    public partial class CheckSignupQueueOutput : ATObject, ICBOREncodable<CheckSignupQueueOutput>, IJsonEncodable<CheckSignupQueueOutput>
     {
 
         /// <summary>
@@ -65,10 +65,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
         public const string RecordType = "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput";
 
-        public static CheckSignupQueueOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput);
+        }
+
+        public static new CheckSignupQueueOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new CheckSignupQueueOutput FromCBORObject(CBORObject obj)
+        {
+            return new CheckSignupQueueOutput(obj);
+        }
+
     }
 }
 

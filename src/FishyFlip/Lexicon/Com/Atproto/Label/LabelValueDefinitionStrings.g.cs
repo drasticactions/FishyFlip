@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     /// <summary>
     /// Strings which describe the label in the UI, localized into a specific language.
     /// </summary>
-    public partial class LabelValueDefinitionStrings : ATObject
+    public partial class LabelValueDefinitionStrings : ATObject, ICBOREncodable<LabelValueDefinitionStrings>, IJsonEncodable<LabelValueDefinitionStrings>
     {
 
         /// <summary>
@@ -73,10 +73,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         public const string RecordType = "com.atproto.label.defs#labelValueDefinitionStrings";
 
-        public static LabelValueDefinitionStrings FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinitionStrings);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinitionStrings);
+        }
+
+        public static new LabelValueDefinitionStrings FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinitionStrings)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new LabelValueDefinitionStrings FromCBORObject(CBORObject obj)
+        {
+            return new LabelValueDefinitionStrings(obj);
+        }
+
     }
 }
 

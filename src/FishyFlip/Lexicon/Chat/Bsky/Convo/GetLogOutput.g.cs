@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class GetLogOutput : ATObject
+    public partial class GetLogOutput : ATObject, ICBOREncodable<GetLogOutput>, IJsonEncodable<GetLogOutput>
     {
 
         /// <summary>
@@ -17,6 +17,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <param name="logs">
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogAcceptConvo"/> (chat.bsky.convo.defs#logAcceptConvo) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage) <br/>
@@ -57,6 +58,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// Gets or sets the logs.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo"/> (chat.bsky.convo.defs#logBeginConvo) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogAcceptConvo"/> (chat.bsky.convo.defs#logAcceptConvo) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogLeaveConvo"/> (chat.bsky.convo.defs#logLeaveConvo) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogCreateMessage"/> (chat.bsky.convo.defs#logCreateMessage) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage"/> (chat.bsky.convo.defs#logDeleteMessage) <br/>
@@ -67,10 +69,34 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public const string RecordType = "chat.bsky.convo.getLog#GetLogOutput";
 
-        public static GetLogOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>)SourceGenerationContext.Default.ChatBskyConvoGetLogOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>)SourceGenerationContext.Default.ChatBskyConvoGetLogOutput);
+        }
+
+        public static new GetLogOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>)SourceGenerationContext.Default.ChatBskyConvoGetLogOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetLogOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetLogOutput(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 {
-    public partial class EmojiRef : ATObject
+    public partial class EmojiRef : ATObject, ICBOREncodable<EmojiRef>, IJsonEncodable<EmojiRef>
     {
 
         /// <summary>
@@ -58,10 +58,34 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 
         public const string RecordType = "blue.maril.stellar.reaction#emojiRef";
 
-        public static EmojiRef FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef>)SourceGenerationContext.Default.BlueMarilStellarEmojiRef);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef>)SourceGenerationContext.Default.BlueMarilStellarEmojiRef);
+        }
+
+        public static new EmojiRef FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef>)SourceGenerationContext.Default.BlueMarilStellarEmojiRef)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new EmojiRef FromCBORObject(CBORObject obj)
+        {
+            return new EmojiRef(obj);
+        }
+
     }
 }
 

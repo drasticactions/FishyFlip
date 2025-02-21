@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
     /// <summary>
     /// Record containing a cards of your profile.
     /// </summary>
-    public partial class Board : ATObject
+    public partial class Board : ATObject, ICBOREncodable<Board>, IJsonEncodable<Board>
     {
 
         /// <summary>
@@ -50,10 +50,34 @@ namespace FishyFlip.Lexicon.Blue.Linkat
 
         public const string RecordType = "blue.linkat.board";
 
-        public static Board FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard);
+        }
+
+        public static new Board FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Linkat.Board>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Board FromCBORObject(CBORObject obj)
+        {
+            return new Board(obj);
+        }
+
     }
 }
 

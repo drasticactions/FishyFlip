@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 {
-    public partial class CreateTemplateInput : ATObject
+    public partial class CreateTemplateInput : ATObject, ICBOREncodable<CreateTemplateInput>, IJsonEncodable<CreateTemplateInput>
     {
 
         /// <summary>
@@ -91,10 +91,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         public const string RecordType = "tools.ozone.communication.createTemplate#CreateTemplateInput";
 
-        public static CreateTemplateInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationCreateTemplateInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationCreateTemplateInput);
+        }
+
+        public static new CreateTemplateInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationCreateTemplateInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new CreateTemplateInput FromCBORObject(CBORObject obj)
+        {
+            return new CreateTemplateInput(obj);
+        }
+
     }
 }
 
