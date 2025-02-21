@@ -31,8 +31,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// Add values to a specific set. Attempting to add values to a set that does not exist will result in an error.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="name"></param>
-        /// <param name="values"></param>
+        /// <param name="name">Name of the set to add values to</param>
+        /// <param name="values">Array of string values to add to the set</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> AddValuesAsync (this FishyFlip.ATProtocol atp, string name, List<string> values, CancellationToken cancellationToken = default)
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <see cref="FishyFlip.Lexicon.SetNotFoundError"/> set with the given name does not exist <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="name"></param>
+        /// <param name="name">Name of the set to delete</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput?>> DeleteSetAsync (this FishyFlip.ATProtocol atp, string name, CancellationToken cancellationToken = default)
@@ -73,8 +73,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <see cref="FishyFlip.Lexicon.SetNotFoundError"/> set with the given name does not exist <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="name"></param>
-        /// <param name="values"></param>
+        /// <param name="name">Name of the set to delete values from</param>
+        /// <param name="values">Array of string values to delete from the set</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> DeleteValuesAsync (this FishyFlip.ATProtocol atp, string name, List<string> values, CancellationToken cancellationToken = default)
@@ -133,7 +133,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <param name="cursor"></param>
         /// <param name="namePrefix"></param>
         /// <param name="sortBy"></param>
-        /// <param name="sortDirection"></param>
+        /// <param name="sortDirection">Defaults to ascending order of name field.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput?>> QuerySetsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)

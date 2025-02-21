@@ -79,15 +79,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <see cref="FishyFlip.Lexicon.UnresolvableDidError"/>  <br/>
         /// <see cref="FishyFlip.Lexicon.IncompatibleDidDocError"/>  <br/>
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">Requested handle for the account.</param>
         /// <param name="email"></param>
-        /// <param name="did"></param>
+        /// <param name="did">Pre-existing atproto DID, being imported to a new account.</param>
         /// <param name="inviteCode"></param>
         /// <param name="verificationCode"></param>
         /// <param name="verificationPhone"></param>
-        /// <param name="password"></param>
-        /// <param name="recoveryKey"></param>
-        /// <param name="plcOp"></param>
+        /// <param name="password">Initial account password. May need to meet instance-specific password strength requirements.</param>
+        /// <param name="recoveryKey">DID PLC rotation key (aka, recovery key) to be included in PLC creation operation.</param>
+        /// <param name="plcOp">A signed DID PLC operation to be submitted as part of importing an existing account to this instance. NOTE: this optional field may be updated when full account migration is implemented.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput?>> CreateAccountAsync (FishyFlip.Models.ATHandle handle, string? email = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default, CancellationToken cancellationToken = default)
         {
@@ -100,8 +100,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="privileged"></param>
+        /// <param name="name">A short name for the App Password, to help distinguish them.</param>
+        /// <param name="privileged">If an app password has 'privileged' access to possibly sensitive account state. Meant for use with trusted clients.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword?>> CreateAppPasswordAsync (string name, bool? privileged = default, CancellationToken cancellationToken = default)
         {
@@ -140,10 +140,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
         /// <see cref="FishyFlip.Lexicon.AuthFactorTokenRequiredError"/>  <br/>
         /// </summary>
-        /// <param name="identifier"></param>
+        /// <param name="identifier">Handle or other identifier supported by the server for the authenticating user.</param>
         /// <param name="password"></param>
         /// <param name="authFactorToken"></param>
-        /// <param name="allowTakendown"></param>
+        /// <param name="allowTakendown">When true, instead of throwing error for takendown accounts, a valid response with a narrow scoped token will be returned</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput?>> CreateSessionAsync (string identifier, string password, string? authFactorToken = default, bool? allowTakendown = default, CancellationToken cancellationToken = default)
         {
@@ -154,7 +154,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Deactivates a currently active account. Stops serving of repo, and future writes to repo until reactivated. Used to finalize account migration with the old host after the account has been activated on the new host.
         /// </summary>
-        /// <param name="deleteAfter"></param>
+        /// <param name="deleteAfter">A recommendation to server as to how long they should hold onto the deactivated account before deleting.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> DeactivateAccountAsync (DateTime? deleteAfter = default, CancellationToken cancellationToken = default)
         {
@@ -204,7 +204,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <see cref="FishyFlip.Lexicon.DuplicateCreateError"/>  <br/>
         /// </summary>
         /// <param name="includeUsed"></param>
-        /// <param name="createAvailable"></param>
+        /// <param name="createAvailable">Controls whether any new 'earned' but not 'created' invites should be created.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput?>> GetAccountInviteCodesAsync (bool? includeUsed = default, bool? createAvailable = default, CancellationToken cancellationToken = default)
         {
@@ -217,9 +217,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.BadExpirationError"/> Indicates that the requested expiration date is not a valid. May be in the past or may be reliant on the requested scopes. <br/>
         /// </summary>
-        /// <param name="aud"></param>
-        /// <param name="exp"></param>
-        /// <param name="lxm"></param>
+        /// <param name="aud">The DID of the service that the token will be used to authenticate with</param>
+        /// <param name="exp">The time in Unix Epoch seconds that the JWT expires. Defaults to 60 seconds in the future. The service may enforce certain time bounds on tokens depending on the requested scope.</param>
+        /// <param name="lxm">Lexicon (XRPC) method to bind the requested token to</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput?>> GetServiceAuthAsync (FishyFlip.Models.ATDid aud, int? exp = 0, string? lxm = default, CancellationToken cancellationToken = default)
         {
@@ -305,7 +305,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Reserve a repo signing key, for use with account creation. Necessary so that a DID PLC update operation can be constructed during an account migraiton. Public and does not require auth; implemented by PDS. NOTE: this endpoint may change when full account migration is implemented.
         /// </summary>
-        /// <param name="did"></param>
+        /// <param name="did">The DID to reserve a key for.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput?>> ReserveSigningKeyAsync (FishyFlip.Models.ATDid? did = default, CancellationToken cancellationToken = default)
         {
@@ -348,7 +348,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// </summary>
         /// <param name="email"></param>
         /// <param name="emailAuthFactor"></param>
-        /// <param name="token"></param>
+        /// <param name="token">Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> UpdateEmailAsync (string email, bool? emailAuthFactor = default, string? token = default, CancellationToken cancellationToken = default)
         {

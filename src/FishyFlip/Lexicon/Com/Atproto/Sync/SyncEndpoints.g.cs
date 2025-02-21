@@ -47,8 +47,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="did"></param>
-        /// <param name="cid"></param>
+        /// <param name="did">The DID of the account.</param>
+        /// <param name="cid">The CID of the blob to fetch</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="byte[]?"/></returns>
         public static Task<Result<byte[]?>> GetBlobAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
@@ -77,7 +77,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="did"></param>
+        /// <param name="did">The DID of the repo.</param>
         /// <param name="cids"></param>
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
@@ -109,7 +109,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="did"></param>
+        /// <param name="did">The DID of the repo.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?>> GetLatestCommitAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
@@ -136,9 +136,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="did"></param>
+        /// <param name="did">The DID of the repo.</param>
         /// <param name="collection"></param>
-        /// <param name="rkey"></param>
+        /// <param name="rkey">Record Key</param>
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
@@ -171,9 +171,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="did"></param>
+        /// <param name="did">The DID of the repo.</param>
         /// <param name="onDecoded"></param>
-        /// <param name="since"></param>
+        /// <param name="since">The revision ('rev') of the repo to create a diff from.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
@@ -203,7 +203,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="did"></param>
+        /// <param name="did">The DID of the repo.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?>> GetRepoStatusAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
@@ -229,8 +229,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="did"></param>
-        /// <param name="since"></param>
+        /// <param name="did">The DID of the repo.</param>
+        /// <param name="since">Optional revision of the repo to list blobs since.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -299,7 +299,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="collection"></param>
-        /// <param name="limit"></param>
+        /// <param name="limit">Maximum size of response set. Recommend setting a large maximum (1000+) when enumerating large DID lists.</param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput?"/></returns>
@@ -331,7 +331,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// Notify a crawling service of a recent update, and that crawling should resume. Intended use is after a gap between repo stream events caused the crawling service to disconnect. Does not require auth; implemented by Relay.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="hostname"></param>
+        /// <param name="hostname">Hostname of the current service (usually a PDS) that is notifying of update.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> NotifyOfUpdateAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
@@ -348,7 +348,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// Request a service to persistently crawl hosted repos. Expected use is new PDS instances declaring their existence to Relays. Does not require auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="hostname"></param>
+        /// <param name="hostname">Hostname of the current service (eg, PDS) that is requesting to be crawled.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
         public static Task<Result<Success?>> RequestCrawlAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)

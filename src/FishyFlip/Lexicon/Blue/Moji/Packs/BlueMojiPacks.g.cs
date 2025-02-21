@@ -59,7 +59,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// <summary>
         /// Gets a 'view' (with additional context) of a specified pack.
         /// </summary>
-        /// <param name="pack"></param>
+        /// <param name="pack">Reference (AT-URI) of the pack record to hydrate.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// <summary>
         /// Gets a 'view' (with additional context) of a specified pack.
         /// </summary>
-        /// <param name="pack"></param>
+        /// <param name="pack">Reference (AT-URI) of the pack record to hydrate.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>

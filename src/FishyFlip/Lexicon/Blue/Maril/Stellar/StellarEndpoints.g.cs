@@ -56,8 +56,8 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         /// Get reaction records which reference a subject (by AT-URI and CID).
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="uri"></param>
-        /// <param name="cid"></param>
+        /// <param name="uri">AT-URI of the subject (eg, a post record).</param>
+        /// <param name="cid">CID of the subject record (aka, specific version of record), to filter reactions.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>

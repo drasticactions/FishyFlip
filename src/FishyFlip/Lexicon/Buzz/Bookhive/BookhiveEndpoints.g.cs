@@ -21,10 +21,10 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// Find books matching the search criteria. Requires authentication.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="q"></param>
+        /// <param name="q">Search query string. Will be matched against title and authors fields.</param>
         /// <param name="limit"></param>
-        /// <param name="offset"></param>
-        /// <param name="id"></param>
+        /// <param name="offset">Offset for pagination into the result set</param>
+        /// <param name="id">The ID of the book within the hive.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput?>> SearchBooksAsync (this FishyFlip.ATProtocol atp, string q, int? limit = 25, int? offset = 0, string? id = default, CancellationToken cancellationToken = default)

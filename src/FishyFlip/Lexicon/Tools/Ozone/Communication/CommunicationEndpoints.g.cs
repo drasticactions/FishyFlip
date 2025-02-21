@@ -29,11 +29,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <see cref="FishyFlip.Lexicon.DuplicateTemplateNameError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="name"></param>
-        /// <param name="contentMarkdown"></param>
-        /// <param name="subject"></param>
-        /// <param name="lang"></param>
-        /// <param name="createdBy"></param>
+        /// <param name="name">Name of the template.</param>
+        /// <param name="contentMarkdown">Content of the template, markdown supported, can contain variable placeholders.</param>
+        /// <param name="subject">Subject of the message, used in emails.</param>
+        /// <param name="lang">Message language.</param>
+        /// <param name="createdBy">DID of the user who is creating the template.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> CreateTemplateAsync (this FishyFlip.ATProtocol atp, string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
@@ -91,12 +91,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <see cref="FishyFlip.Lexicon.DuplicateTemplateNameError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="lang"></param>
-        /// <param name="contentMarkdown"></param>
-        /// <param name="subject"></param>
-        /// <param name="updatedBy"></param>
+        /// <param name="id">ID of the template to be updated.</param>
+        /// <param name="name">Name of the template.</param>
+        /// <param name="lang">Message language.</param>
+        /// <param name="contentMarkdown">Content of the template, markdown supported, can contain variable placeholders.</param>
+        /// <param name="subject">Subject of the message, used in emails.</param>
+        /// <param name="updatedBy">DID of the user who is updating the template.</param>
         /// <param name="disabled"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?"/></returns>

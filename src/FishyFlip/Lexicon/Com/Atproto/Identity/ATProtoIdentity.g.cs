@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Resolves a handle (domain name) to a DID.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The handle to resolve.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput?>> ResolveHandleAsync (FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
@@ -65,7 +65,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Signs a PLC operation to update some value(s) in the requesting DID's document.
         /// </summary>
-        /// <param name="token"></param>
+        /// <param name="token">A token received through com.atproto.identity.requestPlcOperationSignature</param>
         /// <param name="rotationKeys"></param>
         /// <param name="alsoKnownAs"></param>
         /// <param name="verificationMethods"></param>
@@ -91,7 +91,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <summary>
         /// Updates the current account's handle. Verifies handle validity, and updates did:plc document if necessary. Implemented by PDS, and requires auth.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The new handle.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> UpdateHandleAsync (FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {

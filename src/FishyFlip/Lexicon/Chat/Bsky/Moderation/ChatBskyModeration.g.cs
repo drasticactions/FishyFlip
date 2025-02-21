@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// Generated endpoint for chat.bsky.moderation.getMessageContext
         /// </summary>
         /// <param name="messageId"></param>
-        /// <param name="convoId"></param>
+        /// <param name="convoId">Conversation that the message is from. NOTE: this field will eventually be required.</param>
         /// <param name="before"></param>
         /// <param name="after"></param>
         /// <param name="cancellationToken"></param>

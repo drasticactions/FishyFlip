@@ -223,7 +223,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets a 'view' (with additional context) of a specified list.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="list"></param>
+        /// <param name="list">Reference (AT-URI) of the list record to hydrate.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -316,7 +316,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Enumerates the lists created by a specified account (actor).
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="actor"></param>
+        /// <param name="actor">The account (actor) to enumerate lists from.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -381,8 +381,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <see cref="FishyFlip.Lexicon.ActorNotFoundError"/> the primary actor at-identifier could not be resolved <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="actor"></param>
-        /// <param name="others"></param>
+        /// <param name="actor">Primary account requesting relationships for.</param>
+        /// <param name="others">List of 'other' accounts to be related back to the primary.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput?>> GetRelationshipsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, List<FishyFlip.Models.ATIdentifier>? others = default, CancellationToken cancellationToken = default)
@@ -408,7 +408,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets a view of a starter pack.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="starterPack"></param>
+        /// <param name="starterPack">Reference (AT-URI) of the starter pack record.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput?>> GetStarterPackAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri starterPack, CancellationToken cancellationToken = default)
@@ -522,7 +522,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Find starter packs matching search criteria. Does not require auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="q"></param>
+        /// <param name="q">Search query string. Syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>

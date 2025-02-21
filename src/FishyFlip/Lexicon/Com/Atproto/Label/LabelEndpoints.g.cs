@@ -21,8 +21,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// Find labels relevant to the provided AT-URI patterns. Public endpoint for moderation services, though may return different or additional results with auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="uriPatterns"></param>
-        /// <param name="sources"></param>
+        /// <param name="uriPatterns">List of AT URI patterns to match (boolean 'OR'). Each may be a prefix (ending with '*'; will match inclusive of the string leading to '*'), or a full URI.</param>
+        /// <param name="sources">Optional list of label sources (DIDs) to filter on.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>

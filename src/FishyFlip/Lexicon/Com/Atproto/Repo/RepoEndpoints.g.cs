@@ -41,10 +41,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/> Indicates that the 'swapCommit' parameter did not match current commit. <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
         /// <param name="writes"></param>
-        /// <param name="validate"></param>
-        /// <param name="swapCommit"></param>
+        /// <param name="validate">Can be set to 'false' to skip Lexicon schema validation of record data across all operations, 'true' to require it, or leave unset to validate only for known Lexicons.</param>
+        /// <param name="swapCommit">If provided, the entire operation will fail if the current repo commit CID does not match this value. Used to prevent conflicting repo mutations.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput?>> ApplyWritesAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, List<ATObject> writes, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
@@ -66,12 +66,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/> Indicates that 'swapCommit' didn't match current repo commit. <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
-        /// <param name="collection"></param>
-        /// <param name="record"></param>
-        /// <param name="rkey"></param>
-        /// <param name="validate"></param>
-        /// <param name="swapCommit"></param>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
+        /// <param name="collection">The NSID of the record collection.</param>
+        /// <param name="record">The record itself. Must contain a $type field.</param>
+        /// <param name="rkey">The Record Key.</param>
+        /// <param name="validate">Can be set to 'false' to skip Lexicon schema validation of record data, 'true' to require it, or leave unset to validate only for known Lexicons.</param>
+        /// <param name="swapCommit">Compare and swap with the previous commit by CID.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput?>> CreateRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, ATObject record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
@@ -95,11 +95,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
-        /// <param name="collection"></param>
-        /// <param name="rkey"></param>
-        /// <param name="swapRecord"></param>
-        /// <param name="swapCommit"></param>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
+        /// <param name="collection">The NSID of the record collection.</param>
+        /// <param name="rkey">The Record Key.</param>
+        /// <param name="swapRecord">Compare and swap with the previous record by CID.</param>
+        /// <param name="swapCommit">Compare and swap with the previous commit by CID.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput?>> DeleteRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
@@ -120,7 +120,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// Get information about an account and repository, including the list of collections. Does not require auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
+        /// <param name="repo">The handle or DID of the repo.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput?>> DescribeRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default)
@@ -143,10 +143,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.RecordNotFoundError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
-        /// <param name="collection"></param>
-        /// <param name="rkey"></param>
-        /// <param name="cid"></param>
+        /// <param name="repo">The handle or DID of the repo.</param>
+        /// <param name="collection">The NSID of the record collection.</param>
+        /// <param name="rkey">The Record Key.</param>
+        /// <param name="cid">The CID of the version of the record. If not specified, then return the most recent version.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, string? cid = default, CancellationToken cancellationToken = default)
@@ -221,11 +221,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// List a range of records in a repository, matching a specific collection. Does not require auth.
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
-        /// <param name="collection"></param>
-        /// <param name="limit"></param>
+        /// <param name="repo">The handle or DID of the repo.</param>
+        /// <param name="collection">The NSID of the record type.</param>
+        /// <param name="limit">The number of records to return.</param>
         /// <param name="cursor"></param>
-        /// <param name="reverse"></param>
+        /// <param name="reverse">Flag to reverse the order of the returned records.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput?>> ListRecordsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
@@ -265,13 +265,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.InvalidSwapError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
-        /// <param name="repo"></param>
-        /// <param name="collection"></param>
-        /// <param name="rkey"></param>
-        /// <param name="record"></param>
-        /// <param name="validate"></param>
-        /// <param name="swapRecord"></param>
-        /// <param name="swapCommit"></param>
+        /// <param name="repo">The handle or DID of the repo (aka, current account).</param>
+        /// <param name="collection">The NSID of the record collection.</param>
+        /// <param name="rkey">The Record Key.</param>
+        /// <param name="record">The record to write.</param>
+        /// <param name="validate">Can be set to 'false' to skip Lexicon schema validation of record data, 'true' to require it, or leave unset to validate only for known Lexicons.</param>
+        /// <param name="swapRecord">Compare and swap with the previous record by CID. WARNING: nullable and optional field; may cause problems with golang implementation</param>
+        /// <param name="swapCommit">Compare and swap with the previous commit by CID.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?"/></returns>
         public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput?>> PutRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, string rkey, ATObject record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)

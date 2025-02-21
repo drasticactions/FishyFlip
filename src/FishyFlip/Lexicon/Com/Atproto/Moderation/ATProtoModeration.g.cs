@@ -44,8 +44,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// reasonOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonAppeal - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// </param>
-        /// <param name="subject"></param>
-        /// <param name="reason"></param>
+        /// <param name="subject">
+        /// <br/> Union Types: <br/>
+        /// com.atproto.admin.defs#repoRef <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
+        /// </param>
+        /// <param name="reason">Additional context about the content and violation.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (string reasonType, ATObject subject, string? reason = default, CancellationToken cancellationToken = default)
         {

@@ -106,7 +106,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="actor"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
-        /// <param name="filter"></param>
+        /// <param name="filter">Combinations of post/repost types to include in response.</param>
         /// <param name="includePins"></param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput?>> GetAuthorFeedAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
@@ -123,7 +123,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="actor"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
-        /// <param name="filter"></param>
+        /// <param name="filter">Combinations of post/repost types to include in response.</param>
         /// <param name="includePins"></param>
         /// <param name="cancellationToken"></param>
         public GetAuthorFeedOutputCollection GetAuthorFeedCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
@@ -164,7 +164,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get information about a feed generator. Implemented by AppView.
         /// </summary>
-        /// <param name="feed"></param>
+        /// <param name="feed">AT-URI of the feed generator record.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput?>> GetFeedGeneratorAsync (FishyFlip.Models.ATUri feed, CancellationToken cancellationToken = default)
         {
@@ -188,7 +188,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.UnknownFeedError"/>  <br/>
         /// </summary>
-        /// <param name="feed"></param>
+        /// <param name="feed">Reference to feed generator record describing the specific feed being requested.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -202,7 +202,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.UnknownFeedError"/>  <br/>
         /// </summary>
-        /// <param name="feed"></param>
+        /// <param name="feed">Reference to feed generator record describing the specific feed being requested.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -215,8 +215,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get like records which reference a subject (by AT-URI and CID).
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="cid"></param>
+        /// <param name="uri">AT-URI of the subject (eg, a post record).</param>
+        /// <param name="cid">CID of the subject record (aka, specific version of record), to filter likes.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -228,8 +228,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get like records which reference a subject (by AT-URI and CID).
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="cid"></param>
+        /// <param name="uri">AT-URI of the subject (eg, a post record).</param>
+        /// <param name="cid">CID of the subject record (aka, specific version of record), to filter likes.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -244,7 +244,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.UnknownListError"/>  <br/>
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="list">Reference (AT-URI) to the list record.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -258,7 +258,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.UnknownListError"/>  <br/>
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="list">Reference (AT-URI) to the list record.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -271,7 +271,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Gets post views for a specified list of posts (by AT-URI). This is sometimes referred to as 'hydrating' a 'feed skeleton'.
         /// </summary>
-        /// <param name="uris"></param>
+        /// <param name="uris">List of post AT-URIs to return hydrated views for.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput?>> GetPostsAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
@@ -284,9 +284,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.NotFoundError"/>  <br/>
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="depth"></param>
-        /// <param name="parentHeight"></param>
+        /// <param name="uri">Reference (AT-URI) to post record.</param>
+        /// <param name="depth">How many levels of reply depth should be included in response.</param>
+        /// <param name="parentHeight">How many levels of parent (and grandparent, etc) post to include.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput?>> GetPostThreadAsync (FishyFlip.Models.ATUri uri, int? depth = 6, int? parentHeight = 80, CancellationToken cancellationToken = default)
         {
@@ -297,8 +297,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get a list of quotes for a given post.
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="cid"></param>
+        /// <param name="uri">Reference (AT-URI) of post record</param>
+        /// <param name="cid">If supplied, filters to quotes of specific version (by CID) of the post record.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -310,8 +310,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get a list of quotes for a given post.
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="cid"></param>
+        /// <param name="uri">Reference (AT-URI) of post record</param>
+        /// <param name="cid">If supplied, filters to quotes of specific version (by CID) of the post record.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -324,8 +324,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get a list of reposts for a given post.
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="cid"></param>
+        /// <param name="uri">Reference (AT-URI) of post record</param>
+        /// <param name="cid">If supplied, filters to reposts of specific version (by CID) of the post record.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -337,8 +337,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get a list of reposts for a given post.
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="cid"></param>
+        /// <param name="uri">Reference (AT-URI) of post record</param>
+        /// <param name="cid">If supplied, filters to reposts of specific version (by CID) of the post record.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -374,7 +374,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get a view of the requesting account's home timeline. This is expected to be some form of reverse-chronological feed.
         /// </summary>
-        /// <param name="algorithm"></param>
+        /// <param name="algorithm">Variant 'algorithm' for timeline. Implementation-specific. NOTE: most feed flexibility has been moved to feed generator mechanism.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -386,7 +386,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Get a view of the requesting account's home timeline. This is expected to be some form of reverse-chronological feed.
         /// </summary>
-        /// <param name="algorithm"></param>
+        /// <param name="algorithm">Variant 'algorithm' for timeline. Implementation-specific. NOTE: most feed flexibility has been moved to feed generator mechanism.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
@@ -401,18 +401,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
-        /// <param name="q"></param>
-        /// <param name="sort"></param>
-        /// <param name="since"></param>
-        /// <param name="until"></param>
-        /// <param name="mentions"></param>
-        /// <param name="author"></param>
-        /// <param name="lang"></param>
-        /// <param name="domain"></param>
-        /// <param name="url"></param>
-        /// <param name="tag"></param>
+        /// <param name="q">Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
+        /// <param name="sort">Specifies the ranking order of results.</param>
+        /// <param name="since">Filter results for posts after the indicated datetime (inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYYY-MM-DD).</param>
+        /// <param name="until">Filter results for posts before the indicated datetime (not inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYY-MM-DD).</param>
+        /// <param name="mentions">Filter to posts which mention the given account. Handles are resolved to DID before query-time. Only matches rich-text facet mentions.</param>
+        /// <param name="author">Filter to posts by the given account. Handles are resolved to DID before query-time.</param>
+        /// <param name="lang">Filter to posts in the given language. Expected to be based on post language field, though server may override language detection.</param>
+        /// <param name="domain">Filter to posts with URLs (facet links or embeds) linking to the given domain (hostname). Server may apply hostname normalization.</param>
+        /// <param name="url">Filter to posts with links (facet links or embeds) pointing to this URL. Server may apply URL normalization or fuzzy matching.</param>
+        /// <param name="tag">Filter to posts with the given tag (hashtag), based on rich-text facet or tag field. Do not include the hash (#) prefix. Multiple tags can be specified, with 'AND' matching.</param>
         /// <param name="limit"></param>
-        /// <param name="cursor"></param>
+        /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput?>> SearchPostsAsync (string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
@@ -424,18 +424,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
-        /// <param name="q"></param>
-        /// <param name="sort"></param>
-        /// <param name="since"></param>
-        /// <param name="until"></param>
-        /// <param name="mentions"></param>
-        /// <param name="author"></param>
-        /// <param name="lang"></param>
-        /// <param name="domain"></param>
-        /// <param name="url"></param>
-        /// <param name="tag"></param>
+        /// <param name="q">Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.</param>
+        /// <param name="sort">Specifies the ranking order of results.</param>
+        /// <param name="since">Filter results for posts after the indicated datetime (inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYYY-MM-DD).</param>
+        /// <param name="until">Filter results for posts before the indicated datetime (not inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYY-MM-DD).</param>
+        /// <param name="mentions">Filter to posts which mention the given account. Handles are resolved to DID before query-time. Only matches rich-text facet mentions.</param>
+        /// <param name="author">Filter to posts by the given account. Handles are resolved to DID before query-time.</param>
+        /// <param name="lang">Filter to posts in the given language. Expected to be based on post language field, though server may override language detection.</param>
+        /// <param name="domain">Filter to posts with URLs (facet links or embeds) linking to the given domain (hostname). Server may apply hostname normalization.</param>
+        /// <param name="url">Filter to posts with links (facet links or embeds) pointing to this URL. Server may apply URL normalization or fuzzy matching.</param>
+        /// <param name="tag">Filter to posts with the given tag (hashtag), based on rich-text facet or tag field. Do not include the hash (#) prefix. Multiple tags can be specified, with 'AND' matching.</param>
         /// <param name="limit"></param>
-        /// <param name="cursor"></param>
+        /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         public SearchPostsOutputCollection SearchPostsCollectionAsync (string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
