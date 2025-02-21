@@ -11,7 +11,7 @@ namespace FishyFlip.Lexicon
     /// ATProtocol Message Source Generation Context.
     /// </summary>
     [JsonSourceGenerationOptions(
-        WriteIndented = true,
+        WriteIndented = false,
         PropertyNameCaseInsensitive = true,
         Converters = new [] {
             typeof(FishyFlip.Tools.Json.ATUriJsonConverter),
