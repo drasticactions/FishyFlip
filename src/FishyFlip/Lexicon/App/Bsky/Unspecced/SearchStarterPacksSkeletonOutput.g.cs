@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class SearchStarterPacksSkeletonOutput : ATObject
+    public partial class SearchStarterPacksSkeletonOutput : ATObject, ICBOREncodable<SearchStarterPacksSkeletonOutput>, IJsonEncodable<SearchStarterPacksSkeletonOutput>
     {
 
         /// <summary>
@@ -66,10 +66,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public const string RecordType = "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput";
 
-        public static SearchStarterPacksSkeletonOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchStarterPacksSkeletonOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchStarterPacksSkeletonOutput);
+        }
+
+        public static new SearchStarterPacksSkeletonOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchStarterPacksSkeletonOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SearchStarterPacksSkeletonOutput FromCBORObject(CBORObject obj)
+        {
+            return new SearchStarterPacksSkeletonOutput(obj);
+        }
+
     }
 }
 

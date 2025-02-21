@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetActorLikesOutput : ATObject
+    public partial class GetActorLikesOutput : ATObject, ICBOREncodable<GetActorLikesOutput>, IJsonEncodable<GetActorLikesOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.getActorLikes#GetActorLikesOutput";
 
-        public static GetActorLikesOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorLikesOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorLikesOutput);
+        }
+
+        public static new GetActorLikesOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorLikesOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetActorLikesOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetActorLikesOutput(obj);
+        }
+
     }
 }
 

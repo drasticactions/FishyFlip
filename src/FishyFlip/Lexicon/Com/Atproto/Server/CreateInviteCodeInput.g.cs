@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class CreateInviteCodeInput : ATObject
+    public partial class CreateInviteCodeInput : ATObject, ICBOREncodable<CreateInviteCodeInput>, IJsonEncodable<CreateInviteCodeInput>
     {
 
         /// <summary>
@@ -57,10 +57,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public const string RecordType = "com.atproto.server.createInviteCode#CreateInviteCodeInput";
 
-        public static CreateInviteCodeInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeInput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeInput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeInput);
+        }
+
+        public static new CreateInviteCodeInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeInput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new CreateInviteCodeInput FromCBORObject(CBORObject obj)
+        {
+            return new CreateInviteCodeInput(obj);
+        }
+
     }
 }
 

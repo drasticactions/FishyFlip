@@ -27,8 +27,8 @@ public class AuthorizedTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        string handle = (string?)context.Properties["BLUESKY_TEST_HANDLE"] ?? throw new ArgumentNullException();
-        string password = (string?)context.Properties["BLUESKY_TEST_PASSWORD"] ?? throw new ArgumentNullException();
+        string handle = Environment.GetEnvironmentVariable("BLUESKY_TEST_HANDLE") ?? throw new ArgumentNullException();
+        string password = Environment.GetEnvironmentVariable("BLUESKY_TEST_PASSWORD") ?? throw new ArgumentNullException();
         var debugLog = new DebugLoggerProvider();
         var atProtocolBuilder = new ATProtocolBuilder([new StatusConverter(SourceGenerationContext.Default)])
             .EnableAutoRenewSession(false)

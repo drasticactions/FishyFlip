@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// If set, an active progress guide. Once completed, can be set to undefined. Should have unspecced fields tracking progress.
     /// </summary>
-    public partial class BskyAppProgressGuide : ATObject
+    public partial class BskyAppProgressGuide : ATObject, ICBOREncodable<BskyAppProgressGuide>, IJsonEncodable<BskyAppProgressGuide>
     {
 
         /// <summary>
@@ -50,10 +50,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public const string RecordType = "app.bsky.actor.defs#bskyAppProgressGuide";
 
-        public static BskyAppProgressGuide FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide);
+        }
+
+        public static new BskyAppProgressGuide FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new BskyAppProgressGuide FromCBORObject(CBORObject obj)
+        {
+            return new BskyAppProgressGuide(obj);
+        }
+
     }
 }
 

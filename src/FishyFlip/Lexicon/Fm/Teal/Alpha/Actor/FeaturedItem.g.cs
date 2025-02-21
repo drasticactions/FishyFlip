@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 {
-    public partial class FeaturedItem : ATObject
+    public partial class FeaturedItem : ATObject, ICBOREncodable<FeaturedItem>, IJsonEncodable<FeaturedItem>
     {
 
         /// <summary>
@@ -59,10 +59,34 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 
         public const string RecordType = "fm.teal.alpha.actor.profile#featuredItem";
 
-        public static FeaturedItem FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>)SourceGenerationContext.Default.FmTealAlphaActorFeaturedItem);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>)SourceGenerationContext.Default.FmTealAlphaActorFeaturedItem);
+        }
+
+        public static new FeaturedItem FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem>)SourceGenerationContext.Default.FmTealAlphaActorFeaturedItem)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new FeaturedItem FromCBORObject(CBORObject obj)
+        {
+            return new FeaturedItem(obj);
+        }
+
     }
 }
 

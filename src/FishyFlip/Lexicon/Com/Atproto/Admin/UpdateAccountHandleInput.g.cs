@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class UpdateAccountHandleInput : ATObject
+    public partial class UpdateAccountHandleInput : ATObject, ICBOREncodable<UpdateAccountHandleInput>, IJsonEncodable<UpdateAccountHandleInput>
     {
 
         /// <summary>
@@ -59,10 +59,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public const string RecordType = "com.atproto.admin.updateAccountHandle#UpdateAccountHandleInput";
 
-        public static UpdateAccountHandleInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput);
+        }
+
+        public static new UpdateAccountHandleInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new UpdateAccountHandleInput FromCBORObject(CBORObject obj)
+        {
+            return new UpdateAccountHandleInput(obj);
+        }
+
     }
 }
 

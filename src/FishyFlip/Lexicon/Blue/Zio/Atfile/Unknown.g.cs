@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
     /// <summary>
     /// Unknown metadata for an uploaded file.
     /// </summary>
-    public partial class Unknown : ATObject
+    public partial class Unknown : ATObject, ICBOREncodable<Unknown>, IJsonEncodable<Unknown>
     {
 
         /// <summary>
@@ -49,10 +49,34 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
 
         public const string RecordType = "blue.zio.atfile.meta#unknown";
 
-        public static Unknown FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown);
+        }
+
+        public static new Unknown FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Unknown FromCBORObject(CBORObject obj)
+        {
+            return new Unknown(obj);
+        }
+
     }
 }
 

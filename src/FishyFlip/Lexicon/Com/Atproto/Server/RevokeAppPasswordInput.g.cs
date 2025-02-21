@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class RevokeAppPasswordInput : ATObject
+    public partial class RevokeAppPasswordInput : ATObject, ICBOREncodable<RevokeAppPasswordInput>, IJsonEncodable<RevokeAppPasswordInput>
     {
 
         /// <summary>
@@ -47,10 +47,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public const string RecordType = "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput";
 
-        public static RevokeAppPasswordInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerRevokeAppPasswordInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerRevokeAppPasswordInput);
+        }
+
+        public static new RevokeAppPasswordInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerRevokeAppPasswordInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new RevokeAppPasswordInput FromCBORObject(CBORObject obj)
+        {
+            return new RevokeAppPasswordInput(obj);
+        }
+
     }
 }
 

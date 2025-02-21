@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class SkeletonReasonRepost : ATObject
+    public partial class SkeletonReasonRepost : ATObject, ICBOREncodable<SkeletonReasonRepost>, IJsonEncodable<SkeletonReasonRepost>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.defs#skeletonReasonRepost";
 
-        public static SkeletonReasonRepost FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost);
+        }
+
+        public static new SkeletonReasonRepost FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SkeletonReasonRepost FromCBORObject(CBORObject obj)
+        {
+            return new SkeletonReasonRepost(obj);
+        }
+
     }
 }
 

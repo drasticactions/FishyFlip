@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
     /// <summary>
     /// A physical location in the form of a street address.
     /// </summary>
-    public partial class Address : ATObject
+    public partial class Address : ATObject, ICBOREncodable<Address>, IJsonEncodable<Address>
     {
 
         /// <summary>
@@ -101,10 +101,34 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
 
         public const string RecordType = "community.lexicon.location.address";
 
-        public static Address FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Address>)SourceGenerationContext.Default.CommunityLexiconLocationAddress);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Address>)SourceGenerationContext.Default.CommunityLexiconLocationAddress);
+        }
+
+        public static new Address FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Address>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Address>)SourceGenerationContext.Default.CommunityLexiconLocationAddress)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Address FromCBORObject(CBORObject obj)
+        {
+            return new Address(obj);
+        }
+
     }
 }
 

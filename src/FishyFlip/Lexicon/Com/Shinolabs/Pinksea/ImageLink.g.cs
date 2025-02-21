@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
     /// <summary>
     /// A link to the image, it can be either directly to the PDS or to a CDN.
     /// </summary>
-    public partial class ImageLink : ATObject
+    public partial class ImageLink : ATObject, ICBOREncodable<ImageLink>, IJsonEncodable<ImageLink>
     {
 
         /// <summary>
@@ -61,10 +61,34 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 
         public const string RecordType = "com.shinolabs.pinksea.oekaki#imageLink";
 
-        public static ImageLink FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink>)SourceGenerationContext.Default.ComShinolabsPinkseaImageLink);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink>)SourceGenerationContext.Default.ComShinolabsPinkseaImageLink);
+        }
+
+        public static new ImageLink FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink>)SourceGenerationContext.Default.ComShinolabsPinkseaImageLink)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ImageLink FromCBORObject(CBORObject obj)
+        {
+            return new ImageLink(obj);
+        }
+
     }
 }
 

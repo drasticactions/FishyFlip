@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Unmute action on a subject
     /// </summary>
-    public partial class ModEventUnmute : ATObject
+    public partial class ModEventUnmute : ATObject, ICBOREncodable<ModEventUnmute>, IJsonEncodable<ModEventUnmute>
     {
 
         /// <summary>
@@ -50,10 +50,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventUnmute";
 
-        public static ModEventUnmute FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmute);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmute);
+        }
+
+        public static new ModEventUnmute FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmute)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ModEventUnmute FromCBORObject(CBORObject obj)
+        {
+            return new ModEventUnmute(obj);
+        }
+
     }
 }
 

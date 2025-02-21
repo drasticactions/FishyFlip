@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
-    public partial class AddReservedHandleOutput : ATObject
+    public partial class AddReservedHandleOutput : ATObject, ICBOREncodable<AddReservedHandleOutput>, IJsonEncodable<AddReservedHandleOutput>
     {
 
         /// <summary>
@@ -28,10 +28,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
         public const string RecordType = "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";
 
-        public static AddReservedHandleOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput);
+        }
+
+        public static new AddReservedHandleOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new AddReservedHandleOutput FromCBORObject(CBORObject obj)
+        {
+            return new AddReservedHandleOutput(obj);
+        }
+
     }
 }
 

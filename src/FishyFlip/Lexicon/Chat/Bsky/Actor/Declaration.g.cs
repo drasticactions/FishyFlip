@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
     /// <summary>
     /// A declaration of a Bluesky chat account.
     /// </summary>
-    public partial class Declaration : ATObject
+    public partial class Declaration : ATObject, ICBOREncodable<Declaration>, IJsonEncodable<Declaration>
     {
 
         /// <summary>
@@ -58,10 +58,34 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
         public const string RecordType = "chat.bsky.actor.declaration";
 
-        public static Declaration FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration);
+        }
+
+        public static new Declaration FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Declaration FromCBORObject(CBORObject obj)
+        {
+            return new Declaration(obj);
+        }
+
     }
 }
 

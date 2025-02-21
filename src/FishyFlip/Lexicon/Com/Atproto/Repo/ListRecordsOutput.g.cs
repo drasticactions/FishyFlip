@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class ListRecordsOutput : ATObject
+    public partial class ListRecordsOutput : ATObject, ICBOREncodable<ListRecordsOutput>, IJsonEncodable<ListRecordsOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public const string RecordType = "com.atproto.repo.listRecords#ListRecordsOutput";
 
-        public static ListRecordsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput);
+        }
+
+        public static new ListRecordsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListRecordsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ListRecordsOutput FromCBORObject(CBORObject obj)
+        {
+            return new ListRecordsOutput(obj);
+        }
+
     }
 }
 

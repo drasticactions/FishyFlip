@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetSuggestedFollowsByActorOutput : ATObject
+    public partial class GetSuggestedFollowsByActorOutput : ATObject, ICBOREncodable<GetSuggestedFollowsByActorOutput>, IJsonEncodable<GetSuggestedFollowsByActorOutput>
     {
 
         /// <summary>
@@ -67,10 +67,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";
 
-        public static GetSuggestedFollowsByActorOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput);
+        }
+
+        public static new GetSuggestedFollowsByActorOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetSuggestedFollowsByActorOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetSuggestedFollowsByActorOutput(obj);
+        }
+
     }
 }
 

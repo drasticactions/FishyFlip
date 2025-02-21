@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class NotifyOfNewEntryInput : ATObject
+    public partial class NotifyOfNewEntryInput : ATObject, ICBOREncodable<NotifyOfNewEntryInput>, IJsonEncodable<NotifyOfNewEntryInput>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public const string RecordType = "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryInput";
 
-        public static NotifyOfNewEntryInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput);
+        }
+
+        public static new NotifyOfNewEntryInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new NotifyOfNewEntryInput FromCBORObject(CBORObject obj)
+        {
+            return new NotifyOfNewEntryInput(obj);
+        }
+
     }
 }
 

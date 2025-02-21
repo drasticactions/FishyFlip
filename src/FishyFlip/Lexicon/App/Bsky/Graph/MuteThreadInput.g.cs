@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class MuteThreadInput : ATObject
+    public partial class MuteThreadInput : ATObject, ICBOREncodable<MuteThreadInput>, IJsonEncodable<MuteThreadInput>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.muteThread#MuteThreadInput";
 
-        public static MuteThreadInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput>)SourceGenerationContext.Default.AppBskyGraphMuteThreadInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput>)SourceGenerationContext.Default.AppBskyGraphMuteThreadInput);
+        }
+
+        public static new MuteThreadInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput>)SourceGenerationContext.Default.AppBskyGraphMuteThreadInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new MuteThreadInput FromCBORObject(CBORObject obj)
+        {
+            return new MuteThreadInput(obj);
+        }
+
     }
 }
 

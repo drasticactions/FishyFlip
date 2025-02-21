@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class ThreatSignature : ATObject
+    public partial class ThreatSignature : ATObject, ICBOREncodable<ThreatSignature>, IJsonEncodable<ThreatSignature>
     {
 
         /// <summary>
@@ -57,10 +57,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public const string RecordType = "com.atproto.admin.defs#threatSignature";
 
-        public static ThreatSignature FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature);
+        }
+
+        public static new ThreatSignature FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ThreatSignature FromCBORObject(CBORObject obj)
+        {
+            return new ThreatSignature(obj);
+        }
+
     }
 }
 

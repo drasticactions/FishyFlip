@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class MessageViewSender : ATObject
+    public partial class MessageViewSender : ATObject, ICBOREncodable<MessageViewSender>, IJsonEncodable<MessageViewSender>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public const string RecordType = "chat.bsky.convo.defs#messageViewSender";
 
-        public static MessageViewSender FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender>)SourceGenerationContext.Default.ChatBskyConvoMessageViewSender);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender>)SourceGenerationContext.Default.ChatBskyConvoMessageViewSender);
+        }
+
+        public static new MessageViewSender FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender>)SourceGenerationContext.Default.ChatBskyConvoMessageViewSender)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new MessageViewSender FromCBORObject(CBORObject obj)
+        {
+            return new MessageViewSender(obj);
+        }
+
     }
 }
 

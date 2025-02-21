@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
     /// <summary>
     /// Specifies the sub-string range a facet feature applies to. Start index is inclusive, end index is exclusive. Indices are zero-indexed, counting bytes of the UTF-8 encoded text. NOTE: some languages, like Javascript, use UTF-16 or Unicode codepoints for string slice indexing; in these languages, convert to byte arrays before working with facets.
     /// </summary>
-    public partial class ByteSlice : ATObject
+    public partial class ByteSlice : ATObject, ICBOREncodable<ByteSlice>, IJsonEncodable<ByteSlice>
     {
 
         /// <summary>
@@ -60,10 +60,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
 
         public const string RecordType = "app.bsky.richtext.facet#byteSlice";
 
-        public static ByteSlice FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice);
+        }
+
+        public static new ByteSlice FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ByteSlice FromCBORObject(CBORObject obj)
+        {
+            return new ByteSlice(obj);
+        }
+
     }
 }
 

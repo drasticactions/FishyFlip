@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Revert take down action on a subject
     /// </summary>
-    public partial class ModEventReverseTakedown : ATObject
+    public partial class ModEventReverseTakedown : ATObject, ICBOREncodable<ModEventReverseTakedown>, IJsonEncodable<ModEventReverseTakedown>
     {
 
         /// <summary>
@@ -50,10 +50,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventReverseTakedown";
 
-        public static ModEventReverseTakedown FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReverseTakedown);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReverseTakedown);
+        }
+
+        public static new ModEventReverseTakedown FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReverseTakedown)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ModEventReverseTakedown FromCBORObject(CBORObject obj)
+        {
+            return new ModEventReverseTakedown(obj);
+        }
+
     }
 }
 

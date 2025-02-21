@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Team
 {
-    public partial class DeleteMemberInput : ATObject
+    public partial class DeleteMemberInput : ATObject, ICBOREncodable<DeleteMemberInput>, IJsonEncodable<DeleteMemberInput>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         public const string RecordType = "tools.ozone.team.deleteMember#DeleteMemberInput";
 
-        public static DeleteMemberInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.DeleteMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamDeleteMemberInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.DeleteMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamDeleteMemberInput);
+        }
+
+        public static new DeleteMemberInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Team.DeleteMemberInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.DeleteMemberInput>)SourceGenerationContext.Default.ToolsOzoneTeamDeleteMemberInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new DeleteMemberInput FromCBORObject(CBORObject obj)
+        {
+            return new DeleteMemberInput(obj);
+        }
+
     }
 }
 

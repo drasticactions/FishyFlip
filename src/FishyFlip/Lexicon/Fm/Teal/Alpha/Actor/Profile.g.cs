@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
     /// <summary>
     /// This lexicon is in a not officially released state. It is subject to change. | A declaration of a teal.fm account profile.
     /// </summary>
-    public partial class Profile : ATObject
+    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>
     {
 
         /// <summary>
@@ -111,10 +111,34 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 
         public const string RecordType = "fm.teal.alpha.actor.profile";
 
-        public static Profile FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile);
+        }
+
+        public static new Profile FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Profile FromCBORObject(CBORObject obj)
+        {
+            return new Profile(obj);
+        }
+
     }
 }
 

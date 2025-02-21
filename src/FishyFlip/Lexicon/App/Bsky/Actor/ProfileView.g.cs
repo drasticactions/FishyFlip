@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class ProfileView : ATObject
+    public partial class ProfileView : ATObject, ICBOREncodable<ProfileView>, IJsonEncodable<ProfileView>
     {
 
         /// <summary>
@@ -137,10 +137,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public const string RecordType = "app.bsky.actor.defs#profileView";
 
-        public static ProfileView FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>)SourceGenerationContext.Default.AppBskyActorProfileView);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>)SourceGenerationContext.Default.AppBskyActorProfileView);
+        }
+
+        public static new ProfileView FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>)SourceGenerationContext.Default.AppBskyActorProfileView)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ProfileView FromCBORObject(CBORObject obj)
+        {
+            return new ProfileView(obj);
+        }
+
     }
 }
 

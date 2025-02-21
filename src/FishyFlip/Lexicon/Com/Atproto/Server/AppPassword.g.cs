@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class AppPassword : ATObject
+    public partial class AppPassword : ATObject, ICBOREncodable<AppPassword>, IJsonEncodable<AppPassword>
     {
 
         /// <summary>
@@ -76,10 +76,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public const string RecordType = "com.atproto.server.createAppPassword#appPassword";
 
-        public static AppPassword FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>)SourceGenerationContext.Default.ComAtprotoServerAppPassword);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>)SourceGenerationContext.Default.ComAtprotoServerAppPassword);
+        }
+
+        public static new AppPassword FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>)SourceGenerationContext.Default.ComAtprotoServerAppPassword)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new AppPassword FromCBORObject(CBORObject obj)
+        {
+            return new AppPassword(obj);
+        }
+
     }
 }
 

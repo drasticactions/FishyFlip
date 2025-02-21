@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class EnableAccountInvitesInput : ATObject
+    public partial class EnableAccountInvitesInput : ATObject, ICBOREncodable<EnableAccountInvitesInput>, IJsonEncodable<EnableAccountInvitesInput>
     {
 
         /// <summary>
@@ -58,10 +58,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public const string RecordType = "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput";
 
-        public static EnableAccountInvitesInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput);
+        }
+
+        public static new EnableAccountInvitesInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new EnableAccountInvitesInput FromCBORObject(CBORObject obj)
+        {
+            return new EnableAccountInvitesInput(obj);
+        }
+
     }
 }
 

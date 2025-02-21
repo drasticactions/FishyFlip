@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
     /// <summary>
     /// A Picosky message containing at most 2048 graphemes.
     /// </summary>
-    public partial class Message : ATObject
+    public partial class Message : ATObject, ICBOREncodable<Message>, IJsonEncodable<Message>
     {
 
         /// <summary>
@@ -82,10 +82,34 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
 
         public const string RecordType = "social.psky.chat.message";
 
-        public static Message FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage);
+        }
+
+        public static new Message FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Message>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Message FromCBORObject(CBORObject obj)
+        {
+            return new Message(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Netlify.Aniblue
 {
-    public partial class StatusDef : ATObject
+    public partial class StatusDef : ATObject, ICBOREncodable<StatusDef>, IJsonEncodable<StatusDef>
     {
 
         /// <summary>
@@ -101,10 +101,34 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
 
         public const string RecordType = "app.netlify.aniblue.status#status";
 
-        public static StatusDef FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef);
+        }
+
+        public static new StatusDef FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new StatusDef FromCBORObject(CBORObject obj)
+        {
+            return new StatusDef(obj);
+        }
+
     }
 }
 

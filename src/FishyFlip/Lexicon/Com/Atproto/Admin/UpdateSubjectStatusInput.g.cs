@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class UpdateSubjectStatusInput : ATObject
+    public partial class UpdateSubjectStatusInput : ATObject, ICBOREncodable<UpdateSubjectStatusInput>, IJsonEncodable<UpdateSubjectStatusInput>
     {
 
         /// <summary>
@@ -80,10 +80,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public const string RecordType = "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusInput";
 
-        public static UpdateSubjectStatusInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusInput);
+        }
+
+        public static new UpdateSubjectStatusInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateSubjectStatusInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new UpdateSubjectStatusInput FromCBORObject(CBORObject obj)
+        {
+            return new UpdateSubjectStatusInput(obj);
+        }
+
     }
 }
 

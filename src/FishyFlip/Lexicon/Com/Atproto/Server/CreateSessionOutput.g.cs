@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class CreateSessionOutput : ATObject
+    public partial class CreateSessionOutput : ATObject, ICBOREncodable<CreateSessionOutput>, IJsonEncodable<CreateSessionOutput>
     {
 
         /// <summary>
@@ -143,10 +143,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
         public const string RecordType = "com.atproto.server.createSession#CreateSessionOutput";
 
-        public static CreateSessionOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionOutput);
+        }
+
+        public static new CreateSessionOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateSessionOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new CreateSessionOutput FromCBORObject(CBORObject obj)
+        {
+            return new CreateSessionOutput(obj);
+        }
+
     }
 }
 

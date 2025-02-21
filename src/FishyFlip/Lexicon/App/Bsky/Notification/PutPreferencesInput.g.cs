@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class PutPreferencesInput : ATObject
+    public partial class PutPreferencesInput : ATObject, ICBOREncodable<PutPreferencesInput>, IJsonEncodable<PutPreferencesInput>
     {
 
         /// <summary>
@@ -47,10 +47,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public const string RecordType = "app.bsky.notification.putPreferences#PutPreferencesInput";
 
-        public static PutPreferencesInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput>)SourceGenerationContext.Default.AppBskyNotificationPutPreferencesInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput>)SourceGenerationContext.Default.AppBskyNotificationPutPreferencesInput);
+        }
+
+        public static new PutPreferencesInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput>)SourceGenerationContext.Default.AppBskyNotificationPutPreferencesInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new PutPreferencesInput FromCBORObject(CBORObject obj)
+        {
+            return new PutPreferencesInput(obj);
+        }
+
     }
 }
 

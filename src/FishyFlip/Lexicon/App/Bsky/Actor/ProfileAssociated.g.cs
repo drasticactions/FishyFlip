@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class ProfileAssociated : ATObject
+    public partial class ProfileAssociated : ATObject, ICBOREncodable<ProfileAssociated>, IJsonEncodable<ProfileAssociated>
     {
 
         /// <summary>
@@ -85,10 +85,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public const string RecordType = "app.bsky.actor.defs#profileAssociated";
 
-        public static ProfileAssociated FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated);
+        }
+
+        public static new ProfileAssociated FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ProfileAssociated FromCBORObject(CBORObject obj)
+        {
+            return new ProfileAssociated(obj);
+        }
+
     }
 }
 

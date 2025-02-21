@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
     /// <summary>
     /// Record containing a Frontpage vote.
     /// </summary>
-    public partial class Vote : ATObject
+    public partial class Vote : ATObject, ICBOREncodable<Vote>, IJsonEncodable<Vote>
     {
 
         /// <summary>
@@ -62,10 +62,34 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
 
         public const string RecordType = "fyi.unravel.frontpage.vote";
 
-        public static Vote FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote);
+        }
+
+        public static new Vote FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Vote FromCBORObject(CBORObject obj)
+        {
+            return new Vote(obj);
+        }
+
     }
 }
 

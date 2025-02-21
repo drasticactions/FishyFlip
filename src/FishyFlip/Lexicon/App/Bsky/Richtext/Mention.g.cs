@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
     /// <summary>
     /// Facet feature for mention of another account. The text is usually a handle, including a '@' prefix, but the facet reference is a DID.
     /// </summary>
-    public partial class Mention : ATObject
+    public partial class Mention : ATObject, ICBOREncodable<Mention>, IJsonEncodable<Mention>
     {
 
         /// <summary>
@@ -51,10 +51,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
 
         public const string RecordType = "app.bsky.richtext.facet#mention";
 
-        public static Mention FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Mention>)SourceGenerationContext.Default.AppBskyRichtextMention);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Mention>)SourceGenerationContext.Default.AppBskyRichtextMention);
+        }
+
+        public static new Mention FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.Mention>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Mention>)SourceGenerationContext.Default.AppBskyRichtextMention)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Mention FromCBORObject(CBORObject obj)
+        {
+            return new Mention(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Labeler
 {
-    public partial class LabelerView : ATObject
+    public partial class LabelerView : ATObject, ICBOREncodable<LabelerView>, IJsonEncodable<LabelerView>
     {
 
         /// <summary>
@@ -111,10 +111,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
 
         public const string RecordType = "app.bsky.labeler.defs#labelerView";
 
-        public static LabelerView FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>)SourceGenerationContext.Default.AppBskyLabelerLabelerView);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>)SourceGenerationContext.Default.AppBskyLabelerLabelerView);
+        }
+
+        public static new LabelerView FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.LabelerView>)SourceGenerationContext.Default.AppBskyLabelerLabelerView)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new LabelerView FromCBORObject(CBORObject obj)
+        {
+            return new LabelerView(obj);
+        }
+
     }
 }
 

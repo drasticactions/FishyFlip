@@ -10,7 +10,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a blob record.
 /// </summary>
-public class Blob : ATObject
+public class Blob : ATObject, ICBOREncodable<Blob>, IJsonEncodable<Blob>
 {
     /// <summary>
     /// Gets the ATRecord Type.
@@ -60,14 +60,33 @@ public class Blob : ATObject
     /// </summary>
     /// <param name="json">Json.</param>
     /// <returns>Blob.</returns>
-    public static Blob FromJson(string json)
+    public static new Blob FromJson(string json)
     {
         return JsonSerializer.Deserialize<Blob>(json, (JsonTypeInfo<Blob>)SourceGenerationContext.Default.Blob)!;
+    }
+
+    /// <inheritdoc/>
+    public static new Blob FromCBORObject(CBORObject obj)
+    {
+        return new Blob(obj);
     }
 
     /// <inheritdoc/>
     public override string ToJson()
     {
         return JsonSerializer.Serialize<Blob>(this, (JsonTypeInfo<Blob>)SourceGenerationContext.Default.Blob)!;
+    }
+
+    /// <inheritdoc/>
+    public override byte[] ToUtf8Json()
+    {
+        return JsonSerializer.SerializeToUtf8Bytes<Blob>(this, (JsonTypeInfo<Blob>)SourceGenerationContext.Default.Blob)!;
+    }
+
+    /// <inheritdoc/>
+    public override CBORObject ToCBORObject()
+    {
+        using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+        return CBORObject.ReadJSON(jsonStream);
     }
 }

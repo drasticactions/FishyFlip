@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     /// <summary>
     /// Represents an update of repository state. Note that empty commits are allowed, which include no repo data changes, but an update to rev and signature.
     /// </summary>
-    public partial class Commit : ATObject
+    public partial class Commit : ATObject, ICBOREncodable<Commit>, IJsonEncodable<Commit>
     {
 
         /// <summary>
@@ -150,10 +150,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#commit";
 
-        public static Commit FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit);
+        }
+
+        public static new Commit FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Commit FromCBORObject(CBORObject obj)
+        {
+            return new Commit(obj);
+        }
+
     }
 }
 

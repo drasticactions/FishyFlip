@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Packs
 {
-    public partial class PackView : ATObject
+    public partial class PackView : ATObject, ICBOREncodable<PackView>, IJsonEncodable<PackView>
     {
 
         /// <summary>
@@ -148,10 +148,34 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
 
         public const string RecordType = "blue.moji.packs.defs#packView";
 
-        public static PackView FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.PackView>)SourceGenerationContext.Default.BlueMojiPacksPackView);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.PackView>)SourceGenerationContext.Default.BlueMojiPacksPackView);
+        }
+
+        public static new PackView FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Packs.PackView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.PackView>)SourceGenerationContext.Default.BlueMojiPacksPackView)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new PackView FromCBORObject(CBORObject obj)
+        {
+            return new PackView(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class DeletedMessageView : ATObject
+    public partial class DeletedMessageView : ATObject, ICBOREncodable<DeletedMessageView>, IJsonEncodable<DeletedMessageView>
     {
 
         /// <summary>
@@ -80,10 +80,34 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
         public const string RecordType = "chat.bsky.convo.defs#deletedMessageView";
 
-        public static DeletedMessageView FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView);
+        }
+
+        public static new DeletedMessageView FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new DeletedMessageView FromCBORObject(CBORObject obj)
+        {
+            return new DeletedMessageView(obj);
+        }
+
     }
 }
 

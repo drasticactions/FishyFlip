@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
     /// <summary>
     /// A Picosky room belonging to the user.
     /// </summary>
-    public partial class Room : ATObject
+    public partial class Room : ATObject, ICBOREncodable<Room>, IJsonEncodable<Room>
     {
 
         /// <summary>
@@ -103,10 +103,34 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
 
         public const string RecordType = "social.psky.chat.room";
 
-        public static Room FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom);
+        }
+
+        public static new Room FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Room>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Room FromCBORObject(CBORObject obj)
+        {
+            return new Room(obj);
+        }
+
     }
 }
 

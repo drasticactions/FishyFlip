@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class SearchPostsOutput : ATObject
+    public partial class SearchPostsOutput : ATObject, ICBOREncodable<SearchPostsOutput>, IJsonEncodable<SearchPostsOutput>
     {
 
         /// <summary>
@@ -66,10 +66,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.searchPosts#SearchPostsOutput";
 
-        public static SearchPostsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput>)SourceGenerationContext.Default.AppBskyFeedSearchPostsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput>)SourceGenerationContext.Default.AppBskyFeedSearchPostsOutput);
+        }
+
+        public static new SearchPostsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput>)SourceGenerationContext.Default.AppBskyFeedSearchPostsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SearchPostsOutput FromCBORObject(CBORObject obj)
+        {
+            return new SearchPostsOutput(obj);
+        }
+
     }
 }
 

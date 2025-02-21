@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// A new user experiences (NUX) storage object
     /// </summary>
-    public partial class Nux : ATObject
+    public partial class Nux : ATObject, ICBOREncodable<Nux>, IJsonEncodable<Nux>
     {
 
         /// <summary>
@@ -80,10 +80,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public const string RecordType = "app.bsky.actor.defs#nux";
 
-        public static Nux FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux);
+        }
+
+        public static new Nux FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Nux>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Nux FromCBORObject(CBORObject obj)
+        {
+            return new Nux(obj);
+        }
+
     }
 }
 

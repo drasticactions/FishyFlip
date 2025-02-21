@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
     /// <summary>
     /// Operation which creates a new record.
     /// </summary>
-    public partial class Create : ATObject
+    public partial class Create : ATObject, ICBOREncodable<Create>, IJsonEncodable<Create>
     {
 
         /// <summary>
@@ -70,10 +70,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public const string RecordType = "com.atproto.repo.applyWrites#create";
 
-        public static Create FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Create>)SourceGenerationContext.Default.ComAtprotoRepoCreate);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Create>)SourceGenerationContext.Default.ComAtprotoRepoCreate);
+        }
+
+        public static new Create FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Create>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Create>)SourceGenerationContext.Default.ComAtprotoRepoCreate)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Create FromCBORObject(CBORObject obj)
+        {
+            return new Create(obj);
+        }
+
     }
 }
 

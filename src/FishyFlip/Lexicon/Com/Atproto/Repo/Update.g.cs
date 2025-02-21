@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
     /// <summary>
     /// Operation which updates an existing record.
     /// </summary>
-    public partial class Update : ATObject
+    public partial class Update : ATObject, ICBOREncodable<Update>, IJsonEncodable<Update>
     {
 
         /// <summary>
@@ -70,10 +70,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public const string RecordType = "com.atproto.repo.applyWrites#update";
 
-        public static Update FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate);
+        }
+
+        public static new Update FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Update>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Update FromCBORObject(CBORObject obj)
+        {
+            return new Update(obj);
+        }
+
     }
 }
 

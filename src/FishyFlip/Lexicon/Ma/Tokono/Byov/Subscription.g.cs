@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
     /// <summary>
     /// A channel subscription.
     /// </summary>
-    public partial class Subscription : ATObject
+    public partial class Subscription : ATObject, ICBOREncodable<Subscription>, IJsonEncodable<Subscription>
     {
 
         /// <summary>
@@ -58,10 +58,34 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
 
         public const string RecordType = "ma.tokono.byov.subscription";
 
-        public static Subscription FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription);
+        }
+
+        public static new Subscription FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(json, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Subscription FromCBORObject(CBORObject obj)
+        {
+            return new Subscription(obj);
+        }
+
     }
 }
 

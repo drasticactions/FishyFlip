@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Collection
 {
-    public partial class CollectionView : ATObject
+    public partial class CollectionView : ATObject, ICBOREncodable<CollectionView>, IJsonEncodable<CollectionView>
     {
 
         /// <summary>
@@ -136,10 +136,34 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
 
         public const string RecordType = "blue.moji.collection.defs#collectionView";
 
-        public static CollectionView FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.CollectionView>)SourceGenerationContext.Default.BlueMojiCollectionCollectionView);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.CollectionView>)SourceGenerationContext.Default.BlueMojiCollectionCollectionView);
+        }
+
+        public static new CollectionView FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.CollectionView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.CollectionView>)SourceGenerationContext.Default.BlueMojiCollectionCollectionView)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new CollectionView FromCBORObject(CBORObject obj)
+        {
+            return new CollectionView(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetSuggestionsSkeletonOutput : ATObject
+    public partial class GetSuggestionsSkeletonOutput : ATObject, ICBOREncodable<GetSuggestionsSkeletonOutput>, IJsonEncodable<GetSuggestionsSkeletonOutput>
     {
 
         /// <summary>
@@ -77,10 +77,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         public const string RecordType = "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";
 
-        public static GetSuggestionsSkeletonOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput);
+        }
+
+        public static new GetSuggestionsSkeletonOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetSuggestionsSkeletonOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetSuggestionsSkeletonOutput(obj);
+        }
+
     }
 }
 

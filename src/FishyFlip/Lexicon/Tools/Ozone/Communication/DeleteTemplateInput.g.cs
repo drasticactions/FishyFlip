@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 {
-    public partial class DeleteTemplateInput : ATObject
+    public partial class DeleteTemplateInput : ATObject, ICBOREncodable<DeleteTemplateInput>, IJsonEncodable<DeleteTemplateInput>
     {
 
         /// <summary>
@@ -47,10 +47,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 
         public const string RecordType = "tools.ozone.communication.deleteTemplate#DeleteTemplateInput";
 
-        public static DeleteTemplateInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput);
+        }
+
+        public static new DeleteTemplateInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new DeleteTemplateInput FromCBORObject(CBORObject obj)
+        {
+            return new DeleteTemplateInput(obj);
+        }
+
     }
 }
 

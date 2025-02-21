@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// indicates that a handle or DID could not be resolved
     /// </summary>
-    public partial class NotFoundActor : ATObject
+    public partial class NotFoundActor : ATObject, ICBOREncodable<NotFoundActor>, IJsonEncodable<NotFoundActor>
     {
 
         /// <summary>
@@ -61,10 +61,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.defs#notFoundActor";
 
-        public static NotFoundActor FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor);
+        }
+
+        public static new NotFoundActor FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new NotFoundActor FromCBORObject(CBORObject obj)
+        {
+            return new NotFoundActor(obj);
+        }
+
     }
 }
 

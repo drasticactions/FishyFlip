@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 {
-    public partial class ListOptionsOutput : ATObject
+    public partial class ListOptionsOutput : ATObject, ICBOREncodable<ListOptionsOutput>, IJsonEncodable<ListOptionsOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 
         public const string RecordType = "tools.ozone.setting.listOptions#ListOptionsOutput";
 
-        public static ListOptionsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput);
+        }
+
+        public static new ListOptionsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ListOptionsOutput FromCBORObject(CBORObject obj)
+        {
+            return new ListOptionsOutput(obj);
+        }
+
     }
 }
 

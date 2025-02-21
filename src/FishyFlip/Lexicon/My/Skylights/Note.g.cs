@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.My.Skylights
 {
-    public partial class Note : ATObject
+    public partial class Note : ATObject, ICBOREncodable<Note>, IJsonEncodable<Note>
     {
 
         /// <summary>
@@ -67,10 +67,34 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public const string RecordType = "my.skylights.rel#note";
 
-        public static Note FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote);
+        }
+
+        public static new Note FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Note>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Note>)SourceGenerationContext.Default.MySkylightsNote)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Note FromCBORObject(CBORObject obj)
+        {
+            return new Note(obj);
+        }
+
     }
 }
 

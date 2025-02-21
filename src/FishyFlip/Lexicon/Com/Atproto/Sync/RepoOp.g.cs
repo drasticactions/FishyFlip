@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     /// <summary>
     /// A repo operation, ie a mutation of a single record.
     /// </summary>
-    public partial class RepoOp : ATObject
+    public partial class RepoOp : ATObject, ICBOREncodable<RepoOp>, IJsonEncodable<RepoOp>
     {
 
         /// <summary>
@@ -81,10 +81,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#repoOp";
 
-        public static RepoOp FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>)SourceGenerationContext.Default.ComAtprotoSyncRepoOp);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>)SourceGenerationContext.Default.ComAtprotoSyncRepoOp);
+        }
+
+        public static new RepoOp FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>)SourceGenerationContext.Default.ComAtprotoSyncRepoOp)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new RepoOp FromCBORObject(CBORObject obj)
+        {
+            return new RepoOp(obj);
+        }
+
     }
 }
 

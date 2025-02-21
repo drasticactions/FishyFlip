@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.My.Skylights
 {
-    public partial class Rating : ATObject
+    public partial class Rating : ATObject, ICBOREncodable<Rating>, IJsonEncodable<Rating>
     {
 
         /// <summary>
@@ -57,10 +57,34 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         public const string RecordType = "my.skylights.rel#rating";
 
-        public static Rating FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rating>)SourceGenerationContext.Default.MySkylightsRating);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rating>)SourceGenerationContext.Default.MySkylightsRating);
+        }
+
+        public static new Rating FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Rating>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Rating>)SourceGenerationContext.Default.MySkylightsRating)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Rating FromCBORObject(CBORObject obj)
+        {
+            return new Rating(obj);
+        }
+
     }
 }
 

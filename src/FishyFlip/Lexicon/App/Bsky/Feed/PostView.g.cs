@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class PostView : ATObject
+    public partial class PostView : ATObject, ICBOREncodable<PostView>, IJsonEncodable<PostView>
     {
 
         /// <summary>
@@ -182,10 +182,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
         public const string RecordType = "app.bsky.feed.defs#postView";
 
-        public static PostView FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView);
+        }
+
+        public static new PostView FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.PostView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new PostView FromCBORObject(CBORObject obj)
+        {
+            return new PostView(obj);
+        }
+
     }
 }
 

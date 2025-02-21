@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
     /// <summary>
     /// Record representing a Bluemoji's inclusion in a specific pack. The AppView will ignore duplicate item records.
     /// </summary>
-    public partial class Packitem : ATObject
+    public partial class Packitem : ATObject, ICBOREncodable<Packitem>, IJsonEncodable<Packitem>
     {
 
         /// <summary>
@@ -71,10 +71,34 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
 
         public const string RecordType = "blue.moji.packs.packitem";
 
-        public static Packitem FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.Packitem>)SourceGenerationContext.Default.BlueMojiPacksPackitem);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.Packitem>)SourceGenerationContext.Default.BlueMojiPacksPackitem);
+        }
+
+        public static new Packitem FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Packs.Packitem>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.Packitem>)SourceGenerationContext.Default.BlueMojiPacksPackitem)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Packitem FromCBORObject(CBORObject obj)
+        {
+            return new Packitem(obj);
+        }
+
     }
 }
 

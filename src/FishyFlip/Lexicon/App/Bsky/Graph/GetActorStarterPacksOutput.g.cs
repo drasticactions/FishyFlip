@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetActorStarterPacksOutput : ATObject
+    public partial class GetActorStarterPacksOutput : ATObject, ICBOREncodable<GetActorStarterPacksOutput>, IJsonEncodable<GetActorStarterPacksOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.getActorStarterPacks#GetActorStarterPacksOutput";
 
-        public static GetActorStarterPacksOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetActorStarterPacksOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetActorStarterPacksOutput);
+        }
+
+        public static new GetActorStarterPacksOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetActorStarterPacksOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetActorStarterPacksOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetActorStarterPacksOutput(obj);
+        }
+
     }
 }
 

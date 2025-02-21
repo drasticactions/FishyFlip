@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
 {
-    public partial class GetActorBookmarksOutput : ATObject
+    public partial class GetActorBookmarksOutput : ATObject, ICBOREncodable<GetActorBookmarksOutput>, IJsonEncodable<GetActorBookmarksOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
 
         public const string RecordType = "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput";
 
-        public static GetActorBookmarksOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput);
+        }
+
+        public static new GetActorBookmarksOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetActorBookmarksOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetActorBookmarksOutput(obj);
+        }
+
     }
 }
 

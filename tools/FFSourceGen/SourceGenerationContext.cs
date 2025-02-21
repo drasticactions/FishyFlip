@@ -11,7 +11,7 @@ namespace FFSourceGen;
 /// Source Generation Context.
 /// </summary>
 [JsonSourceGenerationOptions(
-    WriteIndented = true,
+    WriteIndented = false,
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
     GenerationMode = JsonSourceGenerationMode.Metadata,
     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull | JsonIgnoreCondition.WhenWritingDefault)]

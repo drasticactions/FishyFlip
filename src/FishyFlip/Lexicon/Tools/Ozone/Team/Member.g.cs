@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Team
 {
-    public partial class Member : ATObject
+    public partial class Member : ATObject, ICBOREncodable<Member>, IJsonEncodable<Member>
     {
 
         /// <summary>
@@ -115,10 +115,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
 
         public const string RecordType = "tools.ozone.team.defs#member";
 
-        public static Member FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember);
+        }
+
+        public static new Member FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Team.Member>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Member FromCBORObject(CBORObject obj)
+        {
+            return new Member(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 {
-    public partial class SearchAccountsOutput : ATObject
+    public partial class SearchAccountsOutput : ATObject, ICBOREncodable<SearchAccountsOutput>, IJsonEncodable<SearchAccountsOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 
         public const string RecordType = "tools.ozone.signature.searchAccounts#SearchAccountsOutput";
 
-        public static SearchAccountsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureSearchAccountsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureSearchAccountsOutput);
+        }
+
+        public static new SearchAccountsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureSearchAccountsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SearchAccountsOutput FromCBORObject(CBORObject obj)
+        {
+            return new SearchAccountsOutput(obj);
+        }
+
     }
 }
 

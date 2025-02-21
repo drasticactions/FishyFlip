@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class SendEmailOutput : ATObject
+    public partial class SendEmailOutput : ATObject, ICBOREncodable<SendEmailOutput>, IJsonEncodable<SendEmailOutput>
     {
 
         /// <summary>
@@ -47,10 +47,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
         public const string RecordType = "com.atproto.admin.sendEmail#SendEmailOutput";
 
-        public static SendEmailOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput>)SourceGenerationContext.Default.ComAtprotoAdminSendEmailOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput>)SourceGenerationContext.Default.ComAtprotoAdminSendEmailOutput);
+        }
+
+        public static new SendEmailOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput>)SourceGenerationContext.Default.ComAtprotoAdminSendEmailOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SendEmailOutput FromCBORObject(CBORObject obj)
+        {
+            return new SendEmailOutput(obj);
+        }
+
     }
 }
 

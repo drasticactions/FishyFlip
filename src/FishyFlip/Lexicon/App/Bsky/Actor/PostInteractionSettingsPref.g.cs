@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// Default post interaction settings for the account. These values should be applied as default values when creating new posts. These refs should mirror the threadgate and postgate records exactly.
     /// </summary>
-    public partial class PostInteractionSettingsPref : ATObject
+    public partial class PostInteractionSettingsPref : ATObject, ICBOREncodable<PostInteractionSettingsPref>, IJsonEncodable<PostInteractionSettingsPref>
     {
 
         /// <summary>
@@ -76,10 +76,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         public const string RecordType = "app.bsky.actor.defs#postInteractionSettingsPref";
 
-        public static PostInteractionSettingsPref FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref);
+        }
+
+        public static new PostInteractionSettingsPref FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new PostInteractionSettingsPref FromCBORObject(CBORObject obj)
+        {
+            return new PostInteractionSettingsPref(obj);
+        }
+
     }
 }
 

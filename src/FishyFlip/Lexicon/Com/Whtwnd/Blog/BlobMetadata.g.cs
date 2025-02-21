@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class BlobMetadata : ATObject
+    public partial class BlobMetadata : ATObject, ICBOREncodable<BlobMetadata>, IJsonEncodable<BlobMetadata>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public const string RecordType = "com.whtwnd.blog.defs#blobMetadata";
 
-        public static BlobMetadata FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>)SourceGenerationContext.Default.ComWhtwndBlogBlobMetadata);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>)SourceGenerationContext.Default.ComWhtwndBlogBlobMetadata);
+        }
+
+        public static new BlobMetadata FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>)SourceGenerationContext.Default.ComWhtwndBlogBlobMetadata)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new BlobMetadata FromCBORObject(CBORObject obj)
+        {
+            return new BlobMetadata(obj);
+        }
+
     }
 }
 

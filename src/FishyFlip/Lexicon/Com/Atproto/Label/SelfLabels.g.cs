@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     /// <summary>
     /// Metadata tags on an atproto record, published by the author within the record.
     /// </summary>
-    public partial class SelfLabels : ATObject
+    public partial class SelfLabels : ATObject, ICBOREncodable<SelfLabels>, IJsonEncodable<SelfLabels>
     {
 
         /// <summary>
@@ -50,10 +50,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
 
         public const string RecordType = "com.atproto.label.defs#selfLabels";
 
-        public static SelfLabels FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabels);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabels);
+        }
+
+        public static new SelfLabels FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabels)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SelfLabels FromCBORObject(CBORObject obj)
+        {
+            return new SelfLabels(obj);
+        }
+
     }
 }
 

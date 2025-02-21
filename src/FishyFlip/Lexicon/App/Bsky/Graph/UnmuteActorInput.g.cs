@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class UnmuteActorInput : ATObject
+    public partial class UnmuteActorInput : ATObject, ICBOREncodable<UnmuteActorInput>, IJsonEncodable<UnmuteActorInput>
     {
 
         /// <summary>
@@ -48,10 +48,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.unmuteActor#UnmuteActorInput";
 
-        public static UnmuteActorInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorInput>)SourceGenerationContext.Default.AppBskyGraphUnmuteActorInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorInput>)SourceGenerationContext.Default.AppBskyGraphUnmuteActorInput);
+        }
+
+        public static new UnmuteActorInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorInput>)SourceGenerationContext.Default.AppBskyGraphUnmuteActorInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new UnmuteActorInput FromCBORObject(CBORObject obj)
+        {
+            return new UnmuteActorInput(obj);
+        }
+
     }
 }
 

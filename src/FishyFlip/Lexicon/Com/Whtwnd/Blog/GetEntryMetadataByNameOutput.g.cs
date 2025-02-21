@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class GetEntryMetadataByNameOutput : ATObject
+    public partial class GetEntryMetadataByNameOutput : ATObject, ICBOREncodable<GetEntryMetadataByNameOutput>, IJsonEncodable<GetEntryMetadataByNameOutput>
     {
 
         /// <summary>
@@ -66,10 +66,34 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 
         public const string RecordType = "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput";
 
-        public static GetEntryMetadataByNameOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput);
+        }
+
+        public static new GetEntryMetadataByNameOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetEntryMetadataByNameOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetEntryMetadataByNameOutput(obj);
+        }
+
     }
 }
 

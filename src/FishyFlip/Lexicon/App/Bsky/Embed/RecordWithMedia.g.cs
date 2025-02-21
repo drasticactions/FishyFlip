@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class RecordWithMedia : ATObject
+    public partial class RecordWithMedia : ATObject, ICBOREncodable<RecordWithMedia>, IJsonEncodable<RecordWithMedia>
     {
 
         /// <summary>
@@ -69,10 +69,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public const string RecordType = "app.bsky.embed.recordWithMedia";
 
-        public static RecordWithMedia FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia);
+        }
+
+        public static new RecordWithMedia FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new RecordWithMedia FromCBORObject(CBORObject obj)
+        {
+            return new RecordWithMedia(obj);
+        }
+
     }
 }
 

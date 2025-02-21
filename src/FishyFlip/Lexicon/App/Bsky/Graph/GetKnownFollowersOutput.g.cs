@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetKnownFollowersOutput : ATObject
+    public partial class GetKnownFollowersOutput : ATObject, ICBOREncodable<GetKnownFollowersOutput>, IJsonEncodable<GetKnownFollowersOutput>
     {
 
         /// <summary>
@@ -69,10 +69,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
         public const string RecordType = "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput";
 
-        public static GetKnownFollowersOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput);
+        }
+
+        public static new GetKnownFollowersOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetKnownFollowersOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetKnownFollowersOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetKnownFollowersOutput(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class ApplyWritesOutput : ATObject
+    public partial class ApplyWritesOutput : ATObject, ICBOREncodable<ApplyWritesOutput>, IJsonEncodable<ApplyWritesOutput>
     {
 
         /// <summary>
@@ -67,10 +67,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
 
         public const string RecordType = "com.atproto.repo.applyWrites#ApplyWritesOutput";
 
-        public static ApplyWritesOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesOutput);
+        }
+
+        public static new ApplyWritesOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ApplyWritesOutput FromCBORObject(CBORObject obj)
+        {
+            return new ApplyWritesOutput(obj);
+        }
+
     }
 }
 

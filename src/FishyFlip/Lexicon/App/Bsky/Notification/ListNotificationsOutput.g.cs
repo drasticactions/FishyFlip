@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class ListNotificationsOutput : ATObject
+    public partial class ListNotificationsOutput : ATObject, ICBOREncodable<ListNotificationsOutput>, IJsonEncodable<ListNotificationsOutput>
     {
 
         /// <summary>
@@ -74,10 +74,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         public const string RecordType = "app.bsky.notification.listNotifications#ListNotificationsOutput";
 
-        public static ListNotificationsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput);
+        }
+
+        public static new ListNotificationsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ListNotificationsOutput FromCBORObject(CBORObject obj)
+        {
+            return new ListNotificationsOutput(obj);
+        }
+
     }
 }
 

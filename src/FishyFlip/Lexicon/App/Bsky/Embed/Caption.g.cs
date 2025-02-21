@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class Caption : ATObject
+    public partial class Caption : ATObject, ICBOREncodable<Caption>, IJsonEncodable<Caption>
     {
 
         /// <summary>
@@ -57,10 +57,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         public const string RecordType = "app.bsky.embed.video#caption";
 
-        public static Caption FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption);
+        }
+
+        public static new Caption FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.Caption>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Caption FromCBORObject(CBORObject obj)
+        {
+            return new Caption(obj);
+        }
+
     }
 }
 

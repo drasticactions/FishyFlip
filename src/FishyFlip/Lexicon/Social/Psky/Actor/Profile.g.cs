@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
     /// <summary>
     /// A declaration of a Picosky account profile.
     /// </summary>
-    public partial class Profile : ATObject
+    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>
     {
 
         /// <summary>
@@ -49,10 +49,34 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
 
         public const string RecordType = "social.psky.actor.profile";
 
-        public static Profile FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile);
+        }
+
+        public static new Profile FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Profile FromCBORObject(CBORObject obj)
+        {
+            return new Profile(obj);
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class SignPlcOperationInput : ATObject
+    public partial class SignPlcOperationInput : ATObject, ICBOREncodable<SignPlcOperationInput>, IJsonEncodable<SignPlcOperationInput>
     {
 
         /// <summary>
@@ -83,10 +83,34 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
         public const string RecordType = "com.atproto.identity.signPlcOperation#SignPlcOperationInput";
 
-        public static SignPlcOperationInput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput);
+        }
+
+        public static new SignPlcOperationInput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new SignPlcOperationInput FromCBORObject(CBORObject obj)
+        {
+            return new SignPlcOperationInput(obj);
+        }
+
     }
 }
 

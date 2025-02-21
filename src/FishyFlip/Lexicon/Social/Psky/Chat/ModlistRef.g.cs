@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Social.Psky.Chat
 {
-    public partial class ModlistRef : ATObject
+    public partial class ModlistRef : ATObject, ICBOREncodable<ModlistRef>, IJsonEncodable<ModlistRef>
     {
 
         /// <summary>
@@ -57,10 +57,34 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
 
         public const string RecordType = "social.psky.chat.room#modlistRef";
 
-        public static ModlistRef FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef>)SourceGenerationContext.Default.SocialPskyChatModlistRef);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef>)SourceGenerationContext.Default.SocialPskyChatModlistRef);
+        }
+
+        public static new ModlistRef FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef>)SourceGenerationContext.Default.SocialPskyChatModlistRef)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new ModlistRef FromCBORObject(CBORObject obj)
+        {
+            return new ModlistRef(obj);
+        }
+
     }
 }
 

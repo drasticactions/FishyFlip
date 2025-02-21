@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class QueryEventsOutput : ATObject
+    public partial class QueryEventsOutput : ATObject, ICBOREncodable<QueryEventsOutput>, IJsonEncodable<QueryEventsOutput>
     {
 
         /// <summary>
@@ -56,10 +56,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public const string RecordType = "tools.ozone.moderation.queryEvents#QueryEventsOutput";
 
-        public static QueryEventsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput);
+        }
+
+        public static new QueryEventsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new QueryEventsOutput FromCBORObject(CBORObject obj)
+        {
+            return new QueryEventsOutput(obj);
+        }
+
     }
 }
 

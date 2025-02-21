@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Video
 {
-    public partial class GetUploadLimitsOutput : ATObject
+    public partial class GetUploadLimitsOutput : ATObject, ICBOREncodable<GetUploadLimitsOutput>, IJsonEncodable<GetUploadLimitsOutput>
     {
 
         /// <summary>
@@ -83,10 +83,34 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
 
         public const string RecordType = "app.bsky.video.getUploadLimits#GetUploadLimitsOutput";
 
-        public static GetUploadLimitsOutput FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput);
+        }
+
+        public static new GetUploadLimitsOutput FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new GetUploadLimitsOutput FromCBORObject(CBORObject obj)
+        {
+            return new GetUploadLimitsOutput(obj);
+        }
+
     }
 }
 

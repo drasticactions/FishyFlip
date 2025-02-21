@@ -31,40 +31,7 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
     /// <inheritdoc/>
     public override ATObject Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        try
-        {
-            if (JsonDocument.TryParseValue(ref reader, out var doc))
-            {
-                var rawText = doc.RootElement.GetRawText();
-                if (doc.RootElement.TryGetProperty("$type", out var type))
-                {
-                    var text = type.GetString()?.Trim() ?? string.Empty;
-                    var atObject = ATObject.ToATObject(rawText, text);
-
-                    if (atObject is not null)
-                    {
-                        return atObject;
-                    }
-
-                    foreach (var converter in this.converters)
-                    {
-                        if (converter.SupportedTypes.Contains(text))
-                        {
-                            atObject = converter.Read(rawText, text, options);
-                            break;
-                        }
-                    }
-
-                    return atObject ?? new UnknownATObject() { Type = text, Json = rawText };
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.Diagnostics.Debug.WriteLine(e);
-        }
-
-        return new UnknownATObject();
+        return ATObjectJsonReader.Read(ref reader, this.converters, options);
     }
 
     /// <inheritdoc/>
@@ -80,13 +47,15 @@ public class ATObjectJsonConverter : JsonConverter<ATObject?>
         {
             writer.WriteRawValue(bytes);
         }
-
-        foreach (var converter in this.converters)
+        else
         {
-            if (converter.SupportedTypes.Contains(value.Type))
+            foreach (var converter in this.converters)
             {
-                converter.Write(writer, value, options);
-                return;
+                if (converter.SupportedTypes.Contains(value.Type))
+                {
+                    converter.Write(writer, value, options);
+                    return;
+                }
             }
         }
     }

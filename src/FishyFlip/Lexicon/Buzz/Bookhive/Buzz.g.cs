@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
     /// <summary>
     /// Record containing a Bookhive comment.
     /// </summary>
-    public partial class Buzz : ATObject
+    public partial class Buzz : ATObject, ICBOREncodable<Buzz>, IJsonEncodable<Buzz>
     {
 
         /// <summary>
@@ -84,10 +84,34 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
 
         public const string RecordType = "buzz.bookhive.buzz";
 
-        public static Buzz FromJson(string json)
+        public override string ToJson()
+        {
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Buzz>)SourceGenerationContext.Default.BuzzBookhiveBuzz);
+        }
+
+        public override byte[] ToUtf8Json()
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Buzz>)SourceGenerationContext.Default.BuzzBookhiveBuzz);
+        }
+
+        public static new Buzz FromJson(string json)
         {
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.Buzz>(json, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Buzz>)SourceGenerationContext.Default.BuzzBookhiveBuzz)!;
         }
+
+         /// <inheritdoc/>
+        public override CBORObject ToCBORObject()
+        {
+            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
+            return CBORObject.ReadJSON(jsonStream);
+        }
+
+         /// <inheritdoc/>
+        public static new Buzz FromCBORObject(CBORObject obj)
+        {
+            return new Buzz(obj);
+        }
+
     }
 }
 

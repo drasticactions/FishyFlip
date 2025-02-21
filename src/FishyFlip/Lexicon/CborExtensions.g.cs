@@ -28,6 +28,10 @@ namespace FishyFlip.Lexicon
             var type = obj["$type"]?.AsString() ?? string.Empty;
             switch (type)
             {
+                case "chat.bsky.convo.acceptConvo#AcceptConvoInput":
+                    return new Chat.Bsky.Convo.AcceptConvoInput(obj);
+                case "chat.bsky.convo.acceptConvo#AcceptConvoOutput":
+                    return new Chat.Bsky.Convo.AcceptConvoOutput(obj);
                 case "com.atproto.sync.subscribeRepos#account":
                     return new Com.Atproto.Sync.Account(obj);
                 case "com.atproto.server.createInviteCodes#accountCodes":
@@ -294,6 +298,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.GetConfigOutput(obj);
                 case "tools.ozone.server.getConfig#GetConfigOutput":
                     return new Tools.Ozone.Server.GetConfigOutput(obj);
+                case "chat.bsky.convo.getConvoAvailability#GetConvoAvailabilityOutput":
+                    return new Chat.Bsky.Convo.GetConvoAvailabilityOutput(obj);
                 case "chat.bsky.convo.getConvoForMembers#GetConvoForMembersOutput":
                     return new Chat.Bsky.Convo.GetConvoForMembersOutput(obj);
                 case "chat.bsky.convo.getConvo#GetConvoOutput":
@@ -544,6 +550,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.ListViewerState(obj);
                 case "blue.zio.atfile.lock":
                     return new Blue.Zio.Atfile.Lock(obj);
+                case "chat.bsky.convo.defs#logAcceptConvo":
+                    return new Chat.Bsky.Convo.LogAcceptConvo(obj);
                 case "chat.bsky.convo.defs#logBeginConvo":
                     return new Chat.Bsky.Convo.LogBeginConvo(obj);
                 case "chat.bsky.convo.defs#logCreateMessage":
@@ -552,6 +560,12 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.LogDeleteMessage(obj);
                 case "chat.bsky.convo.defs#logLeaveConvo":
                     return new Chat.Bsky.Convo.LogLeaveConvo(obj);
+                case "chat.bsky.convo.defs#logMuteConvo":
+                    return new Chat.Bsky.Convo.LogMuteConvo(obj);
+                case "chat.bsky.convo.defs#logReadMessage":
+                    return new Chat.Bsky.Convo.LogReadMessage(obj);
+                case "chat.bsky.convo.defs#logUnmuteConvo":
+                    return new Chat.Bsky.Convo.LogUnmuteConvo(obj);
                 case "blue.zio.atfile.finger#machine":
                     return new Blue.Zio.Atfile.Machine(obj);
                 case "tools.ozone.team.defs#member":
