@@ -18,7 +18,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 		<PackageReference Include="IpfsShipyard.Ipfs.Core" />
 		<PackageReference Include="PeterO.Cbor" />
-		<PackageReference Include="IdentityModel" />
+		<PackageReference Include="Duende.IdentityModel" />
+		<PackageReference Include="Duende.IdentityModel.OidcClient" />
+		<PackageReference Include="Duende.IdentityModel.OidcClient.Extensions" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 		<PackageReference Include="GitVersion.MSBuild">
 			<PrivateAssets>All</PrivateAssets>

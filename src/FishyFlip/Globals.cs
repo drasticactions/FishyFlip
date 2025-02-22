@@ -16,8 +16,6 @@ global using FishyFlip.Events;
 global using FishyFlip.Lexicon;
 global using FishyFlip.Models;
 global using FishyFlip.Tools;
-global using IdentityModel.OidcClient;
-global using IdentityModel.OidcClient.DPoP;
 global using Ipfs;
 global using Microsoft.Extensions.Logging;
 global using PeterO.Cbor;
