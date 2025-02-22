@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public UpdateSeenInput(CBORObject obj)
         {
             if (obj["seenAt"] is not null) this.SeenAt = obj["seenAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

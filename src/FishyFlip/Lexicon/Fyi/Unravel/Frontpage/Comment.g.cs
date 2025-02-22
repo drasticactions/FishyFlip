@@ -52,6 +52,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["parent"] is not null) this.Parent = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["parent"]);
             if (obj["post"] is not null) this.Post = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["post"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

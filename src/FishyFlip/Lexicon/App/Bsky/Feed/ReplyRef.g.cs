@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["root"] is not null) this.Root = obj["root"].ToATObject();
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
             if (obj["grandparentAuthor"] is not null) this.GrandparentAuthor = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["grandparentAuthor"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["subject"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public DisableRule(CBORObject obj)
         {
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         public const string RecordType = "app.bsky.feed.postgate#disableRule";

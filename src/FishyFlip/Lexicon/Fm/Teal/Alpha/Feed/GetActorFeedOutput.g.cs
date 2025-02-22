@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         public GetActorFeedOutput(CBORObject obj)
         {
             if (obj["plays"] is not null) this.Plays = obj["plays"].Values.Select(n =>new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

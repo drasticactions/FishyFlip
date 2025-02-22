@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["password"] is not null) this.Password = obj["password"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

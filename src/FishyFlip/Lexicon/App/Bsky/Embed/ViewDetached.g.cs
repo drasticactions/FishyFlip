@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["detached"] is not null) this.Detached = obj["detached"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

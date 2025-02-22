@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             if (obj["account"] is not null) this.Account = obj["account"].AsString();
             if (obj["codes"] is not null) this.Codes = obj["codes"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

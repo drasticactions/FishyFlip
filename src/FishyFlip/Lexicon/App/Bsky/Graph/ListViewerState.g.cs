@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["muted"] is not null) this.Muted = obj["muted"].AsBoolean();
             if (obj["blocked"] is not null) this.Blocked = obj["blocked"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

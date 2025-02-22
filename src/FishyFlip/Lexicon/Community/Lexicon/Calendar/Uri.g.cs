@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         {
             if (obj["uri"] is not null) this.UriValue = obj["uri"].AsString();
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

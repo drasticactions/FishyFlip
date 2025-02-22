@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public CreateInviteCodeOutput(CBORObject obj)
         {
             if (obj["code"] is not null) this.Code = obj["code"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

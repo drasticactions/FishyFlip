@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             if (obj["topics"] is not null) this.Topics = obj["topics"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic(n)).ToList();
             if (obj["suggested"] is not null) this.Suggested = obj["suggested"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

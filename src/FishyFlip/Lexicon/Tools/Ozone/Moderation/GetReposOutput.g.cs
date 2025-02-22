@@ -40,6 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public GetReposOutput(CBORObject obj)
         {
             if (obj["repos"] is not null) this.Repos = obj["repos"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

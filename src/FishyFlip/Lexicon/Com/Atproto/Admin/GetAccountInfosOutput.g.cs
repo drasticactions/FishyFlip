@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public GetAccountInfosOutput(CBORObject obj)
         {
             if (obj["infos"] is not null) this.Infos = obj["infos"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Admin.AccountView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

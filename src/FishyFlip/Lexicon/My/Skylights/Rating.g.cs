@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         {
             if (obj["value"] is not null) this.Value = obj["value"].AsInt64Value();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

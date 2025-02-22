@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["list"] is not null) this.List = obj["list"].ToATUri();
             if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.FeedItem(n)).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

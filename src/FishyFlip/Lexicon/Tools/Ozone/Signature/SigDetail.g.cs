@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         {
             if (obj["property"] is not null) this.Property = obj["property"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

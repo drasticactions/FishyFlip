@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             if (obj["lang"] is not null) this.Lang = obj["lang"].AsString();
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

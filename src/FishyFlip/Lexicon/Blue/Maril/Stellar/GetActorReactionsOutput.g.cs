@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["feed"] is not null) this.Feed = obj["feed"].Values.Select(n =>new FishyFlip.Lexicon.Blue.Maril.Stellar.ActorReaction(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

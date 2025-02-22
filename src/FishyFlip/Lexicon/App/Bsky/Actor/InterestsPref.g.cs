@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public InterestsPref(CBORObject obj)
         {
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

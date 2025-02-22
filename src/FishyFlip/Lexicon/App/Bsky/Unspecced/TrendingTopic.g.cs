@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["link"] is not null) this.Link = obj["link"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

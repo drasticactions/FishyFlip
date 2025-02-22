@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             if (obj["commit"] is not null) this.Commit = new FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta(obj["commit"]);
             if (obj["results"] is not null) this.Results = obj["results"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

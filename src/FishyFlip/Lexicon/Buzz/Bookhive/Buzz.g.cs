@@ -52,6 +52,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["parent"] is not null) this.Parent = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["parent"]);
             if (obj["book"] is not null) this.Book = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["book"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

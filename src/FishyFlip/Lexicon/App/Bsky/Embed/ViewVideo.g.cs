@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["thumbnail"] is not null) this.Thumbnail = obj["thumbnail"].AsString();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
             if (obj["aspectRatio"] is not null) this.AspectRatio = new FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

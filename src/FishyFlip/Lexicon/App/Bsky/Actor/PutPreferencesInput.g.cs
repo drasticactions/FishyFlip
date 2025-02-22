@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public PutPreferencesInput(CBORObject obj)
         {
             if (obj["preferences"] is not null) this.Preferences = obj["preferences"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

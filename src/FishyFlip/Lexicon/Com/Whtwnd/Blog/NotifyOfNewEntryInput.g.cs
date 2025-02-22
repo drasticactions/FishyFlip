@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         public NotifyOfNewEntryInput(CBORObject obj)
         {
             if (obj["entryUri"] is not null) this.EntryUri = obj["entryUri"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

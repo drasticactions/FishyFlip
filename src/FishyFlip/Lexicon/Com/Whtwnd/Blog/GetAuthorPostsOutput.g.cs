@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         public GetAuthorPostsOutput(CBORObject obj)
         {
             if (obj["post"] is not null) this.Post = obj["post"].Values.Select(n =>new FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

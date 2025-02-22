@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["root"] is not null) this.Root = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["root"]);
             if (obj["parent"] is not null) this.Parent = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["parent"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

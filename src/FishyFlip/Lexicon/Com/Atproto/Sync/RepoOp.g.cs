@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["path"] is not null) this.Path = obj["path"].AsString();
             if (obj["cid"] is not null) this.Cid = obj["cid"].ToATCid();
             if (obj["prev"] is not null) this.Prev = obj["prev"].ToATCid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

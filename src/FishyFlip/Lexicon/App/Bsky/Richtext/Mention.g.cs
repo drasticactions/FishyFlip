@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         public Mention(CBORObject obj)
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

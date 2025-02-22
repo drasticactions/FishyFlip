@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Actor.ViewerState(obj["viewer"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             if (obj["applied"] is not null) this.Applied = obj["applied"].AsBoolean();
             if (obj["ref"] is not null) this.Ref = obj["ref"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

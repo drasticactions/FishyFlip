@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["cids"] is not null) this.Cids = obj["cids"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

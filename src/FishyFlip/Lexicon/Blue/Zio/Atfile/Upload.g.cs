@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             // Temp file
             if (obj["finger"] is not null) this.Finger = obj["finger"].ToATObject();
             if (obj["meta"] is not null) this.Meta = new FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown(obj["meta"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

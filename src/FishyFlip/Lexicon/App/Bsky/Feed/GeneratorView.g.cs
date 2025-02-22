@@ -83,6 +83,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState(obj["viewer"]);
             if (obj["contentMode"] is not null) this.ContentMode = obj["contentMode"].AsString();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

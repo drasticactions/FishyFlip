@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             if (obj["count"] is not null) this.Count = obj["count"].AsInt64Value();
             if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

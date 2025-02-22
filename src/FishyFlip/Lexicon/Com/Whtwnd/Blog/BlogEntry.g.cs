@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         {
             if (obj["content"] is not null) this.Content = obj["content"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -63,6 +63,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             if (obj["cts"] is not null) this.Cts = obj["cts"].ToDateTime();
             if (obj["exp"] is not null) this.Exp = obj["exp"].ToDateTime();
             if (obj["sig"] is not null) this.Sig = obj["sig"].EncodeToBytes();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

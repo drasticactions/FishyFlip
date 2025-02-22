@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         {
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["userAgent"] is not null) this.UserAgent = obj["userAgent"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

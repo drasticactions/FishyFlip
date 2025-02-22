@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
             if (obj["updatedBy"] is not null) this.UpdatedBy = obj["updatedBy"].ToATDid();
             if (obj["disabled"] is not null) this.Disabled = obj["disabled"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

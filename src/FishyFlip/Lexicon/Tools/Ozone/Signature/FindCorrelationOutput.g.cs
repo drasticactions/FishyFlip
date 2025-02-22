@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         public FindCorrelationOutput(CBORObject obj)
         {
             if (obj["details"] is not null) this.Details = obj["details"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

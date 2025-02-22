@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetConfigOutput(CBORObject obj)
         {
             if (obj["checkEmailConfirmed"] is not null) this.CheckEmailConfirmed = obj["checkEmailConfirmed"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

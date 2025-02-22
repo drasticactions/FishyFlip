@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         {
             if (obj["keys"] is not null) this.Keys = obj["keys"].Values.Select(n =>n.AsString()).ToList();
             if (obj["scope"] is not null) this.Scope = obj["scope"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

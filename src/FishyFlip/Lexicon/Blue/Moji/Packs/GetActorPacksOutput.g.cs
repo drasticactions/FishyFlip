@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["packs"] is not null) this.Packs = obj["packs"].Values.Select(n =>new FishyFlip.Lexicon.Blue.Moji.Packs.PackViewBasic(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

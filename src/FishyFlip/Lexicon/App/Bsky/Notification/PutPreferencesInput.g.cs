@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public PutPreferencesInput(CBORObject obj)
         {
             if (obj["priority"] is not null) this.Priority = obj["priority"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

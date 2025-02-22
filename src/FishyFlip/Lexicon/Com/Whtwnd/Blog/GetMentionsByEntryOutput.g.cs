@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         public GetMentionsByEntryOutput(CBORObject obj)
         {
             if (obj["mentions"] is not null) this.Mentions = obj["mentions"].Values.Select(n =>n.ToATUri()!).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

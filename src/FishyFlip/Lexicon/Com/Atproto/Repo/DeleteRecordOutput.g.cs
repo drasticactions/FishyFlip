@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public DeleteRecordOutput(CBORObject obj)
         {
             if (obj["commit"] is not null) this.Commit = new FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta(obj["commit"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

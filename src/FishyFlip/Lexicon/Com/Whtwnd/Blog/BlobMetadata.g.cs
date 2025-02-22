@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         {
             if (obj["blobref"] is not null) this.Blobref = new FishyFlip.Models.Blob(obj["blobref"]);
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.Feed(n)).ToList();
             if (obj["links"] is not null) this.Links = new FishyFlip.Lexicon.App.Bsky.Feed.Links(obj["links"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

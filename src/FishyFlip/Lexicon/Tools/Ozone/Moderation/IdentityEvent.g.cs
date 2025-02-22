@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["pdsHost"] is not null) this.PdsHost = obj["pdsHost"].AsString();
             if (obj["tombstone"] is not null) this.Tombstone = obj["tombstone"].AsBoolean();
             if (obj["timestamp"] is not null) this.Timestamp = obj["timestamp"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

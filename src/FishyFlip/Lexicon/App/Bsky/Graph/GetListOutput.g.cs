@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["list"] is not null) this.List = new FishyFlip.Lexicon.App.Bsky.Graph.ListView(obj["list"]);
             if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.ListItemView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

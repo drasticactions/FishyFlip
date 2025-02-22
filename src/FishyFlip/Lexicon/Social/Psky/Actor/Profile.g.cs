@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
         public Profile(CBORObject obj)
         {
             if (obj["nickname"] is not null) this.Nickname = obj["nickname"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

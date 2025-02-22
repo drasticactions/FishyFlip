@@ -66,6 +66,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["following"] is not null) this.Following = obj["following"].ToATUri();
             if (obj["followedBy"] is not null) this.FollowedBy = obj["followedBy"].ToATUri();
             if (obj["knownFollowers"] is not null) this.KnownFollowers = new FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers(obj["knownFollowers"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

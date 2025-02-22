@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
             if (obj["senderDid"] is not null) this.SenderDid = obj["senderDid"].ToATDid();
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

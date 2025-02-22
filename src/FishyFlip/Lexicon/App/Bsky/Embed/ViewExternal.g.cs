@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public ViewExternal(CBORObject obj)
         {
             if (obj["external"] is not null) this.External = new FishyFlip.Lexicon.App.Bsky.Embed.ViewExternalExternal(obj["external"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         {
             if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["subject"]);
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

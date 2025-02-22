@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         public SignPlcOperationOutput(CBORObject obj)
         {
             if (obj["operation"] is not null) this.Operation = obj["operation"].ToATObject();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

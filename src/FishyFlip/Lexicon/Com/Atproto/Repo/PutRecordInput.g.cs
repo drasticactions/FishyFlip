@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["swapRecord"] is not null) this.SwapRecord = obj["swapRecord"].AsString();
             if (obj["swapCommit"] is not null) this.SwapCommit = obj["swapCommit"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

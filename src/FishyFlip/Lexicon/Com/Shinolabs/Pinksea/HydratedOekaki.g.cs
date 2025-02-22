@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             if (obj["nsfw"] is not null) this.Nsfw = obj["nsfw"].AsBoolean();
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

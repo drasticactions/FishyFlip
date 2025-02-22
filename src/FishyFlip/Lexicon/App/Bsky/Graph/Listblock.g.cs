@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATUri();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

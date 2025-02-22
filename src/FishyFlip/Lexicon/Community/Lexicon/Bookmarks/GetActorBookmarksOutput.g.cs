@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["bookmarks"] is not null) this.Bookmarks = obj["bookmarks"].Values.Select(n =>new FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["add"] is not null) this.Add = obj["add"].Values.Select(n =>n.AsString()).ToList();
             if (obj["remove"] is not null) this.Remove = obj["remove"].Values.Select(n =>n.AsString()).ToList();
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

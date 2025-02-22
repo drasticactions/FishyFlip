@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// </summary>
         public DeleteAccountOutput(CBORObject obj)
         {
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         public const string RecordType = "chat.bsky.actor.deleteAccount#DeleteAccountOutput";

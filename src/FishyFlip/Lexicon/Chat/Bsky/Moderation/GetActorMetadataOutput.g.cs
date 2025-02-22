@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             if (obj["day"] is not null) this.Day = new FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata(obj["day"]);
             if (obj["month"] is not null) this.Month = new FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata(obj["month"]);
             if (obj["all"] is not null) this.All = new FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata(obj["all"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

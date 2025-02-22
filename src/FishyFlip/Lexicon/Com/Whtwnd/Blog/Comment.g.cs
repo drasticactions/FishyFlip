@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         {
             if (obj["content"] is not null) this.Content = obj["content"].AsString();
             if (obj["entryUri"] is not null) this.EntryUri = obj["entryUri"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

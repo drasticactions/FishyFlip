@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventEscalate(CBORObject obj)
         {
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

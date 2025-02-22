@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["muted"] is not null) this.Muted = obj["muted"].AsBoolean();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["unreadCount"] is not null) this.UnreadCount = obj["unreadCount"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

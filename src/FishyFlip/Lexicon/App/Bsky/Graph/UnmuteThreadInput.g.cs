@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public UnmuteThreadInput(CBORObject obj)
         {
             if (obj["root"] is not null) this.Root = obj["root"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

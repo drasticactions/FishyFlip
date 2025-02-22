@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             if (obj["url"] is not null) this.Url = obj["url"].AsString();
             if (obj["width"] is not null) this.Width = obj["width"].AsInt64Value();
             if (obj["height"] is not null) this.Height = obj["height"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

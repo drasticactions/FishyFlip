@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         public Room(CBORObject obj)
         {
             if (obj["room"] is not null) this.RoomValue = obj["room"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

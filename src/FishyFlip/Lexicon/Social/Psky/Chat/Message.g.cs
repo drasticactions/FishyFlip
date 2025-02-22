@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             if (obj["room"] is not null) this.Room = obj["room"].ToATUri();
             if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new FishyFlip.Lexicon.Social.Psky.Richtext.Facet(n)).ToList();
             if (obj["reply"] is not null) this.Reply = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["reply"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

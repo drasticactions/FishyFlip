@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GetFeedGeneratorsOutput(CBORObject obj)
         {
             if (obj["feeds"] is not null) this.Feeds = obj["feeds"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         public Board(CBORObject obj)
         {
             if (obj["cards"] is not null) this.Cards = obj["cards"].Values.Select(n =>new FishyFlip.Lexicon.Blue.Linkat.Card(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

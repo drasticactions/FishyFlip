@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public ThreadContext(CBORObject obj)
         {
             if (obj["rootAuthorLike"] is not null) this.RootAuthorLike = obj["rootAuthorLike"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

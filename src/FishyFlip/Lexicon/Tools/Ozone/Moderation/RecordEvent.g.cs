@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["op"] is not null) this.Op = obj["op"].AsString();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["timestamp"] is not null) this.Timestamp = obj["timestamp"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

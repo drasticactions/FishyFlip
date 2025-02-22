@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         public NotifyOfNewEntryOutput(CBORObject obj)
         {
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         public const string RecordType = "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryOutput";

@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public GetHandleFromDidOutput(CBORObject obj)
         {
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

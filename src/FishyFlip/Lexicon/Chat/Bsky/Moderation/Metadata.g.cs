@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             if (obj["messagesReceived"] is not null) this.MessagesReceived = obj["messagesReceived"].AsInt64Value();
             if (obj["convos"] is not null) this.Convos = obj["convos"].AsInt64Value();
             if (obj["convosStarted"] is not null) this.ConvosStarted = obj["convosStarted"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

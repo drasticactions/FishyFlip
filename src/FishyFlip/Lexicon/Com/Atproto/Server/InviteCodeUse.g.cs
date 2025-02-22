@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         {
             if (obj["usedBy"] is not null) this.UsedBy = obj["usedBy"].ToATDid();
             if (obj["usedAt"] is not null) this.UsedAt = obj["usedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

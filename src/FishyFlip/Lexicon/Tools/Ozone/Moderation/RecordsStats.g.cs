@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["pendingCount"] is not null) this.PendingCount = obj["pendingCount"].AsInt64Value();
             if (obj["processedCount"] is not null) this.ProcessedCount = obj["processedCount"].AsInt64Value();
             if (obj["takendownCount"] is not null) this.TakendownCount = obj["takendownCount"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

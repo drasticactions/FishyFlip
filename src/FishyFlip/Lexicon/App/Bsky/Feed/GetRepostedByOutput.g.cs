@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["repostedBy"] is not null) this.RepostedBy = obj["repostedBy"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

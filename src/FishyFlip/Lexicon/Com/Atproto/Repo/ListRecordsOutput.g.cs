@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["records"] is not null) this.Records = obj["records"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Repo.Record(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

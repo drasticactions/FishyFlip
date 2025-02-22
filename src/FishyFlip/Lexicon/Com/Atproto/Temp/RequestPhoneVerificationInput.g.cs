@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public RequestPhoneVerificationInput(CBORObject obj)
         {
             if (obj["phoneNumber"] is not null) this.PhoneNumber = obj["phoneNumber"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

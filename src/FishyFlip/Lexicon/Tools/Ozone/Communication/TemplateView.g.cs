@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             if (obj["lastUpdatedBy"] is not null) this.LastUpdatedBy = obj["lastUpdatedBy"].ToATDid();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

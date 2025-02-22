@@ -66,6 +66,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["copyOf"] is not null) this.CopyOf = obj["copyOf"].ToATUri();
             if (obj["fallbackText"] is not null) this.FallbackText = obj["fallbackText"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

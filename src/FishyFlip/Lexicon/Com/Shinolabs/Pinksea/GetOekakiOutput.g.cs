@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
             if (obj["children"] is not null) this.Children = obj["children"].Values.Select(n =>new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

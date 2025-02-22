@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public MuteConvoOutput(CBORObject obj)
         {
             if (obj["convo"] is not null) this.Convo = new FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView(obj["convo"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

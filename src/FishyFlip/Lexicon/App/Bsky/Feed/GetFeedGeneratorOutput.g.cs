@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["view"] is not null) this.View = new FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView(obj["view"]);
             if (obj["isOnline"] is not null) this.IsOnline = obj["isOnline"].AsBoolean();
             if (obj["isValid"] is not null) this.IsValid = obj["isValid"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

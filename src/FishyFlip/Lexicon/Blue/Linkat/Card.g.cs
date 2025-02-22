@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
             if (obj["url"] is not null) this.Url = obj["url"].AsString();
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
             if (obj["emoji"] is not null) this.Emoji = obj["emoji"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

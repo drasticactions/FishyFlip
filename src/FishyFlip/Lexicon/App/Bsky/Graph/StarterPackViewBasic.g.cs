@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["joinedAllTimeCount"] is not null) this.JoinedAllTimeCount = obj["joinedAllTimeCount"].AsInt64Value();
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["actor"] is not null) this.Actor = obj["actor"].ToATIdentifier();
             if (obj["notFound"] is not null) this.NotFound = obj["notFound"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

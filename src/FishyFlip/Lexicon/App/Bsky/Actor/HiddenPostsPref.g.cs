@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public HiddenPostsPref(CBORObject obj)
         {
             if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>n.ToATUri()!).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

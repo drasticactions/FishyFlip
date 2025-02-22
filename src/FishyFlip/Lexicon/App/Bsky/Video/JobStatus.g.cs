@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             if (obj["blob"] is not null) this.Blob = new FishyFlip.Models.Blob(obj["blob"]);
             if (obj["error"] is not null) this.Error = obj["error"].AsString();
             if (obj["message"] is not null) this.Message = obj["message"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

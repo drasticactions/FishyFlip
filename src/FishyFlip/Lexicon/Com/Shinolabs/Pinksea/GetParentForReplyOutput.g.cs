@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATIdentifier();
             if (obj["rkey"] is not null) this.Rkey = obj["rkey"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

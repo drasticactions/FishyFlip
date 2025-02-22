@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
             if (obj["url"] is not null) this.Url = obj["url"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

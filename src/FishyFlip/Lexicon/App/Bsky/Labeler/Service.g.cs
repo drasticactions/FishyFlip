@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["policies"] is not null) this.Policies = new FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies(obj["policies"]);
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

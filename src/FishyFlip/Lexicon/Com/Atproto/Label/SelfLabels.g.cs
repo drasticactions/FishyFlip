@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public SelfLabels(CBORObject obj)
         {
             if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

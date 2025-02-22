@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public GetReporterStatsOutput(CBORObject obj)
         {
             if (obj["stats"] is not null) this.Stats = obj["stats"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.ReporterStats(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

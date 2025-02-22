@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         {
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

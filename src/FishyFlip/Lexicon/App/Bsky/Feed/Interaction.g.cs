@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["item"] is not null) this.Item = obj["item"].ToATUri();
             if (obj["event"] is not null) this.Event = obj["event"].AsString();
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

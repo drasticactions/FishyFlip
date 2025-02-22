@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public PersonalDetailsPref(CBORObject obj)
         {
             if (obj["birthDate"] is not null) this.BirthDate = obj["birthDate"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>
