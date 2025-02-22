@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown"/> (tools.ozone.moderation.defs#modEventReverseTakedown) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal"/> (tools.ozone.moderation.defs#modEventResolveAppeal) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail"/> (tools.ozone.moderation.defs#modEventEmail) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventDivert"/> (tools.ozone.moderation.defs#modEventDivert) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTag"/> (tools.ozone.moderation.defs#modEventTag) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountEvent"/> (tools.ozone.moderation.defs#accountEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
@@ -92,6 +93,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
                 case "tools.ozone.moderation.defs#modEventReverseTakedown":
                 case "tools.ozone.moderation.defs#modEventResolveAppeal":
                 case "tools.ozone.moderation.defs#modEventEmail":
+                case "tools.ozone.moderation.defs#modEventDivert":
                 case "tools.ozone.moderation.defs#modEventTag":
                 case "tools.ozone.moderation.defs#accountEvent":
                 case "tools.ozone.moderation.defs#identityEvent":

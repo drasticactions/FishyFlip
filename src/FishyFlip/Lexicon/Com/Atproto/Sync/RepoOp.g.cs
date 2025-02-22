@@ -24,11 +24,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </param>
         /// <param name="path"></param>
         /// <param name="cid">For creates and updates, the new record CID. For deletions, null.</param>
-        public RepoOp(string action = default, string path = default, Ipfs.Cid cid = default)
+        /// <param name="prev">For updates and deletes, the previous record CID (required for inductive firehose). For creations, field should not be defined.</param>
+        public RepoOp(string action = default, string path = default, Ipfs.Cid cid = default, Ipfs.Cid? prev = default)
         {
             this.Action = action;
             this.Path = path;
             this.Cid = cid;
+            this.Prev = prev;
             this.Type = "com.atproto.sync.subscribeRepos#repoOp";
         }
 
@@ -50,6 +52,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["action"] is not null) this.Action = obj["action"].AsString();
             if (obj["path"] is not null) this.Path = obj["path"].AsString();
             if (obj["cid"] is not null) this.Cid = obj["cid"].ToATCid();
+            if (obj["prev"] is not null) this.Prev = obj["prev"].ToATCid();
         }
 
         /// <summary>
@@ -78,6 +81,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
         public Ipfs.Cid Cid { get; set; }
+
+        /// <summary>
+        /// Gets or sets the prev.
+        /// <br/> For updates and deletes, the previous record CID (required for inductive firehose). For creations, field should not be defined.
+        /// </summary>
+        [JsonPropertyName("prev")]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
+        public Ipfs.Cid? Prev { get; set; }
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#repoOp";
 

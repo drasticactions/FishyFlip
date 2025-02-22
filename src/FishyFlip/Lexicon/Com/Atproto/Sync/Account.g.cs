@@ -26,6 +26,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// suspended <br/>
         /// deleted <br/>
         /// deactivated <br/>
+        /// desynchronized <br/>
+        /// throttled <br/>
         /// </param>
         public Account(long seq = default, FishyFlip.Models.ATDid did = default, DateTime? time = default, bool active = default, string? status = default)
         {
@@ -97,6 +99,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// suspended <br/>
         /// deleted <br/>
         /// deactivated <br/>
+        /// desynchronized <br/>
+        /// throttled <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }

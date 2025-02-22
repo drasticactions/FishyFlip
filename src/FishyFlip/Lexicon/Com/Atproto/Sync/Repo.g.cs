@@ -21,7 +21,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Known Values: <br/>
         /// takendown <br/>
         /// suspended <br/>
+        /// deleted <br/>
         /// deactivated <br/>
+        /// desynchronized <br/>
+        /// throttled <br/>
         /// </param>
         public Repo(FishyFlip.Models.ATDid did = default, string head = default, string rev = default, bool? active = default, string? status = default)
         {
@@ -90,7 +93,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Known Values: <br/>
         /// takendown <br/>
         /// suspended <br/>
+        /// deleted <br/>
         /// deactivated <br/>
+        /// desynchronized <br/>
+        /// throttled <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }
