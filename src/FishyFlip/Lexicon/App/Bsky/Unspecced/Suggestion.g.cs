@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["tag"] is not null) this.Tag = obj["tag"].AsString();
             if (obj["subjectType"] is not null) this.SubjectType = obj["subjectType"].AsString();
             if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

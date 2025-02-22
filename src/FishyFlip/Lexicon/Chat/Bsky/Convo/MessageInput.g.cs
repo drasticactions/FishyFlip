@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
             if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["embed"] is not null) this.Embed = new FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord(obj["embed"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

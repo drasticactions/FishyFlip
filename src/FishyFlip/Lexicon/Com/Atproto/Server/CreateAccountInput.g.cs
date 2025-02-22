@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["password"] is not null) this.Password = obj["password"].AsString();
             if (obj["recoveryKey"] is not null) this.RecoveryKey = obj["recoveryKey"].AsString();
             if (obj["plcOp"] is not null) this.PlcOp = obj["plcOp"].ToATObject();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

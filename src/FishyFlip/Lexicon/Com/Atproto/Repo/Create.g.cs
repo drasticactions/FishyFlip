@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["collection"] is not null) this.Collection = obj["collection"].AsString();
             if (obj["rkey"] is not null) this.Rkey = obj["rkey"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

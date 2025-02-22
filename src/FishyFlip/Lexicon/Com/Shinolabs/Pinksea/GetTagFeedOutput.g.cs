@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public GetTagFeedOutput(CBORObject obj)
         {
             if (obj["oekaki"] is not null) this.Oekaki = obj["oekaki"].Values.Select(n =>new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

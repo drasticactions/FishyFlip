@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// </summary>
         public AddReservedHandleOutput(CBORObject obj)
         {
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         public const string RecordType = "com.atproto.temp.addReservedHandle#AddReservedHandleOutput";

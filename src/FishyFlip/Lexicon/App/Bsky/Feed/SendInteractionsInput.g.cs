@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public SendInteractionsInput(CBORObject obj)
         {
             if (obj["interactions"] is not null) this.Interactions = obj["interactions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.Interaction(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

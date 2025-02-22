@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["subject"]);
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["followers"] is not null) this.Followers = obj["followers"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

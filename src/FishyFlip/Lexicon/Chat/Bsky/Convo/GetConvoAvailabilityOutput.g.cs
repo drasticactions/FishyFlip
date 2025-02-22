@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             if (obj["canChat"] is not null) this.CanChat = obj["canChat"].AsBoolean();
             if (obj["convo"] is not null) this.Convo = new FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView(obj["convo"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

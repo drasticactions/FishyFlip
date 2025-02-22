@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public RequestPasswordResetInput(CBORObject obj)
         {
             if (obj["email"] is not null) this.Email = obj["email"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

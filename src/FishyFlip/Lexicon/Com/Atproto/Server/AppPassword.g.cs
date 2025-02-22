@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["password"] is not null) this.Password = obj["password"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["privileged"] is not null) this.Privileged = obj["privileged"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

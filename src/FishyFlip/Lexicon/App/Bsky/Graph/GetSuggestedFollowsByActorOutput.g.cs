@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
             if (obj["isFallback"] is not null) this.IsFallback = obj["isFallback"].AsBoolean();
             if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

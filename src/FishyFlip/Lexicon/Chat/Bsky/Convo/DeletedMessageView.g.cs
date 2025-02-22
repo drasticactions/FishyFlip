@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["sender"] is not null) this.Sender = new FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

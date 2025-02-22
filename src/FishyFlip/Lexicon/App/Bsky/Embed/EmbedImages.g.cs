@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public EmbedImages(CBORObject obj)
         {
             if (obj["images"] is not null) this.Images = obj["images"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Embed.Image(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["hideRepliesByLikeCount"] is not null) this.HideRepliesByLikeCount = obj["hideRepliesByLikeCount"].AsInt64Value();
             if (obj["hideReposts"] is not null) this.HideReposts = obj["hideReposts"].AsBoolean();
             if (obj["hideQuotePosts"] is not null) this.HideQuotePosts = obj["hideQuotePosts"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         {
             if (obj["mbid"] is not null) this.Mbid = obj["mbid"].AsString();
             if (obj["type"] is not null) this.TypeValue = obj["type"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

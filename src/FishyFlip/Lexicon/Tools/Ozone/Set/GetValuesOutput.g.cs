@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             if (obj["set"] is not null) this.Set = new FishyFlip.Lexicon.Tools.Ozone.Set.SetView(obj["set"]);
             if (obj["values"] is not null) this.Values = obj["values"].Values.Select(n =>n.AsString()).ToList();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

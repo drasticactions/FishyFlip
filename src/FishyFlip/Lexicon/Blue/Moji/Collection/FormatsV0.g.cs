@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             if (obj["gif_128"] is not null) this.Gif128 = obj["gif_128"].ToBlob();
             if (obj["webp_128"] is not null) this.Webp128 = obj["webp_128"].ToBlob();
             if (obj["lottie"] is not null) this.Lottie = obj["lottie"].EncodeToBytes();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

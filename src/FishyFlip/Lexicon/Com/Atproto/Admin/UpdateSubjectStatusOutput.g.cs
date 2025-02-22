@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
             if (obj["takedown"] is not null) this.Takedown = new FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr(obj["takedown"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

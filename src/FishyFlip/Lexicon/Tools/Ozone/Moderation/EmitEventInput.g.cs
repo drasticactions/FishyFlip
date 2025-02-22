@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
             if (obj["subjectBlobCids"] is not null) this.SubjectBlobCids = obj["subjectBlobCids"].Values.Select(n =>n.AsString()).ToList();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

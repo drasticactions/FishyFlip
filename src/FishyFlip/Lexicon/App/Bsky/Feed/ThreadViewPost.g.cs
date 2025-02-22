@@ -59,6 +59,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["parent"] is not null) this.Parent = obj["parent"].ToATObject();
             if (obj["replies"] is not null) this.Replies = obj["replies"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["threadContext"] is not null) this.ThreadContext = new FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext(obj["threadContext"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

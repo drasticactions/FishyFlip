@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
             if (obj["latitude"] is not null) this.Latitude = obj["latitude"].AsString();
             if (obj["longitude"] is not null) this.Longitude = obj["longitude"].AsString();
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public SendMessageBatchInput(CBORObject obj)
         {
             if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

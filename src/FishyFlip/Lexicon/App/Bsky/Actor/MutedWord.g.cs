@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["targets"] is not null) this.Targets = obj["targets"].Values.Select(n =>n.AsString()).ToList();
             if (obj["actorTarget"] is not null) this.ActorTarget = obj["actorTarget"].AsString();
             if (obj["expiresAt"] is not null) this.ExpiresAt = obj["expiresAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

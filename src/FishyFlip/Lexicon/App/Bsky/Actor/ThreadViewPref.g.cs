@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             if (obj["sort"] is not null) this.Sort = obj["sort"].AsString();
             if (obj["prioritizeFollowedUsers"] is not null) this.PrioritizeFollowedUsers = obj["prioritizeFollowedUsers"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

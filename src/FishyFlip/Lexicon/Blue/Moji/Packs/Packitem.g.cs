@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATUri();
             if (obj["pack"] is not null) this.Pack = obj["pack"].ToATUri();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

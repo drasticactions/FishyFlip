@@ -75,6 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["quoteCount"] is not null) this.QuoteCount = obj["quoteCount"].AsInt64Value();
             if (obj["embeds"] is not null) this.Embeds = obj["embeds"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

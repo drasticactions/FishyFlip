@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             if (obj["source"] is not null) this.Source = obj["source"].ToATIdentifier();
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["renameTo"] is not null) this.RenameTo = obj["renameTo"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

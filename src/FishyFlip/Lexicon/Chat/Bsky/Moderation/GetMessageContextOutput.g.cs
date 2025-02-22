@@ -40,6 +40,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         public GetMessageContextOutput(CBORObject obj)
         {
             if (obj["messages"] is not null) this.Messages = obj["messages"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

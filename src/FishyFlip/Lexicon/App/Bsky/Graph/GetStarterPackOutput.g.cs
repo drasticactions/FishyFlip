@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetStarterPackOutput(CBORObject obj)
         {
             if (obj["starterPack"] is not null) this.StarterPack = new FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView(obj["starterPack"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             if (obj["record"] is not null) this.Record = new FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord(obj["record"]);
             if (obj["media"] is not null) this.Media = obj["media"].ToATObject();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

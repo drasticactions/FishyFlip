@@ -40,6 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public GetServicesOutput(CBORObject obj)
         {
             if (obj["views"] is not null) this.Views = obj["views"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

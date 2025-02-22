@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["completed"] is not null) this.Completed = obj["completed"].AsBoolean();
             if (obj["data"] is not null) this.Data = obj["data"].AsString();
             if (obj["expiresAt"] is not null) this.ExpiresAt = obj["expiresAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

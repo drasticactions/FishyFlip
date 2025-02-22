@@ -71,6 +71,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["inviteNote"] is not null) this.InviteNote = obj["inviteNote"].AsString();
             if (obj["deactivatedAt"] is not null) this.DeactivatedAt = obj["deactivatedAt"].ToDateTime();
             if (obj["threatSignatures"] is not null) this.ThreatSignatures = obj["threatSignatures"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

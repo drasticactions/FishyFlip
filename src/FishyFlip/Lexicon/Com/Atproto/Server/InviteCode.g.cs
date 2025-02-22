@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["uses"] is not null) this.Uses = obj["uses"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

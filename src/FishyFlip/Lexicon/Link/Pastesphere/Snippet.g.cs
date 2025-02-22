@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
             if (obj["type"] is not null) this.TypeValue = obj["type"].AsString();
             if (obj["body"] is not null) this.Body = obj["body"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

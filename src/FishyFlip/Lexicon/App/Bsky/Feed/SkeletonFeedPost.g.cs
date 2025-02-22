@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["post"] is not null) this.Post = obj["post"].ToATUri();
             if (obj["reason"] is not null) this.Reason = obj["reason"].ToATObject();
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public GetProfilesOutput(CBORObject obj)
         {
             if (obj["profiles"] is not null) this.Profiles = obj["profiles"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

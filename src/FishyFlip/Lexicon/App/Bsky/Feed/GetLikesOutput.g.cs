@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["likes"] is not null) this.Likes = obj["likes"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.LikeDef(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

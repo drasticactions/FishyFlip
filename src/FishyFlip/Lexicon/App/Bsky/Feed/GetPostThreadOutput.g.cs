@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["thread"] is not null) this.Thread = obj["thread"].ToATObject();
             if (obj["threadgate"] is not null) this.Threadgate = new FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

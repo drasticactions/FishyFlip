@@ -59,6 +59,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             if (obj["emojiRef"] is not null) this.EmojiRef = new FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef(obj["emojiRef"]);
             if (obj["emoji"] is not null) this.Emoji = new FishyFlip.Lexicon.Blue.Moji.Collection.ItemView(obj["emoji"]);
             if (obj["actor"] is not null) this.Actor = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["actor"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

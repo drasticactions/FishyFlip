@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public Moderation(CBORObject obj)
         {
             if (obj["subjectStatus"] is not null) this.SubjectStatus = new FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView(obj["subjectStatus"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

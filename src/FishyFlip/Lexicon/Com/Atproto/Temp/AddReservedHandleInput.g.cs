@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         public AddReservedHandleInput(CBORObject obj)
         {
             if (obj["handle"] is not null) this.Handle = obj["handle"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

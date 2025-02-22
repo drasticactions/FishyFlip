@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         public PackViewerState(CBORObject obj)
         {
             if (obj["savedToCollection"] is not null) this.SavedToCollection = obj["savedToCollection"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

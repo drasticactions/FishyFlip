@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["activeProgressGuide"] is not null) this.ActiveProgressGuide = new FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide(obj["activeProgressGuide"]);
             if (obj["queuedNudges"] is not null) this.QueuedNudges = obj["queuedNudges"].Values.Select(n =>n.AsString()).ToList();
             if (obj["nuxs"] is not null) this.Nuxs = obj["nuxs"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.Nux(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

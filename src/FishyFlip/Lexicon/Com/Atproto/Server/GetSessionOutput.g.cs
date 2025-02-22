@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             // Ignore DidDoc
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

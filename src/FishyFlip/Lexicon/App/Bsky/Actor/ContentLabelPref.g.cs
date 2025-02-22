@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["labelerDid"] is not null) this.LabelerDid = obj["labelerDid"].ToATDid();
             if (obj["label"] is not null) this.Label = obj["label"].AsString();
             if (obj["visibility"] is not null) this.Visibility = obj["visibility"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

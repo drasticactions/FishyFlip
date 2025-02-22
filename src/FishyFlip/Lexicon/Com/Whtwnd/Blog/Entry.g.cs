@@ -59,6 +59,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             if (obj["theme"] is not null) this.Theme = obj["theme"].AsString();
             if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata(n)).ToList();
             if (obj["visibility"] is not null) this.Visibility = obj["visibility"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["mutes"] is not null) this.Mutes = obj["mutes"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

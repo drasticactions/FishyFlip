@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["actor"] is not null) this.Actor = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(obj["actor"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

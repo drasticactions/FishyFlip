@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
             if (obj["lastUpdatedBy"] is not null) this.LastUpdatedBy = obj["lastUpdatedBy"].AsString();
             if (obj["role"] is not null) this.Role = obj["role"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

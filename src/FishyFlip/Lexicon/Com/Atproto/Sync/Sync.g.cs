@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["blocks"] is not null) this.Blocks = obj["blocks"].EncodeToBytes();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

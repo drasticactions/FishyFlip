@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         {
             if (obj["ref"] is not null) this.Ref = obj["ref"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

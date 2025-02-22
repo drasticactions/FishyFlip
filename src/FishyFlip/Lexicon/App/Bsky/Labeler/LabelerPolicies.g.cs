@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         {
             if (obj["labelValues"] is not null) this.LabelValues = obj["labelValues"].Values.Select(n =>n.AsString()).ToList();
             if (obj["labelValueDefinitions"] is not null) this.LabelValueDefinitions = obj["labelValueDefinitions"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

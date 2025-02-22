@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["allow"] is not null) this.Allow = obj["allow"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["hiddenReplies"] is not null) this.HiddenReplies = obj["hiddenReplies"].Values.Select(n =>n.ToATUri()!).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
             if (obj["durationInHours"] is not null) this.DurationInHours = obj["durationInHours"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["links"] is not null) this.Links = new FishyFlip.Lexicon.Com.Atproto.Server.Links(obj["links"]);
             if (obj["contact"] is not null) this.Contact = new FishyFlip.Lexicon.Com.Atproto.Server.Contact(obj["contact"]);
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

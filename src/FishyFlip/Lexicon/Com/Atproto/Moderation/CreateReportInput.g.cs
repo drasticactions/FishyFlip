@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             if (obj["reasonType"] is not null) this.ReasonType = obj["reasonType"].AsString();
             if (obj["reason"] is not null) this.Reason = obj["reason"].AsString();
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

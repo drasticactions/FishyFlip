@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             if (obj["alsoKnownAs"] is not null) this.AlsoKnownAs = obj["alsoKnownAs"].Values.Select(n =>n.AsString()).ToList();
             if (obj["verificationMethods"] is not null) this.VerificationMethods = obj["verificationMethods"].ToATObject();
             if (obj["services"] is not null) this.Services = obj["services"].ToATObject();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

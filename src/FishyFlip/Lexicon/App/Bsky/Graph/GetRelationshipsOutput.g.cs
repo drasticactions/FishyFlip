@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["actor"] is not null) this.Actor = obj["actor"].ToATDid();
             if (obj["relationships"] is not null) this.Relationships = obj["relationships"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

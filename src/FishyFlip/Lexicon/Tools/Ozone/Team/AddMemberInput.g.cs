@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["role"] is not null) this.Role = obj["role"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

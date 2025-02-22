@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public SkeletonReasonRepost(CBORObject obj)
         {
             if (obj["repost"] is not null) this.Repost = obj["repost"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

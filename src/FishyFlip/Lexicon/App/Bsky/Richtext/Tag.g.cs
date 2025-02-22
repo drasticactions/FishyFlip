@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
         public Tag(CBORObject obj)
         {
             if (obj["tag"] is not null) this.TagValue = obj["tag"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["deletedAt"] is not null) this.DeletedAt = obj["deletedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

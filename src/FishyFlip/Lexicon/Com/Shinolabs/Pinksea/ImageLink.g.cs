@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             if (obj["fullsize"] is not null) this.Fullsize = obj["fullsize"].AsString();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public NotifyOfUpdateInput(CBORObject obj)
         {
             if (obj["hostname"] is not null) this.Hostname = obj["hostname"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

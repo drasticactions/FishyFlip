@@ -59,6 +59,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

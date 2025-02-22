@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
             if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

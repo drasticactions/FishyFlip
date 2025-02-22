@@ -59,6 +59,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
             if (obj["banner"] is not null) this.Banner = new FishyFlip.Models.Blob(obj["banner"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

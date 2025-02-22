@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["codeCount"] is not null) this.CodeCount = obj["codeCount"].AsInt64Value();
             if (obj["useCount"] is not null) this.UseCount = obj["useCount"].AsInt64Value();
             if (obj["forAccounts"] is not null) this.ForAccounts = obj["forAccounts"].Values.Select(n =>n.ToATDid()!).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

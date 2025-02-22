@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["durationInHours"] is not null) this.DurationInHours = obj["durationInHours"].AsInt64Value();
             if (obj["acknowledgeAccountSubjects"] is not null) this.AcknowledgeAccountSubjects = obj["acknowledgeAccountSubjects"].AsBoolean();
             if (obj["policies"] is not null) this.Policies = obj["policies"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

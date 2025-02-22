@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.My.Skylights
             if (obj["rating"] is not null) this.Rating = new FishyFlip.Lexicon.My.Skylights.Rating(obj["rating"]);
             if (obj["note"] is not null) this.Note = new FishyFlip.Lexicon.My.Skylights.Note(obj["note"]);
             if (obj["finishedAt"] is not null) this.FinishedAt = obj["finishedAt"].Values.Select(n =>n.ToDateTime() ?? default).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

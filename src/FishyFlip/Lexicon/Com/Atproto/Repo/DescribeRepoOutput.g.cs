@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             // Ignore DidDoc
             if (obj["collections"] is not null) this.Collections = obj["collections"].Values.Select(n =>n.AsString()).ToList();
             if (obj["handleIsCorrect"] is not null) this.HandleIsCorrect = obj["handleIsCorrect"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

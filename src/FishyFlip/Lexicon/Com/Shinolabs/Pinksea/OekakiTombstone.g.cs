@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         public OekakiTombstone(CBORObject obj)
         {
             if (obj["formerAt"] is not null) this.FormerAt = obj["formerAt"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

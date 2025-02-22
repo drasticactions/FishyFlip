@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public MuteActorInput(CBORObject obj)
         {
             if (obj["actor"] is not null) this.Actor = obj["actor"].ToATIdentifier();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

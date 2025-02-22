@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["notifications"] is not null) this.Notifications = obj["notifications"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Notification.Notification(n)).ToList();
             if (obj["priority"] is not null) this.Priority = obj["priority"].AsBoolean();
             if (obj["seenAt"] is not null) this.SeenAt = obj["seenAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

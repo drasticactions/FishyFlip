@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public EmbedRecord(CBORObject obj)
         {
             if (obj["record"] is not null) this.Record = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["record"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

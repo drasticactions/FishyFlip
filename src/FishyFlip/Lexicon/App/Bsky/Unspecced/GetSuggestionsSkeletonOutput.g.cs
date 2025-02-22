@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
             if (obj["relativeToDid"] is not null) this.RelativeToDid = obj["relativeToDid"].ToATDid();
             if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

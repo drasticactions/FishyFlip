@@ -64,6 +64,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
             if (obj["reportedBy"] is not null) this.ReportedBy = obj["reportedBy"].ToATDid();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

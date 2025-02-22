@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// </summary>
         public DeleteResult(CBORObject obj)
         {
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         public const string RecordType = "com.atproto.repo.applyWrites#deleteResult";

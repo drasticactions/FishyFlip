@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         {
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
             if (obj["item"] is not null) this.Item = new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView(obj["item"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

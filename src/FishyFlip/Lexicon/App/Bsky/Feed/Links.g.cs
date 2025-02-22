@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["privacyPolicy"] is not null) this.PrivacyPolicy = obj["privacyPolicy"].AsString();
             if (obj["termsOfService"] is not null) this.TermsOfService = obj["termsOfService"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             if (obj["blobDivert"] is not null) this.BlobDivert = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["blobDivert"]);
             if (obj["chat"] is not null) this.Chat = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["chat"]);
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig(obj["viewer"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

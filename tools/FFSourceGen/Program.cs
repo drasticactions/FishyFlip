@@ -2054,7 +2054,7 @@ public partial class AppCommands
         {
             sb.AppendLine($"            {property.CBorProperty}");
         }
-
+        sb.AppendLine("            if (obj[\"$type\"] is not null) this.Type = obj[\"$type\"].AsString();");
         sb.AppendLine("        }");
         sb.AppendLine();
     }

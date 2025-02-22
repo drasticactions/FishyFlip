@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public RepoViewNotFound(CBORObject obj)
         {
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["convos"] is not null) this.Convos = obj["convos"].Values.Select(n =>new FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

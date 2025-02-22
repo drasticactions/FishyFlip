@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public ProfileAssociatedChat(CBORObject obj)
         {
             if (obj["allowIncoming"] is not null) this.AllowIncoming = obj["allowIncoming"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

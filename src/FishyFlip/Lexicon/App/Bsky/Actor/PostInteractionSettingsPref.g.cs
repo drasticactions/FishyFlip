@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             if (obj["threadgateAllowRules"] is not null) this.ThreadgateAllowRules = obj["threadgateAllowRules"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["postgateEmbeddingRules"] is not null) this.PostgateEmbeddingRules = obj["postgateEmbeddingRules"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.DisableRule(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["following"] is not null) this.Following = obj["following"].ToATUri();
             if (obj["followedBy"] is not null) this.FollowedBy = obj["followedBy"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

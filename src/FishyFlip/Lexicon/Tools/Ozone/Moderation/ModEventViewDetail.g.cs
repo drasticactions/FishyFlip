@@ -78,6 +78,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subjectBlobs"] is not null) this.SubjectBlobs = obj["subjectBlobs"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView(n)).ToList();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

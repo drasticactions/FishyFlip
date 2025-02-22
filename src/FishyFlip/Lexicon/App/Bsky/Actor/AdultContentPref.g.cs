@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public AdultContentPref(CBORObject obj)
         {
             if (obj["enabled"] is not null) this.Enabled = obj["enabled"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

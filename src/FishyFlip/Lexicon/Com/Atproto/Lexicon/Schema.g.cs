@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Lexicon
         public Schema(CBORObject obj)
         {
             if (obj["lexicon"] is not null) this.Lexicon = obj["lexicon"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

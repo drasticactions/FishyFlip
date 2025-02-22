@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["managerRole"] is not null) this.ManagerRole = obj["managerRole"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

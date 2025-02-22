@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["deletedAt"] is not null) this.DeletedAt = obj["deletedAt"].ToDateTime();
             if (obj["deactivatedAt"] is not null) this.DeactivatedAt = obj["deactivatedAt"].ToDateTime();
             if (obj["reactivatedAt"] is not null) this.ReactivatedAt = obj["reactivatedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

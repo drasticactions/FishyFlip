@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         {
             if (obj["lang"] is not null) this.Lang = obj["lang"].AsString();
             if (obj["file"] is not null) this.File = new FishyFlip.Models.Blob(obj["file"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         public Unknown(CBORObject obj)
         {
             if (obj["reason"] is not null) this.Reason = obj["reason"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["timestamp"] is not null) this.Timestamp = obj["timestamp"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>
