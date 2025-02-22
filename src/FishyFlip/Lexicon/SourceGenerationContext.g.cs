@@ -927,6 +927,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>), TypeInfoPropertyName = "ListMaTokonoByovSubscription")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion), TypeInfoPropertyName = "AppBskyUnspeccedSuggestion")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>), TypeInfoPropertyName = "ListAppBskyUnspeccedSuggestion")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Sync.Sync), TypeInfoPropertyName = "ComAtprotoSyncSync")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>), TypeInfoPropertyName = "ListComAtprotoSyncSync")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Richtext.Tag), TypeInfoPropertyName = "AppBskyRichtextTag")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>), TypeInfoPropertyName = "ListAppBskyRichtextTag")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView), TypeInfoPropertyName = "ToolsOzoneCommunicationTemplateView")]

@@ -930,6 +930,8 @@ namespace FishyFlip.Lexicon
                     return new Ma.Tokono.Byov.Subscription(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
                     return new App.Bsky.Unspecced.Suggestion(obj);
+                case "com.atproto.sync.subscribeRepos#sync":
+                    return new Com.Atproto.Sync.Sync(obj);
                 case "app.bsky.richtext.facet#tag":
                     return new App.Bsky.Richtext.Tag(obj);
                 case "tools.ozone.communication.defs#templateView":
