@@ -5,11 +5,12 @@
 using FishyFlip.Lexicon.Com.Atproto.Repo;
 using FishyFlip.Lexicon.Com.Atproto.Server;
 using FishyFlip.Tools;
-using IdentityModel.Client;
-using IdentityModel.OidcClient;
-using IdentityModel.OidcClient.DPoP;
-using IdentityModel.OidcClient.Results;
+using Duende.IdentityModel.Client;
+using Duende.IdentityModel.OidcClient;
+using Duende.IdentityModel.OidcClient.DPoP;
+using Duende.IdentityModel.OidcClient.Results;
 using Microsoft.Extensions.Logging;
+using Duende.IdentityModel;
 
 namespace FishyFlip;
 
@@ -125,15 +126,20 @@ internal class OAuth2SessionManager : ISessionManager
             Scope = string.Join(" ", scopes),
             RedirectUri = redirectUrl,
             LoadProfile = false,
-            LoginHint = loginHint,
         };
+        var parameters = new Parameters();
+        if (!string.IsNullOrEmpty(loginHint))
+        {
+            parameters.Add(OidcConstants.AuthorizeRequest.LoginHint, loginHint!, ParameterReplaceBehavior.Single);
+        }
+
         this.proofKey = JsonWebKeys.CreateRsaJson();
         options.ConfigureDPoP(this.proofKey);
 
         this.oidcClient = new OidcClient(options);
 
         this.oidcClient.Options.Policy.Discovery.DiscoveryDocumentPath = ".well-known/oauth-authorization-server";
-        this.state = await this.oidcClient.PrepareLoginAsync(cancellationToken: cancellationToken);
+        this.state = await this.oidcClient.PrepareLoginAsync(parameters, cancellationToken: cancellationToken);
         if (this.state == null)
         {
             return new ATError(new OAuth2Exception("Failed to prepare login."));
