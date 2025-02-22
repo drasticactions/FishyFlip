@@ -12,7 +12,16 @@ public class WalkerStatusProgress : IWalkerStatus
     /// <summary>
     /// Current node.
     /// </summary>
-    public required INodeEntry Current;
+    public INodeEntry Current;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="WalkerStatusProgress"/> class.
+    /// </summary>
+    /// <param name="current">The current node.</param>
+    public WalkerStatusProgress(INodeEntry current)
+    {
+        this.Current = current;
+    }
 
     /// <summary>
     /// Index of the current node.
