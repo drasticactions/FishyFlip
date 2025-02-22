@@ -17,19 +17,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// Initializes a new instance of the <see cref="Commit"/> class.
         /// </summary>
         /// <param name="seq">The stream sequence number of this message.</param>
-        /// <param name="tooBig">Indicates that this commit contained too many ops, or data size was too large. Consumers will need to make a separate request to get missing data.</param>
-        /// <param name="repo">The repo this event comes from.</param>
+        /// <param name="repo">The repo this event comes from. Note that all other message types name this field 'did'.</param>
         /// <param name="commit">Repo commit object CID.</param>
         /// <param name="rev">The rev of the emitted commit. Note that this information is also in the commit object included in blocks, unless this is a tooBig event.</param>
         /// <param name="since">The rev of the last emitted commit from this repo (if any).</param>
-        /// <param name="blocks">CAR file containing relevant blocks, as a diff since the previous repo state.</param>
+        /// <param name="blocks">CAR file containing relevant blocks, as a diff since the previous repo state. The commit must be included as a block, and the commit block CID must be the first entry in the CAR header 'roots' list.</param>
         /// <param name="ops"></param>
         /// <param name="blobs"></param>
+        /// <param name="prevData">The root CID of the MST tree for the previous commit from this repo (indicated by the 'since' revision field in this message). Corresponds to the 'data' field in the repo commit object. NOTE: this field is effectively required for the 'inductive' version of firehose.</param>
         /// <param name="time">Timestamp of when this message was originally broadcast.</param>
-        public Commit(long seq = default, bool tooBig = default, FishyFlip.Models.ATDid repo = default, Ipfs.Cid commit = default, string rev = default, string since = default, byte[] blocks = default, List<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp> ops = default, List<Ipfs.Cid> blobs = default, DateTime? time = default)
+        public Commit(long seq = default, FishyFlip.Models.ATDid repo = default, Ipfs.Cid commit = default, string rev = default, string since = default, byte[] blocks = default, List<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp> ops = default, List<Ipfs.Cid> blobs = default, Ipfs.Cid? prevData = default, DateTime? time = default)
         {
             this.Seq = seq;
-            this.TooBig = tooBig;
             this.Repo = repo;
             this.CommitValue = commit;
             this.Rev = rev;
@@ -37,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             this.Blocks = blocks;
             this.Ops = ops;
             this.Blobs = blobs;
+            this.PrevData = prevData;
             this.Time = time;
             this.Type = "com.atproto.sync.subscribeRepos#commit";
         }
@@ -57,7 +57,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public Commit(CBORObject obj)
         {
             if (obj["seq"] is not null) this.Seq = obj["seq"].AsInt64Value();
-            if (obj["tooBig"] is not null) this.TooBig = obj["tooBig"].AsBoolean();
             if (obj["repo"] is not null) this.Repo = obj["repo"].ToATDid();
             if (obj["commit"] is not null) this.CommitValue = obj["commit"].ToATCid();
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
@@ -65,6 +64,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["blocks"] is not null) this.Blocks = obj["blocks"].EncodeToBytes();
             if (obj["ops"] is not null) this.Ops = obj["ops"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp(n)).ToList();
             if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>n.ToATCid()!).ToList();
+            if (obj["prevData"] is not null) this.PrevData = obj["prevData"].ToATCid();
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
         }
 
@@ -77,16 +77,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         public long Seq { get; set; }
 
         /// <summary>
-        /// Gets or sets the tooBig.
-        /// <br/> Indicates that this commit contained too many ops, or data size was too large. Consumers will need to make a separate request to get missing data.
-        /// </summary>
-        [JsonPropertyName("tooBig")]
-        [JsonRequired]
-        public bool TooBig { get; set; }
-
-        /// <summary>
         /// Gets or sets the repo.
-        /// <br/> The repo this event comes from.
+        /// <br/> The repo this event comes from. Note that all other message types name this field 'did'.
         /// </summary>
         [JsonPropertyName("repo")]
         [JsonRequired]
@@ -120,7 +112,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Gets or sets the blocks.
-        /// <br/> CAR file containing relevant blocks, as a diff since the previous repo state.
+        /// <br/> CAR file containing relevant blocks, as a diff since the previous repo state. The commit must be included as a block, and the commit block CID must be the first entry in the CAR header 'roots' list.
         /// </summary>
         [JsonPropertyName("blocks")]
         [JsonRequired]
@@ -139,6 +131,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("blobs")]
         [JsonRequired]
         public List<Ipfs.Cid> Blobs { get; set; }
+
+        /// <summary>
+        /// Gets or sets the prevData.
+        /// <br/> The root CID of the MST tree for the previous commit from this repo (indicated by the 'since' revision field in this message). Corresponds to the 'data' field in the repo commit object. NOTE: this field is effectively required for the 'inductive' version of firehose.
+        /// </summary>
+        [JsonPropertyName("prevData")]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
+        public Ipfs.Cid? PrevData { get; set; }
 
         /// <summary>
         /// Gets or sets the time.

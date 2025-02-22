@@ -19,7 +19,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Known Values: <br/>
         /// takendown <br/>
         /// suspended <br/>
+        /// deleted <br/>
         /// deactivated <br/>
+        /// desynchronized <br/>
+        /// throttled <br/>
         /// </param>
         /// <param name="rev">Optional field, the current rev of the repo, if active=true</param>
         public GetRepoStatusOutput(FishyFlip.Models.ATDid did = default, bool active = default, string? status = default, string? rev = default)
@@ -73,7 +76,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Known Values: <br/>
         /// takendown <br/>
         /// suspended <br/>
+        /// deleted <br/>
         /// deactivated <br/>
+        /// desynchronized <br/>
+        /// throttled <br/>
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }
