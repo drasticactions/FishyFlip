@@ -9,7 +9,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a frame commit.
 /// </summary>
-public class FrameCommit
+public class FrameCommit : ICBOREncodable<FrameCommit>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameCommit"/> class.
@@ -94,4 +94,16 @@ public class FrameCommit
     /// Gets a value indicating whether this is too big.
     /// </summary>
     public bool TooBig { get; }
+
+    /// <inheritdoc/>
+    public static FrameCommit FromCBORObject(CBORObject obj)
+    {
+        return new FrameCommit(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a handle for a frame.
 /// </summary>
-public class FrameHandle
+public class FrameHandle : ICBOREncodable<FrameHandle>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameHandle"/> class.
@@ -40,4 +40,16 @@ public class FrameHandle
     /// Gets the timestamp of the frame handle.
     /// </summary>
     public DateTime? Time { get; }
+
+    /// <inheritdoc/>
+    public static FrameHandle FromCBORObject(CBORObject obj)
+    {
+        return new FrameHandle(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

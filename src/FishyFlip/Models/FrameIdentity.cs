@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Frame Identity.
 /// </summary>
-public class FrameIdentity
+public class FrameIdentity : ICBOREncodable<FrameIdentity>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameIdentity"/> class.
@@ -40,4 +40,16 @@ public class FrameIdentity
     /// Gets the handle.
     /// </summary>
     public ATHandle? Handle { get; }
+
+    /// <inheritdoc/>
+    public static FrameIdentity FromCBORObject(CBORObject obj)
+    {
+        return new FrameIdentity(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a frame migration object.
 /// </summary>
-public class FrameMigrate
+public class FrameMigrate : ICBOREncodable<FrameMigrate>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameMigrate"/> class.
@@ -40,4 +40,16 @@ public class FrameMigrate
     /// Gets the timestamp of the frame migration.
     /// </summary>
     public DateTime? Time { get; }
+
+    /// <inheritdoc/>
+    public static FrameMigrate FromCBORObject(CBORObject obj)
+    {
+        return new FrameMigrate(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

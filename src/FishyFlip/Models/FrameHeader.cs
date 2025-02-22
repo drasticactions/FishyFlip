@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Frame header.
 /// </summary>
-public class FrameHeader
+public class FrameHeader : ICBOREncodable<FrameHeader>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameHeader"/> class.
@@ -33,4 +33,16 @@ public class FrameHeader
     /// Gets or sets the type of header.
     /// </summary>
     public string? Type { get; set; }
+
+    /// <inheritdoc/>
+    public static FrameHeader FromCBORObject(CBORObject obj)
+    {
+        return new FrameHeader(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

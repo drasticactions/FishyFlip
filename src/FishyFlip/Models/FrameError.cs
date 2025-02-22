@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Frame atError.
 /// </summary>
-public class FrameError
+public class FrameError : ICBOREncodable<FrameError>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameError"/> class.
@@ -28,4 +28,16 @@ public class FrameError
     /// Gets the atError.
     /// </summary>
     public string? Message { get; }
+
+    /// <inheritdoc/>
+    public static FrameError FromCBORObject(CBORObject obj)
+    {
+        return new FrameError(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

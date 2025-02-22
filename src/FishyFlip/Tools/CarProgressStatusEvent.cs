@@ -16,17 +16,21 @@ public class CarProgressStatusEvent
     /// <param name="bytes">The progress status bytes.</param>
     public CarProgressStatusEvent(ATCid cid, byte[] bytes)
     {
-        this.Cid = cid;
-        this.Bytes = bytes;
+        this.FrameEvent = new FrameEvent(cid, bytes);
     }
 
     /// <summary>
     /// Gets the progress status bytes.
     /// </summary>
-    public byte[] Bytes { get; }
+    public byte[] Bytes => this.FrameEvent.Bytes;
 
     /// <summary>
     /// Gets the car ID.
     /// </summary>
-    public ATCid Cid { get; }
+    public ATCid Cid => this.FrameEvent.Cid;
+
+    /// <summary>
+    /// Gets the frame event.
+    /// </summary>
+    public FrameEvent FrameEvent { get; }
 }

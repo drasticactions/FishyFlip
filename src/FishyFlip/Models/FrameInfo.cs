@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents information about a frame.
 /// </summary>
-public class FrameInfo
+public class FrameInfo : ICBOREncodable<FrameInfo>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameInfo"/> class.
@@ -28,4 +28,16 @@ public class FrameInfo
     /// Gets the message associated with the frame.
     /// </summary>
     public string? Message { get; }
+
+    /// <inheritdoc/>
+    public static FrameInfo FromCBORObject(CBORObject obj)
+    {
+        return new FrameInfo(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents an operation on a frame repository.
 /// </summary>
-public class FrameRepoOp
+public class FrameRepoOp : ICBOREncodable<FrameRepoOp>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameRepoOp"/> class.
@@ -34,4 +34,16 @@ public class FrameRepoOp
     /// Gets the action associated with the operation.
     /// </summary>
     public string? Action { get; }
+
+    /// <inheritdoc/>
+    public static FrameRepoOp FromCBORObject(CBORObject obj)
+    {
+        return new FrameRepoOp(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

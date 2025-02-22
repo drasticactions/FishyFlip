@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Frame Account.
 /// </summary>
-public class FrameAccount
+public class FrameAccount : ICBOREncodable<FrameAccount>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameAccount"/> class.
@@ -40,4 +40,16 @@ public class FrameAccount
     /// Gets a value indicating whether the account is active.
     /// </summary>
     public bool Active { get; }
+
+    /// <inheritdoc/>
+    public static FrameAccount FromCBORObject(CBORObject obj)
+    {
+        return new FrameAccount(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

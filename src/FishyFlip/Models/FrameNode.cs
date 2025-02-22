@@ -8,7 +8,7 @@ namespace FishyFlip.Models;
 /// Represents a node in a frame, containing data.
 /// https://atproto.com/ja/specs/repository.
 /// </summary>
-public class FrameNode
+public class FrameNode : ICBOREncodable<FrameNode>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameNode"/> class with the specified CBOR object.
@@ -29,4 +29,16 @@ public class FrameNode
     /// Gets an ordered list of TreeEntry objects.
     /// </summary>
     public FrameEntry[]? Entries { get; }
+
+    /// <inheritdoc/>
+    public static FrameNode FromCBORObject(CBORObject obj)
+    {
+        return new FrameNode(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

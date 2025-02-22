@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents the footer of a frame in the FishyFlip application.
 /// </summary>
-public class FrameFooter
+public class FrameFooter : ICBOREncodable<FrameFooter>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameFooter"/> class.
@@ -62,5 +62,17 @@ public class FrameFooter
         }
 
         return null;
+    }
+
+    /// <inheritdoc/>
+    public static FrameFooter FromCBORObject(CBORObject obj)
+    {
+        return new FrameFooter(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
     }
 }

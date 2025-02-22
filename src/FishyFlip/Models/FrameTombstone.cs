@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a tombstone object for a frame.
 /// </summary>
-public class FrameTombstone
+public class FrameTombstone : ICBOREncodable<FrameTombstone>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameTombstone"/> class.
@@ -34,4 +34,16 @@ public class FrameTombstone
     /// Gets the timestamp of the tombstone.
     /// </summary>
     public DateTime? Time { get; }
+
+    /// <inheritdoc/>
+    public static FrameTombstone FromCBORObject(CBORObject obj)
+    {
+        return new FrameTombstone(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }

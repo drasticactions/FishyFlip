@@ -9,7 +9,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a frame entry.
 /// </summary>
-public class FrameEntry
+public class FrameEntry : ICBOREncodable<FrameEntry>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameEntry"/> class.
@@ -42,4 +42,16 @@ public class FrameEntry
     /// Gets the link to a sub-tree Node at a lower level which has keys sorting after this TreeEntry's key (to the "right"), but before the next TreeEntry's key in this Node (if any).
     /// </summary>
     public ATCid? Tree { get; }
+
+    /// <inheritdoc/>
+    public static FrameEntry FromCBORObject(CBORObject obj)
+    {
+        return new FrameEntry(obj);
+    }
+
+    /// <inheritdoc/>
+    public CBORObject ToCBORObject()
+    {
+        throw new NotImplementedException();
+    }
 }
