@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["thumb"] is not null) this.Thumb = new FishyFlip.Models.Blob(obj["thumb"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

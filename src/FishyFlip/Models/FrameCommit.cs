@@ -95,7 +95,11 @@ public class FrameCommit : ICBOREncodable<FrameCommit>
     /// </summary>
     public bool TooBig { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameCommit"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameCommit instance.</param>
+    /// <returns>A new instance of the <see cref="FrameCommit"/> class.</returns>
     public static FrameCommit FromCBORObject(CBORObject obj)
     {
         return new FrameCommit(obj);

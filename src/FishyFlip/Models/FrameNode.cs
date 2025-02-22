@@ -30,7 +30,11 @@ public class FrameNode : ICBOREncodable<FrameNode>
     /// </summary>
     public FrameEntry[]? Entries { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameNode"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameNode instance.</param>
+    /// <returns>A new instance of the <see cref="FrameNode"/> class.</returns>
     public static FrameNode FromCBORObject(CBORObject obj)
     {
         return new FrameNode(obj);

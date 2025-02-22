@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["item"] is not null) this.Item = new FishyFlip.Lexicon.Blue.Moji.Collection.ItemView(obj["item"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

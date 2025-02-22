@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].AsInt64Value();
             if (obj["labeler"] is not null) this.Labeler = obj["labeler"].AsBoolean();
             if (obj["chat"] is not null) this.Chat = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat(obj["chat"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

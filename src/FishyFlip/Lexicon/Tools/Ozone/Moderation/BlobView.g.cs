@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["details"] is not null) this.Details = obj["details"].ToATObject();
             if (obj["moderation"] is not null) this.Moderation = new FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation(obj["moderation"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

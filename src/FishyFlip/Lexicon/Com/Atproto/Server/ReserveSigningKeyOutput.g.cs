@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public ReserveSigningKeyOutput(CBORObject obj)
         {
             if (obj["signingKey"] is not null) this.SigningKey = obj["signingKey"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

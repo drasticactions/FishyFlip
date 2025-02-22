@@ -67,6 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["joinedViaStarterPack"] is not null) this.JoinedViaStarterPack = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["joinedViaStarterPack"]);
             if (obj["pinnedPost"] is not null) this.PinnedPost = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["pinnedPost"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         public Link(CBORObject obj)
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

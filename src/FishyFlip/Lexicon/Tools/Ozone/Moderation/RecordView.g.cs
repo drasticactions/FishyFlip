@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["moderation"] is not null) this.Moderation = new FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation(obj["moderation"]);
             if (obj["repo"] is not null) this.Repo = new FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView(obj["repo"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

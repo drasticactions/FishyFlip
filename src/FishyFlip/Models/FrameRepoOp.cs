@@ -35,7 +35,11 @@ public class FrameRepoOp : ICBOREncodable<FrameRepoOp>
     /// </summary>
     public string? Action { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameRepoOp"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameRepoOp instance.</param>
+    /// <returns>A new instance of the <see cref="FrameRepoOp"/> class.</returns>
     public static FrameRepoOp FromCBORObject(CBORObject obj)
     {
         return new FrameRepoOp(obj);

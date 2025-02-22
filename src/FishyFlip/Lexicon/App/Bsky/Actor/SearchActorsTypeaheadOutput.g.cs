@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public SearchActorsTypeaheadOutput(CBORObject obj)
         {
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

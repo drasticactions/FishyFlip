@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["contentMode"] is not null) this.ContentMode = obj["contentMode"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

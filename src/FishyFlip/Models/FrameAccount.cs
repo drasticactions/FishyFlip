@@ -41,7 +41,11 @@ public class FrameAccount : ICBOREncodable<FrameAccount>
     /// </summary>
     public bool Active { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameAccount"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameAccount instance.</param>
+    /// <returns>A new instance of the <see cref="FrameAccount"/> class.</returns>
     public static FrameAccount FromCBORObject(CBORObject obj)
     {
         return new FrameAccount(obj);

@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Richtext
             if (obj["adultOnly"] is not null) this.AdultOnly = obj["adultOnly"].AsBoolean();
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["formats"] is not null) this.Formats = new FishyFlip.Lexicon.Blue.Moji.Richtext.FormatsV0(obj["formats"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         {
             if (obj["byteStart"] is not null) this.ByteStart = obj["byteStart"].AsInt64Value();
             if (obj["byteEnd"] is not null) this.ByteEnd = obj["byteEnd"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

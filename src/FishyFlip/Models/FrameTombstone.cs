@@ -35,7 +35,11 @@ public class FrameTombstone : ICBOREncodable<FrameTombstone>
     /// </summary>
     public DateTime? Time { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameTombstone"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameTombstone instance.</param>
+    /// <returns>A new instance of the <see cref="FrameTombstone"/> class.</returns>
     public static FrameTombstone FromCBORObject(CBORObject obj)
     {
         return new FrameTombstone(obj);

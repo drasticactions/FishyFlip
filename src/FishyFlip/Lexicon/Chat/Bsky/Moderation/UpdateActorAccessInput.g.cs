@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             if (obj["actor"] is not null) this.Actor = obj["actor"].ToATDid();
             if (obj["allowAccess"] is not null) this.AllowAccess = obj["allowAccess"].AsBoolean();
             if (obj["ref"] is not null) this.Ref = obj["ref"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

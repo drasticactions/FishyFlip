@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["privateStateValues"] is not null) this.PrivateStateValues = obj["privateStateValues"].AsInt64Value();
             if (obj["expectedBlobs"] is not null) this.ExpectedBlobs = obj["expectedBlobs"].AsInt64Value();
             if (obj["importedBlobs"] is not null) this.ImportedBlobs = obj["importedBlobs"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

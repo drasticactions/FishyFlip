@@ -29,7 +29,11 @@ public class FrameError : ICBOREncodable<FrameError>
     /// </summary>
     public string? Message { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameError"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameError instance.</param>
+    /// <returns>A new instance of the <see cref="FrameError"/> class.</returns>
     public static FrameError FromCBORObject(CBORObject obj)
     {
         return new FrameError(obj);

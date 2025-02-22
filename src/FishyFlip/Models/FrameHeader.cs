@@ -34,7 +34,11 @@ public class FrameHeader : ICBOREncodable<FrameHeader>
     /// </summary>
     public string? Type { get; set; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameHeader"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameHeader instance.</param>
+    /// <returns>A new instance of the <see cref="FrameHeader"/> class.</returns>
     public static FrameHeader FromCBORObject(CBORObject obj)
     {
         return new FrameHeader(obj);

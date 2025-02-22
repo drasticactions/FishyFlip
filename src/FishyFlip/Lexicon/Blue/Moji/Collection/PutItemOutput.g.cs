@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         public PutItemOutput(CBORObject obj)
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

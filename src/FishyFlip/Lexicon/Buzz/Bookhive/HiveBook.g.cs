@@ -75,6 +75,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             if (obj["ratingsCount"] is not null) this.RatingsCount = obj["ratingsCount"].AsInt64Value();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["updatedAt"] is not null) this.UpdatedAt = obj["updatedAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

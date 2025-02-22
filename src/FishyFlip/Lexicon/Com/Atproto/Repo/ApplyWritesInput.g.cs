@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             if (obj["validate"] is not null) this.Validate = obj["validate"].AsBoolean();
             if (obj["writes"] is not null) this.Writes = obj["writes"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["swapCommit"] is not null) this.SwapCommit = obj["swapCommit"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             if (obj["blob"] is not null) this.Blob = new FishyFlip.Models.Blob(obj["blob"]);
             if (obj["imageLink"] is not null) this.ImageLink = new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ImageLink(obj["imageLink"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

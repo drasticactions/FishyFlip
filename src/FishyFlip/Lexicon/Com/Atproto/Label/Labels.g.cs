@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         {
             if (obj["seq"] is not null) this.Seq = obj["seq"].AsInt64Value();
             if (obj["labels"] is not null) this.LabelsValue = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

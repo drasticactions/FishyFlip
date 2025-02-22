@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["reactions"] is not null) this.Reactions = obj["reactions"].Values.Select(n =>new FishyFlip.Lexicon.Blue.Maril.Stellar.ReactionDef(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

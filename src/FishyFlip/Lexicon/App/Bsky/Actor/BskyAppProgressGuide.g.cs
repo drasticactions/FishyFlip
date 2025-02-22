@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public BskyAppProgressGuide(CBORObject obj)
         {
             if (obj["guide"] is not null) this.Guide = obj["guide"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

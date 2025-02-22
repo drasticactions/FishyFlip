@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["blocked"] is not null) this.Blocked = obj["blocked"].AsBoolean();
             if (obj["author"] is not null) this.Author = new FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor(obj["author"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

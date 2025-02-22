@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         {
             if (obj["account"] is not null) this.Account = new FishyFlip.Lexicon.Com.Atproto.Admin.AccountView(obj["account"]);
             if (obj["similarities"] is not null) this.Similarities = obj["similarities"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["width"] is not null) this.Width = obj["width"].AsInt64Value();
             if (obj["height"] is not null) this.Height = obj["height"].AsInt64Value();
             if (obj["length"] is not null) this.Length = obj["length"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

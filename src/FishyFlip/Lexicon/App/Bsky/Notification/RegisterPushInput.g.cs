@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
             if (obj["platform"] is not null) this.Platform = obj["platform"].AsString();
             if (obj["appId"] is not null) this.AppId = obj["appId"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// </summary>
         public RemoveOptionsOutput(CBORObject obj)
         {
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         public const string RecordType = "tools.ozone.setting.removeOptions#RemoveOptionsOutput";

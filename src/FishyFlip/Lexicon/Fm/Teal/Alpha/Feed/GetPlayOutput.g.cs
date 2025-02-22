@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         public GetPlayOutput(CBORObject obj)
         {
             if (obj["play"] is not null) this.Play = new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView(obj["play"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

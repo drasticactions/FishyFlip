@@ -41,7 +41,11 @@ public class FrameIdentity : ICBOREncodable<FrameIdentity>
     /// </summary>
     public ATHandle? Handle { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameIdentity"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameIdentity instance.</param>
+    /// <returns>A new instance of the <see cref="FrameIdentity"/> class.</returns>
     public static FrameIdentity FromCBORObject(CBORObject obj)
     {
         return new FrameIdentity(obj);

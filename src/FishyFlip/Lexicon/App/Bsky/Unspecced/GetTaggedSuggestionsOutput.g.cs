@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetTaggedSuggestionsOutput(CBORObject obj)
         {
             if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

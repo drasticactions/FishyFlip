@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         public UploadVideoOutput(CBORObject obj)
         {
             if (obj["jobStatus"] is not null) this.JobStatus = new FishyFlip.Lexicon.App.Bsky.Video.JobStatus(obj["jobStatus"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

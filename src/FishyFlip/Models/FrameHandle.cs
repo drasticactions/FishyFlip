@@ -41,7 +41,11 @@ public class FrameHandle : ICBOREncodable<FrameHandle>
     /// </summary>
     public DateTime? Time { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameHandle"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameHandle instance.</param>
+    /// <returns>A new instance of the <see cref="FrameHandle"/> class.</returns>
     public static FrameHandle FromCBORObject(CBORObject obj)
     {
         return new FrameHandle(obj);

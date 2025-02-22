@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["suspendCount"] is not null) this.SuspendCount = obj["suspendCount"].AsInt64Value();
             if (obj["escalateCount"] is not null) this.EscalateCount = obj["escalateCount"].AsInt64Value();
             if (obj["takedownCount"] is not null) this.TakedownCount = obj["takedownCount"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

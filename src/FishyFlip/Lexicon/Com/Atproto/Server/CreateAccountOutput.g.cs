@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             // Ignore DidDoc
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

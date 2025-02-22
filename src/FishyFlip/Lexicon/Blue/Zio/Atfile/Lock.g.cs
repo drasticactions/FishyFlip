@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         public Lock(CBORObject obj)
         {
             if (obj["lock"] is not null) this.LockValue = obj["lock"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

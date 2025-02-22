@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         public ServiceConfig(CBORObject obj)
         {
             if (obj["url"] is not null) this.Url = obj["url"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

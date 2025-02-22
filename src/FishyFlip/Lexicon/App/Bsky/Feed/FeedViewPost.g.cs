@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["reply"] is not null) this.Reply = new FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef(obj["reply"]);
             if (obj["reason"] is not null) this.Reason = obj["reason"].ToATObject();
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

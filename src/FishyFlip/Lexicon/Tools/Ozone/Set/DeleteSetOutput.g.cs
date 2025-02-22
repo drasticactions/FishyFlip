@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// </summary>
         public DeleteSetOutput(CBORObject obj)
         {
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         public const string RecordType = "tools.ozone.set.deleteSet#DeleteSetOutput";

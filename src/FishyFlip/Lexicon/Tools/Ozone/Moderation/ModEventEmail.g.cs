@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subjectLine"] is not null) this.SubjectLine = obj["subjectLine"].AsString();
             if (obj["content"] is not null) this.Content = obj["content"].AsString();
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

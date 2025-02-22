@@ -64,7 +64,11 @@ public class FrameFooter : ICBOREncodable<FrameFooter>
         return null;
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameFooter"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameFooter instance.</param>
+    /// <returns>A new instance of the <see cref="FrameFooter"/> class.</returns>
     public static FrameFooter FromCBORObject(CBORObject obj)
     {
         return new FrameFooter(obj);

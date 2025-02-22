@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["pinned"] is not null) this.Pinned = obj["pinned"].Values.Select(n =>n.ToATUri()!).ToList();
             if (obj["saved"] is not null) this.Saved = obj["saved"].Values.Select(n =>n.ToATUri()!).ToList();
             if (obj["timelineIndex"] is not null) this.TimelineIndex = obj["timelineIndex"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

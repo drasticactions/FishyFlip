@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         public SendEmailOutput(CBORObject obj)
         {
             if (obj["sent"] is not null) this.Sent = obj["sent"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

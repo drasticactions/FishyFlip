@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["recordUri"] is not null) this.RecordUri = obj["recordUri"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

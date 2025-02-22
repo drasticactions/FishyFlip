@@ -82,6 +82,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["locations"] is not null) this.Locations = obj["locations"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["uris"] is not null) this.Uris = obj["uris"].Values.Select(n =>new FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

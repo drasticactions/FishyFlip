@@ -45,7 +45,7 @@ public interface IRepoStorage
     /// </summary>
     /// <param name="commit">The commit data.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    Task ApplyCommit(FrameCommit commit);
+    Task ApplyCommit(CommitData commit);
 
     /// <summary>
     /// Gets the bytes of a block by its CID.

@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public ListTemplatesOutput(CBORObject obj)
         {
             if (obj["communicationTemplates"] is not null) this.CommunicationTemplates = obj["communicationTemplates"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

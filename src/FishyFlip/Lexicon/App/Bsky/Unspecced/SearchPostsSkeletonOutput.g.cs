@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["hitsTotal"] is not null) this.HitsTotal = obj["hitsTotal"].AsInt64Value();
             if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

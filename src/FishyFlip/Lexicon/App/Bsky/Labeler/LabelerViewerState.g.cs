@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         public LabelerViewerState(CBORObject obj)
         {
             if (obj["like"] is not null) this.Like = obj["like"].ToATUri();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

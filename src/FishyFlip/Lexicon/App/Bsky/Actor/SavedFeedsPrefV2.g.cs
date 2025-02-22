@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public SavedFeedsPrefV2(CBORObject obj)
         {
             if (obj["items"] is not null) this.Items = obj["items"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.SavedFeed(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

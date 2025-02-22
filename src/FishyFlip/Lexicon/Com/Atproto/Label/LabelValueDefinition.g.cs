@@ -69,6 +69,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             if (obj["defaultSetting"] is not null) this.DefaultSetting = obj["defaultSetting"].AsString();
             if (obj["adultOnly"] is not null) this.AdultOnly = obj["adultOnly"].AsBoolean();
             if (obj["locales"] is not null) this.Locales = obj["locales"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

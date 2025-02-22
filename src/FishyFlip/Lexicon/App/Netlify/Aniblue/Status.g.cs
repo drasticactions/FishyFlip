@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         public Status(CBORObject obj)
         {
             if (obj["status"] is not null) this.StatusValue = obj["status"].Values.Select(n =>new FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

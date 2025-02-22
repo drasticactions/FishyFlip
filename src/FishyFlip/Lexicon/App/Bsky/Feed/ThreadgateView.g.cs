@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["lists"] is not null) this.Lists = obj["lists"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

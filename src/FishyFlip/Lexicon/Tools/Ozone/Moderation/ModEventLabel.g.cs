@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["createLabelVals"] is not null) this.CreateLabelVals = obj["createLabelVals"].Values.Select(n =>n.AsString()).ToList();
             if (obj["negateLabelVals"] is not null) this.NegateLabelVals = obj["negateLabelVals"].Values.Select(n =>n.AsString()).ToList();
             if (obj["durationInHours"] is not null) this.DurationInHours = obj["durationInHours"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

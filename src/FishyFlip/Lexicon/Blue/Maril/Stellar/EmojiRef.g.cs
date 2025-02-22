@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         {
             if (obj["rkey"] is not null) this.Rkey = obj["rkey"].AsString();
             if (obj["repo"] is not null) this.Repo = obj["repo"].ToATDid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

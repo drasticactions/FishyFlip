@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         public DeleteSetInput(CBORObject obj)
         {
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

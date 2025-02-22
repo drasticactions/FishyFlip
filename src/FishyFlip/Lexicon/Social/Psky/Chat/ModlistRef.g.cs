@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         {
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
             if (obj["users"] is not null) this.Users = obj["users"].Values.Select(n =>n.ToATDid()!).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

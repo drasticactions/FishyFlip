@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public RequestEmailUpdateOutput(CBORObject obj)
         {
             if (obj["tokenRequired"] is not null) this.TokenRequired = obj["tokenRequired"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

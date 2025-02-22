@@ -68,6 +68,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["emailAuthFactor"] is not null) this.EmailAuthFactor = obj["emailAuthFactor"].AsBoolean();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

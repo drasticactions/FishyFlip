@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public DeactivateAccountInput(CBORObject obj)
         {
             if (obj["deleteAfter"] is not null) this.DeleteAfter = obj["deleteAfter"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

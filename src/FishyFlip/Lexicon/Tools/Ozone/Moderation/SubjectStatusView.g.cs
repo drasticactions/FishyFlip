@@ -117,6 +117,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["accountStats"] is not null) this.AccountStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats(obj["accountStats"]);
             if (obj["recordsStats"] is not null) this.RecordsStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats(obj["recordsStats"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

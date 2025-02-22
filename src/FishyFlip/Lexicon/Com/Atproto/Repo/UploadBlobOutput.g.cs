@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         public UploadBlobOutput(CBORObject obj)
         {
             if (obj["blob"] is not null) this.Blob = new FishyFlip.Models.Blob(obj["blob"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

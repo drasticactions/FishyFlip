@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["password"] is not null) this.Password = obj["password"].AsString();
             if (obj["authFactorToken"] is not null) this.AuthFactorToken = obj["authFactorToken"].AsString();
             if (obj["allowTakendown"] is not null) this.AllowTakendown = obj["allowTakendown"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

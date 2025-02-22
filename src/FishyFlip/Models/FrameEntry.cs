@@ -43,7 +43,11 @@ public class FrameEntry : ICBOREncodable<FrameEntry>
     /// </summary>
     public ATCid? Tree { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameEntry"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameEntry instance.</param>
+    /// <returns>A new instance of the <see cref="FrameEntry"/> class.</returns>
     public static FrameEntry FromCBORObject(CBORObject obj)
     {
         return new FrameEntry(obj);

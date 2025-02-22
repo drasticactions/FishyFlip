@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["serviceProvider"] is not null) this.ServiceProvider = obj["serviceProvider"].AsString();
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

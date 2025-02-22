@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["convoId"] is not null) this.ConvoId = obj["convoId"].AsString();
             if (obj["messageId"] is not null) this.MessageId = obj["messageId"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

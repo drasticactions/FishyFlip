@@ -66,6 +66,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>n.ToATCid()!).ToList();
             if (obj["prevData"] is not null) this.PrevData = obj["prevData"].ToATCid();
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

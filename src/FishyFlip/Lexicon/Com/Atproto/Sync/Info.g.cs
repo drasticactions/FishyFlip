@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         {
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
             if (obj["message"] is not null) this.Message = obj["message"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

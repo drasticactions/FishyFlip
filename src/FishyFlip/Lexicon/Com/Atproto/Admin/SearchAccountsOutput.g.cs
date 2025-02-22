@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["accounts"] is not null) this.Accounts = obj["accounts"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Admin.AccountView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

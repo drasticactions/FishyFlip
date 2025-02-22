@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         {
             if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["subject"]);
             if (obj["reaction"] is not null) this.Reaction = new FishyFlip.Lexicon.Blue.Maril.Stellar.ReactionDef(obj["reaction"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

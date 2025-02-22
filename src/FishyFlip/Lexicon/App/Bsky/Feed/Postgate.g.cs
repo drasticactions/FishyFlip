@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["post"] is not null) this.Post = obj["post"].ToATUri();
             if (obj["detachedEmbeddingUris"] is not null) this.DetachedEmbeddingUris = obj["detachedEmbeddingUris"].Values.Select(n =>n.ToATUri()!).ToList();
             if (obj["embeddingRules"] is not null) this.EmbeddingRules = obj["embeddingRules"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.DisableRule(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

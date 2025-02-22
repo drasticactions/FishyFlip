@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             if (obj["remainingDailyBytes"] is not null) this.RemainingDailyBytes = obj["remainingDailyBytes"].AsInt64Value();
             if (obj["message"] is not null) this.Message = obj["message"].AsString();
             if (obj["error"] is not null) this.Error = obj["error"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

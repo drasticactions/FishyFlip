@@ -72,6 +72,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             if (obj["scope"] is not null) this.Scope = obj["scope"].AsString();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
             if (obj["lastUpdatedBy"] is not null) this.LastUpdatedBy = obj["lastUpdatedBy"].ToATDid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

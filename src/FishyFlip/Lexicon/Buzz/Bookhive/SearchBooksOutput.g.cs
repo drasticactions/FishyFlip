@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         {
             if (obj["offset"] is not null) this.Offset = obj["offset"].AsInt64Value();
             if (obj["books"] is not null) this.Books = obj["books"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.HiveBook(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

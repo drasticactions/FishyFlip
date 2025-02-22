@@ -41,6 +41,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         public ViewerConfig(CBORObject obj)
         {
             if (obj["role"] is not null) this.Role = obj["role"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

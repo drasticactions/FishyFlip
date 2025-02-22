@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public GetUnreadCountOutput(CBORObject obj)
         {
             if (obj["count"] is not null) this.Count = obj["count"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

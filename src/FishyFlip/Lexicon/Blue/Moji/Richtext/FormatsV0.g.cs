@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Richtext
             if (obj["gif_128"] is not null) this.Gif128 = obj["gif_128"].AsString();
             if (obj["apng_128"] is not null) this.Apng128 = obj["apng_128"].AsBoolean();
             if (obj["lottie"] is not null) this.Lottie = obj["lottie"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

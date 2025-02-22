@@ -38,6 +38,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         public UpsertOptionOutput(CBORObject obj)
         {
             if (obj["option"] is not null) this.Option = new FishyFlip.Lexicon.Tools.Ozone.Setting.Option(obj["option"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

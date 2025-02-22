@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["allowlist"] is not null) this.Allowlist = new FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef(obj["allowlist"]);
             if (obj["denylist"] is not null) this.Denylist = new FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef(obj["denylist"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

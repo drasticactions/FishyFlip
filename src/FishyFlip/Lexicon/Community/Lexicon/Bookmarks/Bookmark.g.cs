@@ -45,6 +45,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
             if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

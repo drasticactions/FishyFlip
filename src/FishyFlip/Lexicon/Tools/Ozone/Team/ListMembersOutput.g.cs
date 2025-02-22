@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Team.Member(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

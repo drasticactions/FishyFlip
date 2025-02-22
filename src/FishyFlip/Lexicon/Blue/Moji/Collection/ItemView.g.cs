@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["formats"] is not null) this.Formats = new FishyFlip.Lexicon.Blue.Moji.Collection.FormatsV0(obj["formats"]);
             if (obj["adultOnly"] is not null) this.AdultOnly = obj["adultOnly"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

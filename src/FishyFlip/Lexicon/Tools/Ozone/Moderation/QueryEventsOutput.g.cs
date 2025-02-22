@@ -39,6 +39,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["events"] is not null) this.Events = obj["events"].Values.Select(n =>new FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

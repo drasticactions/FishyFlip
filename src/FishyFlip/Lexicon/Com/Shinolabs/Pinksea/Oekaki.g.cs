@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["inResponseTo"] is not null) this.InResponseTo = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["inResponseTo"]);
             if (obj["nsfw"] is not null) this.Nsfw = obj["nsfw"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -51,6 +51,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["episode_text"] is not null) this.EpisodeText = obj["episode_text"].AsString();
             if (obj["favorite"] is not null) this.Favorite = obj["favorite"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

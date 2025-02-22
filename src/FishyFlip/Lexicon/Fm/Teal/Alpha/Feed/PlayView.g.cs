@@ -72,6 +72,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             if (obj["musicServiceBaseDomain"] is not null) this.MusicServiceBaseDomain = obj["musicServiceBaseDomain"].AsString();
             if (obj["submissionClientAgent"] is not null) this.SubmissionClientAgent = obj["submissionClientAgent"].AsString();
             if (obj["playedTime"] is not null) this.PlayedTime = obj["playedTime"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

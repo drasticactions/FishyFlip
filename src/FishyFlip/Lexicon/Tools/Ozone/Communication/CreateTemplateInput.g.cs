@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
             if (obj["lang"] is not null) this.Lang = obj["lang"].AsString();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

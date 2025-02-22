@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         public ViewRecordDef(CBORObject obj)
         {
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

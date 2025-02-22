@@ -73,6 +73,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["stars"] is not null) this.Stars = obj["stars"].AsInt64Value();
             if (obj["review"] is not null) this.Review = obj["review"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

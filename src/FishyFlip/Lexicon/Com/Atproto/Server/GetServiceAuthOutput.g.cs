@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public GetServiceAuthOutput(CBORObject obj)
         {
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

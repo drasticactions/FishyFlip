@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         public ListAppPasswordsOutput(CBORObject obj)
         {
             if (obj["passwords"] is not null) this.Passwords = obj["passwords"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

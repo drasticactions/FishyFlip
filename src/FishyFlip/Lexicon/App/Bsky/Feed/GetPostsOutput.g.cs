@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public GetPostsOutput(CBORObject obj)
         {
             if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.PostView(n)).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
             if (obj["adultOnly"] is not null) this.AdultOnly = obj["adultOnly"].AsBoolean();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

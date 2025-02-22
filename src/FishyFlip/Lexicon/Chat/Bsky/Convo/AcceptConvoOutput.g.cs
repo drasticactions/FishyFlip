@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public AcceptConvoOutput(CBORObject obj)
         {
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

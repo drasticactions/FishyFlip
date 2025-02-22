@@ -41,7 +41,11 @@ public class FrameMigrate : ICBOREncodable<FrameMigrate>
     /// </summary>
     public DateTime? Time { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameMigrate"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameMigrate instance.</param>
+    /// <returns>A new instance of the <see cref="FrameMigrate"/> class.</returns>
     public static FrameMigrate FromCBORObject(CBORObject obj)
     {
         return new FrameMigrate(obj);

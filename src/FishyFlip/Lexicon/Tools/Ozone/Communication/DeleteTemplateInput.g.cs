@@ -36,6 +36,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         public DeleteTemplateInput(CBORObject obj)
         {
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

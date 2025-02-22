@@ -42,6 +42,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             if (obj["activated"] is not null) this.Activated = obj["activated"].AsBoolean();
             if (obj["placeInQueue"] is not null) this.PlaceInQueue = obj["placeInQueue"].AsInt64Value();
             if (obj["estimatedTimeMs"] is not null) this.EstimatedTimeMs = obj["estimatedTimeMs"].AsInt64Value();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

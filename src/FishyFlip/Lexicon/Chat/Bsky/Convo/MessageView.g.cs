@@ -59,6 +59,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["embed"] is not null) this.Embed = new FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef(obj["embed"]);
             if (obj["sender"] is not null) this.Sender = new FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

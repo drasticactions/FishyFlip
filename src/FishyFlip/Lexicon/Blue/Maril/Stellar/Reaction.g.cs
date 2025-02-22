@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         {
             if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["subject"]);
             if (obj["emoji"] is not null) this.Emoji = new FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef(obj["emoji"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

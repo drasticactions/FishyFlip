@@ -48,6 +48,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             if (obj["host"] is not null) this.Host = obj["host"].AsString();
             if (obj["id"] is not null) this.Id = obj["id"].AsString();
             if (obj["os"] is not null) this.Os = obj["os"].AsString();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

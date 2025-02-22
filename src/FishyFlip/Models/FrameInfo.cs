@@ -29,7 +29,11 @@ public class FrameInfo : ICBOREncodable<FrameInfo>
     /// </summary>
     public string? Message { get; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Creates a new instance of the <see cref="FrameInfo"/> class from a CBORObject.
+    /// </summary>
+    /// <param name="obj">The CBORObject to convert into a FrameInfo instance.</param>
+    /// <returns>A new instance of the <see cref="FrameInfo"/> class.</returns>
     public static FrameInfo FromCBORObject(CBORObject obj)
     {
         return new FrameInfo(obj);

@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["type"] is not null) this.TypeValue = obj["type"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
             if (obj["pinned"] is not null) this.Pinned = obj["pinned"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

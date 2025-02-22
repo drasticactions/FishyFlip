@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             if (obj["repo"] is not null) this.Repo = obj["repo"].ToATIdentifier();
             if (obj["validate"] is not null) this.Validate = obj["validate"].AsBoolean();
             if (obj["item"] is not null) this.Item = new FishyFlip.Lexicon.Blue.Moji.Collection.ItemView(obj["item"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

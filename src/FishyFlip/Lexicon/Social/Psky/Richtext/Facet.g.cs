@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
         {
             if (obj["index"] is not null) this.Index = new FishyFlip.Lexicon.Social.Psky.Richtext.ByteSlice(obj["index"]);
             if (obj["features"] is not null) this.Features = obj["features"].Values.Select(n =>n.ToATObject()).ToList();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

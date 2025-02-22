@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["replyDisabled"] is not null) this.ReplyDisabled = obj["replyDisabled"].AsBoolean();
             if (obj["embeddingDisabled"] is not null) this.EmbeddingDisabled = obj["embeddingDisabled"].AsBoolean();
             if (obj["pinned"] is not null) this.Pinned = obj["pinned"].AsBoolean();
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>

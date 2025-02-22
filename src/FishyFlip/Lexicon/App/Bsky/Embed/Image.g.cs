@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["image"] is not null) this.ImageValue = new FishyFlip.Models.Blob(obj["image"]);
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
             if (obj["aspectRatio"] is not null) this.AspectRatio = new FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
+            if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>
