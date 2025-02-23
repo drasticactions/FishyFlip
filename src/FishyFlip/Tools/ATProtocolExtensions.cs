@@ -58,7 +58,7 @@ public static class ATProtocolExtensions
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="progress">The progress reporter for the decoding process. This is optional and defaults to null.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Success response message as the result.</returns>
-    public static async Task<Result<Success?>> GetCarAsync(
+    public static async Task<Result<CarResponse>> GetCarAsync(
             this ATProtocol protocol,
             string url,
             CancellationToken cancellationToken,

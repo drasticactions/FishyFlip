@@ -1666,7 +1666,7 @@ public partial class AppCommands
 
         if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
         {
-            requiredProperties.Add("OnCarDecoded onDecoded");
+            optionalProperties.Add("OnCarDecoded? onDecoded = default");
         }
 
         if (isExtensionMethod)
@@ -1715,6 +1715,11 @@ public partial class AppCommands
         if (classGeneration.Definition.Output?.Encoding == "*/*")
         {
             return "byte[]";
+        }
+
+        if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
+        {
+            return "CarResponse";
         }
 
         if (classGeneration.Definition.Output?.Schema is null)
@@ -2508,7 +2513,7 @@ public partial class AppCommands
         sb.AppendLine($"    /// <summary>");
         sb.AppendLine($"    /// The base class for FishyFlip ATProtocol Objects.");
         sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public partial class ATObject : ICBOREncodable<ATObject>, IJsonEncodable<ATObject>");
+        sb.AppendLine($"    public partial class ATObject : ICBOREncodable<ATObject>, IJsonEncodable<ATObject>, IRepoEntry");
         sb.AppendLine("    {");
         sb.AppendLine();
         sb.AppendLine("        public ATObject() { }");
@@ -2564,6 +2569,11 @@ public partial class AppCommands
         // sb.AppendLine("                default:");
         // sb.AppendLine("                    return JsonSerializer.SerializeToUtf8Bytes((ATObject)this, SourceGenerationContext.Default.ATObject);");
         // sb.AppendLine("            }");
+        sb.AppendLine("        }");
+        sb.AppendLine();
+        sb.AppendLine($"        public override string ToString()");
+        sb.AppendLine("        {");
+        sb.AppendLine("            return this.ToJson();");
         sb.AppendLine("        }");
         sb.AppendLine();
         sb.AppendLine("        internal static ATObject? ToATObject(string text, string type)");

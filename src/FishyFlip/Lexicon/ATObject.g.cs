@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon
     /// <summary>
     /// The base class for FishyFlip ATProtocol Objects.
     /// </summary>
-    public partial class ATObject : ICBOREncodable<ATObject>, IJsonEncodable<ATObject>
+    public partial class ATObject : ICBOREncodable<ATObject>, IJsonEncodable<ATObject>, IRepoEntry
     {
 
         public ATObject() { }
@@ -53,6 +53,11 @@ namespace FishyFlip.Lexicon
         public virtual byte[]? ToUtf8Json()
         {
              return null;
+        }
+
+        public override string ToString()
+        {
+            return this.ToJson();
         }
 
         internal static ATObject? ToATObject(string text, string type)

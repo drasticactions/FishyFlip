@@ -9,7 +9,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents a frame entry.
 /// </summary>
-public class FrameEntry
+public class FrameEntry : IRepoEntry
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameEntry"/> class.

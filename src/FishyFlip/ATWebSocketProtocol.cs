@@ -301,7 +301,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             break;
                         }
 
-                        void HandleProgressStatus(CarProgressStatusEvent e)
+                        foreach (var e in CarDecoder.DecodeCar(frameCommit.Blocks))
                         {
                             using var blockStream = new MemoryStream(e.Bytes);
                             var blockObj = CBORObject.Read(blockStream);
@@ -321,8 +321,6 @@ public sealed class ATWebSocketProtocol : IDisposable
                                 message.Nodes.Add(new FrameNode(blockObj));
                             }
                         }
-
-                        CarDecoder.DecodeCar(frameCommit.Blocks, HandleProgressStatus);
 
                         break;
                     case "#handle":

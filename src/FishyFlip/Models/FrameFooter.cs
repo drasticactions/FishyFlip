@@ -7,7 +7,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// Represents the footer of a frame in the FishyFlip application.
 /// </summary>
-public class FrameFooter
+public class FrameFooter : IRepoEntry
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameFooter"/> class.
