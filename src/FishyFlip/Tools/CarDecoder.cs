@@ -18,24 +18,13 @@ public delegate void OnCarDecoded(CarProgressStatusEvent e);
 public static class CarDecoder
 {
     private const int ATCidV1BytesLength = 36;
-    private const int BufferSize = 32768;
-
-    /// <summary>
-    /// Decodes CAR Byte Array.
-    /// </summary>
-    /// <param name="bytes">Byte Array.</param>
-    /// <param name="progress">Fires when a car file is decoded.</param>
-    public static void DecodeCar(byte[] bytes, OnCarDecoded? progress = null)
-    {
-        DecodeCar(bytes.AsSpan(), progress);
-    }
 
     /// <summary>
     /// Decodes CAR ReadOnlySpan.
     /// </summary>
     /// <param name="bytes">Bytes to decode.</param>
-    /// <param name="progress">Fires when a car file is decoded.</param>
-    public static void DecodeCar(ReadOnlySpan<byte> bytes, OnCarDecoded? progress = null)
+    /// <returns>IEnumberable of <see cref="FrameEvent"/>.</returns>
+    public static IEnumerable<FrameEvent> DecodeCar(byte[] bytes)
     {
         int bytesLength = bytes.Length;
         var header = DecodeReader(bytes);
@@ -44,7 +33,11 @@ public static class CarDecoder
 
         while (start < bytesLength)
         {
+#if NET
             var body = DecodeReader(bytes[start..]);
+#else
+            var body = DecodeReader(new ArraySegment<byte>(bytes, start, bytes.Length - start).ToArray());
+#endif
             if (body.Value == 0)
             {
                 break;
@@ -52,13 +45,22 @@ public static class CarDecoder
 
             start += body.Length;
 
+#if NET
             var cidBytes = bytes[start..(start + ATCidV1BytesLength)];
+#else
+            var cidBytes = new ArraySegment<byte>(bytes, start, ATCidV1BytesLength).ToArray();
+#endif
+
             var cid = Cid.Read(cidBytes.ToArray());
 
             start += ATCidV1BytesLength;
+#if NET
             var bs = bytes[start..(start + body.Value - ATCidV1BytesLength)];
+#else
+            var bs = new ArraySegment<byte>(bytes, start, body.Value - ATCidV1BytesLength).ToArray();
+#endif
             start += body.Value - ATCidV1BytesLength;
-            progress?.Invoke(new CarProgressStatusEvent(cid, bs.ToArray()));
+            yield return new FrameEvent(cid, bs.ToArray());
         }
     }
 
@@ -68,16 +70,69 @@ public static class CarDecoder
     /// <param name="stream">Stream containing CAR file.</param>
     /// <param name="progress">Fires when a car file is decoded.</param>
     /// <returns>Task.</returns>
+    [Obsolete("Use DecodeCarAsync(Stream) instead.")]
     public static async Task DecodeCarAsync(Stream stream, OnCarDecoded? progress = null)
+    {
+        var items = DecodeCarAsync(stream);
+        await foreach (var item in items)
+        {
+            progress?.Invoke(new CarProgressStatusEvent(item.Cid, item.Bytes));
+        }
+    }
+
+    /// <summary>
+    /// Decodes Repo and returns ATObjects contained within it.
+    /// Skips over FrameNode and FrameEntry items.
+    /// </summary>
+    /// <param name="bytes">CAR Span.</param>
+    /// <returns>IEnumerable of <see cref="ATObject"/>.</returns>
+    public static IEnumerable<ATObject> DecodeRepo(byte[] bytes)
+    {
+        var items = DecodeCar(bytes);
+        foreach (var e in items)
+        {
+            using var blockStream = new MemoryStream(e.Bytes);
+            var blockObj = CBORObject.Read(blockStream);
+            if (blockObj.IsATObject())
+            {
+                yield return blockObj.ToATObject();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Decodes Repo and returns ATObjects contained within it.
+    /// Skips over FrameNode and FrameEntry items.
+    /// </summary>
+    /// <param name="stream">CAR Stream.</param>
+    /// <returns>IAsyncEnumerable of <see cref="ATObject"/>.</returns>
+    public static async IAsyncEnumerable<ATObject> DecodeRepoAsync(Stream stream)
+    {
+        var items = DecodeCarAsync(stream);
+        await foreach (var e in items)
+        {
+            using var blockStream = new MemoryStream(e.Bytes);
+            var blockObj = CBORObject.Read(blockStream);
+            if (blockObj.IsATObject())
+            {
+                yield return blockObj.ToATObject();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Decodes CAR Stream.
+    /// </summary>
+    /// <param name="stream">Stream containing CAR file.</param>
+    /// <returns>IAsyncEnumberable of <see cref="FrameEvent"/>.</returns>
+    public static async IAsyncEnumerable<FrameEvent> DecodeCarAsync(Stream stream)
     {
         var totalBytesRead = 0;
         var header = DecodeReader(stream);
         totalBytesRead += header.Length + header.Value;
         int start = header.Length + header.Value;
 
-        // System.Diagnostics.Debug.WriteLine($"Header: Value: {header.Value} - Length: {header.Length} - Start: {start}");
         await ScanStream(stream, start - 1);
-        byte[] receiveBuffer = new byte[BufferSize];
 
         while (true)
         {
@@ -90,19 +145,16 @@ public static class CarDecoder
             totalBytesRead += body.Length;
             start += body.Length;
 
-            // System.Diagnostics.Debug.WriteLine($"body: Value: {body.Value} - Length: {body.Length} - Start: {start}");
             byte[] cidBuffer = new byte[ATCidV1BytesLength];
             await stream.ReadExactlyAsync(cidBuffer, 0, ATCidV1BytesLength);
             var cid = Cid.Read(cidBuffer);
             totalBytesRead += ATCidV1BytesLength;
 
-            // System.Diagnostics.Debug.WriteLine($"cidBytes: {cidBuffer.Length}  - total: {totalBytesRead}");
             byte[] bodyBuffer = new byte[body.Value - ATCidV1BytesLength];
             await stream.ReadExactlyAsync(bodyBuffer, 0, body.Value - ATCidV1BytesLength);
             totalBytesRead += bodyBuffer.Length;
 
-            // System.Diagnostics.Debug.WriteLine($"bs: {bodyBuffer.Length}  - total: {totalBytesRead}");
-            progress?.Invoke(new CarProgressStatusEvent(cid, bodyBuffer));
+            yield return new FrameEvent(cid, bodyBuffer);
         }
     }
 

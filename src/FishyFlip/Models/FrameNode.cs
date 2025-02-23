@@ -8,7 +8,7 @@ namespace FishyFlip.Models;
 /// Represents a node in a frame, containing data.
 /// https://atproto.com/ja/specs/repository.
 /// </summary>
-public class FrameNode
+public class FrameNode : IRepoEntry
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameNode"/> class with the specified CBOR object.

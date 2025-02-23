@@ -81,8 +81,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="cids"></param>
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> GetBlocksAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        /// <returns>Result of <see cref="CarResponse?"/></returns>
+        public static Task<Result<CarResponse?>> GetBlocksAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetBlocks.ToString();
             endpointUrl += "?";
@@ -91,7 +91,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
             queryStrings.Add(string.Join("&", cids.Select(n => "cids=" + n)));
 
-            queryStrings.Add("onDecoded=" + onDecoded);
+            if (onDecoded != null)
+            {
+                queryStrings.Add("onDecoded=" + onDecoded);
+            }
 
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
@@ -141,8 +144,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="rkey">Record Key</param>
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        /// <returns>Result of <see cref="CarResponse?"/></returns>
+        public static Task<Result<CarResponse?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRecord.ToString();
             endpointUrl += "?";
@@ -153,7 +156,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
             queryStrings.Add("rkey=" + rkey);
 
-            queryStrings.Add("onDecoded=" + onDecoded);
+            if (onDecoded != null)
+            {
+                queryStrings.Add("onDecoded=" + onDecoded);
+            }
 
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
@@ -172,22 +178,25 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="did">The DID of the repo.</param>
-        /// <param name="onDecoded"></param>
         /// <param name="since">The revision ('rev') of the repo to create a diff from.</param>
+        /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
+        /// <returns>Result of <see cref="CarResponse?"/></returns>
+        public static Task<Result<CarResponse?>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? since = default, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRepo.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
             queryStrings.Add("did=" + did);
 
-            queryStrings.Add("onDecoded=" + onDecoded);
-
             if (since != null)
             {
                 queryStrings.Add("since=" + since);
+            }
+
+            if (onDecoded != null)
+            {
+                queryStrings.Add("onDecoded=" + onDecoded);
             }
 
             var headers = new Dictionary<string, string>();

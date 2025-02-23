@@ -219,7 +219,7 @@ public static class HttpClientExtensions
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
     /// <param name="progress">The progress reporter for the decoding process. This is optional and defaults to null.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Success response message as the result.</returns>
-    public static async Task<Result<Success?>> GetCarAsync(
+    public static async Task<Result<CarResponse>> GetCarAsync(
         this HttpClient client,
         string url,
         JsonSerializerOptions options,
@@ -228,20 +228,24 @@ public static class HttpClientExtensions
         OnCarDecoded? progress = null)
     {
         logger?.LogDebug($"GET {client.BaseAddress}{url}");
-        using var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        var message = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if (!message.IsSuccessStatusCode)
         {
             ATError atError = await CreateError(message!, options, cancellationToken, logger);
             return atError!;
         }
 
-#if NETSTANDARD
-        using var stream = await message.Content.ReadAsStreamAsync();
-#else
-        await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
-#endif
-        await CarDecoder.DecodeCarAsync(stream, progress);
-        return new Success();
+        var carResponse = new CarResponse(message);
+
+        if (progress != null)
+        {
+            await foreach (var item in carResponse)
+            {
+                progress(new CarProgressStatusEvent(item.Cid, item.Bytes));
+            }
+        }
+
+        return new Result<CarResponse>(carResponse);
     }
 
     /// <summary>

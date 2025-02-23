@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="cids"></param>
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<Success?>> GetBlocksAsync (FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        public Task<Result<CarResponse?>> GetBlocksAsync (FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             return atp.GetBlocksAsync(did, cids, onDecoded, cancellationToken);
         }
@@ -98,7 +98,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="rkey">Record Key</param>
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<Success?>> GetRecordAsync (FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded onDecoded, CancellationToken cancellationToken = default)
+        public Task<Result<CarResponse?>> GetRecordAsync (FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             return atp.GetRecordAsync(did, collection, rkey, onDecoded, cancellationToken);
         }
@@ -113,12 +113,12 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <see cref="FishyFlip.Lexicon.RepoDeactivatedError"/>  <br/>
         /// </summary>
         /// <param name="did">The DID of the repo.</param>
-        /// <param name="onDecoded"></param>
         /// <param name="since">The revision ('rev') of the repo to create a diff from.</param>
+        /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<Success?>> GetRepoAsync (FishyFlip.Models.ATDid did, OnCarDecoded onDecoded, string? since = default, CancellationToken cancellationToken = default)
+        public Task<Result<CarResponse?>> GetRepoAsync (FishyFlip.Models.ATDid did, string? since = default, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
-            return atp.GetRepoAsync(did, onDecoded, since, cancellationToken);
+            return atp.GetRepoAsync(did, since, onDecoded, cancellationToken);
         }
 
 

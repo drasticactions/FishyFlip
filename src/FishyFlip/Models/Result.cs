@@ -15,7 +15,7 @@ public class Result<T> : Multiple<T, ATError>
     /// </summary>
     /// <typeparam name="T">The type of the value.</typeparam>
     /// <param name="value">Represents the type of value.</param>
-    private Result(T value)
+    internal Result(T? value)
         : base(0, value, default)
     {
     }
@@ -24,7 +24,7 @@ public class Result<T> : Multiple<T, ATError>
     /// Initializes a new instance of the <see cref="Result{T}"/> class.
     /// </summary>
     /// <param name="value">Represents the type of value.</param>
-    private Result(ATError? value)
+    internal Result(ATError? value)
         : base(1, default, value)
     {
     }
