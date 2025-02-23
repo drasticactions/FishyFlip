@@ -506,6 +506,32 @@ public sealed partial class ATProtocol : IDisposable
         GC.SuppressFinalize(this);
     }
 
+    /// <summary>
+    /// Resolves an ATIdentifier to an ATDid.
+    /// </summary>
+    /// <param name="atIdentifier">ATIdentifier.</param>
+    /// <returns>Result of ATDid.</returns>
+    internal async Task<Result<ATDid?>> ResolveATDidAsync(ATIdentifier atIdentifier)
+    {
+        if (atIdentifier is ATDid)
+        {
+            return (ATDid)atIdentifier;
+        }
+
+        if (atIdentifier is ATHandle handle)
+        {
+            var (didOutput, error) = await this.Identity.ResolveHandleAsync(handle);
+            if (error is not null)
+            {
+                return error;
+            }
+
+            return didOutput?.Did;
+        }
+
+        return new ATError(new Exception("Could not resolve ATIdentifier to ATDid."));
+    }
+
     private void Dispose(bool disposing)
     {
         if (!this.disposedValue)
