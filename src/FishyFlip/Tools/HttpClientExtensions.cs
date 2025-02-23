@@ -253,8 +253,7 @@ public static class HttpClientExtensions
     /// </summary>
     /// <param name="client">The HttpClient instance.</param>
     /// <param name="url">The Uri the request is sent to.</param>
-    /// <param name="filePath">The path where the file should be saved.</param>
-    /// <param name="fileName">The name of the file to be saved.</param>
+    /// <param name="outputStream">Output Stream.</param>
     /// <param name="options">The JsonSerializerOptions for the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="logger">The logger to use. This is optional and defaults to null.</param>
@@ -262,8 +261,7 @@ public static class HttpClientExtensions
     public static async Task<Result<Success?>> DownloadCarAsync(
         this HttpClient client,
         string url,
-        string filePath,
-        string fileName,
+        Stream outputStream,
         JsonSerializerOptions options,
         CancellationToken cancellationToken,
         ILogger? logger = default)
@@ -277,17 +275,12 @@ public static class HttpClientExtensions
             return atError!;
         }
 
-        var fileDownload = Path.Combine(filePath, StringExtensions.GenerateValidFilename(fileName));
 #if NETSTANDARD
-        using var content = File.Create(fileDownload);
         using var stream = await message.Content.ReadAsStreamAsync();
-        await stream.CopyToAsync(content);
+        await stream.CopyToAsync(outputStream);
 #else
-        await using (FileStream content = File.Create(fileDownload))
-        {
-            await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
-            await stream.CopyToAsync(content, cancellationToken);
-        }
+        await using var stream = await message.Content.ReadAsStreamAsync(cancellationToken);
+        await stream.CopyToAsync(outputStream, cancellationToken);
 #endif
 
         return new Success();

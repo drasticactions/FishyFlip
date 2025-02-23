@@ -34,20 +34,56 @@ public static class ATProtocolExtensions
     /// Sends a GET request to the specified Uri and downloads the response as a CAR (Content-Addressable Archive) file.
     /// </summary>
     /// <param name="protocol">The instance.</param>
-    /// <param name="url">The Uri the request is sent to.</param>
-    /// <param name="filePath">The path where the file should be saved.</param>
-    /// <param name="fileName">The name of the file to be saved.</param>
+    /// <param name="identifier">The user to download.</param>
+    /// <param name="outputStream">The stream to write the CAR file to.</param>
+    /// <param name="since">The revision ('rev') of the repo to create a diff from.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <returns>The Task that represents the asynchronous operation. The value of the TResult parameter contains the Success response message as the result.</returns>
-    public static async Task<Result<Success?>> DownloadCarAsync(
+    public static async Task<Result<Success?>> DownloadRepoAsync(
         this ATProtocol protocol,
-        string url,
-        string filePath,
-        string fileName,
-        CancellationToken cancellationToken)
+        ATIdentifier identifier,
+        Stream outputStream,
+        string? since = default,
+        CancellationToken cancellationToken = default)
         {
-            var result = await protocol.ResolveHostUri(url);
-            return await protocol.Client.DownloadCarAsync(result, filePath, fileName, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger);
+        var (result, error) = await protocol.ResolveATIdentifierAsync(identifier);
+        if (error is not null)
+        {
+            return error;
+        }
+
+        ATDid did;
+        if (identifier is ATDid atDid)
+        {
+            did = atDid;
+        }
+        else if (identifier is ATHandle atHandle)
+        {
+            var (didResult, didError) = await protocol.ResolveATDidAsync(atHandle);
+            if (didError is not null)
+            {
+                return didError;
+            }
+
+            did = didResult!;
+        }
+        else
+        {
+            throw new InvalidOperationException("Identifier must be a Did or Handle.");
+        }
+
+        var endpointUrl = $"{result![0..^1]}{FishyFlip.Lexicon.Com.Atproto.Sync.SyncEndpoints.GetRepo.ToString()}";
+        endpointUrl += "?";
+        List<string> queryStrings = new();
+        queryStrings.Add("did=" + did);
+
+        if (since != null)
+        {
+            queryStrings.Add("since=" + since);
+        }
+
+        endpointUrl += string.Join("&", queryStrings);
+        return await protocol.Client.DownloadCarAsync(endpointUrl, outputStream, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger);
         }
 
     /// <summary>
