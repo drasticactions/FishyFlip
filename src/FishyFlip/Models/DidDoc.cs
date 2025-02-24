@@ -59,6 +59,27 @@ public class DidDoc
     /// </summary>
     public List<Service> Service { get; }
 
+    /// <summary>
+    /// Gets the handle from the DidDoc.
+    /// </summary>
+    /// <returns><see cref="ATHandle"/>.</returns>
+    public ATHandle? GetHandle()
+    {
+        if (this.AlsoKnownAs.Count == 0)
+        {
+            return null;
+        }
+
+        var atUriString = this.AlsoKnownAs.FirstOrDefault(ATUri.IsValid);
+        if (atUriString == null)
+        {
+            return null;
+        }
+
+        var atUri = ATUri.Create(atUriString)!;
+        return atUri.Handle;
+    }
+
     /// <inheritdoc/>
     public override string ToString()
     {
