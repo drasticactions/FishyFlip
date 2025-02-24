@@ -46,7 +46,7 @@ public static class ATProtocolExtensions
         string? since = default,
         CancellationToken cancellationToken = default)
         {
-        var (result, error) = await protocol.ResolveATIdentifierAsync(identifier);
+        var (result, error) = await protocol.ResolveATIdentifierToHostAddressAsync(identifier);
         if (error is not null)
         {
             return error;

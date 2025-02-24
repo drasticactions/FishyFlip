@@ -152,7 +152,7 @@ public sealed partial class ATProtocol : IDisposable
     /// <returns>Authorization URL to call.</returns>
     public async Task<Result<string?>> GenerateOAuth2AuthenticationUrlResultAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, ATIdentifier identifier, CancellationToken cancellationToken = default)
     {
-        var (hostUrl, error) = await this.ResolveATIdentifierAsync(identifier, cancellationToken);
+        var (hostUrl, error) = await this.ResolveATIdentifierToHostAddressAsync(identifier, cancellationToken);
 
         if (error is not null)
         {
@@ -345,12 +345,49 @@ public sealed partial class ATProtocol : IDisposable
     }
 
     /// <summary>
+    /// Resolves an ATIdentifier to their ATDid and ATHandle..
+    /// </summary>
+    /// <param name="identifier"><see cref="ATIdentifier"/>.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
+    public async Task<Result<(ATDid Did, ATHandle Handle)>> ResolveATIdentifierAsync(ATIdentifier identifier, CancellationToken? token = default)
+    {
+        if (identifier is ATHandle handle)
+        {
+            var (resolveHandle, resolveError) = await this.Identity.ResolveHandleAsync(handle, token ?? CancellationToken.None);
+            if (resolveError is not null)
+            {
+                return resolveError;
+            }
+
+            if (resolveHandle?.Did is null)
+            {
+                return new ATError(new Exception($"Failed to resolve Handle: {handle}. Missing DID."));
+            }
+
+            return (resolveHandle.Did, handle);
+        }
+        else if (identifier is ATDid did)
+        {
+            var (didDoc, error) = await this.GetDidDocAsync(did, token ?? CancellationToken.None);
+            if (error is not null)
+            {
+                return error;
+            }
+
+            return (did, didDoc?.GetHandle()!);
+        }
+
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Resolves an ATIdentifier to a host address.
     /// </summary>
     /// <param name="identifier"><see cref="ATIdentifier"/>.</param>
     /// <param name="token">Cancellation Token.</param>
     /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
-    public async Task<Result<string?>> ResolveATIdentifierAsync(ATIdentifier identifier, CancellationToken? token = default)
+    public async Task<Result<string?>> ResolveATIdentifierToHostAddressAsync(ATIdentifier identifier, CancellationToken? token = default)
     {
         if (identifier is ATHandle handle)
         {
@@ -624,5 +661,42 @@ public sealed partial class ATProtocol : IDisposable
         }
 
         return host;
+    }
+
+    private async Task<Result<DidDoc?>> GetDidDocAsync(ATDid did, CancellationToken? token)
+    {
+        switch (did.Type)
+        {
+            case "plc":
+                return await this.PlcDirectory.GetDidDocAsync(did!, token ?? CancellationToken.None);
+            case "web":
+                var baseUri = did.ToString().Split(':').Last();
+                if (!baseUri.Contains("http"))
+                {
+                    baseUri = $"https://{baseUri}";
+                }
+
+                if (Uri.TryCreate(baseUri, UriKind.Absolute, out var uri))
+                {
+                    var result = await this.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
+                    }
+
+                    this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
+                }
+                else
+                {
+                    this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
+                }
+
+                break;
+            default:
+                this.options.Logger?.LogError($"DID type could not be resolved: {did}");
+                break;
+        }
+
+        return new ATError(new Exception($"DID type could not be resolved: {did}"));
     }
 }
