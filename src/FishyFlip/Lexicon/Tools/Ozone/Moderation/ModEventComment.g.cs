@@ -8,7 +8,7 @@
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
     /// <summary>
-    /// Add a comment to a subject
+    /// Add a comment to a subject. An empty comment will clear any previously set sticky comment.
     /// </summary>
     public partial class ModEventComment : ATObject, ICBOREncodable<ModEventComment>, IJsonEncodable<ModEventComment>
     {
@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </summary>
         /// <param name="comment"></param>
         /// <param name="sticky">Make the comment persistent on the subject</param>
-        public ModEventComment(string comment = default, bool? sticky = default)
+        public ModEventComment(string? comment = default, bool? sticky = default)
         {
             this.Comment = comment;
             this.Sticky = sticky;
@@ -49,8 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
-        [JsonRequired]
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         /// <summary>
         /// Gets or sets the sticky.

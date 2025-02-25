@@ -1008,6 +1008,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountPasswordInput);
                 case "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>)SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput);
+                case "chat.bsky.convo.updateAllRead#UpdateAllReadInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadInput>)SourceGenerationContext.Default.ChatBskyConvoUpdateAllReadInput);
+                case "chat.bsky.convo.updateAllRead#UpdateAllReadOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput>)SourceGenerationContext.Default.ChatBskyConvoUpdateAllReadOutput);
                 case "com.atproto.server.updateEmail#UpdateEmailInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.UpdateEmailInput>)SourceGenerationContext.Default.ComAtprotoServerUpdateEmailInput);
                 case "com.atproto.identity.updateHandle#UpdateHandleInput":
