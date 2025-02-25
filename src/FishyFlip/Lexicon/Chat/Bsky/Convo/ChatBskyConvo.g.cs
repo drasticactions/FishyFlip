@@ -217,6 +217,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
 
         /// <summary>
+        /// Generated endpoint for chat.bsky.convo.updateAllRead
+        /// </summary>
+        /// <param name="status"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput?>> UpdateAllReadAsync (string? status = default, CancellationToken cancellationToken = default)
+        {
+            return atp.UpdateAllReadAsync(status, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Generated endpoint for chat.bsky.convo.updateRead
         /// </summary>
         /// <param name="convoId"></param>

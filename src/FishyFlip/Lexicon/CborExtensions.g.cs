@@ -972,6 +972,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.UpdateAccountPasswordInput(obj);
                 case "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput":
                     return new Chat.Bsky.Moderation.UpdateActorAccessInput(obj);
+                case "chat.bsky.convo.updateAllRead#UpdateAllReadInput":
+                    return new Chat.Bsky.Convo.UpdateAllReadInput(obj);
+                case "chat.bsky.convo.updateAllRead#UpdateAllReadOutput":
+                    return new Chat.Bsky.Convo.UpdateAllReadOutput(obj);
                 case "com.atproto.server.updateEmail#UpdateEmailInput":
                     return new Com.Atproto.Server.UpdateEmailInput(obj);
                 case "com.atproto.identity.updateHandle#UpdateHandleInput":

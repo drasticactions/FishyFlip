@@ -40,6 +40,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
        public const string UnmuteConvo = "/xrpc/chat.bsky.convo.unmuteConvo";
 
+       public const string UpdateAllRead = "/xrpc/chat.bsky.convo.updateAllRead";
+
        public const string UpdateRead = "/xrpc/chat.bsky.convo.updateRead";
 
 
@@ -338,6 +340,24 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             var inputItem = new UnmuteConvoInput();
             inputItem.ConvoId = convoId;
             return atp.Post<UnmuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUnmuteConvoOutput!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Generated endpoint for chat.bsky.convo.updateAllRead
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="status"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput?>> UpdateAllReadAsync (this FishyFlip.ATProtocol atp, string? status = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = UpdateAllRead.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
+            var inputItem = new UpdateAllReadInput();
+            inputItem.Status = status;
+            return atp.Post<UpdateAllReadInput, FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateAllReadInput!, atp.Options.SourceGenerationContext.ChatBskyConvoUpdateAllReadOutput!, inputItem, cancellationToken, headers);
         }
 
 
