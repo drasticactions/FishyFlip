@@ -24,11 +24,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </param>
         /// <param name="createdAt"></param>
-        public Service(FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies? policies, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default)
+        /// <param name="reasonTypes">The set of report reason 'codes' which are in-scope for this service to review and action. These usually align to policy categories. If not defined (distinct from empty array), all reason types are allowed.</param>
+        /// <param name="subjectTypes">The set of subject types (account, record, etc) this service accepts reports on.</param>
+        /// <param name="subjectCollections">Set of record types (collection NSIDs) which can be reported to this service. If not defined (distinct from empty array), default is any record type.</param>
+        public Service(FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies? policies, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default, List<string>? reasonTypes = default, List<string>? subjectTypes = default, List<string>? subjectCollections = default)
         {
             this.Policies = policies;
             this.Labels = labels;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.ReasonTypes = reasonTypes;
+            this.SubjectTypes = subjectTypes;
+            this.SubjectCollections = subjectCollections;
             this.Type = "app.bsky.labeler.service";
         }
 
@@ -50,6 +56,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["policies"] is not null) this.Policies = new FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies(obj["policies"]);
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["reasonTypes"] is not null) this.ReasonTypes = obj["reasonTypes"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["subjectTypes"] is not null) this.SubjectTypes = obj["subjectTypes"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["subjectCollections"] is not null) this.SubjectCollections = obj["subjectCollections"].Values.Select(n =>n.AsString()).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -73,6 +82,27 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// Gets or sets the reasonTypes.
+        /// <br/> The set of report reason 'codes' which are in-scope for this service to review and action. These usually align to policy categories. If not defined (distinct from empty array), all reason types are allowed.
+        /// </summary>
+        [JsonPropertyName("reasonTypes")]
+        public List<string>? ReasonTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subjectTypes.
+        /// <br/> The set of subject types (account, record, etc) this service accepts reports on.
+        /// </summary>
+        [JsonPropertyName("subjectTypes")]
+        public List<string>? SubjectTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subjectCollections.
+        /// <br/> Set of record types (collection NSIDs) which can be reported to this service. If not defined (distinct from empty array), default is any record type.
+        /// </summary>
+        [JsonPropertyName("subjectCollections")]
+        public List<string>? SubjectCollections { get; set; }
 
         public const string RecordType = "app.bsky.labeler.service";
 

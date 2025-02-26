@@ -653,8 +653,6 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>), TypeInfoPropertyName = "ListComWhtwndBlogNotifyOfNewEntryInput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput), TypeInfoPropertyName = "ComWhtwndBlogNotifyOfNewEntryOutput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>), TypeInfoPropertyName = "ListComWhtwndBlogNotifyOfNewEntryOutput")]
-    [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Sync.NotifyOfUpdateInput), TypeInfoPropertyName = "ComAtprotoSyncNotifyOfUpdateInput")]
-    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Sync.NotifyOfUpdateInput>), TypeInfoPropertyName = "ListComAtprotoSyncNotifyOfUpdateInput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Actor.Nux), TypeInfoPropertyName = "AppBskyActorNux")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Actor.Nux>), TypeInfoPropertyName = "ListAppBskyActorNux")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki), TypeInfoPropertyName = "ComShinolabsPinkseaOekaki")]
