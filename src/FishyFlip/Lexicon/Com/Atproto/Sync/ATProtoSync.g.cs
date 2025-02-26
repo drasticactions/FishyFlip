@@ -203,17 +203,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
-        /// Notify a crawling service of a recent update, and that crawling should resume. Intended use is after a gap between repo stream events caused the crawling service to disconnect. Does not require auth; implemented by Relay.
-        /// </summary>
-        /// <param name="hostname">Hostname of the current service (usually a PDS) that is notifying of update.</param>
-        /// <param name="cancellationToken"></param>
-        public Task<Result<Success?>> NotifyOfUpdateAsync (string hostname, CancellationToken cancellationToken = default)
-        {
-            return atp.NotifyOfUpdateAsync(hostname, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Request a service to persistently crawl hosted repos. Expected use is new PDS instances declaring their existence to Relays. Does not require auth.
         /// </summary>
         /// <param name="hostname">Hostname of the current service (eg, PDS) that is requesting to be crawled.</param>

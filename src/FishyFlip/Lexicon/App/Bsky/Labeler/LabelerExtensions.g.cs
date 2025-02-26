@@ -42,16 +42,22 @@ namespace FishyFlip.Lexicon
         /// com.atproto.label.defs#selfLabels <br/>
         /// </param>
         /// <param name="createdAt"></param>
+        /// <param name="reasonTypes">The set of report reason 'codes' which are in-scope for this service to review and action. These usually align to policy categories. If not defined (distinct from empty array), all reason types are allowed.</param>
+        /// <param name="subjectTypes">The set of subject types (account, record, etc) this service accepts reports on.</param>
+        /// <param name="subjectCollections">Set of record types (collection NSIDs) which can be reported to this service. If not defined (distinct from empty array), default is any record type.</param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies? policies, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies? policies, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, DateTime? createdAt = default, List<string>? reasonTypes = default, List<string>? subjectTypes = default, List<string>? subjectCollections = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Labeler.Service();
             record.Policies = policies;
             record.Labels = labels;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
+            record.ReasonTypes = reasonTypes;
+            record.SubjectTypes = subjectTypes;
+            record.SubjectCollections = subjectCollections;
             return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
         }
 

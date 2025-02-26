@@ -692,8 +692,6 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput);
                 case "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryOutput);
-                case "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.NotifyOfUpdateInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.NotifyOfUpdateInput>)SourceGenerationContext.Default.ComAtprotoSyncNotifyOfUpdateInput);
                 case "app.bsky.actor.defs#nux":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Nux>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux);
                 case "com.shinolabs.pinksea.oekaki":

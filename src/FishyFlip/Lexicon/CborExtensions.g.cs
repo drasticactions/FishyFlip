@@ -656,8 +656,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Whtwnd.Blog.NotifyOfNewEntryInput(obj);
                 case "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryOutput":
                     return new Com.Whtwnd.Blog.NotifyOfNewEntryOutput(obj);
-                case "com.atproto.sync.notifyOfUpdate#NotifyOfUpdateInput":
-                    return new Com.Atproto.Sync.NotifyOfUpdateInput(obj);
                 case "app.bsky.actor.defs#nux":
                     return new App.Bsky.Actor.Nux(obj);
                 case "com.shinolabs.pinksea.oekaki":

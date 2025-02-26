@@ -32,8 +32,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
        public const string ListReposByCollection = "/xrpc/com.atproto.sync.listReposByCollection";
 
-       public const string NotifyOfUpdate = "/xrpc/com.atproto.sync.notifyOfUpdate";
-
        public const string RequestCrawl = "/xrpc/com.atproto.sync.requestCrawl";
 
 
@@ -333,23 +331,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposByCollectionOutput!, cancellationToken, headers);
-        }
-
-
-        /// <summary>
-        /// Notify a crawling service of a recent update, and that crawling should resume. Intended use is after a gap between repo stream events caused the crawling service to disconnect. Does not require auth; implemented by Relay.
-        /// </summary>
-        /// <param name="atp"></param>
-        /// <param name="hostname">Hostname of the current service (usually a PDS) that is notifying of update.</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> NotifyOfUpdateAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
-        {
-            var endpointUrl = NotifyOfUpdate.ToString();
-            var headers = new Dictionary<string, string>();
-            var inputItem = new NotifyOfUpdateInput();
-            inputItem.Hostname = hostname;
-            return atp.Post<NotifyOfUpdateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncNotifyOfUpdateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
