@@ -442,6 +442,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.Identity(obj);
                 case "tools.ozone.moderation.defs#identityEvent":
                     return new Tools.Ozone.Moderation.IdentityEvent(obj);
+                case "com.atproto.identity.defs#identityInfo":
+                    return new Com.Atproto.Identity.IdentityInfo(obj);
                 case "app.bsky.embed.images#image":
                     return new App.Bsky.Embed.Image(obj);
                 case "com.shinolabs.pinksea.oekaki#image":
@@ -762,6 +764,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.RecordWithMedia(obj);
                 case "my.skylights.rel#refItem":
                     return new My.Skylights.RefItem(obj);
+                case "com.atproto.identity.refreshIdentity#RefreshIdentityInput":
+                    return new Com.Atproto.Identity.RefreshIdentityInput(obj);
                 case "com.atproto.server.refreshSession#RefreshSessionOutput":
                     return new Com.Atproto.Server.RefreshSessionOutput(obj);
                 case "app.bsky.notification.registerPush#RegisterPushInput":
@@ -814,6 +818,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.ReserveSigningKeyOutput(obj);
                 case "com.atproto.server.resetPassword#ResetPasswordInput":
                     return new Com.Atproto.Server.ResetPasswordInput(obj);
+                case "com.atproto.identity.resolveDid#ResolveDidOutput":
+                    return new Com.Atproto.Identity.ResolveDidOutput(obj);
                 case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
                     return new Com.Atproto.Identity.ResolveHandleOutput(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":

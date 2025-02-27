@@ -86,6 +86,12 @@ namespace FishyFlip.Lexicon
                     return new ActorNotFoundError(statusCode, detail);
                 case "BadExpiration":
                     return new BadExpirationError(statusCode, detail);
+                case "HandleNotFound":
+                    return new HandleNotFoundError(statusCode, detail);
+                case "DidNotFound":
+                    return new DidNotFoundError(statusCode, detail);
+                case "DidDeactivated":
+                    return new DidDeactivatedError(statusCode, detail);
                 case "EmojiNotFound":
                     return new EmojiNotFoundError(statusCode, detail);
                 case "DestinationExists":

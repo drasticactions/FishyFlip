@@ -42,6 +42,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
 
         /// <summary>
+        /// Request that the server re-resolve an identity (DID and handle). The server may ignore this request, or require authentication, depending on the role, implementation, and policy of the server.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.HandleNotFoundError"/> The resolution process confirmed that the handle does not resolve to any DID. <br/>
+        /// <see cref="FishyFlip.Lexicon.DidNotFoundError"/> The DID resolution process confirmed that there is no current DID. <br/>
+        /// <see cref="FishyFlip.Lexicon.DidDeactivatedError"/> The DID previously existed, but has been deactivated. <br/>
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo?>> RefreshIdentityAsync (FishyFlip.Models.ATIdentifier identifier, CancellationToken cancellationToken = default)
+        {
+            return atp.RefreshIdentityAsync(identifier, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Request an email with a code to in order to request a signed PLC operation. Requires Auth.
         /// </summary>
         /// <param name="cancellationToken"></param>
@@ -52,13 +67,44 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
 
 
         /// <summary>
-        /// Resolves a handle (domain name) to a DID.
+        /// Resolves DID to DID document. Does not bi-directionally verify handle.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.DidNotFoundError"/> The DID resolution process confirmed that there is no current DID. <br/>
+        /// <see cref="FishyFlip.Lexicon.DidDeactivatedError"/> The DID previously existed, but has been deactivated. <br/>
+        /// </summary>
+        /// <param name="did">DID to resolve.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput?>> ResolveDidAsync (FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        {
+            return atp.ResolveDidAsync(did, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Resolves an atproto handle (hostname) to a DID. Does not necessarily bi-directionally verify against the the DID document.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.HandleNotFoundError"/> The resolution process confirmed that the handle does not resolve to any DID. <br/>
         /// </summary>
         /// <param name="handle">The handle to resolve.</param>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput?>> ResolveHandleAsync (FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default)
         {
             return atp.ResolveHandleAsync(handle, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Resolves an identity (DID or Handle) to a full identity (DID document and verified handle).
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.HandleNotFoundError"/> The resolution process confirmed that the handle does not resolve to any DID. <br/>
+        /// <see cref="FishyFlip.Lexicon.DidNotFoundError"/> The DID resolution process confirmed that there is no current DID. <br/>
+        /// <see cref="FishyFlip.Lexicon.DidDeactivatedError"/> The DID previously existed, but has been deactivated. <br/>
+        /// </summary>
+        /// <param name="identifier">Handle or DID to resolve.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo?>> ResolveIdentityAsync (FishyFlip.Models.ATIdentifier identifier, CancellationToken cancellationToken = default)
+        {
+            return atp.ResolveIdentityAsync(identifier, cancellationToken);
         }
 
 

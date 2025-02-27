@@ -27,7 +27,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </param>
         /// <param name="indexedAt"></param>
         /// <param name="labels"></param>
-        public LabelerViewDetailed(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView creator = default, FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies policies = default, long? likeCount = default, FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState? viewer = default, DateTime? indexedAt = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default)
+        /// <param name="reasonTypes">The set of report reason 'codes' which are in-scope for this service to review and action. These usually align to policy categories. If not defined (distinct from empty array), all reason types are allowed.</param>
+        /// <param name="subjectTypes">The set of subject types (account, record, etc) this service accepts reports on.</param>
+        /// <param name="subjectCollections">Set of record types (collection NSIDs) which can be reported to this service. If not defined (distinct from empty array), default is any record type.</param>
+        public LabelerViewDetailed(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView creator = default, FishyFlip.Lexicon.App.Bsky.Labeler.LabelerPolicies policies = default, long? likeCount = default, FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState? viewer = default, DateTime? indexedAt = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, List<string>? reasonTypes = default, List<string>? subjectTypes = default, List<string>? subjectCollections = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -37,6 +40,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             this.Viewer = viewer;
             this.IndexedAt = indexedAt;
             this.Labels = labels;
+            this.ReasonTypes = reasonTypes;
+            this.SubjectTypes = subjectTypes;
+            this.SubjectCollections = subjectCollections;
             this.Type = "app.bsky.labeler.defs#labelerViewDetailed";
         }
 
@@ -63,6 +69,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState(obj["viewer"]);
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
+            if (obj["reasonTypes"] is not null) this.ReasonTypes = obj["reasonTypes"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["subjectTypes"] is not null) this.SubjectTypes = obj["subjectTypes"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["subjectCollections"] is not null) this.SubjectCollections = obj["subjectCollections"].Values.Select(n =>n.AsString()).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -122,6 +131,27 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// </summary>
         [JsonPropertyName("labels")]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reasonTypes.
+        /// <br/> The set of report reason 'codes' which are in-scope for this service to review and action. These usually align to policy categories. If not defined (distinct from empty array), all reason types are allowed.
+        /// </summary>
+        [JsonPropertyName("reasonTypes")]
+        public List<string>? ReasonTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subjectTypes.
+        /// <br/> The set of subject types (account, record, etc) this service accepts reports on.
+        /// </summary>
+        [JsonPropertyName("subjectTypes")]
+        public List<string>? SubjectTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subjectCollections.
+        /// <br/> Set of record types (collection NSIDs) which can be reported to this service. If not defined (distinct from empty array), default is any record type.
+        /// </summary>
+        [JsonPropertyName("subjectCollections")]
+        public List<string>? SubjectCollections { get; set; }
 
         public const string RecordType = "app.bsky.labeler.defs#labelerViewDetailed";
 

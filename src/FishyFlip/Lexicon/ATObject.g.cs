@@ -478,6 +478,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity);
                 case "tools.ozone.moderation.defs#identityEvent":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent>)SourceGenerationContext.Default.ToolsOzoneModerationIdentityEvent);
+                case "com.atproto.identity.defs#identityInfo":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>)SourceGenerationContext.Default.ComAtprotoIdentityIdentityInfo);
                 case "app.bsky.embed.images#image":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.Image>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Image>)SourceGenerationContext.Default.AppBskyEmbedImage);
                 case "com.shinolabs.pinksea.oekaki#image":
@@ -798,6 +800,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia);
                 case "my.skylights.rel#refItem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.RefItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.RefItem>)SourceGenerationContext.Default.MySkylightsRefItem);
+                case "com.atproto.identity.refreshIdentity#RefreshIdentityInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput>)SourceGenerationContext.Default.ComAtprotoIdentityRefreshIdentityInput);
                 case "com.atproto.server.refreshSession#RefreshSessionOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerRefreshSessionOutput);
                 case "app.bsky.notification.registerPush#RegisterPushInput":
@@ -850,6 +854,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyOutput);
                 case "com.atproto.server.resetPassword#ResetPasswordInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ResetPasswordInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ResetPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerResetPasswordInput);
+                case "com.atproto.identity.resolveDid#ResolveDidOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput>)SourceGenerationContext.Default.ComAtprotoIdentityResolveDidOutput);
                 case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>)SourceGenerationContext.Default.ComAtprotoIdentityResolveHandleOutput);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
