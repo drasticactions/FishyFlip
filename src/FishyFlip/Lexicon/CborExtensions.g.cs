@@ -430,12 +430,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Video.GetUploadLimitsOutput(obj);
                 case "tools.ozone.set.getValues#GetValuesOutput":
                     return new Tools.Ozone.Set.GetValuesOutput(obj);
-                case "community.lexicon.location.h3":
-                    return new Community.Lexicon.Location.H3(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
                 case "buzz.bookhive.hiveBook":
                     return new Buzz.Bookhive.HiveBook(obj);
+                case "community.lexicon.location.hthree":
+                    return new Community.Lexicon.Location.Hthree(obj);
                 case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
                     return new Com.Shinolabs.Pinksea.HydratedOekaki(obj);
                 case "com.atproto.sync.subscribeRepos#identity":

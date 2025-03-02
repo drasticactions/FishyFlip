@@ -466,12 +466,12 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput);
                 case "tools.ozone.set.getValues#GetValuesOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>)SourceGenerationContext.Default.ToolsOzoneSetGetValuesOutput);
-                case "community.lexicon.location.h3":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.H3>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref);
                 case "buzz.bookhive.hiveBook":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>(text, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>)SourceGenerationContext.Default.BuzzBookhiveHiveBook);
+                case "community.lexicon.location.hthree":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree);
                 case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.HydratedOekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaHydratedOekaki);
                 case "com.atproto.sync.subscribeRepos#identity":
