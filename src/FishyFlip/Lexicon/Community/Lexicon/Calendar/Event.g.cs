@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Address"/> (community.lexicon.location.address) <br/>
         /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Fsq"/> (community.lexicon.location.fsq) <br/>
         /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Geo"/> (community.lexicon.location.geo) <br/>
-        /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.H3"/> (community.lexicon.location.h3) <br/>
+        /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Hthree"/> (community.lexicon.location.hthree) <br/>
         /// </param>
         /// <param name="uris">URIs associated with the event.</param>
         public Event(string? name, string? description = default, DateTime? createdAt = default, DateTime? startsAt = default, DateTime? endsAt = default, string? mode = default, string? status = default, List<ATObject>? locations = default, List<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>? uris = default)
@@ -152,7 +152,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Address"/> (community.lexicon.location.address) <br/>
         /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Fsq"/> (community.lexicon.location.fsq) <br/>
         /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Geo"/> (community.lexicon.location.geo) <br/>
-        /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.H3"/> (community.lexicon.location.h3) <br/>
+        /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Hthree"/> (community.lexicon.location.hthree) <br/>
         /// </summary>
         [JsonPropertyName("locations")]
         public List<ATObject>? Locations { get; set; }

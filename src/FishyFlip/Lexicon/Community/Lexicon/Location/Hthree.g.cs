@@ -10,35 +10,35 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
     /// <summary>
     /// A physical location in the form of a H3 encoded location.
     /// </summary>
-    public partial class H3 : ATObject, ICBOREncodable<H3>, IJsonEncodable<H3>
+    public partial class Hthree : ATObject, ICBOREncodable<Hthree>, IJsonEncodable<Hthree>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="H3"/> class.
+        /// Initializes a new instance of the <see cref="Hthree"/> class.
         /// </summary>
         /// <param name="value">The h3 encoded location.</param>
         /// <param name="name">The name of the location.</param>
-        public H3(string value = default, string? name = default)
+        public Hthree(string value = default, string? name = default)
         {
             this.Value = value;
             this.Name = name;
-            this.Type = "community.lexicon.location.h3";
+            this.Type = "community.lexicon.location.hthree";
         }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="H3"/> class.
+        /// Initializes a new instance of the <see cref="Hthree"/> class.
         /// </summary>
-        public H3()
+        public Hthree()
         {
-            this.Type = "community.lexicon.location.h3";
+            this.Type = "community.lexicon.location.hthree";
         }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="H3"/> class.
+        /// Initializes a new instance of the <see cref="Hthree"/> class.
         /// </summary>
-        public H3(CBORObject obj)
+        public Hthree(CBORObject obj)
         {
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
             if (obj["name"] is not null) this.Name = obj["name"].AsString();
@@ -60,21 +60,21 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
-        public const string RecordType = "community.lexicon.location.h3";
+        public const string RecordType = "community.lexicon.location.hthree";
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3);
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree);
         }
 
         public override byte[] ToUtf8Json()
         {
-            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3);
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree);
         }
 
-        public static new H3 FromJson(string json)
+        public static new Hthree FromJson(string json)
         {
-            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.H3>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.H3>)SourceGenerationContext.Default.CommunityLexiconLocationH3)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree)!;
         }
 
          /// <inheritdoc/>
@@ -85,9 +85,9 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         }
 
          /// <inheritdoc/>
-        public static new H3 FromCBORObject(CBORObject obj)
+        public static new Hthree FromCBORObject(CBORObject obj)
         {
-            return new H3(obj);
+            return new Hthree(obj);
         }
 
     }
