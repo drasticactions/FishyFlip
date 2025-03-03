@@ -309,7 +309,7 @@ public sealed partial class ATProtocol : IDisposable
                 var result = await oAuth2SessionManager.RefreshTokenAsync();
                 return oAuth2SessionManager.OAuthSession;
             case PasswordSessionManager { Session: not null } passwordManager:
-                await passwordManager.RefreshSessionAsync();
+                (await passwordManager.RefreshSessionAsync()).HandleResult();
                 return new AuthSession(passwordManager.Session);
             default:
                 return null;
