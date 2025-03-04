@@ -300,19 +300,43 @@ public sealed partial class ATProtocol : IDisposable
     /// Refreshes the current session asynchronously.
     /// </summary>
     /// <returns><see cref="AuthSession"/>.</returns>
+    [Obsolete("Use RefreshAuthSessionResultAsync instead.")]
     public async Task<AuthSession?> RefreshAuthSessionAsync()
+        => (await this.RefreshAuthSessionResultAsync()).HandleResult();
+
+    /// <summary>
+    /// Refreshes the current session asynchronously.
+    /// </summary>
+    /// <returns><see cref="AuthSession"/>.</returns>
+    public async Task<Result<AuthSession?>> RefreshAuthSessionResultAsync()
     {
         switch (this.sessionManager)
         {
             case OAuth2SessionManager oAuth2SessionManager:
                 // Refresh the token to make sure it's the most up to date.
                 var result = await oAuth2SessionManager.RefreshTokenAsync();
+                if (result?.IsError ?? false)
+                {
+                    // I'm not sure if 403 is the best status code to use here, and result doesn't include the code...
+                    return new ATError(403, new ErrorDetail(result.Error, result.ErrorDescription));
+                }
+
                 return oAuth2SessionManager.OAuthSession;
             case PasswordSessionManager { Session: not null } passwordManager:
-                await passwordManager.RefreshSessionAsync();
+                // The information from RefreshSessionOutput is set in passwordManager.Session,
+                // so we can return the session from password manager, and only worry about
+                // checking for the error.
+                var (_, error) = await passwordManager.RefreshSessionAsync();
+                if (error is not null)
+                {
+                    return error;
+                }
+
                 return new AuthSession(passwordManager.Session);
             default:
-                return null;
+                // If you don't have a session manager, you can't refresh the session.
+                // So return null.
+                return (AuthSession?)null;
         }
     }
 
