@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <summary>
         /// Initializes a new instance of the <see cref="EmbedVideo"/> class.
         /// </summary>
-        /// <param name="video"></param>
+        /// <param name="video">The mp4 video file. May be up to 100mb, formerly limited to 50mb.</param>
         /// <param name="captions"></param>
         /// <param name="alt">Alt text description of the video, for accessibility.</param>
         /// <param name="aspectRatio">
@@ -52,6 +52,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
 
         /// <summary>
         /// Gets or sets the video.
+        /// <br/> The mp4 video file. May be up to 100mb, formerly limited to 50mb.
         /// </summary>
         [JsonPropertyName("video")]
         [JsonRequired]
