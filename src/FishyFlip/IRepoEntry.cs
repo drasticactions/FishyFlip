@@ -6,7 +6,7 @@ namespace FishyFlip;
 
 /// <summary>
 /// IRepoEntry represents items that can be served within a Repo entry file,
-/// such as the ones served through <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.SyncEndpoints.GetRepoAsync(FishyFlip.ATProtocol, ATDid, OnCarDecoded, string?, CancellationToken)"/>.
+/// such as the ones served through GetRepoAsync."/>.
 /// </summary>
 public interface IRepoEntry
 {

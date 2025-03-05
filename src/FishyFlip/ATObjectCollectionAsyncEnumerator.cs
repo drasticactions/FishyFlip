@@ -1,4 +1,4 @@
-// <copyright file="ATObjectCollectionAsyncEnumerator{T}.cs" company="Drastic Actions">
+// <copyright file="ATObjectCollectionAsyncEnumerator.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 

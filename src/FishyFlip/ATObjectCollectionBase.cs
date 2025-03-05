@@ -1,4 +1,4 @@
-// <copyright file="ATObjectCollectionBase{T}.cs" company="Drastic Actions">
+// <copyright file="ATObjectCollectionBase.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 

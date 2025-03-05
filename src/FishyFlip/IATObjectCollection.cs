@@ -1,4 +1,4 @@
-// <copyright file="IATObjectCollection{T}.cs" company="Drastic Actions">
+// <copyright file="IATObjectCollection.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
