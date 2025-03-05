@@ -11,7 +11,7 @@ Version 3.0 contains several breaking changes from previous versions in order to
 
 FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, forked from [bluesky-net](https://github.com/dariogriffo/bluesky-net).
 
-For documentation, check out https://drasticactions.github.io/FishyFlip
+For documentation, check out [our docs site](https://fishyflip.dev).
 
 ### Third-Party Libraries
 
