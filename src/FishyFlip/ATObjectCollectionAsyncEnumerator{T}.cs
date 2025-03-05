@@ -60,8 +60,16 @@ internal class ATObjectCollectionAsyncEnumerator<T> : IAsyncEnumerator<T>
         if (this.Collection.HasMoreItems)
         {
             await this.Collection.GetMoreItemsAsync(cancellationToken: this.cancellationToken);
-            this.index++;
-            return true;
+
+            // Need to verify that new items were added with GetMoreItemsAsync to increase the index,
+            // otherwise it will throw on an out of range index.
+            if (this.index + 1 < this.Collection.Count)
+            {
+                this.index++;
+                return true;
+            }
+
+            return this.Collection.HasMoreItems;
         }
 
         return false;
