@@ -14,7 +14,7 @@ public static class BatchItemExtensions
     /// <summary>
     /// Collects all elements of the specified asynchronous sequence into a read-only list.
     /// </summary>
-    /// <typeparam name="T">The type of elements in the source sequence, which must implement <see cref="IBatchItem"/>.</typeparam>
+    /// <typeparam name="T">The type of elements in the source sequence.</typeparam>
     /// <param name="source">The asynchronous sequence to collect elements from.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a read-only list of the collected elements.</returns>
     public static async ValueTask<IReadOnlyList<T>> CollectAsync<T>(this IAsyncEnumerable<T> source)
@@ -23,7 +23,7 @@ public static class BatchItemExtensions
     /// <summary>
     /// Collects a specified number of items from an asynchronous enumerable sequence and returns them as a read-only list.
     /// </summary>
-    /// <typeparam name="T">The type of elements in the source sequence, which must implement <see cref="IBatchItem"/>.</typeparam>
+    /// <typeparam name="T">The type of elements in the source sequence.</typeparam>
     /// <param name="source">The asynchronous enumerable sequence to collect items from.</param>
     /// <param name="count">The number of items to collect from the source sequence.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a read-only list of collected items.</returns>

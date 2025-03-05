@@ -13,7 +13,7 @@ public class FrameEntry : IRepoEntry
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameEntry"/> class.
-    /// </
+    /// </summary>
     /// <param name="obj">The CBOR object.</param>
     public FrameEntry(CBORObject obj)
     {

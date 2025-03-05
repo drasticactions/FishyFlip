@@ -11,7 +11,7 @@ public class FrameIdentity
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FrameIdentity"/> class.
-    /// </
+    /// </summary>
     /// <param name="obj">The CBOR object containing the identity information.</param>
     public FrameIdentity(CBORObject obj)
     {
