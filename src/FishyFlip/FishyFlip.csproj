@@ -3,7 +3,7 @@
 		<Description>Access the ATProtocol and Bluesky through .NET: built with Source Generation.</Description>
 		<PackageTags>atproto atprotocol bluesky</PackageTags>
 		<RepositoryUrl>https://github.com/drasticactions/FishyFlip</RepositoryUrl>
-		<PackageProjectUrl>https://drasticactions.github.io/FishyFlip</PackageProjectUrl>
+		<PackageProjectUrl>https://fishyflip.dev</PackageProjectUrl>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>

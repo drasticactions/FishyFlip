@@ -6,7 +6,7 @@
 
 FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, forked from [bluesky-net](https://github.com/dariogriffo/bluesky-net).
 
-For documentation, check out https://drasticactions.github.io/FishyFlip
+For documentation, check out https://fishyflip.dev
 
 ### Code Flow
 
