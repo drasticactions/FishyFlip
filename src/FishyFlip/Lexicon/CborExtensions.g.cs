@@ -304,6 +304,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.GetConvoForMembersOutput(obj);
                 case "chat.bsky.convo.getConvo#GetConvoOutput":
                     return new Chat.Bsky.Convo.GetConvoOutput(obj);
+                case "blue.maril.stellar.getEmojis#GetEmojisOutput":
+                    return new Blue.Maril.Stellar.GetEmojisOutput(obj);
                 case "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput":
                     return new Com.Whtwnd.Blog.GetEntryMetadataByNameOutput(obj);
                 case "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput":
@@ -466,6 +468,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.InviteCodeUse(obj);
                 case "blue.moji.collection.item":
                     return new Blue.Moji.Collection.Item(obj);
+                case "blue.maril.stellar.getEmojis#itemView":
+                    return new Blue.Maril.Stellar.ItemView(obj);
                 case "blue.moji.collection.item#itemView":
                     return new Blue.Moji.Collection.ItemView(obj);
                 case "blue.moji.collection.listCollection#itemView":

@@ -57,6 +57,31 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 
 
         /// <summary>
+        /// Return all Bluemoji in the AppView.
+        /// </summary>
+        /// <param name="limit">The number of records to return.</param>
+        /// <param name="cursor"></param>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput?>> GetEmojisAsync (int? limit = 50, string? cursor = default, FishyFlip.Models.ATIdentifier? did = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetEmojisAsync(limit, cursor, did, cancellationToken);
+        }
+
+        /// <summary>
+        /// Return all Bluemoji in the AppView.
+        /// </summary>
+        /// <param name="limit">The number of records to return.</param>
+        /// <param name="cursor"></param>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        public GetEmojisOutputCollection GetEmojisCollectionAsync (int? limit = 50, string? cursor = default, FishyFlip.Models.ATIdentifier? did = default, CancellationToken cancellationToken = default)
+        {
+            return new GetEmojisOutputCollection(atp, limit, cursor, did, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get reaction records which reference a subject (by AT-URI and CID).
         /// </summary>
         /// <param name="uri">AT-URI of the subject (eg, a post record).</param>

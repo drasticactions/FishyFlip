@@ -21,6 +21,7 @@ REPOS=(
     "https://github.com/nperez0111/bookhive.git"
     "https://github.com/teal-fm/teal.git"
     "https://github.com/marukun712/stellar.git"
+    "https://github.com/aendra-rininsland/bluemoji.git"
 )
 
 PWD=$(pwd)
@@ -55,8 +56,10 @@ do
     if [ "$target_dir" != "bluesky-social-atproto" ]; then
         if [ "$target_dir" == "whtwnd-whitewind-blog" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/com/whtwnd")
+        elif [ "$target_dir" == "aendra-rininsland-bluemoji" ]; then
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/schema/blue.moji")
         elif [ "$target_dir" == "marukun712-stellar" ]; then
-            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/blue")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/stellar")
         elif [ "$target_dir" == "ziodotsh-lexicons" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/blue/zio")
         elif [ "$target_dir" == "shinolabs-PinkSea" ]; then
