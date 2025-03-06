@@ -340,6 +340,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>)SourceGenerationContext.Default.ChatBskyConvoGetConvoForMembersOutput);
                 case "chat.bsky.convo.getConvo#GetConvoOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoGetConvoOutput);
+                case "blue.maril.stellar.getEmojis#GetEmojisOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>)SourceGenerationContext.Default.BlueMarilStellarGetEmojisOutput);
                 case "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput);
                 case "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput":
@@ -502,6 +504,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse>)SourceGenerationContext.Default.ComAtprotoServerInviteCodeUse);
                 case "blue.moji.collection.item":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.Item>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.Item>)SourceGenerationContext.Default.BlueMojiCollectionItem);
+                case "blue.maril.stellar.getEmojis#itemView":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.ItemView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.ItemView>)SourceGenerationContext.Default.BlueMarilStellarItemView);
                 case "blue.moji.collection.item#itemView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.ItemView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.ItemView>)SourceGenerationContext.Default.BlueMojiCollectionItemView);
                 case "blue.moji.collection.listCollection#itemView":

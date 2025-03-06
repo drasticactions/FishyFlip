@@ -16,6 +16,8 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 
        public const string GetActorReactions = "/xrpc/blue.maril.stellar.getActorReactions";
 
+       public const string GetEmojis = "/xrpc/blue.maril.stellar.getEmojis";
+
        public const string GetReactions = "/xrpc/blue.maril.stellar.getReactions";
 
 
@@ -49,6 +51,42 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Maril.Stellar.GetActorReactionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMarilStellarGetActorReactionsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Return all Bluemoji in the AppView.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit">The number of records to return.</param>
+        /// <param name="cursor"></param>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput?>> GetEmojisAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, FishyFlip.Models.ATIdentifier? did = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetEmojis.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (did != null)
+            {
+                queryStrings.Add("did=" + did);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMarilStellarGetEmojisOutput!, cancellationToken, headers);
         }
 
 

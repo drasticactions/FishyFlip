@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         /// <param name="actor">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </param>
-        public ReactionDef(string rkey = default, Com.Atproto.Repo.StrongRef subject = default, DateTime? createdAt = default, FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef? emojiRef = default, FishyFlip.Lexicon.Blue.Moji.Collection.ItemView emoji = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView actor = default)
+        public ReactionDef(string rkey = default, Com.Atproto.Repo.StrongRef subject = default, DateTime? createdAt = default, FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef? emojiRef = default, FishyFlip.Lexicon.Blue.Moji.Collection.ItemView emoji = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? actor = default)
         {
             this.Rkey = rkey;
             this.Subject = subject;
@@ -104,8 +104,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </summary>
         [JsonPropertyName("actor")]
-        [JsonRequired]
-        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView Actor { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Actor { get; set; }
 
         public const string RecordType = "blue.maril.stellar.getReactions#reaction";
 
