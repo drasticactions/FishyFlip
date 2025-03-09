@@ -466,6 +466,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.InviteCode(obj);
                 case "com.atproto.server.defs#inviteCodeUse":
                     return new Com.Atproto.Server.InviteCodeUse(obj);
+                case "my.skylights.rel#item":
+                    return new My.Skylights.Item(obj);
                 case "blue.moji.collection.item":
                     return new Blue.Moji.Collection.Item(obj);
                 case "blue.maril.stellar.getEmojis#itemView":
@@ -766,8 +768,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.RecordViewNotFound(obj);
                 case "app.bsky.embed.recordWithMedia":
                     return new App.Bsky.Embed.RecordWithMedia(obj);
-                case "my.skylights.rel#refItem":
-                    return new My.Skylights.RefItem(obj);
                 case "com.atproto.identity.refreshIdentity#RefreshIdentityInput":
                     return new Com.Atproto.Identity.RefreshIdentityInput(obj);
                 case "com.atproto.server.refreshSession#RefreshSessionOutput":
@@ -1016,8 +1016,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
                 case "community.lexicon.calendar.event#uri":
                     return new Community.Lexicon.Calendar.Uri(obj);
-                case "my.skylights.rel#urlItem":
-                    return new My.Skylights.UrlItem(obj);
                 case "ma.tokono.byov.video":
                     return new Ma.Tokono.Byov.Video(obj);
                 case "tools.ozone.moderation.defs#videoDetails":
