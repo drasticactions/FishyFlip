@@ -14,9 +14,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// Initializes a new instance of the <see cref="Rel"/> class.
         /// </summary>
         /// <param name="item">
-        /// <br/> Union Types: <br/>
-        /// #refItem <br/>
-        /// #urlItem <br/>
+        /// my.skylights.defs#item <br/>
         /// </param>
         /// <param name="rating">
         /// my.skylights.defs#rating <br/>
@@ -25,7 +23,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// my.skylights.defs#note <br/>
         /// </param>
         /// <param name="finishedAt"></param>
-        public Rel(ATObject? item, FishyFlip.Lexicon.My.Skylights.Rating? rating = default, FishyFlip.Lexicon.My.Skylights.Note? note = default, List<DateTime>? finishedAt = default)
+        public Rel(FishyFlip.Lexicon.My.Skylights.Item? item, FishyFlip.Lexicon.My.Skylights.Rating? rating = default, FishyFlip.Lexicon.My.Skylights.Note? note = default, List<DateTime>? finishedAt = default)
         {
             this.Item = item;
             this.Rating = rating;
@@ -49,7 +47,7 @@ namespace FishyFlip.Lexicon.My.Skylights
         /// </summary>
         public Rel(CBORObject obj)
         {
-            if (obj["item"] is not null) this.Item = obj["item"].ToATObject();
+            if (obj["item"] is not null) this.Item = new FishyFlip.Lexicon.My.Skylights.Item(obj["item"]);
             if (obj["rating"] is not null) this.Rating = new FishyFlip.Lexicon.My.Skylights.Rating(obj["rating"]);
             if (obj["note"] is not null) this.Note = new FishyFlip.Lexicon.My.Skylights.Note(obj["note"]);
             if (obj["finishedAt"] is not null) this.FinishedAt = obj["finishedAt"].Values.Select(n =>n.ToDateTime() ?? default).ToList();
@@ -58,12 +56,10 @@ namespace FishyFlip.Lexicon.My.Skylights
 
         /// <summary>
         /// Gets or sets the item.
-        /// <br/> Union Types: <br/>
-        /// <see cref="FishyFlip.Lexicon.My.Skylights.RefItem"/> (my.skylights.rel#refItem) <br/>
-        /// <see cref="FishyFlip.Lexicon.My.Skylights.UrlItem"/> (my.skylights.rel#urlItem) <br/>
+        /// my.skylights.defs#item <br/>
         /// </summary>
         [JsonPropertyName("item")]
-        public ATObject? Item { get; set; }
+        public FishyFlip.Lexicon.My.Skylights.Item? Item { get; set; }
 
         /// <summary>
         /// Gets or sets the rating.

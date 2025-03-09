@@ -67,7 +67,7 @@ do
         elif [ "$target_dir" == "likeandscribe-frontpage" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/fyi")
         elif [ "$target_dir" == "Gregoor-skylights" ]; then
-            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/web/lexicons")
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons")
         elif [ "$target_dir" == "lexicon-community-lexicon" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/community/lexicon")
         elif [ "$target_dir" == "teal-fm-teal" ]; then

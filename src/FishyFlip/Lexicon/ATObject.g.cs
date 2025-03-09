@@ -502,6 +502,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>)SourceGenerationContext.Default.ComAtprotoServerInviteCode);
                 case "com.atproto.server.defs#inviteCodeUse":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.InviteCodeUse>)SourceGenerationContext.Default.ComAtprotoServerInviteCodeUse);
+                case "my.skylights.rel#item":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Item>(text, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Item>)SourceGenerationContext.Default.MySkylightsItem);
                 case "blue.moji.collection.item":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.Item>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.Item>)SourceGenerationContext.Default.BlueMojiCollectionItem);
                 case "blue.maril.stellar.getEmojis#itemView":
@@ -802,8 +804,6 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewNotFound>)SourceGenerationContext.Default.ToolsOzoneModerationRecordViewNotFound);
                 case "app.bsky.embed.recordWithMedia":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia>)SourceGenerationContext.Default.AppBskyEmbedRecordWithMedia);
-                case "my.skylights.rel#refItem":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.RefItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.RefItem>)SourceGenerationContext.Default.MySkylightsRefItem);
                 case "com.atproto.identity.refreshIdentity#RefreshIdentityInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput>)SourceGenerationContext.Default.ComAtprotoIdentityRefreshIdentityInput);
                 case "com.atproto.server.refreshSession#RefreshSessionOutput":
@@ -1052,8 +1052,6 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionOutput);
                 case "community.lexicon.calendar.event#uri":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>)SourceGenerationContext.Default.CommunityLexiconCalendarUri);
-                case "my.skylights.rel#urlItem":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.UrlItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.UrlItem>)SourceGenerationContext.Default.MySkylightsUrlItem);
                 case "ma.tokono.byov.video":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>(text, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo);
                 case "tools.ozone.moderation.defs#videoDetails":

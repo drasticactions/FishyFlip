@@ -13,15 +13,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
     public class ListMembersOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Team.Member>
     {
 
-        public ListMembersOutputCollection(FishyFlip.ATProtocol atp, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListMembersOutputCollection(FishyFlip.ATProtocol atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
+            this.Q = q;
             this.Disabled = disabled;
             this.Roles = roles;
             this.Limit = limit;
             this.Cursor = cursor;
             this.CancellationToken = cancellationToken;
         }
+
+        public string? Q { get; }
 
         public bool? Disabled { get; }
 
@@ -31,7 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         public override async Task<(IList<FishyFlip.Lexicon.Tools.Ozone.Team.Member> Posts, string Cursor)> GetRecordsAsync(int? limit = null, CancellationToken? token = default)
         {
             token = token ?? this.CancellationToken ?? System.Threading.CancellationToken.None;
-            var (result, error) = await this.ATProtocol.ListMembersAsync(disabled: this.Disabled, roles: this.Roles, limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
+            var (result, error) = await this.ATProtocol.ListMembersAsync(q: this.Q, disabled: this.Disabled, roles: this.Roles, limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
 
             this.HandleATError(error);
 
@@ -43,9 +46,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             return (result.Members, result.Cursor ?? string.Empty);
         }
 
-        public static ListMembersOutputCollection Create(FishyFlip.ATProtocol atp, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static ListMembersOutputCollection Create(FishyFlip.ATProtocol atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return new(atp: atp, disabled: disabled, roles: roles, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
+            return new(atp: atp, q: q, disabled: disabled, roles: roles, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }
     }
 }

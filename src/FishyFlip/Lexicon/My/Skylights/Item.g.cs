@@ -7,35 +7,35 @@
 
 namespace FishyFlip.Lexicon.My.Skylights
 {
-    public partial class RefItem : ATObject, ICBOREncodable<RefItem>, IJsonEncodable<RefItem>
+    public partial class Item : ATObject, ICBOREncodable<Item>, IJsonEncodable<Item>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RefItem"/> class.
+        /// Initializes a new instance of the <see cref="Item"/> class.
         /// </summary>
         /// <param name="@ref"></param>
         /// <param name="value"></param>
-        public RefItem(string @ref = default, string value = default)
+        public Item(string @ref = default, string value = default)
         {
             this.Ref = @ref;
             this.Value = value;
-            this.Type = "my.skylights.rel#refItem";
+            this.Type = "my.skylights.rel#item";
         }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RefItem"/> class.
+        /// Initializes a new instance of the <see cref="Item"/> class.
         /// </summary>
-        public RefItem()
+        public Item()
         {
-            this.Type = "my.skylights.rel#refItem";
+            this.Type = "my.skylights.rel#item";
         }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RefItem"/> class.
+        /// Initializes a new instance of the <see cref="Item"/> class.
         /// </summary>
-        public RefItem(CBORObject obj)
+        public Item(CBORObject obj)
         {
             if (obj["ref"] is not null) this.Ref = obj["ref"].AsString();
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
@@ -56,21 +56,21 @@ namespace FishyFlip.Lexicon.My.Skylights
         [JsonRequired]
         public string Value { get; set; }
 
-        public const string RecordType = "my.skylights.rel#refItem";
+        public const string RecordType = "my.skylights.rel#item";
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.RefItem>)SourceGenerationContext.Default.MySkylightsRefItem);
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Item>)SourceGenerationContext.Default.MySkylightsItem);
         }
 
         public override byte[] ToUtf8Json()
         {
-            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.RefItem>)SourceGenerationContext.Default.MySkylightsRefItem);
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Item>)SourceGenerationContext.Default.MySkylightsItem);
         }
 
-        public static new RefItem FromJson(string json)
+        public static new Item FromJson(string json)
         {
-            return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.RefItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.RefItem>)SourceGenerationContext.Default.MySkylightsRefItem)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.My.Skylights.Item>(json, (JsonTypeInfo<FishyFlip.Lexicon.My.Skylights.Item>)SourceGenerationContext.Default.MySkylightsItem)!;
         }
 
          /// <inheritdoc/>
@@ -81,9 +81,9 @@ namespace FishyFlip.Lexicon.My.Skylights
         }
 
          /// <inheritdoc/>
-        public static new RefItem FromCBORObject(CBORObject obj)
+        public static new Item FromCBORObject(CBORObject obj)
         {
-            return new RefItem(obj);
+            return new Item(obj);
         }
 
     }

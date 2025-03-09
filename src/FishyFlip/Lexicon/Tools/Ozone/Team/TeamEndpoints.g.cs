@@ -70,17 +70,23 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// List all members with access to the ozone service.
         /// </summary>
         /// <param name="atp"></param>
+        /// <param name="q"></param>
         /// <param name="disabled"></param>
         /// <param name="roles"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (this FishyFlip.ATProtocol atp, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (this FishyFlip.ATProtocol atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListMembers.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
+            if (q != null)
+            {
+                queryStrings.Add("q=" + q);
+            }
+
             if (disabled != null)
             {
                 queryStrings.Add("disabled=" + (disabled.Value ? "true" : "false"));

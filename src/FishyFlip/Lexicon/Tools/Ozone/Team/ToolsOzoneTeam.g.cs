@@ -62,27 +62,29 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// List all members with access to the ozone service.
         /// </summary>
+        /// <param name="q"></param>
         /// <param name="disabled"></param>
         /// <param name="roles"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListMembersAsync(disabled, roles, limit, cursor, cancellationToken);
+            return atp.ListMembersAsync(q, disabled, roles, limit, cursor, cancellationToken);
         }
 
         /// <summary>
         /// List all members with access to the ozone service.
         /// </summary>
+        /// <param name="q"></param>
         /// <param name="disabled"></param>
         /// <param name="roles"></param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
-        public ListMembersOutputCollection ListMembersCollectionAsync (bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListMembersOutputCollection ListMembersCollectionAsync (string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return new ListMembersOutputCollection(atp, disabled, roles, limit, cursor, cancellationToken);
+            return new ListMembersOutputCollection(atp, q, disabled, roles, limit, cursor, cancellationToken);
         }
 
 
