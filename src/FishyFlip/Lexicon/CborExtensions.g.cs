@@ -466,8 +466,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.InviteCode(obj);
                 case "com.atproto.server.defs#inviteCodeUse":
                     return new Com.Atproto.Server.InviteCodeUse(obj);
-                case "my.skylights.rel#item":
-                    return new My.Skylights.Item(obj);
                 case "blue.moji.collection.item":
                     return new Blue.Moji.Collection.Item(obj);
                 case "blue.maril.stellar.getEmojis#itemView":
@@ -506,6 +504,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.LeaveConvoOutput(obj);
                 case "app.bsky.feed.like":
                     return new App.Bsky.Feed.Like(obj);
+                case "community.lexicon.interaction.like":
+                    return new Community.Lexicon.Interaction.Like(obj);
                 case "app.bsky.feed.getLikes#like":
                     return new App.Bsky.Feed.LikeDef(obj);
                 case "app.bsky.richtext.facet#link":
@@ -652,8 +652,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.MutedWordsPref(obj);
                 case "app.bsky.graph.muteThread#MuteThreadInput":
                     return new App.Bsky.Graph.MuteThreadInput(obj);
-                case "my.skylights.rel#note":
-                    return new My.Skylights.Note(obj);
                 case "app.bsky.graph.defs#notFoundActor":
                     return new App.Bsky.Graph.NotFoundActor(obj);
                 case "app.bsky.feed.defs#notFoundPost":
@@ -740,8 +738,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Set.QuerySetsOutput(obj);
                 case "tools.ozone.moderation.queryStatuses#QueryStatusesOutput":
                     return new Tools.Ozone.Moderation.QueryStatusesOutput(obj);
-                case "my.skylights.rel#rating":
-                    return new My.Skylights.Rating(obj);
                 case "blue.maril.stellar.reaction":
                     return new Blue.Maril.Stellar.Reaction(obj);
                 case "blue.maril.stellar.getReactions#reaction":
@@ -774,8 +770,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.RefreshSessionOutput(obj);
                 case "app.bsky.notification.registerPush#RegisterPushInput":
                     return new App.Bsky.Notification.RegisterPushInput(obj);
-                case "my.skylights.rel":
-                    return new My.Skylights.Rel(obj);
                 case "tools.ozone.signature.findRelatedAccounts#relatedAccount":
                     return new Tools.Ozone.Signature.RelatedAccount(obj);
                 case "app.bsky.graph.defs#relationship":

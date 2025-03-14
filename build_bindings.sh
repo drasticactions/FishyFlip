@@ -13,7 +13,6 @@ REPOS=(
     "https://github.com/mkizka/linkat.git"
     "https://github.com/likeandscribe/frontpage.git"
     "https://github.com/psky-atp/client.git"
-    "https://github.com/Gregoor/skylights.git"
     "https://github.com/echo8/pastesphere.git"
     "https://github.com/marukun712/AniBlue.git"
     "https://github.com/lexicon-community/lexicon.git"
