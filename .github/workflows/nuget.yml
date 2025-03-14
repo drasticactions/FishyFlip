@@ -24,7 +24,7 @@ jobs:
           dotnet-version: 9.x
 
       - name: Build and Pack Nugets
-        run: dotnet pack src/FishyFlip.sln --configuration Release --output nupkg
+        run: dotnet pack src/FishyFlip.slnx --configuration Release --output nupkg
         
       - name: Upload Nuget
         uses: actions/upload-artifact@v4
