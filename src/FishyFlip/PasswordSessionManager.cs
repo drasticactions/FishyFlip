@@ -104,9 +104,19 @@ internal class PasswordSessionManager : ISessionManager
 
             if (d is not null)
             {
+                if (d.DidDoc is null)
+                {
+                    this.logger?.LogDebug($"Session didDoc is null, fetching via did on session.");
+                    (d.DidDoc, var didDocError) = await this.protocol.GetDidDocAsync(d.Did, cancellationToken);
+                    if (didDocError is not null)
+                    {
+                        return didDocError;
+                    }
+                }
+
                 var newSession = new Session(
                     d!.Did!,
-                    d.DidDoc,
+                    d.DidDoc!,
                     d.Handle!,
                     string.Empty,
                     d.AccessJwt!,
@@ -139,6 +149,7 @@ internal class PasswordSessionManager : ISessionManager
     {
         var host = this.protocol.Options.Url.ToString();
         var usingPublicApi = host.Contains(Constants.Urls.ATProtoServer.PublicApi);
+        DidDoc? didDoc = null;
         if (usingPublicApi)
         {
             this.logger?.LogInformation($"Using public server {host} to login, resolving identifier to find host.");
@@ -149,23 +160,14 @@ internal class PasswordSessionManager : ISessionManager
             }
             else if (ATIdentifier.TryCreate(identifier, out var ident))
             {
-                string? resolveHost = null;
-                if (ident is ATHandle handle)
+                (didDoc, var didDocError) = await this.protocol.GetDidDocAsync(ident, cancellationToken);
+                if (didDocError is not null)
                 {
-                    (resolveHost, var resolveHandleError) = await this.protocol.ResolveATHandleHostAsync(handle, cancellationToken);
-                    if (resolveHandleError is not null)
-                    {
-                        this.logger?.LogError($"Error resolving handle {identifier}: {resolveHandleError}");
-                    }
+                    this.logger?.LogWarning($"Could not resolve identifier {identifier} to a valid host.");
+                    return didDocError;
                 }
-                else if (ident is ATDid did)
-                {
-                    (resolveHost, var resolveDidError) = await this.protocol.ResolveATDidHostAsync(did, cancellationToken);
-                    if (resolveDidError is not null)
-                    {
-                        this.logger?.LogError($"Error resolving did {identifier}: {resolveDidError}");
-                    }
-                }
+
+                var resolveHost = didDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
 
                 if (Uri.TryCreate(resolveHost, UriKind.Absolute, out var uri))
                 {
@@ -183,15 +185,32 @@ internal class PasswordSessionManager : ISessionManager
             }
         }
 
-#pragma warning disable CS0618
         var (session, error) = await this.protocol.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken: cancellationToken);
-#pragma warning restore CS0618
         if (session is not null)
         {
+            if (didDoc is null)
+            {
+                if (session.DidDoc is not null)
+                {
+                    this.logger?.LogDebug($"Session didDoc is null, using session didDoc.");
+                    didDoc = session.DidDoc;
+                }
+                else
+                {
+                    this.logger?.LogDebug($"Session didDoc is null, session didn't contain diddoc, fetching via did on session.");
+                    (didDoc, var didDocError) = await this.protocol.GetDidDocAsync(session.Did, cancellationToken);
+                    if (didDocError is not null)
+                    {
+                        this.logger?.LogWarning($"Could not resolve identifier {session.Did} to a valid host.");
+                        return didDocError;
+                    }
+                }
+            }
+
             if (this.protocol.Options.UseServiceEndpointUponLogin)
             {
                 var logger = this.protocol.Options.Logger;
-                var serviceUrl = session!.DidDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
+                var serviceUrl = didDoc?.Service?.FirstOrDefault()?.ServiceEndpoint;
                 if (string.IsNullOrEmpty(serviceUrl))
                 {
                     logger?.LogWarning($"UseServiceEndpointUponLogin enabled, but session missing Service Endpoint.");
@@ -215,7 +234,7 @@ internal class PasswordSessionManager : ISessionManager
 
             var resultSession = new Session(
                 session!.Did!,
-                session.DidDoc,
+                didDoc!,
                 session.Handle!,
                 session.Email,
                 session.AccessJwt!,

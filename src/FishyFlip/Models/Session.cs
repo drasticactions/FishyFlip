@@ -24,7 +24,7 @@ public class Session
     [JsonConstructor]
     public Session(
         ATDid did,
-        DidDoc? didDoc,
+        DidDoc didDoc,
         ATHandle handle,
         string? email,
         string accessJwt,
@@ -49,7 +49,7 @@ public class Session
     /// <summary>
     /// Gets the DidDoc associated with the session.
     /// </summary>
-    public DidDoc? DidDoc { get; }
+    public DidDoc DidDoc { get; }
 
     /// <summary>
     /// Gets the ATHandle associated with the session.
