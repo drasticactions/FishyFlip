@@ -568,6 +568,71 @@ public sealed partial class ATProtocol : IDisposable
     }
 
     /// <summary>
+    /// Gets the DID Document for the given ATIdentifier.
+    /// </summary>
+    /// <param name="identifier"><see cref="ATIdentifier"/>.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>Result of <see cref="DidDoc"/>.</returns>
+    public async Task<Result<DidDoc?>> GetDidDocAsync(ATIdentifier identifier, CancellationToken? token)
+    {
+        var (did, error) = await this.ResolveATDidAsync(identifier);
+        if (error is not null)
+        {
+            return error;
+        }
+
+        if (did is null)
+        {
+            return new ATError(new Exception($"Failed to resolve ATIdentifier: {identifier}."));
+        }
+
+        return await this.GetDidDocAsync(did, token);
+    }
+
+    /// <summary>
+    /// Gets the DID Document for the given DID.
+    /// </summary>
+    /// <param name="did"><see cref="ATDid"/>.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns>Result of <see cref="DidDoc"/>.</returns>
+    public async Task<Result<DidDoc?>> GetDidDocAsync(ATDid did, CancellationToken? token)
+    {
+        switch (did.Type)
+        {
+            case "plc":
+                return await this.PlcDirectory.GetDidDocAsync(did!, token ?? CancellationToken.None);
+            case "web":
+                var baseUri = did.ToString().Split(':').Last();
+                if (!baseUri.Contains("http"))
+                {
+                    baseUri = $"https://{baseUri}";
+                }
+
+                if (Uri.TryCreate(baseUri, UriKind.Absolute, out var uri))
+                {
+                    var result = await this.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
+                    }
+
+                    this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
+                }
+                else
+                {
+                    this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
+                }
+
+                break;
+            default:
+                this.options.Logger?.LogError($"DID type could not be resolved: {did}");
+                break;
+        }
+
+        return new ATError(new Exception($"DID type could not be resolved: {did}"));
+    }
+
+    /// <summary>
     /// Resolves an ATIdentifier to an ATDid.
     /// </summary>
     /// <param name="atIdentifier">ATIdentifier.</param>
@@ -685,42 +750,5 @@ public sealed partial class ATProtocol : IDisposable
         }
 
         return host;
-    }
-
-    private async Task<Result<DidDoc?>> GetDidDocAsync(ATDid did, CancellationToken? token)
-    {
-        switch (did.Type)
-        {
-            case "plc":
-                return await this.PlcDirectory.GetDidDocAsync(did!, token ?? CancellationToken.None);
-            case "web":
-                var baseUri = did.ToString().Split(':').Last();
-                if (!baseUri.Contains("http"))
-                {
-                    baseUri = $"https://{baseUri}";
-                }
-
-                if (Uri.TryCreate(baseUri, UriKind.Absolute, out var uri))
-                {
-                    var result = await this.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
-                    if (result.IsSuccessStatusCode)
-                    {
-                        return JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
-                    }
-
-                    this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
-                }
-                else
-                {
-                    this.options.Logger?.LogError($"Failed to resolve web DID: {did}.");
-                }
-
-                break;
-            default:
-                this.options.Logger?.LogError($"DID type could not be resolved: {did}");
-                break;
-        }
-
-        return new ATError(new Exception($"DID type could not be resolved: {did}"));
     }
 }

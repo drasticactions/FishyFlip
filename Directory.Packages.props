@@ -10,8 +10,8 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
-    <PackageVersion Include="Microsoft.Identity.Client" Version="4.69.1" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.6.2" />
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.70.0" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.6.3" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.6.1" />
     <PackageVersion Include="IpfsShipyard.Ipfs.Core" Version="0.7.0" />
@@ -22,7 +22,7 @@
     <PackageVersion Include="System.Memory" Version="4.6.0" />
     <PackageVersion Include="System.Memory.Data" Version="9.0.3" />
     <PackageVersion Include="System.Text.Json" Version="9.0.3" />
-    <PackageVersion Include="MSTest" Version="3.8.2" />
+    <PackageVersion Include="MSTest" Version="3.8.3" />
     <PackageVersion Include="GitVersion.MSBuild" Version="6.1.0" />
     <PackageVersion Include="Duende.IdentityModel" Version="7.0.0" />
     <PackageVersion Include="ConsoleAppFramework" Version="5.4.1">
