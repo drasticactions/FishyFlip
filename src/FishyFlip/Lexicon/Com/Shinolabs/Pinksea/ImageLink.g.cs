@@ -16,11 +16,9 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageLink"/> class.
         /// </summary>
-        /// <param name="fullsize">Fully-qualified URL where a large version of the image can be fetched.</param>
         /// <param name="alt">Alt text description of the image, for accessibility.</param>
-        public ImageLink(string fullsize = default, string? alt = default)
+        public ImageLink(string? alt = default)
         {
-            this.Fullsize = fullsize;
             this.Alt = alt;
             this.Type = "com.shinolabs.pinksea.oekaki#imageLink";
         }
@@ -40,18 +38,9 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// </summary>
         public ImageLink(CBORObject obj)
         {
-            if (obj["fullsize"] is not null) this.Fullsize = obj["fullsize"].AsString();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
-
-        /// <summary>
-        /// Gets or sets the fullsize.
-        /// <br/> Fully-qualified URL where a large version of the image can be fetched.
-        /// </summary>
-        [JsonPropertyName("fullsize")]
-        [JsonRequired]
-        public string Fullsize { get; set; }
 
         /// <summary>
         /// Gets or sets the alt.
