@@ -18,6 +18,12 @@ namespace FishyFlip.Lexicon
             {
                 case "MemberAlreadyExists":
                     return new MemberAlreadyExistsError(statusCode, detail);
+                case "ReactionMessageDeleted":
+                    return new ReactionMessageDeletedError(statusCode, detail);
+                case "ReactionLimitReached":
+                    return new ReactionLimitReachedError(statusCode, detail);
+                case "ReactionInvalidValue":
+                    return new ReactionInvalidValueError(statusCode, detail);
                 case "InvalidSwap":
                     return new InvalidSwapError(statusCode, detail);
                 case "AccountNotFound":

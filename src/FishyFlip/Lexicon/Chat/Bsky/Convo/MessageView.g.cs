@@ -21,17 +21,19 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view) <br/>
         /// </param>
+        /// <param name="reactions">Reactions to this message, in ascending order of creation time.</param>
         /// <param name="sender">
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender"/> (chat.bsky.convo.defs#messageViewSender)
         /// </param>
         /// <param name="sentAt"></param>
-        public MessageView(string id = default, string rev = default, string text = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? facets = default, FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef? embed = default, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender sender = default, DateTime? sentAt = default)
+        public MessageView(string id = default, string rev = default, string text = default, List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? facets = default, FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef? embed = default, List<FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionView>? reactions = default, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender sender = default, DateTime? sentAt = default)
         {
             this.Id = id;
             this.Rev = rev;
             this.Text = text;
             this.Facets = facets;
             this.Embed = embed;
+            this.Reactions = reactions;
             this.Sender = sender;
             this.SentAt = sentAt;
             this.Type = "chat.bsky.convo.defs#messageView";
@@ -57,6 +59,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["text"] is not null) this.Text = obj["text"].AsString();
             if (obj["facets"] is not null) this.Facets = obj["facets"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Richtext.Facet(n)).ToList();
             if (obj["embed"] is not null) this.Embed = new FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef(obj["embed"]);
+            if (obj["reactions"] is not null) this.Reactions = obj["reactions"].Values.Select(n =>new FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionView(n)).ToList();
             if (obj["sender"] is not null) this.Sender = new FishyFlip.Lexicon.Chat.Bsky.Convo.MessageViewSender(obj["sender"]);
             if (obj["sentAt"] is not null) this.SentAt = obj["sentAt"].ToDateTime();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
@@ -97,6 +100,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// </summary>
         [JsonPropertyName("embed")]
         public FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef? Embed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reactions.
+        /// <br/> Reactions to this message, in ascending order of creation time.
+        /// </summary>
+        [JsonPropertyName("reactions")]
+        public List<FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionView>? Reactions { get; set; }
 
         /// <summary>
         /// Gets or sets the sender.
