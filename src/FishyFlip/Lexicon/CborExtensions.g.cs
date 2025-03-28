@@ -48,6 +48,10 @@ namespace FishyFlip.Lexicon
                     return new Blue.Maril.Stellar.ActorReaction(obj);
                 case "tools.ozone.team.addMember#AddMemberInput":
                     return new Tools.Ozone.Team.AddMemberInput(obj);
+                case "chat.bsky.convo.addReaction#AddReactionInput":
+                    return new Chat.Bsky.Convo.AddReactionInput(obj);
+                case "chat.bsky.convo.addReaction#AddReactionOutput":
+                    return new Chat.Bsky.Convo.AddReactionOutput(obj);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleInput":
                     return new Com.Atproto.Temp.AddReservedHandleInput(obj);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
@@ -408,6 +412,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetStarterPackOutput(obj);
                 case "app.bsky.graph.getStarterPacks#GetStarterPacksOutput":
                     return new App.Bsky.Graph.GetStarterPacksOutput(obj);
+                case "tools.ozone.moderation.getSubjects#GetSubjectsOutput":
+                    return new Tools.Ozone.Moderation.GetSubjectsOutput(obj);
                 case "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput":
                     return new Com.Atproto.Admin.GetSubjectStatusOutput(obj);
                 case "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput":
@@ -560,6 +566,8 @@ namespace FishyFlip.Lexicon
                     return new Blue.Zio.Atfile.Lock(obj);
                 case "chat.bsky.convo.defs#logAcceptConvo":
                     return new Chat.Bsky.Convo.LogAcceptConvo(obj);
+                case "chat.bsky.convo.defs#logAddReaction":
+                    return new Chat.Bsky.Convo.LogAddReaction(obj);
                 case "chat.bsky.convo.defs#logBeginConvo":
                     return new Chat.Bsky.Convo.LogBeginConvo(obj);
                 case "chat.bsky.convo.defs#logCreateMessage":
@@ -572,6 +580,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.LogMuteConvo(obj);
                 case "chat.bsky.convo.defs#logReadMessage":
                     return new Chat.Bsky.Convo.LogReadMessage(obj);
+                case "chat.bsky.convo.defs#logRemoveReaction":
+                    return new Chat.Bsky.Convo.LogRemoveReaction(obj);
                 case "chat.bsky.convo.defs#logUnmuteConvo":
                     return new Chat.Bsky.Convo.LogUnmuteConvo(obj);
                 case "blue.zio.atfile.finger#machine":
@@ -586,6 +596,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.MentionRule(obj);
                 case "social.psky.chat.message":
                     return new Social.Psky.Chat.Message(obj);
+                case "chat.bsky.convo.defs#messageAndReactionView":
+                    return new Chat.Bsky.Convo.MessageAndReactionView(obj);
                 case "chat.bsky.convo.defs#messageInput":
                     return new Chat.Bsky.Convo.MessageInput(obj);
                 case "chat.bsky.convo.defs#messageRef":
@@ -742,6 +754,10 @@ namespace FishyFlip.Lexicon
                     return new Blue.Maril.Stellar.Reaction(obj);
                 case "blue.maril.stellar.getReactions#reaction":
                     return new Blue.Maril.Stellar.ReactionDef(obj);
+                case "chat.bsky.convo.defs#reactionView":
+                    return new Chat.Bsky.Convo.ReactionView(obj);
+                case "chat.bsky.convo.defs#reactionViewSender":
+                    return new Chat.Bsky.Convo.ReactionViewSender(obj);
                 case "app.bsky.feed.defs#reasonPin":
                     return new App.Bsky.Feed.ReasonPin(obj);
                 case "app.bsky.feed.defs#reasonRepost":
@@ -778,6 +794,10 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.RemoveOptionsInput(obj);
                 case "tools.ozone.setting.removeOptions#RemoveOptionsOutput":
                     return new Tools.Ozone.Setting.RemoveOptionsOutput(obj);
+                case "chat.bsky.convo.removeReaction#RemoveReactionInput":
+                    return new Chat.Bsky.Convo.RemoveReactionInput(obj);
+                case "chat.bsky.convo.removeReaction#RemoveReactionOutput":
+                    return new Chat.Bsky.Convo.RemoveReactionOutput(obj);
                 case "app.bsky.feed.defs#replyRef":
                     return new App.Bsky.Feed.ReplyRef(obj);
                 case "app.bsky.feed.post#replyRef":
@@ -926,6 +946,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Repo.StrongRef(obj);
                 case "tools.ozone.moderation.defs#subjectStatusView":
                     return new Tools.Ozone.Moderation.SubjectStatusView(obj);
+                case "tools.ozone.moderation.defs#subjectView":
+                    return new Tools.Ozone.Moderation.SubjectView(obj);
                 case "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput":
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
                 case "ma.tokono.byov.subscription":

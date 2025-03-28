@@ -43,6 +43,23 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
 
         /// <summary>
+        /// Adds an emoji reaction to a message. Requires authentication. It is idempotent, so multiple calls from the same user with the same emoji result in a single reaction.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionMessageDeletedError"/> Indicates that the message has been deleted and reactions can no longer be added/removed. <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionLimitReachedError"/> Indicates that the message has the maximum number of reactions allowed for a single user, and the requested reaction wasn't yet present. If it was already present, the request will not fail since it is idempotent. <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionInvalidValueError"/> Indicates the value for the reaction is not acceptable. In general, this means it is not an emoji. <br/>
+        /// </summary>
+        /// <param name="convoId"></param>
+        /// <param name="messageId"></param>
+        /// <param name="value"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput?>> AddReactionAsync (string convoId, string messageId, string value, CancellationToken cancellationToken = default)
+        {
+            return atp.AddReactionAsync(convoId, messageId, value, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Generated endpoint for chat.bsky.convo.deleteMessageForSelf
         /// </summary>
         /// <param name="convoId"></param>
@@ -179,6 +196,22 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput?>> MuteConvoAsync (string convoId, CancellationToken cancellationToken = default)
         {
             return atp.MuteConvoAsync(convoId, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Removes an emoji reaction from a message. Requires authentication. It is idempotent, so multiple calls from the same user with the same emoji result in that reaction not being present, even if it already wasn't.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionMessageDeletedError"/> Indicates that the message has been deleted and reactions can no longer be added/removed. <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionInvalidValueError"/> Indicates the value for the reaction is not acceptable. In general, this means it is not an emoji. <br/>
+        /// </summary>
+        /// <param name="convoId"></param>
+        /// <param name="messageId"></param>
+        /// <param name="value"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.RemoveReactionOutput?>> RemoveReactionAsync (string convoId, string messageId, string value, CancellationToken cancellationToken = default)
+        {
+            return atp.RemoveReactionAsync(convoId, messageId, value, cancellationToken);
         }
 
 

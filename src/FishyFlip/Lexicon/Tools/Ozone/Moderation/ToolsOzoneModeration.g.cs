@@ -144,6 +144,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
 
         /// <summary>
+        /// Get details about subjects.
+        /// </summary>
+        /// <param name="subjects"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput?>> GetSubjectsAsync (List<string> subjects, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSubjectsAsync(subjects, cancellationToken);
+        }
+
+
+        /// <summary>
         /// List moderation events related to a subject.
         /// </summary>
         /// <param name="types">The types of events (fully qualified string in the format of tools.ozone.moderation.defs#modEvent<name>) to filter by. If not specified, all events are returned.</param>

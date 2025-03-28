@@ -16,6 +16,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 
        public const string AcceptConvo = "/xrpc/chat.bsky.convo.acceptConvo";
 
+       public const string AddReaction = "/xrpc/chat.bsky.convo.addReaction";
+
        public const string DeleteMessageForSelf = "/xrpc/chat.bsky.convo.deleteMessageForSelf";
 
        public const string GetConvo = "/xrpc/chat.bsky.convo.getConvo";
@@ -33,6 +35,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
        public const string ListConvos = "/xrpc/chat.bsky.convo.listConvos";
 
        public const string MuteConvo = "/xrpc/chat.bsky.convo.muteConvo";
+
+       public const string RemoveReaction = "/xrpc/chat.bsky.convo.removeReaction";
 
        public const string SendMessage = "/xrpc/chat.bsky.convo.sendMessage";
 
@@ -60,6 +64,32 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             var inputItem = new AcceptConvoInput();
             inputItem.ConvoId = convoId;
             return atp.Post<AcceptConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoAcceptConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoAcceptConvoOutput!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Adds an emoji reaction to a message. Requires authentication. It is idempotent, so multiple calls from the same user with the same emoji result in a single reaction.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionMessageDeletedError"/> Indicates that the message has been deleted and reactions can no longer be added/removed. <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionLimitReachedError"/> Indicates that the message has the maximum number of reactions allowed for a single user, and the requested reaction wasn't yet present. If it was already present, the request will not fail since it is idempotent. <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionInvalidValueError"/> Indicates the value for the reaction is not acceptable. In general, this means it is not an emoji. <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="convoId"></param>
+        /// <param name="messageId"></param>
+        /// <param name="value"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput?>> AddReactionAsync (this FishyFlip.ATProtocol atp, string convoId, string messageId, string value, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = AddReaction.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
+            var inputItem = new AddReactionInput();
+            inputItem.ConvoId = convoId;
+            inputItem.MessageId = messageId;
+            inputItem.Value = value;
+            return atp.Post<AddReactionInput, FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoAddReactionInput!, atp.Options.SourceGenerationContext.ChatBskyConvoAddReactionOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -284,6 +314,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             var inputItem = new MuteConvoInput();
             inputItem.ConvoId = convoId;
             return atp.Post<MuteConvoInput, FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoInput!, atp.Options.SourceGenerationContext.ChatBskyConvoMuteConvoOutput!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Removes an emoji reaction from a message. Requires authentication. It is idempotent, so multiple calls from the same user with the same emoji result in that reaction not being present, even if it already wasn't.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionMessageDeletedError"/> Indicates that the message has been deleted and reactions can no longer be added/removed. <br/>
+        /// <see cref="FishyFlip.Lexicon.ReactionInvalidValueError"/> Indicates the value for the reaction is not acceptable. In general, this means it is not an emoji. <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="convoId"></param>
+        /// <param name="messageId"></param>
+        /// <param name="value"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.RemoveReactionOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Convo.RemoveReactionOutput?>> RemoveReactionAsync (this FishyFlip.ATProtocol atp, string convoId, string messageId, string value, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = RemoveReaction.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
+            var inputItem = new RemoveReactionInput();
+            inputItem.ConvoId = convoId;
+            inputItem.MessageId = messageId;
+            inputItem.Value = value;
+            return atp.Post<RemoveReactionInput, FishyFlip.Lexicon.Chat.Bsky.Convo.RemoveReactionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyConvoRemoveReactionInput!, atp.Options.SourceGenerationContext.ChatBskyConvoRemoveReactionOutput!, inputItem, cancellationToken, headers);
         }
 
 

@@ -28,6 +28,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
        public const string GetRepos = "/xrpc/tools.ozone.moderation.getRepos";
 
+       public const string GetSubjects = "/xrpc/tools.ozone.moderation.getSubjects";
+
        public const string QueryEvents = "/xrpc/tools.ozone.moderation.queryEvents";
 
        public const string QueryStatuses = "/xrpc/tools.ozone.moderation.queryStatuses";
@@ -260,6 +262,28 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReposOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get details about subjects.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="subjects"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput?>> GetSubjectsAsync (this FishyFlip.ATProtocol atp, List<string> subjects, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetSubjects.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add(string.Join("&", subjects.Select(n => "subjects=" + n)));
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetSubjectsOutput!, cancellationToken, headers);
         }
 
 

@@ -20,6 +20,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView"/> (chat.bsky.convo.defs#messageAndReactionView) <br/>
         /// </param>
         /// <param name="muted"></param>
         /// <param name="status">
@@ -91,6 +92,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView"/> (chat.bsky.convo.defs#messageAndReactionView) <br/>
         /// </summary>
         [JsonPropertyName("lastMessage")]
         public ATObject? LastMessage { get; set; }
