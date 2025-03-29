@@ -33,4 +33,9 @@ public class ATWebSocketProtocolOptions
     /// Gets the custom converters.
     /// </summary>
     public IReadOnlyList<ICustomATObjectCBORConverter> CustomConverters { get; internal set; }
+
+    /// <summary>
+    /// Gets the TaskFactory.
+    /// </summary>
+    public TaskFactory TaskFactory { get; internal set; } = new TaskFactory(TaskScheduler.Default);
 }

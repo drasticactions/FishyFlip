@@ -12,6 +12,7 @@ namespace FishyFlip;
 /// </summary>
 public sealed class ATWebSocketProtocol : IDisposable
 {
+    private readonly TaskFactory taskFactory;
     private bool subscribedLabels;
     private WebSocketWrapper webSocketWrapper;
     private IReadOnlyList<ICustomATObjectCBORConverter> customConverters;
@@ -26,6 +27,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     public ATWebSocketProtocol(ATWebSocketProtocolOptions options)
     {
         this.customConverters = options.CustomConverters;
+        this.taskFactory = options.TaskFactory;
         this.logger = options.Logger;
         this.instanceUri = options.Url;
         this.webSocketWrapper = new WebSocketWrapper(this.logger);
@@ -370,7 +372,7 @@ public sealed class ATWebSocketProtocol : IDisposable
         if (this.OnRecordReceived is not null || this.OnSubscribedRepoMessage is not null || this.OnSubscribedLabelMessage is not null)
         {
             var newMessage = message.ToArray();
-            Task.Run(() => { this.HandleMessage(newMessage); }).FireAndForgetSafeAsync(this.logger);
+            this.taskFactory.StartNew(() => this.HandleMessage(newMessage)).FireAndForgetSafeAsync(this.logger);
         }
 
         return Task.CompletedTask;

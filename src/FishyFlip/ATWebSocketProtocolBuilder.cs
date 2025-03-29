@@ -52,6 +52,17 @@ public class ATWebSocketProtocolBuilder
     }
 
     /// <summary>
+    /// Sets a custom task factory.
+    /// </summary>
+    /// <param name="taskFactory">The Task Factory.</param>
+    /// <returns><see cref="ATWebSocketProtocolBuilder"/>.</returns>
+    public ATWebSocketProtocolBuilder WithTaskScheduler(TaskFactory taskFactory)
+    {
+        this.atProtocolOptions.TaskFactory = taskFactory;
+        return this;
+    }
+
+    /// <summary>
     /// Returns the ATWebSocketProtocolOptions.
     /// </summary>
     /// <returns>ATWebSocketProtocolOptions.</returns>
