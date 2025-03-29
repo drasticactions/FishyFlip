@@ -132,6 +132,17 @@ public class ATJetStreamBuilder
     }
 
     /// <summary>
+    /// Sets a custom task factory.
+    /// </summary>
+    /// <param name="taskFactory">The Task Factory.</param>
+    /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
+    public ATJetStreamBuilder WithTaskFactory(TaskFactory taskFactory)
+    {
+        this.atProtocolOptions.TaskFactory = taskFactory;
+        return this;
+    }
+
+    /// <summary>
     /// Returns the ATWebSocketProtocolOptions.
     /// </summary>
     /// <returns>ATJetStreamBuilder.</returns>

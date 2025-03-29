@@ -81,6 +81,11 @@ public class ATJetStreamOptions
     public JsonSerializerOptions JsonSerializerOptions { get; internal set; }
 
     /// <summary>
+    /// Gets the TaskFactory.
+    /// </summary>
+    public TaskFactory TaskFactory { get; internal set; } = new TaskFactory(TaskScheduler.Default);
+
+    /// <summary>
     /// Gets the source generation context.
     /// </summary>
     internal SourceGenerationContext SourceGenerationContext { get; }

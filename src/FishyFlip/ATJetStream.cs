@@ -293,7 +293,7 @@ public sealed class ATJetStream : IDisposable
 #endif
                 var message = Encoding.UTF8.GetString(newArray);
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
-                Task.Run(() => this.HandleMessage(message)).FireAndForgetSafeAsync(this.logger);
+                this.options.TaskFactory.StartNew(() => this.HandleMessage(message)).FireAndForgetSafeAsync(this.logger);
             }
             catch (OperationCanceledException)
             {
