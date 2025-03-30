@@ -17,10 +17,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <param name="sender">
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionViewSender"/> (chat.bsky.convo.defs#reactionViewSender)
         /// </param>
-        public ReactionView(string value = default, FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionViewSender sender = default)
+        /// <param name="createdAt"></param>
+        public ReactionView(string value = default, FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionViewSender sender = default, DateTime? createdAt = default)
         {
             this.Value = value;
             this.Sender = sender;
+            this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Type = "chat.bsky.convo.defs#reactionView";
         }
 
@@ -41,6 +43,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         {
             if (obj["value"] is not null) this.Value = obj["value"].AsString();
             if (obj["sender"] is not null) this.Sender = new FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionViewSender(obj["sender"]);
+            if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -58,6 +61,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         [JsonPropertyName("sender")]
         [JsonRequired]
         public FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionViewSender Sender { get; set; }
+
+        /// <summary>
+        /// Gets or sets the createdAt.
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        [JsonRequired]
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "chat.bsky.convo.defs#reactionView";
 
