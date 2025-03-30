@@ -20,6 +20,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView) <br/>
+        /// </param>
+        /// <param name="lastReaction">
+        /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView"/> (chat.bsky.convo.defs#messageAndReactionView) <br/>
         /// </param>
         /// <param name="muted"></param>
@@ -29,12 +32,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// accepted <br/>
         /// </param>
         /// <param name="unreadCount"></param>
-        public ConvoView(string id = default, string rev = default, List<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic> members = default, ATObject? lastMessage = default, bool muted = default, string? status = default, long unreadCount = default)
+        public ConvoView(string id = default, string rev = default, List<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic> members = default, ATObject? lastMessage = default, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView? lastReaction = default, bool muted = default, string? status = default, long unreadCount = default)
         {
             this.Id = id;
             this.Rev = rev;
             this.Members = members;
             this.LastMessage = lastMessage;
+            this.LastReaction = lastReaction;
             this.Muted = muted;
             this.Status = status;
             this.UnreadCount = unreadCount;
@@ -60,6 +64,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             if (obj["rev"] is not null) this.Rev = obj["rev"].AsString();
             if (obj["members"] is not null) this.Members = obj["members"].Values.Select(n =>new FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic(n)).ToList();
             if (obj["lastMessage"] is not null) this.LastMessage = obj["lastMessage"].ToATObject();
+            if (obj["lastReaction"] is not null) this.LastReaction = new FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView(obj["lastReaction"]);
             if (obj["muted"] is not null) this.Muted = obj["muted"].AsBoolean();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["unreadCount"] is not null) this.UnreadCount = obj["unreadCount"].AsInt64Value();
@@ -92,10 +97,17 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/> (chat.bsky.convo.defs#messageView) <br/>
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView) <br/>
-        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView"/> (chat.bsky.convo.defs#messageAndReactionView) <br/>
         /// </summary>
         [JsonPropertyName("lastMessage")]
         public ATObject? LastMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the lastReaction.
+        /// <br/> Union Types: <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView"/> (chat.bsky.convo.defs#messageAndReactionView) <br/>
+        /// </summary>
+        [JsonPropertyName("lastReaction")]
+        public FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView? LastReaction { get; set; }
 
         /// <summary>
         /// Gets or sets the muted.
