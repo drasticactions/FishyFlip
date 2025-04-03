@@ -418,8 +418,16 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.GetSubjectStatusOutput(obj);
                 case "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput":
                     return new App.Bsky.Feed.GetSuggestedFeedsOutput(obj);
+                case "app.bsky.unspecced.getSuggestedFeeds#GetSuggestedFeedsOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedFeedsOutput(obj);
+                case "app.bsky.unspecced.getSuggestedFeedsSkeleton#GetSuggestedFeedsSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput(obj);
                 case "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput":
                     return new App.Bsky.Graph.GetSuggestedFollowsByActorOutput(obj);
+                case "app.bsky.unspecced.getSuggestedStarterPacks#GetSuggestedStarterPacksOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedStarterPacksOutput(obj);
+                case "app.bsky.unspecced.getSuggestedStarterPacksSkeleton#GetSuggestedStarterPacksSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput(obj);
                 case "app.bsky.actor.getSuggestions#GetSuggestionsOutput":
                     return new App.Bsky.Actor.GetSuggestionsOutput(obj);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
@@ -432,6 +440,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.GetTimelineOutput(obj);
                 case "app.bsky.unspecced.getTrendingTopics#GetTrendingTopicsOutput":
                     return new App.Bsky.Unspecced.GetTrendingTopicsOutput(obj);
+                case "app.bsky.unspecced.getTrends#GetTrendsOutput":
+                    return new App.Bsky.Unspecced.GetTrendsOutput(obj);
+                case "app.bsky.unspecced.getTrendsSkeleton#GetTrendsSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetTrendsSkeletonOutput(obj);
                 case "app.bsky.notification.getUnreadCount#GetUnreadCountOutput":
                     return new App.Bsky.Notification.GetUnreadCountOutput(obj);
                 case "app.bsky.video.getUploadLimits#GetUploadLimitsOutput":
@@ -926,6 +938,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SkeletonSearchPost(obj);
                 case "app.bsky.unspecced.defs#skeletonSearchStarterPack":
                     return new App.Bsky.Unspecced.SkeletonSearchStarterPack(obj);
+                case "app.bsky.unspecced.defs#skeletonTrend":
+                    return new App.Bsky.Unspecced.SkeletonTrend(obj);
                 case "link.pastesphere.snippet":
                     return new Link.Pastesphere.Snippet(obj);
                 case "app.bsky.graph.starterpack":
@@ -974,6 +988,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.ThreatSignature(obj);
                 case "app.bsky.unspecced.defs#trendingTopic":
                     return new App.Bsky.Unspecced.TrendingTopic(obj);
+                case "app.bsky.unspecced.defs#trendView":
+                    return new App.Bsky.Unspecced.TrendView(obj);
                 case "blue.zio.atfile.meta#unknown":
                     return new Blue.Zio.Atfile.Unknown(obj);
                 case "app.bsky.graph.unmuteActor#UnmuteActorInput":
@@ -994,6 +1010,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.UpdateAccountHandleInput(obj);
                 case "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput":
                     return new Com.Atproto.Admin.UpdateAccountPasswordInput(obj);
+                case "com.atproto.admin.updateAccountSigningKey#UpdateAccountSigningKeyInput":
+                    return new Com.Atproto.Admin.UpdateAccountSigningKeyInput(obj);
                 case "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput":
                     return new Chat.Bsky.Moderation.UpdateActorAccessInput(obj);
                 case "chat.bsky.convo.updateAllRead#UpdateAllReadInput":

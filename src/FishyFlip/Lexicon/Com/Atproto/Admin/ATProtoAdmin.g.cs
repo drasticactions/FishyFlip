@@ -215,6 +215,18 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
 
         /// <summary>
+        /// Administrative action to update an account's signing key in their Did document.
+        /// </summary>
+        /// <param name="did"></param>
+        /// <param name="signingKey">Did-key formatted public key</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> UpdateAccountSigningKeyAsync (FishyFlip.Models.ATDid did, FishyFlip.Models.ATDid signingKey, CancellationToken cancellationToken = default)
+        {
+            return atp.UpdateAccountSigningKeyAsync(did, signingKey, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Update the service-specific admin status of a subject (account, record, or blob).
         /// </summary>
         /// <param name="subject">

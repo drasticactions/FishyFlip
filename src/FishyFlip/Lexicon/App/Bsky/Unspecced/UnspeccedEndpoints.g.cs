@@ -18,11 +18,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
 
+       public const string GetSuggestedFeeds = "/xrpc/app.bsky.unspecced.getSuggestedFeeds";
+
+       public const string GetSuggestedFeedsSkeleton = "/xrpc/app.bsky.unspecced.getSuggestedFeedsSkeleton";
+
+       public const string GetSuggestedStarterPacks = "/xrpc/app.bsky.unspecced.getSuggestedStarterPacks";
+
+       public const string GetSuggestedStarterPacksSkeleton = "/xrpc/app.bsky.unspecced.getSuggestedStarterPacksSkeleton";
+
        public const string GetSuggestionsSkeleton = "/xrpc/app.bsky.unspecced.getSuggestionsSkeleton";
 
        public const string GetTaggedSuggestions = "/xrpc/app.bsky.unspecced.getTaggedSuggestions";
 
        public const string GetTrendingTopics = "/xrpc/app.bsky.unspecced.getTrendingTopics";
+
+       public const string GetTrends = "/xrpc/app.bsky.unspecced.getTrends";
+
+       public const string GetTrendsSkeleton = "/xrpc/app.bsky.unspecced.getTrendsSkeleton";
 
        public const string SearchActorsSkeleton = "/xrpc/app.bsky.unspecced.searchActorsSkeleton";
 
@@ -79,6 +91,114 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested feeds
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput?>> GetSuggestedFeedsAsync (this FishyFlip.ATProtocol atp, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetSuggestedFeeds.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedFeedsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested feeds. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedFeeds
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput?>> GetSuggestedFeedsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetSuggestedFeedsSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedFeedsSkeletonOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested starterpacks
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput?>> GetSuggestedStarterPacksAsync (this FishyFlip.ATProtocol atp, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetSuggestedStarterPacks.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedStarterPacksOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested starterpacks. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedStarterpacks
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput?>> GetSuggestedStarterPacksSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetSuggestedStarterPacksSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -166,6 +286,60 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendingTopicsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get the current trends on the network
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput?>> GetTrendsAsync (this FishyFlip.ATProtocol atp, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetTrends.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get the skeleton of trends on the network. Intended to be called and then hydrated through app.bsky.unspecced.getTrends
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput?>> GetTrendsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetTrendsSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendsSkeletonOutput!, cancellationToken, headers);
         }
 
 

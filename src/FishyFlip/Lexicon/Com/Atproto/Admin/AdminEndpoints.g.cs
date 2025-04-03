@@ -40,6 +40,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
 
        public const string UpdateAccountPassword = "/xrpc/com.atproto.admin.updateAccountPassword";
 
+       public const string UpdateAccountSigningKey = "/xrpc/com.atproto.admin.updateAccountSigningKey";
+
        public const string UpdateSubjectStatus = "/xrpc/com.atproto.admin.updateSubjectStatus";
 
 
@@ -346,6 +348,25 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             inputItem.Did = did;
             inputItem.Password = password;
             return atp.Post<UpdateAccountPasswordInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountPasswordInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Administrative action to update an account's signing key in their Did document.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="signingKey">Did-key formatted public key</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> UpdateAccountSigningKeyAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, FishyFlip.Models.ATDid signingKey, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = UpdateAccountSigningKey.ToString();
+            var headers = new Dictionary<string, string>();
+            var inputItem = new UpdateAccountSigningKeyInput();
+            inputItem.Did = did;
+            inputItem.SigningKey = signingKey;
+            return atp.Post<UpdateAccountSigningKeyInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminUpdateAccountSigningKeyInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 
