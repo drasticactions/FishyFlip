@@ -67,6 +67,52 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// Get a list of suggested feeds
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput?>> GetSuggestedFeedsAsync (int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedFeedsAsync(limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested feeds. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedFeeds
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput?>> GetSuggestedFeedsSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedFeedsSkeletonAsync(viewer, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested starterpacks
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput?>> GetSuggestedStarterPacksAsync (int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedStarterPacksAsync(limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested starterpacks. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedStarterpacks
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput?>> GetSuggestedStarterPacksSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedStarterPacksSkeletonAsync(viewer, limit, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get a skeleton of suggested actors. Intended to be called and then hydrated through app.bsky.actor.getSuggestions
         /// </summary>
         /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries). Used to boost followed accounts in ranking.</param>
@@ -112,6 +158,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?>> GetTrendingTopicsAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
             return atp.GetTrendingTopicsAsync(viewer, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get the current trends on the network
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput?>> GetTrendsAsync (int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetTrendsAsync(limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get the skeleton of trends on the network. Intended to be called and then hydrated through app.bsky.unspecced.getTrends
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput?>> GetTrendsSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetTrendsSkeletonAsync(viewer, limit, cancellationToken);
         }
 
 

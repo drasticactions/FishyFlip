@@ -454,8 +454,16 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetSubjectStatusOutput);
                 case "app.bsky.feed.getSuggestedFeeds#GetSuggestedFeedsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetSuggestedFeedsOutput);
+                case "app.bsky.unspecced.getSuggestedFeeds#GetSuggestedFeedsOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedFeedsOutput);
+                case "app.bsky.unspecced.getSuggestedFeedsSkeleton#GetSuggestedFeedsSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedFeedsSkeletonOutput);
                 case "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput);
+                case "app.bsky.unspecced.getSuggestedStarterPacks#GetSuggestedStarterPacksOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksOutput);
+                case "app.bsky.unspecced.getSuggestedStarterPacksSkeleton#GetSuggestedStarterPacksSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput);
                 case "app.bsky.actor.getSuggestions#GetSuggestionsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>)SourceGenerationContext.Default.AppBskyActorGetSuggestionsOutput);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
@@ -468,6 +476,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput>)SourceGenerationContext.Default.AppBskyFeedGetTimelineOutput);
                 case "app.bsky.unspecced.getTrendingTopics#GetTrendingTopicsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput);
+                case "app.bsky.unspecced.getTrends#GetTrendsOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendsOutput);
+                case "app.bsky.unspecced.getTrendsSkeleton#GetTrendsSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendsSkeletonOutput);
                 case "app.bsky.notification.getUnreadCount#GetUnreadCountOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput);
                 case "app.bsky.video.getUploadLimits#GetUploadLimitsOutput":
@@ -962,6 +974,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchPost);
                 case "app.bsky.unspecced.defs#skeletonSearchStarterPack":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchStarterPack);
+                case "app.bsky.unspecced.defs#skeletonTrend":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonTrend>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonTrend>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonTrend);
                 case "link.pastesphere.snippet":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(text, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet);
                 case "app.bsky.graph.starterpack":
@@ -1010,6 +1024,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature);
                 case "app.bsky.unspecced.defs#trendingTopic":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>)SourceGenerationContext.Default.AppBskyUnspeccedTrendingTopic);
+                case "app.bsky.unspecced.defs#trendView":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendView>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendView>)SourceGenerationContext.Default.AppBskyUnspeccedTrendView);
                 case "blue.zio.atfile.meta#unknown":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown);
                 case "app.bsky.graph.unmuteActor#UnmuteActorInput":
@@ -1030,6 +1046,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountHandleInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountHandleInput);
                 case "com.atproto.admin.updateAccountPassword#UpdateAccountPasswordInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountPasswordInput);
+                case "com.atproto.admin.updateAccountSigningKey#UpdateAccountSigningKeyInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountSigningKeyInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountSigningKeyInput);
                 case "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput>)SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput);
                 case "chat.bsky.convo.updateAllRead#UpdateAllReadInput":
