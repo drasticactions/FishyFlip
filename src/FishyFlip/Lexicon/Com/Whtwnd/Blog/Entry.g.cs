@@ -19,17 +19,19 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <param name="content"></param>
         /// <param name="createdAt"></param>
         /// <param name="title"></param>
+        /// <param name="subtitle"></param>
         /// <param name="ogp">
         /// <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp"/> (com.whtwnd.blog.defs#ogp)
         /// </param>
         /// <param name="theme"></param>
         /// <param name="blobs"></param>
         /// <param name="visibility">Tells the visibility of the article to AppView.</param>
-        public Entry(string? content, DateTime? createdAt = default, string? title = default, FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default)
+        public Entry(string? content, DateTime? createdAt = default, string? title = default, string? subtitle = default, FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default)
         {
             this.Content = content;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Title = title;
+            this.Subtitle = subtitle;
             this.Ogp = ogp;
             this.Theme = theme;
             this.Blobs = blobs;
@@ -55,6 +57,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             if (obj["content"] is not null) this.Content = obj["content"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
+            if (obj["subtitle"] is not null) this.Subtitle = obj["subtitle"].AsString();
             if (obj["ogp"] is not null) this.Ogp = new FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp(obj["ogp"]);
             if (obj["theme"] is not null) this.Theme = obj["theme"].AsString();
             if (obj["blobs"] is not null) this.Blobs = obj["blobs"].Values.Select(n =>new FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata(n)).ToList();
@@ -79,6 +82,12 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// </summary>
         [JsonPropertyName("title")]
         public string? Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subtitle.
+        /// </summary>
+        [JsonPropertyName("subtitle")]
+        public string? Subtitle { get; set; }
 
         /// <summary>
         /// Gets or sets the ogp.

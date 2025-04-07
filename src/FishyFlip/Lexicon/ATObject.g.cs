@@ -464,6 +464,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksOutput);
                 case "app.bsky.unspecced.getSuggestedStarterPacksSkeleton#GetSuggestedStarterPacksSkeletonOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput);
+                case "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersOutput);
+                case "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersSkeletonOutput);
                 case "app.bsky.actor.getSuggestions#GetSuggestionsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>)SourceGenerationContext.Default.AppBskyActorGetSuggestionsOutput);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":

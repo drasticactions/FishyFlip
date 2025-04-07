@@ -26,6 +26,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GetSuggestedStarterPacksSkeleton = "/xrpc/app.bsky.unspecced.getSuggestedStarterPacksSkeleton";
 
+       public const string GetSuggestedUsers = "/xrpc/app.bsky.unspecced.getSuggestedUsers";
+
+       public const string GetSuggestedUsersSkeleton = "/xrpc/app.bsky.unspecced.getSuggestedUsersSkeleton";
+
        public const string GetSuggestionsSkeleton = "/xrpc/app.bsky.unspecced.getSuggestionsSkeleton";
 
        public const string GetTaggedSuggestions = "/xrpc/app.bsky.unspecced.getTaggedSuggestions";
@@ -199,6 +203,72 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested users
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput?>> GetSuggestedUsersAsync (this FishyFlip.ATProtocol atp, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetSuggestedUsers.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (category != null)
+            {
+                queryStrings.Add("category=" + category);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedUsersOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested users. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsers
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput?>> GetSuggestedUsersSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetSuggestedUsersSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (category != null)
+            {
+                queryStrings.Add("category=" + category);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedUsersSkeletonOutput!, cancellationToken, headers);
         }
 
 

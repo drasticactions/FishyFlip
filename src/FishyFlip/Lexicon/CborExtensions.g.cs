@@ -428,6 +428,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.GetSuggestedStarterPacksOutput(obj);
                 case "app.bsky.unspecced.getSuggestedStarterPacksSkeleton#GetSuggestedStarterPacksSkeletonOutput":
                     return new App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput(obj);
                 case "app.bsky.actor.getSuggestions#GetSuggestionsOutput":
                     return new App.Bsky.Actor.GetSuggestionsOutput(obj);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
