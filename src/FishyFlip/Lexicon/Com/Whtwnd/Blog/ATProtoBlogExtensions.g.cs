@@ -40,12 +40,13 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateEntryAsync(this FishyFlip.ATProtocol atp, string? content, DateTime? createdAt = default, string? title = default, FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateEntryAsync(this FishyFlip.ATProtocol atp, string? content, DateTime? createdAt = default, string? title = default, string? subtitle = default, FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? ogp = default, string? theme = default, List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? blobs = default, string? visibility = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Com.Whtwnd.Blog.Entry();
             record.Content = content;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
             record.Title = title;
+            record.Subtitle = subtitle;
             record.Ogp = ogp;
             record.Theme = theme;
             record.Blobs = blobs;

@@ -113,6 +113,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// Get a list of suggested users
+        /// </summary>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput?>> GetSuggestedUsersAsync (string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersAsync(category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested users. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsers
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput?>> GetSuggestedUsersSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersSkeletonAsync(viewer, category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get a skeleton of suggested actors. Intended to be called and then hydrated through app.bsky.actor.getSuggestions
         /// </summary>
         /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries). Used to boost followed accounts in ranking.</param>
