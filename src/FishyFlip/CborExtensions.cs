@@ -28,7 +28,7 @@ public static class CborExtensions
 
         try
         {
-            return DateTime.Parse(obj.AsString());
+            return DateTime.Parse(obj.AsString(), null, System.Globalization.DateTimeStyles.AdjustToUniversal | System.Globalization.DateTimeStyles.AssumeUniversal);
         }
         catch
         {
