@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetSuggestedUsersOutput"/> class.
         /// </summary>
         /// <param name="actors"></param>
-        public GetSuggestedUsersOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic> actors = default)
+        public GetSuggestedUsersOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> actors = default)
         {
             this.Actors = actors;
             this.Type = "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput";
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetSuggestedUsersOutput(CBORObject obj)
         {
-            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(n)).ToList();
+            if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("actors")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic> Actors { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Actors { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput";
 

@@ -326,6 +326,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetFollowsOutput(obj);
                 case "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput":
                     return new Com.Shinolabs.Pinksea.GetHandleFromDidOutput(obj);
+                case "com.atproto.sync.getHostStatus#GetHostStatusOutput":
+                    return new Com.Atproto.Sync.GetHostStatusOutput(obj);
                 case "com.shinolabs.pinksea.getIdentity#GetIdentityOutput":
                     return new Com.Shinolabs.Pinksea.GetIdentityOutput(obj);
                 case "com.atproto.admin.getInviteCodes#GetInviteCodesOutput":
@@ -458,6 +460,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
                 case "buzz.bookhive.hiveBook":
                     return new Buzz.Bookhive.HiveBook(obj);
+                case "com.atproto.sync.listHosts#host":
+                    return new Com.Atproto.Sync.Host(obj);
                 case "community.lexicon.location.hthree":
                     return new Community.Lexicon.Location.Hthree(obj);
                 case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
@@ -550,6 +554,8 @@ namespace FishyFlip.Lexicon
                     return new Blue.Moji.Collection.ListCollectionOutput(obj);
                 case "chat.bsky.convo.listConvos#ListConvosOutput":
                     return new Chat.Bsky.Convo.ListConvosOutput(obj);
+                case "com.atproto.sync.listHosts#ListHostsOutput":
+                    return new Com.Atproto.Sync.ListHostsOutput(obj);
                 case "app.bsky.graph.listitem":
                     return new App.Bsky.Graph.Listitem(obj);
                 case "app.bsky.graph.defs#listItemView":

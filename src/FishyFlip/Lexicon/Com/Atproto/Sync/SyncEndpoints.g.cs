@@ -18,6 +18,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
        public const string GetBlocks = "/xrpc/com.atproto.sync.getBlocks";
 
+       public const string GetHostStatus = "/xrpc/com.atproto.sync.getHostStatus";
+
        public const string GetLatestCommit = "/xrpc/com.atproto.sync.getLatestCommit";
 
        public const string GetRecord = "/xrpc/com.atproto.sync.getRecord";
@@ -27,6 +29,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
        public const string GetRepoStatus = "/xrpc/com.atproto.sync.getRepoStatus";
 
        public const string ListBlobs = "/xrpc/com.atproto.sync.listBlobs";
+
+       public const string ListHosts = "/xrpc/com.atproto.sync.listHosts";
 
        public const string ListRepos = "/xrpc/com.atproto.sync.listRepos";
 
@@ -98,6 +102,29 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
+        }
+
+
+        /// <summary>
+        /// Returns information about a specified upstream host, as consumed by the server. Implemented by relays.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.HostNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="hostname">Hostname of the host (eg, PDS or relay) being queried.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput?>> GetHostStatusAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetHostStatus.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("hostname=" + hostname);
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetHostStatusOutput!, cancellationToken, headers);
         }
 
 
@@ -272,6 +299,36 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
+        /// Enumerates upstream hosts (eg, PDS or relay instances) that this service consumes from. Implemented by relays.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput?>> ListHostsAsync (this FishyFlip.ATProtocol atp, int? limit = 200, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = ListHosts.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListHostsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
         /// Enumerates all the DID, rev, and commit CID for all repos hosted by this service. Does not require auth; implemented by PDS and Relay.
         /// </summary>
         /// <param name="atp"></param>
@@ -336,6 +393,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Request a service to persistently crawl hosted repos. Expected use is new PDS instances declaring their existence to Relays. Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.HostBannedError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="hostname">Hostname of the current service (eg, PDS) that is requesting to be crawled.</param>

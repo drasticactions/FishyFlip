@@ -84,6 +84,8 @@ namespace FishyFlip.Lexicon
                     return new NotFoundError(statusCode, detail);
                 case "UnknownFeed":
                     return new UnknownFeedError(statusCode, detail);
+                case "HostNotFound":
+                    return new HostNotFoundError(statusCode, detail);
                 case "UnknownList":
                     return new UnknownListError(statusCode, detail);
                 case "RecordNotFound":
@@ -98,6 +100,8 @@ namespace FishyFlip.Lexicon
                     return new DidNotFoundError(statusCode, detail);
                 case "DidDeactivated":
                     return new DidDeactivatedError(statusCode, detail);
+                case "HostBanned":
+                    return new HostBannedError(statusCode, detail);
                 case "EmojiNotFound":
                     return new EmojiNotFoundError(statusCode, detail);
                 case "DestinationExists":
