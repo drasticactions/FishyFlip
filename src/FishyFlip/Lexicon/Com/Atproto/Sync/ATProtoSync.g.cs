@@ -69,6 +69,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
+        /// Returns information about a specified upstream host, as consumed by the server. Implemented by relays.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.HostNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="hostname">Hostname of the host (eg, PDS or relay) being queried.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput?>> GetHostStatusAsync (string hostname, CancellationToken cancellationToken = default)
+        {
+            return atp.GetHostStatusAsync(hostname, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get the current commit CID & revision of the specified repo. Does not require auth.
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
@@ -155,6 +168,29 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
 
         /// <summary>
+        /// Enumerates upstream hosts (eg, PDS or relay instances) that this service consumes from. Implemented by relays.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput?>> ListHostsAsync (int? limit = 200, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListHostsAsync(limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates upstream hosts (eg, PDS or relay instances) that this service consumes from. Implemented by relays.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public ListHostsOutputCollection ListHostsCollectionAsync (int? limit = 200, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new ListHostsOutputCollection(atp, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Enumerates all the DID, rev, and commit CID for all repos hosted by this service. Does not require auth; implemented by PDS and Relay.
         /// </summary>
         /// <param name="limit"></param>
@@ -204,6 +240,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
 
         /// <summary>
         /// Request a service to persistently crawl hosted repos. Expected use is new PDS instances declaring their existence to Relays. Does not require auth.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.HostBannedError"/>  <br/>
         /// </summary>
         /// <param name="hostname">Hostname of the current service (eg, PDS) that is requesting to be crawled.</param>
         /// <param name="cancellationToken"></param>

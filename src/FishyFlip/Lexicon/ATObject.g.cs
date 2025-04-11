@@ -362,6 +362,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>)SourceGenerationContext.Default.AppBskyGraphGetFollowsOutput);
                 case "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetHandleFromDidOutput);
+                case "com.atproto.sync.getHostStatus#GetHostStatusOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>)SourceGenerationContext.Default.ComAtprotoSyncGetHostStatusOutput);
                 case "com.shinolabs.pinksea.getIdentity#GetIdentityOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetIdentityOutput);
                 case "com.atproto.admin.getInviteCodes#GetInviteCodesOutput":
@@ -494,6 +496,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref);
                 case "buzz.bookhive.hiveBook":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>(text, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.HiveBook>)SourceGenerationContext.Default.BuzzBookhiveHiveBook);
+                case "com.atproto.sync.listHosts#host":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Host>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Host>)SourceGenerationContext.Default.ComAtprotoSyncHost);
                 case "community.lexicon.location.hthree":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree);
                 case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
@@ -586,6 +590,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput>)SourceGenerationContext.Default.BlueMojiCollectionListCollectionOutput);
                 case "chat.bsky.convo.listConvos#ListConvosOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>)SourceGenerationContext.Default.ChatBskyConvoListConvosOutput);
+                case "com.atproto.sync.listHosts#ListHostsOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>)SourceGenerationContext.Default.ComAtprotoSyncListHostsOutput);
                 case "app.bsky.graph.listitem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Listitem>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Listitem>)SourceGenerationContext.Default.AppBskyGraphListitem);
                 case "app.bsky.graph.defs#listItemView":
