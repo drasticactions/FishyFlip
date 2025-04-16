@@ -380,8 +380,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.GetPostThreadOutput(obj);
                 case "app.bsky.actor.getPreferences#GetPreferencesOutput":
                     return new App.Bsky.Actor.GetPreferencesOutput(obj);
+                case "fm.teal.alpha.actor.getProfile#GetProfileOutput":
+                    return new Fm.Teal.Alpha.Actor.GetProfileOutput(obj);
                 case "app.bsky.actor.getProfiles#GetProfilesOutput":
                     return new App.Bsky.Actor.GetProfilesOutput(obj);
+                case "fm.teal.alpha.actor.getProfiles#GetProfilesOutput":
+                    return new Fm.Teal.Alpha.Actor.GetProfilesOutput(obj);
                 case "app.bsky.feed.getQuotes#GetQuotesOutput":
                     return new App.Bsky.Feed.GetQuotesOutput(obj);
                 case "blue.maril.stellar.getReactions#GetReactionsOutput":
@@ -630,6 +634,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.MessageViewSender(obj);
                 case "chat.bsky.moderation.getActorMetadata#metadata":
                     return new Chat.Bsky.Moderation.Metadata(obj);
+                case "fm.teal.alpha.actor.defs#miniProfileView":
+                    return new Fm.Teal.Alpha.Actor.MiniProfileView(obj);
                 case "tools.ozone.moderation.defs#moderation":
                     return new Tools.Ozone.Moderation.Moderation(obj);
                 case "tools.ozone.moderation.defs#moderationDetail":
@@ -746,6 +752,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.ProfileAssociatedChat(obj);
                 case "app.bsky.actor.defs#profileView":
                     return new App.Bsky.Actor.ProfileView(obj);
+                case "fm.teal.alpha.actor.defs#profileView":
+                    return new Fm.Teal.Alpha.Actor.ProfileView(obj);
                 case "app.bsky.actor.defs#profileViewBasic":
                     return new App.Bsky.Actor.ProfileViewBasic(obj);
                 case "chat.bsky.actor.defs#profileViewBasic":
@@ -888,6 +896,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Signature.SearchAccountsOutput(obj);
                 case "app.bsky.actor.searchActors#SearchActorsOutput":
                     return new App.Bsky.Actor.SearchActorsOutput(obj);
+                case "fm.teal.alpha.actor.searchActors#SearchActorsOutput":
+                    return new Fm.Teal.Alpha.Actor.SearchActorsOutput(obj);
                 case "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput":
                     return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
                 case "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput":
@@ -1060,6 +1070,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
                 case "community.lexicon.calendar.event#uri":
                     return new Community.Lexicon.Calendar.Uri(obj);
+                case "app.bsky.graph.verification":
+                    return new App.Bsky.Graph.Verification(obj);
                 case "ma.tokono.byov.video":
                     return new Ma.Tokono.Byov.Video(obj);
                 case "tools.ozone.moderation.defs#videoDetails":

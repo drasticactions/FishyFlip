@@ -710,6 +710,121 @@ namespace FishyFlip.Lexicon
         {
             return atp.ATProtocol.GetRecordAsync(repo, "app.bsky.graph.starterpack", rkey, cid, cancellationToken);
         }
+        /// <summary>
+        /// Create a Verification record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="record"></param>
+        /// <param name="rkey"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<CreateRecordOutput?>> CreateVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Lexicon.App.Bsky.Graph.Verification record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.verification", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a Verification record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="subject">DID of the subject the verification applies to.</param>
+        /// <param name="handle">Handle of the subject the verification applies to at the moment of verifying, which might not be the same at the time of viewing. The verification is only valid if the current handle matches the one at the time of verifying.</param>
+        /// <param name="displayName">Display name of the subject the verification applies to at the moment of verifying, which might not be the same at the time of viewing. The verification is only valid if the current displayName matches the one at the time of verifying.</param>
+        /// <param name="createdAt">Date of when the verification was created.</param>
+        /// <param name="rkey"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<CreateRecordOutput?>> CreateVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATDid? subject, FishyFlip.Models.ATHandle? handle, string? displayName, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.App.Bsky.Graph.Verification();
+            record.Subject = subject;
+            record.Handle = handle;
+            record.DisplayName = displayName;
+            record.CreatedAt = createdAt ?? DateTime.UtcNow;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.verification", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete a Verification record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="swapRecord"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<DeleteRecordOutput?>> DeleteVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.DeleteRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.verification", rkey, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Put a Verification record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="record"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapRecord"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<PutRecordOutput?>> PutVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, string rkey, FishyFlip.Lexicon.App.Bsky.Graph.Verification record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.PutRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.verification", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Verification records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.ListRecordsAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.verification", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Verification records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.ListRecordsAsync(repo, "app.bsky.graph.verification", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Verification records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.GetRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.verification", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Verification records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetVerificationAsync(this FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.GetRecordAsync(repo, "app.bsky.graph.verification", rkey, cid, cancellationToken);
+        }
     }
 }
 
