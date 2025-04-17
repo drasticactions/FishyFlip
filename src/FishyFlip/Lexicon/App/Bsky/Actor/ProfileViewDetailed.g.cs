@@ -37,7 +37,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="pinnedPost">
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </param>
-        public ProfileViewDetailed(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? description = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default)
+        /// <param name="verification">
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.VerificationState"/> (app.bsky.actor.defs#verificationState)
+        /// </param>
+        public ProfileViewDetailed(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? description = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default)
         {
             this.Did = did;
             this.Handle = handle;
@@ -55,6 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Viewer = viewer;
             this.Labels = labels;
             this.PinnedPost = pinnedPost;
+            this.Verification = verification;
             this.Type = "app.bsky.actor.defs#profileViewDetailed";
         }
 
@@ -89,6 +93,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Actor.ViewerState(obj["viewer"]);
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["pinnedPost"] is not null) this.PinnedPost = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["pinnedPost"]);
+            if (obj["verification"] is not null) this.Verification = new FishyFlip.Lexicon.App.Bsky.Actor.VerificationState(obj["verification"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -195,6 +200,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("pinnedPost")]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }
+
+        /// <summary>
+        /// Gets or sets the verification.
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.VerificationState"/> (app.bsky.actor.defs#verificationState)
+        /// </summary>
+        [JsonPropertyName("verification")]
+        public FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? Verification { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#profileViewDetailed";
 

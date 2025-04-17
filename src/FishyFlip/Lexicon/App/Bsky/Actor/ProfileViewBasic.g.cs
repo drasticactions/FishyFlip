@@ -25,7 +25,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </param>
         /// <param name="labels"></param>
         /// <param name="createdAt"></param>
-        public ProfileViewBasic(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? avatar = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, DateTime? createdAt = default)
+        /// <param name="verification">
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.VerificationState"/> (app.bsky.actor.defs#verificationState)
+        /// </param>
+        public ProfileViewBasic(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? avatar = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default)
         {
             this.Did = did;
             this.Handle = handle;
@@ -35,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Viewer = viewer;
             this.Labels = labels;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Verification = verification;
             this.Type = "app.bsky.actor.defs#profileViewBasic";
         }
 
@@ -61,6 +65,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Actor.ViewerState(obj["viewer"]);
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["verification"] is not null) this.Verification = new FishyFlip.Lexicon.App.Bsky.Actor.VerificationState(obj["verification"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -117,6 +122,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// Gets or sets the verification.
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.VerificationState"/> (app.bsky.actor.defs#verificationState)
+        /// </summary>
+        [JsonPropertyName("verification")]
+        public FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? Verification { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#profileViewBasic";
 
