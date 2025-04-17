@@ -1072,6 +1072,10 @@ namespace FishyFlip.Lexicon
                     return new Community.Lexicon.Calendar.Uri(obj);
                 case "app.bsky.graph.verification":
                     return new App.Bsky.Graph.Verification(obj);
+                case "app.bsky.actor.defs#verificationState":
+                    return new App.Bsky.Actor.VerificationState(obj);
+                case "app.bsky.actor.defs#verificationView":
+                    return new App.Bsky.Actor.VerificationView(obj);
                 case "ma.tokono.byov.video":
                     return new Ma.Tokono.Byov.Video(obj);
                 case "tools.ozone.moderation.defs#videoDetails":
