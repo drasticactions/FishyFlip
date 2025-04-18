@@ -384,7 +384,6 @@ public sealed class ATWebSocketProtocol : IDisposable
         private readonly Pipe pipe;
         private readonly CancellationTokenSource cts;
         private readonly ILogger? logger;
-        private Task? receiveTask;
 
         public WebSocketWrapper(ILogger? logger)
         {
@@ -411,8 +410,7 @@ public sealed class ATWebSocketProtocol : IDisposable
 
             this.logger?.LogInformation("WSS: Connecting to WebSocket.");
             await this.webSocket.ConnectAsync(uri, cancellationToken);
-            this.receiveTask?.Dispose();
-            this.receiveTask = this.StartReceiveLoop();
+            _ = this.StartReceiveLoop();
         }
 
         public async Task CloseAsync(CancellationToken cancellationToken = default)
@@ -431,7 +429,6 @@ public sealed class ATWebSocketProtocol : IDisposable
             this.cts.Cancel();
             this.webSocket.Dispose();
             this.cts.Dispose();
-            this.receiveTask?.Dispose();
         }
 
         private async Task StartReceiveLoop()
