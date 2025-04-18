@@ -1069,6 +1069,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>), TypeInfoPropertyName = "ListCommunityLexiconCalendarUri")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.Verification), TypeInfoPropertyName = "AppBskyGraphVerification")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.Verification>), TypeInfoPropertyName = "ListAppBskyGraphVerification")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Actor.VerificationPrefs), TypeInfoPropertyName = "AppBskyActorVerificationPrefs")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Actor.VerificationPrefs>), TypeInfoPropertyName = "ListAppBskyActorVerificationPrefs")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Actor.VerificationState), TypeInfoPropertyName = "AppBskyActorVerificationState")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Actor.VerificationState>), TypeInfoPropertyName = "ListAppBskyActorVerificationState")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Actor.VerificationView), TypeInfoPropertyName = "AppBskyActorVerificationView")]

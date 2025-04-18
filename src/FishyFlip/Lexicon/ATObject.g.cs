@@ -1108,6 +1108,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>)SourceGenerationContext.Default.CommunityLexiconCalendarUri);
                 case "app.bsky.graph.verification":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Verification>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Verification>)SourceGenerationContext.Default.AppBskyGraphVerification);
+                case "app.bsky.actor.defs#verificationPrefs":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.VerificationPrefs>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.VerificationPrefs>)SourceGenerationContext.Default.AppBskyActorVerificationPrefs);
                 case "app.bsky.actor.defs#verificationState":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.VerificationState>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.VerificationState>)SourceGenerationContext.Default.AppBskyActorVerificationState);
                 case "app.bsky.actor.defs#verificationView":
