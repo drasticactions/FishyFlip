@@ -796,6 +796,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Repo.Record(obj);
                 case "com.atproto.repo.listMissingBlobs#recordBlob":
                     return new Com.Atproto.Repo.RecordBlob(obj);
+                case "app.bsky.notification.defs#recordDeleted":
+                    return new App.Bsky.Notification.RecordDeleted(obj);
                 case "tools.ozone.moderation.defs#recordEvent":
                     return new Tools.Ozone.Moderation.RecordEvent(obj);
                 case "tools.ozone.moderation.defs#recordHosting":

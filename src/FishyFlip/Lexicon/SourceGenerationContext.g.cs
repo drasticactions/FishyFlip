@@ -793,6 +793,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Repo.Record>), TypeInfoPropertyName = "ListComAtprotoRepoRecord")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob), TypeInfoPropertyName = "ComAtprotoRepoRecordBlob")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>), TypeInfoPropertyName = "ListComAtprotoRepoRecordBlob")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Notification.RecordDeleted), TypeInfoPropertyName = "AppBskyNotificationRecordDeleted")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Notification.RecordDeleted>), TypeInfoPropertyName = "ListAppBskyNotificationRecordDeleted")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent), TypeInfoPropertyName = "ToolsOzoneModerationRecordEvent")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent>), TypeInfoPropertyName = "ListToolsOzoneModerationRecordEvent")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting), TypeInfoPropertyName = "ToolsOzoneModerationRecordHosting")]
