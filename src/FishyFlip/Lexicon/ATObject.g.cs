@@ -832,6 +832,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Record>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Record>)SourceGenerationContext.Default.ComAtprotoRepoRecord);
                 case "com.atproto.repo.listMissingBlobs#recordBlob":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>)SourceGenerationContext.Default.ComAtprotoRepoRecordBlob);
+                case "app.bsky.notification.defs#recordDeleted":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.RecordDeleted>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RecordDeleted>)SourceGenerationContext.Default.AppBskyNotificationRecordDeleted);
                 case "tools.ozone.moderation.defs#recordEvent":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent>)SourceGenerationContext.Default.ToolsOzoneModerationRecordEvent);
                 case "tools.ozone.moderation.defs#recordHosting":

@@ -10,7 +10,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Identity.Client" Version="4.70.2" />
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.71.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.6.3" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.8.0" />

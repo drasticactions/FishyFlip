@@ -24,7 +24,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </param>
         /// <param name="labels"></param>
-        /// <param name="chatDisabled">Set to true when the actor cannot actively participate in converations</param>
+        /// <param name="chatDisabled">Set to true when the actor cannot actively participate in conversations</param>
         /// <param name="verification">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.VerificationState"/> (app.bsky.actor.defs#verificationState)
         /// </param>
@@ -119,7 +119,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the chatDisabled.
-        /// <br/> Set to true when the actor cannot actively participate in converations
+        /// <br/> Set to true when the actor cannot actively participate in conversations
         /// </summary>
         [JsonPropertyName("chatDisabled")]
         public bool? ChatDisabled { get; set; }
