@@ -161,14 +161,16 @@ namespace FishyFlip.Lexicon
         /// <param name="item">
         /// fm.teal.alpha.actor.defs#playView
         /// </param>
+        /// <param name="expiry">The unix timestamp of the expiry time of the item. If unavailable, default to 10 minutes past the start time.</param>
         /// <param name="rkey"></param>
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FmTealAlphaActor atp, DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FmTealAlphaActor atp, DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item, DateTime? expiry = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status();
             record.Time = time;
+            record.Expiry = expiry;
             record.Item = item;
             return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fm.teal.alpha.actor.status", record, rkey, validate, swapCommit, cancellationToken);
         }
