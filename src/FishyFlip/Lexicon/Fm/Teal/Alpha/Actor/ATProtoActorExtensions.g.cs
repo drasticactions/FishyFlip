@@ -158,10 +158,11 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateStatusAsync(this FishyFlip.ATProtocol atp, DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item, DateTime? expiry = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Status();
             record.Time = time;
+            record.Expiry = expiry;
             record.Item = item;
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "fm.teal.alpha.actor.status", record, rkey, validate, swapCommit, cancellationToken);
         }

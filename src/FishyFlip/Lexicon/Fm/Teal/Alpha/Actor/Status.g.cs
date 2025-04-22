@@ -20,9 +20,11 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <param name="item">
         /// <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView"/> (fm.teal.alpha.feed.defs#playView)
         /// </param>
-        public Status(DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item)
+        /// <param name="expiry">The unix timestamp of the expiry time of the item. If unavailable, default to 10 minutes past the start time.</param>
+        public Status(DateTime? time, FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? item, DateTime? expiry = default)
         {
             this.Time = time;
+            this.Expiry = expiry;
             this.Item = item;
             this.Type = "fm.teal.alpha.actor.status";
         }
@@ -43,6 +45,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         public Status(CBORObject obj)
         {
             if (obj["time"] is not null) this.Time = obj["time"].ToDateTime();
+            if (obj["expiry"] is not null) this.Expiry = obj["expiry"].ToDateTime();
             if (obj["item"] is not null) this.Item = new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView(obj["item"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
@@ -53,6 +56,13 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// </summary>
         [JsonPropertyName("time")]
         public DateTime? Time { get; set; }
+
+        /// <summary>
+        /// Gets or sets the expiry.
+        /// <br/> The unix timestamp of the expiry time of the item. If unavailable, default to 10 minutes past the start time.
+        /// </summary>
+        [JsonPropertyName("expiry")]
+        public DateTime? Expiry { get; set; }
 
         /// <summary>
         /// Gets or sets the item.
