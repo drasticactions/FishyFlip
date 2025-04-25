@@ -25,6 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <br/> Known Values: <br/>
         /// roleModerator - Moderator role. Can perform most actions. <br/>
         /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// </param>
         public UpsertOptionInput(string key = default, string scope = default, ATObject value = default, string? description = default, string? managerRole = default)
@@ -95,6 +96,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <br/> Known Values: <br/>
         /// roleModerator - Moderator role. Can perform most actions. <br/>
         /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// </summary>
         [JsonPropertyName("managerRole")]

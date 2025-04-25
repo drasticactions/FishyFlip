@@ -24,6 +24,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// roleModerator - Moderator role. Can perform most actions. <br/>
         /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
         /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// </param>
         /// <param name="scope">
         /// <br/> Known Values: <br/>
@@ -121,6 +122,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// roleModerator - Moderator role. Can perform most actions. <br/>
         /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
         /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// </summary>
         [JsonPropertyName("managerRole")]
         public string? ManagerRole { get; set; }
