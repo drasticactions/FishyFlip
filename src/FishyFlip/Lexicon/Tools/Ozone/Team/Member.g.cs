@@ -26,6 +26,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// roleAdmin <br/>
         /// roleModerator <br/>
         /// roleTriage <br/>
+        /// roleVerifier <br/>
         /// </param>
         public Member(FishyFlip.Models.ATDid did = default, bool? disabled = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed? profile = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? lastUpdatedBy = default, string role = default)
         {
@@ -109,6 +110,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// roleAdmin <br/>
         /// roleModerator <br/>
         /// roleTriage <br/>
+        /// roleVerifier <br/>
         /// </summary>
         [JsonPropertyName("role")]
         [JsonRequired]

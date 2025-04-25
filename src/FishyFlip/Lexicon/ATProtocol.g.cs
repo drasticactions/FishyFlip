@@ -155,6 +155,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Tools.Ozone.Communication.ToolsOzoneCommunication ToolsOzoneCommunication => new (this);
 
         /// <summary>
+        /// tools.ozone.hosting Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Tools.Ozone.Hosting.ToolsOzoneHosting ToolsOzoneHosting => new (this);
+
+        /// <summary>
         /// tools.ozone.moderation Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.ToolsOzoneModeration ToolsOzoneModeration => new (this);
@@ -183,6 +188,11 @@ namespace FishyFlip
         /// tools.ozone.team Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Tools.Ozone.Team.ToolsOzoneTeam ToolsOzoneTeam => new (this);
+
+        /// <summary>
+        /// tools.ozone.verification Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Tools.Ozone.Verification.ToolsOzoneVerification ToolsOzoneVerification => new (this);
 
     }
 }

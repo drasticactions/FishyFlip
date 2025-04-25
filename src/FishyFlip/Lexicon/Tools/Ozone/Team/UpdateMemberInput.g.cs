@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <br/> Known Values: <br/>
         /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
         /// </param>
         public UpdateMemberInput(FishyFlip.Models.ATDid did = default, bool? disabled = default, string? role = default)
@@ -69,6 +70,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <br/> Known Values: <br/>
         /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
         /// </summary>
         [JsonPropertyName("role")]

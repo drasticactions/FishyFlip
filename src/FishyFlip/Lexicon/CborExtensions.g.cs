@@ -36,6 +36,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.Account(obj);
                 case "com.atproto.server.createInviteCodes#accountCodes":
                     return new Com.Atproto.Server.AccountCodes(obj);
+                case "tools.ozone.hosting.getAccountHistory#accountCreated":
+                    return new Tools.Ozone.Hosting.AccountCreated(obj);
                 case "tools.ozone.moderation.defs#accountEvent":
                     return new Tools.Ozone.Moderation.AccountEvent(obj);
                 case "tools.ozone.moderation.defs#accountHosting":
@@ -208,6 +210,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.DisableInviteCodesInput(obj);
                 case "app.bsky.feed.postgate#disableRule":
                     return new App.Bsky.Feed.DisableRule(obj);
+                case "tools.ozone.hosting.getAccountHistory#emailConfirmed":
+                    return new Tools.Ozone.Hosting.EmailConfirmed(obj);
+                case "tools.ozone.hosting.getAccountHistory#emailUpdated":
+                    return new Tools.Ozone.Hosting.EmailUpdated(obj);
                 case "app.bsky.embed.external":
                     return new App.Bsky.Embed.EmbedExternal(obj);
                 case "app.bsky.embed.images":
@@ -224,6 +230,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
                 case "com.whtwnd.blog.entry":
                     return new Com.Whtwnd.Blog.Entry(obj);
+                case "tools.ozone.hosting.getAccountHistory#event":
+                    return new Tools.Ozone.Hosting.Event(obj);
                 case "community.lexicon.calendar.event":
                     return new Community.Lexicon.Calendar.Event(obj);
                 case "app.bsky.embed.external#external":
@@ -268,6 +276,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.GeneratorViewerState(obj);
                 case "community.lexicon.location.geo":
                     return new Community.Lexicon.Location.Geo(obj);
+                case "tools.ozone.hosting.getAccountHistory#GetAccountHistoryOutput":
+                    return new Tools.Ozone.Hosting.GetAccountHistoryOutput(obj);
                 case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
                     return new Com.Atproto.Admin.GetAccountInfosOutput(obj);
                 case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
@@ -460,6 +470,14 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Video.GetUploadLimitsOutput(obj);
                 case "tools.ozone.set.getValues#GetValuesOutput":
                     return new Tools.Ozone.Set.GetValuesOutput(obj);
+                case "tools.ozone.verification.grantVerifications#grantError":
+                    return new Tools.Ozone.Verification.GrantError(obj);
+                case "tools.ozone.verification.grantVerifications#GrantVerificationsInput":
+                    return new Tools.Ozone.Verification.GrantVerificationsInput(obj);
+                case "tools.ozone.verification.grantVerifications#GrantVerificationsOutput":
+                    return new Tools.Ozone.Verification.GrantVerificationsOutput(obj);
+                case "tools.ozone.hosting.getAccountHistory#handleUpdated":
+                    return new Tools.Ozone.Hosting.HandleUpdated(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
                 case "buzz.bookhive.hiveBook":
@@ -582,6 +600,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.ListRule(obj);
                 case "tools.ozone.communication.listTemplates#ListTemplatesOutput":
                     return new Tools.Ozone.Communication.ListTemplatesOutput(obj);
+                case "tools.ozone.verification.listVerifications#ListVerificationsOutput":
+                    return new Tools.Ozone.Verification.ListVerificationsOutput(obj);
                 case "app.bsky.graph.defs#listView":
                     return new App.Bsky.Graph.ListView(obj);
                 case "app.bsky.graph.defs#listViewBasic":
@@ -724,6 +744,8 @@ namespace FishyFlip.Lexicon
                     return new Blue.Moji.Packs.PackViewBasic(obj);
                 case "blue.moji.packs.defs#packViewerState":
                     return new Blue.Moji.Packs.PackViewerState(obj);
+                case "tools.ozone.hosting.getAccountHistory#passwordUpdated":
+                    return new Tools.Ozone.Hosting.PasswordUpdated(obj);
                 case "app.bsky.actor.defs#personalDetailsPref":
                     return new App.Bsky.Actor.PersonalDetailsPref(obj);
                 case "fm.teal.alpha.feed.play":
@@ -874,6 +896,12 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.ResolveHandleOutput(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
                     return new Com.Atproto.Server.RevokeAppPasswordInput(obj);
+                case "tools.ozone.verification.revokeVerifications#revokeError":
+                    return new Tools.Ozone.Verification.RevokeError(obj);
+                case "tools.ozone.verification.revokeVerifications#RevokeVerificationsInput":
+                    return new Tools.Ozone.Verification.RevokeVerificationsInput(obj);
+                case "tools.ozone.verification.revokeVerifications#RevokeVerificationsOutput":
+                    return new Tools.Ozone.Verification.RevokeVerificationsOutput(obj);
                 case "social.psky.richtext.facet#room":
                     return new Social.Psky.Richtext.Room(obj);
                 case "social.psky.chat.room":
@@ -1074,12 +1102,16 @@ namespace FishyFlip.Lexicon
                     return new Community.Lexicon.Calendar.Uri(obj);
                 case "app.bsky.graph.verification":
                     return new App.Bsky.Graph.Verification(obj);
+                case "tools.ozone.verification.grantVerifications#verificationInput":
+                    return new Tools.Ozone.Verification.VerificationInput(obj);
                 case "app.bsky.actor.defs#verificationPrefs":
                     return new App.Bsky.Actor.VerificationPrefs(obj);
                 case "app.bsky.actor.defs#verificationState":
                     return new App.Bsky.Actor.VerificationState(obj);
                 case "app.bsky.actor.defs#verificationView":
                     return new App.Bsky.Actor.VerificationView(obj);
+                case "tools.ozone.verification.defs#verificationView":
+                    return new Tools.Ozone.Verification.VerificationView(obj);
                 case "ma.tokono.byov.video":
                     return new Ma.Tokono.Byov.Video(obj);
                 case "tools.ozone.moderation.defs#videoDetails":

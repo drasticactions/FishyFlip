@@ -28,13 +28,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <param name="viewer">
         /// tools.ozone.server.defs#viewerConfig <br/>
         /// </param>
-        public GetConfigOutput(FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? appview = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? pds = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? blobDivert = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? chat = default, FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig? viewer = default)
+        /// <param name="verifierDid">The did of the verifier used for verification.</param>
+        public GetConfigOutput(FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? appview = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? pds = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? blobDivert = default, FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? chat = default, FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig? viewer = default, FishyFlip.Models.ATDid? verifierDid = default)
         {
             this.Appview = appview;
             this.Pds = pds;
             this.BlobDivert = blobDivert;
             this.Chat = chat;
             this.Viewer = viewer;
+            this.VerifierDid = verifierDid;
             this.Type = "tools.ozone.server.getConfig#GetConfigOutput";
         }
 
@@ -58,6 +60,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             if (obj["blobDivert"] is not null) this.BlobDivert = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["blobDivert"]);
             if (obj["chat"] is not null) this.Chat = new FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig(obj["chat"]);
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig(obj["viewer"]);
+            if (obj["verifierDid"] is not null) this.VerifierDid = obj["verifierDid"].ToATDid();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -95,6 +98,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// </summary>
         [JsonPropertyName("viewer")]
         public FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig? Viewer { get; set; }
+
+        /// <summary>
+        /// Gets or sets the verifierDid.
+        /// <br/> The did of the verifier used for verification.
+        /// </summary>
+        [JsonPropertyName("verifierDid")]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
+        public FishyFlip.Models.ATDid? VerifierDid { get; set; }
 
         public const string RecordType = "tools.ozone.server.getConfig#GetConfigOutput";
 
