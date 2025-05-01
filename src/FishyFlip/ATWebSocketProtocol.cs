@@ -303,6 +303,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             break;
                         }
 
+                        var records = new List<ATObject>();
                         foreach (var e in CarDecoder.DecodeCar(frameCommit.Blocks))
                         {
                             using var blockStream = new MemoryStream(e.Bytes);
@@ -310,9 +311,16 @@ public sealed class ATWebSocketProtocol : IDisposable
                             if (blockObj["$type"] is not null)
                             {
                                 var type = blockObj["$type"].AsString();
-                                message.Record = blockObj.ToATObject(this.customConverters);
-                                message.Record!.Type = type;
-                                this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, message.Record));
+                                var record = blockObj.ToATObject(this.customConverters);
+                                if (record is null)
+                                {
+                                    this.logger?.LogWarning($"WSS: ATError: Unable to decode record of type {type}");
+                                    continue;
+                                }
+
+                                record.Type = type;
+                                this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, record));
+                                records.Add(record);
                             }
                             else if (blockObj["sig"] is not null)
                             {
@@ -322,6 +330,11 @@ public sealed class ATWebSocketProtocol : IDisposable
                             {
                                 message.Nodes.Add(new FrameNode(blockObj));
                             }
+                        }
+
+                        if (records.Count > 0)
+                        {
+                            message.Records = records;
                         }
 
                         break;
