@@ -33,12 +33,12 @@ public class SubscribeRepoMessage
     /// Gets the record of the message.
     /// </summary>
     [Obsolete("Use Records instead.")]
-    public ATObject? Record => this.Records?.FirstOrDefault();
+    public ATObject? Record => this.Records?.FirstOrDefault().Value;
 
     /// <summary>
     /// Gets the records of the message.
     /// </summary>
-    public IReadOnlyList<ATObject>? Records { get; internal set; }
+    public IReadOnlyList<(Cid Cid, ATObject Value)>? Records { get; internal set; }
 
     /// <summary>
     /// Gets the atError of the message.
