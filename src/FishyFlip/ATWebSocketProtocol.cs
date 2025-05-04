@@ -303,7 +303,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             break;
                         }
 
-                        var records = new List<ATObject>();
+                        var records = new List<(Cid Cid, ATObject Value)>();
                         foreach (var e in CarDecoder.DecodeCar(frameCommit.Blocks))
                         {
                             using var blockStream = new MemoryStream(e.Bytes);
@@ -320,7 +320,7 @@ public sealed class ATWebSocketProtocol : IDisposable
 
                                 record.Type = type;
                                 this.OnRecordReceived?.Invoke(this, new RecordMessageReceivedEventArgs(frameCommit, record));
-                                records.Add(record);
+                                records.Add((e.Cid, record));
                             }
                             else if (blockObj["sig"] is not null)
                             {
