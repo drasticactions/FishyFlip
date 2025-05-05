@@ -66,6 +66,46 @@ public partial class AppCommands
         await this.GenerateModelFiles(lexiconPath);
     }
 
+    /// <summary>
+    /// Generate lexicon source code.
+    /// </summary>
+    /// <param name="lexiconPath">Path to lexicon files.</param>
+    /// <param name="outputDir">-o, Output directory.</param>
+    /// <param name="baseNamespace">-n, Base Namespace.</param>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <param name="thirdPartyDirs">-t, Third Party Directories.</param>
+    /// <returns>Task.</returns>
+    [Command("generate-xrpc")]
+    public async Task GenerateXrpcAsync([Argument] string lexiconPath, string? outputDir = default,
+        string? baseNamespace = default, CancellationToken cancellationToken = default, params string[] thirdPartyDirs)
+    {
+        baseNamespace = baseNamespace ??= baseNamespace;
+        outputDir ??= AppDomain.CurrentDomain.BaseDirectory;
+        Console.WriteLine($"Lexicon Path: {lexiconPath}");
+        Console.WriteLine($"Output Directory: {outputDir}");
+
+        this.basePath = Path.Combine(outputDir, "Lexicon");
+        if (Directory.Exists(this.basePath))
+        {
+            Directory.Delete(this.basePath, true);
+        }
+
+        Directory.CreateDirectory(this.basePath);
+
+        await this.GenerateClasses(lexiconPath);
+
+        foreach (var dir in thirdPartyDirs)
+        {
+            var directories = GetHighestLevelDirectories(dir);
+            foreach (var directory in directories.Where(n => !n.Contains("bsky") && !n.Contains("atproto")))
+            {
+                await this.GenerateClasses(directory);
+            }
+        }
+
+        await this.GenerateXrpcFiles(lexiconPath);
+    }
+
     private List<string> GetHighestLevelDirectories(string path)
     {
         if (string.IsNullOrEmpty(path))
@@ -133,6 +173,18 @@ public partial class AppCommands
         {
             var filename = Path.GetFileNameWithoutExtension(jsonFile);
             await this.ProcessFile(jsonFile);
+        }
+    }
+
+    private async Task GenerateXrpcFiles(string lexiconPath)
+    {
+        var procedureClasses = AllClassesSored
+            .Where(n => n.Definition.Type == "procedure" || n.Definition.Type == "query")
+            .GroupBy(n => n.CSharpNamespace).ToList();
+
+        foreach (var group in procedureClasses)
+        {
+            await this.GenerateXrpcControllerGroupAsync(group);
         }
     }
 
@@ -1294,6 +1346,74 @@ public partial class AppCommands
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
+    private async Task GenerateXrpcControllerGroupAsync(IGrouping<string, ClassGeneration> group)
+    {
+        Console.WriteLine($"Generating Xrpc Controller Group: {group.Key}");
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, $"FishyFlip.Xrpc.Lexicon.{group.Key}");
+        var className = $"{group.Key.Split(".").Last()}Controller";
+
+        sb.AppendLine("{");
+        sb.AppendLine();
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// {group.Key.ToLower()} XRPC Group.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    [ApiController]");
+        sb.AppendLine($"    public abstract class {className} : ControllerBase");
+        sb.AppendLine("    {");
+        foreach (var item in group)
+        {
+            sb.AppendLine();
+            Console.WriteLine($"{item.Definition.Type} {item.Id}");
+            var methodName = $"{item.ClassName}Async";
+            var (requiredProperties, optionalProperties) = this.FetchInputProperties(item, false, false);
+            var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+            var outputProperty = this.FetchOutputProperties(item);
+            sb.AppendLine($"        /// <summary>");
+            sb.AppendLine($"        /// {item.Definition.Description}");
+            this.GenerateErrorConstructorDocs(sb, item.Definition.Errors);
+            sb.AppendLine($"        /// </summary>");
+            this.GenerateParams(sb, item, inputProperties);
+            sb.AppendLine($"        /// <returns>Result of <see cref=\"{outputProperty}\"/></returns>");
+            var httpType = item.Definition.Type == "procedure" ? "Post" : "Get";
+            sb.AppendLine($"        [Http{httpType}(\"/xrpc/{item.Id}\")]");
+            if (outputProperty == "Success")
+            {
+                sb.Append($"        public abstract Task<Results<Ok, BadRequest>> {methodName} (");
+            }
+            else if (outputProperty == "CarResponse")
+            {
+                sb.Append($"        public abstract Task<Results<FileStreamHttpResult, BadRequest>> {methodName} (");
+            }
+            else
+            {
+                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, BadRequest>> {methodName} (");
+            }
+            for (int i = 0; i < inputProperties.Count; i++)
+            {
+                sb.Append($"{inputProperties[i]}");
+                if (i < inputProperties.Count - 1)
+                {
+                    sb.Append(", ");
+                }
+            }
+            sb.AppendLine($");");
+        }
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"{className}.g.cs");
+        if (File.Exists(classPath))
+        {
+            throw new Exception($"File already exists: {className} {classPath}");
+        }
+
+        await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
     private async Task GenerateEndpointGroupAsync(IGrouping<string, ClassGeneration> group)
     {
         Console.WriteLine($"Generating Endpoint Group: {group.Key}");
@@ -1596,7 +1716,7 @@ public partial class AppCommands
     }
 
     private (List<string> RequiredProperties, List<string> OptionalProperties) FetchInputProperties(
-    ClassGeneration classGeneration, bool isExtensionMethod = false)
+    ClassGeneration classGeneration, bool isExtensionMethod = false, bool includeCarDecoded = true)
     {
         var requiredProperties = new List<string>();
         var optionalProperties = new List<string>();
@@ -1664,7 +1784,7 @@ public partial class AppCommands
             requiredProperties.Add("StreamContent content");
         }
 
-        if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
+        if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car" && includeCarDecoded)
         {
             optionalProperties.Add("OnCarDecoded? onDecoded = default");
         }
@@ -1715,6 +1835,11 @@ public partial class AppCommands
         if (classGeneration.Definition.Output?.Encoding == "*/*")
         {
             return "byte[]";
+        }
+
+        if (classGeneration.Definition.Output?.Encoding == "application/jsonl")
+        {
+            return "string";
         }
 
         if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")

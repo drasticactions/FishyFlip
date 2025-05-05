@@ -4,6 +4,8 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="../src/FishyFlip.Xrpc/FishyFlip.Xrpc.csproj" />
   <Project Path="../src/FishyFlip/FishyFlip.csproj" />
-  <Project Path="Sandbox.csproj" />
+  <Project Path="Sandbox/Sandbox.csproj" />
+  <Project Path="SandboxWeb/SandboxWeb.csproj" />
 </Solution>

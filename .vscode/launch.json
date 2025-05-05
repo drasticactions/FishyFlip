@@ -13,6 +13,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "FFSourceGen - XRPC",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_ffsourcegen",
+            "program": "${workspaceFolder}/tools/FFSourceGen/bin/Debug/net9.0/FFSourceGen.dll",
+            "args": [ "generate-xrpc", "${workspaceFolder}/../fflexicons/bluesky-social-atproto/lexicons", "-o", "${workspaceFolder}/src/FishyFlip.Xrpc/", "-n", "FishyFlip.Xrpc.Lexicon", "-t", "${workspaceFolder}/../fflexicons/whtwnd-whitewind-blog/lexicons", ],
+            "cwd": "${workspaceFolder}/tools/FFSourceGen",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
