@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class AccountHosting : ATObject, ICBOREncodable<AccountHosting>, IJsonEncodable<AccountHosting>
+    public partial class AccountHosting : ATObject, ICBOREncodable<AccountHosting>, IJsonEncodable<AccountHosting>, IParsable<AccountHosting>
     {
 
         /// <summary>
@@ -121,19 +121,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting>)SourceGenerationContext.Default.ToolsOzoneModerationAccountHosting)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new AccountHosting FromCBORObject(CBORObject obj)
         {
             return new AccountHosting(obj);
         }
 
+        /// <inheritdoc/>
+        public static AccountHosting Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<AccountHosting>(s, (JsonTypeInfo<AccountHosting>)SourceGenerationContext.Default.ToolsOzoneModerationAccountHosting)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out AccountHosting result)
+        {
+            result = JsonSerializer.Deserialize<AccountHosting>(s, (JsonTypeInfo<AccountHosting>)SourceGenerationContext.Default.ToolsOzoneModerationAccountHosting);
+            return result != null;
+        }
     }
 }
 

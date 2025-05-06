@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Mute incoming reports from an account
     /// </summary>
-    public partial class ModEventMuteReporter : ATObject, ICBOREncodable<ModEventMuteReporter>, IJsonEncodable<ModEventMuteReporter>
+    public partial class ModEventMuteReporter : ATObject, ICBOREncodable<ModEventMuteReporter>, IJsonEncodable<ModEventMuteReporter>, IParsable<ModEventMuteReporter>
     {
 
         /// <summary>
@@ -75,19 +75,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventMuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventMuteReporter)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventMuteReporter FromCBORObject(CBORObject obj)
         {
             return new ModEventMuteReporter(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventMuteReporter Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventMuteReporter>(s, (JsonTypeInfo<ModEventMuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventMuteReporter)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventMuteReporter result)
+        {
+            result = JsonSerializer.Deserialize<ModEventMuteReporter>(s, (JsonTypeInfo<ModEventMuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventMuteReporter);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class UpdateAccountPasswordInput : ATObject, ICBOREncodable<UpdateAccountPasswordInput>, IJsonEncodable<UpdateAccountPasswordInput>
+    public partial class UpdateAccountPasswordInput : ATObject, ICBOREncodable<UpdateAccountPasswordInput>, IJsonEncodable<UpdateAccountPasswordInput>, IParsable<UpdateAccountPasswordInput>
     {
 
         /// <summary>
@@ -74,19 +74,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountPasswordInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountPasswordInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new UpdateAccountPasswordInput FromCBORObject(CBORObject obj)
         {
             return new UpdateAccountPasswordInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static UpdateAccountPasswordInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<UpdateAccountPasswordInput>(s, (JsonTypeInfo<UpdateAccountPasswordInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountPasswordInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out UpdateAccountPasswordInput result)
+        {
+            result = JsonSerializer.Deserialize<UpdateAccountPasswordInput>(s, (JsonTypeInfo<UpdateAccountPasswordInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountPasswordInput);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class ReplyRef : ATObject, ICBOREncodable<ReplyRef>, IJsonEncodable<ReplyRef>
+    public partial class ReplyRef : ATObject, ICBOREncodable<ReplyRef>, IJsonEncodable<ReplyRef>, IParsable<ReplyRef>
     {
 
         /// <summary>
@@ -104,19 +104,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef>)SourceGenerationContext.Default.AppBskyFeedReplyRef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ReplyRef FromCBORObject(CBORObject obj)
         {
             return new ReplyRef(obj);
         }
 
+        /// <inheritdoc/>
+        public static ReplyRef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ReplyRef>(s, (JsonTypeInfo<ReplyRef>)SourceGenerationContext.Default.AppBskyFeedReplyRef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ReplyRef result)
+        {
+            result = JsonSerializer.Deserialize<ReplyRef>(s, (JsonTypeInfo<ReplyRef>)SourceGenerationContext.Default.AppBskyFeedReplyRef);
+            return result != null;
+        }
     }
 }
 

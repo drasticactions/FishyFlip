@@ -44,7 +44,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.server.confirmEmail")]
-        public abstract Task<Results<Ok, BadRequest>> ConfirmEmailAsync (string email, string token, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> ConfirmEmailAsync ([FromBody] string email, [FromBody] string token, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create an account. Implemented by PDS.
@@ -69,7 +69,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.server.createAccount")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>, BadRequest>> CreateAccountAsync (FishyFlip.Models.ATHandle handle, string? email = default, FishyFlip.Models.ATDid? did = default, string? inviteCode = default, string? verificationCode = default, string? verificationPhone = default, string? password = default, string? recoveryKey = default, ATObject? plcOp = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>, BadRequest>> CreateAccountAsync ([FromBody] FishyFlip.Models.ATHandle handle, [FromBody] string? email = default, [FromBody] FishyFlip.Models.ATDid? did = default, [FromBody] string? inviteCode = default, [FromBody] string? verificationCode = default, [FromBody] string? verificationPhone = default, [FromBody] string? password = default, [FromBody] string? recoveryKey = default, [FromBody] ATObject? plcOp = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create an App Password.
@@ -81,7 +81,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.AppPassword"/></returns>
         [HttpPost("/xrpc/com.atproto.server.createAppPassword")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>, BadRequest>> CreateAppPasswordAsync (string name, bool? privileged = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>, BadRequest>> CreateAppPasswordAsync ([FromBody] string name, [FromBody] bool? privileged = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create an invite code.
@@ -91,7 +91,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.server.createInviteCode")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>, BadRequest>> CreateInviteCodeAsync (int useCount, FishyFlip.Models.ATDid? forAccount = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeOutput>, BadRequest>> CreateInviteCodeAsync ([FromBody] int useCount, [FromBody] FishyFlip.Models.ATDid? forAccount = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create invite codes.
@@ -102,7 +102,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.server.createInviteCodes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput>, BadRequest>> CreateInviteCodesAsync (int codeCount, int useCount, List<FishyFlip.Models.ATDid>? forAccounts = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesOutput>, BadRequest>> CreateInviteCodesAsync ([FromBody] int codeCount, [FromBody] int useCount, [FromBody] List<FishyFlip.Models.ATDid>? forAccounts = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create an authentication session.
@@ -117,7 +117,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.server.createSession")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>, BadRequest>> CreateSessionAsync (string identifier, string password, string? authFactorToken = default, bool? allowTakendown = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.CreateSessionOutput>, BadRequest>> CreateSessionAsync ([FromBody] string identifier, [FromBody] string password, [FromBody] string? authFactorToken = default, [FromBody] bool? allowTakendown = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deactivates a currently active account. Stops serving of repo, and future writes to repo until reactivated. Used to finalize account migration with the old host after the account has been activated on the new host.
@@ -126,7 +126,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.server.deactivateAccount")]
-        public abstract Task<Results<Ok, BadRequest>> DeactivateAccountAsync (DateTime? deleteAfter = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> DeactivateAccountAsync ([FromBody] DateTime? deleteAfter = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete an actor's account with a token and password. Can only be called after requesting a deletion token. Requires auth.
@@ -140,7 +140,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.server.deleteAccount")]
-        public abstract Task<Results<Ok, BadRequest>> DeleteAccountAsync (FishyFlip.Models.ATDid did, string password, string token, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> DeleteAccountAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] string password, [FromBody] string token, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete the current session. Requires auth.
@@ -168,7 +168,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.server.getAccountInviteCodes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>, BadRequest>> GetAccountInviteCodesAsync (bool? includeUsed = default, bool? createAvailable = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>, BadRequest>> GetAccountInviteCodesAsync ([FromQuery] bool? includeUsed = default, [FromQuery] bool? createAvailable = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a signed token on behalf of the requesting DID for the requested service.
@@ -181,7 +181,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.server.getServiceAuth")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>, BadRequest>> GetServiceAuthAsync (FishyFlip.Models.ATDid aud, int? exp = 0, string? lxm = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>, BadRequest>> GetServiceAuthAsync ([FromQuery] FishyFlip.Models.ATDid aud, [FromQuery] int? exp = 0, [FromQuery] string? lxm = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get information about the current auth session. Requires auth.
@@ -242,7 +242,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.server.requestPasswordReset")]
-        public abstract Task<Results<Ok, BadRequest>> RequestPasswordResetAsync (string email, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> RequestPasswordResetAsync ([FromBody] string email, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Reserve a repo signing key, for use with account creation. Necessary so that a DID PLC update operation can be constructed during an account migraiton. Public and does not require auth; implemented by PDS. NOTE: this endpoint may change when full account migration is implemented.
@@ -251,7 +251,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.server.reserveSigningKey")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput>, BadRequest>> ReserveSigningKeyAsync (FishyFlip.Models.ATDid? did = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput>, BadRequest>> ReserveSigningKeyAsync ([FromBody] FishyFlip.Models.ATDid? did = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Reset a user account password using a token.
@@ -264,7 +264,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.server.resetPassword")]
-        public abstract Task<Results<Ok, BadRequest>> ResetPasswordAsync (string token, string password, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> ResetPasswordAsync ([FromBody] string token, [FromBody] string password, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Revoke an App Password by name.
@@ -273,7 +273,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.server.revokeAppPassword")]
-        public abstract Task<Results<Ok, BadRequest>> RevokeAppPasswordAsync (string name, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> RevokeAppPasswordAsync ([FromBody] string name, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update an account's email.
@@ -288,7 +288,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.server.updateEmail")]
-        public abstract Task<Results<Ok, BadRequest>> UpdateEmailAsync (string email, bool? emailAuthFactor = default, string? token = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> UpdateEmailAsync ([FromBody] string email, [FromBody] bool? emailAuthFactor = default, [FromBody] string? token = default, CancellationToken cancellationToken = default);
     }
 }
 

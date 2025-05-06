@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Verification
 {
-    public partial class VerificationInput : ATObject, ICBOREncodable<VerificationInput>, IJsonEncodable<VerificationInput>
+    public partial class VerificationInput : ATObject, ICBOREncodable<VerificationInput>, IJsonEncodable<VerificationInput>, IParsable<VerificationInput>
     {
 
         /// <summary>
@@ -98,19 +98,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationInput>)SourceGenerationContext.Default.ToolsOzoneVerificationVerificationInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new VerificationInput FromCBORObject(CBORObject obj)
         {
             return new VerificationInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static VerificationInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<VerificationInput>(s, (JsonTypeInfo<VerificationInput>)SourceGenerationContext.Default.ToolsOzoneVerificationVerificationInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out VerificationInput result)
+        {
+            result = JsonSerializer.Deserialize<VerificationInput>(s, (JsonTypeInfo<VerificationInput>)SourceGenerationContext.Default.ToolsOzoneVerificationVerificationInput);
+            return result != null;
+        }
     }
 }
 

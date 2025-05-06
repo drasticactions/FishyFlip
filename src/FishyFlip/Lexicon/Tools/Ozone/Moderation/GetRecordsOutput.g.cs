@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class GetRecordsOutput : ATObject, ICBOREncodable<GetRecordsOutput>, IJsonEncodable<GetRecordsOutput>
+    public partial class GetRecordsOutput : ATObject, ICBOREncodable<GetRecordsOutput>, IJsonEncodable<GetRecordsOutput>, IParsable<GetRecordsOutput>
     {
 
         /// <summary>
@@ -70,19 +70,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetRecordsOutput FromCBORObject(CBORObject obj)
         {
             return new GetRecordsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetRecordsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetRecordsOutput>(s, (JsonTypeInfo<GetRecordsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetRecordsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetRecordsOutput>(s, (JsonTypeInfo<GetRecordsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput);
+            return result != null;
+        }
     }
 }
 

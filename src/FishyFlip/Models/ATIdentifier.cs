@@ -5,12 +5,14 @@
 #nullable enable annotations
 #nullable disable warnings
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace FishyFlip.Models;
 
 /// <summary>
 /// Represents an abstract class for an identifier.
 /// </summary>
-public abstract class ATIdentifier
+public abstract class ATIdentifier : IParsable<ATIdentifier>
 {
     /// <summary>
     /// Creates an instance of ATIdentifier based on the provided ID.
@@ -30,6 +32,25 @@ public abstract class ATIdentifier
         }
 
         return null;
+    }
+
+    /// <inheritdoc/>
+    public static ATIdentifier Parse(string s, IFormatProvider? provider)
+    {
+        var atIdentifier = Create(s);
+        if (atIdentifier == null)
+        {
+            throw new FormatException($"Invalid ATIdentifier format: {s}");
+        }
+
+        return atIdentifier;
+    }
+
+    /// <inheritdoc/>
+    public static bool TryParse(string? s, IFormatProvider? provider, out ATIdentifier result)
+    {
+        result = Create(s);
+        return result != null;
     }
 
     /// <summary>

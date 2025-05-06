@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class ListView : ATObject, ICBOREncodable<ListView>, IJsonEncodable<ListView>
+    public partial class ListView : ATObject, ICBOREncodable<ListView>, IJsonEncodable<ListView>, IParsable<ListView>
     {
 
         /// <summary>
@@ -183,19 +183,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.ListView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListView>)SourceGenerationContext.Default.AppBskyGraphListView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListView FromCBORObject(CBORObject obj)
         {
             return new ListView(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListView>(s, (JsonTypeInfo<ListView>)SourceGenerationContext.Default.AppBskyGraphListView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListView result)
+        {
+            result = JsonSerializer.Deserialize<ListView>(s, (JsonTypeInfo<ListView>)SourceGenerationContext.Default.AppBskyGraphListView);
+            return result != null;
+        }
     }
 }
 

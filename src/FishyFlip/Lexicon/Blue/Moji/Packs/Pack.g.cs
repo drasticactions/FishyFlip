@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
     /// <summary>
     /// A shareable Bluemoji pack
     /// </summary>
-    public partial class Pack : ATObject, ICBOREncodable<Pack>, IJsonEncodable<Pack>
+    public partial class Pack : ATObject, ICBOREncodable<Pack>, IJsonEncodable<Pack>, IParsable<Pack>
     {
 
         /// <summary>
@@ -125,19 +125,31 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Packs.Pack>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Packs.Pack>)SourceGenerationContext.Default.BlueMojiPacksPack)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Pack FromCBORObject(CBORObject obj)
         {
             return new Pack(obj);
         }
 
+        /// <inheritdoc/>
+        public static Pack Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Pack>(s, (JsonTypeInfo<Pack>)SourceGenerationContext.Default.BlueMojiPacksPack)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Pack result)
+        {
+            result = JsonSerializer.Deserialize<Pack>(s, (JsonTypeInfo<Pack>)SourceGenerationContext.Default.BlueMojiPacksPack);
+            return result != null;
+        }
     }
 }
 

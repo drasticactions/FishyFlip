@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 {
-    public partial class RemoveOptionsOutput : ATObject, ICBOREncodable<RemoveOptionsOutput>, IJsonEncodable<RemoveOptionsOutput>
+    public partial class RemoveOptionsOutput : ATObject, ICBOREncodable<RemoveOptionsOutput>, IJsonEncodable<RemoveOptionsOutput>, IParsable<RemoveOptionsOutput>
     {
 
         /// <summary>
@@ -44,19 +44,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RemoveOptionsOutput FromCBORObject(CBORObject obj)
         {
             return new RemoveOptionsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RemoveOptionsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RemoveOptionsOutput>(s, (JsonTypeInfo<RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RemoveOptionsOutput result)
+        {
+            result = JsonSerializer.Deserialize<RemoveOptionsOutput>(s, (JsonTypeInfo<RemoveOptionsOutput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput);
+            return result != null;
+        }
     }
 }
 

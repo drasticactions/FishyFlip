@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class AccountCodes : ATObject, ICBOREncodable<AccountCodes>, IJsonEncodable<AccountCodes>
+    public partial class AccountCodes : ATObject, ICBOREncodable<AccountCodes>, IJsonEncodable<AccountCodes>, IParsable<AccountCodes>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AccountCodes>)SourceGenerationContext.Default.ComAtprotoServerAccountCodes)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new AccountCodes FromCBORObject(CBORObject obj)
         {
             return new AccountCodes(obj);
         }
 
+        /// <inheritdoc/>
+        public static AccountCodes Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<AccountCodes>(s, (JsonTypeInfo<AccountCodes>)SourceGenerationContext.Default.ComAtprotoServerAccountCodes)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out AccountCodes result)
+        {
+            result = JsonSerializer.Deserialize<AccountCodes>(s, (JsonTypeInfo<AccountCodes>)SourceGenerationContext.Default.ComAtprotoServerAccountCodes);
+            return result != null;
+        }
     }
 }
 

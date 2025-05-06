@@ -28,7 +28,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Communication
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView"/></returns>
         [HttpPost("/xrpc/tools.ozone.communication.createTemplate")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>, BadRequest>> CreateTemplateAsync (string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>, BadRequest>> CreateTemplateAsync ([FromBody] string name, [FromBody] string contentMarkdown, [FromBody] string subject, [FromBody] string? lang = default, [FromBody] FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a communication template.
@@ -37,7 +37,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Communication
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/tools.ozone.communication.deleteTemplate")]
-        public abstract Task<Results<Ok, BadRequest>> DeleteTemplateAsync (string id, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> DeleteTemplateAsync ([FromBody] string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get list of all communication templates.
@@ -62,7 +62,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Communication
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView"/></returns>
         [HttpPost("/xrpc/tools.ozone.communication.updateTemplate")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>, BadRequest>> UpdateTemplateAsync (string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>, BadRequest>> UpdateTemplateAsync ([FromBody] string id, [FromBody] string? name = default, [FromBody] string? lang = default, [FromBody] string? contentMarkdown = default, [FromBody] string? subject = default, [FromBody] FishyFlip.Models.ATDid? updatedBy = default, [FromBody] bool? disabled = default, CancellationToken cancellationToken = default);
     }
 }
 

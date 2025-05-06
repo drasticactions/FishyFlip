@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class Comment : ATObject, ICBOREncodable<Comment>, IJsonEncodable<Comment>
+    public partial class Comment : ATObject, ICBOREncodable<Comment>, IJsonEncodable<Comment>, IParsable<Comment>
     {
 
         /// <summary>
@@ -74,19 +74,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Comment>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Comment>)SourceGenerationContext.Default.ComWhtwndBlogComment)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Comment FromCBORObject(CBORObject obj)
         {
             return new Comment(obj);
         }
 
+        /// <inheritdoc/>
+        public static Comment Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Comment>(s, (JsonTypeInfo<Comment>)SourceGenerationContext.Default.ComWhtwndBlogComment)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Comment result)
+        {
+            result = JsonSerializer.Deserialize<Comment>(s, (JsonTypeInfo<Comment>)SourceGenerationContext.Default.ComWhtwndBlogComment);
+            return result != null;
+        }
     }
 }
 

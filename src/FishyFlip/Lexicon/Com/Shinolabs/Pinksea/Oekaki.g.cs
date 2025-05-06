@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
     /// <summary>
     /// An oekaki post.
     /// </summary>
-    public partial class Oekaki : ATObject, ICBOREncodable<Oekaki>, IJsonEncodable<Oekaki>
+    public partial class Oekaki : ATObject, ICBOREncodable<Oekaki>, IJsonEncodable<Oekaki>, IParsable<Oekaki>
     {
 
         /// <summary>
@@ -111,19 +111,31 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Oekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaOekaki)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Oekaki FromCBORObject(CBORObject obj)
         {
             return new Oekaki(obj);
         }
 
+        /// <inheritdoc/>
+        public static Oekaki Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Oekaki>(s, (JsonTypeInfo<Oekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaOekaki)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Oekaki result)
+        {
+            result = JsonSerializer.Deserialize<Oekaki>(s, (JsonTypeInfo<Oekaki>)SourceGenerationContext.Default.ComShinolabsPinkseaOekaki);
+            return result != null;
+        }
     }
 }
 

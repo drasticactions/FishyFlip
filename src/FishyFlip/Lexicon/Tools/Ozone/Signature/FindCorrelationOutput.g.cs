@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 {
-    public partial class FindCorrelationOutput : ATObject, ICBOREncodable<FindCorrelationOutput>, IJsonEncodable<FindCorrelationOutput>
+    public partial class FindCorrelationOutput : ATObject, ICBOREncodable<FindCorrelationOutput>, IJsonEncodable<FindCorrelationOutput>, IParsable<FindCorrelationOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new FindCorrelationOutput FromCBORObject(CBORObject obj)
         {
             return new FindCorrelationOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static FindCorrelationOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<FindCorrelationOutput>(s, (JsonTypeInfo<FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out FindCorrelationOutput result)
+        {
+            result = JsonSerializer.Deserialize<FindCorrelationOutput>(s, (JsonTypeInfo<FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput);
+            return result != null;
+        }
     }
 }
 

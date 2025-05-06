@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class ProfileAssociatedChat : ATObject, ICBOREncodable<ProfileAssociatedChat>, IJsonEncodable<ProfileAssociatedChat>
+    public partial class ProfileAssociatedChat : ATObject, ICBOREncodable<ProfileAssociatedChat>, IJsonEncodable<ProfileAssociatedChat>, IParsable<ProfileAssociatedChat>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ProfileAssociatedChat FromCBORObject(CBORObject obj)
         {
             return new ProfileAssociatedChat(obj);
         }
 
+        /// <inheritdoc/>
+        public static ProfileAssociatedChat Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ProfileAssociatedChat>(s, (JsonTypeInfo<ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ProfileAssociatedChat result)
+        {
+            result = JsonSerializer.Deserialize<ProfileAssociatedChat>(s, (JsonTypeInfo<ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat);
+            return result != null;
+        }
     }
 }
 

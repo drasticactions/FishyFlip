@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class GetRecordOutput : ATObject, ICBOREncodable<GetRecordOutput>, IJsonEncodable<GetRecordOutput>
+    public partial class GetRecordOutput : ATObject, ICBOREncodable<GetRecordOutput>, IJsonEncodable<GetRecordOutput>, IParsable<GetRecordOutput>
     {
 
         /// <summary>
@@ -83,19 +83,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoGetRecordOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetRecordOutput FromCBORObject(CBORObject obj)
         {
             return new GetRecordOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetRecordOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetRecordOutput>(s, (JsonTypeInfo<GetRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoGetRecordOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetRecordOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetRecordOutput>(s, (JsonTypeInfo<GetRecordOutput>)SourceGenerationContext.Default.ComAtprotoRepoGetRecordOutput);
+            return result != null;
+        }
     }
 }
 

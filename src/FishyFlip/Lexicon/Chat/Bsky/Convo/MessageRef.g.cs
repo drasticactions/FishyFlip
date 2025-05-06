@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class MessageRef : ATObject, ICBOREncodable<MessageRef>, IJsonEncodable<MessageRef>
+    public partial class MessageRef : ATObject, ICBOREncodable<MessageRef>, IJsonEncodable<MessageRef>, IParsable<MessageRef>
     {
 
         /// <summary>
@@ -84,19 +84,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageRef>)SourceGenerationContext.Default.ChatBskyConvoMessageRef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new MessageRef FromCBORObject(CBORObject obj)
         {
             return new MessageRef(obj);
         }
 
+        /// <inheritdoc/>
+        public static MessageRef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<MessageRef>(s, (JsonTypeInfo<MessageRef>)SourceGenerationContext.Default.ChatBskyConvoMessageRef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out MessageRef result)
+        {
+            result = JsonSerializer.Deserialize<MessageRef>(s, (JsonTypeInfo<MessageRef>)SourceGenerationContext.Default.ChatBskyConvoMessageRef);
+            return result != null;
+        }
     }
 }
 

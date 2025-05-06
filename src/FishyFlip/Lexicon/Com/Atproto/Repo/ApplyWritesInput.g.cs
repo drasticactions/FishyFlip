@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class ApplyWritesInput : ATObject, ICBOREncodable<ApplyWritesInput>, IJsonEncodable<ApplyWritesInput>
+    public partial class ApplyWritesInput : ATObject, ICBOREncodable<ApplyWritesInput>, IJsonEncodable<ApplyWritesInput>, IParsable<ApplyWritesInput>
     {
 
         /// <summary>
@@ -104,19 +104,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ApplyWritesInput FromCBORObject(CBORObject obj)
         {
             return new ApplyWritesInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ApplyWritesInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ApplyWritesInput>(s, (JsonTypeInfo<ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ApplyWritesInput result)
+        {
+            result = JsonSerializer.Deserialize<ApplyWritesInput>(s, (JsonTypeInfo<ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput);
+            return result != null;
+        }
     }
 }
 

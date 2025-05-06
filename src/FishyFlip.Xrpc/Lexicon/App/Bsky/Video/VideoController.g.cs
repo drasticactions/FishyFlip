@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Video
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.video.getJobStatus")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>, BadRequest>> GetJobStatusAsync (string jobId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>, BadRequest>> GetJobStatusAsync ([FromQuery] string jobId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get video upload limits for the authenticated user.

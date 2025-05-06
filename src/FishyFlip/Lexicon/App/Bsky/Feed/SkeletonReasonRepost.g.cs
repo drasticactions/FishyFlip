@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class SkeletonReasonRepost : ATObject, ICBOREncodable<SkeletonReasonRepost>, IJsonEncodable<SkeletonReasonRepost>
+    public partial class SkeletonReasonRepost : ATObject, ICBOREncodable<SkeletonReasonRepost>, IJsonEncodable<SkeletonReasonRepost>, IParsable<SkeletonReasonRepost>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SkeletonReasonRepost FromCBORObject(CBORObject obj)
         {
             return new SkeletonReasonRepost(obj);
         }
 
+        /// <inheritdoc/>
+        public static SkeletonReasonRepost Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SkeletonReasonRepost>(s, (JsonTypeInfo<SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SkeletonReasonRepost result)
+        {
+            result = JsonSerializer.Deserialize<SkeletonReasonRepost>(s, (JsonTypeInfo<SkeletonReasonRepost>)SourceGenerationContext.Default.AppBskyFeedSkeletonReasonRepost);
+            return result != null;
+        }
     }
 }
 

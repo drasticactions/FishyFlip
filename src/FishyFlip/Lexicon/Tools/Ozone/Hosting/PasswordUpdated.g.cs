@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
 {
-    public partial class PasswordUpdated : ATObject, ICBOREncodable<PasswordUpdated>, IJsonEncodable<PasswordUpdated>
+    public partial class PasswordUpdated : ATObject, ICBOREncodable<PasswordUpdated>, IJsonEncodable<PasswordUpdated>, IParsable<PasswordUpdated>
     {
 
         /// <summary>
@@ -44,19 +44,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Hosting.PasswordUpdated>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Hosting.PasswordUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingPasswordUpdated)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new PasswordUpdated FromCBORObject(CBORObject obj)
         {
             return new PasswordUpdated(obj);
         }
 
+        /// <inheritdoc/>
+        public static PasswordUpdated Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<PasswordUpdated>(s, (JsonTypeInfo<PasswordUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingPasswordUpdated)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out PasswordUpdated result)
+        {
+            result = JsonSerializer.Deserialize<PasswordUpdated>(s, (JsonTypeInfo<PasswordUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingPasswordUpdated);
+            return result != null;
+        }
     }
 }
 

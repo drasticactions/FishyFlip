@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class CreateAppPasswordInput : ATObject, ICBOREncodable<CreateAppPasswordInput>, IJsonEncodable<CreateAppPasswordInput>
+    public partial class CreateAppPasswordInput : ATObject, ICBOREncodable<CreateAppPasswordInput>, IJsonEncodable<CreateAppPasswordInput>, IParsable<CreateAppPasswordInput>
     {
 
         /// <summary>
@@ -74,19 +74,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CreateAppPasswordInput FromCBORObject(CBORObject obj)
         {
             return new CreateAppPasswordInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static CreateAppPasswordInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CreateAppPasswordInput>(s, (JsonTypeInfo<CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CreateAppPasswordInput result)
+        {
+            result = JsonSerializer.Deserialize<CreateAppPasswordInput>(s, (JsonTypeInfo<CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput);
+            return result != null;
+        }
     }
 }
 

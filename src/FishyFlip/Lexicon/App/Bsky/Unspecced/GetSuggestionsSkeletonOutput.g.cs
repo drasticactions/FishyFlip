@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetSuggestionsSkeletonOutput : ATObject, ICBOREncodable<GetSuggestionsSkeletonOutput>, IJsonEncodable<GetSuggestionsSkeletonOutput>
+    public partial class GetSuggestionsSkeletonOutput : ATObject, ICBOREncodable<GetSuggestionsSkeletonOutput>, IJsonEncodable<GetSuggestionsSkeletonOutput>, IParsable<GetSuggestionsSkeletonOutput>
     {
 
         /// <summary>
@@ -93,19 +93,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSuggestionsSkeletonOutput FromCBORObject(CBORObject obj)
         {
             return new GetSuggestionsSkeletonOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSuggestionsSkeletonOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSuggestionsSkeletonOutput>(s, (JsonTypeInfo<GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSuggestionsSkeletonOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSuggestionsSkeletonOutput>(s, (JsonTypeInfo<GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput);
+            return result != null;
+        }
     }
 }
 

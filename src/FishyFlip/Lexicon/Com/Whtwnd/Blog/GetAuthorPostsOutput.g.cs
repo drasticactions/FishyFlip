@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class GetAuthorPostsOutput : ATObject, ICBOREncodable<GetAuthorPostsOutput>, IJsonEncodable<GetAuthorPostsOutput>
+    public partial class GetAuthorPostsOutput : ATObject, ICBOREncodable<GetAuthorPostsOutput>, IJsonEncodable<GetAuthorPostsOutput>, IParsable<GetAuthorPostsOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetAuthorPostsOutput FromCBORObject(CBORObject obj)
         {
             return new GetAuthorPostsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetAuthorPostsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetAuthorPostsOutput>(s, (JsonTypeInfo<GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetAuthorPostsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetAuthorPostsOutput>(s, (JsonTypeInfo<GetAuthorPostsOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetAuthorPostsOutput);
+            return result != null;
+        }
     }
 }
 

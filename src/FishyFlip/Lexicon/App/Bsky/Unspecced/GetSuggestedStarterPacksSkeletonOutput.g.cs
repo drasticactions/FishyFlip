@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetSuggestedStarterPacksSkeletonOutput : ATObject, ICBOREncodable<GetSuggestedStarterPacksSkeletonOutput>, IJsonEncodable<GetSuggestedStarterPacksSkeletonOutput>
+    public partial class GetSuggestedStarterPacksSkeletonOutput : ATObject, ICBOREncodable<GetSuggestedStarterPacksSkeletonOutput>, IJsonEncodable<GetSuggestedStarterPacksSkeletonOutput>, IParsable<GetSuggestedStarterPacksSkeletonOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSuggestedStarterPacksSkeletonOutput FromCBORObject(CBORObject obj)
         {
             return new GetSuggestedStarterPacksSkeletonOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSuggestedStarterPacksSkeletonOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSuggestedStarterPacksSkeletonOutput>(s, (JsonTypeInfo<GetSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSuggestedStarterPacksSkeletonOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSuggestedStarterPacksSkeletonOutput>(s, (JsonTypeInfo<GetSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput);
+            return result != null;
+        }
     }
 }
 

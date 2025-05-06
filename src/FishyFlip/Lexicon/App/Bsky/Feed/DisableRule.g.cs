@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Disables embedding of this post.
     /// </summary>
-    public partial class DisableRule : ATObject, ICBOREncodable<DisableRule>, IJsonEncodable<DisableRule>
+    public partial class DisableRule : ATObject, ICBOREncodable<DisableRule>, IJsonEncodable<DisableRule>, IParsable<DisableRule>
     {
 
         /// <summary>
@@ -47,19 +47,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>)SourceGenerationContext.Default.AppBskyFeedDisableRule)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DisableRule FromCBORObject(CBORObject obj)
         {
             return new DisableRule(obj);
         }
 
+        /// <inheritdoc/>
+        public static DisableRule Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DisableRule>(s, (JsonTypeInfo<DisableRule>)SourceGenerationContext.Default.AppBskyFeedDisableRule)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DisableRule result)
+        {
+            result = JsonSerializer.Deserialize<DisableRule>(s, (JsonTypeInfo<DisableRule>)SourceGenerationContext.Default.AppBskyFeedDisableRule);
+            return result != null;
+        }
     }
 }
 

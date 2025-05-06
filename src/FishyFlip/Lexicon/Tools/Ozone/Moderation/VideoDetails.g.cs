@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class VideoDetails : ATObject, ICBOREncodable<VideoDetails>, IJsonEncodable<VideoDetails>
+    public partial class VideoDetails : ATObject, ICBOREncodable<VideoDetails>, IJsonEncodable<VideoDetails>, IParsable<VideoDetails>
     {
 
         /// <summary>
@@ -83,19 +83,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails>)SourceGenerationContext.Default.ToolsOzoneModerationVideoDetails)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new VideoDetails FromCBORObject(CBORObject obj)
         {
             return new VideoDetails(obj);
         }
 
+        /// <inheritdoc/>
+        public static VideoDetails Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<VideoDetails>(s, (JsonTypeInfo<VideoDetails>)SourceGenerationContext.Default.ToolsOzoneModerationVideoDetails)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out VideoDetails result)
+        {
+            result = JsonSerializer.Deserialize<VideoDetails>(s, (JsonTypeInfo<VideoDetails>)SourceGenerationContext.Default.ToolsOzoneModerationVideoDetails);
+            return result != null;
+        }
     }
 }
 

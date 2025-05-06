@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class SignPlcOperationInput : ATObject, ICBOREncodable<SignPlcOperationInput>, IJsonEncodable<SignPlcOperationInput>
+    public partial class SignPlcOperationInput : ATObject, ICBOREncodable<SignPlcOperationInput>, IJsonEncodable<SignPlcOperationInput>, IParsable<SignPlcOperationInput>
     {
 
         /// <summary>
@@ -99,19 +99,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SignPlcOperationInput FromCBORObject(CBORObject obj)
         {
             return new SignPlcOperationInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static SignPlcOperationInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SignPlcOperationInput>(s, (JsonTypeInfo<SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SignPlcOperationInput result)
+        {
+            result = JsonSerializer.Deserialize<SignPlcOperationInput>(s, (JsonTypeInfo<SignPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySignPlcOperationInput);
+            return result != null;
+        }
     }
 }
 

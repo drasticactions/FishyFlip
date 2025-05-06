@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Record representing a 'repost' of an existing Bluesky post.
     /// </summary>
-    public partial class Repost : ATObject, ICBOREncodable<Repost>, IJsonEncodable<Repost>
+    public partial class Repost : ATObject, ICBOREncodable<Repost>, IJsonEncodable<Repost>, IParsable<Repost>
     {
 
         /// <summary>
@@ -77,19 +77,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Repost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Repost>)SourceGenerationContext.Default.AppBskyFeedRepost)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Repost FromCBORObject(CBORObject obj)
         {
             return new Repost(obj);
         }
 
+        /// <inheritdoc/>
+        public static Repost Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Repost>(s, (JsonTypeInfo<Repost>)SourceGenerationContext.Default.AppBskyFeedRepost)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Repost result)
+        {
+            result = JsonSerializer.Deserialize<Repost>(s, (JsonTypeInfo<Repost>)SourceGenerationContext.Default.AppBskyFeedRepost);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     /// <summary>
     /// Metadata tag on an atproto resource (eg, repo or record).
     /// </summary>
-    public partial class Label : ATObject, ICBOREncodable<Label>, IJsonEncodable<Label>
+    public partial class Label : ATObject, ICBOREncodable<Label>, IJsonEncodable<Label>, IParsable<Label>
     {
 
         /// <summary>
@@ -151,19 +151,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.Label>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.Label>)SourceGenerationContext.Default.ComAtprotoLabelLabel)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Label FromCBORObject(CBORObject obj)
         {
             return new Label(obj);
         }
 
+        /// <inheritdoc/>
+        public static Label Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Label>(s, (JsonTypeInfo<Label>)SourceGenerationContext.Default.ComAtprotoLabelLabel)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Label result)
+        {
+            result = JsonSerializer.Deserialize<Label>(s, (JsonTypeInfo<Label>)SourceGenerationContext.Default.ComAtprotoLabelLabel);
+            return result != null;
+        }
     }
 }
 

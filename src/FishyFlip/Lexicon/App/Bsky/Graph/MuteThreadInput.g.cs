@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class MuteThreadInput : ATObject, ICBOREncodable<MuteThreadInput>, IJsonEncodable<MuteThreadInput>
+    public partial class MuteThreadInput : ATObject, ICBOREncodable<MuteThreadInput>, IJsonEncodable<MuteThreadInput>, IParsable<MuteThreadInput>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput>)SourceGenerationContext.Default.AppBskyGraphMuteThreadInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new MuteThreadInput FromCBORObject(CBORObject obj)
         {
             return new MuteThreadInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static MuteThreadInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<MuteThreadInput>(s, (JsonTypeInfo<MuteThreadInput>)SourceGenerationContext.Default.AppBskyGraphMuteThreadInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out MuteThreadInput result)
+        {
+            result = JsonSerializer.Deserialize<MuteThreadInput>(s, (JsonTypeInfo<MuteThreadInput>)SourceGenerationContext.Default.AppBskyGraphMuteThreadInput);
+            return result != null;
+        }
     }
 }
 

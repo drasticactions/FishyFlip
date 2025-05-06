@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class Links : ATObject, ICBOREncodable<Links>, IJsonEncodable<Links>
+    public partial class Links : ATObject, ICBOREncodable<Links>, IJsonEncodable<Links>, IParsable<Links>
     {
 
         /// <summary>
@@ -71,19 +71,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Links>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Links>)SourceGenerationContext.Default.AppBskyFeedLinks)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Links FromCBORObject(CBORObject obj)
         {
             return new Links(obj);
         }
 
+        /// <inheritdoc/>
+        public static Links Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Links>(s, (JsonTypeInfo<Links>)SourceGenerationContext.Default.AppBskyFeedLinks)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Links result)
+        {
+            result = JsonSerializer.Deserialize<Links>(s, (JsonTypeInfo<Links>)SourceGenerationContext.Default.AppBskyFeedLinks);
+            return result != null;
+        }
     }
 }
 

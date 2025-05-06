@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
     /// <summary>
     /// Operation which updates an existing record.
     /// </summary>
-    public partial class Update : ATObject, ICBOREncodable<Update>, IJsonEncodable<Update>
+    public partial class Update : ATObject, ICBOREncodable<Update>, IJsonEncodable<Update>, IParsable<Update>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Update>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Update FromCBORObject(CBORObject obj)
         {
             return new Update(obj);
         }
 
+        /// <inheritdoc/>
+        public static Update Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Update>(s, (JsonTypeInfo<Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Update result)
+        {
+            result = JsonSerializer.Deserialize<Update>(s, (JsonTypeInfo<Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate);
+            return result != null;
+        }
     }
 }
 

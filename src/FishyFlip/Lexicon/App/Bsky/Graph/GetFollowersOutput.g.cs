@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetFollowersOutput : ATObject, ICBOREncodable<GetFollowersOutput>, IJsonEncodable<GetFollowersOutput>
+    public partial class GetFollowersOutput : ATObject, ICBOREncodable<GetFollowersOutput>, IJsonEncodable<GetFollowersOutput>, IParsable<GetFollowersOutput>
     {
 
         /// <summary>
@@ -85,19 +85,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetFollowersOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetFollowersOutput FromCBORObject(CBORObject obj)
         {
             return new GetFollowersOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetFollowersOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetFollowersOutput>(s, (JsonTypeInfo<GetFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetFollowersOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetFollowersOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetFollowersOutput>(s, (JsonTypeInfo<GetFollowersOutput>)SourceGenerationContext.Default.AppBskyGraphGetFollowersOutput);
+            return result != null;
+        }
     }
 }
 

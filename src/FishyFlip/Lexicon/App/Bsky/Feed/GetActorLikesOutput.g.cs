@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetActorLikesOutput : ATObject, ICBOREncodable<GetActorLikesOutput>, IJsonEncodable<GetActorLikesOutput>
+    public partial class GetActorLikesOutput : ATObject, ICBOREncodable<GetActorLikesOutput>, IJsonEncodable<GetActorLikesOutput>, IParsable<GetActorLikesOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorLikesOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetActorLikesOutput FromCBORObject(CBORObject obj)
         {
             return new GetActorLikesOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetActorLikesOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetActorLikesOutput>(s, (JsonTypeInfo<GetActorLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorLikesOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetActorLikesOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetActorLikesOutput>(s, (JsonTypeInfo<GetActorLikesOutput>)SourceGenerationContext.Default.AppBskyFeedGetActorLikesOutput);
+            return result != null;
+        }
     }
 }
 

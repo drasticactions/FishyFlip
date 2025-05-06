@@ -185,6 +185,7 @@ public partial class AppCommands
         foreach (var group in procedureClasses)
         {
             await this.GenerateXrpcControllerGroupAsync(group);
+            // await this.GenerateXrpcRoutesGroupAsync(group);
         }
     }
 
@@ -1346,6 +1347,92 @@ public partial class AppCommands
         await File.WriteAllTextAsync(classPath, sb.ToString());
     }
 
+    private async Task GenerateXrpcRoutesGroupAsync(IGrouping<string, ClassGeneration> group)
+    {
+        Console.WriteLine($"Generating Xrpc Controller Group: {group.Key}");
+        var sb = new StringBuilder();
+        this.GenerateHeader(sb);
+        this.GenerateNamespace(sb, $"FishyFlip.Xrpc.Lexicon.{group.Key}");
+        var className = $"{group.Key.Split(".").Last()}Routes";
+
+        sb.AppendLine("{");
+        sb.AppendLine();
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// {group.Key.ToLower()} XRPC Routes.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public abstract class {className}");
+        sb.AppendLine("    {");
+        foreach (var item in group)
+        {
+            sb.AppendLine();
+            Console.WriteLine($"{item.Definition.Type} {item.Id}");
+            var methodName = $"{item.ClassName}Async";
+            var (requiredProperties, optionalProperties) = this.FetchInputProperties(item, false, false);
+            var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
+            var outputProperty = this.FetchOutputProperties(item);
+            if (item.Definition.Output?.Encoding == "application/jsonl")
+            {
+                outputProperty = "string";
+            }
+            sb.AppendLine($"        /// <summary>");
+            sb.AppendLine($"        /// {item.Definition.Description}");
+            this.GenerateErrorConstructorDocs(sb, item.Definition.Errors);
+            sb.AppendLine($"        /// </summary>");
+            this.GenerateParams(sb, item, inputProperties);
+            sb.AppendLine($"        /// <returns>Result of <see cref=\"{outputProperty}\"/></returns>");
+            var httpType = item.Definition.Type == "procedure" ? "Post" : "Get";
+            if (outputProperty == "Success")
+            {
+                sb.Append($"        public abstract Task<Results<Ok, BadRequest>> {methodName} (");
+            }
+            else if (outputProperty == "CarResponse")
+            {
+                sb.Append($"        public abstract Task<Results<FileStreamHttpResult, BadRequest>> {methodName} (");
+            }
+            else
+            {
+                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, BadRequest>> {methodName} (");
+            }
+            for (int i = 0; i < inputProperties.Count; i++)
+            {
+                var propType = inputProperties[i];
+                if (propType.Contains("CancellationToken"))
+                {
+                    sb.Append($"{propType}");
+                }
+                else
+                {
+                    if (httpType == "Get")
+                    {
+                        sb.Append($"[FromQuery] {propType}");
+                    }
+                    else
+                    {
+                        sb.Append($"[FromBody] {propType}");
+                    }
+                }
+                if (i < inputProperties.Count - 1)
+                {
+                    sb.Append(", ");
+                }
+                }
+            sb.AppendLine($");");
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        var outputPath = Path.Combine(this.basePath, group.Key.Replace('.', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(outputPath);
+        var classPath = Path.Combine(outputPath, $"{className}.g.cs");
+        if (File.Exists(classPath))
+        {
+            throw new Exception($"File already exists: {className} {classPath}");
+        }
+
+        await File.WriteAllTextAsync(classPath, sb.ToString());
+    }
+
     private async Task GenerateXrpcControllerGroupAsync(IGrouping<string, ClassGeneration> group)
     {
         Console.WriteLine($"Generating Xrpc Controller Group: {group.Key}");
@@ -1370,6 +1457,10 @@ public partial class AppCommands
             var (requiredProperties, optionalProperties) = this.FetchInputProperties(item, false, false);
             var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
             var outputProperty = this.FetchOutputProperties(item);
+            if (item.Definition.Output?.Encoding == "application/jsonl")
+            {
+                outputProperty = "string";
+            }
             sb.AppendLine($"        /// <summary>");
             sb.AppendLine($"        /// {item.Definition.Description}");
             this.GenerateErrorConstructorDocs(sb, item.Definition.Errors);
@@ -1392,7 +1483,22 @@ public partial class AppCommands
             }
             for (int i = 0; i < inputProperties.Count; i++)
             {
-                sb.Append($"{inputProperties[i]}");
+                var propType = inputProperties[i];
+                if (propType.Contains("CancellationToken"))
+                {
+                    sb.Append($"{propType}");
+                }
+                else
+                {
+                    if (httpType == "Get")
+                    {
+                        sb.Append($"[FromQuery] {propType}");
+                    }
+                    else
+                    {
+                        sb.Append($"[FromBody] {propType}");
+                    }
+                }
                 if (i < inputProperties.Count - 1)
                 {
                     sb.Append(", ");
@@ -1837,11 +1943,6 @@ public partial class AppCommands
             return "byte[]";
         }
 
-        if (classGeneration.Definition.Output?.Encoding == "application/jsonl")
-        {
-            return "string";
-        }
-
         if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car")
         {
             return "CarResponse";
@@ -2075,7 +2176,7 @@ public partial class AppCommands
 
         this.GenerateClassDocumentation(sb, cls.Definition);
 
-        sb.AppendLine($"    public partial class {cls.ClassName} : ATObject, ICBOREncodable<{cls.ClassName}>, IJsonEncodable<{cls.ClassName}>");
+        sb.AppendLine($"    public partial class {cls.ClassName} : ATObject, ICBOREncodable<{cls.ClassName}>, IJsonEncodable<{cls.ClassName}>, IParsable<{cls.ClassName}>");
         sb.AppendLine("    {");
 
         this.GenerateClassConstructor(sb, cls);
@@ -2093,6 +2194,8 @@ public partial class AppCommands
         this.GenerateFromJsonWithSourceGenerator(sb, cls);
 
         this.GenerateICBOREncodeableEntries(sb, cls);
+
+        this.GenerateIParsableEntries(sb, cls);
 
         sb.AppendLine("    }");
 
@@ -2152,16 +2255,33 @@ public partial class AppCommands
         sb.AppendLine();
     }
 
+    private void GenerateIParsableEntries(StringBuilder sb, ClassGeneration cls)
+    {
+        sb.AppendLine("        /// <inheritdoc/>");
+        sb.AppendLine($"        public static {cls.ClassName} Parse(string s, IFormatProvider? provider)");
+        sb.AppendLine("        {");
+        sb.AppendLine($"            return JsonSerializer.Deserialize<{cls.ClassName}>(s, (JsonTypeInfo<{cls.ClassName}>)SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName})!;");
+        sb.AppendLine("        }");
+        sb.AppendLine();
+        sb.AppendLine("        /// <inheritdoc/>");
+        sb.AppendLine($"        public static bool TryParse(string? s, IFormatProvider? provider, out {cls.ClassName} result)");
+        sb.AppendLine("        {");
+        sb.AppendLine($"            result = JsonSerializer.Deserialize<{cls.ClassName}>(s, (JsonTypeInfo<{cls.ClassName}>)SourceGenerationContext.Default.{cls.CSharpNamespace.Replace(".", string.Empty)}{cls.ClassName});");
+        sb.AppendLine("            return result != null;");
+        sb.AppendLine("        }");
+
+    }
+
     private void GenerateICBOREncodeableEntries(StringBuilder sb, ClassGeneration cls)
     {
-        sb.AppendLine("         /// <inheritdoc/>");
+        sb.AppendLine("        /// <inheritdoc/>");
         sb.AppendLine($"        public override CBORObject ToCBORObject()");
         sb.AppendLine("        {");
         sb.AppendLine($"            using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));");
         sb.AppendLine($"            return CBORObject.ReadJSON(jsonStream);");
         sb.AppendLine("        }");
         sb.AppendLine();
-        sb.AppendLine("         /// <inheritdoc/>");
+        sb.AppendLine("        /// <inheritdoc/>");
         sb.AppendLine($"        public static new {cls.ClassName} FromCBORObject(CBORObject obj)");
         sb.AppendLine("        {");
         sb.AppendLine($"            return new {cls.ClassName}(obj);");

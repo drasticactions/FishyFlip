@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.acceptConvo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput>, BadRequest>> AcceptConvoAsync (string convoId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput>, BadRequest>> AcceptConvoAsync ([FromBody] string convoId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Adds an emoji reaction to a message. Requires authentication. It is idempotent, so multiple calls from the same user with the same emoji result in a single reaction.
@@ -37,7 +37,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.addReaction")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput>, BadRequest>> AddReactionAsync (string convoId, string messageId, string value, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput>, BadRequest>> AddReactionAsync ([FromBody] string convoId, [FromBody] string messageId, [FromBody] string value, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -47,7 +47,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.deleteMessageForSelf")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>, BadRequest>> DeleteMessageForSelfAsync (string convoId, string messageId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>, BadRequest>> DeleteMessageForSelfAsync ([FromBody] string convoId, [FromBody] string messageId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -56,7 +56,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.convo.getConvo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>, BadRequest>> GetConvoAsync (string convoId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoOutput>, BadRequest>> GetConvoAsync ([FromQuery] string convoId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get whether the requester and the other members can chat. If an existing convo is found for these members, it is returned.
@@ -65,7 +65,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoAvailabilityOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.convo.getConvoAvailability")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoAvailabilityOutput>, BadRequest>> GetConvoAvailabilityAsync (List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoAvailabilityOutput>, BadRequest>> GetConvoAvailabilityAsync ([FromQuery] List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -74,7 +74,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.convo.getConvoForMembers")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>, BadRequest>> GetConvoForMembersAsync (List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetConvoForMembersOutput>, BadRequest>> GetConvoForMembersAsync ([FromQuery] List<FishyFlip.Models.ATDid> members, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -83,7 +83,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.convo.getLog")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>, BadRequest>> GetLogAsync (string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>, BadRequest>> GetLogAsync ([FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -94,7 +94,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.convo.getMessages")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>, BadRequest>> GetMessagesAsync (string convoId, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>, BadRequest>> GetMessagesAsync ([FromQuery] string convoId, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -103,7 +103,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.leaveConvo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput>, BadRequest>> LeaveConvoAsync (string convoId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.LeaveConvoOutput>, BadRequest>> LeaveConvoAsync ([FromBody] string convoId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -115,7 +115,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.convo.listConvos")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>, BadRequest>> ListConvosAsync (int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.ListConvosOutput>, BadRequest>> ListConvosAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] string? readState = default, [FromQuery] string? status = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -124,7 +124,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.muteConvo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput>, BadRequest>> MuteConvoAsync (string convoId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoOutput>, BadRequest>> MuteConvoAsync ([FromBody] string convoId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Removes an emoji reaction from a message. Requires authentication. It is idempotent, so multiple calls from the same user with the same emoji result in that reaction not being present, even if it already wasn't.
@@ -138,7 +138,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.RemoveReactionOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.removeReaction")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.RemoveReactionOutput>, BadRequest>> RemoveReactionAsync (string convoId, string messageId, string value, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.RemoveReactionOutput>, BadRequest>> RemoveReactionAsync ([FromBody] string convoId, [FromBody] string messageId, [FromBody] string value, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -148,7 +148,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.sendMessage")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>, BadRequest>> SendMessageAsync (string convoId, FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput message, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>, BadRequest>> SendMessageAsync ([FromBody] string convoId, [FromBody] FishyFlip.Lexicon.Chat.Bsky.Convo.MessageInput message, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -157,7 +157,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.sendMessageBatch")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput>, BadRequest>> SendMessageBatchAsync (List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem> items, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput>, BadRequest>> SendMessageBatchAsync ([FromBody] List<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem> items, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -166,7 +166,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.unmuteConvo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>, BadRequest>> UnmuteConvoAsync (string convoId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>, BadRequest>> UnmuteConvoAsync ([FromBody] string convoId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -175,7 +175,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.updateAllRead")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput>, BadRequest>> UpdateAllReadAsync (string? status = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateAllReadOutput>, BadRequest>> UpdateAllReadAsync ([FromBody] string? status = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -185,7 +185,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Convo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.convo.updateRead")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput>, BadRequest>> UpdateReadAsync (string convoId, string? messageId = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Convo.UpdateReadOutput>, BadRequest>> UpdateReadAsync ([FromBody] string convoId, [FromBody] string? messageId = default, CancellationToken cancellationToken = default);
     }
 }
 

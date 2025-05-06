@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 {
-    public partial class SigDetail : ATObject, ICBOREncodable<SigDetail>, IJsonEncodable<SigDetail>
+    public partial class SigDetail : ATObject, ICBOREncodable<SigDetail>, IJsonEncodable<SigDetail>, IParsable<SigDetail>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SigDetail FromCBORObject(CBORObject obj)
         {
             return new SigDetail(obj);
         }
 
+        /// <inheritdoc/>
+        public static SigDetail Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SigDetail>(s, (JsonTypeInfo<SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SigDetail result)
+        {
+            result = JsonSerializer.Deserialize<SigDetail>(s, (JsonTypeInfo<SigDetail>)SourceGenerationContext.Default.ToolsOzoneSignatureSigDetail);
+            return result != null;
+        }
     }
 }
 

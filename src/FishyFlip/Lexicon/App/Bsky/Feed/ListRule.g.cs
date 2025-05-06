@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Allow replies from actors on a list.
     /// </summary>
-    public partial class ListRule : ATObject, ICBOREncodable<ListRule>, IJsonEncodable<ListRule>
+    public partial class ListRule : ATObject, ICBOREncodable<ListRule>, IJsonEncodable<ListRule>, IParsable<ListRule>
     {
 
         /// <summary>
@@ -67,19 +67,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListRule FromCBORObject(CBORObject obj)
         {
             return new ListRule(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListRule Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListRule>(s, (JsonTypeInfo<ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListRule result)
+        {
+            result = JsonSerializer.Deserialize<ListRule>(s, (JsonTypeInfo<ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule);
+            return result != null;
+        }
     }
 }
 

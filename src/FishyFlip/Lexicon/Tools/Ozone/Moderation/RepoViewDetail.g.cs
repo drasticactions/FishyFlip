@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class RepoViewDetail : ATObject, ICBOREncodable<RepoViewDetail>, IJsonEncodable<RepoViewDetail>
+    public partial class RepoViewDetail : ATObject, ICBOREncodable<RepoViewDetail>, IJsonEncodable<RepoViewDetail>, IParsable<RepoViewDetail>
     {
 
         /// <summary>
@@ -192,19 +192,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRepoViewDetail)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RepoViewDetail FromCBORObject(CBORObject obj)
         {
             return new RepoViewDetail(obj);
         }
 
+        /// <inheritdoc/>
+        public static RepoViewDetail Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RepoViewDetail>(s, (JsonTypeInfo<RepoViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRepoViewDetail)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RepoViewDetail result)
+        {
+            result = JsonSerializer.Deserialize<RepoViewDetail>(s, (JsonTypeInfo<RepoViewDetail>)SourceGenerationContext.Default.ToolsOzoneModerationRepoViewDetail);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// Record defining a starter pack of actors and feeds for new users.
     /// </summary>
-    public partial class Starterpack : ATObject, ICBOREncodable<Starterpack>, IJsonEncodable<Starterpack>
+    public partial class Starterpack : ATObject, ICBOREncodable<Starterpack>, IJsonEncodable<Starterpack>, IParsable<Starterpack>
     {
 
         /// <summary>
@@ -113,19 +113,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Starterpack>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Starterpack>)SourceGenerationContext.Default.AppBskyGraphStarterpack)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Starterpack FromCBORObject(CBORObject obj)
         {
             return new Starterpack(obj);
         }
 
+        /// <inheritdoc/>
+        public static Starterpack Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Starterpack>(s, (JsonTypeInfo<Starterpack>)SourceGenerationContext.Default.AppBskyGraphStarterpack)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Starterpack result)
+        {
+            result = JsonSerializer.Deserialize<Starterpack>(s, (JsonTypeInfo<Starterpack>)SourceGenerationContext.Default.AppBskyGraphStarterpack);
+            return result != null;
+        }
     }
 }
 

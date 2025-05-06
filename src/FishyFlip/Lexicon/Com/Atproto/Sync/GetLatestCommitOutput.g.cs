@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class GetLatestCommitOutput : ATObject, ICBOREncodable<GetLatestCommitOutput>, IJsonEncodable<GetLatestCommitOutput>
+    public partial class GetLatestCommitOutput : ATObject, ICBOREncodable<GetLatestCommitOutput>, IJsonEncodable<GetLatestCommitOutput>, IParsable<GetLatestCommitOutput>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>)SourceGenerationContext.Default.ComAtprotoSyncGetLatestCommitOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetLatestCommitOutput FromCBORObject(CBORObject obj)
         {
             return new GetLatestCommitOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetLatestCommitOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetLatestCommitOutput>(s, (JsonTypeInfo<GetLatestCommitOutput>)SourceGenerationContext.Default.ComAtprotoSyncGetLatestCommitOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetLatestCommitOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetLatestCommitOutput>(s, (JsonTypeInfo<GetLatestCommitOutput>)SourceGenerationContext.Default.ComAtprotoSyncGetLatestCommitOutput);
+            return result != null;
+        }
     }
 }
 

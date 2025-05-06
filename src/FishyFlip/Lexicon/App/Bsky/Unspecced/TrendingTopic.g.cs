@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class TrendingTopic : ATObject, ICBOREncodable<TrendingTopic>, IJsonEncodable<TrendingTopic>
+    public partial class TrendingTopic : ATObject, ICBOREncodable<TrendingTopic>, IJsonEncodable<TrendingTopic>, IParsable<TrendingTopic>
     {
 
         /// <summary>
@@ -91,19 +91,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendingTopic>)SourceGenerationContext.Default.AppBskyUnspeccedTrendingTopic)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new TrendingTopic FromCBORObject(CBORObject obj)
         {
             return new TrendingTopic(obj);
         }
 
+        /// <inheritdoc/>
+        public static TrendingTopic Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<TrendingTopic>(s, (JsonTypeInfo<TrendingTopic>)SourceGenerationContext.Default.AppBskyUnspeccedTrendingTopic)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out TrendingTopic result)
+        {
+            result = JsonSerializer.Deserialize<TrendingTopic>(s, (JsonTypeInfo<TrendingTopic>)SourceGenerationContext.Default.AppBskyUnspeccedTrendingTopic);
+            return result != null;
+        }
     }
 }
 

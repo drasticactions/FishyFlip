@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class RefreshIdentityInput : ATObject, ICBOREncodable<RefreshIdentityInput>, IJsonEncodable<RefreshIdentityInput>
+    public partial class RefreshIdentityInput : ATObject, ICBOREncodable<RefreshIdentityInput>, IJsonEncodable<RefreshIdentityInput>, IParsable<RefreshIdentityInput>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput>)SourceGenerationContext.Default.ComAtprotoIdentityRefreshIdentityInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RefreshIdentityInput FromCBORObject(CBORObject obj)
         {
             return new RefreshIdentityInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RefreshIdentityInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RefreshIdentityInput>(s, (JsonTypeInfo<RefreshIdentityInput>)SourceGenerationContext.Default.ComAtprotoIdentityRefreshIdentityInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RefreshIdentityInput result)
+        {
+            result = JsonSerializer.Deserialize<RefreshIdentityInput>(s, (JsonTypeInfo<RefreshIdentityInput>)SourceGenerationContext.Default.ComAtprotoIdentityRefreshIdentityInput);
+            return result != null;
+        }
     }
 }
 

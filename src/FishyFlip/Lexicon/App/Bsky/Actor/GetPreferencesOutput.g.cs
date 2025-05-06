@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class GetPreferencesOutput : ATObject, ICBOREncodable<GetPreferencesOutput>, IJsonEncodable<GetPreferencesOutput>
+    public partial class GetPreferencesOutput : ATObject, ICBOREncodable<GetPreferencesOutput>, IJsonEncodable<GetPreferencesOutput>, IParsable<GetPreferencesOutput>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>)SourceGenerationContext.Default.AppBskyActorGetPreferencesOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetPreferencesOutput FromCBORObject(CBORObject obj)
         {
             return new GetPreferencesOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetPreferencesOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetPreferencesOutput>(s, (JsonTypeInfo<GetPreferencesOutput>)SourceGenerationContext.Default.AppBskyActorGetPreferencesOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetPreferencesOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetPreferencesOutput>(s, (JsonTypeInfo<GetPreferencesOutput>)SourceGenerationContext.Default.AppBskyActorGetPreferencesOutput);
+            return result != null;
+        }
     }
 }
 

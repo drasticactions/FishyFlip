@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Moderation
 {
-    public partial class CreateReportInput : ATObject, ICBOREncodable<CreateReportInput>, IJsonEncodable<CreateReportInput>
+    public partial class CreateReportInput : ATObject, ICBOREncodable<CreateReportInput>, IJsonEncodable<CreateReportInput>, IParsable<CreateReportInput>
     {
 
         /// <summary>
@@ -108,19 +108,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportInput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CreateReportInput FromCBORObject(CBORObject obj)
         {
             return new CreateReportInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static CreateReportInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CreateReportInput>(s, (JsonTypeInfo<CreateReportInput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CreateReportInput result)
+        {
+            result = JsonSerializer.Deserialize<CreateReportInput>(s, (JsonTypeInfo<CreateReportInput>)SourceGenerationContext.Default.ComAtprotoModerationCreateReportInput);
+            return result != null;
+        }
     }
 }
 

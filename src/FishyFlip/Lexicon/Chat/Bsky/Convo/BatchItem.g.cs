@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class BatchItem : ATObject, ICBOREncodable<BatchItem>, IJsonEncodable<BatchItem>
+    public partial class BatchItem : ATObject, ICBOREncodable<BatchItem>, IJsonEncodable<BatchItem>, IParsable<BatchItem>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new BatchItem FromCBORObject(CBORObject obj)
         {
             return new BatchItem(obj);
         }
 
+        /// <inheritdoc/>
+        public static BatchItem Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<BatchItem>(s, (JsonTypeInfo<BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out BatchItem result)
+        {
+            result = JsonSerializer.Deserialize<BatchItem>(s, (JsonTypeInfo<BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem);
+            return result != null;
+        }
     }
 }
 

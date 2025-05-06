@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class RecordView : ATObject, ICBOREncodable<RecordView>, IJsonEncodable<RecordView>
+    public partial class RecordView : ATObject, ICBOREncodable<RecordView>, IJsonEncodable<RecordView>, IParsable<RecordView>
     {
 
         /// <summary>
@@ -130,19 +130,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordView>)SourceGenerationContext.Default.ToolsOzoneModerationRecordView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RecordView FromCBORObject(CBORObject obj)
         {
             return new RecordView(obj);
         }
 
+        /// <inheritdoc/>
+        public static RecordView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RecordView>(s, (JsonTypeInfo<RecordView>)SourceGenerationContext.Default.ToolsOzoneModerationRecordView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RecordView result)
+        {
+            result = JsonSerializer.Deserialize<RecordView>(s, (JsonTypeInfo<RecordView>)SourceGenerationContext.Default.ToolsOzoneModerationRecordView);
+            return result != null;
+        }
     }
 }
 

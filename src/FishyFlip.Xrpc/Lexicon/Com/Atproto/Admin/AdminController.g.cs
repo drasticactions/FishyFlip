@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.deleteAccount")]
-        public abstract Task<Results<Ok, BadRequest>> DeleteAccountAsync (FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> DeleteAccountAsync ([FromBody] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Disable an account from receiving new invite codes, but does not invalidate existing codes.
@@ -32,7 +32,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.disableAccountInvites")]
-        public abstract Task<Results<Ok, BadRequest>> DisableAccountInvitesAsync (FishyFlip.Models.ATDid account, string? note = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> DisableAccountInvitesAsync ([FromBody] FishyFlip.Models.ATDid account, [FromBody] string? note = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Disable some set of codes and/or all codes associated with a set of users.
@@ -42,7 +42,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.disableInviteCodes")]
-        public abstract Task<Results<Ok, BadRequest>> DisableInviteCodesAsync (List<string>? codes = default, List<string>? accounts = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> DisableInviteCodesAsync ([FromBody] List<string>? codes = default, [FromBody] List<string>? accounts = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Re-enable an account's ability to receive invite codes.
@@ -52,7 +52,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.enableAccountInvites")]
-        public abstract Task<Results<Ok, BadRequest>> EnableAccountInvitesAsync (FishyFlip.Models.ATDid account, string? note = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> EnableAccountInvitesAsync ([FromBody] FishyFlip.Models.ATDid account, [FromBody] string? note = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get details about an account.
@@ -61,7 +61,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.AccountView"/></returns>
         [HttpGet("/xrpc/com.atproto.admin.getAccountInfo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>, BadRequest>> GetAccountInfoAsync (FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>, BadRequest>> GetAccountInfoAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get details about some accounts.
@@ -70,7 +70,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.admin.getAccountInfos")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>, BadRequest>> GetAccountInfosAsync (List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>, BadRequest>> GetAccountInfosAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get an admin view of invite codes.
@@ -81,7 +81,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.admin.getInviteCodes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput>, BadRequest>> GetInviteCodesAsync (string? sort = default, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput>, BadRequest>> GetInviteCodesAsync ([FromQuery] string? sort = default, [FromQuery] int? limit = 100, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the service-specific admin status of a subject (account, record, or blob).
@@ -92,7 +92,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.admin.getSubjectStatus")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>, BadRequest>> GetSubjectStatusAsync (FishyFlip.Models.ATDid? did = default, FishyFlip.Models.ATUri? uri = default, string? blob = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>, BadRequest>> GetSubjectStatusAsync ([FromQuery] FishyFlip.Models.ATDid? did = default, [FromQuery] FishyFlip.Models.ATUri? uri = default, [FromQuery] string? blob = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get list of accounts that matches your search query.
@@ -103,7 +103,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.admin.searchAccounts")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>, BadRequest>> SearchAccountsAsync (string? email = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>, BadRequest>> SearchAccountsAsync ([FromQuery] string? email = default, [FromQuery] string? cursor = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send email to a user's account email address.
@@ -116,7 +116,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.sendEmail")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput>, BadRequest>> SendEmailAsync (FishyFlip.Models.ATDid recipientDid, string content, FishyFlip.Models.ATDid senderDid, string? subject = default, string? comment = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.SendEmailOutput>, BadRequest>> SendEmailAsync ([FromBody] FishyFlip.Models.ATDid recipientDid, [FromBody] string content, [FromBody] FishyFlip.Models.ATDid senderDid, [FromBody] string? subject = default, [FromBody] string? comment = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Administrative action to update an account's email.
@@ -126,7 +126,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.updateAccountEmail")]
-        public abstract Task<Results<Ok, BadRequest>> UpdateAccountEmailAsync (FishyFlip.Models.ATIdentifier account, string email, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> UpdateAccountEmailAsync ([FromBody] FishyFlip.Models.ATIdentifier account, [FromBody] string email, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Administrative action to update an account's handle.
@@ -136,7 +136,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.updateAccountHandle")]
-        public abstract Task<Results<Ok, BadRequest>> UpdateAccountHandleAsync (FishyFlip.Models.ATDid did, FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> UpdateAccountHandleAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update the password for a user account as an administrator.
@@ -146,7 +146,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.updateAccountPassword")]
-        public abstract Task<Results<Ok, BadRequest>> UpdateAccountPasswordAsync (FishyFlip.Models.ATDid did, string password, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> UpdateAccountPasswordAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] string password, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Administrative action to update an account's signing key in their Did document.
@@ -156,7 +156,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.updateAccountSigningKey")]
-        public abstract Task<Results<Ok, BadRequest>> UpdateAccountSigningKeyAsync (FishyFlip.Models.ATDid did, FishyFlip.Models.ATDid signingKey, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> UpdateAccountSigningKeyAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] FishyFlip.Models.ATDid signingKey, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update the service-specific admin status of a subject (account, record, or blob).
@@ -172,7 +172,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Admin
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.admin.updateSubjectStatus")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput>, BadRequest>> UpdateSubjectStatusAsync (ATObject subject, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? takedown = default, FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? deactivated = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateSubjectStatusOutput>, BadRequest>> UpdateSubjectStatusAsync ([FromBody] ATObject subject, [FromBody] FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? takedown = default, [FromBody] FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? deactivated = default, CancellationToken cancellationToken = default);
     }
 }
 

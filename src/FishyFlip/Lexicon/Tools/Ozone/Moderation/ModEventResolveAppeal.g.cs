@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Resolve appeal on a subject
     /// </summary>
-    public partial class ModEventResolveAppeal : ATObject, ICBOREncodable<ModEventResolveAppeal>, IJsonEncodable<ModEventResolveAppeal>
+    public partial class ModEventResolveAppeal : ATObject, ICBOREncodable<ModEventResolveAppeal>, IJsonEncodable<ModEventResolveAppeal>, IParsable<ModEventResolveAppeal>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventResolveAppeal>)SourceGenerationContext.Default.ToolsOzoneModerationModEventResolveAppeal)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventResolveAppeal FromCBORObject(CBORObject obj)
         {
             return new ModEventResolveAppeal(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventResolveAppeal Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventResolveAppeal>(s, (JsonTypeInfo<ModEventResolveAppeal>)SourceGenerationContext.Default.ToolsOzoneModerationModEventResolveAppeal)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventResolveAppeal result)
+        {
+            result = JsonSerializer.Deserialize<ModEventResolveAppeal>(s, (JsonTypeInfo<ModEventResolveAppeal>)SourceGenerationContext.Default.ToolsOzoneModerationModEventResolveAppeal);
+            return result != null;
+        }
     }
 }
 

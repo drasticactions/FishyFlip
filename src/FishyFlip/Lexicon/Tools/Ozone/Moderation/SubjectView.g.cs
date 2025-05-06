@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Detailed view of a subject. For record subjects, the author's repo and profile will be returned.
     /// </summary>
-    public partial class SubjectView : ATObject, ICBOREncodable<SubjectView>, IJsonEncodable<SubjectView>
+    public partial class SubjectView : ATObject, ICBOREncodable<SubjectView>, IJsonEncodable<SubjectView>, IParsable<SubjectView>
     {
 
         /// <summary>
@@ -133,19 +133,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SubjectView FromCBORObject(CBORObject obj)
         {
             return new SubjectView(obj);
         }
 
+        /// <inheritdoc/>
+        public static SubjectView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SubjectView>(s, (JsonTypeInfo<SubjectView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SubjectView result)
+        {
+            result = JsonSerializer.Deserialize<SubjectView>(s, (JsonTypeInfo<SubjectView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectView);
+            return result != null;
+        }
     }
 }
 

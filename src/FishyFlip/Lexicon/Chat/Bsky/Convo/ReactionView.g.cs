@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class ReactionView : ATObject, ICBOREncodable<ReactionView>, IJsonEncodable<ReactionView>
+    public partial class ReactionView : ATObject, ICBOREncodable<ReactionView>, IJsonEncodable<ReactionView>, IParsable<ReactionView>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionView>)SourceGenerationContext.Default.ChatBskyConvoReactionView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ReactionView FromCBORObject(CBORObject obj)
         {
             return new ReactionView(obj);
         }
 
+        /// <inheritdoc/>
+        public static ReactionView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ReactionView>(s, (JsonTypeInfo<ReactionView>)SourceGenerationContext.Default.ChatBskyConvoReactionView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ReactionView result)
+        {
+            result = JsonSerializer.Deserialize<ReactionView>(s, (JsonTypeInfo<ReactionView>)SourceGenerationContext.Default.ChatBskyConvoReactionView);
+            return result != null;
+        }
     }
 }
 

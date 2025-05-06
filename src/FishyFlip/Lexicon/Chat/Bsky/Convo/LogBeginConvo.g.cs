@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class LogBeginConvo : ATObject, ICBOREncodable<LogBeginConvo>, IJsonEncodable<LogBeginConvo>
+    public partial class LogBeginConvo : ATObject, ICBOREncodable<LogBeginConvo>, IJsonEncodable<LogBeginConvo>, IParsable<LogBeginConvo>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogBeginConvo>)SourceGenerationContext.Default.ChatBskyConvoLogBeginConvo)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new LogBeginConvo FromCBORObject(CBORObject obj)
         {
             return new LogBeginConvo(obj);
         }
 
+        /// <inheritdoc/>
+        public static LogBeginConvo Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<LogBeginConvo>(s, (JsonTypeInfo<LogBeginConvo>)SourceGenerationContext.Default.ChatBskyConvoLogBeginConvo)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out LogBeginConvo result)
+        {
+            result = JsonSerializer.Deserialize<LogBeginConvo>(s, (JsonTypeInfo<LogBeginConvo>)SourceGenerationContext.Default.ChatBskyConvoLogBeginConvo);
+            return result != null;
+        }
     }
 }
 

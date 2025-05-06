@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
     /// <summary>
     /// Unknown metadata for an uploaded file.
     /// </summary>
-    public partial class Unknown : ATObject, ICBOREncodable<Unknown>, IJsonEncodable<Unknown>
+    public partial class Unknown : ATObject, ICBOREncodable<Unknown>, IJsonEncodable<Unknown>, IParsable<Unknown>
     {
 
         /// <summary>
@@ -65,19 +65,31 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Unknown FromCBORObject(CBORObject obj)
         {
             return new Unknown(obj);
         }
 
+        /// <inheritdoc/>
+        public static Unknown Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Unknown>(s, (JsonTypeInfo<Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Unknown result)
+        {
+            result = JsonSerializer.Deserialize<Unknown>(s, (JsonTypeInfo<Unknown>)SourceGenerationContext.Default.BlueZioAtfileUnknown);
+            return result != null;
+        }
     }
 }
 

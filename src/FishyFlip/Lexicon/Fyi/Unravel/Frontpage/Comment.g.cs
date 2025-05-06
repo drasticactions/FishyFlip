@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
     /// <summary>
     /// Record containing a Frontpage comment.
     /// </summary>
-    public partial class Comment : ATObject, ICBOREncodable<Comment>, IJsonEncodable<Comment>
+    public partial class Comment : ATObject, ICBOREncodable<Comment>, IJsonEncodable<Comment>, IParsable<Comment>
     {
 
         /// <summary>
@@ -100,19 +100,31 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Comment>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Comment>)SourceGenerationContext.Default.FyiUnravelFrontpageComment)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Comment FromCBORObject(CBORObject obj)
         {
             return new Comment(obj);
         }
 
+        /// <inheritdoc/>
+        public static Comment Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Comment>(s, (JsonTypeInfo<Comment>)SourceGenerationContext.Default.FyiUnravelFrontpageComment)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Comment result)
+        {
+            result = JsonSerializer.Deserialize<Comment>(s, (JsonTypeInfo<Comment>)SourceGenerationContext.Default.FyiUnravelFrontpageComment);
+            return result != null;
+        }
     }
 }
 

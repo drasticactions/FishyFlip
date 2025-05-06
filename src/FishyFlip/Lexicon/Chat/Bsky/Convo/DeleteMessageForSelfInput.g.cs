@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class DeleteMessageForSelfInput : ATObject, ICBOREncodable<DeleteMessageForSelfInput>, IJsonEncodable<DeleteMessageForSelfInput>
+    public partial class DeleteMessageForSelfInput : ATObject, ICBOREncodable<DeleteMessageForSelfInput>, IJsonEncodable<DeleteMessageForSelfInput>, IParsable<DeleteMessageForSelfInput>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.DeleteMessageForSelfInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeleteMessageForSelfInput>)SourceGenerationContext.Default.ChatBskyConvoDeleteMessageForSelfInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DeleteMessageForSelfInput FromCBORObject(CBORObject obj)
         {
             return new DeleteMessageForSelfInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static DeleteMessageForSelfInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DeleteMessageForSelfInput>(s, (JsonTypeInfo<DeleteMessageForSelfInput>)SourceGenerationContext.Default.ChatBskyConvoDeleteMessageForSelfInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DeleteMessageForSelfInput result)
+        {
+            result = JsonSerializer.Deserialize<DeleteMessageForSelfInput>(s, (JsonTypeInfo<DeleteMessageForSelfInput>)SourceGenerationContext.Default.ChatBskyConvoDeleteMessageForSelfInput);
+            return result != null;
+        }
     }
 }
 

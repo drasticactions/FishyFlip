@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Buzz.Bookhive
 {
-    public partial class SearchBooksOutput : ATObject, ICBOREncodable<SearchBooksOutput>, IJsonEncodable<SearchBooksOutput>
+    public partial class SearchBooksOutput : ATObject, ICBOREncodable<SearchBooksOutput>, IJsonEncodable<SearchBooksOutput>, IParsable<SearchBooksOutput>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SearchBooksOutput FromCBORObject(CBORObject obj)
         {
             return new SearchBooksOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static SearchBooksOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SearchBooksOutput>(s, (JsonTypeInfo<SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SearchBooksOutput result)
+        {
+            result = JsonSerializer.Deserialize<SearchBooksOutput>(s, (JsonTypeInfo<SearchBooksOutput>)SourceGenerationContext.Default.BuzzBookhiveSearchBooksOutput);
+            return result != null;
+        }
     }
 }
 

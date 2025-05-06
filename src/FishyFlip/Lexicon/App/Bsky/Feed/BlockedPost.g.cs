@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class BlockedPost : ATObject, ICBOREncodable<BlockedPost>, IJsonEncodable<BlockedPost>
+    public partial class BlockedPost : ATObject, ICBOREncodable<BlockedPost>, IJsonEncodable<BlockedPost>, IParsable<BlockedPost>
     {
 
         /// <summary>
@@ -87,19 +87,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost>)SourceGenerationContext.Default.AppBskyFeedBlockedPost)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new BlockedPost FromCBORObject(CBORObject obj)
         {
             return new BlockedPost(obj);
         }
 
+        /// <inheritdoc/>
+        public static BlockedPost Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<BlockedPost>(s, (JsonTypeInfo<BlockedPost>)SourceGenerationContext.Default.AppBskyFeedBlockedPost)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out BlockedPost result)
+        {
+            result = JsonSerializer.Deserialize<BlockedPost>(s, (JsonTypeInfo<BlockedPost>)SourceGenerationContext.Default.AppBskyFeedBlockedPost);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class LogDeleteMessage : ATObject, ICBOREncodable<LogDeleteMessage>, IJsonEncodable<LogDeleteMessage>
+    public partial class LogDeleteMessage : ATObject, ICBOREncodable<LogDeleteMessage>, IJsonEncodable<LogDeleteMessage>, IParsable<LogDeleteMessage>
     {
 
         /// <summary>
@@ -90,19 +90,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new LogDeleteMessage FromCBORObject(CBORObject obj)
         {
             return new LogDeleteMessage(obj);
         }
 
+        /// <inheritdoc/>
+        public static LogDeleteMessage Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<LogDeleteMessage>(s, (JsonTypeInfo<LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out LogDeleteMessage result)
+        {
+            result = JsonSerializer.Deserialize<LogDeleteMessage>(s, (JsonTypeInfo<LogDeleteMessage>)SourceGenerationContext.Default.ChatBskyConvoLogDeleteMessage);
+            return result != null;
+        }
     }
 }
 

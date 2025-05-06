@@ -46,6 +46,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.AccountStats(obj);
                 case "com.atproto.admin.defs#accountView":
                     return new Com.Atproto.Admin.AccountView(obj);
+                case "buzz.bookhive.defs#activity":
+                    return new Buzz.Bookhive.Activity(obj);
                 case "blue.maril.stellar.getActorReactions#actorReaction":
                     return new Blue.Maril.Stellar.ActorReaction(obj);
                 case "tools.ozone.team.addMember#AddMemberInput":
@@ -122,6 +124,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Whtwnd.Blog.Comment(obj);
                 case "fyi.unravel.frontpage.comment":
                     return new Fyi.Unravel.Frontpage.Comment(obj);
+                case "buzz.bookhive.defs#comment":
+                    return new Buzz.Bookhive.Comment(obj);
                 case "com.atproto.sync.subscribeRepos#commit":
                     return new Com.Atproto.Sync.Commit(obj);
                 case "com.atproto.repo.defs#commitMeta":
@@ -308,6 +312,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Shinolabs.Pinksea.GetAuthorRepliesOutput(obj);
                 case "app.bsky.graph.getBlocks#GetBlocksOutput":
                     return new App.Bsky.Graph.GetBlocksOutput(obj);
+                case "buzz.bookhive.getBook#GetBookOutput":
+                    return new Buzz.Bookhive.GetBookOutput(obj);
                 case "app.bsky.unspecced.getConfig#GetConfigOutput":
                     return new App.Bsky.Unspecced.GetConfigOutput(obj);
                 case "tools.ozone.server.getConfig#GetConfigOutput":
@@ -390,6 +396,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.GetPostThreadOutput(obj);
                 case "app.bsky.actor.getPreferences#GetPreferencesOutput":
                     return new App.Bsky.Actor.GetPreferencesOutput(obj);
+                case "buzz.bookhive.getProfile#GetProfileOutput":
+                    return new Buzz.Bookhive.GetProfileOutput(obj);
                 case "fm.teal.alpha.actor.getProfile#GetProfileOutput":
                     return new Fm.Teal.Alpha.Actor.GetProfileOutput(obj);
                 case "app.bsky.actor.getProfiles#GetProfilesOutput":
@@ -766,6 +774,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.Profile(obj);
                 case "social.psky.actor.profile":
                     return new Social.Psky.Actor.Profile(obj);
+                case "buzz.bookhive.defs#profile":
+                    return new Buzz.Bookhive.Profile(obj);
                 case "fm.teal.alpha.actor.profile":
                     return new Fm.Teal.Alpha.Actor.Profile(obj);
                 case "app.bsky.actor.defs#profileAssociated":
@@ -894,6 +904,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.ResolveDidOutput(obj);
                 case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
                     return new Com.Atproto.Identity.ResolveHandleOutput(obj);
+                case "buzz.bookhive.defs#review":
+                    return new Buzz.Bookhive.Review(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
                     return new Com.Atproto.Server.RevokeAppPasswordInput(obj);
                 case "tools.ozone.verification.revokeVerifications#revokeError":
@@ -998,6 +1010,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackView(obj);
                 case "app.bsky.graph.defs#starterPackViewBasic":
                     return new App.Bsky.Graph.StarterPackViewBasic(obj);
+                case "app.bsky.actor.status":
+                    return new App.Bsky.Actor.Status(obj);
                 case "app.netlify.aniblue.status":
                     return new App.Netlify.Aniblue.Status(obj);
                 case "fm.teal.alpha.actor.status":
@@ -1006,6 +1020,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.StatusAttr(obj);
                 case "app.netlify.aniblue.status#status":
                     return new App.Netlify.Aniblue.StatusDef(obj);
+                case "app.bsky.actor.defs#statusView":
+                    return new App.Bsky.Actor.StatusView(obj);
                 case "com.atproto.repo.strongRef":
                     return new Com.Atproto.Repo.StrongRef(obj);
                 case "tools.ozone.moderation.defs#subjectStatusView":
@@ -1100,6 +1116,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
                 case "community.lexicon.calendar.event#uri":
                     return new Community.Lexicon.Calendar.Uri(obj);
+                case "buzz.bookhive.defs#userBook":
+                    return new Buzz.Bookhive.UserBook(obj);
                 case "app.bsky.graph.verification":
                     return new App.Bsky.Graph.Verification(obj);
                 case "tools.ozone.verification.grantVerifications#verificationInput":

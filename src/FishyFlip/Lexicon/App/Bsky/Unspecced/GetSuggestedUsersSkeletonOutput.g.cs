@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetSuggestedUsersSkeletonOutput : ATObject, ICBOREncodable<GetSuggestedUsersSkeletonOutput>, IJsonEncodable<GetSuggestedUsersSkeletonOutput>
+    public partial class GetSuggestedUsersSkeletonOutput : ATObject, ICBOREncodable<GetSuggestedUsersSkeletonOutput>, IJsonEncodable<GetSuggestedUsersSkeletonOutput>, IParsable<GetSuggestedUsersSkeletonOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersSkeletonOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSuggestedUsersSkeletonOutput FromCBORObject(CBORObject obj)
         {
             return new GetSuggestedUsersSkeletonOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSuggestedUsersSkeletonOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSuggestedUsersSkeletonOutput>(s, (JsonTypeInfo<GetSuggestedUsersSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersSkeletonOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSuggestedUsersSkeletonOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSuggestedUsersSkeletonOutput>(s, (JsonTypeInfo<GetSuggestedUsersSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersSkeletonOutput);
+            return result != null;
+        }
     }
 }
 

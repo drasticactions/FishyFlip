@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 {
-    public partial class ActorReaction : ATObject, ICBOREncodable<ActorReaction>, IJsonEncodable<ActorReaction>
+    public partial class ActorReaction : ATObject, ICBOREncodable<ActorReaction>, IJsonEncodable<ActorReaction>, IParsable<ActorReaction>
     {
 
         /// <summary>
@@ -79,19 +79,31 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.ActorReaction>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.ActorReaction>)SourceGenerationContext.Default.BlueMarilStellarActorReaction)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ActorReaction FromCBORObject(CBORObject obj)
         {
             return new ActorReaction(obj);
         }
 
+        /// <inheritdoc/>
+        public static ActorReaction Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ActorReaction>(s, (JsonTypeInfo<ActorReaction>)SourceGenerationContext.Default.BlueMarilStellarActorReaction)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ActorReaction result)
+        {
+            result = JsonSerializer.Deserialize<ActorReaction>(s, (JsonTypeInfo<ActorReaction>)SourceGenerationContext.Default.BlueMarilStellarActorReaction);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// Default post interaction settings for the account. These values should be applied as default values when creating new posts. These refs should mirror the threadgate and postgate records exactly.
     /// </summary>
-    public partial class PostInteractionSettingsPref : ATObject, ICBOREncodable<PostInteractionSettingsPref>, IJsonEncodable<PostInteractionSettingsPref>
+    public partial class PostInteractionSettingsPref : ATObject, ICBOREncodable<PostInteractionSettingsPref>, IJsonEncodable<PostInteractionSettingsPref>, IParsable<PostInteractionSettingsPref>
     {
 
         /// <summary>
@@ -92,19 +92,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new PostInteractionSettingsPref FromCBORObject(CBORObject obj)
         {
             return new PostInteractionSettingsPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static PostInteractionSettingsPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<PostInteractionSettingsPref>(s, (JsonTypeInfo<PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out PostInteractionSettingsPref result)
+        {
+            result = JsonSerializer.Deserialize<PostInteractionSettingsPref>(s, (JsonTypeInfo<PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class RequestEmailUpdateOutput : ATObject, ICBOREncodable<RequestEmailUpdateOutput>, IJsonEncodable<RequestEmailUpdateOutput>
+    public partial class RequestEmailUpdateOutput : ATObject, ICBOREncodable<RequestEmailUpdateOutput>, IJsonEncodable<RequestEmailUpdateOutput>, IParsable<RequestEmailUpdateOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RequestEmailUpdateOutput>)SourceGenerationContext.Default.ComAtprotoServerRequestEmailUpdateOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RequestEmailUpdateOutput FromCBORObject(CBORObject obj)
         {
             return new RequestEmailUpdateOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RequestEmailUpdateOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RequestEmailUpdateOutput>(s, (JsonTypeInfo<RequestEmailUpdateOutput>)SourceGenerationContext.Default.ComAtprotoServerRequestEmailUpdateOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RequestEmailUpdateOutput result)
+        {
+            result = JsonSerializer.Deserialize<RequestEmailUpdateOutput>(s, (JsonTypeInfo<RequestEmailUpdateOutput>)SourceGenerationContext.Default.ComAtprotoServerRequestEmailUpdateOutput);
+            return result != null;
+        }
     }
 }
 

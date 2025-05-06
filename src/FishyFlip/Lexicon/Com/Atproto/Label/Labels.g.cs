@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Label
 {
-    public partial class Labels : ATObject, ICBOREncodable<Labels>, IJsonEncodable<Labels>
+    public partial class Labels : ATObject, ICBOREncodable<Labels>, IJsonEncodable<Labels>, IParsable<Labels>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.Labels>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.Labels>)SourceGenerationContext.Default.ComAtprotoLabelLabels)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Labels FromCBORObject(CBORObject obj)
         {
             return new Labels(obj);
         }
 
+        /// <inheritdoc/>
+        public static Labels Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Labels>(s, (JsonTypeInfo<Labels>)SourceGenerationContext.Default.ComAtprotoLabelLabels)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Labels result)
+        {
+            result = JsonSerializer.Deserialize<Labels>(s, (JsonTypeInfo<Labels>)SourceGenerationContext.Default.ComAtprotoLabelLabels);
+            return result != null;
+        }
     }
 }
 

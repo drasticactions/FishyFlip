@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Team
 {
-    public partial class ListMembersOutput : ATObject, ICBOREncodable<ListMembersOutput>, IJsonEncodable<ListMembersOutput>
+    public partial class ListMembersOutput : ATObject, ICBOREncodable<ListMembersOutput>, IJsonEncodable<ListMembersOutput>, IParsable<ListMembersOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListMembersOutput FromCBORObject(CBORObject obj)
         {
             return new ListMembersOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListMembersOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListMembersOutput>(s, (JsonTypeInfo<ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListMembersOutput result)
+        {
+            result = JsonSerializer.Deserialize<ListMembersOutput>(s, (JsonTypeInfo<ListMembersOutput>)SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput);
+            return result != null;
+        }
     }
 }
 

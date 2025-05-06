@@ -82,6 +82,7 @@ done
 # Build FFSourceGen
 dotnet build tools/FFSourceGen/FFSourceGen.csproj
 dotnet run --project tools/FFSourceGen/FFSourceGen.csproj -- generate $PWD/../fflexicons/bluesky-social-atproto/lexicons -o $PWD/src/FishyFlip/ -t "${REPO_DIRS[@]}"
+dotnet run --project tools/FFSourceGen/FFSourceGen.csproj -- generate-xrpc $PWD/../fflexicons/bluesky-social-atproto/lexicons -o $PWD/src/FishyFlip.Xrpc/ -n FishyFlip.Xrpc.Lexicon -t "${REPO_DIRS[@]}"
 
 if [ $? -ne 0 ]; then
     echo "FFSourceGen failed to generate bindings"
@@ -91,3 +92,4 @@ fi
 # Build FishyFlip to verify the bindings compile
 
 dotnet build src/FishyFlip/FishyFlip.csproj -c Release
+dotnet build src/FishyFlip.Xrpc/FishyFlip.Xrpc.csproj -c Release

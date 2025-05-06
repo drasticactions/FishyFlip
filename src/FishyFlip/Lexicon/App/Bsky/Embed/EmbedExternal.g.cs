@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
     /// <summary>
     /// A representation of some externally linked content (eg, a URL and 'card'), embedded in a Bluesky record (eg, a post).
     /// </summary>
-    public partial class EmbedExternal : ATObject, ICBOREncodable<EmbedExternal>, IJsonEncodable<EmbedExternal>
+    public partial class EmbedExternal : ATObject, ICBOREncodable<EmbedExternal>, IJsonEncodable<EmbedExternal>, IParsable<EmbedExternal>
     {
 
         /// <summary>
@@ -69,19 +69,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal>)SourceGenerationContext.Default.AppBskyEmbedEmbedExternal)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new EmbedExternal FromCBORObject(CBORObject obj)
         {
             return new EmbedExternal(obj);
         }
 
+        /// <inheritdoc/>
+        public static EmbedExternal Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<EmbedExternal>(s, (JsonTypeInfo<EmbedExternal>)SourceGenerationContext.Default.AppBskyEmbedEmbedExternal)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out EmbedExternal result)
+        {
+            result = JsonSerializer.Deserialize<EmbedExternal>(s, (JsonTypeInfo<EmbedExternal>)SourceGenerationContext.Default.AppBskyEmbedEmbedExternal);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class UpdateAccountEmailInput : ATObject, ICBOREncodable<UpdateAccountEmailInput>, IJsonEncodable<UpdateAccountEmailInput>
+    public partial class UpdateAccountEmailInput : ATObject, ICBOREncodable<UpdateAccountEmailInput>, IJsonEncodable<UpdateAccountEmailInput>, IParsable<UpdateAccountEmailInput>
     {
 
         /// <summary>
@@ -75,19 +75,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountEmailInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountEmailInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountEmailInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new UpdateAccountEmailInput FromCBORObject(CBORObject obj)
         {
             return new UpdateAccountEmailInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static UpdateAccountEmailInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<UpdateAccountEmailInput>(s, (JsonTypeInfo<UpdateAccountEmailInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountEmailInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out UpdateAccountEmailInput result)
+        {
+            result = JsonSerializer.Deserialize<UpdateAccountEmailInput>(s, (JsonTypeInfo<UpdateAccountEmailInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountEmailInput);
+            return result != null;
+        }
     }
 }
 

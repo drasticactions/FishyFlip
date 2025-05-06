@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class EnableAccountInvitesInput : ATObject, ICBOREncodable<EnableAccountInvitesInput>, IJsonEncodable<EnableAccountInvitesInput>
+    public partial class EnableAccountInvitesInput : ATObject, ICBOREncodable<EnableAccountInvitesInput>, IJsonEncodable<EnableAccountInvitesInput>, IParsable<EnableAccountInvitesInput>
     {
 
         /// <summary>
@@ -74,19 +74,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new EnableAccountInvitesInput FromCBORObject(CBORObject obj)
         {
             return new EnableAccountInvitesInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static EnableAccountInvitesInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<EnableAccountInvitesInput>(s, (JsonTypeInfo<EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out EnableAccountInvitesInput result)
+        {
+            result = JsonSerializer.Deserialize<EnableAccountInvitesInput>(s, (JsonTypeInfo<EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput);
+            return result != null;
+        }
     }
 }
 

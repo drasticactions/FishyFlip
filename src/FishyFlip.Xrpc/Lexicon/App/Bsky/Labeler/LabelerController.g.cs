@@ -23,7 +23,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Labeler
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.labeler.getServices")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>, BadRequest>> GetServicesAsync (List<FishyFlip.Models.ATDid> dids, bool? detailed = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>, BadRequest>> GetServicesAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, [FromQuery] bool? detailed = default, CancellationToken cancellationToken = default);
     }
 }
 

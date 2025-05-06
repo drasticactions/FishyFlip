@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
     /// <summary>
     /// Record containing a cards of your profile.
     /// </summary>
-    public partial class Board : ATObject, ICBOREncodable<Board>, IJsonEncodable<Board>
+    public partial class Board : ATObject, ICBOREncodable<Board>, IJsonEncodable<Board>, IParsable<Board>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Blue.Linkat
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Linkat.Board>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Board FromCBORObject(CBORObject obj)
         {
             return new Board(obj);
         }
 
+        /// <inheritdoc/>
+        public static Board Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Board>(s, (JsonTypeInfo<Board>)SourceGenerationContext.Default.BlueLinkatBoard)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Board result)
+        {
+            result = JsonSerializer.Deserialize<Board>(s, (JsonTypeInfo<Board>)SourceGenerationContext.Default.BlueLinkatBoard);
+            return result != null;
+        }
     }
 }
 

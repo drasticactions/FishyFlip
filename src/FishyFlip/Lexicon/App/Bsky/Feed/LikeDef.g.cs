@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class LikeDef : ATObject, ICBOREncodable<LikeDef>, IJsonEncodable<LikeDef>
+    public partial class LikeDef : ATObject, ICBOREncodable<LikeDef>, IJsonEncodable<LikeDef>, IParsable<LikeDef>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>)SourceGenerationContext.Default.AppBskyFeedLikeDef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new LikeDef FromCBORObject(CBORObject obj)
         {
             return new LikeDef(obj);
         }
 
+        /// <inheritdoc/>
+        public static LikeDef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<LikeDef>(s, (JsonTypeInfo<LikeDef>)SourceGenerationContext.Default.AppBskyFeedLikeDef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out LikeDef result)
+        {
+            result = JsonSerializer.Deserialize<LikeDef>(s, (JsonTypeInfo<LikeDef>)SourceGenerationContext.Default.AppBskyFeedLikeDef);
+            return result != null;
+        }
     }
 }
 

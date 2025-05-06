@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 {
-    public partial class GetMessageContextOutput : ATObject, ICBOREncodable<GetMessageContextOutput>, IJsonEncodable<GetMessageContextOutput>
+    public partial class GetMessageContextOutput : ATObject, ICBOREncodable<GetMessageContextOutput>, IJsonEncodable<GetMessageContextOutput>, IParsable<GetMessageContextOutput>
     {
 
         /// <summary>
@@ -70,19 +70,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>)SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetMessageContextOutput FromCBORObject(CBORObject obj)
         {
             return new GetMessageContextOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetMessageContextOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetMessageContextOutput>(s, (JsonTypeInfo<GetMessageContextOutput>)SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetMessageContextOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetMessageContextOutput>(s, (JsonTypeInfo<GetMessageContextOutput>)SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// A declaration of a Bluesky account profile.
     /// </summary>
-    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>
+    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>, IParsable<Profile>
     {
 
         /// <summary>
@@ -143,19 +143,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Profile>)SourceGenerationContext.Default.AppBskyActorProfile)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Profile FromCBORObject(CBORObject obj)
         {
             return new Profile(obj);
         }
 
+        /// <inheritdoc/>
+        public static Profile Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Profile>(s, (JsonTypeInfo<Profile>)SourceGenerationContext.Default.AppBskyActorProfile)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Profile result)
+        {
+            result = JsonSerializer.Deserialize<Profile>(s, (JsonTypeInfo<Profile>)SourceGenerationContext.Default.AppBskyActorProfile);
+            return result != null;
+        }
     }
 }
 

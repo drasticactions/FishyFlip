@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class ConfirmEmailInput : ATObject, ICBOREncodable<ConfirmEmailInput>, IJsonEncodable<ConfirmEmailInput>
+    public partial class ConfirmEmailInput : ATObject, ICBOREncodable<ConfirmEmailInput>, IJsonEncodable<ConfirmEmailInput>, IParsable<ConfirmEmailInput>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ConfirmEmailInput FromCBORObject(CBORObject obj)
         {
             return new ConfirmEmailInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ConfirmEmailInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ConfirmEmailInput>(s, (JsonTypeInfo<ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ConfirmEmailInput result)
+        {
+            result = JsonSerializer.Deserialize<ConfirmEmailInput>(s, (JsonTypeInfo<ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput);
+            return result != null;
+        }
     }
 }
 

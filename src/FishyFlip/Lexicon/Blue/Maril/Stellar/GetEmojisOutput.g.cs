@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 {
-    public partial class GetEmojisOutput : ATObject, ICBOREncodable<GetEmojisOutput>, IJsonEncodable<GetEmojisOutput>
+    public partial class GetEmojisOutput : ATObject, ICBOREncodable<GetEmojisOutput>, IJsonEncodable<GetEmojisOutput>, IParsable<GetEmojisOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>)SourceGenerationContext.Default.BlueMarilStellarGetEmojisOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetEmojisOutput FromCBORObject(CBORObject obj)
         {
             return new GetEmojisOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetEmojisOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetEmojisOutput>(s, (JsonTypeInfo<GetEmojisOutput>)SourceGenerationContext.Default.BlueMarilStellarGetEmojisOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetEmojisOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetEmojisOutput>(s, (JsonTypeInfo<GetEmojisOutput>)SourceGenerationContext.Default.BlueMarilStellarGetEmojisOutput);
+            return result != null;
+        }
     }
 }
 

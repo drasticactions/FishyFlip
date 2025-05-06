@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class PostView : ATObject, ICBOREncodable<PostView>, IJsonEncodable<PostView>
+    public partial class PostView : ATObject, ICBOREncodable<PostView>, IJsonEncodable<PostView>, IParsable<PostView>
     {
 
         /// <summary>
@@ -198,19 +198,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.PostView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new PostView FromCBORObject(CBORObject obj)
         {
             return new PostView(obj);
         }
 
+        /// <inheritdoc/>
+        public static PostView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<PostView>(s, (JsonTypeInfo<PostView>)SourceGenerationContext.Default.AppBskyFeedPostView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out PostView result)
+        {
+            result = JsonSerializer.Deserialize<PostView>(s, (JsonTypeInfo<PostView>)SourceGenerationContext.Default.AppBskyFeedPostView);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class AddReactionOutput : ATObject, ICBOREncodable<AddReactionOutput>, IJsonEncodable<AddReactionOutput>
+    public partial class AddReactionOutput : ATObject, ICBOREncodable<AddReactionOutput>, IJsonEncodable<AddReactionOutput>, IParsable<AddReactionOutput>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.AddReactionOutput>)SourceGenerationContext.Default.ChatBskyConvoAddReactionOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new AddReactionOutput FromCBORObject(CBORObject obj)
         {
             return new AddReactionOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static AddReactionOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<AddReactionOutput>(s, (JsonTypeInfo<AddReactionOutput>)SourceGenerationContext.Default.ChatBskyConvoAddReactionOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out AddReactionOutput result)
+        {
+            result = JsonSerializer.Deserialize<AddReactionOutput>(s, (JsonTypeInfo<AddReactionOutput>)SourceGenerationContext.Default.ChatBskyConvoAddReactionOutput);
+            return result != null;
+        }
     }
 }
 

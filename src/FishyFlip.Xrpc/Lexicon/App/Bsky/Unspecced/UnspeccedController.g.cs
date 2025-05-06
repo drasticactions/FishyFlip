@@ -32,7 +32,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getPopularFeedGenerators")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>, BadRequest>> GetPopularFeedGeneratorsAsync (int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>, BadRequest>> GetPopularFeedGeneratorsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] string? query = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of suggested feeds
@@ -41,7 +41,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedFeeds")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput>, BadRequest>> GetSuggestedFeedsAsync (int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput>, BadRequest>> GetSuggestedFeedsAsync ([FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a skeleton of suggested feeds. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedFeeds
@@ -51,7 +51,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedFeedsSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>, BadRequest>> GetSuggestedFeedsSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>, BadRequest>> GetSuggestedFeedsSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of suggested starterpacks
@@ -60,7 +60,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedStarterPacks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>, BadRequest>> GetSuggestedStarterPacksAsync (int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>, BadRequest>> GetSuggestedStarterPacksAsync ([FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a skeleton of suggested starterpacks. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedStarterpacks
@@ -70,7 +70,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedStarterPacksSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>, BadRequest>> GetSuggestedStarterPacksSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>, BadRequest>> GetSuggestedStarterPacksSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of suggested users
@@ -80,7 +80,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsers")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>, BadRequest>> GetSuggestedUsersAsync (string? category = default, int? limit = 25, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>, BadRequest>> GetSuggestedUsersAsync ([FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a skeleton of suggested users. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsers
@@ -91,7 +91,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsersSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>, BadRequest>> GetSuggestedUsersSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>, BadRequest>> GetSuggestedUsersSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a skeleton of suggested actors. Intended to be called and then hydrated through app.bsky.actor.getSuggestions
@@ -103,7 +103,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestionsSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>, BadRequest>> GetSuggestionsSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>, BadRequest>> GetSuggestionsSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of suggestions (feeds and users) tagged with categories
@@ -121,7 +121,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getTrendingTopics")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>, BadRequest>> GetTrendingTopicsAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>, BadRequest>> GetTrendingTopicsAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the current trends on the network
@@ -130,7 +130,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getTrends")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput>, BadRequest>> GetTrendsAsync (int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput>, BadRequest>> GetTrendsAsync ([FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the skeleton of trends on the network. Intended to be called and then hydrated through app.bsky.unspecced.getTrends
@@ -140,7 +140,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getTrendsSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>, BadRequest>> GetTrendsSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>, BadRequest>> GetTrendsSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Backend Actors (profile) search, returns only skeleton.
@@ -155,7 +155,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.searchActorsSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>, BadRequest>> SearchActorsSkeletonAsync (string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>, BadRequest>> SearchActorsSkeletonAsync ([FromQuery] string q, [FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] bool? typeahead = default, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Backend Posts search, returns only skeleton
@@ -178,7 +178,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.searchPostsSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>, BadRequest>> SearchPostsSkeletonAsync (string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>, BadRequest>> SearchPostsSkeletonAsync ([FromQuery] string q, [FromQuery] string? sort = default, [FromQuery] string? since = default, [FromQuery] string? until = default, [FromQuery] FishyFlip.Models.ATIdentifier? mentions = default, [FromQuery] FishyFlip.Models.ATIdentifier? author = default, [FromQuery] string? lang = default, [FromQuery] string? domain = default, [FromQuery] string? url = default, [FromQuery] List<string>? tag = default, [FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Backend Starter Pack search, returns only skeleton.
@@ -192,7 +192,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.searchStarterPacksSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>, BadRequest>> SearchStarterPacksSkeletonAsync (string q, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>, BadRequest>> SearchStarterPacksSkeletonAsync ([FromQuery] string q, [FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
     /// <summary>
     /// width:height represents an aspect ratio. It may be approximate, and may not correspond to absolute dimensions in any given unit.
     /// </summary>
-    public partial class AspectRatio : ATObject, ICBOREncodable<AspectRatio>, IJsonEncodable<AspectRatio>
+    public partial class AspectRatio : ATObject, ICBOREncodable<AspectRatio>, IJsonEncodable<AspectRatio>, IParsable<AspectRatio>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new AspectRatio FromCBORObject(CBORObject obj)
         {
             return new AspectRatio(obj);
         }
 
+        /// <inheritdoc/>
+        public static AspectRatio Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<AspectRatio>(s, (JsonTypeInfo<AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out AspectRatio result)
+        {
+            result = JsonSerializer.Deserialize<AspectRatio>(s, (JsonTypeInfo<AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio);
+            return result != null;
+        }
     }
 }
 

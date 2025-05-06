@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class SavedFeedsPref : ATObject, ICBOREncodable<SavedFeedsPref>, IJsonEncodable<SavedFeedsPref>
+    public partial class SavedFeedsPref : ATObject, ICBOREncodable<SavedFeedsPref>, IJsonEncodable<SavedFeedsPref>, IParsable<SavedFeedsPref>
     {
 
         /// <summary>
@@ -82,19 +82,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPref>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SavedFeedsPref FromCBORObject(CBORObject obj)
         {
             return new SavedFeedsPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static SavedFeedsPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SavedFeedsPref>(s, (JsonTypeInfo<SavedFeedsPref>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SavedFeedsPref result)
+        {
+            result = JsonSerializer.Deserialize<SavedFeedsPref>(s, (JsonTypeInfo<SavedFeedsPref>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPref);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class DeleteAccountInput : ATObject, ICBOREncodable<DeleteAccountInput>, IJsonEncodable<DeleteAccountInput>
+    public partial class DeleteAccountInput : ATObject, ICBOREncodable<DeleteAccountInput>, IJsonEncodable<DeleteAccountInput>, IParsable<DeleteAccountInput>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.DeleteAccountInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoAdminDeleteAccountInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DeleteAccountInput FromCBORObject(CBORObject obj)
         {
             return new DeleteAccountInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static DeleteAccountInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DeleteAccountInput>(s, (JsonTypeInfo<DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoAdminDeleteAccountInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DeleteAccountInput result)
+        {
+            result = JsonSerializer.Deserialize<DeleteAccountInput>(s, (JsonTypeInfo<DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoAdminDeleteAccountInput);
+            return result != null;
+        }
     }
 }
 

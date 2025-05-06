@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class GetUnreadCountOutput : ATObject, ICBOREncodable<GetUnreadCountOutput>, IJsonEncodable<GetUnreadCountOutput>
+    public partial class GetUnreadCountOutput : ATObject, ICBOREncodable<GetUnreadCountOutput>, IJsonEncodable<GetUnreadCountOutput>, IParsable<GetUnreadCountOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetUnreadCountOutput FromCBORObject(CBORObject obj)
         {
             return new GetUnreadCountOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetUnreadCountOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetUnreadCountOutput>(s, (JsonTypeInfo<GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetUnreadCountOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetUnreadCountOutput>(s, (JsonTypeInfo<GetUnreadCountOutput>)SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput);
+            return result != null;
+        }
     }
 }
 

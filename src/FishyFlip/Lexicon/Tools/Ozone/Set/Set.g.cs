@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Set
 {
-    public partial class Set : ATObject, ICBOREncodable<Set>, IJsonEncodable<Set>
+    public partial class Set : ATObject, ICBOREncodable<Set>, IJsonEncodable<Set>, IParsable<Set>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.Set>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.Set>)SourceGenerationContext.Default.ToolsOzoneSetSet)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Set FromCBORObject(CBORObject obj)
         {
             return new Set(obj);
         }
 
+        /// <inheritdoc/>
+        public static Set Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Set>(s, (JsonTypeInfo<Set>)SourceGenerationContext.Default.ToolsOzoneSetSet)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Set result)
+        {
+            result = JsonSerializer.Deserialize<Set>(s, (JsonTypeInfo<Set>)SourceGenerationContext.Default.ToolsOzoneSetSet);
+            return result != null;
+        }
     }
 }
 

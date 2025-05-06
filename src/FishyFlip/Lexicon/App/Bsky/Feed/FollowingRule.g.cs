@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Allow replies from actors you follow.
     /// </summary>
-    public partial class FollowingRule : ATObject, ICBOREncodable<FollowingRule>, IJsonEncodable<FollowingRule>
+    public partial class FollowingRule : ATObject, ICBOREncodable<FollowingRule>, IJsonEncodable<FollowingRule>, IParsable<FollowingRule>
     {
 
         /// <summary>
@@ -47,19 +47,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule>)SourceGenerationContext.Default.AppBskyFeedFollowingRule)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new FollowingRule FromCBORObject(CBORObject obj)
         {
             return new FollowingRule(obj);
         }
 
+        /// <inheritdoc/>
+        public static FollowingRule Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<FollowingRule>(s, (JsonTypeInfo<FollowingRule>)SourceGenerationContext.Default.AppBskyFeedFollowingRule)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out FollowingRule result)
+        {
+            result = JsonSerializer.Deserialize<FollowingRule>(s, (JsonTypeInfo<FollowingRule>)SourceGenerationContext.Default.AppBskyFeedFollowingRule);
+            return result != null;
+        }
     }
 }
 

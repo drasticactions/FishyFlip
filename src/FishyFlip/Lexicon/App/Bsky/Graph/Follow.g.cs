@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// Record declaring a social 'follow' relationship of another account. Duplicate follows will be ignored by the AppView.
     /// </summary>
-    public partial class Follow : ATObject, ICBOREncodable<Follow>, IJsonEncodable<Follow>
+    public partial class Follow : ATObject, ICBOREncodable<Follow>, IJsonEncodable<Follow>, IParsable<Follow>
     {
 
         /// <summary>
@@ -75,19 +75,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Follow>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Follow>)SourceGenerationContext.Default.AppBskyGraphFollow)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Follow FromCBORObject(CBORObject obj)
         {
             return new Follow(obj);
         }
 
+        /// <inheritdoc/>
+        public static Follow Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Follow>(s, (JsonTypeInfo<Follow>)SourceGenerationContext.Default.AppBskyGraphFollow)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Follow result)
+        {
+            result = JsonSerializer.Deserialize<Follow>(s, (JsonTypeInfo<Follow>)SourceGenerationContext.Default.AppBskyGraphFollow);
+            return result != null;
+        }
     }
 }
 

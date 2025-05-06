@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Record declaring of the existence of a feed generator, and containing metadata about it. The record can exist in any repository.
     /// </summary>
-    public partial class Generator : ATObject, ICBOREncodable<Generator>, IJsonEncodable<Generator>
+    public partial class Generator : ATObject, ICBOREncodable<Generator>, IJsonEncodable<Generator>, IParsable<Generator>
     {
 
         /// <summary>
@@ -152,19 +152,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Generator>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Generator>)SourceGenerationContext.Default.AppBskyFeedGenerator)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Generator FromCBORObject(CBORObject obj)
         {
             return new Generator(obj);
         }
 
+        /// <inheritdoc/>
+        public static Generator Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Generator>(s, (JsonTypeInfo<Generator>)SourceGenerationContext.Default.AppBskyFeedGenerator)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Generator result)
+        {
+            result = JsonSerializer.Deserialize<Generator>(s, (JsonTypeInfo<Generator>)SourceGenerationContext.Default.AppBskyFeedGenerator);
+            return result != null;
+        }
     }
 }
 

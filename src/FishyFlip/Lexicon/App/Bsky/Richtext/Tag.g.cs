@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
     /// <summary>
     /// Facet feature for a hashtag. The text usually includes a '#' prefix, but the facet reference should not (except in the case of 'double hash tags').
     /// </summary>
-    public partial class Tag : ATObject, ICBOREncodable<Tag>, IJsonEncodable<Tag>
+    public partial class Tag : ATObject, ICBOREncodable<Tag>, IJsonEncodable<Tag>, IParsable<Tag>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>)SourceGenerationContext.Default.AppBskyRichtextTag)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Tag FromCBORObject(CBORObject obj)
         {
             return new Tag(obj);
         }
 
+        /// <inheritdoc/>
+        public static Tag Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Tag>(s, (JsonTypeInfo<Tag>)SourceGenerationContext.Default.AppBskyRichtextTag)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Tag result)
+        {
+            result = JsonSerializer.Deserialize<Tag>(s, (JsonTypeInfo<Tag>)SourceGenerationContext.Default.AppBskyRichtextTag);
+            return result != null;
+        }
     }
 }
 

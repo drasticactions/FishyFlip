@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
     /// <summary>
     /// A physical location contained in the Foursquare Open Source Places dataset.
     /// </summary>
-    public partial class Fsq : ATObject, ICBOREncodable<Fsq>, IJsonEncodable<Fsq>
+    public partial class Fsq : ATObject, ICBOREncodable<Fsq>, IJsonEncodable<Fsq>, IParsable<Fsq>
     {
 
         /// <summary>
@@ -95,19 +95,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Fsq>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Fsq>)SourceGenerationContext.Default.CommunityLexiconLocationFsq)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Fsq FromCBORObject(CBORObject obj)
         {
             return new Fsq(obj);
         }
 
+        /// <inheritdoc/>
+        public static Fsq Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Fsq>(s, (JsonTypeInfo<Fsq>)SourceGenerationContext.Default.CommunityLexiconLocationFsq)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Fsq result)
+        {
+            result = JsonSerializer.Deserialize<Fsq>(s, (JsonTypeInfo<Fsq>)SourceGenerationContext.Default.CommunityLexiconLocationFsq);
+            return result != null;
+        }
     }
 }
 

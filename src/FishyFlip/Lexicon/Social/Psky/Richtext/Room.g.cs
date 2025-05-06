@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
     /// <summary>
     /// Facet feature for a room. The text usually includes a '#' prefix, but the facet reference should not (except in the case of a room tag that includes a '#' prefix) - TODO: update when rooms are actually implemented
     /// </summary>
-    public partial class Room : ATObject, ICBOREncodable<Room>, IJsonEncodable<Room>
+    public partial class Room : ATObject, ICBOREncodable<Room>, IJsonEncodable<Room>, IParsable<Room>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Richtext.Room>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Room>)SourceGenerationContext.Default.SocialPskyRichtextRoom)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Room FromCBORObject(CBORObject obj)
         {
             return new Room(obj);
         }
 
+        /// <inheritdoc/>
+        public static Room Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Room>(s, (JsonTypeInfo<Room>)SourceGenerationContext.Default.SocialPskyRichtextRoom)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Room result)
+        {
+            result = JsonSerializer.Deserialize<Room>(s, (JsonTypeInfo<Room>)SourceGenerationContext.Default.SocialPskyRichtextRoom);
+            return result != null;
+        }
     }
 }
 

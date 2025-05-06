@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// A new user experiences (NUX) storage object
     /// </summary>
-    public partial class Nux : ATObject, ICBOREncodable<Nux>, IJsonEncodable<Nux>
+    public partial class Nux : ATObject, ICBOREncodable<Nux>, IJsonEncodable<Nux>, IParsable<Nux>
     {
 
         /// <summary>
@@ -96,19 +96,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Nux>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Nux>)SourceGenerationContext.Default.AppBskyActorNux)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Nux FromCBORObject(CBORObject obj)
         {
             return new Nux(obj);
         }
 
+        /// <inheritdoc/>
+        public static Nux Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Nux>(s, (JsonTypeInfo<Nux>)SourceGenerationContext.Default.AppBskyActorNux)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Nux result)
+        {
+            result = JsonSerializer.Deserialize<Nux>(s, (JsonTypeInfo<Nux>)SourceGenerationContext.Default.AppBskyActorNux);
+            return result != null;
+        }
     }
 }
 

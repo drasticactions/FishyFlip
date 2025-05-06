@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class ListReposByCollectionOutput : ATObject, ICBOREncodable<ListReposByCollectionOutput>, IJsonEncodable<ListReposByCollectionOutput>
+    public partial class ListReposByCollectionOutput : ATObject, ICBOREncodable<ListReposByCollectionOutput>, IJsonEncodable<ListReposByCollectionOutput>, IParsable<ListReposByCollectionOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>)SourceGenerationContext.Default.ComAtprotoSyncListReposByCollectionOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListReposByCollectionOutput FromCBORObject(CBORObject obj)
         {
             return new ListReposByCollectionOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListReposByCollectionOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListReposByCollectionOutput>(s, (JsonTypeInfo<ListReposByCollectionOutput>)SourceGenerationContext.Default.ComAtprotoSyncListReposByCollectionOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListReposByCollectionOutput result)
+        {
+            result = JsonSerializer.Deserialize<ListReposByCollectionOutput>(s, (JsonTypeInfo<ListReposByCollectionOutput>)SourceGenerationContext.Default.ComAtprotoSyncListReposByCollectionOutput);
+            return result != null;
+        }
     }
 }
 

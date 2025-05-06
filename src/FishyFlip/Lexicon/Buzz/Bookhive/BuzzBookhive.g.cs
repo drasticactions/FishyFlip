@@ -32,6 +32,29 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
 
 
         /// <summary>
+        /// Get a book's info. Requires authentication.
+        /// </summary>
+        /// <param name="id">The book's hive ID</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput?>> GetBookAsync (string id, CancellationToken cancellationToken = default)
+        {
+            return atp.GetBookAsync(id, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a profile's info. Does not require authentication.
+        /// </summary>
+        /// <param name="did">The user's DID to get the profile of</param>
+        /// <param name="handle">The user's handle to get the profile of</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput?>> GetProfileAsync (string? did = default, string? handle = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetProfileAsync(did, handle, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Find books matching the search criteria. Requires authentication.
         /// </summary>
         /// <param name="q">Search query string. Will be matched against title and authors fields.</param>

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
     /// <summary>
     /// Specifies the sub-string range a facet feature applies to. Start index is inclusive, end index is exclusive. Indices are zero-indexed, counting bytes of the UTF-8 encoded text. NOTE: some languages, like Javascript, use UTF-16 or Unicode codepoints for string slice indexing; in these languages, convert to byte arrays before working with facets.
     /// </summary>
-    public partial class ByteSlice : ATObject, ICBOREncodable<ByteSlice>, IJsonEncodable<ByteSlice>
+    public partial class ByteSlice : ATObject, ICBOREncodable<ByteSlice>, IJsonEncodable<ByteSlice>, IParsable<ByteSlice>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ByteSlice FromCBORObject(CBORObject obj)
         {
             return new ByteSlice(obj);
         }
 
+        /// <inheritdoc/>
+        public static ByteSlice Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ByteSlice>(s, (JsonTypeInfo<ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ByteSlice result)
+        {
+            result = JsonSerializer.Deserialize<ByteSlice>(s, (JsonTypeInfo<ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 {
-    public partial class RelatedAccount : ATObject, ICBOREncodable<RelatedAccount>, IJsonEncodable<RelatedAccount>
+    public partial class RelatedAccount : ATObject, ICBOREncodable<RelatedAccount>, IJsonEncodable<RelatedAccount>, IParsable<RelatedAccount>
     {
 
         /// <summary>
@@ -75,19 +75,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RelatedAccount FromCBORObject(CBORObject obj)
         {
             return new RelatedAccount(obj);
         }
 
+        /// <inheritdoc/>
+        public static RelatedAccount Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RelatedAccount>(s, (JsonTypeInfo<RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RelatedAccount result)
+        {
+            result = JsonSerializer.Deserialize<RelatedAccount>(s, (JsonTypeInfo<RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount);
+            return result != null;
+        }
     }
 }
 

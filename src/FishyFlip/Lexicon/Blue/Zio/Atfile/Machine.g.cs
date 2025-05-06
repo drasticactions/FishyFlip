@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
     /// <summary>
     /// A fingerprint of a machine upload.
     /// </summary>
-    public partial class Machine : ATObject, ICBOREncodable<Machine>, IJsonEncodable<Machine>
+    public partial class Machine : ATObject, ICBOREncodable<Machine>, IJsonEncodable<Machine>, IParsable<Machine>
     {
 
         /// <summary>
@@ -92,19 +92,31 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Machine FromCBORObject(CBORObject obj)
         {
             return new Machine(obj);
         }
 
+        /// <inheritdoc/>
+        public static Machine Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Machine>(s, (JsonTypeInfo<Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Machine result)
+        {
+            result = JsonSerializer.Deserialize<Machine>(s, (JsonTypeInfo<Machine>)SourceGenerationContext.Default.BlueZioAtfileMachine);
+            return result != null;
+        }
     }
 }
 

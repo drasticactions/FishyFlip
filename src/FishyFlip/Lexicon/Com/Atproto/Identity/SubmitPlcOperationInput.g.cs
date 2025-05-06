@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class SubmitPlcOperationInput : ATObject, ICBOREncodable<SubmitPlcOperationInput>, IJsonEncodable<SubmitPlcOperationInput>
+    public partial class SubmitPlcOperationInput : ATObject, ICBOREncodable<SubmitPlcOperationInput>, IJsonEncodable<SubmitPlcOperationInput>, IParsable<SubmitPlcOperationInput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySubmitPlcOperationInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SubmitPlcOperationInput FromCBORObject(CBORObject obj)
         {
             return new SubmitPlcOperationInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static SubmitPlcOperationInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SubmitPlcOperationInput>(s, (JsonTypeInfo<SubmitPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySubmitPlcOperationInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SubmitPlcOperationInput result)
+        {
+            result = JsonSerializer.Deserialize<SubmitPlcOperationInput>(s, (JsonTypeInfo<SubmitPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySubmitPlcOperationInput);
+            return result != null;
+        }
     }
 }
 

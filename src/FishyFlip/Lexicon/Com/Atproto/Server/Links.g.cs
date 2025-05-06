@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class Links : ATObject, ICBOREncodable<Links>, IJsonEncodable<Links>
+    public partial class Links : ATObject, ICBOREncodable<Links>, IJsonEncodable<Links>, IParsable<Links>
     {
 
         /// <summary>
@@ -71,19 +71,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.Links>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Links>)SourceGenerationContext.Default.ComAtprotoServerLinks)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Links FromCBORObject(CBORObject obj)
         {
             return new Links(obj);
         }
 
+        /// <inheritdoc/>
+        public static Links Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Links>(s, (JsonTypeInfo<Links>)SourceGenerationContext.Default.ComAtprotoServerLinks)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Links result)
+        {
+            result = JsonSerializer.Deserialize<Links>(s, (JsonTypeInfo<Links>)SourceGenerationContext.Default.ComAtprotoServerLinks);
+            return result != null;
+        }
     }
 }
 

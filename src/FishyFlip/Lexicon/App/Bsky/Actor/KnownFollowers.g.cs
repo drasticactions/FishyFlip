@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// The subject's followers whom you also follow
     /// </summary>
-    public partial class KnownFollowers : ATObject, ICBOREncodable<KnownFollowers>, IJsonEncodable<KnownFollowers>
+    public partial class KnownFollowers : ATObject, ICBOREncodable<KnownFollowers>, IJsonEncodable<KnownFollowers>, IParsable<KnownFollowers>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers>)SourceGenerationContext.Default.AppBskyActorKnownFollowers)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new KnownFollowers FromCBORObject(CBORObject obj)
         {
             return new KnownFollowers(obj);
         }
 
+        /// <inheritdoc/>
+        public static KnownFollowers Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<KnownFollowers>(s, (JsonTypeInfo<KnownFollowers>)SourceGenerationContext.Default.AppBskyActorKnownFollowers)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out KnownFollowers result)
+        {
+            result = JsonSerializer.Deserialize<KnownFollowers>(s, (JsonTypeInfo<KnownFollowers>)SourceGenerationContext.Default.AppBskyActorKnownFollowers);
+            return result != null;
+        }
     }
 }
 

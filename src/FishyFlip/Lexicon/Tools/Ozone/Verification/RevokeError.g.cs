@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
     /// <summary>
     /// Error object for failed revocations
     /// </summary>
-    public partial class RevokeError : ATObject, ICBOREncodable<RevokeError>, IJsonEncodable<RevokeError>
+    public partial class RevokeError : ATObject, ICBOREncodable<RevokeError>, IJsonEncodable<RevokeError>, IParsable<RevokeError>
     {
 
         /// <summary>
@@ -79,19 +79,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeError>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeError>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeError)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RevokeError FromCBORObject(CBORObject obj)
         {
             return new RevokeError(obj);
         }
 
+        /// <inheritdoc/>
+        public static RevokeError Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RevokeError>(s, (JsonTypeInfo<RevokeError>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeError)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RevokeError result)
+        {
+            result = JsonSerializer.Deserialize<RevokeError>(s, (JsonTypeInfo<RevokeError>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeError);
+            return result != null;
+        }
     }
 }
 

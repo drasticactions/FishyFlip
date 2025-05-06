@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
     /// <summary>
     /// A physical location in the form of a H3 encoded location.
     /// </summary>
-    public partial class Hthree : ATObject, ICBOREncodable<Hthree>, IJsonEncodable<Hthree>
+    public partial class Hthree : ATObject, ICBOREncodable<Hthree>, IJsonEncodable<Hthree>, IParsable<Hthree>
     {
 
         /// <summary>
@@ -77,19 +77,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Hthree FromCBORObject(CBORObject obj)
         {
             return new Hthree(obj);
         }
 
+        /// <inheritdoc/>
+        public static Hthree Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Hthree>(s, (JsonTypeInfo<Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Hthree result)
+        {
+            result = JsonSerializer.Deserialize<Hthree>(s, (JsonTypeInfo<Hthree>)SourceGenerationContext.Default.CommunityLexiconLocationHthree);
+            return result != null;
+        }
     }
 }
 

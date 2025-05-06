@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class GetRecommendedDidCredentialsOutput : ATObject, ICBOREncodable<GetRecommendedDidCredentialsOutput>, IJsonEncodable<GetRecommendedDidCredentialsOutput>
+    public partial class GetRecommendedDidCredentialsOutput : ATObject, ICBOREncodable<GetRecommendedDidCredentialsOutput>, IJsonEncodable<GetRecommendedDidCredentialsOutput>, IParsable<GetRecommendedDidCredentialsOutput>
     {
 
         /// <summary>
@@ -90,19 +90,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>)SourceGenerationContext.Default.ComAtprotoIdentityGetRecommendedDidCredentialsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetRecommendedDidCredentialsOutput FromCBORObject(CBORObject obj)
         {
             return new GetRecommendedDidCredentialsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetRecommendedDidCredentialsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetRecommendedDidCredentialsOutput>(s, (JsonTypeInfo<GetRecommendedDidCredentialsOutput>)SourceGenerationContext.Default.ComAtprotoIdentityGetRecommendedDidCredentialsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetRecommendedDidCredentialsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetRecommendedDidCredentialsOutput>(s, (JsonTypeInfo<GetRecommendedDidCredentialsOutput>)SourceGenerationContext.Default.ComAtprotoIdentityGetRecommendedDidCredentialsOutput);
+            return result != null;
+        }
     }
 }
 

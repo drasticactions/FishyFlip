@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
     /// <summary>
     /// A physical location in the form of a street address.
     /// </summary>
-    public partial class Address : ATObject, ICBOREncodable<Address>, IJsonEncodable<Address>
+    public partial class Address : ATObject, ICBOREncodable<Address>, IJsonEncodable<Address>, IParsable<Address>
     {
 
         /// <summary>
@@ -117,19 +117,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Address>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Address>)SourceGenerationContext.Default.CommunityLexiconLocationAddress)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Address FromCBORObject(CBORObject obj)
         {
             return new Address(obj);
         }
 
+        /// <inheritdoc/>
+        public static Address Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Address>(s, (JsonTypeInfo<Address>)SourceGenerationContext.Default.CommunityLexiconLocationAddress)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Address result)
+        {
+            result = JsonSerializer.Deserialize<Address>(s, (JsonTypeInfo<Address>)SourceGenerationContext.Default.CommunityLexiconLocationAddress);
+            return result != null;
+        }
     }
 }
 

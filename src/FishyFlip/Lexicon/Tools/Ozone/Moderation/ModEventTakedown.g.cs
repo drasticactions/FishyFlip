@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Take down a subject permanently or temporarily
     /// </summary>
-    public partial class ModEventTakedown : ATObject, ICBOREncodable<ModEventTakedown>, IJsonEncodable<ModEventTakedown>
+    public partial class ModEventTakedown : ATObject, ICBOREncodable<ModEventTakedown>, IJsonEncodable<ModEventTakedown>, IParsable<ModEventTakedown>
     {
 
         /// <summary>
@@ -95,19 +95,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventTakedown)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventTakedown FromCBORObject(CBORObject obj)
         {
             return new ModEventTakedown(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventTakedown Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventTakedown>(s, (JsonTypeInfo<ModEventTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventTakedown)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventTakedown result)
+        {
+            result = JsonSerializer.Deserialize<ModEventTakedown>(s, (JsonTypeInfo<ModEventTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventTakedown);
+            return result != null;
+        }
     }
 }
 

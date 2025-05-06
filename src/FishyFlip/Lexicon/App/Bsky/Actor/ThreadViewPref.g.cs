@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class ThreadViewPref : ATObject, ICBOREncodable<ThreadViewPref>, IJsonEncodable<ThreadViewPref>
+    public partial class ThreadViewPref : ATObject, ICBOREncodable<ThreadViewPref>, IJsonEncodable<ThreadViewPref>, IParsable<ThreadViewPref>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref>)SourceGenerationContext.Default.AppBskyActorThreadViewPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ThreadViewPref FromCBORObject(CBORObject obj)
         {
             return new ThreadViewPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static ThreadViewPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ThreadViewPref>(s, (JsonTypeInfo<ThreadViewPref>)SourceGenerationContext.Default.AppBskyActorThreadViewPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ThreadViewPref result)
+        {
+            result = JsonSerializer.Deserialize<ThreadViewPref>(s, (JsonTypeInfo<ThreadViewPref>)SourceGenerationContext.Default.AppBskyActorThreadViewPref);
+            return result != null;
+        }
     }
 }
 

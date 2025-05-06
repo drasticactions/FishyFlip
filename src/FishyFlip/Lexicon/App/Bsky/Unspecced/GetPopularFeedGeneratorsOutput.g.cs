@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetPopularFeedGeneratorsOutput : ATObject, ICBOREncodable<GetPopularFeedGeneratorsOutput>, IJsonEncodable<GetPopularFeedGeneratorsOutput>
+    public partial class GetPopularFeedGeneratorsOutput : ATObject, ICBOREncodable<GetPopularFeedGeneratorsOutput>, IJsonEncodable<GetPopularFeedGeneratorsOutput>, IParsable<GetPopularFeedGeneratorsOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetPopularFeedGeneratorsOutput FromCBORObject(CBORObject obj)
         {
             return new GetPopularFeedGeneratorsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetPopularFeedGeneratorsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetPopularFeedGeneratorsOutput>(s, (JsonTypeInfo<GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetPopularFeedGeneratorsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetPopularFeedGeneratorsOutput>(s, (JsonTypeInfo<GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput);
+            return result != null;
+        }
     }
 }
 

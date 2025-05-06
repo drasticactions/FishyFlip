@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
     /// <summary>
     /// A record that stores the status of the anime.
     /// </summary>
-    public partial class Status : ATObject, ICBOREncodable<Status>, IJsonEncodable<Status>
+    public partial class Status : ATObject, ICBOREncodable<Status>, IJsonEncodable<Status>, IParsable<Status>
     {
 
         /// <summary>
@@ -65,19 +65,31 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Netlify.Aniblue.Status>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.Status>)SourceGenerationContext.Default.AppNetlifyAniblueStatus)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Status FromCBORObject(CBORObject obj)
         {
             return new Status(obj);
         }
 
+        /// <inheritdoc/>
+        public static Status Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Status>(s, (JsonTypeInfo<Status>)SourceGenerationContext.Default.AppNetlifyAniblueStatus)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Status result)
+        {
+            result = JsonSerializer.Deserialize<Status>(s, (JsonTypeInfo<Status>)SourceGenerationContext.Default.AppNetlifyAniblueStatus);
+            return result != null;
+        }
     }
 }
 

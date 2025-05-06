@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetQuotesOutput : ATObject, ICBOREncodable<GetQuotesOutput>, IJsonEncodable<GetQuotesOutput>
+    public partial class GetQuotesOutput : ATObject, ICBOREncodable<GetQuotesOutput>, IJsonEncodable<GetQuotesOutput>, IParsable<GetQuotesOutput>
     {
 
         /// <summary>
@@ -92,19 +92,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>)SourceGenerationContext.Default.AppBskyFeedGetQuotesOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetQuotesOutput FromCBORObject(CBORObject obj)
         {
             return new GetQuotesOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetQuotesOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetQuotesOutput>(s, (JsonTypeInfo<GetQuotesOutput>)SourceGenerationContext.Default.AppBskyFeedGetQuotesOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetQuotesOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetQuotesOutput>(s, (JsonTypeInfo<GetQuotesOutput>)SourceGenerationContext.Default.AppBskyFeedGetQuotesOutput);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Keep a log of outgoing email to a user
     /// </summary>
-    public partial class ModEventEmail : ATObject, ICBOREncodable<ModEventEmail>, IJsonEncodable<ModEventEmail>
+    public partial class ModEventEmail : ATObject, ICBOREncodable<ModEventEmail>, IJsonEncodable<ModEventEmail>, IParsable<ModEventEmail>
     {
 
         /// <summary>
@@ -87,19 +87,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEmail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventEmail)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventEmail FromCBORObject(CBORObject obj)
         {
             return new ModEventEmail(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventEmail Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventEmail>(s, (JsonTypeInfo<ModEventEmail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventEmail)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventEmail result)
+        {
+            result = JsonSerializer.Deserialize<ModEventEmail>(s, (JsonTypeInfo<ModEventEmail>)SourceGenerationContext.Default.ToolsOzoneModerationModEventEmail);
+            return result != null;
+        }
     }
 }
 

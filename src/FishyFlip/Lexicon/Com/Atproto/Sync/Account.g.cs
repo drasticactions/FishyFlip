@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     /// <summary>
     /// Represents a change to an account's status on a host (eg, PDS or Relay). The semantics of this event are that the status is at the host which emitted the event, not necessarily that at the currently active PDS. Eg, a Relay takedown would emit a takedown with active=false, even if the PDS is still active.
     /// </summary>
-    public partial class Account : ATObject, ICBOREncodable<Account>, IJsonEncodable<Account>
+    public partial class Account : ATObject, ICBOREncodable<Account>, IJsonEncodable<Account>, IParsable<Account>
     {
 
         /// <summary>
@@ -123,19 +123,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Account>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Account>)SourceGenerationContext.Default.ComAtprotoSyncAccount)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Account FromCBORObject(CBORObject obj)
         {
             return new Account(obj);
         }
 
+        /// <inheritdoc/>
+        public static Account Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Account>(s, (JsonTypeInfo<Account>)SourceGenerationContext.Default.ComAtprotoSyncAccount)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Account result)
+        {
+            result = JsonSerializer.Deserialize<Account>(s, (JsonTypeInfo<Account>)SourceGenerationContext.Default.ComAtprotoSyncAccount);
+            return result != null;
+        }
     }
 }
 

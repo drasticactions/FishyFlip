@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
     /// <summary>
     /// Record bookmarking a link to come back to later.
     /// </summary>
-    public partial class Bookmark : ATObject, ICBOREncodable<Bookmark>, IJsonEncodable<Bookmark>
+    public partial class Bookmark : ATObject, ICBOREncodable<Bookmark>, IJsonEncodable<Bookmark>, IParsable<Bookmark>
     {
 
         /// <summary>
@@ -84,19 +84,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Bookmark FromCBORObject(CBORObject obj)
         {
             return new Bookmark(obj);
         }
 
+        /// <inheritdoc/>
+        public static Bookmark Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Bookmark>(s, (JsonTypeInfo<Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Bookmark result)
+        {
+            result = JsonSerializer.Deserialize<Bookmark>(s, (JsonTypeInfo<Bookmark>)SourceGenerationContext.Default.CommunityLexiconBookmarksBookmark);
+            return result != null;
+        }
     }
 }
 

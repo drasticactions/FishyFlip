@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
 {
-    public partial class HandleUpdated : ATObject, ICBOREncodable<HandleUpdated>, IJsonEncodable<HandleUpdated>
+    public partial class HandleUpdated : ATObject, ICBOREncodable<HandleUpdated>, IJsonEncodable<HandleUpdated>, IParsable<HandleUpdated>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Hosting.HandleUpdated>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Hosting.HandleUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingHandleUpdated)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new HandleUpdated FromCBORObject(CBORObject obj)
         {
             return new HandleUpdated(obj);
         }
 
+        /// <inheritdoc/>
+        public static HandleUpdated Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<HandleUpdated>(s, (JsonTypeInfo<HandleUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingHandleUpdated)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out HandleUpdated result)
+        {
+            result = JsonSerializer.Deserialize<HandleUpdated>(s, (JsonTypeInfo<HandleUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingHandleUpdated);
+            return result != null;
+        }
     }
 }
 

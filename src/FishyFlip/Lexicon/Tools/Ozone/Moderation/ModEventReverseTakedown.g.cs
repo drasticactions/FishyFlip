@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Revert take down action on a subject
     /// </summary>
-    public partial class ModEventReverseTakedown : ATObject, ICBOREncodable<ModEventReverseTakedown>, IJsonEncodable<ModEventReverseTakedown>
+    public partial class ModEventReverseTakedown : ATObject, ICBOREncodable<ModEventReverseTakedown>, IJsonEncodable<ModEventReverseTakedown>, IParsable<ModEventReverseTakedown>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventReverseTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReverseTakedown)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventReverseTakedown FromCBORObject(CBORObject obj)
         {
             return new ModEventReverseTakedown(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventReverseTakedown Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventReverseTakedown>(s, (JsonTypeInfo<ModEventReverseTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReverseTakedown)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventReverseTakedown result)
+        {
+            result = JsonSerializer.Deserialize<ModEventReverseTakedown>(s, (JsonTypeInfo<ModEventReverseTakedown>)SourceGenerationContext.Default.ToolsOzoneModerationModEventReverseTakedown);
+            return result != null;
+        }
     }
 }
 

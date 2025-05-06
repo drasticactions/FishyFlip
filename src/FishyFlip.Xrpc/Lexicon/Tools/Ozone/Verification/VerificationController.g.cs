@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Verification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput"/></returns>
         [HttpPost("/xrpc/tools.ozone.verification.grantVerifications")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput>, BadRequest>> GrantVerificationsAsync (List<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationInput> verifications, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput>, BadRequest>> GrantVerificationsAsync ([FromBody] List<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationInput> verifications, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List verifications
@@ -38,7 +38,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Verification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.verification.listVerifications")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput>, BadRequest>> ListVerificationsAsync (string? cursor = default, int? limit = 50, DateTime? createdAfter = default, DateTime? createdBefore = default, List<FishyFlip.Models.ATDid>? issuers = default, List<FishyFlip.Models.ATDid>? subjects = default, string? sortDirection = default, bool? isRevoked = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput>, BadRequest>> ListVerificationsAsync ([FromQuery] string? cursor = default, [FromQuery] int? limit = 50, [FromQuery] DateTime? createdAfter = default, [FromQuery] DateTime? createdBefore = default, [FromQuery] List<FishyFlip.Models.ATDid>? issuers = default, [FromQuery] List<FishyFlip.Models.ATDid>? subjects = default, [FromQuery] string? sortDirection = default, [FromQuery] bool? isRevoked = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Revoke previously granted verifications in batches of up to 100.
@@ -48,7 +48,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Verification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput"/></returns>
         [HttpPost("/xrpc/tools.ozone.verification.revokeVerifications")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>, BadRequest>> RevokeVerificationsAsync (List<FishyFlip.Models.ATUri> uris, string? revokeReason = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>, BadRequest>> RevokeVerificationsAsync ([FromBody] List<FishyFlip.Models.ATUri> uris, [FromBody] string? revokeReason = default, CancellationToken cancellationToken = default);
     }
 }
 

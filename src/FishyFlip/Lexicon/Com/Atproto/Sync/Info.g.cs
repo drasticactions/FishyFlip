@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class Info : ATObject, ICBOREncodable<Info>, IJsonEncodable<Info>
+    public partial class Info : ATObject, ICBOREncodable<Info>, IJsonEncodable<Info>, IParsable<Info>
     {
 
         /// <summary>
@@ -77,19 +77,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Info>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Info>)SourceGenerationContext.Default.ComAtprotoSyncInfo)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Info FromCBORObject(CBORObject obj)
         {
             return new Info(obj);
         }
 
+        /// <inheritdoc/>
+        public static Info Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Info>(s, (JsonTypeInfo<Info>)SourceGenerationContext.Default.ComAtprotoSyncInfo)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Info result)
+        {
+            result = JsonSerializer.Deserialize<Info>(s, (JsonTypeInfo<Info>)SourceGenerationContext.Default.ComAtprotoSyncInfo);
+            return result != null;
+        }
     }
 }
 

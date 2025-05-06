@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class PersonalDetailsPref : ATObject, ICBOREncodable<PersonalDetailsPref>, IJsonEncodable<PersonalDetailsPref>
+    public partial class PersonalDetailsPref : ATObject, ICBOREncodable<PersonalDetailsPref>, IJsonEncodable<PersonalDetailsPref>, IParsable<PersonalDetailsPref>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.PersonalDetailsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PersonalDetailsPref>)SourceGenerationContext.Default.AppBskyActorPersonalDetailsPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new PersonalDetailsPref FromCBORObject(CBORObject obj)
         {
             return new PersonalDetailsPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static PersonalDetailsPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<PersonalDetailsPref>(s, (JsonTypeInfo<PersonalDetailsPref>)SourceGenerationContext.Default.AppBskyActorPersonalDetailsPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out PersonalDetailsPref result)
+        {
+            result = JsonSerializer.Deserialize<PersonalDetailsPref>(s, (JsonTypeInfo<PersonalDetailsPref>)SourceGenerationContext.Default.AppBskyActorPersonalDetailsPref);
+            return result != null;
+        }
     }
 }
 

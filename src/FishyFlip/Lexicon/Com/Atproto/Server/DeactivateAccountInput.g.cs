@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class DeactivateAccountInput : ATObject, ICBOREncodable<DeactivateAccountInput>, IJsonEncodable<DeactivateAccountInput>
+    public partial class DeactivateAccountInput : ATObject, ICBOREncodable<DeactivateAccountInput>, IJsonEncodable<DeactivateAccountInput>, IParsable<DeactivateAccountInput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.DeactivateAccountInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DeactivateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeactivateAccountInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DeactivateAccountInput FromCBORObject(CBORObject obj)
         {
             return new DeactivateAccountInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static DeactivateAccountInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DeactivateAccountInput>(s, (JsonTypeInfo<DeactivateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeactivateAccountInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DeactivateAccountInput result)
+        {
+            result = JsonSerializer.Deserialize<DeactivateAccountInput>(s, (JsonTypeInfo<DeactivateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeactivateAccountInput);
+            return result != null;
+        }
     }
 }
 

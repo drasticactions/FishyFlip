@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
     /// <summary>
     /// Error object for failed verifications.
     /// </summary>
-    public partial class GrantError : ATObject, ICBOREncodable<GrantError>, IJsonEncodable<GrantError>
+    public partial class GrantError : ATObject, ICBOREncodable<GrantError>, IJsonEncodable<GrantError>, IParsable<GrantError>
     {
 
         /// <summary>
@@ -79,19 +79,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantError>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantError>)SourceGenerationContext.Default.ToolsOzoneVerificationGrantError)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GrantError FromCBORObject(CBORObject obj)
         {
             return new GrantError(obj);
         }
 
+        /// <inheritdoc/>
+        public static GrantError Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GrantError>(s, (JsonTypeInfo<GrantError>)SourceGenerationContext.Default.ToolsOzoneVerificationGrantError)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GrantError result)
+        {
+            result = JsonSerializer.Deserialize<GrantError>(s, (JsonTypeInfo<GrantError>)SourceGenerationContext.Default.ToolsOzoneVerificationGrantError);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class MessageAndReactionView : ATObject, ICBOREncodable<MessageAndReactionView>, IJsonEncodable<MessageAndReactionView>
+    public partial class MessageAndReactionView : ATObject, ICBOREncodable<MessageAndReactionView>, IJsonEncodable<MessageAndReactionView>, IParsable<MessageAndReactionView>
     {
 
         /// <summary>
@@ -79,19 +79,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView>)SourceGenerationContext.Default.ChatBskyConvoMessageAndReactionView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new MessageAndReactionView FromCBORObject(CBORObject obj)
         {
             return new MessageAndReactionView(obj);
         }
 
+        /// <inheritdoc/>
+        public static MessageAndReactionView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<MessageAndReactionView>(s, (JsonTypeInfo<MessageAndReactionView>)SourceGenerationContext.Default.ChatBskyConvoMessageAndReactionView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out MessageAndReactionView result)
+        {
+            result = JsonSerializer.Deserialize<MessageAndReactionView>(s, (JsonTypeInfo<MessageAndReactionView>)SourceGenerationContext.Default.ChatBskyConvoMessageAndReactionView);
+            return result != null;
+        }
     }
 }
 

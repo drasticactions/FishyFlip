@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// Record representing a block relationship against an entire an entire list of accounts (actors).
     /// </summary>
-    public partial class Listblock : ATObject, ICBOREncodable<Listblock>, IJsonEncodable<Listblock>
+    public partial class Listblock : ATObject, ICBOREncodable<Listblock>, IJsonEncodable<Listblock>, IParsable<Listblock>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Listblock>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Listblock>)SourceGenerationContext.Default.AppBskyGraphListblock)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Listblock FromCBORObject(CBORObject obj)
         {
             return new Listblock(obj);
         }
 
+        /// <inheritdoc/>
+        public static Listblock Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Listblock>(s, (JsonTypeInfo<Listblock>)SourceGenerationContext.Default.AppBskyGraphListblock)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Listblock result)
+        {
+            result = JsonSerializer.Deserialize<Listblock>(s, (JsonTypeInfo<Listblock>)SourceGenerationContext.Default.AppBskyGraphListblock);
+            return result != null;
+        }
     }
 }
 

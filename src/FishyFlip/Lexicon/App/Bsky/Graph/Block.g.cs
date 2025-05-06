@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// Record declaring a 'block' relationship against another account. NOTE: blocks are public in Bluesky; see blog posts for details.
     /// </summary>
-    public partial class Block : ATObject, ICBOREncodable<Block>, IJsonEncodable<Block>
+    public partial class Block : ATObject, ICBOREncodable<Block>, IJsonEncodable<Block>, IParsable<Block>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Block>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Block>)SourceGenerationContext.Default.AppBskyGraphBlock)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Block FromCBORObject(CBORObject obj)
         {
             return new Block(obj);
         }
 
+        /// <inheritdoc/>
+        public static Block Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Block>(s, (JsonTypeInfo<Block>)SourceGenerationContext.Default.AppBskyGraphBlock)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Block result)
+        {
+            result = JsonSerializer.Deserialize<Block>(s, (JsonTypeInfo<Block>)SourceGenerationContext.Default.AppBskyGraphBlock);
+            return result != null;
+        }
     }
 }
 

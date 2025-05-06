@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Communication
 {
-    public partial class TemplateView : ATObject, ICBOREncodable<TemplateView>, IJsonEncodable<TemplateView>
+    public partial class TemplateView : ATObject, ICBOREncodable<TemplateView>, IJsonEncodable<TemplateView>, IParsable<TemplateView>
     {
 
         /// <summary>
@@ -147,19 +147,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new TemplateView FromCBORObject(CBORObject obj)
         {
             return new TemplateView(obj);
         }
 
+        /// <inheritdoc/>
+        public static TemplateView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<TemplateView>(s, (JsonTypeInfo<TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out TemplateView result)
+        {
+            result = JsonSerializer.Deserialize<TemplateView>(s, (JsonTypeInfo<TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// lists the bi-directional graph relationships between one actor (not indicated in the object), and the target actors (the DID included in the object)
     /// </summary>
-    public partial class Relationship : ATObject, ICBOREncodable<Relationship>, IJsonEncodable<Relationship>
+    public partial class Relationship : ATObject, ICBOREncodable<Relationship>, IJsonEncodable<Relationship>, IParsable<Relationship>
     {
 
         /// <summary>
@@ -89,19 +89,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Relationship FromCBORObject(CBORObject obj)
         {
             return new Relationship(obj);
         }
 
+        /// <inheritdoc/>
+        public static Relationship Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Relationship>(s, (JsonTypeInfo<Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Relationship result)
+        {
+            result = JsonSerializer.Deserialize<Relationship>(s, (JsonTypeInfo<Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship);
+            return result != null;
+        }
     }
 }
 

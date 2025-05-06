@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class DeleteRecordInput : ATObject, ICBOREncodable<DeleteRecordInput>, IJsonEncodable<DeleteRecordInput>
+    public partial class DeleteRecordInput : ATObject, ICBOREncodable<DeleteRecordInput>, IJsonEncodable<DeleteRecordInput>, IParsable<DeleteRecordInput>
     {
 
         /// <summary>
@@ -107,19 +107,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoDeleteRecordInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DeleteRecordInput FromCBORObject(CBORObject obj)
         {
             return new DeleteRecordInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static DeleteRecordInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DeleteRecordInput>(s, (JsonTypeInfo<DeleteRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoDeleteRecordInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DeleteRecordInput result)
+        {
+            result = JsonSerializer.Deserialize<DeleteRecordInput>(s, (JsonTypeInfo<DeleteRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoDeleteRecordInput);
+            return result != null;
+        }
     }
 }
 

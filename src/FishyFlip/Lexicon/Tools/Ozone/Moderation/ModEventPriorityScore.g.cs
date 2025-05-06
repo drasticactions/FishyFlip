@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Set priority score of the subject. Higher score means higher priority.
     /// </summary>
-    public partial class ModEventPriorityScore : ATObject, ICBOREncodable<ModEventPriorityScore>, IJsonEncodable<ModEventPriorityScore>
+    public partial class ModEventPriorityScore : ATObject, ICBOREncodable<ModEventPriorityScore>, IJsonEncodable<ModEventPriorityScore>, IParsable<ModEventPriorityScore>
     {
 
         /// <summary>
@@ -75,19 +75,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore>)SourceGenerationContext.Default.ToolsOzoneModerationModEventPriorityScore)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventPriorityScore FromCBORObject(CBORObject obj)
         {
             return new ModEventPriorityScore(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventPriorityScore Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventPriorityScore>(s, (JsonTypeInfo<ModEventPriorityScore>)SourceGenerationContext.Default.ToolsOzoneModerationModEventPriorityScore)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventPriorityScore result)
+        {
+            result = JsonSerializer.Deserialize<ModEventPriorityScore>(s, (JsonTypeInfo<ModEventPriorityScore>)SourceGenerationContext.Default.ToolsOzoneModerationModEventPriorityScore);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class NotifyOfNewEntryInput : ATObject, ICBOREncodable<NotifyOfNewEntryInput>, IJsonEncodable<NotifyOfNewEntryInput>
+    public partial class NotifyOfNewEntryInput : ATObject, ICBOREncodable<NotifyOfNewEntryInput>, IJsonEncodable<NotifyOfNewEntryInput>, IParsable<NotifyOfNewEntryInput>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new NotifyOfNewEntryInput FromCBORObject(CBORObject obj)
         {
             return new NotifyOfNewEntryInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static NotifyOfNewEntryInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<NotifyOfNewEntryInput>(s, (JsonTypeInfo<NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out NotifyOfNewEntryInput result)
+        {
+            result = JsonSerializer.Deserialize<NotifyOfNewEntryInput>(s, (JsonTypeInfo<NotifyOfNewEntryInput>)SourceGenerationContext.Default.ComWhtwndBlogNotifyOfNewEntryInput);
+            return result != null;
+        }
     }
 }
 

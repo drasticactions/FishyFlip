@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     /// <summary>
     /// Represents an update of repository state. Note that empty commits are allowed, which include no repo data changes, but an update to rev and signature.
     /// </summary>
-    public partial class Commit : ATObject, ICBOREncodable<Commit>, IJsonEncodable<Commit>
+    public partial class Commit : ATObject, ICBOREncodable<Commit>, IJsonEncodable<Commit>, IParsable<Commit>
     {
 
         /// <summary>
@@ -166,19 +166,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Commit FromCBORObject(CBORObject obj)
         {
             return new Commit(obj);
         }
 
+        /// <inheritdoc/>
+        public static Commit Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Commit>(s, (JsonTypeInfo<Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Commit result)
+        {
+            result = JsonSerializer.Deserialize<Commit>(s, (JsonTypeInfo<Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit);
+            return result != null;
+        }
     }
 }
 

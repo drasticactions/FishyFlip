@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Signature
 {
-    public partial class FindRelatedAccountsOutput : ATObject, ICBOREncodable<FindRelatedAccountsOutput>, IJsonEncodable<FindRelatedAccountsOutput>
+    public partial class FindRelatedAccountsOutput : ATObject, ICBOREncodable<FindRelatedAccountsOutput>, IJsonEncodable<FindRelatedAccountsOutput>, IParsable<FindRelatedAccountsOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new FindRelatedAccountsOutput FromCBORObject(CBORObject obj)
         {
             return new FindRelatedAccountsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static FindRelatedAccountsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<FindRelatedAccountsOutput>(s, (JsonTypeInfo<FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out FindRelatedAccountsOutput result)
+        {
+            result = JsonSerializer.Deserialize<FindRelatedAccountsOutput>(s, (JsonTypeInfo<FindRelatedAccountsOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput);
+            return result != null;
+        }
     }
 }
 

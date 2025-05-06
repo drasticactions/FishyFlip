@@ -23,7 +23,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Set
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/tools.ozone.set.addValues")]
-        public abstract Task<Results<Ok, BadRequest>> AddValuesAsync (string name, List<string> values, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> AddValuesAsync ([FromBody] string name, [FromBody] List<string> values, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete an entire set. Attempting to delete a set that does not exist will result in an error.
@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Set
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput"/></returns>
         [HttpPost("/xrpc/tools.ozone.set.deleteSet")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput>, BadRequest>> DeleteSetAsync (string name, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteSetOutput>, BadRequest>> DeleteSetAsync ([FromBody] string name, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete values from a specific set. Attempting to delete values that are not in the set will not result in an error
@@ -46,7 +46,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Set
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/tools.ozone.set.deleteValues")]
-        public abstract Task<Results<Ok, BadRequest>> DeleteValuesAsync (string name, List<string> values, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, BadRequest>> DeleteValuesAsync ([FromBody] string name, [FromBody] List<string> values, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a specific set and its values
@@ -59,7 +59,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Set
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.set.getValues")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>, BadRequest>> GetValuesAsync (string name, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Set.GetValuesOutput>, BadRequest>> GetValuesAsync ([FromQuery] string name, [FromQuery] int? limit = 100, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Query available sets
@@ -72,7 +72,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Set
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.set.querySets")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>, BadRequest>> QuerySetsAsync (int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>, BadRequest>> QuerySetsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] string? namePrefix = default, [FromQuery] string? sortBy = default, [FromQuery] string? sortDirection = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create or update set metadata

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class Caption : ATObject, ICBOREncodable<Caption>, IJsonEncodable<Caption>
+    public partial class Caption : ATObject, ICBOREncodable<Caption>, IJsonEncodable<Caption>, IParsable<Caption>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.Caption>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Caption FromCBORObject(CBORObject obj)
         {
             return new Caption(obj);
         }
 
+        /// <inheritdoc/>
+        public static Caption Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Caption>(s, (JsonTypeInfo<Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Caption result)
+        {
+            result = JsonSerializer.Deserialize<Caption>(s, (JsonTypeInfo<Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
     /// <summary>
     /// Record representing a text snippet.
     /// </summary>
-    public partial class Snippet : ATObject, ICBOREncodable<Snippet>, IJsonEncodable<Snippet>
+    public partial class Snippet : ATObject, ICBOREncodable<Snippet>, IJsonEncodable<Snippet>, IParsable<Snippet>
     {
 
         /// <summary>
@@ -101,19 +101,31 @@ namespace FishyFlip.Lexicon.Link.Pastesphere
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Link.Pastesphere.Snippet>(json, (JsonTypeInfo<FishyFlip.Lexicon.Link.Pastesphere.Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Snippet FromCBORObject(CBORObject obj)
         {
             return new Snippet(obj);
         }
 
+        /// <inheritdoc/>
+        public static Snippet Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Snippet>(s, (JsonTypeInfo<Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Snippet result)
+        {
+            result = JsonSerializer.Deserialize<Snippet>(s, (JsonTypeInfo<Snippet>)SourceGenerationContext.Default.LinkPastesphereSnippet);
+            return result != null;
+        }
     }
 }
 

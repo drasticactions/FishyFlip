@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Set
 {
-    public partial class QuerySetsOutput : ATObject, ICBOREncodable<QuerySetsOutput>, IJsonEncodable<QuerySetsOutput>
+    public partial class QuerySetsOutput : ATObject, ICBOREncodable<QuerySetsOutput>, IJsonEncodable<QuerySetsOutput>, IParsable<QuerySetsOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.QuerySetsOutput>)SourceGenerationContext.Default.ToolsOzoneSetQuerySetsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new QuerySetsOutput FromCBORObject(CBORObject obj)
         {
             return new QuerySetsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static QuerySetsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<QuerySetsOutput>(s, (JsonTypeInfo<QuerySetsOutput>)SourceGenerationContext.Default.ToolsOzoneSetQuerySetsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out QuerySetsOutput result)
+        {
+            result = JsonSerializer.Deserialize<QuerySetsOutput>(s, (JsonTypeInfo<QuerySetsOutput>)SourceGenerationContext.Default.ToolsOzoneSetQuerySetsOutput);
+            return result != null;
+        }
     }
 }
 

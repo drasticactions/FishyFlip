@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Social.Psky.Chat
 {
-    public partial class ModlistRef : ATObject, ICBOREncodable<ModlistRef>, IJsonEncodable<ModlistRef>
+    public partial class ModlistRef : ATObject, ICBOREncodable<ModlistRef>, IJsonEncodable<ModlistRef>, IParsable<ModlistRef>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef>)SourceGenerationContext.Default.SocialPskyChatModlistRef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModlistRef FromCBORObject(CBORObject obj)
         {
             return new ModlistRef(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModlistRef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModlistRef>(s, (JsonTypeInfo<ModlistRef>)SourceGenerationContext.Default.SocialPskyChatModlistRef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModlistRef result)
+        {
+            result = JsonSerializer.Deserialize<ModlistRef>(s, (JsonTypeInfo<ModlistRef>)SourceGenerationContext.Default.SocialPskyChatModlistRef);
+            return result != null;
+        }
     }
 }
 

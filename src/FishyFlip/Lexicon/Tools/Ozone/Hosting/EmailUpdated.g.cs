@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
 {
-    public partial class EmailUpdated : ATObject, ICBOREncodable<EmailUpdated>, IJsonEncodable<EmailUpdated>
+    public partial class EmailUpdated : ATObject, ICBOREncodable<EmailUpdated>, IJsonEncodable<EmailUpdated>, IParsable<EmailUpdated>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailUpdated>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingEmailUpdated)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new EmailUpdated FromCBORObject(CBORObject obj)
         {
             return new EmailUpdated(obj);
         }
 
+        /// <inheritdoc/>
+        public static EmailUpdated Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<EmailUpdated>(s, (JsonTypeInfo<EmailUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingEmailUpdated)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out EmailUpdated result)
+        {
+            result = JsonSerializer.Deserialize<EmailUpdated>(s, (JsonTypeInfo<EmailUpdated>)SourceGenerationContext.Default.ToolsOzoneHostingEmailUpdated);
+            return result != null;
+        }
     }
 }
 

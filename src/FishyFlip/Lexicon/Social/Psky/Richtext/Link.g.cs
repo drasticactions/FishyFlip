@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
     /// <summary>
     /// Facet feature for a URL. The text URL may have been simplified or truncated, but the facet reference should be a complete URL.
     /// </summary>
-    public partial class Link : ATObject, ICBOREncodable<Link>, IJsonEncodable<Link>
+    public partial class Link : ATObject, ICBOREncodable<Link>, IJsonEncodable<Link>, IParsable<Link>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Social.Psky.Richtext
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Richtext.Link>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Link>)SourceGenerationContext.Default.SocialPskyRichtextLink)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Link FromCBORObject(CBORObject obj)
         {
             return new Link(obj);
         }
 
+        /// <inheritdoc/>
+        public static Link Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Link>(s, (JsonTypeInfo<Link>)SourceGenerationContext.Default.SocialPskyRichtextLink)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Link result)
+        {
+            result = JsonSerializer.Deserialize<Link>(s, (JsonTypeInfo<Link>)SourceGenerationContext.Default.SocialPskyRichtextLink);
+            return result != null;
+        }
     }
 }
 

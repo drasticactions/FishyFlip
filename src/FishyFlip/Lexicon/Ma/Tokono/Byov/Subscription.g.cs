@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
     /// <summary>
     /// A channel subscription.
     /// </summary>
-    public partial class Subscription : ATObject, ICBOREncodable<Subscription>, IJsonEncodable<Subscription>
+    public partial class Subscription : ATObject, ICBOREncodable<Subscription>, IJsonEncodable<Subscription>, IParsable<Subscription>
     {
 
         /// <summary>
@@ -74,19 +74,31 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(json, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Subscription FromCBORObject(CBORObject obj)
         {
             return new Subscription(obj);
         }
 
+        /// <inheritdoc/>
+        public static Subscription Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Subscription>(s, (JsonTypeInfo<Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Subscription result)
+        {
+            result = JsonSerializer.Deserialize<Subscription>(s, (JsonTypeInfo<Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription);
+            return result != null;
+        }
     }
 }
 

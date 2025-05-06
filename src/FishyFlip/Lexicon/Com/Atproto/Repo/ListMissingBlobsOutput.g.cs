@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class ListMissingBlobsOutput : ATObject, ICBOREncodable<ListMissingBlobsOutput>, IJsonEncodable<ListMissingBlobsOutput>
+    public partial class ListMissingBlobsOutput : ATObject, ICBOREncodable<ListMissingBlobsOutput>, IJsonEncodable<ListMissingBlobsOutput>, IParsable<ListMissingBlobsOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListMissingBlobsOutput FromCBORObject(CBORObject obj)
         {
             return new ListMissingBlobsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListMissingBlobsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListMissingBlobsOutput>(s, (JsonTypeInfo<ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListMissingBlobsOutput result)
+        {
+            result = JsonSerializer.Deserialize<ListMissingBlobsOutput>(s, (JsonTypeInfo<ListMissingBlobsOutput>)SourceGenerationContext.Default.ComAtprotoRepoListMissingBlobsOutput);
+            return result != null;
+        }
     }
 }
 

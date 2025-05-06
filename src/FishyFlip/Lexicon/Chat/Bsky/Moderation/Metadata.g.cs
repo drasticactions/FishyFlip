@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
 {
-    public partial class Metadata : ATObject, ICBOREncodable<Metadata>, IJsonEncodable<Metadata>
+    public partial class Metadata : ATObject, ICBOREncodable<Metadata>, IJsonEncodable<Metadata>, IParsable<Metadata>
     {
 
         /// <summary>
@@ -93,19 +93,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.Metadata>)SourceGenerationContext.Default.ChatBskyModerationMetadata)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Metadata FromCBORObject(CBORObject obj)
         {
             return new Metadata(obj);
         }
 
+        /// <inheritdoc/>
+        public static Metadata Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Metadata>(s, (JsonTypeInfo<Metadata>)SourceGenerationContext.Default.ChatBskyModerationMetadata)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Metadata result)
+        {
+            result = JsonSerializer.Deserialize<Metadata>(s, (JsonTypeInfo<Metadata>)SourceGenerationContext.Default.ChatBskyModerationMetadata);
+            return result != null;
+        }
     }
 }
 

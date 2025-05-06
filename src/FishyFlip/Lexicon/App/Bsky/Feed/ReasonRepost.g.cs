@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class ReasonRepost : ATObject, ICBOREncodable<ReasonRepost>, IJsonEncodable<ReasonRepost>
+    public partial class ReasonRepost : ATObject, ICBOREncodable<ReasonRepost>, IJsonEncodable<ReasonRepost>, IParsable<ReasonRepost>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ReasonRepost>)SourceGenerationContext.Default.AppBskyFeedReasonRepost)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ReasonRepost FromCBORObject(CBORObject obj)
         {
             return new ReasonRepost(obj);
         }
 
+        /// <inheritdoc/>
+        public static ReasonRepost Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ReasonRepost>(s, (JsonTypeInfo<ReasonRepost>)SourceGenerationContext.Default.AppBskyFeedReasonRepost)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ReasonRepost result)
+        {
+            result = JsonSerializer.Deserialize<ReasonRepost>(s, (JsonTypeInfo<ReasonRepost>)SourceGenerationContext.Default.AppBskyFeedReasonRepost);
+            return result != null;
+        }
     }
 }
 

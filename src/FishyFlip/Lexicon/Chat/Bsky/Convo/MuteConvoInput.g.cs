@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class MuteConvoInput : ATObject, ICBOREncodable<MuteConvoInput>, IJsonEncodable<MuteConvoInput>
+    public partial class MuteConvoInput : ATObject, ICBOREncodable<MuteConvoInput>, IJsonEncodable<MuteConvoInput>, IParsable<MuteConvoInput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MuteConvoInput>)SourceGenerationContext.Default.ChatBskyConvoMuteConvoInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new MuteConvoInput FromCBORObject(CBORObject obj)
         {
             return new MuteConvoInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static MuteConvoInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<MuteConvoInput>(s, (JsonTypeInfo<MuteConvoInput>)SourceGenerationContext.Default.ChatBskyConvoMuteConvoInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out MuteConvoInput result)
+        {
+            result = JsonSerializer.Deserialize<MuteConvoInput>(s, (JsonTypeInfo<MuteConvoInput>)SourceGenerationContext.Default.ChatBskyConvoMuteConvoInput);
+            return result != null;
+        }
     }
 }
 

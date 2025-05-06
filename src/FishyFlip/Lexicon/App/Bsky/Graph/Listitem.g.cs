@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// Record representing an account's inclusion on a specific list. The AppView will ignore duplicate listitem records.
     /// </summary>
-    public partial class Listitem : ATObject, ICBOREncodable<Listitem>, IJsonEncodable<Listitem>
+    public partial class Listitem : ATObject, ICBOREncodable<Listitem>, IJsonEncodable<Listitem>, IParsable<Listitem>
     {
 
         /// <summary>
@@ -87,19 +87,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Listitem>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Listitem>)SourceGenerationContext.Default.AppBskyGraphListitem)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Listitem FromCBORObject(CBORObject obj)
         {
             return new Listitem(obj);
         }
 
+        /// <inheritdoc/>
+        public static Listitem Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Listitem>(s, (JsonTypeInfo<Listitem>)SourceGenerationContext.Default.AppBskyGraphListitem)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Listitem result)
+        {
+            result = JsonSerializer.Deserialize<Listitem>(s, (JsonTypeInfo<Listitem>)SourceGenerationContext.Default.AppBskyGraphListitem);
+            return result != null;
+        }
     }
 }
 

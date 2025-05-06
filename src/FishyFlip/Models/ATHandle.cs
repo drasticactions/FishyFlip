@@ -5,6 +5,8 @@
 #nullable enable annotations
 #nullable disable warnings
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace FishyFlip.Models;
 
 /// <summary>

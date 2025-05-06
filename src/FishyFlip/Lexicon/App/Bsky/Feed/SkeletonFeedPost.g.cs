@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class SkeletonFeedPost : ATObject, ICBOREncodable<SkeletonFeedPost>, IJsonEncodable<SkeletonFeedPost>
+    public partial class SkeletonFeedPost : ATObject, ICBOREncodable<SkeletonFeedPost>, IJsonEncodable<SkeletonFeedPost>, IParsable<SkeletonFeedPost>
     {
 
         /// <summary>
@@ -90,19 +90,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonFeedPost>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonFeedPost>)SourceGenerationContext.Default.AppBskyFeedSkeletonFeedPost)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SkeletonFeedPost FromCBORObject(CBORObject obj)
         {
             return new SkeletonFeedPost(obj);
         }
 
+        /// <inheritdoc/>
+        public static SkeletonFeedPost Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SkeletonFeedPost>(s, (JsonTypeInfo<SkeletonFeedPost>)SourceGenerationContext.Default.AppBskyFeedSkeletonFeedPost)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SkeletonFeedPost result)
+        {
+            result = JsonSerializer.Deserialize<SkeletonFeedPost>(s, (JsonTypeInfo<SkeletonFeedPost>)SourceGenerationContext.Default.AppBskyFeedSkeletonFeedPost);
+            return result != null;
+        }
     }
 }
 

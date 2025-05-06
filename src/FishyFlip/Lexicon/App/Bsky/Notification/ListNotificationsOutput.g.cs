@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class ListNotificationsOutput : ATObject, ICBOREncodable<ListNotificationsOutput>, IJsonEncodable<ListNotificationsOutput>
+    public partial class ListNotificationsOutput : ATObject, ICBOREncodable<ListNotificationsOutput>, IJsonEncodable<ListNotificationsOutput>, IParsable<ListNotificationsOutput>
     {
 
         /// <summary>
@@ -90,19 +90,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListNotificationsOutput FromCBORObject(CBORObject obj)
         {
             return new ListNotificationsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListNotificationsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListNotificationsOutput>(s, (JsonTypeInfo<ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListNotificationsOutput result)
+        {
+            result = JsonSerializer.Deserialize<ListNotificationsOutput>(s, (JsonTypeInfo<ListNotificationsOutput>)SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput);
+            return result != null;
+        }
     }
 }
 

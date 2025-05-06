@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class BlogEntry : ATObject, ICBOREncodable<BlogEntry>, IJsonEncodable<BlogEntry>
+    public partial class BlogEntry : ATObject, ICBOREncodable<BlogEntry>, IJsonEncodable<BlogEntry>, IParsable<BlogEntry>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlogEntry>)SourceGenerationContext.Default.ComWhtwndBlogBlogEntry)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new BlogEntry FromCBORObject(CBORObject obj)
         {
             return new BlogEntry(obj);
         }
 
+        /// <inheritdoc/>
+        public static BlogEntry Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<BlogEntry>(s, (JsonTypeInfo<BlogEntry>)SourceGenerationContext.Default.ComWhtwndBlogBlogEntry)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out BlogEntry result)
+        {
+            result = JsonSerializer.Deserialize<BlogEntry>(s, (JsonTypeInfo<BlogEntry>)SourceGenerationContext.Default.ComWhtwndBlogBlogEntry);
+            return result != null;
+        }
     }
 }
 

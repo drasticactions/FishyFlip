@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Verification
 {
-    public partial class GrantVerificationsOutput : ATObject, ICBOREncodable<GrantVerificationsOutput>, IJsonEncodable<GrantVerificationsOutput>
+    public partial class GrantVerificationsOutput : ATObject, ICBOREncodable<GrantVerificationsOutput>, IJsonEncodable<GrantVerificationsOutput>, IParsable<GrantVerificationsOutput>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput>)SourceGenerationContext.Default.ToolsOzoneVerificationGrantVerificationsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GrantVerificationsOutput FromCBORObject(CBORObject obj)
         {
             return new GrantVerificationsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GrantVerificationsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GrantVerificationsOutput>(s, (JsonTypeInfo<GrantVerificationsOutput>)SourceGenerationContext.Default.ToolsOzoneVerificationGrantVerificationsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GrantVerificationsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GrantVerificationsOutput>(s, (JsonTypeInfo<GrantVerificationsOutput>)SourceGenerationContext.Default.ToolsOzoneVerificationGrantVerificationsOutput);
+            return result != null;
+        }
     }
 }
 

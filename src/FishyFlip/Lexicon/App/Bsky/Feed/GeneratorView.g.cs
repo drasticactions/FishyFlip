@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GeneratorView : ATObject, ICBOREncodable<GeneratorView>, IJsonEncodable<GeneratorView>
+    public partial class GeneratorView : ATObject, ICBOREncodable<GeneratorView>, IJsonEncodable<GeneratorView>, IParsable<GeneratorView>
     {
 
         /// <summary>
@@ -200,19 +200,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GeneratorView FromCBORObject(CBORObject obj)
         {
             return new GeneratorView(obj);
         }
 
+        /// <inheritdoc/>
+        public static GeneratorView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GeneratorView>(s, (JsonTypeInfo<GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GeneratorView result)
+        {
+            result = JsonSerializer.Deserialize<GeneratorView>(s, (JsonTypeInfo<GeneratorView>)SourceGenerationContext.Default.AppBskyFeedGeneratorView);
+            return result != null;
+        }
     }
 }
 

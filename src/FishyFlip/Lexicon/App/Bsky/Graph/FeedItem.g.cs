@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class FeedItem : ATObject, ICBOREncodable<FeedItem>, IJsonEncodable<FeedItem>
+    public partial class FeedItem : ATObject, ICBOREncodable<FeedItem>, IJsonEncodable<FeedItem>, IParsable<FeedItem>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new FeedItem FromCBORObject(CBORObject obj)
         {
             return new FeedItem(obj);
         }
 
+        /// <inheritdoc/>
+        public static FeedItem Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<FeedItem>(s, (JsonTypeInfo<FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out FeedItem result)
+        {
+            result = JsonSerializer.Deserialize<FeedItem>(s, (JsonTypeInfo<FeedItem>)SourceGenerationContext.Default.AppBskyGraphFeedItem);
+            return result != null;
+        }
     }
 }
 

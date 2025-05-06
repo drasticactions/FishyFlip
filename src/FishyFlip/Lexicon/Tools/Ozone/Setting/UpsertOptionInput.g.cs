@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Setting
 {
-    public partial class UpsertOptionInput : ATObject, ICBOREncodable<UpsertOptionInput>, IJsonEncodable<UpsertOptionInput>
+    public partial class UpsertOptionInput : ATObject, ICBOREncodable<UpsertOptionInput>, IJsonEncodable<UpsertOptionInput>, IParsable<UpsertOptionInput>
     {
 
         /// <summary>
@@ -119,19 +119,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new UpsertOptionInput FromCBORObject(CBORObject obj)
         {
             return new UpsertOptionInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static UpsertOptionInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<UpsertOptionInput>(s, (JsonTypeInfo<UpsertOptionInput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out UpsertOptionInput result)
+        {
+            result = JsonSerializer.Deserialize<UpsertOptionInput>(s, (JsonTypeInfo<UpsertOptionInput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput);
+            return result != null;
+        }
     }
 }
 

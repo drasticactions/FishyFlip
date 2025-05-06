@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class UpdateHandleInput : ATObject, ICBOREncodable<UpdateHandleInput>, IJsonEncodable<UpdateHandleInput>
+    public partial class UpdateHandleInput : ATObject, ICBOREncodable<UpdateHandleInput>, IJsonEncodable<UpdateHandleInput>, IParsable<UpdateHandleInput>
     {
 
         /// <summary>
@@ -65,19 +65,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new UpdateHandleInput FromCBORObject(CBORObject obj)
         {
             return new UpdateHandleInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static UpdateHandleInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<UpdateHandleInput>(s, (JsonTypeInfo<UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out UpdateHandleInput result)
+        {
+            result = JsonSerializer.Deserialize<UpdateHandleInput>(s, (JsonTypeInfo<UpdateHandleInput>)SourceGenerationContext.Default.ComAtprotoIdentityUpdateHandleInput);
+            return result != null;
+        }
     }
 }
 

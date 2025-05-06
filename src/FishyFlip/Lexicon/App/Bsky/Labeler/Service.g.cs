@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
     /// <summary>
     /// A declaration of the existence of labeler service.
     /// </summary>
-    public partial class Service : ATObject, ICBOREncodable<Service>, IJsonEncodable<Service>
+    public partial class Service : ATObject, ICBOREncodable<Service>, IJsonEncodable<Service>, IParsable<Service>
     {
 
         /// <summary>
@@ -121,19 +121,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Labeler.Service>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.Service>)SourceGenerationContext.Default.AppBskyLabelerService)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Service FromCBORObject(CBORObject obj)
         {
             return new Service(obj);
         }
 
+        /// <inheritdoc/>
+        public static Service Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Service>(s, (JsonTypeInfo<Service>)SourceGenerationContext.Default.AppBskyLabelerService)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Service result)
+        {
+            result = JsonSerializer.Deserialize<Service>(s, (JsonTypeInfo<Service>)SourceGenerationContext.Default.AppBskyLabelerService);
+            return result != null;
+        }
     }
 }
 

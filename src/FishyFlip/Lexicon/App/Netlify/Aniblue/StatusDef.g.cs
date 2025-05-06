@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Netlify.Aniblue
 {
-    public partial class StatusDef : ATObject, ICBOREncodable<StatusDef>, IJsonEncodable<StatusDef>
+    public partial class StatusDef : ATObject, ICBOREncodable<StatusDef>, IJsonEncodable<StatusDef>, IParsable<StatusDef>
     {
 
         /// <summary>
@@ -117,19 +117,31 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new StatusDef FromCBORObject(CBORObject obj)
         {
             return new StatusDef(obj);
         }
 
+        /// <inheritdoc/>
+        public static StatusDef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<StatusDef>(s, (JsonTypeInfo<StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out StatusDef result)
+        {
+            result = JsonSerializer.Deserialize<StatusDef>(s, (JsonTypeInfo<StatusDef>)SourceGenerationContext.Default.AppNetlifyAniblueStatusDef);
+            return result != null;
+        }
     }
 }
 

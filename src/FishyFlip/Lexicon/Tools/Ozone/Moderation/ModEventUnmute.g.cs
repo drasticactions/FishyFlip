@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Unmute action on a subject
     /// </summary>
-    public partial class ModEventUnmute : ATObject, ICBOREncodable<ModEventUnmute>, IJsonEncodable<ModEventUnmute>
+    public partial class ModEventUnmute : ATObject, ICBOREncodable<ModEventUnmute>, IJsonEncodable<ModEventUnmute>, IParsable<ModEventUnmute>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmute>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmute)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventUnmute FromCBORObject(CBORObject obj)
         {
             return new ModEventUnmute(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventUnmute Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventUnmute>(s, (JsonTypeInfo<ModEventUnmute>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmute)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventUnmute result)
+        {
+            result = JsonSerializer.Deserialize<ModEventUnmute>(s, (JsonTypeInfo<ModEventUnmute>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmute);
+            return result != null;
+        }
     }
 }
 

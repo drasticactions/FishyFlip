@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class BlobMetadata : ATObject, ICBOREncodable<BlobMetadata>, IJsonEncodable<BlobMetadata>
+    public partial class BlobMetadata : ATObject, ICBOREncodable<BlobMetadata>, IJsonEncodable<BlobMetadata>, IParsable<BlobMetadata>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>)SourceGenerationContext.Default.ComWhtwndBlogBlobMetadata)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new BlobMetadata FromCBORObject(CBORObject obj)
         {
             return new BlobMetadata(obj);
         }
 
+        /// <inheritdoc/>
+        public static BlobMetadata Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<BlobMetadata>(s, (JsonTypeInfo<BlobMetadata>)SourceGenerationContext.Default.ComWhtwndBlogBlobMetadata)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out BlobMetadata result)
+        {
+            result = JsonSerializer.Deserialize<BlobMetadata>(s, (JsonTypeInfo<BlobMetadata>)SourceGenerationContext.Default.ComWhtwndBlogBlobMetadata);
+            return result != null;
+        }
     }
 }
 
