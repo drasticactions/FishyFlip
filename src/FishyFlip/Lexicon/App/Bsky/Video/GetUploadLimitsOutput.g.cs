@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Video
 {
-    public partial class GetUploadLimitsOutput : ATObject, ICBOREncodable<GetUploadLimitsOutput>, IJsonEncodable<GetUploadLimitsOutput>
+    public partial class GetUploadLimitsOutput : ATObject, ICBOREncodable<GetUploadLimitsOutput>, IJsonEncodable<GetUploadLimitsOutput>, IParsable<GetUploadLimitsOutput>
     {
 
         /// <summary>
@@ -99,19 +99,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetUploadLimitsOutput FromCBORObject(CBORObject obj)
         {
             return new GetUploadLimitsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetUploadLimitsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetUploadLimitsOutput>(s, (JsonTypeInfo<GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetUploadLimitsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetUploadLimitsOutput>(s, (JsonTypeInfo<GetUploadLimitsOutput>)SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput);
+            return result != null;
+        }
     }
 }
 

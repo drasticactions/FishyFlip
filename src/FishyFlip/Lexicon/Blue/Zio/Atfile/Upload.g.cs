@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
     /// <summary>
     /// A reference to an uploaded blob.
     /// </summary>
-    public partial class Upload : ATObject, ICBOREncodable<Upload>, IJsonEncodable<Upload>
+    public partial class Upload : ATObject, ICBOREncodable<Upload>, IJsonEncodable<Upload>, IParsable<Upload>
     {
 
         /// <summary>
@@ -122,19 +122,31 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Upload FromCBORObject(CBORObject obj)
         {
             return new Upload(obj);
         }
 
+        /// <inheritdoc/>
+        public static Upload Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Upload>(s, (JsonTypeInfo<Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Upload result)
+        {
+            result = JsonSerializer.Deserialize<Upload>(s, (JsonTypeInfo<Upload>)SourceGenerationContext.Default.BlueZioAtfileUpload);
+            return result != null;
+        }
     }
 
     public partial class Checksum

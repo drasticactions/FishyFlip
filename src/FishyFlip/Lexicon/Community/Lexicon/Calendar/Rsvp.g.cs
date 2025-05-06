@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
     /// <summary>
     /// An RSVP for an event.
     /// </summary>
-    public partial class Rsvp : ATObject, ICBOREncodable<Rsvp>, IJsonEncodable<Rsvp>
+    public partial class Rsvp : ATObject, ICBOREncodable<Rsvp>, IJsonEncodable<Rsvp>, IParsable<Rsvp>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Rsvp>)SourceGenerationContext.Default.CommunityLexiconCalendarRsvp)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Rsvp FromCBORObject(CBORObject obj)
         {
             return new Rsvp(obj);
         }
 
+        /// <inheritdoc/>
+        public static Rsvp Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Rsvp>(s, (JsonTypeInfo<Rsvp>)SourceGenerationContext.Default.CommunityLexiconCalendarRsvp)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Rsvp result)
+        {
+            result = JsonSerializer.Deserialize<Rsvp>(s, (JsonTypeInfo<Rsvp>)SourceGenerationContext.Default.CommunityLexiconCalendarRsvp);
+            return result != null;
+        }
     }
 }
 

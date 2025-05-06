@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetRelationshipsOutput : ATObject, ICBOREncodable<GetRelationshipsOutput>, IJsonEncodable<GetRelationshipsOutput>
+    public partial class GetRelationshipsOutput : ATObject, ICBOREncodable<GetRelationshipsOutput>, IJsonEncodable<GetRelationshipsOutput>, IParsable<GetRelationshipsOutput>
     {
 
         /// <summary>
@@ -80,19 +80,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>)SourceGenerationContext.Default.AppBskyGraphGetRelationshipsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetRelationshipsOutput FromCBORObject(CBORObject obj)
         {
             return new GetRelationshipsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetRelationshipsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetRelationshipsOutput>(s, (JsonTypeInfo<GetRelationshipsOutput>)SourceGenerationContext.Default.AppBskyGraphGetRelationshipsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetRelationshipsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetRelationshipsOutput>(s, (JsonTypeInfo<GetRelationshipsOutput>)SourceGenerationContext.Default.AppBskyGraphGetRelationshipsOutput);
+            return result != null;
+        }
     }
 }
 

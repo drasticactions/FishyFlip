@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// Record representing a list of accounts (actors). Scope includes both moderation-oriented lists and curration-oriented lists.
     /// </summary>
-    public partial class List : ATObject, ICBOREncodable<List>, IJsonEncodable<List>
+    public partial class List : ATObject, ICBOREncodable<List>, IJsonEncodable<List>, IParsable<List>
     {
 
         /// <summary>
@@ -135,19 +135,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.List>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.List>)SourceGenerationContext.Default.AppBskyGraphList)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new List FromCBORObject(CBORObject obj)
         {
             return new List(obj);
         }
 
+        /// <inheritdoc/>
+        public static List Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<List>(s, (JsonTypeInfo<List>)SourceGenerationContext.Default.AppBskyGraphList)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out List result)
+        {
+            result = JsonSerializer.Deserialize<List>(s, (JsonTypeInfo<List>)SourceGenerationContext.Default.AppBskyGraphList);
+            return result != null;
+        }
     }
 }
 

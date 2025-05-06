@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class ViewBlocked : ATObject, ICBOREncodable<ViewBlocked>, IJsonEncodable<ViewBlocked>
+    public partial class ViewBlocked : ATObject, ICBOREncodable<ViewBlocked>, IJsonEncodable<ViewBlocked>, IParsable<ViewBlocked>
     {
 
         /// <summary>
@@ -87,19 +87,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewBlocked>)SourceGenerationContext.Default.AppBskyEmbedViewBlocked)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ViewBlocked FromCBORObject(CBORObject obj)
         {
             return new ViewBlocked(obj);
         }
 
+        /// <inheritdoc/>
+        public static ViewBlocked Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ViewBlocked>(s, (JsonTypeInfo<ViewBlocked>)SourceGenerationContext.Default.AppBskyEmbedViewBlocked)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ViewBlocked result)
+        {
+            result = JsonSerializer.Deserialize<ViewBlocked>(s, (JsonTypeInfo<ViewBlocked>)SourceGenerationContext.Default.AppBskyEmbedViewBlocked);
+            return result != null;
+        }
     }
 }
 

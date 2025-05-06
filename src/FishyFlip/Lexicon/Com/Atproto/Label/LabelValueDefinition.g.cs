@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     /// <summary>
     /// Declares a label value and its expected interpretations and behaviors.
     /// </summary>
-    public partial class LabelValueDefinition : ATObject, ICBOREncodable<LabelValueDefinition>, IJsonEncodable<LabelValueDefinition>
+    public partial class LabelValueDefinition : ATObject, ICBOREncodable<LabelValueDefinition>, IJsonEncodable<LabelValueDefinition>, IParsable<LabelValueDefinition>
     {
 
         /// <summary>
@@ -146,19 +146,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new LabelValueDefinition FromCBORObject(CBORObject obj)
         {
             return new LabelValueDefinition(obj);
         }
 
+        /// <inheritdoc/>
+        public static LabelValueDefinition Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<LabelValueDefinition>(s, (JsonTypeInfo<LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out LabelValueDefinition result)
+        {
+            result = JsonSerializer.Deserialize<LabelValueDefinition>(s, (JsonTypeInfo<LabelValueDefinition>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinition);
+            return result != null;
+        }
     }
 }
 

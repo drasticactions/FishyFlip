@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class SearchAccountsOutput : ATObject, ICBOREncodable<SearchAccountsOutput>, IJsonEncodable<SearchAccountsOutput>
+    public partial class SearchAccountsOutput : ATObject, ICBOREncodable<SearchAccountsOutput>, IJsonEncodable<SearchAccountsOutput>, IParsable<SearchAccountsOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>)SourceGenerationContext.Default.ComAtprotoAdminSearchAccountsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SearchAccountsOutput FromCBORObject(CBORObject obj)
         {
             return new SearchAccountsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static SearchAccountsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SearchAccountsOutput>(s, (JsonTypeInfo<SearchAccountsOutput>)SourceGenerationContext.Default.ComAtprotoAdminSearchAccountsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SearchAccountsOutput result)
+        {
+            result = JsonSerializer.Deserialize<SearchAccountsOutput>(s, (JsonTypeInfo<SearchAccountsOutput>)SourceGenerationContext.Default.ComAtprotoAdminSearchAccountsOutput);
+            return result != null;
+        }
     }
 }
 

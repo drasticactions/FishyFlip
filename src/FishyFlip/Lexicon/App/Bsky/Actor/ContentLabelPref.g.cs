@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class ContentLabelPref : ATObject, ICBOREncodable<ContentLabelPref>, IJsonEncodable<ContentLabelPref>
+    public partial class ContentLabelPref : ATObject, ICBOREncodable<ContentLabelPref>, IJsonEncodable<ContentLabelPref>, IParsable<ContentLabelPref>
     {
 
         /// <summary>
@@ -95,19 +95,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ContentLabelPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ContentLabelPref>)SourceGenerationContext.Default.AppBskyActorContentLabelPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ContentLabelPref FromCBORObject(CBORObject obj)
         {
             return new ContentLabelPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static ContentLabelPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ContentLabelPref>(s, (JsonTypeInfo<ContentLabelPref>)SourceGenerationContext.Default.AppBskyActorContentLabelPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ContentLabelPref result)
+        {
+            result = JsonSerializer.Deserialize<ContentLabelPref>(s, (JsonTypeInfo<ContentLabelPref>)SourceGenerationContext.Default.AppBskyActorContentLabelPref);
+            return result != null;
+        }
     }
 }
 

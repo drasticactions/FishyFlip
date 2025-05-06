@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Record containing a Bluesky post.
     /// </summary>
-    public partial class Post : ATObject, ICBOREncodable<Post>, IJsonEncodable<Post>
+    public partial class Post : ATObject, ICBOREncodable<Post>, IJsonEncodable<Post>, IParsable<Post>
     {
 
         /// <summary>
@@ -155,19 +155,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Post>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Post>)SourceGenerationContext.Default.AppBskyFeedPost)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Post FromCBORObject(CBORObject obj)
         {
             return new Post(obj);
         }
 
+        /// <inheritdoc/>
+        public static Post Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Post>(s, (JsonTypeInfo<Post>)SourceGenerationContext.Default.AppBskyFeedPost)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Post result)
+        {
+            result = JsonSerializer.Deserialize<Post>(s, (JsonTypeInfo<Post>)SourceGenerationContext.Default.AppBskyFeedPost);
+            return result != null;
+        }
     }
 }
 

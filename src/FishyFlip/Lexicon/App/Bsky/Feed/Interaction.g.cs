@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class Interaction : ATObject, ICBOREncodable<Interaction>, IJsonEncodable<Interaction>
+    public partial class Interaction : ATObject, ICBOREncodable<Interaction>, IJsonEncodable<Interaction>, IParsable<Interaction>
     {
 
         /// <summary>
@@ -109,19 +109,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Interaction FromCBORObject(CBORObject obj)
         {
             return new Interaction(obj);
         }
 
+        /// <inheritdoc/>
+        public static Interaction Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Interaction>(s, (JsonTypeInfo<Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Interaction result)
+        {
+            result = JsonSerializer.Deserialize<Interaction>(s, (JsonTypeInfo<Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction);
+            return result != null;
+        }
     }
 }
 

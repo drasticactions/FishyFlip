@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetPostThreadOutput : ATObject, ICBOREncodable<GetPostThreadOutput>, IJsonEncodable<GetPostThreadOutput>
+    public partial class GetPostThreadOutput : ATObject, ICBOREncodable<GetPostThreadOutput>, IJsonEncodable<GetPostThreadOutput>, IParsable<GetPostThreadOutput>
     {
 
         /// <summary>
@@ -84,19 +84,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetPostThreadOutput FromCBORObject(CBORObject obj)
         {
             return new GetPostThreadOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetPostThreadOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetPostThreadOutput>(s, (JsonTypeInfo<GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetPostThreadOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetPostThreadOutput>(s, (JsonTypeInfo<GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput);
+            return result != null;
+        }
     }
 }
 

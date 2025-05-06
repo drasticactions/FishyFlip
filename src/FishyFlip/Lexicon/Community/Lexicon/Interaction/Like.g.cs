@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Interaction
     /// <summary>
     /// A 'like' interaction with another AT Protocol record.
     /// </summary>
-    public partial class Like : ATObject, ICBOREncodable<Like>, IJsonEncodable<Like>
+    public partial class Like : ATObject, ICBOREncodable<Like>, IJsonEncodable<Like>, IParsable<Like>
     {
 
         /// <summary>
@@ -77,19 +77,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Interaction
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Interaction.Like>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Interaction.Like>)SourceGenerationContext.Default.CommunityLexiconInteractionLike)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Like FromCBORObject(CBORObject obj)
         {
             return new Like(obj);
         }
 
+        /// <inheritdoc/>
+        public static Like Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Like>(s, (JsonTypeInfo<Like>)SourceGenerationContext.Default.CommunityLexiconInteractionLike)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Like result)
+        {
+            result = JsonSerializer.Deserialize<Like>(s, (JsonTypeInfo<Like>)SourceGenerationContext.Default.CommunityLexiconInteractionLike);
+            return result != null;
+        }
     }
 }
 

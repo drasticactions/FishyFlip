@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
     /// <summary>
     /// A declaration of a Bluesky chat account.
     /// </summary>
-    public partial class Declaration : ATObject, ICBOREncodable<Declaration>, IJsonEncodable<Declaration>
+    public partial class Declaration : ATObject, ICBOREncodable<Declaration>, IJsonEncodable<Declaration>, IParsable<Declaration>
     {
 
         /// <summary>
@@ -74,19 +74,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Declaration FromCBORObject(CBORObject obj)
         {
             return new Declaration(obj);
         }
 
+        /// <inheritdoc/>
+        public static Declaration Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Declaration>(s, (JsonTypeInfo<Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Declaration result)
+        {
+            result = JsonSerializer.Deserialize<Declaration>(s, (JsonTypeInfo<Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
     /// <summary>
     /// A reference to a locked file.
     /// </summary>
-    public partial class Lock : ATObject, ICBOREncodable<Lock>, IJsonEncodable<Lock>
+    public partial class Lock : ATObject, ICBOREncodable<Lock>, IJsonEncodable<Lock>, IParsable<Lock>
     {
 
         /// <summary>
@@ -65,19 +65,31 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Lock>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Lock>)SourceGenerationContext.Default.BlueZioAtfileLock)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Lock FromCBORObject(CBORObject obj)
         {
             return new Lock(obj);
         }
 
+        /// <inheritdoc/>
+        public static Lock Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Lock>(s, (JsonTypeInfo<Lock>)SourceGenerationContext.Default.BlueZioAtfileLock)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Lock result)
+        {
+            result = JsonSerializer.Deserialize<Lock>(s, (JsonTypeInfo<Lock>)SourceGenerationContext.Default.BlueZioAtfileLock);
+            return result != null;
+        }
     }
 }
 

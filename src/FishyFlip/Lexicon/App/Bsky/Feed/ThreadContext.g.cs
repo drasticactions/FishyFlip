@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Metadata about this post within the context of the thread it is in.
     /// </summary>
-    public partial class ThreadContext : ATObject, ICBOREncodable<ThreadContext>, IJsonEncodable<ThreadContext>
+    public partial class ThreadContext : ATObject, ICBOREncodable<ThreadContext>, IJsonEncodable<ThreadContext>, IParsable<ThreadContext>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext>)SourceGenerationContext.Default.AppBskyFeedThreadContext)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ThreadContext FromCBORObject(CBORObject obj)
         {
             return new ThreadContext(obj);
         }
 
+        /// <inheritdoc/>
+        public static ThreadContext Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ThreadContext>(s, (JsonTypeInfo<ThreadContext>)SourceGenerationContext.Default.AppBskyFeedThreadContext)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ThreadContext result)
+        {
+            result = JsonSerializer.Deserialize<ThreadContext>(s, (JsonTypeInfo<ThreadContext>)SourceGenerationContext.Default.AppBskyFeedThreadContext);
+            return result != null;
+        }
     }
 }
 

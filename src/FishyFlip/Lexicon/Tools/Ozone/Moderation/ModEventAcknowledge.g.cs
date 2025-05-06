@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class ModEventAcknowledge : ATObject, ICBOREncodable<ModEventAcknowledge>, IJsonEncodable<ModEventAcknowledge>
+    public partial class ModEventAcknowledge : ATObject, ICBOREncodable<ModEventAcknowledge>, IJsonEncodable<ModEventAcknowledge>, IParsable<ModEventAcknowledge>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventAcknowledge>)SourceGenerationContext.Default.ToolsOzoneModerationModEventAcknowledge)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventAcknowledge FromCBORObject(CBORObject obj)
         {
             return new ModEventAcknowledge(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventAcknowledge Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventAcknowledge>(s, (JsonTypeInfo<ModEventAcknowledge>)SourceGenerationContext.Default.ToolsOzoneModerationModEventAcknowledge)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventAcknowledge result)
+        {
+            result = JsonSerializer.Deserialize<ModEventAcknowledge>(s, (JsonTypeInfo<ModEventAcknowledge>)SourceGenerationContext.Default.ToolsOzoneModerationModEventAcknowledge);
+            return result != null;
+        }
     }
 }
 

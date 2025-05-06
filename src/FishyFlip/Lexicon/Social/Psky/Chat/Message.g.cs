@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
     /// <summary>
     /// A Picosky message containing at most 2048 graphemes.
     /// </summary>
-    public partial class Message : ATObject, ICBOREncodable<Message>, IJsonEncodable<Message>
+    public partial class Message : ATObject, ICBOREncodable<Message>, IJsonEncodable<Message>, IParsable<Message>
     {
 
         /// <summary>
@@ -98,19 +98,31 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Message>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Message FromCBORObject(CBORObject obj)
         {
             return new Message(obj);
         }
 
+        /// <inheritdoc/>
+        public static Message Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Message>(s, (JsonTypeInfo<Message>)SourceGenerationContext.Default.SocialPskyChatMessage)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Message result)
+        {
+            result = JsonSerializer.Deserialize<Message>(s, (JsonTypeInfo<Message>)SourceGenerationContext.Default.SocialPskyChatMessage);
+            return result != null;
+        }
     }
 }
 

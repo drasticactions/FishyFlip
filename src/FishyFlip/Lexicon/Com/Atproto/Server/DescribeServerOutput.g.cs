@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class DescribeServerOutput : ATObject, ICBOREncodable<DescribeServerOutput>, IJsonEncodable<DescribeServerOutput>
+    public partial class DescribeServerOutput : ATObject, ICBOREncodable<DescribeServerOutput>, IJsonEncodable<DescribeServerOutput>, IParsable<DescribeServerOutput>
     {
 
         /// <summary>
@@ -121,19 +121,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DescribeServerOutput>)SourceGenerationContext.Default.ComAtprotoServerDescribeServerOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DescribeServerOutput FromCBORObject(CBORObject obj)
         {
             return new DescribeServerOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static DescribeServerOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DescribeServerOutput>(s, (JsonTypeInfo<DescribeServerOutput>)SourceGenerationContext.Default.ComAtprotoServerDescribeServerOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DescribeServerOutput result)
+        {
+            result = JsonSerializer.Deserialize<DescribeServerOutput>(s, (JsonTypeInfo<DescribeServerOutput>)SourceGenerationContext.Default.ComAtprotoServerDescribeServerOutput);
+            return result != null;
+        }
     }
 }
 

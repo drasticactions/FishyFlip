@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
     /// <summary>
     /// A Picosky room belonging to the user.
     /// </summary>
-    public partial class Room : ATObject, ICBOREncodable<Room>, IJsonEncodable<Room>
+    public partial class Room : ATObject, ICBOREncodable<Room>, IJsonEncodable<Room>, IParsable<Room>
     {
 
         /// <summary>
@@ -119,19 +119,31 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Chat.Room>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Chat.Room>)SourceGenerationContext.Default.SocialPskyChatRoom)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Room FromCBORObject(CBORObject obj)
         {
             return new Room(obj);
         }
 
+        /// <inheritdoc/>
+        public static Room Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Room>(s, (JsonTypeInfo<Room>)SourceGenerationContext.Default.SocialPskyChatRoom)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Room result)
+        {
+            result = JsonSerializer.Deserialize<Room>(s, (JsonTypeInfo<Room>)SourceGenerationContext.Default.SocialPskyChatRoom);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class RefreshSessionOutput : ATObject, ICBOREncodable<RefreshSessionOutput>, IJsonEncodable<RefreshSessionOutput>
+    public partial class RefreshSessionOutput : ATObject, ICBOREncodable<RefreshSessionOutput>, IJsonEncodable<RefreshSessionOutput>, IParsable<RefreshSessionOutput>
     {
 
         /// <summary>
@@ -132,19 +132,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerRefreshSessionOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RefreshSessionOutput FromCBORObject(CBORObject obj)
         {
             return new RefreshSessionOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RefreshSessionOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RefreshSessionOutput>(s, (JsonTypeInfo<RefreshSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerRefreshSessionOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RefreshSessionOutput result)
+        {
+            result = JsonSerializer.Deserialize<RefreshSessionOutput>(s, (JsonTypeInfo<RefreshSessionOutput>)SourceGenerationContext.Default.ComAtprotoServerRefreshSessionOutput);
+            return result != null;
+        }
     }
 }
 

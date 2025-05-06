@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
     /// <summary>
     /// A custom emoji
     /// </summary>
-    public partial class Item : ATObject, ICBOREncodable<Item>, IJsonEncodable<Item>
+    public partial class Item : ATObject, ICBOREncodable<Item>, IJsonEncodable<Item>, IParsable<Item>
     {
 
         /// <summary>
@@ -142,19 +142,31 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.Item>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.Item>)SourceGenerationContext.Default.BlueMojiCollectionItem)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Item FromCBORObject(CBORObject obj)
         {
             return new Item(obj);
         }
 
+        /// <inheritdoc/>
+        public static Item Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Item>(s, (JsonTypeInfo<Item>)SourceGenerationContext.Default.BlueMojiCollectionItem)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Item result)
+        {
+            result = JsonSerializer.Deserialize<Item>(s, (JsonTypeInfo<Item>)SourceGenerationContext.Default.BlueMojiCollectionItem);
+            return result != null;
+        }
     }
 }
 

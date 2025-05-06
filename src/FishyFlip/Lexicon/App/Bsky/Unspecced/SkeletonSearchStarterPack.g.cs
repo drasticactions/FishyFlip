@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class SkeletonSearchStarterPack : ATObject, ICBOREncodable<SkeletonSearchStarterPack>, IJsonEncodable<SkeletonSearchStarterPack>
+    public partial class SkeletonSearchStarterPack : ATObject, ICBOREncodable<SkeletonSearchStarterPack>, IJsonEncodable<SkeletonSearchStarterPack>, IParsable<SkeletonSearchStarterPack>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchStarterPack>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchStarterPack)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SkeletonSearchStarterPack FromCBORObject(CBORObject obj)
         {
             return new SkeletonSearchStarterPack(obj);
         }
 
+        /// <inheritdoc/>
+        public static SkeletonSearchStarterPack Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SkeletonSearchStarterPack>(s, (JsonTypeInfo<SkeletonSearchStarterPack>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchStarterPack)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SkeletonSearchStarterPack result)
+        {
+            result = JsonSerializer.Deserialize<SkeletonSearchStarterPack>(s, (JsonTypeInfo<SkeletonSearchStarterPack>)SourceGenerationContext.Default.AppBskyUnspeccedSkeletonSearchStarterPack);
+            return result != null;
+        }
     }
 }
 

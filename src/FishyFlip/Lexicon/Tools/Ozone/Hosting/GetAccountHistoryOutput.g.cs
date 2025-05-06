@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
 {
-    public partial class GetAccountHistoryOutput : ATObject, ICBOREncodable<GetAccountHistoryOutput>, IJsonEncodable<GetAccountHistoryOutput>
+    public partial class GetAccountHistoryOutput : ATObject, ICBOREncodable<GetAccountHistoryOutput>, IJsonEncodable<GetAccountHistoryOutput>, IParsable<GetAccountHistoryOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput>)SourceGenerationContext.Default.ToolsOzoneHostingGetAccountHistoryOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetAccountHistoryOutput FromCBORObject(CBORObject obj)
         {
             return new GetAccountHistoryOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetAccountHistoryOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetAccountHistoryOutput>(s, (JsonTypeInfo<GetAccountHistoryOutput>)SourceGenerationContext.Default.ToolsOzoneHostingGetAccountHistoryOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetAccountHistoryOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetAccountHistoryOutput>(s, (JsonTypeInfo<GetAccountHistoryOutput>)SourceGenerationContext.Default.ToolsOzoneHostingGetAccountHistoryOutput);
+            return result != null;
+        }
     }
 }
 

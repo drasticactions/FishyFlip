@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// Represents the verification information about the user this object is attached to.
     /// </summary>
-    public partial class VerificationState : ATObject, ICBOREncodable<VerificationState>, IJsonEncodable<VerificationState>
+    public partial class VerificationState : ATObject, ICBOREncodable<VerificationState>, IJsonEncodable<VerificationState>, IParsable<VerificationState>
     {
 
         /// <summary>
@@ -107,19 +107,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.VerificationState>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.VerificationState>)SourceGenerationContext.Default.AppBskyActorVerificationState)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new VerificationState FromCBORObject(CBORObject obj)
         {
             return new VerificationState(obj);
         }
 
+        /// <inheritdoc/>
+        public static VerificationState Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<VerificationState>(s, (JsonTypeInfo<VerificationState>)SourceGenerationContext.Default.AppBskyActorVerificationState)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out VerificationState result)
+        {
+            result = JsonSerializer.Deserialize<VerificationState>(s, (JsonTypeInfo<VerificationState>)SourceGenerationContext.Default.AppBskyActorVerificationState);
+            return result != null;
+        }
     }
 }
 

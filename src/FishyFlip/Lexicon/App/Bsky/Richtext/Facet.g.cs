@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
     /// <summary>
     /// Annotation of a sub-string within rich text.
     /// </summary>
-    public partial class Facet : ATObject, ICBOREncodable<Facet>, IJsonEncodable<Facet>
+    public partial class Facet : ATObject, ICBOREncodable<Facet>, IJsonEncodable<Facet>, IParsable<Facet>
     {
 
         /// <summary>
@@ -88,19 +88,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Richtext
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Facet FromCBORObject(CBORObject obj)
         {
             return new Facet(obj);
         }
 
+        /// <inheritdoc/>
+        public static Facet Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Facet>(s, (JsonTypeInfo<Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Facet result)
+        {
+            result = JsonSerializer.Deserialize<Facet>(s, (JsonTypeInfo<Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet);
+            return result != null;
+        }
     }
 }
 

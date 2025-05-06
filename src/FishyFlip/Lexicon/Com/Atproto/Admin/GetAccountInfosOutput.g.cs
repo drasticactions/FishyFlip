@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class GetAccountInfosOutput : ATObject, ICBOREncodable<GetAccountInfosOutput>, IJsonEncodable<GetAccountInfosOutput>
+    public partial class GetAccountInfosOutput : ATObject, ICBOREncodable<GetAccountInfosOutput>, IJsonEncodable<GetAccountInfosOutput>, IParsable<GetAccountInfosOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetAccountInfosOutput FromCBORObject(CBORObject obj)
         {
             return new GetAccountInfosOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetAccountInfosOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetAccountInfosOutput>(s, (JsonTypeInfo<GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetAccountInfosOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetAccountInfosOutput>(s, (JsonTypeInfo<GetAccountInfosOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetAccountInfosOutput);
+            return result != null;
+        }
     }
 }
 

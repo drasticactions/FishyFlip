@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
     /// <summary>
     /// A declaration of a Picosky account profile.
     /// </summary>
-    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>
+    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>, IParsable<Profile>
     {
 
         /// <summary>
@@ -65,19 +65,31 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Actor.Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Profile FromCBORObject(CBORObject obj)
         {
             return new Profile(obj);
         }
 
+        /// <inheritdoc/>
+        public static Profile Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Profile>(s, (JsonTypeInfo<Profile>)SourceGenerationContext.Default.SocialPskyActorProfile)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Profile result)
+        {
+            result = JsonSerializer.Deserialize<Profile>(s, (JsonTypeInfo<Profile>)SourceGenerationContext.Default.SocialPskyActorProfile);
+            return result != null;
+        }
     }
 }
 

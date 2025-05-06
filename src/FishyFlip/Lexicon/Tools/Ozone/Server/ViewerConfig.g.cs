@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Server
 {
-    public partial class ViewerConfig : ATObject, ICBOREncodable<ViewerConfig>, IJsonEncodable<ViewerConfig>
+    public partial class ViewerConfig : ATObject, ICBOREncodable<ViewerConfig>, IJsonEncodable<ViewerConfig>, IParsable<ViewerConfig>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig>)SourceGenerationContext.Default.ToolsOzoneServerViewerConfig)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ViewerConfig FromCBORObject(CBORObject obj)
         {
             return new ViewerConfig(obj);
         }
 
+        /// <inheritdoc/>
+        public static ViewerConfig Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ViewerConfig>(s, (JsonTypeInfo<ViewerConfig>)SourceGenerationContext.Default.ToolsOzoneServerViewerConfig)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ViewerConfig result)
+        {
+            result = JsonSerializer.Deserialize<ViewerConfig>(s, (JsonTypeInfo<ViewerConfig>)SourceGenerationContext.Default.ToolsOzoneServerViewerConfig);
+            return result != null;
+        }
     }
 }
 

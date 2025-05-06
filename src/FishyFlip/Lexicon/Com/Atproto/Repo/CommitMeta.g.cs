@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class CommitMeta : ATObject, ICBOREncodable<CommitMeta>, IJsonEncodable<CommitMeta>
+    public partial class CommitMeta : ATObject, ICBOREncodable<CommitMeta>, IJsonEncodable<CommitMeta>, IParsable<CommitMeta>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CommitMeta FromCBORObject(CBORObject obj)
         {
             return new CommitMeta(obj);
         }
 
+        /// <inheritdoc/>
+        public static CommitMeta Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CommitMeta>(s, (JsonTypeInfo<CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CommitMeta result)
+        {
+            result = JsonSerializer.Deserialize<CommitMeta>(s, (JsonTypeInfo<CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta);
+            return result != null;
+        }
     }
 }
 

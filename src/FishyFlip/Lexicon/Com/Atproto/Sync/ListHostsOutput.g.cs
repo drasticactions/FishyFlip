@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class ListHostsOutput : ATObject, ICBOREncodable<ListHostsOutput>, IJsonEncodable<ListHostsOutput>
+    public partial class ListHostsOutput : ATObject, ICBOREncodable<ListHostsOutput>, IJsonEncodable<ListHostsOutput>, IParsable<ListHostsOutput>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>)SourceGenerationContext.Default.ComAtprotoSyncListHostsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListHostsOutput FromCBORObject(CBORObject obj)
         {
             return new ListHostsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListHostsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListHostsOutput>(s, (JsonTypeInfo<ListHostsOutput>)SourceGenerationContext.Default.ComAtprotoSyncListHostsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListHostsOutput result)
+        {
+            result = JsonSerializer.Deserialize<ListHostsOutput>(s, (JsonTypeInfo<ListHostsOutput>)SourceGenerationContext.Default.ComAtprotoSyncListHostsOutput);
+            return result != null;
+        }
     }
 }
 

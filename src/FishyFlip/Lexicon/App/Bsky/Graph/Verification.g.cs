@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     /// <summary>
     /// Record declaring a verification relationship between two accounts. Verifications are only considered valid by an app if issued by an account the app considers trusted.
     /// </summary>
-    public partial class Verification : ATObject, ICBOREncodable<Verification>, IJsonEncodable<Verification>
+    public partial class Verification : ATObject, ICBOREncodable<Verification>, IJsonEncodable<Verification>, IParsable<Verification>
     {
 
         /// <summary>
@@ -98,19 +98,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Verification>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Verification>)SourceGenerationContext.Default.AppBskyGraphVerification)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Verification FromCBORObject(CBORObject obj)
         {
             return new Verification(obj);
         }
 
+        /// <inheritdoc/>
+        public static Verification Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Verification>(s, (JsonTypeInfo<Verification>)SourceGenerationContext.Default.AppBskyGraphVerification)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Verification result)
+        {
+            result = JsonSerializer.Deserialize<Verification>(s, (JsonTypeInfo<Verification>)SourceGenerationContext.Default.AppBskyGraphVerification);
+            return result != null;
+        }
     }
 }
 

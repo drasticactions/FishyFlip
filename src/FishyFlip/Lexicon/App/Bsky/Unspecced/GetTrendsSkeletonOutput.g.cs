@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetTrendsSkeletonOutput : ATObject, ICBOREncodable<GetTrendsSkeletonOutput>, IJsonEncodable<GetTrendsSkeletonOutput>
+    public partial class GetTrendsSkeletonOutput : ATObject, ICBOREncodable<GetTrendsSkeletonOutput>, IJsonEncodable<GetTrendsSkeletonOutput>, IParsable<GetTrendsSkeletonOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendsSkeletonOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetTrendsSkeletonOutput FromCBORObject(CBORObject obj)
         {
             return new GetTrendsSkeletonOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetTrendsSkeletonOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetTrendsSkeletonOutput>(s, (JsonTypeInfo<GetTrendsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendsSkeletonOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetTrendsSkeletonOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetTrendsSkeletonOutput>(s, (JsonTypeInfo<GetTrendsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendsSkeletonOutput);
+            return result != null;
+        }
     }
 }
 

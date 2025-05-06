@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetPostsOutput : ATObject, ICBOREncodable<GetPostsOutput>, IJsonEncodable<GetPostsOutput>
+    public partial class GetPostsOutput : ATObject, ICBOREncodable<GetPostsOutput>, IJsonEncodable<GetPostsOutput>, IParsable<GetPostsOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetPostsOutput FromCBORObject(CBORObject obj)
         {
             return new GetPostsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetPostsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetPostsOutput>(s, (JsonTypeInfo<GetPostsOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetPostsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetPostsOutput>(s, (JsonTypeInfo<GetPostsOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostsOutput);
+            return result != null;
+        }
     }
 }
 

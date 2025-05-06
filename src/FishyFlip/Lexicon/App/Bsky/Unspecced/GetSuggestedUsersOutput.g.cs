@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetSuggestedUsersOutput : ATObject, ICBOREncodable<GetSuggestedUsersOutput>, IJsonEncodable<GetSuggestedUsersOutput>
+    public partial class GetSuggestedUsersOutput : ATObject, ICBOREncodable<GetSuggestedUsersOutput>, IJsonEncodable<GetSuggestedUsersOutput>, IParsable<GetSuggestedUsersOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSuggestedUsersOutput FromCBORObject(CBORObject obj)
         {
             return new GetSuggestedUsersOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSuggestedUsersOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSuggestedUsersOutput>(s, (JsonTypeInfo<GetSuggestedUsersOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSuggestedUsersOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSuggestedUsersOutput>(s, (JsonTypeInfo<GetSuggestedUsersOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersOutput);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Verification
 {
-    public partial class RevokeVerificationsOutput : ATObject, ICBOREncodable<RevokeVerificationsOutput>, IJsonEncodable<RevokeVerificationsOutput>
+    public partial class RevokeVerificationsOutput : ATObject, ICBOREncodable<RevokeVerificationsOutput>, IJsonEncodable<RevokeVerificationsOutput>, IParsable<RevokeVerificationsOutput>
     {
 
         /// <summary>
@@ -75,19 +75,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeVerificationsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RevokeVerificationsOutput FromCBORObject(CBORObject obj)
         {
             return new RevokeVerificationsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RevokeVerificationsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RevokeVerificationsOutput>(s, (JsonTypeInfo<RevokeVerificationsOutput>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeVerificationsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RevokeVerificationsOutput result)
+        {
+            result = JsonSerializer.Deserialize<RevokeVerificationsOutput>(s, (JsonTypeInfo<RevokeVerificationsOutput>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeVerificationsOutput);
+            return result != null;
+        }
     }
 }
 

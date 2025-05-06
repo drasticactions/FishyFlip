@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
 {
-    public partial class GetActorBookmarksOutput : ATObject, ICBOREncodable<GetActorBookmarksOutput>, IJsonEncodable<GetActorBookmarksOutput>
+    public partial class GetActorBookmarksOutput : ATObject, ICBOREncodable<GetActorBookmarksOutput>, IJsonEncodable<GetActorBookmarksOutput>, IParsable<GetActorBookmarksOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetActorBookmarksOutput FromCBORObject(CBORObject obj)
         {
             return new GetActorBookmarksOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetActorBookmarksOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetActorBookmarksOutput>(s, (JsonTypeInfo<GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetActorBookmarksOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetActorBookmarksOutput>(s, (JsonTypeInfo<GetActorBookmarksOutput>)SourceGenerationContext.Default.CommunityLexiconBookmarksGetActorBookmarksOutput);
+            return result != null;
+        }
     }
 }
 

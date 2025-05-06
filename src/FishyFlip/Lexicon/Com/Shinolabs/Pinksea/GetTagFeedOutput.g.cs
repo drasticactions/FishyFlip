@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 {
-    public partial class GetTagFeedOutput : ATObject, ICBOREncodable<GetTagFeedOutput>, IJsonEncodable<GetTagFeedOutput>
+    public partial class GetTagFeedOutput : ATObject, ICBOREncodable<GetTagFeedOutput>, IJsonEncodable<GetTagFeedOutput>, IParsable<GetTagFeedOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetTagFeedOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetTagFeedOutput FromCBORObject(CBORObject obj)
         {
             return new GetTagFeedOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetTagFeedOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetTagFeedOutput>(s, (JsonTypeInfo<GetTagFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetTagFeedOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetTagFeedOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetTagFeedOutput>(s, (JsonTypeInfo<GetTagFeedOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetTagFeedOutput);
+            return result != null;
+        }
     }
 }
 

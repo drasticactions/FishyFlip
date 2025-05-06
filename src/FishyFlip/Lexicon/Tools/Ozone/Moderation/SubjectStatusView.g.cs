@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class SubjectStatusView : ATObject, ICBOREncodable<SubjectStatusView>, IJsonEncodable<SubjectStatusView>
+    public partial class SubjectStatusView : ATObject, ICBOREncodable<SubjectStatusView>, IJsonEncodable<SubjectStatusView>, IParsable<SubjectStatusView>
     {
 
         /// <summary>
@@ -296,19 +296,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectStatusView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SubjectStatusView FromCBORObject(CBORObject obj)
         {
             return new SubjectStatusView(obj);
         }
 
+        /// <inheritdoc/>
+        public static SubjectStatusView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SubjectStatusView>(s, (JsonTypeInfo<SubjectStatusView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectStatusView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SubjectStatusView result)
+        {
+            result = JsonSerializer.Deserialize<SubjectStatusView>(s, (JsonTypeInfo<SubjectStatusView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectStatusView);
+            return result != null;
+        }
     }
 }
 

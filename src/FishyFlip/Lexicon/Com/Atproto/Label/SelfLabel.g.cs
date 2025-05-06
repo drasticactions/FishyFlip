@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     /// <summary>
     /// Metadata tag on an atproto record, published by the author within the record. Note that schemas should use #selfLabels, not #selfLabel.
     /// </summary>
-    public partial class SelfLabel : ATObject, ICBOREncodable<SelfLabel>, IJsonEncodable<SelfLabel>
+    public partial class SelfLabel : ATObject, ICBOREncodable<SelfLabel>, IJsonEncodable<SelfLabel>, IParsable<SelfLabel>
     {
 
         /// <summary>
@@ -67,19 +67,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.SelfLabel>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabel)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SelfLabel FromCBORObject(CBORObject obj)
         {
             return new SelfLabel(obj);
         }
 
+        /// <inheritdoc/>
+        public static SelfLabel Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SelfLabel>(s, (JsonTypeInfo<SelfLabel>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabel)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SelfLabel result)
+        {
+            result = JsonSerializer.Deserialize<SelfLabel>(s, (JsonTypeInfo<SelfLabel>)SourceGenerationContext.Default.ComAtprotoLabelSelfLabel);
+            return result != null;
+        }
     }
 }
 

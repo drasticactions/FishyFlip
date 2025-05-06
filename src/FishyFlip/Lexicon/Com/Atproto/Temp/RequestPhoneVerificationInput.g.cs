@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
-    public partial class RequestPhoneVerificationInput : ATObject, ICBOREncodable<RequestPhoneVerificationInput>, IJsonEncodable<RequestPhoneVerificationInput>
+    public partial class RequestPhoneVerificationInput : ATObject, ICBOREncodable<RequestPhoneVerificationInput>, IJsonEncodable<RequestPhoneVerificationInput>, IParsable<RequestPhoneVerificationInput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RequestPhoneVerificationInput FromCBORObject(CBORObject obj)
         {
             return new RequestPhoneVerificationInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RequestPhoneVerificationInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RequestPhoneVerificationInput>(s, (JsonTypeInfo<RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RequestPhoneVerificationInput result)
+        {
+            result = JsonSerializer.Deserialize<RequestPhoneVerificationInput>(s, (JsonTypeInfo<RequestPhoneVerificationInput>)SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class GetSubjectStatusOutput : ATObject, ICBOREncodable<GetSubjectStatusOutput>, IJsonEncodable<GetSubjectStatusOutput>
+    public partial class GetSubjectStatusOutput : ATObject, ICBOREncodable<GetSubjectStatusOutput>, IJsonEncodable<GetSubjectStatusOutput>, IParsable<GetSubjectStatusOutput>
     {
 
         /// <summary>
@@ -96,19 +96,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetSubjectStatusOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSubjectStatusOutput FromCBORObject(CBORObject obj)
         {
             return new GetSubjectStatusOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSubjectStatusOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSubjectStatusOutput>(s, (JsonTypeInfo<GetSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetSubjectStatusOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSubjectStatusOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSubjectStatusOutput>(s, (JsonTypeInfo<GetSubjectStatusOutput>)SourceGenerationContext.Default.ComAtprotoAdminGetSubjectStatusOutput);
+            return result != null;
+        }
     }
 }
 

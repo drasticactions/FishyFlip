@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetTaggedSuggestionsOutput : ATObject, ICBOREncodable<GetTaggedSuggestionsOutput>, IJsonEncodable<GetTaggedSuggestionsOutput>
+    public partial class GetTaggedSuggestionsOutput : ATObject, ICBOREncodable<GetTaggedSuggestionsOutput>, IJsonEncodable<GetTaggedSuggestionsOutput>, IParsable<GetTaggedSuggestionsOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetTaggedSuggestionsOutput FromCBORObject(CBORObject obj)
         {
             return new GetTaggedSuggestionsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetTaggedSuggestionsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetTaggedSuggestionsOutput>(s, (JsonTypeInfo<GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetTaggedSuggestionsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetTaggedSuggestionsOutput>(s, (JsonTypeInfo<GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput);
+            return result != null;
+        }
     }
 }
 

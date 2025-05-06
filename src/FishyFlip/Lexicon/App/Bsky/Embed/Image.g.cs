@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class Image : ATObject, ICBOREncodable<Image>, IJsonEncodable<Image>
+    public partial class Image : ATObject, ICBOREncodable<Image>, IJsonEncodable<Image>, IParsable<Image>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.Image>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Image>)SourceGenerationContext.Default.AppBskyEmbedImage)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Image FromCBORObject(CBORObject obj)
         {
             return new Image(obj);
         }
 
+        /// <inheritdoc/>
+        public static Image Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Image>(s, (JsonTypeInfo<Image>)SourceGenerationContext.Default.AppBskyEmbedImage)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Image result)
+        {
+            result = JsonSerializer.Deserialize<Image>(s, (JsonTypeInfo<Image>)SourceGenerationContext.Default.AppBskyEmbedImage);
+            return result != null;
+        }
     }
 }
 

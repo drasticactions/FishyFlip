@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class LabelersPref : ATObject, ICBOREncodable<LabelersPref>, IJsonEncodable<LabelersPref>
+    public partial class LabelersPref : ATObject, ICBOREncodable<LabelersPref>, IJsonEncodable<LabelersPref>, IParsable<LabelersPref>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new LabelersPref FromCBORObject(CBORObject obj)
         {
             return new LabelersPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static LabelersPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<LabelersPref>(s, (JsonTypeInfo<LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out LabelersPref result)
+        {
+            result = JsonSerializer.Deserialize<LabelersPref>(s, (JsonTypeInfo<LabelersPref>)SourceGenerationContext.Default.AppBskyActorLabelersPref);
+            return result != null;
+        }
     }
 }
 

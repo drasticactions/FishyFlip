@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// A grab bag of state that's specific to the bsky.app program. Third-party apps shouldn't use this.
     /// </summary>
-    public partial class BskyAppStatePref : ATObject, ICBOREncodable<BskyAppStatePref>, IJsonEncodable<BskyAppStatePref>
+    public partial class BskyAppStatePref : ATObject, ICBOREncodable<BskyAppStatePref>, IJsonEncodable<BskyAppStatePref>, IParsable<BskyAppStatePref>
     {
 
         /// <summary>
@@ -88,19 +88,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new BskyAppStatePref FromCBORObject(CBORObject obj)
         {
             return new BskyAppStatePref(obj);
         }
 
+        /// <inheritdoc/>
+        public static BskyAppStatePref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<BskyAppStatePref>(s, (JsonTypeInfo<BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out BskyAppStatePref result)
+        {
+            result = JsonSerializer.Deserialize<BskyAppStatePref>(s, (JsonTypeInfo<BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Record defining interaction rules for a post. The record key (rkey) of the postgate record must match the record key of the post, and that record must be in the same repository.
     /// </summary>
-    public partial class Postgate : ATObject, ICBOREncodable<Postgate>, IJsonEncodable<Postgate>
+    public partial class Postgate : ATObject, ICBOREncodable<Postgate>, IJsonEncodable<Postgate>, IParsable<Postgate>
     {
 
         /// <summary>
@@ -101,19 +101,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Postgate FromCBORObject(CBORObject obj)
         {
             return new Postgate(obj);
         }
 
+        /// <inheritdoc/>
+        public static Postgate Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Postgate>(s, (JsonTypeInfo<Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Postgate result)
+        {
+            result = JsonSerializer.Deserialize<Postgate>(s, (JsonTypeInfo<Postgate>)SourceGenerationContext.Default.AppBskyFeedPostgate);
+            return result != null;
+        }
     }
 }
 

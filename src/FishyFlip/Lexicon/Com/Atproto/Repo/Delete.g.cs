@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
     /// <summary>
     /// Operation which deletes an existing record.
     /// </summary>
-    public partial class Delete : ATObject, ICBOREncodable<Delete>, IJsonEncodable<Delete>
+    public partial class Delete : ATObject, ICBOREncodable<Delete>, IJsonEncodable<Delete>, IParsable<Delete>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Delete FromCBORObject(CBORObject obj)
         {
             return new Delete(obj);
         }
 
+        /// <inheritdoc/>
+        public static Delete Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Delete>(s, (JsonTypeInfo<Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Delete result)
+        {
+            result = JsonSerializer.Deserialize<Delete>(s, (JsonTypeInfo<Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete);
+            return result != null;
+        }
     }
 }
 

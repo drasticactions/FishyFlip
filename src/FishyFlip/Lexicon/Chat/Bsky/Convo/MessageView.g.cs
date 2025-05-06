@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class MessageView : ATObject, ICBOREncodable<MessageView>, IJsonEncodable<MessageView>
+    public partial class MessageView : ATObject, ICBOREncodable<MessageView>, IJsonEncodable<MessageView>, IParsable<MessageView>
     {
 
         /// <summary>
@@ -140,19 +140,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.MessageView>)SourceGenerationContext.Default.ChatBskyConvoMessageView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new MessageView FromCBORObject(CBORObject obj)
         {
             return new MessageView(obj);
         }
 
+        /// <inheritdoc/>
+        public static MessageView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<MessageView>(s, (JsonTypeInfo<MessageView>)SourceGenerationContext.Default.ChatBskyConvoMessageView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out MessageView result)
+        {
+            result = JsonSerializer.Deserialize<MessageView>(s, (JsonTypeInfo<MessageView>)SourceGenerationContext.Default.ChatBskyConvoMessageView);
+            return result != null;
+        }
     }
 }
 

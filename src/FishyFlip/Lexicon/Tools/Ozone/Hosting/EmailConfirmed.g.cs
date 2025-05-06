@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
 {
-    public partial class EmailConfirmed : ATObject, ICBOREncodable<EmailConfirmed>, IJsonEncodable<EmailConfirmed>
+    public partial class EmailConfirmed : ATObject, ICBOREncodable<EmailConfirmed>, IJsonEncodable<EmailConfirmed>, IParsable<EmailConfirmed>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailConfirmed>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailConfirmed>)SourceGenerationContext.Default.ToolsOzoneHostingEmailConfirmed)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new EmailConfirmed FromCBORObject(CBORObject obj)
         {
             return new EmailConfirmed(obj);
         }
 
+        /// <inheritdoc/>
+        public static EmailConfirmed Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<EmailConfirmed>(s, (JsonTypeInfo<EmailConfirmed>)SourceGenerationContext.Default.ToolsOzoneHostingEmailConfirmed)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out EmailConfirmed result)
+        {
+            result = JsonSerializer.Deserialize<EmailConfirmed>(s, (JsonTypeInfo<EmailConfirmed>)SourceGenerationContext.Default.ToolsOzoneHostingEmailConfirmed);
+            return result != null;
+        }
     }
 }
 

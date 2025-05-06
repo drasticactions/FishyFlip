@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Record defining interaction gating rules for a thread (aka, reply controls). The record key (rkey) of the threadgate record must match the record key of the thread's root post, and that record must be in the same repository.
     /// </summary>
-    public partial class Threadgate : ATObject, ICBOREncodable<Threadgate>, IJsonEncodable<Threadgate>
+    public partial class Threadgate : ATObject, ICBOREncodable<Threadgate>, IJsonEncodable<Threadgate>, IParsable<Threadgate>
     {
 
         /// <summary>
@@ -107,19 +107,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Threadgate FromCBORObject(CBORObject obj)
         {
             return new Threadgate(obj);
         }
 
+        /// <inheritdoc/>
+        public static Threadgate Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Threadgate>(s, (JsonTypeInfo<Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Threadgate result)
+        {
+            result = JsonSerializer.Deserialize<Threadgate>(s, (JsonTypeInfo<Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate);
+            return result != null;
+        }
     }
 }
 

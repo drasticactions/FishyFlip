@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     /// <summary>
     /// Unmute incoming reports from an account
     /// </summary>
-    public partial class ModEventUnmuteReporter : ATObject, ICBOREncodable<ModEventUnmuteReporter>, IJsonEncodable<ModEventUnmuteReporter>
+    public partial class ModEventUnmuteReporter : ATObject, ICBOREncodable<ModEventUnmuteReporter>, IJsonEncodable<ModEventUnmuteReporter>, IParsable<ModEventUnmuteReporter>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventUnmuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmuteReporter)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventUnmuteReporter FromCBORObject(CBORObject obj)
         {
             return new ModEventUnmuteReporter(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventUnmuteReporter Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventUnmuteReporter>(s, (JsonTypeInfo<ModEventUnmuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmuteReporter)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventUnmuteReporter result)
+        {
+            result = JsonSerializer.Deserialize<ModEventUnmuteReporter>(s, (JsonTypeInfo<ModEventUnmuteReporter>)SourceGenerationContext.Default.ToolsOzoneModerationModEventUnmuteReporter);
+            return result != null;
+        }
     }
 }
 

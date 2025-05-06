@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class HiddenPostsPref : ATObject, ICBOREncodable<HiddenPostsPref>, IJsonEncodable<HiddenPostsPref>
+    public partial class HiddenPostsPref : ATObject, ICBOREncodable<HiddenPostsPref>, IJsonEncodable<HiddenPostsPref>, IParsable<HiddenPostsPref>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new HiddenPostsPref FromCBORObject(CBORObject obj)
         {
             return new HiddenPostsPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static HiddenPostsPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<HiddenPostsPref>(s, (JsonTypeInfo<HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out HiddenPostsPref result)
+        {
+            result = JsonSerializer.Deserialize<HiddenPostsPref>(s, (JsonTypeInfo<HiddenPostsPref>)SourceGenerationContext.Default.AppBskyActorHiddenPostsPref);
+            return result != null;
+        }
     }
 }
 

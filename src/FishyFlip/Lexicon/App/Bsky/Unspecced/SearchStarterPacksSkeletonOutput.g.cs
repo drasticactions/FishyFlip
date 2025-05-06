@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class SearchStarterPacksSkeletonOutput : ATObject, ICBOREncodable<SearchStarterPacksSkeletonOutput>, IJsonEncodable<SearchStarterPacksSkeletonOutput>
+    public partial class SearchStarterPacksSkeletonOutput : ATObject, ICBOREncodable<SearchStarterPacksSkeletonOutput>, IJsonEncodable<SearchStarterPacksSkeletonOutput>, IParsable<SearchStarterPacksSkeletonOutput>
     {
 
         /// <summary>
@@ -82,19 +82,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchStarterPacksSkeletonOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SearchStarterPacksSkeletonOutput FromCBORObject(CBORObject obj)
         {
             return new SearchStarterPacksSkeletonOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static SearchStarterPacksSkeletonOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SearchStarterPacksSkeletonOutput>(s, (JsonTypeInfo<SearchStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchStarterPacksSkeletonOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SearchStarterPacksSkeletonOutput result)
+        {
+            result = JsonSerializer.Deserialize<SearchStarterPacksSkeletonOutput>(s, (JsonTypeInfo<SearchStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedSearchStarterPacksSkeletonOutput);
+            return result != null;
+        }
     }
 }
 

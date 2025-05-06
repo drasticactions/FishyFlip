@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class GetServiceAuthOutput : ATObject, ICBOREncodable<GetServiceAuthOutput>, IJsonEncodable<GetServiceAuthOutput>
+    public partial class GetServiceAuthOutput : ATObject, ICBOREncodable<GetServiceAuthOutput>, IJsonEncodable<GetServiceAuthOutput>, IParsable<GetServiceAuthOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.GetServiceAuthOutput>)SourceGenerationContext.Default.ComAtprotoServerGetServiceAuthOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetServiceAuthOutput FromCBORObject(CBORObject obj)
         {
             return new GetServiceAuthOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetServiceAuthOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetServiceAuthOutput>(s, (JsonTypeInfo<GetServiceAuthOutput>)SourceGenerationContext.Default.ComAtprotoServerGetServiceAuthOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetServiceAuthOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetServiceAuthOutput>(s, (JsonTypeInfo<GetServiceAuthOutput>)SourceGenerationContext.Default.ComAtprotoServerGetServiceAuthOutput);
+            return result != null;
+        }
     }
 }
 

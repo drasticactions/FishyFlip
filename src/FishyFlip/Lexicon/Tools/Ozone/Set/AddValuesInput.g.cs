@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Set
 {
-    public partial class AddValuesInput : ATObject, ICBOREncodable<AddValuesInput>, IJsonEncodable<AddValuesInput>
+    public partial class AddValuesInput : ATObject, ICBOREncodable<AddValuesInput>, IJsonEncodable<AddValuesInput>, IParsable<AddValuesInput>
     {
 
         /// <summary>
@@ -75,19 +75,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new AddValuesInput FromCBORObject(CBORObject obj)
         {
             return new AddValuesInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static AddValuesInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<AddValuesInput>(s, (JsonTypeInfo<AddValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out AddValuesInput result)
+        {
+            result = JsonSerializer.Deserialize<AddValuesInput>(s, (JsonTypeInfo<AddValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput);
+            return result != null;
+        }
     }
 }
 

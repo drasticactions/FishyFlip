@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class StrongRef : ATObject, ICBOREncodable<StrongRef>, IJsonEncodable<StrongRef>
+    public partial class StrongRef : ATObject, ICBOREncodable<StrongRef>, IJsonEncodable<StrongRef>, IParsable<StrongRef>
     {
 
         /// <summary>
@@ -74,19 +74,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef>)SourceGenerationContext.Default.ComAtprotoRepoStrongRef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new StrongRef FromCBORObject(CBORObject obj)
         {
             return new StrongRef(obj);
         }
 
+        /// <inheritdoc/>
+        public static StrongRef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<StrongRef>(s, (JsonTypeInfo<StrongRef>)SourceGenerationContext.Default.ComAtprotoRepoStrongRef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out StrongRef result)
+        {
+            result = JsonSerializer.Deserialize<StrongRef>(s, (JsonTypeInfo<StrongRef>)SourceGenerationContext.Default.ComAtprotoRepoStrongRef);
+            return result != null;
+        }
     }
 }
 

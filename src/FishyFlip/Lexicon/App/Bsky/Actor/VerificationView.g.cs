@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// An individual verification for an associated subject.
     /// </summary>
-    public partial class VerificationView : ATObject, ICBOREncodable<VerificationView>, IJsonEncodable<VerificationView>
+    public partial class VerificationView : ATObject, ICBOREncodable<VerificationView>, IJsonEncodable<VerificationView>, IParsable<VerificationView>
     {
 
         /// <summary>
@@ -102,19 +102,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.VerificationView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.VerificationView>)SourceGenerationContext.Default.AppBskyActorVerificationView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new VerificationView FromCBORObject(CBORObject obj)
         {
             return new VerificationView(obj);
         }
 
+        /// <inheritdoc/>
+        public static VerificationView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<VerificationView>(s, (JsonTypeInfo<VerificationView>)SourceGenerationContext.Default.AppBskyActorVerificationView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out VerificationView result)
+        {
+            result = JsonSerializer.Deserialize<VerificationView>(s, (JsonTypeInfo<VerificationView>)SourceGenerationContext.Default.AppBskyActorVerificationView);
+            return result != null;
+        }
     }
 }
 

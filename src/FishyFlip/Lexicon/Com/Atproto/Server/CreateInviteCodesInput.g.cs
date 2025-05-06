@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class CreateInviteCodesInput : ATObject, ICBOREncodable<CreateInviteCodesInput>, IJsonEncodable<CreateInviteCodesInput>
+    public partial class CreateInviteCodesInput : ATObject, ICBOREncodable<CreateInviteCodesInput>, IJsonEncodable<CreateInviteCodesInput>, IParsable<CreateInviteCodesInput>
     {
 
         /// <summary>
@@ -82,19 +82,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodesInput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodesInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CreateInviteCodesInput FromCBORObject(CBORObject obj)
         {
             return new CreateInviteCodesInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static CreateInviteCodesInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CreateInviteCodesInput>(s, (JsonTypeInfo<CreateInviteCodesInput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodesInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CreateInviteCodesInput result)
+        {
+            result = JsonSerializer.Deserialize<CreateInviteCodesInput>(s, (JsonTypeInfo<CreateInviteCodesInput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodesInput);
+            return result != null;
+        }
     }
 }
 

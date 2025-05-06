@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class DescribeFeedGeneratorOutput : ATObject, ICBOREncodable<DescribeFeedGeneratorOutput>, IJsonEncodable<DescribeFeedGeneratorOutput>
+    public partial class DescribeFeedGeneratorOutput : ATObject, ICBOREncodable<DescribeFeedGeneratorOutput>, IJsonEncodable<DescribeFeedGeneratorOutput>, IParsable<DescribeFeedGeneratorOutput>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DescribeFeedGeneratorOutput FromCBORObject(CBORObject obj)
         {
             return new DescribeFeedGeneratorOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static DescribeFeedGeneratorOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DescribeFeedGeneratorOutput>(s, (JsonTypeInfo<DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DescribeFeedGeneratorOutput result)
+        {
+            result = JsonSerializer.Deserialize<DescribeFeedGeneratorOutput>(s, (JsonTypeInfo<DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class PutPreferencesInput : ATObject, ICBOREncodable<PutPreferencesInput>, IJsonEncodable<PutPreferencesInput>
+    public partial class PutPreferencesInput : ATObject, ICBOREncodable<PutPreferencesInput>, IJsonEncodable<PutPreferencesInput>, IParsable<PutPreferencesInput>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.PutPreferencesInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PutPreferencesInput>)SourceGenerationContext.Default.AppBskyActorPutPreferencesInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new PutPreferencesInput FromCBORObject(CBORObject obj)
         {
             return new PutPreferencesInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static PutPreferencesInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<PutPreferencesInput>(s, (JsonTypeInfo<PutPreferencesInput>)SourceGenerationContext.Default.AppBskyActorPutPreferencesInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out PutPreferencesInput result)
+        {
+            result = JsonSerializer.Deserialize<PutPreferencesInput>(s, (JsonTypeInfo<PutPreferencesInput>)SourceGenerationContext.Default.AppBskyActorPutPreferencesInput);
+            return result != null;
+        }
     }
 }
 

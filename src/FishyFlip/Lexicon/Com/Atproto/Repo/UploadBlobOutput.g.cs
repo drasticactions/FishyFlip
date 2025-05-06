@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Repo
 {
-    public partial class UploadBlobOutput : ATObject, ICBOREncodable<UploadBlobOutput>, IJsonEncodable<UploadBlobOutput>
+    public partial class UploadBlobOutput : ATObject, ICBOREncodable<UploadBlobOutput>, IJsonEncodable<UploadBlobOutput>, IParsable<UploadBlobOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput>)SourceGenerationContext.Default.ComAtprotoRepoUploadBlobOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new UploadBlobOutput FromCBORObject(CBORObject obj)
         {
             return new UploadBlobOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static UploadBlobOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<UploadBlobOutput>(s, (JsonTypeInfo<UploadBlobOutput>)SourceGenerationContext.Default.ComAtprotoRepoUploadBlobOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out UploadBlobOutput result)
+        {
+            result = JsonSerializer.Deserialize<UploadBlobOutput>(s, (JsonTypeInfo<UploadBlobOutput>)SourceGenerationContext.Default.ComAtprotoRepoUploadBlobOutput);
+            return result != null;
+        }
     }
 }
 

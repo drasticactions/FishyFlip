@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetSuggestedFollowsByActorOutput : ATObject, ICBOREncodable<GetSuggestedFollowsByActorOutput>, IJsonEncodable<GetSuggestedFollowsByActorOutput>
+    public partial class GetSuggestedFollowsByActorOutput : ATObject, ICBOREncodable<GetSuggestedFollowsByActorOutput>, IJsonEncodable<GetSuggestedFollowsByActorOutput>, IParsable<GetSuggestedFollowsByActorOutput>
     {
 
         /// <summary>
@@ -83,19 +83,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSuggestedFollowsByActorOutput FromCBORObject(CBORObject obj)
         {
             return new GetSuggestedFollowsByActorOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSuggestedFollowsByActorOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSuggestedFollowsByActorOutput>(s, (JsonTypeInfo<GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSuggestedFollowsByActorOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSuggestedFollowsByActorOutput>(s, (JsonTypeInfo<GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput);
+            return result != null;
+        }
     }
 }
 

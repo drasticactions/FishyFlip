@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class Contact : ATObject, ICBOREncodable<Contact>, IJsonEncodable<Contact>
+    public partial class Contact : ATObject, ICBOREncodable<Contact>, IJsonEncodable<Contact>, IParsable<Contact>
     {
 
         /// <summary>
@@ -62,19 +62,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.Contact>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Contact FromCBORObject(CBORObject obj)
         {
             return new Contact(obj);
         }
 
+        /// <inheritdoc/>
+        public static Contact Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Contact>(s, (JsonTypeInfo<Contact>)SourceGenerationContext.Default.ComAtprotoServerContact)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Contact result)
+        {
+            result = JsonSerializer.Deserialize<Contact>(s, (JsonTypeInfo<Contact>)SourceGenerationContext.Default.ComAtprotoServerContact);
+            return result != null;
+        }
     }
 }
 

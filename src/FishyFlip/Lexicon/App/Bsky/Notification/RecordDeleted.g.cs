@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class RecordDeleted : ATObject, ICBOREncodable<RecordDeleted>, IJsonEncodable<RecordDeleted>
+    public partial class RecordDeleted : ATObject, ICBOREncodable<RecordDeleted>, IJsonEncodable<RecordDeleted>, IParsable<RecordDeleted>
     {
 
         /// <summary>
@@ -44,19 +44,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.RecordDeleted>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RecordDeleted>)SourceGenerationContext.Default.AppBskyNotificationRecordDeleted)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RecordDeleted FromCBORObject(CBORObject obj)
         {
             return new RecordDeleted(obj);
         }
 
+        /// <inheritdoc/>
+        public static RecordDeleted Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RecordDeleted>(s, (JsonTypeInfo<RecordDeleted>)SourceGenerationContext.Default.AppBskyNotificationRecordDeleted)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RecordDeleted result)
+        {
+            result = JsonSerializer.Deserialize<RecordDeleted>(s, (JsonTypeInfo<RecordDeleted>)SourceGenerationContext.Default.AppBskyNotificationRecordDeleted);
+            return result != null;
+        }
     }
 }
 

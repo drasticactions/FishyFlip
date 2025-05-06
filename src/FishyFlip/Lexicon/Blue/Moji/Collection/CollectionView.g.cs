@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Moji.Collection
 {
-    public partial class CollectionView : ATObject, ICBOREncodable<CollectionView>, IJsonEncodable<CollectionView>
+    public partial class CollectionView : ATObject, ICBOREncodable<CollectionView>, IJsonEncodable<CollectionView>, IParsable<CollectionView>
     {
 
         /// <summary>
@@ -152,19 +152,31 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.CollectionView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.CollectionView>)SourceGenerationContext.Default.BlueMojiCollectionCollectionView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CollectionView FromCBORObject(CBORObject obj)
         {
             return new CollectionView(obj);
         }
 
+        /// <inheritdoc/>
+        public static CollectionView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CollectionView>(s, (JsonTypeInfo<CollectionView>)SourceGenerationContext.Default.BlueMojiCollectionCollectionView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CollectionView result)
+        {
+            result = JsonSerializer.Deserialize<CollectionView>(s, (JsonTypeInfo<CollectionView>)SourceGenerationContext.Default.BlueMojiCollectionCollectionView);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
 {
-    public partial class ProfileView : ATObject, ICBOREncodable<ProfileView>, IJsonEncodable<ProfileView>
+    public partial class ProfileView : ATObject, ICBOREncodable<ProfileView>, IJsonEncodable<ProfileView>, IParsable<ProfileView>
     {
 
         /// <summary>
@@ -134,19 +134,31 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.ProfileView>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.ProfileView>)SourceGenerationContext.Default.FmTealAlphaActorProfileView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ProfileView FromCBORObject(CBORObject obj)
         {
             return new ProfileView(obj);
         }
 
+        /// <inheritdoc/>
+        public static ProfileView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ProfileView>(s, (JsonTypeInfo<ProfileView>)SourceGenerationContext.Default.FmTealAlphaActorProfileView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ProfileView result)
+        {
+            result = JsonSerializer.Deserialize<ProfileView>(s, (JsonTypeInfo<ProfileView>)SourceGenerationContext.Default.FmTealAlphaActorProfileView);
+            return result != null;
+        }
     }
 }
 

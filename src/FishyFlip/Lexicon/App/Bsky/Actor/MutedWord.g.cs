@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// A word that the account owner has muted.
     /// </summary>
-    public partial class MutedWord : ATObject, ICBOREncodable<MutedWord>, IJsonEncodable<MutedWord>
+    public partial class MutedWord : ATObject, ICBOREncodable<MutedWord>, IJsonEncodable<MutedWord>, IParsable<MutedWord>
     {
 
         /// <summary>
@@ -114,19 +114,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.MutedWord>)SourceGenerationContext.Default.AppBskyActorMutedWord)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new MutedWord FromCBORObject(CBORObject obj)
         {
             return new MutedWord(obj);
         }
 
+        /// <inheritdoc/>
+        public static MutedWord Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<MutedWord>(s, (JsonTypeInfo<MutedWord>)SourceGenerationContext.Default.AppBskyActorMutedWord)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out MutedWord result)
+        {
+            result = JsonSerializer.Deserialize<MutedWord>(s, (JsonTypeInfo<MutedWord>)SourceGenerationContext.Default.AppBskyActorMutedWord);
+            return result != null;
+        }
     }
 }
 

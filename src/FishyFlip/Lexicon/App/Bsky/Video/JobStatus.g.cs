@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Video
 {
-    public partial class JobStatus : ATObject, ICBOREncodable<JobStatus>, IJsonEncodable<JobStatus>
+    public partial class JobStatus : ATObject, ICBOREncodable<JobStatus>, IJsonEncodable<JobStatus>, IParsable<JobStatus>
     {
 
         /// <summary>
@@ -129,19 +129,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Video.JobStatus>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Video.JobStatus>)SourceGenerationContext.Default.AppBskyVideoJobStatus)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new JobStatus FromCBORObject(CBORObject obj)
         {
             return new JobStatus(obj);
         }
 
+        /// <inheritdoc/>
+        public static JobStatus Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<JobStatus>(s, (JsonTypeInfo<JobStatus>)SourceGenerationContext.Default.AppBskyVideoJobStatus)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out JobStatus result)
+        {
+            result = JsonSerializer.Deserialize<JobStatus>(s, (JsonTypeInfo<JobStatus>)SourceGenerationContext.Default.AppBskyVideoJobStatus);
+            return result != null;
+        }
     }
 }
 

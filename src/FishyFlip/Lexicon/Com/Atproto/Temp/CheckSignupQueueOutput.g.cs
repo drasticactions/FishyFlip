@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
-    public partial class CheckSignupQueueOutput : ATObject, ICBOREncodable<CheckSignupQueueOutput>, IJsonEncodable<CheckSignupQueueOutput>
+    public partial class CheckSignupQueueOutput : ATObject, ICBOREncodable<CheckSignupQueueOutput>, IJsonEncodable<CheckSignupQueueOutput>, IParsable<CheckSignupQueueOutput>
     {
 
         /// <summary>
@@ -81,19 +81,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CheckSignupQueueOutput FromCBORObject(CBORObject obj)
         {
             return new CheckSignupQueueOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static CheckSignupQueueOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CheckSignupQueueOutput>(s, (JsonTypeInfo<CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CheckSignupQueueOutput result)
+        {
+            result = JsonSerializer.Deserialize<CheckSignupQueueOutput>(s, (JsonTypeInfo<CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput);
+            return result != null;
+        }
     }
 }
 

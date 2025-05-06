@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
     /// <summary>
     /// A tombstone for a missing oekaki.
     /// </summary>
-    public partial class OekakiTombstone : ATObject, ICBOREncodable<OekakiTombstone>, IJsonEncodable<OekakiTombstone>
+    public partial class OekakiTombstone : ATObject, ICBOREncodable<OekakiTombstone>, IJsonEncodable<OekakiTombstone>, IParsable<OekakiTombstone>
     {
 
         /// <summary>
@@ -68,19 +68,31 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new OekakiTombstone FromCBORObject(CBORObject obj)
         {
             return new OekakiTombstone(obj);
         }
 
+        /// <inheritdoc/>
+        public static OekakiTombstone Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<OekakiTombstone>(s, (JsonTypeInfo<OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out OekakiTombstone result)
+        {
+            result = JsonSerializer.Deserialize<OekakiTombstone>(s, (JsonTypeInfo<OekakiTombstone>)SourceGenerationContext.Default.ComShinolabsPinkseaOekakiTombstone);
+            return result != null;
+        }
     }
 }
 

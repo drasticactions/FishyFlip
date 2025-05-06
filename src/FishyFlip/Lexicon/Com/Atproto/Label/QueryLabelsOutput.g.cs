@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Label
 {
-    public partial class QueryLabelsOutput : ATObject, ICBOREncodable<QueryLabelsOutput>, IJsonEncodable<QueryLabelsOutput>
+    public partial class QueryLabelsOutput : ATObject, ICBOREncodable<QueryLabelsOutput>, IJsonEncodable<QueryLabelsOutput>, IParsable<QueryLabelsOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new QueryLabelsOutput FromCBORObject(CBORObject obj)
         {
             return new QueryLabelsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static QueryLabelsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<QueryLabelsOutput>(s, (JsonTypeInfo<QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out QueryLabelsOutput result)
+        {
+            result = JsonSerializer.Deserialize<QueryLabelsOutput>(s, (JsonTypeInfo<QueryLabelsOutput>)SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput);
+            return result != null;
+        }
     }
 }
 

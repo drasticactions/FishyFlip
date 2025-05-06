@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class ViewExternal : ATObject, ICBOREncodable<ViewExternal>, IJsonEncodable<ViewExternal>
+    public partial class ViewExternal : ATObject, ICBOREncodable<ViewExternal>, IJsonEncodable<ViewExternal>, IParsable<ViewExternal>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal>)SourceGenerationContext.Default.AppBskyEmbedViewExternal)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ViewExternal FromCBORObject(CBORObject obj)
         {
             return new ViewExternal(obj);
         }
 
+        /// <inheritdoc/>
+        public static ViewExternal Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ViewExternal>(s, (JsonTypeInfo<ViewExternal>)SourceGenerationContext.Default.AppBskyEmbedViewExternal)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ViewExternal result)
+        {
+            result = JsonSerializer.Deserialize<ViewExternal>(s, (JsonTypeInfo<ViewExternal>)SourceGenerationContext.Default.AppBskyEmbedViewExternal);
+            return result != null;
+        }
     }
 }
 

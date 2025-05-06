@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
     /// <summary>
     /// This lexicon is in a not officially released state. It is subject to change. | A declaration of a teal.fm account profile.
     /// </summary>
-    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>
+    public partial class Profile : ATObject, ICBOREncodable<Profile>, IJsonEncodable<Profile>, IParsable<Profile>
     {
 
         /// <summary>
@@ -127,19 +127,31 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Profile FromCBORObject(CBORObject obj)
         {
             return new Profile(obj);
         }
 
+        /// <inheritdoc/>
+        public static Profile Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Profile>(s, (JsonTypeInfo<Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Profile result)
+        {
+            result = JsonSerializer.Deserialize<Profile>(s, (JsonTypeInfo<Profile>)SourceGenerationContext.Default.FmTealAlphaActorProfile);
+            return result != null;
+        }
     }
 }
 

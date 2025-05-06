@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     /// <summary>
     /// Represents a change to an account's identity. Could be an updated handle, signing key, or pds hosting endpoint. Serves as a prod to all downstream services to refresh their identity cache.
     /// </summary>
-    public partial class Identity : ATObject, ICBOREncodable<Identity>, IJsonEncodable<Identity>
+    public partial class Identity : ATObject, ICBOREncodable<Identity>, IJsonEncodable<Identity>, IParsable<Identity>
     {
 
         /// <summary>
@@ -98,19 +98,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Identity FromCBORObject(CBORObject obj)
         {
             return new Identity(obj);
         }
 
+        /// <inheritdoc/>
+        public static Identity Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Identity>(s, (JsonTypeInfo<Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Identity result)
+        {
+            result = JsonSerializer.Deserialize<Identity>(s, (JsonTypeInfo<Identity>)SourceGenerationContext.Default.ComAtprotoSyncIdentity);
+            return result != null;
+        }
     }
 }
 

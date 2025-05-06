@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class TrendView : ATObject, ICBOREncodable<TrendView>, IJsonEncodable<TrendView>
+    public partial class TrendView : ATObject, ICBOREncodable<TrendView>, IJsonEncodable<TrendView>, IParsable<TrendView>
     {
 
         /// <summary>
@@ -136,19 +136,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.TrendView>)SourceGenerationContext.Default.AppBskyUnspeccedTrendView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new TrendView FromCBORObject(CBORObject obj)
         {
             return new TrendView(obj);
         }
 
+        /// <inheritdoc/>
+        public static TrendView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<TrendView>(s, (JsonTypeInfo<TrendView>)SourceGenerationContext.Default.AppBskyUnspeccedTrendView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out TrendView result)
+        {
+            result = JsonSerializer.Deserialize<TrendView>(s, (JsonTypeInfo<TrendView>)SourceGenerationContext.Default.AppBskyUnspeccedTrendView);
+            return result != null;
+        }
     }
 }
 

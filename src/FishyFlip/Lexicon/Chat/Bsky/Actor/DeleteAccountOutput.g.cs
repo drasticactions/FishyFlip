@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 {
-    public partial class DeleteAccountOutput : ATObject, ICBOREncodable<DeleteAccountOutput>, IJsonEncodable<DeleteAccountOutput>
+    public partial class DeleteAccountOutput : ATObject, ICBOREncodable<DeleteAccountOutput>, IJsonEncodable<DeleteAccountOutput>, IParsable<DeleteAccountOutput>
     {
 
         /// <summary>
@@ -44,19 +44,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new DeleteAccountOutput FromCBORObject(CBORObject obj)
         {
             return new DeleteAccountOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static DeleteAccountOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<DeleteAccountOutput>(s, (JsonTypeInfo<DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out DeleteAccountOutput result)
+        {
+            result = JsonSerializer.Deserialize<DeleteAccountOutput>(s, (JsonTypeInfo<DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     /// <summary>
     /// Updates the repo to a new state, without necessarily including that state on the firehose. Used to recover from broken commit streams, data loss incidents, or in situations where upstream host does not know recent state of the repository.
     /// </summary>
-    public partial class Sync : ATObject, ICBOREncodable<Sync>, IJsonEncodable<Sync>
+    public partial class Sync : ATObject, ICBOREncodable<Sync>, IJsonEncodable<Sync>, IParsable<Sync>
     {
 
         /// <summary>
@@ -112,19 +112,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>)SourceGenerationContext.Default.ComAtprotoSyncSync)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Sync FromCBORObject(CBORObject obj)
         {
             return new Sync(obj);
         }
 
+        /// <inheritdoc/>
+        public static Sync Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Sync>(s, (JsonTypeInfo<Sync>)SourceGenerationContext.Default.ComAtprotoSyncSync)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Sync result)
+        {
+            result = JsonSerializer.Deserialize<Sync>(s, (JsonTypeInfo<Sync>)SourceGenerationContext.Default.ComAtprotoSyncSync);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class ModEventEscalate : ATObject, ICBOREncodable<ModEventEscalate>, IJsonEncodable<ModEventEscalate>
+    public partial class ModEventEscalate : ATObject, ICBOREncodable<ModEventEscalate>, IJsonEncodable<ModEventEscalate>, IParsable<ModEventEscalate>
     {
 
         /// <summary>
@@ -62,19 +62,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventEscalate>)SourceGenerationContext.Default.ToolsOzoneModerationModEventEscalate)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ModEventEscalate FromCBORObject(CBORObject obj)
         {
             return new ModEventEscalate(obj);
         }
 
+        /// <inheritdoc/>
+        public static ModEventEscalate Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ModEventEscalate>(s, (JsonTypeInfo<ModEventEscalate>)SourceGenerationContext.Default.ToolsOzoneModerationModEventEscalate)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ModEventEscalate result)
+        {
+            result = JsonSerializer.Deserialize<ModEventEscalate>(s, (JsonTypeInfo<ModEventEscalate>)SourceGenerationContext.Default.ToolsOzoneModerationModEventEscalate);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetSuggestedStarterPacksOutput : ATObject, ICBOREncodable<GetSuggestedStarterPacksOutput>, IJsonEncodable<GetSuggestedStarterPacksOutput>
+    public partial class GetSuggestedStarterPacksOutput : ATObject, ICBOREncodable<GetSuggestedStarterPacksOutput>, IJsonEncodable<GetSuggestedStarterPacksOutput>, IParsable<GetSuggestedStarterPacksOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSuggestedStarterPacksOutput FromCBORObject(CBORObject obj)
         {
             return new GetSuggestedStarterPacksOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSuggestedStarterPacksOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSuggestedStarterPacksOutput>(s, (JsonTypeInfo<GetSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSuggestedStarterPacksOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSuggestedStarterPacksOutput>(s, (JsonTypeInfo<GetSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksOutput);
+            return result != null;
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class GetEntryMetadataByNameOutput : ATObject, ICBOREncodable<GetEntryMetadataByNameOutput>, IJsonEncodable<GetEntryMetadataByNameOutput>
+    public partial class GetEntryMetadataByNameOutput : ATObject, ICBOREncodable<GetEntryMetadataByNameOutput>, IJsonEncodable<GetEntryMetadataByNameOutput>, IParsable<GetEntryMetadataByNameOutput>
     {
 
         /// <summary>
@@ -82,19 +82,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetEntryMetadataByNameOutput FromCBORObject(CBORObject obj)
         {
             return new GetEntryMetadataByNameOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetEntryMetadataByNameOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetEntryMetadataByNameOutput>(s, (JsonTypeInfo<GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetEntryMetadataByNameOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetEntryMetadataByNameOutput>(s, (JsonTypeInfo<GetEntryMetadataByNameOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetEntryMetadataByNameOutput);
+            return result != null;
+        }
     }
 }
 

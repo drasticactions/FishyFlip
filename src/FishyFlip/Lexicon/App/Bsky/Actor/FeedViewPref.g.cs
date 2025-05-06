@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Actor
 {
-    public partial class FeedViewPref : ATObject, ICBOREncodable<FeedViewPref>, IJsonEncodable<FeedViewPref>
+    public partial class FeedViewPref : ATObject, ICBOREncodable<FeedViewPref>, IJsonEncodable<FeedViewPref>, IParsable<FeedViewPref>
     {
 
         /// <summary>
@@ -114,19 +114,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref>)SourceGenerationContext.Default.AppBskyActorFeedViewPref)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new FeedViewPref FromCBORObject(CBORObject obj)
         {
             return new FeedViewPref(obj);
         }
 
+        /// <inheritdoc/>
+        public static FeedViewPref Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<FeedViewPref>(s, (JsonTypeInfo<FeedViewPref>)SourceGenerationContext.Default.AppBskyActorFeedViewPref)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out FeedViewPref result)
+        {
+            result = JsonSerializer.Deserialize<FeedViewPref>(s, (JsonTypeInfo<FeedViewPref>)SourceGenerationContext.Default.AppBskyActorFeedViewPref);
+            return result != null;
+        }
     }
 }
 

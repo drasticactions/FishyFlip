@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class GetMentionsByEntryOutput : ATObject, ICBOREncodable<GetMentionsByEntryOutput>, IJsonEncodable<GetMentionsByEntryOutput>
+    public partial class GetMentionsByEntryOutput : ATObject, ICBOREncodable<GetMentionsByEntryOutput>, IJsonEncodable<GetMentionsByEntryOutput>, IParsable<GetMentionsByEntryOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetMentionsByEntryOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetMentionsByEntryOutput FromCBORObject(CBORObject obj)
         {
             return new GetMentionsByEntryOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetMentionsByEntryOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetMentionsByEntryOutput>(s, (JsonTypeInfo<GetMentionsByEntryOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetMentionsByEntryOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetMentionsByEntryOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetMentionsByEntryOutput>(s, (JsonTypeInfo<GetMentionsByEntryOutput>)SourceGenerationContext.Default.ComWhtwndBlogGetMentionsByEntryOutput);
+            return result != null;
+        }
     }
 }
 

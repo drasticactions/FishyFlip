@@ -12,7 +12,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DebugType>embedded</DebugType>
     <IncludeSymbols>true</IncludeSymbols>
-    <NoWarn>$(NoWarn);SA1208;SA0001;NU5104</NoWarn>
+    <NoWarn>$(NoWarn);SA1001;SA1208;SA0001;NU5104</NoWarn>
     <GitVersionTargetFramework>net8.0</GitVersionTargetFramework>
   </PropertyGroup>
 

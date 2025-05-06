@@ -14,7 +14,62 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
     public static class BookhiveEndpoints
     {
 
+       public const string GetBook = "/xrpc/buzz.bookhive.getBook";
+
+       public const string GetProfile = "/xrpc/buzz.bookhive.getProfile";
+
        public const string SearchBooks = "/xrpc/buzz.bookhive.searchBooks";
+
+
+        /// <summary>
+        /// Get a book's info. Requires authentication.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="id">The book's hive ID</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput?>> GetBookAsync (this FishyFlip.ATProtocol atp, string id, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetBook.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("id=" + id);
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput>(endpointUrl, atp.Options.SourceGenerationContext.BuzzBookhiveGetBookOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a profile's info. Does not require authentication.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did">The user's DID to get the profile of</param>
+        /// <param name="handle">The user's handle to get the profile of</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput?>> GetProfileAsync (this FishyFlip.ATProtocol atp, string? did = default, string? handle = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetProfile.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (did != null)
+            {
+                queryStrings.Add("did=" + did);
+            }
+
+            if (handle != null)
+            {
+                queryStrings.Add("handle=" + handle);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput>(endpointUrl, atp.Options.SourceGenerationContext.BuzzBookhiveGetProfileOutput!, cancellationToken, headers);
+        }
 
 
         /// <summary>

@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class RepoDef : ATObject, ICBOREncodable<RepoDef>, IJsonEncodable<RepoDef>
+    public partial class RepoDef : ATObject, ICBOREncodable<RepoDef>, IJsonEncodable<RepoDef>, IParsable<RepoDef>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>)SourceGenerationContext.Default.ComAtprotoSyncRepoDef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RepoDef FromCBORObject(CBORObject obj)
         {
             return new RepoDef(obj);
         }
 
+        /// <inheritdoc/>
+        public static RepoDef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RepoDef>(s, (JsonTypeInfo<RepoDef>)SourceGenerationContext.Default.ComAtprotoSyncRepoDef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RepoDef result)
+        {
+            result = JsonSerializer.Deserialize<RepoDef>(s, (JsonTypeInfo<RepoDef>)SourceGenerationContext.Default.ComAtprotoSyncRepoDef);
+            return result != null;
+        }
     }
 }
 

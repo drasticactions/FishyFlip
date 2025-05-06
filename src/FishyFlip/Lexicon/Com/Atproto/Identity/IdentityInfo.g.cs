@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Identity
 {
-    public partial class IdentityInfo : ATObject, ICBOREncodable<IdentityInfo>, IJsonEncodable<IdentityInfo>
+    public partial class IdentityInfo : ATObject, ICBOREncodable<IdentityInfo>, IJsonEncodable<IdentityInfo>, IParsable<IdentityInfo>
     {
 
         /// <summary>
@@ -87,19 +87,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>)SourceGenerationContext.Default.ComAtprotoIdentityIdentityInfo)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new IdentityInfo FromCBORObject(CBORObject obj)
         {
             return new IdentityInfo(obj);
         }
 
+        /// <inheritdoc/>
+        public static IdentityInfo Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<IdentityInfo>(s, (JsonTypeInfo<IdentityInfo>)SourceGenerationContext.Default.ComAtprotoIdentityIdentityInfo)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out IdentityInfo result)
+        {
+            result = JsonSerializer.Deserialize<IdentityInfo>(s, (JsonTypeInfo<IdentityInfo>)SourceGenerationContext.Default.ComAtprotoIdentityIdentityInfo);
+            return result != null;
+        }
     }
 }
 

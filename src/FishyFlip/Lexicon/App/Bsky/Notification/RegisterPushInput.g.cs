@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Notification
 {
-    public partial class RegisterPushInput : ATObject, ICBOREncodable<RegisterPushInput>, IJsonEncodable<RegisterPushInput>
+    public partial class RegisterPushInput : ATObject, ICBOREncodable<RegisterPushInput>, IJsonEncodable<RegisterPushInput>, IParsable<RegisterPushInput>
     {
 
         /// <summary>
@@ -103,19 +103,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RegisterPushInput FromCBORObject(CBORObject obj)
         {
             return new RegisterPushInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RegisterPushInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RegisterPushInput>(s, (JsonTypeInfo<RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RegisterPushInput result)
+        {
+            result = JsonSerializer.Deserialize<RegisterPushInput>(s, (JsonTypeInfo<RegisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput);
+            return result != null;
+        }
     }
 }
 

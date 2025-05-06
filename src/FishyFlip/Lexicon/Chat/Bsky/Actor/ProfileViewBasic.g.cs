@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Actor
 {
-    public partial class ProfileViewBasic : ATObject, ICBOREncodable<ProfileViewBasic>, IJsonEncodable<ProfileViewBasic>
+    public partial class ProfileViewBasic : ATObject, ICBOREncodable<ProfileViewBasic>, IJsonEncodable<ProfileViewBasic>, IParsable<ProfileViewBasic>
     {
 
         /// <summary>
@@ -148,19 +148,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ProfileViewBasic FromCBORObject(CBORObject obj)
         {
             return new ProfileViewBasic(obj);
         }
 
+        /// <inheritdoc/>
+        public static ProfileViewBasic Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ProfileViewBasic>(s, (JsonTypeInfo<ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ProfileViewBasic result)
+        {
+            result = JsonSerializer.Deserialize<ProfileViewBasic>(s, (JsonTypeInfo<ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic);
+            return result != null;
+        }
     }
 }
 

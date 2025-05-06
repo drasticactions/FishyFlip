@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// If set, an active progress guide. Once completed, can be set to undefined. Should have unspecced fields tracking progress.
     /// </summary>
-    public partial class BskyAppProgressGuide : ATObject, ICBOREncodable<BskyAppProgressGuide>, IJsonEncodable<BskyAppProgressGuide>
+    public partial class BskyAppProgressGuide : ATObject, ICBOREncodable<BskyAppProgressGuide>, IJsonEncodable<BskyAppProgressGuide>, IParsable<BskyAppProgressGuide>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new BskyAppProgressGuide FromCBORObject(CBORObject obj)
         {
             return new BskyAppProgressGuide(obj);
         }
 
+        /// <inheritdoc/>
+        public static BskyAppProgressGuide Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<BskyAppProgressGuide>(s, (JsonTypeInfo<BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out BskyAppProgressGuide result)
+        {
+            result = JsonSerializer.Deserialize<BskyAppProgressGuide>(s, (JsonTypeInfo<BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide);
+            return result != null;
+        }
     }
 }
 

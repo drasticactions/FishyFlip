@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class SendMessageBatchInput : ATObject, ICBOREncodable<SendMessageBatchInput>, IJsonEncodable<SendMessageBatchInput>
+    public partial class SendMessageBatchInput : ATObject, ICBOREncodable<SendMessageBatchInput>, IJsonEncodable<SendMessageBatchInput>, IParsable<SendMessageBatchInput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchInput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new SendMessageBatchInput FromCBORObject(CBORObject obj)
         {
             return new SendMessageBatchInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static SendMessageBatchInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<SendMessageBatchInput>(s, (JsonTypeInfo<SendMessageBatchInput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out SendMessageBatchInput result)
+        {
+            result = JsonSerializer.Deserialize<SendMessageBatchInput>(s, (JsonTypeInfo<SendMessageBatchInput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchInput);
+            return result != null;
+        }
     }
 }
 

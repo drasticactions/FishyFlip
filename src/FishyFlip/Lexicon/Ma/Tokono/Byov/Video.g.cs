@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
     /// <summary>
     /// A reference to a video.
     /// </summary>
-    public partial class Video : ATObject, ICBOREncodable<Video>, IJsonEncodable<Video>
+    public partial class Video : ATObject, ICBOREncodable<Video>, IJsonEncodable<Video>, IParsable<Video>
     {
 
         /// <summary>
@@ -101,19 +101,31 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>(json, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Video FromCBORObject(CBORObject obj)
         {
             return new Video(obj);
         }
 
+        /// <inheritdoc/>
+        public static Video Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Video>(s, (JsonTypeInfo<Video>)SourceGenerationContext.Default.MaTokonoByovVideo)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Video result)
+        {
+            result = JsonSerializer.Deserialize<Video>(s, (JsonTypeInfo<Video>)SourceGenerationContext.Default.MaTokonoByovVideo);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     /// <summary>
     /// Strings which describe the label in the UI, localized into a specific language.
     /// </summary>
-    public partial class LabelValueDefinitionStrings : ATObject, ICBOREncodable<LabelValueDefinitionStrings>, IJsonEncodable<LabelValueDefinitionStrings>
+    public partial class LabelValueDefinitionStrings : ATObject, ICBOREncodable<LabelValueDefinitionStrings>, IJsonEncodable<LabelValueDefinitionStrings>, IParsable<LabelValueDefinitionStrings>
     {
 
         /// <summary>
@@ -89,19 +89,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinitionStrings>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinitionStrings)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new LabelValueDefinitionStrings FromCBORObject(CBORObject obj)
         {
             return new LabelValueDefinitionStrings(obj);
         }
 
+        /// <inheritdoc/>
+        public static LabelValueDefinitionStrings Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<LabelValueDefinitionStrings>(s, (JsonTypeInfo<LabelValueDefinitionStrings>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinitionStrings)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out LabelValueDefinitionStrings result)
+        {
+            result = JsonSerializer.Deserialize<LabelValueDefinitionStrings>(s, (JsonTypeInfo<LabelValueDefinitionStrings>)SourceGenerationContext.Default.ComAtprotoLabelLabelValueDefinitionStrings);
+            return result != null;
+        }
     }
 }
 

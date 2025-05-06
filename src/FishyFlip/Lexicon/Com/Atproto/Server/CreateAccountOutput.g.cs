@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
     /// <summary>
     /// Account login session returned on successful account creation.
     /// </summary>
-    public partial class CreateAccountOutput : ATObject, ICBOREncodable<CreateAccountOutput>, IJsonEncodable<CreateAccountOutput>
+    public partial class CreateAccountOutput : ATObject, ICBOREncodable<CreateAccountOutput>, IJsonEncodable<CreateAccountOutput>, IParsable<CreateAccountOutput>
     {
 
         /// <summary>
@@ -109,19 +109,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CreateAccountOutput FromCBORObject(CBORObject obj)
         {
             return new CreateAccountOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static CreateAccountOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CreateAccountOutput>(s, (JsonTypeInfo<CreateAccountOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CreateAccountOutput result)
+        {
+            result = JsonSerializer.Deserialize<CreateAccountOutput>(s, (JsonTypeInfo<CreateAccountOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountOutput);
+            return result != null;
+        }
     }
 }
 

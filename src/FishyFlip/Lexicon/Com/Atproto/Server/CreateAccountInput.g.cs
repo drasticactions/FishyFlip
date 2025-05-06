@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class CreateAccountInput : ATObject, ICBOREncodable<CreateAccountInput>, IJsonEncodable<CreateAccountInput>
+    public partial class CreateAccountInput : ATObject, ICBOREncodable<CreateAccountInput>, IJsonEncodable<CreateAccountInput>, IParsable<CreateAccountInput>
     {
 
         /// <summary>
@@ -142,19 +142,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new CreateAccountInput FromCBORObject(CBORObject obj)
         {
             return new CreateAccountInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static CreateAccountInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<CreateAccountInput>(s, (JsonTypeInfo<CreateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out CreateAccountInput result)
+        {
+            result = JsonSerializer.Deserialize<CreateAccountInput>(s, (JsonTypeInfo<CreateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountInput);
+            return result != null;
+        }
     }
 }
 

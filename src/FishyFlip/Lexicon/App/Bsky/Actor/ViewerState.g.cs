@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     /// <summary>
     /// Metadata about the requesting account's relationship with the subject account. Only has meaningful content for authed requests.
     /// </summary>
-    public partial class ViewerState : ATObject, ICBOREncodable<ViewerState>, IJsonEncodable<ViewerState>
+    public partial class ViewerState : ATObject, ICBOREncodable<ViewerState>, IJsonEncodable<ViewerState>, IParsable<ViewerState>
     {
 
         /// <summary>
@@ -140,19 +140,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ViewerState>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ViewerState>)SourceGenerationContext.Default.AppBskyActorViewerState)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ViewerState FromCBORObject(CBORObject obj)
         {
             return new ViewerState(obj);
         }
 
+        /// <inheritdoc/>
+        public static ViewerState Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ViewerState>(s, (JsonTypeInfo<ViewerState>)SourceGenerationContext.Default.AppBskyActorViewerState)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ViewerState result)
+        {
+            result = JsonSerializer.Deserialize<ViewerState>(s, (JsonTypeInfo<ViewerState>)SourceGenerationContext.Default.AppBskyActorViewerState);
+            return result != null;
+        }
     }
 }
 

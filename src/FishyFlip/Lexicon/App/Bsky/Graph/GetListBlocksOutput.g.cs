@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class GetListBlocksOutput : ATObject, ICBOREncodable<GetListBlocksOutput>, IJsonEncodable<GetListBlocksOutput>
+    public partial class GetListBlocksOutput : ATObject, ICBOREncodable<GetListBlocksOutput>, IJsonEncodable<GetListBlocksOutput>, IParsable<GetListBlocksOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetListBlocksOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetListBlocksOutput FromCBORObject(CBORObject obj)
         {
             return new GetListBlocksOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetListBlocksOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetListBlocksOutput>(s, (JsonTypeInfo<GetListBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetListBlocksOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetListBlocksOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetListBlocksOutput>(s, (JsonTypeInfo<GetListBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetListBlocksOutput);
+            return result != null;
+        }
     }
 }
 

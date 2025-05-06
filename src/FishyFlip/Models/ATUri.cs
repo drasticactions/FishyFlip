@@ -5,12 +5,14 @@
 #nullable enable annotations
 #nullable disable warnings
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace FishyFlip.Models;
 
 /// <summary>
 /// Represents an ATUri object that parses and manipulates AT URIs.
 /// </summary>
-public class ATUri
+public class ATUri : IParsable<ATUri>
 {
     private static readonly Regex AtpUriRegex = new Regex(
         @"^(at:\/\/)?((?:did:[a-z0-9:%-]+)|(?:[a-z][a-z0-9.:-]*))(\/[^?#\s]*)?(\?[^#\s]+)?(#[^\s]+)?$",
@@ -130,6 +132,44 @@ public class ATUri
             atUri = null;
             return false;
         }
+    }
+
+    /// <summary>
+    /// Parses the AT URI.
+    /// </summary>
+    /// <param name="s">String.</param>
+    /// <param name="provider">Provider.</param>
+    /// <returns>ATUri.</returns>
+    /// <exception cref="FormatException">Thrown if ATUri could not be parsed.</exception>
+    public static ATUri Parse(string s, IFormatProvider? provider)
+    {
+        var uri = Create(s);
+        if (uri != null)
+        {
+            return uri;
+        }
+
+        throw new FormatException($"Invalid ATUri: {s}");
+    }
+
+    /// <summary>
+    /// Tries to parse the AT URI.
+    /// </summary>
+    /// <param name="s">String.</param>
+    /// <param name="provider">IFormatProvider.</param>
+    /// <param name="result">Result.</param>
+    /// <returns>Bool if ATUri could be parsed.</returns>
+    public static bool TryParse(string? s, IFormatProvider? provider, out ATUri result)
+    {
+        var uri = Create(s);
+        if (uri != null)
+        {
+            result = uri;
+            return true;
+        }
+
+        result = null;
+        return false;
     }
 
     /// <summary>

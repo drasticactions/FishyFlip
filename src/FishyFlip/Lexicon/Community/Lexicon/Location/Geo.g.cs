@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
     /// <summary>
     /// A physical location in the form of a WGS84 coordinate.
     /// </summary>
-    public partial class Geo : ATObject, ICBOREncodable<Geo>, IJsonEncodable<Geo>
+    public partial class Geo : ATObject, ICBOREncodable<Geo>, IJsonEncodable<Geo>, IParsable<Geo>
     {
 
         /// <summary>
@@ -95,19 +95,31 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Geo>(json, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Geo>)SourceGenerationContext.Default.CommunityLexiconLocationGeo)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Geo FromCBORObject(CBORObject obj)
         {
             return new Geo(obj);
         }
 
+        /// <inheritdoc/>
+        public static Geo Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Geo>(s, (JsonTypeInfo<Geo>)SourceGenerationContext.Default.CommunityLexiconLocationGeo)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Geo result)
+        {
+            result = JsonSerializer.Deserialize<Geo>(s, (JsonTypeInfo<Geo>)SourceGenerationContext.Default.CommunityLexiconLocationGeo);
+            return result != null;
+        }
     }
 }
 

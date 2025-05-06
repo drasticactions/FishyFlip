@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Blue.Maril.Stellar
 {
-    public partial class GetReactionsOutput : ATObject, ICBOREncodable<GetReactionsOutput>, IJsonEncodable<GetReactionsOutput>
+    public partial class GetReactionsOutput : ATObject, ICBOREncodable<GetReactionsOutput>, IJsonEncodable<GetReactionsOutput>, IParsable<GetReactionsOutput>
     {
 
         /// <summary>
@@ -92,19 +92,31 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.GetReactionsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.GetReactionsOutput>)SourceGenerationContext.Default.BlueMarilStellarGetReactionsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetReactionsOutput FromCBORObject(CBORObject obj)
         {
             return new GetReactionsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetReactionsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetReactionsOutput>(s, (JsonTypeInfo<GetReactionsOutput>)SourceGenerationContext.Default.BlueMarilStellarGetReactionsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetReactionsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetReactionsOutput>(s, (JsonTypeInfo<GetReactionsOutput>)SourceGenerationContext.Default.BlueMarilStellarGetReactionsOutput);
+            return result != null;
+        }
     }
 }
 

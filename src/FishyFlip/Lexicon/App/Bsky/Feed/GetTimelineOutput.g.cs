@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetTimelineOutput : ATObject, ICBOREncodable<GetTimelineOutput>, IJsonEncodable<GetTimelineOutput>
+    public partial class GetTimelineOutput : ATObject, ICBOREncodable<GetTimelineOutput>, IJsonEncodable<GetTimelineOutput>, IParsable<GetTimelineOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput>)SourceGenerationContext.Default.AppBskyFeedGetTimelineOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetTimelineOutput FromCBORObject(CBORObject obj)
         {
             return new GetTimelineOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetTimelineOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetTimelineOutput>(s, (JsonTypeInfo<GetTimelineOutput>)SourceGenerationContext.Default.AppBskyFeedGetTimelineOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetTimelineOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetTimelineOutput>(s, (JsonTypeInfo<GetTimelineOutput>)SourceGenerationContext.Default.AppBskyFeedGetTimelineOutput);
+            return result != null;
+        }
     }
 }
 

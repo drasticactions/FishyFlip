@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\FishyFlip\FishyFlip.csproj" />
+    <ProjectReference Include="..\..\src\FishyFlip\FishyFlip.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     /// <summary>
     /// Allow replies from actors mentioned in your post.
     /// </summary>
-    public partial class MentionRule : ATObject, ICBOREncodable<MentionRule>, IJsonEncodable<MentionRule>
+    public partial class MentionRule : ATObject, ICBOREncodable<MentionRule>, IJsonEncodable<MentionRule>, IParsable<MentionRule>
     {
 
         /// <summary>
@@ -47,19 +47,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.MentionRule>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.MentionRule>)SourceGenerationContext.Default.AppBskyFeedMentionRule)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new MentionRule FromCBORObject(CBORObject obj)
         {
             return new MentionRule(obj);
         }
 
+        /// <inheritdoc/>
+        public static MentionRule Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<MentionRule>(s, (JsonTypeInfo<MentionRule>)SourceGenerationContext.Default.AppBskyFeedMentionRule)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out MentionRule result)
+        {
+            result = JsonSerializer.Deserialize<MentionRule>(s, (JsonTypeInfo<MentionRule>)SourceGenerationContext.Default.AppBskyFeedMentionRule);
+            return result != null;
+        }
     }
 }
 

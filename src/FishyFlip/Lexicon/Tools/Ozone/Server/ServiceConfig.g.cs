@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Server
 {
-    public partial class ServiceConfig : ATObject, ICBOREncodable<ServiceConfig>, IJsonEncodable<ServiceConfig>
+    public partial class ServiceConfig : ATObject, ICBOREncodable<ServiceConfig>, IJsonEncodable<ServiceConfig>, IParsable<ServiceConfig>
     {
 
         /// <summary>
@@ -62,19 +62,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig>)SourceGenerationContext.Default.ToolsOzoneServerServiceConfig)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ServiceConfig FromCBORObject(CBORObject obj)
         {
             return new ServiceConfig(obj);
         }
 
+        /// <inheritdoc/>
+        public static ServiceConfig Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ServiceConfig>(s, (JsonTypeInfo<ServiceConfig>)SourceGenerationContext.Default.ToolsOzoneServerServiceConfig)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ServiceConfig result)
+        {
+            result = JsonSerializer.Deserialize<ServiceConfig>(s, (JsonTypeInfo<ServiceConfig>)SourceGenerationContext.Default.ToolsOzoneServerServiceConfig);
+            return result != null;
+        }
     }
 }
 

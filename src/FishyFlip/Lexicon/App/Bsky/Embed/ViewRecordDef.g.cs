@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Embed
 {
-    public partial class ViewRecordDef : ATObject, ICBOREncodable<ViewRecordDef>, IJsonEncodable<ViewRecordDef>
+    public partial class ViewRecordDef : ATObject, ICBOREncodable<ViewRecordDef>, IJsonEncodable<ViewRecordDef>, IParsable<ViewRecordDef>
     {
 
         /// <summary>
@@ -82,19 +82,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef>)SourceGenerationContext.Default.AppBskyEmbedViewRecordDef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ViewRecordDef FromCBORObject(CBORObject obj)
         {
             return new ViewRecordDef(obj);
         }
 
+        /// <inheritdoc/>
+        public static ViewRecordDef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ViewRecordDef>(s, (JsonTypeInfo<ViewRecordDef>)SourceGenerationContext.Default.AppBskyEmbedViewRecordDef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ViewRecordDef result)
+        {
+            result = JsonSerializer.Deserialize<ViewRecordDef>(s, (JsonTypeInfo<ViewRecordDef>)SourceGenerationContext.Default.AppBskyEmbedViewRecordDef);
+            return result != null;
+        }
     }
 }
 

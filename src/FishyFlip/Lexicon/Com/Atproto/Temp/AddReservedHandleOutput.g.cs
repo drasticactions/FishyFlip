@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
-    public partial class AddReservedHandleOutput : ATObject, ICBOREncodable<AddReservedHandleOutput>, IJsonEncodable<AddReservedHandleOutput>
+    public partial class AddReservedHandleOutput : ATObject, ICBOREncodable<AddReservedHandleOutput>, IJsonEncodable<AddReservedHandleOutput>, IParsable<AddReservedHandleOutput>
     {
 
         /// <summary>
@@ -44,19 +44,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new AddReservedHandleOutput FromCBORObject(CBORObject obj)
         {
             return new AddReservedHandleOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static AddReservedHandleOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<AddReservedHandleOutput>(s, (JsonTypeInfo<AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out AddReservedHandleOutput result)
+        {
+            result = JsonSerializer.Deserialize<AddReservedHandleOutput>(s, (JsonTypeInfo<AddReservedHandleOutput>)SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput);
+            return result != null;
+        }
     }
 }
 

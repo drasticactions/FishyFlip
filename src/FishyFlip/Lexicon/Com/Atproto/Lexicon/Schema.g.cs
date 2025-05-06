@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Lexicon
     /// <summary>
     /// Representation of Lexicon schemas themselves, when published as atproto records. Note that the schema language is not defined in Lexicon; this meta schema currently only includes a single version field ('lexicon'). See the atproto specifications for description of the other expected top-level fields ('id', 'defs', etc).
     /// </summary>
-    public partial class Schema : ATObject, ICBOREncodable<Schema>, IJsonEncodable<Schema>
+    public partial class Schema : ATObject, ICBOREncodable<Schema>, IJsonEncodable<Schema>, IParsable<Schema>
     {
 
         /// <summary>
@@ -66,19 +66,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Lexicon
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Lexicon.Schema>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Lexicon.Schema>)SourceGenerationContext.Default.ComAtprotoLexiconSchema)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Schema FromCBORObject(CBORObject obj)
         {
             return new Schema(obj);
         }
 
+        /// <inheritdoc/>
+        public static Schema Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Schema>(s, (JsonTypeInfo<Schema>)SourceGenerationContext.Default.ComAtprotoLexiconSchema)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Schema result)
+        {
+            result = JsonSerializer.Deserialize<Schema>(s, (JsonTypeInfo<Schema>)SourceGenerationContext.Default.ComAtprotoLexiconSchema);
+            return result != null;
+        }
     }
 }
 

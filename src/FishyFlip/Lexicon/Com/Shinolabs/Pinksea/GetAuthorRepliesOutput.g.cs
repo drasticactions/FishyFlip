@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
 {
-    public partial class GetAuthorRepliesOutput : ATObject, ICBOREncodable<GetAuthorRepliesOutput>, IJsonEncodable<GetAuthorRepliesOutput>
+    public partial class GetAuthorRepliesOutput : ATObject, ICBOREncodable<GetAuthorRepliesOutput>, IJsonEncodable<GetAuthorRepliesOutput>, IParsable<GetAuthorRepliesOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorRepliesOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetAuthorRepliesOutput FromCBORObject(CBORObject obj)
         {
             return new GetAuthorRepliesOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetAuthorRepliesOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetAuthorRepliesOutput>(s, (JsonTypeInfo<GetAuthorRepliesOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorRepliesOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetAuthorRepliesOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetAuthorRepliesOutput>(s, (JsonTypeInfo<GetAuthorRepliesOutput>)SourceGenerationContext.Default.ComShinolabsPinkseaGetAuthorRepliesOutput);
+            return result != null;
+        }
     }
 }
 

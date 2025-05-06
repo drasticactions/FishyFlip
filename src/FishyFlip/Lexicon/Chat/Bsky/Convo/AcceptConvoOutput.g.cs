@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Chat.Bsky.Convo
 {
-    public partial class AcceptConvoOutput : ATObject, ICBOREncodable<AcceptConvoOutput>, IJsonEncodable<AcceptConvoOutput>
+    public partial class AcceptConvoOutput : ATObject, ICBOREncodable<AcceptConvoOutput>, IJsonEncodable<AcceptConvoOutput>, IParsable<AcceptConvoOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.AcceptConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoAcceptConvoOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new AcceptConvoOutput FromCBORObject(CBORObject obj)
         {
             return new AcceptConvoOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static AcceptConvoOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<AcceptConvoOutput>(s, (JsonTypeInfo<AcceptConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoAcceptConvoOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out AcceptConvoOutput result)
+        {
+            result = JsonSerializer.Deserialize<AcceptConvoOutput>(s, (JsonTypeInfo<AcceptConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoAcceptConvoOutput);
+            return result != null;
+        }
     }
 }
 

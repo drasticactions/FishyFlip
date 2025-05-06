@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 {
-    public partial class GetActorFeedOutput : ATObject, ICBOREncodable<GetActorFeedOutput>, IJsonEncodable<GetActorFeedOutput>
+    public partial class GetActorFeedOutput : ATObject, ICBOREncodable<GetActorFeedOutput>, IJsonEncodable<GetActorFeedOutput>, IParsable<GetActorFeedOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetActorFeedOutput FromCBORObject(CBORObject obj)
         {
             return new GetActorFeedOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetActorFeedOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetActorFeedOutput>(s, (JsonTypeInfo<GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetActorFeedOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetActorFeedOutput>(s, (JsonTypeInfo<GetActorFeedOutput>)SourceGenerationContext.Default.FmTealAlphaFeedGetActorFeedOutput);
+            return result != null;
+        }
     }
 }
 

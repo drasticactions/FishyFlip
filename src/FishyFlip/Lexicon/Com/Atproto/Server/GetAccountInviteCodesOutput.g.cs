@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class GetAccountInviteCodesOutput : ATObject, ICBOREncodable<GetAccountInviteCodesOutput>, IJsonEncodable<GetAccountInviteCodesOutput>
+    public partial class GetAccountInviteCodesOutput : ATObject, ICBOREncodable<GetAccountInviteCodesOutput>, IJsonEncodable<GetAccountInviteCodesOutput>, IParsable<GetAccountInviteCodesOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.GetAccountInviteCodesOutput>)SourceGenerationContext.Default.ComAtprotoServerGetAccountInviteCodesOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetAccountInviteCodesOutput FromCBORObject(CBORObject obj)
         {
             return new GetAccountInviteCodesOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetAccountInviteCodesOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetAccountInviteCodesOutput>(s, (JsonTypeInfo<GetAccountInviteCodesOutput>)SourceGenerationContext.Default.ComAtprotoServerGetAccountInviteCodesOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetAccountInviteCodesOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetAccountInviteCodesOutput>(s, (JsonTypeInfo<GetAccountInviteCodesOutput>)SourceGenerationContext.Default.ComAtprotoServerGetAccountInviteCodesOutput);
+            return result != null;
+        }
     }
 }
 

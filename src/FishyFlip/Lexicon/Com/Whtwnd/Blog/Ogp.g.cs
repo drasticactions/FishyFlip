@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
 {
-    public partial class Ogp : ATObject, ICBOREncodable<Ogp>, IJsonEncodable<Ogp>
+    public partial class Ogp : ATObject, ICBOREncodable<Ogp>, IJsonEncodable<Ogp>, IParsable<Ogp>
     {
 
         /// <summary>
@@ -81,19 +81,31 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp>)SourceGenerationContext.Default.ComWhtwndBlogOgp)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Ogp FromCBORObject(CBORObject obj)
         {
             return new Ogp(obj);
         }
 
+        /// <inheritdoc/>
+        public static Ogp Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Ogp>(s, (JsonTypeInfo<Ogp>)SourceGenerationContext.Default.ComWhtwndBlogOgp)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Ogp result)
+        {
+            result = JsonSerializer.Deserialize<Ogp>(s, (JsonTypeInfo<Ogp>)SourceGenerationContext.Default.ComWhtwndBlogOgp);
+            return result != null;
+        }
     }
 }
 

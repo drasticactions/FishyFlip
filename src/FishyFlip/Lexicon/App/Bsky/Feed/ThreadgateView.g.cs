@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class ThreadgateView : ATObject, ICBOREncodable<ThreadgateView>, IJsonEncodable<ThreadgateView>
+    public partial class ThreadgateView : ATObject, ICBOREncodable<ThreadgateView>, IJsonEncodable<ThreadgateView>, IParsable<ThreadgateView>
     {
 
         /// <summary>
@@ -90,19 +90,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ThreadgateView FromCBORObject(CBORObject obj)
         {
             return new ThreadgateView(obj);
         }
 
+        /// <inheritdoc/>
+        public static ThreadgateView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ThreadgateView>(s, (JsonTypeInfo<ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ThreadgateView result)
+        {
+            result = JsonSerializer.Deserialize<ThreadgateView>(s, (JsonTypeInfo<ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView);
+            return result != null;
+        }
     }
 }
 

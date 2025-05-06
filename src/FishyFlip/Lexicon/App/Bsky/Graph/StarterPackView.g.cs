@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Graph
 {
-    public partial class StarterPackView : ATObject, ICBOREncodable<StarterPackView>, IJsonEncodable<StarterPackView>
+    public partial class StarterPackView : ATObject, ICBOREncodable<StarterPackView>, IJsonEncodable<StarterPackView>, IParsable<StarterPackView>
     {
 
         /// <summary>
@@ -164,19 +164,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackView>)SourceGenerationContext.Default.AppBskyGraphStarterPackView)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new StarterPackView FromCBORObject(CBORObject obj)
         {
             return new StarterPackView(obj);
         }
 
+        /// <inheritdoc/>
+        public static StarterPackView Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<StarterPackView>(s, (JsonTypeInfo<StarterPackView>)SourceGenerationContext.Default.AppBskyGraphStarterPackView)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out StarterPackView result)
+        {
+            result = JsonSerializer.Deserialize<StarterPackView>(s, (JsonTypeInfo<StarterPackView>)SourceGenerationContext.Default.AppBskyGraphStarterPackView);
+            return result != null;
+        }
     }
 }
 

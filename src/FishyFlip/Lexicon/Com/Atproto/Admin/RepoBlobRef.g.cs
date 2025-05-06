@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class RepoBlobRef : ATObject, ICBOREncodable<RepoBlobRef>, IJsonEncodable<RepoBlobRef>
+    public partial class RepoBlobRef : ATObject, ICBOREncodable<RepoBlobRef>, IJsonEncodable<RepoBlobRef>, IParsable<RepoBlobRef>
     {
 
         /// <summary>
@@ -84,19 +84,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RepoBlobRef FromCBORObject(CBORObject obj)
         {
             return new RepoBlobRef(obj);
         }
 
+        /// <inheritdoc/>
+        public static RepoBlobRef Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RepoBlobRef>(s, (JsonTypeInfo<RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RepoBlobRef result)
+        {
+            result = JsonSerializer.Deserialize<RepoBlobRef>(s, (JsonTypeInfo<RepoBlobRef>)SourceGenerationContext.Default.ComAtprotoAdminRepoBlobRef);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Richtext
     /// <summary>
     /// On the facet, only the CID is provided as this can be combined with the DID to create CDN URLs for non-animated blobs. For APNG and dotLottie, raw Bytes are served and require a com.atproto.repo.getRecord roundtrip on render so are marked with a boolean
     /// </summary>
-    public partial class FormatsV0 : ATObject, ICBOREncodable<FormatsV0>, IJsonEncodable<FormatsV0>
+    public partial class FormatsV0 : ATObject, ICBOREncodable<FormatsV0>, IJsonEncodable<FormatsV0>, IParsable<FormatsV0>
     {
 
         /// <summary>
@@ -101,19 +101,31 @@ namespace FishyFlip.Lexicon.Blue.Moji.Richtext
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Richtext.FormatsV0>(json, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Richtext.FormatsV0>)SourceGenerationContext.Default.BlueMojiRichtextFormatsV0)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new FormatsV0 FromCBORObject(CBORObject obj)
         {
             return new FormatsV0(obj);
         }
 
+        /// <inheritdoc/>
+        public static FormatsV0 Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<FormatsV0>(s, (JsonTypeInfo<FormatsV0>)SourceGenerationContext.Default.BlueMojiRichtextFormatsV0)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out FormatsV0 result)
+        {
+            result = JsonSerializer.Deserialize<FormatsV0>(s, (JsonTypeInfo<FormatsV0>)SourceGenerationContext.Default.BlueMojiRichtextFormatsV0);
+            return result != null;
+        }
     }
 }
 

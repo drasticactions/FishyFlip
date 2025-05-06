@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Sync
 {
-    public partial class RequestCrawlInput : ATObject, ICBOREncodable<RequestCrawlInput>, IJsonEncodable<RequestCrawlInput>
+    public partial class RequestCrawlInput : ATObject, ICBOREncodable<RequestCrawlInput>, IJsonEncodable<RequestCrawlInput>, IParsable<RequestCrawlInput>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.RequestCrawlInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RequestCrawlInput>)SourceGenerationContext.Default.ComAtprotoSyncRequestCrawlInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RequestCrawlInput FromCBORObject(CBORObject obj)
         {
             return new RequestCrawlInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RequestCrawlInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RequestCrawlInput>(s, (JsonTypeInfo<RequestCrawlInput>)SourceGenerationContext.Default.ComAtprotoSyncRequestCrawlInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RequestCrawlInput result)
+        {
+            result = JsonSerializer.Deserialize<RequestCrawlInput>(s, (JsonTypeInfo<RequestCrawlInput>)SourceGenerationContext.Default.ComAtprotoSyncRequestCrawlInput);
+            return result != null;
+        }
     }
 }
 

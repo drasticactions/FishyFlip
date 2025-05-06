@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class RequestPasswordResetInput : ATObject, ICBOREncodable<RequestPasswordResetInput>, IJsonEncodable<RequestPasswordResetInput>
+    public partial class RequestPasswordResetInput : ATObject, ICBOREncodable<RequestPasswordResetInput>, IJsonEncodable<RequestPasswordResetInput>, IParsable<RequestPasswordResetInput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.RequestPasswordResetInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RequestPasswordResetInput>)SourceGenerationContext.Default.ComAtprotoServerRequestPasswordResetInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RequestPasswordResetInput FromCBORObject(CBORObject obj)
         {
             return new RequestPasswordResetInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static RequestPasswordResetInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RequestPasswordResetInput>(s, (JsonTypeInfo<RequestPasswordResetInput>)SourceGenerationContext.Default.ComAtprotoServerRequestPasswordResetInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RequestPasswordResetInput result)
+        {
+            result = JsonSerializer.Deserialize<RequestPasswordResetInput>(s, (JsonTypeInfo<RequestPasswordResetInput>)SourceGenerationContext.Default.ComAtprotoServerRequestPasswordResetInput);
+            return result != null;
+        }
     }
 }
 

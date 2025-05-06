@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 {
-    public partial class Moderation : ATObject, ICBOREncodable<Moderation>, IJsonEncodable<Moderation>
+    public partial class Moderation : ATObject, ICBOREncodable<Moderation>, IJsonEncodable<Moderation>, IParsable<Moderation>
     {
 
         /// <summary>
@@ -65,19 +65,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation>)SourceGenerationContext.Default.ToolsOzoneModerationModeration)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Moderation FromCBORObject(CBORObject obj)
         {
             return new Moderation(obj);
         }
 
+        /// <inheritdoc/>
+        public static Moderation Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Moderation>(s, (JsonTypeInfo<Moderation>)SourceGenerationContext.Default.ToolsOzoneModerationModeration)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Moderation result)
+        {
+            result = JsonSerializer.Deserialize<Moderation>(s, (JsonTypeInfo<Moderation>)SourceGenerationContext.Default.ToolsOzoneModerationModeration);
+            return result != null;
+        }
     }
 }
 

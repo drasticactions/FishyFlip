@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class ThreatSignature : ATObject, ICBOREncodable<ThreatSignature>, IJsonEncodable<ThreatSignature>
+    public partial class ThreatSignature : ATObject, ICBOREncodable<ThreatSignature>, IJsonEncodable<ThreatSignature>, IParsable<ThreatSignature>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ThreatSignature FromCBORObject(CBORObject obj)
         {
             return new ThreatSignature(obj);
         }
 
+        /// <inheritdoc/>
+        public static ThreatSignature Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ThreatSignature>(s, (JsonTypeInfo<ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ThreatSignature result)
+        {
+            result = JsonSerializer.Deserialize<ThreatSignature>(s, (JsonTypeInfo<ThreatSignature>)SourceGenerationContext.Default.ComAtprotoAdminThreatSignature);
+            return result != null;
+        }
     }
 }
 

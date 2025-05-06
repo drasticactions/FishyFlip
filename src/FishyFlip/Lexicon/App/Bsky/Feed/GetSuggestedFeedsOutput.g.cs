@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class GetSuggestedFeedsOutput : ATObject, ICBOREncodable<GetSuggestedFeedsOutput>, IJsonEncodable<GetSuggestedFeedsOutput>
+    public partial class GetSuggestedFeedsOutput : ATObject, ICBOREncodable<GetSuggestedFeedsOutput>, IJsonEncodable<GetSuggestedFeedsOutput>, IParsable<GetSuggestedFeedsOutput>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetSuggestedFeedsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetSuggestedFeedsOutput FromCBORObject(CBORObject obj)
         {
             return new GetSuggestedFeedsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetSuggestedFeedsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetSuggestedFeedsOutput>(s, (JsonTypeInfo<GetSuggestedFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetSuggestedFeedsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetSuggestedFeedsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetSuggestedFeedsOutput>(s, (JsonTypeInfo<GetSuggestedFeedsOutput>)SourceGenerationContext.Default.AppBskyFeedGetSuggestedFeedsOutput);
+            return result != null;
+        }
     }
 }
 

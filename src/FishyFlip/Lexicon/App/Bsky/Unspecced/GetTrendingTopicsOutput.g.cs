@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 {
-    public partial class GetTrendingTopicsOutput : ATObject, ICBOREncodable<GetTrendingTopicsOutput>, IJsonEncodable<GetTrendingTopicsOutput>
+    public partial class GetTrendingTopicsOutput : ATObject, ICBOREncodable<GetTrendingTopicsOutput>, IJsonEncodable<GetTrendingTopicsOutput>, IParsable<GetTrendingTopicsOutput>
     {
 
         /// <summary>
@@ -73,19 +73,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new GetTrendingTopicsOutput FromCBORObject(CBORObject obj)
         {
             return new GetTrendingTopicsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static GetTrendingTopicsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<GetTrendingTopicsOutput>(s, (JsonTypeInfo<GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out GetTrendingTopicsOutput result)
+        {
+            result = JsonSerializer.Deserialize<GetTrendingTopicsOutput>(s, (JsonTypeInfo<GetTrendingTopicsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput);
+            return result != null;
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     /// <summary>
     /// A repo operation, ie a mutation of a single record.
     /// </summary>
-    public partial class RepoOp : ATObject, ICBOREncodable<RepoOp>, IJsonEncodable<RepoOp>
+    public partial class RepoOp : ATObject, ICBOREncodable<RepoOp>, IJsonEncodable<RepoOp>, IParsable<RepoOp>
     {
 
         /// <summary>
@@ -108,19 +108,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp>)SourceGenerationContext.Default.ComAtprotoSyncRepoOp)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new RepoOp FromCBORObject(CBORObject obj)
         {
             return new RepoOp(obj);
         }
 
+        /// <inheritdoc/>
+        public static RepoOp Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<RepoOp>(s, (JsonTypeInfo<RepoOp>)SourceGenerationContext.Default.ComAtprotoSyncRepoOp)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out RepoOp result)
+        {
+            result = JsonSerializer.Deserialize<RepoOp>(s, (JsonTypeInfo<RepoOp>)SourceGenerationContext.Default.ComAtprotoSyncRepoOp);
+            return result != null;
+        }
     }
 }
 

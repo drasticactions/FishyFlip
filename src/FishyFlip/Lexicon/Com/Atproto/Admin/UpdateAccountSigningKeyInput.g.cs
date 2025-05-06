@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class UpdateAccountSigningKeyInput : ATObject, ICBOREncodable<UpdateAccountSigningKeyInput>, IJsonEncodable<UpdateAccountSigningKeyInput>
+    public partial class UpdateAccountSigningKeyInput : ATObject, ICBOREncodable<UpdateAccountSigningKeyInput>, IJsonEncodable<UpdateAccountSigningKeyInput>, IParsable<UpdateAccountSigningKeyInput>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountSigningKeyInput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.UpdateAccountSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountSigningKeyInput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new UpdateAccountSigningKeyInput FromCBORObject(CBORObject obj)
         {
             return new UpdateAccountSigningKeyInput(obj);
         }
 
+        /// <inheritdoc/>
+        public static UpdateAccountSigningKeyInput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<UpdateAccountSigningKeyInput>(s, (JsonTypeInfo<UpdateAccountSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountSigningKeyInput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out UpdateAccountSigningKeyInput result)
+        {
+            result = JsonSerializer.Deserialize<UpdateAccountSigningKeyInput>(s, (JsonTypeInfo<UpdateAccountSigningKeyInput>)SourceGenerationContext.Default.ComAtprotoAdminUpdateAccountSigningKeyInput);
+            return result != null;
+        }
     }
 }
 

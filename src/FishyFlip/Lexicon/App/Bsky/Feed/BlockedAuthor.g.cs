@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.App.Bsky.Feed
 {
-    public partial class BlockedAuthor : ATObject, ICBOREncodable<BlockedAuthor>, IJsonEncodable<BlockedAuthor>
+    public partial class BlockedAuthor : ATObject, ICBOREncodable<BlockedAuthor>, IJsonEncodable<BlockedAuthor>, IParsable<BlockedAuthor>
     {
 
         /// <summary>
@@ -76,19 +76,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new BlockedAuthor FromCBORObject(CBORObject obj)
         {
             return new BlockedAuthor(obj);
         }
 
+        /// <inheritdoc/>
+        public static BlockedAuthor Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<BlockedAuthor>(s, (JsonTypeInfo<BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out BlockedAuthor result)
+        {
+            result = JsonSerializer.Deserialize<BlockedAuthor>(s, (JsonTypeInfo<BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor);
+            return result != null;
+        }
     }
 }
 

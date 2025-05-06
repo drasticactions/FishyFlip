@@ -10,7 +10,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
     /// <summary>
     /// Record containing a Frontpage post.
     /// </summary>
-    public partial class Post : ATObject, ICBOREncodable<Post>, IJsonEncodable<Post>
+    public partial class Post : ATObject, ICBOREncodable<Post>, IJsonEncodable<Post>, IParsable<Post>
     {
 
         /// <summary>
@@ -86,19 +86,31 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>(json, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new Post FromCBORObject(CBORObject obj)
         {
             return new Post(obj);
         }
 
+        /// <inheritdoc/>
+        public static Post Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<Post>(s, (JsonTypeInfo<Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out Post result)
+        {
+            result = JsonSerializer.Deserialize<Post>(s, (JsonTypeInfo<Post>)SourceGenerationContext.Default.FyiUnravelFrontpagePost);
+            return result != null;
+        }
     }
 }
 

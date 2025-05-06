@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class ListAppPasswordsOutput : ATObject, ICBOREncodable<ListAppPasswordsOutput>, IJsonEncodable<ListAppPasswordsOutput>
+    public partial class ListAppPasswordsOutput : ATObject, ICBOREncodable<ListAppPasswordsOutput>, IJsonEncodable<ListAppPasswordsOutput>, IParsable<ListAppPasswordsOutput>
     {
 
         /// <summary>
@@ -63,19 +63,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ListAppPasswordsOutput FromCBORObject(CBORObject obj)
         {
             return new ListAppPasswordsOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ListAppPasswordsOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ListAppPasswordsOutput>(s, (JsonTypeInfo<ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ListAppPasswordsOutput result)
+        {
+            result = JsonSerializer.Deserialize<ListAppPasswordsOutput>(s, (JsonTypeInfo<ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput);
+            return result != null;
+        }
     }
 }
 

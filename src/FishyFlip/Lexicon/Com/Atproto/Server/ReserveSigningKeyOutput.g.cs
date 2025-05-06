@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Server
 {
-    public partial class ReserveSigningKeyOutput : ATObject, ICBOREncodable<ReserveSigningKeyOutput>, IJsonEncodable<ReserveSigningKeyOutput>
+    public partial class ReserveSigningKeyOutput : ATObject, ICBOREncodable<ReserveSigningKeyOutput>, IJsonEncodable<ReserveSigningKeyOutput>, IParsable<ReserveSigningKeyOutput>
     {
 
         /// <summary>
@@ -64,19 +64,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ReserveSigningKeyOutput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyOutput)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new ReserveSigningKeyOutput FromCBORObject(CBORObject obj)
         {
             return new ReserveSigningKeyOutput(obj);
         }
 
+        /// <inheritdoc/>
+        public static ReserveSigningKeyOutput Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<ReserveSigningKeyOutput>(s, (JsonTypeInfo<ReserveSigningKeyOutput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyOutput)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out ReserveSigningKeyOutput result)
+        {
+            result = JsonSerializer.Deserialize<ReserveSigningKeyOutput>(s, (JsonTypeInfo<ReserveSigningKeyOutput>)SourceGenerationContext.Default.ComAtprotoServerReserveSigningKeyOutput);
+            return result != null;
+        }
     }
 }
 

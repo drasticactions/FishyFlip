@@ -7,7 +7,7 @@
 
 namespace FishyFlip.Lexicon.Com.Atproto.Admin
 {
-    public partial class StatusAttr : ATObject, ICBOREncodable<StatusAttr>, IJsonEncodable<StatusAttr>
+    public partial class StatusAttr : ATObject, ICBOREncodable<StatusAttr>, IJsonEncodable<StatusAttr>, IParsable<StatusAttr>
     {
 
         /// <summary>
@@ -72,19 +72,31 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr>)SourceGenerationContext.Default.ComAtprotoAdminStatusAttr)!;
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public override CBORObject ToCBORObject()
         {
             using var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(this.ToJson()));
             return CBORObject.ReadJSON(jsonStream);
         }
 
-         /// <inheritdoc/>
+        /// <inheritdoc/>
         public static new StatusAttr FromCBORObject(CBORObject obj)
         {
             return new StatusAttr(obj);
         }
 
+        /// <inheritdoc/>
+        public static StatusAttr Parse(string s, IFormatProvider? provider)
+        {
+            return JsonSerializer.Deserialize<StatusAttr>(s, (JsonTypeInfo<StatusAttr>)SourceGenerationContext.Default.ComAtprotoAdminStatusAttr)!;
+        }
+
+        /// <inheritdoc/>
+        public static bool TryParse(string? s, IFormatProvider? provider, out StatusAttr result)
+        {
+            result = JsonSerializer.Deserialize<StatusAttr>(s, (JsonTypeInfo<StatusAttr>)SourceGenerationContext.Default.ComAtprotoAdminStatusAttr);
+            return result != null;
+        }
     }
 }
 
