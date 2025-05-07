@@ -1383,15 +1383,15 @@ public partial class AppCommands
             var httpType = item.Definition.Type == "procedure" ? "Post" : "Get";
             if (outputProperty == "Success")
             {
-                sb.Append($"        public abstract Task<Results<Ok, BadRequest>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<Ok, ATErrorResult>> {methodName} (");
             }
             else if (outputProperty == "CarResponse")
             {
-                sb.Append($"        public abstract Task<Results<FileStreamHttpResult, BadRequest>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<FileStreamHttpResult, ATErrorResult>> {methodName} (");
             }
             else
             {
-                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, BadRequest>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, ATErrorResult>> {methodName} (");
             }
             for (int i = 0; i < inputProperties.Count; i++)
             {
@@ -1471,15 +1471,15 @@ public partial class AppCommands
             sb.AppendLine($"        [Http{httpType}(\"/xrpc/{item.Id}\")]");
             if (outputProperty == "Success")
             {
-                sb.Append($"        public abstract Task<Results<Ok, BadRequest>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<Ok, ATErrorResult>> {methodName} (");
             }
             else if (outputProperty == "CarResponse")
             {
-                sb.Append($"        public abstract Task<Results<FileStreamHttpResult, BadRequest>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<FileStreamHttpResult, ATErrorResult>> {methodName} (");
             }
             else
             {
-                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, BadRequest>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, ATErrorResult>> {methodName} (");
             }
             for (int i = 0; i < inputProperties.Count; i++)
             {

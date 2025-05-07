@@ -9,6 +9,7 @@
 using System.Text.Json.Serialization;
 using FishyFlip.Lexicon.Com.Whtwnd.Blog;
 using FishyFlip.Models;
+using FishyFlip.Xrpc.Lexicon.Com.Whtwnd.Blog;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;

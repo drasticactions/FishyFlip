@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.moderation.getActorMetadata")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>, BadRequest>> GetActorMetadataAsync ([FromQuery] FishyFlip.Models.ATDid actor, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>, ATErrorResult>> GetActorMetadataAsync ([FromQuery] FishyFlip.Models.ATDid actor, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput"/></returns>
         [HttpGet("/xrpc/chat.bsky.moderation.getMessageContext")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>, BadRequest>> GetMessageContextAsync ([FromQuery] string messageId, [FromQuery] string? convoId = default, [FromQuery] int? before = 5, [FromQuery] int? after = 5, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>, ATErrorResult>> GetMessageContextAsync ([FromQuery] string messageId, [FromQuery] string? convoId = default, [FromQuery] int? before = 5, [FromQuery] int? after = 5, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -45,7 +45,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/chat.bsky.moderation.updateActorAccess")]
-        public abstract Task<Results<Ok, BadRequest>> UpdateActorAccessAsync ([FromBody] FishyFlip.Models.ATDid actor, [FromBody] bool allowAccess, [FromBody] string? @ref = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UpdateActorAccessAsync ([FromBody] FishyFlip.Models.ATDid actor, [FromBody] bool allowAccess, [FromBody] string? @ref = default, CancellationToken cancellationToken = default);
     }
 }
 

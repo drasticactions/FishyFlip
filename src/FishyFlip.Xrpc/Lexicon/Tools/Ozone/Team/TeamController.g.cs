@@ -25,7 +25,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Team
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.Member"/></returns>
         [HttpPost("/xrpc/tools.ozone.team.addMember")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, BadRequest>> AddMemberAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] string role, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, ATErrorResult>> AddMemberAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] string role, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a member from ozone team. Requires admin role.
@@ -37,7 +37,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Team
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/tools.ozone.team.deleteMember")]
-        public abstract Task<Results<Ok, BadRequest>> DeleteMemberAsync ([FromBody] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> DeleteMemberAsync ([FromBody] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all members with access to the ozone service.
@@ -50,7 +50,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Team
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.team.listMembers")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>, BadRequest>> ListMembersAsync ([FromQuery] string? q = default, [FromQuery] bool? disabled = default, [FromQuery] List<string>? roles = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>, ATErrorResult>> ListMembersAsync ([FromQuery] string? q = default, [FromQuery] bool? disabled = default, [FromQuery] List<string>? roles = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a member in the ozone service. Requires admin role.
@@ -63,7 +63,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Team
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.Member"/></returns>
         [HttpPost("/xrpc/tools.ozone.team.updateMember")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, BadRequest>> UpdateMemberAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] bool? disabled = default, [FromBody] string? role = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, ATErrorResult>> UpdateMemberAsync ([FromBody] FishyFlip.Models.ATDid did, [FromBody] bool? disabled = default, [FromBody] string? role = default, CancellationToken cancellationToken = default);
     }
 }
 

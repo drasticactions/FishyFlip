@@ -25,7 +25,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Label
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.label.queryLabels")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>, BadRequest>> QueryLabelsAsync ([FromQuery] List<string> uriPatterns, [FromQuery] List<FishyFlip.Models.ATDid>? sources = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>, ATErrorResult>> QueryLabelsAsync ([FromQuery] List<string> uriPatterns, [FromQuery] List<FishyFlip.Models.ATDid>? sources = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
     }
 }
 

@@ -56,6 +56,15 @@ public class ATError
     public ErrorDetail? Detail { get; set; }
 
     /// <summary>
+    /// Returns the error as a JSON string.
+    /// </summary>
+    /// <returns>JSON string.</returns>
+    public string ToJson()
+    {
+        return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Models.ATError>)SourceGenerationContext.Default.ATError);
+    }
+
+    /// <summary>
     /// ToString override.
     /// </summary>
     /// <returns>String.</returns>

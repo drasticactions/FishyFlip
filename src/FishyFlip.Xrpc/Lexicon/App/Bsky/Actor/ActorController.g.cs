@@ -21,7 +21,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.actor.getPreferences")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>, BadRequest>> GetPreferencesAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>, ATErrorResult>> GetPreferencesAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get detailed profile view of an actor. Does not require auth, but contains relevant metadata with auth.
@@ -30,7 +30,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed"/></returns>
         [HttpGet("/xrpc/app.bsky.actor.getProfile")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>, BadRequest>> GetProfileAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>, ATErrorResult>> GetProfileAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get detailed profile views of multiple actors.
@@ -39,7 +39,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.actor.getProfiles")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>, BadRequest>> GetProfilesAsync ([FromQuery] List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.GetProfilesOutput>, ATErrorResult>> GetProfilesAsync ([FromQuery] List<FishyFlip.Models.ATIdentifier> actors, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of suggested actors. Expected use is discovery of accounts to follow during new account onboarding.
@@ -49,7 +49,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.actor.getSuggestions")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>, BadRequest>> GetSuggestionsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>, ATErrorResult>> GetSuggestionsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set the private preferences attached to the account.
@@ -74,7 +74,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.actor.putPreferences")]
-        public abstract Task<Results<Ok, BadRequest>> PutPreferencesAsync ([FromBody] List<ATObject> preferences, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> PutPreferencesAsync ([FromBody] List<ATObject> preferences, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find actors (profiles) matching search criteria. Does not require auth.
@@ -85,7 +85,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.actor.searchActors")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>, BadRequest>> SearchActorsAsync ([FromQuery] string? q = default, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsOutput>, ATErrorResult>> SearchActorsAsync ([FromQuery] string? q = default, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find actor suggestions for a prefix search term. Expected use is for auto-completion during text field entry. Does not require auth.
@@ -95,7 +95,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.actor.searchActorsTypeahead")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>, BadRequest>> SearchActorsTypeaheadAsync ([FromQuery] string? q = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Actor.SearchActorsTypeaheadOutput>, ATErrorResult>> SearchActorsTypeaheadAsync ([FromQuery] string? q = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
     }
 }
 
