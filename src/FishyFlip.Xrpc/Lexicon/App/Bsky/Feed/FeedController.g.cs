@@ -21,7 +21,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.describeFeedGenerator")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>, BadRequest>> DescribeFeedGeneratorAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>, ATErrorResult>> DescribeFeedGeneratorAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of feeds (feed generator records) created by the actor (in the actor's repo).
@@ -32,7 +32,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getActorFeeds")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput>, BadRequest>> GetActorFeedsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetActorFeedsOutput>, ATErrorResult>> GetActorFeedsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of posts liked by an actor. Requires auth, actor must be the requesting account.
@@ -46,7 +46,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getActorLikes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>, BadRequest>> GetActorLikesAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetActorLikesOutput>, ATErrorResult>> GetActorLikesAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a view of an actor's 'author feed' (post and reposts by the author). Does not require auth.
@@ -62,7 +62,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getAuthorFeed")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput>, BadRequest>> GetAuthorFeedAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] string? filter = default, [FromQuery] bool? includePins = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput>, ATErrorResult>> GetAuthorFeedAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] string? filter = default, [FromQuery] bool? includePins = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a hydrated feed from an actor's selected feed generator. Implemented by App View.
@@ -75,7 +75,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getFeed")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput>, BadRequest>> GetFeedAsync ([FromQuery] FishyFlip.Models.ATUri feed, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedOutput>, ATErrorResult>> GetFeedAsync ([FromQuery] FishyFlip.Models.ATUri feed, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get information about a feed generator. Implemented by AppView.
@@ -84,7 +84,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getFeedGenerator")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>, BadRequest>> GetFeedGeneratorAsync ([FromQuery] FishyFlip.Models.ATUri feed, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorOutput>, ATErrorResult>> GetFeedGeneratorAsync ([FromQuery] FishyFlip.Models.ATUri feed, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get information about a list of feed generators.
@@ -93,7 +93,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getFeedGenerators")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>, BadRequest>> GetFeedGeneratorsAsync ([FromQuery] List<FishyFlip.Models.ATUri> feeds, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedGeneratorsOutput>, ATErrorResult>> GetFeedGeneratorsAsync ([FromQuery] List<FishyFlip.Models.ATUri> feeds, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a skeleton of a feed provided by a feed generator. Auth is optional, depending on provider requirements, and provides the DID of the requester. Implemented by Feed Generator Service.
@@ -106,7 +106,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetFeedSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getFeedSkeleton")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedSkeletonOutput>, BadRequest>> GetFeedSkeletonAsync ([FromQuery] FishyFlip.Models.ATUri feed, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetFeedSkeletonOutput>, ATErrorResult>> GetFeedSkeletonAsync ([FromQuery] FishyFlip.Models.ATUri feed, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get like records which reference a subject (by AT-URI and CID).
@@ -118,7 +118,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getLikes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>, BadRequest>> GetLikesAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetLikesOutput>, ATErrorResult>> GetLikesAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a feed of recent posts from a list (posts and reposts from any actors on the list). Does not require auth.
@@ -131,7 +131,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getListFeed")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput>, BadRequest>> GetListFeedAsync ([FromQuery] FishyFlip.Models.ATUri list, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetListFeedOutput>, ATErrorResult>> GetListFeedAsync ([FromQuery] FishyFlip.Models.ATUri list, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets post views for a specified list of posts (by AT-URI). This is sometimes referred to as 'hydrating' a 'feed skeleton'.
@@ -140,7 +140,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getPosts")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>, BadRequest>> GetPostsAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>, ATErrorResult>> GetPostsAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get posts in a thread. Does not require auth, but additional metadata and filtering will be applied for authed requests.
@@ -153,7 +153,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getPostThread")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>, BadRequest>> GetPostThreadAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] int? depth = 6, [FromQuery] int? parentHeight = 80, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>, ATErrorResult>> GetPostThreadAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] int? depth = 6, [FromQuery] int? parentHeight = 80, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of quotes for a given post.
@@ -165,7 +165,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getQuotes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>, BadRequest>> GetQuotesAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetQuotesOutput>, ATErrorResult>> GetQuotesAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of reposts for a given post.
@@ -177,7 +177,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getRepostedBy")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>, BadRequest>> GetRepostedByAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetRepostedByOutput>, ATErrorResult>> GetRepostedByAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a list of suggested feeds (feed generators) for the requesting account.
@@ -187,7 +187,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getSuggestedFeeds")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput>, BadRequest>> GetSuggestedFeedsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetSuggestedFeedsOutput>, ATErrorResult>> GetSuggestedFeedsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a view of the requesting account's home timeline. This is expected to be some form of reverse-chronological feed.
@@ -198,7 +198,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.getTimeline")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput>, BadRequest>> GetTimelineAsync ([FromQuery] string? algorithm = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput>, ATErrorResult>> GetTimelineAsync ([FromQuery] string? algorithm = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find posts matching search criteria, returning views of those posts.
@@ -220,7 +220,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.feed.searchPosts")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput>, BadRequest>> SearchPostsAsync ([FromQuery] string q, [FromQuery] string? sort = default, [FromQuery] string? since = default, [FromQuery] string? until = default, [FromQuery] FishyFlip.Models.ATIdentifier? mentions = default, [FromQuery] FishyFlip.Models.ATIdentifier? author = default, [FromQuery] string? lang = default, [FromQuery] string? domain = default, [FromQuery] string? url = default, [FromQuery] List<string>? tag = default, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.SearchPostsOutput>, ATErrorResult>> SearchPostsAsync ([FromQuery] string q, [FromQuery] string? sort = default, [FromQuery] string? since = default, [FromQuery] string? until = default, [FromQuery] FishyFlip.Models.ATIdentifier? mentions = default, [FromQuery] FishyFlip.Models.ATIdentifier? author = default, [FromQuery] string? lang = default, [FromQuery] string? domain = default, [FromQuery] string? url = default, [FromQuery] List<string>? tag = default, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send information about interactions with feed items back to the feed generator that served them.
@@ -229,7 +229,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput"/></returns>
         [HttpPost("/xrpc/app.bsky.feed.sendInteractions")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>, BadRequest>> SendInteractionsAsync ([FromBody] List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>, ATErrorResult>> SendInteractionsAsync ([FromBody] List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default);
     }
 }
 

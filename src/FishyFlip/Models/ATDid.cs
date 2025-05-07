@@ -12,7 +12,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// ATDid.
 /// </summary>
-public class ATDid : ATIdentifier
+public class ATDid : ATIdentifier, IParsable<ATDid>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ATDid"/> class.
@@ -97,6 +97,41 @@ public class ATDid : ATIdentifier
 
         return DIDValidator.EnsureValidDid(uri);
     }
+
+    /// <summary>
+    /// TryParse method for ATDid.
+    /// </summary>
+    /// <param name="s">String to parse.</param>
+    /// <param name="provider">Format provider.</param>
+    /// <param name="result">Parsed ATDid.</param>
+    /// <returns>True if parsed successfully, false otherwise.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if s is null or empty.</exception>
+    public static bool TryParse(string? s, IFormatProvider? provider, out ATDid result)
+    {
+        result = Create(s);
+        return result != null;
+    }
+
+#if NET
+    /// <summary>
+    /// Parse method for ATDid.
+    /// </summary>
+    /// <param name="s">String to parse.</param>
+    /// <param name="provider">Format provider.</param>
+    /// <returns>Parsed ATDid.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if s is null or empty.</exception>
+    /// <exception cref="FormatException">Thrown if the format is invalid.</exception>
+    static ATDid IParsable<ATDid>.Parse(string s, IFormatProvider? provider)
+    {
+        var atDid = Create(s);
+        if (atDid == null)
+        {
+            throw new FormatException($"Invalid ATDid format: {s}");
+        }
+
+        return atDid;
+    }
+#endif
 
     /// <inheritdoc/>
     public override string ToString()

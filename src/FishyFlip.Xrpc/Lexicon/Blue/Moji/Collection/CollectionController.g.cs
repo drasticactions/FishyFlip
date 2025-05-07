@@ -23,7 +23,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Moji.Collection
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.GetItemOutput"/></returns>
         [HttpGet("/xrpc/blue.moji.collection.getItem")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.GetItemOutput>, BadRequest>> GetItemAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, [FromQuery] string name, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.GetItemOutput>, ATErrorResult>> GetItemAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, [FromQuery] string name, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List a range of Bluemoji in a repository, matching a specific collection. Requires auth.
@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Moji.Collection
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput"/></returns>
         [HttpGet("/xrpc/blue.moji.collection.listCollection")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput>, BadRequest>> ListCollectionAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] bool? reverse = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput>, ATErrorResult>> ListCollectionAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] bool? reverse = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Write a Bluemoji record, creating or updating it as needed. Requires auth, implemented by AppView.
@@ -45,7 +45,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Moji.Collection
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput"/></returns>
         [HttpPost("/xrpc/blue.moji.collection.putItem")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput>, BadRequest>> PutItemAsync ([FromBody] FishyFlip.Models.ATIdentifier repo, [FromBody] FishyFlip.Lexicon.Blue.Moji.Collection.ItemView item, [FromBody] bool? validate = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemOutput>, ATErrorResult>> PutItemAsync ([FromBody] FishyFlip.Models.ATIdentifier repo, [FromBody] FishyFlip.Lexicon.Blue.Moji.Collection.ItemView item, [FromBody] bool? validate = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Copy a single emoji from another repo. Requires auth.
@@ -59,7 +59,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Moji.Collection
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionOutput"/></returns>
         [HttpPost("/xrpc/blue.moji.collection.saveToCollection")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionOutput>, BadRequest>> SaveToCollectionAsync ([FromBody] FishyFlip.Models.ATIdentifier source, [FromBody] string name, [FromBody] string? renameTo = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Collection.SaveToCollectionOutput>, ATErrorResult>> SaveToCollectionAsync ([FromBody] FishyFlip.Models.ATIdentifier source, [FromBody] string name, [FromBody] string? renameTo = default, CancellationToken cancellationToken = default);
     }
 }
 

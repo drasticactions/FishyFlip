@@ -24,7 +24,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getAuthorFeed")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>, BadRequest>> GetAuthorFeedAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>, ATErrorResult>> GetAuthorFeedAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the replies for an author.
@@ -35,7 +35,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getAuthorReplies")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>, BadRequest>> GetAuthorRepliesAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>, ATErrorResult>> GetAuthorRepliesAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the handle for a DID.
@@ -44,7 +44,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getHandleFromDid")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>, BadRequest>> GetHandleFromDidAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>, ATErrorResult>> GetHandleFromDidAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the identity of the authenticated user.
@@ -52,7 +52,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getIdentity")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>, BadRequest>> GetIdentityAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>, ATErrorResult>> GetIdentityAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the data about an oekaki post, with its children
@@ -62,7 +62,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getOekaki")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>, BadRequest>> GetOekakiAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] string rkey, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>, ATErrorResult>> GetOekakiAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] string rkey, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the parent for a reply.
@@ -72,7 +72,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetParentForReplyOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getParentForReply")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetParentForReplyOutput>, BadRequest>> GetParentForReplyAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] string rkey, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetParentForReplyOutput>, ATErrorResult>> GetParentForReplyAsync ([FromQuery] FishyFlip.Models.ATIdentifier did, [FromQuery] string rkey, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the most recent posts on the timeline, in reverse chronological order.
@@ -82,7 +82,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetRecentOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getRecent")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetRecentOutput>, BadRequest>> GetRecentAsync ([FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetRecentOutput>, ATErrorResult>> GetRecentAsync ([FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the feed for a given tag.
@@ -93,7 +93,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Shinolabs.Pinksea
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput"/></returns>
         [HttpGet("/xrpc/com.shinolabs.pinksea.getTagFeed")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput>, BadRequest>> GetTagFeedAsync ([FromQuery] string tag, [FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput>, ATErrorResult>> GetTagFeedAsync ([FromQuery] string tag, [FromQuery] DateTime? since = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
     }
 }
 

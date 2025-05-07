@@ -12,7 +12,7 @@ namespace FishyFlip.Models;
 /// <summary>
 /// ATHandle.
 /// </summary>
-public class ATHandle : ATIdentifier
+public class ATHandle : ATIdentifier, IParsable<ATHandle>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ATHandle"/> class.
@@ -118,6 +118,41 @@ public class ATHandle : ATIdentifier
 
         return HandleValidator.EnsureValidHandle(uri);
     }
+
+    /// <summary>
+    /// TryParse method for ATHandle.
+    /// </summary>
+    /// <param name="s">String to parse.</param>
+    /// <param name="provider">Format provider.</param>
+    /// <param name="result">Parsed ATHandle.</param>
+    /// <returns>True if parsed successfully, false otherwise.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if s is null or empty.</exception>
+    public static bool TryParse(string? s, IFormatProvider? provider, out ATHandle result)
+    {
+        result = Create(s);
+        return result != null;
+    }
+
+#if NET
+    /// <summary>
+    /// Parse method for ATHandle.
+    /// </summary>
+    /// <param name="s">String to parse.</param>
+    /// <param name="provider">Format provider.</param>
+    /// <returns>Parsed ATHandle.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if s is null or empty.</exception>
+    /// <exception cref="FormatException">Thrown if the format is invalid.</exception>
+    static ATHandle IParsable<ATHandle>.Parse(string s, IFormatProvider? provider)
+    {
+        var atHandle = Create(s);
+        if (atHandle == null)
+        {
+            throw new FormatException($"Invalid ATHandle format: {s}");
+        }
+
+        return atHandle;
+    }
+#endif
 
     /// <inheritdoc/>
     public override string ToString()

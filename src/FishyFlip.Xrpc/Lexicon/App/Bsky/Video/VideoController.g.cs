@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Video
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.video.getJobStatus")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>, BadRequest>> GetJobStatusAsync ([FromQuery] string jobId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>, ATErrorResult>> GetJobStatusAsync ([FromQuery] string jobId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get video upload limits for the authenticated user.
@@ -30,7 +30,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Video
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.video.getUploadLimits")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>, BadRequest>> GetUploadLimitsAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>, ATErrorResult>> GetUploadLimitsAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload a video to be processed then stored on the PDS.
@@ -38,7 +38,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Video
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput"/></returns>
         [HttpPost("/xrpc/app.bsky.video.uploadVideo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>, BadRequest>> UploadVideoAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>, ATErrorResult>> UploadVideoAsync (CancellationToken cancellationToken = default);
     }
 }
 

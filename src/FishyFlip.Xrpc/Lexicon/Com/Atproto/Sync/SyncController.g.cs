@@ -29,7 +29,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="byte[]"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.getBlob")]
-        public abstract Task<Results<Ok<byte[]>, BadRequest>> GetBlobAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string cid, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<byte[]>, ATErrorResult>> GetBlobAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string cid, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get data blocks from a given repo, by CID. For example, intermediate MST nodes, or records. Does not require auth; implemented by PDS.
@@ -45,7 +45,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="CarResponse"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.getBlocks")]
-        public abstract Task<Results<FileStreamHttpResult, BadRequest>> GetBlocksAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] List<string> cids, CancellationToken cancellationToken = default);
+        public abstract Task<Results<FileStreamHttpResult, ATErrorResult>> GetBlocksAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] List<string> cids, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns information about a specified upstream host, as consumed by the server. Implemented by relays.
@@ -56,7 +56,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.getHostStatus")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>, BadRequest>> GetHostStatusAsync ([FromQuery] string hostname, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>, ATErrorResult>> GetHostStatusAsync ([FromQuery] string hostname, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the current commit CID & revision of the specified repo. Does not require auth.
@@ -70,7 +70,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.getLatestCommit")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>, BadRequest>> GetLatestCommitAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>, ATErrorResult>> GetLatestCommitAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get data blocks needed to prove the existence or non-existence of record in the current version of repo. Does not require auth.
@@ -87,7 +87,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="CarResponse"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.getRecord")]
-        public abstract Task<Results<FileStreamHttpResult, BadRequest>> GetRecordAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string collection, [FromQuery] string rkey, CancellationToken cancellationToken = default);
+        public abstract Task<Results<FileStreamHttpResult, ATErrorResult>> GetRecordAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string collection, [FromQuery] string rkey, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Download a repository export as CAR file. Optionally only a 'diff' since a previous revision. Does not require auth; implemented by PDS.
@@ -102,7 +102,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="CarResponse"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.getRepo")]
-        public abstract Task<Results<FileStreamHttpResult, BadRequest>> GetRepoAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string? since = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<FileStreamHttpResult, ATErrorResult>> GetRepoAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string? since = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the hosting status for a repository, on this server. Expected to be implemented by PDS and Relay.
@@ -113,7 +113,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.getRepoStatus")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>, BadRequest>> GetRepoStatusAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>, ATErrorResult>> GetRepoStatusAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List blob CIDs for an account, since some repo revision. Does not require auth; implemented by PDS.
@@ -130,7 +130,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.listBlobs")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>, BadRequest>> ListBlobsAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string? since = default, [FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>, ATErrorResult>> ListBlobsAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string? since = default, [FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates upstream hosts (eg, PDS or relay instances) that this service consumes from. Implemented by relays.
@@ -140,7 +140,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.listHosts")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>, BadRequest>> ListHostsAsync ([FromQuery] int? limit = 200, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>, ATErrorResult>> ListHostsAsync ([FromQuery] int? limit = 200, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates all the DID, rev, and commit CID for all repos hosted by this service. Does not require auth; implemented by PDS and Relay.
@@ -150,7 +150,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.listRepos")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>, BadRequest>> ListReposAsync ([FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>, ATErrorResult>> ListReposAsync ([FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates all the DIDs which have records with the given collection NSID.
@@ -161,7 +161,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.sync.listReposByCollection")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>, BadRequest>> ListReposByCollectionAsync ([FromQuery] string collection, [FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>, ATErrorResult>> ListReposByCollectionAsync ([FromQuery] string collection, [FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Request a service to persistently crawl hosted repos. Expected use is new PDS instances declaring their existence to Relays. Does not require auth.
@@ -172,7 +172,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.sync.requestCrawl")]
-        public abstract Task<Results<Ok, BadRequest>> RequestCrawlAsync ([FromBody] string hostname, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> RequestCrawlAsync ([FromBody] string hostname, CancellationToken cancellationToken = default);
     }
 }
 

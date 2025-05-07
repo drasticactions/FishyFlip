@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.temp.addReservedHandle")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>, BadRequest>> AddReservedHandleAsync ([FromBody] string handle, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>, ATErrorResult>> AddReservedHandleAsync ([FromBody] string handle, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Check accounts location in signup queue.
@@ -30,7 +30,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.temp.checkSignupQueue")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>, BadRequest>> CheckSignupQueueAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>, ATErrorResult>> CheckSignupQueueAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Request a verification code to be sent to the supplied phone number
@@ -39,7 +39,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.temp.requestPhoneVerification")]
-        public abstract Task<Results<Ok, BadRequest>> RequestPhoneVerificationAsync ([FromBody] string phoneNumber, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> RequestPhoneVerificationAsync ([FromBody] string phoneNumber, CancellationToken cancellationToken = default);
     }
 }
 

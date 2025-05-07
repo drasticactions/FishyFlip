@@ -25,7 +25,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Hosting
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.hosting.getAccountHistory")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput>, BadRequest>> GetAccountHistoryAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] List<string>? events = default, [FromQuery] string? cursor = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput>, ATErrorResult>> GetAccountHistoryAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] List<string>? events = default, [FromQuery] string? cursor = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
     }
 }
 

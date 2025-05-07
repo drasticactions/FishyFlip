@@ -23,7 +23,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.notification.getUnreadCount")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>, BadRequest>> GetUnreadCountAsync ([FromQuery] bool? priority = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>, ATErrorResult>> GetUnreadCountAsync ([FromQuery] bool? priority = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerate notifications for the requesting account. Requires auth.
@@ -36,7 +36,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.notification.listNotifications")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>, BadRequest>> ListNotificationsAsync ([FromQuery] List<string>? reasons = default, [FromQuery] int? limit = 50, [FromQuery] bool? priority = default, [FromQuery] string? cursor = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>, ATErrorResult>> ListNotificationsAsync ([FromQuery] List<string>? reasons = default, [FromQuery] int? limit = 50, [FromQuery] bool? priority = default, [FromQuery] string? cursor = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set notification-related preferences for an account. Requires auth.
@@ -45,7 +45,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.putPreferences")]
-        public abstract Task<Results<Ok, BadRequest>> PutPreferencesAsync ([FromBody] bool priority, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> PutPreferencesAsync ([FromBody] bool priority, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Register to receive push notifications, via a specified service, for the requesting account. Requires auth.
@@ -57,7 +57,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.registerPush")]
-        public abstract Task<Results<Ok, BadRequest>> RegisterPushAsync ([FromBody] FishyFlip.Models.ATDid serviceDid, [FromBody] string token, [FromBody] string platform, [FromBody] string appId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> RegisterPushAsync ([FromBody] FishyFlip.Models.ATDid serviceDid, [FromBody] string token, [FromBody] string platform, [FromBody] string appId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Notify server that the requesting account has seen notifications. Requires auth.
@@ -66,7 +66,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.updateSeen")]
-        public abstract Task<Results<Ok, BadRequest>> UpdateSeenAsync ([FromBody] DateTime seenAt, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UpdateSeenAsync ([FromBody] DateTime seenAt, CancellationToken cancellationToken = default);
     }
 }
 

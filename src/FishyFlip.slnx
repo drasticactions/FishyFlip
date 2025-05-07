@@ -2,4 +2,5 @@
   <Project Path="FishyFlip.Auth.Tests/FishyFlip.Auth.Tests.csproj" />
   <Project Path="FishyFlip.Tests/FishyFlip.Tests.csproj" />
   <Project Path="FishyFlip/FishyFlip.csproj" />
+  <Project Path="FishyFlip.Xrpc/FishyFlip.Xrpc.csproj" />
 </Solution>

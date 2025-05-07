@@ -24,7 +24,7 @@ namespace FishyFlip.Xrpc.Lexicon.Community.Lexicon.Bookmarks
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput"/></returns>
         [HttpGet("/xrpc/community.lexicon.bookmarks.getActorBookmarks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>, BadRequest>> GetActorBookmarksAsync ([FromQuery] List<string>? tags = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>, ATErrorResult>> GetActorBookmarksAsync ([FromQuery] List<string>? tags = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
     }
 }
 
