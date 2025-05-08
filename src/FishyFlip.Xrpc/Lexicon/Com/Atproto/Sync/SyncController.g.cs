@@ -172,7 +172,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Sync
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.sync.requestCrawl")]
-        public abstract Task<Results<Ok, ATErrorResult>> RequestCrawlAsync ([FromBody] string hostname, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> RequestCrawlAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Sync.RequestCrawlInput input, CancellationToken cancellationToken);
     }
 }
 

@@ -52,7 +52,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView"/></returns>
         [HttpPost("/xrpc/tools.ozone.moderation.emitEvent")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>, ATErrorResult>> EmitEventAsync ([FromBody] ATObject @event, [FromBody] ATObject subject, [FromBody] FishyFlip.Models.ATDid createdBy, [FromBody] List<string>? subjectBlobCids = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>, ATErrorResult>> EmitEventAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Get details about a moderation event.

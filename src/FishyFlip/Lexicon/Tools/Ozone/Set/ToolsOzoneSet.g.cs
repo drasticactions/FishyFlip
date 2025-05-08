@@ -117,10 +117,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <summary>
         /// Create or update set metadata
         /// </summary>
+        /// <param name="Set"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (FishyFlip.Lexicon.Tools.Ozone.Set.Set Set, CancellationToken cancellationToken = default)
         {
-            return atp.UpsertSetAsync(cancellationToken);
+            return atp.UpsertSetAsync(Set, cancellationToken);
         }
 
     }

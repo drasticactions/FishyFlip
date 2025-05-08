@@ -167,7 +167,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.graph.muteActor")]
-        public abstract Task<Results<Ok, ATErrorResult>> MuteActorAsync ([FromBody] FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> MuteActorAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Graph.MuteActorInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Creates a mute relationship for the specified list of accounts. Mutes are private in Bluesky. Requires auth.
@@ -176,7 +176,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.graph.muteActorList")]
-        public abstract Task<Results<Ok, ATErrorResult>> MuteActorListAsync ([FromBody] FishyFlip.Models.ATUri list, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> MuteActorListAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Graph.MuteActorListInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Mutes a thread preventing notifications from the thread and any of its children. Mutes are private in Bluesky. Requires auth.
@@ -185,7 +185,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.graph.muteThread")]
-        public abstract Task<Results<Ok, ATErrorResult>> MuteThreadAsync ([FromBody] FishyFlip.Models.ATUri root, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> MuteThreadAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Graph.MuteThreadInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Find starter packs matching search criteria. Does not require auth.
@@ -205,7 +205,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.graph.unmuteActor")]
-        public abstract Task<Results<Ok, ATErrorResult>> UnmuteActorAsync ([FromBody] FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UnmuteActorAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Unmutes the specified list of accounts. Requires auth.
@@ -214,7 +214,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.graph.unmuteActorList")]
-        public abstract Task<Results<Ok, ATErrorResult>> UnmuteActorListAsync ([FromBody] FishyFlip.Models.ATUri list, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UnmuteActorListAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Graph.UnmuteActorListInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Unmutes the specified thread. Requires auth.
@@ -223,7 +223,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.graph.unmuteThread")]
-        public abstract Task<Results<Ok, ATErrorResult>> UnmuteThreadAsync ([FromBody] FishyFlip.Models.ATUri root, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UnmuteThreadAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Graph.UnmuteThreadInput input, CancellationToken cancellationToken);
     }
 }
 

@@ -37,7 +37,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.moderation.createReport")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput>, ATErrorResult>> CreateReportAsync ([FromBody] string reasonType, [FromBody] ATObject subject, [FromBody] string? reason = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput>, ATErrorResult>> CreateReportAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportInput input, CancellationToken cancellationToken);
     }
 }
 

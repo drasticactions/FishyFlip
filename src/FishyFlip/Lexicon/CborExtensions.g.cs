@@ -1114,6 +1114,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.UpsertOptionInput(obj);
                 case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
                     return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
+                case "tools.ozone.set.upsertSet#UpsertSetInput":
+                    return new Tools.Ozone.Set.UpsertSetInput(obj);
                 case "community.lexicon.calendar.event#uri":
                     return new Community.Lexicon.Calendar.Uri(obj);
                 case "buzz.bookhive.defs#userBook":

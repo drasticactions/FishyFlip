@@ -74,7 +74,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.actor.putPreferences")]
-        public abstract Task<Results<Ok, ATErrorResult>> PutPreferencesAsync ([FromBody] List<ATObject> preferences, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> PutPreferencesAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Actor.PutPreferencesInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Find actors (profiles) matching search criteria. Does not require auth.

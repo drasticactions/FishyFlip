@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo"/></returns>
         [HttpPost("/xrpc/com.atproto.identity.refreshIdentity")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>, ATErrorResult>> RefreshIdentityAsync ([FromBody] FishyFlip.Models.ATIdentifier identifier, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>, ATErrorResult>> RefreshIdentityAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Request an email with a code to in order to request a signed PLC operation. Requires Auth.
@@ -91,7 +91,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.identity.signPlcOperation")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput>, ATErrorResult>> SignPlcOperationAsync ([FromBody] string? token = default, [FromBody] List<string>? rotationKeys = default, [FromBody] List<string>? alsoKnownAs = default, [FromBody] ATObject? verificationMethods = default, [FromBody] ATObject? services = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput>, ATErrorResult>> SignPlcOperationAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Validates a PLC operation to ensure that it doesn't violate a service's constraints or get the identity into a bad state, then submits it to the PLC registry
@@ -100,7 +100,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.identity.submitPlcOperation")]
-        public abstract Task<Results<Ok, ATErrorResult>> SubmitPlcOperationAsync ([FromBody] ATObject operation, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> SubmitPlcOperationAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Updates the current account's handle. Verifies handle validity, and updates did:plc document if necessary. Implemented by PDS, and requires auth.
@@ -109,7 +109,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.identity.updateHandle")]
-        public abstract Task<Results<Ok, ATErrorResult>> UpdateHandleAsync ([FromBody] FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UpdateHandleAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.UpdateHandleInput input, CancellationToken cancellationToken);
     }
 }
 

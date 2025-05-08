@@ -45,7 +45,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/chat.bsky.moderation.updateActorAccess")]
-        public abstract Task<Results<Ok, ATErrorResult>> UpdateActorAccessAsync ([FromBody] FishyFlip.Models.ATDid actor, [FromBody] bool allowAccess, [FromBody] string? @ref = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UpdateActorAccessAsync ([FromBody] FishyFlip.Lexicon.Chat.Bsky.Moderation.UpdateActorAccessInput input, CancellationToken cancellationToken);
     }
 }
 

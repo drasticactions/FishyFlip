@@ -36,7 +36,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Setting
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput"/></returns>
         [HttpPost("/xrpc/tools.ozone.setting.removeOptions")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>, ATErrorResult>> RemoveOptionsAsync ([FromBody] List<string> keys, [FromBody] string scope, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput>, ATErrorResult>> RemoveOptionsAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Create or update setting option
@@ -49,7 +49,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Setting
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput"/></returns>
         [HttpPost("/xrpc/tools.ozone.setting.upsertOption")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>, ATErrorResult>> UpsertOptionAsync ([FromBody] string key, [FromBody] string scope, [FromBody] ATObject value, [FromBody] string? description = default, [FromBody] string? managerRole = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>, ATErrorResult>> UpsertOptionAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput input, CancellationToken cancellationToken);
     }
 }
 

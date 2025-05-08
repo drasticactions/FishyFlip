@@ -1150,6 +1150,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput);
                 case "tools.ozone.setting.upsertOption#UpsertOptionOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>)SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionOutput);
+                case "tools.ozone.set.upsertSet#UpsertSetInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.UpsertSetInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.UpsertSetInput>)SourceGenerationContext.Default.ToolsOzoneSetUpsertSetInput);
                 case "community.lexicon.calendar.event#uri":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>)SourceGenerationContext.Default.CommunityLexiconCalendarUri);
                 case "buzz.bookhive.defs#userBook":

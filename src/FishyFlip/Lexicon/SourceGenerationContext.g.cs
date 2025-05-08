@@ -1111,6 +1111,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionInput>), TypeInfoPropertyName = "ListToolsOzoneSettingUpsertOptionInput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput), TypeInfoPropertyName = "ToolsOzoneSettingUpsertOptionOutput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput>), TypeInfoPropertyName = "ListToolsOzoneSettingUpsertOptionOutput")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.Tools.Ozone.Set.UpsertSetInput), TypeInfoPropertyName = "ToolsOzoneSetUpsertSetInput")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Set.UpsertSetInput>), TypeInfoPropertyName = "ListToolsOzoneSetUpsertSetInput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri), TypeInfoPropertyName = "CommunityLexiconCalendarUri")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>), TypeInfoPropertyName = "ListCommunityLexiconCalendarUri")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Buzz.Bookhive.UserBook), TypeInfoPropertyName = "BuzzBookhiveUserBook")]

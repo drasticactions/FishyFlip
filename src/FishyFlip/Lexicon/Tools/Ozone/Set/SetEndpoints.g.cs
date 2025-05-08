@@ -178,14 +178,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// Create or update set metadata
         /// </summary>
         /// <param name="atp"></param>
+        /// <param name="Set"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.SetView?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>> UpsertSetAsync (this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Tools.Ozone.Set.Set Set, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpsertSet.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            return atp.Post<FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetSetView!, cancellationToken, headers);
+            var inputItem = new UpsertSetInput();
+            inputItem.Set = Set;
+            return atp.Post<UpsertSetInput, FishyFlip.Lexicon.Tools.Ozone.Set.SetView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSetUpsertSetInput!, atp.Options.SourceGenerationContext.ToolsOzoneSetSetView!, inputItem, cancellationToken, headers);
         }
 
     }

@@ -52,7 +52,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Whtwnd.Blog
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput"/></returns>
         [HttpPost("/xrpc/com.whtwnd.blog.notifyOfNewEntry")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>, ATErrorResult>> NotifyOfNewEntryAsync ([FromBody] FishyFlip.Models.ATUri entryUri, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>, ATErrorResult>> NotifyOfNewEntryAsync ([FromBody] FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput input, CancellationToken cancellationToken);
     }
 }
 
