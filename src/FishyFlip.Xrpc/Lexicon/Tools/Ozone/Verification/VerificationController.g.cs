@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Verification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput"/></returns>
         [HttpPost("/xrpc/tools.ozone.verification.grantVerifications")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput>, ATErrorResult>> GrantVerificationsAsync ([FromBody] List<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationInput> verifications, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput>, ATErrorResult>> GrantVerificationsAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// List verifications
@@ -48,7 +48,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Verification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput"/></returns>
         [HttpPost("/xrpc/tools.ozone.verification.revokeVerifications")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>, ATErrorResult>> RevokeVerificationsAsync ([FromBody] List<FishyFlip.Models.ATUri> uris, [FromBody] string? revokeReason = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>, ATErrorResult>> RevokeVerificationsAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsInput input, CancellationToken cancellationToken);
     }
 }
 

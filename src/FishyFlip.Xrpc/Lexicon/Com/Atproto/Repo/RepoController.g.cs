@@ -27,7 +27,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.applyWrites")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>, ATErrorResult>> ApplyWritesAsync ([FromBody] FishyFlip.Models.ATIdentifier repo, [FromBody] List<ATObject> writes, [FromBody] bool? validate = default, [FromBody] string? swapCommit = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>, ATErrorResult>> ApplyWritesAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Create a single new repository record. Requires auth, implemented by PDS.
@@ -43,7 +43,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.createRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>, ATErrorResult>> CreateRecordAsync ([FromBody] FishyFlip.Models.ATIdentifier repo, [FromBody] string collection, [FromBody] ATObject record, [FromBody] string? rkey = default, [FromBody] bool? validate = default, [FromBody] string? swapCommit = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>, ATErrorResult>> CreateRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Delete a repository record, or ensure it doesn't exist. Requires auth, implemented by PDS.
@@ -58,7 +58,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.deleteRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>, ATErrorResult>> DeleteRecordAsync ([FromBody] FishyFlip.Models.ATIdentifier repo, [FromBody] string collection, [FromBody] string rkey, [FromBody] string? swapRecord = default, [FromBody] string? swapCommit = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>, ATErrorResult>> DeleteRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Get information about an account and repository, including the list of collections. Does not require auth.
@@ -130,7 +130,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.putRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput>, ATErrorResult>> PutRecordAsync ([FromBody] FishyFlip.Models.ATIdentifier repo, [FromBody] string collection, [FromBody] string rkey, [FromBody] ATObject record, [FromBody] bool? validate = default, [FromBody] string? swapRecord = default, [FromBody] string? swapCommit = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput>, ATErrorResult>> PutRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Upload a new blob, to be referenced from a repository record. The blob will be deleted if it is not referenced within a time window (eg, minutes). Blob restrictions (mimetype, size, etc) are enforced when the reference is created. Requires auth, implemented by PDS.

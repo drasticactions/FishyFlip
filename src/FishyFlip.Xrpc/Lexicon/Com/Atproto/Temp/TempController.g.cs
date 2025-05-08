@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.temp.addReservedHandle")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>, ATErrorResult>> AddReservedHandleAsync ([FromBody] string handle, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>, ATErrorResult>> AddReservedHandleAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Check accounts location in signup queue.
@@ -39,7 +39,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.temp.requestPhoneVerification")]
-        public abstract Task<Results<Ok, ATErrorResult>> RequestPhoneVerificationAsync ([FromBody] string phoneNumber, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> RequestPhoneVerificationAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput input, CancellationToken cancellationToken);
     }
 }
 

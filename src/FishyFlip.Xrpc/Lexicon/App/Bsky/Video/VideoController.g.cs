@@ -35,10 +35,11 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Video
         /// <summary>
         /// Upload a video to be processed then stored on the PDS.
         /// </summary>
+        /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput"/></returns>
         [HttpPost("/xrpc/app.bsky.video.uploadVideo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>, ATErrorResult>> UploadVideoAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput>, ATErrorResult>> UploadVideoAsync ([FromBody] StreamContent content, CancellationToken cancellationToken = default);
     }
 }
 

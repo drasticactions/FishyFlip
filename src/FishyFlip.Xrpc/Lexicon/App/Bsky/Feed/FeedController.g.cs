@@ -229,7 +229,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput"/></returns>
         [HttpPost("/xrpc/app.bsky.feed.sendInteractions")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>, ATErrorResult>> SendInteractionsAsync ([FromBody] List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput>, ATErrorResult>> SendInteractionsAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsInput input, CancellationToken cancellationToken);
     }
 }
 

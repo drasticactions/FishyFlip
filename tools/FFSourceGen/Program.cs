@@ -197,6 +197,7 @@ public partial class AppCommands
             {
                 case "object":
                 case "record":
+                case "ref":
                     await this.GenerateModelFile(cls);
                     break;
                 default:
@@ -205,7 +206,7 @@ public partial class AppCommands
             }
         }
 
-        var modelClasses = AllClassesSored.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record")
+        var modelClasses = AllClassesSored.Where(n => n.Definition.Type == "object" || n.Definition.Type == "record" || n.Definition.Type == "ref")
             .ToList();
         var procedureClasses = AllClassesSored
             .Where(n => n.Definition.Type == "procedure" || n.Definition.Type == "query")
@@ -224,7 +225,7 @@ public partial class AppCommands
 
         await this.GenerateEndpointClassListForATProtoCS(procedureClasses);
 
-        await this.GenerateJsonSerializerContextFile(modelClasses);
+        await this.GenerateJsonSerializerContextFile(modelClasses.ToList());
         await this.GenerateCBORToATObjectConverterClassFile(modelClasses);
 
         var atRecordSource = this.GenerateATObjectSource(baseNamespace, modelClasses);
@@ -1468,6 +1469,15 @@ public partial class AppCommands
             this.GenerateParams(sb, item, inputProperties);
             sb.AppendLine($"        /// <returns>Result of <see cref=\"{outputProperty}\"/></returns>");
             var httpType = item.Definition.Type == "procedure" ? "Post" : "Get";
+            if (httpType == "Post")
+            {
+                if (item.Definition.Input?.Encoding == "application/json")
+                {
+                    inputProperties = new List<string>();
+                    inputProperties.Add($"{baseNamespace}.{item.CSharpNamespace}.{item.ClassName}Input input");
+                    inputProperties.Add("CancellationToken cancellationToken");
+                }
+            }
             sb.AppendLine($"        [Http{httpType}(\"/xrpc/{item.Id}\")]");
             if (outputProperty == "Success")
             {
@@ -1885,7 +1895,7 @@ public partial class AppCommands
             }
         }
 
-        if (classGeneration.Definition.Input?.Encoding == "*/*" || classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
+        if (classGeneration.Definition.Input?.Encoding == "*/*" || classGeneration.Definition.Input?.Encoding == "video/mp4" || classGeneration.Definition.Input?.Encoding == "application/vnd.ipld.car")
         {
             requiredProperties.Add("StreamContent content");
         }
@@ -1893,6 +1903,16 @@ public partial class AppCommands
         if (classGeneration.Definition.Output?.Encoding == "application/vnd.ipld.car" && includeCarDecoded)
         {
             optionalProperties.Add("OnCarDecoded? onDecoded = default");
+        }
+
+        if (classGeneration.Definition.Input?.Schema?.Type == "ref")
+        {
+            var refString = classGeneration.Definition.Input.Schema.Ref.Split("#")[0] == string.Empty ? $"{classGeneration.Id}#{classGeneration.Definition.Input.Schema.Ref.Split("#")[1]}" : classGeneration.Definition.Input.Schema.Ref;
+            var classRef = FindClassFromRef(refString);
+            if (classRef is not null)
+            {
+                requiredProperties.Add($"{this.GenerateReturnTypeFromClassGeneration(classRef)} {classRef.ClassName.ToPascalCase()}");
+            }
         }
 
         if (isExtensionMethod)
@@ -1939,6 +1959,11 @@ public partial class AppCommands
     private string FetchOutputProperties(ClassGeneration classGeneration)
     {
         if (classGeneration.Definition.Output?.Encoding == "*/*")
+        {
+            return "byte[]";
+        }
+
+        if (classGeneration.Definition.Output?.Encoding == "video/mp4")
         {
             return "byte[]";
         }
@@ -2182,7 +2207,24 @@ public partial class AppCommands
         this.GenerateClassConstructor(sb, cls);
         this.GenerateEmptyClassConstructor(sb, cls);
         this.GenerateCBorObjectClassConstructor(sb, cls);
-        foreach (var property in cls.Properties)
+        var properties = cls.Properties;
+        if (!properties.Any() && cls.Definition.Type == "ref")
+        {
+            var refString = cls.Definition.Ref;
+            var classRef = FindClassFromRef(refString);
+            if (classRef is not null)
+            {
+                var propertyDefinition = new PropertyDefinition
+                {
+                    Type = "ref",
+                    Ref = classRef.Id,
+                };
+                var prop = new PropertyGeneration(propertyDefinition, classRef.Key, cls);
+                properties.Add(prop);
+            }
+        }
+
+        foreach (var property in properties)
         {
             await this.GenerateProperty(sb, property, cls);
         }
@@ -2199,7 +2241,7 @@ public partial class AppCommands
 
         sb.AppendLine("    }");
 
-        var nonAtObjectProperties = cls.Properties.Where(n => n.PropertyDefinition.Type == "object" && !AllClasses.Any(y => y.Key == n.Key)).ToList();
+        var nonAtObjectProperties = properties.Where(n => n.PropertyDefinition.Type == "object" && !AllClasses.Any(y => y.Key == n.Key)).ToList();
         foreach (var prop in nonAtObjectProperties)
         {
             sb.AppendLine();

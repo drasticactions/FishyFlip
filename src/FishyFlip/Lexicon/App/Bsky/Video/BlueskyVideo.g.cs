@@ -55,10 +55,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Upload a video to be processed then stored on the PDS.
         /// </summary>
+        /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (StreamContent content, CancellationToken cancellationToken = default)
         {
-            return atp.UploadVideoAsync(cancellationToken);
+            return atp.UploadVideoAsync(content, cancellationToken);
         }
 
     }

@@ -45,7 +45,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.putPreferences")]
-        public abstract Task<Results<Ok, ATErrorResult>> PutPreferencesAsync ([FromBody] bool priority, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> PutPreferencesAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Register to receive push notifications, via a specified service, for the requesting account. Requires auth.
@@ -57,7 +57,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.registerPush")]
-        public abstract Task<Results<Ok, ATErrorResult>> RegisterPushAsync ([FromBody] FishyFlip.Models.ATDid serviceDid, [FromBody] string token, [FromBody] string platform, [FromBody] string appId, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> RegisterPushAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Notify server that the requesting account has seen notifications. Requires auth.
@@ -66,7 +66,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.updateSeen")]
-        public abstract Task<Results<Ok, ATErrorResult>> UpdateSeenAsync ([FromBody] DateTime seenAt, CancellationToken cancellationToken = default);
+        public abstract Task<Results<Ok, ATErrorResult>> UpdateSeenAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.UpdateSeenInput input, CancellationToken cancellationToken);
     }
 }
 
