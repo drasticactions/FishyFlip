@@ -24,7 +24,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Moji.Packs
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Packs.GetActorPacksOutput"/></returns>
         [HttpGet("/xrpc/blue.moji.packs.getActorPacks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Packs.GetActorPacksOutput>, ATErrorResult>> GetActorPacksAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Blue.Moji.Packs.GetActorPacksOutput>, ATErrorResult>> GetActorPacksAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a 'view' (with additional context) of a specified pack.
@@ -35,7 +35,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Moji.Packs
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Packs.GetPackOutput"/></returns>
         [HttpGet("/xrpc/blue.moji.packs.getPack")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Packs.GetPackOutput>, ATErrorResult>> GetPackAsync ([FromQuery] FishyFlip.Models.ATUri pack, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Blue.Moji.Packs.GetPackOutput>, ATErrorResult>> GetPackAsync ([FromQuery] FishyFlip.Models.ATUri pack, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get views for a list of Bluemoji packs.
@@ -44,7 +44,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Moji.Packs
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput"/></returns>
         [HttpGet("/xrpc/blue.moji.packs.getPacks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput>, ATErrorResult>> GetPacksAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput>, ATErrorResult>> GetPacksAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
     }
 }
 

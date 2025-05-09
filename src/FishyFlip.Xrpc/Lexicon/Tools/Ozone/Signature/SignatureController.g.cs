@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Signature
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.signature.findCorrelation")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>, ATErrorResult>> FindCorrelationAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>, ATErrorResult>> FindCorrelationAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get accounts that share some matching threat signatures with the root account.
@@ -33,7 +33,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Signature
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.signature.findRelatedAccounts")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>, ATErrorResult>> FindRelatedAccountsAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string? cursor = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>, ATErrorResult>> FindRelatedAccountsAsync ([FromQuery] FishyFlip.Models.ATDid did, [FromQuery] string? cursor = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search for accounts that match one or more threat signature values.
@@ -44,7 +44,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Signature
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.signature.searchAccounts")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>, ATErrorResult>> SearchAccountsAsync ([FromQuery] List<string> values, [FromQuery] string? cursor = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>, ATErrorResult>> SearchAccountsAsync ([FromQuery] List<string> values, [FromQuery] string? cursor = default, [FromQuery] int? limit = 50, CancellationToken cancellationToken = default);
     }
 }
 

@@ -25,7 +25,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Team
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.Member"/></returns>
         [HttpPost("/xrpc/tools.ozone.team.addMember")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, ATErrorResult>> AddMemberAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Team.AddMemberInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, ATErrorResult>> AddMemberAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Team.AddMemberInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Delete a member from ozone team. Requires admin role.
@@ -50,7 +50,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Team
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.team.listMembers")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>, ATErrorResult>> ListMembersAsync ([FromQuery] string? q = default, [FromQuery] bool? disabled = default, [FromQuery] List<string>? roles = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>, ATErrorResult>> ListMembersAsync ([FromQuery] string? q = default, [FromQuery] bool? disabled = default, [FromQuery] List<string>? roles = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a member in the ozone service. Requires admin role.
@@ -63,7 +63,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Team
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.Member"/></returns>
         [HttpPost("/xrpc/tools.ozone.team.updateMember")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, ATErrorResult>> UpdateMemberAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, ATErrorResult>> UpdateMemberAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Team.UpdateMemberInput input, CancellationToken cancellationToken);
     }
 }
 

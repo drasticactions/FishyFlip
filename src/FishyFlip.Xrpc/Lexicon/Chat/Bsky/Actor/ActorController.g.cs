@@ -21,7 +21,7 @@ namespace FishyFlip.Xrpc.Lexicon.Chat.Bsky.Actor
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput"/></returns>
         [HttpPost("/xrpc/chat.bsky.actor.deleteAccount")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>, ATErrorResult>> DeleteAccountAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>, ATErrorResult>> DeleteAccountAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 

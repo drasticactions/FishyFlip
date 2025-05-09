@@ -52,7 +52,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView"/></returns>
         [HttpPost("/xrpc/tools.ozone.moderation.emitEvent")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>, ATErrorResult>> EmitEventAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>, ATErrorResult>> EmitEventAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Get details about a moderation event.
@@ -61,7 +61,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.getEvent")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>, ATErrorResult>> GetEventAsync ([FromQuery] int id, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>, ATErrorResult>> GetEventAsync ([FromQuery] int id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get details about a record.
@@ -73,7 +73,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.getRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>, ATErrorResult>> GetRecordAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>, ATErrorResult>> GetRecordAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get details about some records.
@@ -82,7 +82,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.getRecords")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>, ATErrorResult>> GetRecordsAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>, ATErrorResult>> GetRecordsAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get details about a repository.
@@ -93,7 +93,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.getRepo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>, ATErrorResult>> GetRepoAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>, ATErrorResult>> GetRepoAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get reporter stats for a list of users.
@@ -102,7 +102,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.getReporterStats")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput>, ATErrorResult>> GetReporterStatsAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput>, ATErrorResult>> GetReporterStatsAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get details about some repositories.
@@ -111,7 +111,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.getRepos")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>, ATErrorResult>> GetReposAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>, ATErrorResult>> GetReposAsync ([FromQuery] List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get details about subjects.
@@ -120,7 +120,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.getSubjects")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>, ATErrorResult>> GetSubjectsAsync ([FromQuery] List<string> subjects, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>, ATErrorResult>> GetSubjectsAsync ([FromQuery] List<string> subjects, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List moderation events related to a subject.
@@ -147,7 +147,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.queryEvents")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>, ATErrorResult>> QueryEventsAsync ([FromQuery] List<string>? types = default, [FromQuery] FishyFlip.Models.ATDid? createdBy = default, [FromQuery] string? sortDirection = default, [FromQuery] DateTime? createdAfter = default, [FromQuery] DateTime? createdBefore = default, [FromQuery] string? subject = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] int? limit = 50, [FromQuery] bool? hasComment = default, [FromQuery] string? comment = default, [FromQuery] List<string>? addedLabels = default, [FromQuery] List<string>? removedLabels = default, [FromQuery] List<string>? addedTags = default, [FromQuery] List<string>? removedTags = default, [FromQuery] List<string>? reportTypes = default, [FromQuery] List<string>? policies = default, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>, ATErrorResult>> QueryEventsAsync ([FromQuery] List<string>? types = default, [FromQuery] FishyFlip.Models.ATDid? createdBy = default, [FromQuery] string? sortDirection = default, [FromQuery] DateTime? createdAfter = default, [FromQuery] DateTime? createdBefore = default, [FromQuery] string? subject = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] int? limit = 50, [FromQuery] bool? hasComment = default, [FromQuery] string? comment = default, [FromQuery] List<string>? addedLabels = default, [FromQuery] List<string>? removedLabels = default, [FromQuery] List<string>? addedTags = default, [FromQuery] List<string>? removedTags = default, [FromQuery] List<string>? reportTypes = default, [FromQuery] List<string>? policies = default, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// View moderation statuses of subjects (record or repo).
@@ -189,7 +189,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.queryStatuses")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>, ATErrorResult>> QueryStatusesAsync ([FromQuery] int? queueCount = 0, [FromQuery] int? queueIndex = 0, [FromQuery] string? queueSeed = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] string? subject = default, [FromQuery] string? comment = default, [FromQuery] DateTime? reportedAfter = default, [FromQuery] DateTime? reportedBefore = default, [FromQuery] DateTime? reviewedAfter = default, [FromQuery] DateTime? hostingDeletedAfter = default, [FromQuery] DateTime? hostingDeletedBefore = default, [FromQuery] DateTime? hostingUpdatedAfter = default, [FromQuery] DateTime? hostingUpdatedBefore = default, [FromQuery] List<string>? hostingStatuses = default, [FromQuery] DateTime? reviewedBefore = default, [FromQuery] bool? includeMuted = default, [FromQuery] bool? onlyMuted = default, [FromQuery] string? reviewState = default, [FromQuery] List<string>? ignoreSubjects = default, [FromQuery] FishyFlip.Models.ATDid? lastReviewedBy = default, [FromQuery] string? sortField = default, [FromQuery] string? sortDirection = default, [FromQuery] bool? takendown = default, [FromQuery] bool? appealed = default, [FromQuery] int? limit = 50, [FromQuery] List<string>? tags = default, [FromQuery] List<string>? excludeTags = default, [FromQuery] string? cursor = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] int? minAccountSuspendCount = 0, [FromQuery] int? minReportedRecordsCount = 0, [FromQuery] int? minTakendownRecordsCount = 0, [FromQuery] int? minPriorityScore = 0, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>, ATErrorResult>> QueryStatusesAsync ([FromQuery] int? queueCount = 0, [FromQuery] int? queueIndex = 0, [FromQuery] string? queueSeed = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] string? subject = default, [FromQuery] string? comment = default, [FromQuery] DateTime? reportedAfter = default, [FromQuery] DateTime? reportedBefore = default, [FromQuery] DateTime? reviewedAfter = default, [FromQuery] DateTime? hostingDeletedAfter = default, [FromQuery] DateTime? hostingDeletedBefore = default, [FromQuery] DateTime? hostingUpdatedAfter = default, [FromQuery] DateTime? hostingUpdatedBefore = default, [FromQuery] List<string>? hostingStatuses = default, [FromQuery] DateTime? reviewedBefore = default, [FromQuery] bool? includeMuted = default, [FromQuery] bool? onlyMuted = default, [FromQuery] string? reviewState = default, [FromQuery] List<string>? ignoreSubjects = default, [FromQuery] FishyFlip.Models.ATDid? lastReviewedBy = default, [FromQuery] string? sortField = default, [FromQuery] string? sortDirection = default, [FromQuery] bool? takendown = default, [FromQuery] bool? appealed = default, [FromQuery] int? limit = 50, [FromQuery] List<string>? tags = default, [FromQuery] List<string>? excludeTags = default, [FromQuery] string? cursor = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] int? minAccountSuspendCount = 0, [FromQuery] int? minReportedRecordsCount = 0, [FromQuery] int? minTakendownRecordsCount = 0, [FromQuery] int? minPriorityScore = 0, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find repositories based on a search term.
@@ -200,7 +200,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.searchRepos")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>, ATErrorResult>> SearchReposAsync ([FromQuery] string? q = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>, ATErrorResult>> SearchReposAsync ([FromQuery] string? q = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
     }
 }
 

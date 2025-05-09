@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Buzz.Bookhive
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput"/></returns>
         [HttpGet("/xrpc/buzz.bookhive.getBook")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput>, ATErrorResult>> GetBookAsync ([FromQuery] string id, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput>, ATErrorResult>> GetBookAsync ([FromQuery] string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a profile's info. Does not require authentication.
@@ -32,7 +32,7 @@ namespace FishyFlip.Xrpc.Lexicon.Buzz.Bookhive
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput"/></returns>
         [HttpGet("/xrpc/buzz.bookhive.getProfile")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput>, ATErrorResult>> GetProfileAsync ([FromQuery] string? did = default, [FromQuery] string? handle = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput>, ATErrorResult>> GetProfileAsync ([FromQuery] string? did = default, [FromQuery] string? handle = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find books matching the search criteria. Requires authentication.
@@ -44,7 +44,7 @@ namespace FishyFlip.Xrpc.Lexicon.Buzz.Bookhive
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput"/></returns>
         [HttpGet("/xrpc/buzz.bookhive.searchBooks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>, ATErrorResult>> SearchBooksAsync ([FromQuery] string q, [FromQuery] int? limit = 25, [FromQuery] int? offset = 0, [FromQuery] string? id = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>, ATErrorResult>> SearchBooksAsync ([FromQuery] string q, [FromQuery] int? limit = 25, [FromQuery] int? offset = 0, [FromQuery] string? id = default, CancellationToken cancellationToken = default);
     }
 }
 

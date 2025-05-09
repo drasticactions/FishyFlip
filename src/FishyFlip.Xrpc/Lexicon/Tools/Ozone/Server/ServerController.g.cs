@@ -21,7 +21,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Server
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.server.getConfig")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>, ATErrorResult>> GetConfigAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>, ATErrorResult>> GetConfigAsync (CancellationToken cancellationToken = default);
     }
 }
 

@@ -23,7 +23,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.notification.getUnreadCount")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>, ATErrorResult>> GetUnreadCountAsync ([FromQuery] bool? priority = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>, ATErrorResult>> GetUnreadCountAsync ([FromQuery] bool? priority = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerate notifications for the requesting account. Requires auth.
@@ -36,7 +36,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.notification.listNotifications")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>, ATErrorResult>> ListNotificationsAsync ([FromQuery] List<string>? reasons = default, [FromQuery] int? limit = 50, [FromQuery] bool? priority = default, [FromQuery] string? cursor = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>, ATErrorResult>> ListNotificationsAsync ([FromQuery] List<string>? reasons = default, [FromQuery] int? limit = 50, [FromQuery] bool? priority = default, [FromQuery] string? cursor = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set notification-related preferences for an account. Requires auth.

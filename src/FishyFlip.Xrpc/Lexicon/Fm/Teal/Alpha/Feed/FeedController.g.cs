@@ -24,7 +24,7 @@ namespace FishyFlip.Xrpc.Lexicon.Fm.Teal.Alpha.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput"/></returns>
         [HttpGet("/xrpc/fm.teal.alpha.feed.getActorFeed")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>, ATErrorResult>> GetActorFeedAsync ([FromQuery] FishyFlip.Models.ATIdentifier authorDID, [FromQuery] string? cursor = default, [FromQuery] int? limit = 0, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>, ATErrorResult>> GetActorFeedAsync ([FromQuery] FishyFlip.Models.ATIdentifier authorDID, [FromQuery] string? cursor = default, [FromQuery] int? limit = 0, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Fm.Teal.Alpha.Feed
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput"/></returns>
         [HttpGet("/xrpc/fm.teal.alpha.feed.getPlay")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput>, ATErrorResult>> GetPlayAsync ([FromQuery] FishyFlip.Models.ATIdentifier authorDID, [FromQuery] string rkey, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput>, ATErrorResult>> GetPlayAsync ([FromQuery] FishyFlip.Models.ATIdentifier authorDID, [FromQuery] string rkey, CancellationToken cancellationToken = default);
     }
 }
 

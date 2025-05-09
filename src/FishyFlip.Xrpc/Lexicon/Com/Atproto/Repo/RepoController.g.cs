@@ -27,7 +27,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.applyWrites")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>, ATErrorResult>> ApplyWritesAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesOutput>, ATErrorResult>> ApplyWritesAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Create a single new repository record. Requires auth, implemented by PDS.
@@ -43,7 +43,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.createRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>, ATErrorResult>> CreateRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordOutput>, ATErrorResult>> CreateRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.CreateRecordInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Delete a repository record, or ensure it doesn't exist. Requires auth, implemented by PDS.
@@ -58,7 +58,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.deleteRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>, ATErrorResult>> DeleteRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordOutput>, ATErrorResult>> DeleteRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.DeleteRecordInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Get information about an account and repository, including the list of collections. Does not require auth.
@@ -67,7 +67,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.repo.describeRepo")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>, ATErrorResult>> DescribeRepoAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.DescribeRepoOutput>, ATErrorResult>> DescribeRepoAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a single record from a repository. Does not require auth.
@@ -81,7 +81,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.repo.getRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>, ATErrorResult>> GetRecordAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, [FromQuery] string collection, [FromQuery] string rkey, [FromQuery] string? cid = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.GetRecordOutput>, ATErrorResult>> GetRecordAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, [FromQuery] string collection, [FromQuery] string rkey, [FromQuery] string? cid = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Import a repo in the form of a CAR file. Requires Content-Length HTTP header to be set.
@@ -100,7 +100,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.repo.listMissingBlobs")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>, ATErrorResult>> ListMissingBlobsAsync ([FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.ListMissingBlobsOutput>, ATErrorResult>> ListMissingBlobsAsync ([FromQuery] int? limit = 500, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List a range of records in a repository, matching a specific collection. Does not require auth.
@@ -113,7 +113,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.repo.listRecords")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>, ATErrorResult>> ListRecordsAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, [FromQuery] string collection, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] bool? reverse = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.ListRecordsOutput>, ATErrorResult>> ListRecordsAsync ([FromQuery] FishyFlip.Models.ATIdentifier repo, [FromQuery] string collection, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] bool? reverse = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Write a repository record, creating or updating it as needed. Requires auth, implemented by PDS.
@@ -130,7 +130,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.putRecord")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput>, ATErrorResult>> PutRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordOutput>, ATErrorResult>> PutRecordAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Upload a new blob, to be referenced from a repository record. The blob will be deleted if it is not referenced within a time window (eg, minutes). Blob restrictions (mimetype, size, etc) are enforced when the reference is created. Requires auth, implemented by PDS.
@@ -139,7 +139,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Repo
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.repo.uploadBlob")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput>, ATErrorResult>> UploadBlobAsync ([FromBody] StreamContent content, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Repo.UploadBlobOutput>, ATErrorResult>> UploadBlobAsync ([FromBody] StreamContent content, CancellationToken cancellationToken = default);
     }
 }
 

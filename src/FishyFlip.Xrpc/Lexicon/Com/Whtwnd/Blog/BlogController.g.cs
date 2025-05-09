@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Whtwnd.Blog
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput"/></returns>
         [HttpGet("/xrpc/com.whtwnd.blog.getAuthorPosts")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>, ATErrorResult>> GetAuthorPostsAsync ([FromQuery] FishyFlip.Models.ATDid author, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>, ATErrorResult>> GetAuthorPostsAsync ([FromQuery] FishyFlip.Models.ATDid author, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get AT URI by blog author and entry name. If there are multiple blog entries associated with the name, return the latest one.
@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Whtwnd.Blog
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput"/></returns>
         [HttpGet("/xrpc/com.whtwnd.blog.getEntryMetadataByName")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>, ATErrorResult>> GetEntryMetadataByNameAsync ([FromQuery] FishyFlip.Models.ATIdentifier author, [FromQuery] string entryTitle, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>, ATErrorResult>> GetEntryMetadataByNameAsync ([FromQuery] FishyFlip.Models.ATIdentifier author, [FromQuery] string entryTitle, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get comments associated to designated post.
@@ -43,7 +43,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Whtwnd.Blog
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput"/></returns>
         [HttpGet("/xrpc/com.whtwnd.blog.getMentionsByEntry")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>, ATErrorResult>> GetMentionsByEntryAsync ([FromQuery] FishyFlip.Models.ATUri postUri, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>, ATErrorResult>> GetMentionsByEntryAsync ([FromQuery] FishyFlip.Models.ATUri postUri, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Notify AppView of existence of new entry and request indexing
@@ -52,7 +52,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Whtwnd.Blog
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput"/></returns>
         [HttpPost("/xrpc/com.whtwnd.blog.notifyOfNewEntry")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>, ATErrorResult>> NotifyOfNewEntryAsync ([FromBody] FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryOutput>, ATErrorResult>> NotifyOfNewEntryAsync ([FromBody] FishyFlip.Lexicon.Com.Whtwnd.Blog.NotifyOfNewEntryInput input, CancellationToken cancellationToken);
     }
 }
 
