@@ -24,7 +24,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getActorStarterPacks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>, ATErrorResult>> GetActorStarterPacksAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetActorStarterPacksOutput>, ATErrorResult>> GetActorStarterPacksAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates which accounts the requesting account is currently blocking. Requires auth.
@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getBlocks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>, ATErrorResult>> GetBlocksAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>, ATErrorResult>> GetBlocksAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates accounts which follow a specified account (actor).
@@ -45,7 +45,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getFollowers")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>, ATErrorResult>> GetFollowersAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowersOutput>, ATErrorResult>> GetFollowersAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates accounts which a specified account (actor) follows.
@@ -56,7 +56,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getFollows")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>, ATErrorResult>> GetFollowsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetFollowsOutput>, ATErrorResult>> GetFollowsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates accounts which follow a specified account (actor) and are followed by the viewer.
@@ -67,7 +67,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getKnownFollowers")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>, ATErrorResult>> GetKnownFollowersAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetKnownFollowersOutput>, ATErrorResult>> GetKnownFollowersAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a 'view' (with additional context) of a specified list.
@@ -78,7 +78,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getList")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>, ATErrorResult>> GetListAsync ([FromQuery] FishyFlip.Models.ATUri list, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetListOutput>, ATErrorResult>> GetListAsync ([FromQuery] FishyFlip.Models.ATUri list, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get mod lists that the requesting account (actor) is blocking. Requires auth.
@@ -88,7 +88,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getListBlocks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>, ATErrorResult>> GetListBlocksAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetListBlocksOutput>, ATErrorResult>> GetListBlocksAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates mod lists that the requesting account (actor) currently has muted. Requires auth.
@@ -98,7 +98,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getListMutes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>, ATErrorResult>> GetListMutesAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetListMutesOutput>, ATErrorResult>> GetListMutesAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates the lists created by a specified account (actor).
@@ -109,7 +109,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getLists")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>, ATErrorResult>> GetListsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>, ATErrorResult>> GetListsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
@@ -119,7 +119,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getMutes")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>, ATErrorResult>> GetMutesAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>, ATErrorResult>> GetMutesAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates public relationships between one account, and a list of other accounts. Does not require auth.
@@ -131,7 +131,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getRelationships")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>, ATErrorResult>> GetRelationshipsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] List<FishyFlip.Models.ATIdentifier>? others = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetRelationshipsOutput>, ATErrorResult>> GetRelationshipsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] List<FishyFlip.Models.ATIdentifier>? others = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a view of a starter pack.
@@ -140,7 +140,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getStarterPack")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>, ATErrorResult>> GetStarterPackAsync ([FromQuery] FishyFlip.Models.ATUri starterPack, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPackOutput>, ATErrorResult>> GetStarterPackAsync ([FromQuery] FishyFlip.Models.ATUri starterPack, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get views for a list of starter packs.
@@ -149,7 +149,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getStarterPacks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>, ATErrorResult>> GetStarterPacksAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>, ATErrorResult>> GetStarterPacksAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates follows similar to a given account (actor). Expected use is to recommend additional accounts immediately after following one account.
@@ -158,7 +158,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getSuggestedFollowsByActor")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>, ATErrorResult>> GetSuggestedFollowsByActorAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>, ATErrorResult>> GetSuggestedFollowsByActorAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a mute relationship for the specified account. Mutes are private in Bluesky. Requires auth.
@@ -196,7 +196,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.searchStarterPacks")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>, ATErrorResult>> SearchStarterPacksAsync ([FromQuery] string q, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.SearchStarterPacksOutput>, ATErrorResult>> SearchStarterPacksAsync ([FromQuery] string q, [FromQuery] int? limit = 25, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Unmutes the specified account. Requires auth.

@@ -22,7 +22,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.temp.addReservedHandle")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>, ATErrorResult>> AddReservedHandleAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>, ATErrorResult>> AddReservedHandleAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Check accounts location in signup queue.
@@ -30,7 +30,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.temp.checkSignupQueue")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>, ATErrorResult>> CheckSignupQueueAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>, ATErrorResult>> CheckSignupQueueAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Request a verification code to be sent to the supplied phone number

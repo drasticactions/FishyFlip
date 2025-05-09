@@ -21,7 +21,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.identity.getRecommendedDidCredentials")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>, ATErrorResult>> GetRecommendedDidCredentialsAsync (CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Identity.GetRecommendedDidCredentialsOutput>, ATErrorResult>> GetRecommendedDidCredentialsAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Request that the server re-resolve an identity (DID and handle). The server may ignore this request, or require authentication, depending on the role, implementation, and policy of the server.
@@ -34,7 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo"/></returns>
         [HttpPost("/xrpc/com.atproto.identity.refreshIdentity")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>, ATErrorResult>> RefreshIdentityAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>, ATErrorResult>> RefreshIdentityAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.RefreshIdentityInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Request an email with a code to in order to request a signed PLC operation. Requires Auth.
@@ -54,7 +54,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.identity.resolveDid")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput>, ATErrorResult>> ResolveDidAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput>, ATErrorResult>> ResolveDidAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Resolves an atproto handle (hostname) to a DID. Does not necessarily bi-directionally verify against the the DID document.
@@ -65,7 +65,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput"/></returns>
         [HttpGet("/xrpc/com.atproto.identity.resolveHandle")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>, ATErrorResult>> ResolveHandleAsync ([FromQuery] FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>, ATErrorResult>> ResolveHandleAsync ([FromQuery] FishyFlip.Models.ATHandle handle, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Resolves an identity (DID or Handle) to a full identity (DID document and verified handle).
@@ -78,7 +78,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo"/></returns>
         [HttpGet("/xrpc/com.atproto.identity.resolveIdentity")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>, ATErrorResult>> ResolveIdentityAsync ([FromQuery] FishyFlip.Models.ATIdentifier identifier, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Identity.IdentityInfo>, ATErrorResult>> ResolveIdentityAsync ([FromQuery] FishyFlip.Models.ATIdentifier identifier, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Signs a PLC operation to update some value(s) in the requesting DID's document.
@@ -91,7 +91,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Identity
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.identity.signPlcOperation")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput>, ATErrorResult>> SignPlcOperationAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput input, CancellationToken cancellationToken);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationOutput>, ATErrorResult>> SignPlcOperationAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Identity.SignPlcOperationInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Validates a PLC operation to ensure that it doesn't violate a service's constraints or get the identity into a bad state, then submits it to the PLC registry

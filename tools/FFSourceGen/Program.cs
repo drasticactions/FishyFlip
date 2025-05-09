@@ -1390,9 +1390,17 @@ public partial class AppCommands
             {
                 sb.Append($"        public abstract Task<Results<FileStreamHttpResult, ATErrorResult>> {methodName} (");
             }
+            else if (outputProperty == "byte[]")
+            {
+                sb.Append($"        public abstract Task<Results<Ok<byte[]>, ATErrorResult>> {methodName} (");
+            }
+            else if (outputProperty == "string")
+            {
+                sb.Append($"        public abstract Task<Results<Ok<string>, ATErrorResult>> {methodName} (");
+            }
             else
             {
-                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, ATErrorResult>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<ATResult<{outputProperty}>, ATErrorResult>> {methodName} (");
             }
             for (int i = 0; i < inputProperties.Count; i++)
             {
@@ -1487,9 +1495,17 @@ public partial class AppCommands
             {
                 sb.Append($"        public abstract Task<Results<FileStreamHttpResult, ATErrorResult>> {methodName} (");
             }
+            else if (outputProperty == "byte[]")
+            {
+                sb.Append($"        public abstract Task<Results<Ok<byte[]>, ATErrorResult>> {methodName} (");
+            }
+            else if (outputProperty == "string")
+            {
+                sb.Append($"        public abstract Task<Results<Ok<string>, ATErrorResult>> {methodName} (");
+            }
             else
             {
-                sb.Append($"        public abstract Task<Results<Ok<{outputProperty}>, ATErrorResult>> {methodName} (");
+                sb.Append($"        public abstract Task<Results<ATResult<{outputProperty}>, ATErrorResult>> {methodName} (");
             }
             for (int i = 0; i < inputProperties.Count; i++)
             {

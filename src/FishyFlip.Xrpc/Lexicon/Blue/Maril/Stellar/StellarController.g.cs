@@ -24,7 +24,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Maril.Stellar
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Maril.Stellar.GetActorReactionsOutput"/></returns>
         [HttpGet("/xrpc/blue.maril.stellar.getActorReactions")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Maril.Stellar.GetActorReactionsOutput>, ATErrorResult>> GetActorReactionsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Blue.Maril.Stellar.GetActorReactionsOutput>, ATErrorResult>> GetActorReactionsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Return all Bluemoji in the AppView.
@@ -35,7 +35,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Maril.Stellar
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput"/></returns>
         [HttpGet("/xrpc/blue.maril.stellar.getEmojis")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>, ATErrorResult>> GetEmojisAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] FishyFlip.Models.ATIdentifier? did = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>, ATErrorResult>> GetEmojisAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] FishyFlip.Models.ATIdentifier? did = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get reaction records which reference a subject (by AT-URI and CID).
@@ -47,7 +47,7 @@ namespace FishyFlip.Xrpc.Lexicon.Blue.Maril.Stellar
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Blue.Maril.Stellar.GetReactionsOutput"/></returns>
         [HttpGet("/xrpc/blue.maril.stellar.getReactions")]
-        public abstract Task<Results<Ok<FishyFlip.Lexicon.Blue.Maril.Stellar.GetReactionsOutput>, ATErrorResult>> GetReactionsAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Blue.Maril.Stellar.GetReactionsOutput>, ATErrorResult>> GetReactionsAsync ([FromQuery] FishyFlip.Models.ATUri uri, [FromQuery] string? cid = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
     }
 }
 
