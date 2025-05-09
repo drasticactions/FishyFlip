@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Gets or sets the captions.
         /// </summary>
         [JsonPropertyName("captions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Embed.Caption>? Captions { get; set; }
 
         /// <summary>
@@ -69,6 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <br/> Alt text description of the video, for accessibility.
         /// </summary>
         [JsonPropertyName("alt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Alt { get; set; }
 
         /// <summary>
@@ -76,6 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
         public const string RecordType = "app.bsky.embed.video";

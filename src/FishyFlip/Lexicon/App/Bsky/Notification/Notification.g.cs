@@ -121,6 +121,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// Gets or sets the reasonSubject.
         /// </summary>
         [JsonPropertyName("reasonSubject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? ReasonSubject { get; set; }
 
@@ -149,6 +150,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         public const string RecordType = "app.bsky.notification.listNotifications#notification";

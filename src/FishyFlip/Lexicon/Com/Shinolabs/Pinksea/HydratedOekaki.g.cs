@@ -118,6 +118,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <br/> An array of tags this image had.
         /// </summary>
         [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
         /// <summary>
@@ -125,6 +126,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <br/> Alt text description of the image, for accessibility.
         /// </summary>
         [JsonPropertyName("alt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Alt { get; set; }
 
         public const string RecordType = "com.shinolabs.pinksea.appViewDefs#hydratedOekaki";

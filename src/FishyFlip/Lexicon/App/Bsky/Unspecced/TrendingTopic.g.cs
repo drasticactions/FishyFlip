@@ -59,12 +59,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Gets or sets the displayName.
         /// </summary>
         [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>

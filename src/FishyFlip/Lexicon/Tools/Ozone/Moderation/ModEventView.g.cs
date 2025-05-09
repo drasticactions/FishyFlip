@@ -157,12 +157,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the creatorHandle.
         /// </summary>
         [JsonPropertyName("creatorHandle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? CreatorHandle { get; set; }
 
         /// <summary>
         /// Gets or sets the subjectHandle.
         /// </summary>
         [JsonPropertyName("subjectHandle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SubjectHandle { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventView";

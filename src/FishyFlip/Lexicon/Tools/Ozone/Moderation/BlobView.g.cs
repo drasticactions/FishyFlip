@@ -95,6 +95,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails"/> (tools.ozone.moderation.defs#videoDetails) <br/>
         /// </summary>
         [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Details { get; set; }
 
         /// <summary>
@@ -102,6 +103,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation"/> (tools.ozone.moderation.defs#moderation)
         /// </summary>
         [JsonPropertyName("moderation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.Moderation? Moderation { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#blobView";

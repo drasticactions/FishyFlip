@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Arbitrary data for the NUX. The structure is defined by the NUX itself. Limited to 300 characters.
         /// </summary>
         [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Data { get; set; }
 
         /// <summary>
@@ -77,6 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> The date and time at which the NUX will expire and should be considered completed.
         /// </summary>
         [JsonPropertyName("expiresAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ExpiresAt { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#nux";

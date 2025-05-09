@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// Gets or sets the reason.
         /// </summary>
         [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Reason { get; set; }
 
         public const string RecordType = "blue.zio.atfile.meta#unknown";

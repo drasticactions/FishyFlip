@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> The content of the email sent to the user.
         /// </summary>
         [JsonPropertyName("content")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Content { get; set; }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Additional comment about the outgoing comm.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventEmail";

@@ -77,6 +77,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// Gets or sets the disabled.
         /// </summary>
         [JsonPropertyName("disabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Disabled { get; set; }
 
         /// <summary>
@@ -84,24 +85,28 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed"/> (app.bsky.actor.defs#profileViewDetailed)
         /// </summary>
         [JsonPropertyName("profile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed? Profile { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets or sets the updatedAt.
         /// </summary>
         [JsonPropertyName("updatedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the lastUpdatedBy.
         /// </summary>
         [JsonPropertyName("lastUpdatedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? LastUpdatedBy { get; set; }
 
         /// <summary>

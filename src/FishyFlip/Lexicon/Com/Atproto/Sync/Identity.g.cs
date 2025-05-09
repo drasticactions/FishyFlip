@@ -78,6 +78,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> The current handle for the account, or 'handle.invalid' if validation fails. This field is optional, might have been validated or passed-through from an upstream source. Semantics and behaviors for PDS vs Relay may evolve in the future; see atproto specs for more details.
         /// </summary>
         [JsonPropertyName("handle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 

@@ -64,6 +64,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Gets or sets the recordUri.
         /// </summary>
         [JsonPropertyName("recordUri")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? RecordUri { get; set; }
 

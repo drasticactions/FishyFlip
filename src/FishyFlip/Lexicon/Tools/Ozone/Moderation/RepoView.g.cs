@@ -93,6 +93,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the email.
         /// </summary>
         [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Email { get; set; }
 
         /// <summary>
@@ -122,30 +123,35 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Server.InviteCode"/> (com.atproto.server.defs#inviteCode)
         /// </summary>
         [JsonPropertyName("invitedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Server.InviteCode? InvitedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the invitesDisabled.
         /// </summary>
         [JsonPropertyName("invitesDisabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? InvitesDisabled { get; set; }
 
         /// <summary>
         /// Gets or sets the inviteNote.
         /// </summary>
         [JsonPropertyName("inviteNote")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? InviteNote { get; set; }
 
         /// <summary>
         /// Gets or sets the deactivatedAt.
         /// </summary>
         [JsonPropertyName("deactivatedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? DeactivatedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the threatSignatures.
         /// </summary>
         [JsonPropertyName("threatSignatures")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Admin.ThreatSignature>? ThreatSignatures { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#repoView";

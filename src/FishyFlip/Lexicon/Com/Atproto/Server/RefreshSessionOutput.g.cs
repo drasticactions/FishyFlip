@@ -96,12 +96,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the didDoc.
         /// </summary>
         [JsonPropertyName("didDoc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
 
         /// <summary>
         /// Gets or sets the active.
         /// </summary>
         [JsonPropertyName("active")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Active { get; set; }
 
         /// <summary>
@@ -113,6 +115,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// deactivated <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         public const string RecordType = "com.atproto.server.refreshSession#RefreshSessionOutput";

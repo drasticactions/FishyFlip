@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> The birth date of account owner.
         /// </summary>
         [JsonPropertyName("birthDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? BirthDate { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#personalDetailsPref";

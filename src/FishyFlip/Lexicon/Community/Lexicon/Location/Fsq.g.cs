@@ -63,12 +63,14 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// Gets or sets the latitude.
         /// </summary>
         [JsonPropertyName("latitude")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Latitude { get; set; }
 
         /// <summary>
         /// Gets or sets the longitude.
         /// </summary>
         [JsonPropertyName("longitude")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Longitude { get; set; }
 
         /// <summary>
@@ -76,6 +78,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The name of the location.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         public const string RecordType = "community.lexicon.location.fsq";

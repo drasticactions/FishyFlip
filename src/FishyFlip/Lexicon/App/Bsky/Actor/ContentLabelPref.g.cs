@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Which labeler does this preference apply to? If undefined, applies globally.
         /// </summary>
         [JsonPropertyName("labelerDid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? LabelerDid { get; set; }
 

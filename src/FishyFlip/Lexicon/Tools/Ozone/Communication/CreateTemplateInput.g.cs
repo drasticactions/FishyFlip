@@ -80,6 +80,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> Message language.
         /// </summary>
         [JsonPropertyName("lang")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Lang { get; set; }
 
         /// <summary>
@@ -87,6 +88,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> DID of the user who is creating the template.
         /// </summary>
         [JsonPropertyName("createdBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? CreatedBy { get; set; }
 

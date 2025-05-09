@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// Gets or sets the status.
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Netlify.Aniblue.StatusDef>? StatusValue { get; set; }
 
         public const string RecordType = "app.netlify.aniblue.status";

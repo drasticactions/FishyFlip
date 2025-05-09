@@ -108,36 +108,42 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("list")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? List { get; set; }
 
         /// <summary>
         /// Gets or sets the listItemsSample.
         /// </summary>
         [JsonPropertyName("listItemsSample")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>? ListItemsSample { get; set; }
 
         /// <summary>
         /// Gets or sets the feeds.
         /// </summary>
         [JsonPropertyName("feeds")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>? Feeds { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedWeekCount.
         /// </summary>
         [JsonPropertyName("joinedWeekCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? JoinedWeekCount { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedAllTimeCount.
         /// </summary>
         [JsonPropertyName("joinedAllTimeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? JoinedAllTimeCount { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>

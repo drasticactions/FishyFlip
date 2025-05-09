@@ -63,6 +63,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the forAccounts.
         /// </summary>
         [JsonPropertyName("forAccounts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Models.ATDid>? ForAccounts { get; set; }
 
         public const string RecordType = "com.atproto.server.createInviteCodes#CreateInviteCodesInput";

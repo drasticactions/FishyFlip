@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// Gets or sets the lock.
         /// </summary>
         [JsonPropertyName("lock")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? LockValue { get; set; }
 
         public const string RecordType = "blue.zio.atfile.lock";

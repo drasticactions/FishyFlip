@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -62,6 +63,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Indicates how long the takedown should be in effect before automatically expiring.
         /// </summary>
         [JsonPropertyName("durationInHours")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? DurationInHours { get; set; }
 
         /// <summary>
@@ -69,6 +71,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> If true, all other reports on content authored by this account will be resolved (acknowledged).
         /// </summary>
         [JsonPropertyName("acknowledgeAccountSubjects")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AcknowledgeAccountSubjects { get; set; }
 
         /// <summary>
@@ -76,6 +79,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Names/Keywords of the policies that drove the decision.
         /// </summary>
         [JsonPropertyName("policies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Policies { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventTakedown";

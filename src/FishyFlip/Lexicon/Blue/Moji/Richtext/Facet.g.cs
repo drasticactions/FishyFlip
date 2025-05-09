@@ -80,12 +80,14 @@ namespace FishyFlip.Lexicon.Blue.Moji.Richtext
         /// Gets or sets the alt.
         /// </summary>
         [JsonPropertyName("alt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Alt { get; set; }
 
         /// <summary>
         /// Gets or sets the adultOnly.
         /// </summary>
         [JsonPropertyName("adultOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AdultOnly { get; set; } = false;
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Richtext
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>

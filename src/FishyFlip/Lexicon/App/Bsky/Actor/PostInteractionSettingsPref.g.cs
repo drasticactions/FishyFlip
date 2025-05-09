@@ -64,6 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule) <br/>
         /// </summary>
         [JsonPropertyName("threadgateAllowRules")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ATObject>? ThreadgateAllowRules { get; set; }
 
         /// <summary>
@@ -73,6 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule) <br/>
         /// </summary>
         [JsonPropertyName("postgateEmbeddingRules")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>? PostgateEmbeddingRules { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#postInteractionSettingsPref";

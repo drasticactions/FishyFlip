@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView"/> (chat.bsky.convo.defs#convoView)
         /// </summary>
         [JsonPropertyName("convo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView? Convo { get; set; }
 
         public const string RecordType = "chat.bsky.convo.getConvoAvailability#GetConvoAvailabilityOutput";

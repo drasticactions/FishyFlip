@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Gets or sets the subject.
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Subject { get; set; }
 
         /// <summary>
@@ -85,6 +86,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <br/> Additional comment by the sender that won't be used in the email itself but helpful to provide more context for moderators/reviewers
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         public const string RecordType = "com.atproto.admin.sendEmail#SendEmailInput";

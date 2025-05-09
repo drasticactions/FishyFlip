@@ -93,6 +93,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView"/> (tools.ozone.moderation.defs#subjectStatusView)
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView? Status { get; set; }
 
         /// <summary>
@@ -100,6 +101,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail"/> (tools.ozone.moderation.defs#repoViewDetail)
         /// </summary>
         [JsonPropertyName("repo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail? Repo { get; set; }
 
         /// <summary>
@@ -107,6 +109,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Union Types: <br/>
         /// </summary>
         [JsonPropertyName("profile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Profile { get; set; }
 
         /// <summary>
@@ -114,6 +117,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail"/> (tools.ozone.moderation.defs#recordViewDetail)
         /// </summary>
         [JsonPropertyName("record")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail? Record { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#subjectView";

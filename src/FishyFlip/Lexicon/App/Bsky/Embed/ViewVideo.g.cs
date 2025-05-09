@@ -71,12 +71,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Gets or sets the thumbnail.
         /// </summary>
         [JsonPropertyName("thumbnail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Thumbnail { get; set; }
 
         /// <summary>
         /// Gets or sets the alt.
         /// </summary>
         [JsonPropertyName("alt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Alt { get; set; }
 
         /// <summary>
@@ -84,6 +86,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
         public const string RecordType = "app.bsky.embed.video#view";

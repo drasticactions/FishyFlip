@@ -63,6 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the timelineIndex.
         /// </summary>
         [JsonPropertyName("timelineIndex")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? TimelineIndex { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#savedFeedsPref";

@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>

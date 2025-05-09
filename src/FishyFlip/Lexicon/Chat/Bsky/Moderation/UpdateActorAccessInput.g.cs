@@ -64,6 +64,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// Gets or sets the ref.
         /// </summary>
         [JsonPropertyName("ref")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Ref { get; set; }
 
         public const string RecordType = "chat.bsky.moderation.updateActorAccess#UpdateActorAccessInput";

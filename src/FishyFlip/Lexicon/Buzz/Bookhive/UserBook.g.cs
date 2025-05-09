@@ -118,6 +118,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The date the user started reading the book
         /// </summary>
         [JsonPropertyName("startedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? StartedAt { get; set; }
 
         /// <summary>
@@ -125,6 +126,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The date the user finished reading the book
         /// </summary>
         [JsonPropertyName("finishedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? FinishedAt { get; set; }
 
         /// <summary>
@@ -132,6 +134,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Cover image of the book
         /// </summary>
         [JsonPropertyName("cover")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cover { get; set; }
 
         /// <summary>
@@ -147,6 +150,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Book description/summary
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
@@ -154,6 +158,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Average rating (0-1000)
         /// </summary>
         [JsonPropertyName("rating")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Rating { get; set; }
 
         /// <summary>
@@ -166,6 +171,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// owned - User owns the book <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         /// <summary>
@@ -173,6 +179,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Number of stars given to the book (1-10) which will be mapped to 1-5 stars
         /// </summary>
         [JsonPropertyName("stars")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Stars { get; set; }
 
         /// <summary>
@@ -180,6 +187,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The book's review
         /// </summary>
         [JsonPropertyName("review")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Review { get; set; }
 
         public const string RecordType = "buzz.bookhive.defs#userBook";

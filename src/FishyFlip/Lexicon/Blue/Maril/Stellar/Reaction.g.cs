@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Subject { get; set; }
 
         /// <summary>
@@ -61,6 +62,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         /// blue.maril.stellar.defs#emojiRef <br/>
         /// </summary>
         [JsonPropertyName("emoji")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef? Emoji { get; set; }
 
         public const string RecordType = "blue.maril.stellar.reaction";

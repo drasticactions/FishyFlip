@@ -46,12 +46,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Gets or sets the codes.
         /// </summary>
         [JsonPropertyName("codes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Codes { get; set; }
 
         /// <summary>
         /// Gets or sets the accounts.
         /// </summary>
         [JsonPropertyName("accounts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Accounts { get; set; }
 
         public const string RecordType = "com.atproto.admin.disableInviteCodes#DisableInviteCodesInput";

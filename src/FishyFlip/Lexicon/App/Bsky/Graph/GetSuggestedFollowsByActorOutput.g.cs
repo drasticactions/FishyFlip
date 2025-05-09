@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> If true, response has fallen-back to generic results, and is not scoped using relativeToDid
         /// </summary>
         [JsonPropertyName("isFallback")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? IsFallback { get; set; } = false;
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
         /// </summary>
         [JsonPropertyName("recId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RecId { get; set; }
 
         public const string RecordType = "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";

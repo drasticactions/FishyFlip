@@ -78,30 +78,35 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the updatedAt.
         /// </summary>
         [JsonPropertyName("updatedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets or sets the deletedAt.
         /// </summary>
         [JsonPropertyName("deletedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? DeletedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the deactivatedAt.
         /// </summary>
         [JsonPropertyName("deactivatedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? DeactivatedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the reactivatedAt.
         /// </summary>
         [JsonPropertyName("reactivatedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ReactivatedAt { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#accountHosting";

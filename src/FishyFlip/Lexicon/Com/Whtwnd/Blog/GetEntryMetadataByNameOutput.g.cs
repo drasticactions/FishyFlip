@@ -57,12 +57,14 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// Gets or sets the lastUpdate.
         /// </summary>
         [JsonPropertyName("lastUpdate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? LastUpdate { get; set; }
 
         /// <summary>
         /// Gets or sets the cid.
         /// </summary>
         [JsonPropertyName("cid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cid { get; set; }
 
         public const string RecordType = "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput";

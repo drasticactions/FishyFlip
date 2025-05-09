@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the email.
         /// </summary>
         [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Email { get; set; }
 
         public const string RecordType = "com.atproto.server.describeServer#contact";

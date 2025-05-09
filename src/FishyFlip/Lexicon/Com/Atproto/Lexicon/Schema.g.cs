@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Lexicon
         /// <br/> Indicates the 'version' of the Lexicon language. Must be '1' for the current atproto/Lexicon schema system.
         /// </summary>
         [JsonPropertyName("lexicon")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Lexicon { get; set; }
 
         public const string RecordType = "com.atproto.lexicon.schema";

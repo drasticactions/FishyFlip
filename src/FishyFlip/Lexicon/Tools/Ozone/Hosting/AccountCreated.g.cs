@@ -46,12 +46,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
         /// Gets or sets the email.
         /// </summary>
         [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Email { get; set; }
 
         /// <summary>
         /// Gets or sets the handle.
         /// </summary>
         [JsonPropertyName("handle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 

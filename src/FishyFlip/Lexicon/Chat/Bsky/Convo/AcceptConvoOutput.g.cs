@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Rev when the convo was accepted. If not present, the convo was already accepted.
         /// </summary>
         [JsonPropertyName("rev")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Rev { get; set; }
 
         public const string RecordType = "chat.bsky.convo.acceptConvo#AcceptConvoOutput";

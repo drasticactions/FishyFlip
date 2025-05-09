@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// Gets or sets the cursor.
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         /// <summary>

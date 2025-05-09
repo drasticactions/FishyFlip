@@ -88,6 +88,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The Musicbrainz ID of the track
         /// </summary>
         [JsonPropertyName("trackMbId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? TrackMbId { get; set; }
 
         /// <summary>
@@ -95,6 +96,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The Musicbrainz recording ID of the track
         /// </summary>
         [JsonPropertyName("recordingMbId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? RecordingMbId { get; set; }
 
         /// <summary>
@@ -102,6 +104,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The length of the track in seconds
         /// </summary>
         [JsonPropertyName("duration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Duration { get; set; }
 
         /// <summary>
@@ -117,6 +120,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> Array of Musicbrainz artist IDs
         /// </summary>
         [JsonPropertyName("artistMbIds")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? ArtistMbIds { get; set; }
 
         /// <summary>
@@ -124,6 +128,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The name of the release/album
         /// </summary>
         [JsonPropertyName("releaseName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ReleaseName { get; set; }
 
         /// <summary>
@@ -131,6 +136,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The Musicbrainz release ID
         /// </summary>
         [JsonPropertyName("releaseMbId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ReleaseMbId { get; set; }
 
         /// <summary>
@@ -138,6 +144,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The ISRC code associated with the recording
         /// </summary>
         [JsonPropertyName("isrc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Isrc { get; set; }
 
         /// <summary>
@@ -145,6 +152,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The URL associated with this track
         /// </summary>
         [JsonPropertyName("originUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? OriginUrl { get; set; }
 
         /// <summary>
@@ -152,6 +160,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The base domain of the music service. e.g. music.apple.com, tidal.com, spotify.com. Defaults to 'local' if not provided.
         /// </summary>
         [JsonPropertyName("musicServiceBaseDomain")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? MusicServiceBaseDomain { get; set; }
 
         /// <summary>
@@ -159,6 +168,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> A user-agent style string specifying the user agent. e.g. tealtracker/0.0.1b (Linux; Android 13; SM-A715F). Defaults to 'manual/unknown' if not provided.
         /// </summary>
         [JsonPropertyName("submissionClientAgent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SubmissionClientAgent { get; set; }
 
         /// <summary>
@@ -166,6 +176,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <br/> The unix timestamp of when the track was played
         /// </summary>
         [JsonPropertyName("playedTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? PlayedTime { get; set; }
 
         public const string RecordType = "fm.teal.alpha.feed.defs#playView";

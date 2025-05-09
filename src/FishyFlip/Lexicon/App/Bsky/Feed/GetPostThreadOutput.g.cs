@@ -65,6 +65,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </summary>
         [JsonPropertyName("threadgate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 
         public const string RecordType = "app.bsky.feed.getPostThread#GetPostThreadOutput";

@@ -69,6 +69,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Additional comment about added/removed tags.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventTag";

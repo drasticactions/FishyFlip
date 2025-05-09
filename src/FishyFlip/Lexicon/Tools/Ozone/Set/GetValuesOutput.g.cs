@@ -66,6 +66,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// Gets or sets the cursor.
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         public const string RecordType = "tools.ozone.set.getValues#GetValuesOutput";

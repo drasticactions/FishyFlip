@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the repost.
         /// </summary>
         [JsonPropertyName("repost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Repost { get; set; }
 
@@ -68,6 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the like.
         /// </summary>
         [JsonPropertyName("like")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Like { get; set; }
 
@@ -75,24 +77,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the threadMuted.
         /// </summary>
         [JsonPropertyName("threadMuted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? ThreadMuted { get; set; }
 
         /// <summary>
         /// Gets or sets the replyDisabled.
         /// </summary>
         [JsonPropertyName("replyDisabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? ReplyDisabled { get; set; }
 
         /// <summary>
         /// Gets or sets the embeddingDisabled.
         /// </summary>
         [JsonPropertyName("embeddingDisabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? EmbeddingDisabled { get; set; }
 
         /// <summary>
         /// Gets or sets the pinned.
         /// </summary>
         [JsonPropertyName("pinned")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Pinned { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#viewerState";

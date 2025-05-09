@@ -69,6 +69,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </summary>
         [JsonPropertyName("reply")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef? Reply { get; set; }
 
         /// <summary>
@@ -78,6 +79,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin) <br/>
         /// </summary>
         [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Reason { get; set; }
 
         /// <summary>
@@ -85,6 +87,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Context provided by feed generator that may be passed back alongside interactions.
         /// </summary>
         [JsonPropertyName("feedContext")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FeedContext { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#feedViewPost";

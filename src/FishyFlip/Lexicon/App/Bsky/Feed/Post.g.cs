@@ -80,6 +80,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> The primary post content. May be an empty string, if there are embeds.
         /// </summary>
         [JsonPropertyName("text")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Text { get; set; }
 
         /// <summary>
@@ -87,6 +88,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
@@ -94,6 +96,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef"/> (app.bsky.feed.defs#replyRef)
         /// </summary>
         [JsonPropertyName("reply")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.ReplyRefDef? Reply { get; set; }
 
         /// <summary>
@@ -106,6 +109,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.RecordWithMedia"/> (app.bsky.embed.recordWithMedia) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Embed { get; set; }
 
         /// <summary>
@@ -113,6 +117,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Indicates human language of post primary text content.
         /// </summary>
         [JsonPropertyName("langs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Langs { get; set; }
 
         /// <summary>
@@ -122,6 +127,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
@@ -129,6 +135,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Additional hashtags, in addition to any included in post text and facets.
         /// </summary>
         [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
         /// <summary>
@@ -136,6 +143,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Client-declared timestamp when this post was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "app.bsky.feed.post";

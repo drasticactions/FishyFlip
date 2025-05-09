@@ -63,6 +63,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> If true, an invite code must be supplied to create an account on this instance.
         /// </summary>
         [JsonPropertyName("inviteCodeRequired")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? InviteCodeRequired { get; set; }
 
         /// <summary>
@@ -70,6 +71,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> If true, a phone verification token must be supplied to create an account on this instance.
         /// </summary>
         [JsonPropertyName("phoneVerificationRequired")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? PhoneVerificationRequired { get; set; }
 
         /// <summary>
@@ -86,6 +88,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// com.atproto.server.defs#links <br/>
         /// </summary>
         [JsonPropertyName("links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Server.Links? Links { get; set; }
 
         /// <summary>
@@ -94,6 +97,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// com.atproto.server.defs#contact <br/>
         /// </summary>
         [JsonPropertyName("contact")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Server.Contact? Contact { get; set; }
 
         /// <summary>

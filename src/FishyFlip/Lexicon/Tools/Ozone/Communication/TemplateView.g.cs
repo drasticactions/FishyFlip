@@ -83,6 +83,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> Content of the template, can contain markdown and variable placeholders.
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Subject { get; set; }
 
         /// <summary>
@@ -105,6 +106,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> Message language.
         /// </summary>
         [JsonPropertyName("lang")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Lang { get; set; }
 
         /// <summary>

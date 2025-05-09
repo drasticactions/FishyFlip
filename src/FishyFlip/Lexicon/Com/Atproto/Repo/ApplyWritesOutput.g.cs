@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </summary>
         [JsonPropertyName("commit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.DeleteResult"/> (com.atproto.repo.applyWrites#deleteResult) <br/>
         /// </summary>
         [JsonPropertyName("results")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ATObject>? Results { get; set; }
 
         public const string RecordType = "com.atproto.repo.applyWrites#ApplyWritesOutput";

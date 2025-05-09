@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the cursor.
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Count of search hits. Optional, may be rounded/truncated, and may not be possible to paginate through all hits.
         /// </summary>
         [JsonPropertyName("hitsTotal")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? HitsTotal { get; set; }
 
         /// <summary>

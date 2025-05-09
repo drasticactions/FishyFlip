@@ -67,6 +67,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// <br/> The alias to save the Bluemoji to in the current logged-in user's repo.
         /// </summary>
         [JsonPropertyName("renameTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? RenameTo { get; set; }
 
         public const string RecordType = "blue.moji.collection.saveToCollection#SaveToCollectionInput";

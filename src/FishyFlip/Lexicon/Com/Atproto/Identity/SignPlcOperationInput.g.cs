@@ -56,30 +56,35 @@ namespace FishyFlip.Lexicon.Com.Atproto.Identity
         /// <br/> A token received through com.atproto.identity.requestPlcOperationSignature
         /// </summary>
         [JsonPropertyName("token")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Token { get; set; }
 
         /// <summary>
         /// Gets or sets the rotationKeys.
         /// </summary>
         [JsonPropertyName("rotationKeys")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? RotationKeys { get; set; }
 
         /// <summary>
         /// Gets or sets the alsoKnownAs.
         /// </summary>
         [JsonPropertyName("alsoKnownAs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? AlsoKnownAs { get; set; }
 
         /// <summary>
         /// Gets or sets the verificationMethods.
         /// </summary>
         [JsonPropertyName("verificationMethods")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? VerificationMethods { get; set; }
 
         /// <summary>
         /// Gets or sets the services.
         /// </summary>
         [JsonPropertyName("services")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Services { get; set; }
 
         public const string RecordType = "com.atproto.identity.signPlcOperation#SignPlcOperationInput";

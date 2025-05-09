@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> Label values created by this labeler and scoped exclusively to it. Labels defined here will override global label definitions for this labeler.
         /// </summary>
         [JsonPropertyName("labelValueDefinitions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.LabelValueDefinition>? LabelValueDefinitions { get; set; }
 
         public const string RecordType = "app.bsky.labeler.defs#labelerPolicies";

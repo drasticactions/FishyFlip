@@ -77,6 +77,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the did.
         /// </summary>
         [JsonPropertyName("did")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
@@ -84,24 +85,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the displayName.
         /// </summary>
         [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the descriptionFacets.
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Avatar { get; set; }
 
         /// <summary>
@@ -109,6 +114,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Declaration that a feed accepts feedback interactions from a client through app.bsky.feed.sendInteractions
         /// </summary>
         [JsonPropertyName("acceptsInteractions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AcceptsInteractions { get; set; }
 
         /// <summary>
@@ -118,6 +124,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
@@ -127,12 +134,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// contentModeVideo - Declares the feed generator returns posts containing app.bsky.embed.video embeds. <br/>
         /// </summary>
         [JsonPropertyName("contentMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ContentMode { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "app.bsky.feed.generator";

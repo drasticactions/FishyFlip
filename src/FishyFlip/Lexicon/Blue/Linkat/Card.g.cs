@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <br/> URL of the link
         /// </summary>
         [JsonPropertyName("url")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Url { get; set; }
 
         /// <summary>
@@ -57,6 +58,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <br/> Text of the card
         /// </summary>
         [JsonPropertyName("text")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Text { get; set; }
 
         /// <summary>
@@ -64,6 +66,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <br/> Emoji of the card
         /// </summary>
         [JsonPropertyName("emoji")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Emoji { get; set; }
 
         public const string RecordType = "blue.linkat.board#card";

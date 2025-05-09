@@ -74,6 +74,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta"/> (com.atproto.repo.defs#commitMeta)
         /// </summary>
         [JsonPropertyName("commit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta? Commit { get; set; }
 
         /// <summary>
@@ -83,6 +84,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// unknown <br/>
         /// </summary>
         [JsonPropertyName("validationStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ValidationStatus { get; set; }
 
         public const string RecordType = "com.atproto.repo.putRecord#PutRecordOutput";

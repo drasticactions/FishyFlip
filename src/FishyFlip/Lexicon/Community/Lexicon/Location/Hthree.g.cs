@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The name of the location.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         public const string RecordType = "community.lexicon.location.hthree";

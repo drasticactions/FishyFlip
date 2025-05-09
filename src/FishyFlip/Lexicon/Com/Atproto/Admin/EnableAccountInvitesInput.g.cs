@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <br/> Optional reason for enabled invites.
         /// </summary>
         [JsonPropertyName("note")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Note { get; set; }
 
         public const string RecordType = "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput";

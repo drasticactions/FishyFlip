@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the like.
         /// </summary>
         [JsonPropertyName("like")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Like { get; set; }
 

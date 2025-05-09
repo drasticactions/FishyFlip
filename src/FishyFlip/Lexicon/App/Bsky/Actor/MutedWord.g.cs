@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the id.
         /// </summary>
         [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Id { get; set; }
 
         /// <summary>
@@ -88,6 +89,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// exclude-following <br/>
         /// </summary>
         [JsonPropertyName("actorTarget")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ActorTarget { get; set; } = "all";
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> The date and time at which the muted word will expire and no longer be applied.
         /// </summary>
         [JsonPropertyName("expiresAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ExpiresAt { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#mutedWord";

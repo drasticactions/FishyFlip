@@ -64,6 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// live - Advertises an account as currently offering live content. <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? StatusValue { get; set; }
 
         /// <summary>
@@ -73,6 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal"/> (app.bsky.embed.external) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.EmbedExternal? Embed { get; set; }
 
         /// <summary>
@@ -80,12 +82,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> The duration of the status in minutes. Applications can choose to impose minimum and maximum limits.
         /// </summary>
         [JsonPropertyName("durationMinutes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? DurationMinutes { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "app.bsky.actor.status";

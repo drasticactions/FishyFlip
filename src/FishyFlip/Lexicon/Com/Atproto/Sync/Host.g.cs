@@ -68,12 +68,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Recent repo stream event sequence number. May be delayed from actual stream processing (eg, persisted cursor not in-memory cursor).
         /// </summary>
         [JsonPropertyName("seq")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Seq { get; set; }
 
         /// <summary>
         /// Gets or sets the accountCount.
         /// </summary>
         [JsonPropertyName("accountCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? AccountCount { get; set; }
 
         /// <summary>
@@ -86,6 +88,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// banned <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         public const string RecordType = "com.atproto.sync.listHosts#host";

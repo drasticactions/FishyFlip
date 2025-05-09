@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// Gets or sets the url.
         /// </summary>
         [JsonPropertyName("url")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Url { get; set; }
 
         public const string RecordType = "tools.ozone.server.getConfig#serviceConfig";

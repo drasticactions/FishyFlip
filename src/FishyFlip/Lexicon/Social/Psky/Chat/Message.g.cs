@@ -58,12 +58,14 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <br/> Text content.
         /// </summary>
         [JsonPropertyName("content")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Content { get; set; }
 
         /// <summary>
         /// Gets or sets the room.
         /// </summary>
         [JsonPropertyName("room")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Room { get; set; }
 
@@ -72,6 +74,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Social.Psky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
@@ -79,6 +82,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("reply")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Reply { get; set; }
 
         public const string RecordType = "social.psky.chat.message";

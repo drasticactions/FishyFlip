@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Actor
         /// Gets or sets the nickname.
         /// </summary>
         [JsonPropertyName("nickname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Nickname { get; set; }
 
         public const string RecordType = "social.psky.actor.profile";

@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> Name of the template.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         /// <summary>
@@ -77,6 +78,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> Message language.
         /// </summary>
         [JsonPropertyName("lang")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Lang { get; set; }
 
         /// <summary>
@@ -84,6 +86,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> Content of the template, markdown supported, can contain variable placeholders.
         /// </summary>
         [JsonPropertyName("contentMarkdown")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ContentMarkdown { get; set; }
 
         /// <summary>
@@ -91,6 +94,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> Subject of the message, used in emails.
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Subject { get; set; }
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <br/> DID of the user who is updating the template.
         /// </summary>
         [JsonPropertyName("updatedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? UpdatedBy { get; set; }
 
@@ -105,6 +110,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// Gets or sets the disabled.
         /// </summary>
         [JsonPropertyName("disabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Disabled { get; set; }
 
         public const string RecordType = "tools.ozone.communication.updateTemplate#UpdateTemplateInput";

@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the actor.
         /// </summary>
         [JsonPropertyName("actor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Actor { get; set; }
 

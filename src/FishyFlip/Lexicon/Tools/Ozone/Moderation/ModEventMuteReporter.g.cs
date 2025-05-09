@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Indicates how long the account should remain muted. Falsy value here means a permanent mute.
         /// </summary>
         [JsonPropertyName("durationInHours")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? DurationInHours { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventMuteReporter";

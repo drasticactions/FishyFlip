@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// Gets or sets the cursor.
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         /// <summary>

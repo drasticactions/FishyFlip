@@ -72,12 +72,14 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// Gets or sets the avatar.
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Avatar { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>

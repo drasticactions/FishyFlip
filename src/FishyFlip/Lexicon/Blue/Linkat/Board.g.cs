@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.Blue.Linkat
         /// <br/> List of cards in the board.
         /// </summary>
         [JsonPropertyName("cards")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Blue.Linkat.Card>? Cards { get; set; }
 
         public const string RecordType = "blue.linkat.board";

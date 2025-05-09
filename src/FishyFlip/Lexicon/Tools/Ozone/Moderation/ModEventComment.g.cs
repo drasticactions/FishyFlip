@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Make the comment persistent on the subject
         /// </summary>
         [JsonPropertyName("sticky")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Sticky { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventComment";

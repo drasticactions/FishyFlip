@@ -81,6 +81,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal"/> (app.bsky.embed.external#view) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal? Embed { get; set; }
 
         /// <summary>
@@ -88,6 +89,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> The date when this status will expire. The application might choose to no longer return the status after expiration.
         /// </summary>
         [JsonPropertyName("expiresAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ExpiresAt { get; set; }
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> True if the status is not expired, false if it is expired. Only present if expiration was set.
         /// </summary>
         [JsonPropertyName("isActive")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? IsActive { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#statusView";

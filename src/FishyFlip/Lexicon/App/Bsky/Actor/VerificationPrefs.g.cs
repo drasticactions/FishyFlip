@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Hide the blue check badges for verified accounts and trusted verifiers.
         /// </summary>
         [JsonPropertyName("hideBadges")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? HideBadges { get; set; } = false;
 
         public const string RecordType = "app.bsky.actor.defs#verificationPrefs";

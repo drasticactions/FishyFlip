@@ -73,6 +73,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the muted.
         /// </summary>
         [JsonPropertyName("muted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Muted { get; set; }
 
         /// <summary>
@@ -80,18 +81,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("mutedByList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? MutedByList { get; set; }
 
         /// <summary>
         /// Gets or sets the blockedBy.
         /// </summary>
         [JsonPropertyName("blockedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? BlockedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the blocking.
         /// </summary>
         [JsonPropertyName("blocking")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Blocking { get; set; }
 
@@ -100,12 +104,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic"/> (app.bsky.graph.defs#listViewBasic)
         /// </summary>
         [JsonPropertyName("blockingByList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? BlockingByList { get; set; }
 
         /// <summary>
         /// Gets or sets the following.
         /// </summary>
         [JsonPropertyName("following")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Following { get; set; }
 
@@ -113,6 +119,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the followedBy.
         /// </summary>
         [JsonPropertyName("followedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? FollowedBy { get; set; }
 
@@ -121,6 +128,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
         /// </summary>
         [JsonPropertyName("knownFollowers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? KnownFollowers { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#viewerState";

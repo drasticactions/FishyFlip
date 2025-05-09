@@ -52,6 +52,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the uri.
         /// </summary>
         [JsonPropertyName("uri")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Uri { get; set; }
 
@@ -59,18 +60,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the cid.
         /// </summary>
         [JsonPropertyName("cid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cid { get; set; }
 
         /// <summary>
         /// Gets or sets the record.
         /// </summary>
         [JsonPropertyName("record")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Record { get; set; }
 
         /// <summary>
         /// Gets or sets the lists.
         /// </summary>
         [JsonPropertyName("lists")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>? Lists { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#threadgateView";

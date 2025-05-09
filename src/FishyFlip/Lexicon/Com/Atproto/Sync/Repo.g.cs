@@ -86,6 +86,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// Gets or sets the active.
         /// </summary>
         [JsonPropertyName("active")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Active { get; set; }
 
         /// <summary>
@@ -100,6 +101,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// throttled <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         public const string RecordType = "com.atproto.sync.listRepos#repo";

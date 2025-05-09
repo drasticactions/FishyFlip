@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord"/> (app.bsky.embed.record) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.EmbedRecord? Embed { get; set; }
 
         public const string RecordType = "chat.bsky.convo.defs#messageInput";

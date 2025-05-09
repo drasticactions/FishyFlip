@@ -79,6 +79,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </summary>
         [JsonPropertyName("aspectRatio")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
 
         public const string RecordType = "app.bsky.embed.images#viewImage";

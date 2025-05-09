@@ -113,6 +113,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// hide <br/>
         /// </summary>
         [JsonPropertyName("defaultSetting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DefaultSetting { get; set; } = "warn";
 
         /// <summary>
@@ -120,6 +121,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <br/> Does the user need to have adult content enabled in order to configure this label?
         /// </summary>
         [JsonPropertyName("adultOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AdultOnly { get; set; }
 
         /// <summary>

@@ -89,6 +89,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
@@ -100,6 +101,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
         /// </summary>
         [JsonPropertyName("managerRole")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ManagerRole { get; set; }
 
         public const string RecordType = "tools.ozone.setting.upsertOption#UpsertOptionInput";

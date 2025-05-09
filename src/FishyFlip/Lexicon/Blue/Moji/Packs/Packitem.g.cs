@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// <br/> Reference (AT-URI) to the Bluemoji item record (blue.moji.collection.item).
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Subject { get; set; }
 
@@ -61,6 +62,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// <br/> Reference (AT-URI) to the pack record (blue.moji.packs.pack).
         /// </summary>
         [JsonPropertyName("pack")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Pack { get; set; }
 
@@ -68,6 +70,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "blue.moji.packs.packitem";

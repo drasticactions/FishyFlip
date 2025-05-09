@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> The unix timestamp of when the item was recorded
         /// </summary>
         [JsonPropertyName("time")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? Time { get; set; }
 
         /// <summary>
@@ -62,6 +63,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> The unix timestamp of the expiry time of the item. If unavailable, default to 10 minutes past the start time.
         /// </summary>
         [JsonPropertyName("expiry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? Expiry { get; set; }
 
         /// <summary>
@@ -69,6 +71,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView"/> (fm.teal.alpha.feed.defs#playView)
         /// </summary>
         [JsonPropertyName("item")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.PlayView? Item { get; set; }
 
         public const string RecordType = "fm.teal.alpha.actor.status";

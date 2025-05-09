@@ -63,6 +63,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// Gets or sets the disabled.
         /// </summary>
         [JsonPropertyName("disabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Disabled { get; set; }
 
         /// <summary>
@@ -74,6 +75,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
         /// </summary>
         [JsonPropertyName("role")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Role { get; set; }
 
         public const string RecordType = "tools.ozone.team.updateMember#UpdateMemberInput";

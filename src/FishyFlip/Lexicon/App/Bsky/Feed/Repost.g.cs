@@ -52,12 +52,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Subject { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "app.bsky.feed.repost";

@@ -74,6 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the displayName.
         /// </summary>
         [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
 
         /// <summary>
@@ -81,6 +82,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Free-form profile description text.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
@@ -88,6 +90,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Small image to be displayed next to posts from account. AKA, 'profile picture'
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Avatar { get; set; }
 
         /// <summary>
@@ -95,6 +98,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Larger horizontal image to display behind profile view.
         /// </summary>
         [JsonPropertyName("banner")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Banner { get; set; }
 
         /// <summary>
@@ -104,6 +108,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
@@ -111,6 +116,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("joinedViaStarterPack")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? JoinedViaStarterPack { get; set; }
 
         /// <summary>
@@ -118,12 +124,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("pinnedPost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? PinnedPost { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "app.bsky.actor.profile";

@@ -64,6 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SkeletonReasonPin"/> (app.bsky.feed.defs#skeletonReasonPin) <br/>
         /// </summary>
         [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Reason { get; set; }
 
         /// <summary>
@@ -71,6 +72,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Context that will be passed through to client and may be passed to feed generator back alongside interactions.
         /// </summary>
         [JsonPropertyName("feedContext")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FeedContext { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#skeletonFeedPost";

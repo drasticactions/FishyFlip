@@ -107,18 +107,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the avatar.
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Avatar { get; set; }
 
         /// <summary>
         /// Gets or sets the listItemCount.
         /// </summary>
         [JsonPropertyName("listItemCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ListItemCount { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
@@ -126,12 +129,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState"/> (app.bsky.graph.defs#listViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
         /// </summary>
         [JsonPropertyName("indexedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? IndexedAt { get; set; }
 
         public const string RecordType = "app.bsky.graph.defs#listViewBasic";

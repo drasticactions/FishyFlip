@@ -52,12 +52,14 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// Gets or sets the subject.
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Subject { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -65,6 +67,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
         /// <br/> Tags for content the bookmark may be related to, for example 'news' or 'funny videos'
         /// </summary>
         [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
         public const string RecordType = "community.lexicon.bookmarks.bookmark";

@@ -147,6 +147,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <br/> Describes the reason for revocation, also indicating that the verification is no longer valid.
         /// </summary>
         [JsonPropertyName("revokeReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? RevokeReason { get; set; }
 
         /// <summary>
@@ -154,6 +155,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <br/> Timestamp when the verification was revoked.
         /// </summary>
         [JsonPropertyName("revokedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? RevokedAt { get; set; }
 
         /// <summary>
@@ -161,6 +163,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <br/> The user who revoked this verification.
         /// </summary>
         [JsonPropertyName("revokedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? RevokedBy { get; set; }
 
@@ -169,6 +172,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <br/> Union Types: <br/>
         /// </summary>
         [JsonPropertyName("subjectProfile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? SubjectProfile { get; set; }
 
         /// <summary>
@@ -176,6 +180,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <br/> Union Types: <br/>
         /// </summary>
         [JsonPropertyName("issuerProfile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? IssuerProfile { get; set; }
 
         /// <summary>
@@ -185,6 +190,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound) <br/>
         /// </summary>
         [JsonPropertyName("subjectRepo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? SubjectRepo { get; set; }
 
         /// <summary>
@@ -194,6 +200,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewNotFound"/> (tools.ozone.moderation.defs#repoViewNotFound) <br/>
         /// </summary>
         [JsonPropertyName("issuerRepo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? IssuerRepo { get; set; }
 
         public const string RecordType = "tools.ozone.verification.defs#verificationView";

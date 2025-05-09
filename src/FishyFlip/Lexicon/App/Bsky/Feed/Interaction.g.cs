@@ -63,6 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the item.
         /// </summary>
         [JsonPropertyName("item")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Item { get; set; }
 
@@ -83,6 +84,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// interactionShare - User shared the feed item <br/>
         /// </summary>
         [JsonPropertyName("event")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Event { get; set; }
 
         /// <summary>
@@ -90,6 +92,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Context on a feed item that was originally supplied by the feed generator on getFeedSkeleton.
         /// </summary>
         [JsonPropertyName("feedContext")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FeedContext { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#interaction";

@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> if the actor follows this DID, this is the AT-URI of the follow record
         /// </summary>
         [JsonPropertyName("following")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Following { get; set; }
 
@@ -69,6 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> if the actor is followed by this DID, contains the AT-URI of the follow record
         /// </summary>
         [JsonPropertyName("followedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? FollowedBy { get; set; }
 

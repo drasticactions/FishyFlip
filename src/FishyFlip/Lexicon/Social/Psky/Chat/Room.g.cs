@@ -65,12 +65,14 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// Gets or sets the name.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         /// <summary>
         /// Gets or sets the languages.
         /// </summary>
         [JsonPropertyName("languages")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Languages { get; set; }
 
         /// <summary>
@@ -78,12 +80,14 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// <br/> Topic title of the room.
         /// </summary>
         [JsonPropertyName("topic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Topic { get; set; }
 
         /// <summary>
         /// Gets or sets the tags.
         /// </summary>
         [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
         /// <summary>
@@ -92,6 +96,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// social.psky.chat.defs#modlistRef <br/>
         /// </summary>
         [JsonPropertyName("allowlist")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? Allowlist { get; set; }
 
         /// <summary>
@@ -100,6 +105,7 @@ namespace FishyFlip.Lexicon.Social.Psky.Chat
         /// social.psky.chat.defs#modlistRef <br/>
         /// </summary>
         [JsonPropertyName("denylist")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Social.Psky.Chat.ModlistRef? Denylist { get; set; }
 
         public const string RecordType = "social.psky.chat.room";

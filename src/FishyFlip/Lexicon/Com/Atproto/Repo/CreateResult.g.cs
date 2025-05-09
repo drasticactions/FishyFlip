@@ -71,6 +71,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// unknown <br/>
         /// </summary>
         [JsonPropertyName("validationStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ValidationStatus { get; set; }
 
         public const string RecordType = "com.atproto.repo.applyWrites#createResult";

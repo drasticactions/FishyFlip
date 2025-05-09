@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#blockedAuthor";

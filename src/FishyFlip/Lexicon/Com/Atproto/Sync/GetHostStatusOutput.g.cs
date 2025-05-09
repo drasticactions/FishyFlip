@@ -67,6 +67,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Recent repo stream event sequence number. May be delayed from actual stream processing (eg, persisted cursor not in-memory cursor).
         /// </summary>
         [JsonPropertyName("seq")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Seq { get; set; }
 
         /// <summary>
@@ -74,6 +75,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Number of accounts on the server which are associated with the upstream host. Note that the upstream may actually have more accounts.
         /// </summary>
         [JsonPropertyName("accountCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? AccountCount { get; set; }
 
         /// <summary>
@@ -86,6 +88,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// banned <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         public const string RecordType = "com.atproto.sync.getHostStatus#GetHostStatusOutput";

@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "com.whtwnd.blog.defs#blogEntry";

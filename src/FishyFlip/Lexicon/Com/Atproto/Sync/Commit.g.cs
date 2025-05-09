@@ -138,6 +138,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> The root CID of the MST tree for the previous commit from this repo (indicated by the 'since' revision field in this message). Corresponds to the 'data' field in the repo commit object. NOTE: this field is effectively required for the 'inductive' version of firehose.
         /// </summary>
         [JsonPropertyName("prevData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
         public Ipfs.Cid? PrevData { get; set; }
 

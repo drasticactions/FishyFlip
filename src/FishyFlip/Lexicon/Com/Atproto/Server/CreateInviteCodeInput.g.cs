@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the forAccount.
         /// </summary>
         [JsonPropertyName("forAccount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? ForAccount { get; set; }
 

@@ -62,24 +62,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// Gets or sets the remainingDailyVideos.
         /// </summary>
         [JsonPropertyName("remainingDailyVideos")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RemainingDailyVideos { get; set; }
 
         /// <summary>
         /// Gets or sets the remainingDailyBytes.
         /// </summary>
         [JsonPropertyName("remainingDailyBytes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RemainingDailyBytes { get; set; }
 
         /// <summary>
         /// Gets or sets the message.
         /// </summary>
         [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Message { get; set; }
 
         /// <summary>
         /// Gets or sets the error.
         /// </summary>
         [JsonPropertyName("error")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Error { get; set; }
 
         public const string RecordType = "app.bsky.video.getUploadLimits#GetUploadLimitsOutput";

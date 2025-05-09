@@ -69,6 +69,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// Gets or sets the altitude.
         /// </summary>
         [JsonPropertyName("altitude")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Altitude { get; set; }
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The name of the location.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         public const string RecordType = "community.lexicon.location.geo";

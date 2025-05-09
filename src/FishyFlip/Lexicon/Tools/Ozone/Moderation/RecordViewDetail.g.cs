@@ -97,6 +97,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>

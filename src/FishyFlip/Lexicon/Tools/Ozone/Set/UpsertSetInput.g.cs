@@ -32,6 +32,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Set.Set"/> (tools.ozone.set.defs#set)
         /// </summary>
         [JsonPropertyName("set")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Set.Set? Set { get; set; }
 
         public const string RecordType = "tools.ozone.set.upsertSet#UpsertSetInput";

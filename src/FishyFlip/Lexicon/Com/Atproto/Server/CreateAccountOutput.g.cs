@@ -90,6 +90,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> Complete DID document.
         /// </summary>
         [JsonPropertyName("didDoc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
 
         public const string RecordType = "com.atproto.server.createAccount#CreateAccountOutput";

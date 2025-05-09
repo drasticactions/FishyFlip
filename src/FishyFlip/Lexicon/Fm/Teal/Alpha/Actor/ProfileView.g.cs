@@ -67,12 +67,14 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> The decentralized identifier of the actor
         /// </summary>
         [JsonPropertyName("did")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Did { get; set; }
 
         /// <summary>
         /// Gets or sets the displayName.
         /// </summary>
         [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
 
         /// <summary>
@@ -80,6 +82,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> Free-form profile description text.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
@@ -87,6 +90,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> Annotations of text in the profile description (mentions, URLs, hashtags, etc). May be changed to another (backwards compatible) lexicon.
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
@@ -95,6 +99,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem"/> (fm.teal.alpha.actor.profile#featuredItem)
         /// </summary>
         [JsonPropertyName("featuredItem")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FeaturedItem? FeaturedItem { get; set; }
 
         /// <summary>
@@ -102,6 +107,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> IPLD of the avatar
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Avatar { get; set; }
 
         /// <summary>
@@ -109,12 +115,14 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> IPLD of the banner image
         /// </summary>
         [JsonPropertyName("banner")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Banner { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "fm.teal.alpha.actor.defs#profileView";

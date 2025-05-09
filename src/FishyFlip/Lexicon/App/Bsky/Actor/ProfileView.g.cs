@@ -100,18 +100,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the displayName.
         /// </summary>
         [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Avatar { get; set; }
 
         /// <summary>
@@ -119,18 +122,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated"/> (app.bsky.actor.defs#profileAssociated)
         /// </summary>
         [JsonPropertyName("associated")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? Associated { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
         /// </summary>
         [JsonPropertyName("indexedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? IndexedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -138,12 +144,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ViewerState"/> (app.bsky.actor.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
@@ -151,6 +159,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.VerificationState"/> (app.bsky.actor.defs#verificationState)
         /// </summary>
         [JsonPropertyName("verification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? Verification { get; set; }
 
         /// <summary>
@@ -158,6 +167,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.StatusView"/> (app.bsky.actor.defs#statusView)
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.StatusView? Status { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#profileView";

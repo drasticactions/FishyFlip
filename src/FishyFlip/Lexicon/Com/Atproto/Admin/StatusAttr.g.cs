@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// Gets or sets the ref.
         /// </summary>
         [JsonPropertyName("ref")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Ref { get; set; }
 
         public const string RecordType = "com.atproto.admin.defs#statusAttr";

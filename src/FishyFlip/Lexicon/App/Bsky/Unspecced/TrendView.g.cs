@@ -104,12 +104,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// hot <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         /// <summary>
         /// Gets or sets the category.
         /// </summary>
         [JsonPropertyName("category")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Category { get; set; }
 
         /// <summary>

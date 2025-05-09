@@ -104,6 +104,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// throttled <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#account";

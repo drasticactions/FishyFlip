@@ -74,18 +74,21 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// <br/> Should be in the format :emoji:
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         /// <summary>
         /// Gets or sets the alt.
         /// </summary>
         [JsonPropertyName("alt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Alt { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -95,12 +98,14 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// <see cref="FishyFlip.Lexicon.Blue.Moji.Collection.FormatsV0"/> (blue.moji.collection.item#formats_v0) <br/>
         /// </summary>
         [JsonPropertyName("formats")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Blue.Moji.Collection.FormatsV0? Formats { get; set; }
 
         /// <summary>
         /// Gets or sets the adultOnly.
         /// </summary>
         [JsonPropertyName("adultOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AdultOnly { get; set; } = false;
 
         /// <summary>
@@ -110,12 +115,14 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the copyOf.
         /// </summary>
         [JsonPropertyName("copyOf")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? CopyOf { get; set; }
 
@@ -123,6 +130,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// Gets or sets the fallbackText.
         /// </summary>
         [JsonPropertyName("fallbackText")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FallbackText { get; set; } = "◌";
 
         public const string RecordType = "blue.moji.collection.item";

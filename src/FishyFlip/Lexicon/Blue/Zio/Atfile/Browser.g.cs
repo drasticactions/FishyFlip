@@ -49,12 +49,14 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// Gets or sets the id.
         /// </summary>
         [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the userAgent.
         /// </summary>
         [JsonPropertyName("userAgent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? UserAgent { get; set; }
 
         public const string RecordType = "blue.zio.atfile.finger#browser";

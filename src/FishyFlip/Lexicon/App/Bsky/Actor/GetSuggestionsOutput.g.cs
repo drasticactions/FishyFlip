@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the cursor.
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         /// <summary>
@@ -63,6 +64,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
         /// </summary>
         [JsonPropertyName("recId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RecId { get; set; }
 
         public const string RecordType = "app.bsky.actor.getSuggestions#GetSuggestionsOutput";

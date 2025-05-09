@@ -93,6 +93,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// Gets or sets the reason.
         /// </summary>
         [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Reason { get; set; }
 
         /// <summary>

@@ -85,6 +85,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </summary>
         [JsonPropertyName("grandparentAuthor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic? GrandparentAuthor { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#replyRef";

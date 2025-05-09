@@ -67,6 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Hide replies in the feed.
         /// </summary>
         [JsonPropertyName("hideReplies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? HideReplies { get; set; }
 
         /// <summary>
@@ -74,6 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Hide replies in the feed if they are not by followed users.
         /// </summary>
         [JsonPropertyName("hideRepliesByUnfollowed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? HideRepliesByUnfollowed { get; set; } = true;
 
         /// <summary>
@@ -81,6 +83,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Hide replies in the feed if they do not have this number of likes.
         /// </summary>
         [JsonPropertyName("hideRepliesByLikeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? HideRepliesByLikeCount { get; set; }
 
         /// <summary>
@@ -88,6 +91,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Hide reposts in the feed.
         /// </summary>
         [JsonPropertyName("hideReposts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? HideReposts { get; set; }
 
         /// <summary>
@@ -95,6 +99,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Hide quote posts in the feed.
         /// </summary>
         [JsonPropertyName("hideQuotePosts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? HideQuotePosts { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#feedViewPref";

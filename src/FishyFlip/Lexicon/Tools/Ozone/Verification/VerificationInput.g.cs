@@ -79,6 +79,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <br/> Timestamp for verification record. Defaults to current time when not specified.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "tools.ozone.verification.grantVerifications#verificationInput";

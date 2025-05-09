@@ -128,30 +128,35 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Embed { get; set; }
 
         /// <summary>
         /// Gets or sets the replyCount.
         /// </summary>
         [JsonPropertyName("replyCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ReplyCount { get; set; }
 
         /// <summary>
         /// Gets or sets the repostCount.
         /// </summary>
         [JsonPropertyName("repostCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RepostCount { get; set; }
 
         /// <summary>
         /// Gets or sets the likeCount.
         /// </summary>
         [JsonPropertyName("likeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? LikeCount { get; set; }
 
         /// <summary>
         /// Gets or sets the quoteCount.
         /// </summary>
         [JsonPropertyName("quoteCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? QuoteCount { get; set; }
 
         /// <summary>
@@ -166,12 +171,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ViewerState"/> (app.bsky.feed.defs#viewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.ViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
@@ -179,6 +186,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </summary>
         [JsonPropertyName("threadgate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#postView";

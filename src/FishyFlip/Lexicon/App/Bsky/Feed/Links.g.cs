@@ -46,12 +46,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the privacyPolicy.
         /// </summary>
         [JsonPropertyName("privacyPolicy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PrivacyPolicy { get; set; }
 
         /// <summary>
         /// Gets or sets the termsOfService.
         /// </summary>
         [JsonPropertyName("termsOfService")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? TermsOfService { get; set; }
 
         public const string RecordType = "app.bsky.feed.describeFeedGenerator#links";

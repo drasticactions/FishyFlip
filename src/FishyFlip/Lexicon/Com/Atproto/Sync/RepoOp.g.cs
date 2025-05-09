@@ -88,6 +88,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> For updates and deletes, the previous record CID (required for inductive firehose). For creations, field should not be defined.
         /// </summary>
         [JsonPropertyName("prev")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
         public Ipfs.Cid? Prev { get; set; }
 
