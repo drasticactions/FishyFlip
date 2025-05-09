@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Set to true if the reporter was muted from reporting at the time of the event. These reports won't impact the reviewState of the subject.
         /// </summary>
         [JsonPropertyName("isReporterMuted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? IsReporterMuted { get; set; }
 
         /// <summary>

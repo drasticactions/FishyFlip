@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The content of the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -67,6 +68,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Client-declared timestamp when this comment was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -74,6 +76,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("parent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Parent { get; set; }
 
         /// <summary>
@@ -81,6 +84,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("book")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Book { get; set; }
 
         public const string RecordType = "buzz.bookhive.buzz";

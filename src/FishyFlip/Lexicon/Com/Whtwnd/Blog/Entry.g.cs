@@ -69,24 +69,28 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// Gets or sets the content.
         /// </summary>
         [JsonPropertyName("content")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Content { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
         [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Title { get; set; }
 
         /// <summary>
         /// Gets or sets the subtitle.
         /// </summary>
         [JsonPropertyName("subtitle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Subtitle { get; set; }
 
         /// <summary>
@@ -94,18 +98,21 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp"/> (com.whtwnd.blog.defs#ogp)
         /// </summary>
         [JsonPropertyName("ogp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Whtwnd.Blog.Ogp? Ogp { get; set; }
 
         /// <summary>
         /// Gets or sets the theme.
         /// </summary>
         [JsonPropertyName("theme")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Theme { get; set; }
 
         /// <summary>
         /// Gets or sets the blobs.
         /// </summary>
         [JsonPropertyName("blobs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Whtwnd.Blog.BlobMetadata>? Blobs { get; set; }
 
         /// <summary>
@@ -113,6 +120,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// <br/> Tells the visibility of the article to AppView.
         /// </summary>
         [JsonPropertyName("visibility")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Visibility { get; set; } = "public";
 
         public const string RecordType = "com.whtwnd.blog.entry";

@@ -68,6 +68,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Cumulative sum of the number of reports on the items in the set
         /// </summary>
         [JsonPropertyName("totalReports")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? TotalReports { get; set; }
 
         /// <summary>
@@ -75,6 +76,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of items that were reported at least once
         /// </summary>
         [JsonPropertyName("reportedCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ReportedCount { get; set; }
 
         /// <summary>
@@ -82,6 +84,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of items that were escalated at least once
         /// </summary>
         [JsonPropertyName("escalatedCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? EscalatedCount { get; set; }
 
         /// <summary>
@@ -89,6 +92,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of items that were appealed at least once
         /// </summary>
         [JsonPropertyName("appealedCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? AppealedCount { get; set; }
 
         /// <summary>
@@ -96,6 +100,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Total number of item in the set
         /// </summary>
         [JsonPropertyName("subjectCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? SubjectCount { get; set; }
 
         /// <summary>
@@ -103,6 +108,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of item currently in "reviewOpen" or "reviewEscalated" state
         /// </summary>
         [JsonPropertyName("pendingCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? PendingCount { get; set; }
 
         /// <summary>
@@ -110,6 +116,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of item currently in "reviewNone" or "reviewClosed" state
         /// </summary>
         [JsonPropertyName("processedCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ProcessedCount { get; set; }
 
         /// <summary>
@@ -117,6 +124,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of item currently taken down
         /// </summary>
         [JsonPropertyName("takendownCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? TakendownCount { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#recordsStats";

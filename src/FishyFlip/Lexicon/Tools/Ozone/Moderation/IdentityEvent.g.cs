@@ -58,12 +58,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
         /// Gets or sets the handle.
         /// </summary>
         [JsonPropertyName("handle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
@@ -71,12 +73,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the pdsHost.
         /// </summary>
         [JsonPropertyName("pdsHost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PdsHost { get; set; }
 
         /// <summary>
         /// Gets or sets the tombstone.
         /// </summary>
         [JsonPropertyName("tombstone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Tombstone { get; set; }
 
         /// <summary>

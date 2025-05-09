@@ -73,6 +73,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Gets or sets the thumb.
         /// </summary>
         [JsonPropertyName("thumb")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Thumb { get; set; }
 
         public const string RecordType = "app.bsky.embed.external#viewExternal";

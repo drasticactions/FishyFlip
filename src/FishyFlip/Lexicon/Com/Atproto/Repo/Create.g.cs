@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> NOTE: maxLength is redundant with record-key format. Keeping it temporarily to ensure backwards compatibility.
         /// </summary>
         [JsonPropertyName("rkey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Rkey { get; set; }
 
         /// <summary>

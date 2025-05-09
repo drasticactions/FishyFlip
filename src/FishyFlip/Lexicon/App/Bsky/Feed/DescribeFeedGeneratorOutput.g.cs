@@ -67,6 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// app.bsky.feed.defs#links <br/>
         /// </summary>
         [JsonPropertyName("links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.Links? Links { get; set; }
 
         public const string RecordType = "app.bsky.feed.describeFeedGenerator#DescribeFeedGeneratorOutput";

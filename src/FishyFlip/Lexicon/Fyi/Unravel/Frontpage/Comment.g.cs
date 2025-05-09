@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> The content of the comment.
         /// </summary>
         [JsonPropertyName("content")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Content { get; set; }
 
         /// <summary>
@@ -67,6 +68,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> Client-declared timestamp when this comment was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -74,6 +76,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("parent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Parent { get; set; }
 
         /// <summary>
@@ -81,6 +84,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("post")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Post { get; set; }
 
         public const string RecordType = "fyi.unravel.frontpage.comment";

@@ -113,30 +113,35 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the replyCount.
         /// </summary>
         [JsonPropertyName("replyCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ReplyCount { get; set; }
 
         /// <summary>
         /// Gets or sets the repostCount.
         /// </summary>
         [JsonPropertyName("repostCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RepostCount { get; set; }
 
         /// <summary>
         /// Gets or sets the likeCount.
         /// </summary>
         [JsonPropertyName("likeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? LikeCount { get; set; }
 
         /// <summary>
         /// Gets or sets the quoteCount.
         /// </summary>
         [JsonPropertyName("quoteCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? QuoteCount { get; set; }
 
         /// <summary>
@@ -149,6 +154,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view) <br/>
         /// </summary>
         [JsonPropertyName("embeds")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ATObject>? Embeds { get; set; }
 
         /// <summary>

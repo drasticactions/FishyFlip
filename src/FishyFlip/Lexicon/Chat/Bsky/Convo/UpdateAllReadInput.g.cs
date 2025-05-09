@@ -50,6 +50,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// accepted <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         public const string RecordType = "chat.bsky.convo.updateAllRead#UpdateAllReadInput";

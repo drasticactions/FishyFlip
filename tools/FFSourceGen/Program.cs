@@ -2649,6 +2649,10 @@ public partial class AppCommands
         {
             sb.AppendLine("        [JsonRequired]");
         }
+        else
+        {
+            sb.AppendLine("        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]");
+        }
 
         if (property.PropertyDefinition.Type == "array" && !property.IsBaseType)
         {

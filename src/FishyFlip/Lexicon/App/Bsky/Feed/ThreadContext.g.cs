@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the rootAuthorLike.
         /// </summary>
         [JsonPropertyName("rootAuthorLike")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? RootAuthorLike { get; set; }
 

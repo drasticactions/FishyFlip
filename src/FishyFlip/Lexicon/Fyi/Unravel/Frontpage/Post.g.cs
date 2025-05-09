@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> The title of the post.
         /// </summary>
         [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Title { get; set; }
 
         /// <summary>
@@ -60,6 +61,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> The URL of the post.
         /// </summary>
         [JsonPropertyName("url")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Url { get; set; }
 
         /// <summary>
@@ -67,6 +69,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> Client-declared timestamp when this post was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "fyi.unravel.frontpage.post";

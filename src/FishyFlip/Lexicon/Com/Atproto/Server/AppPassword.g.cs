@@ -73,6 +73,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the privileged.
         /// </summary>
         [JsonPropertyName("privileged")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Privileged { get; set; }
 
         public const string RecordType = "com.atproto.server.createAppPassword#appPassword";

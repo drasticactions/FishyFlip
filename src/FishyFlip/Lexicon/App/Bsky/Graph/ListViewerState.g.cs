@@ -46,12 +46,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the muted.
         /// </summary>
         [JsonPropertyName("muted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Muted { get; set; }
 
         /// <summary>
         /// Gets or sets the blocked.
         /// </summary>
         [JsonPropertyName("blocked")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Blocked { get; set; }
 

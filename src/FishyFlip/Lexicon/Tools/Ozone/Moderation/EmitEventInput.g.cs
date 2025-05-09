@@ -114,6 +114,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the subjectBlobCids.
         /// </summary>
         [JsonPropertyName("subjectBlobCids")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? SubjectBlobCids { get; set; }
 
         /// <summary>

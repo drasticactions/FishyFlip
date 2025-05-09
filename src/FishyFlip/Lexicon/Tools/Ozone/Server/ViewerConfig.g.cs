@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// </summary>
         [JsonPropertyName("role")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Role { get; set; }
 
         public const string RecordType = "tools.ozone.server.getConfig#viewerConfig";

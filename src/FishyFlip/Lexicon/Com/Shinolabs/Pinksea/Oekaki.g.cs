@@ -63,6 +63,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <br/> The timestamp of creation.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -70,6 +71,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// com.shinolabs.pinksea.defs#image <br/>
         /// </summary>
         [JsonPropertyName("image")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Image? Image { get; set; }
 
         /// <summary>
@@ -77,6 +79,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <br/> An array of tags this image had.
         /// </summary>
         [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
         /// <summary>
@@ -85,6 +88,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("inResponseTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? InResponseTo { get; set; }
 
         /// <summary>
@@ -92,6 +96,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <br/> Is this oekaki NSFW?
         /// </summary>
         [JsonPropertyName("nsfw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Nsfw { get; set; }
 
         public const string RecordType = "com.shinolabs.pinksea.oekaki";

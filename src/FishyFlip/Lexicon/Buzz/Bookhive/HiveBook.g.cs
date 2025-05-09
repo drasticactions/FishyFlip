@@ -83,6 +83,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The title of the book
         /// </summary>
         [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Title { get; set; }
 
         /// <summary>
@@ -90,6 +91,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The authors of the book (tab separated)
         /// </summary>
         [JsonPropertyName("authors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Authors { get; set; }
 
         /// <summary>
@@ -97,6 +99,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The book's hive id, used to correlate user's books with the hive
         /// </summary>
         [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Id { get; set; }
 
         /// <summary>
@@ -104,6 +107,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The source service name (e.g. Goodreads)
         /// </summary>
         [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Source { get; set; }
 
         /// <summary>
@@ -111,6 +115,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> URL to the book on the source service
         /// </summary>
         [JsonPropertyName("sourceUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SourceUrl { get; set; }
 
         /// <summary>
@@ -118,6 +123,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> ID of the book in the source service
         /// </summary>
         [JsonPropertyName("sourceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SourceId { get; set; }
 
         /// <summary>
@@ -125,6 +131,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> URL to full-size cover image
         /// </summary>
         [JsonPropertyName("cover")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cover { get; set; }
 
         /// <summary>
@@ -132,6 +139,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> URL to thumbnail image
         /// </summary>
         [JsonPropertyName("thumbnail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Thumbnail { get; set; }
 
         /// <summary>
@@ -139,6 +147,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Book description/summary
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
@@ -146,6 +155,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Average rating (0-1000)
         /// </summary>
         [JsonPropertyName("rating")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Rating { get; set; }
 
         /// <summary>
@@ -153,18 +163,21 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> Number of ratings
         /// </summary>
         [JsonPropertyName("ratingsCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RatingsCount { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets or sets the updatedAt.
         /// </summary>
         [JsonPropertyName("updatedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? UpdatedAt { get; set; }
 
         public const string RecordType = "buzz.bookhive.hiveBook";

@@ -52,6 +52,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// Gets or sets the cursor.
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         /// <summary>
@@ -65,12 +66,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// Gets or sets the priority.
         /// </summary>
         [JsonPropertyName("priority")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Priority { get; set; }
 
         /// <summary>
         /// Gets or sets the seenAt.
         /// </summary>
         [JsonPropertyName("seenAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? SeenAt { get; set; }
 
         public const string RecordType = "app.bsky.notification.listNotifications#ListNotificationsOutput";

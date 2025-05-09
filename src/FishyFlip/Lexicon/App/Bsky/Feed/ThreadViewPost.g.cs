@@ -78,6 +78,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </summary>
         [JsonPropertyName("parent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Parent { get; set; }
 
         /// <summary>
@@ -88,6 +89,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost"/> (app.bsky.feed.defs#blockedPost) <br/>
         /// </summary>
         [JsonPropertyName("replies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ATObject>? Replies { get; set; }
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext"/> (app.bsky.feed.defs#threadContext)
         /// </summary>
         [JsonPropertyName("threadContext")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.ThreadContext? ThreadContext { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#threadViewPost";

@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> If an app password has 'privileged' access to possibly sensitive account state. Meant for use with trusted clients.
         /// </summary>
         [JsonPropertyName("privileged")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Privileged { get; set; }
 
         public const string RecordType = "com.atproto.server.createAppPassword#CreateAppPasswordInput";

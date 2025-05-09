@@ -58,30 +58,35 @@ namespace FishyFlip.Lexicon.Blue.Moji.Richtext
         /// Gets or sets the png_128.
         /// </summary>
         [JsonPropertyName("png_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Png128 { get; set; }
 
         /// <summary>
         /// Gets or sets the webp_128.
         /// </summary>
         [JsonPropertyName("webp_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Webp128 { get; set; }
 
         /// <summary>
         /// Gets or sets the gif_128.
         /// </summary>
         [JsonPropertyName("gif_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Gif128 { get; set; }
 
         /// <summary>
         /// Gets or sets the apng_128.
         /// </summary>
         [JsonPropertyName("apng_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Apng128 { get; set; } = false;
 
         /// <summary>
         /// Gets or sets the lottie.
         /// </summary>
         [JsonPropertyName("lottie")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Lottie { get; set; } = false;
 
         public const string RecordType = "blue.moji.richtext.facet#formats_v0";

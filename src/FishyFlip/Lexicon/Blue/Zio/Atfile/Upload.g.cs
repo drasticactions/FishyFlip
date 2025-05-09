@@ -68,24 +68,28 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// Gets or sets the blob.
         /// </summary>
         [JsonPropertyName("blob")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Blob { get; set; }
 
         /// <summary>
         /// Gets or sets the checksum.
         /// </summary>
         [JsonPropertyName("checksum")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blue.Zio.Atfile.Checksum? Checksum { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets or sets the file.
         /// </summary>
         [JsonPropertyName("file")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blue.Zio.Atfile.File? File { get; set; }
 
         /// <summary>
@@ -95,6 +99,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// <see cref="FishyFlip.Lexicon.Blue.Zio.Atfile.Machine"/> (blue.zio.atfile.finger#machine) <br/>
         /// </summary>
         [JsonPropertyName("finger")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Finger { get; set; }
 
         /// <summary>
@@ -103,6 +108,7 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// <see cref="FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown"/> (blue.zio.atfile.meta#unknown) <br/>
         /// </summary>
         [JsonPropertyName("meta")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Blue.Zio.Atfile.Unknown? Meta { get; set; }
 
         public const string RecordType = "blue.zio.atfile.upload";
@@ -155,12 +161,14 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// Gets or sets the algo.
         /// </summary>
         [JsonPropertyName("algo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Algo { get; set; }
 
         /// <summary>
         /// Gets or sets the hash.
         /// </summary>
         [JsonPropertyName("hash")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Hash { get; set; }
 
     }
@@ -171,24 +179,28 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// Gets or sets the mimeType.
         /// </summary>
         [JsonPropertyName("mimeType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? MimeType { get; set; }
 
         /// <summary>
         /// Gets or sets the modifiedAt.
         /// </summary>
         [JsonPropertyName("modifiedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? ModifiedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         /// <summary>
         /// Gets or sets the size.
         /// </summary>
         [JsonPropertyName("size")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Size { get; set; }
 
     }

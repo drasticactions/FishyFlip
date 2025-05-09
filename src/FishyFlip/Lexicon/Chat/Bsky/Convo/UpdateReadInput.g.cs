@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// Gets or sets the messageId.
         /// </summary>
         [JsonPropertyName("messageId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? MessageId { get; set; }
 
         public const string RecordType = "chat.bsky.convo.updateRead#UpdateReadInput";

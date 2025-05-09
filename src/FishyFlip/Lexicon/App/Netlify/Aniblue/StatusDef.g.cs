@@ -75,6 +75,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// <br/> URL of the anime thumbnail image
         /// </summary>
         [JsonPropertyName("thumbnail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Thumbnail { get; set; }
 
         /// <summary>
@@ -98,6 +99,7 @@ namespace FishyFlip.Lexicon.App.Netlify.Aniblue
         /// <br/> Favorite flag of the anime
         /// </summary>
         [JsonPropertyName("favorite")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Favorite { get; set; }
 
         public const string RecordType = "app.netlify.aniblue.status#status";

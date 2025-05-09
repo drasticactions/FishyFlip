@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -65,6 +66,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Reference (AT-URI) to the post record.
         /// </summary>
         [JsonPropertyName("post")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Post { get; set; }
 
@@ -73,6 +75,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> List of AT-URIs embedding this post that the author has detached from.
         /// </summary>
         [JsonPropertyName("detachedEmbeddingUris")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Models.ATUri>? DetachedEmbeddingUris { get; set; }
 
         /// <summary>
@@ -82,6 +85,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.DisableRule"/> (app.bsky.feed.postgate#disableRule) <br/>
         /// </summary>
         [JsonPropertyName("embeddingRules")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>? EmbeddingRules { get; set; }
 
         public const string RecordType = "app.bsky.feed.postgate";

@@ -99,24 +99,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Gets or sets the listItemCount.
         /// </summary>
         [JsonPropertyName("listItemCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ListItemCount { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedWeekCount.
         /// </summary>
         [JsonPropertyName("joinedWeekCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? JoinedWeekCount { get; set; }
 
         /// <summary>
         /// Gets or sets the joinedAllTimeCount.
         /// </summary>
         [JsonPropertyName("joinedAllTimeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? JoinedAllTimeCount { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>

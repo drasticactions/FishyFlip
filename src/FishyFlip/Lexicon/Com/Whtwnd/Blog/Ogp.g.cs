@@ -56,12 +56,14 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// Gets or sets the width.
         /// </summary>
         [JsonPropertyName("width")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Width { get; set; }
 
         /// <summary>
         /// Gets or sets the height.
         /// </summary>
         [JsonPropertyName("height")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Height { get; set; }
 
         public const string RecordType = "com.whtwnd.blog.defs#ogp";

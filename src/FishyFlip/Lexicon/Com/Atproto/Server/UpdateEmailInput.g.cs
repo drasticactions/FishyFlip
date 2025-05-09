@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the emailAuthFactor.
         /// </summary>
         [JsonPropertyName("emailAuthFactor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? EmailAuthFactor { get; set; }
 
         /// <summary>
@@ -63,6 +64,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.
         /// </summary>
         [JsonPropertyName("token")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Token { get; set; }
 
         public const string RecordType = "com.atproto.server.updateEmail#UpdateEmailInput";

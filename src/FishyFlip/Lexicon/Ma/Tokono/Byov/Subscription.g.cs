@@ -49,12 +49,14 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = default;
 
         /// <summary>
         /// Gets or sets the subject.
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Subject { get; set; }
 
         public const string RecordType = "ma.tokono.byov.subscription";

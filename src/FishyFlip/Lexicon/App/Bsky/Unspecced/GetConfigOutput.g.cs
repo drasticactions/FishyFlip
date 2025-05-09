@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Gets or sets the checkEmailConfirmed.
         /// </summary>
         [JsonPropertyName("checkEmailConfirmed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? CheckEmailConfirmed { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getConfig#GetConfigOutput";

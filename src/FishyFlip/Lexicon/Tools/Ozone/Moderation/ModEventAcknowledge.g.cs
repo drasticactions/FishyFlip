@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -53,6 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> If true, all other reports on content authored by this account will be resolved (acknowledged).
         /// </summary>
         [JsonPropertyName("acknowledgeAccountSubjects")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AcknowledgeAccountSubjects { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventAcknowledge";

@@ -79,6 +79,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <br/> Additional context about the content and violation.
         /// </summary>
         [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Reason { get; set; }
 
         /// <summary>

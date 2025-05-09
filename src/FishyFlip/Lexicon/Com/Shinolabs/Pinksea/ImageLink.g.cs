@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         /// <br/> Alt text description of the image, for accessibility.
         /// </summary>
         [JsonPropertyName("alt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Alt { get; set; }
 
         public const string RecordType = "com.shinolabs.pinksea.oekaki#imageLink";

@@ -54,6 +54,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> Cursor for pagination
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         public const string RecordType = "fm.teal.alpha.actor.searchActors#SearchActorsOutput";

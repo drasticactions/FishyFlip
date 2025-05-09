@@ -43,6 +43,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// Gets or sets the savedToCollection.
         /// </summary>
         [JsonPropertyName("savedToCollection")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? SavedToCollection { get; set; }
 
         public const string RecordType = "blue.moji.packs.defs#packViewerState";

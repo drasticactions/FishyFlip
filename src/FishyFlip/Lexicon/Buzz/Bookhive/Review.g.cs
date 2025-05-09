@@ -72,6 +72,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The number of stars given to the book
         /// </summary>
         [JsonPropertyName("stars")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Stars { get; set; }
 
         /// <summary>

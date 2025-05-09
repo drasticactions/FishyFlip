@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> DID of the subject the verification applies to.
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Subject { get; set; }
 
@@ -64,6 +65,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> Handle of the subject the verification applies to at the moment of verifying, which might not be the same at the time of viewing. The verification is only valid if the current handle matches the one at the time of verifying.
         /// </summary>
         [JsonPropertyName("handle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
         public FishyFlip.Models.ATHandle? Handle { get; set; }
 
@@ -72,6 +74,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> Display name of the subject the verification applies to at the moment of verifying, which might not be the same at the time of viewing. The verification is only valid if the current displayName matches the one at the time of verifying.
         /// </summary>
         [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
 
         /// <summary>
@@ -79,6 +82,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <br/> Date of when the verification was created.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "app.bsky.graph.verification";

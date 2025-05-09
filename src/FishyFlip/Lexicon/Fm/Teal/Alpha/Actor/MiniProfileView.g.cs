@@ -53,18 +53,21 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> The decentralized identifier of the actor
         /// </summary>
         [JsonPropertyName("did")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Did { get; set; }
 
         /// <summary>
         /// Gets or sets the displayName.
         /// </summary>
         [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the handle.
         /// </summary>
         [JsonPropertyName("handle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Handle { get; set; }
 
         /// <summary>
@@ -72,6 +75,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
         /// <br/> IPLD of the avatar
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Avatar { get; set; }
 
         public const string RecordType = "fm.teal.alpha.actor.defs#miniProfileView";

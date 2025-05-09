@@ -56,6 +56,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// Gets or sets the similarities.
         /// </summary>
         [JsonPropertyName("similarities")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Tools.Ozone.Signature.SigDetail>? Similarities { get; set; }
 
         public const string RecordType = "tools.ozone.signature.findRelatedAccounts#relatedAccount";

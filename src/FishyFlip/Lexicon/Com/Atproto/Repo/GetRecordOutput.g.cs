@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// Gets or sets the cid.
         /// </summary>
         [JsonPropertyName("cid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cid { get; set; }
 
         /// <summary>

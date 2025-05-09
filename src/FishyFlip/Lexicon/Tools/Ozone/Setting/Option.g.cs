@@ -102,18 +102,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets or sets the updatedAt.
         /// </summary>
         [JsonPropertyName("updatedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
@@ -125,6 +128,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// </summary>
         [JsonPropertyName("managerRole")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ManagerRole { get; set; }
 
         /// <summary>

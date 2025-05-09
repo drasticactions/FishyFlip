@@ -55,24 +55,28 @@ namespace FishyFlip.Lexicon.Blue.Zio.Atfile
         /// Gets or sets the app.
         /// </summary>
         [JsonPropertyName("app")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? App { get; set; }
 
         /// <summary>
         /// Gets or sets the host.
         /// </summary>
         [JsonPropertyName("host")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Host { get; set; }
 
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
         [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the os.
         /// </summary>
         [JsonPropertyName("os")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Os { get; set; }
 
         public const string RecordType = "blue.zio.atfile.finger#machine";

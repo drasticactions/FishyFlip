@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> The DID to reserve a key for.
         /// </summary>
         [JsonPropertyName("did")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 

@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the comment.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Indicates how long the label will remain on the subject. Only applies on labels that are being added.
         /// </summary>
         [JsonPropertyName("durationInHours")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? DurationInHours { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventLabel";

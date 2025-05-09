@@ -44,6 +44,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> A recommendation to server as to how long they should hold onto the deactivated account before deleting.
         /// </summary>
         [JsonPropertyName("deleteAfter")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? DeleteAfter { get; set; }
 
         public const string RecordType = "com.atproto.server.deactivateAccount#DeactivateAccountInput";

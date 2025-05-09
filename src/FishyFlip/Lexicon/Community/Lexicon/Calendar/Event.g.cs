@@ -90,6 +90,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> The name of the event.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         /// <summary>
@@ -97,6 +98,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> The description of the event.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
@@ -104,6 +106,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> Client-declared timestamp when the event was created.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -111,6 +114,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> Client-declared timestamp when the event starts.
         /// </summary>
         [JsonPropertyName("startsAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? StartsAt { get; set; }
 
         /// <summary>
@@ -118,6 +122,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> Client-declared timestamp when the event ends.
         /// </summary>
         [JsonPropertyName("endsAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? EndsAt { get; set; }
 
         /// <summary>
@@ -129,6 +134,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// community.lexicon.calendar.event#virtual - A virtual event that takes place online. <br/>
         /// </summary>
         [JsonPropertyName("mode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Mode { get; set; }
 
         /// <summary>
@@ -142,6 +148,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// community.lexicon.calendar.event#scheduled - The event has been created and scheduled. <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         /// <summary>
@@ -155,6 +162,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <see cref="FishyFlip.Lexicon.Community.Lexicon.Location.Hthree"/> (community.lexicon.location.hthree) <br/>
         /// </summary>
         [JsonPropertyName("locations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ATObject>? Locations { get; set; }
 
         /// <summary>
@@ -162,6 +170,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> URIs associated with the event.
         /// </summary>
         [JsonPropertyName("uris")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Community.Lexicon.Calendar.Uri>? Uris { get; set; }
 
         public const string RecordType = "community.lexicon.calendar.event";

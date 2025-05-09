@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Describe reasoning behind the reversal.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventUnmute";

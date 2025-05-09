@@ -56,12 +56,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// Gets or sets the placeInQueue.
         /// </summary>
         [JsonPropertyName("placeInQueue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? PlaceInQueue { get; set; }
 
         /// <summary>
         /// Gets or sets the estimatedTimeMs.
         /// </summary>
         [JsonPropertyName("estimatedTimeMs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? EstimatedTimeMs { get; set; }
 
         public const string RecordType = "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput";

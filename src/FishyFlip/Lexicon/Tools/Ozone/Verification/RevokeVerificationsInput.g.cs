@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <br/> Reason for revoking the verification. This is optional and can be omitted if not needed.
         /// </summary>
         [JsonPropertyName("revokeReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? RevokeReason { get; set; }
 
         public const string RecordType = "tools.ozone.verification.revokeVerifications#RevokeVerificationsInput";

@@ -110,6 +110,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// Gets or sets the likeCount.
         /// </summary>
         [JsonPropertyName("likeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? LikeCount { get; set; }
 
         /// <summary>
@@ -117,6 +118,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState"/> (app.bsky.labeler.defs#labelerViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState? Viewer { get; set; }
 
         /// <summary>
@@ -130,6 +132,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
@@ -137,6 +140,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> The set of report reason 'codes' which are in-scope for this service to review and action. These usually align to policy categories. If not defined (distinct from empty array), all reason types are allowed.
         /// </summary>
         [JsonPropertyName("reasonTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? ReasonTypes { get; set; }
 
         /// <summary>
@@ -144,6 +148,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> The set of subject types (account, record, etc) this service accepts reports on.
         /// </summary>
         [JsonPropertyName("subjectTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? SubjectTypes { get; set; }
 
         /// <summary>
@@ -151,6 +156,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> Set of record types (collection NSIDs) which can be reported to this service. If not defined (distinct from empty array), default is any record type.
         /// </summary>
         [JsonPropertyName("subjectCollections")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? SubjectCollections { get; set; }
 
         public const string RecordType = "app.bsky.labeler.defs#labelerViewDetailed";

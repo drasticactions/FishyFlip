@@ -128,36 +128,42 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the descriptionFacets.
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Avatar { get; set; }
 
         /// <summary>
         /// Gets or sets the likeCount.
         /// </summary>
         [JsonPropertyName("likeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? LikeCount { get; set; }
 
         /// <summary>
         /// Gets or sets the acceptsInteractions.
         /// </summary>
         [JsonPropertyName("acceptsInteractions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AcceptsInteractions { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
@@ -165,6 +171,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState"/> (app.bsky.feed.defs#generatorViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.GeneratorViewerState? Viewer { get; set; }
 
         /// <summary>
@@ -174,6 +181,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// contentModeVideo - Declares the feed generator returns posts containing app.bsky.embed.video embeds. <br/>
         /// </summary>
         [JsonPropertyName("contentMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ContentMode { get; set; }
 
         /// <summary>

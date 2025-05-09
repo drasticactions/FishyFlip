@@ -89,6 +89,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         /// <br/> <see cref="FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef"/> (blue.maril.stellar.reaction#emojiRef)
         /// </summary>
         [JsonPropertyName("emojiRef")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Blue.Maril.Stellar.EmojiRef? EmojiRef { get; set; }
 
         /// <summary>
@@ -104,6 +105,7 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </summary>
         [JsonPropertyName("actor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileView? Actor { get; set; }
 
         public const string RecordType = "blue.maril.stellar.getReactions#reaction";

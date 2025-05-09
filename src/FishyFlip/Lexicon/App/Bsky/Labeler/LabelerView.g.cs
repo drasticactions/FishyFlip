@@ -88,6 +88,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// Gets or sets the likeCount.
         /// </summary>
         [JsonPropertyName("likeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? LikeCount { get; set; }
 
         /// <summary>
@@ -95,6 +96,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState"/> (app.bsky.labeler.defs#labelerViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Labeler.LabelerViewerState? Viewer { get; set; }
 
         /// <summary>
@@ -108,6 +110,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         public const string RecordType = "app.bsky.labeler.defs#labelerView";

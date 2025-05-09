@@ -57,24 +57,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// Gets or sets the lists.
         /// </summary>
         [JsonPropertyName("lists")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Lists { get; set; }
 
         /// <summary>
         /// Gets or sets the feedgens.
         /// </summary>
         [JsonPropertyName("feedgens")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Feedgens { get; set; }
 
         /// <summary>
         /// Gets or sets the starterPacks.
         /// </summary>
         [JsonPropertyName("starterPacks")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? StarterPacks { get; set; }
 
         /// <summary>
         /// Gets or sets the labeler.
         /// </summary>
         [JsonPropertyName("labeler")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Labeler { get; set; }
 
         /// <summary>
@@ -82,6 +86,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat"/> (app.bsky.actor.defs#profileAssociatedChat)
         /// </summary>
         [JsonPropertyName("chat")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? Chat { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#profileAssociated";

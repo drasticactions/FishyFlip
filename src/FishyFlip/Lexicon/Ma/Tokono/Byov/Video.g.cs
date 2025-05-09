@@ -58,30 +58,35 @@ namespace FishyFlip.Lexicon.Ma.Tokono.Byov
         /// Gets or sets the cid.
         /// </summary>
         [JsonPropertyName("cid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cid { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = default;
 
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
         [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the serviceProvider.
         /// </summary>
         [JsonPropertyName("serviceProvider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ServiceProvider { get; set; }
 
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
         [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Title { get; set; }
 
         public const string RecordType = "ma.tokono.byov.video";

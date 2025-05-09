@@ -99,6 +99,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView"/> (chat.bsky.convo.defs#deletedMessageView) <br/>
         /// </summary>
         [JsonPropertyName("lastMessage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? LastMessage { get; set; }
 
         /// <summary>
@@ -107,6 +108,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView"/> (chat.bsky.convo.defs#messageAndReactionView) <br/>
         /// </summary>
         [JsonPropertyName("lastReaction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Chat.Bsky.Convo.MessageAndReactionView? LastReaction { get; set; }
 
         /// <summary>
@@ -123,6 +125,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// accepted <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         /// <summary>

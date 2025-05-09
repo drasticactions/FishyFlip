@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide"/> (app.bsky.actor.defs#bskyAppProgressGuide)
         /// </summary>
         [JsonPropertyName("activeProgressGuide")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide? ActiveProgressGuide { get; set; }
 
         /// <summary>
@@ -62,6 +63,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> An array of tokens which identify nudges (modals, popups, tours, highlight dots) that should be shown to the user.
         /// </summary>
         [JsonPropertyName("queuedNudges")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? QueuedNudges { get; set; }
 
         /// <summary>
@@ -69,6 +71,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Storage for NUXs the user has encountered.
         /// </summary>
         [JsonPropertyName("nuxs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.Nux>? Nuxs { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#bskyAppStatePref";

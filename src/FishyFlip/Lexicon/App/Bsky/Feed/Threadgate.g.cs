@@ -62,6 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> Reference (AT-URI) to the post record.
         /// </summary>
         [JsonPropertyName("post")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Post { get; set; }
 
@@ -75,12 +76,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule) <br/>
         /// </summary>
         [JsonPropertyName("allow")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ATObject>? Allow { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -88,6 +91,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <br/> List of hidden reply URIs.
         /// </summary>
         [JsonPropertyName("hiddenReplies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Models.ATUri>? HiddenReplies { get; set; }
 
         public const string RecordType = "app.bsky.feed.threadgate";

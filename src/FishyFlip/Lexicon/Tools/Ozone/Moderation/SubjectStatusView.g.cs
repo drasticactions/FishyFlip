@@ -144,18 +144,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordHosting"/> (tools.ozone.moderation.defs#recordHosting) <br/>
         /// </summary>
         [JsonPropertyName("hosting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Hosting { get; set; }
 
         /// <summary>
         /// Gets or sets the subjectBlobCids.
         /// </summary>
         [JsonPropertyName("subjectBlobCids")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? SubjectBlobCids { get; set; }
 
         /// <summary>
         /// Gets or sets the subjectRepoHandle.
         /// </summary>
         [JsonPropertyName("subjectRepoHandle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SubjectRepoHandle { get; set; }
 
         /// <summary>
@@ -191,6 +194,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Sticky comment on the subject.
         /// </summary>
         [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
 
         /// <summary>
@@ -198,24 +202,28 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Numeric value representing the level of priority. Higher score means higher priority.
         /// </summary>
         [JsonPropertyName("priorityScore")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? PriorityScore { get; set; }
 
         /// <summary>
         /// Gets or sets the muteUntil.
         /// </summary>
         [JsonPropertyName("muteUntil")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? MuteUntil { get; set; }
 
         /// <summary>
         /// Gets or sets the muteReportingUntil.
         /// </summary>
         [JsonPropertyName("muteReportingUntil")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? MuteReportingUntil { get; set; }
 
         /// <summary>
         /// Gets or sets the lastReviewedBy.
         /// </summary>
         [JsonPropertyName("lastReviewedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? LastReviewedBy { get; set; }
 
@@ -223,12 +231,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Gets or sets the lastReviewedAt.
         /// </summary>
         [JsonPropertyName("lastReviewedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? LastReviewedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the lastReportedAt.
         /// </summary>
         [JsonPropertyName("lastReportedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? LastReportedAt { get; set; }
 
         /// <summary>
@@ -236,12 +246,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Timestamp referencing when the author of the subject appealed a moderation action
         /// </summary>
         [JsonPropertyName("lastAppealedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? LastAppealedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the takendown.
         /// </summary>
         [JsonPropertyName("takendown")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Takendown { get; set; }
 
         /// <summary>
@@ -249,18 +261,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> True indicates that the a previously taken moderator action was appealed against, by the author of the content. False indicates last appeal was resolved by moderators.
         /// </summary>
         [JsonPropertyName("appealed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Appealed { get; set; }
 
         /// <summary>
         /// Gets or sets the suspendUntil.
         /// </summary>
         [JsonPropertyName("suspendUntil")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? SuspendUntil { get; set; }
 
         /// <summary>
         /// Gets or sets the tags.
         /// </summary>
         [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Tags { get; set; }
 
         /// <summary>
@@ -269,6 +284,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats"/> (tools.ozone.moderation.defs#accountStats)
         /// </summary>
         [JsonPropertyName("accountStats")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? AccountStats { get; set; }
 
         /// <summary>
@@ -277,6 +293,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats"/> (tools.ozone.moderation.defs#recordsStats)
         /// </summary>
         [JsonPropertyName("recordsStats")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? RecordsStats { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#subjectStatusView";

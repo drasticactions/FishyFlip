@@ -68,6 +68,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// Gets or sets the original.
         /// </summary>
         [JsonPropertyName("original")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Original { get; set; }
 
         /// <summary>
@@ -75,6 +76,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// blue.moji.collection.defs#blob_v0 <br/>
         /// </summary>
         [JsonPropertyName("png_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Png128 { get; set; }
 
         /// <summary>
@@ -82,6 +84,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// blue.moji.collection.defs#bytes_v0 <br/>
         /// </summary>
         [JsonPropertyName("apng_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public byte[]? Apng128 { get; set; }
 
         /// <summary>
@@ -89,6 +92,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// blue.moji.collection.defs#blob_v0 <br/>
         /// </summary>
         [JsonPropertyName("gif_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Gif128 { get; set; }
 
         /// <summary>
@@ -96,6 +100,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// blue.moji.collection.defs#blob_v0 <br/>
         /// </summary>
         [JsonPropertyName("webp_128")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Webp128 { get; set; }
 
         /// <summary>
@@ -103,6 +108,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// blue.moji.collection.defs#bytes_v0 <br/>
         /// </summary>
         [JsonPropertyName("lottie")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public byte[]? Lottie { get; set; }
 
         public const string RecordType = "blue.moji.collection.item#formats_v0";

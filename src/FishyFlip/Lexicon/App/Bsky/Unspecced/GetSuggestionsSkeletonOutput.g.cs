@@ -52,6 +52,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Gets or sets the cursor.
         /// </summary>
         [JsonPropertyName("cursor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cursor { get; set; }
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <br/> DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.
         /// </summary>
         [JsonPropertyName("relativeToDid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? RelativeToDid { get; set; }
 
@@ -74,6 +76,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
         /// </summary>
         [JsonPropertyName("recId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? RecId { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";

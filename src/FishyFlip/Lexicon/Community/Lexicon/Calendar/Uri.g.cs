@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> The display name of the URI.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         public const string RecordType = "community.lexicon.calendar.event#uri";

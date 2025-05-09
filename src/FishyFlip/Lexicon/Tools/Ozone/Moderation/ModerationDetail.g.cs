@@ -46,6 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView"/> (tools.ozone.moderation.defs#subjectStatusView)
         /// </summary>
         [JsonPropertyName("subjectStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView? SubjectStatus { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#moderationDetail";

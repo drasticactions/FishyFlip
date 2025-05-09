@@ -87,6 +87,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> Can be set to 'false' to skip Lexicon schema validation of record data, 'true' to require it, or leave unset to validate only for known Lexicons.
         /// </summary>
         [JsonPropertyName("validate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Validate { get; set; }
 
         /// <summary>
@@ -102,6 +103,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> Compare and swap with the previous record by CID. WARNING: nullable and optional field; may cause problems with golang implementation
         /// </summary>
         [JsonPropertyName("swapRecord")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SwapRecord { get; set; }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> Compare and swap with the previous commit by CID.
         /// </summary>
         [JsonPropertyName("swapCommit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SwapCommit { get; set; }
 
         public const string RecordType = "com.atproto.repo.putRecord#PutRecordInput";

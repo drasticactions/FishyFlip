@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr"/> (com.atproto.admin.defs#statusAttr)
         /// </summary>
         [JsonPropertyName("takedown")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? Takedown { get; set; }
 
         /// <summary>
@@ -77,6 +78,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr"/> (com.atproto.admin.defs#statusAttr)
         /// </summary>
         [JsonPropertyName("deactivated")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Com.Atproto.Admin.StatusAttr? Deactivated { get; set; }
 
         public const string RecordType = "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusInput";

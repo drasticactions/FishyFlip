@@ -67,6 +67,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the email.
         /// </summary>
         [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Email { get; set; }
 
         /// <summary>
@@ -83,6 +84,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> Pre-existing atproto DID, being imported to a new account.
         /// </summary>
         [JsonPropertyName("did")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? Did { get; set; }
 
@@ -90,18 +92,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Gets or sets the inviteCode.
         /// </summary>
         [JsonPropertyName("inviteCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? InviteCode { get; set; }
 
         /// <summary>
         /// Gets or sets the verificationCode.
         /// </summary>
         [JsonPropertyName("verificationCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? VerificationCode { get; set; }
 
         /// <summary>
         /// Gets or sets the verificationPhone.
         /// </summary>
         [JsonPropertyName("verificationPhone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? VerificationPhone { get; set; }
 
         /// <summary>
@@ -109,6 +114,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> Initial account password. May need to meet instance-specific password strength requirements.
         /// </summary>
         [JsonPropertyName("password")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Password { get; set; }
 
         /// <summary>
@@ -116,6 +122,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> DID PLC rotation key (aka, recovery key) to be included in PLC creation operation.
         /// </summary>
         [JsonPropertyName("recoveryKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? RecoveryKey { get; set; }
 
         /// <summary>
@@ -123,6 +130,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <br/> A signed DID PLC operation to be submitted as part of importing an existing account to this instance. NOTE: this optional field may be updated when full account migration is implemented.
         /// </summary>
         [JsonPropertyName("plcOp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? PlcOp { get; set; }
 
         public const string RecordType = "com.atproto.server.createAccount#CreateAccountInput";

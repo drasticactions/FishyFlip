@@ -83,6 +83,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// throttled <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         /// <summary>
@@ -90,6 +91,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <br/> Optional field, the current rev of the repo, if active=true
         /// </summary>
         [JsonPropertyName("rev")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Rev { get; set; }
 
         public const string RecordType = "com.atproto.sync.getRepoStatus#GetRepoStatusOutput";

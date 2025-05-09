@@ -94,30 +94,35 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// Gets or sets the description.
         /// </summary>
         [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the descriptionFacets.
         /// </summary>
         [JsonPropertyName("descriptionFacets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Blue.Moji.Richtext.Facet>? DescriptionFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.
         /// </summary>
         [JsonPropertyName("avatar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Avatar { get; set; }
 
         /// <summary>
         /// Gets or sets the itemCount.
         /// </summary>
         [JsonPropertyName("itemCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ItemCount { get; set; }
 
         /// <summary>
         /// Gets or sets the labels.
         /// </summary>
         [JsonPropertyName("labels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? Labels { get; set; }
 
         /// <summary>
@@ -125,12 +130,14 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
         /// <br/> <see cref="FishyFlip.Lexicon.Blue.Moji.Packs.PackViewerState"/> (blue.moji.packs.defs#packViewerState)
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Blue.Moji.Packs.PackViewerState? Viewer { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.
         /// </summary>
         [JsonPropertyName("indexedAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? IndexedAt { get; set; }
 
         public const string RecordType = "blue.moji.packs.defs#packViewBasic";

@@ -69,6 +69,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("appview")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? Appview { get; set; }
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("pds")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? Pds { get; set; }
 
         /// <summary>
@@ -83,6 +85,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("blobDivert")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? BlobDivert { get; set; }
 
         /// <summary>
@@ -90,6 +93,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// tools.ozone.server.defs#serviceConfig <br/>
         /// </summary>
         [JsonPropertyName("chat")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig? Chat { get; set; }
 
         /// <summary>
@@ -97,6 +101,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// tools.ozone.server.defs#viewerConfig <br/>
         /// </summary>
         [JsonPropertyName("viewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Server.ViewerConfig? Viewer { get; set; }
 
         /// <summary>
@@ -104,6 +109,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <br/> The did of the verifier used for verification.
         /// </summary>
         [JsonPropertyName("verifierDid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid? VerifierDid { get; set; }
 

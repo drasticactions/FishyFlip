@@ -61,6 +61,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// <br/> Can be set to 'false' to skip Lexicon schema validation of record data.
         /// </summary>
         [JsonPropertyName("validate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Validate { get; set; } = true;
 
         /// <summary>

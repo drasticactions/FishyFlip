@@ -52,6 +52,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Subject { get; set; }
 
         /// <summary>
@@ -59,6 +60,7 @@ namespace FishyFlip.Lexicon.Fyi.Unravel.Frontpage
         /// <br/> Client-declared timestamp when this vote was originally created.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         public const string RecordType = "fyi.unravel.frontpage.vote";

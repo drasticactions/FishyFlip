@@ -91,6 +91,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Annotations of text (mentions, URLs, hashtags, etc)
         /// </summary>
         [JsonPropertyName("facets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>? Facets { get; set; }
 
         /// <summary>
@@ -99,6 +100,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view) <br/>
         /// </summary>
         [JsonPropertyName("embed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef? Embed { get; set; }
 
         /// <summary>
@@ -106,6 +108,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
         /// <br/> Reactions to this message, in ascending order of creation time.
         /// </summary>
         [JsonPropertyName("reactions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Chat.Bsky.Convo.ReactionView>? Reactions { get; set; }
 
         /// <summary>

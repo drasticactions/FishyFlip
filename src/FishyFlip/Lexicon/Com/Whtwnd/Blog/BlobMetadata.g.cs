@@ -53,6 +53,7 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
         /// Gets or sets the name.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         public const string RecordType = "com.whtwnd.blog.defs#blobMetadata";

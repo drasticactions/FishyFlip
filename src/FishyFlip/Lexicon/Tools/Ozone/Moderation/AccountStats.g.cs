@@ -59,6 +59,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Total number of reports on the account
         /// </summary>
         [JsonPropertyName("reportCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? ReportCount { get; set; }
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Total number of appeals against a moderation action on the account
         /// </summary>
         [JsonPropertyName("appealCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? AppealCount { get; set; }
 
         /// <summary>
@@ -73,6 +75,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of times the account was suspended
         /// </summary>
         [JsonPropertyName("suspendCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? SuspendCount { get; set; }
 
         /// <summary>
@@ -80,6 +83,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of times the account was escalated
         /// </summary>
         [JsonPropertyName("escalateCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? EscalateCount { get; set; }
 
         /// <summary>
@@ -87,6 +91,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Number of times the account was taken down
         /// </summary>
         [JsonPropertyName("takedownCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? TakedownCount { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#accountStats";

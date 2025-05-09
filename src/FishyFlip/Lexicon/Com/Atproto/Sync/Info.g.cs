@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// Gets or sets the message.
         /// </summary>
         [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Message { get; set; }
 
         public const string RecordType = "com.atproto.sync.subscribeRepos#info";

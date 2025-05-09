@@ -71,6 +71,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <br/> The AT Protocol version of the label object.
         /// </summary>
         [JsonPropertyName("ver")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Ver { get; set; }
 
         /// <summary>
@@ -95,6 +96,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <br/> Optionally, CID specifying the specific version of 'uri' resource this label applies to.
         /// </summary>
         [JsonPropertyName("cid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Cid { get; set; }
 
         /// <summary>
@@ -110,6 +112,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <br/> If true, this is a negation label, overwriting a previous label.
         /// </summary>
         [JsonPropertyName("neg")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Neg { get; set; }
 
         /// <summary>
@@ -125,6 +128,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <br/> Timestamp at which this label expires (no longer applies).
         /// </summary>
         [JsonPropertyName("exp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? Exp { get; set; }
 
         /// <summary>
@@ -132,6 +136,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <br/> Signature of dag-cbor encoded label.
         /// </summary>
         [JsonPropertyName("sig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public byte[]? Sig { get; set; }
 
         public const string RecordType = "com.atproto.label.defs#label";

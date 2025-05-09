@@ -81,6 +81,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> Compare and swap with the previous record by CID.
         /// </summary>
         [JsonPropertyName("swapRecord")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SwapRecord { get; set; }
 
         /// <summary>
@@ -88,6 +89,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
         /// <br/> Compare and swap with the previous commit by CID.
         /// </summary>
         [JsonPropertyName("swapCommit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SwapCommit { get; set; }
 
         public const string RecordType = "com.atproto.repo.deleteRecord#DeleteRecordInput";

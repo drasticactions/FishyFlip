@@ -92,24 +92,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <br/> Progress within the current processing state.
         /// </summary>
         [JsonPropertyName("progress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Progress { get; set; }
 
         /// <summary>
         /// Gets or sets the blob.
         /// </summary>
         [JsonPropertyName("blob")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Blob? Blob { get; set; }
 
         /// <summary>
         /// Gets or sets the error.
         /// </summary>
         [JsonPropertyName("error")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Error { get; set; }
 
         /// <summary>
         /// Gets or sets the message.
         /// </summary>
         [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Message { get; set; }
 
         public const string RecordType = "app.bsky.video.defs#jobStatus";

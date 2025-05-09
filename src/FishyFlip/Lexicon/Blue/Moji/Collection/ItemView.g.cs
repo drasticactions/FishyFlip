@@ -64,12 +64,14 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// Gets or sets the alt.
         /// </summary>
         [JsonPropertyName("alt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Alt { get; set; }
 
         /// <summary>
         /// Gets or sets the createdAt.
         /// </summary>
         [JsonPropertyName("createdAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -84,6 +86,7 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
         /// Gets or sets the adultOnly.
         /// </summary>
         [JsonPropertyName("adultOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? AdultOnly { get; set; } = false;
 
         public const string RecordType = "blue.moji.collection.item#itemView";

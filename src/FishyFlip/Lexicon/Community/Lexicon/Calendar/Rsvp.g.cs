@@ -57,6 +57,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("subject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Subject { get; set; }
 
         /// <summary>
@@ -67,6 +68,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Calendar
         /// notgoing - Not going to the event <br/>
         /// </summary>
         [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; } = "community.lexicon.calendar.rsvp#going";
 
         public const string RecordType = "community.lexicon.calendar.rsvp";

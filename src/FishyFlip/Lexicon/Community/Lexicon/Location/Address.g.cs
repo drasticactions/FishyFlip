@@ -70,6 +70,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The postal code of the location.
         /// </summary>
         [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? PostalCode { get; set; }
 
         /// <summary>
@@ -77,6 +78,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The administrative region of the country. For example, a state in the USA.
         /// </summary>
         [JsonPropertyName("region")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Region { get; set; }
 
         /// <summary>
@@ -84,6 +86,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The locality of the region. For example, a city in the USA.
         /// </summary>
         [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Locality { get; set; }
 
         /// <summary>
@@ -91,6 +94,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The street address.
         /// </summary>
         [JsonPropertyName("street")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Street { get; set; }
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Location
         /// <br/> The name of the location.
         /// </summary>
         [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Name { get; set; }
 
         public const string RecordType = "community.lexicon.location.address";

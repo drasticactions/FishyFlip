@@ -55,6 +55,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// following <br/>
         /// </summary>
         [JsonPropertyName("allowIncoming")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? AllowIncoming { get; set; }
 
         public const string RecordType = "chat.bsky.actor.declaration";

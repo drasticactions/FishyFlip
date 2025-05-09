@@ -47,6 +47,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <br/> The next offset to use for pagination (result of limit + offset)
         /// </summary>
         [JsonPropertyName("offset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public long? Offset { get; set; }
 
         /// <summary>

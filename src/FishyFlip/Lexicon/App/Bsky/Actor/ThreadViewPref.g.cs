@@ -60,6 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// hotness <br/>
         /// </summary>
         [JsonPropertyName("sort")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Sort { get; set; }
 
         /// <summary>
@@ -67,6 +68,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <br/> Show followed users at the top of all replies.
         /// </summary>
         [JsonPropertyName("prioritizeFollowedUsers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? PrioritizeFollowedUsers { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#threadViewPref";
