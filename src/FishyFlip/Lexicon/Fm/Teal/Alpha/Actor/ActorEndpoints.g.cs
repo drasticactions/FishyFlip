@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
     public static class ActorEndpoints
     {
 
+       public const string GroupNamespace = "fm.teal.alpha.actor";
+
        public const string GetProfile = "/xrpc/fm.teal.alpha.actor.getProfile";
 
        public const string GetProfiles = "/xrpc/fm.teal.alpha.actor.getProfiles";
@@ -36,6 +38,10 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
             queryStrings.Add("actor=" + actor);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.GetProfileOutput>(endpointUrl, atp.Options.SourceGenerationContext.FmTealAlphaActorGetProfileOutput!, cancellationToken, headers);
@@ -57,6 +63,10 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
             queryStrings.Add(string.Join("&", actors.Select(n => "actors=" + n)));
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.GetProfilesOutput>(endpointUrl, atp.Options.SourceGenerationContext.FmTealAlphaActorGetProfilesOutput!, cancellationToken, headers);
@@ -90,6 +100,10 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Actor
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.SearchActorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.FmTealAlphaActorSearchActorsOutput!, cancellationToken, headers);

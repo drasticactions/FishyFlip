@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
     public static class TeamEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.team";
+
        public const string AddMember = "/xrpc/tools.ozone.team.addMember";
 
        public const string DeleteMember = "/xrpc/tools.ozone.team.deleteMember";

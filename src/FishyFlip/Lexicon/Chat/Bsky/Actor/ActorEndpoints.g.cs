@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
     public static class ActorEndpoints
     {
 
+       public const string GroupNamespace = "chat.bsky.actor";
+
        public const string DeleteAccount = "/xrpc/chat.bsky.actor.deleteAccount";
 
        public const string ExportAccountData = "/xrpc/chat.bsky.actor.exportAccountData";

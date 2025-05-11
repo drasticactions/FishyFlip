@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
     public static class PacksEndpoints
     {
 
+       public const string GroupNamespace = "blue.moji.packs";
+
        public const string GetActorPacks = "/xrpc/blue.moji.packs.getActorPacks";
 
        public const string GetPack = "/xrpc/blue.moji.packs.getPack";
@@ -48,6 +50,10 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Moji.Packs.GetActorPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMojiPacksGetActorPacksOutput!, cancellationToken, headers);
@@ -81,6 +87,10 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Moji.Packs.GetPackOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMojiPacksGetPackOutput!, cancellationToken, headers);
@@ -102,6 +112,10 @@ namespace FishyFlip.Lexicon.Blue.Moji.Packs
             queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Moji.Packs.GetPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMojiPacksGetPacksOutput!, cancellationToken, headers);

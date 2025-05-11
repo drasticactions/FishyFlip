@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
     public static class BlogEndpoints
     {
 
+       public const string GroupNamespace = "com.whtwnd.blog";
+
        public const string GetAuthorPosts = "/xrpc/com.whtwnd.blog.getAuthorPosts";
 
        public const string GetEntryMetadataByName = "/xrpc/com.whtwnd.blog.getEntryMetadataByName";
@@ -38,6 +40,10 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             queryStrings.Add("author=" + author);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetAuthorPostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetAuthorPostsOutput!, cancellationToken, headers);
@@ -64,6 +70,10 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             queryStrings.Add("entryTitle=" + entryTitle);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetEntryMetadataByNameOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetEntryMetadataByNameOutput!, cancellationToken, headers);
@@ -85,6 +95,10 @@ namespace FishyFlip.Lexicon.Com.Whtwnd.Blog
             queryStrings.Add("postUri=" + postUri);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Whtwnd.Blog.GetMentionsByEntryOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComWhtwndBlogGetMentionsByEntryOutput!, cancellationToken, headers);

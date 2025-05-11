@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     public static class ActorEndpoints
     {
 
+       public const string GroupNamespace = "app.bsky.actor";
+
        public const string GetPreferences = "/xrpc/app.bsky.actor.getPreferences";
 
        public const string GetProfile = "/xrpc/app.bsky.actor.getProfile";

@@ -1561,6 +1561,8 @@ public partial class AppCommands
         sb.AppendLine($"    public static class {className}");
         sb.AppendLine("    {");
         sb.AppendLine();
+        sb.AppendLine($"       public const string GroupNamespace = \"{group.Key.ToLower()}\";");
+        sb.AppendLine();
         foreach (var item in group)
         {
             sb.AppendLine($"       public const string {item.ClassName} = \"/xrpc/{item.Id}\";");
@@ -1745,7 +1747,14 @@ public partial class AppCommands
                     {
                         sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
                     }
-
+                    else if (!item.Id.Contains("app.bsky") || item.Id.Contains("com.atproto"))
+                    {
+                        sb.AppendLine($"            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))");
+                        sb.AppendLine("            {");
+                        sb.AppendLine($"                headers.Add(Constants.AtProtoProxy, proxyUrl);");
+                        sb.AppendLine("            }");
+                    }
+                    
                     sb.AppendLine($"            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);");
 
                     if (inputProperties.Count > 2)

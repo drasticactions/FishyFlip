@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public static class FeedEndpoints
     {
 
+       public const string GroupNamespace = "app.bsky.feed";
+
        public const string DescribeFeedGenerator = "/xrpc/app.bsky.feed.describeFeedGenerator";
 
        public const string GetActorFeeds = "/xrpc/app.bsky.feed.getActorFeeds";

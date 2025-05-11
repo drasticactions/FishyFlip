@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
     public static class ServerEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.server";
+
        public const string GetConfig = "/xrpc/tools.ozone.server.getConfig";
 
 

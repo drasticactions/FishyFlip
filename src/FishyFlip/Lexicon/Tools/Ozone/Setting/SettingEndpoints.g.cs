@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
     public static class SettingEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.setting";
+
        public const string ListOptions = "/xrpc/tools.ozone.setting.listOptions";
 
        public const string RemoveOptions = "/xrpc/tools.ozone.setting.removeOptions";

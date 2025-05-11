@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
     public static class HostingEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.hosting";
+
        public const string GetAccountHistory = "/xrpc/tools.ozone.hosting.getAccountHistory";
 
 

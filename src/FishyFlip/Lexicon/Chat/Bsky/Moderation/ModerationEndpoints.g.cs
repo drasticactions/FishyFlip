@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
     public static class ModerationEndpoints
     {
 
+       public const string GroupNamespace = "chat.bsky.moderation";
+
        public const string GetActorMetadata = "/xrpc/chat.bsky.moderation.getActorMetadata";
 
        public const string GetMessageContext = "/xrpc/chat.bsky.moderation.getMessageContext";

@@ -25,10 +25,10 @@ public static class ATProtocolExtensions
         JsonTypeInfo<T> type,
         CancellationToken cancellationToken,
         Dictionary<string, string>? headers = default)
-        {
-            var result = await protocol.ResolveHostUri(url);
-            return await protocol.Client.Get<T>(result, type, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger, headers);
-        }
+    {
+        var result = await protocol.ResolveHostUri(url);
+        return await protocol.Client.Get<T>(result, type, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger, headers);
+    }
 
     /// <summary>
     /// Sends a GET request to the specified Uri and downloads the response as a CAR (Content-Addressable Archive) file.
@@ -45,7 +45,7 @@ public static class ATProtocolExtensions
         Stream outputStream,
         string? since = default,
         CancellationToken cancellationToken = default)
-        {
+    {
         var (result, error) = await protocol.ResolveATIdentifierToHostAddressAsync(identifier);
         if (error is not null)
         {
@@ -84,7 +84,7 @@ public static class ATProtocolExtensions
 
         endpointUrl += string.Join("&", queryStrings);
         return await protocol.Client.DownloadCarAsync(endpointUrl, outputStream, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger);
-        }
+    }
 
     /// <summary>
     /// Sends a GET request to the specified Uri and decodes the response as a CAR (Content-Addressable Archive).
@@ -99,10 +99,10 @@ public static class ATProtocolExtensions
             string url,
             CancellationToken cancellationToken,
             OnCarDecoded? progress = null)
-        {
-            var result = await protocol.ResolveHostUri(url);
-            return await protocol.Client.GetCarAsync(result, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger, progress);
-        }
+    {
+        var result = await protocol.ResolveHostUri(url);
+        return await protocol.Client.GetCarAsync(result, protocol.Options.JsonSerializerOptions, cancellationToken, protocol.Options.Logger, progress);
+    }
 
     /// <summary>
     /// Sends a GET request to the specified Uri and retrieves the response as a Blob.
@@ -198,7 +198,32 @@ public static class ATProtocolExtensions
         return await protocol.Client.Post<T, TK>(result, typeT, typeTK, protocol.Options.JsonSerializerOptions, body, cancellationToken, protocol.Options.Logger, headers);
     }
 
-    private static async Task<string> ResolveHostUri(this ATProtocol protocol, string pathAndQueryString)
+    /// <summary>
+    /// Tries to fetch the proxy for the given URI from the ATProxyCache.
+    /// </summary>
+    /// <param name="atp">The ATProtocol instance.</param>
+    /// <param name="uri">The URI to fetch the proxy for.</param>
+    /// <param name="proxy">The proxy URI if found, otherwise null.</param>
+    /// <returns>True if the proxy was found, otherwise false.</returns>
+    /// <remarks>
+    /// This method checks the ATProxyCache for a proxy associated with the given URI.
+    /// If found, it sets the proxy parameter and returns true. Otherwise, it sets proxy to null and returns false.
+    /// </remarks>
+    internal static bool TryFetchProxy(this ATProtocol atp, string uri, out string? proxy)
+    {
+        if (atp.Options.ATProxyCache.TryGetValue(uri, out proxy))
+        {
+            return true;
+        }
+
+        proxy = atp.Options.ATProxyCache
+            .FirstOrDefault(x => uri.StartsWith(x.Key, StringComparison.OrdinalIgnoreCase))
+            .Value;
+
+        return proxy != null;
+    }
+
+    private static async Task<string> ResolveHostUri(this ATProtocol protocol, string pathAndQueryString, string? ndid = null)
     {
         var logger = protocol.Options.Logger;
         string? host = null;

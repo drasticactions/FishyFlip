@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
     public static class BookhiveEndpoints
     {
 
+       public const string GroupNamespace = "buzz.bookhive";
+
        public const string GetBook = "/xrpc/buzz.bookhive.getBook";
 
        public const string GetProfile = "/xrpc/buzz.bookhive.getProfile";
@@ -36,6 +38,10 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             queryStrings.Add("id=" + id);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Buzz.Bookhive.GetBookOutput>(endpointUrl, atp.Options.SourceGenerationContext.BuzzBookhiveGetBookOutput!, cancellationToken, headers);
@@ -66,6 +72,10 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput>(endpointUrl, atp.Options.SourceGenerationContext.BuzzBookhiveGetProfileOutput!, cancellationToken, headers);
@@ -105,6 +115,10 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Buzz.Bookhive.SearchBooksOutput>(endpointUrl, atp.Options.SourceGenerationContext.BuzzBookhiveSearchBooksOutput!, cancellationToken, headers);

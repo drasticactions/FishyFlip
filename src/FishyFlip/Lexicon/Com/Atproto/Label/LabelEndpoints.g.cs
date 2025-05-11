@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     public static class LabelEndpoints
     {
 
+       public const string GroupNamespace = "com.atproto.label";
+
        public const string QueryLabels = "/xrpc/com.atproto.label.queryLabels";
 
 
@@ -50,6 +52,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, cancellationToken, headers);

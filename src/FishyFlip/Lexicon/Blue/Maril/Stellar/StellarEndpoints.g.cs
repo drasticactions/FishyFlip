@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
     public static class StellarEndpoints
     {
 
+       public const string GroupNamespace = "blue.maril.stellar";
+
        public const string GetActorReactions = "/xrpc/blue.maril.stellar.getActorReactions";
 
        public const string GetEmojis = "/xrpc/blue.maril.stellar.getEmojis";
@@ -48,6 +50,10 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Maril.Stellar.GetActorReactionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMarilStellarGetActorReactionsOutput!, cancellationToken, headers);
@@ -84,6 +90,10 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Maril.Stellar.GetEmojisOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMarilStellarGetEmojisOutput!, cancellationToken, headers);
@@ -123,6 +133,10 @@ namespace FishyFlip.Lexicon.Blue.Maril.Stellar
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Maril.Stellar.GetReactionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMarilStellarGetReactionsOutput!, cancellationToken, headers);

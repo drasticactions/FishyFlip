@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
     public static class CommunicationEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.communication";
+
        public const string CreateTemplate = "/xrpc/tools.ozone.communication.createTemplate";
 
        public const string DeleteTemplate = "/xrpc/tools.ozone.communication.deleteTemplate";

@@ -81,6 +81,11 @@ public class ATProtocolOptions
     internal ConcurrentDictionary<string, string> DidCache { get; } = new();
 
     /// <summary>
+    /// Gets the ATProxy Cache.
+    /// </summary>
+    internal ConcurrentDictionary<string, string> ATProxyCache { get; } = new();
+
+    /// <summary>
     /// Gets the source generation context.
     /// </summary>
     internal SourceGenerationContext SourceGenerationContext { get; }

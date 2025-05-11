@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
     public static class PinkseaEndpoints
     {
 
+       public const string GroupNamespace = "com.shinolabs.pinksea";
+
        public const string GetAuthorFeed = "/xrpc/com.shinolabs.pinksea.getAuthorFeed";
 
        public const string GetAuthorReplies = "/xrpc/com.shinolabs.pinksea.getAuthorReplies";
@@ -58,6 +60,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorFeedOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetAuthorFeedOutput!, cancellationToken, headers);
@@ -91,6 +97,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetAuthorRepliesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetAuthorRepliesOutput!, cancellationToken, headers);
@@ -112,6 +122,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             queryStrings.Add("did=" + did);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetHandleFromDidOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetHandleFromDidOutput!, cancellationToken, headers);
@@ -128,6 +142,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
         {
             var endpointUrl = GetIdentity.ToString();
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetIdentityOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetIdentityOutput!, cancellationToken, headers);
         }
@@ -151,6 +169,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             queryStrings.Add("rkey=" + rkey);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetOekakiOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetOekakiOutput!, cancellationToken, headers);
@@ -175,6 +197,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             queryStrings.Add("rkey=" + rkey);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetParentForReplyOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetParentForReplyOutput!, cancellationToken, headers);
@@ -205,6 +231,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetRecentOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetRecentOutput!, cancellationToken, headers);
@@ -238,6 +268,10 @@ namespace FishyFlip.Lexicon.Com.Shinolabs.Pinksea
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.GetTagFeedOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComShinolabsPinkseaGetTagFeedOutput!, cancellationToken, headers);

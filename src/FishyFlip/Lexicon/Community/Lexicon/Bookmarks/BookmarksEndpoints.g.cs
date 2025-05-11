@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
     public static class BookmarksEndpoints
     {
 
+       public const string GroupNamespace = "community.lexicon.bookmarks";
+
        public const string GetActorBookmarks = "/xrpc/community.lexicon.bookmarks.getActorBookmarks";
 
 
@@ -47,6 +49,10 @@ namespace FishyFlip.Lexicon.Community.Lexicon.Bookmarks
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Community.Lexicon.Bookmarks.GetActorBookmarksOutput>(endpointUrl, atp.Options.SourceGenerationContext.CommunityLexiconBookmarksGetActorBookmarksOutput!, cancellationToken, headers);

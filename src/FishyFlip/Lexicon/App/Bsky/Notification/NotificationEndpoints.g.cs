@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
     public static class NotificationEndpoints
     {
 
+       public const string GroupNamespace = "app.bsky.notification";
+
        public const string GetUnreadCount = "/xrpc/app.bsky.notification.getUnreadCount";
 
        public const string ListNotifications = "/xrpc/app.bsky.notification.listNotifications";

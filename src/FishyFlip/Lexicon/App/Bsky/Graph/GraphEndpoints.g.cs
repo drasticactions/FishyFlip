@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     public static class GraphEndpoints
     {
 
+       public const string GroupNamespace = "app.bsky.graph";
+
        public const string GetActorStarterPacks = "/xrpc/app.bsky.graph.getActorStarterPacks";
 
        public const string GetBlocks = "/xrpc/app.bsky.graph.getBlocks";
