@@ -162,6 +162,25 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Adds a cache set of ATProxy values with their respective service labels.
+    /// The key should resolve to the group namespace of the endpoint, ex. com.whtwnd.blog.
+    /// or the subset of it, ex. com.whtwnd.
+    /// The value should be the the DID followed by the service endpoint identifier, ex. did:web:whtwnd.com#whitewind_blog.
+    /// More information can be found at https://atproto.com/specs/xrpc#service-proxying.
+    /// </summary>
+    /// <param name="proxyCache">Proxy value.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithATProxyCache(Dictionary<string, string> proxyCache)
+    {
+        foreach (var item in proxyCache)
+        {
+            this.atProtocolOptions.ATProxyCache[item.Key] = item.Value;
+        }
+
+        return this;
+    }
+
+    /// <summary>
     /// Adds a cache set of ATHandle values with their respective service endpoint URIs.
     /// Use this to cache the service endpoints for the ATHandle values to avoid having to look them up.
     /// </summary>

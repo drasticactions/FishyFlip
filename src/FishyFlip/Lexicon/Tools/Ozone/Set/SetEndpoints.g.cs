@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
     public static class SetEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.set";
+
        public const string AddValues = "/xrpc/tools.ozone.set.addValues";
 
        public const string DeleteSet = "/xrpc/tools.ozone.set.deleteSet";

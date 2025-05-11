@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
     public static class LabelerEndpoints
     {
 
+       public const string GroupNamespace = "app.bsky.labeler";
+
        public const string GetServices = "/xrpc/app.bsky.labeler.getServices";
 
 

@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
     public static class VerificationEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.verification";
+
        public const string GrantVerifications = "/xrpc/tools.ozone.verification.grantVerifications";
 
        public const string ListVerifications = "/xrpc/tools.ozone.verification.listVerifications";

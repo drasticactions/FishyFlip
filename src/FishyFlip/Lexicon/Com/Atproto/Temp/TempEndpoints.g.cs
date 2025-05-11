@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
     public static class TempEndpoints
     {
 
+       public const string GroupNamespace = "com.atproto.temp";
+
        public const string AddReservedHandle = "/xrpc/com.atproto.temp.addReservedHandle";
 
        public const string CheckSignupQueue = "/xrpc/com.atproto.temp.checkSignupQueue";
@@ -48,6 +50,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         {
             var endpointUrl = CheckSignupQueue.ToString();
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken, headers);
         }

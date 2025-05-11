@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
     public static class SignatureEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.signature";
+
        public const string FindCorrelation = "/xrpc/tools.ozone.signature.findCorrelation";
 
        public const string FindRelatedAccounts = "/xrpc/tools.ozone.signature.findRelatedAccounts";

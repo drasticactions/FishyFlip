@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
     public static class CollectionEndpoints
     {
 
+       public const string GroupNamespace = "blue.moji.collection";
+
        public const string GetItem = "/xrpc/blue.moji.collection.getItem";
 
        public const string ListCollection = "/xrpc/blue.moji.collection.listCollection";
@@ -41,6 +43,10 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             queryStrings.Add("name=" + name);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Moji.Collection.GetItemOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMojiCollectionGetItemOutput!, cancellationToken, headers);
@@ -77,6 +83,10 @@ namespace FishyFlip.Lexicon.Blue.Moji.Collection
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Blue.Moji.Collection.ListCollectionOutput>(endpointUrl, atp.Options.SourceGenerationContext.BlueMojiCollectionListCollectionOutput!, cancellationToken, headers);

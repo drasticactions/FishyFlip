@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     public static class ModerationEndpoints
     {
 
+       public const string GroupNamespace = "tools.ozone.moderation";
+
        public const string EmitEvent = "/xrpc/tools.ozone.moderation.emitEvent";
 
        public const string GetEvent = "/xrpc/tools.ozone.moderation.getEvent";

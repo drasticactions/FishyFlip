@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
     public static class ConvoEndpoints
     {
 
+       public const string GroupNamespace = "chat.bsky.convo";
+
        public const string AcceptConvo = "/xrpc/chat.bsky.convo.acceptConvo";
 
        public const string AddReaction = "/xrpc/chat.bsky.convo.addReaction";

@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
     public static class FeedEndpoints
     {
 
+       public const string GroupNamespace = "fm.teal.alpha.feed";
+
        public const string GetActorFeed = "/xrpc/fm.teal.alpha.feed.getActorFeed";
 
        public const string GetPlay = "/xrpc/fm.teal.alpha.feed.getPlay";
@@ -46,6 +48,10 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetActorFeedOutput>(endpointUrl, atp.Options.SourceGenerationContext.FmTealAlphaFeedGetActorFeedOutput!, cancellationToken, headers);
@@ -70,6 +76,10 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             queryStrings.Add("rkey=" + rkey);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.GetPlayOutput>(endpointUrl, atp.Options.SourceGenerationContext.FmTealAlphaFeedGetPlayOutput!, cancellationToken, headers);

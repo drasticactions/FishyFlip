@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
     public static class VideoEndpoints
     {
 
+       public const string GroupNamespace = "app.bsky.video";
+
        public const string GetJobStatus = "/xrpc/app.bsky.video.getJobStatus";
 
        public const string GetUploadLimits = "/xrpc/app.bsky.video.getUploadLimits";

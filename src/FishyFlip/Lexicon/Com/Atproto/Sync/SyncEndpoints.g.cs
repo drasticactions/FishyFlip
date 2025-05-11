@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     public static class SyncEndpoints
     {
 
+       public const string GroupNamespace = "com.atproto.sync";
+
        public const string GetBlob = "/xrpc/com.atproto.sync.getBlob";
 
        public const string GetBlocks = "/xrpc/com.atproto.sync.getBlocks";
@@ -63,6 +65,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("cid=" + cid);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetBlob(endpointUrl, cancellationToken);
@@ -99,6 +105,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
@@ -122,6 +132,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("hostname=" + hostname);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetHostStatusOutput!, cancellationToken, headers);
@@ -148,6 +162,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("did=" + did);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, cancellationToken, headers);
@@ -187,6 +205,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
@@ -225,6 +247,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
@@ -248,6 +274,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             queryStrings.Add("did=" + did);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, cancellationToken, headers);
@@ -292,6 +322,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListBlobsOutput!, cancellationToken, headers);
@@ -322,6 +356,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListHostsOutput!, cancellationToken, headers);
@@ -352,6 +390,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposOutput!, cancellationToken, headers);
@@ -385,6 +427,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposByCollectionOutput!, cancellationToken, headers);

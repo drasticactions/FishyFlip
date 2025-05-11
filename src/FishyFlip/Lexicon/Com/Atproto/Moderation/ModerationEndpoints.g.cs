@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
     public static class ModerationEndpoints
     {
 
+       public const string GroupNamespace = "com.atproto.moderation";
+
        public const string CreateReport = "/xrpc/com.atproto.moderation.createReport";
 
 

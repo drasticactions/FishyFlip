@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
     public static class AdminEndpoints
     {
 
+       public const string GroupNamespace = "com.atproto.admin";
+
        public const string DeleteAccount = "/xrpc/com.atproto.admin.deleteAccount";
 
        public const string DisableAccountInvites = "/xrpc/com.atproto.admin.disableAccountInvites";
@@ -134,6 +136,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             queryStrings.Add("did=" + did);
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminAccountView!, cancellationToken, headers);
@@ -155,6 +161,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetAccountInfosOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetAccountInfosOutput!, cancellationToken, headers);
@@ -191,6 +201,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetInviteCodesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetInviteCodesOutput!, cancellationToken, headers);
@@ -227,6 +241,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.GetSubjectStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminGetSubjectStatusOutput!, cancellationToken, headers);
@@ -263,6 +281,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             }
 
             var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Admin.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoAdminSearchAccountsOutput!, cancellationToken, headers);

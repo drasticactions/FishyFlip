@@ -14,6 +14,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
     public static class UnspeccedEndpoints
     {
 
+       public const string GroupNamespace = "app.bsky.unspecced";
+
        public const string GetConfig = "/xrpc/app.bsky.unspecced.getConfig";
 
        public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
