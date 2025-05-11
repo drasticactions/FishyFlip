@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using DnsClient;
 using FishyFlip.Tools.Json;
 using System.Collections.Concurrent;
 using System.Net;
@@ -30,6 +31,14 @@ public class ATProtocolOptions
 
         this.SourceGenerationContext = new SourceGenerationContext(this.JsonSerializerOptions);
         this.UserAgent = $"FishyFlip {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
+        this.DnsClient = new LookupClient(new LookupClientOptions()
+        {
+            ContinueOnDnsError = true,
+            ContinueOnEmptyResponse = true,
+            ThrowDnsErrors = false,
+            Timeout = TimeSpan.FromSeconds(15),
+            UseCache = true,
+        });
     }
 
     /// <summary>
@@ -53,6 +62,11 @@ public class ATProtocolOptions
     /// This does not affect OAuth sessions. These will always be renewed.
     /// </summary>
     public bool AutoRenewSession { get; internal set; } = false;
+
+    /// <summary>
+    /// Gets the DNS Client, used to look up <see cref="ATHandle"/>.
+    /// </summary>
+    public LookupClient DnsClient { get; internal set; }
 
     /// <summary>
     /// Gets the JsonSerializerOptions.

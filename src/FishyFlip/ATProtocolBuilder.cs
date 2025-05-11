@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Security.Cryptography.X509Certificates;
+using DnsClient;
 using FishyFlip.Tools.Json;
 
 namespace FishyFlip;
@@ -142,6 +143,17 @@ public class ATProtocolBuilder
     public ATProtocolBuilder WithLogger(ILogger? logger)
     {
         this.atProtocolOptions.Logger = logger;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the DNS Client.
+    /// </summary>
+    /// <param name="dnsClient"><see cref="LookupClient"/>.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithDNSClient(LookupClient dnsClient)
+    {
+        this.atProtocolOptions.DnsClient = dnsClient;
         return this;
     }
 

@@ -378,6 +378,13 @@ public sealed partial class ATProtocol : IDisposable
     {
         if (identifier is ATHandle handle)
         {
+            var dnsHandle = await this.ResolveATHandleViaDNSAsync(handle, token ?? CancellationToken.None);
+            if (dnsHandle is not null)
+            {
+                this.options.Logger?.LogDebug($"Resolved handle from DNS: {handle} to {dnsHandle}");
+                return (dnsHandle, handle);
+            }
+
             var (resolveHandle, resolveError) = await this.Identity.ResolveHandleAsync(handle, token ?? CancellationToken.None);
             if (resolveError is not null)
             {
@@ -389,6 +396,7 @@ public sealed partial class ATProtocol : IDisposable
                 return new ATError(new Exception($"Failed to resolve Handle: {handle}. Missing DID."));
             }
 
+            this.options.Logger?.LogDebug($"Resolved handle via Identity XRPC: {handle} to {resolveHandle.Did}");
             return (resolveHandle.Did, handle);
         }
         else if (identifier is ATDid did)
@@ -656,6 +664,30 @@ public sealed partial class ATProtocol : IDisposable
         }
 
         return new ATError(new Exception("Could not resolve ATIdentifier to ATDid."));
+    }
+
+    private async Task<ATDid?> ResolveATHandleViaDNSAsync(ATHandle handle, CancellationToken token)
+    {
+        string didTxtRecordHost = $"_atproto.{handle}";
+        const string didTextRecordPrefix = "did=";
+        IDnsQueryResponse dnsLookupResult = await this.Options.DnsClient.QueryAsync(didTxtRecordHost, QueryType.TXT, QueryClass.IN, CancellationToken.None).ConfigureAwait(false);
+
+        foreach (TxtRecord? textRecord in dnsLookupResult.Answers.TxtRecords())
+        {
+            foreach (string? text in textRecord.Text.Where(t => t.StartsWith(didTextRecordPrefix, StringComparison.InvariantCulture)))
+            {
+                if (ATDid.TryCreate(text.Substring(didTextRecordPrefix.Length), out var did))
+                {
+                    return did;
+                }
+                else
+                {
+                    this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. Invalid DID.");
+                }
+            }
+        }
+
+        return null;
     }
 
     private void Dispose(bool disposing)
