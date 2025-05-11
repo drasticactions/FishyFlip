@@ -163,7 +163,8 @@ public class ATProtocolBuilder
 
     /// <summary>
     /// Adds a cache set of ATProxy values with their respective service labels.
-    /// The key should resolve to the NSID of the service, ex. com.whtwnd.blog.
+    /// The key should resolve to the group namespace of the endpoint, ex. com.whtwnd.blog.
+    /// or the subset of it, ex. com.whtwnd.
     /// The value should be the the DID followed by the service endpoint identifier, ex. did:web:whtwnd.com#whitewind_blog.
     /// More information can be found at https://atproto.com/specs/xrpc#service-proxying.
     /// </summary>
