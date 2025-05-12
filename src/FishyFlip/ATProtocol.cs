@@ -378,6 +378,20 @@ public sealed partial class ATProtocol : IDisposable
     {
         if (identifier is ATHandle handle)
         {
+            var dnsHandle = await this.ResolveATHandleViaDNSAsync(handle, token ?? CancellationToken.None);
+            if (dnsHandle is not null)
+            {
+                this.options.Logger?.LogDebug($"Resolved handle from DNS: {handle} to {dnsHandle}");
+                return (dnsHandle, handle);
+            }
+
+            var httpsHandle = await this.ResolveATHandleViaHTTPSAsync(handle, token ?? CancellationToken.None);
+            if (httpsHandle is not null)
+            {
+                this.options.Logger?.LogDebug($"Resolved handle from HTTPS: {handle} to {httpsHandle}");
+                return (httpsHandle, handle);
+            }
+
             var (resolveHandle, resolveError) = await this.Identity.ResolveHandleAsync(handle, token ?? CancellationToken.None);
             if (resolveError is not null)
             {
@@ -630,6 +644,73 @@ public sealed partial class ATProtocol : IDisposable
         }
 
         return new ATError(new Exception($"DID type could not be resolved: {did}"));
+    }
+
+    /// <summary>
+    /// Resolves an ATHandle to an ATDid via DNS.
+    /// </summary>
+    /// <param name="handle">The ATHandle to resolve.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns><see cref="ATDid"/>.</returns>
+    public async Task<ATDid?> ResolveATHandleViaDNSAsync(ATHandle handle, CancellationToken token)
+    {
+        // Originally from idunno.Bluesky https://github.com/blowdart/idunno.Bluesky/blob/b5267989dff4edfdc455a845c27c46233dbdfd73/src/idunno.AtProto/Identity/AtProtoServer.cs
+        string didTxtRecordHost = $"_atproto.{handle}";
+        const string didTextRecordPrefix = "did=";
+        IDnsQueryResponse dnsLookupResult = await this.Options.DnsClient.QueryAsync(didTxtRecordHost, QueryType.TXT, QueryClass.IN, CancellationToken.None).ConfigureAwait(false);
+
+        foreach (TxtRecord? textRecord in dnsLookupResult.Answers.TxtRecords())
+        {
+            foreach (string? text in textRecord.Text.Where(t => t.StartsWith(didTextRecordPrefix, StringComparison.InvariantCulture)))
+            {
+                if (ATDid.TryCreate(text.Substring(didTextRecordPrefix.Length), out var did))
+                {
+                    return did;
+                }
+                else
+                {
+                    this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. Invalid DID.");
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Resolves an ATHandle to an ATDid via HTTPs.
+    /// </summary>
+    /// <param name="handle">The ATHandle to resolve.</param>
+    /// <param name="token">Cancellation Token.</param>
+    /// <returns><see cref="ATDid"/>.</returns>
+    public async Task<ATDid?> ResolveATHandleViaHTTPSAsync(ATHandle handle, CancellationToken token)
+    {
+        // Originally from idunno.Bluesky https://github.com/blowdart/idunno.Bluesky/blob/b5267989dff4edfdc455a845c27c46233dbdfd73/src/idunno.AtProto/Identity/AtProtoServer.cs
+        Uri didUri = new($"https://{handle}/.well-known/atproto-did");
+        using HttpRequestMessage httpRequestMessage = new(HttpMethod.Get, didUri) { Headers = { Accept = { new("text/plain") } } };
+        HttpResponseMessage httpResponseMessage = await this.SessionManager.Client.SendAsync(httpRequestMessage, token).ConfigureAwait(false);
+        if (httpResponseMessage.IsSuccessStatusCode)
+        {
+#if NETSTANDARD
+            string? did = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+#else
+            string? did = await httpResponseMessage.Content.ReadAsStringAsync(token).ConfigureAwait(false);
+#endif
+            if (ATDid.TryCreate(did, out var atDid))
+            {
+                return atDid;
+            }
+            else
+            {
+                this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. Invalid DID.");
+            }
+        }
+        else
+        {
+            this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {httpResponseMessage.StatusCode}");
+        }
+
+        return null;
     }
 
     /// <summary>

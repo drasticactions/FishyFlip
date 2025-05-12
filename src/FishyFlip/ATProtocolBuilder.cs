@@ -162,6 +162,18 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Sets the DNS Client.
+    /// Used for resolving <see cref="ATHandle"/> to <see cref="ATDid"/>s.
+    /// </summary>
+    /// <param name="dnsClient"><see cref="LookupClient"/>.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithDNSClient(LookupClient dnsClient)
+    {
+        this.atProtocolOptions.DnsClient = dnsClient;
+        return this;
+    }
+
+    /// <summary>
     /// Adds a cache set of ATProxy values with their respective service labels.
     /// The key should resolve to the group namespace of the endpoint, ex. com.whtwnd.blog.
     /// or the subset of it, ex. com.whtwnd.

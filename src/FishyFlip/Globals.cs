@@ -12,6 +12,8 @@ global using System.Text.Json.Serialization;
 global using System.Text.Json.Serialization.Metadata;
 global using System.Text.RegularExpressions;
 global using System.Timers;
+global using DnsClient;
+global using DnsClient.Protocol;
 global using FishyFlip.Events;
 global using FishyFlip.Lexicon;
 global using FishyFlip.Models;
