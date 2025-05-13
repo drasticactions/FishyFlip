@@ -429,7 +429,13 @@ public sealed partial class ATProtocol : IDisposable
     {
         if (identifier is ATHandle handle)
         {
-            return await this.ResolveATHandleHostAsync(handle, token);
+            var (identifier2, error) = await this.ResolveATIdentifierAsync(handle, token);
+            if (error is not null)
+            {
+                return error;
+            }
+
+            return await this.ResolveATDidHostAsync(identifier2.Did, token);
         }
         else if (identifier is ATDid did)
         {
@@ -447,73 +453,14 @@ public sealed partial class ATProtocol : IDisposable
     /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
     public async Task<Result<string?>> ResolveATHandleHostAsync(ATHandle handle, CancellationToken? token = default)
     {
-        if (this.options.DidCache.TryGetValue(handle.ToString(), out var host) && !string.IsNullOrEmpty(host))
+        var (did, error) = await this.ResolveATIdentifierAsync(handle, token);
+
+        if (error is not null)
         {
-            this.options.Logger?.LogDebug($"Resolved handle from cache: {handle} to {host}");
-            return host;
+            return error;
         }
 
-        if (this.IsAuthenticated && this.Session?.Handle.ToString() == handle.ToString())
-        {
-            host = this.Session?.DidDoc?.GetPDSEndpointUrl(this.options.Logger)?.ToString();
-            if (!string.IsNullOrEmpty(host))
-            {
-                this.options.DidCache[handle.ToString()] = host!;
-                this.options.Logger?.LogDebug($"Resolved handle: {handle} to {host}, adding to cache.");
-                return host;
-            }
-
-            this.options.Logger?.LogError($"Failed to resolve Self User handle: {handle}, missing Service Handle.");
-        }
-
-        try
-        {
-            var endpointUrl = $"{Constants.Urls.ATProtoServer.PublicApi}{IdentityEndpoints.ResolveHandle}?handle={handle}";
-            var result = await this.Client.GetAsync(endpointUrl, token ?? CancellationToken.None);
-            if (result.IsSuccessStatusCode)
-            {
-                var resolveHandle = JsonSerializer.Deserialize<ResolveHandleOutput>(
-                    await result.Content.ReadAsStringAsync(),
-                    this.options.SourceGenerationContext.ComAtprotoIdentityResolveHandleOutput);
-                if (resolveHandle?.Did is not null)
-                {
-                    (host, var error) = await this.ResolveATDidHostAsync(resolveHandle.Did, token);
-                    if (!string.IsNullOrEmpty(host))
-                    {
-                        this.options.DidCache[handle.ToString()] = host!;
-                        this.options.Logger?.LogDebug($"Resolved handle: {handle} to {host}, adding to cache.");
-                    }
-                    else
-                    {
-                        this.options.Logger?.LogError($"Failed to resolve Handle: {handle}, missing Service Handle.");
-                        return error;
-                    }
-                }
-                else
-                {
-                    this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. Missing DID.");
-                }
-            }
-            else
-            {
-                var resolveError = JsonSerializer.Deserialize<ATError>(
-                    await result.Content.ReadAsStringAsync(),
-                    this.options.SourceGenerationContext.ATError);
-                if (resolveError is not null)
-                {
-                    this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {resolveError}");
-                    return resolveError;
-                }
-
-                this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {result.StatusCode}");
-            }
-        }
-        catch (Exception ex)
-        {
-            this.options.Logger?.LogError($"Failed to resolve Handle: {handle}. {ex.Message}");
-        }
-
-        return host;
+        return await this.ResolveATDidHostAsync(did.Did, token);
     }
 
     /// <summary>
@@ -524,11 +471,18 @@ public sealed partial class ATProtocol : IDisposable
     /// <returns>String of Host URI if it could be resolved, null if it could not.</returns>
     public async Task<Result<string?>> ResolveATDidHostAsync(ATDid did, CancellationToken? token = default)
     {
-        if (this.options.DidCache.TryGetValue(did.ToString(), out var host) && !string.IsNullOrEmpty(host))
+        if (await this.options.DidDocCache.TryGetAsync(did, out var didDoc, token ?? CancellationToken.None) && didDoc is not null)
         {
-            this.options.Logger?.LogDebug($"Resolved DID from cache: {did} to {host}");
-            return host;
+            var didDocHost = didDoc.GetPDSEndpointUrl(this.options.Logger)?.ToString();
+            if (!string.IsNullOrEmpty(didDocHost))
+            {
+                await this.options.DidDocCache.SetAsync(did, didDoc, token ?? CancellationToken.None);
+                this.options.Logger?.LogDebug($"Resolved DID from cache: {did} to {didDocHost}");
+                return didDocHost;
+            }
         }
+
+        string? host = null;
 
         try
         {
@@ -548,12 +502,6 @@ public sealed partial class ATProtocol : IDisposable
                 default:
                     this.options.Logger?.LogError($"DID type could not be resolved: {did}");
                     break;
-            }
-
-            if (!string.IsNullOrEmpty(host))
-            {
-                this.options.DidCache[did.ToString()] = host!;
-                this.options.Logger?.LogDebug($"Resolved DID: {did} to {host}, adding to cache.");
             }
         }
         catch (Exception ex)
@@ -696,7 +644,7 @@ public sealed partial class ATProtocol : IDisposable
 #else
             string? did = await httpResponseMessage.Content.ReadAsStringAsync(token).ConfigureAwait(false);
 #endif
-            if (ATDid.TryCreate(did, out var atDid))
+            if (ATDid.TryCreate(did?.Trim() ?? string.Empty, out var atDid))
             {
                 return atDid;
             }
@@ -759,14 +707,26 @@ public sealed partial class ATProtocol : IDisposable
 
     private async Task<Result<string?>> ResolvePlcDidAsync(ATDid did, CancellationToken? token)
     {
-        string? host = null;
+        string? host;
+        var didDoc = await this.options.DidDocCache.GetAsync(did, token ?? CancellationToken.None);
+        if (didDoc is not null)
+        {
+            host = didDoc.GetPDSEndpointUrl(this.options.Logger)?.ToString();
+            if (!string.IsNullOrEmpty(host))
+            {
+                this.options.Logger?.LogDebug($"Resolved DID via cache: {did} to {host}");
+                return host;
+            }
+        }
+
         if (this.IsAuthenticated && this.Session?.Did.ToString() == did.ToString())
         {
             host = this.Session?.DidDoc?.GetPDSEndpointUrl(this.options.Logger)?.ToString();
             if (!string.IsNullOrEmpty(host))
             {
-                this.options.DidCache[did.ToString()] = host!;
-                this.options.Logger?.LogDebug($"Resolved DID: {did} to {host}, adding to cache.");
+                await this.options.DidDocCache.SetAsync(did, this.Session!.DidDoc!, token ?? CancellationToken.None);
+                this.options.Logger?.LogDebug($"Resolved DID via Session DidDoc, adding to cache: {did} to {host}");
+                return host;
             }
             else
             {
@@ -781,6 +741,12 @@ public sealed partial class ATProtocol : IDisposable
             if (string.IsNullOrEmpty(host))
             {
                 this.options.Logger?.LogError($"Failed to resolve DID: {did}, missing Service Handle.");
+            }
+            else
+            {
+                await this.options.DidDocCache.SetAsync(did, resolveHandle, token ?? CancellationToken.None);
+                this.options.Logger?.LogDebug($"Resolved DID via PLC Directory: {did} to {host}, adding to cache.");
+                return host;
             }
         }
         else
@@ -809,6 +775,7 @@ public sealed partial class ATProtocol : IDisposable
                 var didDoc = JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
                 if (didDoc is not null)
                 {
+                    await this.options.DidDocCache.SetAsync(did, didDoc, token ?? CancellationToken.None);
                     host = didDoc.GetPDSEndpointUrl(this.options.Logger)?.ToString();
                     if (string.IsNullOrEmpty(host))
                     {

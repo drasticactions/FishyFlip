@@ -34,6 +34,18 @@ public class DidDoc
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="DidDoc"/> class.
+    /// </summary>
+    internal DidDoc()
+    {
+        this.Context = new List<string>();
+        this.Id = string.Empty;
+        this.AlsoKnownAs = new List<string>();
+        this.VerificationMethod = new List<VerificationMethod>();
+        this.Service = new List<Service>();
+    }
+
+    /// <summary>
     /// Gets the list of contexts.
     /// </summary>
     [JsonPropertyName("@context")]

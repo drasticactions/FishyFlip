@@ -41,6 +41,7 @@ public class AnonymousTests
     /// <param name="embedType">The type of data that should be embedded.</param>
     /// <returns>Task.</returns>
     [TestMethod]
+    [DataRow("at://did:web:zio.sh/app.bsky.feed.post/3lnvkn5gdzc2n", "")]
     [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3kv25q4gqbk2y", "")]
     [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3knxcq7bwwo2j", EmbedRecord.RecordType)]
     [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3l46sr63j7r2m", EmbedExternal.RecordType)]
@@ -49,7 +50,9 @@ public class AnonymousTests
     public async Task TestPostAsync(string atUri, string embedType)
     {
         var postUri = ATUri.Create(atUri);
-        var post = await AnonymousTests.proto!.GetRecordAsync(postUri.Did!, Post.RecordType, postUri.Rkey);
+        Assert.IsNotNull(postUri);
+        Assert.IsNotNull(postUri.Identifier);
+        var post = await AnonymousTests.proto!.GetRecordAsync(postUri.Identifier, Post.RecordType, postUri.Rkey);
         post.Switch(
             success =>
             {
@@ -281,5 +284,28 @@ public class AnonymousTests
         var test2 = GetPostThreadOutput.FromJson(testing1);
         Assert.IsNotNull(test2);
         Assert.IsTrue(((ThreadViewPost)post.Thread).Replies!.Count == ((ThreadViewPost)test2!.Thread).Replies!.Count);
+    }
+
+    /// <summary>
+    /// Validate the in-memory cache.
+    /// </summary>
+    /// <param name="atUri">ATUri.</param>
+    /// <returns>Task.</returns>
+    [TestMethod]
+    [DataRow("at://zio.sh/app.bsky.feed.post/3lnvkn5gdzc2n")]
+    [DataRow("at://did:plc:okblbaji7rz243bluudjlgxt/app.bsky.feed.post/3kv25q4gqbk2y")]
+    public async Task ValidateInMemoryCache(string atUri)
+    {
+        var postUri = ATUri.Create(atUri);
+        var post = await AnonymousTests.proto!.GetRecordAsync(postUri.Identifier!, Post.RecordType, postUri.Rkey);
+        Assert.IsNotNull(post);
+        Assert.IsTrue(post is not null);
+        Assert.IsTrue(post!.Value is not null);
+        var cacheDidDoc = AnonymousTests.proto!.Options.DidDocCache.GetAsync(postUri.Identifier!);
+        Assert.IsNotNull(cacheDidDoc);
+        var post2 = await AnonymousTests.proto!.GetRecordAsync(postUri.Identifier!, Post.RecordType, postUri.Rkey);
+        Assert.IsNotNull(post2);
+        var count = await AnonymousTests.proto!.Options.DidDocCache.CountAsync();
+        Assert.IsTrue(count == 1);
     }
 }

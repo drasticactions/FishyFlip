@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+global using System.Collections.Concurrent;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Net.Http.Headers;
 global using System.Net.WebSockets;

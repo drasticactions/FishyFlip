@@ -151,13 +151,9 @@ public class ATProtocolBuilder
     /// </summary>
     /// <param name="didCache">Cache values.</param>
     /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    [Obsolete("Now no-ops, use WithDidDocCache instead.")]
     public ATProtocolBuilder WithATDidCache(Dictionary<ATDid, Uri> didCache)
     {
-        foreach (var item in didCache)
-        {
-            this.atProtocolOptions.DidCache[item.Key.ToString()] = item.Value.ToString();
-        }
-
         return this;
     }
 
@@ -198,13 +194,22 @@ public class ATProtocolBuilder
     /// </summary>
     /// <param name="didCache">Cache values.</param>
     /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    [Obsolete("Now no-ops, use WithDidDocCache instead.")]
     public ATProtocolBuilder WithATHandleCache(Dictionary<ATHandle, Uri> didCache)
     {
-        foreach (var item in didCache)
-        {
-            this.atProtocolOptions.DidCache[item.Key.ToString()] = item.Value.ToString();
-        }
+        return this;
+    }
 
+    /// <summary>
+    /// Adds a cache set of <see cref="ATIdentifier"/>s with their respective <see cref="DidDoc"/>s.
+    /// By default, this is a <see cref="DidDocInMemoryAsyncCache"/>.
+    /// You can implement your own <see cref="IAsyncCache{ATDid, DidDoc}"/> to use a different cache.
+    /// </summary>
+    /// <param name="didDocCache">DidDoc Cache.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithDidDocCache(IAsyncCache<ATDid, DidDoc> didDocCache)
+    {
+        this.atProtocolOptions.DidDocCache = didDocCache;
         return this;
     }
 

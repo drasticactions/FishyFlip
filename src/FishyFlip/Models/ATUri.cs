@@ -87,6 +87,27 @@ public class ATUri : IParsable<ATUri>
     public ATHandle? Handle { get; }
 
     /// <summary>
+    /// Gets the ATIdentifier value.
+    /// </summary>
+    public ATIdentifier? Identifier
+    {
+        get
+        {
+            if (this.Did != null)
+            {
+                return this.Did;
+            }
+
+            if (this.Handle != null)
+            {
+                return this.Handle;
+            }
+
+            return null;
+        }
+    }
+
+    /// <summary>
     /// Gets the identity value.
     /// </summary>
     public string? Identity => this.Did?.ToString() ?? this.Handle?.ToString();

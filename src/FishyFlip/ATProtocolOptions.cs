@@ -89,9 +89,9 @@ public class ATProtocolOptions
     public string OzoneProxyHeader { get; internal set; } = string.Empty;
 
     /// <summary>
-    /// Gets the Did Cache.
+    /// Gets the DidDoc Cache.
     /// </summary>
-    internal ConcurrentDictionary<string, string> DidCache { get; } = new();
+    public IAsyncCache<ATDid, DidDoc> DidDocCache { get; internal set; } = new DidDocInMemoryAsyncCache();
 
     /// <summary>
     /// Gets the ATProxy Cache.
