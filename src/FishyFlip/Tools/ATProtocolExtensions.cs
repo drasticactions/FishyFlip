@@ -72,7 +72,7 @@ public static class ATProtocolExtensions
             throw new InvalidOperationException("Identifier must be a Did or Handle.");
         }
 
-        var endpointUrl = $"{result![0..^1]}{FishyFlip.Lexicon.Com.Atproto.Sync.SyncEndpoints.GetRepo.ToString()}";
+        var endpointUrl = $"{result!.Substring(0, result.Length - 1)}{FishyFlip.Lexicon.Com.Atproto.Sync.SyncEndpoints.GetRepo.ToString()}";
         endpointUrl += "?";
         List<string> queryStrings = new();
         queryStrings.Add("did=" + did);
@@ -289,7 +289,7 @@ public static class ATProtocolExtensions
 
         if (host!.EndsWith("/") && pathAndQueryString.StartsWith("/"))
         {
-            host = host[0..^1];
+            host = host.Substring(0, host.Length - 1);
         }
         else if (!host.EndsWith("/") && !pathAndQueryString.StartsWith("/"))
         {

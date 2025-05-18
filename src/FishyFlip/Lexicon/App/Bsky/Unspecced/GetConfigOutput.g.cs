@@ -14,9 +14,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetConfigOutput"/> class.
         /// </summary>
         /// <param name="checkEmailConfirmed"></param>
-        public GetConfigOutput(bool? checkEmailConfirmed = default)
+        /// <param name="liveNow"></param>
+        public GetConfigOutput(bool? checkEmailConfirmed = default, List<FishyFlip.Lexicon.App.Bsky.Unspecced.LiveNowConfig>? liveNow = default)
         {
             this.CheckEmailConfirmed = checkEmailConfirmed;
+            this.LiveNow = liveNow;
             this.Type = "app.bsky.unspecced.getConfig#GetConfigOutput";
         }
 
@@ -36,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetConfigOutput(CBORObject obj)
         {
             if (obj["checkEmailConfirmed"] is not null) this.CheckEmailConfirmed = obj["checkEmailConfirmed"].AsBoolean();
+            if (obj["liveNow"] is not null) this.LiveNow = obj["liveNow"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.LiveNowConfig(n)).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -45,6 +48,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("checkEmailConfirmed")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? CheckEmailConfirmed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the liveNow.
+        /// </summary>
+        [JsonPropertyName("liveNow")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.LiveNowConfig>? LiveNow { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getConfig#GetConfigOutput";
 
