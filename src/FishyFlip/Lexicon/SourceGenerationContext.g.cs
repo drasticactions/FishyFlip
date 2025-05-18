@@ -613,6 +613,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>), TypeInfoPropertyName = "ListAppBskyGraphListViewBasic")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState), TypeInfoPropertyName = "AppBskyGraphListViewerState")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState>), TypeInfoPropertyName = "ListAppBskyGraphListViewerState")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.LiveNowConfig), TypeInfoPropertyName = "AppBskyUnspeccedLiveNowConfig")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.LiveNowConfig>), TypeInfoPropertyName = "ListAppBskyUnspeccedLiveNowConfig")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Blue.Zio.Atfile.Lock), TypeInfoPropertyName = "BlueZioAtfileLock")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Blue.Zio.Atfile.Lock>), TypeInfoPropertyName = "ListBlueZioAtfileLock")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Chat.Bsky.Convo.LogAcceptConvo), TypeInfoPropertyName = "ChatBskyConvoLogAcceptConvo")]

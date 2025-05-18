@@ -616,6 +616,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.ListViewBasic(obj);
                 case "app.bsky.graph.defs#listViewerState":
                     return new App.Bsky.Graph.ListViewerState(obj);
+                case "app.bsky.unspecced.getConfig#liveNowConfig":
+                    return new App.Bsky.Unspecced.LiveNowConfig(obj);
                 case "blue.zio.atfile.lock":
                     return new Blue.Zio.Atfile.Lock(obj);
                 case "chat.bsky.convo.defs#logAcceptConvo":

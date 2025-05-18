@@ -111,7 +111,7 @@ public sealed class ATJetStream : IDisposable
             }
         }
 
-        if (subscribe[^1] == '&')
+        if (subscribe.Length > 0 && subscribe[subscribe.Length - 1] == '&')
         {
             subscribe.Length--; // Remove the trailing '&'
         }

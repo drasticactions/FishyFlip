@@ -652,6 +652,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic>)SourceGenerationContext.Default.AppBskyGraphListViewBasic);
                 case "app.bsky.graph.defs#listViewerState":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.ListViewerState>)SourceGenerationContext.Default.AppBskyGraphListViewerState);
+                case "app.bsky.unspecced.getConfig#liveNowConfig":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.LiveNowConfig>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.LiveNowConfig>)SourceGenerationContext.Default.AppBskyUnspeccedLiveNowConfig);
                 case "blue.zio.atfile.lock":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Zio.Atfile.Lock>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Zio.Atfile.Lock>)SourceGenerationContext.Default.BlueZioAtfileLock);
                 case "chat.bsky.convo.defs#logAcceptConvo":
