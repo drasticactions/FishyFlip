@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreatePlayAsync(this FishyFlip.ATProtocol atp, string? trackName, List<string>? artistNames, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistMbIds = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePlayAsync(this FishyFlip.ATProtocol atp, string? trackName, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistNames = default, List<string>? artistMbIds = default, List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist>? artists = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play();
             record.TrackName = trackName;
@@ -49,6 +49,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             record.Duration = duration;
             record.ArtistNames = artistNames;
             record.ArtistMbIds = artistMbIds;
+            record.Artists = artists;
             record.ReleaseName = releaseName;
             record.ReleaseMbId = releaseMbId;
             record.Isrc = isrc;

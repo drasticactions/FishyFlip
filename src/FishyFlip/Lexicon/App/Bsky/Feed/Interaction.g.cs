@@ -30,11 +30,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// interactionShare - User shared the feed item <br/>
         /// </param>
         /// <param name="feedContext">Context on a feed item that was originally supplied by the feed generator on getFeedSkeleton.</param>
-        public Interaction(FishyFlip.Models.ATUri? item = default, string? @event = default, string? feedContext = default)
+        /// <param name="reqId">Unique identifier per request that may be passed back alongside interactions.</param>
+        public Interaction(FishyFlip.Models.ATUri? item = default, string? @event = default, string? feedContext = default, string? reqId = default)
         {
             this.Item = item;
             this.Event = @event;
             this.FeedContext = feedContext;
+            this.ReqId = reqId;
             this.Type = "app.bsky.feed.defs#interaction";
         }
 
@@ -56,6 +58,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["item"] is not null) this.Item = obj["item"].ToATUri();
             if (obj["event"] is not null) this.Event = obj["event"].AsString();
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
+            if (obj["reqId"] is not null) this.ReqId = obj["reqId"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -94,6 +97,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("feedContext")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FeedContext { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reqId.
+        /// <br/> Unique identifier per request that may be passed back alongside interactions.
+        /// </summary>
+        [JsonPropertyName("reqId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ReqId { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#interaction";
 

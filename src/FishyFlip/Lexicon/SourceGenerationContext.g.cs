@@ -71,6 +71,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>), TypeInfoPropertyName = "ListComAtprotoServerAppPassword")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef), TypeInfoPropertyName = "ComAtprotoServerAppPasswordDef")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef>), TypeInfoPropertyName = "ListComAtprotoServerAppPasswordDef")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist), TypeInfoPropertyName = "FmTealAlphaFeedArtist")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist>), TypeInfoPropertyName = "ListFmTealAlphaFeedArtist")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio), TypeInfoPropertyName = "AppBskyEmbedAspectRatio")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>), TypeInfoPropertyName = "ListAppBskyEmbedAspectRatio")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author), TypeInfoPropertyName = "ComShinolabsPinkseaAuthor")]

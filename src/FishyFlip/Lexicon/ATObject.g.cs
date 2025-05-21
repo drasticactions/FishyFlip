@@ -110,6 +110,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AppPassword>)SourceGenerationContext.Default.ComAtprotoServerAppPassword);
                 case "com.atproto.server.listAppPasswords#appPassword":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.AppPasswordDef>)SourceGenerationContext.Default.ComAtprotoServerAppPasswordDef);
+                case "fm.teal.alpha.feed.defs#artist":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist>(text, (JsonTypeInfo<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist>)SourceGenerationContext.Default.FmTealAlphaFeedArtist);
                 case "app.bsky.embed.defs#aspectRatio":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio);
                 case "com.shinolabs.pinksea.appViewDefs#author":

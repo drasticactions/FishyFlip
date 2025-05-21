@@ -25,12 +25,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ReasonPin"/> (app.bsky.feed.defs#reasonPin) <br/>
         /// </param>
         /// <param name="feedContext">Context provided by feed generator that may be passed back alongside interactions.</param>
-        public FeedViewPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView post = default, FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef? reply = default, ATObject? reason = default, string? feedContext = default)
+        /// <param name="reqId">Unique identifier per request that may be passed back alongside interactions.</param>
+        public FeedViewPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView post = default, FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef? reply = default, ATObject? reason = default, string? feedContext = default, string? reqId = default)
         {
             this.Post = post;
             this.Reply = reply;
             this.Reason = reason;
             this.FeedContext = feedContext;
+            this.ReqId = reqId;
             this.Type = "app.bsky.feed.defs#feedViewPost";
         }
 
@@ -53,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["reply"] is not null) this.Reply = new FishyFlip.Lexicon.App.Bsky.Feed.ReplyRef(obj["reply"]);
             if (obj["reason"] is not null) this.Reason = obj["reason"].ToATObject();
             if (obj["feedContext"] is not null) this.FeedContext = obj["feedContext"].AsString();
+            if (obj["reqId"] is not null) this.ReqId = obj["reqId"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -89,6 +92,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("feedContext")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FeedContext { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reqId.
+        /// <br/> Unique identifier per request that may be passed back alongside interactions.
+        /// </summary>
+        [JsonPropertyName("reqId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ReqId { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#feedViewPost";
 
