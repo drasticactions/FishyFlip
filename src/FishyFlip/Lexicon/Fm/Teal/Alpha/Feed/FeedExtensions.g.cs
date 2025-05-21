@@ -35,11 +35,12 @@ namespace FishyFlip.Lexicon
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="trackName">The name of the track</param>
-        /// <param name="artistNames">Array of artist names in order of original appearance.</param>
         /// <param name="trackMbId">The Musicbrainz ID of the track</param>
         /// <param name="recordingMbId">The Musicbrainz recording ID of the track</param>
         /// <param name="duration">The length of the track in seconds</param>
-        /// <param name="artistMbIds">Array of Musicbrainz artist IDs</param>
+        /// <param name="artistNames">Array of artist names in order of original appearance. Prefer using 'artists'.</param>
+        /// <param name="artistMbIds">Array of Musicbrainz artist IDs. Prefer using 'artists'.</param>
+        /// <param name="artists">Array of artists in order of original appearance.</param>
         /// <param name="releaseName">The name of the release/album</param>
         /// <param name="releaseMbId">The Musicbrainz release ID</param>
         /// <param name="isrc">The ISRC code associated with the recording</param>
@@ -51,7 +52,7 @@ namespace FishyFlip.Lexicon
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreatePlayAsync(this FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.FmTealAlphaFeed atp, string? trackName, List<string>? artistNames, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistMbIds = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreatePlayAsync(this FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.FmTealAlphaFeed atp, string? trackName, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistNames = default, List<string>? artistMbIds = default, List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist>? artists = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Play();
             record.TrackName = trackName;
@@ -60,6 +61,7 @@ namespace FishyFlip.Lexicon
             record.Duration = duration;
             record.ArtistNames = artistNames;
             record.ArtistMbIds = artistMbIds;
+            record.Artists = artists;
             record.ReleaseName = releaseName;
             record.ReleaseMbId = releaseMbId;
             record.Isrc = isrc;

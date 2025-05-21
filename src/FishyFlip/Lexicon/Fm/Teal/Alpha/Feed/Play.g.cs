@@ -14,11 +14,12 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// Initializes a new instance of the <see cref="Play"/> class.
         /// </summary>
         /// <param name="trackName">The name of the track</param>
-        /// <param name="artistNames">Array of artist names in order of original appearance.</param>
         /// <param name="trackMbId">The Musicbrainz ID of the track</param>
         /// <param name="recordingMbId">The Musicbrainz recording ID of the track</param>
         /// <param name="duration">The length of the track in seconds</param>
-        /// <param name="artistMbIds">Array of Musicbrainz artist IDs</param>
+        /// <param name="artistNames">Array of artist names in order of original appearance. Prefer using 'artists'.</param>
+        /// <param name="artistMbIds">Array of Musicbrainz artist IDs. Prefer using 'artists'.</param>
+        /// <param name="artists">Array of artists in order of original appearance.</param>
         /// <param name="releaseName">The name of the release/album</param>
         /// <param name="releaseMbId">The Musicbrainz release ID</param>
         /// <param name="isrc">The ISRC code associated with the recording</param>
@@ -26,7 +27,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
         /// <param name="musicServiceBaseDomain">The base domain of the music service. e.g. music.apple.com, tidal.com, spotify.com. Defaults to 'local' if unavailable or not provided.</param>
         /// <param name="submissionClientAgent">A metadata string specifying the user agent where the format is `<app-identifier>/<version> (<kernel/OS-base>; <platform/OS-version>; <device-model>)`. If string is provided, only `app-identifier` and `version` are required. `app-identifier` is recommended to be in reverse dns format. Defaults to 'manual/unknown' if unavailable or not provided.</param>
         /// <param name="playedTime">The unix timestamp of when the track was played</param>
-        public Play(string? trackName, List<string>? artistNames, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistMbIds = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default)
+        public Play(string? trackName, string? trackMbId = default, string? recordingMbId = default, long? duration = default, List<string>? artistNames = default, List<string>? artistMbIds = default, List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist>? artists = default, string? releaseName = default, string? releaseMbId = default, string? isrc = default, string? originUrl = default, string? musicServiceBaseDomain = default, string? submissionClientAgent = default, DateTime? playedTime = default)
         {
             this.TrackName = trackName;
             this.TrackMbId = trackMbId;
@@ -34,6 +35,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             this.Duration = duration;
             this.ArtistNames = artistNames;
             this.ArtistMbIds = artistMbIds;
+            this.Artists = artists;
             this.ReleaseName = releaseName;
             this.ReleaseMbId = releaseMbId;
             this.Isrc = isrc;
@@ -65,6 +67,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
             if (obj["duration"] is not null) this.Duration = obj["duration"].AsInt64Value();
             if (obj["artistNames"] is not null) this.ArtistNames = obj["artistNames"].Values.Select(n =>n.AsString()).ToList();
             if (obj["artistMbIds"] is not null) this.ArtistMbIds = obj["artistMbIds"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["artists"] is not null) this.Artists = obj["artists"].Values.Select(n =>new FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist(n)).ToList();
             if (obj["releaseName"] is not null) this.ReleaseName = obj["releaseName"].AsString();
             if (obj["releaseMbId"] is not null) this.ReleaseMbId = obj["releaseMbId"].AsString();
             if (obj["isrc"] is not null) this.Isrc = obj["isrc"].AsString();
@@ -109,7 +112,7 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 
         /// <summary>
         /// Gets or sets the artistNames.
-        /// <br/> Array of artist names in order of original appearance.
+        /// <br/> Array of artist names in order of original appearance. Prefer using 'artists'.
         /// </summary>
         [JsonPropertyName("artistNames")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -117,11 +120,19 @@ namespace FishyFlip.Lexicon.Fm.Teal.Alpha.Feed
 
         /// <summary>
         /// Gets or sets the artistMbIds.
-        /// <br/> Array of Musicbrainz artist IDs
+        /// <br/> Array of Musicbrainz artist IDs. Prefer using 'artists'.
         /// </summary>
         [JsonPropertyName("artistMbIds")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? ArtistMbIds { get; set; }
+
+        /// <summary>
+        /// Gets or sets the artists.
+        /// <br/> Array of artists in order of original appearance.
+        /// </summary>
+        [JsonPropertyName("artists")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.Artist>? Artists { get; set; }
 
         /// <summary>
         /// Gets or sets the releaseName.

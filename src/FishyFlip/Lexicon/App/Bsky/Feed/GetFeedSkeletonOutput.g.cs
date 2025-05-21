@@ -15,10 +15,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         /// <param name="cursor"></param>
         /// <param name="feed"></param>
-        public GetFeedSkeletonOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonFeedPost> feed = default)
+        /// <param name="reqId">Unique identifier per request that may be passed back alongside interactions.</param>
+        public GetFeedSkeletonOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonFeedPost> feed = default, string? reqId = default)
         {
             this.Cursor = cursor;
             this.Feed = feed;
+            this.ReqId = reqId;
             this.Type = "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput";
         }
 
@@ -39,6 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["feed"] is not null) this.Feed = obj["feed"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.SkeletonFeedPost(n)).ToList();
+            if (obj["reqId"] is not null) this.ReqId = obj["reqId"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -55,6 +58,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("feed")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Feed.SkeletonFeedPost> Feed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reqId.
+        /// <br/> Unique identifier per request that may be passed back alongside interactions.
+        /// </summary>
+        [JsonPropertyName("reqId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ReqId { get; set; }
 
         public const string RecordType = "app.bsky.feed.getFeedSkeleton#GetFeedSkeletonOutput";
 

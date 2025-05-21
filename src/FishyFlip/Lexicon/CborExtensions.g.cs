@@ -74,6 +74,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.AppPassword(obj);
                 case "com.atproto.server.listAppPasswords#appPassword":
                     return new Com.Atproto.Server.AppPasswordDef(obj);
+                case "fm.teal.alpha.feed.defs#artist":
+                    return new Fm.Teal.Alpha.Feed.Artist(obj);
                 case "app.bsky.embed.defs#aspectRatio":
                     return new App.Bsky.Embed.AspectRatio(obj);
                 case "com.shinolabs.pinksea.appViewDefs#author":
