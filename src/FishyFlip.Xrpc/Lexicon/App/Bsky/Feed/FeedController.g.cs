@@ -201,7 +201,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput>, ATErrorResult>> GetTimelineAsync ([FromQuery] string? algorithm = default, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Find posts matching search criteria, returning views of those posts.
+        /// Find posts matching search criteria, returning views of those posts. Note that this API endpoint may require authentication (eg, not public) for some service providers and implementations.
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>

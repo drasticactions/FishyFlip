@@ -572,7 +572,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
 
 
         /// <summary>
-        /// Find posts matching search criteria, returning views of those posts.
+        /// Find posts matching search criteria, returning views of those posts. Note that this API endpoint may require authentication (eg, not public) for some service providers and implementations.
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.BadQueryStringError"/>  <br/>
         /// </summary>
