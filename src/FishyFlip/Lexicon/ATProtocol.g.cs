@@ -150,6 +150,16 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.FmTealAlphaFeed FmTealAlphaFeed => new (this);
 
         /// <summary>
+        /// place.stream.graph Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Place.Stream.Graph.PlaceStreamGraph PlaceStreamGraph => new (this);
+
+        /// <summary>
+        /// place.stream.live Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Place.Stream.Live.PlaceStreamLive PlaceStreamLive => new (this);
+
+        /// <summary>
         /// tools.ozone.communication Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Tools.Ozone.Communication.ToolsOzoneCommunication ToolsOzoneCommunication => new (this);

@@ -52,14 +52,16 @@ public partial class AppCommands
 
         Directory.CreateDirectory(this.basePath);
 
-        await this.GenerateClasses(lexiconPath);
+
+
+        await this.GenerateClasses(lexiconPath, SearchOption.AllDirectories);
 
         foreach (var dir in thirdPartyDirs)
         {
             var directories = GetHighestLevelDirectories(dir);
             foreach (var directory in directories.Where(n => !n.Contains("bsky") && !n.Contains("atproto")))
             {
-                await this.GenerateClasses(directory);
+                await this.GenerateClasses(directory, SearchOption.TopDirectoryOnly);
             }
         }
 
@@ -92,14 +94,14 @@ public partial class AppCommands
 
         Directory.CreateDirectory(this.basePath);
 
-        await this.GenerateClasses(lexiconPath);
+        await this.GenerateClasses(lexiconPath, SearchOption.AllDirectories);
 
         foreach (var dir in thirdPartyDirs)
         {
             var directories = GetHighestLevelDirectories(dir);
             foreach (var directory in directories.Where(n => !n.Contains("bsky") && !n.Contains("atproto")))
             {
-                await this.GenerateClasses(directory);
+                await this.GenerateClasses(directory, SearchOption.TopDirectoryOnly);
             }
         }
 
@@ -145,12 +147,18 @@ public partial class AppCommands
             }
         }
 
-        return highestLevelDirectories;
+        var files = Directory.EnumerateFiles(path, "*.json", SearchOption.TopDirectoryOnly);
+        if (files.Any())
+        {
+            highestLevelDirectories.Add(path);
+        }
+
+        return highestLevelDirectories.Distinct().ToList();
     }
 
-    private async Task GenerateClasses(string lexiconPath)
+    private async Task GenerateClasses(string lexiconPath, SearchOption option)
     {
-        var files = Directory.EnumerateFiles(lexiconPath, "*.json", SearchOption.AllDirectories).OrderBy(n => n).ToList();
+        var files = Directory.EnumerateFiles(lexiconPath, "*.json", option).OrderBy(n => n).ToList();
         Console.WriteLine($"Found {files.Count()} files.");
 
         var defs = files.Where(n => n.Contains("defs.json")).ToList();

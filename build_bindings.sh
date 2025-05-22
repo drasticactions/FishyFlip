@@ -21,6 +21,7 @@ REPOS=(
     "https://github.com/teal-fm/teal.git"
     "https://github.com/marukun712/stellar.git"
     "https://github.com/aendra-rininsland/bluemoji.git"
+    "https://github.com/streamplace/streamplace.git"
 )
 
 PWD=$(pwd)
@@ -65,6 +66,8 @@ do
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/PinkSea.Lexicons/com")
         elif [ "$target_dir" == "likeandscribe-frontpage" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/fyi")
+        elif [ "$target_dir" == "streamplace-streamplace" ]; then
+            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/place/stream")
         elif [ "$target_dir" == "Gregoor-skylights" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons")
         elif [ "$target_dir" == "lexicon-community-lexicon" ]; then
