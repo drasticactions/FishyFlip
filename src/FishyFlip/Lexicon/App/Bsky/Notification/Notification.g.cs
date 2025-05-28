@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="author">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileView"/> (app.bsky.actor.defs#profileView)
         /// </param>
-        /// <param name="reason">Expected values are 'like', 'repost', 'follow', 'mention', 'reply', 'quote', 'starterpack-joined', 'verified', and 'unverified'.
+        /// <param name="reason">The reason why this notification was delivered - e.g. your post was liked, or you received a new follower.
         /// <br/> Known Values: <br/>
         /// like <br/>
         /// repost <br/>
@@ -29,6 +29,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// starterpack-joined <br/>
         /// verified <br/>
         /// unverified <br/>
+        /// like-via-repost <br/>
+        /// repost-via-repost <br/>
         /// </param>
         /// <param name="reasonSubject"></param>
         /// <param name="record"></param>
@@ -101,7 +103,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
         /// <summary>
         /// Gets or sets the reason.
-        /// <br/> Expected values are 'like', 'repost', 'follow', 'mention', 'reply', 'quote', 'starterpack-joined', 'verified', and 'unverified'.
+        /// <br/> The reason why this notification was delivered - e.g. your post was liked, or you received a new follower.
         /// <br/> Known Values: <br/>
         /// like <br/>
         /// repost <br/>
@@ -112,6 +114,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// starterpack-joined <br/>
         /// verified <br/>
         /// unverified <br/>
+        /// like-via-repost <br/>
+        /// repost-via-repost <br/>
         /// </summary>
         [JsonPropertyName("reason")]
         [JsonRequired]

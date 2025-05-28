@@ -160,11 +160,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateLikeAsync(this FishyFlip.ATProtocol atp, Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateLikeAsync(this FishyFlip.ATProtocol atp, Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? via = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Feed.Like();
             record.Subject = subject;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
+            record.Via = via;
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.like", record, rkey, validate, swapCommit, cancellationToken);
         }
 
@@ -507,11 +508,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.ATProtocol atp, Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateRepostAsync(this FishyFlip.ATProtocol atp, Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? via = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Feed.Repost();
             record.Subject = subject;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
+            record.Via = via;
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.feed.repost", record, rkey, validate, swapCommit, cancellationToken);
         }
 

@@ -18,6 +18,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageRef"/> (chat.bsky.convo.defs#messageRef) <br/>
         /// </param>
         /// <param name="hosting">
         /// <br/> Union Types: <br/>
@@ -132,6 +133,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
+        /// <see cref="FishyFlip.Lexicon.Chat.Bsky.Convo.MessageRef"/> (chat.bsky.convo.defs#messageRef) <br/>
         /// </summary>
         [JsonPropertyName("subject")]
         [JsonRequired]

@@ -16,10 +16,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="by">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic"/> (app.bsky.actor.defs#profileViewBasic)
         /// </param>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
         /// <param name="indexedAt"></param>
-        public ReasonRepost(FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic by = default, DateTime? indexedAt = default)
+        public ReasonRepost(FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic by = default, FishyFlip.Models.ATUri? uri = default, string? cid = default, DateTime? indexedAt = default)
         {
             this.By = by;
+            this.Uri = uri;
+            this.Cid = cid;
             this.IndexedAt = indexedAt;
             this.Type = "app.bsky.feed.defs#reasonRepost";
         }
@@ -40,6 +44,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         public ReasonRepost(CBORObject obj)
         {
             if (obj["by"] is not null) this.By = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["by"]);
+            if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
+            if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
@@ -51,6 +57,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("by")]
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic By { get; set; }
+
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
+        public FishyFlip.Models.ATUri? Uri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
+        [JsonPropertyName("cid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Cid { get; set; }
 
         /// <summary>
         /// Gets or sets the indexedAt.

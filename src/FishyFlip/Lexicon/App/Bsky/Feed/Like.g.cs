@@ -20,10 +20,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </param>
         /// <param name="createdAt"></param>
-        public Like(Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default)
+        /// <param name="via">
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </param>
+        public Like(Com.Atproto.Repo.StrongRef? subject, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? via = default)
         {
             this.Subject = subject;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Via = via;
             this.Type = "app.bsky.feed.like";
         }
 
@@ -44,6 +48,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["subject"] is not null) this.Subject = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["subject"]);
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["via"] is not null) this.Via = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["via"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -61,6 +66,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("createdAt")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// Gets or sets the via.
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </summary>
+        [JsonPropertyName("via")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Com.Atproto.Repo.StrongRef? Via { get; set; }
 
         public const string RecordType = "app.bsky.feed.like";
 
