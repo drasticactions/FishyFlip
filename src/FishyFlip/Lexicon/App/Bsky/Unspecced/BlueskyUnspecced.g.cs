@@ -67,6 +67,33 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get the hidden posts in a thread. It is based in an anchor post at any depth of the tree, and returns hidden replies (recursive replies, with branching to their replies) below the anchor. It does not include ancestors nor the anchor. This should be called after exhausting `app.bsky.unspecced.getPostThreadV2`. Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// </summary>
+        /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?>> GetPostThreadHiddenV2Async (FishyFlip.Models.ATUri anchor, CancellationToken cancellationToken = default)
+        {
+            return atp.GetPostThreadHiddenV2Async(anchor, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get posts in a thread. It is based in an anchor post at any depth of the tree, and returns posts above it (recursively resolving the parent, without further branching to their replies) and below it (recursive replies, with branching to their replies). Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// </summary>
+        /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post, and the thread will be built around it. It can be any post in the tree, not necessarily a root post.</param>
+        /// <param name="above">Whether to include parents above the anchor.</param>
+        /// <param name="below">How many levels of replies to include below the anchor.</param>
+        /// <param name="branchingFactor">Maximum of replies to include at each level of the thread, except for the direct replies to the anchor, which are (NOTE: currently, during unspecced phase) all returned (NOTE: later they might be paginated).</param>
+        /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
+        /// <param name="sort">Sorting for the thread replies.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?>> GetPostThreadV2Async (FishyFlip.Models.ATUri anchor, bool? above = default, int? below = 6, int? branchingFactor = 10, bool? prioritizeFollowedUsers = default, string? sort = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetPostThreadV2Async(anchor, above, below, branchingFactor, prioritizeFollowedUsers, sort, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get a list of suggested feeds
         /// </summary>
         /// <param name="limit"></param>

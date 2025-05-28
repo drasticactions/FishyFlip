@@ -422,8 +422,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
                     return new App.Bsky.Feed.GetPostsOutput(obj);
+                case "app.bsky.unspecced.getPostThreadHiddenV2#GetPostThreadHiddenV2Output":
+                    return new App.Bsky.Unspecced.GetPostThreadHiddenV2Output(obj);
                 case "app.bsky.feed.getPostThread#GetPostThreadOutput":
                     return new App.Bsky.Feed.GetPostThreadOutput(obj);
+                case "app.bsky.unspecced.getPostThreadV2#GetPostThreadV2Output":
+                    return new App.Bsky.Unspecced.GetPostThreadV2Output(obj);
                 case "app.bsky.actor.getPreferences#GetPreferencesOutput":
                     return new App.Bsky.Actor.GetPreferencesOutput(obj);
                 case "buzz.bookhive.getProfile#GetProfileOutput":
@@ -1124,6 +1128,20 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.Threadgate(obj);
                 case "app.bsky.feed.defs#threadgateView":
                     return new App.Bsky.Feed.ThreadgateView(obj);
+                case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItem":
+                    return new App.Bsky.Unspecced.ThreadHiddenItem(obj);
+                case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItemPost":
+                    return new App.Bsky.Unspecced.ThreadHiddenItemPost(obj);
+                case "app.bsky.unspecced.getPostThreadV2#threadItem":
+                    return new App.Bsky.Unspecced.ThreadItem(obj);
+                case "app.bsky.unspecced.getPostThreadV2#threadItemBlocked":
+                    return new App.Bsky.Unspecced.ThreadItemBlocked(obj);
+                case "app.bsky.unspecced.getPostThreadV2#threadItemNotFound":
+                    return new App.Bsky.Unspecced.ThreadItemNotFound(obj);
+                case "app.bsky.unspecced.getPostThreadV2#threadItemNoUnauthenticated":
+                    return new App.Bsky.Unspecced.ThreadItemNoUnauthenticated(obj);
+                case "app.bsky.unspecced.getPostThreadV2#threadItemPost":
+                    return new App.Bsky.Unspecced.ThreadItemPost(obj);
                 case "app.bsky.feed.defs#threadViewPost":
                     return new App.Bsky.Feed.ThreadViewPost(obj);
                 case "app.bsky.actor.defs#threadViewPref":

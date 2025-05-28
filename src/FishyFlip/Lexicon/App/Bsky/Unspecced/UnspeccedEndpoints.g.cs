@@ -20,6 +20,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
 
+       public const string GetPostThreadHiddenV2 = "/xrpc/app.bsky.unspecced.getPostThreadHiddenV2";
+
+       public const string GetPostThreadV2 = "/xrpc/app.bsky.unspecced.getPostThreadV2";
+
        public const string GetSuggestedFeeds = "/xrpc/app.bsky.unspecced.getSuggestedFeeds";
 
        public const string GetSuggestedFeedsSkeleton = "/xrpc/app.bsky.unspecced.getSuggestedFeedsSkeleton";
@@ -97,6 +101,78 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get the hidden posts in a thread. It is based in an anchor post at any depth of the tree, and returns hidden replies (recursive replies, with branching to their replies) below the anchor. It does not include ancestors nor the anchor. This should be called after exhausting `app.bsky.unspecced.getPostThreadV2`. Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?>> GetPostThreadHiddenV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetPostThreadHiddenV2.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("anchor=" + anchor);
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPostThreadHiddenV2Output!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get posts in a thread. It is based in an anchor post at any depth of the tree, and returns posts above it (recursively resolving the parent, without further branching to their replies) and below it (recursive replies, with branching to their replies). Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post, and the thread will be built around it. It can be any post in the tree, not necessarily a root post.</param>
+        /// <param name="above">Whether to include parents above the anchor.</param>
+        /// <param name="below">How many levels of replies to include below the anchor.</param>
+        /// <param name="branchingFactor">Maximum of replies to include at each level of the thread, except for the direct replies to the anchor, which are (NOTE: currently, during unspecced phase) all returned (NOTE: later they might be paginated).</param>
+        /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
+        /// <param name="sort">Sorting for the thread replies.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?>> GetPostThreadV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? above = default, int? below = 6, int? branchingFactor = 10, bool? prioritizeFollowedUsers = default, string? sort = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetPostThreadV2.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("anchor=" + anchor);
+
+            if (above != null)
+            {
+                queryStrings.Add("above=" + (above.Value ? "true" : "false"));
+            }
+
+            if (below != null)
+            {
+                queryStrings.Add("below=" + below);
+            }
+
+            if (branchingFactor != null)
+            {
+                queryStrings.Add("branchingFactor=" + branchingFactor);
+            }
+
+            if (prioritizeFollowedUsers != null)
+            {
+                queryStrings.Add("prioritizeFollowedUsers=" + (prioritizeFollowedUsers.Value ? "true" : "false"));
+            }
+
+            if (sort != null)
+            {
+                queryStrings.Add("sort=" + sort);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPostThreadV2Output!, cancellationToken, headers);
         }
 
 

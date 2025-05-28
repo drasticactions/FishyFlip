@@ -35,6 +35,29 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>, ATErrorResult>> GetPopularFeedGeneratorsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] string? query = default, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get the hidden posts in a thread. It is based in an anchor post at any depth of the tree, and returns hidden replies (recursive replies, with branching to their replies) below the anchor. It does not include ancestors nor the anchor. This should be called after exhausting `app.bsky.unspecced.getPostThreadV2`. Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// </summary>
+        /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getPostThreadHiddenV2")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output>, ATErrorResult>> GetPostThreadHiddenV2Async ([FromQuery] FishyFlip.Models.ATUri anchor, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get posts in a thread. It is based in an anchor post at any depth of the tree, and returns posts above it (recursively resolving the parent, without further branching to their replies) and below it (recursive replies, with branching to their replies). Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// </summary>
+        /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post, and the thread will be built around it. It can be any post in the tree, not necessarily a root post.</param>
+        /// <param name="above">Whether to include parents above the anchor.</param>
+        /// <param name="below">How many levels of replies to include below the anchor.</param>
+        /// <param name="branchingFactor">Maximum of replies to include at each level of the thread, except for the direct replies to the anchor, which are (NOTE: currently, during unspecced phase) all returned (NOTE: later they might be paginated).</param>
+        /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
+        /// <param name="sort">Sorting for the thread replies.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getPostThreadV2")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output>, ATErrorResult>> GetPostThreadV2Async ([FromQuery] FishyFlip.Models.ATUri anchor, [FromQuery] bool? above = default, [FromQuery] int? below = 6, [FromQuery] int? branchingFactor = 10, [FromQuery] bool? prioritizeFollowedUsers = default, [FromQuery] string? sort = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get a list of suggested feeds
         /// </summary>
         /// <param name="limit"></param>
