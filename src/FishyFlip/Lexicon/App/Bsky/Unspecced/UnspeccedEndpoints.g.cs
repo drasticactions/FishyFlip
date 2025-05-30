@@ -109,14 +109,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post.</param>
+        /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?>> GetPostThreadHiddenV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?>> GetPostThreadHiddenV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPostThreadHiddenV2.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
             queryStrings.Add("anchor=" + anchor);
+
+            if (prioritizeFollowedUsers != null)
+            {
+                queryStrings.Add("prioritizeFollowedUsers=" + (prioritizeFollowedUsers.Value ? "true" : "false"));
+            }
 
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
