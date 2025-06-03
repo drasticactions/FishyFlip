@@ -17,9 +17,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="depth">The nesting level of this item in the thread. Depth 0 means the anchor item. Items above have negative depths, items below have positive depths.</param>
         /// <param name="value">
         /// <br/> Union Types: <br/>
-        /// #threadHiddenItemPost <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost"/> (app.bsky.unspecced.defs#threadItemPost) <br/>
         /// </param>
-        public ThreadHiddenItem(FishyFlip.Models.ATUri uri = default, long depth = default, FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost value = default)
+        public ThreadHiddenItem(FishyFlip.Models.ATUri uri = default, long depth = default, FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost value = default)
         {
             this.Uri = uri;
             this.Depth = depth;
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["depth"] is not null) this.Depth = obj["depth"].AsInt64Value();
-            if (obj["value"] is not null) this.Value = new FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost(obj["value"]);
+            if (obj["value"] is not null) this.Value = new FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost(obj["value"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -67,11 +67,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Gets or sets the value.
         /// <br/> Union Types: <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost"/> (app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItemPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost"/> (app.bsky.unspecced.defs#threadItemPost) <br/>
         /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
-        public FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost Value { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost Value { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItem";
 

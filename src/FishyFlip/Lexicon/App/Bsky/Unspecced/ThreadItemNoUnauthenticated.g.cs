@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ThreadItemNoUnauthenticated()
         {
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItemNoUnauthenticated";
+            this.Type = "app.bsky.unspecced.defs#threadItemNoUnauthenticated";
         }
 
 
@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
-        public const string RecordType = "app.bsky.unspecced.getPostThreadV2#threadItemNoUnauthenticated";
+        public const string RecordType = "app.bsky.unspecced.defs#threadItemNoUnauthenticated";
 
         public override string ToJson()
         {

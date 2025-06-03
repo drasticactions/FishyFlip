@@ -1127,8 +1127,6 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>), TypeInfoPropertyName = "ListAppBskyFeedThreadgateView")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItem), TypeInfoPropertyName = "AppBskyUnspeccedThreadHiddenItem")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItem>), TypeInfoPropertyName = "ListAppBskyUnspeccedThreadHiddenItem")]
-    [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost), TypeInfoPropertyName = "AppBskyUnspeccedThreadHiddenItemPost")]
-    [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost>), TypeInfoPropertyName = "ListAppBskyUnspeccedThreadHiddenItemPost")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem), TypeInfoPropertyName = "AppBskyUnspeccedThreadItem")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem>), TypeInfoPropertyName = "ListAppBskyUnspeccedThreadItem")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked), TypeInfoPropertyName = "AppBskyUnspeccedThreadItemBlocked")]

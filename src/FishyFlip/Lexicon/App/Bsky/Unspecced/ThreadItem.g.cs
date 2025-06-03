@@ -17,10 +17,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="depth">The nesting level of this item in the thread. Depth 0 means the anchor item. Items above have negative depths, items below have positive depths.</param>
         /// <param name="value">
         /// <br/> Union Types: <br/>
-        /// #threadItemPost <br/>
-        /// #threadItemNoUnauthenticated <br/>
-        /// #threadItemNotFound <br/>
-        /// #threadItemBlocked <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost"/> (app.bsky.unspecced.defs#threadItemPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNoUnauthenticated"/> (app.bsky.unspecced.defs#threadItemNoUnauthenticated) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound"/> (app.bsky.unspecced.defs#threadItemNotFound) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked"/> (app.bsky.unspecced.defs#threadItemBlocked) <br/>
         /// </param>
         public ThreadItem(FishyFlip.Models.ATUri uri = default, long depth = default, ATObject value = default)
         {
@@ -70,10 +70,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Gets or sets the value.
         /// <br/> Union Types: <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost"/> (app.bsky.unspecced.getPostThreadV2#threadItemPost) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNoUnauthenticated"/> (app.bsky.unspecced.getPostThreadV2#threadItemNoUnauthenticated) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound"/> (app.bsky.unspecced.getPostThreadV2#threadItemNotFound) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked"/> (app.bsky.unspecced.getPostThreadV2#threadItemBlocked) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost"/> (app.bsky.unspecced.defs#threadItemPost) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNoUnauthenticated"/> (app.bsky.unspecced.defs#threadItemNoUnauthenticated) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound"/> (app.bsky.unspecced.defs#threadItemNotFound) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked"/> (app.bsky.unspecced.defs#threadItemBlocked) <br/>
         /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]

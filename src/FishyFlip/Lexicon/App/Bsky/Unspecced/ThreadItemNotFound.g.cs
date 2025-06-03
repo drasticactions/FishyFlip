@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ThreadItemNotFound()
         {
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItemNotFound";
+            this.Type = "app.bsky.unspecced.defs#threadItemNotFound";
         }
 
 
@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
-        public const string RecordType = "app.bsky.unspecced.getPostThreadV2#threadItemNotFound";
+        public const string RecordType = "app.bsky.unspecced.defs#threadItemNotFound";
 
         public override string ToJson()
         {
