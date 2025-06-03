@@ -1130,17 +1130,15 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.ThreadgateView(obj);
                 case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItem":
                     return new App.Bsky.Unspecced.ThreadHiddenItem(obj);
-                case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItemPost":
-                    return new App.Bsky.Unspecced.ThreadHiddenItemPost(obj);
                 case "app.bsky.unspecced.getPostThreadV2#threadItem":
                     return new App.Bsky.Unspecced.ThreadItem(obj);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemBlocked":
+                case "app.bsky.unspecced.defs#threadItemBlocked":
                     return new App.Bsky.Unspecced.ThreadItemBlocked(obj);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemNotFound":
+                case "app.bsky.unspecced.defs#threadItemNotFound":
                     return new App.Bsky.Unspecced.ThreadItemNotFound(obj);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemNoUnauthenticated":
+                case "app.bsky.unspecced.defs#threadItemNoUnauthenticated":
                     return new App.Bsky.Unspecced.ThreadItemNoUnauthenticated(obj);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemPost":
+                case "app.bsky.unspecced.defs#threadItemPost":
                     return new App.Bsky.Unspecced.ThreadItemPost(obj);
                 case "app.bsky.feed.defs#threadViewPost":
                     return new App.Bsky.Feed.ThreadViewPost(obj);

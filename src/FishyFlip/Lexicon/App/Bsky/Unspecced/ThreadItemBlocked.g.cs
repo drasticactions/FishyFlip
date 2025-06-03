@@ -19,7 +19,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public ThreadItemBlocked(FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor author = default)
         {
             this.Author = author;
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItemBlocked";
+            this.Type = "app.bsky.unspecced.defs#threadItemBlocked";
         }
 
 
@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ThreadItemBlocked()
         {
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItemBlocked";
+            this.Type = "app.bsky.unspecced.defs#threadItemBlocked";
         }
 
 
@@ -49,7 +49,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonRequired]
         public FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor Author { get; set; }
 
-        public const string RecordType = "app.bsky.unspecced.getPostThreadV2#threadItemBlocked";
+        public const string RecordType = "app.bsky.unspecced.defs#threadItemBlocked";
 
         public override string ToJson()
         {

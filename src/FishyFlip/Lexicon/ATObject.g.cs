@@ -1166,17 +1166,15 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView);
                 case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItem>)SourceGenerationContext.Default.AppBskyUnspeccedThreadHiddenItem);
-                case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItemPost":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItemPost>)SourceGenerationContext.Default.AppBskyUnspeccedThreadHiddenItemPost);
                 case "app.bsky.unspecced.getPostThreadV2#threadItem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItem);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemBlocked":
+                case "app.bsky.unspecced.defs#threadItemBlocked":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItemBlocked);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemNotFound":
+                case "app.bsky.unspecced.defs#threadItemNotFound":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItemNotFound);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemNoUnauthenticated":
+                case "app.bsky.unspecced.defs#threadItemNoUnauthenticated":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNoUnauthenticated>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNoUnauthenticated>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItemNoUnauthenticated);
-                case "app.bsky.unspecced.getPostThreadV2#threadItemPost":
+                case "app.bsky.unspecced.defs#threadItemPost":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItemPost);
                 case "app.bsky.feed.defs#threadViewPost":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadViewPost>)SourceGenerationContext.Default.AppBskyFeedThreadViewPost);

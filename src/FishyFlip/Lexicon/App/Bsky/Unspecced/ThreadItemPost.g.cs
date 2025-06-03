@@ -19,13 +19,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="moreParents">This post has more parents that were not present in the response. This is just a boolean, without the number of parents.</param>
         /// <param name="moreReplies">This post has more replies that were not present in the response. This is a numeric value, which is best-effort and might not be accurate.</param>
         /// <param name="opThread">This post is part of a contiguous thread by the OP from the thread root. Many different OP threads can happen in the same thread.</param>
-        public ThreadItemPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView post = default, bool moreParents = default, long moreReplies = default, bool opThread = default)
+        /// <param name="hiddenByThreadgate">The threadgate created by the author indicates this post as a reply to be hidden for everyone consuming the thread.</param>
+        /// <param name="mutedByViewer">This is by an account muted by the viewer requesting it.</param>
+        public ThreadItemPost(FishyFlip.Lexicon.App.Bsky.Feed.PostView post = default, bool moreParents = default, long moreReplies = default, bool opThread = default, bool hiddenByThreadgate = default, bool mutedByViewer = default)
         {
             this.Post = post;
             this.MoreParents = moreParents;
             this.MoreReplies = moreReplies;
             this.OpThread = opThread;
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItemPost";
+            this.HiddenByThreadgate = hiddenByThreadgate;
+            this.MutedByViewer = mutedByViewer;
+            this.Type = "app.bsky.unspecced.defs#threadItemPost";
         }
 
 
@@ -34,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ThreadItemPost()
         {
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItemPost";
+            this.Type = "app.bsky.unspecced.defs#threadItemPost";
         }
 
 
@@ -47,6 +51,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["moreParents"] is not null) this.MoreParents = obj["moreParents"].AsBoolean();
             if (obj["moreReplies"] is not null) this.MoreReplies = obj["moreReplies"].AsInt64Value();
             if (obj["opThread"] is not null) this.OpThread = obj["opThread"].AsBoolean();
+            if (obj["hiddenByThreadgate"] is not null) this.HiddenByThreadgate = obj["hiddenByThreadgate"].AsBoolean();
+            if (obj["mutedByViewer"] is not null) this.MutedByViewer = obj["mutedByViewer"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -82,7 +88,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonRequired]
         public bool OpThread { get; set; }
 
-        public const string RecordType = "app.bsky.unspecced.getPostThreadV2#threadItemPost";
+        /// <summary>
+        /// Gets or sets the hiddenByThreadgate.
+        /// <br/> The threadgate created by the author indicates this post as a reply to be hidden for everyone consuming the thread.
+        /// </summary>
+        [JsonPropertyName("hiddenByThreadgate")]
+        [JsonRequired]
+        public bool HiddenByThreadgate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the mutedByViewer.
+        /// <br/> This is by an account muted by the viewer requesting it.
+        /// </summary>
+        [JsonPropertyName("mutedByViewer")]
+        [JsonRequired]
+        public bool MutedByViewer { get; set; }
+
+        public const string RecordType = "app.bsky.unspecced.defs#threadItemPost";
 
         public override string ToJson()
         {

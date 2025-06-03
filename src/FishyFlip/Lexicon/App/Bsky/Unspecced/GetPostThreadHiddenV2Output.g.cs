@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPostThreadHiddenV2Output"/> class.
         /// </summary>
-        /// <param name="thread">A flat list of thread hidden items. The depth of each item is indicated by the depth property inside the item.</param>
+        /// <param name="thread">A flat list of hidden thread items. The depth of each item is indicated by the depth property inside the item.</param>
         public GetPostThreadHiddenV2Output(List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItem> thread = default)
         {
             this.Thread = thread;
@@ -41,7 +41,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         /// <summary>
         /// Gets or sets the thread.
-        /// <br/> A flat list of thread hidden items. The depth of each item is indicated by the depth property inside the item.
+        /// <br/> A flat list of hidden thread items. The depth of each item is indicated by the depth property inside the item.
         /// </summary>
         [JsonPropertyName("thread")]
         [JsonRequired]

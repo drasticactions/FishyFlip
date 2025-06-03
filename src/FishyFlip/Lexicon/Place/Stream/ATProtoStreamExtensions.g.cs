@@ -153,13 +153,14 @@ namespace FishyFlip.Lexicon.Place.Stream
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateLivestreamAsync(this FishyFlip.ATProtocol atp, string? title, string? url = default, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? post = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateLivestreamAsync(this FishyFlip.ATProtocol atp, string? title, string? url = default, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? post = default, Blob? thumb = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Place.Stream.Livestream();
             record.Title = title;
             record.Url = url;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
             record.Post = post;
+            record.Thumb = thumb;
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "place.stream.livestream", record, rkey, validate, swapCommit, cancellationToken);
         }
 

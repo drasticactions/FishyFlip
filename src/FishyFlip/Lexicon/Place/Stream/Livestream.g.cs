@@ -19,15 +19,17 @@ namespace FishyFlip.Lexicon.Place.Stream
         /// <param name="title">The title of the livestream, as it will be announced to followers.</param>
         /// <param name="url">The URL where this stream can be found. This is primarily a hint for other Streamplace nodes to locate and replicate the stream.</param>
         /// <param name="createdAt">Client-declared timestamp when this livestream started.</param>
-        /// <param name="post">The post that announced this livestream. Used for chat replies.
+        /// <param name="post">The post that announced this livestream.
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </param>
-        public Livestream(string? title, string? url = default, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? post = default)
+        /// <param name="thumb"></param>
+        public Livestream(string? title, string? url = default, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? post = default, Blob? thumb = default)
         {
             this.Title = title;
             this.Url = url;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.Post = post;
+            this.Thumb = thumb;
             this.Type = "place.stream.livestream";
         }
 
@@ -50,6 +52,7 @@ namespace FishyFlip.Lexicon.Place.Stream
             if (obj["url"] is not null) this.Url = obj["url"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["post"] is not null) this.Post = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["post"]);
+            if (obj["thumb"] is not null) this.Thumb = new FishyFlip.Models.Blob(obj["thumb"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -79,12 +82,19 @@ namespace FishyFlip.Lexicon.Place.Stream
 
         /// <summary>
         /// Gets or sets the post.
-        /// <br/> The post that announced this livestream. Used for chat replies.
+        /// <br/> The post that announced this livestream.
         /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </summary>
         [JsonPropertyName("post")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Com.Atproto.Repo.StrongRef? Post { get; set; }
+
+        /// <summary>
+        /// Gets or sets the thumb.
+        /// </summary>
+        [JsonPropertyName("thumb")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Blob? Thumb { get; set; }
 
         public const string RecordType = "place.stream.livestream";
 
