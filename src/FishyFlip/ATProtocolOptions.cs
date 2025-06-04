@@ -3,6 +3,7 @@
 // </copyright>
 
 using FishyFlip.Tools.Json;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 using System.Collections.Concurrent;
 using System.Net;
 
@@ -50,6 +51,11 @@ public class ATProtocolOptions
     /// Defaults to https://public.api.bsky.app.
     /// </summary>
     public Uri Url { get; internal set; }
+
+    /// <summary>
+    /// Gets the Plc Directory Url.
+    /// </summary>
+    public Uri PlcDirectoryUrl { get; internal set; } = new Uri("https://plc.directory/");
 
     /// <summary>
     /// Gets the user agent. Defaults to FishyFlip.

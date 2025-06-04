@@ -10,7 +10,6 @@ namespace FishyFlip;
 public sealed class PlcDirectory : IDisposable
 {
     private ATProtocol proto;
-    private HttpClient client;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PlcDirectory"/> class.
@@ -18,7 +17,6 @@ public sealed class PlcDirectory : IDisposable
     /// <param name="proto"><see cref="ATProtocol"/>.</param>
     internal PlcDirectory(ATProtocol proto)
     {
-        this.client = new HttpClient() { BaseAddress = new Uri("https://plc.directory/") };
         this.proto = proto;
     }
 
@@ -33,8 +31,8 @@ public sealed class PlcDirectory : IDisposable
     public async Task<Result<DidDoc?>> GetDidDocAsync(ATDid identifier, CancellationToken cancellationToken = default)
     {
         // Url: https://plc.directory/{identifier}
-        string url = $"/{identifier}";
-        return await this.client.Get<DidDoc?>(url, this.Options.SourceGenerationContext.DidDoc!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        var url = new Uri(this.Options.PlcDirectoryUrl, $"/{identifier}");
+        return await this.proto.Client.Get<DidDoc?>(url.ToString(), this.Options.SourceGenerationContext.DidDoc!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     /// <summary>
@@ -42,6 +40,5 @@ public sealed class PlcDirectory : IDisposable
     /// </summary>
     public void Dispose()
     {
-        this.client.Dispose();
     }
 }
