@@ -92,6 +92,19 @@ public class ATProtocolBuilder
     }
 
     /// <summary>
+    /// Sets the URI to use for <see cref="PlcDirectory"/> lookups.
+    /// Defaults to https://plc.directory/.
+    /// For alternatives, check out https://github.com/bsky-watch/plc-mirror.
+    /// </summary>
+    /// <param name="mirror">Mirror Uri.</param>
+    /// <returns><see cref="ATProtocolBuilder"/>.</returns>
+    public ATProtocolBuilder WithPlcMirror(Uri mirror)
+    {
+        this.atProtocolOptions.PlcDirectoryUrl = mirror;
+        return this;
+    }
+
+    /// <summary>
     /// Sets UseServiceEndpointUponLogin.
     /// </summary>
     /// <param name="serviceEndpointUponLogin">Value for UseServiceEndpointUponLogin.</param>
