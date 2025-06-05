@@ -23,11 +23,15 @@ namespace FishyFlip.Lexicon.Pub.Leaflet
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Pages.LinearDocument"/> (pub.leaflet.pages.linearDocument) <br/>
         /// </param>
+        /// <param name="postRef">
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </param>
         /// <param name="description"></param>
         /// <param name="publishedAt"></param>
-        public Document(string? title, FishyFlip.Models.ATUri? publication, FishyFlip.Models.ATIdentifier? author, List<FishyFlip.Lexicon.Pub.Leaflet.Pages.LinearDocument>? pages, string? description = default, DateTime? publishedAt = default)
+        public Document(string? title, FishyFlip.Models.ATUri? publication, FishyFlip.Models.ATIdentifier? author, List<FishyFlip.Lexicon.Pub.Leaflet.Pages.LinearDocument>? pages, Com.Atproto.Repo.StrongRef? postRef = default, string? description = default, DateTime? publishedAt = default)
         {
             this.Title = title;
+            this.PostRef = postRef;
             this.Description = description;
             this.PublishedAt = publishedAt;
             this.Publication = publication;
@@ -52,6 +56,7 @@ namespace FishyFlip.Lexicon.Pub.Leaflet
         public Document(CBORObject obj)
         {
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
+            if (obj["postRef"] is not null) this.PostRef = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["postRef"]);
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["publishedAt"] is not null) this.PublishedAt = obj["publishedAt"].ToDateTime();
             if (obj["publication"] is not null) this.Publication = obj["publication"].ToATUri();
@@ -66,6 +71,14 @@ namespace FishyFlip.Lexicon.Pub.Leaflet
         [JsonPropertyName("title")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the postRef.
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </summary>
+        [JsonPropertyName("postRef")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Com.Atproto.Repo.StrongRef? PostRef { get; set; }
 
         /// <summary>
         /// Gets or sets the description.

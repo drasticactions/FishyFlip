@@ -1110,6 +1110,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.SubjectView(obj);
                 case "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput":
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
+                case "pub.leaflet.graph.subscription":
+                    return new Pub.Leaflet.Graph.Subscription(obj);
                 case "ma.tokono.byov.subscription":
                     return new Ma.Tokono.Byov.Subscription(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#suggestion":

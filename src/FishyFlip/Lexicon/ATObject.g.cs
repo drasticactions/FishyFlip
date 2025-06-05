@@ -1146,6 +1146,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectView);
                 case "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySubmitPlcOperationInput);
+                case "pub.leaflet.graph.subscription":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Graph.Subscription>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Graph.Subscription>)SourceGenerationContext.Default.PubLeafletGraphSubscription);
                 case "ma.tokono.byov.subscription":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(text, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription);
                 case "app.bsky.unspecced.getTaggedSuggestions#suggestion":

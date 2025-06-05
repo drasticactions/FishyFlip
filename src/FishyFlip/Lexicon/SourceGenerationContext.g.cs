@@ -1107,6 +1107,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectView>), TypeInfoPropertyName = "ListToolsOzoneModerationSubjectView")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput), TypeInfoPropertyName = "ComAtprotoIdentitySubmitPlcOperationInput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>), TypeInfoPropertyName = "ListComAtprotoIdentitySubmitPlcOperationInput")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.Pub.Leaflet.Graph.Subscription), TypeInfoPropertyName = "PubLeafletGraphSubscription")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Pub.Leaflet.Graph.Subscription>), TypeInfoPropertyName = "ListPubLeafletGraphSubscription")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription), TypeInfoPropertyName = "MaTokonoByovSubscription")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>), TypeInfoPropertyName = "ListMaTokonoByovSubscription")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion), TypeInfoPropertyName = "AppBskyUnspeccedSuggestion")]
