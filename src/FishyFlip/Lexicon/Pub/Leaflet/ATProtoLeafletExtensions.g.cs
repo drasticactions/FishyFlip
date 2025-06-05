@@ -40,10 +40,11 @@ namespace FishyFlip.Lexicon.Pub.Leaflet
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateDocumentAsync(this FishyFlip.ATProtocol atp, string? title, FishyFlip.Models.ATUri? publication, FishyFlip.Models.ATIdentifier? author, List<FishyFlip.Lexicon.Pub.Leaflet.Pages.LinearDocument>? pages, string? description = default, DateTime? publishedAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateDocumentAsync(this FishyFlip.ATProtocol atp, string? title, FishyFlip.Models.ATUri? publication, FishyFlip.Models.ATIdentifier? author, List<FishyFlip.Lexicon.Pub.Leaflet.Pages.LinearDocument>? pages, Com.Atproto.Repo.StrongRef? postRef = default, string? description = default, DateTime? publishedAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Pub.Leaflet.Document();
             record.Title = title;
+            record.PostRef = postRef;
             record.Description = description;
             record.PublishedAt = publishedAt;
             record.Publication = publication;
