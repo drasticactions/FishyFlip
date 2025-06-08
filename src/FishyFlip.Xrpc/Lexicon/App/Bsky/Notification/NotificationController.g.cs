@@ -16,6 +16,14 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
     {
 
         /// <summary>
+        /// Get notification-related preferences for an account. Requires auth.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.notification.getPreferences")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput>, ATErrorResult>> GetPreferencesAsync (CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Count the number of unread notifications for the requesting account. Requires auth.
         /// </summary>
         /// <param name="priority"></param>
@@ -46,6 +54,27 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.putPreferences")]
         public abstract Task<Results<Ok, ATErrorResult>> PutPreferencesAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput input, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Set notification-related preferences for an account. Requires auth.
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <param name="follow"></param>
+        /// <param name="like"></param>
+        /// <param name="likeViaRepost"></param>
+        /// <param name="mention"></param>
+        /// <param name="quote"></param>
+        /// <param name="reply"></param>
+        /// <param name="repost"></param>
+        /// <param name="repostViaRepost"></param>
+        /// <param name="starterpackJoined"></param>
+        /// <param name="subscribedPost"></param>
+        /// <param name="unverified"></param>
+        /// <param name="verified"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output"/></returns>
+        [HttpPost("/xrpc/app.bsky.notification.putPreferencesV2")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output>, ATErrorResult>> PutPreferencesV2Async ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Input input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Register to receive push notifications, via a specified service, for the requesting account. Requires auth.

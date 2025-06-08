@@ -18,16 +18,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="value">
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost"/> (app.bsky.unspecced.defs#threadItemPost) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNoUnauthenticated"/> (app.bsky.unspecced.defs#threadItemNoUnauthenticated) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound"/> (app.bsky.unspecced.defs#threadItemNotFound) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked"/> (app.bsky.unspecced.defs#threadItemBlocked) <br/>
         /// </param>
-        public ThreadItem(FishyFlip.Models.ATUri uri = default, long depth = default, ATObject value = default)
+        public ThreadItem(FishyFlip.Models.ATUri uri = default, long depth = default, FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost value = default)
         {
             this.Uri = uri;
             this.Depth = depth;
             this.Value = value;
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItem";
+            this.Type = "app.bsky.unspecced.getPostThreadOtherV2#threadItem";
         }
 
 
@@ -36,7 +33,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ThreadItem()
         {
-            this.Type = "app.bsky.unspecced.getPostThreadV2#threadItem";
+            this.Type = "app.bsky.unspecced.getPostThreadOtherV2#threadItem";
         }
 
 
@@ -47,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
             if (obj["depth"] is not null) this.Depth = obj["depth"].AsInt64Value();
-            if (obj["value"] is not null) this.Value = obj["value"].ToATObject();
+            if (obj["value"] is not null) this.Value = new FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost(obj["value"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -71,15 +68,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Gets or sets the value.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost"/> (app.bsky.unspecced.defs#threadItemPost) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNoUnauthenticated"/> (app.bsky.unspecced.defs#threadItemNoUnauthenticated) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound"/> (app.bsky.unspecced.defs#threadItemNotFound) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked"/> (app.bsky.unspecced.defs#threadItemBlocked) <br/>
         /// </summary>
         [JsonPropertyName("value")]
         [JsonRequired]
-        public ATObject Value { get; set; }
+        public FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemPost Value { get; set; }
 
-        public const string RecordType = "app.bsky.unspecced.getPostThreadV2#threadItem";
+        public const string RecordType = "app.bsky.unspecced.getPostThreadOtherV2#threadItem";
 
         public override string ToJson()
         {
