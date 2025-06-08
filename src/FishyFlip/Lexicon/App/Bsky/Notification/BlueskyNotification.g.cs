@@ -32,6 +32,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
 
         /// <summary>
+        /// Get notification-related preferences for an account. Requires auth.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput?>> GetPreferencesAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.GetPreferencesAsync(cancellationToken);
+        }
+
+
+        /// <summary>
         /// Count the number of unread notifications for the requesting account. Requires auth.
         /// </summary>
         /// <param name="priority"></param>
@@ -80,6 +90,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public Task<Result<Success?>> PutPreferencesAsync (bool priority, CancellationToken cancellationToken = default)
         {
             return atp.PutPreferencesAsync(priority, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Set notification-related preferences for an account. Requires auth.
+        /// </summary>
+        /// <param name="chat"></param>
+        /// <param name="follow"></param>
+        /// <param name="like"></param>
+        /// <param name="likeViaRepost"></param>
+        /// <param name="mention"></param>
+        /// <param name="quote"></param>
+        /// <param name="reply"></param>
+        /// <param name="repost"></param>
+        /// <param name="repostViaRepost"></param>
+        /// <param name="starterpackJoined"></param>
+        /// <param name="subscribedPost"></param>
+        /// <param name="unverified"></param>
+        /// <param name="verified"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output?>> PutPreferencesV2Async (FishyFlip.Lexicon.App.Bsky.Notification.ChatPreference? chat = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? follow = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? like = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? likeViaRepost = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? mention = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? quote = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? reply = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? repost = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? repostViaRepost = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? starterpackJoined = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? subscribedPost = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? unverified = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? verified = default, CancellationToken cancellationToken = default)
+        {
+            return atp.PutPreferencesV2Async(chat, follow, like, likeViaRepost, mention, quote, reply, repost, repostViaRepost, starterpackJoined, subscribedPost, unverified, verified, cancellationToken);
         }
 
 

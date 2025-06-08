@@ -35,14 +35,14 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>, ATErrorResult>> GetPopularFeedGeneratorsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] string? query = default, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get the hidden posts in a thread. It is based in an anchor post at any depth of the tree, and returns hidden replies (recursive replies, with branching to their replies) below the anchor. It does not include ancestors nor the anchor. This should be called after exhausting `app.bsky.unspecced.getPostThreadV2`. Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get additional posts under a thread e.g. replies hidden by threadgate. Based on an anchor post at any depth of the tree, returns top-level replies below that anchor. It does not include ancestors nor the anchor itself. This should be called after exhausting `app.bsky.unspecced.getPostThreadV2`. Does not require auth, but additional metadata and filtering will be applied for authed requests.
         /// </summary>
         /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post.</param>
         /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output"/></returns>
-        [HttpGet("/xrpc/app.bsky.unspecced.getPostThreadHiddenV2")]
-        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output>, ATErrorResult>> GetPostThreadHiddenV2Async ([FromQuery] FishyFlip.Models.ATUri anchor, [FromQuery] bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default);
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getPostThreadOtherV2")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output>, ATErrorResult>> GetPostThreadOtherV2Async ([FromQuery] FishyFlip.Models.ATUri anchor, [FromQuery] bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get posts in a thread. It is based in an anchor post at any depth of the tree, and returns posts above it (recursively resolving the parent, without further branching to their replies) and below it (recursive replies, with branching to their replies). Does not require auth, but additional metadata and filtering will be applied for authed requests.

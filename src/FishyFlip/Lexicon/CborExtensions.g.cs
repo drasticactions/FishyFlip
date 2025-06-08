@@ -130,6 +130,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.Caption(obj);
                 case "blue.linkat.board#card":
                     return new Blue.Linkat.Card(obj);
+                case "app.bsky.notification.defs#chatPreference":
+                    return new App.Bsky.Notification.ChatPreference(obj);
                 case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
                     return new Com.Atproto.Server.CheckAccountStatusOutput(obj);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
@@ -280,6 +282,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.FeedViewPost(obj);
                 case "app.bsky.actor.defs#feedViewPref":
                     return new App.Bsky.Actor.FeedViewPref(obj);
+                case "app.bsky.notification.defs#filterablePreference":
+                    return new App.Bsky.Notification.FilterablePreference(obj);
                 case "tools.ozone.signature.findCorrelation#FindCorrelationOutput":
                     return new Tools.Ozone.Signature.FindCorrelationOutput(obj);
                 case "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput":
@@ -422,14 +426,16 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
                     return new App.Bsky.Feed.GetPostsOutput(obj);
-                case "app.bsky.unspecced.getPostThreadHiddenV2#GetPostThreadHiddenV2Output":
-                    return new App.Bsky.Unspecced.GetPostThreadHiddenV2Output(obj);
+                case "app.bsky.unspecced.getPostThreadOtherV2#GetPostThreadOtherV2Output":
+                    return new App.Bsky.Unspecced.GetPostThreadOtherV2Output(obj);
                 case "app.bsky.feed.getPostThread#GetPostThreadOutput":
                     return new App.Bsky.Feed.GetPostThreadOutput(obj);
                 case "app.bsky.unspecced.getPostThreadV2#GetPostThreadV2Output":
                     return new App.Bsky.Unspecced.GetPostThreadV2Output(obj);
                 case "app.bsky.actor.getPreferences#GetPreferencesOutput":
                     return new App.Bsky.Actor.GetPreferencesOutput(obj);
+                case "app.bsky.notification.getPreferences#GetPreferencesOutput":
+                    return new App.Bsky.Notification.GetPreferencesOutput(obj);
                 case "buzz.bookhive.getProfile#GetProfileOutput":
                     return new Buzz.Bookhive.GetProfileOutput(obj);
                 case "fm.teal.alpha.actor.getProfile#GetProfileOutput":
@@ -830,6 +836,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.PostInteractionSettingsPref(obj);
                 case "app.bsky.feed.defs#postView":
                     return new App.Bsky.Feed.PostView(obj);
+                case "app.bsky.notification.defs#preference":
+                    return new App.Bsky.Notification.Preference(obj);
+                case "app.bsky.notification.defs#preferences":
+                    return new App.Bsky.Notification.Preferences(obj);
                 case "app.bsky.actor.profile":
                     return new App.Bsky.Actor.Profile(obj);
                 case "social.psky.actor.profile":
@@ -864,6 +874,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.PutPreferencesInput(obj);
                 case "app.bsky.notification.putPreferences#PutPreferencesInput":
                     return new App.Bsky.Notification.PutPreferencesInput(obj);
+                case "app.bsky.notification.putPreferencesV2#PutPreferencesV2Input":
+                    return new App.Bsky.Notification.PutPreferencesV2Input(obj);
+                case "app.bsky.notification.putPreferencesV2#PutPreferencesV2Output":
+                    return new App.Bsky.Notification.PutPreferencesV2Output(obj);
                 case "com.atproto.repo.putRecord#PutRecordInput":
                     return new Com.Atproto.Repo.PutRecordInput(obj);
                 case "com.atproto.repo.putRecord#PutRecordOutput":
@@ -1130,12 +1144,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.Threadgate(obj);
                 case "app.bsky.feed.defs#threadgateView":
                     return new App.Bsky.Feed.ThreadgateView(obj);
-                case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItem":
-                    return new App.Bsky.Unspecced.ThreadHiddenItem(obj);
-                case "app.bsky.unspecced.getPostThreadV2#threadItem":
+                case "app.bsky.unspecced.getPostThreadOtherV2#threadItem":
                     return new App.Bsky.Unspecced.ThreadItem(obj);
                 case "app.bsky.unspecced.defs#threadItemBlocked":
                     return new App.Bsky.Unspecced.ThreadItemBlocked(obj);
+                case "app.bsky.unspecced.getPostThreadV2#threadItem":
+                    return new App.Bsky.Unspecced.ThreadItemDef(obj);
                 case "app.bsky.unspecced.defs#threadItemNotFound":
                     return new App.Bsky.Unspecced.ThreadItemNotFound(obj);
                 case "app.bsky.unspecced.defs#threadItemNoUnauthenticated":

@@ -20,7 +20,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
 
-       public const string GetPostThreadHiddenV2 = "/xrpc/app.bsky.unspecced.getPostThreadHiddenV2";
+       public const string GetPostThreadOtherV2 = "/xrpc/app.bsky.unspecced.getPostThreadOtherV2";
 
        public const string GetPostThreadV2 = "/xrpc/app.bsky.unspecced.getPostThreadV2";
 
@@ -105,16 +105,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
-        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get the hidden posts in a thread. It is based in an anchor post at any depth of the tree, and returns hidden replies (recursive replies, with branching to their replies) below the anchor. It does not include ancestors nor the anchor. This should be called after exhausting `app.bsky.unspecced.getPostThreadV2`. Does not require auth, but additional metadata and filtering will be applied for authed requests.
+        /// (NOTE: this endpoint is under development and WILL change without notice. Don't use it until it is moved out of `unspecced` or your application WILL break) Get additional posts under a thread e.g. replies hidden by threadgate. Based on an anchor post at any depth of the tree, returns top-level replies below that anchor. It does not include ancestors nor the anchor itself. This should be called after exhausting `app.bsky.unspecced.getPostThreadV2`. Does not require auth, but additional metadata and filtering will be applied for authed requests.
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post.</param>
         /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output?>> GetPostThreadHiddenV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default)
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?>> GetPostThreadOtherV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default)
         {
-            var endpointUrl = GetPostThreadHiddenV2.ToString();
+            var endpointUrl = GetPostThreadOtherV2.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
             queryStrings.Add("anchor=" + anchor);
@@ -127,7 +127,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPostThreadHiddenV2Output!, cancellationToken, headers);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPostThreadOtherV2Output!, cancellationToken, headers);
         }
 
 

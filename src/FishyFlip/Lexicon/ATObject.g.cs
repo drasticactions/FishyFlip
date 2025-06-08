@@ -166,6 +166,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.Caption>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption);
                 case "blue.linkat.board#card":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Linkat.Card>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Linkat.Card>)SourceGenerationContext.Default.BlueLinkatCard);
+                case "app.bsky.notification.defs#chatPreference":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.ChatPreference>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ChatPreference>)SourceGenerationContext.Default.AppBskyNotificationChatPreference);
                 case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>)SourceGenerationContext.Default.ComAtprotoServerCheckAccountStatusOutput);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
@@ -316,6 +318,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>)SourceGenerationContext.Default.AppBskyFeedFeedViewPost);
                 case "app.bsky.actor.defs#feedViewPref":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref>)SourceGenerationContext.Default.AppBskyActorFeedViewPref);
+                case "app.bsky.notification.defs#filterablePreference":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference>)SourceGenerationContext.Default.AppBskyNotificationFilterablePreference);
                 case "tools.ozone.signature.findCorrelation#FindCorrelationOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>)SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput);
                 case "tools.ozone.signature.findRelatedAccounts#FindRelatedAccountsOutput":
@@ -458,14 +462,16 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostsOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostsOutput);
-                case "app.bsky.unspecced.getPostThreadHiddenV2#GetPostThreadHiddenV2Output":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadHiddenV2Output>)SourceGenerationContext.Default.AppBskyUnspeccedGetPostThreadHiddenV2Output);
+                case "app.bsky.unspecced.getPostThreadOtherV2#GetPostThreadOtherV2Output":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output>)SourceGenerationContext.Default.AppBskyUnspeccedGetPostThreadOtherV2Output);
                 case "app.bsky.feed.getPostThread#GetPostThreadOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetPostThreadOutput>)SourceGenerationContext.Default.AppBskyFeedGetPostThreadOutput);
                 case "app.bsky.unspecced.getPostThreadV2#GetPostThreadV2Output":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output>)SourceGenerationContext.Default.AppBskyUnspeccedGetPostThreadV2Output);
                 case "app.bsky.actor.getPreferences#GetPreferencesOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetPreferencesOutput>)SourceGenerationContext.Default.AppBskyActorGetPreferencesOutput);
+                case "app.bsky.notification.getPreferences#GetPreferencesOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput>)SourceGenerationContext.Default.AppBskyNotificationGetPreferencesOutput);
                 case "buzz.bookhive.getProfile#GetProfileOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.GetProfileOutput>)SourceGenerationContext.Default.BuzzBookhiveGetProfileOutput);
                 case "fm.teal.alpha.actor.getProfile#GetProfileOutput":
@@ -866,6 +872,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref>)SourceGenerationContext.Default.AppBskyActorPostInteractionSettingsPref);
                 case "app.bsky.feed.defs#postView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.PostView>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.PostView>)SourceGenerationContext.Default.AppBskyFeedPostView);
+                case "app.bsky.notification.defs#preference":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.Preference>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Preference>)SourceGenerationContext.Default.AppBskyNotificationPreference);
+                case "app.bsky.notification.defs#preferences":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.Preferences>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Preferences>)SourceGenerationContext.Default.AppBskyNotificationPreferences);
                 case "app.bsky.actor.profile":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Profile>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Profile>)SourceGenerationContext.Default.AppBskyActorProfile);
                 case "social.psky.actor.profile":
@@ -900,6 +910,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.PutPreferencesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.PutPreferencesInput>)SourceGenerationContext.Default.AppBskyActorPutPreferencesInput);
                 case "app.bsky.notification.putPreferences#PutPreferencesInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesInput>)SourceGenerationContext.Default.AppBskyNotificationPutPreferencesInput);
+                case "app.bsky.notification.putPreferencesV2#PutPreferencesV2Input":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Input>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Input>)SourceGenerationContext.Default.AppBskyNotificationPutPreferencesV2Input);
+                case "app.bsky.notification.putPreferencesV2#PutPreferencesV2Output":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output>)SourceGenerationContext.Default.AppBskyNotificationPutPreferencesV2Output);
                 case "com.atproto.repo.putRecord#PutRecordInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.PutRecordInput>)SourceGenerationContext.Default.ComAtprotoRepoPutRecordInput);
                 case "com.atproto.repo.putRecord#PutRecordOutput":
@@ -1166,12 +1180,12 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Threadgate>)SourceGenerationContext.Default.AppBskyFeedThreadgate);
                 case "app.bsky.feed.defs#threadgateView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView>)SourceGenerationContext.Default.AppBskyFeedThreadgateView);
-                case "app.bsky.unspecced.getPostThreadHiddenV2#threadHiddenItem":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadHiddenItem>)SourceGenerationContext.Default.AppBskyUnspeccedThreadHiddenItem);
-                case "app.bsky.unspecced.getPostThreadV2#threadItem":
+                case "app.bsky.unspecced.getPostThreadOtherV2#threadItem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItem);
                 case "app.bsky.unspecced.defs#threadItemBlocked":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemBlocked>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItemBlocked);
+                case "app.bsky.unspecced.getPostThreadV2#threadItem":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemDef>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemDef>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItemDef);
                 case "app.bsky.unspecced.defs#threadItemNotFound":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemNotFound>)SourceGenerationContext.Default.AppBskyUnspeccedThreadItemNotFound);
                 case "app.bsky.unspecced.defs#threadItemNoUnauthenticated":

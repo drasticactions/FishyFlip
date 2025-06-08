@@ -17,12 +17,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="threadgate">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </param>
-        /// <param name="hasHiddenReplies">Whether this thread has hidden replies. If true, a call can be made to the `getPostThreadHiddenV2` endpoint to retrieve them.</param>
-        public GetPostThreadV2Output(List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem> thread = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default, bool hasHiddenReplies = default)
+        /// <param name="hasOtherReplies">Whether this thread has additional replies. If true, a call can be made to the `getPostThreadOtherV2` endpoint to retrieve them.</param>
+        public GetPostThreadV2Output(List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemDef> thread = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default, bool hasOtherReplies = default)
         {
             this.Thread = thread;
             this.Threadgate = threadgate;
-            this.HasHiddenReplies = hasHiddenReplies;
+            this.HasOtherReplies = hasOtherReplies;
             this.Type = "app.bsky.unspecced.getPostThreadV2#GetPostThreadV2Output";
         }
 
@@ -41,9 +41,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetPostThreadV2Output(CBORObject obj)
         {
-            if (obj["thread"] is not null) this.Thread = obj["thread"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem(n)).ToList();
+            if (obj["thread"] is not null) this.Thread = obj["thread"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemDef(n)).ToList();
             if (obj["threadgate"] is not null) this.Threadgate = new FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
-            if (obj["hasHiddenReplies"] is not null) this.HasHiddenReplies = obj["hasHiddenReplies"].AsBoolean();
+            if (obj["hasOtherReplies"] is not null) this.HasOtherReplies = obj["hasOtherReplies"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("thread")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItem> Thread { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.ThreadItemDef> Thread { get; set; }
 
         /// <summary>
         /// Gets or sets the threadgate.
@@ -64,12 +64,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
 
         /// <summary>
-        /// Gets or sets the hasHiddenReplies.
-        /// <br/> Whether this thread has hidden replies. If true, a call can be made to the `getPostThreadHiddenV2` endpoint to retrieve them.
+        /// Gets or sets the hasOtherReplies.
+        /// <br/> Whether this thread has additional replies. If true, a call can be made to the `getPostThreadOtherV2` endpoint to retrieve them.
         /// </summary>
-        [JsonPropertyName("hasHiddenReplies")]
+        [JsonPropertyName("hasOtherReplies")]
         [JsonRequired]
-        public bool HasHiddenReplies { get; set; }
+        public bool HasOtherReplies { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getPostThreadV2#GetPostThreadV2Output";
 
