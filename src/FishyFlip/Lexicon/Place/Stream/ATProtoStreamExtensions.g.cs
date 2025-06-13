@@ -40,11 +40,12 @@ namespace FishyFlip.Lexicon.Place.Stream
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateKeyAsync(this FishyFlip.ATProtocol atp, string? signingKey, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateKeyAsync(this FishyFlip.ATProtocol atp, string? signingKey, DateTime? createdAt = default, string? createdBy = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Place.Stream.Key();
             record.SigningKey = signingKey;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
+            record.CreatedBy = createdBy;
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "place.stream.key", record, rkey, validate, swapCommit, cancellationToken);
         }
 

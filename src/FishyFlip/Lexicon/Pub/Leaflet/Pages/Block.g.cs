@@ -19,6 +19,7 @@ namespace FishyFlip.Lexicon.Pub.Leaflet.Pages
         /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.Header"/> (pub.leaflet.blocks.header) <br/>
         /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.BlocksImage"/> (pub.leaflet.blocks.image) <br/>
         /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.UnorderedList"/> (pub.leaflet.blocks.unorderedList) <br/>
+        /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.Website"/> (pub.leaflet.blocks.website) <br/>
         /// </param>
         /// <param name="alignment">
         /// <br/> Known Values: <br/>
@@ -60,6 +61,7 @@ namespace FishyFlip.Lexicon.Pub.Leaflet.Pages
         /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.Header"/> (pub.leaflet.blocks.header) <br/>
         /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.BlocksImage"/> (pub.leaflet.blocks.image) <br/>
         /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.UnorderedList"/> (pub.leaflet.blocks.unorderedList) <br/>
+        /// <see cref="FishyFlip.Lexicon.Pub.Leaflet.Blocks.Website"/> (pub.leaflet.blocks.website) <br/>
         /// </summary>
         [JsonPropertyName("block")]
         [JsonRequired]

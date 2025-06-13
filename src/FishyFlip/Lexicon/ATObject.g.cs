@@ -1104,6 +1104,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Server.ServiceConfig>)SourceGenerationContext.Default.ToolsOzoneServerServiceConfig);
                 case "tools.ozone.set.defs#set":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.Set>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.Set>)SourceGenerationContext.Default.ToolsOzoneSetSet);
+                case "place.stream.server.settings":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Place.Stream.Server.Settings>(text, (JsonTypeInfo<FishyFlip.Lexicon.Place.Stream.Server.Settings>)SourceGenerationContext.Default.PlaceStreamServerSettings);
                 case "tools.ozone.set.defs#setView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>)SourceGenerationContext.Default.ToolsOzoneSetSetView);
                 case "tools.ozone.signature.defs#sigDetail":
@@ -1320,6 +1322,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.ViewVideo>)SourceGenerationContext.Default.AppBskyEmbedViewVideo);
                 case "fyi.unravel.frontpage.vote":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>(text, (JsonTypeInfo<FishyFlip.Lexicon.Fyi.Unravel.Frontpage.Vote>)SourceGenerationContext.Default.FyiUnravelFrontpageVote);
+                case "pub.leaflet.blocks.website":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Blocks.Website>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Blocks.Website>)SourceGenerationContext.Default.PubLeafletBlocksWebsite);
                 case "blob":
                     return JsonSerializer.Deserialize<FishyFlip.Models.Blob>(text, (JsonTypeInfo<FishyFlip.Models.Blob>)SourceGenerationContext.Default.Blob);
                 default:

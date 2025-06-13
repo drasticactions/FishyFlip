@@ -1068,6 +1068,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Server.ServiceConfig(obj);
                 case "tools.ozone.set.defs#set":
                     return new Tools.Ozone.Set.Set(obj);
+                case "place.stream.server.settings":
+                    return new Place.Stream.Server.Settings(obj);
                 case "tools.ozone.set.defs#setView":
                     return new Tools.Ozone.Set.SetView(obj);
                 case "tools.ozone.signature.defs#sigDetail":
@@ -1284,6 +1286,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.ViewVideo(obj);
                 case "fyi.unravel.frontpage.vote":
                     return new Fyi.Unravel.Frontpage.Vote(obj);
+                case "pub.leaflet.blocks.website":
+                    return new Pub.Leaflet.Blocks.Website(obj);
                 default:
                     if (converters != null)
                     {
