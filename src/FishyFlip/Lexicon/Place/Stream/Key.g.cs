@@ -18,10 +18,12 @@ namespace FishyFlip.Lexicon.Place.Stream
         /// </summary>
         /// <param name="signingKey">The did:key signing key for the stream.</param>
         /// <param name="createdAt">Client-declared timestamp when this key was created.</param>
-        public Key(string? signingKey, DateTime? createdAt = default)
+        /// <param name="createdBy">The name of the client that created this key.</param>
+        public Key(string? signingKey, DateTime? createdAt = default, string? createdBy = default)
         {
             this.SigningKey = signingKey;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.CreatedBy = createdBy;
             this.Type = "place.stream.key";
         }
 
@@ -42,6 +44,7 @@ namespace FishyFlip.Lexicon.Place.Stream
         {
             if (obj["signingKey"] is not null) this.SigningKey = obj["signingKey"].AsString();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -60,6 +63,14 @@ namespace FishyFlip.Lexicon.Place.Stream
         [JsonPropertyName("createdAt")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// Gets or sets the createdBy.
+        /// <br/> The name of the client that created this key.
+        /// </summary>
+        [JsonPropertyName("createdBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CreatedBy { get; set; }
 
         public const string RecordType = "place.stream.key";
 
