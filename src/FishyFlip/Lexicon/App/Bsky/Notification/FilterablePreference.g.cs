@@ -13,16 +13,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="FilterablePreference"/> class.
         /// </summary>
-        /// <param name="filter">
+        /// <param name="include">
         /// <br/> Known Values: <br/>
         /// all <br/>
         /// follows <br/>
         /// </param>
         /// <param name="list"></param>
         /// <param name="push"></param>
-        public FilterablePreference(string filter = default, bool list = default, bool push = default)
+        public FilterablePreference(string include = default, bool list = default, bool push = default)
         {
-            this.Filter = filter;
+            this.Include = include;
             this.List = list;
             this.Push = push;
             this.Type = "app.bsky.notification.defs#filterablePreference";
@@ -43,21 +43,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public FilterablePreference(CBORObject obj)
         {
-            if (obj["filter"] is not null) this.Filter = obj["filter"].AsString();
+            if (obj["include"] is not null) this.Include = obj["include"].AsString();
             if (obj["list"] is not null) this.List = obj["list"].AsBoolean();
             if (obj["push"] is not null) this.Push = obj["push"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>
-        /// Gets or sets the filter.
+        /// Gets or sets the include.
         /// <br/> Known Values: <br/>
         /// all <br/>
         /// follows <br/>
         /// </summary>
-        [JsonPropertyName("filter")]
+        [JsonPropertyName("include")]
         [JsonRequired]
-        public string Filter { get; set; }
+        public string Include { get; set; }
 
         /// <summary>
         /// Gets or sets the list.
