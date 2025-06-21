@@ -13,15 +13,15 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <summary>
         /// Initializes a new instance of the <see cref="ChatPreference"/> class.
         /// </summary>
-        /// <param name="filter">
+        /// <param name="include">
         /// <br/> Known Values: <br/>
         /// all <br/>
         /// accepted <br/>
         /// </param>
         /// <param name="push"></param>
-        public ChatPreference(string filter = default, bool push = default)
+        public ChatPreference(string include = default, bool push = default)
         {
-            this.Filter = filter;
+            this.Include = include;
             this.Push = push;
             this.Type = "app.bsky.notification.defs#chatPreference";
         }
@@ -41,20 +41,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// </summary>
         public ChatPreference(CBORObject obj)
         {
-            if (obj["filter"] is not null) this.Filter = obj["filter"].AsString();
+            if (obj["include"] is not null) this.Include = obj["include"].AsString();
             if (obj["push"] is not null) this.Push = obj["push"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>
-        /// Gets or sets the filter.
+        /// Gets or sets the include.
         /// <br/> Known Values: <br/>
         /// all <br/>
         /// accepted <br/>
         /// </summary>
-        [JsonPropertyName("filter")]
+        [JsonPropertyName("include")]
         [JsonRequired]
-        public string Filter { get; set; }
+        public string Include { get; set; }
 
         /// <summary>
         /// Gets or sets the push.
