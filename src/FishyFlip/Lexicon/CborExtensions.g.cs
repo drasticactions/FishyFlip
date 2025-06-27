@@ -48,6 +48,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.AccountView(obj);
                 case "buzz.bookhive.defs#activity":
                     return new Buzz.Bookhive.Activity(obj);
+                case "app.bsky.notification.defs#activitySubscription":
+                    return new App.Bsky.Notification.ActivitySubscription(obj);
                 case "blue.maril.stellar.getActorReactions#actorReaction":
                     return new Blue.Maril.Stellar.ActorReaction(obj);
                 case "tools.ozone.team.addMember#AddMemberInput":
@@ -192,6 +194,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Communication.CreateTemplateInput(obj);
                 case "com.atproto.server.deactivateAccount#DeactivateAccountInput":
                     return new Com.Atproto.Server.DeactivateAccountInput(obj);
+                case "app.bsky.notification.declaration":
+                    return new App.Bsky.Notification.Declaration(obj);
                 case "chat.bsky.actor.declaration":
                     return new Chat.Bsky.Actor.Declaration(obj);
                 case "com.atproto.repo.applyWrites#delete":
@@ -628,6 +632,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.Links(obj);
                 case "app.bsky.graph.list":
                     return new App.Bsky.Graph.List(obj);
+                case "app.bsky.notification.listActivitySubscriptions#ListActivitySubscriptionsOutput":
+                    return new App.Bsky.Notification.ListActivitySubscriptionsOutput(obj);
                 case "com.atproto.server.listAppPasswords#ListAppPasswordsOutput":
                     return new Com.Atproto.Server.ListAppPasswordsOutput(obj);
                 case "com.atproto.sync.listBlobs#ListBlobsOutput":
@@ -852,6 +858,8 @@ namespace FishyFlip.Lexicon
                     return new Place.Stream.Chat.Profile(obj);
                 case "app.bsky.actor.defs#profileAssociated":
                     return new App.Bsky.Actor.ProfileAssociated(obj);
+                case "app.bsky.actor.defs#profileAssociatedActivitySubscription":
+                    return new App.Bsky.Actor.ProfileAssociatedActivitySubscription(obj);
                 case "app.bsky.actor.defs#profileAssociatedChat":
                     return new App.Bsky.Actor.ProfileAssociatedChat(obj);
                 case "app.bsky.actor.defs#profileView":
@@ -866,6 +874,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.ProfileViewDetailed(obj);
                 case "pub.leaflet.publication":
                     return new Pub.Leaflet.Publication(obj);
+                case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionInput":
+                    return new App.Bsky.Notification.PutActivitySubscriptionInput(obj);
+                case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionOutput":
+                    return new App.Bsky.Notification.PutActivitySubscriptionOutput(obj);
                 case "blue.moji.collection.putItem#PutItemInput":
                     return new Blue.Moji.Collection.PutItemInput(obj);
                 case "blue.moji.collection.putItem#PutItemOutput":
@@ -1120,6 +1132,8 @@ namespace FishyFlip.Lexicon
                     return new Pub.Leaflet.Richtext.Strikethrough(obj);
                 case "com.atproto.repo.strongRef":
                     return new Com.Atproto.Repo.StrongRef(obj);
+                case "app.bsky.notification.defs#subjectActivitySubscription":
+                    return new App.Bsky.Notification.SubjectActivitySubscription(obj);
                 case "tools.ozone.moderation.defs#subjectStatusView":
                     return new Tools.Ozone.Moderation.SubjectStatusView(obj);
                 case "tools.ozone.moderation.defs#subjectView":

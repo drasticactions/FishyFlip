@@ -20,13 +20,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="chat">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat"/> (app.bsky.actor.defs#profileAssociatedChat)
         /// </param>
-        public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? chat = default)
+        /// <param name="activitySubscription">
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription"/> (app.bsky.actor.defs#profileAssociatedActivitySubscription)
+        /// </param>
+        public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? chat = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription? activitySubscription = default)
         {
             this.Lists = lists;
             this.Feedgens = feedgens;
             this.StarterPacks = starterPacks;
             this.Labeler = labeler;
             this.Chat = chat;
+            this.ActivitySubscription = activitySubscription;
             this.Type = "app.bsky.actor.defs#profileAssociated";
         }
 
@@ -50,6 +54,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["starterPacks"] is not null) this.StarterPacks = obj["starterPacks"].AsInt64Value();
             if (obj["labeler"] is not null) this.Labeler = obj["labeler"].AsBoolean();
             if (obj["chat"] is not null) this.Chat = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat(obj["chat"]);
+            if (obj["activitySubscription"] is not null) this.ActivitySubscription = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription(obj["activitySubscription"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -88,6 +93,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("chat")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? Chat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the activitySubscription.
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription"/> (app.bsky.actor.defs#profileAssociatedActivitySubscription)
+        /// </summary>
+        [JsonPropertyName("activitySubscription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription? ActivitySubscription { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#profileAssociated";
 

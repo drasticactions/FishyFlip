@@ -54,6 +54,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
 
         /// <summary>
+        /// Enumerate all accounts to which the requesting account is subscribed to receive notifications for. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput?>> ListActivitySubscriptionsAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ListActivitySubscriptionsAsync(limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerate all accounts to which the requesting account is subscribed to receive notifications for. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public ListActivitySubscriptionsOutputCollection ListActivitySubscriptionsCollectionAsync (int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new ListActivitySubscriptionsOutputCollection(atp, limit, cursor, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Enumerate notifications for the requesting account. Requires auth.
         /// </summary>
         /// <param name="reasons">Notification reasons to include in response.</param>
@@ -79,6 +102,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         public ListNotificationsOutputCollection ListNotificationsCollectionAsync (List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
         {
             return new ListNotificationsOutputCollection(atp, reasons, limit, priority, cursor, seenAt, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Puts an activity subscription entry. The key should be omitted for creation and provided for updates. Requires auth.
+        /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="activitySubscription"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?>> PutActivitySubscriptionAsync (FishyFlip.Models.ATDid subject, FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription activitySubscription, CancellationToken cancellationToken = default)
+        {
+            return atp.PutActivitySubscriptionAsync(subject, activitySubscription, cancellationToken);
         }
 
 
