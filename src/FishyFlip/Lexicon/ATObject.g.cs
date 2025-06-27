@@ -84,6 +84,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>)SourceGenerationContext.Default.ComAtprotoAdminAccountView);
                 case "buzz.bookhive.defs#activity":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.Activity>(text, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Activity>)SourceGenerationContext.Default.BuzzBookhiveActivity);
+                case "app.bsky.notification.defs#activitySubscription":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription>)SourceGenerationContext.Default.AppBskyNotificationActivitySubscription);
                 case "blue.maril.stellar.getActorReactions#actorReaction":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Maril.Stellar.ActorReaction>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Maril.Stellar.ActorReaction>)SourceGenerationContext.Default.BlueMarilStellarActorReaction);
                 case "tools.ozone.team.addMember#AddMemberInput":
@@ -228,6 +230,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.CreateTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationCreateTemplateInput);
                 case "com.atproto.server.deactivateAccount#DeactivateAccountInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.DeactivateAccountInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DeactivateAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeactivateAccountInput);
+                case "app.bsky.notification.declaration":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.Declaration>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Declaration>)SourceGenerationContext.Default.AppBskyNotificationDeclaration);
                 case "chat.bsky.actor.declaration":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration);
                 case "com.atproto.repo.applyWrites#delete":
@@ -664,6 +668,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.Links>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.Links>)SourceGenerationContext.Default.ComAtprotoServerLinks);
                 case "app.bsky.graph.list":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.List>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.List>)SourceGenerationContext.Default.AppBskyGraphList);
+                case "app.bsky.notification.listActivitySubscriptions#ListActivitySubscriptionsOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput>)SourceGenerationContext.Default.AppBskyNotificationListActivitySubscriptionsOutput);
                 case "com.atproto.server.listAppPasswords#ListAppPasswordsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ListAppPasswordsOutput>)SourceGenerationContext.Default.ComAtprotoServerListAppPasswordsOutput);
                 case "com.atproto.sync.listBlobs#ListBlobsOutput":
@@ -888,6 +894,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Place.Stream.Chat.Profile>(text, (JsonTypeInfo<FishyFlip.Lexicon.Place.Stream.Chat.Profile>)SourceGenerationContext.Default.PlaceStreamChatProfile);
                 case "app.bsky.actor.defs#profileAssociated":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated>)SourceGenerationContext.Default.AppBskyActorProfileAssociated);
+                case "app.bsky.actor.defs#profileAssociatedActivitySubscription":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedActivitySubscription);
                 case "app.bsky.actor.defs#profileAssociatedChat":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat>)SourceGenerationContext.Default.AppBskyActorProfileAssociatedChat);
                 case "app.bsky.actor.defs#profileView":
@@ -902,6 +910,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>)SourceGenerationContext.Default.AppBskyActorProfileViewDetailed);
                 case "pub.leaflet.publication":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Publication>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Publication>)SourceGenerationContext.Default.PubLeafletPublication);
+                case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionInput>)SourceGenerationContext.Default.AppBskyNotificationPutActivitySubscriptionInput);
+                case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput>)SourceGenerationContext.Default.AppBskyNotificationPutActivitySubscriptionOutput);
                 case "blue.moji.collection.putItem#PutItemInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Blue.Moji.Collection.PutItemInput>)SourceGenerationContext.Default.BlueMojiCollectionPutItemInput);
                 case "blue.moji.collection.putItem#PutItemOutput":
@@ -1156,6 +1168,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Richtext.Strikethrough>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Richtext.Strikethrough>)SourceGenerationContext.Default.PubLeafletRichtextStrikethrough);
                 case "com.atproto.repo.strongRef":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef>)SourceGenerationContext.Default.ComAtprotoRepoStrongRef);
+                case "app.bsky.notification.defs#subjectActivitySubscription":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.SubjectActivitySubscription>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.SubjectActivitySubscription>)SourceGenerationContext.Default.AppBskyNotificationSubjectActivitySubscription);
                 case "tools.ozone.moderation.defs#subjectStatusView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SubjectStatusView>)SourceGenerationContext.Default.ToolsOzoneModerationSubjectStatusView);
                 case "tools.ozone.moderation.defs#subjectView":

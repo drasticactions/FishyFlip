@@ -30,7 +30,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="knownFollowers">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
         /// </param>
-        public ViewerState(bool? muted = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? mutedByList = default, bool? blockedBy = default, FishyFlip.Models.ATUri? blocking = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? blockingByList = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? knownFollowers = default)
+        /// <param name="activitySubscription">
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription"/> (app.bsky.notification.defs#activitySubscription)
+        /// </param>
+        public ViewerState(bool? muted = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? mutedByList = default, bool? blockedBy = default, FishyFlip.Models.ATUri? blocking = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? blockingByList = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? knownFollowers = default, FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription? activitySubscription = default)
         {
             this.Muted = muted;
             this.MutedByList = mutedByList;
@@ -40,6 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Following = following;
             this.FollowedBy = followedBy;
             this.KnownFollowers = knownFollowers;
+            this.ActivitySubscription = activitySubscription;
             this.Type = "app.bsky.actor.defs#viewerState";
         }
 
@@ -66,6 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["following"] is not null) this.Following = obj["following"].ToATUri();
             if (obj["followedBy"] is not null) this.FollowedBy = obj["followedBy"].ToATUri();
             if (obj["knownFollowers"] is not null) this.KnownFollowers = new FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers(obj["knownFollowers"]);
+            if (obj["activitySubscription"] is not null) this.ActivitySubscription = new FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription(obj["activitySubscription"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -130,6 +135,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("knownFollowers")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? KnownFollowers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the activitySubscription.
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription"/> (app.bsky.notification.defs#activitySubscription)
+        /// </summary>
+        [JsonPropertyName("activitySubscription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription? ActivitySubscription { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#viewerState";
 

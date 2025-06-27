@@ -34,6 +34,16 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>, ATErrorResult>> GetUnreadCountAsync ([FromQuery] bool? priority = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Enumerate all accounts to which the requesting account is subscribed to receive notifications for. Requires auth.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.notification.listActivitySubscriptions")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput>, ATErrorResult>> ListActivitySubscriptionsAsync ([FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Enumerate notifications for the requesting account. Requires auth.
         /// </summary>
         /// <param name="reasons">Notification reasons to include in response.</param>
@@ -45,6 +55,16 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.notification.listNotifications")]
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>, ATErrorResult>> ListNotificationsAsync ([FromQuery] List<string>? reasons = default, [FromQuery] int? limit = 50, [FromQuery] bool? priority = default, [FromQuery] string? cursor = default, [FromQuery] DateTime? seenAt = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Puts an activity subscription entry. The key should be omitted for creation and provided for updates. Requires auth.
+        /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="activitySubscription"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput"/></returns>
+        [HttpPost("/xrpc/app.bsky.notification.putActivitySubscription")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput>, ATErrorResult>> PutActivitySubscriptionAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Set notification-related preferences for an account. Requires auth.

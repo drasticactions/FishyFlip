@@ -20,7 +20,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
        public const string GetUnreadCount = "/xrpc/app.bsky.notification.getUnreadCount";
 
+       public const string ListActivitySubscriptions = "/xrpc/app.bsky.notification.listActivitySubscriptions";
+
        public const string ListNotifications = "/xrpc/app.bsky.notification.listNotifications";
+
+       public const string PutActivitySubscription = "/xrpc/app.bsky.notification.putActivitySubscription";
 
        public const string PutPreferences = "/xrpc/app.bsky.notification.putPreferences";
 
@@ -77,6 +81,36 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
 
         /// <summary>
+        /// Enumerate all accounts to which the requesting account is subscribed to receive notifications for. Requires auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput?>> ListActivitySubscriptionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = ListActivitySubscriptions.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListActivitySubscriptionsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
         /// Enumerate notifications for the requesting account. Requires auth.
         /// </summary>
         /// <param name="atp"></param>
@@ -121,6 +155,25 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListNotificationsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Puts an activity subscription entry. The key should be omitted for creation and provided for updates. Requires auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="subject"></param>
+        /// <param name="activitySubscription"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?>> PutActivitySubscriptionAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid subject, FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription activitySubscription, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = PutActivitySubscription.ToString();
+            var headers = new Dictionary<string, string>();
+            var inputItem = new PutActivitySubscriptionInput();
+            inputItem.Subject = subject;
+            inputItem.ActivitySubscription = activitySubscription;
+            return atp.Post<PutActivitySubscriptionInput, FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutActivitySubscriptionInput!, atp.Options.SourceGenerationContext.AppBskyNotificationPutActivitySubscriptionOutput!, inputItem, cancellationToken, headers);
         }
 
 
