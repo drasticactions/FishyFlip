@@ -29,11 +29,15 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Admin.RepoRef"/> (com.atproto.admin.defs#repoRef) <br/>
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </param>
-        public CreateReportInput(string reasonType = default, string? reason = default, ATObject subject = default)
+        /// <param name="modTool">
+        /// com.atproto.moderation.defs#modTool <br/>
+        /// </param>
+        public CreateReportInput(string reasonType = default, string? reason = default, ATObject subject = default, FishyFlip.Lexicon.Com.Atproto.Moderation.ModTool? modTool = default)
         {
             this.ReasonType = reasonType;
             this.Reason = reason;
             this.Subject = subject;
+            this.ModTool = modTool;
             this.Type = "com.atproto.moderation.createReport#CreateReportInput";
         }
 
@@ -55,6 +59,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             if (obj["reasonType"] is not null) this.ReasonType = obj["reasonType"].AsString();
             if (obj["reason"] is not null) this.Reason = obj["reason"].AsString();
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
+            if (obj["modTool"] is not null) this.ModTool = new FishyFlip.Lexicon.Com.Atproto.Moderation.ModTool(obj["modTool"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -91,6 +96,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         [JsonPropertyName("subject")]
         [JsonRequired]
         public ATObject Subject { get; set; }
+
+        /// <summary>
+        /// Gets or sets the modTool.
+        /// com.atproto.moderation.defs#modTool <br/>
+        /// </summary>
+        [JsonPropertyName("modTool")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FishyFlip.Lexicon.Com.Atproto.Moderation.ModTool? ModTool { get; set; }
 
         public const string RecordType = "com.atproto.moderation.createReport#CreateReportInput";
 

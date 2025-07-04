@@ -34,6 +34,7 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Moderation
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </param>
         /// <param name="reason">Additional context about the content and violation.</param>
+        /// <param name="modTool"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput"/></returns>
         [HttpPost("/xrpc/com.atproto.moderation.createReport")]

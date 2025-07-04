@@ -50,10 +50,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </param>
         /// <param name="reason">Additional context about the content and violation.</param>
+        /// <param name="modTool"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (string reasonType, ATObject subject, string? reason = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (string reasonType, ATObject subject, string? reason = default, FishyFlip.Lexicon.Com.Atproto.Moderation.ModTool? modTool = default, CancellationToken cancellationToken = default)
         {
-            return atp.CreateReportAsync(reasonType, subject, reason, cancellationToken);
+            return atp.CreateReportAsync(reasonType, subject, reason, modTool, cancellationToken);
         }
 
     }

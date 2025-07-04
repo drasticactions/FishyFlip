@@ -31,6 +31,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// unverified <br/>
         /// like-via-repost <br/>
         /// repost-via-repost <br/>
+        /// subscribed-post <br/>
         /// </param>
         /// <param name="reasonSubject"></param>
         /// <param name="record"></param>
@@ -116,6 +117,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// unverified <br/>
         /// like-via-repost <br/>
         /// repost-via-repost <br/>
+        /// subscribed-post <br/>
         /// </summary>
         [JsonPropertyName("reason")]
         [JsonRequired]

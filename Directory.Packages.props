@@ -10,10 +10,10 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.6" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.6" />
-    <PackageVersion Include="Microsoft.Identity.Client" Version="4.72.1" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.7.2" />
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.73.1" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.7.3" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
-    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.12.0" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.12.1" />
     <PackageVersion Include="IpfsShipyard.Ipfs.Core" Version="0.7.0" />
     <PackageVersion Include="PeterO.Cbor" Version="5.0.0-alpha2" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.6" />
@@ -22,11 +22,11 @@
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.Memory.Data" Version="9.0.6" />
     <PackageVersion Include="System.Text.Json" Version="9.0.6" />
-    <PackageVersion Include="MSTest" Version="3.9.2" />
+    <PackageVersion Include="MSTest" Version="3.9.3" />
     <PackageVersion Include="GitVersion.MSBuild" Version="6.3.0" />
-    <PackageVersion Include="Duende.IdentityModel" Version="7.0.0" />
+    <PackageVersion Include="Duende.IdentityModel" Version="7.1.0" />
     <PackageVersion Include="DnsClient" Version="1.8.0" />
-    <PackageVersion Include="ConsoleAppFramework" Version="5.4.1">
+    <PackageVersion Include="ConsoleAppFramework" Version="5.5.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>

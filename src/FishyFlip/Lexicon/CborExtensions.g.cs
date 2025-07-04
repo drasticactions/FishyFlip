@@ -64,6 +64,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.AddReservedHandleOutput(obj);
                 case "community.lexicon.location.address":
                     return new Community.Lexicon.Location.Address(obj);
+                case "tools.ozone.safelink.addRule#AddRuleInput":
+                    return new Tools.Ozone.Safelink.AddRuleInput(obj);
                 case "tools.ozone.set.addValues#AddValuesInput":
                     return new Tools.Ozone.Set.AddValuesInput(obj);
                 case "app.bsky.actor.defs#adultContentPref":
@@ -260,6 +262,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
                 case "com.whtwnd.blog.entry":
                     return new Com.Whtwnd.Blog.Entry(obj);
+                case "tools.ozone.safelink.defs#event":
+                    return new Tools.Ozone.Safelink.Event(obj);
                 case "tools.ozone.hosting.getAccountHistory#event":
                     return new Tools.Ozone.Hosting.Event(obj);
                 case "community.lexicon.calendar.event":
@@ -778,6 +782,10 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.ModEventViewDetail(obj);
                 case "social.psky.chat.room#modlistRef":
                     return new Social.Psky.Chat.ModlistRef(obj);
+                case "tools.ozone.moderation.defs#modTool":
+                    return new Tools.Ozone.Moderation.ModTool(obj);
+                case "com.atproto.moderation.createReport#modTool":
+                    return new Com.Atproto.Moderation.ModTool(obj);
                 case "app.bsky.graph.muteActor#MuteActorInput":
                     return new App.Bsky.Graph.MuteActorInput(obj);
                 case "app.bsky.graph.muteActorList#MuteActorListInput":
@@ -894,10 +902,18 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Repo.PutRecordInput(obj);
                 case "com.atproto.repo.putRecord#PutRecordOutput":
                     return new Com.Atproto.Repo.PutRecordOutput(obj);
+                case "tools.ozone.safelink.queryEvents#QueryEventsInput":
+                    return new Tools.Ozone.Safelink.QueryEventsInput(obj);
                 case "tools.ozone.moderation.queryEvents#QueryEventsOutput":
                     return new Tools.Ozone.Moderation.QueryEventsOutput(obj);
+                case "tools.ozone.safelink.queryEvents#QueryEventsOutput":
+                    return new Tools.Ozone.Safelink.QueryEventsOutput(obj);
                 case "com.atproto.label.queryLabels#QueryLabelsOutput":
                     return new Com.Atproto.Label.QueryLabelsOutput(obj);
+                case "tools.ozone.safelink.queryRules#QueryRulesInput":
+                    return new Tools.Ozone.Safelink.QueryRulesInput(obj);
+                case "tools.ozone.safelink.queryRules#QueryRulesOutput":
+                    return new Tools.Ozone.Safelink.QueryRulesOutput(obj);
                 case "tools.ozone.set.querySets#QuerySetsOutput":
                     return new Tools.Ozone.Set.QuerySetsOutput(obj);
                 case "tools.ozone.moderation.queryStatuses#QueryStatusesOutput":
@@ -952,6 +968,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.RemoveReactionInput(obj);
                 case "chat.bsky.convo.removeReaction#RemoveReactionOutput":
                     return new Chat.Bsky.Convo.RemoveReactionOutput(obj);
+                case "tools.ozone.safelink.removeRule#RemoveRuleInput":
+                    return new Tools.Ozone.Safelink.RemoveRuleInput(obj);
                 case "place.stream.defs#rendition":
                     return new Place.Stream.Rendition(obj);
                 case "place.stream.defs#renditions":
@@ -1226,6 +1244,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.UpdateReadOutput(obj);
                 case "com.atproto.repo.applyWrites#updateResult":
                     return new Com.Atproto.Repo.UpdateResult(obj);
+                case "tools.ozone.safelink.updateRule#UpdateRuleInput":
+                    return new Tools.Ozone.Safelink.UpdateRuleInput(obj);
                 case "app.bsky.notification.updateSeen#UpdateSeenInput":
                     return new App.Bsky.Notification.UpdateSeenInput(obj);
                 case "com.atproto.admin.updateSubjectStatus#UpdateSubjectStatusInput":
@@ -1248,6 +1268,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Set.UpsertSetInput(obj);
                 case "community.lexicon.calendar.event#uri":
                     return new Community.Lexicon.Calendar.Uri(obj);
+                case "tools.ozone.safelink.defs#urlRule":
+                    return new Tools.Ozone.Safelink.UrlRule(obj);
                 case "buzz.bookhive.defs#userBook":
                     return new Buzz.Bookhive.UserBook(obj);
                 case "app.bsky.graph.verification":

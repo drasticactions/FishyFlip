@@ -47,7 +47,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="createdAt"></param>
         /// <param name="creatorHandle"></param>
         /// <param name="subjectHandle"></param>
-        public ModEventView(long id = default, ATObject @event = default, ATObject subject = default, List<string> subjectBlobCids = default, FishyFlip.Models.ATDid createdBy = default, DateTime? createdAt = default, string? creatorHandle = default, string? subjectHandle = default)
+        /// <param name="modTool">
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool"/> (tools.ozone.moderation.defs#modTool)
+        /// </param>
+        public ModEventView(long id = default, ATObject @event = default, ATObject subject = default, List<string> subjectBlobCids = default, FishyFlip.Models.ATDid createdBy = default, DateTime? createdAt = default, string? creatorHandle = default, string? subjectHandle = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default)
         {
             this.Id = id;
             this.Event = @event;
@@ -57,6 +60,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.CreatorHandle = creatorHandle;
             this.SubjectHandle = subjectHandle;
+            this.ModTool = modTool;
             this.Type = "tools.ozone.moderation.defs#modEventView";
         }
 
@@ -83,6 +87,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["creatorHandle"] is not null) this.CreatorHandle = obj["creatorHandle"].AsString();
             if (obj["subjectHandle"] is not null) this.SubjectHandle = obj["subjectHandle"].AsString();
+            if (obj["modTool"] is not null) this.ModTool = new FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool(obj["modTool"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -166,6 +171,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("subjectHandle")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SubjectHandle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the modTool.
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool"/> (tools.ozone.moderation.defs#modTool)
+        /// </summary>
+        [JsonPropertyName("modTool")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? ModTool { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventView";
 

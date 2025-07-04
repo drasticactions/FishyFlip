@@ -42,12 +42,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </param>
         /// <param name="subjectBlobCids"></param>
         /// <param name="createdBy"></param>
-        public EmitEventInput(ATObject @event = default, ATObject subject = default, List<string>? subjectBlobCids = default, FishyFlip.Models.ATDid createdBy = default)
+        /// <param name="modTool">
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool"/> (tools.ozone.moderation.defs#modTool)
+        /// </param>
+        public EmitEventInput(ATObject @event = default, ATObject subject = default, List<string>? subjectBlobCids = default, FishyFlip.Models.ATDid createdBy = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default)
         {
             this.Event = @event;
             this.Subject = subject;
             this.SubjectBlobCids = subjectBlobCids;
             this.CreatedBy = createdBy;
+            this.ModTool = modTool;
             this.Type = "tools.ozone.moderation.emitEvent#EmitEventInput";
         }
 
@@ -70,6 +74,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATObject();
             if (obj["subjectBlobCids"] is not null) this.SubjectBlobCids = obj["subjectBlobCids"].Values.Select(n =>n.AsString()).ToList();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
+            if (obj["modTool"] is not null) this.ModTool = new FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool(obj["modTool"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -124,6 +129,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATDidJsonConverter))]
         public FishyFlip.Models.ATDid CreatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the modTool.
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool"/> (tools.ozone.moderation.defs#modTool)
+        /// </summary>
+        [JsonPropertyName("modTool")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? ModTool { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.emitEvent#EmitEventInput";
 

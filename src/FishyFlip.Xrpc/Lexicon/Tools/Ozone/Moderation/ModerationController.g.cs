@@ -49,6 +49,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// </param>
         /// <param name="createdBy"></param>
         /// <param name="subjectBlobCids"></param>
+        /// <param name="modTool">Moderation tool information for tracing the source of the action</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView"/></returns>
         [HttpPost("/xrpc/tools.ozone.moderation.emitEvent")]
@@ -143,11 +144,12 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="removedTags">If specified, only events where all of these tags were removed are returned</param>
         /// <param name="reportTypes"></param>
         /// <param name="policies"></param>
+        /// <param name="modTool">If specified, only events where the modTool name matches any of the given values are returned</param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.queryEvents")]
-        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>, ATErrorResult>> QueryEventsAsync ([FromQuery] List<string>? types = default, [FromQuery] FishyFlip.Models.ATDid? createdBy = default, [FromQuery] string? sortDirection = default, [FromQuery] DateTime? createdAfter = default, [FromQuery] DateTime? createdBefore = default, [FromQuery] string? subject = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] int? limit = 50, [FromQuery] bool? hasComment = default, [FromQuery] string? comment = default, [FromQuery] List<string>? addedLabels = default, [FromQuery] List<string>? removedLabels = default, [FromQuery] List<string>? addedTags = default, [FromQuery] List<string>? removedTags = default, [FromQuery] List<string>? reportTypes = default, [FromQuery] List<string>? policies = default, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>, ATErrorResult>> QueryEventsAsync ([FromQuery] List<string>? types = default, [FromQuery] FishyFlip.Models.ATDid? createdBy = default, [FromQuery] string? sortDirection = default, [FromQuery] DateTime? createdAfter = default, [FromQuery] DateTime? createdBefore = default, [FromQuery] string? subject = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] int? limit = 50, [FromQuery] bool? hasComment = default, [FromQuery] string? comment = default, [FromQuery] List<string>? addedLabels = default, [FromQuery] List<string>? removedLabels = default, [FromQuery] List<string>? addedTags = default, [FromQuery] List<string>? removedTags = default, [FromQuery] List<string>? reportTypes = default, [FromQuery] List<string>? policies = default, [FromQuery] List<string>? modTool = default, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// View moderation statuses of subjects (record or repo).

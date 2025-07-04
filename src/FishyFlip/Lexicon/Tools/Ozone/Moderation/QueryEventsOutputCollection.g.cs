@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     public class QueryEventsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>
     {
 
-        public QueryEventsOutputCollection(FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public QueryEventsOutputCollection(FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Types = types;
@@ -34,6 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.RemovedTags = removedTags;
             this.ReportTypes = reportTypes;
             this.Policies = policies;
+            this.ModTool = modTool;
             this.Cursor = cursor;
             this.CancellationToken = cancellationToken;
         }
@@ -72,11 +73,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         public List<string>? Policies { get; }
 
+        public List<string>? ModTool { get; }
+
         /// <inheritdoc/>
         public override async Task<(IList<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView> Posts, string Cursor)> GetRecordsAsync(int? limit = null, CancellationToken? token = default)
         {
             token = token ?? this.CancellationToken ?? System.Threading.CancellationToken.None;
-            var (result, error) = await this.ATProtocol.QueryEventsAsync(types: this.Types, createdBy: this.CreatedBy, sortDirection: this.SortDirection, createdAfter: this.CreatedAfter, createdBefore: this.CreatedBefore, subject: this.Subject, collections: this.Collections, subjectType: this.SubjectType, includeAllUserRecords: this.IncludeAllUserRecords, hasComment: this.HasComment, comment: this.Comment, addedLabels: this.AddedLabels, removedLabels: this.RemovedLabels, addedTags: this.AddedTags, removedTags: this.RemovedTags, reportTypes: this.ReportTypes, policies: this.Policies, limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
+            var (result, error) = await this.ATProtocol.QueryEventsAsync(types: this.Types, createdBy: this.CreatedBy, sortDirection: this.SortDirection, createdAfter: this.CreatedAfter, createdBefore: this.CreatedBefore, subject: this.Subject, collections: this.Collections, subjectType: this.SubjectType, includeAllUserRecords: this.IncludeAllUserRecords, hasComment: this.HasComment, comment: this.Comment, addedLabels: this.AddedLabels, removedLabels: this.RemovedLabels, addedTags: this.AddedTags, removedTags: this.RemovedTags, reportTypes: this.ReportTypes, policies: this.Policies, modTool: this.ModTool, limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
 
             this.HandleATError(error);
 
@@ -88,9 +91,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return (result.Events, result.Cursor ?? string.Empty);
         }
 
-        public static QueryEventsOutputCollection Create(FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public static QueryEventsOutputCollection Create(FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? cursor = default, CancellationToken cancellationToken = default)
         {
-            return new(atp: atp, types: types, createdBy: createdBy, sortDirection: sortDirection, createdAfter: createdAfter, createdBefore: createdBefore, subject: subject, collections: collections, subjectType: subjectType, includeAllUserRecords: includeAllUserRecords, hasComment: hasComment, comment: comment, addedLabels: addedLabels, removedLabels: removedLabels, addedTags: addedTags, removedTags: removedTags, reportTypes: reportTypes, policies: policies, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
+            return new(atp: atp, types: types, createdBy: createdBy, sortDirection: sortDirection, createdAfter: createdAfter, createdBefore: createdBefore, subject: subject, collections: collections, subjectType: subjectType, includeAllUserRecords: includeAllUserRecords, hasComment: hasComment, comment: comment, addedLabels: addedLabels, removedLabels: removedLabels, addedTags: addedTags, removedTags: removedTags, reportTypes: reportTypes, policies: policies, modTool: modTool, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }
     }
 }

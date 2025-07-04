@@ -175,6 +175,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.ToolsOzoneModeration ToolsOzoneModeration => new (this);
 
         /// <summary>
+        /// tools.ozone.safelink Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Tools.Ozone.Safelink.ToolsOzoneSafelink ToolsOzoneSafelink => new (this);
+
+        /// <summary>
         /// tools.ozone.server Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Tools.Ozone.Server.ToolsOzoneServer ToolsOzoneServer => new (this);

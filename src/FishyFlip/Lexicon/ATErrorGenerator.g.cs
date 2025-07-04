@@ -24,6 +24,10 @@ namespace FishyFlip.Lexicon
                     return new ReactionLimitReachedError(statusCode, detail);
                 case "ReactionInvalidValue":
                     return new ReactionInvalidValueError(statusCode, detail);
+                case "InvalidUrl":
+                    return new InvalidUrlError(statusCode, detail);
+                case "RuleAlreadyExists":
+                    return new RuleAlreadyExistsError(statusCode, detail);
                 case "InvalidSwap":
                     return new InvalidSwapError(statusCode, detail);
                 case "AccountNotFound":
@@ -100,6 +104,8 @@ namespace FishyFlip.Lexicon
                     return new DidNotFoundError(statusCode, detail);
                 case "DidDeactivated":
                     return new DidDeactivatedError(statusCode, detail);
+                case "RuleNotFound":
+                    return new RuleNotFoundError(statusCode, detail);
                 case "HostBanned":
                     return new HostBannedError(statusCode, detail);
                 case "EmojiNotFound":
