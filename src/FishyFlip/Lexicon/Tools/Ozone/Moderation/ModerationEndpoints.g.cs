@@ -74,9 +74,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </param>
         /// <param name="createdBy"></param>
         /// <param name="subjectBlobCids"></param>
+        /// <param name="modTool">Moderation tool information for tracing the source of the action</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (this FishyFlip.ATProtocol atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (this FishyFlip.ATProtocol atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = EmitEvent.ToString();
             var headers = new Dictionary<string, string>();
@@ -121,6 +122,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             inputItem.Subject = subject;
             inputItem.CreatedBy = createdBy;
             inputItem.SubjectBlobCids = subjectBlobCids;
+            inputItem.ModTool = modTool;
             return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken, headers);
         }
 
@@ -311,10 +313,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="removedTags">If specified, only events where all of these tags were removed are returned</param>
         /// <param name="reportTypes"></param>
         /// <param name="policies"></param>
+        /// <param name="modTool">If specified, only events where the modTool name matches any of the given values are returned</param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryEvents.ToString();
             endpointUrl += "?";
@@ -407,6 +410,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (policies != null)
             {
                 queryStrings.Add(string.Join("&", policies.Select(n => "policies=" + n)));
+            }
+
+            if (modTool != null)
+            {
+                queryStrings.Add(string.Join("&", modTool.Select(n => "modTool=" + n)));
             }
 
             if (cursor != null)

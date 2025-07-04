@@ -27,10 +27,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </param>
         /// <param name="following"></param>
         /// <param name="followedBy"></param>
-        /// <param name="knownFollowers">
+        /// <param name="knownFollowers">This property is present only in selected cases, as an optimization.
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
         /// </param>
-        /// <param name="activitySubscription">
+        /// <param name="activitySubscription">This property is present only in selected cases, as an optimization.
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription"/> (app.bsky.notification.defs#activitySubscription)
         /// </param>
         public ViewerState(bool? muted = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? mutedByList = default, bool? blockedBy = default, FishyFlip.Models.ATUri? blocking = default, FishyFlip.Lexicon.App.Bsky.Graph.ListViewBasic? blockingByList = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers? knownFollowers = default, FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription? activitySubscription = default)
@@ -130,6 +130,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the knownFollowers.
+        /// <br/> This property is present only in selected cases, as an optimization.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.KnownFollowers"/> (app.bsky.actor.defs#knownFollowers)
         /// </summary>
         [JsonPropertyName("knownFollowers")]
@@ -138,6 +139,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
 
         /// <summary>
         /// Gets or sets the activitySubscription.
+        /// <br/> This property is present only in selected cases, as an optimization.
         /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription"/> (app.bsky.notification.defs#activitySubscription)
         /// </summary>
         [JsonPropertyName("activitySubscription")]

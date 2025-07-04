@@ -39,9 +39,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef) <br/>
         /// </param>
         /// <param name="reason">Additional context about the content and violation.</param>
+        /// <param name="modTool"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (this FishyFlip.ATProtocol atp, string reasonType, ATObject subject, string? reason = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (this FishyFlip.ATProtocol atp, string reasonType, ATObject subject, string? reason = default, FishyFlip.Lexicon.Com.Atproto.Moderation.ModTool? modTool = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateReport.ToString();
             var headers = new Dictionary<string, string>();
@@ -59,6 +60,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
             }
             inputItem.Subject = subject;
             inputItem.Reason = reason;
+            inputItem.ModTool = modTool;
             return atp.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, inputItem, cancellationToken, headers);
         }
 
