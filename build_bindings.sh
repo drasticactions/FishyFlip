@@ -7,7 +7,7 @@
 # List of git repos to clone
 REPOS=(
     "https://github.com/bluesky-social/atproto.git"
-    "https://github.com/hyperlink-academy/leaflet.git"
+    # "https://github.com/hyperlink-academy/leaflet.git"
     "https://github.com/whtwnd/whitewind-blog.git"
     "https://github.com/ziodotsh/lexicons.git"
     "https://github.com/shinolabs/PinkSea.git"

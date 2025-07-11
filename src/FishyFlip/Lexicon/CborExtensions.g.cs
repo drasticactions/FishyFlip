@@ -82,14 +82,10 @@ namespace FishyFlip.Lexicon
                     return new Fm.Teal.Alpha.Feed.Artist(obj);
                 case "app.bsky.embed.defs#aspectRatio":
                     return new App.Bsky.Embed.AspectRatio(obj);
-                case "pub.leaflet.blocks.image#aspectRatio":
-                    return new Pub.Leaflet.Blocks.AspectRatio(obj);
                 case "place.stream.segment#audio":
                     return new Place.Stream.Audio(obj);
                 case "com.shinolabs.pinksea.appViewDefs#author":
                     return new Com.Shinolabs.Pinksea.Author(obj);
-                case "pub.leaflet.theme.backgroundImage":
-                    return new Pub.Leaflet.Theme.BackgroundImage(obj);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return new Chat.Bsky.Convo.BatchItem(obj);
                 case "com.whtwnd.blog.defs#blobMetadata":
@@ -98,22 +94,16 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.BlobView(obj);
                 case "app.bsky.graph.block":
                     return new App.Bsky.Graph.Block(obj);
-                case "pub.leaflet.pages.linearDocument#block":
-                    return new Pub.Leaflet.Pages.Block(obj);
                 case "app.bsky.feed.defs#blockedAuthor":
                     return new App.Bsky.Feed.BlockedAuthor(obj);
                 case "app.bsky.feed.defs#blockedPost":
                     return new App.Bsky.Feed.BlockedPost(obj);
-                case "pub.leaflet.blocks.image":
-                    return new Pub.Leaflet.Blocks.BlocksImage(obj);
                 case "place.stream.defs#blockView":
                     return new Place.Stream.BlockView(obj);
                 case "com.whtwnd.blog.defs#blogEntry":
                     return new Com.Whtwnd.Blog.BlogEntry(obj);
                 case "blue.linkat.board":
                     return new Blue.Linkat.Board(obj);
-                case "pub.leaflet.richtext.facet#bold":
-                    return new Pub.Leaflet.Richtext.Bold(obj);
                 case "buzz.bookhive.book":
                     return new Buzz.Bookhive.Book(obj);
                 case "community.lexicon.bookmarks.bookmark":
@@ -128,8 +118,6 @@ namespace FishyFlip.Lexicon
                     return new Buzz.Bookhive.Buzz(obj);
                 case "app.bsky.richtext.facet#byteSlice":
                     return new App.Bsky.Richtext.ByteSlice(obj);
-                case "pub.leaflet.richtext.facet#byteSlice":
-                    return new Pub.Leaflet.Richtext.ByteSlice(obj);
                 case "social.psky.richtext.facet#byteSlice":
                     return new Social.Psky.Richtext.ByteSlice(obj);
                 case "app.bsky.embed.video#caption":
@@ -272,8 +260,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.External(obj);
                 case "app.bsky.richtext.facet":
                     return new App.Bsky.Richtext.Facet(obj);
-                case "pub.leaflet.richtext.facet":
-                    return new Pub.Leaflet.Richtext.Facet(obj);
                 case "social.psky.richtext.facet":
                     return new Social.Psky.Richtext.Facet(obj);
                 case "blue.moji.richtext.facet":
@@ -536,12 +522,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Verification.GrantVerificationsOutput(obj);
                 case "tools.ozone.hosting.getAccountHistory#handleUpdated":
                     return new Tools.Ozone.Hosting.HandleUpdated(obj);
-                case "pub.leaflet.blocks.header":
-                    return new Pub.Leaflet.Blocks.Header(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
-                case "pub.leaflet.richtext.facet#highlight":
-                    return new Pub.Leaflet.Richtext.Highlight(obj);
                 case "buzz.bookhive.hiveBook":
                     return new Buzz.Bookhive.HiveBook(obj);
                 case "com.atproto.sync.listHosts#host":
@@ -576,8 +558,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.InviteCode(obj);
                 case "com.atproto.server.defs#inviteCodeUse":
                     return new Com.Atproto.Server.InviteCodeUse(obj);
-                case "pub.leaflet.richtext.facet#italic":
-                    return new Pub.Leaflet.Richtext.Italic(obj);
                 case "blue.moji.collection.item":
                     return new Blue.Moji.Collection.Item(obj);
                 case "blue.maril.stellar.getEmojis#itemView":
@@ -622,12 +602,8 @@ namespace FishyFlip.Lexicon
                     return new Community.Lexicon.Interaction.Like(obj);
                 case "app.bsky.feed.getLikes#like":
                     return new App.Bsky.Feed.LikeDef(obj);
-                case "pub.leaflet.pages.linearDocument":
-                    return new Pub.Leaflet.Pages.LinearDocument(obj);
                 case "app.bsky.richtext.facet#link":
                     return new App.Bsky.Richtext.Link(obj);
-                case "pub.leaflet.richtext.facet#link":
-                    return new Pub.Leaflet.Richtext.Link(obj);
                 case "social.psky.richtext.facet#link":
                     return new Social.Psky.Richtext.Link(obj);
                 case "app.bsky.feed.describeFeedGenerator#links":
@@ -652,8 +628,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.ListHostsOutput(obj);
                 case "app.bsky.graph.listitem":
                     return new App.Bsky.Graph.Listitem(obj);
-                case "pub.leaflet.blocks.unorderedList#listItem":
-                    return new Pub.Leaflet.Blocks.ListItem(obj);
                 case "app.bsky.graph.defs#listItemView":
                     return new App.Bsky.Graph.ListItemView(obj);
                 case "tools.ozone.team.listMembers#ListMembersOutput":
@@ -1026,10 +1000,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Verification.RevokeVerificationsInput(obj);
                 case "tools.ozone.verification.revokeVerifications#RevokeVerificationsOutput":
                     return new Tools.Ozone.Verification.RevokeVerificationsOutput(obj);
-                case "pub.leaflet.theme.color#rgb":
-                    return new Pub.Leaflet.Theme.Rgb(obj);
-                case "pub.leaflet.theme.color#rgba":
-                    return new Pub.Leaflet.Theme.Rgba(obj);
                 case "social.psky.richtext.facet#room":
                     return new Social.Psky.Richtext.Room(obj);
                 case "social.psky.chat.room":
@@ -1148,8 +1118,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.StatusView(obj);
                 case "place.stream.livestream#streamplaceAnything":
                     return new Place.Stream.StreamplaceAnything(obj);
-                case "pub.leaflet.richtext.facet#strikethrough":
-                    return new Pub.Leaflet.Richtext.Strikethrough(obj);
                 case "com.atproto.repo.strongRef":
                     return new Com.Atproto.Repo.StrongRef(obj);
                 case "app.bsky.notification.defs#subjectActivitySubscription":
@@ -1160,8 +1128,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.SubjectView(obj);
                 case "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput":
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
-                case "pub.leaflet.graph.subscription":
-                    return new Pub.Leaflet.Graph.Subscription(obj);
                 case "ma.tokono.byov.subscription":
                     return new Ma.Tokono.Byov.Subscription(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
@@ -1172,8 +1138,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Richtext.Tag(obj);
                 case "tools.ozone.communication.defs#templateView":
                     return new Tools.Ozone.Communication.TemplateView(obj);
-                case "pub.leaflet.blocks.text":
-                    return new Pub.Leaflet.Blocks.Text(obj);
                 case "app.bsky.feed.defs#threadContext":
                     return new App.Bsky.Feed.ThreadContext(obj);
                 case "app.bsky.feed.threadgate":
@@ -1202,8 +1166,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.TrendingTopic(obj);
                 case "app.bsky.unspecced.defs#trendView":
                     return new App.Bsky.Unspecced.TrendView(obj);
-                case "pub.leaflet.richtext.facet#underline":
-                    return new Pub.Leaflet.Richtext.Underline(obj);
                 case "blue.zio.atfile.meta#unknown":
                     return new Blue.Zio.Atfile.Unknown(obj);
                 case "app.bsky.graph.unmuteActor#UnmuteActorInput":
@@ -1216,8 +1178,6 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.UnmuteConvoOutput(obj);
                 case "app.bsky.graph.unmuteThread#UnmuteThreadInput":
                     return new App.Bsky.Graph.UnmuteThreadInput(obj);
-                case "pub.leaflet.blocks.unorderedList":
-                    return new Pub.Leaflet.Blocks.UnorderedList(obj);
                 case "com.atproto.repo.applyWrites#update":
                     return new Com.Atproto.Repo.Update(obj);
                 case "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput":
@@ -1324,8 +1284,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.ViewVideo(obj);
                 case "fyi.unravel.frontpage.vote":
                     return new Fyi.Unravel.Frontpage.Vote(obj);
-                case "pub.leaflet.blocks.website":
-                    return new Pub.Leaflet.Blocks.Website(obj);
                 default:
                     if (converters != null)
                     {
