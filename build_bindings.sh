@@ -7,7 +7,7 @@
 # List of git repos to clone
 REPOS=(
     "https://github.com/bluesky-social/atproto.git"
-    "https://github.com/hyperlink-academy/leaflet.git"
+    # "https://github.com/hyperlink-academy/leaflet.git"
     "https://github.com/whtwnd/whitewind-blog.git"
     "https://github.com/ziodotsh/lexicons.git"
     "https://github.com/shinolabs/PinkSea.git"
@@ -61,8 +61,8 @@ do
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/schema/blue.moji")
         elif [ "$target_dir" == "marukun712-stellar" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/stellar")
-        elif [ "$target_dir" == "hyperlink-academy-leaflet" ]; then
-            REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/pub/leaflet")
+        # elif [ "$target_dir" == "hyperlink-academy-leaflet" ]; then
+        #     REPO_DIRS+=("$PWD/../fflexicons/$target_dir/lexicons/pub/leaflet")
         elif [ "$target_dir" == "ziodotsh-lexicons" ]; then
             REPO_DIRS+=("$PWD/../fflexicons/$target_dir/blue/zio")
         elif [ "$target_dir" == "shinolabs-PinkSea" ]; then

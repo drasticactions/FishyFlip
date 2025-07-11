@@ -158,10 +158,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="token"></param>
         /// <param name="platform"></param>
         /// <param name="appId"></param>
+        /// <param name="ageRestricted">Set to true when the actor is age restricted</param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<Success?>> RegisterPushAsync (FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
+        public Task<Result<Success?>> RegisterPushAsync (FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, bool? ageRestricted = default, CancellationToken cancellationToken = default)
         {
-            return atp.RegisterPushAsync(serviceDid, token, platform, appId, cancellationToken);
+            return atp.RegisterPushAsync(serviceDid, token, platform, appId, ageRestricted, cancellationToken);
         }
 
 
