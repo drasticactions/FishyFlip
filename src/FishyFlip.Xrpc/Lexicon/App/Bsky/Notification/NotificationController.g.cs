@@ -103,6 +103,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         /// <param name="token"></param>
         /// <param name="platform"></param>
         /// <param name="appId"></param>
+        /// <param name="ageRestricted">Set to true when the actor is age restricted</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/app.bsky.notification.registerPush")]

@@ -88,6 +88,8 @@ namespace FishyFlip.Lexicon
                     return new Place.Stream.Audio(obj);
                 case "com.shinolabs.pinksea.appViewDefs#author":
                     return new Com.Shinolabs.Pinksea.Author(obj);
+                case "pub.leaflet.theme.backgroundImage":
+                    return new Pub.Leaflet.Theme.BackgroundImage(obj);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return new Chat.Bsky.Convo.BatchItem(obj);
                 case "com.whtwnd.blog.defs#blobMetadata":
@@ -240,8 +242,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.DisableInviteCodesInput(obj);
                 case "app.bsky.feed.postgate#disableRule":
                     return new App.Bsky.Feed.DisableRule(obj);
-                case "pub.leaflet.document":
-                    return new Pub.Leaflet.Document(obj);
                 case "tools.ozone.hosting.getAccountHistory#emailConfirmed":
                     return new Tools.Ozone.Hosting.EmailConfirmed(obj);
                 case "tools.ozone.hosting.getAccountHistory#emailUpdated":
@@ -880,8 +880,6 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Actor.ProfileViewBasic(obj);
                 case "app.bsky.actor.defs#profileViewDetailed":
                     return new App.Bsky.Actor.ProfileViewDetailed(obj);
-                case "pub.leaflet.publication":
-                    return new Pub.Leaflet.Publication(obj);
                 case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionInput":
                     return new App.Bsky.Notification.PutActivitySubscriptionInput(obj);
                 case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionOutput":
@@ -1028,6 +1026,10 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Verification.RevokeVerificationsInput(obj);
                 case "tools.ozone.verification.revokeVerifications#RevokeVerificationsOutput":
                     return new Tools.Ozone.Verification.RevokeVerificationsOutput(obj);
+                case "pub.leaflet.theme.color#rgb":
+                    return new Pub.Leaflet.Theme.Rgb(obj);
+                case "pub.leaflet.theme.color#rgba":
+                    return new Pub.Leaflet.Theme.Rgba(obj);
                 case "social.psky.richtext.facet#room":
                     return new Social.Psky.Richtext.Room(obj);
                 case "social.psky.chat.room":

@@ -124,6 +124,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Place.Stream.Audio>(text, (JsonTypeInfo<FishyFlip.Lexicon.Place.Stream.Audio>)SourceGenerationContext.Default.PlaceStreamAudio);
                 case "com.shinolabs.pinksea.appViewDefs#author":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Author>)SourceGenerationContext.Default.ComShinolabsPinkseaAuthor);
+                case "pub.leaflet.theme.backgroundImage":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Theme.BackgroundImage>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Theme.BackgroundImage>)SourceGenerationContext.Default.PubLeafletThemeBackgroundImage);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem);
                 case "com.whtwnd.blog.defs#blobMetadata":
@@ -276,8 +278,6 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.DisableInviteCodesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.DisableInviteCodesInput>)SourceGenerationContext.Default.ComAtprotoAdminDisableInviteCodesInput);
                 case "app.bsky.feed.postgate#disableRule":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>)SourceGenerationContext.Default.AppBskyFeedDisableRule);
-                case "pub.leaflet.document":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Document>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Document>)SourceGenerationContext.Default.PubLeafletDocument);
                 case "tools.ozone.hosting.getAccountHistory#emailConfirmed":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailConfirmed>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailConfirmed>)SourceGenerationContext.Default.ToolsOzoneHostingEmailConfirmed);
                 case "tools.ozone.hosting.getAccountHistory#emailUpdated":
@@ -916,8 +916,6 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.ProfileViewBasic>)SourceGenerationContext.Default.ChatBskyActorProfileViewBasic);
                 case "app.bsky.actor.defs#profileViewDetailed":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed>)SourceGenerationContext.Default.AppBskyActorProfileViewDetailed);
-                case "pub.leaflet.publication":
-                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Publication>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Publication>)SourceGenerationContext.Default.PubLeafletPublication);
                 case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionInput>)SourceGenerationContext.Default.AppBskyNotificationPutActivitySubscriptionInput);
                 case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionOutput":
@@ -1064,6 +1062,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsInput>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeVerificationsInput);
                 case "tools.ozone.verification.revokeVerifications#RevokeVerificationsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput>)SourceGenerationContext.Default.ToolsOzoneVerificationRevokeVerificationsOutput);
+                case "pub.leaflet.theme.color#rgb":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Theme.Rgb>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Theme.Rgb>)SourceGenerationContext.Default.PubLeafletThemeRgb);
+                case "pub.leaflet.theme.color#rgba":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Pub.Leaflet.Theme.Rgba>(text, (JsonTypeInfo<FishyFlip.Lexicon.Pub.Leaflet.Theme.Rgba>)SourceGenerationContext.Default.PubLeafletThemeRgba);
                 case "social.psky.richtext.facet#room":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Social.Psky.Richtext.Room>(text, (JsonTypeInfo<FishyFlip.Lexicon.Social.Psky.Richtext.Room>)SourceGenerationContext.Default.SocialPskyRichtextRoom);
                 case "social.psky.chat.room":

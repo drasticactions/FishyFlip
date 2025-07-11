@@ -22,12 +22,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// web <br/>
         /// </param>
         /// <param name="appId"></param>
-        public RegisterPushInput(FishyFlip.Models.ATDid serviceDid = default, string token = default, string platform = default, string appId = default)
+        /// <param name="ageRestricted">Set to true when the actor is age restricted</param>
+        public RegisterPushInput(FishyFlip.Models.ATDid serviceDid = default, string token = default, string platform = default, string appId = default, bool? ageRestricted = default)
         {
             this.ServiceDid = serviceDid;
             this.Token = token;
             this.Platform = platform;
             this.AppId = appId;
+            this.AgeRestricted = ageRestricted;
             this.Type = "app.bsky.notification.registerPush#RegisterPushInput";
         }
 
@@ -50,6 +52,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             if (obj["token"] is not null) this.Token = obj["token"].AsString();
             if (obj["platform"] is not null) this.Platform = obj["platform"].AsString();
             if (obj["appId"] is not null) this.AppId = obj["appId"].AsString();
+            if (obj["ageRestricted"] is not null) this.AgeRestricted = obj["ageRestricted"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -85,6 +88,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         [JsonPropertyName("appId")]
         [JsonRequired]
         public string AppId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ageRestricted.
+        /// <br/> Set to true when the actor is age restricted
+        /// </summary>
+        [JsonPropertyName("ageRestricted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? AgeRestricted { get; set; }
 
         public const string RecordType = "app.bsky.notification.registerPush#RegisterPushInput";
 

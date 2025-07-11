@@ -243,9 +243,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="token"></param>
         /// <param name="platform"></param>
         /// <param name="appId"></param>
+        /// <param name="ageRestricted">Set to true when the actor is age restricted</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> RegisterPushAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RegisterPushAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, bool? ageRestricted = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RegisterPush.ToString();
             var headers = new Dictionary<string, string>();
@@ -254,6 +255,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             inputItem.Token = token;
             inputItem.Platform = platform;
             inputItem.AppId = appId;
+            inputItem.AgeRestricted = ageRestricted;
             return atp.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
