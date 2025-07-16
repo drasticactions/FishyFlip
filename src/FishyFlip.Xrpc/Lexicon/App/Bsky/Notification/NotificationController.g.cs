@@ -110,6 +110,18 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Notification
         public abstract Task<Results<Ok, ATErrorResult>> RegisterPushAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.RegisterPushInput input, CancellationToken cancellationToken);
 
         /// <summary>
+        /// The inverse of registerPush - inform a specified service that push notifications should no longer be sent to the given token for the requesting account. Requires auth.
+        /// </summary>
+        /// <param name="serviceDid"></param>
+        /// <param name="token"></param>
+        /// <param name="platform"></param>
+        /// <param name="appId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success"/></returns>
+        [HttpPost("/xrpc/app.bsky.notification.unregisterPush")]
+        public abstract Task<Results<Ok, ATErrorResult>> UnregisterPushAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Notification.UnregisterPushInput input, CancellationToken cancellationToken);
+
+        /// <summary>
         /// Notify server that the requesting account has seen notifications. Requires auth.
         /// </summary>
         /// <param name="seenAt"></param>

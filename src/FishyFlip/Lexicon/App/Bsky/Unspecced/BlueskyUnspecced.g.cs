@@ -32,6 +32,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// Returns the current state of the age assurance process for an account. This is used to check if the user has completed age assurance or if further action is required.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> GetAgeAssuranceStateAsync (CancellationToken cancellationToken = default)
+        {
+            return atp.GetAgeAssuranceStateAsync(cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get miscellaneous runtime configuration.
         /// </summary>
         /// <param name="cancellationToken"></param>
@@ -234,6 +244,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput?>> GetTrendsSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
             return atp.GetTrendsSkeletonAsync(viewer, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Initiate age assurance for an account. This is a one-time action that will start the process of verifying the user's age.
+        /// </summary>
+        /// <param name="email">The user's email address to receive assurance instructions.</param>
+        /// <param name="language">The user's preferred language for communication during the assurance process.</param>
+        /// <param name="countryCode">An ISO 3166-1 alpha-2 code of the user's location.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> InitAgeAssuranceAsync (string email, string language, string countryCode, CancellationToken cancellationToken = default)
+        {
+            return atp.InitAgeAssuranceAsync(email, language, countryCode, cancellationToken);
         }
 
 

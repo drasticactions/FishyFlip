@@ -35,6 +35,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore"/> (tools.ozone.moderation.defs#modEventPriorityScore) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// </param>
         /// <param name="subject">
         /// <br/> Union Types: <br/>
@@ -120,6 +122,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore"/> (tools.ozone.moderation.defs#modEventPriorityScore) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// </summary>
         [JsonPropertyName("event")]
         [JsonRequired]

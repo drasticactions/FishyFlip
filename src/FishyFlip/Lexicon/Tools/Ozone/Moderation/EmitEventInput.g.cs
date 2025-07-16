@@ -34,6 +34,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore"/> (tools.ozone.moderation.defs#modEventPriorityScore) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// </param>
         /// <param name="subject">
         /// <br/> Union Types: <br/>
@@ -45,13 +47,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="modTool">
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool"/> (tools.ozone.moderation.defs#modTool)
         /// </param>
-        public EmitEventInput(ATObject @event = default, ATObject subject = default, List<string>? subjectBlobCids = default, FishyFlip.Models.ATDid createdBy = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default)
+        /// <param name="externalId">An optional external ID for the event, used to deduplicate events from external systems. Fails when an event of same type with the same external ID exists for the same subject.</param>
+        public EmitEventInput(ATObject @event = default, ATObject subject = default, List<string>? subjectBlobCids = default, FishyFlip.Models.ATDid createdBy = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default, string? externalId = default)
         {
             this.Event = @event;
             this.Subject = subject;
             this.SubjectBlobCids = subjectBlobCids;
             this.CreatedBy = createdBy;
             this.ModTool = modTool;
+            this.ExternalId = externalId;
             this.Type = "tools.ozone.moderation.emitEvent#EmitEventInput";
         }
 
@@ -75,6 +79,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subjectBlobCids"] is not null) this.SubjectBlobCids = obj["subjectBlobCids"].Values.Select(n =>n.AsString()).ToList();
             if (obj["createdBy"] is not null) this.CreatedBy = obj["createdBy"].ToATDid();
             if (obj["modTool"] is not null) this.ModTool = new FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool(obj["modTool"]);
+            if (obj["externalId"] is not null) this.ExternalId = obj["externalId"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -100,6 +105,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore"/> (tools.ozone.moderation.defs#modEventPriorityScore) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// </summary>
         [JsonPropertyName("event")]
         [JsonRequired]
@@ -137,6 +144,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("modTool")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? ModTool { get; set; }
+
+        /// <summary>
+        /// Gets or sets the externalId.
+        /// <br/> An optional external ID for the event, used to deduplicate events from external systems. Fails when an event of same type with the same external ID exists for the same subject.
+        /// </summary>
+        [JsonPropertyName("externalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ExternalId { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.emitEvent#EmitEventInput";
 

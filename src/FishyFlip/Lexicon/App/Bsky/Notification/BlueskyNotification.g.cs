@@ -167,6 +167,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
 
         /// <summary>
+        /// The inverse of registerPush - inform a specified service that push notifications should no longer be sent to the given token for the requesting account. Requires auth.
+        /// </summary>
+        /// <param name="serviceDid"></param>
+        /// <param name="token"></param>
+        /// <param name="platform"></param>
+        /// <param name="appId"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> UnregisterPushAsync (FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
+        {
+            return atp.UnregisterPushAsync(serviceDid, token, platform, appId, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Notify server that the requesting account has seen notifications. Requires auth.
         /// </summary>
         /// <param name="seenAt"></param>

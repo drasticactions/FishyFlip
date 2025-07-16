@@ -106,6 +106,14 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.AddValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetAddValuesInput);
                 case "app.bsky.actor.defs#adultContentPref":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.AdultContentPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.AdultContentPref>)SourceGenerationContext.Default.AppBskyActorAdultContentPref);
+                case "app.bsky.unspecced.defs#ageAssuranceEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceEvent>)SourceGenerationContext.Default.AppBskyUnspeccedAgeAssuranceEvent);
+                case "tools.ozone.moderation.defs#ageAssuranceEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceEvent);
+                case "tools.ozone.moderation.defs#ageAssuranceOverrideEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceOverrideEvent);
+                case "app.bsky.unspecced.defs#ageAssuranceState":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>)SourceGenerationContext.Default.AppBskyUnspeccedAgeAssuranceState);
                 case "com.atproto.repo.applyWrites#ApplyWritesInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.ApplyWritesInput>)SourceGenerationContext.Default.ComAtprotoRepoApplyWritesInput);
                 case "com.atproto.repo.applyWrites#ApplyWritesOutput":
@@ -586,6 +594,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.Info>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.Info>)SourceGenerationContext.Default.ComAtprotoLabelInfo);
                 case "com.atproto.sync.subscribeRepos#info":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Info>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Info>)SourceGenerationContext.Default.ComAtprotoSyncInfo);
+                case "app.bsky.unspecced.initAgeAssurance#InitAgeAssuranceInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.InitAgeAssuranceInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.InitAgeAssuranceInput>)SourceGenerationContext.Default.AppBskyUnspeccedInitAgeAssuranceInput);
                 case "app.bsky.feed.defs#interaction":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Interaction>)SourceGenerationContext.Default.AppBskyFeedInteraction);
                 case "app.bsky.actor.defs#interestsPref":
@@ -1214,6 +1224,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.UnmuteConvoOutput>)SourceGenerationContext.Default.ChatBskyConvoUnmuteConvoOutput);
                 case "app.bsky.graph.unmuteThread#UnmuteThreadInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteThreadInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.UnmuteThreadInput>)SourceGenerationContext.Default.AppBskyGraphUnmuteThreadInput);
+                case "app.bsky.notification.unregisterPush#UnregisterPushInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.UnregisterPushInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.UnregisterPushInput>)SourceGenerationContext.Default.AppBskyNotificationUnregisterPushInput);
                 case "com.atproto.repo.applyWrites#update":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Update>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Update>)SourceGenerationContext.Default.ComAtprotoRepoUpdate);
                 case "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput":
