@@ -66,6 +66,8 @@ namespace FishyFlip.Lexicon
                     return new SetNotFoundError(statusCode, detail);
                 case "SubjectHasAction":
                     return new SubjectHasActionError(statusCode, detail);
+                case "DuplicateExternalId":
+                    return new DuplicateExternalIdError(statusCode, detail);
                 case "DuplicateCreate":
                     return new DuplicateCreateError(statusCode, detail);
                 case "BlockedActor":

@@ -16,6 +16,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GroupNamespace = "app.bsky.unspecced";
 
+       public const string GetAgeAssuranceState = "/xrpc/app.bsky.unspecced.getAgeAssuranceState";
+
        public const string GetConfig = "/xrpc/app.bsky.unspecced.getConfig";
 
        public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
@@ -46,11 +48,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GetTrendsSkeleton = "/xrpc/app.bsky.unspecced.getTrendsSkeleton";
 
+       public const string InitAgeAssurance = "/xrpc/app.bsky.unspecced.initAgeAssurance";
+
        public const string SearchActorsSkeleton = "/xrpc/app.bsky.unspecced.searchActorsSkeleton";
 
        public const string SearchPostsSkeleton = "/xrpc/app.bsky.unspecced.searchPostsSkeleton";
 
        public const string SearchStarterPacksSkeleton = "/xrpc/app.bsky.unspecced.searchStarterPacksSkeleton";
+
+
+        /// <summary>
+        /// Returns the current state of the age assurance process for an account. This is used to check if the user has completed age assurance or if further action is required.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> GetAgeAssuranceStateAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetAgeAssuranceState.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedAgeAssuranceState!, cancellationToken, headers);
+        }
 
 
         /// <summary>
@@ -494,6 +513,27 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendsSkeletonOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Initiate age assurance for an account. This is a one-time action that will start the process of verifying the user's age.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="email">The user's email address to receive assurance instructions.</param>
+        /// <param name="language">The user's preferred language for communication during the assurance process.</param>
+        /// <param name="countryCode">An ISO 3166-1 alpha-2 code of the user's location.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> InitAgeAssuranceAsync (this FishyFlip.ATProtocol atp, string email, string language, string countryCode, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = InitAgeAssurance.ToString();
+            var headers = new Dictionary<string, string>();
+            var inputItem = new InitAgeAssuranceInput();
+            inputItem.Email = email;
+            inputItem.Language = language;
+            inputItem.CountryCode = countryCode;
+            return atp.Post<InitAgeAssuranceInput, FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedInitAgeAssuranceInput!, atp.Options.SourceGenerationContext.AppBskyUnspeccedAgeAssuranceState!, inputItem, cancellationToken, headers);
         }
 
 

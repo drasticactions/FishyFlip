@@ -70,6 +70,14 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Set.AddValuesInput(obj);
                 case "app.bsky.actor.defs#adultContentPref":
                     return new App.Bsky.Actor.AdultContentPref(obj);
+                case "app.bsky.unspecced.defs#ageAssuranceEvent":
+                    return new App.Bsky.Unspecced.AgeAssuranceEvent(obj);
+                case "tools.ozone.moderation.defs#ageAssuranceEvent":
+                    return new Tools.Ozone.Moderation.AgeAssuranceEvent(obj);
+                case "tools.ozone.moderation.defs#ageAssuranceOverrideEvent":
+                    return new Tools.Ozone.Moderation.AgeAssuranceOverrideEvent(obj);
+                case "app.bsky.unspecced.defs#ageAssuranceState":
+                    return new App.Bsky.Unspecced.AgeAssuranceState(obj);
                 case "com.atproto.repo.applyWrites#ApplyWritesInput":
                     return new Com.Atproto.Repo.ApplyWritesInput(obj);
                 case "com.atproto.repo.applyWrites#ApplyWritesOutput":
@@ -550,6 +558,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Label.Info(obj);
                 case "com.atproto.sync.subscribeRepos#info":
                     return new Com.Atproto.Sync.Info(obj);
+                case "app.bsky.unspecced.initAgeAssurance#InitAgeAssuranceInput":
+                    return new App.Bsky.Unspecced.InitAgeAssuranceInput(obj);
                 case "app.bsky.feed.defs#interaction":
                     return new App.Bsky.Feed.Interaction(obj);
                 case "app.bsky.actor.defs#interestsPref":
@@ -1178,6 +1188,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.UnmuteConvoOutput(obj);
                 case "app.bsky.graph.unmuteThread#UnmuteThreadInput":
                     return new App.Bsky.Graph.UnmuteThreadInput(obj);
+                case "app.bsky.notification.unregisterPush#UnregisterPushInput":
+                    return new App.Bsky.Notification.UnregisterPushInput(obj);
                 case "com.atproto.repo.applyWrites#update":
                     return new Com.Atproto.Repo.Update(obj);
                 case "com.atproto.admin.updateAccountEmail#UpdateAccountEmailInput":

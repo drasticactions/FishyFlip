@@ -32,6 +32,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
 
        public const string RegisterPush = "/xrpc/app.bsky.notification.registerPush";
 
+       public const string UnregisterPush = "/xrpc/app.bsky.notification.unregisterPush";
+
        public const string UpdateSeen = "/xrpc/app.bsky.notification.updateSeen";
 
 
@@ -257,6 +259,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             inputItem.AppId = appId;
             inputItem.AgeRestricted = ageRestricted;
             return atp.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// The inverse of registerPush - inform a specified service that push notifications should no longer be sent to the given token for the requesting account. Requires auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="serviceDid"></param>
+        /// <param name="token"></param>
+        /// <param name="platform"></param>
+        /// <param name="appId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> UnregisterPushAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = UnregisterPush.ToString();
+            var headers = new Dictionary<string, string>();
+            var inputItem = new UnregisterPushInput();
+            inputItem.ServiceDid = serviceDid;
+            inputItem.Token = token;
+            inputItem.Platform = platform;
+            inputItem.AppId = appId;
+            return atp.Post<UnregisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUnregisterPushInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
 

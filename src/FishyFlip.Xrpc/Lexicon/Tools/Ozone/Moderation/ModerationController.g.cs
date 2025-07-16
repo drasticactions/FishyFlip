@@ -19,6 +19,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// Take a moderation action on an actor.
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.SubjectHasActionError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.DuplicateExternalIdError"/> An event with the same external ID already exists for the subject. <br/>
         /// </summary>
         /// <param name="@event">
         /// <br/> Union Types: <br/>
@@ -41,6 +42,8 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.IdentityEvent"/> (tools.ozone.moderation.defs#identityEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordEvent"/> (tools.ozone.moderation.defs#recordEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore"/> (tools.ozone.moderation.defs#modEventPriorityScore) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// </param>
         /// <param name="subject">
         /// <br/> Union Types: <br/>
@@ -50,6 +53,7 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="createdBy"></param>
         /// <param name="subjectBlobCids"></param>
         /// <param name="modTool">Moderation tool information for tracing the source of the action</param>
+        /// <param name="externalId">An optional external ID for the event, used to deduplicate events from external systems. Fails when an event of same type with the same external ID exists for the same subject.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView"/></returns>
         [HttpPost("/xrpc/tools.ozone.moderation.emitEvent")]
@@ -145,11 +149,12 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="reportTypes"></param>
         /// <param name="policies"></param>
         /// <param name="modTool">If specified, only events where the modTool name matches any of the given values are returned</param>
+        /// <param name="ageAssuranceState">If specified, only events where the age assurance state matches the given value are returned</param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.queryEvents")]
-        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>, ATErrorResult>> QueryEventsAsync ([FromQuery] List<string>? types = default, [FromQuery] FishyFlip.Models.ATDid? createdBy = default, [FromQuery] string? sortDirection = default, [FromQuery] DateTime? createdAfter = default, [FromQuery] DateTime? createdBefore = default, [FromQuery] string? subject = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] int? limit = 50, [FromQuery] bool? hasComment = default, [FromQuery] string? comment = default, [FromQuery] List<string>? addedLabels = default, [FromQuery] List<string>? removedLabels = default, [FromQuery] List<string>? addedTags = default, [FromQuery] List<string>? removedTags = default, [FromQuery] List<string>? reportTypes = default, [FromQuery] List<string>? policies = default, [FromQuery] List<string>? modTool = default, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>, ATErrorResult>> QueryEventsAsync ([FromQuery] List<string>? types = default, [FromQuery] FishyFlip.Models.ATDid? createdBy = default, [FromQuery] string? sortDirection = default, [FromQuery] DateTime? createdAfter = default, [FromQuery] DateTime? createdBefore = default, [FromQuery] string? subject = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] int? limit = 50, [FromQuery] bool? hasComment = default, [FromQuery] string? comment = default, [FromQuery] List<string>? addedLabels = default, [FromQuery] List<string>? removedLabels = default, [FromQuery] List<string>? addedTags = default, [FromQuery] List<string>? removedTags = default, [FromQuery] List<string>? reportTypes = default, [FromQuery] List<string>? policies = default, [FromQuery] List<string>? modTool = default, [FromQuery] string? ageAssuranceState = default, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// View moderation statuses of subjects (record or repo).
@@ -188,10 +193,11 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <param name="minReportedRecordsCount">If specified, only subjects that belong to an account that has at least this many reported records will be returned.</param>
         /// <param name="minTakendownRecordsCount">If specified, only subjects that belong to an account that has at least this many taken down records will be returned.</param>
         /// <param name="minPriorityScore">If specified, only subjects that have priority score value above the given value will be returned.</param>
+        /// <param name="ageAssuranceState">If specified, only subjects with the given age assurance state will be returned.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.queryStatuses")]
-        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>, ATErrorResult>> QueryStatusesAsync ([FromQuery] int? queueCount = 0, [FromQuery] int? queueIndex = 0, [FromQuery] string? queueSeed = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] string? subject = default, [FromQuery] string? comment = default, [FromQuery] DateTime? reportedAfter = default, [FromQuery] DateTime? reportedBefore = default, [FromQuery] DateTime? reviewedAfter = default, [FromQuery] DateTime? hostingDeletedAfter = default, [FromQuery] DateTime? hostingDeletedBefore = default, [FromQuery] DateTime? hostingUpdatedAfter = default, [FromQuery] DateTime? hostingUpdatedBefore = default, [FromQuery] List<string>? hostingStatuses = default, [FromQuery] DateTime? reviewedBefore = default, [FromQuery] bool? includeMuted = default, [FromQuery] bool? onlyMuted = default, [FromQuery] string? reviewState = default, [FromQuery] List<string>? ignoreSubjects = default, [FromQuery] FishyFlip.Models.ATDid? lastReviewedBy = default, [FromQuery] string? sortField = default, [FromQuery] string? sortDirection = default, [FromQuery] bool? takendown = default, [FromQuery] bool? appealed = default, [FromQuery] int? limit = 50, [FromQuery] List<string>? tags = default, [FromQuery] List<string>? excludeTags = default, [FromQuery] string? cursor = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] int? minAccountSuspendCount = 0, [FromQuery] int? minReportedRecordsCount = 0, [FromQuery] int? minTakendownRecordsCount = 0, [FromQuery] int? minPriorityScore = 0, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>, ATErrorResult>> QueryStatusesAsync ([FromQuery] int? queueCount = 0, [FromQuery] int? queueIndex = 0, [FromQuery] string? queueSeed = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] string? subject = default, [FromQuery] string? comment = default, [FromQuery] DateTime? reportedAfter = default, [FromQuery] DateTime? reportedBefore = default, [FromQuery] DateTime? reviewedAfter = default, [FromQuery] DateTime? hostingDeletedAfter = default, [FromQuery] DateTime? hostingDeletedBefore = default, [FromQuery] DateTime? hostingUpdatedAfter = default, [FromQuery] DateTime? hostingUpdatedBefore = default, [FromQuery] List<string>? hostingStatuses = default, [FromQuery] DateTime? reviewedBefore = default, [FromQuery] bool? includeMuted = default, [FromQuery] bool? onlyMuted = default, [FromQuery] string? reviewState = default, [FromQuery] List<string>? ignoreSubjects = default, [FromQuery] FishyFlip.Models.ATDid? lastReviewedBy = default, [FromQuery] string? sortField = default, [FromQuery] string? sortDirection = default, [FromQuery] bool? takendown = default, [FromQuery] bool? appealed = default, [FromQuery] int? limit = 50, [FromQuery] List<string>? tags = default, [FromQuery] List<string>? excludeTags = default, [FromQuery] string? cursor = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] int? minAccountSuspendCount = 0, [FromQuery] int? minReportedRecordsCount = 0, [FromQuery] int? minTakendownRecordsCount = 0, [FromQuery] int? minPriorityScore = 0, [FromQuery] string? ageAssuranceState = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find repositories based on a search term.

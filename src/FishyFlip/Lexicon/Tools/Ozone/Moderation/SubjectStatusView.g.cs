@@ -54,7 +54,20 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="recordsStats">Statistics related to the record subjects authored by the subject's account
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats"/> (tools.ozone.moderation.defs#recordsStats)
         /// </param>
-        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, long? priorityScore = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? accountStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? recordsStats = default)
+        /// <param name="ageAssuranceState">Current age assurance state of the subject.
+        /// <br/> Known Values: <br/>
+        /// pending <br/>
+        /// assured <br/>
+        /// unknown <br/>
+        /// reset <br/>
+        /// blocked <br/>
+        /// </param>
+        /// <param name="ageAssuranceUpdatedBy">Whether or not the last successful update to age assurance was made by the user or admin.
+        /// <br/> Known Values: <br/>
+        /// admin <br/>
+        /// user <br/>
+        /// </param>
+        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, long? priorityScore = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? accountStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? recordsStats = default, string? ageAssuranceState = default, string? ageAssuranceUpdatedBy = default)
         {
             this.Id = id;
             this.Subject = subject;
@@ -78,6 +91,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Tags = tags;
             this.AccountStats = accountStats;
             this.RecordsStats = recordsStats;
+            this.AgeAssuranceState = ageAssuranceState;
+            this.AgeAssuranceUpdatedBy = ageAssuranceUpdatedBy;
             this.Type = "tools.ozone.moderation.defs#subjectStatusView";
         }
 
@@ -118,6 +133,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["accountStats"] is not null) this.AccountStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats(obj["accountStats"]);
             if (obj["recordsStats"] is not null) this.RecordsStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats(obj["recordsStats"]);
+            if (obj["ageAssuranceState"] is not null) this.AgeAssuranceState = obj["ageAssuranceState"].AsString();
+            if (obj["ageAssuranceUpdatedBy"] is not null) this.AgeAssuranceUpdatedBy = obj["ageAssuranceUpdatedBy"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -297,6 +314,31 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("recordsStats")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? RecordsStats { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ageAssuranceState.
+        /// <br/> Current age assurance state of the subject.
+        /// <br/> Known Values: <br/>
+        /// pending <br/>
+        /// assured <br/>
+        /// unknown <br/>
+        /// reset <br/>
+        /// blocked <br/>
+        /// </summary>
+        [JsonPropertyName("ageAssuranceState")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? AgeAssuranceState { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ageAssuranceUpdatedBy.
+        /// <br/> Whether or not the last successful update to age assurance was made by the user or admin.
+        /// <br/> Known Values: <br/>
+        /// admin <br/>
+        /// user <br/>
+        /// </summary>
+        [JsonPropertyName("ageAssuranceUpdatedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? AgeAssuranceUpdatedBy { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#subjectStatusView";
 

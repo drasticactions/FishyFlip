@@ -16,6 +16,14 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
     {
 
         /// <summary>
+        /// Returns the current state of the age assurance process for an account. This is used to check if the user has completed age assurance or if further action is required.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getAgeAssuranceState")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>, ATErrorResult>> GetAgeAssuranceStateAsync (CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get miscellaneous runtime configuration.
         /// </summary>
         /// <param name="cancellationToken"></param>
@@ -165,6 +173,17 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getTrendsSkeleton")]
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>, ATErrorResult>> GetTrendsSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Initiate age assurance for an account. This is a one-time action that will start the process of verifying the user's age.
+        /// </summary>
+        /// <param name="email">The user's email address to receive assurance instructions.</param>
+        /// <param name="language">The user's preferred language for communication during the assurance process.</param>
+        /// <param name="countryCode">An ISO 3166-1 alpha-2 code of the user's location.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState"/></returns>
+        [HttpPost("/xrpc/app.bsky.unspecced.initAgeAssurance")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>, ATErrorResult>> InitAgeAssuranceAsync ([FromBody] FishyFlip.Lexicon.App.Bsky.Unspecced.InitAgeAssuranceInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Backend Actors (profile) search, returns only skeleton.
