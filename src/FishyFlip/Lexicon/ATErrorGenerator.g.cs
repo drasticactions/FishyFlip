@@ -30,14 +30,14 @@ namespace FishyFlip.Lexicon
                     return new RuleAlreadyExistsError(statusCode, detail);
                 case "InvalidSwap":
                     return new InvalidSwapError(statusCode, detail);
+                case "InvalidEmail":
+                    return new InvalidEmailError(statusCode, detail);
                 case "AccountNotFound":
                     return new AccountNotFoundError(statusCode, detail);
                 case "ExpiredToken":
                     return new ExpiredTokenError(statusCode, detail);
                 case "InvalidToken":
                     return new InvalidTokenError(statusCode, detail);
-                case "InvalidEmail":
-                    return new InvalidEmailError(statusCode, detail);
                 case "InvalidHandle":
                     return new InvalidHandleError(statusCode, detail);
                 case "InvalidPassword":
@@ -100,6 +100,10 @@ namespace FishyFlip.Lexicon
                     return new ActorNotFoundError(statusCode, detail);
                 case "BadExpiration":
                     return new BadExpirationError(statusCode, detail);
+                case "DidTooLong":
+                    return new DidTooLongError(statusCode, detail);
+                case "InvalidInitiation":
+                    return new InvalidInitiationError(statusCode, detail);
                 case "HandleNotFound":
                     return new HandleNotFoundError(statusCode, detail);
                 case "DidNotFound":

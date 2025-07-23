@@ -136,6 +136,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.ChatPreference(obj);
                 case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
                     return new Com.Atproto.Server.CheckAccountStatusOutput(obj);
+                case "app.bsky.unspecced.checkHandleAvailability#CheckHandleAvailabilityOutput":
+                    return new App.Bsky.Unspecced.CheckHandleAvailabilityOutput(obj);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
                     return new Com.Atproto.Temp.CheckSignupQueueOutput(obj);
                 case "blue.moji.collection.defs#collectionView":
@@ -304,6 +306,8 @@ namespace FishyFlip.Lexicon
                     return new Place.Stream.Framerate(obj);
                 case "community.lexicon.location.fsq":
                     return new Community.Lexicon.Location.Fsq(obj);
+                case "place.stream.chat.gate":
+                    return new Place.Stream.Chat.Gate(obj);
                 case "app.bsky.feed.generator":
                     return new App.Bsky.Feed.Generator(obj);
                 case "app.bsky.feed.defs#generatorView":
@@ -1000,6 +1004,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.ResolveDidOutput(obj);
                 case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
                     return new Com.Atproto.Identity.ResolveHandleOutput(obj);
+                case "app.bsky.unspecced.checkHandleAvailability#resultAvailable":
+                    return new App.Bsky.Unspecced.ResultAvailable(obj);
+                case "app.bsky.unspecced.checkHandleAvailability#resultUnavailable":
+                    return new App.Bsky.Unspecced.ResultUnavailable(obj);
                 case "buzz.bookhive.defs#review":
                     return new Buzz.Bookhive.Review(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
@@ -1140,8 +1148,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
                 case "ma.tokono.byov.subscription":
                     return new Ma.Tokono.Byov.Subscription(obj);
-                case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
+                case "app.bsky.unspecced.checkHandleAvailability#suggestion":
                     return new App.Bsky.Unspecced.Suggestion(obj);
+                case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
+                    return new App.Bsky.Unspecced.SuggestionDef(obj);
                 case "com.atproto.sync.subscribeRepos#sync":
                     return new Com.Atproto.Sync.Sync(obj);
                 case "app.bsky.richtext.facet#tag":
