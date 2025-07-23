@@ -13,19 +13,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Initializes a new instance of the <see cref="Suggestion"/> class.
         /// </summary>
-        /// <param name="tag"></param>
-        /// <param name="subjectType">
-        /// <br/> Known Values: <br/>
-        /// actor <br/>
-        /// feed <br/>
-        /// </param>
-        /// <param name="subject"></param>
-        public Suggestion(string tag = default, string subjectType = default, string subject = default)
+        /// <param name="handle"></param>
+        /// <param name="method">Method used to build this suggestion. Should be considered opaque to clients. Can be used for metrics.</param>
+        public Suggestion(FishyFlip.Models.ATHandle handle = default, string method = default)
         {
-            this.Tag = tag;
-            this.SubjectType = subjectType;
-            this.Subject = subject;
-            this.Type = "app.bsky.unspecced.getTaggedSuggestions#suggestion";
+            this.Handle = handle;
+            this.Method = method;
+            this.Type = "app.bsky.unspecced.checkHandleAvailability#suggestion";
         }
 
 
@@ -34,7 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public Suggestion()
         {
-            this.Type = "app.bsky.unspecced.getTaggedSuggestions#suggestion";
+            this.Type = "app.bsky.unspecced.checkHandleAvailability#suggestion";
         }
 
 
@@ -43,37 +37,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public Suggestion(CBORObject obj)
         {
-            if (obj["tag"] is not null) this.Tag = obj["tag"].AsString();
-            if (obj["subjectType"] is not null) this.SubjectType = obj["subjectType"].AsString();
-            if (obj["subject"] is not null) this.Subject = obj["subject"].AsString();
+            if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
+            if (obj["method"] is not null) this.Method = obj["method"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
         /// <summary>
-        /// Gets or sets the tag.
+        /// Gets or sets the handle.
         /// </summary>
-        [JsonPropertyName("tag")]
+        [JsonPropertyName("handle")]
         [JsonRequired]
-        public string Tag { get; set; }
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATHandleJsonConverter))]
+        public FishyFlip.Models.ATHandle Handle { get; set; }
 
         /// <summary>
-        /// Gets or sets the subjectType.
-        /// <br/> Known Values: <br/>
-        /// actor <br/>
-        /// feed <br/>
+        /// Gets or sets the method.
+        /// <br/> Method used to build this suggestion. Should be considered opaque to clients. Can be used for metrics.
         /// </summary>
-        [JsonPropertyName("subjectType")]
+        [JsonPropertyName("method")]
         [JsonRequired]
-        public string SubjectType { get; set; }
+        public string Method { get; set; }
 
-        /// <summary>
-        /// Gets or sets the subject.
-        /// </summary>
-        [JsonPropertyName("subject")]
-        [JsonRequired]
-        public string Subject { get; set; }
-
-        public const string RecordType = "app.bsky.unspecced.getTaggedSuggestions#suggestion";
+        public const string RecordType = "app.bsky.unspecced.checkHandleAvailability#suggestion";
 
         public override string ToJson()
         {

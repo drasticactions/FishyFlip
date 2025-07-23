@@ -16,6 +16,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GroupNamespace = "app.bsky.unspecced";
 
+       public const string CheckHandleAvailability = "/xrpc/app.bsky.unspecced.checkHandleAvailability";
+
        public const string GetAgeAssuranceState = "/xrpc/app.bsky.unspecced.getAgeAssuranceState";
 
        public const string GetConfig = "/xrpc/app.bsky.unspecced.getConfig";
@@ -55,6 +57,41 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
        public const string SearchPostsSkeleton = "/xrpc/app.bsky.unspecced.searchPostsSkeleton";
 
        public const string SearchStarterPacksSkeleton = "/xrpc/app.bsky.unspecced.searchStarterPacksSkeleton";
+
+
+        /// <summary>
+        /// Checks whether the provided handle is available. If the handle is not available, available suggestions will be returned. Optional inputs will be used to generate suggestions.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidEmailError"/> An invalid email was provided. <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="handle">Tentative handle. Will be checked for availability or used to build handle suggestions.</param>
+        /// <param name="email">User-provided email. Might be used to build handle suggestions.</param>
+        /// <param name="birthDate">User-provided birth date. Might be used to build handle suggestions.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput?>> CheckHandleAvailabilityAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, string? email = default, DateTime? birthDate = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = CheckHandleAvailability.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("handle=" + handle);
+
+            if (email != null)
+            {
+                queryStrings.Add("email=" + email);
+            }
+
+            if (birthDate != null)
+            {
+                queryStrings.Add("birthDate=" + birthDate);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedCheckHandleAvailabilityOutput!, cancellationToken, headers);
+        }
 
 
         /// <summary>
@@ -518,6 +555,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
         /// <summary>
         /// Initiate age assurance for an account. This is a one-time action that will start the process of verifying the user's age.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidEmailError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.DidTooLongError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidInitiationError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="email">The user's email address to receive assurance instructions.</param>

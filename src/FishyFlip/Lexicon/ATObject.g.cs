@@ -172,6 +172,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.ChatPreference>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.ChatPreference>)SourceGenerationContext.Default.AppBskyNotificationChatPreference);
                 case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CheckAccountStatusOutput>)SourceGenerationContext.Default.ComAtprotoServerCheckAccountStatusOutput);
+                case "app.bsky.unspecced.checkHandleAvailability#CheckHandleAvailabilityOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.AppBskyUnspeccedCheckHandleAvailabilityOutput);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput);
                 case "blue.moji.collection.defs#collectionView":
@@ -340,6 +342,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Place.Stream.Framerate>(text, (JsonTypeInfo<FishyFlip.Lexicon.Place.Stream.Framerate>)SourceGenerationContext.Default.PlaceStreamFramerate);
                 case "community.lexicon.location.fsq":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Community.Lexicon.Location.Fsq>(text, (JsonTypeInfo<FishyFlip.Lexicon.Community.Lexicon.Location.Fsq>)SourceGenerationContext.Default.CommunityLexiconLocationFsq);
+                case "place.stream.chat.gate":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Place.Stream.Chat.Gate>(text, (JsonTypeInfo<FishyFlip.Lexicon.Place.Stream.Chat.Gate>)SourceGenerationContext.Default.PlaceStreamChatGate);
                 case "app.bsky.feed.generator":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Generator>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Generator>)SourceGenerationContext.Default.AppBskyFeedGenerator);
                 case "app.bsky.feed.defs#generatorView":
@@ -1036,6 +1040,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput>)SourceGenerationContext.Default.ComAtprotoIdentityResolveDidOutput);
                 case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>)SourceGenerationContext.Default.ComAtprotoIdentityResolveHandleOutput);
+                case "app.bsky.unspecced.checkHandleAvailability#resultAvailable":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultAvailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultAvailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultAvailable);
+                case "app.bsky.unspecced.checkHandleAvailability#resultUnavailable":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultUnavailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultUnavailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultUnavailable);
                 case "buzz.bookhive.defs#review":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Buzz.Bookhive.Review>(text, (JsonTypeInfo<FishyFlip.Lexicon.Buzz.Bookhive.Review>)SourceGenerationContext.Default.BuzzBookhiveReview);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
@@ -1176,8 +1184,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Identity.SubmitPlcOperationInput>)SourceGenerationContext.Default.ComAtprotoIdentitySubmitPlcOperationInput);
                 case "ma.tokono.byov.subscription":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>(text, (JsonTypeInfo<FishyFlip.Lexicon.Ma.Tokono.Byov.Subscription>)SourceGenerationContext.Default.MaTokonoByovSubscription);
-                case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
+                case "app.bsky.unspecced.checkHandleAvailability#suggestion":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion>)SourceGenerationContext.Default.AppBskyUnspeccedSuggestion);
+                case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.SuggestionDef>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.SuggestionDef>)SourceGenerationContext.Default.AppBskyUnspeccedSuggestionDef);
                 case "com.atproto.sync.subscribeRepos#sync":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>)SourceGenerationContext.Default.ComAtprotoSyncSync);
                 case "app.bsky.richtext.facet#tag":
