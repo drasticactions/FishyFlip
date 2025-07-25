@@ -2695,7 +2695,7 @@ public partial class AppCommands
                 sb.AppendLine(
                     $"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATUriJsonConverter>))]");
             }
-            else if (nonNullableRawType == "Ipfs.Cid")
+            else if (nonNullableRawType == "FishyFlip.Models.ATCid")
             {
                 sb.AppendLine(
                     $"        [JsonConverter(typeof(FishyFlip.Tools.Json.GenericListConverter<{property.RawType}, FishyFlip.Tools.Json.ATCidJsonConverter>))]");
@@ -2724,7 +2724,7 @@ public partial class AppCommands
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]");
         }
 
-        if (nonNullablePropertyType == "Ipfs.Cid")
+        if (nonNullablePropertyType == "FishyFlip.Models.ATCid")
         {
             sb.AppendLine("        [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]");
         }

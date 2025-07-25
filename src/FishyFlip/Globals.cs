@@ -18,10 +18,9 @@ global using FishyFlip.Events;
 global using FishyFlip.Lexicon;
 global using FishyFlip.Models;
 global using FishyFlip.Tools;
-global using Ipfs;
 global using Microsoft.Extensions.Logging;
 global using PeterO.Cbor;
-global using ATCid = Ipfs.Cid;
+global using ATCid = FishyFlip.Models.ATCid;
 
 #if NETSTANDARD
 namespace System.Runtime.CompilerServices

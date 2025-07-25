@@ -51,9 +51,15 @@
       </AssemblyAttribute>
     </ItemGroup>
     <!-- Handle InternalsVisibleToSuffix -->
-    <ItemGroup Condition="@(InternalsVisibleToSuffix-&gt;Count()) &gt; 0">
+    <ItemGroup Condition="@(InternalsVisibleToSuffix-&gt;Count()) &gt; 0 AND '$(SignAssembly)' != 'true'">
       <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
         <_Parameter1>$(AssemblyName)%(InternalsVisibleToSuffix.Identity)</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+    <!-- Handle InternalsVisibleToSuffix with strong naming -->
+    <ItemGroup Condition="@(InternalsVisibleToSuffix-&gt;Count()) &gt; 0 AND '$(SignAssembly)' == 'true'">
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>$(AssemblyName)%(InternalsVisibleToSuffix.Identity), PublicKey=00240000048000009400000006020000002400005253413100040000010001005311bd88d09f39da8d0a7814421594e8769c2c6af9b162a58a5c531868178ee6f8c3a108ffef4035eebe195bc06615043564b1c319b5b83be9ee8fae7f99a5b0b52cab19f8aabb66acbe9384dfda7a5d359e6b34ac3f7907db45f2c0c33c2bb4290ca55adc414a1823888a92d9b9f61c32f48d391be17000f3032e0b5146b48b</_Parameter1>
       </AssemblyAttribute>
     </ItemGroup>
   </Target>

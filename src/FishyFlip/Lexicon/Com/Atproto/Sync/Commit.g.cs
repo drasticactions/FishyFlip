@@ -26,7 +26,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="blobs"></param>
         /// <param name="prevData">The root CID of the MST tree for the previous commit from this repo (indicated by the 'since' revision field in this message). Corresponds to the 'data' field in the repo commit object. NOTE: this field is effectively required for the 'inductive' version of firehose.</param>
         /// <param name="time">Timestamp of when this message was originally broadcast.</param>
-        public Commit(long seq = default, FishyFlip.Models.ATDid repo = default, Ipfs.Cid commit = default, string rev = default, string since = default, byte[] blocks = default, List<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp> ops = default, List<Ipfs.Cid> blobs = default, Ipfs.Cid? prevData = default, DateTime? time = default)
+        public Commit(long seq = default, FishyFlip.Models.ATDid repo = default, FishyFlip.Models.ATCid commit = default, string rev = default, string since = default, byte[] blocks = default, List<FishyFlip.Lexicon.Com.Atproto.Sync.RepoOp> ops = default, List<FishyFlip.Models.ATCid> blobs = default, FishyFlip.Models.ATCid? prevData = default, DateTime? time = default)
         {
             this.Seq = seq;
             this.Repo = repo;
@@ -93,7 +93,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("commit")]
         [JsonRequired]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
-        public Ipfs.Cid CommitValue { get; set; }
+        public FishyFlip.Models.ATCid CommitValue { get; set; }
 
         /// <summary>
         /// Gets or sets the rev.
@@ -131,7 +131,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// </summary>
         [JsonPropertyName("blobs")]
         [JsonRequired]
-        public List<Ipfs.Cid> Blobs { get; set; }
+        public List<FishyFlip.Models.ATCid> Blobs { get; set; }
 
         /// <summary>
         /// Gets or sets the prevData.
@@ -140,7 +140,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         [JsonPropertyName("prevData")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATCidJsonConverter))]
-        public Ipfs.Cid? PrevData { get; set; }
+        public FishyFlip.Models.ATCid? PrevData { get; set; }
 
         /// <summary>
         /// Gets or sets the time.

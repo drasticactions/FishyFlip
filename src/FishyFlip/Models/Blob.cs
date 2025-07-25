@@ -3,7 +3,6 @@
 // </copyright>
 
 using FishyFlip.Lexicon.Com.Atproto.Repo;
-using Google.Protobuf.WellKnownTypes;
 
 namespace FishyFlip.Models;
 
@@ -65,7 +64,11 @@ public class Blob : ATObject, ICBOREncodable<Blob>, IJsonEncodable<Blob>
         return JsonSerializer.Deserialize<Blob>(json, (JsonTypeInfo<Blob>)SourceGenerationContext.Default.Blob)!;
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Reads a <see cref="Blob"/> from a CBOR object.
+    /// </summary>
+    /// <param name="obj">The object.</param>
+    /// <returns>A blob.</returns>
     public static new Blob FromCBORObject(CBORObject obj)
     {
         return new Blob(obj);

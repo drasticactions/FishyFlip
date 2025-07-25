@@ -145,7 +145,7 @@ internal class PasswordSessionManager : ISessionManager
     /// <param name="authFactorToken">2-Factor Auth Token, optional.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    internal async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, string? authFactorToken = default,  CancellationToken cancellationToken = default)
+    internal async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
     {
         var host = this.protocol.Options.Url.ToString();
         var usingPublicApi = host.Contains(Constants.Urls.ATProtoServer.PublicApi);

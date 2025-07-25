@@ -303,7 +303,7 @@ public sealed class ATWebSocketProtocol : IDisposable
                             break;
                         }
 
-                        var records = new List<(Cid Cid, ATObject Value)>();
+                        var records = new List<(ATCid Cid, ATObject Value)>();
                         foreach (var e in CarDecoder.DecodeCar(frameCommit.Blocks))
                         {
                             using var blockStream = new MemoryStream(e.Bytes);
