@@ -53,10 +53,29 @@ jobs:
           name: dotnet-test-results
           path: dotnet-test-results
         if: ${{ always() }}
-  publish:
-    needs: [build, test]
+  check-changes:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    outputs:
+      changed: ${{ steps.changes.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -E "^src/FishyFlip(\.Xrpc)?/|^Directory\.(Build|Packages)\.props$|^src/FishyFlip(\.Xrpc)?/.*\.csproj$"; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+  publish:
+    needs: [build, test, check-changes]
+    runs-on: ubuntu-latest
+    if: needs.check-changes.outputs.changed == 'true'
 
     steps:
       - name: Download Nuget Package
