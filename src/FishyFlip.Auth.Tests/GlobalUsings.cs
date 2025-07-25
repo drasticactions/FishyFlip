@@ -15,7 +15,6 @@ global using FishyFlip.Events;
 global using FishyFlip.Models;
 global using FishyFlip.Tools;
 global using FishyFlip.Tools.Json;
-global using Ipfs;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.Testing;

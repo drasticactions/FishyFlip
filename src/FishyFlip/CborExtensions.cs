@@ -216,9 +216,9 @@ public static class CborExtensions
                         return null;
                     }
 
-                    return Cid.Read(cid.AsSpan(1).ToArray());
+                    return ATCid.Read(cid.AsSpan(1).ToArray());
                 case CBORType.TextString:
-                    return Cid.Decode(obj.AsString());
+                    return ATCid.Decode(obj.AsString());
             }
         }
         catch (Exception ex)

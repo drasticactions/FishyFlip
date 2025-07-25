@@ -38,7 +38,7 @@ public class SubscribeRepoMessage
     /// <summary>
     /// Gets the records of the message.
     /// </summary>
-    public IReadOnlyList<(Cid Cid, ATObject Value)>? Records { get; internal set; }
+    public IReadOnlyList<(ATCid Cid, ATObject Value)>? Records { get; internal set; }
 
     /// <summary>
     /// Gets the atError of the message.

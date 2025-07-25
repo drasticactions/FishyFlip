@@ -51,7 +51,7 @@ public static class CarDecoder
             var cidBytes = new ArraySegment<byte>(bytes, start, ATCidV1BytesLength).ToArray();
 #endif
 
-            var cid = Cid.Read(cidBytes.ToArray());
+            var cid = ATCid.Read(cidBytes.ToArray());
 
             start += ATCidV1BytesLength;
 #if NET
@@ -147,7 +147,7 @@ public static class CarDecoder
 
             byte[] cidBuffer = new byte[ATCidV1BytesLength];
             await stream.ReadExactlyAsync(cidBuffer, 0, ATCidV1BytesLength);
-            var cid = Cid.Read(cidBuffer);
+            var cid = ATCid.Read(cidBuffer);
             totalBytesRead += ATCidV1BytesLength;
 
             byte[] bodyBuffer = new byte[body.Value - ATCidV1BytesLength];

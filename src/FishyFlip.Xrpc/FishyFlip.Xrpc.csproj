@@ -12,6 +12,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors>nullable</WarningsAsErrors>
     <PublishAot>false</PublishAot>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../FishyFlip.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

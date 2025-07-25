@@ -244,7 +244,7 @@ public class PropertyGeneration
                 return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n.ToDateTime()).ToList();";
             case "Blob?":
                 return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(new FishyFlip.Models.Blob(n)).ToList();";
-            case "Ipfs.Cid?":
+            case "FishyFlip.Models.ATCid?":
                 return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n =>n.ToATCid()!).ToList();";
             default:
                 return $"if (obj[\"{this.Key}\"] is not null) this.{this.PropertyName} = obj[\"{this.Key}\"].Values.Select(n =>new {propertyName.Replace("?", string.Empty)}(n)).ToList();";
@@ -344,7 +344,7 @@ public class PropertyGeneration
             "integer" => "long",
             "boolean" => "bool",
             "bytes" => "byte[]",
-            "cid-link" => "Ipfs.Cid",
+            "cid-link" => "FishyFlip.Models.ATCid",
             "array" when property.Items != null => this.GetListPropertyName(className, name, property),
             "unknown" => this.GetUnknownObjectType(property),
             "object" => this.GetObjectType(property),

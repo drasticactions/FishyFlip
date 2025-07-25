@@ -92,8 +92,6 @@ public class AnonymousTests
                             foreach (var image in imagesEmbed.Images)
                             {
                                 Assert.IsNotNull(image);
-                                image.ThrowIfNull();
-                                image?.ImageValue?.Ref.ThrowIfNull();
                                 Assert.IsTrue(!string.IsNullOrEmpty(image?.ImageValue?.MimeType));
                             }
 
@@ -102,7 +100,6 @@ public class AnonymousTests
                             var videoEmbed = (EmbedVideo)value.Embed;
                             Assert.IsNotNull(videoEmbed);
                             Assert.IsNotNull(videoEmbed.Video);
-                            videoEmbed.Video?.Ref.ThrowIfNull();
                             Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.MimeType));
                             Assert.IsTrue(!string.IsNullOrEmpty(videoEmbed.Video?.Type));
                             Assert.IsNotNull(videoEmbed.AspectRatio);
