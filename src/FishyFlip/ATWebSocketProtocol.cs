@@ -4,6 +4,7 @@
 
 using System.Buffers;
 using System.IO.Pipelines;
+using FishyFlip.Abstractions;
 
 namespace FishyFlip;
 
@@ -14,7 +15,7 @@ public sealed class ATWebSocketProtocol : IDisposable
 {
     private readonly TaskFactory taskFactory;
     private bool subscribedLabels;
-    private WebSocketWrapper webSocketWrapper;
+    private IWebSocketClient webSocketClient;
     private IReadOnlyList<ICustomATObjectCBORConverter> customConverters;
     private bool disposedValue;
     private ILogger? logger;
@@ -24,14 +25,15 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// Initializes a new instance of the <see cref="ATWebSocketProtocol"/> class.
     /// </summary>
     /// <param name="options"><see cref="ATWebSocketProtocolOptions"/>.</param>
-    public ATWebSocketProtocol(ATWebSocketProtocolOptions options)
+    /// <param name="webSocketClient">Optional WebSocket client implementation. If null, uses factory from options.</param>
+    public ATWebSocketProtocol(ATWebSocketProtocolOptions options, IWebSocketClient? webSocketClient = null)
     {
         this.customConverters = options.CustomConverters;
         this.taskFactory = options.TaskFactory;
         this.logger = options.Logger;
         this.instanceUri = options.Url;
-        this.webSocketWrapper = new WebSocketWrapper(this.logger);
-        this.webSocketWrapper.OnMessageReceived += this.OnInternalMessageReceived;
+        this.webSocketClient = webSocketClient ?? options.WebSocketClientFactory(this.logger);
+        this.webSocketClient.OnMessageReceived += this.OnInternalMessageReceived;
     }
 
     /// <summary>
@@ -71,7 +73,7 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// <summary>
     /// Gets a value indicating whether ATProtocol is connected.
     /// </summary>
-    public bool IsConnected => this.webSocketWrapper.IsConnected;
+    public bool IsConnected => this.webSocketClient.IsConnected;
 
     /// <summary>
     /// Connect to the BlueSky instance via a WebSocket connection.
@@ -88,9 +90,9 @@ public sealed class ATWebSocketProtocol : IDisposable
         }
 
         var endToken = token ?? CancellationToken.None;
-        await this.webSocketWrapper.ConnectAsync(new Uri($"wss://{this.instanceUri.Host}{connection}"), endToken);
+        await this.webSocketClient.ConnectAsync(new Uri($"wss://{this.instanceUri.Host}{connection}"), endToken);
         this.logger?.LogInformation($"WSS: Connected to {this.instanceUri}");
-        this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.webSocketWrapper.State));
+        this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.webSocketClient.State));
     }
 
     /// <summary>
@@ -111,14 +113,14 @@ public sealed class ATWebSocketProtocol : IDisposable
         this.logger?.LogInformation($"WSS: Disconnecting");
         try
         {
-            await this.webSocketWrapper.CloseAsync(endToken);
+            await this.webSocketClient.CloseAsync(endToken);
         }
         catch (Exception ex)
         {
             this.logger?.LogError(ex, "Failed to Close WebSocket connection.");
         }
 
-        this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.webSocketWrapper.State));
+        this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(this.webSocketClient.State));
         this.subscribedLabels = false;
     }
 
@@ -198,7 +200,7 @@ public sealed class ATWebSocketProtocol : IDisposable
         {
             if (disposing)
             {
-                this.webSocketWrapper.Dispose();
+                this.webSocketClient.Dispose();
             }
 
             this.disposedValue = true;
@@ -389,130 +391,5 @@ public sealed class ATWebSocketProtocol : IDisposable
         }
 
         return Task.CompletedTask;
-    }
-
-    private class WebSocketWrapper : IDisposable
-    {
-        private readonly ClientWebSocket webSocket;
-        private readonly Pipe pipe;
-        private readonly CancellationTokenSource cts;
-        private readonly ILogger? logger;
-
-        public WebSocketWrapper(ILogger? logger)
-        {
-            this.webSocket = new ClientWebSocket();
-            this.pipe = new Pipe();
-            this.cts = new CancellationTokenSource();
-            this.logger = logger;
-        }
-
-        public delegate Task MessageReceivedHandler(ReadOnlySequence<byte> message);
-
-        public event MessageReceivedHandler? OnMessageReceived;
-
-        public WebSocketState State => this.webSocket.State;
-
-        public bool IsConnected => this.webSocket.State == WebSocketState.Open;
-
-        public async Task ConnectAsync(Uri uri, CancellationToken cancellationToken = default)
-        {
-            if (this.webSocket.State == WebSocketState.Open)
-            {
-                return;
-            }
-
-            this.logger?.LogInformation("WSS: Connecting to WebSocket.");
-            await this.webSocket.ConnectAsync(uri, cancellationToken);
-            _ = this.StartReceiveLoop();
-        }
-
-        public async Task CloseAsync(CancellationToken cancellationToken = default)
-        {
-            if (this.webSocket.State == WebSocketState.Closed || this.webSocket.State == WebSocketState.Aborted)
-            {
-                return;
-            }
-
-            this.logger?.LogInformation("WSS: Closing WebSocket connection.");
-            await this.webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
-        }
-
-        public void Dispose()
-        {
-            this.cts.Cancel();
-            this.webSocket.Dispose();
-            this.cts.Dispose();
-        }
-
-        private async Task StartReceiveLoop()
-        {
-            try
-            {
-                while (this.webSocket.State == WebSocketState.Open)
-                {
-                    var memory = this.pipe.Writer.GetMemory(8192);
-#if NETSTANDARD
-                    var arraySegment = new ArraySegment<byte>(memory.Span.ToArray());
-                    var result = await this.webSocket.ReceiveAsync(
-                        arraySegment, this.cts.Token);
-#else
-                    var result = await this.webSocket.ReceiveAsync(
-                        memory, this.cts.Token);
-#endif
-
-                    if (result.Count <= 0)
-                    {
-                        continue;
-                    }
-
-                    this.pipe.Writer.Advance(result.Count);
-
-                    if (result.EndOfMessage)
-                    {
-                        await this.pipe.Writer.FlushAsync(this.cts.Token);
-                        await this.ProcessMessageAsync();
-                    }
-
-                    if (result.MessageType == WebSocketMessageType.Close || this.webSocket.State == WebSocketState.Aborted)
-                    {
-                        break;
-                    }
-                }
-            }
-            catch (OperationCanceledException ocx)
-            {
-                this.logger?.LogInformation(ocx, "WSS: Operation Cancelled.");
-            }
-            catch (Exception ex)
-            {
-                this.logger?.LogError(ex, "WSS: Error in Receive Loop.");
-                throw;
-            }
-            finally
-            {
-                await this.pipe.Writer.CompleteAsync();
-            }
-        }
-
-        private async Task ProcessMessageAsync()
-        {
-            ReadResult result = await this.pipe.Reader.ReadAsync(this.cts.Token);
-            ReadOnlySequence<byte> buffer = result.Buffer;
-
-            try
-            {
-                if (this.OnMessageReceived != null)
-                {
-                    if (this.webSocket.State == WebSocketState.Open)
-                    {
-                        await this.OnMessageReceived(buffer);
-                    }
-                }
-            }
-            finally
-            {
-                this.pipe.Reader.AdvanceTo(buffer.End);
-            }
-        }
     }
 }

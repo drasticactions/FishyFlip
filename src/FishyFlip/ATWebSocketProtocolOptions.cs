@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using FishyFlip.Abstractions;
+
 namespace FishyFlip;
 
 /// <summary>
@@ -38,4 +40,9 @@ public class ATWebSocketProtocolOptions
     /// Gets the TaskFactory.
     /// </summary>
     public TaskFactory TaskFactory { get; internal set; } = new TaskFactory(TaskScheduler.Default);
+
+    /// <summary>
+    /// Gets the WebSocket client factory function.
+    /// </summary>
+    public Func<ILogger?, IWebSocketClient> WebSocketClientFactory { get; internal set; } = logger => new WebSocketClient(logger);
 }
