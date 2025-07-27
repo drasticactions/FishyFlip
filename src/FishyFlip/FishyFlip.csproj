@@ -41,11 +41,13 @@
 			Visible="false" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="System.Buffers" />
 		<PackageReference Include="System.Memory" />
 		<PackageReference Include="Microsoft.Bcl.Memory" />
 		<PackageReference Include="Microsoft.Bcl.HashCode" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+		<PackageReference Include="System.Buffers" />
 		<PackageReference Include="System.Memory" />
 		<PackageReference Include="Microsoft.Bcl.Memory" />
 		<PackageReference Include="Microsoft.Bcl.HashCode" />

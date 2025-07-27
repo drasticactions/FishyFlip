@@ -357,4 +357,91 @@ public class CarDecoderTests
         Assert.IsTrue(frameEvents.Count > 0);
         Assert.IsTrue(stream.Position > initialPosition);
     }
+
+    /// <summary>
+    /// Performance test to ensure optimizations don't break functionality.
+    /// </summary>
+    [TestMethod]
+    public void CarDecoder_Performance_MultipleDecodesShouldComplete()
+    {
+        // Arrange
+        Assert.IsNotNull(testRepoData);
+        const int iterations = 100;
+
+        // Act & Assert - Should complete without throwing
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        for (int i = 0; i < iterations; i++)
+        {
+            var frameEvents = CarDecoder.DecodeCar(testRepoData).ToList();
+            Assert.IsTrue(frameEvents.Count > 0);
+        }
+
+        sw.Stop();
+
+        // Ensure it completes in reasonable time (this will vary by machine, but should be fast)
+        Assert.IsTrue(sw.ElapsedMilliseconds < 5000, $"Performance test took too long: {sw.ElapsedMilliseconds}ms");
+    }
+
+    /// <summary>
+    /// Performance test for async methods.
+    /// </summary>
+    [TestMethod]
+    public async Task CarDecoder_Performance_AsyncMultipleDecodesShouldComplete()
+    {
+        // Arrange
+        Assert.IsNotNull(testRepoData);
+        const int iterations = 50; // Fewer iterations for async test
+
+        // Act & Assert
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        for (int i = 0; i < iterations; i++)
+        {
+            using var stream = new MemoryStream(testRepoData);
+            var frameEvents = new List<FrameEvent>();
+            await foreach (var frameEvent in CarDecoder.DecodeCarAsync(stream))
+            {
+                frameEvents.Add(frameEvent);
+            }
+
+            Assert.IsTrue(frameEvents.Count > 0);
+        }
+
+        sw.Stop();
+
+        // Should complete in reasonable time
+        Assert.IsTrue(sw.ElapsedMilliseconds < 5000, $"Async performance test took too long: {sw.ElapsedMilliseconds}ms");
+    }
+
+    /// <summary>
+    /// Test memory usage patterns to ensure ArrayPool is working.
+    /// </summary>
+    [TestMethod]
+    public async Task CarDecoder_MemoryUsage_ShouldNotExcessivelyAllocate()
+    {
+        // Arrange
+        Assert.IsNotNull(testRepoData);
+        var initialMemory = GC.GetTotalMemory(true);
+
+        // Act - Process the file multiple times
+        for (int i = 0; i < 20; i++)
+        {
+            using var stream = new MemoryStream(testRepoData);
+            await foreach (var frameEvent in CarDecoder.DecodeCarAsync(stream))
+            {
+                // Process each frame event
+                Assert.IsNotNull(frameEvent.Cid);
+                Assert.IsNotNull(frameEvent.Bytes);
+            }
+        }
+
+        // Force garbage collection and measure
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        var finalMemory = GC.GetTotalMemory(false);
+
+        // Memory growth should be reasonable (this is a rough check)
+        var memoryGrowth = finalMemory - initialMemory;
+        Assert.IsTrue(memoryGrowth < 10_000_000, $"Memory growth seems excessive: {memoryGrowth} bytes");
+    }
 }
