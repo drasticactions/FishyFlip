@@ -8,6 +8,7 @@
         <IsTestProject>true</IsTestProject>
         <EnableMSTestRunner>true</EnableMSTestRunner>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <NoWarn>$(NoWarn);SA1615</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,6 +17,10 @@
 
     <ItemGroup>
         <ProjectReference Include="..\FishyFlip\FishyFlip.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="Assets\**" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
 </Project>

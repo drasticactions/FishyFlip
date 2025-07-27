@@ -129,10 +129,19 @@ public static class CarDecoder
     {
         var totalBytesRead = 0;
         var header = DecodeReader(stream);
+
+        if (header.Value == -1)
+        {
+            yield break;
+        }
+
         totalBytesRead += header.Length + header.Value;
         int start = header.Length + header.Value;
 
-        await ScanStream(stream, start - 1);
+        if (start > 1)
+        {
+            await ScanStream(stream, start - 1);
+        }
 
         while (true)
         {

@@ -12,6 +12,7 @@ global using System.Text.Json.Serialization;
 global using System.Text.RegularExpressions;
 global using System.Timers;
 global using FishyFlip.Events;
+global using FishyFlip.Lexicon;
 global using FishyFlip.Models;
 global using FishyFlip.Tools;
 global using FishyFlip.Tools.Json;
