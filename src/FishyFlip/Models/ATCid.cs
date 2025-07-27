@@ -91,6 +91,21 @@ public class ATCid : IEquatable<ATCid>
     }
 
     /// <summary>
+    /// Reads a CID from a span of bytes.
+    /// </summary>
+    /// <param name="bytes">The bytes to read from.</param>
+    /// <returns>A new ATCid instance.</returns>
+    public static ATCid Read(ReadOnlySpan<byte> bytes)
+    {
+        if (bytes.Length == 0)
+        {
+            throw new ArgumentException("Bytes cannot be empty", nameof(bytes));
+        }
+
+        return ReadFromSpan(bytes);
+    }
+
+    /// <summary>
     /// Converts the CID to its string representation.
     /// </summary>
     /// <returns>The CID as a string.</returns>
@@ -168,7 +183,11 @@ public class ATCid : IEquatable<ATCid>
 
     private static ATCid ReadFromBytes(byte[] bytes)
     {
-        var span = bytes.AsSpan();
+        return ReadFromSpan(bytes.AsSpan());
+    }
+
+    private static ATCid ReadFromSpan(ReadOnlySpan<byte> span)
+    {
         var offset = 0;
 
         // Read version

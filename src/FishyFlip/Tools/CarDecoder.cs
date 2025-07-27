@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Buffers;
 using System.Runtime.InteropServices;
 
 namespace FishyFlip.Tools;
@@ -18,6 +19,7 @@ public delegate void OnCarDecoded(CarProgressStatusEvent e);
 public static class CarDecoder
 {
     private const int ATCidV1BytesLength = 36;
+    private static readonly ArrayPool<byte> ArrayPool = ArrayPool<byte>.Shared;
 
     /// <summary>
     /// Decodes CAR ReadOnlySpan.
@@ -51,7 +53,7 @@ public static class CarDecoder
             var cidBytes = new ArraySegment<byte>(bytes, start, ATCidV1BytesLength).ToArray();
 #endif
 
-            var cid = ATCid.Read(cidBytes.ToArray());
+            var cid = ATCid.Read(cidBytes);
 
             start += ATCidV1BytesLength;
 #if NET
@@ -60,7 +62,11 @@ public static class CarDecoder
             var bs = new ArraySegment<byte>(bytes, start, body.Value - ATCidV1BytesLength).ToArray();
 #endif
             start += body.Value - ATCidV1BytesLength;
+#if NET
             yield return new FrameEvent(cid, bs.ToArray());
+#else
+            yield return new FrameEvent(cid, bs);
+#endif
         }
     }
 
@@ -127,48 +133,73 @@ public static class CarDecoder
     /// <returns>IAsyncEnumberable of <see cref="FrameEvent"/>.</returns>
     public static async IAsyncEnumerable<FrameEvent> DecodeCarAsync(Stream stream)
     {
-        var totalBytesRead = 0;
         var header = DecodeReader(stream);
-        totalBytesRead += header.Length + header.Value;
+
+        if (header.Value == -1)
+        {
+            yield break;
+        }
+
         int start = header.Length + header.Value;
 
-        await ScanStream(stream, start - 1);
-
-        while (true)
+        if (start > 1)
         {
-            var body = DecodeReader(stream);
-            if (body.Value == -1)
+            await ScanStream(stream, start - 1);
+        }
+
+        var cidBuffer = ArrayPool.Rent(ATCidV1BytesLength);
+        try
+        {
+            while (true)
             {
-                break;
+                var body = DecodeReader(stream);
+                if (body.Value == -1)
+                {
+                    break;
+                }
+
+                await stream.ReadExactlyAsync(cidBuffer, 0, ATCidV1BytesLength);
+                var cid = ATCid.Read(cidBuffer.AsSpan(0, ATCidV1BytesLength));
+
+                int bodySize = body.Value - ATCidV1BytesLength;
+                var bodyBuffer = ArrayPool.Rent(bodySize);
+                try
+                {
+                    await stream.ReadExactlyAsync(bodyBuffer, 0, bodySize);
+                    var bodyBytes = new byte[bodySize];
+                    Array.Copy(bodyBuffer, bodyBytes, bodySize);
+                    yield return new FrameEvent(cid, bodyBytes);
+                }
+                finally
+                {
+                    ArrayPool.Return(bodyBuffer);
+                }
             }
-
-            totalBytesRead += body.Length;
-            start += body.Length;
-
-            byte[] cidBuffer = new byte[ATCidV1BytesLength];
-            await stream.ReadExactlyAsync(cidBuffer, 0, ATCidV1BytesLength);
-            var cid = ATCid.Read(cidBuffer);
-            totalBytesRead += ATCidV1BytesLength;
-
-            byte[] bodyBuffer = new byte[body.Value - ATCidV1BytesLength];
-            await stream.ReadExactlyAsync(bodyBuffer, 0, body.Value - ATCidV1BytesLength);
-            totalBytesRead += bodyBuffer.Length;
-
-            yield return new FrameEvent(cid, bodyBuffer);
+        }
+        finally
+        {
+            ArrayPool.Return(cidBuffer);
         }
     }
 
     private static async Task ScanStream(Stream stream, int length)
     {
-        byte[] receiveBuffer = new byte[length];
-        await stream.ReadExactlyAsync(receiveBuffer, 0, length);
+        var receiveBuffer = ArrayPool.Rent(length);
+        try
+        {
+            await stream.ReadExactlyAsync(receiveBuffer, 0, length);
+        }
+        finally
+        {
+            ArrayPool.Return(receiveBuffer);
+        }
     }
 
     private static DecodedBlock DecodeReader(Stream stream)
     {
-        var a = new List<byte>();
+        Span<byte> buffer = stackalloc byte[16]; // Most varint encodings are < 16 bytes
+        int count = 0;
 
-        int i = 0;
         while (true)
         {
             int b = stream.ReadByte();
@@ -177,7 +208,32 @@ public static class CarDecoder
                 return new DecodedBlock(-1, -1);
             }
 
-            i++;
+            if (count >= buffer.Length)
+            {
+                // Fall back to List for very long encodings (rare)
+                return DecodeReaderFallback(stream, buffer, count, (byte)b);
+            }
+
+            buffer[count++] = (byte)b;
+            if ((b & 0x80) == 0)
+            {
+                return new DecodedBlock(Decode(buffer[..count]), count);
+            }
+        }
+    }
+
+    private static DecodedBlock DecodeReaderFallback(Stream stream, ReadOnlySpan<byte> initialBuffer, int initialCount, byte currentByte)
+    {
+        var a = new List<byte>(initialBuffer[..initialCount].ToArray()) { currentByte };
+
+        while (true)
+        {
+            int b = stream.ReadByte();
+            if (b == -1)
+            {
+                return new DecodedBlock(-1, -1);
+            }
+
             a.Add((byte)b);
             if ((b & 0x80) == 0)
             {
