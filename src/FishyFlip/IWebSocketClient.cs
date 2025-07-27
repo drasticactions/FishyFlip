@@ -4,7 +4,7 @@
 
 using System.Buffers;
 
-namespace FishyFlip.Abstractions;
+namespace FishyFlip;
 
 /// <summary>
 /// Abstraction for WebSocket client functionality to enable testing.
