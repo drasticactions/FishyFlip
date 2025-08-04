@@ -137,6 +137,123 @@ namespace FishyFlip.Lexicon
         {
             return atp.ATProtocol.GetRecordAsync(repo, "com.shinolabs.pinksea.oekaki", rkey, cid, cancellationToken);
         }
+        /// <summary>
+        /// Create a Profile record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="record"></param>
+        /// <param name="rkey"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Profile record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.shinolabs.pinksea.profile", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Create a Profile record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="avatar">The oekaki image that's the avatar of this profile.
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </param>
+        /// <param name="nickname">The display name of the user.</param>
+        /// <param name="bio">The bio of the user.</param>
+        /// <param name="links">The links to outside platforms for this user</param>
+        /// <param name="rkey"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, Com.Atproto.Repo.StrongRef? avatar = default, string? nickname = default, string? bio = default, List<FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ProfileLink>? links = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            var record = new FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Profile();
+            record.Avatar = avatar;
+            record.Nickname = nickname;
+            record.Bio = bio;
+            record.Links = links;
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.shinolabs.pinksea.profile", record, rkey, validate, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete a Profile record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="swapRecord"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<DeleteRecordOutput?>> DeleteProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.DeleteRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.shinolabs.pinksea.profile", rkey, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// Put a Profile record.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="record"></param>
+        /// <param name="validate"></param>
+        /// <param name="swapRecord"></param>
+        /// <param name="swapCommit"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<PutRecordOutput?>> PutProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, string rkey, FishyFlip.Lexicon.Com.Shinolabs.Pinksea.Profile record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.PutRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.shinolabs.pinksea.profile", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Profile records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.ListRecordsAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.shinolabs.pinksea.profile", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// List Profile records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="reverse"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<ListRecordsOutput?>> ListProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.ListRecordsAsync(repo, "com.shinolabs.pinksea.profile", limit, cursor, reverse, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Profile records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.GetRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "com.shinolabs.pinksea.profile", rkey, cid, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get Profile records.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="repo"></param>
+        /// <param name="rkey"></param>
+        /// <param name="cid"></param>
+        /// <param name="cancellationToken"></param>
+        public static Task<Result<GetRecordOutput?>> GetProfileAsync(this FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        {
+            return atp.ATProtocol.GetRecordAsync(repo, "com.shinolabs.pinksea.profile", rkey, cid, cancellationToken);
+        }
     }
 }
 

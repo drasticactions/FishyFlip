@@ -86,8 +86,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.AppPassword(obj);
                 case "com.atproto.server.listAppPasswords#appPassword":
                     return new Com.Atproto.Server.AppPasswordDef(obj);
-                case "fm.teal.alpha.feed.defs#artist":
-                    return new Fm.Teal.Alpha.Feed.Artist(obj);
                 case "app.bsky.embed.defs#aspectRatio":
                     return new App.Bsky.Embed.AspectRatio(obj);
                 case "place.stream.segment#audio":
@@ -136,8 +134,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.ChatPreference(obj);
                 case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
                     return new Com.Atproto.Server.CheckAccountStatusOutput(obj);
-                case "app.bsky.unspecced.checkHandleAvailability#CheckHandleAvailabilityOutput":
-                    return new App.Bsky.Unspecced.CheckHandleAvailabilityOutput(obj);
+                case "com.atproto.temp.checkHandleAvailability#CheckHandleAvailabilityOutput":
+                    return new Com.Atproto.Temp.CheckHandleAvailabilityOutput(obj);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
                     return new Com.Atproto.Temp.CheckSignupQueueOutput(obj);
                 case "blue.moji.collection.defs#collectionView":
@@ -276,8 +274,6 @@ namespace FishyFlip.Lexicon
                     return new Blue.Moji.Richtext.Facet(obj);
                 case "place.stream.richtext.facet":
                     return new Place.Stream.Richtext.Facet(obj);
-                case "fm.teal.alpha.actor.profile#featuredItem":
-                    return new Fm.Teal.Alpha.Actor.FeaturedItem(obj);
                 case "app.bsky.feed.describeFeedGenerator#feed":
                     return new App.Bsky.Feed.Feed(obj);
                 case "app.bsky.graph.starterpack#feedItem":
@@ -324,8 +320,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.GetAccountInviteCodesOutput(obj);
                 case "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput":
                     return new Community.Lexicon.Bookmarks.GetActorBookmarksOutput(obj);
-                case "fm.teal.alpha.feed.getActorFeed#GetActorFeedOutput":
-                    return new Fm.Teal.Alpha.Feed.GetActorFeedOutput(obj);
                 case "app.bsky.feed.getActorFeeds#GetActorFeedsOutput":
                     return new App.Bsky.Feed.GetActorFeedsOutput(obj);
                 case "app.bsky.feed.getActorLikes#GetActorLikesOutput":
@@ -426,8 +420,6 @@ namespace FishyFlip.Lexicon
                     return new Blue.Moji.Packs.GetPacksOutput(obj);
                 case "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput":
                     return new Com.Shinolabs.Pinksea.GetParentForReplyOutput(obj);
-                case "fm.teal.alpha.feed.getPlay#GetPlayOutput":
-                    return new Fm.Teal.Alpha.Feed.GetPlayOutput(obj);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -444,12 +436,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.GetPreferencesOutput(obj);
                 case "buzz.bookhive.getProfile#GetProfileOutput":
                     return new Buzz.Bookhive.GetProfileOutput(obj);
-                case "fm.teal.alpha.actor.getProfile#GetProfileOutput":
-                    return new Fm.Teal.Alpha.Actor.GetProfileOutput(obj);
                 case "app.bsky.actor.getProfiles#GetProfilesOutput":
                     return new App.Bsky.Actor.GetProfilesOutput(obj);
-                case "fm.teal.alpha.actor.getProfiles#GetProfilesOutput":
-                    return new Fm.Teal.Alpha.Actor.GetProfilesOutput(obj);
                 case "app.bsky.feed.getQuotes#GetQuotesOutput":
                     return new App.Bsky.Feed.GetQuotesOutput(obj);
                 case "blue.maril.stellar.getReactions#GetReactionsOutput":
@@ -726,8 +714,6 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.MessageViewSender(obj);
                 case "chat.bsky.moderation.getActorMetadata#metadata":
                     return new Chat.Bsky.Moderation.Metadata(obj);
-                case "fm.teal.alpha.actor.defs#miniProfileView":
-                    return new Fm.Teal.Alpha.Actor.MiniProfileView(obj);
                 case "tools.ozone.moderation.defs#moderation":
                     return new Tools.Ozone.Moderation.Moderation(obj);
                 case "tools.ozone.moderation.defs#moderationDetail":
@@ -824,10 +810,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Hosting.PasswordUpdated(obj);
                 case "app.bsky.actor.defs#personalDetailsPref":
                     return new App.Bsky.Actor.PersonalDetailsPref(obj);
-                case "fm.teal.alpha.feed.play":
-                    return new Fm.Teal.Alpha.Feed.Play(obj);
-                case "fm.teal.alpha.feed.defs#playView":
-                    return new Fm.Teal.Alpha.Feed.PlayView(obj);
                 case "app.bsky.feed.post":
                     return new App.Bsky.Feed.Post(obj);
                 case "fyi.unravel.frontpage.post":
@@ -844,12 +826,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.Preferences(obj);
                 case "app.bsky.actor.profile":
                     return new App.Bsky.Actor.Profile(obj);
+                case "com.shinolabs.pinksea.profile":
+                    return new Com.Shinolabs.Pinksea.Profile(obj);
                 case "social.psky.actor.profile":
                     return new Social.Psky.Actor.Profile(obj);
                 case "buzz.bookhive.defs#profile":
                     return new Buzz.Bookhive.Profile(obj);
-                case "fm.teal.alpha.actor.profile":
-                    return new Fm.Teal.Alpha.Actor.Profile(obj);
                 case "place.stream.chat.profile":
                     return new Place.Stream.Chat.Profile(obj);
                 case "app.bsky.actor.defs#profileAssociated":
@@ -858,10 +840,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.ProfileAssociatedActivitySubscription(obj);
                 case "app.bsky.actor.defs#profileAssociatedChat":
                     return new App.Bsky.Actor.ProfileAssociatedChat(obj);
+                case "com.shinolabs.pinksea.profile#profileLink":
+                    return new Com.Shinolabs.Pinksea.ProfileLink(obj);
                 case "app.bsky.actor.defs#profileView":
                     return new App.Bsky.Actor.ProfileView(obj);
-                case "fm.teal.alpha.actor.defs#profileView":
-                    return new Fm.Teal.Alpha.Actor.ProfileView(obj);
                 case "app.bsky.actor.defs#profileViewBasic":
                     return new App.Bsky.Actor.ProfileViewBasic(obj);
                 case "chat.bsky.actor.defs#profileViewBasic":
@@ -1004,10 +986,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.ResolveDidOutput(obj);
                 case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
                     return new Com.Atproto.Identity.ResolveHandleOutput(obj);
-                case "app.bsky.unspecced.checkHandleAvailability#resultAvailable":
-                    return new App.Bsky.Unspecced.ResultAvailable(obj);
-                case "app.bsky.unspecced.checkHandleAvailability#resultUnavailable":
-                    return new App.Bsky.Unspecced.ResultUnavailable(obj);
+                case "com.atproto.temp.checkHandleAvailability#resultAvailable":
+                    return new Com.Atproto.Temp.ResultAvailable(obj);
+                case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
+                    return new Com.Atproto.Temp.ResultUnavailable(obj);
                 case "buzz.bookhive.defs#review":
                     return new Buzz.Bookhive.Review(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
@@ -1042,8 +1024,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Signature.SearchAccountsOutput(obj);
                 case "app.bsky.actor.searchActors#SearchActorsOutput":
                     return new App.Bsky.Actor.SearchActorsOutput(obj);
-                case "fm.teal.alpha.actor.searchActors#SearchActorsOutput":
-                    return new Fm.Teal.Alpha.Actor.SearchActorsOutput(obj);
                 case "app.bsky.unspecced.searchActorsSkeleton#SearchActorsSkeletonOutput":
                     return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
                 case "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput":
@@ -1124,10 +1104,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.Status(obj);
                 case "app.netlify.aniblue.status":
                     return new App.Netlify.Aniblue.Status(obj);
-                case "fm.teal.alpha.actor.status":
-                    return new Fm.Teal.Alpha.Actor.Status(obj);
-                case "xyz.statusphere.status":
-                    return new Xyz.Statusphere.Status(obj);
                 case "com.atproto.admin.defs#statusAttr":
                     return new Com.Atproto.Admin.StatusAttr(obj);
                 case "app.netlify.aniblue.status#status":
@@ -1148,10 +1124,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
                 case "ma.tokono.byov.subscription":
                     return new Ma.Tokono.Byov.Subscription(obj);
-                case "app.bsky.unspecced.checkHandleAvailability#suggestion":
-                    return new App.Bsky.Unspecced.Suggestion(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
-                    return new App.Bsky.Unspecced.SuggestionDef(obj);
+                    return new App.Bsky.Unspecced.Suggestion(obj);
+                case "com.atproto.temp.checkHandleAvailability#suggestion":
+                    return new Com.Atproto.Temp.Suggestion(obj);
                 case "com.atproto.sync.subscribeRepos#sync":
                     return new Com.Atproto.Sync.Sync(obj);
                 case "app.bsky.richtext.facet#tag":

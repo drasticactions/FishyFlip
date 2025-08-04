@@ -32,21 +32,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
-        /// Checks whether the provided handle is available. If the handle is not available, available suggestions will be returned. Optional inputs will be used to generate suggestions.
-        /// <br/> Possible Errors: <br/>
-        /// <see cref="FishyFlip.Lexicon.InvalidEmailError"/> An invalid email was provided. <br/>
-        /// </summary>
-        /// <param name="handle">Tentative handle. Will be checked for availability or used to build handle suggestions.</param>
-        /// <param name="email">User-provided email. Might be used to build handle suggestions.</param>
-        /// <param name="birthDate">User-provided birth date. Might be used to build handle suggestions.</param>
-        /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput?>> CheckHandleAvailabilityAsync (FishyFlip.Models.ATHandle handle, string? email = default, DateTime? birthDate = default, CancellationToken cancellationToken = default)
-        {
-            return atp.CheckHandleAvailabilityAsync(handle, email, birthDate, cancellationToken);
-        }
-
-
-        /// <summary>
         /// Returns the current state of the age assurance process for an account. This is used to check if the user has completed age assurance or if further action is required.
         /// </summary>
         /// <param name="cancellationToken"></param>

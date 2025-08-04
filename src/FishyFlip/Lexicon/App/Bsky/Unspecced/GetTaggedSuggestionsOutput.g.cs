@@ -14,7 +14,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetTaggedSuggestionsOutput"/> class.
         /// </summary>
         /// <param name="suggestions"></param>
-        public GetTaggedSuggestionsOutput(List<FishyFlip.Lexicon.App.Bsky.Unspecced.SuggestionDef> suggestions = default)
+        public GetTaggedSuggestionsOutput(List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion> suggestions = default)
         {
             this.Suggestions = suggestions;
             this.Type = "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput";
@@ -35,7 +35,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public GetTaggedSuggestionsOutput(CBORObject obj)
         {
-            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.SuggestionDef(n)).ToList();
+            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion(n)).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("suggestions")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.SuggestionDef> Suggestions { get; set; }
+        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion> Suggestions { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput";
 

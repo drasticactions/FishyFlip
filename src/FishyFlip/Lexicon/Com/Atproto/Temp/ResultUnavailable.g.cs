@@ -5,7 +5,7 @@
 #nullable enable annotations
 #nullable disable warnings
 
-namespace FishyFlip.Lexicon.App.Bsky.Unspecced
+namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
     /// <summary>
     /// Indicates the provided handle is unavailable and gives suggestions of available handles.
@@ -17,10 +17,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="ResultUnavailable"/> class.
         /// </summary>
         /// <param name="suggestions">List of suggested handles based on the provided inputs.</param>
-        public ResultUnavailable(List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion> suggestions = default)
+        public ResultUnavailable(List<FishyFlip.Lexicon.Com.Atproto.Temp.Suggestion> suggestions = default)
         {
             this.Suggestions = suggestions;
-            this.Type = "app.bsky.unspecced.checkHandleAvailability#resultUnavailable";
+            this.Type = "com.atproto.temp.checkHandleAvailability#resultUnavailable";
         }
 
 
@@ -29,7 +29,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ResultUnavailable()
         {
-            this.Type = "app.bsky.unspecced.checkHandleAvailability#resultUnavailable";
+            this.Type = "com.atproto.temp.checkHandleAvailability#resultUnavailable";
         }
 
 
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ResultUnavailable(CBORObject obj)
         {
-            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion(n)).ToList();
+            if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Temp.Suggestion(n)).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -48,23 +48,23 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("suggestions")]
         [JsonRequired]
-        public List<FishyFlip.Lexicon.App.Bsky.Unspecced.Suggestion> Suggestions { get; set; }
+        public List<FishyFlip.Lexicon.Com.Atproto.Temp.Suggestion> Suggestions { get; set; }
 
-        public const string RecordType = "app.bsky.unspecced.checkHandleAvailability#resultUnavailable";
+        public const string RecordType = "com.atproto.temp.checkHandleAvailability#resultUnavailable";
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultUnavailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultUnavailable);
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable);
         }
 
         public override byte[] ToUtf8Json()
         {
-            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultUnavailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultUnavailable);
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable);
         }
 
         public static new ResultUnavailable FromJson(string json)
         {
-            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultUnavailable>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultUnavailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultUnavailable)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable)!;
         }
 
         /// <inheritdoc/>
@@ -83,13 +83,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <inheritdoc/>
         public static ResultUnavailable Parse(string s, IFormatProvider? provider)
         {
-            return JsonSerializer.Deserialize<ResultUnavailable>(s, (JsonTypeInfo<ResultUnavailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultUnavailable)!;
+            return JsonSerializer.Deserialize<ResultUnavailable>(s, (JsonTypeInfo<ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable)!;
         }
 
         /// <inheritdoc/>
         public static bool TryParse(string? s, IFormatProvider? provider, out ResultUnavailable result)
         {
-            result = JsonSerializer.Deserialize<ResultUnavailable>(s, (JsonTypeInfo<ResultUnavailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultUnavailable);
+            result = JsonSerializer.Deserialize<ResultUnavailable>(s, (JsonTypeInfo<ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable);
             return result != null;
         }
     }

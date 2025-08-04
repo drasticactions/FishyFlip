@@ -5,7 +5,7 @@
 #nullable enable annotations
 #nullable disable warnings
 
-namespace FishyFlip.Lexicon.App.Bsky.Unspecced
+namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
     /// <summary>
     /// Indicates the provided handle is available.
@@ -18,7 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public ResultAvailable()
         {
-            this.Type = "app.bsky.unspecced.checkHandleAvailability#resultAvailable";
+            this.Type = "com.atproto.temp.checkHandleAvailability#resultAvailable";
         }
 
 
@@ -30,21 +30,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
-        public const string RecordType = "app.bsky.unspecced.checkHandleAvailability#resultAvailable";
+        public const string RecordType = "com.atproto.temp.checkHandleAvailability#resultAvailable";
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultAvailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultAvailable);
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable);
         }
 
         public override byte[] ToUtf8Json()
         {
-            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultAvailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultAvailable);
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable);
         }
 
         public static new ResultAvailable FromJson(string json)
         {
-            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultAvailable>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.ResultAvailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultAvailable)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable)!;
         }
 
         /// <inheritdoc/>
@@ -63,13 +63,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <inheritdoc/>
         public static ResultAvailable Parse(string s, IFormatProvider? provider)
         {
-            return JsonSerializer.Deserialize<ResultAvailable>(s, (JsonTypeInfo<ResultAvailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultAvailable)!;
+            return JsonSerializer.Deserialize<ResultAvailable>(s, (JsonTypeInfo<ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable)!;
         }
 
         /// <inheritdoc/>
         public static bool TryParse(string? s, IFormatProvider? provider, out ResultAvailable result)
         {
-            result = JsonSerializer.Deserialize<ResultAvailable>(s, (JsonTypeInfo<ResultAvailable>)SourceGenerationContext.Default.AppBskyUnspeccedResultAvailable);
+            result = JsonSerializer.Deserialize<ResultAvailable>(s, (JsonTypeInfo<ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable);
             return result != null;
         }
     }

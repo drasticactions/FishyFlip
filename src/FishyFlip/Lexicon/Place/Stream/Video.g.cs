@@ -19,12 +19,14 @@ namespace FishyFlip.Lexicon.Place.Stream
         /// <param name="framerate">
         /// place.stream.defs#framerate <br/>
         /// </param>
-        public Video(string codec = default, long width = default, long height = default, FishyFlip.Lexicon.Place.Stream.Framerate? framerate = default)
+        /// <param name="bframes"></param>
+        public Video(string codec = default, long width = default, long height = default, FishyFlip.Lexicon.Place.Stream.Framerate? framerate = default, bool? bframes = default)
         {
             this.Codec = codec;
             this.Width = width;
             this.Height = height;
             this.Framerate = framerate;
+            this.Bframes = bframes;
             this.Type = "place.stream.segment#video";
         }
 
@@ -47,6 +49,7 @@ namespace FishyFlip.Lexicon.Place.Stream
             if (obj["width"] is not null) this.Width = obj["width"].AsInt64Value();
             if (obj["height"] is not null) this.Height = obj["height"].AsInt64Value();
             if (obj["framerate"] is not null) this.Framerate = new FishyFlip.Lexicon.Place.Stream.Framerate(obj["framerate"]);
+            if (obj["bframes"] is not null) this.Bframes = obj["bframes"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -78,6 +81,13 @@ namespace FishyFlip.Lexicon.Place.Stream
         [JsonPropertyName("framerate")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Place.Stream.Framerate? Framerate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bframes.
+        /// </summary>
+        [JsonPropertyName("bframes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Bframes { get; set; }
 
         public const string RecordType = "place.stream.segment#video";
 

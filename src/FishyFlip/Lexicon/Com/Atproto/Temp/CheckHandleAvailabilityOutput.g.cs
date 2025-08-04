@@ -5,7 +5,7 @@
 #nullable enable annotations
 #nullable disable warnings
 
-namespace FishyFlip.Lexicon.App.Bsky.Unspecced
+namespace FishyFlip.Lexicon.Com.Atproto.Temp
 {
     public partial class CheckHandleAvailabilityOutput : ATObject, ICBOREncodable<CheckHandleAvailabilityOutput>, IJsonEncodable<CheckHandleAvailabilityOutput>, IParsable<CheckHandleAvailabilityOutput>
     {
@@ -23,7 +23,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         {
             this.Handle = handle;
             this.Result = result;
-            this.Type = "app.bsky.unspecced.checkHandleAvailability#CheckHandleAvailabilityOutput";
+            this.Type = "com.atproto.temp.checkHandleAvailability#CheckHandleAvailabilityOutput";
         }
 
 
@@ -32,7 +32,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         public CheckHandleAvailabilityOutput()
         {
-            this.Type = "app.bsky.unspecced.checkHandleAvailability#CheckHandleAvailabilityOutput";
+            this.Type = "com.atproto.temp.checkHandleAvailability#CheckHandleAvailabilityOutput";
         }
 
 
@@ -58,28 +58,28 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <summary>
         /// Gets or sets the result.
         /// <br/> Union Types: <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ResultAvailable"/> (app.bsky.unspecced.checkHandleAvailability#resultAvailable) <br/>
-        /// <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.ResultUnavailable"/> (app.bsky.unspecced.checkHandleAvailability#resultUnavailable) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable"/> (com.atproto.temp.checkHandleAvailability#resultAvailable) <br/>
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable"/> (com.atproto.temp.checkHandleAvailability#resultUnavailable) <br/>
         /// </summary>
         [JsonPropertyName("result")]
         [JsonRequired]
         public ATObject Result { get; set; }
 
-        public const string RecordType = "app.bsky.unspecced.checkHandleAvailability#CheckHandleAvailabilityOutput";
+        public const string RecordType = "com.atproto.temp.checkHandleAvailability#CheckHandleAvailabilityOutput";
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.AppBskyUnspeccedCheckHandleAvailabilityOutput);
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckHandleAvailabilityOutput);
         }
 
         public override byte[] ToUtf8Json()
         {
-            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.AppBskyUnspeccedCheckHandleAvailabilityOutput);
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckHandleAvailabilityOutput);
         }
 
         public static new CheckHandleAvailabilityOutput FromJson(string json)
         {
-            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.AppBskyUnspeccedCheckHandleAvailabilityOutput)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>(json, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckHandleAvailabilityOutput)!;
         }
 
         /// <inheritdoc/>
@@ -98,13 +98,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <inheritdoc/>
         public static CheckHandleAvailabilityOutput Parse(string s, IFormatProvider? provider)
         {
-            return JsonSerializer.Deserialize<CheckHandleAvailabilityOutput>(s, (JsonTypeInfo<CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.AppBskyUnspeccedCheckHandleAvailabilityOutput)!;
+            return JsonSerializer.Deserialize<CheckHandleAvailabilityOutput>(s, (JsonTypeInfo<CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckHandleAvailabilityOutput)!;
         }
 
         /// <inheritdoc/>
         public static bool TryParse(string? s, IFormatProvider? provider, out CheckHandleAvailabilityOutput result)
         {
-            result = JsonSerializer.Deserialize<CheckHandleAvailabilityOutput>(s, (JsonTypeInfo<CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.AppBskyUnspeccedCheckHandleAvailabilityOutput);
+            result = JsonSerializer.Deserialize<CheckHandleAvailabilityOutput>(s, (JsonTypeInfo<CheckHandleAvailabilityOutput>)SourceGenerationContext.Default.ComAtprotoTempCheckHandleAvailabilityOutput);
             return result != null;
         }
     }

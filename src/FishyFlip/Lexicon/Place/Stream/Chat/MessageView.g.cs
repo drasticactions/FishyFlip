@@ -27,7 +27,8 @@ namespace FishyFlip.Lexicon.Place.Stream.Chat
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Place.Stream.Chat.MessageView"/> (place.stream.chat.defs#messageView) <br/>
         /// </param>
-        public MessageView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic author = default, ATObject record = default, DateTime? indexedAt = default, FishyFlip.Lexicon.Place.Stream.Chat.Profile? chatProfile = default, FishyFlip.Lexicon.Place.Stream.Chat.MessageView? replyTo = default)
+        /// <param name="deleted">If true, this message has been deleted or labeled and should be cleared from the cache</param>
+        public MessageView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic author = default, ATObject record = default, DateTime? indexedAt = default, FishyFlip.Lexicon.Place.Stream.Chat.Profile? chatProfile = default, FishyFlip.Lexicon.Place.Stream.Chat.MessageView? replyTo = default, bool? deleted = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -36,6 +37,7 @@ namespace FishyFlip.Lexicon.Place.Stream.Chat
             this.IndexedAt = indexedAt;
             this.ChatProfile = chatProfile;
             this.ReplyTo = replyTo;
+            this.Deleted = deleted;
             this.Type = "place.stream.chat.defs#messageView";
         }
 
@@ -61,6 +63,7 @@ namespace FishyFlip.Lexicon.Place.Stream.Chat
             if (obj["indexedAt"] is not null) this.IndexedAt = obj["indexedAt"].ToDateTime();
             if (obj["chatProfile"] is not null) this.ChatProfile = new FishyFlip.Lexicon.Place.Stream.Chat.Profile(obj["chatProfile"]);
             if (obj["replyTo"] is not null) this.ReplyTo = new FishyFlip.Lexicon.Place.Stream.Chat.MessageView(obj["replyTo"]);
+            if (obj["deleted"] is not null) this.Deleted = obj["deleted"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -117,6 +120,14 @@ namespace FishyFlip.Lexicon.Place.Stream.Chat
         [JsonPropertyName("replyTo")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Place.Stream.Chat.MessageView? ReplyTo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the deleted.
+        /// <br/> If true, this message has been deleted or labeled and should be cleared from the cache
+        /// </summary>
+        [JsonPropertyName("deleted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Deleted { get; set; }
 
         public const string RecordType = "place.stream.chat.defs#messageView";
 
