@@ -43,6 +43,21 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
 
         /// <summary>
+        /// Checks whether the provided handle is available. If the handle is not available, available suggestions will be returned. Optional inputs will be used to generate suggestions.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidEmailError"/> An invalid email was provided. <br/>
+        /// </summary>
+        /// <param name="handle">Tentative handle. Will be checked for availability or used to build handle suggestions.</param>
+        /// <param name="email">User-provided email. Might be used to build handle suggestions.</param>
+        /// <param name="birthDate">User-provided birth date. Might be used to build handle suggestions.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput?>> CheckHandleAvailabilityAsync (FishyFlip.Models.ATHandle handle, string? email = default, DateTime? birthDate = default, CancellationToken cancellationToken = default)
+        {
+            return atp.CheckHandleAvailabilityAsync(handle, email, birthDate, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Check accounts location in signup queue.
         /// </summary>
         /// <param name="cancellationToken"></param>

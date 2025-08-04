@@ -23,7 +23,8 @@ namespace FishyFlip.Lexicon.Place.Stream
         /// <param name="duration">The duration of the segment in nanoseconds</param>
         /// <param name="video"></param>
         /// <param name="audio"></param>
-        public Segment(string? id, string? signingKey, DateTime? startTime, FishyFlip.Models.ATDid? creator, long? duration = default, List<FishyFlip.Lexicon.Place.Stream.Video>? video = default, List<FishyFlip.Lexicon.Place.Stream.Audio>? audio = default)
+        /// <param name="size">The size of the segment in bytes</param>
+        public Segment(string? id, string? signingKey, DateTime? startTime, FishyFlip.Models.ATDid? creator, long? duration = default, List<FishyFlip.Lexicon.Place.Stream.Video>? video = default, List<FishyFlip.Lexicon.Place.Stream.Audio>? audio = default, long? size = default)
         {
             this.Id = id;
             this.SigningKey = signingKey;
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Place.Stream
             this.Creator = creator;
             this.Video = video;
             this.Audio = audio;
+            this.Size = size;
             this.Type = "place.stream.segment";
         }
 
@@ -57,6 +59,7 @@ namespace FishyFlip.Lexicon.Place.Stream
             if (obj["creator"] is not null) this.Creator = obj["creator"].ToATDid();
             if (obj["video"] is not null) this.Video = obj["video"].Values.Select(n =>new FishyFlip.Lexicon.Place.Stream.Video(n)).ToList();
             if (obj["audio"] is not null) this.Audio = obj["audio"].Values.Select(n =>new FishyFlip.Lexicon.Place.Stream.Audio(n)).ToList();
+            if (obj["size"] is not null) this.Size = obj["size"].AsInt64Value();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -113,6 +116,14 @@ namespace FishyFlip.Lexicon.Place.Stream
         [JsonPropertyName("audio")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<FishyFlip.Lexicon.Place.Stream.Audio>? Audio { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size.
+        /// <br/> The size of the segment in bytes
+        /// </summary>
+        [JsonPropertyName("size")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? Size { get; set; }
 
         public const string RecordType = "place.stream.segment";
 

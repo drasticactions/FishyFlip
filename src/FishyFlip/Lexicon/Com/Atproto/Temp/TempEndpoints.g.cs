@@ -18,6 +18,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
        public const string AddReservedHandle = "/xrpc/com.atproto.temp.addReservedHandle";
 
+       public const string CheckHandleAvailability = "/xrpc/com.atproto.temp.checkHandleAvailability";
+
        public const string CheckSignupQueue = "/xrpc/com.atproto.temp.checkSignupQueue";
 
        public const string RequestPhoneVerification = "/xrpc/com.atproto.temp.requestPhoneVerification";
@@ -37,6 +39,45 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             var inputItem = new AddReservedHandleInput();
             inputItem.Handle = handle;
             return atp.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Checks whether the provided handle is available. If the handle is not available, available suggestions will be returned. Optional inputs will be used to generate suggestions.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidEmailError"/> An invalid email was provided. <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="handle">Tentative handle. Will be checked for availability or used to build handle suggestions.</param>
+        /// <param name="email">User-provided email. Might be used to build handle suggestions.</param>
+        /// <param name="birthDate">User-provided birth date. Might be used to build handle suggestions.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput?>> CheckHandleAvailabilityAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, string? email = default, DateTime? birthDate = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = CheckHandleAvailability.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("handle=" + handle);
+
+            if (email != null)
+            {
+                queryStrings.Add("email=" + email);
+            }
+
+            if (birthDate != null)
+            {
+                queryStrings.Add("birthDate=" + birthDate);
+            }
+
+            var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckHandleAvailabilityOutput!, cancellationToken, headers);
         }
 
 

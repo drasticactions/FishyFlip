@@ -25,6 +25,19 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput>, ATErrorResult>> AddReservedHandleAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleInput input, CancellationToken cancellationToken);
 
         /// <summary>
+        /// Checks whether the provided handle is available. If the handle is not available, available suggestions will be returned. Optional inputs will be used to generate suggestions.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidEmailError"/> An invalid email was provided. <br/>
+        /// </summary>
+        /// <param name="handle">Tentative handle. Will be checked for availability or used to build handle suggestions.</param>
+        /// <param name="email">User-provided email. Might be used to build handle suggestions.</param>
+        /// <param name="birthDate">User-provided birth date. Might be used to build handle suggestions.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput"/></returns>
+        [HttpGet("/xrpc/com.atproto.temp.checkHandleAvailability")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>, ATErrorResult>> CheckHandleAvailabilityAsync ([FromQuery] FishyFlip.Models.ATHandle handle, [FromQuery] string? email = default, [FromQuery] DateTime? birthDate = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Check accounts location in signup queue.
         /// </summary>
         /// <param name="cancellationToken"></param>

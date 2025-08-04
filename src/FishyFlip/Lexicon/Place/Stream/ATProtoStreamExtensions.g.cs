@@ -270,7 +270,7 @@ namespace FishyFlip.Lexicon.Place.Stream
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateSegmentAsync(this FishyFlip.ATProtocol atp, string? id, string? signingKey, DateTime? startTime, FishyFlip.Models.ATDid? creator, long? duration = default, List<FishyFlip.Lexicon.Place.Stream.Video>? video = default, List<FishyFlip.Lexicon.Place.Stream.Audio>? audio = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateSegmentAsync(this FishyFlip.ATProtocol atp, string? id, string? signingKey, DateTime? startTime, FishyFlip.Models.ATDid? creator, long? duration = default, List<FishyFlip.Lexicon.Place.Stream.Video>? video = default, List<FishyFlip.Lexicon.Place.Stream.Audio>? audio = default, long? size = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Place.Stream.Segment();
             record.Id = id;
@@ -280,6 +280,7 @@ namespace FishyFlip.Lexicon.Place.Stream
             record.Creator = creator;
             record.Video = video;
             record.Audio = audio;
+            record.Size = size;
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "place.stream.segment", record, rkey, validate, swapCommit, cancellationToken);
         }
 

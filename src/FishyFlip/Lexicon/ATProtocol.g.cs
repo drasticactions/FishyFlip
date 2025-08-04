@@ -140,16 +140,6 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Community.Lexicon.Bookmarks.CommunityLexiconBookmarks CommunityLexiconBookmarks => new (this);
 
         /// <summary>
-        /// fm.teal.alpha.actor Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Fm.Teal.Alpha.Actor.FmTealAlphaActor FmTealAlphaActor => new (this);
-
-        /// <summary>
-        /// fm.teal.alpha.feed Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Fm.Teal.Alpha.Feed.FmTealAlphaFeed FmTealAlphaFeed => new (this);
-
-        /// <summary>
         /// place.stream.graph Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Place.Stream.Graph.PlaceStreamGraph PlaceStreamGraph => new (this);
