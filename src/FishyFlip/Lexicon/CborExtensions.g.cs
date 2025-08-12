@@ -318,6 +318,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.GetAccountInfosOutput(obj);
                 case "com.atproto.server.getAccountInviteCodes#GetAccountInviteCodesOutput":
                     return new Com.Atproto.Server.GetAccountInviteCodesOutput(obj);
+                case "tools.ozone.moderation.getAccountTimeline#GetAccountTimelineOutput":
+                    return new Tools.Ozone.Moderation.GetAccountTimelineOutput(obj);
                 case "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput":
                     return new Community.Lexicon.Bookmarks.GetActorBookmarksOutput(obj);
                 case "app.bsky.feed.getActorFeeds#GetActorFeedsOutput":
@@ -400,6 +402,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetListOutput(obj);
                 case "app.bsky.graph.getLists#GetListsOutput":
                     return new App.Bsky.Graph.GetListsOutput(obj);
+                case "app.bsky.graph.getListsWithMembership#GetListsWithMembershipOutput":
+                    return new App.Bsky.Graph.GetListsWithMembershipOutput(obj);
                 case "place.stream.live.getLiveUsers#GetLiveUsersOutput":
                     return new Place.Stream.Live.GetLiveUsersOutput(obj);
                 case "chat.bsky.convo.getLog#GetLogOutput":
@@ -472,6 +476,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetStarterPackOutput(obj);
                 case "app.bsky.graph.getStarterPacks#GetStarterPacksOutput":
                     return new App.Bsky.Graph.GetStarterPacksOutput(obj);
+                case "app.bsky.graph.getStarterPacksWithMembership#GetStarterPacksWithMembershipOutput":
+                    return new App.Bsky.Graph.GetStarterPacksWithMembershipOutput(obj);
                 case "tools.ozone.moderation.getSubjects#GetSubjectsOutput":
                     return new Tools.Ozone.Moderation.GetSubjectsOutput(obj);
                 case "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput":
@@ -658,6 +664,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.ListViewBasic(obj);
                 case "app.bsky.graph.defs#listViewerState":
                     return new App.Bsky.Graph.ListViewerState(obj);
+                case "app.bsky.graph.getListsWithMembership#listWithMembership":
+                    return new App.Bsky.Graph.ListWithMembership(obj);
                 case "app.bsky.unspecced.getConfig#liveNowConfig":
                     return new App.Bsky.Unspecced.LiveNowConfig(obj);
                 case "place.stream.livestream":
@@ -1100,6 +1108,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackView(obj);
                 case "app.bsky.graph.defs#starterPackViewBasic":
                     return new App.Bsky.Graph.StarterPackViewBasic(obj);
+                case "app.bsky.graph.getStarterPacksWithMembership#starterPackWithMembership":
+                    return new App.Bsky.Graph.StarterPackWithMembership(obj);
                 case "app.bsky.actor.status":
                     return new App.Bsky.Actor.Status(obj);
                 case "app.netlify.aniblue.status":
@@ -1158,6 +1168,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.ThreadViewPref(obj);
                 case "com.atproto.admin.defs#threatSignature":
                     return new Com.Atproto.Admin.ThreatSignature(obj);
+                case "tools.ozone.moderation.getAccountTimeline#timelineItem":
+                    return new Tools.Ozone.Moderation.TimelineItem(obj);
+                case "tools.ozone.moderation.getAccountTimeline#timelineItemSummary":
+                    return new Tools.Ozone.Moderation.TimelineItemSummary(obj);
                 case "app.bsky.unspecced.defs#trendingTopic":
                     return new App.Bsky.Unspecced.TrendingTopic(obj);
                 case "app.bsky.unspecced.defs#trendView":

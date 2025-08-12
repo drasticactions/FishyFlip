@@ -13,22 +13,25 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     public class GetListsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Graph.ListView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Graph.ListView>
     {
 
-        public GetListsOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetListsOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Actor = actor;
             this.Limit = limit;
             this.Cursor = cursor;
+            this.Purposes = purposes;
             this.CancellationToken = cancellationToken;
         }
 
         public FishyFlip.Models.ATIdentifier Actor { get; }
 
+        public List<string>? Purposes { get; }
+
         /// <inheritdoc/>
         public override async Task<(IList<FishyFlip.Lexicon.App.Bsky.Graph.ListView> Posts, string Cursor)> GetRecordsAsync(int? limit = null, CancellationToken? token = default)
         {
             token = token ?? this.CancellationToken ?? System.Threading.CancellationToken.None;
-            var (result, error) = await this.ATProtocol.GetListsAsync(actor: this.Actor, limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
+            var (result, error) = await this.ATProtocol.GetListsAsync(actor: this.Actor, purposes: this.Purposes, limit: limit, cursor: this.Cursor, cancellationToken: token.Value!);
 
             this.HandleATError(error);
 
@@ -40,9 +43,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return (result.Lists, result.Cursor ?? string.Empty);
         }
 
-        public static GetListsOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetListsOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
         {
-            return new(atp: atp, actor: actor, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
+            return new(atp: atp, actor: actor, purposes: purposes, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }
     }
 }

@@ -78,6 +78,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
 
         /// <summary>
+        /// Get timeline of all available events of an account. This includes moderation events, account history and did history.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput?>> GetAccountTimelineAsync (FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        {
+            return atp.GetAccountTimelineAsync(did, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get details about a moderation event.
         /// </summary>
         /// <param name="id"></param>

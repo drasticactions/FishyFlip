@@ -13,6 +13,8 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <summary>
         /// Initializes a new instance of the <see cref="UserBook"/> class.
         /// </summary>
+        /// <param name="userDid">The DID of the user who added the book</param>
+        /// <param name="userHandle">The handle of the user who added the book</param>
         /// <param name="title">The title of the book</param>
         /// <param name="authors">The authors of the book (tab separated)</param>
         /// <param name="hiveId">The book's hive id, used to correlate user's books with the hive</param>
@@ -33,8 +35,10 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </param>
         /// <param name="stars">Number of stars given to the book (1-10) which will be mapped to 1-5 stars</param>
         /// <param name="review">The book's review</param>
-        public UserBook(string title = default, string authors = default, string hiveId = default, DateTime? createdAt = default, DateTime? startedAt = default, DateTime? finishedAt = default, string? cover = default, string thumbnail = default, string? description = default, long? rating = default, string? status = default, long? stars = default, string? review = default)
+        public UserBook(string userDid = default, string? userHandle = default, string title = default, string authors = default, string hiveId = default, DateTime? createdAt = default, DateTime? startedAt = default, DateTime? finishedAt = default, string? cover = default, string thumbnail = default, string? description = default, long? rating = default, string? status = default, long? stars = default, string? review = default)
         {
+            this.UserDid = userDid;
+            this.UserHandle = userHandle;
             this.Title = title;
             this.Authors = authors;
             this.HiveId = hiveId;
@@ -66,6 +70,8 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </summary>
         public UserBook(CBORObject obj)
         {
+            if (obj["userDid"] is not null) this.UserDid = obj["userDid"].AsString();
+            if (obj["userHandle"] is not null) this.UserHandle = obj["userHandle"].AsString();
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
             if (obj["authors"] is not null) this.Authors = obj["authors"].AsString();
             if (obj["hiveId"] is not null) this.HiveId = obj["hiveId"].AsString();
@@ -81,6 +87,22 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             if (obj["review"] is not null) this.Review = obj["review"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
+
+        /// <summary>
+        /// Gets or sets the userDid.
+        /// <br/> The DID of the user who added the book
+        /// </summary>
+        [JsonPropertyName("userDid")]
+        [JsonRequired]
+        public string UserDid { get; set; }
+
+        /// <summary>
+        /// Gets or sets the userHandle.
+        /// <br/> The handle of the user who added the book
+        /// </summary>
+        [JsonPropertyName("userHandle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? UserHandle { get; set; }
 
         /// <summary>
         /// Gets or sets the title.

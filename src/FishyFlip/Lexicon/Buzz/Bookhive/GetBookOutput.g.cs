@@ -32,7 +32,8 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// </param>
         /// <param name="reviews">Reviews of the book</param>
         /// <param name="comments">Comments on the book</param>
-        public GetBookOutput(DateTime? createdAt = default, DateTime? startedAt = default, DateTime? finishedAt = default, Blob? cover = default, string? status = default, long? stars = default, string? review = default, FishyFlip.Lexicon.Buzz.Bookhive.HiveBook book = default, List<FishyFlip.Lexicon.Buzz.Bookhive.Review> reviews = default, List<FishyFlip.Lexicon.Buzz.Bookhive.Comment> comments = default)
+        /// <param name="activity">Other users' activity on the book</param>
+        public GetBookOutput(DateTime? createdAt = default, DateTime? startedAt = default, DateTime? finishedAt = default, Blob? cover = default, string? status = default, long? stars = default, string? review = default, FishyFlip.Lexicon.Buzz.Bookhive.HiveBook book = default, List<FishyFlip.Lexicon.Buzz.Bookhive.Review> reviews = default, List<FishyFlip.Lexicon.Buzz.Bookhive.Comment> comments = default, List<FishyFlip.Lexicon.Buzz.Bookhive.Activity>? activity = default)
         {
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.StartedAt = startedAt;
@@ -44,6 +45,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             this.Book = book;
             this.Reviews = reviews;
             this.Comments = comments;
+            this.Activity = activity;
             this.Type = "buzz.bookhive.getBook#GetBookOutput";
         }
 
@@ -72,6 +74,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             if (obj["book"] is not null) this.Book = new FishyFlip.Lexicon.Buzz.Bookhive.HiveBook(obj["book"]);
             if (obj["reviews"] is not null) this.Reviews = obj["reviews"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.Review(n)).ToList();
             if (obj["comments"] is not null) this.Comments = obj["comments"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.Comment(n)).ToList();
+            if (obj["activity"] is not null) this.Activity = obj["activity"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.Activity(n)).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -159,6 +162,14 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         [JsonPropertyName("comments")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Buzz.Bookhive.Comment> Comments { get; set; }
+
+        /// <summary>
+        /// Gets or sets the activity.
+        /// <br/> Other users' activity on the book
+        /// </summary>
+        [JsonPropertyName("activity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<FishyFlip.Lexicon.Buzz.Bookhive.Activity>? Activity { get; set; }
 
         public const string RecordType = "buzz.bookhive.getBook#GetBookOutput";
 
