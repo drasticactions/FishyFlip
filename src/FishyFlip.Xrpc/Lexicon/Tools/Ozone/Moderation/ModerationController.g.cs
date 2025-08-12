@@ -60,6 +60,17 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView>, ATErrorResult>> EmitEventAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput input, CancellationToken cancellationToken);
 
         /// <summary>
+        /// Get timeline of all available events of an account. This includes moderation events, account history and did history.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput"/></returns>
+        [HttpGet("/xrpc/tools.ozone.moderation.getAccountTimeline")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput>, ATErrorResult>> GetAccountTimelineAsync ([FromQuery] FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get details about a moderation event.
         /// </summary>
         /// <param name="id"></param>

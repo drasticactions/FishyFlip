@@ -231,10 +231,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="actor">The account (actor) to enumerate lists from.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput?>> GetListsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput?>> GetListsAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
         {
-            return atp.GetListsAsync(actor, limit, cursor, cancellationToken);
+            return atp.GetListsAsync(actor, limit, cursor, purposes, cancellationToken);
         }
 
         /// <summary>
@@ -243,10 +244,38 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="actor">The account (actor) to enumerate lists from.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
         /// <param name="cancellationToken"></param>
-        public GetListsOutputCollection GetListsCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetListsOutputCollection GetListsCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
         {
-            return new GetListsOutputCollection(atp, actor, limit, cursor, cancellationToken);
+            return new GetListsOutputCollection(atp, actor, limit, cursor, purposes, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates the lists created by the session user, and includes membership information about `actor` in those lists. Only supports curation and moderation lists (no reference lists, used in starter packs). Requires auth.
+        /// </summary>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput?>> GetListsWithMembershipAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetListsWithMembershipAsync(actor, limit, cursor, purposes, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates the lists created by the session user, and includes membership information about `actor` in those lists. Only supports curation and moderation lists (no reference lists, used in starter packs). Requires auth.
+        /// </summary>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
+        /// <param name="cancellationToken"></param>
+        public GetListsWithMembershipOutputCollection GetListsWithMembershipCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
+        {
+            return new GetListsWithMembershipOutputCollection(atp, actor, limit, cursor, purposes, cancellationToken);
         }
 
 
@@ -306,6 +335,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput?>> GetStarterPacksAsync (List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
             return atp.GetStarterPacksAsync(uris, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Enumerates the starter packs created by the session user, and includes membership information about `actor` in those starter packs. Requires auth.
+        /// </summary>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput?>> GetStarterPacksWithMembershipAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return atp.GetStarterPacksWithMembershipAsync(actor, limit, cursor, cancellationToken);
+        }
+
+        /// <summary>
+        /// Enumerates the starter packs created by the session user, and includes membership information about `actor` in those starter packs. Requires auth.
+        /// </summary>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        public GetStarterPacksWithMembershipOutputCollection GetStarterPacksWithMembershipCollectionAsync (FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            return new GetStarterPacksWithMembershipOutputCollection(atp, actor, limit, cursor, cancellationToken);
         }
 
 

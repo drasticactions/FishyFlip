@@ -34,6 +34,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
 
        public const string GetLists = "/xrpc/app.bsky.graph.getLists";
 
+       public const string GetListsWithMembership = "/xrpc/app.bsky.graph.getListsWithMembership";
+
        public const string GetMutes = "/xrpc/app.bsky.graph.getMutes";
 
        public const string GetRelationships = "/xrpc/app.bsky.graph.getRelationships";
@@ -41,6 +43,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
        public const string GetStarterPack = "/xrpc/app.bsky.graph.getStarterPack";
 
        public const string GetStarterPacks = "/xrpc/app.bsky.graph.getStarterPacks";
+
+       public const string GetStarterPacksWithMembership = "/xrpc/app.bsky.graph.getStarterPacksWithMembership";
 
        public const string GetSuggestedFollowsByActor = "/xrpc/app.bsky.graph.getSuggestedFollowsByActor";
 
@@ -321,9 +325,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="actor">The account (actor) to enumerate lists from.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput?>> GetListsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput?>> GetListsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetLists.ToString();
             endpointUrl += "?";
@@ -340,10 +345,54 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
                 queryStrings.Add("cursor=" + cursor);
             }
 
+            if (purposes != null)
+            {
+                queryStrings.Add(string.Join("&", purposes.Select(n => "purposes=" + n)));
+            }
+
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Enumerates the lists created by the session user, and includes membership information about `actor` in those lists. Only supports curation and moderation lists (no reference lists, used in starter packs). Requires auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput?>> GetListsWithMembershipAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetListsWithMembership.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("actor=" + actor);
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            if (purposes != null)
+            {
+                queryStrings.Add(string.Join("&", purposes.Select(n => "purposes=" + n)));
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetListsWithMembershipOutput!, cancellationToken, headers);
         }
 
 
@@ -445,6 +494,39 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Enumerates the starter packs created by the session user, and includes membership information about `actor` in those starter packs. Requires auth.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput?>> GetStarterPacksWithMembershipAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetStarterPacksWithMembership.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("actor=" + actor);
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            if (cursor != null)
+            {
+                queryStrings.Add("cursor=" + cursor);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyGraphGetStarterPacksWithMembershipOutput!, cancellationToken, headers);
         }
 
 

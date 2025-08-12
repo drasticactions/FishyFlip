@@ -18,11 +18,13 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <see cref="FishyFlip.Lexicon.Buzz.Bookhive.Profile"/> (buzz.bookhive.defs#profile)
         /// </param>
         /// <param name="activity">The user's activity</param>
-        public GetProfileOutput(List<FishyFlip.Lexicon.Buzz.Bookhive.UserBook> books = default, FishyFlip.Lexicon.Buzz.Bookhive.Profile profile = default, List<FishyFlip.Lexicon.Buzz.Bookhive.Activity> activity = default)
+        /// <param name="friendActivity">The user's friend activity</param>
+        public GetProfileOutput(List<FishyFlip.Lexicon.Buzz.Bookhive.UserBook> books = default, FishyFlip.Lexicon.Buzz.Bookhive.Profile profile = default, List<FishyFlip.Lexicon.Buzz.Bookhive.Activity> activity = default, List<FishyFlip.Lexicon.Buzz.Bookhive.UserBook> friendActivity = default)
         {
             this.Books = books;
             this.Profile = profile;
             this.Activity = activity;
+            this.FriendActivity = friendActivity;
             this.Type = "buzz.bookhive.getProfile#GetProfileOutput";
         }
 
@@ -44,6 +46,7 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             if (obj["books"] is not null) this.Books = obj["books"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.UserBook(n)).ToList();
             if (obj["profile"] is not null) this.Profile = new FishyFlip.Lexicon.Buzz.Bookhive.Profile(obj["profile"]);
             if (obj["activity"] is not null) this.Activity = obj["activity"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.Activity(n)).ToList();
+            if (obj["friendActivity"] is not null) this.FriendActivity = obj["friendActivity"].Values.Select(n =>new FishyFlip.Lexicon.Buzz.Bookhive.UserBook(n)).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -71,6 +74,14 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         [JsonPropertyName("activity")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.Buzz.Bookhive.Activity> Activity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the friendActivity.
+        /// <br/> The user's friend activity
+        /// </summary>
+        [JsonPropertyName("friendActivity")]
+        [JsonRequired]
+        public List<FishyFlip.Lexicon.Buzz.Bookhive.UserBook> FriendActivity { get; set; }
 
         public const string RecordType = "buzz.bookhive.getProfile#GetProfileOutput";
 

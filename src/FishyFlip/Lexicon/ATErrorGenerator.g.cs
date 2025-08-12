@@ -70,14 +70,14 @@ namespace FishyFlip.Lexicon
                     return new DuplicateExternalIdError(statusCode, detail);
                 case "DuplicateCreate":
                     return new DuplicateCreateError(statusCode, detail);
+                case "RepoNotFound":
+                    return new RepoNotFoundError(statusCode, detail);
                 case "BlockedActor":
                     return new BlockedActorError(statusCode, detail);
                 case "BlockedByActor":
                     return new BlockedByActorError(statusCode, detail);
                 case "BlobNotFound":
                     return new BlobNotFoundError(statusCode, detail);
-                case "RepoNotFound":
-                    return new RepoNotFoundError(statusCode, detail);
                 case "RepoTakendown":
                     return new RepoTakendownError(statusCode, detail);
                 case "RepoSuspended":

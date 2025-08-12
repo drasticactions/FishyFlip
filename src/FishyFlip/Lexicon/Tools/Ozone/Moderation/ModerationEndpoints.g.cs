@@ -18,6 +18,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
        public const string EmitEvent = "/xrpc/tools.ozone.moderation.emitEvent";
 
+       public const string GetAccountTimeline = "/xrpc/tools.ozone.moderation.getAccountTimeline";
+
        public const string GetEvent = "/xrpc/tools.ozone.moderation.getEvent";
 
        public const string GetRecord = "/xrpc/tools.ozone.moderation.getRecord";
@@ -131,6 +133,30 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             inputItem.ModTool = modTool;
             inputItem.ExternalId = externalId;
             return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get timeline of all available events of an account. This includes moderation events, account history and did history.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="did"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput?>> GetAccountTimelineAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetAccountTimeline.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("did=" + did);
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetAccountTimelineOutput!, cancellationToken, headers);
         }
 
 

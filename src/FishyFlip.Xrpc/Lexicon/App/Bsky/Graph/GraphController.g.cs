@@ -106,10 +106,23 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <param name="actor">The account (actor) to enumerate lists from.</param>
         /// <param name="limit"></param>
         /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getLists")]
-        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>, ATErrorResult>> GetListsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetListsOutput>, ATErrorResult>> GetListsAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] List<string>? purposes = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Enumerates the lists created by the session user, and includes membership information about `actor` in those lists. Only supports curation and moderation lists (no reference lists, used in starter packs). Requires auth.
+        /// </summary>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="purposes">Optional filter by list purpose. If not specified, all supported types are returned.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.graph.getListsWithMembership")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput>, ATErrorResult>> GetListsWithMembershipAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, [FromQuery] List<string>? purposes = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
@@ -150,6 +163,17 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Graph
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.graph.getStarterPacks")]
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>, ATErrorResult>> GetStarterPacksAsync ([FromQuery] List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Enumerates the starter packs created by the session user, and includes membership information about `actor` in those starter packs. Requires auth.
+        /// </summary>
+        /// <param name="actor">The account (actor) to check for membership.</param>
+        /// <param name="limit"></param>
+        /// <param name="cursor"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.graph.getStarterPacksWithMembership")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput>, ATErrorResult>> GetStarterPacksWithMembershipAsync ([FromQuery] FishyFlip.Models.ATIdentifier actor, [FromQuery] int? limit = 50, [FromQuery] string? cursor = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Enumerates follows similar to a given account (actor). Expected use is to recommend additional accounts immediately after following one account.

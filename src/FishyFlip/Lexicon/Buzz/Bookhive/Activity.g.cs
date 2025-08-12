@@ -23,12 +23,16 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         /// <param name="createdAt"></param>
         /// <param name="hiveId">The hive id of the book</param>
         /// <param name="title">The title of the book</param>
-        public Activity(string type = default, DateTime? createdAt = default, string hiveId = default, string title = default)
+        /// <param name="userDid">The DID of the user who added the book</param>
+        /// <param name="userHandle">The handle of the user who added the book</param>
+        public Activity(string type = default, DateTime? createdAt = default, string hiveId = default, string title = default, string userDid = default, string userHandle = default)
         {
             this.TypeValue = type;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.HiveId = hiveId;
             this.Title = title;
+            this.UserDid = userDid;
+            this.UserHandle = userHandle;
             this.Type = "buzz.bookhive.defs#activity";
         }
 
@@ -51,6 +55,8 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["hiveId"] is not null) this.HiveId = obj["hiveId"].AsString();
             if (obj["title"] is not null) this.Title = obj["title"].AsString();
+            if (obj["userDid"] is not null) this.UserDid = obj["userDid"].AsString();
+            if (obj["userHandle"] is not null) this.UserHandle = obj["userHandle"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -88,6 +94,22 @@ namespace FishyFlip.Lexicon.Buzz.Bookhive
         [JsonPropertyName("title")]
         [JsonRequired]
         public string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the userDid.
+        /// <br/> The DID of the user who added the book
+        /// </summary>
+        [JsonPropertyName("userDid")]
+        [JsonRequired]
+        public string UserDid { get; set; }
+
+        /// <summary>
+        /// Gets or sets the userHandle.
+        /// <br/> The handle of the user who added the book
+        /// </summary>
+        [JsonPropertyName("userHandle")]
+        [JsonRequired]
+        public string UserHandle { get; set; }
 
         public const string RecordType = "buzz.bookhive.defs#activity";
 
