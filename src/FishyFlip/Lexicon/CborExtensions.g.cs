@@ -46,12 +46,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.AccountStats(obj);
                 case "com.atproto.admin.defs#accountView":
                     return new Com.Atproto.Admin.AccountView(obj);
-                case "buzz.bookhive.defs#activity":
-                    return new Buzz.Bookhive.Activity(obj);
                 case "app.bsky.notification.defs#activitySubscription":
                     return new App.Bsky.Notification.ActivitySubscription(obj);
-                case "blue.maril.stellar.getActorReactions#actorReaction":
-                    return new Blue.Maril.Stellar.ActorReaction(obj);
                 case "tools.ozone.team.addMember#AddMemberInput":
                     return new Tools.Ozone.Team.AddMemberInput(obj);
                 case "chat.bsky.convo.addReaction#AddReactionInput":
@@ -62,8 +58,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.AddReservedHandleInput(obj);
                 case "com.atproto.temp.addReservedHandle#AddReservedHandleOutput":
                     return new Com.Atproto.Temp.AddReservedHandleOutput(obj);
-                case "community.lexicon.location.address":
-                    return new Community.Lexicon.Location.Address(obj);
                 case "tools.ozone.safelink.addRule#AddRuleInput":
                     return new Tools.Ozone.Safelink.AddRuleInput(obj);
                 case "tools.ozone.set.addValues#AddValuesInput":
@@ -88,14 +82,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.AppPasswordDef(obj);
                 case "app.bsky.embed.defs#aspectRatio":
                     return new App.Bsky.Embed.AspectRatio(obj);
-                case "place.stream.segment#audio":
-                    return new Place.Stream.Audio(obj);
-                case "com.shinolabs.pinksea.appViewDefs#author":
-                    return new Com.Shinolabs.Pinksea.Author(obj);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return new Chat.Bsky.Convo.BatchItem(obj);
-                case "com.whtwnd.blog.defs#blobMetadata":
-                    return new Com.Whtwnd.Blog.BlobMetadata(obj);
                 case "tools.ozone.moderation.defs#blobView":
                     return new Tools.Ozone.Moderation.BlobView(obj);
                 case "app.bsky.graph.block":
@@ -104,32 +92,14 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.BlockedAuthor(obj);
                 case "app.bsky.feed.defs#blockedPost":
                     return new App.Bsky.Feed.BlockedPost(obj);
-                case "place.stream.defs#blockView":
-                    return new Place.Stream.BlockView(obj);
-                case "com.whtwnd.blog.defs#blogEntry":
-                    return new Com.Whtwnd.Blog.BlogEntry(obj);
-                case "blue.linkat.board":
-                    return new Blue.Linkat.Board(obj);
-                case "buzz.bookhive.book":
-                    return new Buzz.Bookhive.Book(obj);
-                case "community.lexicon.bookmarks.bookmark":
-                    return new Community.Lexicon.Bookmarks.Bookmark(obj);
-                case "blue.zio.atfile.finger#browser":
-                    return new Blue.Zio.Atfile.Browser(obj);
                 case "app.bsky.actor.defs#bskyAppProgressGuide":
                     return new App.Bsky.Actor.BskyAppProgressGuide(obj);
                 case "app.bsky.actor.defs#bskyAppStatePref":
                     return new App.Bsky.Actor.BskyAppStatePref(obj);
-                case "buzz.bookhive.buzz":
-                    return new Buzz.Bookhive.Buzz(obj);
                 case "app.bsky.richtext.facet#byteSlice":
                     return new App.Bsky.Richtext.ByteSlice(obj);
-                case "social.psky.richtext.facet#byteSlice":
-                    return new Social.Psky.Richtext.ByteSlice(obj);
                 case "app.bsky.embed.video#caption":
                     return new App.Bsky.Embed.Caption(obj);
-                case "blue.linkat.board#card":
-                    return new Blue.Linkat.Card(obj);
                 case "app.bsky.notification.defs#chatPreference":
                     return new App.Bsky.Notification.ChatPreference(obj);
                 case "com.atproto.server.checkAccountStatus#CheckAccountStatusOutput":
@@ -138,16 +108,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.CheckHandleAvailabilityOutput(obj);
                 case "com.atproto.temp.checkSignupQueue#CheckSignupQueueOutput":
                     return new Com.Atproto.Temp.CheckSignupQueueOutput(obj);
-                case "blue.moji.collection.defs#collectionView":
-                    return new Blue.Moji.Collection.CollectionView(obj);
-                case "place.stream.chat.profile#color":
-                    return new Place.Stream.Chat.Color(obj);
-                case "com.whtwnd.blog.defs#comment":
-                    return new Com.Whtwnd.Blog.Comment(obj);
-                case "fyi.unravel.frontpage.comment":
-                    return new Fyi.Unravel.Frontpage.Comment(obj);
-                case "buzz.bookhive.defs#comment":
-                    return new Buzz.Bookhive.Comment(obj);
                 case "com.atproto.sync.subscribeRepos#commit":
                     return new Com.Atproto.Sync.Commit(obj);
                 case "com.atproto.repo.defs#commitMeta":
@@ -252,28 +212,16 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.EmbedVideo(obj);
                 case "tools.ozone.moderation.emitEvent#EmitEventInput":
                     return new Tools.Ozone.Moderation.EmitEventInput(obj);
-                case "blue.maril.stellar.reaction#emojiRef":
-                    return new Blue.Maril.Stellar.EmojiRef(obj);
                 case "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput":
                     return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
-                case "com.whtwnd.blog.entry":
-                    return new Com.Whtwnd.Blog.Entry(obj);
                 case "tools.ozone.safelink.defs#event":
                     return new Tools.Ozone.Safelink.Event(obj);
                 case "tools.ozone.hosting.getAccountHistory#event":
                     return new Tools.Ozone.Hosting.Event(obj);
-                case "community.lexicon.calendar.event":
-                    return new Community.Lexicon.Calendar.Event(obj);
                 case "app.bsky.embed.external#external":
                     return new App.Bsky.Embed.External(obj);
                 case "app.bsky.richtext.facet":
                     return new App.Bsky.Richtext.Facet(obj);
-                case "social.psky.richtext.facet":
-                    return new Social.Psky.Richtext.Facet(obj);
-                case "blue.moji.richtext.facet":
-                    return new Blue.Moji.Richtext.Facet(obj);
-                case "place.stream.richtext.facet":
-                    return new Place.Stream.Richtext.Facet(obj);
                 case "app.bsky.feed.describeFeedGenerator#feed":
                     return new App.Bsky.Feed.Feed(obj);
                 case "app.bsky.graph.starterpack#feedItem":
@@ -294,24 +242,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.FollowerRule(obj);
                 case "app.bsky.feed.threadgate#followingRule":
                     return new App.Bsky.Feed.FollowingRule(obj);
-                case "blue.moji.richtext.facet#formats_v0":
-                    return new Blue.Moji.Richtext.FormatsV0(obj);
-                case "blue.moji.collection.item#formats_v0":
-                    return new Blue.Moji.Collection.FormatsV0(obj);
-                case "place.stream.segment#framerate":
-                    return new Place.Stream.Framerate(obj);
-                case "community.lexicon.location.fsq":
-                    return new Community.Lexicon.Location.Fsq(obj);
-                case "place.stream.chat.gate":
-                    return new Place.Stream.Chat.Gate(obj);
                 case "app.bsky.feed.generator":
                     return new App.Bsky.Feed.Generator(obj);
                 case "app.bsky.feed.defs#generatorView":
                     return new App.Bsky.Feed.GeneratorView(obj);
                 case "app.bsky.feed.defs#generatorViewerState":
                     return new App.Bsky.Feed.GeneratorViewerState(obj);
-                case "community.lexicon.location.geo":
-                    return new Community.Lexicon.Location.Geo(obj);
                 case "tools.ozone.hosting.getAccountHistory#GetAccountHistoryOutput":
                     return new Tools.Ozone.Hosting.GetAccountHistoryOutput(obj);
                 case "com.atproto.admin.getAccountInfos#GetAccountInfosOutput":
@@ -320,32 +256,18 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.GetAccountInviteCodesOutput(obj);
                 case "tools.ozone.moderation.getAccountTimeline#GetAccountTimelineOutput":
                     return new Tools.Ozone.Moderation.GetAccountTimelineOutput(obj);
-                case "community.lexicon.bookmarks.getActorBookmarks#GetActorBookmarksOutput":
-                    return new Community.Lexicon.Bookmarks.GetActorBookmarksOutput(obj);
                 case "app.bsky.feed.getActorFeeds#GetActorFeedsOutput":
                     return new App.Bsky.Feed.GetActorFeedsOutput(obj);
                 case "app.bsky.feed.getActorLikes#GetActorLikesOutput":
                     return new App.Bsky.Feed.GetActorLikesOutput(obj);
                 case "chat.bsky.moderation.getActorMetadata#GetActorMetadataOutput":
                     return new Chat.Bsky.Moderation.GetActorMetadataOutput(obj);
-                case "blue.moji.packs.getActorPacks#GetActorPacksOutput":
-                    return new Blue.Moji.Packs.GetActorPacksOutput(obj);
-                case "blue.maril.stellar.getActorReactions#GetActorReactionsOutput":
-                    return new Blue.Maril.Stellar.GetActorReactionsOutput(obj);
                 case "app.bsky.graph.getActorStarterPacks#GetActorStarterPacksOutput":
                     return new App.Bsky.Graph.GetActorStarterPacksOutput(obj);
                 case "app.bsky.feed.getAuthorFeed#GetAuthorFeedOutput":
                     return new App.Bsky.Feed.GetAuthorFeedOutput(obj);
-                case "com.shinolabs.pinksea.getAuthorFeed#GetAuthorFeedOutput":
-                    return new Com.Shinolabs.Pinksea.GetAuthorFeedOutput(obj);
-                case "com.whtwnd.blog.getAuthorPosts#GetAuthorPostsOutput":
-                    return new Com.Whtwnd.Blog.GetAuthorPostsOutput(obj);
-                case "com.shinolabs.pinksea.getAuthorReplies#GetAuthorRepliesOutput":
-                    return new Com.Shinolabs.Pinksea.GetAuthorRepliesOutput(obj);
                 case "app.bsky.graph.getBlocks#GetBlocksOutput":
                     return new App.Bsky.Graph.GetBlocksOutput(obj);
-                case "buzz.bookhive.getBook#GetBookOutput":
-                    return new Buzz.Bookhive.GetBookOutput(obj);
                 case "app.bsky.unspecced.getConfig#GetConfigOutput":
                     return new App.Bsky.Unspecced.GetConfigOutput(obj);
                 case "tools.ozone.server.getConfig#GetConfigOutput":
@@ -356,10 +278,6 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.GetConvoForMembersOutput(obj);
                 case "chat.bsky.convo.getConvo#GetConvoOutput":
                     return new Chat.Bsky.Convo.GetConvoOutput(obj);
-                case "blue.maril.stellar.getEmojis#GetEmojisOutput":
-                    return new Blue.Maril.Stellar.GetEmojisOutput(obj);
-                case "com.whtwnd.blog.getEntryMetadataByName#GetEntryMetadataByNameOutput":
-                    return new Com.Whtwnd.Blog.GetEntryMetadataByNameOutput(obj);
                 case "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput":
                     return new App.Bsky.Feed.GetFeedGeneratorOutput(obj);
                 case "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput":
@@ -370,20 +288,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.GetFeedSkeletonOutput(obj);
                 case "app.bsky.graph.getFollowers#GetFollowersOutput":
                     return new App.Bsky.Graph.GetFollowersOutput(obj);
-                case "place.stream.graph.getFollowingUser#GetFollowingUserOutput":
-                    return new Place.Stream.Graph.GetFollowingUserOutput(obj);
                 case "app.bsky.graph.getFollows#GetFollowsOutput":
                     return new App.Bsky.Graph.GetFollowsOutput(obj);
-                case "com.shinolabs.pinksea.getHandleFromDid#GetHandleFromDidOutput":
-                    return new Com.Shinolabs.Pinksea.GetHandleFromDidOutput(obj);
                 case "com.atproto.sync.getHostStatus#GetHostStatusOutput":
                     return new Com.Atproto.Sync.GetHostStatusOutput(obj);
-                case "com.shinolabs.pinksea.getIdentity#GetIdentityOutput":
-                    return new Com.Shinolabs.Pinksea.GetIdentityOutput(obj);
                 case "com.atproto.admin.getInviteCodes#GetInviteCodesOutput":
                     return new Com.Atproto.Admin.GetInviteCodesOutput(obj);
-                case "blue.moji.collection.getItem#GetItemOutput":
-                    return new Blue.Moji.Collection.GetItemOutput(obj);
                 case "app.bsky.video.getJobStatus#GetJobStatusOutput":
                     return new App.Bsky.Video.GetJobStatusOutput(obj);
                 case "app.bsky.graph.getKnownFollowers#GetKnownFollowersOutput":
@@ -404,26 +314,14 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetListsOutput(obj);
                 case "app.bsky.graph.getListsWithMembership#GetListsWithMembershipOutput":
                     return new App.Bsky.Graph.GetListsWithMembershipOutput(obj);
-                case "place.stream.live.getLiveUsers#GetLiveUsersOutput":
-                    return new Place.Stream.Live.GetLiveUsersOutput(obj);
                 case "chat.bsky.convo.getLog#GetLogOutput":
                     return new Chat.Bsky.Convo.GetLogOutput(obj);
-                case "com.whtwnd.blog.getMentionsByEntry#GetMentionsByEntryOutput":
-                    return new Com.Whtwnd.Blog.GetMentionsByEntryOutput(obj);
                 case "chat.bsky.moderation.getMessageContext#GetMessageContextOutput":
                     return new Chat.Bsky.Moderation.GetMessageContextOutput(obj);
                 case "chat.bsky.convo.getMessages#GetMessagesOutput":
                     return new Chat.Bsky.Convo.GetMessagesOutput(obj);
                 case "app.bsky.graph.getMutes#GetMutesOutput":
                     return new App.Bsky.Graph.GetMutesOutput(obj);
-                case "com.shinolabs.pinksea.getOekaki#GetOekakiOutput":
-                    return new Com.Shinolabs.Pinksea.GetOekakiOutput(obj);
-                case "blue.moji.packs.getPack#GetPackOutput":
-                    return new Blue.Moji.Packs.GetPackOutput(obj);
-                case "blue.moji.packs.getPacks#GetPacksOutput":
-                    return new Blue.Moji.Packs.GetPacksOutput(obj);
-                case "com.shinolabs.pinksea.getParentForReply#GetParentForReplyOutput":
-                    return new Com.Shinolabs.Pinksea.GetParentForReplyOutput(obj);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -438,16 +336,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.GetPreferencesOutput(obj);
                 case "app.bsky.notification.getPreferences#GetPreferencesOutput":
                     return new App.Bsky.Notification.GetPreferencesOutput(obj);
-                case "buzz.bookhive.getProfile#GetProfileOutput":
-                    return new Buzz.Bookhive.GetProfileOutput(obj);
                 case "app.bsky.actor.getProfiles#GetProfilesOutput":
                     return new App.Bsky.Actor.GetProfilesOutput(obj);
                 case "app.bsky.feed.getQuotes#GetQuotesOutput":
                     return new App.Bsky.Feed.GetQuotesOutput(obj);
-                case "blue.maril.stellar.getReactions#GetReactionsOutput":
-                    return new Blue.Maril.Stellar.GetReactionsOutput(obj);
-                case "com.shinolabs.pinksea.getRecent#GetRecentOutput":
-                    return new Com.Shinolabs.Pinksea.GetRecentOutput(obj);
                 case "com.atproto.identity.getRecommendedDidCredentials#GetRecommendedDidCredentialsOutput":
                     return new Com.Atproto.Identity.GetRecommendedDidCredentialsOutput(obj);
                 case "com.atproto.repo.getRecord#GetRecordOutput":
@@ -464,8 +356,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.GetRepoStatusOutput(obj);
                 case "app.bsky.feed.getRepostedBy#GetRepostedByOutput":
                     return new App.Bsky.Feed.GetRepostedByOutput(obj);
-                case "place.stream.live.getSegments#GetSegmentsOutput":
-                    return new Place.Stream.Live.GetSegmentsOutput(obj);
                 case "com.atproto.server.getServiceAuth#GetServiceAuthOutput":
                     return new Com.Atproto.Server.GetServiceAuthOutput(obj);
                 case "app.bsky.labeler.getServices#GetServicesOutput":
@@ -502,8 +392,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.GetSuggestionsOutput(obj);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
                     return new App.Bsky.Unspecced.GetSuggestionsSkeletonOutput(obj);
-                case "com.shinolabs.pinksea.getTagFeed#GetTagFeedOutput":
-                    return new Com.Shinolabs.Pinksea.GetTagFeedOutput(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput":
                     return new App.Bsky.Unspecced.GetTaggedSuggestionsOutput(obj);
                 case "app.bsky.feed.getTimeline#GetTimelineOutput":
@@ -530,14 +418,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Hosting.HandleUpdated(obj);
                 case "app.bsky.actor.defs#hiddenPostsPref":
                     return new App.Bsky.Actor.HiddenPostsPref(obj);
-                case "buzz.bookhive.hiveBook":
-                    return new Buzz.Bookhive.HiveBook(obj);
                 case "com.atproto.sync.listHosts#host":
                     return new Com.Atproto.Sync.Host(obj);
-                case "community.lexicon.location.hthree":
-                    return new Community.Lexicon.Location.Hthree(obj);
-                case "com.shinolabs.pinksea.appViewDefs#hydratedOekaki":
-                    return new Com.Shinolabs.Pinksea.HydratedOekaki(obj);
                 case "com.atproto.sync.subscribeRepos#identity":
                     return new Com.Atproto.Sync.Identity(obj);
                 case "tools.ozone.moderation.defs#identityEvent":
@@ -546,12 +428,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.IdentityInfo(obj);
                 case "app.bsky.embed.images#image":
                     return new App.Bsky.Embed.Image(obj);
-                case "com.shinolabs.pinksea.oekaki#image":
-                    return new Com.Shinolabs.Pinksea.Image(obj);
                 case "tools.ozone.moderation.defs#imageDetails":
                     return new Tools.Ozone.Moderation.ImageDetails(obj);
-                case "com.shinolabs.pinksea.oekaki#imageLink":
-                    return new Com.Shinolabs.Pinksea.ImageLink(obj);
                 case "com.atproto.label.subscribeLabels#info":
                     return new Com.Atproto.Label.Info(obj);
                 case "com.atproto.sync.subscribeRepos#info":
@@ -566,18 +444,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.InviteCode(obj);
                 case "com.atproto.server.defs#inviteCodeUse":
                     return new Com.Atproto.Server.InviteCodeUse(obj);
-                case "blue.moji.collection.item":
-                    return new Blue.Moji.Collection.Item(obj);
-                case "blue.maril.stellar.getEmojis#itemView":
-                    return new Blue.Maril.Stellar.ItemView(obj);
-                case "blue.moji.collection.item#itemView":
-                    return new Blue.Moji.Collection.ItemView(obj);
-                case "blue.moji.collection.listCollection#itemView":
-                    return new Blue.Moji.Collection.ItemViewDef(obj);
                 case "app.bsky.video.defs#jobStatus":
                     return new App.Bsky.Video.JobStatus(obj);
-                case "place.stream.key":
-                    return new Place.Stream.Key(obj);
                 case "app.bsky.actor.defs#knownFollowers":
                     return new App.Bsky.Actor.KnownFollowers(obj);
                 case "com.atproto.label.defs#label":
@@ -606,14 +474,10 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.LeaveConvoOutput(obj);
                 case "app.bsky.feed.like":
                     return new App.Bsky.Feed.Like(obj);
-                case "community.lexicon.interaction.like":
-                    return new Community.Lexicon.Interaction.Like(obj);
                 case "app.bsky.feed.getLikes#like":
                     return new App.Bsky.Feed.LikeDef(obj);
                 case "app.bsky.richtext.facet#link":
                     return new App.Bsky.Richtext.Link(obj);
-                case "social.psky.richtext.facet#link":
-                    return new Social.Psky.Richtext.Link(obj);
                 case "app.bsky.feed.describeFeedGenerator#links":
                     return new App.Bsky.Feed.Links(obj);
                 case "com.atproto.server.describeServer#links":
@@ -628,8 +492,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.ListBlobsOutput(obj);
                 case "app.bsky.graph.listblock":
                     return new App.Bsky.Graph.Listblock(obj);
-                case "blue.moji.collection.listCollection#ListCollectionOutput":
-                    return new Blue.Moji.Collection.ListCollectionOutput(obj);
                 case "chat.bsky.convo.listConvos#ListConvosOutput":
                     return new Chat.Bsky.Convo.ListConvosOutput(obj);
                 case "com.atproto.sync.listHosts#ListHostsOutput":
@@ -668,12 +530,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.ListWithMembership(obj);
                 case "app.bsky.unspecced.getConfig#liveNowConfig":
                     return new App.Bsky.Unspecced.LiveNowConfig(obj);
-                case "place.stream.livestream":
-                    return new Place.Stream.Livestream(obj);
-                case "place.stream.livestream#livestreamView":
-                    return new Place.Stream.LivestreamView(obj);
-                case "blue.zio.atfile.lock":
-                    return new Blue.Zio.Atfile.Lock(obj);
                 case "chat.bsky.convo.defs#logAcceptConvo":
                     return new Chat.Bsky.Convo.LogAcceptConvo(obj);
                 case "chat.bsky.convo.defs#logAddReaction":
@@ -694,20 +550,12 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.LogRemoveReaction(obj);
                 case "chat.bsky.convo.defs#logUnmuteConvo":
                     return new Chat.Bsky.Convo.LogUnmuteConvo(obj);
-                case "blue.zio.atfile.finger#machine":
-                    return new Blue.Zio.Atfile.Machine(obj);
                 case "tools.ozone.team.defs#member":
                     return new Tools.Ozone.Team.Member(obj);
                 case "app.bsky.richtext.facet#mention":
                     return new App.Bsky.Richtext.Mention(obj);
-                case "social.psky.richtext.facet#mention":
-                    return new Social.Psky.Richtext.Mention(obj);
                 case "app.bsky.feed.threadgate#mentionRule":
                     return new App.Bsky.Feed.MentionRule(obj);
-                case "social.psky.chat.message":
-                    return new Social.Psky.Chat.Message(obj);
-                case "place.stream.chat.message":
-                    return new Place.Stream.Chat.Message(obj);
                 case "chat.bsky.convo.defs#messageAndReactionView":
                     return new Chat.Bsky.Convo.MessageAndReactionView(obj);
                 case "chat.bsky.convo.defs#messageInput":
@@ -716,8 +564,6 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.MessageRef(obj);
                 case "chat.bsky.convo.defs#messageView":
                     return new Chat.Bsky.Convo.MessageView(obj);
-                case "place.stream.chat.defs#messageView":
-                    return new Place.Stream.Chat.MessageView(obj);
                 case "chat.bsky.convo.defs#messageViewSender":
                     return new Chat.Bsky.Convo.MessageViewSender(obj);
                 case "chat.bsky.moderation.getActorMetadata#metadata":
@@ -762,8 +608,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.ModEventView(obj);
                 case "tools.ozone.moderation.defs#modEventViewDetail":
                     return new Tools.Ozone.Moderation.ModEventViewDetail(obj);
-                case "social.psky.chat.room#modlistRef":
-                    return new Social.Psky.Chat.ModlistRef(obj);
                 case "tools.ozone.moderation.defs#modTool":
                     return new Tools.Ozone.Moderation.ModTool(obj);
                 case "com.atproto.moderation.createReport#modTool":
@@ -788,40 +632,16 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.NotFoundPost(obj);
                 case "app.bsky.notification.listNotifications#notification":
                     return new App.Bsky.Notification.Notification(obj);
-                case "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryInput":
-                    return new Com.Whtwnd.Blog.NotifyOfNewEntryInput(obj);
-                case "com.whtwnd.blog.notifyOfNewEntry#NotifyOfNewEntryOutput":
-                    return new Com.Whtwnd.Blog.NotifyOfNewEntryOutput(obj);
                 case "app.bsky.actor.defs#nux":
                     return new App.Bsky.Actor.Nux(obj);
-                case "com.shinolabs.pinksea.oekaki":
-                    return new Com.Shinolabs.Pinksea.Oekaki(obj);
-                case "com.shinolabs.pinksea.appViewDefs#oekakiTombstone":
-                    return new Com.Shinolabs.Pinksea.OekakiTombstone(obj);
-                case "com.whtwnd.blog.defs#ogp":
-                    return new Com.Whtwnd.Blog.Ogp(obj);
                 case "tools.ozone.setting.defs#option":
                     return new Tools.Ozone.Setting.Option(obj);
-                case "blue.moji.packs.pack":
-                    return new Blue.Moji.Packs.Pack(obj);
-                case "blue.moji.packs.packitem":
-                    return new Blue.Moji.Packs.Packitem(obj);
-                case "blue.moji.packs.defs#packItemView":
-                    return new Blue.Moji.Packs.PackItemView(obj);
-                case "blue.moji.packs.defs#packView":
-                    return new Blue.Moji.Packs.PackView(obj);
-                case "blue.moji.packs.defs#packViewBasic":
-                    return new Blue.Moji.Packs.PackViewBasic(obj);
-                case "blue.moji.packs.defs#packViewerState":
-                    return new Blue.Moji.Packs.PackViewerState(obj);
                 case "tools.ozone.hosting.getAccountHistory#passwordUpdated":
                     return new Tools.Ozone.Hosting.PasswordUpdated(obj);
                 case "app.bsky.actor.defs#personalDetailsPref":
                     return new App.Bsky.Actor.PersonalDetailsPref(obj);
                 case "app.bsky.feed.post":
                     return new App.Bsky.Feed.Post(obj);
-                case "fyi.unravel.frontpage.post":
-                    return new Fyi.Unravel.Frontpage.Post(obj);
                 case "app.bsky.feed.postgate":
                     return new App.Bsky.Feed.Postgate(obj);
                 case "app.bsky.actor.defs#postInteractionSettingsPref":
@@ -834,22 +654,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.Preferences(obj);
                 case "app.bsky.actor.profile":
                     return new App.Bsky.Actor.Profile(obj);
-                case "com.shinolabs.pinksea.profile":
-                    return new Com.Shinolabs.Pinksea.Profile(obj);
-                case "social.psky.actor.profile":
-                    return new Social.Psky.Actor.Profile(obj);
-                case "buzz.bookhive.defs#profile":
-                    return new Buzz.Bookhive.Profile(obj);
-                case "place.stream.chat.profile":
-                    return new Place.Stream.Chat.Profile(obj);
                 case "app.bsky.actor.defs#profileAssociated":
                     return new App.Bsky.Actor.ProfileAssociated(obj);
                 case "app.bsky.actor.defs#profileAssociatedActivitySubscription":
                     return new App.Bsky.Actor.ProfileAssociatedActivitySubscription(obj);
                 case "app.bsky.actor.defs#profileAssociatedChat":
                     return new App.Bsky.Actor.ProfileAssociatedChat(obj);
-                case "com.shinolabs.pinksea.profile#profileLink":
-                    return new Com.Shinolabs.Pinksea.ProfileLink(obj);
                 case "app.bsky.actor.defs#profileView":
                     return new App.Bsky.Actor.ProfileView(obj);
                 case "app.bsky.actor.defs#profileViewBasic":
@@ -862,10 +672,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.PutActivitySubscriptionInput(obj);
                 case "app.bsky.notification.putActivitySubscription#PutActivitySubscriptionOutput":
                     return new App.Bsky.Notification.PutActivitySubscriptionOutput(obj);
-                case "blue.moji.collection.putItem#PutItemInput":
-                    return new Blue.Moji.Collection.PutItemInput(obj);
-                case "blue.moji.collection.putItem#PutItemOutput":
-                    return new Blue.Moji.Collection.PutItemOutput(obj);
                 case "app.bsky.actor.putPreferences#PutPreferencesInput":
                     return new App.Bsky.Actor.PutPreferencesInput(obj);
                 case "app.bsky.notification.putPreferences#PutPreferencesInput":
@@ -894,10 +700,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Set.QuerySetsOutput(obj);
                 case "tools.ozone.moderation.queryStatuses#QueryStatusesOutput":
                     return new Tools.Ozone.Moderation.QueryStatusesOutput(obj);
-                case "blue.maril.stellar.reaction":
-                    return new Blue.Maril.Stellar.Reaction(obj);
-                case "blue.maril.stellar.getReactions#reaction":
-                    return new Blue.Maril.Stellar.ReactionDef(obj);
                 case "chat.bsky.convo.defs#reactionView":
                     return new Chat.Bsky.Convo.ReactionView(obj);
                 case "chat.bsky.convo.defs#reactionViewSender":
@@ -946,14 +748,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.RemoveReactionOutput(obj);
                 case "tools.ozone.safelink.removeRule#RemoveRuleInput":
                     return new Tools.Ozone.Safelink.RemoveRuleInput(obj);
-                case "place.stream.defs#rendition":
-                    return new Place.Stream.Rendition(obj);
-                case "place.stream.defs#renditions":
-                    return new Place.Stream.Renditions(obj);
                 case "app.bsky.feed.defs#replyRef":
                     return new App.Bsky.Feed.ReplyRef(obj);
-                case "place.stream.chat.message#replyRef":
-                    return new Place.Stream.Chat.ReplyRef(obj);
                 case "app.bsky.feed.post#replyRef":
                     return new App.Bsky.Feed.ReplyRefDef(obj);
                 case "com.atproto.sync.listRepos#repo":
@@ -998,8 +794,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.ResultAvailable(obj);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
                     return new Com.Atproto.Temp.ResultUnavailable(obj);
-                case "buzz.bookhive.defs#review":
-                    return new Buzz.Bookhive.Review(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
                     return new Com.Atproto.Server.RevokeAppPasswordInput(obj);
                 case "tools.ozone.verification.revokeVerifications#revokeError":
@@ -1008,22 +802,12 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Verification.RevokeVerificationsInput(obj);
                 case "tools.ozone.verification.revokeVerifications#RevokeVerificationsOutput":
                     return new Tools.Ozone.Verification.RevokeVerificationsOutput(obj);
-                case "social.psky.richtext.facet#room":
-                    return new Social.Psky.Richtext.Room(obj);
-                case "social.psky.chat.room":
-                    return new Social.Psky.Chat.Room(obj);
-                case "community.lexicon.calendar.rsvp":
-                    return new Community.Lexicon.Calendar.Rsvp(obj);
                 case "app.bsky.actor.defs#savedFeed":
                     return new App.Bsky.Actor.SavedFeed(obj);
                 case "app.bsky.actor.defs#savedFeedsPref":
                     return new App.Bsky.Actor.SavedFeedsPref(obj);
                 case "app.bsky.actor.defs#savedFeedsPrefV2":
                     return new App.Bsky.Actor.SavedFeedsPrefV2(obj);
-                case "blue.moji.collection.saveToCollection#SaveToCollectionInput":
-                    return new Blue.Moji.Collection.SaveToCollectionInput(obj);
-                case "blue.moji.collection.saveToCollection#SaveToCollectionOutput":
-                    return new Blue.Moji.Collection.SaveToCollectionOutput(obj);
                 case "com.atproto.lexicon.schema":
                     return new Com.Atproto.Lexicon.Schema(obj);
                 case "com.atproto.admin.searchAccounts#SearchAccountsOutput":
@@ -1036,8 +820,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SearchActorsSkeletonOutput(obj);
                 case "app.bsky.actor.searchActorsTypeahead#SearchActorsTypeaheadOutput":
                     return new App.Bsky.Actor.SearchActorsTypeaheadOutput(obj);
-                case "buzz.bookhive.searchBooks#SearchBooksOutput":
-                    return new Buzz.Bookhive.SearchBooksOutput(obj);
                 case "app.bsky.feed.searchPosts#SearchPostsOutput":
                     return new App.Bsky.Feed.SearchPostsOutput(obj);
                 case "app.bsky.unspecced.searchPostsSkeleton#SearchPostsSkeletonOutput":
@@ -1048,10 +830,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.SearchStarterPacksOutput(obj);
                 case "app.bsky.unspecced.searchStarterPacksSkeleton#SearchStarterPacksSkeletonOutput":
                     return new App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput(obj);
-                case "place.stream.segment":
-                    return new Place.Stream.Segment(obj);
-                case "place.stream.segment#segmentView":
-                    return new Place.Stream.SegmentView(obj);
                 case "com.atproto.label.defs#selfLabel":
                     return new Com.Atproto.Label.SelfLabel(obj);
                 case "com.atproto.label.defs#selfLabels":
@@ -1076,8 +854,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Server.ServiceConfig(obj);
                 case "tools.ozone.set.defs#set":
                     return new Tools.Ozone.Set.Set(obj);
-                case "place.stream.server.settings":
-                    return new Place.Stream.Server.Settings(obj);
                 case "tools.ozone.set.defs#setView":
                     return new Tools.Ozone.Set.SetView(obj);
                 case "tools.ozone.signature.defs#sigDetail":
@@ -1100,8 +876,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.SkeletonSearchStarterPack(obj);
                 case "app.bsky.unspecced.defs#skeletonTrend":
                     return new App.Bsky.Unspecced.SkeletonTrend(obj);
-                case "link.pastesphere.snippet":
-                    return new Link.Pastesphere.Snippet(obj);
                 case "app.bsky.graph.starterpack":
                     return new App.Bsky.Graph.Starterpack(obj);
                 case "app.bsky.graph.defs#starterPackView":
@@ -1112,16 +886,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackWithMembership(obj);
                 case "app.bsky.actor.status":
                     return new App.Bsky.Actor.Status(obj);
-                case "app.netlify.aniblue.status":
-                    return new App.Netlify.Aniblue.Status(obj);
                 case "com.atproto.admin.defs#statusAttr":
                     return new Com.Atproto.Admin.StatusAttr(obj);
-                case "app.netlify.aniblue.status#status":
-                    return new App.Netlify.Aniblue.StatusDef(obj);
                 case "app.bsky.actor.defs#statusView":
                     return new App.Bsky.Actor.StatusView(obj);
-                case "place.stream.livestream#streamplaceAnything":
-                    return new Place.Stream.StreamplaceAnything(obj);
                 case "com.atproto.repo.strongRef":
                     return new Com.Atproto.Repo.StrongRef(obj);
                 case "app.bsky.notification.defs#subjectActivitySubscription":
@@ -1132,8 +900,6 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.SubjectView(obj);
                 case "com.atproto.identity.submitPlcOperation#SubmitPlcOperationInput":
                     return new Com.Atproto.Identity.SubmitPlcOperationInput(obj);
-                case "ma.tokono.byov.subscription":
-                    return new Ma.Tokono.Byov.Subscription(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#suggestion":
                     return new App.Bsky.Unspecced.Suggestion(obj);
                 case "com.atproto.temp.checkHandleAvailability#suggestion":
@@ -1176,8 +942,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.TrendingTopic(obj);
                 case "app.bsky.unspecced.defs#trendView":
                     return new App.Bsky.Unspecced.TrendView(obj);
-                case "blue.zio.atfile.meta#unknown":
-                    return new Blue.Zio.Atfile.Unknown(obj);
                 case "app.bsky.graph.unmuteActor#UnmuteActorInput":
                     return new App.Bsky.Graph.UnmuteActorInput(obj);
                 case "app.bsky.graph.unmuteActorList#UnmuteActorListInput":
@@ -1228,8 +992,6 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.UpdateSubjectStatusOutput(obj);
                 case "tools.ozone.communication.updateTemplate#UpdateTemplateInput":
                     return new Tools.Ozone.Communication.UpdateTemplateInput(obj);
-                case "blue.zio.atfile.upload":
-                    return new Blue.Zio.Atfile.Upload(obj);
                 case "com.atproto.repo.uploadBlob#UploadBlobOutput":
                     return new Com.Atproto.Repo.UploadBlobOutput(obj);
                 case "app.bsky.video.uploadVideo#UploadVideoOutput":
@@ -1240,12 +1002,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Setting.UpsertOptionOutput(obj);
                 case "tools.ozone.set.upsertSet#UpsertSetInput":
                     return new Tools.Ozone.Set.UpsertSetInput(obj);
-                case "community.lexicon.calendar.event#uri":
-                    return new Community.Lexicon.Calendar.Uri(obj);
                 case "tools.ozone.safelink.defs#urlRule":
                     return new Tools.Ozone.Safelink.UrlRule(obj);
-                case "buzz.bookhive.defs#userBook":
-                    return new Buzz.Bookhive.UserBook(obj);
                 case "app.bsky.graph.verification":
                     return new App.Bsky.Graph.Verification(obj);
                 case "tools.ozone.verification.grantVerifications#verificationInput":
@@ -1258,10 +1016,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.VerificationView(obj);
                 case "tools.ozone.verification.defs#verificationView":
                     return new Tools.Ozone.Verification.VerificationView(obj);
-                case "ma.tokono.byov.video":
-                    return new Ma.Tokono.Byov.Video(obj);
-                case "place.stream.segment#video":
-                    return new Place.Stream.Video(obj);
                 case "tools.ozone.moderation.defs#videoDetails":
                     return new Tools.Ozone.Moderation.VideoDetails(obj);
                 case "app.bsky.embed.record#viewBlocked":
@@ -1270,8 +1024,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.ViewDetached(obj);
                 case "tools.ozone.server.getConfig#viewerConfig":
                     return new Tools.Ozone.Server.ViewerConfig(obj);
-                case "place.stream.livestream#viewerCount":
-                    return new Place.Stream.ViewerCount(obj);
                 case "app.bsky.actor.defs#viewerState":
                     return new App.Bsky.Actor.ViewerState(obj);
                 case "app.bsky.feed.defs#viewerState":
@@ -1294,8 +1046,6 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.ViewRecordWithMedia(obj);
                 case "app.bsky.embed.video#view":
                     return new App.Bsky.Embed.ViewVideo(obj);
-                case "fyi.unravel.frontpage.vote":
-                    return new Fyi.Unravel.Frontpage.Vote(obj);
                 default:
                     if (converters != null)
                     {
