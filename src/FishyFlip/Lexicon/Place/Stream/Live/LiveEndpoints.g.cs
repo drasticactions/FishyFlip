@@ -18,6 +18,8 @@ namespace FishyFlip.Lexicon.Place.Stream.Live
 
        public const string GetLiveUsers = "/xrpc/place.stream.live.getLiveUsers";
 
+       public const string GetProfileCard = "/xrpc/place.stream.live.getProfileCard";
+
        public const string GetSegments = "/xrpc/place.stream.live.getSegments";
 
 
@@ -52,6 +54,33 @@ namespace FishyFlip.Lexicon.Place.Stream.Live
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Place.Stream.Live.GetLiveUsersOutput>(endpointUrl, atp.Options.SourceGenerationContext.PlaceStreamLiveGetLiveUsersOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get an OG image associated with a given account.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="id">The DID or handle of the account.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="byte[]?"/></returns>
+        public static Task<Result<byte[]?>> GetProfileCardAsync (this FishyFlip.ATProtocol atp, string id, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetProfileCard.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("id=" + id);
+
+            var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.GetBlob(endpointUrl, cancellationToken);
         }
 
 

@@ -44,6 +44,19 @@ namespace FishyFlip.Lexicon.Place.Stream.Live
 
 
         /// <summary>
+        /// Get an OG image associated with a given account.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="id">The DID or handle of the account.</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<byte[]?>> GetProfileCardAsync (string id, CancellationToken cancellationToken = default)
+        {
+            return atp.GetProfileCardAsync(id, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get a list of livestream segments for a user
         /// </summary>
         /// <param name="userDID">The DID of the potentially-following user</param>
