@@ -314,11 +314,10 @@ public sealed partial class ATProtocol : IDisposable
         {
             case OAuth2SessionManager oAuth2SessionManager:
                 // Refresh the token to make sure it's the most up to date.
-                var result = await oAuth2SessionManager.RefreshTokenAsync();
-                if (result?.IsError ?? false)
+                var (result, error2) = await oAuth2SessionManager.RefreshSessionAsync();
+                if (error2 is not null)
                 {
-                    // I'm not sure if 403 is the best status code to use here, and result doesn't include the code...
-                    return new ATError(403, new ErrorDetail(result.Error, result.ErrorDescription));
+                    return error2;
                 }
 
                 return oAuth2SessionManager.OAuthSession;
