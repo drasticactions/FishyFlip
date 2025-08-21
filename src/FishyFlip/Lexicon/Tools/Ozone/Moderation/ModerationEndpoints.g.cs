@@ -347,11 +347,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="reportTypes"></param>
         /// <param name="policies"></param>
         /// <param name="modTool">If specified, only events where the modTool name matches any of the given values are returned</param>
+        /// <param name="batchId">If specified, only events where the batchId matches the given value are returned</param>
         /// <param name="ageAssuranceState">If specified, only events where the age assurance state matches the given value are returned</param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? ageAssuranceState = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? batchId = default, string? ageAssuranceState = default, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryEvents.ToString();
             endpointUrl += "?";
@@ -449,6 +450,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (modTool != null)
             {
                 queryStrings.Add(string.Join("&", modTool.Select(n => "modTool=" + n)));
+            }
+
+            if (batchId != null)
+            {
+                queryStrings.Add("batchId=" + batchId);
             }
 
             if (ageAssuranceState != null)

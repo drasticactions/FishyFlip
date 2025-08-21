@@ -26,6 +26,17 @@ namespace FishyFlip.Xrpc.Lexicon.Place.Stream.Live
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.Place.Stream.Live.GetLiveUsersOutput>, ATErrorResult>> GetLiveUsersAsync ([FromQuery] int? limit = 50, [FromQuery] DateTime? before = default, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Get an OG image associated with a given account.
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.RepoNotFoundError"/>  <br/>
+        /// </summary>
+        /// <param name="id">The DID or handle of the account.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="byte[]"/></returns>
+        [HttpGet("/xrpc/place.stream.live.getProfileCard")]
+        public abstract Task<Results<Ok<byte[]>, ATErrorResult>> GetProfileCardAsync ([FromQuery] string id, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get a list of livestream segments for a user
         /// </summary>
         /// <param name="userDID">The DID of the potentially-following user</param>
