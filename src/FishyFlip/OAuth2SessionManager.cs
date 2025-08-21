@@ -94,7 +94,11 @@ internal class OAuth2SessionManager : ISessionManager
             return new ATError(new OAuth2Exception("Failed to discover OAuth endpoints."));
         }
 
+#if NET5_0_OR_GREATER
         var tokenEndpoint = config.GetValueOrDefault("token_endpoint")?.ToString();
+#else
+        var tokenEndpoint = config.TryGetValue("token_endpoint", out var tokenEp) ? tokenEp?.ToString() : null;
+#endif
         if (string.IsNullOrEmpty(tokenEndpoint))
         {
             return new ATError(new OAuth2Exception("Missing token endpoint."));
@@ -226,7 +230,7 @@ internal class OAuth2SessionManager : ISessionManager
             return new ATError(new OAuth2Exception("Failed to extract subject from token."));
         }
 
-        var didSub = ATDid.Create(sub)!;
+        var didSub = ATDid.Create(sub!)!;
         (var describeRepo, var error) = await this.protocol.DescribeRepoAsync(didSub, cancellationToken);
         if (error is not null)
         {

@@ -107,7 +107,7 @@ internal class RefreshTokenHandler : DelegatingHandler
                 request.Method.ToString(),
                 request.RequestUri?.ToString() ?? string.Empty,
                 this.oauthClient.State?.Nonce,
-                DPoPHandler.CreateAccessTokenHash(this.accessToken));
+                DPoPHandler.CreateAccessTokenHash(this.accessToken!));
 
             request.Headers.Add("DPoP", dpopProof);
         }
@@ -146,7 +146,7 @@ internal class RefreshTokenHandler : DelegatingHandler
                         retryRequest.Method.ToString(),
                         retryRequest.RequestUri?.ToString() ?? string.Empty,
                         this.oauthClient.State?.Nonce,
-                        DPoPHandler.CreateAccessTokenHash(this.accessToken));
+                        DPoPHandler.CreateAccessTokenHash(this.accessToken!));
 
                     retryRequest.Headers.Remove("DPoP");
                     retryRequest.Headers.Add("DPoP", dpopProof);
@@ -193,7 +193,7 @@ internal class RefreshTokenHandler : DelegatingHandler
             this.logger?.LogInformation("Refreshing OAuth token");
 
             var tokenResponse = await this.oauthClient.RefreshTokenAsync(
-                this.refreshToken,
+                this.refreshToken!,
                 this.clientId,
                 cancellationToken);
 

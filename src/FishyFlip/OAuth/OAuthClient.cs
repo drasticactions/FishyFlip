@@ -71,7 +71,12 @@ internal class OAuthClient
                 return null;
             }
 
+#if NET
             return await response.Content.ReadFromJsonAsync(SourceGenerationContext.Default.DictionaryStringObject, cancellationToken);
+#else
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize(json, SourceGenerationContext.Default.DictionaryStringObject);
+#endif
         }
         catch (Exception ex)
         {
@@ -105,10 +110,17 @@ internal class OAuthClient
             return null;
         }
 
+#if NET5_0_OR_GREATER
         var authEndpoint = config.GetValueOrDefault("authorization_endpoint")?.ToString();
         var tokenEndpoint = config.GetValueOrDefault("token_endpoint")?.ToString();
         var parEndpoint = config.GetValueOrDefault("pushed_authorization_request_endpoint")?.ToString();
         var revocationEndpoint = config.GetValueOrDefault("revocation_endpoint")?.ToString();
+#else
+        var authEndpoint = config.TryGetValue("authorization_endpoint", out var authEp) ? authEp?.ToString() : null;
+        var tokenEndpoint = config.TryGetValue("token_endpoint", out var tokenEp) ? tokenEp?.ToString() : null;
+        var parEndpoint = config.TryGetValue("pushed_authorization_request_endpoint", out var parEp) ? parEp?.ToString() : null;
+        var revocationEndpoint = config.TryGetValue("revocation_endpoint", out var revEp) ? revEp?.ToString() : null;
+#endif
 
         if (string.IsNullOrEmpty(authEndpoint) || string.IsNullOrEmpty(tokenEndpoint))
         {
@@ -143,7 +155,7 @@ internal class OAuthClient
         if (!string.IsNullOrEmpty(parEndpoint))
         {
             var requestUri = await this.PushAuthorizationRequestAsync(
-                parEndpoint,
+                parEndpoint!,
                 clientId,
                 redirectUri,
                 scope,
@@ -204,7 +216,7 @@ internal class OAuthClient
             return null;
         }
 
-        var tokenEndpoint = this.currentState.TokenEndpoint;
+        var tokenEndpoint = this.currentState.TokenEndpoint ?? string.Empty;
         if (string.IsNullOrEmpty(tokenEndpoint))
         {
             return null;
@@ -245,12 +257,21 @@ internal class OAuthClient
 
             if (!response.IsSuccessStatusCode)
             {
+#if NET
                 var error = await response.Content.ReadAsStringAsync(cancellationToken);
+#else
+                var error = await response.Content.ReadAsStringAsync();
+#endif
                 this.logger?.LogError($"Token exchange failed: {response.StatusCode} - {error}");
                 return null;
             }
 
+#if NET
             return await response.Content.ReadFromJsonAsync<TokenResponse>(SourceGenerationContext.Default.TokenResponse, cancellationToken);
+#else
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<TokenResponse>(json, SourceGenerationContext.Default.TokenResponse);
+#endif
         }
         catch (Exception ex)
         {
@@ -277,7 +298,7 @@ internal class OAuthClient
             return null;
         }
 
-        var tokenEndpoint = this.currentState.TokenEndpoint;
+        var tokenEndpoint = this.currentState.TokenEndpoint ?? string.Empty;
         if (string.IsNullOrEmpty(tokenEndpoint))
         {
             return null;
@@ -316,12 +337,21 @@ internal class OAuthClient
 
             if (!response.IsSuccessStatusCode)
             {
+#if NET
                 var error = await response.Content.ReadAsStringAsync(cancellationToken);
+#else
+                var error = await response.Content.ReadAsStringAsync();
+#endif
                 this.logger?.LogError($"Token refresh failed: {response.StatusCode} - {error}");
                 return null;
             }
 
+#if NET
             return await response.Content.ReadFromJsonAsync<TokenResponse>(SourceGenerationContext.Default.TokenResponse, cancellationToken);
+#else
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<TokenResponse>(json, SourceGenerationContext.Default.TokenResponse);
+#endif
         }
         catch (Exception ex)
         {
@@ -372,7 +402,7 @@ internal class OAuthClient
 
         if (!string.IsNullOrEmpty(loginHint))
         {
-            parRequest["login_hint"] = loginHint;
+            parRequest["login_hint"] = loginHint!;
         }
 
         // Create DPoP proof for PAR
@@ -407,8 +437,14 @@ internal class OAuthClient
                 return null;
             }
 
+#if NET
             var parResponse = await response.Content.ReadFromJsonAsync<Dictionary<string, JsonElement>>(SourceGenerationContext.Default.DictionaryStringJsonElement, cancellationToken);
             return parResponse?.GetValueOrDefault("request_uri").GetString();
+#else
+            var json = await response.Content.ReadAsStringAsync();
+            var parResponse = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json, SourceGenerationContext.Default.DictionaryStringJsonElement);
+            return parResponse != null && parResponse.TryGetValue("request_uri", out var uri) ? uri.GetString() : null;
+#endif
         }
         catch (Exception ex)
         {
