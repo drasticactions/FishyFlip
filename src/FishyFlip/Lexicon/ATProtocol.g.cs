@@ -50,26 +50,6 @@ namespace FishyFlip
         public FishyFlip.Lexicon.App.Bsky.Video.BlueskyVideo Video => new (this);
 
         /// <summary>
-        /// blue.maril.stellar Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Blue.Maril.Stellar.BlueMarilStellar BlueMarilStellar => new (this);
-
-        /// <summary>
-        /// blue.moji.collection Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Blue.Moji.Collection.BlueMojiCollection BlueMojiCollection => new (this);
-
-        /// <summary>
-        /// blue.moji.packs Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Blue.Moji.Packs.BlueMojiPacks BlueMojiPacks => new (this);
-
-        /// <summary>
-        /// buzz.bookhive Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Buzz.Bookhive.BuzzBookhive BuzzBookhive => new (this);
-
-        /// <summary>
         /// chat.bsky.actor Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor ChatBskyActor => new (this);
@@ -123,31 +103,6 @@ namespace FishyFlip
         /// com.atproto.temp Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Com.Atproto.Temp.ATProtoTemp Temp => new (this);
-
-        /// <summary>
-        /// com.shinolabs.pinksea Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Com.Shinolabs.Pinksea.ComShinolabsPinksea ComShinolabsPinksea => new (this);
-
-        /// <summary>
-        /// com.whtwnd.blog Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Com.Whtwnd.Blog.ComWhtwndBlog ComWhtwndBlog => new (this);
-
-        /// <summary>
-        /// community.lexicon.bookmarks Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Community.Lexicon.Bookmarks.CommunityLexiconBookmarks CommunityLexiconBookmarks => new (this);
-
-        /// <summary>
-        /// place.stream.graph Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Place.Stream.Graph.PlaceStreamGraph PlaceStreamGraph => new (this);
-
-        /// <summary>
-        /// place.stream.live Endpoint Group.
-        /// </summary>
-        public FishyFlip.Lexicon.Place.Stream.Live.PlaceStreamLive PlaceStreamLive => new (this);
 
         /// <summary>
         /// tools.ozone.communication Endpoint Group.

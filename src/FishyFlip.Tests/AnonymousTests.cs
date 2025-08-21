@@ -200,21 +200,6 @@ public class AnonymousTests
     }
 
     /// <summary>
-    /// Tests the GetEntryAsync method and validates the post exists.
-    /// </summary>
-    /// <param name="atDid">The ATDid.</param>
-    /// <returns>Task.</returns>
-    [TestMethod]
-    [DataRow("at://did:plc:fzkpgpjj7nki7r5rhtmgzrez/com.whtwnd.blog.entry/3kudrxp52ps2a")]
-    public async Task GetAuthorPostTest(string atDid)
-    {
-        var postUri = ATUri.Create(atDid);
-        var (result, error) = await AnonymousTests.proto!.ComWhtwndBlog.GetEntryAsync(postUri.Did!, postUri.Rkey);
-        Assert.IsNull(error);
-        Assert.IsNotNull(result);
-    }
-
-    /// <summary>
     /// Tests the labeler.
     /// </summary>
     /// <param name="atDid">The ATDid.</param>

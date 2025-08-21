@@ -86,14 +86,14 @@ namespace FishyFlip.Lexicon
                     return new RepoDeactivatedError(statusCode, detail);
                 case "BlockNotFound":
                     return new BlockNotFoundError(statusCode, detail);
-                case "NotFound":
-                    return new NotFoundError(statusCode, detail);
                 case "UnknownFeed":
                     return new UnknownFeedError(statusCode, detail);
                 case "HostNotFound":
                     return new HostNotFoundError(statusCode, detail);
                 case "UnknownList":
                     return new UnknownListError(statusCode, detail);
+                case "NotFound":
+                    return new NotFoundError(statusCode, detail);
                 case "RecordNotFound":
                     return new RecordNotFoundError(statusCode, detail);
                 case "ActorNotFound":
@@ -114,10 +114,6 @@ namespace FishyFlip.Lexicon
                     return new RuleNotFoundError(statusCode, detail);
                 case "HostBanned":
                     return new HostBannedError(statusCode, detail);
-                case "EmojiNotFound":
-                    return new EmojiNotFoundError(statusCode, detail);
-                case "DestinationExists":
-                    return new DestinationExistsError(statusCode, detail);
                 case "BadQueryString":
                     return new BadQueryStringError(statusCode, detail);
                 case "FutureCursor":
