@@ -8,4 +8,5 @@
   <Project Path="../src/FishyFlip/FishyFlip.csproj" />
   <Project Path="Sandbox/Sandbox.csproj" />
   <Project Path="SandboxWeb/SandboxWeb.csproj" />
+  <Project Path="SandboxWebMvc/SandboxWebMvc.csproj" />
 </Solution>
