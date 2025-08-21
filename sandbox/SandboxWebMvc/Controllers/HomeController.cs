@@ -3,6 +3,11 @@
 // </copyright>
 
 using System.Diagnostics;
+using FishyFlip;
+using FishyFlip.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using SandboxWebMvc.Models;
 
@@ -14,6 +19,7 @@ namespace SandboxWebMvc.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> logger;
+    private ATProtocol protocol;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HomeController"/> class.
@@ -22,6 +28,8 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger)
     {
         this.logger = logger;
+        var atProtocolBuilder = new ATProtocolBuilder();
+        this.protocol = atProtocolBuilder.Build();
     }
 
     /// <summary>
@@ -29,6 +37,16 @@ public class HomeController : Controller
     /// </summary>
     /// <returns><see cref="IActionResult"/>.</returns>
     public IActionResult Index()
+    {
+        return this.View();
+    }
+
+    /// <summary>
+    /// Returns the Auth view.
+    /// </summary>
+    /// <returns><see cref="IActionResult"/>.</returns>
+    [Authorize]
+    public IActionResult Auth()
     {
         return this.View();
     }

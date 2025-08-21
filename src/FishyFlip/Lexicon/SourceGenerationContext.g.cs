@@ -1057,6 +1057,7 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(FishyFlip.Models.AuthSession))]
     [JsonSerializable(typeof(FishyFlip.Models.Session))]
     [JsonSerializable(typeof(FishyFlip.Models.Success))]
+    [JsonSerializable(typeof(FishyFlip.Models.OAuthClientMetadata))]
     [JsonSerializable(typeof(FishyFlip.Models.UnknownATObject))]
     [JsonSerializable(typeof(Dictionary<string, JsonElement>))]
     [JsonSerializable(typeof(Microsoft.IdentityModel.Tokens.JsonWebKey), TypeInfoPropertyName = nameof(Microsoft.IdentityModel.Tokens.JsonWebKey) + "_A")]
