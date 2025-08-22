@@ -16,7 +16,7 @@ namespace FishyFlip.OAuth;
 /// <summary>
 /// HTTP message handler that automatically refreshes OAuth tokens.
 /// </summary>
-internal class RefreshTokenHandler : DelegatingHandler
+public class RefreshTokenHandler : DelegatingHandler
 {
     private readonly OAuthClient oauthClient;
     private readonly string clientId;

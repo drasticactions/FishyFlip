@@ -2,26 +2,16 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using FishyFlip.OAuth.Models;
 using Microsoft.IdentityModel.Tokens;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Asn1.Sec;
 using Org.BouncyCastle.Asn1.Pkcs;
 using ECCurveNet = System.Security.Cryptography.ECCurve;
-using ECPointBC = Org.BouncyCastle.Math.EC.ECPoint;
 using ECPointNet = System.Security.Cryptography.ECPoint;
 #endif
 

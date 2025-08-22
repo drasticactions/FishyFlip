@@ -7,7 +7,7 @@ namespace FishyFlip.OAuth.Models;
 /// <summary>
 /// Represents the state of an OAuth authorization flow.
 /// </summary>
-internal class OAuthState
+public class OAuthState
 {
     /// <summary>
     /// Gets or sets the state identifier.

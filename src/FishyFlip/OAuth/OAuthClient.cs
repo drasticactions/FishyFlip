@@ -22,7 +22,7 @@ namespace FishyFlip.OAuth;
 /// <summary>
 /// OAuth client for ATProtocol authentication.
 /// </summary>
-internal class OAuthClient
+public class OAuthClient
 {
     private readonly HttpClient httpClient;
     private readonly ILogger? logger;
