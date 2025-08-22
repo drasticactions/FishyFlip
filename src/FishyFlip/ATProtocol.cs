@@ -4,6 +4,7 @@
 
 using FishyFlip.Lexicon.App.Bsky.Actor;
 using FishyFlip.Lexicon.Com.Atproto.Identity;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace FishyFlip;
 
@@ -314,11 +315,10 @@ public sealed partial class ATProtocol : IDisposable
         {
             case OAuth2SessionManager oAuth2SessionManager:
                 // Refresh the token to make sure it's the most up to date.
-                var result = await oAuth2SessionManager.RefreshTokenAsync();
-                if (result?.IsError ?? false)
+                var (resultOauth, errorOauth) = await oAuth2SessionManager.RefreshSessionAsync();
+                if (errorOauth is not null)
                 {
-                    // I'm not sure if 403 is the best status code to use here, and result doesn't include the code...
-                    return new ATError(403, new ErrorDetail(result.Error, result.ErrorDescription));
+                    return errorOauth;
                 }
 
                 return oAuth2SessionManager.OAuthSession;

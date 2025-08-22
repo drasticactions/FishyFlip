@@ -2,6 +2,28 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "OAuth Start",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_oauth",
+            "program": "${workspaceFolder}/samples/Oauth/bin/Debug/net9.0/Oauth.dll",
+            "args": [ "start" ],
+            "cwd": "${workspaceFolder}/samples/Oauth",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "OAuth Start Headless",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_oauth",
+            "program": "${workspaceFolder}/samples/Oauth/bin/Debug/net9.0/Oauth.dll",
+            "args": [ "start", "headless" ],
+            "cwd": "${workspaceFolder}/samples/Oauth",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "FFSourceGen",
             "type": "coreclr",
             "request": "launch",

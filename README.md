@@ -30,7 +30,5 @@ FishyFlip
 
 - Forked from [bluesky-net](https://github.com/dariogriffo/bluesky-net).
 - [CBOR](https://github.com/peteroupc/CBOR)
-- [net-ipfs-core](https://github.com/ipfs-shipyard/net-ipfs-core)
 - [OneOf](https://github.com/mcintyre321/OneOf)
-- [Duende.IdentityModel](https://github.com/duendesoftware/foss)
 - [ZstdSharp.Port](https://github.com/oleg-st/ZstdSharp)

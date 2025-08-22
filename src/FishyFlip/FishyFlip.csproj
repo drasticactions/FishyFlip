@@ -19,9 +19,6 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 		<PackageReference Include="PeterO.Cbor" />
-		<PackageReference Include="Duende.IdentityModel" />
-		<PackageReference Include="Duende.IdentityModel.OidcClient" />
-		<PackageReference Include="Duende.IdentityModel.OidcClient.Extensions" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
 		<PackageReference Include="DnsClient" />
 		<PackageReference Include="GitVersion.MSBuild">
@@ -35,6 +32,7 @@
 		Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1'">
 		<PackageReference Include="System.Memory.Data" />
 		<PackageReference Include="System.Text.Json" />
+		<PackageReference Include="BouncyCastle.Cryptography" />
 	</ItemGroup>
 	<ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath=""

@@ -2207,10 +2207,16 @@ public partial class AppCommands
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.ATUri))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Blob))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.AuthSession))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.OAuthClientMetadata))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Session))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.Success))]");
         sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.Models.UnknownATObject))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.OAuth.Models.DPoPKeyPair))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.OAuth.Models.TokenResponse))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(FishyFlip.OAuth.Models.OAuthState))]");
         sb.AppendLine($"    [JsonSerializable(typeof(Dictionary<string, JsonElement>))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(Dictionary<string, object>))]");
+        sb.AppendLine($"    [JsonSerializable(typeof(Dictionary<string, string>))]");
         sb.AppendLine(
             $"    [JsonSerializable(typeof(Microsoft.IdentityModel.Tokens.JsonWebKey), TypeInfoPropertyName = nameof(Microsoft.IdentityModel.Tokens.JsonWebKey) + \"_A\")]");
         sb.AppendLine($"    [JsonSerializable(typeof(List<ATObject>))]");

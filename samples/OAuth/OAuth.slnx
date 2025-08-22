@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="OAuth.csproj" />
+  <Project Path="../../src/FishyFlip/FishyFlip.csproj" />
+</Solution>
