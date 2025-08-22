@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     public class GetSuggestionsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>
     {
 
-        public GetSuggestionsOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetSuggestionsOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return (result.Actors, result.Cursor ?? string.Empty);
         }
 
-        public static GetSuggestionsOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetSuggestionsOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

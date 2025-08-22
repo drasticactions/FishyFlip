@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
     public class FindRelatedAccountsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>
     {
 
-        public FindRelatedAccountsOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public FindRelatedAccountsOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Did = did;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             return (result.Accounts, result.Cursor ?? string.Empty);
         }
 
-        public static FindRelatedAccountsOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public static FindRelatedAccountsOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, did: did, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

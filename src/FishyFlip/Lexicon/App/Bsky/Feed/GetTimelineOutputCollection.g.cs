@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class GetTimelineOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>
     {
 
-        public GetTimelineOutputCollection(FishyFlip.ATProtocol atp, string? algorithm = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetTimelineOutputCollection(FishyFlip.IXrpcClient atp, string? algorithm = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Algorithm = algorithm;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.Feed, result.Cursor ?? string.Empty);
         }
 
-        public static GetTimelineOutputCollection Create(FishyFlip.ATProtocol atp, string? algorithm = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetTimelineOutputCollection Create(FishyFlip.IXrpcClient atp, string? algorithm = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, algorithm: algorithm, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

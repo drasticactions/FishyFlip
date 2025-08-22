@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class SearchPostsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.PostView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.PostView>
     {
 
-        public SearchPostsOutputCollection(FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public SearchPostsOutputCollection(FishyFlip.IXrpcClient atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Q = q;
@@ -67,7 +67,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.Posts, result.Cursor ?? string.Empty);
         }
 
-        public static SearchPostsOutputCollection Create(FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static SearchPostsOutputCollection Create(FishyFlip.IXrpcClient atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, q: q, sort: sort, since: since, until: until, mentions: mentions, author: author, lang: lang, domain: domain, url: url, tag: tag, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

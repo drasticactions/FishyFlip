@@ -16,7 +16,6 @@ public sealed partial class ATProtocol : IDisposable
 {
     private ATProtocolOptions options;
     private bool disposedValue;
-    private ISessionManager sessionManager;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATProtocol"/> class.
@@ -25,7 +24,6 @@ public sealed partial class ATProtocol : IDisposable
     public ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
-        this.sessionManager = new UnauthenticatedSessionManager(this, options);
     }
 
     /// <summary>
@@ -36,12 +34,12 @@ public sealed partial class ATProtocol : IDisposable
     /// <summary>
     /// Gets a value indicating whether the user is authenticated.
     /// </summary>
-    public bool IsAuthenticated => this.sessionManager.IsAuthenticated;
+    public bool IsAuthenticated => this.XrpcClient?.IsAuthenticated ?? false;
 
     /// <summary>
     /// Gets the current ATProto Session. Null if no session is active.
     /// </summary>
-    public Session? Session => this.sessionManager?.Session;
+    public Session? Session => this.XrpcClient?.Session;
 
     /// <summary>
     /// Gets the ATProtocol Options.
@@ -49,28 +47,9 @@ public sealed partial class ATProtocol : IDisposable
     public ATProtocolOptions Options => this.options;
 
     /// <summary>
-    /// Gets the base address for the underlying HttpClient.
+    /// Gets the XrpcClient.
     /// </summary>
-    public Uri? BaseAddress => this.sessionManager.Client.BaseAddress;
-
-    /// <summary>
-    /// Gets the HttpClient.
-    /// </summary>
-    public HttpClient Client => this.sessionManager.Client;
-
-    /// <summary>
-    /// Gets the current OAuth session, if any is active.
-    /// </summary>
-    public AuthSession? OAuthSession => this.sessionManager is OAuth2SessionManager oAuth2SessionManager
-        ? oAuth2SessionManager.OAuthSession
-        : null;
-
-    /// <summary>
-    /// Gets the current PasswordSession session, if any is active.
-    /// </summary>
-    public AuthSession? PasswordSession => this.sessionManager is PasswordSessionManager passwordSessionManager
-        ? passwordSessionManager.PasswordSession
-        : null;
+    public IXrpcClient XrpcClient { get; } = null!;
 
     /// <summary>
     /// Gets the PclDirectory Methods.
@@ -84,34 +63,6 @@ public sealed partial class ATProtocol : IDisposable
     public OpenGraphParser OpenGraphParser => new(this);
 
     /// <summary>
-    /// Gets the current AuthSession.
-    /// </summary>
-    public AuthSession? AuthSession => this.sessionManager switch
-    {
-        PasswordSessionManager passwordSessionManager => passwordSessionManager.PasswordSession,
-        OAuth2SessionManager oAuth2SessionManager => oAuth2SessionManager.OAuthSession,
-        _ => null,
-    };
-
-    /// <summary>
-    /// Gets the session manager.
-    /// </summary>
-    public ISessionManager SessionManager
-    {
-        get => this.sessionManager;
-
-        internal set
-        {
-            this.sessionManager.SessionUpdated -= this.OnSessionUpdated;
-            this.sessionManager.Dispose();
-
-            this.sessionManager = value;
-
-            this.sessionManager.SessionUpdated += this.OnSessionUpdated;
-        }
-    }
-
-    /// <summary>
     /// Asynchronously creates a new session manager using a password.
     /// </summary>
     /// <param name="identifier">The identifier of the user.</param>
@@ -119,12 +70,9 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="authFactorToken">2-Factor Auth Token, optional.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Result<Session?>> AuthenticateWithPasswordResultAsync(string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
+    public Task<Result<Session?>> AuthenticateWithPasswordResultAsync(string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
     {
-        var passwordSessionManager = new PasswordSessionManager(this);
-        this.SessionManager = passwordSessionManager;
-
-        return await passwordSessionManager.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken);
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -151,23 +99,9 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="identifier">ATIdentifier, used for LoginHint and InstanceUrl.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<Result<string?>> GenerateOAuth2AuthenticationUrlResultAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, ATIdentifier identifier, CancellationToken cancellationToken = default)
+    public Task<Result<string?>> GenerateOAuth2AuthenticationUrlResultAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, ATIdentifier identifier, CancellationToken cancellationToken = default)
     {
-        var (hostUrl, error) = await this.ResolveATIdentifierToHostAddressAsync(identifier, cancellationToken);
-
-        if (error is not null)
-        {
-            return error;
-        }
-
-        var uri = new Uri(hostUrl!);
-
-        // If the uri contains bsky.network, we need to use the bsky.social instance.
-        var instanceUrl = uri.Host.Contains("bsky.network") ? Constants.Urls.ATProtoServer.SocialApi : uri.ToString();
-
-        var oAuth2SessionManager = new OAuth2SessionManager(this);
-        this.SessionManager = oAuth2SessionManager;
-        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, identifier.ToString(), instanceUrl, cancellationToken);
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -179,26 +113,9 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<Result<string?>> GenerateOAuth2AuthenticationUrlResultAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public Task<Result<string?>> GenerateOAuth2AuthenticationUrlResultAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
-        var oAuth2SessionManager = new OAuth2SessionManager(this);
-        this.SessionManager = oAuth2SessionManager;
-        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, null, instanceUrl, cancellationToken);
-    }
-
-    /// <summary>
-    /// Starts the OAuth2 authentication process asynchronously.
-    /// </summary>
-    /// <param name="clientId">ClientID, must be a URL.</param>
-    /// <param name="redirectUrl">RedirectUrl.</param>
-    /// <param name="scopes">ATProtocol Scopes.</param>
-    /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
-    /// <param name="cancellationToken">Cancellation Token.</param>
-    /// <returns>Authorization URL to call.</returns>
-    [Obsolete("Use GenerateOAuth2AuthenticationUrlResultAsync instead.")]
-    public async Task<string> GenerateOAuth2AuthenticationUrlAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? instanceUrl = default, CancellationToken cancellationToken = default)
-    {
-        return (await this.GenerateOAuth2AuthenticationUrlResultAsync(clientId, redirectUrl, scopes, instanceUrl, cancellationToken)).HandleResult()!;
+       throw new NotImplementedException();
     }
 
     /// <summary>
@@ -207,26 +124,9 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="callbackData">The callback data received from the OAuth2 provider.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Result<Session?>> AuthenticateWithOAuth2CallbackResultAsync(string callbackData, CancellationToken cancellationToken = default)
+    public Task<Result<Session?>> AuthenticateWithOAuth2CallbackResultAsync(string callbackData, CancellationToken cancellationToken = default)
     {
-        if (this.SessionManager is not OAuth2SessionManager oAuth2SessionManager)
-        {
-            return new ATError(new OAuth2Exception("Session manager is not an OAuth2 session manager."));
-        }
-
-        return await oAuth2SessionManager.CompleteAuthorizationAsync(callbackData, cancellationToken);
-    }
-
-    /// <summary>
-    /// Authenticates with OAuth2 callback asynchronously.
-    /// </summary>
-    /// <param name="callbackData">The callback data received from the OAuth2 provider.</param>
-    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
-    /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    [Obsolete("Use AuthenticateWithOAuth2CallbackResultAsync instead.")]
-    public async Task<Session?> AuthenticateWithOAuth2CallbackAsync(string callbackData, CancellationToken cancellationToken = default)
-    {
-        return (await this.AuthenticateWithOAuth2CallbackResultAsync(callbackData, cancellationToken)).HandleResult();
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -235,16 +135,9 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="session">The password session.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
     /// <exception cref="OAuth2Exception">Thrown if ProofKey was included in AuthSession.</exception>
-    public async Task<Result<Session?>> AuthenticateWithPasswordSessionResultAsync(AuthSession session)
+    public Task<Result<Session?>> AuthenticateWithPasswordSessionResultAsync(AuthSession session)
     {
-        if (!string.IsNullOrEmpty(session.ProofKey))
-        {
-            return new ATError(new OAuth2Exception("Proof key is not required for password sessions. Is this an OAuth2 session?"));
-        }
-
-        var passwordSessionManager = new PasswordSessionManager(this, session.Session);
-        this.SessionManager = passwordSessionManager;
-        return await Task.FromResult<Session?>(passwordSessionManager.Session);
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -266,22 +159,9 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="clientId">The client ID.</param>
     /// <param name="instanceUrl">Optional. The instance URL. If null, uses https://bsky.social.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Result<Session?>> AuthenticateWithOAuth2SessionResultAsync(AuthSession session, string clientId, string? instanceUrl = default)
+    public Task<Result<Session?>> AuthenticateWithOAuth2SessionResultAsync(AuthSession session, string clientId, string? instanceUrl = default)
     {
-        var oAuth2SessionManager = new OAuth2SessionManager(this);
-        this.SessionManager = oAuth2SessionManager;
-        if (string.IsNullOrEmpty(session.ProofKey))
-        {
-            return new ATError(new OAuth2Exception("Proof key is required for OAuth2 sessions."));
-        }
-
-        var (session2, error2) = await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl);
-        if (error2 is not null)
-        {
-            return error2;
-        }
-
-        return session2!.Session;
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -309,35 +189,9 @@ public sealed partial class ATProtocol : IDisposable
     /// Refreshes the current session asynchronously.
     /// </summary>
     /// <returns><see cref="AuthSession"/>.</returns>
-    public async Task<Result<AuthSession?>> RefreshAuthSessionResultAsync()
+    public Task<Result<AuthSession?>> RefreshAuthSessionResultAsync()
     {
-        switch (this.sessionManager)
-        {
-            case OAuth2SessionManager oAuth2SessionManager:
-                // Refresh the token to make sure it's the most up to date.
-                var (resultOauth, errorOauth) = await oAuth2SessionManager.RefreshSessionAsync();
-                if (errorOauth is not null)
-                {
-                    return errorOauth;
-                }
-
-                return oAuth2SessionManager.OAuthSession;
-            case PasswordSessionManager { Session: not null } passwordManager:
-                // The information from RefreshSessionOutput is set in passwordManager.Session,
-                // so we can return the session from password manager, and only worry about
-                // checking for the error.
-                var (_, error) = await passwordManager.RefreshSessionAsync();
-                if (error is not null)
-                {
-                    return error;
-                }
-
-                return new AuthSession(passwordManager.Session);
-            default:
-                // If you don't have a session manager, you can't refresh the session.
-                // So return null.
-                return (AuthSession?)null;
-        }
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -469,7 +323,7 @@ public sealed partial class ATProtocol : IDisposable
         try
         {
             var endpointUrl = $"{Constants.Urls.ATProtoServer.PublicApi}{IdentityEndpoints.ResolveHandle}?handle={handle}";
-            var result = await this.Client.GetAsync(endpointUrl, token ?? CancellationToken.None);
+            var result = await this.XrpcClient.Client.GetAsync(endpointUrl, token ?? CancellationToken.None);
             if (result.IsSuccessStatusCode)
             {
                 var resolveHandle = JsonSerializer.Deserialize<ResolveHandleOutput>(
@@ -624,7 +478,7 @@ public sealed partial class ATProtocol : IDisposable
 
                 if (Uri.TryCreate(baseUri, UriKind.Absolute, out var uri))
                 {
-                    var result = await this.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
+                    var result = await this.XrpcClient.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
                     if (result.IsSuccessStatusCode)
                     {
                         return JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);
@@ -688,7 +542,7 @@ public sealed partial class ATProtocol : IDisposable
         // Originally from idunno.Bluesky https://github.com/blowdart/idunno.Bluesky/blob/b5267989dff4edfdc455a845c27c46233dbdfd73/src/idunno.AtProto/Identity/AtProtoServer.cs
         Uri didUri = new($"https://{handle}/.well-known/atproto-did");
         using HttpRequestMessage httpRequestMessage = new(HttpMethod.Get, didUri) { Headers = { Accept = { new("text/plain") } } };
-        HttpResponseMessage httpResponseMessage = await this.SessionManager.Client.SendAsync(httpRequestMessage, token).ConfigureAwait(false);
+        HttpResponseMessage httpResponseMessage = await this.XrpcClient.Client.SendAsync(httpRequestMessage, token).ConfigureAwait(false);
         if (httpResponseMessage.IsSuccessStatusCode)
         {
 #if NETSTANDARD
@@ -745,7 +599,7 @@ public sealed partial class ATProtocol : IDisposable
         {
             if (disposing)
             {
-                this.sessionManager.Dispose();
+                this.XrpcClient.Dispose();
             }
 
             this.disposedValue = true;
@@ -803,7 +657,7 @@ public sealed partial class ATProtocol : IDisposable
 
         if (Uri.TryCreate(baseUri, UriKind.Absolute, out var uri))
         {
-            var result = await this.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
+            var result = await this.XrpcClient.Client.GetAsync($"{uri}{Constants.DidJson}", token ?? CancellationToken.None);
             if (result.IsSuccessStatusCode)
             {
                 var didDoc = JsonSerializer.Deserialize<DidDoc>(await result.Content.ReadAsStringAsync(), this.options.SourceGenerationContext.DidDoc);

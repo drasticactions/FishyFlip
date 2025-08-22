@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
     public class QuerySetsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Set.SetView>
     {
 
-        public QuerySetsOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public QuerySetsOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Set
             return (result.Sets, result.Cursor ?? string.Empty);
         }
 
-        public static QuerySetsOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public static QuerySetsOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? namePrefix = default, string? sortBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, namePrefix: namePrefix, sortBy: sortBy, sortDirection: sortDirection, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

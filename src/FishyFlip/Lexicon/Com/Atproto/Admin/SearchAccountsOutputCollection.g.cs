@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
     public class SearchAccountsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>, IAsyncEnumerable<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>
     {
 
-        public SearchAccountsOutputCollection(FishyFlip.ATProtocol atp, string? email = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public SearchAccountsOutputCollection(FishyFlip.IXrpcClient atp, string? email = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Email = email;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return (result.Accounts, result.Cursor ?? string.Empty);
         }
 
-        public static SearchAccountsOutputCollection Create(FishyFlip.ATProtocol atp, string? email = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public static SearchAccountsOutputCollection Create(FishyFlip.IXrpcClient atp, string? email = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, email: email, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

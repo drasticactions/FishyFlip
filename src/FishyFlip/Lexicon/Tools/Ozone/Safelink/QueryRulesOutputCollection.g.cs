@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
     public class QueryRulesOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Safelink.UrlRule>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Safelink.UrlRule>
     {
 
-        public QueryRulesOutputCollection(FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, List<string>? actions = default, string? reason = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public QueryRulesOutputCollection(FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, List<string>? actions = default, string? reason = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Cursor = cursor;
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
             return (result.Rules, result.Cursor ?? string.Empty);
         }
 
-        public static QueryRulesOutputCollection Create(FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, List<string>? actions = default, string? reason = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public static QueryRulesOutputCollection Create(FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, List<string>? actions = default, string? reason = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, urls: urls, patternType: patternType, actions: actions, reason: reason, createdBy: createdBy, sortDirection: sortDirection, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

@@ -14,13 +14,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
     public sealed class ATProtoServer
     {
 
-        private ATProtocol atp;
+        private IXrpcClient atp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ATProtoServer"/> class.
         /// </summary>
         /// <param name="atp"><see cref="ATProtocol"/>.</param>
-        internal ATProtoServer(ATProtocol atp)
+        internal ATProtoServer(IXrpcClient atp)
         {
             this.atp = atp;
         }
@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <summary>
         /// Gets the ATProtocol.
         /// </summary>
-        internal ATProtocol ATProtocol => this.atp;
+        internal IXrpcClient ATProtocol => this.atp;
 
 
         /// <summary>

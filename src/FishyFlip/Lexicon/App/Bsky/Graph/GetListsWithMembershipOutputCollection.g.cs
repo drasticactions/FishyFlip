@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     public class GetListsWithMembershipOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Graph.ListWithMembership>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Graph.ListWithMembership>
     {
 
-        public GetListsWithMembershipOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
+        public GetListsWithMembershipOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Actor = actor;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return (result.ListsWithMembership, result.Cursor ?? string.Empty);
         }
 
-        public static GetListsWithMembershipOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
+        public static GetListsWithMembershipOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, List<string>? purposes = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, actor: actor, purposes: purposes, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

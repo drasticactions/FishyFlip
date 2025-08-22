@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
     public class QueryEventsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event>
     {
 
-        public QueryEventsOutputCollection(FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public QueryEventsOutputCollection(FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, string? sortDirection = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Cursor = cursor;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
             return (result.Events, result.Cursor ?? string.Empty);
         }
 
-        public static QueryEventsOutputCollection Create(FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public static QueryEventsOutputCollection Create(FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, string? sortDirection = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, urls: urls, patternType: patternType, sortDirection: sortDirection, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

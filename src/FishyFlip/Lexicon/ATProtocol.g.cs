@@ -17,142 +17,142 @@ namespace FishyFlip
         /// <summary>
         /// app.bsky.actor Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.App.Bsky.Actor.BlueskyActor Actor => new (this);
+        public FishyFlip.Lexicon.App.Bsky.Actor.BlueskyActor Actor => new (this.XrpcClient);
 
         /// <summary>
         /// app.bsky.feed Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed Feed => new (this);
+        public FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed Feed => new (this.XrpcClient);
 
         /// <summary>
         /// app.bsky.graph Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph Graph => new (this);
+        public FishyFlip.Lexicon.App.Bsky.Graph.BlueskyGraph Graph => new (this.XrpcClient);
 
         /// <summary>
         /// app.bsky.labeler Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler Labeler => new (this);
+        public FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler Labeler => new (this.XrpcClient);
 
         /// <summary>
         /// app.bsky.notification Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.App.Bsky.Notification.BlueskyNotification Notification => new (this);
+        public FishyFlip.Lexicon.App.Bsky.Notification.BlueskyNotification Notification => new (this.XrpcClient);
 
         /// <summary>
         /// app.bsky.unspecced Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.App.Bsky.Unspecced.BlueskyUnspecced Unspecced => new (this);
+        public FishyFlip.Lexicon.App.Bsky.Unspecced.BlueskyUnspecced Unspecced => new (this.XrpcClient);
 
         /// <summary>
         /// app.bsky.video Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.App.Bsky.Video.BlueskyVideo Video => new (this);
+        public FishyFlip.Lexicon.App.Bsky.Video.BlueskyVideo Video => new (this.XrpcClient);
 
         /// <summary>
         /// chat.bsky.actor Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor ChatBskyActor => new (this);
+        public FishyFlip.Lexicon.Chat.Bsky.Actor.ChatBskyActor ChatBskyActor => new (this.XrpcClient);
 
         /// <summary>
         /// chat.bsky.convo Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Chat.Bsky.Convo.ChatBskyConvo ChatBskyConvo => new (this);
+        public FishyFlip.Lexicon.Chat.Bsky.Convo.ChatBskyConvo ChatBskyConvo => new (this.XrpcClient);
 
         /// <summary>
         /// chat.bsky.moderation Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Chat.Bsky.Moderation.ChatBskyModeration ChatBskyModeration => new (this);
+        public FishyFlip.Lexicon.Chat.Bsky.Moderation.ChatBskyModeration ChatBskyModeration => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.admin Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Admin.ATProtoAdmin Admin => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Admin.ATProtoAdmin Admin => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.identity Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Identity.ATProtoIdentity Identity => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Identity.ATProtoIdentity Identity => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.label Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Label.ATProtoLabel Label => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Label.ATProtoLabel Label => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.moderation Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Moderation.ATProtoModeration Moderation => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Moderation.ATProtoModeration Moderation => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.repo Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Repo.ATProtoRepo Repo => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Repo.ATProtoRepo Repo => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.server Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Server.ATProtoServer Server => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Server.ATProtoServer Server => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.sync Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Sync.ATProtoSync Sync => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Sync.ATProtoSync Sync => new (this.XrpcClient);
 
         /// <summary>
         /// com.atproto.temp Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Com.Atproto.Temp.ATProtoTemp Temp => new (this);
+        public FishyFlip.Lexicon.Com.Atproto.Temp.ATProtoTemp Temp => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.communication Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Communication.ToolsOzoneCommunication ToolsOzoneCommunication => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Communication.ToolsOzoneCommunication ToolsOzoneCommunication => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.hosting Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Hosting.ToolsOzoneHosting ToolsOzoneHosting => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Hosting.ToolsOzoneHosting ToolsOzoneHosting => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.moderation Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Moderation.ToolsOzoneModeration ToolsOzoneModeration => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.ToolsOzoneModeration ToolsOzoneModeration => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.safelink Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Safelink.ToolsOzoneSafelink ToolsOzoneSafelink => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Safelink.ToolsOzoneSafelink ToolsOzoneSafelink => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.server Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Server.ToolsOzoneServer ToolsOzoneServer => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Server.ToolsOzoneServer ToolsOzoneServer => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.set Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Set.ToolsOzoneSet ToolsOzoneSet => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Set.ToolsOzoneSet ToolsOzoneSet => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.setting Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Setting.ToolsOzoneSetting ToolsOzoneSetting => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Setting.ToolsOzoneSetting ToolsOzoneSetting => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.signature Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Signature.ToolsOzoneSignature ToolsOzoneSignature => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Signature.ToolsOzoneSignature ToolsOzoneSignature => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.team Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Team.ToolsOzoneTeam ToolsOzoneTeam => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Team.ToolsOzoneTeam ToolsOzoneTeam => new (this.XrpcClient);
 
         /// <summary>
         /// tools.ozone.verification Endpoint Group.
         /// </summary>
-        public FishyFlip.Lexicon.Tools.Ozone.Verification.ToolsOzoneVerification ToolsOzoneVerification => new (this);
+        public FishyFlip.Lexicon.Tools.Ozone.Verification.ToolsOzoneVerification ToolsOzoneVerification => new (this.XrpcClient);
 
     }
 }

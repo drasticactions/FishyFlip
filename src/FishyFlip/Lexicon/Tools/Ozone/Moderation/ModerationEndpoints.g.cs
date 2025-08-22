@@ -83,11 +83,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="externalId">An optional external ID for the event, used to deduplicate events from external systems. Fails when an event of same type with the same external ID exists for the same subject.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (this FishyFlip.ATProtocol atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default, string? externalId = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>> EmitEventAsync (this FishyFlip.IXrpcClient atp, ATObject @event, ATObject subject, FishyFlip.Models.ATDid createdBy, List<string>? subjectBlobCids = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default, string? externalId = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = EmitEvent.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new EmitEventInput();
             switch (@event.Type)
             {
@@ -114,7 +114,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
                 case "tools.ozone.moderation.defs#ageAssuranceOverrideEvent":
                     break;
                 default:
-                    atp.Options.Logger?.LogWarning($"Unknown @event type for union: " + @event.Type);
+                    atp.Logger?.LogWarning($"Unknown @event type for union: " + @event.Type);
                     break;
             }
             inputItem.Event = @event;
@@ -124,7 +124,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
                 case "com.atproto.repo.strongRef":
                     break;
                 default:
-                    atp.Options.Logger?.LogWarning($"Unknown subject type for union: " + subject.Type);
+                    atp.Logger?.LogWarning($"Unknown subject type for union: " + subject.Type);
                     break;
             }
             inputItem.Subject = subject;
@@ -132,7 +132,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             inputItem.SubjectBlobCids = subjectBlobCids;
             inputItem.ModTool = modTool;
             inputItem.ExternalId = externalId;
-            return atp.Post<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationEmitEventInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventView!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<EmitEventInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventView?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationEmitEventInput!, SourceGenerationContext.Default.ToolsOzoneModerationModEventView!, inputItem, cancellationToken, headers);
         }
 
 
@@ -145,7 +145,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="did"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput?>> GetAccountTimelineAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput?>> GetAccountTimelineAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetAccountTimeline.ToString();
             endpointUrl += "?";
@@ -153,10 +153,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add("did=" + did);
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetAccountTimelineOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetAccountTimelineOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationGetAccountTimelineOutput!, cancellationToken, headers);
         }
 
 
@@ -167,7 +167,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail?>> GetEventAsync (this FishyFlip.ATProtocol atp, int id, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail?>> GetEventAsync (this FishyFlip.IXrpcClient atp, int id, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetEvent.ToString();
             endpointUrl += "?";
@@ -175,10 +175,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add("id=" + id);
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationModEventViewDetail!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventViewDetail>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationModEventViewDetail!, cancellationToken, headers);
         }
 
 
@@ -192,7 +192,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="cid"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail?>> GetRecordAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri uri, string? cid = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRecord.ToString();
             endpointUrl += "?";
@@ -205,10 +205,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRecordViewDetail!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordViewDetail>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationRecordViewDetail!, cancellationToken, headers);
         }
 
 
@@ -219,7 +219,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="uris"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput?>> GetRecordsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput?>> GetRecordsAsync (this FishyFlip.IXrpcClient atp, List<FishyFlip.Models.ATUri> uris, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRecords.ToString();
             endpointUrl += "?";
@@ -227,10 +227,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", uris.Select(n => "uris=" + n)));
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetRecordsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetRecordsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationGetRecordsOutput!, cancellationToken, headers);
         }
 
 
@@ -243,7 +243,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="did"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail?>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail?>> GetRepoAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRepo.ToString();
             endpointUrl += "?";
@@ -251,10 +251,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add("did=" + did);
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationRepoViewDetail!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoViewDetail>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationRepoViewDetail!, cancellationToken, headers);
         }
 
 
@@ -265,7 +265,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="dids"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput?>> GetReporterStatsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput?>> GetReporterStatsAsync (this FishyFlip.IXrpcClient atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetReporterStats.ToString();
             endpointUrl += "?";
@@ -273,10 +273,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReporterStatsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReporterStatsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationGetReporterStatsOutput!, cancellationToken, headers);
         }
 
 
@@ -287,7 +287,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="dids"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput?>> GetReposAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput?>> GetReposAsync (this FishyFlip.IXrpcClient atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRepos.ToString();
             endpointUrl += "?";
@@ -295,10 +295,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetReposOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetReposOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationGetReposOutput!, cancellationToken, headers);
         }
 
 
@@ -309,7 +309,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="subjects"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput?>> GetSubjectsAsync (this FishyFlip.ATProtocol atp, List<string> subjects, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput?>> GetSubjectsAsync (this FishyFlip.IXrpcClient atp, List<string> subjects, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSubjects.ToString();
             endpointUrl += "?";
@@ -317,10 +317,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             queryStrings.Add(string.Join("&", subjects.Select(n => "subjects=" + n)));
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetSubjectsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationGetSubjectsOutput!, cancellationToken, headers);
         }
 
 
@@ -352,7 +352,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? batchId = default, string? ageAssuranceState = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.IXrpcClient atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? batchId = default, string? ageAssuranceState = default, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryEvents.ToString();
             endpointUrl += "?";
@@ -468,10 +468,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryEventsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationQueryEventsOutput!, cancellationToken, headers);
         }
 
 
@@ -516,7 +516,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="ageAssuranceState">If specified, only subjects with the given age assurance state will be returned.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, int? minAccountSuspendCount = 0, int? minReportedRecordsCount = 0, int? minTakendownRecordsCount = 0, int? minPriorityScore = 0, string? ageAssuranceState = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.IXrpcClient atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, int? minAccountSuspendCount = 0, int? minReportedRecordsCount = 0, int? minTakendownRecordsCount = 0, int? minPriorityScore = 0, string? ageAssuranceState = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryStatuses.ToString();
             endpointUrl += "?";
@@ -697,10 +697,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryStatusesOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationQueryStatusesOutput!, cancellationToken, headers);
         }
 
 
@@ -713,7 +713,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput?>> SearchReposAsync (this FishyFlip.ATProtocol atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput?>> SearchReposAsync (this FishyFlip.IXrpcClient atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SearchRepos.ToString();
             endpointUrl += "?";
@@ -734,10 +734,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationSearchReposOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Moderation.SearchReposOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneModerationSearchReposOutput!, cancellationToken, headers);
         }
 
     }

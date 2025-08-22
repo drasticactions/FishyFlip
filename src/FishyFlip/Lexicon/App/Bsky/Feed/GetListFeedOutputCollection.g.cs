@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class GetListFeedOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>
     {
 
-        public GetListFeedOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetListFeedOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.List = list;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.Feed, result.Cursor ?? string.Empty);
         }
 
-        public static GetListFeedOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetListFeedOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, list: list, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

@@ -27,12 +27,12 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>> DeleteAccountAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteAccount.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
-            return atp.Post<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyActorDeleteAccountOutput!, cancellationToken, headers);
+            return atp.ProcedureAsync<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput?>(endpointUrl, SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput!, cancellationToken, headers);
         }
 
 
@@ -42,13 +42,13 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> ExportAccountDataAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> ExportAccountDataAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ExportAccountData.ToString();
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoProxy, Constants.BlueskyChatProxy);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<Success>(endpointUrl, atp.Options.SourceGenerationContext.Success!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<Success>(endpointUrl, SourceGenerationContext.Default.Success!, cancellationToken, headers);
         }
 
     }

@@ -63,12 +63,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> GetAgeAssuranceStateAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> GetAgeAssuranceStateAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetAgeAssuranceState.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedAgeAssuranceState!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedAgeAssuranceState!, cancellationToken, headers);
         }
 
 
@@ -78,12 +78,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput?>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput?>> GetConfigAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetConfig.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetConfigOutput!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetConfigOutput!, cancellationToken, headers);
         }
 
 
@@ -96,7 +96,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="query"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput?>> GetPopularFeedGeneratorsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput?>> GetPopularFeedGeneratorsAsync (this FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPopularFeedGenerators.ToString();
             endpointUrl += "?";
@@ -117,9 +117,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput!, cancellationToken, headers);
         }
 
 
@@ -131,7 +131,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?>> GetPostThreadOtherV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?>> GetPostThreadOtherV2Async (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri anchor, bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPostThreadOtherV2.ToString();
             endpointUrl += "?";
@@ -144,9 +144,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPostThreadOtherV2Output!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetPostThreadOtherV2Output!, cancellationToken, headers);
         }
 
 
@@ -162,7 +162,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="sort">Sorting for the thread replies.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?>> GetPostThreadV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? above = default, int? below = 6, int? branchingFactor = 10, bool? prioritizeFollowedUsers = default, string? sort = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?>> GetPostThreadV2Async (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri anchor, bool? above = default, int? below = 6, int? branchingFactor = 10, bool? prioritizeFollowedUsers = default, string? sort = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPostThreadV2.ToString();
             endpointUrl += "?";
@@ -195,9 +195,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetPostThreadV2Output!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetPostThreadV2Output!, cancellationToken, headers);
         }
 
 
@@ -208,7 +208,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput?>> GetSuggestedFeedsAsync (this FishyFlip.ATProtocol atp, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput?>> GetSuggestedFeedsAsync (this FishyFlip.IXrpcClient atp, int? limit = 10, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSuggestedFeeds.ToString();
             endpointUrl += "?";
@@ -219,9 +219,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedFeedsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedFeedsOutput!, cancellationToken, headers);
         }
 
 
@@ -233,7 +233,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput?>> GetSuggestedFeedsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput?>> GetSuggestedFeedsSkeletonAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSuggestedFeedsSkeleton.ToString();
             endpointUrl += "?";
@@ -249,9 +249,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedFeedsSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedFeedsSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -262,7 +262,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput?>> GetSuggestedStarterPacksAsync (this FishyFlip.ATProtocol atp, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput?>> GetSuggestedStarterPacksAsync (this FishyFlip.IXrpcClient atp, int? limit = 10, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSuggestedStarterPacks.ToString();
             endpointUrl += "?";
@@ -273,9 +273,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedStarterPacksOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksOutput!, cancellationToken, headers);
         }
 
 
@@ -287,7 +287,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput?>> GetSuggestedStarterPacksSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput?>> GetSuggestedStarterPacksSkeletonAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSuggestedStarterPacksSkeleton.ToString();
             endpointUrl += "?";
@@ -303,9 +303,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -317,7 +317,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput?>> GetSuggestedUsersAsync (this FishyFlip.ATProtocol atp, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput?>> GetSuggestedUsersAsync (this FishyFlip.IXrpcClient atp, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSuggestedUsers.ToString();
             endpointUrl += "?";
@@ -333,9 +333,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedUsersOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersOutput!, cancellationToken, headers);
         }
 
 
@@ -348,7 +348,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput?>> GetSuggestedUsersSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput?>> GetSuggestedUsersSkeletonAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSuggestedUsersSkeleton.ToString();
             endpointUrl += "?";
@@ -369,9 +369,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestedUsersSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -385,7 +385,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="relativeToDid">DID of the account to get suggestions relative to. If not provided, suggestions will be based on the viewer.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput?>> GetSuggestionsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput?>> GetSuggestionsSkeletonAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetSuggestionsSkeleton.ToString();
             endpointUrl += "?";
@@ -411,9 +411,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetSuggestionsSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -423,12 +423,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput?>> GetTaggedSuggestionsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput?>> GetTaggedSuggestionsAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetTaggedSuggestions.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTaggedSuggestionsOutput!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput!, cancellationToken, headers);
         }
 
 
@@ -440,7 +440,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?>> GetTrendingTopicsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput?>> GetTrendingTopicsAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetTrendingTopics.ToString();
             endpointUrl += "?";
@@ -456,9 +456,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendingTopicsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendingTopicsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetTrendingTopicsOutput!, cancellationToken, headers);
         }
 
 
@@ -469,7 +469,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput?>> GetTrendsAsync (this FishyFlip.ATProtocol atp, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput?>> GetTrendsAsync (this FishyFlip.IXrpcClient atp, int? limit = 10, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetTrends.ToString();
             endpointUrl += "?";
@@ -480,9 +480,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetTrendsOutput!, cancellationToken, headers);
         }
 
 
@@ -494,7 +494,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput?>> GetTrendsSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput?>> GetTrendsSkeletonAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetTrendsSkeleton.ToString();
             endpointUrl += "?";
@@ -510,9 +510,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetTrendsSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTrendsSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedGetTrendsSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -529,7 +529,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="countryCode">An ISO 3166-1 alpha-2 code of the user's location.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> InitAgeAssuranceAsync (this FishyFlip.ATProtocol atp, string email, string language, string countryCode, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>> InitAgeAssuranceAsync (this FishyFlip.IXrpcClient atp, string email, string language, string countryCode, CancellationToken cancellationToken = default)
         {
             var endpointUrl = InitAgeAssurance.ToString();
             var headers = new Dictionary<string, string>();
@@ -537,7 +537,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             inputItem.Email = email;
             inputItem.Language = language;
             inputItem.CountryCode = countryCode;
-            return atp.Post<InitAgeAssuranceInput, FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedInitAgeAssuranceInput!, atp.Options.SourceGenerationContext.AppBskyUnspeccedAgeAssuranceState!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<InitAgeAssuranceInput, FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState?>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedInitAgeAssuranceInput!, SourceGenerationContext.Default.AppBskyUnspeccedAgeAssuranceState!, inputItem, cancellationToken, headers);
         }
 
 
@@ -554,7 +554,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput?>> SearchActorsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput?>> SearchActorsSkeletonAsync (this FishyFlip.IXrpcClient atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SearchActorsSkeleton.ToString();
             endpointUrl += "?";
@@ -582,9 +582,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchActorsSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchActorsSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedSearchActorsSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -609,7 +609,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput?>> SearchPostsSkeletonAsync (this FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput?>> SearchPostsSkeletonAsync (this FishyFlip.IXrpcClient atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SearchPostsSkeleton.ToString();
             endpointUrl += "?";
@@ -677,9 +677,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchPostsSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchPostsSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedSearchPostsSkeletonOutput!, cancellationToken, headers);
         }
 
 
@@ -695,7 +695,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="cursor">Optional pagination mechanism; may not necessarily allow scrolling through entire result set.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput?>> SearchStarterPacksSkeletonAsync (this FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput?>> SearchStarterPacksSkeletonAsync (this FishyFlip.IXrpcClient atp, string q, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SearchStarterPacksSkeleton.ToString();
             endpointUrl += "?";
@@ -718,9 +718,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedSearchStarterPacksSkeletonOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Unspecced.SearchStarterPacksSkeletonOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyUnspeccedSearchStarterPacksSkeletonOutput!, cancellationToken, headers);
         }
 
     }

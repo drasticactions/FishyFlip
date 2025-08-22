@@ -38,18 +38,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <param name="createdBy">DID of the user who is creating the template.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> CreateTemplateAsync (this FishyFlip.ATProtocol atp, string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> CreateTemplateAsync (this FishyFlip.IXrpcClient atp, string name, string contentMarkdown, string subject, string? lang = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateTemplate.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new CreateTemplateInput();
             inputItem.Name = name;
             inputItem.ContentMarkdown = contentMarkdown;
             inputItem.Subject = subject;
             inputItem.Lang = lang;
             inputItem.CreatedBy = createdBy;
-            return atp.Post<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationCreateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<CreateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneCommunicationCreateTemplateInput!, SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
         }
 
 
@@ -60,14 +60,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> DeleteTemplateAsync (this FishyFlip.ATProtocol atp, string id, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> DeleteTemplateAsync (this FishyFlip.IXrpcClient atp, string id, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteTemplate.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new DeleteTemplateInput();
             inputItem.Id = id;
-            return atp.Post<DeleteTemplateInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationDeleteTemplateInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<DeleteTemplateInput, Success?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -77,13 +77,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?>> ListTemplatesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput?>> ListTemplatesAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListTemplates.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationListTemplatesOutput!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneCommunicationListTemplatesOutput!, cancellationToken, headers);
         }
 
 
@@ -102,11 +102,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
         /// <param name="disabled"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (this FishyFlip.ATProtocol atp, string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>> UpdateTemplateAsync (this FishyFlip.IXrpcClient atp, string id, string? name = default, string? lang = default, string? contentMarkdown = default, string? subject = default, FishyFlip.Models.ATDid? updatedBy = default, bool? disabled = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateTemplate.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new UpdateTemplateInput();
             inputItem.Id = id;
             inputItem.Name = name;
@@ -115,7 +115,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Communication
             inputItem.Subject = subject;
             inputItem.UpdatedBy = updatedBy;
             inputItem.Disabled = disabled;
-            return atp.Post<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationUpdateTemplateInput!, atp.Options.SourceGenerationContext.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<UpdateTemplateInput, FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneCommunicationUpdateTemplateInput!, SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView!, inputItem, cancellationToken, headers);
         }
 
     }

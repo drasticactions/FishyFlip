@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class GetRepostedByOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>
     {
 
-        public GetRepostedByOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetRepostedByOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Uri = uri;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.RepostedBy, result.Cursor ?? string.Empty);
         }
 
-        public static GetRepostedByOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetRepostedByOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, uri: uri, cid: cid, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

@@ -25,13 +25,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput?>> GetConfigAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput?>> GetConfigAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetConfig.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneServerGetConfigOutput!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Server.GetConfigOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneServerGetConfigOutput!, cancellationToken, headers);
         }
 
     }

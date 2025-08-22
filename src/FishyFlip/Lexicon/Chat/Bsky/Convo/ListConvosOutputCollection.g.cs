@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
     public class ListConvosOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>, IAsyncEnumerable<FishyFlip.Lexicon.Chat.Bsky.Convo.ConvoView>
     {
 
-        public ListConvosOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
+        public ListConvosOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return (result.Convos, result.Cursor ?? string.Empty);
         }
 
-        public static ListConvosOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
+        public static ListConvosOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? readState = default, string? status = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, readState: readState, status: status, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

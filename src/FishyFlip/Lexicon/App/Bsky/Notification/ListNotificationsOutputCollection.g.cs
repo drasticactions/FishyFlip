@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
     public class ListNotificationsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Notification.Notification>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Notification.Notification>
     {
 
-        public ListNotificationsOutputCollection(FishyFlip.ATProtocol atp, List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        public ListNotificationsOutputCollection(FishyFlip.IXrpcClient atp, List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Reasons = reasons;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             return (result.Notifications, result.Cursor ?? string.Empty);
         }
 
-        public static ListNotificationsOutputCollection Create(FishyFlip.ATProtocol atp, List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        public static ListNotificationsOutputCollection Create(FishyFlip.IXrpcClient atp, List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, reasons: reasons, priority: priority, seenAt: seenAt, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

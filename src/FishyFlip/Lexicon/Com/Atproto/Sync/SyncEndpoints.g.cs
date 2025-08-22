@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="cid">The CID of the blob to fetch</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="byte[]?"/></returns>
-        public static Task<Result<byte[]?>> GetBlobAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
+        public static Task<Result<byte[]?>> GetBlobAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string cid, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetBlob.ToString();
             endpointUrl += "?";
@@ -69,9 +69,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.GetBlob(endpointUrl, cancellationToken);
+            return atp.GetBlobAsync(endpointUrl, cancellationToken);
         }
 
 
@@ -90,7 +90,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="CarResponse?"/></returns>
-        public static Task<Result<CarResponse?>> GetBlocksAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CarResponse?>> GetBlocksAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, List<string> cids, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetBlocks.ToString();
             endpointUrl += "?";
@@ -109,7 +109,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
@@ -124,7 +124,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="hostname">Hostname of the host (eg, PDS or relay) being queried.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput?>> GetHostStatusAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput?>> GetHostStatusAsync (this FishyFlip.IXrpcClient atp, string hostname, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetHostStatus.ToString();
             endpointUrl += "?";
@@ -136,9 +136,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetHostStatusOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Sync.GetHostStatusOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncGetHostStatusOutput!, cancellationToken, headers);
         }
 
 
@@ -154,7 +154,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="did">The DID of the repo.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?>> GetLatestCommitAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput?>> GetLatestCommitAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetLatestCommit.ToString();
             endpointUrl += "?";
@@ -166,9 +166,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetLatestCommitOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Sync.GetLatestCommitOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncGetLatestCommitOutput!, cancellationToken, headers);
         }
 
 
@@ -188,7 +188,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="CarResponse?"/></returns>
-        public static Task<Result<CarResponse?>> GetRecordAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CarResponse?>> GetRecordAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string collection, string rkey, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRecord.ToString();
             endpointUrl += "?";
@@ -209,7 +209,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
@@ -229,7 +229,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="onDecoded"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="CarResponse?"/></returns>
-        public static Task<Result<CarResponse?>> GetRepoAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? since = default, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CarResponse?>> GetRepoAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string? since = default, OnCarDecoded? onDecoded = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRepo.ToString();
             endpointUrl += "?";
@@ -251,7 +251,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
             return atp.GetCarAsync(endpointUrl, cancellationToken, onDecoded);
         }
@@ -266,7 +266,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="did">The DID of the repo.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?>> GetRepoStatusAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput?>> GetRepoStatusAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetRepoStatus.ToString();
             endpointUrl += "?";
@@ -278,9 +278,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncGetRepoStatusOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Sync.GetRepoStatusOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncGetRepoStatusOutput!, cancellationToken, headers);
         }
 
 
@@ -299,7 +299,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput?>> ListBlobsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? since = default, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput?>> ListBlobsAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string? since = default, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListBlobs.ToString();
             endpointUrl += "?";
@@ -326,9 +326,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListBlobsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Sync.ListBlobsOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncListBlobsOutput!, cancellationToken, headers);
         }
 
 
@@ -340,7 +340,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput?>> ListHostsAsync (this FishyFlip.ATProtocol atp, int? limit = 200, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput?>> ListHostsAsync (this FishyFlip.IXrpcClient atp, int? limit = 200, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListHosts.ToString();
             endpointUrl += "?";
@@ -360,9 +360,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListHostsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Sync.ListHostsOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncListHostsOutput!, cancellationToken, headers);
         }
 
 
@@ -374,7 +374,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput?>> ListReposAsync (this FishyFlip.ATProtocol atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput?>> ListReposAsync (this FishyFlip.IXrpcClient atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListRepos.ToString();
             endpointUrl += "?";
@@ -394,9 +394,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncListReposOutput!, cancellationToken, headers);
         }
 
 
@@ -409,7 +409,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput?>> ListReposByCollectionAsync (this FishyFlip.ATProtocol atp, string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput?>> ListReposByCollectionAsync (this FishyFlip.IXrpcClient atp, string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListReposByCollection.ToString();
             endpointUrl += "?";
@@ -431,9 +431,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncListReposByCollectionOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposByCollectionOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncListReposByCollectionOutput!, cancellationToken, headers);
         }
 
 
@@ -446,13 +446,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
         /// <param name="hostname">Hostname of the current service (eg, PDS) that is requesting to be crawled.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> RequestCrawlAsync (this FishyFlip.ATProtocol atp, string hostname, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RequestCrawlAsync (this FishyFlip.IXrpcClient atp, string hostname, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestCrawl.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new RequestCrawlInput();
             inputItem.Hostname = hostname;
-            return atp.Post<RequestCrawlInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoSyncRequestCrawlInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<RequestCrawlInput, Success?>(endpointUrl, SourceGenerationContext.Default.ComAtprotoSyncRequestCrawlInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
     }

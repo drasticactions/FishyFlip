@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
     public class ListMissingBlobsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>, IAsyncEnumerable<FishyFlip.Lexicon.Com.Atproto.Repo.RecordBlob>
     {
 
-        public ListMissingBlobsOutputCollection(FishyFlip.ATProtocol atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListMissingBlobsOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return (result.Blobs, result.Cursor ?? string.Empty);
         }
 
-        public static ListMissingBlobsOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public static ListMissingBlobsOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

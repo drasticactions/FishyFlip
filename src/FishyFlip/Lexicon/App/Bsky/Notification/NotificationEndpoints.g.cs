@@ -43,12 +43,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput?>> GetPreferencesAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput?>> GetPreferencesAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPreferences.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetPreferencesOutput!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Notification.GetPreferencesOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationGetPreferencesOutput!, cancellationToken, headers);
         }
 
 
@@ -60,7 +60,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="seenAt"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?>> GetUnreadCountAsync (this FishyFlip.ATProtocol atp, bool? priority = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput?>> GetUnreadCountAsync (this FishyFlip.IXrpcClient atp, bool? priority = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetUnreadCount.ToString();
             endpointUrl += "?";
@@ -76,9 +76,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationGetUnreadCountOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Notification.GetUnreadCountOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationGetUnreadCountOutput!, cancellationToken, headers);
         }
 
 
@@ -90,7 +90,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput?>> ListActivitySubscriptionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput?>> ListActivitySubscriptionsAsync (this FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListActivitySubscriptions.ToString();
             endpointUrl += "?";
@@ -106,9 +106,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListActivitySubscriptionsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Notification.ListActivitySubscriptionsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationListActivitySubscriptionsOutput!, cancellationToken, headers);
         }
 
 
@@ -123,7 +123,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="seenAt"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?>> ListNotificationsAsync (this FishyFlip.ATProtocol atp, List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput?>> ListNotificationsAsync (this FishyFlip.IXrpcClient atp, List<string>? reasons = default, int? limit = 50, bool? priority = default, string? cursor = default, DateTime? seenAt = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListNotifications.ToString();
             endpointUrl += "?";
@@ -154,9 +154,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationListNotificationsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Notification.ListNotificationsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationListNotificationsOutput!, cancellationToken, headers);
         }
 
 
@@ -168,14 +168,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="activitySubscription"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?>> PutActivitySubscriptionAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid subject, FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription activitySubscription, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?>> PutActivitySubscriptionAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid subject, FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription activitySubscription, CancellationToken cancellationToken = default)
         {
             var endpointUrl = PutActivitySubscription.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new PutActivitySubscriptionInput();
             inputItem.Subject = subject;
             inputItem.ActivitySubscription = activitySubscription;
-            return atp.Post<PutActivitySubscriptionInput, FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutActivitySubscriptionInput!, atp.Options.SourceGenerationContext.AppBskyNotificationPutActivitySubscriptionOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<PutActivitySubscriptionInput, FishyFlip.Lexicon.App.Bsky.Notification.PutActivitySubscriptionOutput?>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationPutActivitySubscriptionInput!, SourceGenerationContext.Default.AppBskyNotificationPutActivitySubscriptionOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -186,13 +186,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="priority"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.ATProtocol atp, bool priority, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> PutPreferencesAsync (this FishyFlip.IXrpcClient atp, bool priority, CancellationToken cancellationToken = default)
         {
             var endpointUrl = PutPreferences.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new PutPreferencesInput();
             inputItem.Priority = priority;
-            return atp.Post<PutPreferencesInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<PutPreferencesInput, Success?>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationPutPreferencesInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -215,7 +215,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="verified"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output?>> PutPreferencesV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.App.Bsky.Notification.ChatPreference? chat = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? follow = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? like = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? likeViaRepost = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? mention = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? quote = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? reply = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? repost = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? repostViaRepost = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? starterpackJoined = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? subscribedPost = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? unverified = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? verified = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output?>> PutPreferencesV2Async (this FishyFlip.IXrpcClient atp, FishyFlip.Lexicon.App.Bsky.Notification.ChatPreference? chat = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? follow = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? like = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? likeViaRepost = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? mention = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? quote = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? reply = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? repost = default, FishyFlip.Lexicon.App.Bsky.Notification.FilterablePreference? repostViaRepost = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? starterpackJoined = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? subscribedPost = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? unverified = default, FishyFlip.Lexicon.App.Bsky.Notification.Preference? verified = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = PutPreferencesV2.ToString();
             var headers = new Dictionary<string, string>();
@@ -233,7 +233,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             inputItem.SubscribedPost = subscribedPost;
             inputItem.Unverified = unverified;
             inputItem.Verified = verified;
-            return atp.Post<PutPreferencesV2Input, FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesV2Input!, atp.Options.SourceGenerationContext.AppBskyNotificationPutPreferencesV2Output!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<PutPreferencesV2Input, FishyFlip.Lexicon.App.Bsky.Notification.PutPreferencesV2Output?>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationPutPreferencesV2Input!, SourceGenerationContext.Default.AppBskyNotificationPutPreferencesV2Output!, inputItem, cancellationToken, headers);
         }
 
 
@@ -248,7 +248,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="ageRestricted">Set to true when the actor is age restricted</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> RegisterPushAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, bool? ageRestricted = default, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RegisterPushAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, bool? ageRestricted = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RegisterPush.ToString();
             var headers = new Dictionary<string, string>();
@@ -258,7 +258,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             inputItem.Platform = platform;
             inputItem.AppId = appId;
             inputItem.AgeRestricted = ageRestricted;
-            return atp.Post<RegisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationRegisterPushInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<RegisterPushInput, Success?>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationRegisterPushInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -272,7 +272,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="appId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> UnregisterPushAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> UnregisterPushAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid serviceDid, string token, string platform, string appId, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UnregisterPush.ToString();
             var headers = new Dictionary<string, string>();
@@ -281,7 +281,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             inputItem.Token = token;
             inputItem.Platform = platform;
             inputItem.AppId = appId;
-            return atp.Post<UnregisterPushInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUnregisterPushInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<UnregisterPushInput, Success?>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationUnregisterPushInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -292,13 +292,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
         /// <param name="seenAt"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> UpdateSeenAsync (this FishyFlip.ATProtocol atp, DateTime seenAt, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> UpdateSeenAsync (this FishyFlip.IXrpcClient atp, DateTime seenAt, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateSeen.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new UpdateSeenInput();
             inputItem.SeenAt = seenAt;
-            return atp.Post<UpdateSeenInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyNotificationUpdateSeenInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<UpdateSeenInput, Success?>(endpointUrl, SourceGenerationContext.Default.AppBskyNotificationUpdateSeenInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
     }

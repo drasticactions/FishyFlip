@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
     public class SearchActorsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>
     {
 
-        public SearchActorsOutputCollection(FishyFlip.ATProtocol atp, string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public SearchActorsOutputCollection(FishyFlip.IXrpcClient atp, string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Q = q;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             return (result.Actors, result.Cursor ?? string.Empty);
         }
 
-        public static SearchActorsOutputCollection Create(FishyFlip.ATProtocol atp, string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static SearchActorsOutputCollection Create(FishyFlip.IXrpcClient atp, string? q = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, q: q, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

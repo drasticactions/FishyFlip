@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class GetQuotesOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.PostView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.PostView>
     {
 
-        public GetQuotesOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetQuotesOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Uri = uri;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.Posts, result.Cursor ?? string.Empty);
         }
 
-        public static GetQuotesOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetQuotesOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, uri: uri, cid: cid, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

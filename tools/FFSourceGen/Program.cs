@@ -331,7 +331,7 @@ public partial class AppCommands
             sb.AppendLine($"        /// {group.Key.ToLower()} Endpoint Group.");
             sb.AppendLine($"        /// </summary>");
             sb.AppendLine(
-                $"        public {baseNamespace}.{group.Key}.{className} {className.Replace("ATProto", string.Empty).Replace("Bluesky", string.Empty)} => new (this);");
+                $"        public {baseNamespace}.{group.Key}.{className} {className.Replace("ATProto", string.Empty).Replace("Bluesky", string.Empty)} => new (this.XrpcClient);");
             sb.AppendLine();
         }
 
@@ -379,13 +379,13 @@ public partial class AppCommands
         sb.AppendLine($"    public sealed class {className}");
         sb.AppendLine("    {");
         sb.AppendLine();
-        sb.AppendLine("        private ATProtocol atp;");
+        sb.AppendLine("        private IXrpcClient atp;");
         sb.AppendLine();
         sb.AppendLine($"        /// <summary>");
         sb.AppendLine($"        /// Initializes a new instance of the <see cref=\"{className}\"/> class.");
         sb.AppendLine($"        /// </summary>");
         sb.AppendLine($"        /// <param name=\"atp\"><see cref=\"ATProtocol\"/>.</param>");
-        sb.AppendLine($"        internal {className}(ATProtocol atp)");
+        sb.AppendLine($"        internal {className}(IXrpcClient atp)");
         sb.AppendLine("        {");
         sb.AppendLine("            this.atp = atp;");
         sb.AppendLine("        }");
@@ -393,7 +393,7 @@ public partial class AppCommands
         sb.AppendLine("        /// <summary>");
         sb.AppendLine("        /// Gets the ATProtocol.");
         sb.AppendLine("        /// </summary>");
-        sb.AppendLine("        internal ATProtocol ATProtocol => this.atp;");
+        sb.AppendLine("        internal IXrpcClient ATProtocol => this.atp;");
         sb.AppendLine();
         foreach (var item in group)
         {
@@ -580,7 +580,7 @@ public partial class AppCommands
             // replace collection with the first input property.
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.ATProtocol.CreateRecordAsync({string.Join(", ", properties)});");
@@ -609,7 +609,7 @@ public partial class AppCommands
             properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            var record = new {baseNamespace}.{item.FullClassName}();");
@@ -647,7 +647,7 @@ public partial class AppCommands
             properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.ATProtocol.DeleteRecordAsync({string.Join(", ", properties)});");
@@ -672,7 +672,7 @@ public partial class AppCommands
             // replace collection with the first input property.
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.ATProtocol.PutRecordAsync({string.Join(", ", properties)});");
@@ -694,7 +694,7 @@ public partial class AppCommands
             properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.ATProtocol.ListRecordsAsync({string.Join(", ", properties)});");
@@ -735,7 +735,7 @@ public partial class AppCommands
             properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.ATProtocol.GetRecordAsync({string.Join(", ", properties)});");
@@ -806,7 +806,7 @@ public partial class AppCommands
             // replace collection with the first input property.
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.CreateRecordAsync({string.Join(", ", properties)});");
@@ -833,7 +833,7 @@ public partial class AppCommands
             properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            var record = new {baseNamespace}.{item.FullClassName}();");
@@ -926,7 +926,7 @@ public partial class AppCommands
             properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.ListRecordsAsync({string.Join(", ", properties)});");
@@ -967,7 +967,7 @@ public partial class AppCommands
             properties = inputProperties.Select(n => n.Split(" ")[1]).ToList();
             properties[properties.IndexOf("collection")] = $"\"{item.Id}\"";
             properties[properties.IndexOf("repo")] =
-                $"atp.SessionManager.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
+                $"atp.Session?.Did ?? throw new InvalidOperationException(\"Session did is required.\")";
             sb.AppendLine(")");
             sb.AppendLine("        {");
             sb.AppendLine($"            return atp.GetRecordAsync({string.Join(", ", properties)});");
@@ -1249,8 +1249,8 @@ public partial class AppCommands
         sb.AppendLine();
         // Generate the input properties
         var (requiredProperties, optionalProperties) = this.FetchInputProperties(inputClass);
-        // Add ATProtocol to Required
-        requiredProperties.Insert(0, "FishyFlip.ATProtocol atp");
+        // Add IXrpcClient to Required
+        requiredProperties.Insert(0, "FishyFlip.IXrpcClient atp");
         var inputProperties = requiredProperties.Concat(optionalProperties).ToList();
         //this.GenerateParams(sb, cls, inputProperties);
         sb.Append($"        public {className}(");
@@ -1617,7 +1617,7 @@ public partial class AppCommands
                     sb.AppendLine($"            var headers = new Dictionary<string, string>();");
                     if (item.Id.Contains("moderation"))
                     {
-                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);");
                     }
                     else if (item.Id.Contains("chat"))
                     {
@@ -1625,17 +1625,17 @@ public partial class AppCommands
                     }
                     else if (item.Id.Contains("ozone"))
                     {
-                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);");
                     }
                     if (inputProperties.Count <= 2)
                     {
                         sb.AppendLine(
-                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken, headers);");
+                            $"            return atp.ProcedureAsync<{outputProperty}?>(endpointUrl, SourceGenerationContext.Default.{sourceContext}!, cancellationToken, headers);");
                     }
                     else if (inputProperties[1].Contains("StreamContent"))
                     {
                         sb.AppendLine(
-                            $"            return atp.Post<{outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, {inputProperties[1].Split(" ").Last()}, cancellationToken, headers);");
+                            $"            return atp.ProcedureAsync<{outputProperty}?>(endpointUrl, SourceGenerationContext.Default.{sourceContext}!, {inputProperties[1].Split(" ").Last()}, cancellationToken, headers);");
                     }
                     else
                     {
@@ -1664,7 +1664,7 @@ public partial class AppCommands
                                     sb.AppendLine("                default:");
                                     var name =
                                     sb.AppendLine(
-                                        $"                    atp.Options.Logger?.LogWarning($\"Unknown {prop} type for union: \" + {prop}.Type);");
+                                        $"                    atp.Logger?.LogWarning($\"Unknown {prop} type for union: \" + {prop}.Type);");
                                     sb.AppendLine("                    break;");
                                     sb.AppendLine("            }");
                                 }
@@ -1674,7 +1674,7 @@ public partial class AppCommands
                         }
 
                         sb.AppendLine(
-                            $"            return atp.Post<{item.ClassName}Input, {outputProperty}?>(endpointUrl, atp.Options.SourceGenerationContext.{inputSourceContext}!, atp.Options.SourceGenerationContext.{sourceContext}!, inputItem, cancellationToken, headers);");
+                            $"            return atp.ProcedureAsync<{item.ClassName}Input, {outputProperty}?>(endpointUrl, SourceGenerationContext.Default.{inputSourceContext}!, SourceGenerationContext.Default.{sourceContext}!, inputItem, cancellationToken, headers);");
                     }
 
                     break;
@@ -1745,7 +1745,7 @@ public partial class AppCommands
                     sb.AppendLine($"            var headers = new Dictionary<string, string>();");
                     if (item.Id.Contains("moderation"))
                     {
-                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);");
                     }
                     else if (item.Id.Contains("chat"))
                     {
@@ -1753,7 +1753,7 @@ public partial class AppCommands
                     }
                     else if (item.Id.Contains("ozone"))
                     {
-                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);");
+                        sb.AppendLine($"            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);");
                     }
                     else if (!item.Id.Contains("app.bsky") || item.Id.Contains("com.atproto"))
                     {
@@ -1763,7 +1763,7 @@ public partial class AppCommands
                         sb.AppendLine("            }");
                     }
                     
-                    sb.AppendLine($"            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);");
+                    sb.AppendLine($"            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(\", \", atp.LabelParameters.Select(p => p.ToString())));");
 
                     if (inputProperties.Count > 2)
                     {
@@ -1778,12 +1778,12 @@ public partial class AppCommands
                     else if (outputProperty == "byte[]")
                     {
                         sb.AppendLine(
-                            $"            return atp.GetBlob(endpointUrl, cancellationToken);");
+                            $"            return atp.GetBlobAsync(endpointUrl, cancellationToken);");
                     }
                     else
                     {
                         sb.AppendLine(
-                            $"            return atp.Get<{outputProperty}>(endpointUrl, atp.Options.SourceGenerationContext.{sourceContext}!, cancellationToken, headers);");
+                            $"            return atp.QueryAsync<{outputProperty}>(endpointUrl, SourceGenerationContext.Default.{sourceContext}!, cancellationToken, headers);");
                     }
 
                     break;
@@ -1853,7 +1853,7 @@ public partial class AppCommands
 
         if (isExtensionMethod)
         {
-            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+            requiredProperties.Insert(0, "this FishyFlip.IXrpcClient atp");
         }
 
         if (includeCancellationToken)
@@ -1950,7 +1950,7 @@ public partial class AppCommands
 
         if (isExtensionMethod)
         {
-            requiredProperties.Insert(0, "this FishyFlip.ATProtocol atp");
+            requiredProperties.Insert(0, "this FishyFlip.IXrpcClient atp");
         }
 
         optionalProperties.Add("CancellationToken cancellationToken = default");

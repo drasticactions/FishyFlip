@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
     public class QueryLabelsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Com.Atproto.Label.Label>, IAsyncEnumerable<FishyFlip.Lexicon.Com.Atproto.Label.Label>
     {
 
-        public QueryLabelsOutputCollection(FishyFlip.ATProtocol atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public QueryLabelsOutputCollection(FishyFlip.IXrpcClient atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.UriPatterns = uriPatterns;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             return (result.Labels, result.Cursor ?? string.Empty);
         }
 
-        public static QueryLabelsOutputCollection Create(FishyFlip.ATProtocol atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static QueryLabelsOutputCollection Create(FishyFlip.IXrpcClient atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, uriPatterns: uriPatterns, sources: sources, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

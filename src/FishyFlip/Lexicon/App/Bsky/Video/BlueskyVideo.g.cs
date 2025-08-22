@@ -14,13 +14,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
     public sealed class BlueskyVideo
     {
 
-        private ATProtocol atp;
+        private IXrpcClient atp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlueskyVideo"/> class.
         /// </summary>
         /// <param name="atp"><see cref="ATProtocol"/>.</param>
-        internal BlueskyVideo(ATProtocol atp)
+        internal BlueskyVideo(IXrpcClient atp)
         {
             this.atp = atp;
         }
@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <summary>
         /// Gets the ATProtocol.
         /// </summary>
-        internal ATProtocol ATProtocol => this.atp;
+        internal IXrpcClient ATProtocol => this.atp;
 
 
         /// <summary>

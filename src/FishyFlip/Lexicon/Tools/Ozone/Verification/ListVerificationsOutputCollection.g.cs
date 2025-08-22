@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
     public class ListVerificationsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationView>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationView>
     {
 
-        public ListVerificationsOutputCollection(FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, DateTime? createdAfter = default, DateTime? createdBefore = default, List<FishyFlip.Models.ATDid>? issuers = default, List<FishyFlip.Models.ATDid>? subjects = default, string? sortDirection = default, bool? isRevoked = default, CancellationToken cancellationToken = default)
+        public ListVerificationsOutputCollection(FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, DateTime? createdAfter = default, DateTime? createdBefore = default, List<FishyFlip.Models.ATDid>? issuers = default, List<FishyFlip.Models.ATDid>? subjects = default, string? sortDirection = default, bool? isRevoked = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Cursor = cursor;
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
             return (result.Verifications, result.Cursor ?? string.Empty);
         }
 
-        public static ListVerificationsOutputCollection Create(FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, DateTime? createdAfter = default, DateTime? createdBefore = default, List<FishyFlip.Models.ATDid>? issuers = default, List<FishyFlip.Models.ATDid>? subjects = default, string? sortDirection = default, bool? isRevoked = default, CancellationToken cancellationToken = default)
+        public static ListVerificationsOutputCollection Create(FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, DateTime? createdAfter = default, DateTime? createdBefore = default, List<FishyFlip.Models.ATDid>? issuers = default, List<FishyFlip.Models.ATDid>? subjects = default, string? sortDirection = default, bool? isRevoked = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, createdAfter: createdAfter, createdBefore: createdBefore, issuers: issuers, subjects: subjects, sortDirection: sortDirection, isRevoked: isRevoked, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

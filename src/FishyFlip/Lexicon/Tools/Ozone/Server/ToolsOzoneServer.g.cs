@@ -14,13 +14,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
     public sealed class ToolsOzoneServer
     {
 
-        private ATProtocol atp;
+        private IXrpcClient atp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolsOzoneServer"/> class.
         /// </summary>
         /// <param name="atp"><see cref="ATProtocol"/>.</param>
-        internal ToolsOzoneServer(ATProtocol atp)
+        internal ToolsOzoneServer(IXrpcClient atp)
         {
             this.atp = atp;
         }
@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Server
         /// <summary>
         /// Gets the ATProtocol.
         /// </summary>
-        internal ATProtocol ATProtocol => this.atp;
+        internal IXrpcClient ATProtocol => this.atp;
 
 
         /// <summary>

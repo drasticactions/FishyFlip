@@ -42,11 +42,11 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// <param name="modTool"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (this FishyFlip.ATProtocol atp, string reasonType, ATObject subject, string? reason = default, FishyFlip.Lexicon.Com.Atproto.Moderation.ModTool? modTool = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>> CreateReportAsync (this FishyFlip.IXrpcClient atp, string reasonType, ATObject subject, string? reason = default, FishyFlip.Lexicon.Com.Atproto.Moderation.ModTool? modTool = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CreateReport.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new CreateReportInput();
             inputItem.ReasonType = reasonType;
             switch (subject.Type)
@@ -55,13 +55,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
                 case "com.atproto.repo.strongRef":
                     break;
                 default:
-                    atp.Options.Logger?.LogWarning($"Unknown subject type for union: " + subject.Type);
+                    atp.Logger?.LogWarning($"Unknown subject type for union: " + subject.Type);
                     break;
             }
             inputItem.Subject = subject;
             inputItem.Reason = reason;
             inputItem.ModTool = modTool;
-            return atp.Post<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportInput!, atp.Options.SourceGenerationContext.ComAtprotoModerationCreateReportOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<CreateReportInput, FishyFlip.Lexicon.Com.Atproto.Moderation.CreateReportOutput?>(endpointUrl, SourceGenerationContext.Default.ComAtprotoModerationCreateReportInput!, SourceGenerationContext.Default.ComAtprotoModerationCreateReportOutput!, inputItem, cancellationToken, headers);
         }
 
     }

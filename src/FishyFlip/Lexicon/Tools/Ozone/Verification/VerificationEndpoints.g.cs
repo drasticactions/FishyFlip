@@ -30,14 +30,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <param name="verifications">Array of verification requests to process</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput?>> GrantVerificationsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationInput> verifications, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput?>> GrantVerificationsAsync (this FishyFlip.IXrpcClient atp, List<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationInput> verifications, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GrantVerifications.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new GrantVerificationsInput();
             inputItem.Verifications = verifications;
-            return atp.Post<GrantVerificationsInput, FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneVerificationGrantVerificationsInput!, atp.Options.SourceGenerationContext.ToolsOzoneVerificationGrantVerificationsOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<GrantVerificationsInput, FishyFlip.Lexicon.Tools.Ozone.Verification.GrantVerificationsOutput?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneVerificationGrantVerificationsInput!, SourceGenerationContext.Default.ToolsOzoneVerificationGrantVerificationsOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <param name="isRevoked">Filter to verifications that are revoked or not. By default, includes both.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput?>> ListVerificationsAsync (this FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, DateTime? createdAfter = default, DateTime? createdBefore = default, List<FishyFlip.Models.ATDid>? issuers = default, List<FishyFlip.Models.ATDid>? subjects = default, string? sortDirection = default, bool? isRevoked = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput?>> ListVerificationsAsync (this FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, DateTime? createdAfter = default, DateTime? createdBefore = default, List<FishyFlip.Models.ATDid>? issuers = default, List<FishyFlip.Models.ATDid>? subjects = default, string? sortDirection = default, bool? isRevoked = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListVerifications.ToString();
             endpointUrl += "?";
@@ -101,10 +101,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneVerificationListVerificationsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Verification.ListVerificationsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneVerificationListVerificationsOutput!, cancellationToken, headers);
         }
 
 
@@ -116,15 +116,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Verification
         /// <param name="revokeReason">Reason for revoking the verification. This is optional and can be omitted if not needed.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput?>> RevokeVerificationsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATUri> uris, string? revokeReason = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput?>> RevokeVerificationsAsync (this FishyFlip.IXrpcClient atp, List<FishyFlip.Models.ATUri> uris, string? revokeReason = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RevokeVerifications.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new RevokeVerificationsInput();
             inputItem.Uris = uris;
             inputItem.RevokeReason = revokeReason;
-            return atp.Post<RevokeVerificationsInput, FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneVerificationRevokeVerificationsInput!, atp.Options.SourceGenerationContext.ToolsOzoneVerificationRevokeVerificationsOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<RevokeVerificationsInput, FishyFlip.Lexicon.Tools.Ozone.Verification.RevokeVerificationsOutput?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneVerificationRevokeVerificationsInput!, SourceGenerationContext.Default.ToolsOzoneVerificationRevokeVerificationsOutput!, inputItem, cancellationToken, headers);
         }
 
     }

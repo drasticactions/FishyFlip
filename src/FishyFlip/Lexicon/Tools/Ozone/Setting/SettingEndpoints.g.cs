@@ -34,7 +34,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <param name="keys">Filter for only the specified keys. Ignored if prefix is provided</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput?>> ListOptionsAsync (this FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? scope = default, string? prefix = default, List<string>? keys = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListOptions.ToString();
             endpointUrl += "?";
@@ -65,10 +65,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingListOptionsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Setting.ListOptionsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSettingListOptionsOutput!, cancellationToken, headers);
         }
 
 
@@ -80,15 +80,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <param name="scope"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (this FishyFlip.ATProtocol atp, List<string> keys, string scope, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>> RemoveOptionsAsync (this FishyFlip.IXrpcClient atp, List<string> keys, string scope, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RemoveOptions.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new RemoveOptionsInput();
             inputItem.Keys = keys;
             inputItem.Scope = scope;
-            return atp.Post<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingRemoveOptionsOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<RemoveOptionsInput, FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsOutput?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsInput!, SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -103,18 +103,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Setting
         /// <param name="managerRole"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>> UpsertOptionAsync (this FishyFlip.ATProtocol atp, string key, string scope, ATObject value, string? description = default, string? managerRole = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>> UpsertOptionAsync (this FishyFlip.IXrpcClient atp, string key, string scope, ATObject value, string? description = default, string? managerRole = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpsertOption.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new UpsertOptionInput();
             inputItem.Key = key;
             inputItem.Scope = scope;
             inputItem.Value = value;
             inputItem.Description = description;
             inputItem.ManagerRole = managerRole;
-            return atp.Post<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionInput!, atp.Options.SourceGenerationContext.ToolsOzoneSettingUpsertOptionOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<UpsertOptionInput, FishyFlip.Lexicon.Tools.Ozone.Setting.UpsertOptionOutput?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionInput!, SourceGenerationContext.Default.ToolsOzoneSettingUpsertOptionOutput!, inputItem, cancellationToken, headers);
         }
 
     }

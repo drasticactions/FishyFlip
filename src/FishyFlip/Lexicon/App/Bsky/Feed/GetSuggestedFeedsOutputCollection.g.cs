@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class GetSuggestedFeedsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>
     {
 
-        public GetSuggestedFeedsOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetSuggestedFeedsOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.Feeds, result.Cursor ?? string.Empty);
         }
 
-        public static GetSuggestedFeedsOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetSuggestedFeedsOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

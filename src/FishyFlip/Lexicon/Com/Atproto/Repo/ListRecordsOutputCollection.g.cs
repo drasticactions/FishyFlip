@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
     public class ListRecordsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Com.Atproto.Repo.Record>, IAsyncEnumerable<FishyFlip.Lexicon.Com.Atproto.Repo.Record>
     {
 
-        public ListRecordsOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public ListRecordsOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Repo = repo;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Repo
             return (result.Records, result.Cursor ?? string.Empty);
         }
 
-        public static ListRecordsOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static ListRecordsOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier repo, string collection, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, repo: repo, collection: collection, reverse: reverse, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

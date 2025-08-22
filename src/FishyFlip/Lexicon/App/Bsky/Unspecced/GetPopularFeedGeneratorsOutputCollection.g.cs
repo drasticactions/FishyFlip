@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
     public class GetPopularFeedGeneratorsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.GeneratorView>
     {
 
-        public GetPopularFeedGeneratorsOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
+        public GetPopularFeedGeneratorsOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return (result.Feeds, result.Cursor ?? string.Empty);
         }
 
-        public static GetPopularFeedGeneratorsOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
+        public static GetPopularFeedGeneratorsOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, string? query = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, query: query, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

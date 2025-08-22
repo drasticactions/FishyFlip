@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     public class GetFollowersOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>
     {
 
-        public GetFollowersOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetFollowersOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Actor = actor;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return (result.Followers, result.Cursor ?? string.Empty);
         }
 
-        public static GetFollowersOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetFollowersOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, actor: actor, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

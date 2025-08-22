@@ -19,14 +19,14 @@ namespace FishyFlip;
 public abstract class ATObjectCollectionBase<T> : IATObjectCollection<T>
     where T : ATObject
 {
-    private readonly ATProtocol atp;
+    private readonly IXrpcClient atp;
     private readonly ObservableCollection<T> items;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATObjectCollectionBase{T}"/> class.
     /// </summary>
     /// <param name="atp">ATProtocol.</param>
-    protected ATObjectCollectionBase(ATProtocol atp)
+    protected ATObjectCollectionBase(IXrpcClient atp)
     {
         this.atp = atp;
         this.items = new ObservableCollection<T>();
@@ -57,7 +57,7 @@ public abstract class ATObjectCollectionBase<T> : IATObjectCollection<T>
     /// <summary>
     /// Gets the ATProtocol.
     /// </summary>
-    internal ATProtocol ATProtocol => this.atp;
+    internal IXrpcClient ATProtocol => this.atp;
 
     /// <inheritdoc/>
     public T this[int index] => this.items[index];

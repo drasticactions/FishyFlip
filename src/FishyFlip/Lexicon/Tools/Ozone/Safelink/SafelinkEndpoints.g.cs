@@ -57,11 +57,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
         /// <param name="createdBy">Author DID. Only respected when using admin auth</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>> AddRuleAsync (this FishyFlip.ATProtocol atp, string url, string pattern, string action, string reason, string? comment = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>> AddRuleAsync (this FishyFlip.IXrpcClient atp, string url, string pattern, string action, string reason, string? comment = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = AddRule.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new AddRuleInput();
             inputItem.Url = url;
             inputItem.Pattern = pattern;
@@ -69,7 +69,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
             inputItem.Reason = reason;
             inputItem.Comment = comment;
             inputItem.CreatedBy = createdBy;
-            return atp.Post<AddRuleInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkAddRuleInput!, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkEvent!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<AddRuleInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSafelinkAddRuleInput!, SourceGenerationContext.Default.ToolsOzoneSafelinkEvent!, inputItem, cancellationToken, headers);
         }
 
 
@@ -84,18 +84,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
         /// <param name="sortDirection">Sort direction</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryEventsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, string? sortDirection = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryEvents.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new QueryEventsInput();
             inputItem.Cursor = cursor;
             inputItem.Limit = limit;
             inputItem.Urls = urls;
             inputItem.PatternType = patternType;
             inputItem.SortDirection = sortDirection;
-            return atp.Post<QueryEventsInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryEventsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkQueryEventsInput!, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkQueryEventsOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<QueryEventsInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryEventsOutput?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSafelinkQueryEventsInput!, SourceGenerationContext.Default.ToolsOzoneSafelinkQueryEventsOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -113,11 +113,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
         /// <param name="sortDirection">Sort direction</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryRulesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryRulesOutput?>> QueryRulesAsync (this FishyFlip.ATProtocol atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, List<string>? actions = default, string? reason = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryRulesOutput?>> QueryRulesAsync (this FishyFlip.IXrpcClient atp, string? cursor = default, int? limit = 50, List<string>? urls = default, string? patternType = default, List<string>? actions = default, string? reason = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryRules.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new QueryRulesInput();
             inputItem.Cursor = cursor;
             inputItem.Limit = limit;
@@ -127,7 +127,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
             inputItem.Reason = reason;
             inputItem.CreatedBy = createdBy;
             inputItem.SortDirection = sortDirection;
-            return atp.Post<QueryRulesInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryRulesOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkQueryRulesInput!, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkQueryRulesOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<QueryRulesInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.QueryRulesOutput?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSafelinkQueryRulesInput!, SourceGenerationContext.Default.ToolsOzoneSafelinkQueryRulesOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -147,17 +147,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
         /// <param name="createdBy">Optional DID of the user. Only respected when using admin auth.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>> RemoveRuleAsync (this FishyFlip.ATProtocol atp, string url, string pattern, string? comment = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>> RemoveRuleAsync (this FishyFlip.IXrpcClient atp, string url, string pattern, string? comment = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RemoveRule.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new RemoveRuleInput();
             inputItem.Url = url;
             inputItem.Pattern = pattern;
             inputItem.Comment = comment;
             inputItem.CreatedBy = createdBy;
-            return atp.Post<RemoveRuleInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkRemoveRuleInput!, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkEvent!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<RemoveRuleInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSafelinkRemoveRuleInput!, SourceGenerationContext.Default.ToolsOzoneSafelinkEvent!, inputItem, cancellationToken, headers);
         }
 
 
@@ -190,11 +190,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
         /// <param name="createdBy">Optional DID to credit as the creator. Only respected for admin_token authentication.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>> UpdateRuleAsync (this FishyFlip.ATProtocol atp, string url, string pattern, string action, string reason, string? comment = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>> UpdateRuleAsync (this FishyFlip.IXrpcClient atp, string url, string pattern, string action, string reason, string? comment = default, FishyFlip.Models.ATDid? createdBy = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateRule.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new UpdateRuleInput();
             inputItem.Url = url;
             inputItem.Pattern = pattern;
@@ -202,7 +202,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
             inputItem.Reason = reason;
             inputItem.Comment = comment;
             inputItem.CreatedBy = createdBy;
-            return atp.Post<UpdateRuleInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkUpdateRuleInput!, atp.Options.SourceGenerationContext.ToolsOzoneSafelinkEvent!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<UpdateRuleInput, FishyFlip.Lexicon.Tools.Ozone.Safelink.Event?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSafelinkUpdateRuleInput!, SourceGenerationContext.Default.ToolsOzoneSafelinkEvent!, inputItem, cancellationToken, headers);
         }
 
     }

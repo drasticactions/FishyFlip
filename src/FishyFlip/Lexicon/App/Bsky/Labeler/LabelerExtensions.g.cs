@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon
         /// <param name="cancellationToken"></param>
         public static Task<Result<CreateRecordOutput?>> CreateServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, FishyFlip.Lexicon.App.Bsky.Labeler.Service record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace FishyFlip.Lexicon
             record.ReasonTypes = reasonTypes;
             record.SubjectTypes = subjectTypes;
             record.SubjectCollections = subjectCollections;
-            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.ATProtocol.CreateRecordAsync(atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace FishyFlip.Lexicon
         /// <param name="cancellationToken"></param>
         public static Task<Result<DeleteRecordOutput?>> DeleteServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.DeleteRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", rkey, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.DeleteRecordAsync(atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", rkey, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace FishyFlip.Lexicon
         /// <param name="cancellationToken"></param>
         public static Task<Result<PutRecordOutput?>> PutServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, string rkey, FishyFlip.Lexicon.App.Bsky.Labeler.Service record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.PutRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
+            return atp.ATProtocol.PutRecordAsync(atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace FishyFlip.Lexicon
         /// <param name="cancellationToken"></param>
         public static Task<Result<ListRecordsOutput?>> ListServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.ListRecordsAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", limit, cursor, reverse, cancellationToken);
+            return atp.ATProtocol.ListRecordsAsync(atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", limit, cursor, reverse, cancellationToken);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace FishyFlip.Lexicon
         /// <param name="cancellationToken"></param>
         public static Task<Result<GetRecordOutput?>> GetServiceAsync(this FishyFlip.Lexicon.App.Bsky.Labeler.BlueskyLabeler atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
         {
-            return atp.ATProtocol.GetRecordAsync(atp.ATProtocol.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", rkey, cid, cancellationToken);
+            return atp.ATProtocol.GetRecordAsync(atp.ATProtocol.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.labeler.service", rkey, cid, cancellationToken);
         }
 
         /// <summary>

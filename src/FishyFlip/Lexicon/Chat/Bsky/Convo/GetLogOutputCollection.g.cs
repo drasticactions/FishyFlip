@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
     public class GetLogOutputCollection : ATObjectCollectionBase<ATObject>, IAsyncEnumerable<ATObject>
     {
 
-        public GetLogOutputCollection(FishyFlip.ATProtocol atp, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetLogOutputCollection(FishyFlip.IXrpcClient atp, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Cursor = cursor;
@@ -36,7 +36,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return (result.Logs, result.Cursor ?? string.Empty);
         }
 
-        public static GetLogOutputCollection Create(FishyFlip.ATProtocol atp, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetLogOutputCollection Create(FishyFlip.IXrpcClient atp, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, cursor: cursor, cancellationToken: cancellationToken);
         }

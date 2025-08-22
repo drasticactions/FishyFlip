@@ -32,13 +32,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <param name="handle"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>> AddReservedHandleAsync (this FishyFlip.ATProtocol atp, string handle, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>> AddReservedHandleAsync (this FishyFlip.IXrpcClient atp, string handle, CancellationToken cancellationToken = default)
         {
             var endpointUrl = AddReservedHandle.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new AddReservedHandleInput();
             inputItem.Handle = handle;
-            return atp.Post<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleInput!, atp.Options.SourceGenerationContext.ComAtprotoTempAddReservedHandleOutput!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<AddReservedHandleInput, FishyFlip.Lexicon.Com.Atproto.Temp.AddReservedHandleOutput?>(endpointUrl, SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleInput!, SourceGenerationContext.Default.ComAtprotoTempAddReservedHandleOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -53,7 +53,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <param name="birthDate">User-provided birth date. Might be used to build handle suggestions.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput?>> CheckHandleAvailabilityAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATHandle handle, string? email = default, DateTime? birthDate = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput?>> CheckHandleAvailabilityAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATHandle handle, string? email = default, DateTime? birthDate = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CheckHandleAvailability.ToString();
             endpointUrl += "?";
@@ -75,9 +75,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckHandleAvailabilityOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Temp.CheckHandleAvailabilityOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoTempCheckHandleAvailabilityOutput!, cancellationToken, headers);
         }
 
 
@@ -87,7 +87,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?>> CheckSignupQueueAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput?>> CheckSignupQueueAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = CheckSignupQueue.ToString();
             var headers = new Dictionary<string, string>();
@@ -95,8 +95,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken, headers);
         }
 
 
@@ -107,13 +107,13 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
         /// <param name="phoneNumber"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> RequestPhoneVerificationAsync (this FishyFlip.ATProtocol atp, string phoneNumber, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> RequestPhoneVerificationAsync (this FishyFlip.IXrpcClient atp, string phoneNumber, CancellationToken cancellationToken = default)
         {
             var endpointUrl = RequestPhoneVerification.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new RequestPhoneVerificationInput();
             inputItem.PhoneNumber = phoneNumber;
-            return atp.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<RequestPhoneVerificationInput, Success?>(endpointUrl, SourceGenerationContext.Default.ComAtprotoTempRequestPhoneVerificationInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
     }

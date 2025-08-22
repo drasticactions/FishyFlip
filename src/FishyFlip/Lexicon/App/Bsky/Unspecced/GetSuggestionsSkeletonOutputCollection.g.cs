@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
     public class GetSuggestionsSkeletonOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>
     {
 
-        public GetSuggestionsSkeletonOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
+        public GetSuggestionsSkeletonOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Viewer = viewer;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return (result.Actors, result.Cursor ?? string.Empty);
         }
 
-        public static GetSuggestionsSkeletonOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
+        public static GetSuggestionsSkeletonOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 50, string? cursor = default, FishyFlip.Models.ATDid? relativeToDid = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, viewer: viewer, relativeToDid: relativeToDid, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

@@ -67,7 +67,7 @@ public class ATProtocolDelegatingHandler
             return result;
         }
 
-        var (authResult, error) = await this.atProtocol.SessionManager.RefreshSessionAsync(cancellationToken);
+        var (authResult, error) = await this.atProtocol.Server.RefreshSessionAsync(cancellationToken);
         if (error is not null)
         {
             return result;

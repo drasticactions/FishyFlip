@@ -95,7 +95,7 @@ internal class PasswordSessionManager : ISessionManager
             }
 
             this.UpdateBearerTokenForRefresh(this.session);
-            var (d, error) = await this.protocol.ThrowIfNull().RefreshSessionAsync(cancellationToken);
+            var (d, error) = await this.protocol.Server.ThrowIfNull().RefreshSessionAsync(cancellationToken);
 
             if (error != null)
             {
@@ -185,7 +185,7 @@ internal class PasswordSessionManager : ISessionManager
             }
         }
 
-        var (session, error) = await this.protocol.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken: cancellationToken);
+        var (session, error) = await this.protocol.Server.CreateSessionAsync(identifier, password, authFactorToken, cancellationToken: cancellationToken);
         if (session is not null)
         {
             if (didDoc is null)

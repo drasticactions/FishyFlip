@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
     public class GetMessagesOutputCollection : ATObjectCollectionBase<ATObject>, IAsyncEnumerable<ATObject>
     {
 
-        public GetMessagesOutputCollection(FishyFlip.ATProtocol atp, string convoId, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetMessagesOutputCollection(FishyFlip.IXrpcClient atp, string convoId, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.ConvoId = convoId;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Convo
             return (result.Messages, result.Cursor ?? string.Empty);
         }
 
-        public static GetMessagesOutputCollection Create(FishyFlip.ATProtocol atp, string convoId, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetMessagesOutputCollection Create(FishyFlip.IXrpcClient atp, string convoId, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, convoId: convoId, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

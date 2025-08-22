@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <param name="actor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput?>> GetActorMetadataAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid actor, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput?>> GetActorMetadataAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid actor, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetActorMetadata.ToString();
             endpointUrl += "?";
@@ -38,10 +38,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             queryStrings.Add("actor=" + actor);
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetActorMetadataOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetActorMetadataOutput>(endpointUrl, SourceGenerationContext.Default.ChatBskyModerationGetActorMetadataOutput!, cancellationToken, headers);
         }
 
 
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <param name="after"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput?>> GetMessageContextAsync (this FishyFlip.ATProtocol atp, string messageId, string? convoId = default, int? before = 5, int? after = 5, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput?>> GetMessageContextAsync (this FishyFlip.IXrpcClient atp, string messageId, string? convoId = default, int? before = 5, int? after = 5, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetMessageContext.ToString();
             endpointUrl += "?";
@@ -78,10 +78,10 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationGetMessageContextOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(endpointUrl, SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput!, cancellationToken, headers);
         }
 
 
@@ -94,16 +94,16 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Moderation
         /// <param name="@ref"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> UpdateActorAccessAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid actor, bool allowAccess, string? @ref = default, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> UpdateActorAccessAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid actor, bool allowAccess, string? @ref = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateActorAccess.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new UpdateActorAccessInput();
             inputItem.Actor = actor;
             inputItem.AllowAccess = allowAccess;
             inputItem.Ref = @ref;
-            return atp.Post<UpdateActorAccessInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ChatBskyModerationUpdateActorAccessInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<UpdateActorAccessInput, Success?>(endpointUrl, SourceGenerationContext.Default.ChatBskyModerationUpdateActorAccessInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
     }

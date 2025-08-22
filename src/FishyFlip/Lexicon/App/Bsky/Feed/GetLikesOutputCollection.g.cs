@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class GetLikesOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.LikeDef>
     {
 
-        public GetLikesOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetLikesOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Uri = uri;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.Likes, result.Cursor ?? string.Empty);
         }
 
-        public static GetLikesOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetLikesOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri uri, string? cid = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, uri: uri, cid: cid, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
     public class GetAuthorFeedOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Feed.FeedViewPost>
     {
 
-        public GetAuthorFeedOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
+        public GetAuthorFeedOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Actor = actor;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             return (result.Feed, result.Cursor ?? string.Empty);
         }
 
-        public static GetAuthorFeedOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
+        public static GetAuthorFeedOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier actor, int? limit = 50, string? cursor = default, string? filter = default, bool? includePins = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, actor: actor, filter: filter, includePins: includePins, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

@@ -120,7 +120,7 @@ public static class HttpClientExtensions
     }
 
     /// <summary>
-    /// Sends a POST request with a StreamContent body to the specified Uri as an asynchronous operation.
+    /// Sends a POST request to the specified Uri as an asynchronous operation.
     /// </summary>
     /// <typeparam name="TK">The type of the response body.</typeparam>
     /// <param name="client">The HttpClient instance.</param>

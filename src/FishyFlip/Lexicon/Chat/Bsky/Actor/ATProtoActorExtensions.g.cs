@@ -25,9 +25,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.ATProtocol atp, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.IXrpcClient atp, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
-            return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.CreateRecordAsync(atp.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -40,11 +40,11 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.ATProtocol atp, string? allowIncoming, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateDeclarationAsync(this FishyFlip.IXrpcClient atp, string? allowIncoming, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration();
             record.AllowIncoming = allowIncoming;
-            return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
+            return atp.CreateRecordAsync(atp.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", record, rkey, validate, swapCommit, cancellationToken);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<DeleteRecordOutput?>> DeleteDeclarationAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<DeleteRecordOutput?>> DeleteDeclarationAsync(this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.DeleteRecordAsync(repo, "chat.bsky.actor.declaration", rkey, swapRecord, swapCommit, cancellationToken);
         }
@@ -72,7 +72,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="swapRecord"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<PutRecordOutput?>> PutDeclarationAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<PutRecordOutput?>> PutDeclarationAsync(this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier repo, string rkey, FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration record, bool? validate = default, string? swapRecord = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             return atp.PutRecordAsync(repo, "chat.bsky.actor.declaration", rkey, record, validate, swapRecord, swapCommit, cancellationToken);
         }
@@ -86,7 +86,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListDeclarationAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListDeclarationAsync(this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier repo, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
             return atp.ListRecordsAsync(repo, "chat.bsky.actor.declaration", limit, cursor, reverse, cancellationToken);
         }
@@ -99,9 +99,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="cursor"></param>
         /// <param name="reverse"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<ListRecordsOutput?>> ListDeclarationAsync(this FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
+        public static Task<Result<ListRecordsOutput?>> ListDeclarationAsync(this FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, bool? reverse = default, CancellationToken cancellationToken = default)
         {
-            return atp.ListRecordsAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", limit, cursor, reverse, cancellationToken);
+            return atp.ListRecordsAsync(atp.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", limit, cursor, reverse, cancellationToken);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="rkey"></param>
         /// <param name="cid"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<GetRecordOutput?>> GetDeclarationAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        public static Task<Result<GetRecordOutput?>> GetDeclarationAsync(this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATIdentifier repo, string rkey, string? cid = default, CancellationToken cancellationToken = default)
         {
             return atp.GetRecordAsync(repo, "chat.bsky.actor.declaration", rkey, cid, cancellationToken);
         }
@@ -124,9 +124,9 @@ namespace FishyFlip.Lexicon.Chat.Bsky.Actor
         /// <param name="rkey"></param>
         /// <param name="cid"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<GetRecordOutput?>> GetDeclarationAsync(this FishyFlip.ATProtocol atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
+        public static Task<Result<GetRecordOutput?>> GetDeclarationAsync(this FishyFlip.IXrpcClient atp, string rkey, string? cid = default, CancellationToken cancellationToken = default)
         {
-            return atp.GetRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", rkey, cid, cancellationToken);
+            return atp.GetRecordAsync(atp.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "chat.bsky.actor.declaration", rkey, cid, cancellationToken);
         }
     }
 }

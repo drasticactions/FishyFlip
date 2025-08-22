@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
     public class ListActivitySubscriptionsOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>
     {
 
-        public ListActivitySubscriptionsOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListActivitySubscriptionsOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Notification
             return (result.Subscriptions, result.Cursor ?? string.Empty);
         }
 
-        public static ListActivitySubscriptionsOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static ListActivitySubscriptionsOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

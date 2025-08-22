@@ -29,7 +29,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput?>> GetAccountHistoryAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string>? events = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput?>> GetAccountHistoryAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, List<string>? events = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetAccountHistory.ToString();
             endpointUrl += "?";
@@ -52,10 +52,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneHostingGetAccountHistoryOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Hosting.GetAccountHistoryOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneHostingGetAccountHistoryOutput!, cancellationToken, headers);
         }
 
     }

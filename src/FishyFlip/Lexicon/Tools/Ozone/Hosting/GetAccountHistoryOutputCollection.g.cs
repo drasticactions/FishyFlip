@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
     public class GetAccountHistoryOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Hosting.Event>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Hosting.Event>
     {
 
-        public GetAccountHistoryOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string>? events = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public GetAccountHistoryOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, List<string>? events = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Did = did;
@@ -43,7 +43,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Hosting
             return (result.Events, result.Cursor ?? string.Empty);
         }
 
-        public static GetAccountHistoryOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, List<string>? events = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public static GetAccountHistoryOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, List<string>? events = default, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, did: did, events: events, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

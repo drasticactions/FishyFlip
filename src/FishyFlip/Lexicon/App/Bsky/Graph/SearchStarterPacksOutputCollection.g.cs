@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     public class SearchStarterPacksOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>
     {
 
-        public SearchStarterPacksOutputCollection(FishyFlip.ATProtocol atp, string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public SearchStarterPacksOutputCollection(FishyFlip.IXrpcClient atp, string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Q = q;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return (result.StarterPacks, result.Cursor ?? string.Empty);
         }
 
-        public static SearchStarterPacksOutputCollection Create(FishyFlip.ATProtocol atp, string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static SearchStarterPacksOutputCollection Create(FishyFlip.IXrpcClient atp, string q, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, q: q, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

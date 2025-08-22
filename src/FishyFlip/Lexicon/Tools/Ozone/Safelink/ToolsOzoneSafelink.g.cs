@@ -14,13 +14,13 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
     public sealed class ToolsOzoneSafelink
     {
 
-        private ATProtocol atp;
+        private IXrpcClient atp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolsOzoneSafelink"/> class.
         /// </summary>
         /// <param name="atp"><see cref="ATProtocol"/>.</param>
-        internal ToolsOzoneSafelink(ATProtocol atp)
+        internal ToolsOzoneSafelink(IXrpcClient atp)
         {
             this.atp = atp;
         }
@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Safelink
         /// <summary>
         /// Gets the ATProtocol.
         /// </summary>
-        internal ATProtocol ATProtocol => this.atp;
+        internal IXrpcClient ATProtocol => this.atp;
 
 
         /// <summary>

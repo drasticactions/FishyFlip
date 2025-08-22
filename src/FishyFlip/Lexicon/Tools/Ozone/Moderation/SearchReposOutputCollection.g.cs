@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     public class SearchReposOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Moderation.RepoView>
     {
 
-        public SearchReposOutputCollection(FishyFlip.ATProtocol atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public SearchReposOutputCollection(FishyFlip.IXrpcClient atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Q = q;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             return (result.Repos, result.Cursor ?? string.Empty);
         }
 
-        public static SearchReposOutputCollection Create(FishyFlip.ATProtocol atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static SearchReposOutputCollection Create(FishyFlip.IXrpcClient atp, string? q = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, q: q, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

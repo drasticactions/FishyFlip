@@ -35,15 +35,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <param name="role"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.Member?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> AddMemberAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string role, CancellationToken cancellationToken = default)
         {
             var endpointUrl = AddMember.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new AddMemberInput();
             inputItem.Did = did;
             inputItem.Role = role;
-            return atp.Post<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamAddMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<AddMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneTeamAddMemberInput!, SourceGenerationContext.Default.ToolsOzoneTeamMember!, inputItem, cancellationToken, headers);
         }
 
 
@@ -57,14 +57,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <param name="did"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="Success?"/></returns>
-        public static Task<Result<Success?>> DeleteMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
+        public static Task<Result<Success?>> DeleteMemberAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, CancellationToken cancellationToken = default)
         {
             var endpointUrl = DeleteMember.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new DeleteMemberInput();
             inputItem.Did = did;
-            return atp.Post<DeleteMemberInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamDeleteMemberInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<DeleteMemberInput, Success?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneTeamDeleteMemberInput!, SourceGenerationContext.Default.Success!, inputItem, cancellationToken, headers);
         }
 
 
@@ -79,7 +79,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (this FishyFlip.ATProtocol atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput?>> ListMembersAsync (this FishyFlip.IXrpcClient atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = ListMembers.ToString();
             endpointUrl += "?";
@@ -110,10 +110,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamListMembersOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Team.ListMembersOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneTeamListMembersOutput!, cancellationToken, headers);
         }
 
 
@@ -128,16 +128,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <param name="role"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Team.Member?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> UpdateMemberAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Team.Member?>> UpdateMemberAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, bool? disabled = default, string? role = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UpdateMember.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
             var inputItem = new UpdateMemberInput();
             inputItem.Did = did;
             inputItem.Disabled = disabled;
             inputItem.Role = role;
-            return atp.Post<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneTeamUpdateMemberInput!, atp.Options.SourceGenerationContext.ToolsOzoneTeamMember!, inputItem, cancellationToken, headers);
+            return atp.ProcedureAsync<UpdateMemberInput, FishyFlip.Lexicon.Tools.Ozone.Team.Member?>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneTeamUpdateMemberInput!, SourceGenerationContext.Default.ToolsOzoneTeamMember!, inputItem, cancellationToken, headers);
         }
 
     }

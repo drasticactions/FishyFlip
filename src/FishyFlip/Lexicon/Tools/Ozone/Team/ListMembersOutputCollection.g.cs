@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
     public class ListMembersOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Tools.Ozone.Team.Member>, IAsyncEnumerable<FishyFlip.Lexicon.Tools.Ozone.Team.Member>
     {
 
-        public ListMembersOutputCollection(FishyFlip.ATProtocol atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListMembersOutputCollection(FishyFlip.IXrpcClient atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Q = q;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
             return (result.Members, result.Cursor ?? string.Empty);
         }
 
-        public static ListMembersOutputCollection Create(FishyFlip.ATProtocol atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static ListMembersOutputCollection Create(FishyFlip.IXrpcClient atp, string? q = default, bool? disabled = default, List<string>? roles = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, q: q, disabled: disabled, roles: roles, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

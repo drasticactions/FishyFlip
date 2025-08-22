@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     public class GetMutesOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView>
     {
 
-        public GetMutesOutputCollection(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetMutesOutputCollection(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Limit = limit;
@@ -37,7 +37,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return (result.Mutes, result.Cursor ?? string.Empty);
         }
 
-        public static GetMutesOutputCollection Create(FishyFlip.ATProtocol atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetMutesOutputCollection Create(FishyFlip.IXrpcClient atp, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

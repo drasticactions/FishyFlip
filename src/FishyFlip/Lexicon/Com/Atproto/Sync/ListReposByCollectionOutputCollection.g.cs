@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
     public class ListReposByCollectionOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>, IAsyncEnumerable<FishyFlip.Lexicon.Com.Atproto.Sync.RepoDef>
     {
 
-        public ListReposByCollectionOutputCollection(FishyFlip.ATProtocol atp, string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public ListReposByCollectionOutputCollection(FishyFlip.IXrpcClient atp, string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Collection = collection;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Sync
             return (result.Repos, result.Cursor ?? string.Empty);
         }
 
-        public static ListReposByCollectionOutputCollection Create(FishyFlip.ATProtocol atp, string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
+        public static ListReposByCollectionOutputCollection Create(FishyFlip.IXrpcClient atp, string collection, int? limit = 500, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, collection: collection, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

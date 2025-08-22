@@ -32,7 +32,7 @@ public sealed class PlcDirectory : IDisposable
     {
         // Url: https://plc.directory/{identifier}
         var url = new Uri(this.Options.PlcDirectoryUrl, $"/{identifier}");
-        return await this.proto.Client.Get<DidDoc?>(url.ToString(), this.Options.SourceGenerationContext.DidDoc!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
+        return await this.proto.XrpcClient.Client.Get<DidDoc?>(url.ToString(), this.Options.SourceGenerationContext.DidDoc!, this.Options.JsonSerializerOptions, cancellationToken, this.Options.Logger);
     }
 
     /// <summary>

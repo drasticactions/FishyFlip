@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <param name="dids"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput?>> FindCorrelationAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput?>> FindCorrelationAsync (this FishyFlip.IXrpcClient atp, List<FishyFlip.Models.ATDid> dids, CancellationToken cancellationToken = default)
         {
             var endpointUrl = FindCorrelation.ToString();
             endpointUrl += "?";
@@ -38,10 +38,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             queryStrings.Add(string.Join("&", dids.Select(n => "dids=" + n)));
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindCorrelationOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Signature.FindCorrelationOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSignatureFindCorrelationOutput!, cancellationToken, headers);
         }
 
 
@@ -54,7 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput?>> FindRelatedAccountsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput?>> FindRelatedAccountsAsync (this FishyFlip.IXrpcClient atp, FishyFlip.Models.ATDid did, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             var endpointUrl = FindRelatedAccounts.ToString();
             endpointUrl += "?";
@@ -72,10 +72,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureFindRelatedAccountsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Signature.FindRelatedAccountsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSignatureFindRelatedAccountsOutput!, cancellationToken, headers);
         }
 
 
@@ -88,7 +88,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (this FishyFlip.ATProtocol atp, List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput?>> SearchAccountsAsync (this FishyFlip.IXrpcClient atp, List<string> values, string? cursor = default, int? limit = 50, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SearchAccounts.ToString();
             endpointUrl += "?";
@@ -106,10 +106,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Signature
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoProxy, atp.OzoneProxyHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneSignatureSearchAccountsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Tools.Ozone.Signature.SearchAccountsOutput>(endpointUrl, SourceGenerationContext.Default.ToolsOzoneSignatureSearchAccountsOutput!, cancellationToken, headers);
         }
 
     }

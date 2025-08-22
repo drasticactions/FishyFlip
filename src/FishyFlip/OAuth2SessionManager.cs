@@ -245,7 +245,7 @@ internal class OAuth2SessionManager : ISessionManager
         }
 
         var didSub = ATDid.Create(sub!)!;
-        (var describeRepo, var error) = await this.protocol.DescribeRepoAsync(didSub, cancellationToken);
+        (var describeRepo, var error) = await this.protocol.Repo.DescribeRepoAsync(didSub, cancellationToken);
         if (error is not null)
         {
             return error;

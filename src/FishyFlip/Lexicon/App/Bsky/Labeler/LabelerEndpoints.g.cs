@@ -27,7 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <param name="detailed"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput?>> GetServicesAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> dids, bool? detailed = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput?>> GetServicesAsync (this FishyFlip.IXrpcClient atp, List<FishyFlip.Models.ATDid> dids, bool? detailed = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetServices.ToString();
             endpointUrl += "?";
@@ -40,9 +40,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
             }
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyLabelerGetServicesOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Labeler.GetServicesOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyLabelerGetServicesOutput!, cancellationToken, headers);
         }
 
     }

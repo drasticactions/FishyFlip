@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
     public class SearchPostsSkeletonOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchPost>
     {
 
-        public SearchPostsSkeletonOutputCollection(FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public SearchPostsSkeletonOutputCollection(FishyFlip.IXrpcClient atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Q = q;
@@ -70,7 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return (result.Posts, result.Cursor ?? string.Empty);
         }
 
-        public static SearchPostsSkeletonOutputCollection Create(FishyFlip.ATProtocol atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static SearchPostsSkeletonOutputCollection Create(FishyFlip.IXrpcClient atp, string q, string? sort = default, string? since = default, string? until = default, FishyFlip.Models.ATIdentifier? mentions = default, FishyFlip.Models.ATIdentifier? author = default, string? lang = default, string? domain = default, string? url = default, List<string>? tag = default, FishyFlip.Models.ATDid? viewer = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, q: q, sort: sort, since: since, until: until, mentions: mentions, author: author, lang: lang, domain: domain, url: url, tag: tag, viewer: viewer, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

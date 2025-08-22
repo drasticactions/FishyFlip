@@ -29,7 +29,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput?>> QueryLabelsAsync (this FishyFlip.ATProtocol atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput?>> QueryLabelsAsync (this FishyFlip.IXrpcClient atp, List<string> uriPatterns, List<FishyFlip.Models.ATDid>? sources = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryLabels.ToString();
             endpointUrl += "?";
@@ -56,9 +56,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
             {
                 headers.Add(Constants.AtProtoProxy, proxyUrl);
             }
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoLabelQueryLabelsOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.Com.Atproto.Label.QueryLabelsOutput>(endpointUrl, SourceGenerationContext.Default.ComAtprotoLabelQueryLabelsOutput!, cancellationToken, headers);
         }
 
     }

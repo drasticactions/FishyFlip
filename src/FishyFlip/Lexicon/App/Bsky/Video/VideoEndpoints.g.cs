@@ -30,7 +30,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <param name="jobId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput?>> GetJobStatusAsync (this FishyFlip.ATProtocol atp, string jobId, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput?>> GetJobStatusAsync (this FishyFlip.IXrpcClient atp, string jobId, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetJobStatus.ToString();
             endpointUrl += "?";
@@ -38,9 +38,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
             queryStrings.Add("jobId=" + jobId);
 
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
             endpointUrl += string.Join("&", queryStrings);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetJobStatusOutput!, cancellationToken, headers);
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Video.GetJobStatusOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyVideoGetJobStatusOutput!, cancellationToken, headers);
         }
 
 
@@ -50,12 +50,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput?>> GetUploadLimitsAsync (this FishyFlip.ATProtocol atp, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput?>> GetUploadLimitsAsync (this FishyFlip.IXrpcClient atp, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetUploadLimits.ToString();
             var headers = new Dictionary<string, string>();
-            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
-            return atp.Get<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoGetUploadLimitsOutput!, cancellationToken, headers);
+            headers.Add(Constants.AtProtoAcceptLabelers, string.Join(", ", atp.LabelParameters.Select(p => p.ToString())));
+            return atp.QueryAsync<FishyFlip.Lexicon.App.Bsky.Video.GetUploadLimitsOutput>(endpointUrl, SourceGenerationContext.Default.AppBskyVideoGetUploadLimitsOutput!, cancellationToken, headers);
         }
 
 
@@ -66,11 +66,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Video
         /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (this FishyFlip.ATProtocol atp, StreamContent content, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>> UploadVideoAsync (this FishyFlip.IXrpcClient atp, StreamContent content, CancellationToken cancellationToken = default)
         {
             var endpointUrl = UploadVideo.ToString();
             var headers = new Dictionary<string, string>();
-            return atp.Post<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyVideoUploadVideoOutput!, content, cancellationToken, headers);
+            return atp.ProcedureAsync<FishyFlip.Lexicon.App.Bsky.Video.UploadVideoOutput?>(endpointUrl, SourceGenerationContext.Default.AppBskyVideoUploadVideoOutput!, content, cancellationToken, headers);
         }
 
     }

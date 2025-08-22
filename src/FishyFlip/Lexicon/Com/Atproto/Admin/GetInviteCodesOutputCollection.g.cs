@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
     public class GetInviteCodesOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>, IAsyncEnumerable<FishyFlip.Lexicon.Com.Atproto.Server.InviteCode>
     {
 
-        public GetInviteCodesOutputCollection(FishyFlip.ATProtocol atp, string? sort = default, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetInviteCodesOutputCollection(FishyFlip.IXrpcClient atp, string? sort = default, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Sort = sort;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.Com.Atproto.Admin
             return (result.Codes, result.Cursor ?? string.Empty);
         }
 
-        public static GetInviteCodesOutputCollection Create(FishyFlip.ATProtocol atp, string? sort = default, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetInviteCodesOutputCollection Create(FishyFlip.IXrpcClient atp, string? sort = default, int? limit = 100, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, sort: sort, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

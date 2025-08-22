@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
     public class SearchActorsSkeletonOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor>
     {
 
-        public SearchActorsSkeletonOutputCollection(FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public SearchActorsSkeletonOutputCollection(FishyFlip.IXrpcClient atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.Q = q;
@@ -46,7 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             return (result.Actors, result.Cursor ?? string.Empty);
         }
 
-        public static SearchActorsSkeletonOutputCollection Create(FishyFlip.ATProtocol atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
+        public static SearchActorsSkeletonOutputCollection Create(FishyFlip.IXrpcClient atp, string q, FishyFlip.Models.ATDid? viewer = default, bool? typeahead = default, int? limit = 25, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, q: q, viewer: viewer, typeahead: typeahead, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

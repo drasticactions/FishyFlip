@@ -13,7 +13,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
     public class GetListOutputCollection : ATObjectCollectionBase<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>, IAsyncEnumerable<FishyFlip.Lexicon.App.Bsky.Graph.ListItemView>
     {
 
-        public GetListOutputCollection(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public GetListOutputCollection(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
              : base(atp)
         {
             this.List = list;
@@ -40,7 +40,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             return (result.Items, result.Cursor ?? string.Empty);
         }
 
-        public static GetListOutputCollection Create(FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        public static GetListOutputCollection Create(FishyFlip.IXrpcClient atp, FishyFlip.Models.ATUri list, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
         {
             return new(atp: atp, list: list, limit: limit, cursor: cursor, cancellationToken: cancellationToken);
         }

@@ -14,13 +14,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
     public sealed class BlueskyLabeler
     {
 
-        private ATProtocol atp;
+        private IXrpcClient atp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlueskyLabeler"/> class.
         /// </summary>
         /// <param name="atp"><see cref="ATProtocol"/>.</param>
-        internal BlueskyLabeler(ATProtocol atp)
+        internal BlueskyLabeler(IXrpcClient atp)
         {
             this.atp = atp;
         }
@@ -28,7 +28,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Labeler
         /// <summary>
         /// Gets the ATProtocol.
         /// </summary>
-        internal ATProtocol ATProtocol => this.atp;
+        internal IXrpcClient ATProtocol => this.atp;
 
 
         /// <summary>
