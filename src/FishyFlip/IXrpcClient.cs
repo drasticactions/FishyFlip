@@ -159,4 +159,11 @@ public interface IXrpcClient : IDisposable
     public Task<Result<byte[]?>> GetBlobAsync(
        string url,
        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Sets the Ozone Proxy Header.
+    /// </summary>
+    /// <param name="did">The ATDid of the labeler service. This DID should include an #at_labeler that points to the ozone instance to resolve to.</param>
+    /// <remarks>Sets the Ozone Proxy Header to the given DID.</remarks>
+    void SetOzoneProxy(ATDid did);
 }

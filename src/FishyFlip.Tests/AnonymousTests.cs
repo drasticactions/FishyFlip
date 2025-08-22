@@ -49,7 +49,7 @@ public class AnonymousTests
     public async Task TestPostAsync(string atUri, string embedType)
     {
         var postUri = ATUri.Create(atUri);
-        var post = await AnonymousTests.proto!.GetRecordAsync(postUri.Did!, Post.RecordType, postUri.Rkey);
+        var post = await AnonymousTests.proto!.Repo.GetRecordAsync(postUri.Did!, Post.RecordType, postUri.Rkey);
         post.Switch(
             success =>
             {
@@ -125,7 +125,7 @@ public class AnonymousTests
     public async Task DescribeRepoTest(string did)
     {
         var repo = ATDid.Create(did);
-        var describe = (await AnonymousTests.proto!.DescribeRepoAsync(repo!)).HandleResult();
+        var describe = (await AnonymousTests.proto!.Repo.DescribeRepoAsync(repo!)).HandleResult();
         Assert.IsTrue(describe is not null);
         Assert.IsTrue(describe.HandleIsCorrect);
         Assert.IsTrue(describe.Did is not null);

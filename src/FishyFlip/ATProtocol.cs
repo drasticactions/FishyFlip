@@ -24,6 +24,7 @@ public sealed partial class ATProtocol : IDisposable
     public ATProtocol(ATProtocolOptions options)
     {
         this.options = options;
+        this.XrpcClient = new UnauthenticatedXrpcClient(options);
     }
 
     /// <summary>
