@@ -1058,7 +1058,12 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(FishyFlip.Models.Session))]
     [JsonSerializable(typeof(FishyFlip.Models.Success))]
     [JsonSerializable(typeof(FishyFlip.Models.UnknownATObject))]
+    [JsonSerializable(typeof(FishyFlip.OAuth.Models.DPoPKeyPair))]
+    [JsonSerializable(typeof(FishyFlip.OAuth.Models.TokenResponse))]
+    [JsonSerializable(typeof(FishyFlip.OAuth.Models.OAuthState))]
     [JsonSerializable(typeof(Dictionary<string, JsonElement>))]
+    [JsonSerializable(typeof(Dictionary<string, object>))]
+    [JsonSerializable(typeof(Dictionary<string, string>))]
     [JsonSerializable(typeof(Microsoft.IdentityModel.Tokens.JsonWebKey), TypeInfoPropertyName = nameof(Microsoft.IdentityModel.Tokens.JsonWebKey) + "_A")]
     [JsonSerializable(typeof(List<ATObject>))]
     internal partial class SourceGenerationContext : JsonSerializerContext

@@ -35,6 +35,7 @@
 		Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1'">
 		<PackageReference Include="System.Memory.Data" />
 		<PackageReference Include="System.Text.Json" />
+		<PackageReference Include="BouncyCastle.Cryptography" />
 	</ItemGroup>
 	<ItemGroup Condition=" ('$(IsPackable)' == 'true') or ('$(PackAsTool)' == 'true') ">
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath=""
