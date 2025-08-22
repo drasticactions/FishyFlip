@@ -32,11 +32,21 @@ public class OAuthClient
     /// <summary>
     /// Initializes a new instance of the <see cref="OAuthClient"/> class.
     /// </summary>
-    /// <param name="httpClient">The HTTP client.</param>
     /// <param name="logger">Optional logger.</param>
     public OAuthClient(ILogger? logger = null)
     {
         this.httpClient = new HttpClient();
+        this.logger = logger;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OAuthClient"/> class.
+    /// </summary>
+    /// <param name="client">The HTTP client.</param>
+    /// <param name="logger">Optional logger.</param>
+    public OAuthClient(HttpClient client, ILogger? logger = null)
+    {
+        this.httpClient = client;
         this.logger = logger;
     }
 

@@ -190,8 +190,22 @@ internal class OAuth2SessionManager : ISessionManager
         }
 
         // Parse the callback URL to extract code and state
-        var uri = new Uri(data);
-        var query = HttpUtility.ParseQueryString(uri.Query);
+        // Handle both full URI and raw query string
+        Uri? uri;
+        string queryString;
+
+        if (Uri.TryCreate(data, UriKind.Absolute, out uri))
+        {
+            queryString = uri.Query;
+        }
+        else
+        {
+            // Assume data is a raw query string (possibly starting with '?')
+            queryString = data.StartsWith("?") ? data : "?" + data;
+            uri = new Uri("http://127.0.0.1/" + queryString);
+        }
+
+        var query = HttpUtility.ParseQueryString(queryString);
         var code = query["code"];
         var state = query["state"];
 

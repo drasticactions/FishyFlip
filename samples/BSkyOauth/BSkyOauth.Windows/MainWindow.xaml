@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="BSkyOAuth.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BSkyOAuth"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="BSkyOAuth">
+
+    <Window.Content>
+        <StackPanel x:Name="MainContent" Spacing="5" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="myTextBox" Width="200" Text="Handle" />
+            <Button x:Name="myButton" Click="ButtonClick">Authenticate</Button>
+        </StackPanel>
+    </Window.Content>
+</Window>
