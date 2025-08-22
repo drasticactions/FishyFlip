@@ -1055,6 +1055,7 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(FishyFlip.Models.ATUri))]
     [JsonSerializable(typeof(FishyFlip.Models.Blob))]
     [JsonSerializable(typeof(FishyFlip.Models.AuthSession))]
+    [JsonSerializable(typeof(FishyFlip.Models.OAuthClientMetadata))]
     [JsonSerializable(typeof(FishyFlip.Models.Session))]
     [JsonSerializable(typeof(FishyFlip.Models.Success))]
     [JsonSerializable(typeof(FishyFlip.Models.UnknownATObject))]
