@@ -1,0 +1,145 @@
+@using FishyFlip.Lexicon.App.Bsky.Feed
+@{
+    ViewData["Title"] = "Timeline";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-list-ul me-2"></i>Your Timeline</h2>
+    <div class="btn-group" role="group">
+        <a asp-action="Profile" class="btn btn-outline-secondary">
+            <i class="bi bi-person me-1"></i>Profile
+        </a>
+        <a asp-action="CreatePost" class="btn btn-primary">
+            <i class="bi bi-plus-square me-1"></i>New Post
+        </a>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        @ViewBag.Error
+    </div>
+}
+else if (ViewBag.Timeline != null)
+{
+    var timeline = ViewBag.Timeline as FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput;
+    
+    @if (timeline?.Feed?.Any() == true)
+    {
+        <div class="timeline-container">
+            @foreach (var item in timeline.Feed.Take(15))
+            {
+                <div class="card mb-3 timeline-post">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start mb-3">
+                            @if (!string.IsNullOrEmpty(item.Post?.Author?.Avatar))
+                            {
+                                <img src="@item.Post.Author.Avatar" alt="Avatar" class="rounded-circle me-3" width="50" height="50">
+                            }
+                            else
+                            {
+                                <div class="bg-secondary rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 50px; height: 50px;">
+                                    <i class="bi bi-person-fill text-white"></i>
+                                </div>
+                            }
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h6 class="mb-1 fw-semibold">
+                                            @(item.Post?.Author?.DisplayName ?? item.Post?.Author?.Handle?.ToString())
+                                        </h6>
+                                        <small class="text-muted">
+                                            @@@(item.Post?.Author?.Handle) • 
+                                            @item.Post?.IndexedAt?.ToString("MMM dd 'at' HH:mm")
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        @if (!string.IsNullOrEmpty(item.Post?.PostRecord?.Text))
+                        {
+                            <div class="post-content mb-3">
+                                <p class="mb-0">@item.Post.PostRecord.Text</p>
+                            </div>
+                        }
+                        
+                        @if (item.Post?.Embed != null)
+                        {
+                            <div class="embed-indicator mb-3">
+                                <div class="alert alert-light mb-0 py-2">
+                                    <small class="text-muted">
+                                        <i class="bi bi-paperclip me-1"></i>
+                                        This post contains embedded content
+                                    </small>
+                                </div>
+                            </div>
+                        }
+                        
+                        <div class="post-actions">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-secondary" disabled>
+                                    <i class="bi bi-chat me-1"></i>
+                                    @(item.Post?.ReplyCount ?? 0)
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" disabled>
+                                    <i class="bi bi-arrow-repeat me-1"></i>
+                                    @(item.Post?.RepostCount ?? 0)
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" disabled>
+                                    <i class="bi bi-heart me-1"></i>
+                                    @(item.Post?.LikeCount ?? 0)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        @if (timeline.Feed.Count() >= 15)
+        {
+            <div class="text-center mt-4">
+                <div class="alert alert-info">
+                    <p class="mb-2">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Showing your 15 most recent posts
+                    </p>
+                    <small class="text-muted">
+                        In a real application, you could implement pagination to load more posts
+                    </small>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <div class="card">
+                <div class="card-body py-5">
+                    <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+                    <h4 class="mt-3">No posts in your timeline</h4>
+                    <p class="text-muted">
+                        Your timeline appears to be empty. Try following some users to see posts here!
+                    </p>
+                    <a asp-action="CreatePost" class="btn btn-primary">
+                        <i class="bi bi-plus-square me-2"></i>
+                        Create Your First Post
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3 text-muted">Loading your timeline...</p>
+    </div>
+}

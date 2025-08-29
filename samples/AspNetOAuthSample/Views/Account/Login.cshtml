@@ -1,0 +1,130 @@
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <img src="https://bsky.social/static/logo-small.png" width="64" height="64" alt="Bluesky" class="mb-3">
+                    <h3 class="card-title">Sign in with Bluesky</h3>
+                    <p class="text-muted">Connect your Bluesky account using secure OAuth 2.0</p>
+                </div>
+
+                @if (ViewData.ModelState.ErrorCount > 0)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div>@error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+
+                <div class="oauth-info mb-4 p-3 bg-light rounded">
+                    <h6 class="text-primary">
+                        <i class="bi bi-info-circle me-2"></i>
+                        OAuth 2.0 Authentication
+                    </h6>
+                    <p class="small mb-2">
+                        This sample uses OAuth 2.0 for secure authentication. You'll be redirected to Bluesky 
+                        to authorize this application, then brought back to complete the login process.
+                    </p>
+                    <div class="small text-muted">
+                        <strong>Benefits:</strong>
+                        <ul class="mb-0 mt-1">
+                            <li>Your password never leaves Bluesky</li>
+                            <li>You control what permissions to grant</li>
+                            <li>You can revoke access anytime</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <form asp-action="StartOAuth" method="post" class="mb-3">
+                    <input name="ReturnUrl" type="hidden" value="@ViewData["ReturnUrl"]" />
+                    
+                    <div class="mb-3">
+                        <label for="loginHint" class="form-label">Bluesky Handle (Optional)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">@@</span>
+                            <input type="text" 
+                                   name="loginHint" 
+                                   id="loginHint" 
+                                   class="form-control" 
+                                   placeholder="your-handle.bsky.social"
+                                   autocomplete="username">
+                        </div>
+                        <div class="form-text">
+                            <i class="bi bi-lightbulb me-1"></i>
+                            Pre-fill your handle to skip typing it during OAuth
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Continue with OAuth
+                        </button>
+                    </div>
+                </form>
+
+                <div class="oauth-config mt-4">
+                    <details class="small">
+                        <summary class="text-muted mb-2" style="cursor: pointer;">
+                            <i class="bi bi-gear me-1"></i>OAuth Configuration
+                        </summary>
+                        <div class="bg-light p-3 rounded">
+                            <div class="row g-2">
+                                <div class="col-12">
+                                    <strong>Client ID:</strong><br>
+                                    <code class="small">@ViewData["ClientId"]</code>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Redirect URI:</strong><br>
+                                    <code class="small">@ViewData["RedirectUri"]</code>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Scopes:</strong><br>
+                                    <code class="small">atproto, transition:generic</code>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class="alert alert-info">
+                <h6 class="alert-heading">
+                    <i class="bi bi-question-circle me-2"></i>
+                    Don't have a Bluesky account?
+                </h6>
+                <p class="mb-2">
+                    Create your account at <a href="https://bsky.app" target="_blank" class="alert-link">bsky.app</a> 
+                    to join the decentralized social network.
+                </p>
+                <small class="text-muted">
+                    Bluesky is currently in beta and may require an invitation code or waitlist signup.
+                </small>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <div class="alert alert-warning">
+                <h6 class="alert-heading">
+                    <i class="bi bi-tools me-2"></i>
+                    For Developers
+                </h6>
+                <p class="mb-1">
+                    To use this sample, you'll need to register your OAuth client with Bluesky and update the configuration.
+                </p>
+                <small class="text-muted">
+                    See the README.md file for setup instructions and OAuth client registration details.
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
