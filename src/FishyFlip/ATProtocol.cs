@@ -167,7 +167,7 @@ public sealed partial class ATProtocol : IDisposable
 
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.SessionManager = oAuth2SessionManager;
-        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, identifier.ToString(), instanceUrl, cancellationToken);
+        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, identifier.ToString(), instanceUrl, null, cancellationToken);
     }
 
     /// <summary>
@@ -183,7 +183,7 @@ public sealed partial class ATProtocol : IDisposable
     {
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.SessionManager = oAuth2SessionManager;
-        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, null, instanceUrl, cancellationToken);
+        return await oAuth2SessionManager.StartAuthorizationAsync(clientId, redirectUrl, scopes, null, instanceUrl, null, cancellationToken);
     }
 
     /// <summary>

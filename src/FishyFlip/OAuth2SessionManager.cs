@@ -130,9 +130,10 @@ public class OAuth2SessionManager : ISessionManager
     /// <param name="scopes">ATProtocol Scopes.</param>
     /// <param name="loginHint">LoginHint.</param>
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
+    /// <param name="state">State parameter to pass to the server.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<Result<string?>> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? loginHint = default, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public async Task<Result<string?>> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? loginHint = default, string? instanceUrl = default, string? state = default, CancellationToken cancellationToken = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
         var options = new OidcClientOptions
@@ -147,6 +148,11 @@ public class OAuth2SessionManager : ISessionManager
         if (!string.IsNullOrEmpty(loginHint))
         {
             parameters.Add(OidcConstants.AuthorizeRequest.LoginHint, loginHint!, ParameterReplaceBehavior.Single);
+        }
+
+        if (!string.IsNullOrEmpty(state))
+        {
+            parameters.Add(OidcConstants.AuthorizeRequest.State, state!, ParameterReplaceBehavior.Single);
         }
 
         this.proofKey = JsonWebKeys.CreateRsaJson();

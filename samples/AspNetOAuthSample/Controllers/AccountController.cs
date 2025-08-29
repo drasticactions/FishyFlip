@@ -77,6 +77,7 @@ public class AccountController : Controller
                 userId,
                 this.options.ClientId,
                 this.options.RedirectUri,
+                state,
                 this.options.Scopes,
                 loginHint,
                 this.options.InstanceUrl);
@@ -103,7 +104,6 @@ public class AccountController : Controller
         }
     }
 
-    [Route("/")]
     [HttpGet]
     public async Task<IActionResult> OAuthCallback(string? code = null, string? state = null, string? error = null)
     {

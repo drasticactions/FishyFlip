@@ -78,6 +78,7 @@ public class UserSessionManager : IUserSessionManager
         string userId,
         string clientId,
         string redirectUrl,
+        string state,
         IEnumerable<string> scopes,
         string? loginHint = null,
         string? instanceUrl = null,
@@ -100,6 +101,7 @@ public class UserSessionManager : IUserSessionManager
                 scopes,
                 loginHint,
                 instanceUrl,
+                state,
                 cancellationToken);
 
             if (result.IsT0)

@@ -126,6 +126,7 @@ public class BlueskyAuthController : ControllerBase
             userId,
             this.options.ClientId,
             this.options.RedirectUri,
+            state,
             this.options.Scopes,
             loginHint,
             this.options.InstanceUrl,

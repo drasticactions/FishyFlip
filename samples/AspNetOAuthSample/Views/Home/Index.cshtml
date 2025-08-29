@@ -4,57 +4,9 @@
 
 <div class="text-center hero-section">
     <h1 class="display-4 fw-bold">
-        <img src="https://bsky.social/static/logo-small.png" width="48" height="48" alt="Bluesky" class="me-3">
         FishyFlip OAuth Sample
     </h1>
     <p class="lead">Experience seamless Bluesky authentication using OAuth 2.0 with FishyFlip.AspNetCore</p>
-</div>
-
-<div class="row mt-5">
-    <div class="col-lg-4 mb-4">
-        <div class="card h-100 border-primary">
-            <div class="card-body text-center">
-                <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3">
-                    <i class="bi bi-shield-lock"></i>
-                </div>
-                <h5 class="card-title">Secure OAuth 2.0</h5>
-                <p class="card-text">
-                    Industry-standard OAuth 2.0 flow with PKCE for enhanced security. 
-                    No passwords stored on your server.
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-lg-4 mb-4">
-        <div class="card h-100 border-success">
-            <div class="card-body text-center">
-                <div class="feature-icon bg-success text-white rounded-circle mx-auto mb-3">
-                    <i class="bi bi-people"></i>
-                </div>
-                <h5 class="card-title">Multi-Tenant Ready</h5>
-                <p class="card-text">
-                    Support multiple users with isolated sessions and 
-                    automatic token refresh for long-lived applications.
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-lg-4 mb-4">
-        <div class="card h-100 border-info">
-            <div class="card-body text-center">
-                <div class="feature-icon bg-info text-white rounded-circle mx-auto mb-3">
-                    <i class="bi bi-cloud"></i>
-                </div>
-                <h5 class="card-title">AT Protocol</h5>
-                <p class="card-text">
-                    Built on the decentralized AT Protocol, giving users 
-                    control over their data and social experience.
-                </p>
-            </div>
-        </div>
-    </div>
 </div>
 
 @if (User.Identity?.IsAuthenticated != true)
@@ -121,46 +73,3 @@ else
         </div>
     </div>
 }
-
-<div class="row mt-5">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <i class="bi bi-code-square me-2"></i>
-                    About This Sample
-                </h5>
-                <p class="card-text">
-                    This sample demonstrates OAuth 2.0 integration with Bluesky using FishyFlip.AspNetCore. 
-                    It shows how to implement secure authentication flows without storing user passwords, 
-                    manage user sessions, and interact with the Bluesky API.
-                </p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6>Key Features:</h6>
-                        <ul class="list-unstyled">
-                            <li><i class="bi bi-check text-success me-2"></i>OAuth 2.0 with PKCE</li>
-                            <li><i class="bi bi-check text-success me-2"></i>Secure session management</li>
-                            <li><i class="bi bi-check text-success me-2"></i>Automatic token refresh</li>
-                            <li><i class="bi bi-check text-success me-2"></i>Multi-tenant support</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h6>Developer Resources:</h6>
-                        <ul class="list-unstyled">
-                            <li><a href="https://github.com/drasticactions/FishyFlip" target="_blank" class="text-decoration-none">
-                                <i class="bi bi-github me-2"></i>FishyFlip on GitHub
-                            </a></li>
-                            <li><a href="https://atproto.com/" target="_blank" class="text-decoration-none">
-                                <i class="bi bi-book me-2"></i>AT Protocol Docs
-                            </a></li>
-                            <li><a href="https://bsky.social/about/blog/7-05-2023-developer-guidelines" target="_blank" class="text-decoration-none">
-                                <i class="bi bi-lightbulb me-2"></i>Bluesky Dev Guidelines
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

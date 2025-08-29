@@ -31,6 +31,7 @@ public interface IUserSessionManager
     /// <param name="userId">The user identifier.</param>
     /// <param name="clientId">The OAuth client ID.</param>
     /// <param name="redirectUrl">The OAuth redirect URL.</param>
+    /// <param name="state">The state parameter for CSRF protection.</param>
     /// <param name="scopes">The requested OAuth scopes.</param>
     /// <param name="loginHint">Optional login hint.</param>
     /// <param name="instanceUrl">The ATProtocol instance URL.</param>
@@ -40,6 +41,7 @@ public interface IUserSessionManager
         string userId,
         string clientId,
         string redirectUrl,
+        string state,
         IEnumerable<string> scopes,
         string? loginHint = null,
         string? instanceUrl = null,
