@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <ImplicitUsings>enable</ImplicitUsings>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>FishyFlip.AspNetCore</PackageId>
     <Description>ASP.NET Core integration for FishyFlip - ATProtocol/Bluesky library</Description>
     <Authors>Drastic Actions</Authors>
