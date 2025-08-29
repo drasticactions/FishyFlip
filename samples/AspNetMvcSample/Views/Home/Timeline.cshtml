@@ -1,0 +1,105 @@
+@{
+    ViewData["Title"] = "Timeline";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Your Timeline</h2>
+    <a asp-action="Profile" class="btn btn-secondary">View Profile</a>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+else if (ViewBag.Timeline != null)
+{
+    var timeline = ViewBag.Timeline as FishyFlip.Lexicon.App.Bsky.Feed.GetTimelineOutput;
+    
+    @if (timeline?.Feed?.Any() == true)
+    {
+        <div class="row">
+            @foreach (var item in timeline.Feed.Take(10))
+            {
+                <div class="col-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start mb-2">
+                                @if (!string.IsNullOrEmpty(item.Post?.Author?.Avatar))
+                                {
+                                    <img src="@item.Post.Author.Avatar" alt="Avatar" class="rounded-circle me-3" width="50" height="50">
+                                }
+                                else
+                                {
+                                    <div class="bg-secondary rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                         style="width: 50px; height: 50px;">
+                                        <i class="bi bi-person-fill text-white"></i>
+                                    </div>
+                                }
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="card-title mb-1">@(item.Post?.Author?.DisplayName ?? item.Post?.Author?.Handle?.ToString())</h6>
+                                        <small class="text-muted ms-2">@@@(item.Post?.Author?.Handle)</small>
+                                        <small class="text-muted ms-auto">@item.Post?.IndexedAt?.ToString("MMM dd, HH:mm")</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            @if (item.Post?.PostRecord?.Text != null)
+                            {
+                                <p class="card-text">@item.Post.PostRecord.Text</p>
+                            }
+                            
+                            @if (item.Post?.Embed != null)
+                            {
+                                <div class="mt-2">
+                                    <small class="text-muted">📎 Has embedded content</small>
+                                </div>
+                            }
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-outline-secondary">
+                                        <i class="bi bi-chat"></i> @(item.Post?.ReplyCount ?? 0)
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-repeat"></i> @(item.Post?.RepostCount ?? 0)
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary">
+                                        <i class="bi bi-heart"></i> @(item.Post?.LikeCount ?? 0)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        @if (timeline.Feed.Count() > 10)
+        {
+            <div class="text-center mt-4">
+                <p class="text-muted">Showing first 10 posts from your timeline.</p>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center">
+            <div class="alert alert-info">
+                <h5>No posts found</h5>
+                <p>Your timeline appears to be empty. Try following some users to see posts here!</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Loading timeline...</p>
+    </div>
+}

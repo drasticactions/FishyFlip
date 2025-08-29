@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../../src/FishyFlip.AspNetCore/FishyFlip.AspNetCore.csproj" />
+  <Project Path="../../src/FishyFlip/FishyFlip.csproj" />
+  <Project Path="AspNetMvcSample.csproj" />
+</Solution>

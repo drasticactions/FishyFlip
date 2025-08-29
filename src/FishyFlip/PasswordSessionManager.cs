@@ -10,7 +10,7 @@ namespace FishyFlip;
 /// <summary>
 /// ATProtocol Password Session Manager.
 /// </summary>
-internal class PasswordSessionManager : ISessionManager
+public class PasswordSessionManager : ISessionManager
 {
     private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
 
@@ -53,6 +53,16 @@ internal class PasswordSessionManager : ISessionManager
     /// <summary>
     /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
     /// </summary>
+    /// <param name="logger">Logger.</param>
+    public PasswordSessionManager(ILogger? logger = null)
+        : this(new ATProtocol(new ATProtocolOptions { Logger = logger }))
+    {
+        this.protocol.SessionManager = this;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PasswordSessionManager"/> class.
+    /// </summary>
     /// <param name="protocol"><see cref="ATProtocol"/>.</param>
     /// <param name="session">Existing Session.</param>
     public PasswordSessionManager(ATProtocol protocol, Session session)
@@ -83,6 +93,11 @@ internal class PasswordSessionManager : ISessionManager
     /// Gets the password Auth Session.
     /// </summary>
     public AuthSession? PasswordSession => this.authSession;
+
+    /// <summary>
+    /// Gets the ATProtocol instance.
+    /// </summary>
+    public ATProtocol Protocol => this.protocol;
 
     /// <inheritdoc/>
     public async Task<Result<RefreshSessionOutput?>> RefreshSessionAsync(CancellationToken cancellationToken = default)
@@ -145,7 +160,7 @@ internal class PasswordSessionManager : ISessionManager
     /// <param name="authFactorToken">2-Factor Auth Token, optional.</param>
     /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A Task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    internal async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
+    public async Task<Result<Session?>> CreateSessionAsync(string identifier, string password, string? authFactorToken = default, CancellationToken cancellationToken = default)
     {
         var host = this.protocol.Options.Url.ToString();
         var usingPublicApi = host.Contains(Constants.Urls.ATProtoServer.PublicApi);
@@ -263,7 +278,7 @@ internal class PasswordSessionManager : ISessionManager
     /// Sets the given session.
     /// </summary>
     /// <param name="session"><see cref="Session"/>.</param>
-    internal void SetSession(Session session)
+    public void SetSession(Session session)
     {
         this.session = session;
         this.UpdateBearerToken(session);

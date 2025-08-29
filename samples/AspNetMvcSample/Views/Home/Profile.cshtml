@@ -1,0 +1,104 @@
+@using FishyFlip.Lexicon.App.Bsky.Actor
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Your Bluesky Profile</h2>
+    <a asp-action="Timeline" class="btn btn-primary">View Timeline</a>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+else if (ViewBag.Profile != null)
+{
+    ProfileViewDetailed? profile = ViewBag.Profile as FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed;
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    @if (!string.IsNullOrEmpty(profile?.Avatar))
+                    {
+                        <img src="@profile.Avatar" alt="Avatar" class="rounded-circle mb-3" width="150" height="150">
+                    }
+                    else
+                    {
+                        <div class="bg-secondary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 150px; height: 150px;">
+                            <i class="bi bi-person-fill text-white" style="font-size: 3rem;"></i>
+                        </div>
+                    }
+                    <h4 class="card-title">@(profile?.DisplayName ?? ViewBag.Handle)</h4>
+                    <p class="text-muted">@@@ViewBag.Handle</p>
+                    @if (!string.IsNullOrEmpty(ViewBag.Email))
+                    {
+                        <p class="text-muted"><small>@ViewBag.Email</small></p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile Information</h5>
+                    
+                    @if (!string.IsNullOrEmpty(profile?.Description))
+                    {
+                        <div class="mb-3">
+                            <h6>Bio:</h6>
+                            <p>@profile.Description</p>
+                        </div>
+                    }
+                    
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <h4>@(profile?.FollowersCount?.ToString("N0") ?? "0")</h4>
+                                <small class="text-muted">Followers</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <h4>@(profile?.FollowsCount?.ToString("N0") ?? "0")</h4>
+                                <small class="text-muted">Following</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <h4>@(profile?.PostsCount?.ToString("N0") ?? "0")</h4>
+                                <small class="text-muted">Posts</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <small class="text-muted">DID:</small><br>
+                            <code style="font-size: 0.8em;">@ViewBag.Handle</code>
+                        </div>
+                        <div class="col-sm-6">
+                            <small class="text-muted">Created:</small><br>
+                            <small>@(profile?.CreatedAt?.ToString("MMMM dd, yyyy") ?? "Unknown")</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Loading profile...</p>
+    </div>
+}

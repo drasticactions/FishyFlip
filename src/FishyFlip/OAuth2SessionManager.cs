@@ -3,10 +3,13 @@
 // </copyright>
 
 using System.Web;
+using Duende.IdentityModel;
+using Duende.IdentityModel.Client;
+using Duende.IdentityModel.OidcClient;
+using Duende.IdentityModel.OidcClient.DPoP;
+using Duende.IdentityModel.OidcClient.Results;
 using FishyFlip.Lexicon.Com.Atproto.Repo;
 using FishyFlip.Lexicon.Com.Atproto.Server;
-using FishyFlip.OAuth;
-using FishyFlip.OAuth.Models;
 using FishyFlip.Tools;
 using Microsoft.Extensions.Logging;
 
@@ -15,17 +18,27 @@ namespace FishyFlip;
 /// <summary>
 /// OAuth2 Session Manager.
 /// </summary>
-internal class OAuth2SessionManager : ISessionManager
+public class OAuth2SessionManager : ISessionManager
 {
     private bool disposedValue;
     private HttpClient client;
-    private OAuthClient? oauthClient;
-    private RefreshTokenHandler? refreshTokenHandler;
+    private OidcClient? oidcClient;
+    private AuthorizeState? state;
     private ILogger? logger;
     private ATProtocol protocol;
     private Session? session;
     private string? proofKey;
-    private string? clientId;
+    private RefreshTokenDelegatingHandler? delegatingHandler;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OAuth2SessionManager"/> class.
+    /// </summary>
+    /// <param name="logger">Logger.</param>
+    public OAuth2SessionManager(ILogger? logger = null)
+        : this(new ATProtocol(new ATProtocolOptions { Logger = logger }))
+    {
+        this.protocol.SessionManager = this;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OAuth2SessionManager"/> class.
@@ -36,7 +49,6 @@ internal class OAuth2SessionManager : ISessionManager
         this.protocol = protocol;
         this.client = this.protocol.Options.GenerateHttpClient(this.protocol);
         this.logger = this.protocol.Options.Logger;
-        this.oauthClient = new OAuthClient(this.logger);
     }
 
     /// <inheritdoc/>
@@ -57,6 +69,11 @@ internal class OAuth2SessionManager : ISessionManager
     public AuthSession? OAuthSession => this.session is null || this.proofKey is null ? null : new AuthSession(this.session, this.proofKey);
 
     /// <summary>
+    /// Gets the ATProtocol instance.
+    /// </summary>
+    public ATProtocol Protocol => this.protocol;
+
+    /// <summary>
     /// Starts an existing OAuth2 Session.
     /// These should be the same parameters as used when creating the previous session.
     /// </summary>
@@ -66,12 +83,19 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <exception cref="OAuth2Exception">Thrown if missing OAuth2 information.</exception>
     /// <returns>Task.</returns>
+#pragma warning disable CS1998
     public async Task<Result<AuthSession?>> StartSessionAsync(AuthSession session, string clientId, string? instanceUrl = default, CancellationToken cancellationToken = default)
+#pragma warning restore CS1998
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
+        var options = new OidcClientOptions
+        {
+            Authority = instanceUrl,
+            ClientId = clientId,
+            LoadProfile = false,
+        };
 
         this.proofKey = session.ProofKey;
-        this.clientId = clientId;
 
         if (this.proofKey is null)
         {
@@ -83,46 +107,14 @@ internal class OAuth2SessionManager : ISessionManager
             return new ATError(new OAuth2Exception("RefreshJwt is null. This must be set from the previous session."));
         }
 
-        // Setup OAuth client with existing session
-        this.oauthClient = new OAuthClient(this.logger);
-        this.oauthClient.SetupFromSession(this.proofKey, instanceUrl);
+        options.ConfigureDPoP(this.proofKey);
+        this.oidcClient = new OidcClient(options);
+        this.oidcClient.Options.Policy.Discovery.DiscoveryDocumentPath = ".well-known/oauth-authorization-server";
 
-        // Discover endpoints
-        var config = await this.oauthClient.DiscoverEndpointsAsync(instanceUrl, cancellationToken);
-        if (config == null)
-        {
-            return new ATError(new OAuth2Exception("Failed to discover OAuth endpoints."));
-        }
+        var handler = this.oidcClient.CreateDPoPHandler(this.proofKey, session.Session.RefreshJwt);
 
-#if NET5_0_OR_GREATER
-        var tokenEndpoint = config.GetValueOrDefault("token_endpoint")?.ToString();
-#else
-        var tokenEndpoint = config.TryGetValue("token_endpoint", out var tokenEp) ? tokenEp?.ToString() : null;
-#endif
-        if (string.IsNullOrEmpty(tokenEndpoint))
-        {
-            return new ATError(new OAuth2Exception("Missing token endpoint."));
-        }
-
-        // Create refresh token handler
-        var keyPair = this.oauthClient.KeyPair;
-        if (keyPair == null)
-        {
-            return new ATError(new OAuth2Exception("Failed to setup DPoP key pair."));
-        }
-
-        var innerHandler = new HttpClientHandler();
-        this.refreshTokenHandler = new RefreshTokenHandler(
-            this.oauthClient,
-            clientId,
-            session.Session.AccessJwt!,
-            session.Session.RefreshJwt,
-            3600, // Default expiry
-            keyPair,
-            innerHandler,
-            this.logger);
-
-        this.refreshTokenHandler.TokenRefreshed += this.RefreshTokenHandler_TokenRefreshed;
+        this.delegatingHandler = (RefreshTokenDelegatingHandler)handler;
+        this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
 
         this.SetSession(session.Session);
         return session;
@@ -138,36 +130,49 @@ internal class OAuth2SessionManager : ISessionManager
     /// <param name="scopes">ATProtocol Scopes.</param>
     /// <param name="loginHint">LoginHint.</param>
     /// <param name="instanceUrl">InstanceUrl, must be a URL. If null, uses https://bsky.social.</param>
+    /// <param name="state">State parameter to pass to the server.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>Authorization URL to call.</returns>
-    public async Task<Result<string?>> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? loginHint = default, string? instanceUrl = default, CancellationToken cancellationToken = default)
+    public async Task<Result<string?>> StartAuthorizationAsync(string clientId, string redirectUrl, IEnumerable<string> scopes, string? loginHint = default, string? instanceUrl = default, string? state = default, CancellationToken cancellationToken = default)
     {
         instanceUrl ??= Constants.Urls.ATProtoServer.SocialApi;
-        this.clientId = clientId;
-
-        this.oauthClient = new OAuthClient(this.logger);
-
-        var authUrl = await this.oauthClient.PrepareAuthorizationAsync(
-            clientId,
-            redirectUrl,
-            string.Join(" ", scopes),
-            instanceUrl,
-            loginHint,
-            cancellationToken);
-
-        if (string.IsNullOrEmpty(authUrl))
+        var options = new OidcClientOptions
         {
-            return new ATError(new OAuth2Exception("Failed to prepare authorization."));
+            Authority = instanceUrl,
+            ClientId = clientId,
+            Scope = string.Join(" ", scopes),
+            RedirectUri = redirectUrl,
+            LoadProfile = false,
+        };
+        var parameters = new Parameters();
+        if (!string.IsNullOrEmpty(loginHint))
+        {
+            parameters.Add(OidcConstants.AuthorizeRequest.LoginHint, loginHint!, ParameterReplaceBehavior.Single);
         }
 
-        // Store the proof key for later use
-        var keyPair = this.oauthClient.KeyPair;
-        if (keyPair != null)
+        if (!string.IsNullOrEmpty(state))
         {
-            this.proofKey = keyPair.JwkJson ?? string.Empty;
+            parameters.Add(OidcConstants.AuthorizeRequest.State, state!, ParameterReplaceBehavior.Single);
         }
 
-        return authUrl;
+        this.proofKey = JsonWebKeys.CreateRsaJson();
+        options.ConfigureDPoP(this.proofKey);
+
+        this.oidcClient = new OidcClient(options);
+
+        this.oidcClient.Options.Policy.Discovery.DiscoveryDocumentPath = ".well-known/oauth-authorization-server";
+        this.state = await this.oidcClient.PrepareLoginAsync(parameters, cancellationToken: cancellationToken);
+        if (this.state == null)
+        {
+            return new ATError(new OAuth2Exception("Failed to prepare login."));
+        }
+
+        if (this.state.IsError)
+        {
+            return new ATError(new OAuth2Exception($"Failed to prepare login: {this.state.Error} - {this.state.ErrorDescription}"));
+        }
+
+        return this.state.StartUrl;
     }
 
     /// <summary>
@@ -179,9 +184,14 @@ internal class OAuth2SessionManager : ISessionManager
     /// <exception cref="OAuth2Exception">Thrown if Login fails.</exception>
     public async Task<Result<Session?>> CompleteAuthorizationAsync(string data, CancellationToken cancellationToken = default)
     {
-        if (this.oauthClient is null)
+        if (this.oidcClient is null)
         {
             return new ATError(new OAuth2Exception("Client is null. Call StartAuthorizationAsync first."));
+        }
+
+        if (this.state is null)
+        {
+            return new ATError(new OAuth2Exception("State is null. Call StartAuthorizationAsync first."));
         }
 
         if (string.IsNullOrEmpty(data))
@@ -189,96 +199,24 @@ internal class OAuth2SessionManager : ISessionManager
             return new ATError(new OAuth2Exception("Data is null or empty."));
         }
 
-        // Parse the callback URL to extract code and state
-        // Handle both full URI and raw query string
-        Uri? uri;
-        string queryString;
-
-        if (Uri.TryCreate(data, UriKind.Absolute, out uri))
+        var result = await this.oidcClient.ProcessResponseAsync(data, this.state);
+        if (result.IsError)
         {
-            queryString = uri.Query;
-        }
-        else
-        {
-            // Assume data is a raw query string (possibly starting with '?')
-            queryString = data.StartsWith("?") ? data : "?" + data;
-            uri = new Uri("http://127.0.0.1/" + queryString);
+            return new ATError(new OAuth2Exception(result.Error));
         }
 
-        var query = HttpUtility.ParseQueryString(queryString);
-        var code = query["code"];
-        var state = query["state"];
-
-        if (string.IsNullOrEmpty(code))
-        {
-            var errorCode = query["error"];
-            var errorDescription = query["error_description"];
-            return new ATError(new OAuth2Exception($"Authorization failed: {errorCode} - {errorDescription}"));
-        }
-
-        // Verify state matches
-        if (this.oauthClient.State?.State != state)
-        {
-            return new ATError(new OAuth2Exception("State mismatch. Possible CSRF attack."));
-        }
-
-        // Get the redirect URI from the original request
-        var redirectUri = uri.GetLeftPart(UriPartial.Path);
-
-        // Exchange code for tokens
-        var tokenResponse = await this.oauthClient.ExchangeCodeForTokensAsync(
-            code,
-            this.clientId ?? string.Empty,
-            redirectUri,
-            cancellationToken);
-
-        if (tokenResponse == null)
-        {
-            return new ATError(new OAuth2Exception("Failed to exchange code for tokens."));
-        }
-
-        // Extract DID from token
-        var sub = tokenResponse.Sub ?? OAuthHelpers.ExtractSubFromJwt(tokenResponse.AccessToken!);
-        if (string.IsNullOrEmpty(sub))
-        {
-            return new ATError(new OAuth2Exception("Failed to extract subject from token."));
-        }
-
-        var didSub = ATDid.Create(sub!)!;
+        var sub = result.TokenResponse!.Json!.Value!.TryGetValue("sub");
+        var subValue = sub!.ToString();
+        var didSub = ATDid.Create(subValue)!;
         (var describeRepo, var error) = await this.protocol.DescribeRepoAsync(didSub, cancellationToken);
         if (error is not null)
         {
             return error;
         }
 
-        var expiresAt = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn);
-        var session = new Session(
-            describeRepo!.Did!,
-            describeRepo.DidDoc,
-            describeRepo.Handle!,
-            null,
-            tokenResponse.AccessToken ?? string.Empty,
-            tokenResponse.RefreshToken ?? string.Empty,
-            expiresAt);
-
-        // Setup refresh token handler
-        var keyPair = this.oauthClient.KeyPair;
-        if (keyPair != null && !string.IsNullOrEmpty(tokenResponse.RefreshToken))
-        {
-            var innerHandler = new HttpClientHandler();
-            this.refreshTokenHandler = new RefreshTokenHandler(
-                this.oauthClient,
-                this.clientId ?? string.Empty,
-                tokenResponse.AccessToken!,
-                tokenResponse.RefreshToken,
-                tokenResponse.ExpiresIn,
-                keyPair,
-                innerHandler,
-                this.logger);
-
-            this.refreshTokenHandler.TokenRefreshed += this.RefreshTokenHandler_TokenRefreshed;
-        }
-
+        var session = new Session(describeRepo!.Did!, describeRepo.DidDoc, describeRepo.Handle!, null, result.AccessToken, result.RefreshToken, result.AccessTokenExpiration.DateTime);
+        this.delegatingHandler = (RefreshTokenDelegatingHandler)result.RefreshTokenHandler;
+        this.delegatingHandler.TokenRefreshed += this.DelegatingHandler_TokenRefreshed;
         this.SetSession(session);
 
         return session;
@@ -292,44 +230,23 @@ internal class OAuth2SessionManager : ISessionManager
             throw new OAuth2Exception("Session is null.");
         }
 
-        if (this.oauthClient is null)
+        var result = await this.RefreshTokenAsync(cancellationToken);
+        if (result is null)
         {
-            throw new OAuth2Exception("OAuth client is null.");
+            throw new OAuth2Exception("Failed to refresh token.");
         }
 
-        if (string.IsNullOrEmpty(this.session.RefreshJwt))
+        if (result.IsError)
         {
-            throw new OAuth2Exception("Refresh token is null.");
-        }
-
-        var tokenResponse = await this.oauthClient.RefreshTokenAsync(
-            this.session.RefreshJwt,
-            this.clientId ?? string.Empty,
-            cancellationToken);
-
-        if (tokenResponse == null)
-        {
-            return new ATError(401, new ErrorDetail("OAuth Error", "Failed to refresh token"));
+            return new ATError(401, new ErrorDetail("OAuth Error", result.Error));
         }
 
         var refreshSessionOutput = new RefreshSessionOutput();
         refreshSessionOutput.Active = true;
-        refreshSessionOutput.AccessJwt = tokenResponse.AccessToken ?? string.Empty;
-        refreshSessionOutput.RefreshJwt = tokenResponse.RefreshToken ?? this.session.RefreshJwt;
+        refreshSessionOutput.AccessJwt = result.AccessToken;
+        refreshSessionOutput.RefreshJwt = result.RefreshToken;
         refreshSessionOutput.Did = this.session.Did;
         refreshSessionOutput.DidDoc = this.session.DidDoc;
-
-        // Update session with new tokens
-        var expiresAt = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn);
-        this.session = new Session(
-            this.session.Did,
-            this.session.DidDoc,
-            this.session.Handle,
-            null,
-            tokenResponse.AccessToken ?? string.Empty,
-            tokenResponse.RefreshToken ?? this.session.RefreshJwt,
-            expiresAt);
-
         return refreshSessionOutput;
     }
 
@@ -366,13 +283,47 @@ internal class OAuth2SessionManager : ISessionManager
                 {
                     this.protocol.Options.Url = uriResult;
                     this.client.Dispose();
-                    this.client = this.protocol.Options.GenerateHttpClient(this.protocol, this.refreshTokenHandler);
+                    this.client = this.protocol.Options.GenerateHttpClient(this.protocol, this.delegatingHandler);
                     logger?.LogInformation($"UseServiceEndpointUponLogin enabled, switching to {uriResult}.");
                 }
             }
         }
 
         this.session = session;
+    }
+
+    /// <summary>
+    /// Refresh Token.
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation Token.</param>
+    /// <returns>Token result.</returns>
+    internal async Task<RefreshTokenResult?> RefreshTokenAsync(CancellationToken cancellationToken = default)
+    {
+        if (this.oidcClient is null)
+        {
+            this.logger?.LogWarning("OdicClient is null.Start OAuth Session first.");
+            return null;
+        }
+
+        var refreshResult = await this.oidcClient.RefreshTokenAsync(this.session!.RefreshJwt, backChannelParameters: null, scope: null, cancellationToken: cancellationToken);
+        if (refreshResult.IsError)
+        {
+            throw new OAuth2Exception($"Failed to refresh token: {refreshResult.Error} {refreshResult.ErrorDescription}");
+        }
+
+        if (this.session is null)
+        {
+            throw new OAuth2Exception("Session should not be null if RefreshToken handler is enabled");
+        }
+
+        lock (this.session)
+        {
+            var expiresIn = refreshResult.ExpiresIn;
+            var expiresInDatetimeFromNow = DateTime.UtcNow.AddSeconds(expiresIn);
+            this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, refreshResult.AccessToken, refreshResult.RefreshToken, expiresInDatetimeFromNow);
+        }
+
+        return refreshResult;
     }
 
     /// <summary>
@@ -385,25 +336,26 @@ internal class OAuth2SessionManager : ISessionManager
         {
             if (disposing)
             {
-                if (this.refreshTokenHandler is not null)
+                if (this.delegatingHandler is not null)
                 {
-                    this.refreshTokenHandler.TokenRefreshed -= this.RefreshTokenHandler_TokenRefreshed;
-                    this.refreshTokenHandler.Dispose();
+                    this.delegatingHandler.TokenRefreshed -= this.DelegatingHandler_TokenRefreshed;
                 }
+
+                this.delegatingHandler?.Dispose();
             }
 
             this.disposedValue = true;
         }
     }
 
-    private void RefreshTokenHandler_TokenRefreshed(object? sender, TokenRefreshedEventArgs e)
+    private void DelegatingHandler_TokenRefreshed(object? sender, TokenRefreshedEventArgs e)
     {
         if (this.session is null)
         {
             throw new NullReferenceException("Session should not be null if RefreshToken handler is enabled");
         }
 
-        if (string.IsNullOrEmpty(e.RefreshToken) && string.IsNullOrEmpty(this.session.RefreshJwt))
+        if (string.IsNullOrEmpty(e.RefreshToken))
         {
             throw new OAuth2Exception("RefreshToken is null or empty.");
         }
@@ -417,14 +369,7 @@ internal class OAuth2SessionManager : ISessionManager
         {
             var expiresIn = e.ExpiresIn;
             var expiresInDatetimeFromNow = DateTime.UtcNow.AddSeconds(expiresIn);
-            this.session = new Session(
-                this.session.Did,
-                this.session.DidDoc,
-                this.session.Handle,
-                null,
-                e.AccessToken,
-                e.RefreshToken ?? this.session.RefreshJwt,
-                expiresInDatetimeFromNow);
+            this.session = new Session(this.session.Did, this.session.DidDoc, this.session.Handle, null, e.AccessToken, e.RefreshToken, expiresInDatetimeFromNow);
             this.SessionUpdated?.Invoke(this, new SessionUpdatedEventArgs(this.OAuthSession!, this.protocol.Options.Url));
         }
     }
