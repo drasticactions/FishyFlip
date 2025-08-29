@@ -1,0 +1,69 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to FishyFlip MVC Sample</h1>
+    <p class="lead">This sample demonstrates how to integrate Bluesky authentication using FishyFlip.AspNetCore in an ASP.NET Core MVC application.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    About Bluesky
+                </h5>
+                <p class="card-text">
+                    Bluesky is a decentralized social network built on the AT Protocol. It offers users control over their data
+                    and the ability to customize their social media experience.
+                </p>
+                <a href="https://bsky.social" class="btn btn-primary" target="_blank">Visit Bluesky</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-code-square"></i>
+                    About FishyFlip
+                </h5>
+                <p class="card-text">
+                    FishyFlip is a .NET library for interacting with the AT Protocol and Bluesky. This sample shows how to
+                    use password-based authentication to log in users and access their Bluesky data.
+                </p>
+                <a href="https://github.com/drasticactions/FishyFlip" class="btn btn-secondary" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (User.Identity?.IsAuthenticated != true)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Get Started</h4>
+                <p class="mb-0">
+                    To try out this sample, <a asp-controller="Account" asp-action="Login" class="alert-link">log in</a>
+                    with your Bluesky credentials. You'll be able to view your profile and timeline.
+                </p>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Welcome, @(User.FindFirst("bluesky_handle")?.Value)!</h4>
+                <p class="mb-0">
+                    You're logged in! Check out your <a asp-controller="Home" asp-action="Profile" class="alert-link">profile</a>
+                    or view your <a asp-controller="Home" asp-action="Timeline" class="alert-link">timeline</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+}

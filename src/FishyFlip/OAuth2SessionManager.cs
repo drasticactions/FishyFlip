@@ -34,6 +34,7 @@ public class OAuth2SessionManager : ISessionManager
     public OAuth2SessionManager(ILogger? logger = null)
         : this(new ATProtocol(new ATProtocolOptions { Logger = logger }))
     {
+        this.protocol.SessionManager = this;
     }
 
     /// <summary>

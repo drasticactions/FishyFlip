@@ -1,0 +1,82 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+.bluesky-brand {
+  color: #1185fe;
+}
+
+.card {
+  border: 1px solid rgba(0,0,0,0.125);
+  border-radius: 0.5rem;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+.timeline-post {
+  transition: background-color 0.15s ease-in-out;
+}
+
+.timeline-post:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+
+.profile-stats {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.login-card {
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.navbar-brand img {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+
+.alert-info {
+  background-color: rgba(17, 133, 254, 0.1);
+  border-color: rgba(17, 133, 254, 0.2);
+  color: #0f5ba9;
+}
+
+.btn-primary {
+  background-color: #1185fe;
+  border-color: #1185fe;
+}
+
+.btn-primary:hover {
+  background-color: #0e73d9;
+  border-color: #0e73d9;
+}

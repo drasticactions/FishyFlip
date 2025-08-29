@@ -57,6 +57,7 @@ public class PasswordSessionManager : ISessionManager
     public PasswordSessionManager(ILogger? logger = null)
         : this(new ATProtocol(new ATProtocolOptions { Logger = logger }))
     {
+        this.protocol.SessionManager = this;
     }
 
     /// <summary>
