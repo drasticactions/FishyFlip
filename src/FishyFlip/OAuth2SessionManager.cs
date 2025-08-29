@@ -15,7 +15,7 @@ namespace FishyFlip;
 /// <summary>
 /// OAuth2 Session Manager.
 /// </summary>
-internal class OAuth2SessionManager : ISessionManager
+public class OAuth2SessionManager : ISessionManager
 {
     private bool disposedValue;
     private HttpClient client;
@@ -26,6 +26,15 @@ internal class OAuth2SessionManager : ISessionManager
     private Session? session;
     private string? proofKey;
     private string? clientId;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OAuth2SessionManager"/> class.
+    /// </summary>
+    /// <param name="logger">Logger.</param>
+    public OAuth2SessionManager(ILogger? logger = null)
+        : this(new ATProtocol(new ATProtocolOptions { Logger = logger }))
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OAuth2SessionManager"/> class.
@@ -55,6 +64,11 @@ internal class OAuth2SessionManager : ISessionManager
     /// Gets the OAuth2 Session. If null, the session is not authenticated.
     /// </summary>
     public AuthSession? OAuthSession => this.session is null || this.proofKey is null ? null : new AuthSession(this.session, this.proofKey);
+
+    /// <summary>
+    /// Gets the ATProtocol instance.
+    /// </summary>
+    public ATProtocol Protocol => this.protocol;
 
     /// <summary>
     /// Starts an existing OAuth2 Session.

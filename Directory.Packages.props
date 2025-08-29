@@ -12,7 +12,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
     <PackageVersion Include="Microsoft.Identity.Client" Version="4.76.0" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.8.2" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.8.3" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
     <PackageVersion Include="IpfsShipyard.Ipfs.Core" Version="0.8.0" />
@@ -25,7 +25,7 @@
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.Memory.Data" Version="9.0.8" />
     <PackageVersion Include="System.Text.Json" Version="9.0.8" />
-    <PackageVersion Include="MSTest" Version="3.10.2" />
+    <PackageVersion Include="MSTest" Version="3.10.3" />
     <PackageVersion Include="GitVersion.MSBuild" Version="6.4.0" />
     <PackageVersion Include="Duende.IdentityModel" Version="7.1.0" />
     <PackageVersion Include="DnsClient" Version="1.8.0" />
@@ -38,5 +38,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
     <PackageVersion Include="ZstdSharp.Port" Version="0.8.6" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication" Version="2.3.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.3.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.8" />
   </ItemGroup>
 </Project>
