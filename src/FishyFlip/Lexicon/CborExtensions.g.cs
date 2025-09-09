@@ -92,6 +92,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.BlockedAuthor(obj);
                 case "app.bsky.feed.defs#blockedPost":
                     return new App.Bsky.Feed.BlockedPost(obj);
+                case "app.bsky.bookmark.defs#bookmark":
+                    return new App.Bsky.Bookmark.Bookmark(obj);
+                case "app.bsky.bookmark.defs#bookmarkView":
+                    return new App.Bsky.Bookmark.BookmarkView(obj);
                 case "app.bsky.actor.defs#bskyAppProgressGuide":
                     return new App.Bsky.Actor.BskyAppProgressGuide(obj);
                 case "app.bsky.actor.defs#bskyAppStatePref":
@@ -128,6 +132,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.CreateAccountOutput(obj);
                 case "com.atproto.server.createAppPassword#CreateAppPasswordInput":
                     return new Com.Atproto.Server.CreateAppPasswordInput(obj);
+                case "app.bsky.bookmark.createBookmark#CreateBookmarkInput":
+                    return new App.Bsky.Bookmark.CreateBookmarkInput(obj);
                 case "com.atproto.server.createInviteCode#CreateInviteCodeInput":
                     return new Com.Atproto.Server.CreateInviteCodeInput(obj);
                 case "com.atproto.server.createInviteCode#CreateInviteCodeOutput":
@@ -166,6 +172,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.DeleteAccountInput(obj);
                 case "chat.bsky.actor.deleteAccount#DeleteAccountOutput":
                     return new Chat.Bsky.Actor.DeleteAccountOutput(obj);
+                case "app.bsky.bookmark.deleteBookmark#DeleteBookmarkInput":
+                    return new App.Bsky.Bookmark.DeleteBookmarkInput(obj);
                 case "chat.bsky.convo.defs#deletedMessageView":
                     return new Chat.Bsky.Convo.DeletedMessageView(obj);
                 case "tools.ozone.team.deleteMember#DeleteMemberInput":
@@ -268,6 +276,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Feed.GetAuthorFeedOutput(obj);
                 case "app.bsky.graph.getBlocks#GetBlocksOutput":
                     return new App.Bsky.Graph.GetBlocksOutput(obj);
+                case "app.bsky.bookmark.getBookmarks#GetBookmarksOutput":
+                    return new App.Bsky.Bookmark.GetBookmarksOutput(obj);
                 case "app.bsky.unspecced.getConfig#GetConfigOutput":
                     return new App.Bsky.Unspecced.GetConfigOutput(obj);
                 case "tools.ozone.server.getConfig#GetConfigOutput":
@@ -794,6 +804,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.ResultAvailable(obj);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
                     return new Com.Atproto.Temp.ResultUnavailable(obj);
+                case "com.atproto.temp.revokeAccountCredentials#RevokeAccountCredentialsInput":
+                    return new Com.Atproto.Temp.RevokeAccountCredentialsInput(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
                     return new Com.Atproto.Server.RevokeAppPasswordInput(obj);
                 case "tools.ozone.verification.revokeVerifications#revokeError":
