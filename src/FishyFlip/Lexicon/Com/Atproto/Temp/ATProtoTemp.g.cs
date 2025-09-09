@@ -77,6 +77,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             return atp.RequestPhoneVerificationAsync(phoneNumber, cancellationToken);
         }
 
+
+        /// <summary>
+        /// Revoke sessions, password, and app passwords associated with account. May be resolved by a password reset.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<Success?>> RevokeAccountCredentialsAsync (FishyFlip.Models.ATIdentifier account, CancellationToken cancellationToken = default)
+        {
+            return atp.RevokeAccountCredentialsAsync(account, cancellationToken);
+        }
+
     }
 }
 

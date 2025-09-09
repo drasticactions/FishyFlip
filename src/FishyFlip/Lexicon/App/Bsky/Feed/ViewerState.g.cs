@@ -18,14 +18,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         /// <param name="repost"></param>
         /// <param name="like"></param>
+        /// <param name="bookmarked"></param>
         /// <param name="threadMuted"></param>
         /// <param name="replyDisabled"></param>
         /// <param name="embeddingDisabled"></param>
         /// <param name="pinned"></param>
-        public ViewerState(FishyFlip.Models.ATUri? repost = default, FishyFlip.Models.ATUri? like = default, bool? threadMuted = default, bool? replyDisabled = default, bool? embeddingDisabled = default, bool? pinned = default)
+        public ViewerState(FishyFlip.Models.ATUri? repost = default, FishyFlip.Models.ATUri? like = default, bool? bookmarked = default, bool? threadMuted = default, bool? replyDisabled = default, bool? embeddingDisabled = default, bool? pinned = default)
         {
             this.Repost = repost;
             this.Like = like;
+            this.Bookmarked = bookmarked;
             this.ThreadMuted = threadMuted;
             this.ReplyDisabled = replyDisabled;
             this.EmbeddingDisabled = embeddingDisabled;
@@ -50,6 +52,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         {
             if (obj["repost"] is not null) this.Repost = obj["repost"].ToATUri();
             if (obj["like"] is not null) this.Like = obj["like"].ToATUri();
+            if (obj["bookmarked"] is not null) this.Bookmarked = obj["bookmarked"].AsBoolean();
             if (obj["threadMuted"] is not null) this.ThreadMuted = obj["threadMuted"].AsBoolean();
             if (obj["replyDisabled"] is not null) this.ReplyDisabled = obj["replyDisabled"].AsBoolean();
             if (obj["embeddingDisabled"] is not null) this.EmbeddingDisabled = obj["embeddingDisabled"].AsBoolean();
@@ -72,6 +75,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? Like { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bookmarked.
+        /// </summary>
+        [JsonPropertyName("bookmarked")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Bookmarked { get; set; }
 
         /// <summary>
         /// Gets or sets the threadMuted.

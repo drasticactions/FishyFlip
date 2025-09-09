@@ -24,6 +24,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
        public const string RequestPhoneVerification = "/xrpc/com.atproto.temp.requestPhoneVerification";
 
+       public const string RevokeAccountCredentials = "/xrpc/com.atproto.temp.revokeAccountCredentials";
+
 
         /// <summary>
         /// Add a handle to the set of reserved handles.
@@ -114,6 +116,23 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             var inputItem = new RequestPhoneVerificationInput();
             inputItem.PhoneNumber = phoneNumber;
             return atp.Post<RequestPhoneVerificationInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRequestPhoneVerificationInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Revoke sessions, password, and app passwords associated with account. May be resolved by a password reset.
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="account"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success?"/></returns>
+        public static Task<Result<Success?>> RevokeAccountCredentialsAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATIdentifier account, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = RevokeAccountCredentials.ToString();
+            var headers = new Dictionary<string, string>();
+            var inputItem = new RevokeAccountCredentialsInput();
+            inputItem.Account = account;
+            return atp.Post<RevokeAccountCredentialsInput, Success?>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempRevokeAccountCredentialsInput!, atp.Options.SourceGenerationContext.Success!, inputItem, cancellationToken, headers);
         }
 
     }

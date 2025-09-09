@@ -54,6 +54,8 @@ namespace FishyFlip.Lexicon
                     return new IncompatibleDidDocError(statusCode, detail);
                 case "AccountTakedown":
                     return new AccountTakedownError(statusCode, detail);
+                case "UnsupportedCollection":
+                    return new UnsupportedCollectionError(statusCode, detail);
                 case "AuthFactorTokenRequired":
                     return new AuthFactorTokenRequiredError(statusCode, detail);
                 case "DuplicateTemplateName":

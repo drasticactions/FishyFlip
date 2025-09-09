@@ -128,6 +128,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedAuthor>)SourceGenerationContext.Default.AppBskyFeedBlockedAuthor);
                 case "app.bsky.feed.defs#blockedPost":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.BlockedPost>)SourceGenerationContext.Default.AppBskyFeedBlockedPost);
+                case "app.bsky.bookmark.defs#bookmark":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Bookmark.Bookmark>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Bookmark.Bookmark>)SourceGenerationContext.Default.AppBskyBookmarkBookmark);
+                case "app.bsky.bookmark.defs#bookmarkView":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Bookmark.BookmarkView>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Bookmark.BookmarkView>)SourceGenerationContext.Default.AppBskyBookmarkBookmarkView);
                 case "app.bsky.actor.defs#bskyAppProgressGuide":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppProgressGuide>)SourceGenerationContext.Default.AppBskyActorBskyAppProgressGuide);
                 case "app.bsky.actor.defs#bskyAppStatePref":
@@ -164,6 +168,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAccountOutput>)SourceGenerationContext.Default.ComAtprotoServerCreateAccountOutput);
                 case "com.atproto.server.createAppPassword#CreateAppPasswordInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerCreateAppPasswordInput);
+                case "app.bsky.bookmark.createBookmark#CreateBookmarkInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Bookmark.CreateBookmarkInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Bookmark.CreateBookmarkInput>)SourceGenerationContext.Default.AppBskyBookmarkCreateBookmarkInput);
                 case "com.atproto.server.createInviteCode#CreateInviteCodeInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.CreateInviteCodeInput>)SourceGenerationContext.Default.ComAtprotoServerCreateInviteCodeInput);
                 case "com.atproto.server.createInviteCode#CreateInviteCodeOutput":
@@ -202,6 +208,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.DeleteAccountInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.DeleteAccountInput>)SourceGenerationContext.Default.ComAtprotoServerDeleteAccountInput);
                 case "chat.bsky.actor.deleteAccount#DeleteAccountOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.DeleteAccountOutput>)SourceGenerationContext.Default.ChatBskyActorDeleteAccountOutput);
+                case "app.bsky.bookmark.deleteBookmark#DeleteBookmarkInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Bookmark.DeleteBookmarkInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Bookmark.DeleteBookmarkInput>)SourceGenerationContext.Default.AppBskyBookmarkDeleteBookmarkInput);
                 case "chat.bsky.convo.defs#deletedMessageView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.DeletedMessageView>)SourceGenerationContext.Default.ChatBskyConvoDeletedMessageView);
                 case "tools.ozone.team.deleteMember#DeleteMemberInput":
@@ -304,6 +312,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.GetAuthorFeedOutput>)SourceGenerationContext.Default.AppBskyFeedGetAuthorFeedOutput);
                 case "app.bsky.graph.getBlocks#GetBlocksOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetBlocksOutput>)SourceGenerationContext.Default.AppBskyGraphGetBlocksOutput);
+                case "app.bsky.bookmark.getBookmarks#GetBookmarksOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Bookmark.GetBookmarksOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Bookmark.GetBookmarksOutput>)SourceGenerationContext.Default.AppBskyBookmarkGetBookmarksOutput);
                 case "app.bsky.unspecced.getConfig#GetConfigOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetConfigOutput);
                 case "tools.ozone.server.getConfig#GetConfigOutput":
@@ -830,6 +840,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable);
+                case "com.atproto.temp.revokeAccountCredentials#RevokeAccountCredentialsInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.RevokeAccountCredentialsInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.RevokeAccountCredentialsInput>)SourceGenerationContext.Default.ComAtprotoTempRevokeAccountCredentialsInput);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.RevokeAppPasswordInput>)SourceGenerationContext.Default.ComAtprotoServerRevokeAppPasswordInput);
                 case "tools.ozone.verification.revokeVerifications#revokeError":

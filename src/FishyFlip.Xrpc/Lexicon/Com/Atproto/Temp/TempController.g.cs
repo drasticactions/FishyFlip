@@ -53,6 +53,15 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         /// <returns>Result of <see cref="Success"/></returns>
         [HttpPost("/xrpc/com.atproto.temp.requestPhoneVerification")]
         public abstract Task<Results<Ok, ATErrorResult>> RequestPhoneVerificationAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Temp.RequestPhoneVerificationInput input, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Revoke sessions, password, and app passwords associated with account. May be resolved by a password reset.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="Success"/></returns>
+        [HttpPost("/xrpc/com.atproto.temp.revokeAccountCredentials")]
+        public abstract Task<Results<Ok, ATErrorResult>> RevokeAccountCredentialsAsync ([FromBody] FishyFlip.Lexicon.Com.Atproto.Temp.RevokeAccountCredentialsInput input, CancellationToken cancellationToken);
     }
 }
 

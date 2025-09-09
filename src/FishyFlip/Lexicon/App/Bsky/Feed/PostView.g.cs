@@ -27,6 +27,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordDef"/> (app.bsky.embed.record#view) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.ViewRecordWithMedia"/> (app.bsky.embed.recordWithMedia#view) <br/>
         /// </param>
+        /// <param name="bookmarkCount"></param>
         /// <param name="replyCount"></param>
         /// <param name="repostCount"></param>
         /// <param name="likeCount"></param>
@@ -39,13 +40,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="threadgate">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </param>
-        public PostView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic author = default, ATObject record = default, ATObject? embed = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, DateTime? indexedAt = default, FishyFlip.Lexicon.App.Bsky.Feed.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default)
+        public PostView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic author = default, ATObject record = default, ATObject? embed = default, long? bookmarkCount = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, DateTime? indexedAt = default, FishyFlip.Lexicon.App.Bsky.Feed.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default)
         {
             this.Uri = uri;
             this.Cid = cid;
             this.Author = author;
             this.Record = record;
             this.Embed = embed;
+            this.BookmarkCount = bookmarkCount;
             this.ReplyCount = replyCount;
             this.RepostCount = repostCount;
             this.LikeCount = likeCount;
@@ -77,6 +79,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["author"] is not null) this.Author = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic(obj["author"]);
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["embed"] is not null) this.Embed = obj["embed"].ToATObject();
+            if (obj["bookmarkCount"] is not null) this.BookmarkCount = obj["bookmarkCount"].AsInt64Value();
             if (obj["replyCount"] is not null) this.ReplyCount = obj["replyCount"].AsInt64Value();
             if (obj["repostCount"] is not null) this.RepostCount = obj["repostCount"].AsInt64Value();
             if (obj["likeCount"] is not null) this.LikeCount = obj["likeCount"].AsInt64Value();
@@ -130,6 +133,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("embed")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ATObject? Embed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bookmarkCount.
+        /// </summary>
+        [JsonPropertyName("bookmarkCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? BookmarkCount { get; set; }
 
         /// <summary>
         /// Gets or sets the replyCount.

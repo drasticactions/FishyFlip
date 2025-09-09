@@ -275,6 +275,12 @@ public partial class AppCommands
         sb.AppendLine();
         foreach (var knownValue in cls.Definition.KnownValues!)
         {
+            // Workaround for tools.ozone having duplicate known values inside of com.atproto.moderation.defs
+            if (knownValue.StartsWith("tools.ozone") && cls.CSharpNamespace.Contains("com.atproto", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
             sb.AppendLine($"        /// <summary>");
             sb.AppendLine($"        /// {knownValue}");
             sb.AppendLine($"        /// </summary>");
