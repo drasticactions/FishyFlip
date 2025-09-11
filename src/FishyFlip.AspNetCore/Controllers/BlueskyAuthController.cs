@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace FishyFlip.AspNetCore.Controllers;
@@ -32,11 +33,11 @@ public class BlueskyAuthController : ControllerBase
     public BlueskyAuthController(
         IUserSessionManager userSessionManager,
         IOAuthFlowManager oauthFlowManager,
-        FishyFlipOptions options)
+        IOptions<FishyFlipOptions> options)
     {
         this.userSessionManager = userSessionManager ?? throw new ArgumentNullException(nameof(userSessionManager));
         this.oauthFlowManager = oauthFlowManager ?? throw new ArgumentNullException(nameof(oauthFlowManager));
-        this.options = options ?? throw new ArgumentNullException(nameof(options));
+        this.options = options.Value;
     }
 
     /// <summary>
