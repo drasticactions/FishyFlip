@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.ComponentModel.DataAnnotations;
+
 namespace FishyFlip.AspNetCore;
 
 /// <summary>
@@ -12,6 +14,7 @@ public class FishyFlipOptions
     /// <summary>
     /// Gets or sets the default ATProtocol instance URL.
     /// </summary>
+    [Required]
     public string InstanceUrl { get; set; } = FishyFlipConfigurationDefaults.DefaultInstanceUrl;
 
     /// <summary>

@@ -114,7 +114,9 @@ public static class ServiceCollectionExtensions
         Action<FishyFlipOptions>? configureOptions = null,
         string? configurationSectionName = null)
     {
-        var optionsBuilder = services.AddOptions<FishyFlipOptions>();
+        var optionsBuilder = services.AddOptionsWithValidateOnStart<FishyFlipOptions>()
+            .ValidateDataAnnotations();
+
         if (configureOptions != null)
         {
             optionsBuilder.Configure(configureOptions);
