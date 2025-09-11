@@ -126,7 +126,5 @@ public static class ServiceCollectionExtensions
         {
             optionsBuilder.BindConfiguration(configurationSectionName);
         }
-
-        services.TryAddSingleton<FishyFlipOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptions<FishyFlipOptions>>().Value);
     }
 }
