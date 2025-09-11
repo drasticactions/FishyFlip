@@ -49,9 +49,7 @@ public static class ServiceCollectionExtensions
         where TSessionStore : class, ISessionStore
     {
         services.AddFishyFlip(configureOptions);
-        services.RemoveAll<ISessionStore>();
-        services.AddScoped<ISessionStore, TSessionStore>();
-
+        services.Replace(ServiceDescriptor.Scoped<ISessionStore, TSessionStore>());
         return services;
     }
 
