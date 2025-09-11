@@ -12,7 +12,7 @@ public class FishyFlipOptions
     /// <summary>
     /// Gets or sets the default ATProtocol instance URL.
     /// </summary>
-    public string InstanceUrl { get; set; } = "https://bsky.social";
+    public string InstanceUrl { get; set; } = FishyFlipConfigurationDefaults.DefaultInstanceUrl;
 
     /// <summary>
     /// Gets or sets the OAuth client ID for authentication flows.
@@ -27,17 +27,19 @@ public class FishyFlipOptions
     /// <summary>
     /// Gets or sets the OAuth scopes to request during authentication.
     /// </summary>
-    public IEnumerable<string> Scopes { get; set; } = new[] { "atproto", "transition:generic" };
+    public IEnumerable<string> Scopes { get; set; } = FishyFlipConfigurationDefaults.DefaultScopes;
 
     /// <summary>
     /// Gets or sets the cookie authentication scheme name.
     /// </summary>
-    public string CookieAuthenticationScheme { get; set; } = "FishyFlipCookie";
+    [Obsolete("Moved to extension method parameter, this property is ignored and will be removed in the future", error: true)]
+    public string CookieAuthenticationScheme { get; set; } = FishyFlipConfigurationDefaults.DefaultCookieAuthenticationScheme;
 
     /// <summary>
     /// Gets or sets the JWT bearer authentication scheme name.
     /// </summary>
-    public string JwtBearerAuthenticationScheme { get; set; } = "FishyFlipJwtBearer";
+    [Obsolete("Moved to extension method parameter, this property is ignored and will be removed in the future", error: true)]
+    public string JwtBearerAuthenticationScheme { get; set; } = FishyFlipConfigurationDefaults.DefaultJwtBearerAuthenticationScheme;
 
     /// <summary>
     /// Gets or sets the default session expiration time.
