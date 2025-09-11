@@ -27,14 +27,7 @@ public static class ServiceCollectionExtensions
     /// <returns>The service collection for chaining.</returns>
     public static IServiceCollection AddFishyFlip(this IServiceCollection services, Action<FishyFlipOptions>? configureOptions = null, string? configurationSection = null)
     {
-        services.ConfigureFishyFlip(configureOptions);
-        services.AddSingleton<FishyFlipOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptions<FishyFlipOptions>>().Value);
-        services.AddMemoryCache();
-        services.TryAddScoped<ISessionStore, InMemorySessionStore>();
-        services.AddScoped<IUserSessionManager, UserSessionManager>();
-        services.AddScoped<IOAuthFlowManager, OAuthFlowManager>();
-
-        return services;
+        return services.AddFishyFlip<InMemorySessionStore>(configureOptions, configurationSection);
     }
 
     /// <summary>
@@ -48,8 +41,12 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddFishyFlip<TSessionStore>(this IServiceCollection services, Action<FishyFlipOptions>? configureOptions = null, string? configurationSection = null)
         where TSessionStore : class, ISessionStore
     {
-        services.AddFishyFlip(configureOptions, configurationSection);
-        services.Replace(ServiceDescriptor.Scoped<ISessionStore, TSessionStore>());
+        services.ConfigureFishyFlip(configureOptions);
+        services.AddSingleton<FishyFlipOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptions<FishyFlipOptions>>().Value);
+        services.AddMemoryCache();
+        services.AddScoped<ISessionStore, TSessionStore>();
+        services.AddScoped<IUserSessionManager, UserSessionManager>();
+        services.AddScoped<IOAuthFlowManager, OAuthFlowManager>();
         return services;
     }
 
