@@ -43,11 +43,12 @@ public static class ServiceCollectionExtensions
     /// <typeparam name="TSessionStore">The session store implementation type.</typeparam>
     /// <param name="services">The service collection.</param>
     /// <param name="configureOptions">Action to configure FishyFlip options.</param>
+    /// <param name="configurationSection">Optional configuration section to bind options to.</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddFishyFlip<TSessionStore>(this IServiceCollection services, Action<FishyFlipOptions>? configureOptions = null)
+    public static IServiceCollection AddFishyFlip<TSessionStore>(this IServiceCollection services, Action<FishyFlipOptions>? configureOptions = null, string? configurationSection = null)
         where TSessionStore : class, ISessionStore
     {
-        services.AddFishyFlip(configureOptions);
+        services.AddFishyFlip(configureOptions, configurationSection);
         services.Replace(ServiceDescriptor.Scoped<ISessionStore, TSessionStore>());
         return services;
     }
