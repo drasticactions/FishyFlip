@@ -41,7 +41,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddFishyFlip<TSessionStore>(this IServiceCollection services, Action<FishyFlipOptions>? configureOptions = null, string? configurationSection = null)
         where TSessionStore : class, ISessionStore
     {
-        services.ConfigureFishyFlip(configureOptions);
+        services.ConfigureFishyFlip(configureOptions, configurationSection);
         services.AddSingleton<FishyFlipOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptions<FishyFlipOptions>>().Value);
         services.AddMemoryCache();
         services.AddScoped<ISessionStore, TSessionStore>();
