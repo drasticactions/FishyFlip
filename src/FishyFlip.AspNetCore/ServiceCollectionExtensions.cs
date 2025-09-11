@@ -7,9 +7,9 @@ using FishyFlip.AspNetCore.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace FishyFlip.AspNetCore;
 
@@ -23,13 +23,12 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The service collection.</param>
     /// <param name="configureOptions">Action to configure FishyFlip options.</param>
+    /// <param name="configurationSection">Optional configuration section to bind configuration to.</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddFishyFlip(this IServiceCollection services, Action<FishyFlipOptions>? configureOptions = null)
+    public static IServiceCollection AddFishyFlip(this IServiceCollection services, Action<FishyFlipOptions>? configureOptions = null, string? configurationSection = null)
     {
-        var options = new FishyFlipOptions();
-        configureOptions?.Invoke(options);
-
-        services.AddSingleton(options);
+        services.ConfigureFishyFlip(configureOptions);
+        services.AddSingleton<FishyFlipOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptions<FishyFlipOptions>>().Value);
         services.AddMemoryCache();
         services.TryAddScoped<ISessionStore, InMemorySessionStore>();
         services.AddScoped<IUserSessionManager, UserSessionManager>();
@@ -58,15 +57,14 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The service collection.</param>
     /// <param name="configureOptions">Action to configure cookie authentication options.</param>
+    /// <param name="authenticationScheme">Sets the authentication scheme to use for cookie authentication.</param>
     /// <returns>The authentication builder for further configuration.</returns>
-    public static AuthenticationBuilder AddFishyFlipCookieAuthentication(this IServiceCollection services, Action<CookieAuthenticationOptions>? configureOptions = null)
+    public static AuthenticationBuilder AddFishyFlipCookieAuthentication(this IServiceCollection services, Action<CookieAuthenticationOptions>? configureOptions = null, string authenticationScheme = FishyFlipConfigurationDefaults.DefaultCookieAuthenticationScheme)
     {
-        var fishyFlipOptions = services.BuildServiceProvider().GetService<FishyFlipOptions>() ?? new FishyFlipOptions();
-
-        return services.AddAuthentication(fishyFlipOptions.CookieAuthenticationScheme)
+        return services.AddAuthentication(authenticationScheme)
             .AddScheme<BlueskyAuthenticationSchemeOptions, BlueskyAuthenticationHandler>(
-                fishyFlipOptions.CookieAuthenticationScheme,
-                options => { })
+                authenticationScheme,
+                _ => { })
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, configureOptions!);
     }
 
@@ -75,15 +73,14 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The service collection.</param>
     /// <param name="configureOptions">Action to configure JWT bearer options.</param>
+    /// <param name="authenticationScheme">Authentication scheme to use for JWT Bearer authentication.</param>
     /// <returns>The authentication builder for further configuration.</returns>
-    public static AuthenticationBuilder AddFishyFlipJwtBearerAuthentication(this IServiceCollection services, Action<JwtBearerOptions>? configureOptions = null)
+    public static AuthenticationBuilder AddFishyFlipJwtBearerAuthentication(this IServiceCollection services, Action<JwtBearerOptions>? configureOptions = null, string authenticationScheme = FishyFlipConfigurationDefaults.DefaultJwtBearerAuthenticationScheme)
     {
-        var fishyFlipOptions = services.BuildServiceProvider().GetService<FishyFlipOptions>() ?? new FishyFlipOptions();
-
-        return services.AddAuthentication(fishyFlipOptions.JwtBearerAuthenticationScheme)
+        return services.AddAuthentication(authenticationScheme)
             .AddScheme<BlueskyJwtBearerSchemeOptions, BlueskyJwtBearerAuthenticationHandler>(
-                fishyFlipOptions.JwtBearerAuthenticationScheme,
-                options => { })
+                authenticationScheme,
+                _ => { })
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, configureOptions!);
     }
 
@@ -93,22 +90,43 @@ public static class ServiceCollectionExtensions
     /// <param name="services">The service collection.</param>
     /// <param name="configureCookieOptions">Action to configure cookie authentication options.</param>
     /// <param name="configureJwtOptions">Action to configure JWT bearer options.</param>
+    /// <param name="cookieAuthenticationScheme">Cookie authentication scheme.</param>
+    /// <param name="jwtBearerAuthenticationScheme">JWT Bearer authentication scheme.</param>
     /// <returns>The authentication builder for further configuration.</returns>
     public static AuthenticationBuilder AddFishyFlipAuthentication(
         this IServiceCollection services,
         Action<CookieAuthenticationOptions>? configureCookieOptions = null,
-        Action<JwtBearerOptions>? configureJwtOptions = null)
+        Action<JwtBearerOptions>? configureJwtOptions = null,
+        string cookieAuthenticationScheme = FishyFlipConfigurationDefaults.DefaultCookieAuthenticationScheme,
+        string jwtBearerAuthenticationScheme = FishyFlipConfigurationDefaults.DefaultJwtBearerAuthenticationScheme)
     {
-        var fishyFlipOptions = services.BuildServiceProvider().GetService<FishyFlipOptions>() ?? new FishyFlipOptions();
-
         return services.AddAuthentication()
             .AddScheme<BlueskyAuthenticationSchemeOptions, BlueskyAuthenticationHandler>(
-                fishyFlipOptions.CookieAuthenticationScheme,
+                cookieAuthenticationScheme,
                 options => { })
             .AddScheme<BlueskyJwtBearerSchemeOptions, BlueskyJwtBearerAuthenticationHandler>(
-                fishyFlipOptions.JwtBearerAuthenticationScheme,
+                jwtBearerAuthenticationScheme,
                 options => { })
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, configureCookieOptions!)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, configureJwtOptions!);
+    }
+
+    private static void ConfigureFishyFlip(
+        this IServiceCollection services,
+        Action<FishyFlipOptions>? configureOptions = null,
+        string? configurationSectionName = null)
+    {
+        var optionsBuilder = services.AddOptions<FishyFlipOptions>();
+        if (configureOptions != null)
+        {
+            optionsBuilder.Configure(configureOptions);
+        }
+
+        if (!string.IsNullOrWhiteSpace(configurationSectionName))
+        {
+            optionsBuilder.BindConfiguration(configurationSectionName);
+        }
+
+        services.TryAddSingleton<FishyFlipOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptions<FishyFlipOptions>>().Value);
     }
 }
