@@ -28,7 +28,7 @@
     <PackageVersion Include="MSTest" Version="3.10.4" />
     <PackageVersion Include="GitVersion.MSBuild" Version="6.4.0" />
     <PackageVersion Include="Duende.IdentityModel" Version="7.1.0" />
-    <PackageVersion Include="DnsClient" Version="1.8.0" />
+    <PackageVersion Include="DnsClient" Version="1.4.0" />
     <PackageVersion Include="Microsoft.Bcl.Memory" Version="9.0.8" />
     <PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
     <PackageVersion Include="System.Buffers" Version="4.6.1" />
