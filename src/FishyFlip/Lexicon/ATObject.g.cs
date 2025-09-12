@@ -230,6 +230,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput);
                 case "tools.ozone.set.deleteValues#DeleteValuesInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetDeleteValuesInput);
+                case "com.atproto.temp.dereferenceScope#DereferenceScopeOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput>)SourceGenerationContext.Default.ComAtprotoTempDereferenceScopeOutput);
                 case "app.bsky.feed.describeFeedGenerator#DescribeFeedGeneratorOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput);
                 case "com.atproto.repo.describeRepo#DescribeRepoOutput":
@@ -840,6 +842,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable);
+                case "tools.ozone.moderation.defs#revokeAccountCredentialsEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent>)SourceGenerationContext.Default.ToolsOzoneModerationRevokeAccountCredentialsEvent);
                 case "com.atproto.temp.revokeAccountCredentials#RevokeAccountCredentialsInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.RevokeAccountCredentialsInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.RevokeAccountCredentialsInput>)SourceGenerationContext.Default.ComAtprotoTempRevokeAccountCredentialsInput);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":

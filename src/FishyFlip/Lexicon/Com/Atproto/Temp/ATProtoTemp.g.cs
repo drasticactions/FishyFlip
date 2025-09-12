@@ -68,6 +68,19 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
 
         /// <summary>
+        /// Allows finding the oauth permission scope from a reference
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidScopeReferenceError"/> An invalid scope reference was provided. <br/>
+        /// </summary>
+        /// <param name="scope">The scope reference (starts with 'ref:')</param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput?>> DereferenceScopeAsync (string scope, CancellationToken cancellationToken = default)
+        {
+            return atp.DereferenceScopeAsync(scope, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Request a verification code to be sent to the supplied phone number
         /// </summary>
         /// <param name="phoneNumber"></param>

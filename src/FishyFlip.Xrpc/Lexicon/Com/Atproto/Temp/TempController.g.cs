@@ -46,6 +46,17 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Temp
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>, ATErrorResult>> CheckSignupQueueAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Allows finding the oauth permission scope from a reference
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidScopeReferenceError"/> An invalid scope reference was provided. <br/>
+        /// </summary>
+        /// <param name="scope">The scope reference (starts with 'ref:')</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput"/></returns>
+        [HttpGet("/xrpc/com.atproto.temp.dereferenceScope")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput>, ATErrorResult>> DereferenceScopeAsync ([FromQuery] string scope, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Request a verification code to be sent to the supplied phone number
         /// </summary>
         /// <param name="phoneNumber"></param>

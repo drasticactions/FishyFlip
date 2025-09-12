@@ -194,6 +194,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Communication.DeleteTemplateInput(obj);
                 case "tools.ozone.set.deleteValues#DeleteValuesInput":
                     return new Tools.Ozone.Set.DeleteValuesInput(obj);
+                case "com.atproto.temp.dereferenceScope#DereferenceScopeOutput":
+                    return new Com.Atproto.Temp.DereferenceScopeOutput(obj);
                 case "app.bsky.feed.describeFeedGenerator#DescribeFeedGeneratorOutput":
                     return new App.Bsky.Feed.DescribeFeedGeneratorOutput(obj);
                 case "com.atproto.repo.describeRepo#DescribeRepoOutput":
@@ -804,6 +806,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.ResultAvailable(obj);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
                     return new Com.Atproto.Temp.ResultUnavailable(obj);
+                case "tools.ozone.moderation.defs#revokeAccountCredentialsEvent":
+                    return new Tools.Ozone.Moderation.RevokeAccountCredentialsEvent(obj);
                 case "com.atproto.temp.revokeAccountCredentials#RevokeAccountCredentialsInput":
                     return new Com.Atproto.Temp.RevokeAccountCredentialsInput(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
