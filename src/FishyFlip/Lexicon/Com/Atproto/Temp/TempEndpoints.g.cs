@@ -22,6 +22,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
 
        public const string CheckSignupQueue = "/xrpc/com.atproto.temp.checkSignupQueue";
 
+       public const string DereferenceScope = "/xrpc/com.atproto.temp.dereferenceScope";
+
        public const string RequestPhoneVerification = "/xrpc/com.atproto.temp.requestPhoneVerification";
 
        public const string RevokeAccountCredentials = "/xrpc/com.atproto.temp.revokeAccountCredentials";
@@ -99,6 +101,33 @@ namespace FishyFlip.Lexicon.Com.Atproto.Temp
             }
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.CheckSignupQueueOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempCheckSignupQueueOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Allows finding the oauth permission scope from a reference
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidScopeReferenceError"/> An invalid scope reference was provided. <br/>
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="scope">The scope reference (starts with 'ref:')</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput?>> DereferenceScopeAsync (this FishyFlip.ATProtocol atp, string scope, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = DereferenceScope.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            queryStrings.Add("scope=" + scope);
+
+            var headers = new Dictionary<string, string>();
+            if (atp.TryFetchProxy(GroupNamespace, out var proxyUrl))
+            {
+                headers.Add(Constants.AtProtoProxy, proxyUrl);
+            }
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput>(endpointUrl, atp.Options.SourceGenerationContext.ComAtprotoTempDereferenceScopeOutput!, cancellationToken, headers);
         }
 
 
