@@ -334,6 +334,10 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.GetMessagesOutput(obj);
                 case "app.bsky.graph.getMutes#GetMutesOutput":
                     return new App.Bsky.Graph.GetMutesOutput(obj);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacks#GetOnboardingSuggestedStarterPacksOutput":
+                    return new App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput(obj);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton#GetOnboardingSuggestedStarterPacksSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput(obj);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":

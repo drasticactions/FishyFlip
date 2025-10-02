@@ -17,6 +17,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="handle"></param>
         /// <param name="displayName"></param>
         /// <param name="description"></param>
+        /// <param name="pronouns"></param>
+        /// <param name="website"></param>
         /// <param name="avatar"></param>
         /// <param name="banner"></param>
         /// <param name="followersCount"></param>
@@ -43,12 +45,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="status">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.StatusView"/> (app.bsky.actor.defs#statusView)
         /// </param>
-        public ProfileViewDetailed(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? description = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default, FishyFlip.Lexicon.App.Bsky.Actor.StatusView? status = default)
+        public ProfileViewDetailed(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? description = default, string? pronouns = default, string? website = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default, FishyFlip.Lexicon.App.Bsky.Actor.StatusView? status = default)
         {
             this.Did = did;
             this.Handle = handle;
             this.DisplayName = displayName;
             this.Description = description;
+            this.Pronouns = pronouns;
+            this.Website = website;
             this.Avatar = avatar;
             this.Banner = banner;
             this.FollowersCount = followersCount;
@@ -85,6 +89,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
+            if (obj["pronouns"] is not null) this.Pronouns = obj["pronouns"].AsString();
+            if (obj["website"] is not null) this.Website = obj["website"].AsString();
             if (obj["avatar"] is not null) this.Avatar = obj["avatar"].AsString();
             if (obj["banner"] is not null) this.Banner = obj["banner"].AsString();
             if (obj["followersCount"] is not null) this.FollowersCount = obj["followersCount"].AsInt64Value();
@@ -131,6 +137,20 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pronouns.
+        /// </summary>
+        [JsonPropertyName("pronouns")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Pronouns { get; set; }
+
+        /// <summary>
+        /// Gets or sets the website.
+        /// </summary>
+        [JsonPropertyName("website")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Website { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.

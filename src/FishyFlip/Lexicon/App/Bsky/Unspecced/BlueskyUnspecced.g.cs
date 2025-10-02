@@ -52,6 +52,29 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// Get a list of suggested starterpacks for onboarding
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput?>> GetOnboardingSuggestedStarterPacksAsync (int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetOnboardingSuggestedStarterPacksAsync(limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested starterpacks for onboarding. Intended to be called and hydrated by app.bsky.unspecced.getOnboardingSuggestedStarterPacks
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput?>> GetOnboardingSuggestedStarterPacksSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            return atp.GetOnboardingSuggestedStarterPacksSkeletonAsync(viewer, limit, cancellationToken);
+        }
+
+
+        /// <summary>
         /// An unspecced view of globally popular feed generators.
         /// </summary>
         /// <param name="limit"></param>

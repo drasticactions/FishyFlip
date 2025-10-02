@@ -370,6 +370,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>)SourceGenerationContext.Default.ChatBskyConvoGetMessagesOutput);
                 case "app.bsky.graph.getMutes#GetMutesOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetMutesOutput);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacks#GetOnboardingSuggestedStarterPacksOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksOutput);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton#GetOnboardingSuggestedStarterPacksSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksSkeletonOutput);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput);
                 case "app.bsky.feed.getPosts#GetPostsOutput":

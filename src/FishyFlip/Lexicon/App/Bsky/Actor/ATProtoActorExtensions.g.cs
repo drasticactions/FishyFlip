@@ -40,11 +40,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.ATProtocol atp, string? displayName = default, string? description = default, Blob? avatar = default, Blob? banner = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.ATProtocol atp, string? displayName = default, string? description = default, string? pronouns = default, string? website = default, Blob? avatar = default, Blob? banner = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Actor.Profile();
             record.DisplayName = displayName;
             record.Description = description;
+            record.Pronouns = pronouns;
+            record.Website = website;
             record.Avatar = avatar;
             record.Banner = banner;
             record.Labels = labels;
