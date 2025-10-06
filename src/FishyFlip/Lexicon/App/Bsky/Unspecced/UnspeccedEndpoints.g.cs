@@ -20,6 +20,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
        public const string GetConfig = "/xrpc/app.bsky.unspecced.getConfig";
 
+       public const string GetOnboardingSuggestedStarterPacks = "/xrpc/app.bsky.unspecced.getOnboardingSuggestedStarterPacks";
+
+       public const string GetOnboardingSuggestedStarterPacksSkeleton = "/xrpc/app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton";
+
        public const string GetPopularFeedGenerators = "/xrpc/app.bsky.unspecced.getPopularFeedGenerators";
 
        public const string GetPostThreadOtherV2 = "/xrpc/app.bsky.unspecced.getPostThreadOtherV2";
@@ -84,6 +88,60 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetConfigOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested starterpacks for onboarding
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput?>> GetOnboardingSuggestedStarterPacksAsync (this FishyFlip.ATProtocol atp, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetOnboardingSuggestedStarterPacks.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested starterpacks for onboarding. Intended to be called and hydrated by app.bsky.unspecced.getOnboardingSuggestedStarterPacks
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput?>> GetOnboardingSuggestedStarterPacksSkeletonAsync (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? viewer = default, int? limit = 10, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = GetOnboardingSuggestedStarterPacksSkeleton.ToString();
+            endpointUrl += "?";
+            List<string> queryStrings = new();
+            if (viewer != null)
+            {
+                queryStrings.Add("viewer=" + viewer);
+            }
+
+            if (limit != null)
+            {
+                queryStrings.Add("limit=" + limit);
+            }
+
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
+            endpointUrl += string.Join("&", queryStrings);
+            return atp.Get<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksSkeletonOutput!, cancellationToken, headers);
         }
 
 

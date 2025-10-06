@@ -36,6 +36,8 @@ namespace FishyFlip.Lexicon
         /// <param name="atp"></param>
         /// <param name="displayName"></param>
         /// <param name="description">Free-form profile description text.</param>
+        /// <param name="pronouns">Free-form pronouns text.</param>
+        /// <param name="website"></param>
         /// <param name="avatar">Small image to be displayed next to posts from account. AKA, 'profile picture'</param>
         /// <param name="banner">Larger horizontal image to display behind profile view.</param>
         /// <param name="labels">Self-label values, specific to the Bluesky application, on the overall account.
@@ -53,11 +55,13 @@ namespace FishyFlip.Lexicon
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.Lexicon.App.Bsky.Actor.BlueskyActor atp, string? displayName = default, string? description = default, Blob? avatar = default, Blob? banner = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateProfileAsync(this FishyFlip.Lexicon.App.Bsky.Actor.BlueskyActor atp, string? displayName = default, string? description = default, string? pronouns = default, string? website = default, Blob? avatar = default, Blob? banner = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Actor.Profile();
             record.DisplayName = displayName;
             record.Description = description;
+            record.Pronouns = pronouns;
+            record.Website = website;
             record.Avatar = avatar;
             record.Banner = banner;
             record.Labels = labels;
