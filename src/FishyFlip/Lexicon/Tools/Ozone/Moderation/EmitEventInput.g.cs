@@ -37,6 +37,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent"/> (tools.ozone.moderation.defs#revokeAccountCredentialsEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleTakedownEvent"/> (tools.ozone.moderation.defs#scheduleTakedownEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledTakedownEvent"/> (tools.ozone.moderation.defs#cancelScheduledTakedownEvent) <br/>
         /// </param>
         /// <param name="subject">
         /// <br/> Union Types: <br/>
@@ -109,6 +111,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent"/> (tools.ozone.moderation.defs#revokeAccountCredentialsEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleTakedownEvent"/> (tools.ozone.moderation.defs#scheduleTakedownEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledTakedownEvent"/> (tools.ozone.moderation.defs#cancelScheduledTakedownEvent) <br/>
         /// </summary>
         [JsonPropertyName("event")]
         [JsonRequired]

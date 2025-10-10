@@ -20,9 +20,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Report
         public const string ReasonAppeal = "tools.ozone.report.defs#reasonAppeal";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonViolenceAnimalWelfare
+        /// tools.ozone.report.defs#reasonOther
         /// </summary>
-        public const string ReasonViolenceAnimalWelfare = "tools.ozone.report.defs#reasonViolenceAnimalWelfare";
+        public const string ReasonOther = "tools.ozone.report.defs#reasonOther";
+
+        /// <summary>
+        /// tools.ozone.report.defs#reasonViolenceAnimal
+        /// </summary>
+        public const string ReasonViolenceAnimal = "tools.ozone.report.defs#reasonViolenceAnimal";
 
         /// <summary>
         /// tools.ozone.report.defs#reasonViolenceThreats
@@ -33,11 +38,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Report
         /// tools.ozone.report.defs#reasonViolenceGraphicContent
         /// </summary>
         public const string ReasonViolenceGraphicContent = "tools.ozone.report.defs#reasonViolenceGraphicContent";
-
-        /// <summary>
-        /// tools.ozone.report.defs#reasonViolenceSelfHarm
-        /// </summary>
-        public const string ReasonViolenceSelfHarm = "tools.ozone.report.defs#reasonViolenceSelfHarm";
 
         /// <summary>
         /// tools.ozone.report.defs#reasonViolenceGlorification
@@ -70,11 +70,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Report
         public const string ReasonSexualNcii = "tools.ozone.report.defs#reasonSexualNCII";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonSexualSextortion
-        /// </summary>
-        public const string ReasonSexualSextortion = "tools.ozone.report.defs#reasonSexualSextortion";
-
-        /// <summary>
         /// tools.ozone.report.defs#reasonSexualDeepfake
         /// </summary>
         public const string ReasonSexualDeepfake = "tools.ozone.report.defs#reasonSexualDeepfake";
@@ -105,24 +100,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Report
         public const string ReasonChildSafetyGroom = "tools.ozone.report.defs#reasonChildSafetyGroom";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonChildSafetyMinorPrivacy
+        /// tools.ozone.report.defs#reasonChildSafetyPrivacy
         /// </summary>
-        public const string ReasonChildSafetyMinorPrivacy = "tools.ozone.report.defs#reasonChildSafetyMinorPrivacy";
-
-        /// <summary>
-        /// tools.ozone.report.defs#reasonChildSafetyEndangerment
-        /// </summary>
-        public const string ReasonChildSafetyEndangerment = "tools.ozone.report.defs#reasonChildSafetyEndangerment";
+        public const string ReasonChildSafetyPrivacy = "tools.ozone.report.defs#reasonChildSafetyPrivacy";
 
         /// <summary>
         /// tools.ozone.report.defs#reasonChildSafetyHarassment
         /// </summary>
         public const string ReasonChildSafetyHarassment = "tools.ozone.report.defs#reasonChildSafetyHarassment";
-
-        /// <summary>
-        /// tools.ozone.report.defs#reasonChildSafetyPromotion
-        /// </summary>
-        public const string ReasonChildSafetyPromotion = "tools.ozone.report.defs#reasonChildSafetyPromotion";
 
         /// <summary>
         /// tools.ozone.report.defs#reasonChildSafetyOther
@@ -175,14 +160,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Report
         public const string ReasonMisleadingScam = "tools.ozone.report.defs#reasonMisleadingScam";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonMisleadingSyntheticContent
+        /// tools.ozone.report.defs#reasonMisleadingElections
         /// </summary>
-        public const string ReasonMisleadingSyntheticContent = "tools.ozone.report.defs#reasonMisleadingSyntheticContent";
-
-        /// <summary>
-        /// tools.ozone.report.defs#reasonMisleadingMisinformation
-        /// </summary>
-        public const string ReasonMisleadingMisinformation = "tools.ozone.report.defs#reasonMisleadingMisinformation";
+        public const string ReasonMisleadingElections = "tools.ozone.report.defs#reasonMisleadingElections";
 
         /// <summary>
         /// tools.ozone.report.defs#reasonMisleadingOther
@@ -193,11 +173,6 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Report
         /// tools.ozone.report.defs#reasonRuleSiteSecurity
         /// </summary>
         public const string ReasonRuleSiteSecurity = "tools.ozone.report.defs#reasonRuleSiteSecurity";
-
-        /// <summary>
-        /// tools.ozone.report.defs#reasonRuleStolenContent
-        /// </summary>
-        public const string ReasonRuleStolenContent = "tools.ozone.report.defs#reasonRuleStolenContent";
 
         /// <summary>
         /// tools.ozone.report.defs#reasonRuleProhibitedSales
@@ -215,29 +190,29 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Report
         public const string ReasonRuleOther = "tools.ozone.report.defs#reasonRuleOther";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonCivicElectoralProcess
+        /// tools.ozone.report.defs#reasonSelfHarmContent
         /// </summary>
-        public const string ReasonCivicElectoralProcess = "tools.ozone.report.defs#reasonCivicElectoralProcess";
+        public const string ReasonSelfHarmContent = "tools.ozone.report.defs#reasonSelfHarmContent";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonCivicDisclosure
+        /// tools.ozone.report.defs#reasonSelfHarmED
         /// </summary>
-        public const string ReasonCivicDisclosure = "tools.ozone.report.defs#reasonCivicDisclosure";
+        public const string ReasonSelfHarmEd = "tools.ozone.report.defs#reasonSelfHarmED";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonCivicInterference
+        /// tools.ozone.report.defs#reasonSelfHarmStunts
         /// </summary>
-        public const string ReasonCivicInterference = "tools.ozone.report.defs#reasonCivicInterference";
+        public const string ReasonSelfHarmStunts = "tools.ozone.report.defs#reasonSelfHarmStunts";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonCivicMisinformation
+        /// tools.ozone.report.defs#reasonSelfHarmSubstances
         /// </summary>
-        public const string ReasonCivicMisinformation = "tools.ozone.report.defs#reasonCivicMisinformation";
+        public const string ReasonSelfHarmSubstances = "tools.ozone.report.defs#reasonSelfHarmSubstances";
 
         /// <summary>
-        /// tools.ozone.report.defs#reasonCivicImpersonation
+        /// tools.ozone.report.defs#reasonSelfHarmOther
         /// </summary>
-        public const string ReasonCivicImpersonation = "tools.ozone.report.defs#reasonCivicImpersonation";
+        public const string ReasonSelfHarmOther = "tools.ozone.report.defs#reasonSelfHarmOther";
 
     }
 }

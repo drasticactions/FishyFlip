@@ -50,6 +50,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// emailConfirmed -  <br/>
         /// passwordUpdated -  <br/>
         /// handleUpdated -  <br/>
+        /// scheduleTakedownEvent - Logs a scheduled takedown action for an account. <br/>
+        /// cancelScheduledTakedownEvent - Logs cancellation of a scheduled takedown action for an account. <br/>
         /// </param>
         /// <param name="count"></param>
         public TimelineItemSummary(string eventSubjectType = default, string eventType = default, long count = default)
@@ -124,6 +126,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// emailConfirmed -  <br/>
         /// passwordUpdated -  <br/>
         /// handleUpdated -  <br/>
+        /// scheduleTakedownEvent - Logs a scheduled takedown action for an account. <br/>
+        /// cancelScheduledTakedownEvent - Logs cancellation of a scheduled takedown action for an account. <br/>
         /// </summary>
         [JsonPropertyName("eventType")]
         [JsonRequired]
