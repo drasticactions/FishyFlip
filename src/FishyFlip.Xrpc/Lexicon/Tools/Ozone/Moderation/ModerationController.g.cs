@@ -16,6 +16,16 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
     {
 
         /// <summary>
+        /// Cancel all pending scheduled moderation actions for specified subjects
+        /// </summary>
+        /// <param name="subjects">Array of DID subjects to cancel scheduled actions for</param>
+        /// <param name="comment">Optional comment describing the reason for cancellation</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.CancellationResults"/></returns>
+        [HttpPost("/xrpc/tools.ozone.moderation.cancelScheduledActions")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancellationResults>, ATErrorResult>> CancelScheduledActionsAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledActionsInput input, CancellationToken cancellationToken);
+
+        /// <summary>
         /// Take a moderation action on an actor.
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.SubjectHasActionError"/>  <br/>
@@ -45,6 +55,8 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent"/> (tools.ozone.moderation.defs#revokeAccountCredentialsEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleTakedownEvent"/> (tools.ozone.moderation.defs#scheduleTakedownEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledTakedownEvent"/> (tools.ozone.moderation.defs#cancelScheduledTakedownEvent) <br/>
         /// </param>
         /// <param name="subject">
         /// <br/> Union Types: <br/>
@@ -140,6 +152,20 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>, ATErrorResult>> GetSubjectsAsync ([FromQuery] List<string> subjects, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// List scheduled moderation actions with optional filtering
+        /// </summary>
+        /// <param name="statuses">Filter actions by status</param>
+        /// <param name="startsAfter">Filter actions scheduled to execute after this time</param>
+        /// <param name="endsBefore">Filter actions scheduled to execute before this time</param>
+        /// <param name="subjects">Filter actions for specific DID subjects</param>
+        /// <param name="limit">Maximum number of results to return</param>
+        /// <param name="cursor">Cursor for pagination</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsOutput"/></returns>
+        [HttpPost("/xrpc/tools.ozone.moderation.listScheduledActions")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsOutput>, ATErrorResult>> ListScheduledActionsAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsInput input, CancellationToken cancellationToken);
+
+        /// <summary>
         /// List moderation events related to a subject.
         /// </summary>
         /// <param name="types">The types of events (fully qualified string in the format of tools.ozone.moderation.defs#modEvent<name>) to filter by. If not specified, all events are returned.</param>
@@ -211,6 +237,22 @@ namespace FishyFlip.Xrpc.Lexicon.Tools.Ozone.Moderation
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput"/></returns>
         [HttpGet("/xrpc/tools.ozone.moderation.queryStatuses")]
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>, ATErrorResult>> QueryStatusesAsync ([FromQuery] int? queueCount = 0, [FromQuery] int? queueIndex = 0, [FromQuery] string? queueSeed = default, [FromQuery] bool? includeAllUserRecords = default, [FromQuery] string? subject = default, [FromQuery] string? comment = default, [FromQuery] DateTime? reportedAfter = default, [FromQuery] DateTime? reportedBefore = default, [FromQuery] DateTime? reviewedAfter = default, [FromQuery] DateTime? hostingDeletedAfter = default, [FromQuery] DateTime? hostingDeletedBefore = default, [FromQuery] DateTime? hostingUpdatedAfter = default, [FromQuery] DateTime? hostingUpdatedBefore = default, [FromQuery] List<string>? hostingStatuses = default, [FromQuery] DateTime? reviewedBefore = default, [FromQuery] bool? includeMuted = default, [FromQuery] bool? onlyMuted = default, [FromQuery] string? reviewState = default, [FromQuery] List<string>? ignoreSubjects = default, [FromQuery] FishyFlip.Models.ATDid? lastReviewedBy = default, [FromQuery] string? sortField = default, [FromQuery] string? sortDirection = default, [FromQuery] bool? takendown = default, [FromQuery] bool? appealed = default, [FromQuery] int? limit = 50, [FromQuery] List<string>? tags = default, [FromQuery] List<string>? excludeTags = default, [FromQuery] string? cursor = default, [FromQuery] List<string>? collections = default, [FromQuery] string? subjectType = default, [FromQuery] int? minAccountSuspendCount = 0, [FromQuery] int? minReportedRecordsCount = 0, [FromQuery] int? minTakendownRecordsCount = 0, [FromQuery] int? minPriorityScore = 0, [FromQuery] string? ageAssuranceState = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Schedule a moderation action to be executed at a future time
+        /// </summary>
+        /// <param name="action">
+        /// <br/> Union Types: <br/>
+        /// #takedown <br/>
+        /// </param>
+        /// <param name="subjects">Array of DID subjects to schedule the action for</param>
+        /// <param name="createdBy"></param>
+        /// <param name="scheduling"></param>
+        /// <param name="modTool">Moderation tool information for tracing the source of the action</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionResults"/></returns>
+        [HttpPost("/xrpc/tools.ozone.moderation.scheduleAction")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionResults>, ATErrorResult>> ScheduleActionAsync ([FromBody] FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleActionInput input, CancellationToken cancellationToken);
 
         /// <summary>
         /// Find repositories based on a search term.
