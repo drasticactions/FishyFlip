@@ -32,6 +32,25 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetConfigOutput>, ATErrorResult>> GetConfigAsync (CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Get a list of suggested starterpacks for onboarding
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getOnboardingSuggestedStarterPacks")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>, ATErrorResult>> GetOnboardingSuggestedStarterPacksAsync ([FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a skeleton of suggested starterpacks for onboarding. Intended to be called and hydrated by app.bsky.unspecced.getOnboardingSuggestedStarterPacks
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>, ATErrorResult>> GetOnboardingSuggestedStarterPacksSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// An unspecced view of globally popular feed generators.
         /// </summary>
         /// <param name="limit"></param>

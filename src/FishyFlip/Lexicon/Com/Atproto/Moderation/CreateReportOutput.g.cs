@@ -21,30 +21,27 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content. Prefer new lexicon definition `tools.ozone.report.defs#reasonMisleadingOther`. <br/>
         /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content. Prefer new lexicon definition `tools.ozone.report.defs#reasonSexualUnlabeled`. <br/>
         /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior. Prefer new lexicon definition `tools.ozone.report.defs#reasonHarassmentOther`. <br/>
-        /// com.atproto.moderation.defs#reasonOther - Reports not falling under another report category. Prefer new lexicon definition `tools.ozone.report.defs#reasonRuleOther`. <br/>
+        /// com.atproto.moderation.defs#reasonOther - Reports not falling under another report category. Prefer new lexicon definition `tools.ozone.report.defs#reasonOther`. <br/>
         /// com.atproto.moderation.defs#reasonAppeal - Appeal a previously taken moderation action <br/>
         /// tools.ozone.report.defs#reasonAppeal - Appeal a previously taken moderation action <br/>
-        /// tools.ozone.report.defs#reasonViolenceAnimalWelfare - Animal welfare violations <br/>
+        /// tools.ozone.report.defs#reasonOther - An issue not included in these options <br/>
+        /// tools.ozone.report.defs#reasonViolenceAnimal - Animal welfare violations <br/>
         /// tools.ozone.report.defs#reasonViolenceThreats - Threats or incitement <br/>
         /// tools.ozone.report.defs#reasonViolenceGraphicContent - Graphic violent content <br/>
-        /// tools.ozone.report.defs#reasonViolenceSelfHarm - Self harm <br/>
         /// tools.ozone.report.defs#reasonViolenceGlorification - Glorification of violence <br/>
         /// tools.ozone.report.defs#reasonViolenceExtremistContent - Extremist content. These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonViolenceTrafficking - Human trafficking <br/>
         /// tools.ozone.report.defs#reasonViolenceOther - Other violent content <br/>
         /// tools.ozone.report.defs#reasonSexualAbuseContent - Adult sexual abuse content <br/>
         /// tools.ozone.report.defs#reasonSexualNCII - Non-consensual intimate imagery <br/>
-        /// tools.ozone.report.defs#reasonSexualSextortion - Sextortion <br/>
         /// tools.ozone.report.defs#reasonSexualDeepfake - Deepfake adult content <br/>
         /// tools.ozone.report.defs#reasonSexualAnimal - Animal sexual abuse <br/>
         /// tools.ozone.report.defs#reasonSexualUnlabeled - Unlabelled adult content <br/>
         /// tools.ozone.report.defs#reasonSexualOther - Other sexual violence content <br/>
         /// tools.ozone.report.defs#reasonChildSafetyCSAM - Child sexual abuse material (CSAM). These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonChildSafetyGroom - Grooming or predatory behavior. These reports will be sent only be sent to the application's Moderation Authority. <br/>
-        /// tools.ozone.report.defs#reasonChildSafetyMinorPrivacy - Privacy violation involving a minor <br/>
-        /// tools.ozone.report.defs#reasonChildSafetyEndangerment - Child endangerment. These reports will be sent only be sent to the application's Moderation Authority. <br/>
+        /// tools.ozone.report.defs#reasonChildSafetyPrivacy - Privacy violation involving a minor <br/>
         /// tools.ozone.report.defs#reasonChildSafetyHarassment - Harassment or bullying of minors <br/>
-        /// tools.ozone.report.defs#reasonChildSafetyPromotion - Promotion of child exploitation. These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonChildSafetyOther - Other child safety. These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonHarassmentTroll - Trolling <br/>
         /// tools.ozone.report.defs#reasonHarassmentTargeted - Targeted harassment <br/>
@@ -55,19 +52,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// tools.ozone.report.defs#reasonMisleadingImpersonation - Impersonation <br/>
         /// tools.ozone.report.defs#reasonMisleadingSpam - Spam <br/>
         /// tools.ozone.report.defs#reasonMisleadingScam - Scam <br/>
-        /// tools.ozone.report.defs#reasonMisleadingSyntheticContent - Unlabelled gen-AI or synthetic content <br/>
-        /// tools.ozone.report.defs#reasonMisleadingMisinformation - Harmful false claims <br/>
+        /// tools.ozone.report.defs#reasonMisleadingElections - False information about elections <br/>
         /// tools.ozone.report.defs#reasonMisleadingOther - Other misleading content <br/>
         /// tools.ozone.report.defs#reasonRuleSiteSecurity - Hacking or system attacks <br/>
-        /// tools.ozone.report.defs#reasonRuleStolenContent - Stolen content <br/>
         /// tools.ozone.report.defs#reasonRuleProhibitedSales - Promoting or selling prohibited items or services <br/>
         /// tools.ozone.report.defs#reasonRuleBanEvasion - Banned user returning <br/>
         /// tools.ozone.report.defs#reasonRuleOther - Other <br/>
-        /// tools.ozone.report.defs#reasonCivicElectoralProcess - Electoral process violations <br/>
-        /// tools.ozone.report.defs#reasonCivicDisclosure - Disclosure & transparency violations <br/>
-        /// tools.ozone.report.defs#reasonCivicInterference - Voter intimidation or interference <br/>
-        /// tools.ozone.report.defs#reasonCivicMisinformation - Election misinformation <br/>
-        /// tools.ozone.report.defs#reasonCivicImpersonation - Impersonation of electoral officials/entities <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmContent - Content promoting or depicting self-harm <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmED - Eating disorders <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmStunts - Dangerous challenges or activities <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmSubstances - Dangerous substances or drug abuse <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmOther - Other dangerous content <br/>
         /// </param>
         /// <param name="reason"></param>
         /// <param name="subject">
@@ -127,30 +122,27 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// com.atproto.moderation.defs#reasonMisleading - Misleading identity, affiliation, or content. Prefer new lexicon definition `tools.ozone.report.defs#reasonMisleadingOther`. <br/>
         /// com.atproto.moderation.defs#reasonSexual - Unwanted or mislabeled sexual content. Prefer new lexicon definition `tools.ozone.report.defs#reasonSexualUnlabeled`. <br/>
         /// com.atproto.moderation.defs#reasonRude - Rude, harassing, explicit, or otherwise unwelcoming behavior. Prefer new lexicon definition `tools.ozone.report.defs#reasonHarassmentOther`. <br/>
-        /// com.atproto.moderation.defs#reasonOther - Reports not falling under another report category. Prefer new lexicon definition `tools.ozone.report.defs#reasonRuleOther`. <br/>
+        /// com.atproto.moderation.defs#reasonOther - Reports not falling under another report category. Prefer new lexicon definition `tools.ozone.report.defs#reasonOther`. <br/>
         /// com.atproto.moderation.defs#reasonAppeal - Appeal a previously taken moderation action <br/>
         /// tools.ozone.report.defs#reasonAppeal - Appeal a previously taken moderation action <br/>
-        /// tools.ozone.report.defs#reasonViolenceAnimalWelfare - Animal welfare violations <br/>
+        /// tools.ozone.report.defs#reasonOther - An issue not included in these options <br/>
+        /// tools.ozone.report.defs#reasonViolenceAnimal - Animal welfare violations <br/>
         /// tools.ozone.report.defs#reasonViolenceThreats - Threats or incitement <br/>
         /// tools.ozone.report.defs#reasonViolenceGraphicContent - Graphic violent content <br/>
-        /// tools.ozone.report.defs#reasonViolenceSelfHarm - Self harm <br/>
         /// tools.ozone.report.defs#reasonViolenceGlorification - Glorification of violence <br/>
         /// tools.ozone.report.defs#reasonViolenceExtremistContent - Extremist content. These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonViolenceTrafficking - Human trafficking <br/>
         /// tools.ozone.report.defs#reasonViolenceOther - Other violent content <br/>
         /// tools.ozone.report.defs#reasonSexualAbuseContent - Adult sexual abuse content <br/>
         /// tools.ozone.report.defs#reasonSexualNCII - Non-consensual intimate imagery <br/>
-        /// tools.ozone.report.defs#reasonSexualSextortion - Sextortion <br/>
         /// tools.ozone.report.defs#reasonSexualDeepfake - Deepfake adult content <br/>
         /// tools.ozone.report.defs#reasonSexualAnimal - Animal sexual abuse <br/>
         /// tools.ozone.report.defs#reasonSexualUnlabeled - Unlabelled adult content <br/>
         /// tools.ozone.report.defs#reasonSexualOther - Other sexual violence content <br/>
         /// tools.ozone.report.defs#reasonChildSafetyCSAM - Child sexual abuse material (CSAM). These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonChildSafetyGroom - Grooming or predatory behavior. These reports will be sent only be sent to the application's Moderation Authority. <br/>
-        /// tools.ozone.report.defs#reasonChildSafetyMinorPrivacy - Privacy violation involving a minor <br/>
-        /// tools.ozone.report.defs#reasonChildSafetyEndangerment - Child endangerment. These reports will be sent only be sent to the application's Moderation Authority. <br/>
+        /// tools.ozone.report.defs#reasonChildSafetyPrivacy - Privacy violation involving a minor <br/>
         /// tools.ozone.report.defs#reasonChildSafetyHarassment - Harassment or bullying of minors <br/>
-        /// tools.ozone.report.defs#reasonChildSafetyPromotion - Promotion of child exploitation. These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonChildSafetyOther - Other child safety. These reports will be sent only be sent to the application's Moderation Authority. <br/>
         /// tools.ozone.report.defs#reasonHarassmentTroll - Trolling <br/>
         /// tools.ozone.report.defs#reasonHarassmentTargeted - Targeted harassment <br/>
@@ -161,19 +153,17 @@ namespace FishyFlip.Lexicon.Com.Atproto.Moderation
         /// tools.ozone.report.defs#reasonMisleadingImpersonation - Impersonation <br/>
         /// tools.ozone.report.defs#reasonMisleadingSpam - Spam <br/>
         /// tools.ozone.report.defs#reasonMisleadingScam - Scam <br/>
-        /// tools.ozone.report.defs#reasonMisleadingSyntheticContent - Unlabelled gen-AI or synthetic content <br/>
-        /// tools.ozone.report.defs#reasonMisleadingMisinformation - Harmful false claims <br/>
+        /// tools.ozone.report.defs#reasonMisleadingElections - False information about elections <br/>
         /// tools.ozone.report.defs#reasonMisleadingOther - Other misleading content <br/>
         /// tools.ozone.report.defs#reasonRuleSiteSecurity - Hacking or system attacks <br/>
-        /// tools.ozone.report.defs#reasonRuleStolenContent - Stolen content <br/>
         /// tools.ozone.report.defs#reasonRuleProhibitedSales - Promoting or selling prohibited items or services <br/>
         /// tools.ozone.report.defs#reasonRuleBanEvasion - Banned user returning <br/>
         /// tools.ozone.report.defs#reasonRuleOther - Other <br/>
-        /// tools.ozone.report.defs#reasonCivicElectoralProcess - Electoral process violations <br/>
-        /// tools.ozone.report.defs#reasonCivicDisclosure - Disclosure & transparency violations <br/>
-        /// tools.ozone.report.defs#reasonCivicInterference - Voter intimidation or interference <br/>
-        /// tools.ozone.report.defs#reasonCivicMisinformation - Election misinformation <br/>
-        /// tools.ozone.report.defs#reasonCivicImpersonation - Impersonation of electoral officials/entities <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmContent - Content promoting or depicting self-harm <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmED - Eating disorders <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmStunts - Dangerous challenges or activities <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmSubstances - Dangerous substances or drug abuse <br/>
+        /// tools.ozone.report.defs#reasonSelfHarmOther - Other dangerous content <br/>
         /// </summary>
         [JsonPropertyName("reasonType")]
         [JsonRequired]

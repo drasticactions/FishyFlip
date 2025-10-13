@@ -28,27 +28,24 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Moderation
         /// reasonOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonAppeal - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonAppeal - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonViolenceAnimalWelfare - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonViolenceAnimal - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonViolenceThreats - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonViolenceGraphicContent - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonViolenceSelfHarm - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonViolenceGlorification - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonViolenceExtremistContent - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonViolenceTrafficking - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonViolenceOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonSexualAbuseContent - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonSexualNCII - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonSexualSextortion - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonSexualDeepfake - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonSexualAnimal - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonSexualUnlabeled - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonSexualOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonChildSafetyCSAM - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonChildSafetyGroom - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonChildSafetyMinorPrivacy - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonChildSafetyEndangerment - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonChildSafetyPrivacy - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonChildSafetyHarassment - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonChildSafetyPromotion - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonChildSafetyOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonHarassmentTroll - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonHarassmentTargeted - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
@@ -59,19 +56,17 @@ namespace FishyFlip.Xrpc.Lexicon.Com.Atproto.Moderation
         /// reasonMisleadingImpersonation - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonMisleadingSpam - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonMisleadingScam - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonMisleadingSyntheticContent - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonMisleadingMisinformation - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonMisleadingElections - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonMisleadingOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonRuleSiteSecurity - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonRuleStolenContent - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonRuleProhibitedSales - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonRuleBanEvasion - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// reasonRuleOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonCivicElectoralProcess - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonCivicDisclosure - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonCivicInterference - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonCivicMisinformation - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
-        /// reasonCivicImpersonation - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonSelfHarmContent - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonSelfHarmED - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonSelfHarmStunts - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonSelfHarmSubstances - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
+        /// reasonSelfHarmOther - Submit a moderation report regarding an atproto account or record. Implemented by moderation services (with PDS proxying), and requires auth. <br/>
         /// </param>
         /// <param name="subject">
         /// <br/> Union Types: <br/>

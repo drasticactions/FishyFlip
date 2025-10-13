@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using FishyFlip.Lexicon.Com.Atproto.Server;
 using FishyFlip.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace FishyFlip.AspNetCore.Services;
 
@@ -27,11 +28,11 @@ public class UserSessionManager : IUserSessionManager
     /// <param name="logger">The logger.</param>
     public UserSessionManager(
         ISessionStore sessionStore,
-        FishyFlipOptions options,
+        IOptions<FishyFlipOptions> options,
         ILogger<UserSessionManager> logger)
     {
         this.sessionStore = sessionStore ?? throw new ArgumentNullException(nameof(sessionStore));
-        this.options = options ?? throw new ArgumentNullException(nameof(options));
+        this.options = options.Value;
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 

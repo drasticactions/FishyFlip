@@ -18,6 +18,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         /// <param name="displayName"></param>
         /// <param name="description">Free-form profile description text.</param>
+        /// <param name="pronouns">Free-form pronouns text.</param>
+        /// <param name="website"></param>
         /// <param name="avatar">Small image to be displayed next to posts from account. AKA, 'profile picture'</param>
         /// <param name="banner">Larger horizontal image to display behind profile view.</param>
         /// <param name="labels">Self-label values, specific to the Bluesky application, on the overall account.
@@ -31,10 +33,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
         /// </param>
         /// <param name="createdAt"></param>
-        public Profile(string? displayName = default, string? description = default, Blob? avatar = default, Blob? banner = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default)
+        public Profile(string? displayName = default, string? description = default, string? pronouns = default, string? website = default, Blob? avatar = default, Blob? banner = default, FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels? labels = default, Com.Atproto.Repo.StrongRef? joinedViaStarterPack = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, DateTime? createdAt = default)
         {
             this.DisplayName = displayName;
             this.Description = description;
+            this.Pronouns = pronouns;
+            this.Website = website;
             this.Avatar = avatar;
             this.Banner = banner;
             this.Labels = labels;
@@ -61,6 +65,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         {
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
+            if (obj["pronouns"] is not null) this.Pronouns = obj["pronouns"].AsString();
+            if (obj["website"] is not null) this.Website = obj["website"].AsString();
             if (obj["avatar"] is not null) this.Avatar = new FishyFlip.Models.Blob(obj["avatar"]);
             if (obj["banner"] is not null) this.Banner = new FishyFlip.Models.Blob(obj["banner"]);
             if (obj["labels"] is not null) this.Labels = new FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels(obj["labels"]);
@@ -84,6 +90,21 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pronouns.
+        /// <br/> Free-form pronouns text.
+        /// </summary>
+        [JsonPropertyName("pronouns")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Pronouns { get; set; }
+
+        /// <summary>
+        /// Gets or sets the website.
+        /// </summary>
+        [JsonPropertyName("website")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Website { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar.

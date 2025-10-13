@@ -66,6 +66,8 @@ namespace FishyFlip.Lexicon
                     return new CannotDeleteSelfError(statusCode, detail);
                 case "SetNotFound":
                     return new SetNotFoundError(statusCode, detail);
+                case "InvalidScopeReference":
+                    return new InvalidScopeReferenceError(statusCode, detail);
                 case "SubjectHasAction":
                     return new SubjectHasActionError(statusCode, detail);
                 case "DuplicateExternalId":

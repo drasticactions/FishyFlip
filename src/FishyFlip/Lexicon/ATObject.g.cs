@@ -138,6 +138,12 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.BskyAppStatePref>)SourceGenerationContext.Default.AppBskyActorBskyAppStatePref);
                 case "app.bsky.richtext.facet#byteSlice":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.ByteSlice>)SourceGenerationContext.Default.AppBskyRichtextByteSlice);
+                case "tools.ozone.moderation.cancelScheduledActions#cancellationResults":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancellationResults>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancellationResults>)SourceGenerationContext.Default.ToolsOzoneModerationCancellationResults);
+                case "tools.ozone.moderation.cancelScheduledActions#CancelScheduledActionsInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledActionsInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledActionsInput>)SourceGenerationContext.Default.ToolsOzoneModerationCancelScheduledActionsInput);
+                case "tools.ozone.moderation.defs#cancelScheduledTakedownEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledTakedownEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledTakedownEvent>)SourceGenerationContext.Default.ToolsOzoneModerationCancelScheduledTakedownEvent);
                 case "app.bsky.embed.video#caption":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.Caption>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Caption>)SourceGenerationContext.Default.AppBskyEmbedCaption);
                 case "app.bsky.notification.defs#chatPreference":
@@ -230,6 +236,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.DeleteTemplateInput>)SourceGenerationContext.Default.ToolsOzoneCommunicationDeleteTemplateInput);
                 case "tools.ozone.set.deleteValues#DeleteValuesInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Set.DeleteValuesInput>)SourceGenerationContext.Default.ToolsOzoneSetDeleteValuesInput);
+                case "com.atproto.temp.dereferenceScope#DereferenceScopeOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.DereferenceScopeOutput>)SourceGenerationContext.Default.ComAtprotoTempDereferenceScopeOutput);
                 case "app.bsky.feed.describeFeedGenerator#DescribeFeedGeneratorOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DescribeFeedGeneratorOutput>)SourceGenerationContext.Default.AppBskyFeedDescribeFeedGeneratorOutput);
                 case "com.atproto.repo.describeRepo#DescribeRepoOutput":
@@ -266,6 +274,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.External>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.External>)SourceGenerationContext.Default.AppBskyEmbedExternal);
                 case "app.bsky.richtext.facet":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Facet>)SourceGenerationContext.Default.AppBskyRichtextFacet);
+                case "tools.ozone.moderation.cancelScheduledActions#failedCancellation":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.FailedCancellation>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.FailedCancellation>)SourceGenerationContext.Default.ToolsOzoneModerationFailedCancellation);
+                case "tools.ozone.moderation.scheduleAction#failedScheduling":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.FailedScheduling>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.FailedScheduling>)SourceGenerationContext.Default.ToolsOzoneModerationFailedScheduling);
                 case "app.bsky.feed.describeFeedGenerator#feed":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.Feed>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.Feed>)SourceGenerationContext.Default.AppBskyFeedFeed);
                 case "app.bsky.graph.starterpack#feedItem":
@@ -368,6 +380,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetMessagesOutput>)SourceGenerationContext.Default.ChatBskyConvoGetMessagesOutput);
                 case "app.bsky.graph.getMutes#GetMutesOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetMutesOutput>)SourceGenerationContext.Default.AppBskyGraphGetMutesOutput);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacks#GetOnboardingSuggestedStarterPacksOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksOutput);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton#GetOnboardingSuggestedStarterPacksSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksSkeletonOutput);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -562,6 +578,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.ListReposOutput>)SourceGenerationContext.Default.ComAtprotoSyncListReposOutput);
                 case "app.bsky.feed.threadgate#listRule":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.ListRule>)SourceGenerationContext.Default.AppBskyFeedListRule);
+                case "tools.ozone.moderation.listScheduledActions#ListScheduledActionsInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsInput>)SourceGenerationContext.Default.ToolsOzoneModerationListScheduledActionsInput);
+                case "tools.ozone.moderation.listScheduledActions#ListScheduledActionsOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationListScheduledActionsOutput);
                 case "tools.ozone.communication.listTemplates#ListTemplatesOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.ListTemplatesOutput>)SourceGenerationContext.Default.ToolsOzoneCommunicationListTemplatesOutput);
                 case "tools.ozone.verification.listVerifications#ListVerificationsOutput":
@@ -840,6 +860,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>)SourceGenerationContext.Default.ComAtprotoTempResultAvailable);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable>)SourceGenerationContext.Default.ComAtprotoTempResultUnavailable);
+                case "tools.ozone.moderation.defs#revokeAccountCredentialsEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent>)SourceGenerationContext.Default.ToolsOzoneModerationRevokeAccountCredentialsEvent);
                 case "com.atproto.temp.revokeAccountCredentials#RevokeAccountCredentialsInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.RevokeAccountCredentialsInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.RevokeAccountCredentialsInput>)SourceGenerationContext.Default.ComAtprotoTempRevokeAccountCredentialsInput);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
@@ -856,6 +878,16 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPref>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPref>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPref);
                 case "app.bsky.actor.defs#savedFeedsPrefV2":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2>)SourceGenerationContext.Default.AppBskyActorSavedFeedsPrefV2);
+                case "tools.ozone.moderation.scheduleAction#ScheduleActionInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleActionInput>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleActionInput>)SourceGenerationContext.Default.ToolsOzoneModerationScheduleActionInput);
+                case "tools.ozone.moderation.scheduleAction#scheduledActionResults":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionResults>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionResults>)SourceGenerationContext.Default.ToolsOzoneModerationScheduledActionResults);
+                case "tools.ozone.moderation.defs#scheduledActionView":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionView>)SourceGenerationContext.Default.ToolsOzoneModerationScheduledActionView);
+                case "tools.ozone.moderation.defs#scheduleTakedownEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleTakedownEvent>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleTakedownEvent>)SourceGenerationContext.Default.ToolsOzoneModerationScheduleTakedownEvent);
+                case "tools.ozone.moderation.scheduleAction#schedulingConfig":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.SchedulingConfig>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.SchedulingConfig>)SourceGenerationContext.Default.ToolsOzoneModerationSchedulingConfig);
                 case "com.atproto.lexicon.schema":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Lexicon.Schema>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Lexicon.Schema>)SourceGenerationContext.Default.ComAtprotoLexiconSchema);
                 case "com.atproto.admin.searchAccounts#SearchAccountsOutput":
@@ -956,6 +988,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>(text, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>)SourceGenerationContext.Default.ComAtprotoSyncSync);
                 case "app.bsky.richtext.facet#tag":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>(text, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>)SourceGenerationContext.Default.AppBskyRichtextTag);
+                case "tools.ozone.moderation.scheduleAction#takedown":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.Takedown>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.Takedown>)SourceGenerationContext.Default.ToolsOzoneModerationTakedown);
                 case "tools.ozone.communication.defs#templateView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>(text, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Communication.TemplateView>)SourceGenerationContext.Default.ToolsOzoneCommunicationTemplateView);
                 case "app.bsky.feed.defs#threadContext":

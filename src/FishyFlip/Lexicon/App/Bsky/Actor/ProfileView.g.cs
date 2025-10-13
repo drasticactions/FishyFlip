@@ -16,6 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="did"></param>
         /// <param name="handle"></param>
         /// <param name="displayName"></param>
+        /// <param name="pronouns"></param>
         /// <param name="description"></param>
         /// <param name="avatar"></param>
         /// <param name="associated">
@@ -33,11 +34,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="status">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.StatusView"/> (app.bsky.actor.defs#statusView)
         /// </param>
-        public ProfileView(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? description = default, string? avatar = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default, FishyFlip.Lexicon.App.Bsky.Actor.StatusView? status = default)
+        public ProfileView(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? pronouns = default, string? description = default, string? avatar = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default, FishyFlip.Lexicon.App.Bsky.Actor.StatusView? status = default)
         {
             this.Did = did;
             this.Handle = handle;
             this.DisplayName = displayName;
+            this.Pronouns = pronouns;
             this.Description = description;
             this.Avatar = avatar;
             this.Associated = associated;
@@ -68,6 +70,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
             if (obj["displayName"] is not null) this.DisplayName = obj["displayName"].AsString();
+            if (obj["pronouns"] is not null) this.Pronouns = obj["pronouns"].AsString();
             if (obj["description"] is not null) this.Description = obj["description"].AsString();
             if (obj["avatar"] is not null) this.Avatar = obj["avatar"].AsString();
             if (obj["associated"] is not null) this.Associated = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated(obj["associated"]);
@@ -102,6 +105,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("displayName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DisplayName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pronouns.
+        /// </summary>
+        [JsonPropertyName("pronouns")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Pronouns { get; set; }
 
         /// <summary>
         /// Gets or sets the description.

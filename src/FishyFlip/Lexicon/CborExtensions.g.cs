@@ -102,6 +102,12 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.BskyAppStatePref(obj);
                 case "app.bsky.richtext.facet#byteSlice":
                     return new App.Bsky.Richtext.ByteSlice(obj);
+                case "tools.ozone.moderation.cancelScheduledActions#cancellationResults":
+                    return new Tools.Ozone.Moderation.CancellationResults(obj);
+                case "tools.ozone.moderation.cancelScheduledActions#CancelScheduledActionsInput":
+                    return new Tools.Ozone.Moderation.CancelScheduledActionsInput(obj);
+                case "tools.ozone.moderation.defs#cancelScheduledTakedownEvent":
+                    return new Tools.Ozone.Moderation.CancelScheduledTakedownEvent(obj);
                 case "app.bsky.embed.video#caption":
                     return new App.Bsky.Embed.Caption(obj);
                 case "app.bsky.notification.defs#chatPreference":
@@ -194,6 +200,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Communication.DeleteTemplateInput(obj);
                 case "tools.ozone.set.deleteValues#DeleteValuesInput":
                     return new Tools.Ozone.Set.DeleteValuesInput(obj);
+                case "com.atproto.temp.dereferenceScope#DereferenceScopeOutput":
+                    return new Com.Atproto.Temp.DereferenceScopeOutput(obj);
                 case "app.bsky.feed.describeFeedGenerator#DescribeFeedGeneratorOutput":
                     return new App.Bsky.Feed.DescribeFeedGeneratorOutput(obj);
                 case "com.atproto.repo.describeRepo#DescribeRepoOutput":
@@ -230,6 +238,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.External(obj);
                 case "app.bsky.richtext.facet":
                     return new App.Bsky.Richtext.Facet(obj);
+                case "tools.ozone.moderation.cancelScheduledActions#failedCancellation":
+                    return new Tools.Ozone.Moderation.FailedCancellation(obj);
+                case "tools.ozone.moderation.scheduleAction#failedScheduling":
+                    return new Tools.Ozone.Moderation.FailedScheduling(obj);
                 case "app.bsky.feed.describeFeedGenerator#feed":
                     return new App.Bsky.Feed.Feed(obj);
                 case "app.bsky.graph.starterpack#feedItem":
@@ -332,6 +344,10 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.GetMessagesOutput(obj);
                 case "app.bsky.graph.getMutes#GetMutesOutput":
                     return new App.Bsky.Graph.GetMutesOutput(obj);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacks#GetOnboardingSuggestedStarterPacksOutput":
+                    return new App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput(obj);
+                case "app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton#GetOnboardingSuggestedStarterPacksSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput(obj);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -526,6 +542,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.ListReposOutput(obj);
                 case "app.bsky.feed.threadgate#listRule":
                     return new App.Bsky.Feed.ListRule(obj);
+                case "tools.ozone.moderation.listScheduledActions#ListScheduledActionsInput":
+                    return new Tools.Ozone.Moderation.ListScheduledActionsInput(obj);
+                case "tools.ozone.moderation.listScheduledActions#ListScheduledActionsOutput":
+                    return new Tools.Ozone.Moderation.ListScheduledActionsOutput(obj);
                 case "tools.ozone.communication.listTemplates#ListTemplatesOutput":
                     return new Tools.Ozone.Communication.ListTemplatesOutput(obj);
                 case "tools.ozone.verification.listVerifications#ListVerificationsOutput":
@@ -804,6 +824,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.ResultAvailable(obj);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":
                     return new Com.Atproto.Temp.ResultUnavailable(obj);
+                case "tools.ozone.moderation.defs#revokeAccountCredentialsEvent":
+                    return new Tools.Ozone.Moderation.RevokeAccountCredentialsEvent(obj);
                 case "com.atproto.temp.revokeAccountCredentials#RevokeAccountCredentialsInput":
                     return new Com.Atproto.Temp.RevokeAccountCredentialsInput(obj);
                 case "com.atproto.server.revokeAppPassword#RevokeAppPasswordInput":
@@ -820,6 +842,16 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.SavedFeedsPref(obj);
                 case "app.bsky.actor.defs#savedFeedsPrefV2":
                     return new App.Bsky.Actor.SavedFeedsPrefV2(obj);
+                case "tools.ozone.moderation.scheduleAction#ScheduleActionInput":
+                    return new Tools.Ozone.Moderation.ScheduleActionInput(obj);
+                case "tools.ozone.moderation.scheduleAction#scheduledActionResults":
+                    return new Tools.Ozone.Moderation.ScheduledActionResults(obj);
+                case "tools.ozone.moderation.defs#scheduledActionView":
+                    return new Tools.Ozone.Moderation.ScheduledActionView(obj);
+                case "tools.ozone.moderation.defs#scheduleTakedownEvent":
+                    return new Tools.Ozone.Moderation.ScheduleTakedownEvent(obj);
+                case "tools.ozone.moderation.scheduleAction#schedulingConfig":
+                    return new Tools.Ozone.Moderation.SchedulingConfig(obj);
                 case "com.atproto.lexicon.schema":
                     return new Com.Atproto.Lexicon.Schema(obj);
                 case "com.atproto.admin.searchAccounts#SearchAccountsOutput":
@@ -920,6 +952,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.Sync(obj);
                 case "app.bsky.richtext.facet#tag":
                     return new App.Bsky.Richtext.Tag(obj);
+                case "tools.ozone.moderation.scheduleAction#takedown":
+                    return new Tools.Ozone.Moderation.Takedown(obj);
                 case "tools.ozone.communication.defs#templateView":
                     return new Tools.Ozone.Communication.TemplateView(obj);
                 case "app.bsky.feed.defs#threadContext":

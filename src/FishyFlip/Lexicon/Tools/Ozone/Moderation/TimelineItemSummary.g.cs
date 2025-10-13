@@ -40,6 +40,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// identityEvent - Logs identity related events on a repo subject. Normally captured by automod from the firehose and emitted to ozone for historical tracking. <br/>
         /// recordEvent - Logs lifecycle event on a record subject. Normally captured by automod from the firehose and emitted to ozone for historical tracking. <br/>
         /// modEventPriorityScore - Set priority score of the subject. Higher score means higher priority. <br/>
+        /// revokeAccountCredentialsEvent - Account credentials revocation by moderators. Only works on DID subjects. <br/>
         /// ageAssuranceEvent - Age assurance info coming directly from users. Only works on DID subjects. <br/>
         /// ageAssuranceOverrideEvent - Age assurance status override by moderators. Only works on DID subjects. <br/>
         /// timelineEventPlcCreate - Moderation event timeline event for a PLC create operation <br/>
@@ -49,6 +50,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// emailConfirmed -  <br/>
         /// passwordUpdated -  <br/>
         /// handleUpdated -  <br/>
+        /// scheduleTakedownEvent - Logs a scheduled takedown action for an account. <br/>
+        /// cancelScheduledTakedownEvent - Logs cancellation of a scheduled takedown action for an account. <br/>
         /// </param>
         /// <param name="count"></param>
         public TimelineItemSummary(string eventSubjectType = default, string eventType = default, long count = default)
@@ -113,6 +116,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// identityEvent - Logs identity related events on a repo subject. Normally captured by automod from the firehose and emitted to ozone for historical tracking. <br/>
         /// recordEvent - Logs lifecycle event on a record subject. Normally captured by automod from the firehose and emitted to ozone for historical tracking. <br/>
         /// modEventPriorityScore - Set priority score of the subject. Higher score means higher priority. <br/>
+        /// revokeAccountCredentialsEvent - Account credentials revocation by moderators. Only works on DID subjects. <br/>
         /// ageAssuranceEvent - Age assurance info coming directly from users. Only works on DID subjects. <br/>
         /// ageAssuranceOverrideEvent - Age assurance status override by moderators. Only works on DID subjects. <br/>
         /// timelineEventPlcCreate - Moderation event timeline event for a PLC create operation <br/>
@@ -122,6 +126,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// emailConfirmed -  <br/>
         /// passwordUpdated -  <br/>
         /// handleUpdated -  <br/>
+        /// scheduleTakedownEvent - Logs a scheduled takedown action for an account. <br/>
+        /// cancelScheduledTakedownEvent - Logs cancellation of a scheduled takedown action for an account. <br/>
         /// </summary>
         [JsonPropertyName("eventType")]
         [JsonRequired]

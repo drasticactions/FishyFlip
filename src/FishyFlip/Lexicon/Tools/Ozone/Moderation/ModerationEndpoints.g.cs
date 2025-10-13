@@ -16,6 +16,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
        public const string GroupNamespace = "tools.ozone.moderation";
 
+       public const string CancelScheduledActions = "/xrpc/tools.ozone.moderation.cancelScheduledActions";
+
        public const string EmitEvent = "/xrpc/tools.ozone.moderation.emitEvent";
 
        public const string GetAccountTimeline = "/xrpc/tools.ozone.moderation.getAccountTimeline";
@@ -34,11 +36,35 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
        public const string GetSubjects = "/xrpc/tools.ozone.moderation.getSubjects";
 
+       public const string ListScheduledActions = "/xrpc/tools.ozone.moderation.listScheduledActions";
+
        public const string QueryEvents = "/xrpc/tools.ozone.moderation.queryEvents";
 
        public const string QueryStatuses = "/xrpc/tools.ozone.moderation.queryStatuses";
 
+       public const string ScheduleAction = "/xrpc/tools.ozone.moderation.scheduleAction";
+
        public const string SearchRepos = "/xrpc/tools.ozone.moderation.searchRepos";
+
+
+        /// <summary>
+        /// Cancel all pending scheduled moderation actions for specified subjects
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="subjects">Array of DID subjects to cancel scheduled actions for</param>
+        /// <param name="comment">Optional comment describing the reason for cancellation</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.CancellationResults?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.CancellationResults?>> CancelScheduledActionsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Models.ATDid> subjects, string? comment = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = CancelScheduledActions.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            var inputItem = new CancelScheduledActionsInput();
+            inputItem.Subjects = subjects;
+            inputItem.Comment = comment;
+            return atp.Post<CancelScheduledActionsInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.CancellationResults?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationCancelScheduledActionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationCancellationResults!, inputItem, cancellationToken, headers);
+        }
 
 
         /// <summary>
@@ -71,6 +97,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModEventPriorityScore"/> (tools.ozone.moderation.defs#modEventPriorityScore) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent"/> (tools.ozone.moderation.defs#ageAssuranceEvent) <br/>
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent"/> (tools.ozone.moderation.defs#ageAssuranceOverrideEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RevokeAccountCredentialsEvent"/> (tools.ozone.moderation.defs#revokeAccountCredentialsEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduleTakedownEvent"/> (tools.ozone.moderation.defs#scheduleTakedownEvent) <br/>
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.CancelScheduledTakedownEvent"/> (tools.ozone.moderation.defs#cancelScheduledTakedownEvent) <br/>
         /// </param>
         /// <param name="subject">
         /// <br/> Union Types: <br/>
@@ -112,6 +141,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
                 case "tools.ozone.moderation.defs#modEventPriorityScore":
                 case "tools.ozone.moderation.defs#ageAssuranceEvent":
                 case "tools.ozone.moderation.defs#ageAssuranceOverrideEvent":
+                case "tools.ozone.moderation.defs#revokeAccountCredentialsEvent":
+                case "tools.ozone.moderation.defs#scheduleTakedownEvent":
+                case "tools.ozone.moderation.defs#cancelScheduledTakedownEvent":
                     break;
                 default:
                     atp.Options.Logger?.LogWarning($"Unknown @event type for union: " + @event.Type);
@@ -321,6 +353,34 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationGetSubjectsOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// List scheduled moderation actions with optional filtering
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="statuses">Filter actions by status</param>
+        /// <param name="startsAfter">Filter actions scheduled to execute after this time</param>
+        /// <param name="endsBefore">Filter actions scheduled to execute before this time</param>
+        /// <param name="subjects">Filter actions for specific DID subjects</param>
+        /// <param name="limit">Maximum number of results to return</param>
+        /// <param name="cursor">Cursor for pagination</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsOutput?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsOutput?>> ListScheduledActionsAsync (this FishyFlip.ATProtocol atp, List<string> statuses, DateTime? startsAfter = default, DateTime? endsBefore = default, List<FishyFlip.Models.ATDid>? subjects = default, int? limit = 50, string? cursor = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = ListScheduledActions.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            var inputItem = new ListScheduledActionsInput();
+            inputItem.Statuses = statuses;
+            inputItem.StartsAfter = startsAfter;
+            inputItem.EndsBefore = endsBefore;
+            inputItem.Subjects = subjects;
+            inputItem.Limit = limit;
+            inputItem.Cursor = cursor;
+            return atp.Post<ListScheduledActionsInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ListScheduledActionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationListScheduledActionsInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationListScheduledActionsOutput!, inputItem, cancellationToken, headers);
         }
 
 
@@ -701,6 +761,43 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
             endpointUrl += string.Join("&", queryStrings);
             return atp.Get<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationQueryStatusesOutput!, cancellationToken, headers);
+        }
+
+
+        /// <summary>
+        /// Schedule a moderation action to be executed at a future time
+        /// </summary>
+        /// <param name="atp"></param>
+        /// <param name="action">
+        /// <br/> Union Types: <br/>
+        /// #takedown <br/>
+        /// </param>
+        /// <param name="subjects">Array of DID subjects to schedule the action for</param>
+        /// <param name="createdBy"></param>
+        /// <param name="scheduling"></param>
+        /// <param name="modTool">Moderation tool information for tracing the source of the action</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionResults?"/></returns>
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionResults?>> ScheduleActionAsync (this FishyFlip.ATProtocol atp, ATObject action, List<FishyFlip.Models.ATDid> subjects, FishyFlip.Models.ATDid createdBy, FishyFlip.Lexicon.Tools.Ozone.Moderation.SchedulingConfig scheduling, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default, CancellationToken cancellationToken = default)
+        {
+            var endpointUrl = ScheduleAction.ToString();
+            var headers = new Dictionary<string, string>();
+            headers.Add(Constants.AtProtoProxy, atp.Options.OzoneProxyHeader);
+            var inputItem = new ScheduleActionInput();
+            switch (action.Type)
+            {
+                case "tools.ozone.moderation.scheduleAction#takedown":
+                    break;
+                default:
+                    atp.Options.Logger?.LogWarning($"Unknown action type for union: " + action.Type);
+                    break;
+            }
+            inputItem.Action = action;
+            inputItem.Subjects = subjects;
+            inputItem.CreatedBy = createdBy;
+            inputItem.Scheduling = scheduling;
+            inputItem.ModTool = modTool;
+            return atp.Post<ScheduleActionInput, FishyFlip.Lexicon.Tools.Ozone.Moderation.ScheduledActionResults?>(endpointUrl, atp.Options.SourceGenerationContext.ToolsOzoneModerationScheduleActionInput!, atp.Options.SourceGenerationContext.ToolsOzoneModerationScheduledActionResults!, inputItem, cancellationToken, headers);
         }
 
 
