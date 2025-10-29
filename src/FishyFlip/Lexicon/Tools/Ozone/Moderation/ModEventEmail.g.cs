@@ -19,11 +19,19 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="subjectLine">The subject line of the email sent to the user.</param>
         /// <param name="content">The content of the email sent to the user.</param>
         /// <param name="comment">Additional comment about the outgoing comm.</param>
-        public ModEventEmail(string subjectLine = default, string? content = default, string? comment = default)
+        /// <param name="policies">Names/Keywords of the policies that necessitated the email.</param>
+        /// <param name="severityLevel">Severity level of the violation. Normally 'sev-1' that adds strike on repeat offense</param>
+        /// <param name="strikeCount">Number of strikes to assign to the user for this violation. Normally 0 as an indicator of a warning and only added as a strike on a repeat offense.</param>
+        /// <param name="strikeExpiresAt">When the strike should expire. If not provided, the strike never expires.</param>
+        public ModEventEmail(string subjectLine = default, string? content = default, string? comment = default, List<string>? policies = default, string? severityLevel = default, long? strikeCount = default, DateTime? strikeExpiresAt = default)
         {
             this.SubjectLine = subjectLine;
             this.Content = content;
             this.Comment = comment;
+            this.Policies = policies;
+            this.SeverityLevel = severityLevel;
+            this.StrikeCount = strikeCount;
+            this.StrikeExpiresAt = strikeExpiresAt;
             this.Type = "tools.ozone.moderation.defs#modEventEmail";
         }
 
@@ -45,6 +53,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["subjectLine"] is not null) this.SubjectLine = obj["subjectLine"].AsString();
             if (obj["content"] is not null) this.Content = obj["content"].AsString();
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["policies"] is not null) this.Policies = obj["policies"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["severityLevel"] is not null) this.SeverityLevel = obj["severityLevel"].AsString();
+            if (obj["strikeCount"] is not null) this.StrikeCount = obj["strikeCount"].AsInt64Value();
+            if (obj["strikeExpiresAt"] is not null) this.StrikeExpiresAt = obj["strikeExpiresAt"].ToDateTime();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -71,6 +83,38 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("comment")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the policies.
+        /// <br/> Names/Keywords of the policies that necessitated the email.
+        /// </summary>
+        [JsonPropertyName("policies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? Policies { get; set; }
+
+        /// <summary>
+        /// Gets or sets the severityLevel.
+        /// <br/> Severity level of the violation. Normally 'sev-1' that adds strike on repeat offense
+        /// </summary>
+        [JsonPropertyName("severityLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? SeverityLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the strikeCount.
+        /// <br/> Number of strikes to assign to the user for this violation. Normally 0 as an indicator of a warning and only added as a strike on a repeat offense.
+        /// </summary>
+        [JsonPropertyName("strikeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? StrikeCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the strikeExpiresAt.
+        /// <br/> When the strike should expire. If not provided, the strike never expires.
+        /// </summary>
+        [JsonPropertyName("strikeExpiresAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? StrikeExpiresAt { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventEmail";
 

@@ -17,9 +17,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// Initializes a new instance of the <see cref="ModEventReverseTakedown"/> class.
         /// </summary>
         /// <param name="comment">Describe reasoning behind the reversal.</param>
-        public ModEventReverseTakedown(string? comment = default)
+        /// <param name="policies">Names/Keywords of the policy infraction for which takedown is being reversed.</param>
+        /// <param name="severityLevel">Severity level of the violation. Usually set from the last policy infraction's severity.</param>
+        /// <param name="strikeCount">Number of strikes to subtract from the user's strike count. Usually set from the last policy infraction's severity.</param>
+        public ModEventReverseTakedown(string? comment = default, List<string>? policies = default, string? severityLevel = default, long? strikeCount = default)
         {
             this.Comment = comment;
+            this.Policies = policies;
+            this.SeverityLevel = severityLevel;
+            this.StrikeCount = strikeCount;
             this.Type = "tools.ozone.moderation.defs#modEventReverseTakedown";
         }
 
@@ -39,6 +45,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public ModEventReverseTakedown(CBORObject obj)
         {
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
+            if (obj["policies"] is not null) this.Policies = obj["policies"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["severityLevel"] is not null) this.SeverityLevel = obj["severityLevel"].AsString();
+            if (obj["strikeCount"] is not null) this.StrikeCount = obj["strikeCount"].AsInt64Value();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -49,6 +58,30 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("comment")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Comment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the policies.
+        /// <br/> Names/Keywords of the policy infraction for which takedown is being reversed.
+        /// </summary>
+        [JsonPropertyName("policies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? Policies { get; set; }
+
+        /// <summary>
+        /// Gets or sets the severityLevel.
+        /// <br/> Severity level of the violation. Usually set from the last policy infraction's severity.
+        /// </summary>
+        [JsonPropertyName("severityLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? SeverityLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the strikeCount.
+        /// <br/> Number of strikes to subtract from the user's strike count. Usually set from the last policy infraction's severity.
+        /// </summary>
+        [JsonPropertyName("strikeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? StrikeCount { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventReverseTakedown";
 

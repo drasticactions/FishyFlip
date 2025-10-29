@@ -25,7 +25,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="modTool">This will be propagated to the moderation event when it is applied
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool"/> (tools.ozone.moderation.defs#modTool)
         /// </param>
-        public ScheduleActionInput(ATObject action = default, List<FishyFlip.Models.ATDid> subjects = default, FishyFlip.Models.ATDid createdBy = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.SchedulingConfig scheduling = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default)
+        public ScheduleActionInput(FishyFlip.Lexicon.Tools.Ozone.Moderation.Takedown action = default, List<FishyFlip.Models.ATDid> subjects = default, FishyFlip.Models.ATDid createdBy = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.SchedulingConfig scheduling = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.ModTool? modTool = default)
         {
             this.Action = action;
             this.Subjects = subjects;
