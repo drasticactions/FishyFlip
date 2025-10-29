@@ -41,6 +41,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountHosting>), TypeInfoPropertyName = "ListToolsOzoneModerationAccountHosting")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats), TypeInfoPropertyName = "ToolsOzoneModerationAccountStats")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats>), TypeInfoPropertyName = "ListToolsOzoneModerationAccountStats")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStrike), TypeInfoPropertyName = "ToolsOzoneModerationAccountStrike")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStrike>), TypeInfoPropertyName = "ListToolsOzoneModerationAccountStrike")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Admin.AccountView), TypeInfoPropertyName = "ComAtprotoAdminAccountView")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Admin.AccountView>), TypeInfoPropertyName = "ListComAtprotoAdminAccountView")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.App.Bsky.Notification.ActivitySubscription), TypeInfoPropertyName = "AppBskyNotificationActivitySubscription")]

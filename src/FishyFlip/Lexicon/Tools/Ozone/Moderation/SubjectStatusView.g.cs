@@ -54,6 +54,9 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="recordsStats">Statistics related to the record subjects authored by the subject's account
         /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats"/> (tools.ozone.moderation.defs#recordsStats)
         /// </param>
+        /// <param name="accountStrike">Strike information for the account (account-level only)
+        /// <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStrike"/> (tools.ozone.moderation.defs#accountStrike)
+        /// </param>
         /// <param name="ageAssuranceState">Current age assurance state of the subject.
         /// <br/> Known Values: <br/>
         /// pending <br/>
@@ -67,7 +70,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// admin <br/>
         /// user <br/>
         /// </param>
-        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, long? priorityScore = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? accountStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? recordsStats = default, string? ageAssuranceState = default, string? ageAssuranceUpdatedBy = default)
+        public SubjectStatusView(long id = default, ATObject subject = default, ATObject? hosting = default, List<string>? subjectBlobCids = default, string? subjectRepoHandle = default, DateTime? updatedAt = default, DateTime? createdAt = default, string reviewState = default, string? comment = default, long? priorityScore = default, DateTime? muteUntil = default, DateTime? muteReportingUntil = default, FishyFlip.Models.ATDid? lastReviewedBy = default, DateTime? lastReviewedAt = default, DateTime? lastReportedAt = default, DateTime? lastAppealedAt = default, bool? takendown = default, bool? appealed = default, DateTime? suspendUntil = default, List<string>? tags = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats? accountStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? recordsStats = default, FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStrike? accountStrike = default, string? ageAssuranceState = default, string? ageAssuranceUpdatedBy = default)
         {
             this.Id = id;
             this.Subject = subject;
@@ -91,6 +94,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Tags = tags;
             this.AccountStats = accountStats;
             this.RecordsStats = recordsStats;
+            this.AccountStrike = accountStrike;
             this.AgeAssuranceState = ageAssuranceState;
             this.AgeAssuranceUpdatedBy = ageAssuranceUpdatedBy;
             this.Type = "tools.ozone.moderation.defs#subjectStatusView";
@@ -133,6 +137,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["tags"] is not null) this.Tags = obj["tags"].Values.Select(n =>n.AsString()).ToList();
             if (obj["accountStats"] is not null) this.AccountStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStats(obj["accountStats"]);
             if (obj["recordsStats"] is not null) this.RecordsStats = new FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats(obj["recordsStats"]);
+            if (obj["accountStrike"] is not null) this.AccountStrike = new FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStrike(obj["accountStrike"]);
             if (obj["ageAssuranceState"] is not null) this.AgeAssuranceState = obj["ageAssuranceState"].AsString();
             if (obj["ageAssuranceUpdatedBy"] is not null) this.AgeAssuranceUpdatedBy = obj["ageAssuranceUpdatedBy"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
@@ -314,6 +319,15 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("recordsStats")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.Tools.Ozone.Moderation.RecordsStats? RecordsStats { get; set; }
+
+        /// <summary>
+        /// Gets or sets the accountStrike.
+        /// <br/> Strike information for the account (account-level only)
+        /// <br/> <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStrike"/> (tools.ozone.moderation.defs#accountStrike)
+        /// </summary>
+        [JsonPropertyName("accountStrike")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FishyFlip.Lexicon.Tools.Ozone.Moderation.AccountStrike? AccountStrike { get; set; }
 
         /// <summary>
         /// Gets or sets the ageAssuranceState.

@@ -45,7 +45,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="status">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.StatusView"/> (app.bsky.actor.defs#statusView)
         /// </param>
-        public ProfileViewDetailed(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? description = default, string? pronouns = default, string? website = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default, FishyFlip.Lexicon.App.Bsky.Actor.StatusView? status = default)
+        /// <param name="debug">Debug information for internal development</param>
+        public ProfileViewDetailed(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATHandle handle = default, string? displayName = default, string? description = default, string? pronouns = default, string? website = default, string? avatar = default, string? banner = default, long? followersCount = default, long? followsCount = default, long? postsCount = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociated? associated = default, FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic? joinedViaStarterPack = default, DateTime? indexedAt = default, DateTime? createdAt = default, FishyFlip.Lexicon.App.Bsky.Actor.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, Com.Atproto.Repo.StrongRef? pinnedPost = default, FishyFlip.Lexicon.App.Bsky.Actor.VerificationState? verification = default, FishyFlip.Lexicon.App.Bsky.Actor.StatusView? status = default, ATObject? debug = default)
         {
             this.Did = did;
             this.Handle = handle;
@@ -67,6 +68,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.PinnedPost = pinnedPost;
             this.Verification = verification;
             this.Status = status;
+            this.Debug = debug;
             this.Type = "app.bsky.actor.defs#profileViewDetailed";
         }
 
@@ -105,6 +107,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["pinnedPost"] is not null) this.PinnedPost = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["pinnedPost"]);
             if (obj["verification"] is not null) this.Verification = new FishyFlip.Lexicon.App.Bsky.Actor.VerificationState(obj["verification"]);
             if (obj["status"] is not null) this.Status = new FishyFlip.Lexicon.App.Bsky.Actor.StatusView(obj["status"]);
+            if (obj["debug"] is not null) this.Debug = obj["debug"].ToATObject();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -255,6 +258,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("status")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.StatusView? Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets the debug.
+        /// <br/> Debug information for internal development
+        /// </summary>
+        [JsonPropertyName("debug")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ATObject? Debug { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#profileViewDetailed";
 
