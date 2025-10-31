@@ -269,7 +269,11 @@ public sealed class ATJetStream : IDisposable
                     messageBytes = this.decompressor!.Unwrap(messageBytes);
                 }
 
+#if NETSTANDARD
+                var message = Encoding.UTF8.GetString(messageBytes.ToArray());
+#else
                 var message = Encoding.UTF8.GetString(messageBytes);
+#endif
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
                 this.options.TaskFactory.StartNew(() => this.HandleMessage(message)).FireAndForgetSafeAsync(this.logger);
             }
