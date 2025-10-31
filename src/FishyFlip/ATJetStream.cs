@@ -254,44 +254,22 @@ public sealed class ATJetStream : IDisposable
 #if NETSTANDARD
                 var result =
                     await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
-                if (result.MessageType != messageType && !result.EndOfMessage)
-                {
-                    continue;
-                }
-
-                byte[] newArray;
-                if (!this.compression)
-                {
-                    newArray = new byte[result.Count];
-                    Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
-                }
-                else
-                {
-                    var receiveSpan = receiveBuffer.AsSpan(0, result.Count);
-                    newArray = this.decompressor!.Unwrap(receiveSpan).ToArray();
-                }
 #else
                 var result =
                     await webSocket.ReceiveAsync(new Memory<byte>(receiveBuffer), token);
+#endif
                 if (result.MessageType != messageType && !result.EndOfMessage)
                 {
                     continue;
                 }
 
-                // Convert result to string
-                byte[] newArray;
-                if (!this.compression)
+                ReadOnlySpan<byte> messageBytes = receiveBuffer.AsSpan(0, result.Count);
+                if (this.compression)
                 {
-                    newArray = new byte[result.Count];
-                    Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                    messageBytes = this.decompressor!.Unwrap(messageBytes);
                 }
-                else
-                {
-                    var receiveSpan = receiveBuffer.AsSpan(0, result.Count);
-                    newArray = this.decompressor!.Unwrap(receiveSpan).ToArray();
-                }
-#endif
-                var message = Encoding.UTF8.GetString(newArray);
+
+                var message = Encoding.UTF8.GetString(messageBytes);
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
                 this.options.TaskFactory.StartNew(() => this.HandleMessage(message)).FireAndForgetSafeAsync(this.logger);
             }
