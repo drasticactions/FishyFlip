@@ -22,26 +22,29 @@ public static class ATObjectJsonReader
         {
             if (JsonDocument.TryParseValue(ref reader, out var doc))
             {
-                if (doc.RootElement.TryGetProperty("$type", out var type))
+                using (doc)
                 {
-                    var text = type.GetString()?.Trim() ?? string.Empty;
-                    var atObject = ATObject.ToATObject(doc.RootElement, text);
-                    if (atObject is not null)
+                    if (doc.RootElement.TryGetProperty("$type", out var type))
                     {
-                        return atObject;
-                    }
-
-                    var rawText = doc.RootElement.GetRawText();
-                    foreach (var converter in converters)
-                    {
-                        if (converter.SupportedTypes.Contains(text))
+                        var text = type.GetString()?.Trim() ?? string.Empty;
+                        var atObject = ATObject.ToATObject(doc.RootElement, text);
+                        if (atObject is not null)
                         {
-                            atObject = converter.Read(rawText, text, options);
-                            break;
+                            return atObject;
                         }
-                    }
 
-                    return atObject ?? new UnknownATObject() { Type = text, Json = rawText };
+                        var rawText = doc.RootElement.GetRawText();
+                        foreach (var converter in converters)
+                        {
+                            if (converter.SupportedTypes.Contains(text))
+                            {
+                                atObject = converter.Read(rawText, text, options);
+                                break;
+                            }
+                        }
+
+                        return atObject ?? new UnknownATObject() { Type = text, Json = rawText };
+                    }
                 }
             }
         }
