@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System;
+using System.Buffers;
 using FishyFlip.Events;
 using FishyFlip.Lexicon;
 using FishyFlip.Tools.Json;
@@ -246,54 +248,42 @@ public sealed class ATJetStream : IDisposable
     private async Task ReceiveMessages(ClientWebSocket webSocket, CancellationToken token)
     {
         byte[] receiveBuffer = new byte[ReceiveBufferSize];
+        MemoryStream receiveStream = new MemoryStream();
         while (webSocket.State == WebSocketState.Open)
         {
             try
             {
-                var messageType = this.compression ? WebSocketMessageType.Binary : WebSocketMessageType.Text;
+                var expectedMessageType = this.compression ? WebSocketMessageType.Binary : WebSocketMessageType.Text;
 #if NETSTANDARD
                 var result =
                     await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
-                if (result.MessageType != messageType && !result.EndOfMessage)
-                {
-                    continue;
-                }
-
-                byte[] newArray;
-                if (!this.compression)
-                {
-                    newArray = new byte[result.Count];
-                    Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
-                }
-                else
-                {
-                    var receiveSpan = receiveBuffer.AsSpan(0, result.Count);
-                    newArray = this.decompressor!.Unwrap(receiveSpan).ToArray();
-                }
 #else
                 var result =
                     await webSocket.ReceiveAsync(new Memory<byte>(receiveBuffer), token);
-                if (result.MessageType != messageType && !result.EndOfMessage)
+#endif
+                if (result.MessageType != expectedMessageType)
                 {
                     continue;
                 }
 
-                // Convert result to string
-                byte[] newArray;
-                if (!this.compression)
+                receiveStream.Write(receiveBuffer, 0, result.Count);
+                if (!result.EndOfMessage)
                 {
-                    newArray = new byte[result.Count];
-                    Array.Copy(receiveBuffer, 0, newArray, 0, result.Count);
+                    continue;
                 }
-                else
+
+                var data = receiveStream.ToArray();
+                receiveStream.SetLength(0);
+
+                if (this.compression)
                 {
-                    var receiveSpan = receiveBuffer.AsSpan(0, result.Count);
-                    newArray = this.decompressor!.Unwrap(receiveSpan).ToArray();
+                    data = this.decompressor!.Unwrap(data.AsSpan()).ToArray();
                 }
-#endif
-                var message = Encoding.UTF8.GetString(newArray);
+
+                var message = Encoding.UTF8.GetString(data);
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
-                this.options.TaskFactory.StartNew(() => this.HandleMessage(message)).FireAndForgetSafeAsync(this.logger);
+                this.options.TaskFactory.StartNew(() => this.HandleMessage(message))
+                    .FireAndForgetSafeAsync(this.logger);
             }
             catch (OperationCanceledException)
             {
