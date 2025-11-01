@@ -18,7 +18,12 @@ public class ATUri : IParsable<ATUri>
         @"^(at:\/\/)?((?:did:[a-z0-9:%-]+)|(?:[a-z][a-z0-9.:-]*))(\/[^?#\s]*)?(\?[^#\s]+)?(#[^\s]+)?$",
         RegexOptions.IgnoreCase);
 
-    private string host;
+    private readonly string host;
+    private readonly int pathNameStartIndex;
+    private readonly int pathNameLength;
+    private readonly string originalString;
+    private string? collection;
+    private string? rkey;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATUri"/> class.
@@ -44,8 +49,11 @@ public class ATUri : IParsable<ATUri>
             throw new FormatException($"Invalid at uri: {uri}");
         }
 
+        this.originalString = uri;
         this.host = match.Groups[2].Value ?? string.Empty;
-        this.Pathname = match.Groups[3].Value ?? string.Empty;
+        var pathGroup = match.Groups[3];
+        this.pathNameStartIndex = pathGroup.Index;
+        this.pathNameLength = pathGroup.Length;
         this.Hash = match.Groups[5].Value ?? string.Empty;
         this.Did = ATDid.Create(this);
         this.Handle = ATHandle.Create(this);
@@ -59,7 +67,7 @@ public class ATUri : IParsable<ATUri>
     /// <summary>
     /// Gets the pathname value.
     /// </summary>
-    public string Pathname { get; private set; }
+    public string Pathname => this.PathnameSpan.ToString();
 
     /// <summary>
     /// Gets the protocol value.
@@ -94,17 +102,55 @@ public class ATUri : IParsable<ATUri>
     /// <summary>
     /// Gets the collection value.
     /// </summary>
-    public string Collection => this.Pathname.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
+    public string Collection
+    {
+        get
+        {
+            if (this.collection == null)
+            {
+                if (this.pathNameLength <= 1)
+                {
+                    return string.Empty;
+                }
+
+                var trimmedPathname = this.PathnameSpan.Slice(1);
+                var slash = trimmedPathname.IndexOf('/');
+                this.collection = slash != -1 ? ToPossiblyInternedString(trimmedPathname.Slice(0, slash)) : string.Empty;
+            }
+
+            return this.collection;
+        }
+    }
 
     /// <summary>
     /// Gets the rkey value.
     /// </summary>
-    public string Rkey => this.Pathname?.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).ElementAtOrDefault(1) ?? string.Empty;
+    public string Rkey
+    {
+        get
+        {
+            if (this.rkey == null)
+            {
+                if (this.pathNameLength <= 1)
+                {
+                    return string.Empty;
+                }
+
+                var trimmedPathname = this.PathnameSpan.Slice(1);
+                var slash = trimmedPathname.IndexOf('/');
+                this.rkey = slash != -1 ? trimmedPathname.Slice(slash + 1).ToString() : string.Empty;
+            }
+
+            return this.rkey;
+        }
+    }
 
     /// <summary>
     /// Gets the href value.
     /// </summary>
     public string Href => this.ToString();
+
+    private ReadOnlySpan<char> PathnameSpan => this.originalString.AsSpan(this.pathNameStartIndex, this.pathNameLength);
 
     /// <summary>
     /// Creates a new instance of the <see cref="ATUri"/> class.
@@ -216,7 +262,12 @@ public class ATUri : IParsable<ATUri>
         buffer.Append("at://");
         buffer.Append(this.host);
 
-        buffer.Append(!this.Pathname.StartsWith("/") ? $"/{this.Pathname}" : this.Pathname);
+#if NETSTANDARD
+        var pathname = this.Pathname;
+#else
+        var pathname = this.PathnameSpan;
+#endif
+        buffer.Append(!pathname.StartsWith("/") ? $"/{pathname}" : pathname);
 
         if (!string.IsNullOrEmpty(this.Hash) && !this.Hash.StartsWith("#"))
         {
@@ -228,5 +279,17 @@ public class ATUri : IParsable<ATUri>
         }
 
         return buffer.ToString();
+    }
+
+    private static string ToPossiblyInternedString(ReadOnlySpan<char> collection)
+    {
+        return collection switch
+        {
+            FishyFlip.Lexicon.App.Bsky.Feed.Post.RecordType => FishyFlip.Lexicon.App.Bsky.Feed.Post.RecordType,
+            FishyFlip.Lexicon.App.Bsky.Feed.Like.RecordType => FishyFlip.Lexicon.App.Bsky.Feed.Like.RecordType,
+            FishyFlip.Lexicon.App.Bsky.Feed.Repost.RecordType => FishyFlip.Lexicon.App.Bsky.Feed.Repost.RecordType,
+            FishyFlip.Lexicon.App.Bsky.Graph.Follow.RecordType => FishyFlip.Lexicon.App.Bsky.Graph.Follow.RecordType,
+            _ => collection.ToString(),
+        };
     }
 }
