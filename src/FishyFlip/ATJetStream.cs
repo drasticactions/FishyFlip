@@ -272,7 +272,7 @@ public sealed class ATJetStream : IDisposable
                     continue;
                 }
 
-                ReadOnlySpan<byte> messageBytes = receiveStream.ToArray();
+                ReadOnlySpan<byte> messageBytes = receiveStream.GetBuffer().AsSpan(0, (int)receiveStream.Length);
                 receiveStream.SetLength(0);
 
                 if (this.compression)
