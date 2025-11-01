@@ -22,16 +22,16 @@ public static class ATObjectJsonReader
         {
             if (JsonDocument.TryParseValue(ref reader, out var doc))
             {
-                var rawText = doc.RootElement.GetRawText();
                 if (doc.RootElement.TryGetProperty("$type", out var type))
                 {
                     var text = type.GetString()?.Trim() ?? string.Empty;
-                    var atObject = ATObject.ToATObject(rawText, text);
+                    var atObject = ATObject.ToATObject(doc.RootElement, text);
                     if (atObject is not null)
                     {
                         return atObject;
                     }
 
+                    var rawText = doc.RootElement.GetRawText();
                     foreach (var converter in converters)
                     {
                         if (converter.SupportedTypes.Contains(text))
