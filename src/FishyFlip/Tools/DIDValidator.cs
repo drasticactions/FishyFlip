@@ -23,20 +23,27 @@ internal static class DIDValidator
             return false;
         }
 
-        string[] parts = did.Split(':');
-        if (parts.Length < 3)
-        {
-            logger?.LogError("DID requires prefix, method, and method-specific content");
-            return false;
-        }
-
-        if (parts[0] != "did")
+        if (!did.StartsWith("did:", StringComparison.Ordinal))
         {
             logger?.LogError("DID requires \"did:\" prefix");
             return false;
         }
 
-        if (!Regex.IsMatch(parts[1], "^[a-z]+$"))
+        var secondColon = did.IndexOf(':', 4);
+
+        if (secondColon == -1)
+        {
+            logger?.LogError("DID requires prefix, method, and method-specific content");
+            return false;
+        }
+
+#if NETSTANDARD
+        var method = did.Substring(4, secondColon - 4);
+#else
+        var method = did.AsSpan(4, secondColon - 4);
+#endif
+
+        if (!Regex.IsMatch(method, "^[a-z]+$"))
         {
             logger?.LogError("DID method must be lower-case letters");
             return false;
