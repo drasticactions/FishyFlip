@@ -55,18 +55,17 @@ public class ATCid : IEquatable<ATCid>
         try
         {
             // Handle base58btc (starting with 'Qm' for v0) or base32 (starting with 'b' for v1)
-            byte[] bytes;
             if (cid.StartsWith("Qm") && cid.Length == 46)
             {
                 // CIDv0 - base58btc encoded SHA-256 hash
-                bytes = DecodeBase58(cid);
+                var bytes = DecodeBase58(cid);
                 return new ATCid(0, 0x70, bytes); // 0x70 = dag-pb codec
             }
             else
             {
                 // CIDv1 - multibase encoded
-                bytes = DecodeMultibase(cid);
-                return ReadFromBytes(bytes);
+                var bytes = DecodeMultibase(cid, stackalloc byte[36]);
+                return ReadFromSpan(bytes);
             }
         }
         catch (Exception ex)
@@ -329,7 +328,7 @@ public class ATCid : IEquatable<ATCid>
         return result.ToString();
     }
 
-    private static byte[] DecodeMultibase(string input)
+    private static ReadOnlySpan<byte> DecodeMultibase(string input, Span<byte> callerProvidedBuffer)
     {
         if (input.Length == 0)
         {
@@ -341,7 +340,7 @@ public class ATCid : IEquatable<ATCid>
 
         return prefix switch
         {
-            'b' => DecodeBase32(data),
+            'b' => DecodeBase32(data, callerProvidedBuffer),
             #if NETSTANDARD
             'f' => DecodeHexString(data),
             #else
@@ -352,7 +351,7 @@ public class ATCid : IEquatable<ATCid>
         };
     }
 
-    private static byte[] DecodeBase32(string input)
+    private static ReadOnlySpan<byte> DecodeBase32(string input, Span<byte> callerProvidedBuffer)
     {
         // RFC 4648 base32 alphabet
         const string alphabet = "abcdefghijklmnopqrstuvwxyz234567";
@@ -361,7 +360,7 @@ public class ATCid : IEquatable<ATCid>
         input = input.TrimEnd('=');
 
         var resultFinalLength = input.Length * 5 / 8;
-        var result = new byte[resultFinalLength];
+        var result = resultFinalLength <= callerProvidedBuffer.Length ? callerProvidedBuffer : new byte[resultFinalLength];
         var resultLength = 0;
         var buffer = 0;
         var bufferLength = 0;
@@ -384,7 +383,7 @@ public class ATCid : IEquatable<ATCid>
             }
         }
 
-        return result;
+        return result.Slice(0, resultLength);
     }
 
     private static string EncodeBase32(byte[] input)
