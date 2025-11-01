@@ -360,7 +360,9 @@ public class ATCid : IEquatable<ATCid>
         // Remove padding
         input = input.TrimEnd('=');
 
-        var result = new List<byte>();
+        var resultFinalLength = input.Length * 5 / 8;
+        var result = new byte[resultFinalLength];
+        var resultLength = 0;
         var buffer = 0;
         var bufferLength = 0;
 
@@ -377,12 +379,12 @@ public class ATCid : IEquatable<ATCid>
 
             if (bufferLength >= 8)
             {
-                result.Add((byte)(buffer >> (bufferLength - 8)));
+                result[resultLength++] = (byte)(buffer >> (bufferLength - 8));
                 bufferLength -= 8;
             }
         }
 
-        return result.ToArray();
+        return result;
     }
 
     private static string EncodeBase32(byte[] input)
