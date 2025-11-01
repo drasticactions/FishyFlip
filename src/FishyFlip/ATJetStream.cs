@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System;
+using System.Buffers;
 using FishyFlip.Events;
 using FishyFlip.Lexicon;
 using FishyFlip.Tools.Json;
@@ -245,12 +247,13 @@ public sealed class ATJetStream : IDisposable
 
     private async Task ReceiveMessages(ClientWebSocket webSocket, CancellationToken token)
     {
-        byte[] receiveBuffer = new byte[ReceiveBufferSize];
+        var receiveBuffer = new byte[ReceiveBufferSize];
+        var receiveStream = new MemoryStream();
         while (webSocket.State == WebSocketState.Open)
         {
             try
             {
-                var messageType = this.compression ? WebSocketMessageType.Binary : WebSocketMessageType.Text;
+                var expectedMessageType = this.compression ? WebSocketMessageType.Binary : WebSocketMessageType.Text;
 #if NETSTANDARD
                 var result =
                     await webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), token);
@@ -258,12 +261,20 @@ public sealed class ATJetStream : IDisposable
                 var result =
                     await webSocket.ReceiveAsync(new Memory<byte>(receiveBuffer), token);
 #endif
-                if (result.MessageType != messageType && !result.EndOfMessage)
+                if (result.MessageType != expectedMessageType)
                 {
                     continue;
                 }
 
-                ReadOnlySpan<byte> messageBytes = receiveBuffer.AsSpan(0, result.Count);
+                receiveStream.Write(receiveBuffer, 0, result.Count);
+                if (!result.EndOfMessage)
+                {
+                    continue;
+                }
+
+                ReadOnlySpan<byte> messageBytes = receiveStream.ToArray();
+                receiveStream.SetLength(0);
+
                 if (this.compression)
                 {
                     messageBytes = this.decompressor!.Unwrap(messageBytes);
@@ -275,7 +286,8 @@ public sealed class ATJetStream : IDisposable
                 var message = Encoding.UTF8.GetString(messageBytes);
 #endif
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
-                this.options.TaskFactory.StartNew(() => this.HandleMessage(message)).FireAndForgetSafeAsync(this.logger);
+                this.options.TaskFactory.StartNew(() => this.HandleMessage(message))
+                    .FireAndForgetSafeAsync(this.logger);
             }
             catch (OperationCanceledException)
             {
