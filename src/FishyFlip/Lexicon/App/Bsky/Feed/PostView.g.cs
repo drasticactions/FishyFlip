@@ -40,7 +40,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <param name="threadgate">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView"/> (app.bsky.feed.defs#threadgateView)
         /// </param>
-        public PostView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic author = default, ATObject record = default, ATObject? embed = default, long? bookmarkCount = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, DateTime? indexedAt = default, FishyFlip.Lexicon.App.Bsky.Feed.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default)
+        /// <param name="debug">Debug information for internal development</param>
+        public PostView(FishyFlip.Models.ATUri uri = default, string cid = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewBasic author = default, ATObject record = default, ATObject? embed = default, long? bookmarkCount = default, long? replyCount = default, long? repostCount = default, long? likeCount = default, long? quoteCount = default, DateTime? indexedAt = default, FishyFlip.Lexicon.App.Bsky.Feed.ViewerState? viewer = default, List<FishyFlip.Lexicon.Com.Atproto.Label.Label>? labels = default, FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? threadgate = default, ATObject? debug = default)
         {
             this.Uri = uri;
             this.Cid = cid;
@@ -56,6 +57,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             this.Viewer = viewer;
             this.Labels = labels;
             this.Threadgate = threadgate;
+            this.Debug = debug;
             this.Type = "app.bsky.feed.defs#postView";
         }
 
@@ -88,6 +90,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
             if (obj["viewer"] is not null) this.Viewer = new FishyFlip.Lexicon.App.Bsky.Feed.ViewerState(obj["viewer"]);
             if (obj["labels"] is not null) this.Labels = obj["labels"].Values.Select(n =>new FishyFlip.Lexicon.Com.Atproto.Label.Label(n)).ToList();
             if (obj["threadgate"] is not null) this.Threadgate = new FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView(obj["threadgate"]);
+            if (obj["debug"] is not null) this.Debug = obj["debug"].ToATObject();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -198,6 +201,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         [JsonPropertyName("threadgate")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Feed.ThreadgateView? Threadgate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the debug.
+        /// <br/> Debug information for internal development
+        /// </summary>
+        [JsonPropertyName("debug")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ATObject? Debug { get; set; }
 
         public const string RecordType = "app.bsky.feed.defs#postView";
 

@@ -247,8 +247,8 @@ public sealed class ATJetStream : IDisposable
 
     private async Task ReceiveMessages(ClientWebSocket webSocket, CancellationToken token)
     {
-        byte[] receiveBuffer = new byte[ReceiveBufferSize];
-        MemoryStream receiveStream = new MemoryStream();
+        var receiveBuffer = new byte[ReceiveBufferSize];
+        var receiveStream = new MemoryStream();
         while (webSocket.State == WebSocketState.Open)
         {
             try
@@ -272,15 +272,19 @@ public sealed class ATJetStream : IDisposable
                     continue;
                 }
 
-                var data = receiveStream.ToArray();
+                ReadOnlySpan<byte> messageBytes = receiveStream.ToArray();
                 receiveStream.SetLength(0);
 
                 if (this.compression)
                 {
-                    data = this.decompressor!.Unwrap(data.AsSpan()).ToArray();
+                    messageBytes = this.decompressor!.Unwrap(messageBytes);
                 }
 
-                var message = Encoding.UTF8.GetString(data);
+#if NETSTANDARD
+                var message = Encoding.UTF8.GetString(messageBytes.ToArray());
+#else
+                var message = Encoding.UTF8.GetString(messageBytes);
+#endif
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
                 this.options.TaskFactory.StartNew(() => this.HandleMessage(message))
                     .FireAndForgetSafeAsync(this.logger);

@@ -409,10 +409,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="modTool">If specified, only events where the modTool name matches any of the given values are returned</param>
         /// <param name="batchId">If specified, only events where the batchId matches the given value are returned</param>
         /// <param name="ageAssuranceState">If specified, only events where the age assurance state matches the given value are returned</param>
+        /// <param name="withStrike">If specified, only events where strikeCount value is set are returned.</param>
         /// <param name="cursor"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? batchId = default, string? ageAssuranceState = default, string? cursor = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryEventsOutput?>> QueryEventsAsync (this FishyFlip.ATProtocol atp, List<string>? types = default, FishyFlip.Models.ATDid? createdBy = default, string? sortDirection = default, DateTime? createdAfter = default, DateTime? createdBefore = default, string? subject = default, List<string>? collections = default, string? subjectType = default, bool? includeAllUserRecords = default, int? limit = 50, bool? hasComment = default, string? comment = default, List<string>? addedLabels = default, List<string>? removedLabels = default, List<string>? addedTags = default, List<string>? removedTags = default, List<string>? reportTypes = default, List<string>? policies = default, List<string>? modTool = default, string? batchId = default, string? ageAssuranceState = default, bool? withStrike = default, string? cursor = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryEvents.ToString();
             endpointUrl += "?";
@@ -522,6 +523,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
                 queryStrings.Add("ageAssuranceState=" + ageAssuranceState);
             }
 
+            if (withStrike != null)
+            {
+                queryStrings.Add("withStrike=" + (withStrike.Value ? "true" : "false"));
+            }
+
             if (cursor != null)
             {
                 queryStrings.Add("cursor=" + cursor);
@@ -573,10 +579,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="minReportedRecordsCount">If specified, only subjects that belong to an account that has at least this many reported records will be returned.</param>
         /// <param name="minTakendownRecordsCount">If specified, only subjects that belong to an account that has at least this many taken down records will be returned.</param>
         /// <param name="minPriorityScore">If specified, only subjects that have priority score value above the given value will be returned.</param>
+        /// <param name="minStrikeCount">If specified, only subjects that belong to an account that has at least this many active strikes will be returned.</param>
         /// <param name="ageAssuranceState">If specified, only subjects with the given age assurance state will be returned.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, int? minAccountSuspendCount = 0, int? minReportedRecordsCount = 0, int? minTakendownRecordsCount = 0, int? minPriorityScore = 0, string? ageAssuranceState = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.Tools.Ozone.Moderation.QueryStatusesOutput?>> QueryStatusesAsync (this FishyFlip.ATProtocol atp, int? queueCount = 0, int? queueIndex = 0, string? queueSeed = default, bool? includeAllUserRecords = default, string? subject = default, string? comment = default, DateTime? reportedAfter = default, DateTime? reportedBefore = default, DateTime? reviewedAfter = default, DateTime? hostingDeletedAfter = default, DateTime? hostingDeletedBefore = default, DateTime? hostingUpdatedAfter = default, DateTime? hostingUpdatedBefore = default, List<string>? hostingStatuses = default, DateTime? reviewedBefore = default, bool? includeMuted = default, bool? onlyMuted = default, string? reviewState = default, List<string>? ignoreSubjects = default, FishyFlip.Models.ATDid? lastReviewedBy = default, string? sortField = default, string? sortDirection = default, bool? takendown = default, bool? appealed = default, int? limit = 50, List<string>? tags = default, List<string>? excludeTags = default, string? cursor = default, List<string>? collections = default, string? subjectType = default, int? minAccountSuspendCount = 0, int? minReportedRecordsCount = 0, int? minTakendownRecordsCount = 0, int? minPriorityScore = 0, int? minStrikeCount = 0, string? ageAssuranceState = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = QueryStatuses.ToString();
             endpointUrl += "?";
@@ -751,6 +758,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
                 queryStrings.Add("minPriorityScore=" + minPriorityScore);
             }
 
+            if (minStrikeCount != null)
+            {
+                queryStrings.Add("minStrikeCount=" + minStrikeCount);
+            }
+
             if (ageAssuranceState != null)
             {
                 queryStrings.Add("ageAssuranceState=" + ageAssuranceState);
@@ -786,7 +798,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             var inputItem = new ScheduleActionInput();
             switch (action.Type)
             {
-                case "tools.ozone.moderation.scheduleAction#takedown":
+                case "#takedown":
                     break;
                 default:
                     atp.Options.Logger?.LogWarning($"Unknown action type for union: " + action.Type);

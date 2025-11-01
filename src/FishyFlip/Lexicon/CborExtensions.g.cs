@@ -44,6 +44,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.AccountHosting(obj);
                 case "tools.ozone.moderation.defs#accountStats":
                     return new Tools.Ozone.Moderation.AccountStats(obj);
+                case "tools.ozone.moderation.defs#accountStrike":
+                    return new Tools.Ozone.Moderation.AccountStrike(obj);
                 case "com.atproto.admin.defs#accountView":
                     return new Com.Atproto.Admin.AccountView(obj);
                 case "app.bsky.notification.defs#activitySubscription":
