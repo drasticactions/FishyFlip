@@ -14,19 +14,22 @@ public class ATCidJsonConverter : JsonConverter<ATCid?>
     {
         if (JsonDocument.TryParseValue(ref reader, out var doc))
         {
-            if (doc.RootElement.ValueKind == JsonValueKind.Object)
+            using (doc)
             {
-                if (doc.RootElement.TryGetProperty("$link", out var type))
+                if (doc.RootElement.ValueKind == JsonValueKind.Object)
                 {
-                    var typeString = type.GetString()?.Trim() ?? string.Empty;
+                    if (doc.RootElement.TryGetProperty("$link", out var type))
+                    {
+                        var typeString = type.GetString()?.Trim() ?? string.Empty;
+                        return string.IsNullOrEmpty(typeString) ? null : ATCid.Decode(typeString);
+                    }
+                }
+
+                if (doc.RootElement.ValueKind is JsonValueKind.String)
+                {
+                    var typeString = doc.RootElement.GetString()?.Trim() ?? string.Empty;
                     return string.IsNullOrEmpty(typeString) ? null : ATCid.Decode(typeString);
                 }
-            }
-
-            if (doc.RootElement.ValueKind is JsonValueKind.String)
-            {
-                var typeString = doc.RootElement.GetString()?.Trim() ?? string.Empty;
-                return string.IsNullOrEmpty(typeString) ? null : ATCid.Decode(typeString);
             }
         }
 
