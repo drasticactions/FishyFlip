@@ -33,6 +33,8 @@ public class ATJetStreamBuilder
 
     /// <summary>
     /// Set the instance url to connect to.
+    /// Alternatives are listed at https://github.com/bluesky-social/jetstream/tree/main?tab=readme-ov-file#public-instances.
+    /// Defaults to https://jetstream1.us-east.bsky.network.
     /// </summary>
     /// <param name="url">Instance Url.</param>
     /// <returns><see cref="ATJetStreamBuilder"/>.</returns>
