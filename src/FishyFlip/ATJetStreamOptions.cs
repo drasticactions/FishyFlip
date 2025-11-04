@@ -17,7 +17,7 @@ public class ATJetStreamOptions
     /// <param name="customAtObjectConverters">Customer JSON Converters for ATObject.</param>
     public ATJetStreamOptions(IReadOnlyList<ICustomATObjectJsonConverter>? customAtObjectConverters = null)
     {
-        this.Url = new Uri("https://jetstream.atproto.tools");
+        this.Url = new Uri("https://jetstream1.us-east.bsky.network");
         this.Compression = false;
         this.JsonSerializerOptions = new JsonSerializerOptions()
         {

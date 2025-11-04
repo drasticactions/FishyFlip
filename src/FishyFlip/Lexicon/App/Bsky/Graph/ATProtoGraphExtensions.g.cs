@@ -153,11 +153,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="validate"></param>
         /// <param name="swapCommit"></param>
         /// <param name="cancellationToken"></param>
-        public static Task<Result<CreateRecordOutput?>> CreateFollowAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? subject, DateTime? createdAt = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
+        public static Task<Result<CreateRecordOutput?>> CreateFollowAsync(this FishyFlip.ATProtocol atp, FishyFlip.Models.ATDid? subject, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? via = default, string? rkey = default, bool? validate = default, string? swapCommit = default, CancellationToken cancellationToken = default)
         {
             var record = new FishyFlip.Lexicon.App.Bsky.Graph.Follow();
             record.Subject = subject;
             record.CreatedAt = createdAt ?? DateTime.UtcNow;
+            record.Via = via;
             return atp.CreateRecordAsync(atp.SessionManager.Session?.Did ?? throw new InvalidOperationException("Session did is required."), "app.bsky.graph.follow", record, rkey, validate, swapCommit, cancellationToken);
         }
 

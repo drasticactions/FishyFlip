@@ -819,6 +819,8 @@ namespace FishyFlip.Lexicon
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveDidOutput>), TypeInfoPropertyName = "ListComAtprotoIdentityResolveDidOutput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput), TypeInfoPropertyName = "ComAtprotoIdentityResolveHandleOutput")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Identity.ResolveHandleOutput>), TypeInfoPropertyName = "ListComAtprotoIdentityResolveHandleOutput")]
+    [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Lexicon.ResolveLexiconOutput), TypeInfoPropertyName = "ComAtprotoLexiconResolveLexiconOutput")]
+    [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Lexicon.ResolveLexiconOutput>), TypeInfoPropertyName = "ListComAtprotoLexiconResolveLexiconOutput")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable), TypeInfoPropertyName = "ComAtprotoTempResultAvailable")]
     [JsonSerializable(typeof(List<FishyFlip.Lexicon.Com.Atproto.Temp.ResultAvailable>), TypeInfoPropertyName = "ListComAtprotoTempResultAvailable")]
     [JsonSerializable(typeof(FishyFlip.Lexicon.Com.Atproto.Temp.ResultUnavailable), TypeInfoPropertyName = "ComAtprotoTempResultUnavailable")]
