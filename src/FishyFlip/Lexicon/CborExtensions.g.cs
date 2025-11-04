@@ -822,6 +822,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Identity.ResolveDidOutput(obj);
                 case "com.atproto.identity.resolveHandle#ResolveHandleOutput":
                     return new Com.Atproto.Identity.ResolveHandleOutput(obj);
+                case "com.atproto.lexicon.resolveLexicon#ResolveLexiconOutput":
+                    return new Com.Atproto.Lexicon.ResolveLexiconOutput(obj);
                 case "com.atproto.temp.checkHandleAvailability#resultAvailable":
                     return new Com.Atproto.Temp.ResultAvailable(obj);
                 case "com.atproto.temp.checkHandleAvailability#resultUnavailable":

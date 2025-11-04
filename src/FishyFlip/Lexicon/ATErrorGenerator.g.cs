@@ -118,6 +118,8 @@ namespace FishyFlip.Lexicon
                     return new RuleNotFoundError(statusCode, detail);
                 case "HostBanned":
                     return new HostBannedError(statusCode, detail);
+                case "LexiconNotFound":
+                    return new LexiconNotFoundError(statusCode, detail);
                 case "BadQueryString":
                     return new BadQueryStringError(statusCode, detail);
                 case "FutureCursor":

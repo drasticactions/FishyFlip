@@ -85,6 +85,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.Com.Atproto.Label.ATProtoLabel Label => new (this);
 
         /// <summary>
+        /// com.atproto.lexicon Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.Com.Atproto.Lexicon.ATProtoLexicon Lexicon => new (this);
+
+        /// <summary>
         /// com.atproto.moderation Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.Com.Atproto.Moderation.ATProtoModeration Moderation => new (this);

@@ -18,10 +18,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// </summary>
         /// <param name="subject"></param>
         /// <param name="createdAt"></param>
-        public Follow(FishyFlip.Models.ATDid? subject, DateTime? createdAt = default)
+        /// <param name="via">
+        /// <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </param>
+        public Follow(FishyFlip.Models.ATDid? subject, DateTime? createdAt = default, Com.Atproto.Repo.StrongRef? via = default)
         {
             this.Subject = subject;
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
+            this.Via = via;
             this.Type = "app.bsky.graph.follow";
         }
 
@@ -42,6 +46,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         {
             if (obj["subject"] is not null) this.Subject = obj["subject"].ToATDid();
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
+            if (obj["via"] is not null) this.Via = new FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef(obj["via"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -59,6 +64,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonPropertyName("createdAt")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// Gets or sets the via.
+        /// <br/> <see cref="FishyFlip.Lexicon.Com.Atproto.Repo.StrongRef"/> (com.atproto.repo.strongRef)
+        /// </summary>
+        [JsonPropertyName("via")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Com.Atproto.Repo.StrongRef? Via { get; set; }
 
         public const string RecordType = "app.bsky.graph.follow";
 
