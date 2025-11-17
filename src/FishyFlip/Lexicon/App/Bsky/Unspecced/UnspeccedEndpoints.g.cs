@@ -186,20 +186,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="anchor">Reference (AT-URI) to post record. This is the anchor post.</param>
-        /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?>> GetPostThreadOtherV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? prioritizeFollowedUsers = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadOtherV2Output?>> GetPostThreadOtherV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPostThreadOtherV2.ToString();
             endpointUrl += "?";
             List<string> queryStrings = new();
             queryStrings.Add("anchor=" + anchor);
-
-            if (prioritizeFollowedUsers != null)
-            {
-                queryStrings.Add("prioritizeFollowedUsers=" + (prioritizeFollowedUsers.Value ? "true" : "false"));
-            }
 
             var headers = new Dictionary<string, string>();
             headers.Add(Constants.AtProtoAcceptLabelers, atp.Options.LabelDefinitionsHeader);
@@ -216,11 +210,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="above">Whether to include parents above the anchor.</param>
         /// <param name="below">How many levels of replies to include below the anchor.</param>
         /// <param name="branchingFactor">Maximum of replies to include at each level of the thread, except for the direct replies to the anchor, which are (NOTE: currently, during unspecced phase) all returned (NOTE: later they might be paginated).</param>
-        /// <param name="prioritizeFollowedUsers">Whether to prioritize posts from followed users. It only has effect when the user is authenticated.</param>
         /// <param name="sort">Sorting for the thread replies.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?>> GetPostThreadV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? above = default, int? below = 6, int? branchingFactor = 10, bool? prioritizeFollowedUsers = default, string? sort = default, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPostThreadV2Output?>> GetPostThreadV2Async (this FishyFlip.ATProtocol atp, FishyFlip.Models.ATUri anchor, bool? above = default, int? below = 6, int? branchingFactor = 10, string? sort = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = GetPostThreadV2.ToString();
             endpointUrl += "?";
@@ -240,11 +233,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (branchingFactor != null)
             {
                 queryStrings.Add("branchingFactor=" + branchingFactor);
-            }
-
-            if (prioritizeFollowedUsers != null)
-            {
-                queryStrings.Add("prioritizeFollowedUsers=" + (prioritizeFollowedUsers.Value ? "true" : "false"));
             }
 
             if (sort != null)

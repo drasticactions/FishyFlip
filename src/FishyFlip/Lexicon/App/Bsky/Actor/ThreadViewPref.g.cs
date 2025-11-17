@@ -21,11 +21,9 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// random <br/>
         /// hotness <br/>
         /// </param>
-        /// <param name="prioritizeFollowedUsers">Show followed users at the top of all replies.</param>
-        public ThreadViewPref(string? sort = default, bool? prioritizeFollowedUsers = default)
+        public ThreadViewPref(string? sort = default)
         {
             this.Sort = sort;
-            this.PrioritizeFollowedUsers = prioritizeFollowedUsers;
             this.Type = "app.bsky.actor.defs#threadViewPref";
         }
 
@@ -45,7 +43,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         public ThreadViewPref(CBORObject obj)
         {
             if (obj["sort"] is not null) this.Sort = obj["sort"].AsString();
-            if (obj["prioritizeFollowedUsers"] is not null) this.PrioritizeFollowedUsers = obj["prioritizeFollowedUsers"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -62,14 +59,6 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("sort")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Sort { get; set; }
-
-        /// <summary>
-        /// Gets or sets the prioritizeFollowedUsers.
-        /// <br/> Show followed users at the top of all replies.
-        /// </summary>
-        [JsonPropertyName("prioritizeFollowedUsers")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public bool? PrioritizeFollowedUsers { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#threadViewPref";
 
