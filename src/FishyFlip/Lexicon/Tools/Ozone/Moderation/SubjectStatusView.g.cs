@@ -31,10 +31,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="createdAt">Timestamp referencing the first moderation status impacting event was emitted on the subject</param>
         /// <param name="reviewState">
         /// <br/> Known Values: <br/>
-        /// #reviewOpen <br/>
-        /// #reviewEscalated <br/>
-        /// #reviewClosed <br/>
-        /// #reviewNone <br/>
+        /// tools.ozone.moderation.defs#reviewOpen - Moderator review status of a subject: Open. Indicates that the subject needs to be reviewed by a moderator <br/>
+        /// tools.ozone.moderation.defs#reviewEscalated - Moderator review status of a subject: Escalated. Indicates that the subject was escalated for review by a moderator <br/>
+        /// tools.ozone.moderation.defs#reviewClosed - Moderator review status of a subject: Closed. Indicates that the subject was already reviewed and resolved by a moderator <br/>
+        /// tools.ozone.moderation.defs#reviewNone - Moderator review status of a subject: Unnecessary. Indicates that the subject does not need a review at the moment but there is probably some moderation related metadata available for it <br/>
         /// </param>
         /// <param name="comment">Sticky comment on the subject.</param>
         /// <param name="priorityScore">Numeric value representing the level of priority. Higher score means higher priority.</param>
@@ -204,10 +204,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <summary>
         /// Gets or sets the reviewState.
         /// <br/> Known Values: <br/>
-        /// #reviewOpen <br/>
-        /// #reviewEscalated <br/>
-        /// #reviewClosed <br/>
-        /// #reviewNone <br/>
+        /// tools.ozone.moderation.defs#reviewOpen - Moderator review status of a subject: Open. Indicates that the subject needs to be reviewed by a moderator <br/>
+        /// tools.ozone.moderation.defs#reviewEscalated - Moderator review status of a subject: Escalated. Indicates that the subject was escalated for review by a moderator <br/>
+        /// tools.ozone.moderation.defs#reviewClosed - Moderator review status of a subject: Closed. Indicates that the subject was already reviewed and resolved by a moderator <br/>
+        /// tools.ozone.moderation.defs#reviewNone - Moderator review status of a subject: Unnecessary. Indicates that the subject does not need a review at the moment but there is probably some moderation related metadata available for it <br/>
         /// </summary>
         [JsonPropertyName("reviewState")]
         [JsonRequired]

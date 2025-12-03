@@ -21,15 +21,17 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="acknowledgeAccountSubjects">If true, all other reports on content authored by this account will be resolved (acknowledged).</param>
         /// <param name="policies">Names/Keywords of the policies that drove the decision.</param>
         /// <param name="severityLevel">Severity level of the violation (e.g., 'sev-0', 'sev-1', 'sev-2', etc.).</param>
+        /// <param name="targetServices">List of services where the takedown should be applied. If empty or not provided, takedown is applied on all configured services.</param>
         /// <param name="strikeCount">Number of strikes to assign to the user for this violation.</param>
         /// <param name="strikeExpiresAt">When the strike should expire. If not provided, the strike never expires.</param>
-        public ModEventTakedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default, List<string>? policies = default, string? severityLevel = default, long? strikeCount = default, DateTime? strikeExpiresAt = default)
+        public ModEventTakedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default, List<string>? policies = default, string? severityLevel = default, List<string>? targetServices = default, long? strikeCount = default, DateTime? strikeExpiresAt = default)
         {
             this.Comment = comment;
             this.DurationInHours = durationInHours;
             this.AcknowledgeAccountSubjects = acknowledgeAccountSubjects;
             this.Policies = policies;
             this.SeverityLevel = severityLevel;
+            this.TargetServices = targetServices;
             this.StrikeCount = strikeCount;
             this.StrikeExpiresAt = strikeExpiresAt;
             this.Type = "tools.ozone.moderation.defs#modEventTakedown";
@@ -55,6 +57,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["acknowledgeAccountSubjects"] is not null) this.AcknowledgeAccountSubjects = obj["acknowledgeAccountSubjects"].AsBoolean();
             if (obj["policies"] is not null) this.Policies = obj["policies"].Values.Select(n =>n.AsString()).ToList();
             if (obj["severityLevel"] is not null) this.SeverityLevel = obj["severityLevel"].AsString();
+            if (obj["targetServices"] is not null) this.TargetServices = obj["targetServices"].Values.Select(n =>n.AsString()).ToList();
             if (obj["strikeCount"] is not null) this.StrikeCount = obj["strikeCount"].AsInt64Value();
             if (obj["strikeExpiresAt"] is not null) this.StrikeExpiresAt = obj["strikeExpiresAt"].ToDateTime();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
@@ -98,6 +101,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("severityLevel")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SeverityLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the targetServices.
+        /// <br/> List of services where the takedown should be applied. If empty or not provided, takedown is applied on all configured services.
+        /// </summary>
+        [JsonPropertyName("targetServices")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? TargetServices { get; set; }
 
         /// <summary>
         /// Gets or sets the strikeCount.
