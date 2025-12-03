@@ -23,7 +23,8 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="severityLevel">Severity level of the violation. Normally 'sev-1' that adds strike on repeat offense</param>
         /// <param name="strikeCount">Number of strikes to assign to the user for this violation. Normally 0 as an indicator of a warning and only added as a strike on a repeat offense.</param>
         /// <param name="strikeExpiresAt">When the strike should expire. If not provided, the strike never expires.</param>
-        public ModEventEmail(string subjectLine = default, string? content = default, string? comment = default, List<string>? policies = default, string? severityLevel = default, long? strikeCount = default, DateTime? strikeExpiresAt = default)
+        /// <param name="isDelivered">Indicates whether the email was successfully delivered to the user's inbox.</param>
+        public ModEventEmail(string subjectLine = default, string? content = default, string? comment = default, List<string>? policies = default, string? severityLevel = default, long? strikeCount = default, DateTime? strikeExpiresAt = default, bool? isDelivered = default)
         {
             this.SubjectLine = subjectLine;
             this.Content = content;
@@ -32,6 +33,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.SeverityLevel = severityLevel;
             this.StrikeCount = strikeCount;
             this.StrikeExpiresAt = strikeExpiresAt;
+            this.IsDelivered = isDelivered;
             this.Type = "tools.ozone.moderation.defs#modEventEmail";
         }
 
@@ -57,6 +59,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["severityLevel"] is not null) this.SeverityLevel = obj["severityLevel"].AsString();
             if (obj["strikeCount"] is not null) this.StrikeCount = obj["strikeCount"].AsInt64Value();
             if (obj["strikeExpiresAt"] is not null) this.StrikeExpiresAt = obj["strikeExpiresAt"].ToDateTime();
+            if (obj["isDelivered"] is not null) this.IsDelivered = obj["isDelivered"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -115,6 +118,14 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("strikeExpiresAt")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? StrikeExpiresAt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the isDelivered.
+        /// <br/> Indicates whether the email was successfully delivered to the user's inbox.
+        /// </summary>
+        [JsonPropertyName("isDelivered")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsDelivered { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.defs#modEventEmail";
 

@@ -20,12 +20,22 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// <param name="durationInHours">Indicates how long the takedown should be in effect before automatically expiring.</param>
         /// <param name="acknowledgeAccountSubjects">If true, all other reports on content authored by this account will be resolved (acknowledged).</param>
         /// <param name="policies">Names/Keywords of the policies that drove the decision.</param>
-        public Takedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default, List<string>? policies = default)
+        /// <param name="severityLevel">Severity level of the violation (e.g., 'sev-0', 'sev-1', 'sev-2', etc.).</param>
+        /// <param name="strikeCount">Number of strikes to assign to the user when takedown is applied.</param>
+        /// <param name="strikeExpiresAt">When the strike should expire. If not provided, the strike never expires.</param>
+        /// <param name="emailContent">Email content to be sent to the user upon takedown.</param>
+        /// <param name="emailSubject">Subject of the email to be sent to the user upon takedown.</param>
+        public Takedown(string? comment = default, long? durationInHours = default, bool? acknowledgeAccountSubjects = default, List<string>? policies = default, string? severityLevel = default, long? strikeCount = default, DateTime? strikeExpiresAt = default, string? emailContent = default, string? emailSubject = default)
         {
             this.Comment = comment;
             this.DurationInHours = durationInHours;
             this.AcknowledgeAccountSubjects = acknowledgeAccountSubjects;
             this.Policies = policies;
+            this.SeverityLevel = severityLevel;
+            this.StrikeCount = strikeCount;
+            this.StrikeExpiresAt = strikeExpiresAt;
+            this.EmailContent = emailContent;
+            this.EmailSubject = emailSubject;
             this.Type = "tools.ozone.moderation.scheduleAction#takedown";
         }
 
@@ -48,6 +58,11 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["durationInHours"] is not null) this.DurationInHours = obj["durationInHours"].AsInt64Value();
             if (obj["acknowledgeAccountSubjects"] is not null) this.AcknowledgeAccountSubjects = obj["acknowledgeAccountSubjects"].AsBoolean();
             if (obj["policies"] is not null) this.Policies = obj["policies"].Values.Select(n =>n.AsString()).ToList();
+            if (obj["severityLevel"] is not null) this.SeverityLevel = obj["severityLevel"].AsString();
+            if (obj["strikeCount"] is not null) this.StrikeCount = obj["strikeCount"].AsInt64Value();
+            if (obj["strikeExpiresAt"] is not null) this.StrikeExpiresAt = obj["strikeExpiresAt"].ToDateTime();
+            if (obj["emailContent"] is not null) this.EmailContent = obj["emailContent"].AsString();
+            if (obj["emailSubject"] is not null) this.EmailSubject = obj["emailSubject"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -81,6 +96,46 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("policies")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Policies { get; set; }
+
+        /// <summary>
+        /// Gets or sets the severityLevel.
+        /// <br/> Severity level of the violation (e.g., 'sev-0', 'sev-1', 'sev-2', etc.).
+        /// </summary>
+        [JsonPropertyName("severityLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? SeverityLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the strikeCount.
+        /// <br/> Number of strikes to assign to the user when takedown is applied.
+        /// </summary>
+        [JsonPropertyName("strikeCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? StrikeCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the strikeExpiresAt.
+        /// <br/> When the strike should expire. If not provided, the strike never expires.
+        /// </summary>
+        [JsonPropertyName("strikeExpiresAt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? StrikeExpiresAt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the emailContent.
+        /// <br/> Email content to be sent to the user upon takedown.
+        /// </summary>
+        [JsonPropertyName("emailContent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? EmailContent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the emailSubject.
+        /// <br/> Subject of the email to be sent to the user upon takedown.
+        /// </summary>
+        [JsonPropertyName("emailSubject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? EmailSubject { get; set; }
 
         public const string RecordType = "tools.ozone.moderation.scheduleAction#takedown";
 

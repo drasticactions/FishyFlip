@@ -22,10 +22,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// reset <br/>
         /// blocked <br/>
         /// </param>
+        /// <param name="access">
+        /// <br/> Known Values: <br/>
+        /// unknown <br/>
+        /// none <br/>
+        /// safe <br/>
+        /// full <br/>
+        /// </param>
         /// <param name="comment">Comment describing the reason for the override.</param>
-        public AgeAssuranceOverrideEvent(string status = default, string comment = default)
+        public AgeAssuranceOverrideEvent(string status = default, string? access = default, string comment = default)
         {
             this.Status = status;
+            this.Access = access;
             this.Comment = comment;
             this.Type = "tools.ozone.moderation.defs#ageAssuranceOverrideEvent";
         }
@@ -46,6 +54,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public AgeAssuranceOverrideEvent(CBORObject obj)
         {
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
+            if (obj["access"] is not null) this.Access = obj["access"].AsString();
             if (obj["comment"] is not null) this.Comment = obj["comment"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
@@ -61,6 +70,18 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         [JsonPropertyName("status")]
         [JsonRequired]
         public string Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets the access.
+        /// <br/> Known Values: <br/>
+        /// unknown <br/>
+        /// none <br/>
+        /// safe <br/>
+        /// full <br/>
+        /// </summary>
+        [JsonPropertyName("access")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Access { get; set; }
 
         /// <summary>
         /// Gets or sets the comment.

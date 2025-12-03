@@ -5,26 +5,27 @@
 #nullable enable annotations
 #nullable disable warnings
 
-namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
+namespace FishyFlip.Lexicon.App.Bsky.Ageassurance
 {
     /// <summary>
-    /// Age assurance info coming directly from users. Only works on DID subjects.
+    /// Object used to store Age Assurance data in stash.
     /// </summary>
-    public partial class AgeAssuranceEvent : ATObject, ICBOREncodable<AgeAssuranceEvent>, IJsonEncodable<AgeAssuranceEvent>, IParsable<AgeAssuranceEvent>
+    public partial class Event : ATObject, ICBOREncodable<Event>, IJsonEncodable<Event>, IParsable<Event>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AgeAssuranceEvent"/> class.
+        /// Initializes a new instance of the <see cref="Event"/> class.
         /// </summary>
         /// <param name="createdAt">The date and time of this write operation.</param>
-        /// <param name="attemptId">The unique identifier for this instance of the age assurance flow, in UUID format.</param>
+        /// <param name="attemptId">The unique identifier for this instance of the Age Assurance flow, in UUID format.</param>
         /// <param name="status">The status of the Age Assurance process.
         /// <br/> Known Values: <br/>
         /// unknown <br/>
         /// pending <br/>
         /// assured <br/>
+        /// blocked <br/>
         /// </param>
-        /// <param name="access">
+        /// <param name="access">The access level granted based on Age Assurance data we've processed.
         /// <br/> Known Values: <br/>
         /// unknown <br/>
         /// none <br/>
@@ -33,11 +34,12 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// </param>
         /// <param name="countryCode">The ISO 3166-1 alpha-2 country code provided when beginning the Age Assurance flow.</param>
         /// <param name="regionCode">The ISO 3166-2 region code provided when beginning the Age Assurance flow.</param>
-        /// <param name="initIp">The IP address used when initiating the AA flow.</param>
-        /// <param name="initUa">The user agent used when initiating the AA flow.</param>
-        /// <param name="completeIp">The IP address used when completing the AA flow.</param>
-        /// <param name="completeUa">The user agent used when completing the AA flow.</param>
-        public AgeAssuranceEvent(DateTime? createdAt = default, string attemptId = default, string status = default, string? access = default, string? countryCode = default, string? regionCode = default, string? initIp = default, string? initUa = default, string? completeIp = default, string? completeUa = default)
+        /// <param name="email">The email used for Age Assurance.</param>
+        /// <param name="initIp">The IP address used when initiating the Age Assurance flow.</param>
+        /// <param name="initUa">The user agent used when initiating the Age Assurance flow.</param>
+        /// <param name="completeIp">The IP address used when completing the Age Assurance flow.</param>
+        /// <param name="completeUa">The user agent used when completing the Age Assurance flow.</param>
+        public Event(DateTime? createdAt = default, string attemptId = default, string status = default, string access = default, string countryCode = default, string? regionCode = default, string? email = default, string? initIp = default, string? initUa = default, string? completeIp = default, string? completeUa = default)
         {
             this.CreatedAt = createdAt ?? DateTime.UtcNow;
             this.AttemptId = attemptId;
@@ -45,27 +47,28 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             this.Access = access;
             this.CountryCode = countryCode;
             this.RegionCode = regionCode;
+            this.Email = email;
             this.InitIp = initIp;
             this.InitUa = initUa;
             this.CompleteIp = completeIp;
             this.CompleteUa = completeUa;
-            this.Type = "tools.ozone.moderation.defs#ageAssuranceEvent";
+            this.Type = "app.bsky.ageassurance.defs#event";
         }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AgeAssuranceEvent"/> class.
+        /// Initializes a new instance of the <see cref="Event"/> class.
         /// </summary>
-        public AgeAssuranceEvent()
+        public Event()
         {
-            this.Type = "tools.ozone.moderation.defs#ageAssuranceEvent";
+            this.Type = "app.bsky.ageassurance.defs#event";
         }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AgeAssuranceEvent"/> class.
+        /// Initializes a new instance of the <see cref="Event"/> class.
         /// </summary>
-        public AgeAssuranceEvent(CBORObject obj)
+        public Event(CBORObject obj)
         {
             if (obj["createdAt"] is not null) this.CreatedAt = obj["createdAt"].ToDateTime();
             if (obj["attemptId"] is not null) this.AttemptId = obj["attemptId"].AsString();
@@ -73,6 +76,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
             if (obj["access"] is not null) this.Access = obj["access"].AsString();
             if (obj["countryCode"] is not null) this.CountryCode = obj["countryCode"].AsString();
             if (obj["regionCode"] is not null) this.RegionCode = obj["regionCode"].AsString();
+            if (obj["email"] is not null) this.Email = obj["email"].AsString();
             if (obj["initIp"] is not null) this.InitIp = obj["initIp"].AsString();
             if (obj["initUa"] is not null) this.InitUa = obj["initUa"].AsString();
             if (obj["completeIp"] is not null) this.CompleteIp = obj["completeIp"].AsString();
@@ -90,7 +94,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the attemptId.
-        /// <br/> The unique identifier for this instance of the age assurance flow, in UUID format.
+        /// <br/> The unique identifier for this instance of the Age Assurance flow, in UUID format.
         /// </summary>
         [JsonPropertyName("attemptId")]
         [JsonRequired]
@@ -103,6 +107,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// unknown <br/>
         /// pending <br/>
         /// assured <br/>
+        /// blocked <br/>
         /// </summary>
         [JsonPropertyName("status")]
         [JsonRequired]
@@ -110,6 +115,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the access.
+        /// <br/> The access level granted based on Age Assurance data we've processed.
         /// <br/> Known Values: <br/>
         /// unknown <br/>
         /// none <br/>
@@ -117,16 +123,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         /// full <br/>
         /// </summary>
         [JsonPropertyName("access")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? Access { get; set; }
+        [JsonRequired]
+        public string Access { get; set; }
 
         /// <summary>
         /// Gets or sets the countryCode.
         /// <br/> The ISO 3166-1 alpha-2 country code provided when beginning the Age Assurance flow.
         /// </summary>
         [JsonPropertyName("countryCode")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? CountryCode { get; set; }
+        [JsonRequired]
+        public string CountryCode { get; set; }
 
         /// <summary>
         /// Gets or sets the regionCode.
@@ -137,8 +143,16 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         public string? RegionCode { get; set; }
 
         /// <summary>
+        /// Gets or sets the email.
+        /// <br/> The email used for Age Assurance.
+        /// </summary>
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Email { get; set; }
+
+        /// <summary>
         /// Gets or sets the initIp.
-        /// <br/> The IP address used when initiating the AA flow.
+        /// <br/> The IP address used when initiating the Age Assurance flow.
         /// </summary>
         [JsonPropertyName("initIp")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -146,7 +160,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the initUa.
-        /// <br/> The user agent used when initiating the AA flow.
+        /// <br/> The user agent used when initiating the Age Assurance flow.
         /// </summary>
         [JsonPropertyName("initUa")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -154,7 +168,7 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the completeIp.
-        /// <br/> The IP address used when completing the AA flow.
+        /// <br/> The IP address used when completing the Age Assurance flow.
         /// </summary>
         [JsonPropertyName("completeIp")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -162,27 +176,27 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
 
         /// <summary>
         /// Gets or sets the completeUa.
-        /// <br/> The user agent used when completing the AA flow.
+        /// <br/> The user agent used when completing the Age Assurance flow.
         /// </summary>
         [JsonPropertyName("completeUa")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? CompleteUa { get; set; }
 
-        public const string RecordType = "tools.ozone.moderation.defs#ageAssuranceEvent";
+        public const string RecordType = "app.bsky.ageassurance.defs#event";
 
         public override string ToJson()
         {
-            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceEvent);
+            return JsonSerializer.Serialize(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.Event>)SourceGenerationContext.Default.AppBskyAgeassuranceEvent);
         }
 
         public override byte[] ToUtf8Json()
         {
-            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceEvent);
+            return JsonSerializer.SerializeToUtf8Bytes(this, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.Event>)SourceGenerationContext.Default.AppBskyAgeassuranceEvent);
         }
 
-        public static new AgeAssuranceEvent FromJson(string json)
+        public static new Event FromJson(string json)
         {
-            return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>(json, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceEvent)!;
+            return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.Event>(json, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.Event>)SourceGenerationContext.Default.AppBskyAgeassuranceEvent)!;
         }
 
         /// <inheritdoc/>
@@ -193,21 +207,21 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
         }
 
         /// <inheritdoc/>
-        public static new AgeAssuranceEvent FromCBORObject(CBORObject obj)
+        public static new Event FromCBORObject(CBORObject obj)
         {
-            return new AgeAssuranceEvent(obj);
+            return new Event(obj);
         }
 
         /// <inheritdoc/>
-        public static AgeAssuranceEvent Parse(string s, IFormatProvider? provider)
+        public static Event Parse(string s, IFormatProvider? provider)
         {
-            return JsonSerializer.Deserialize<AgeAssuranceEvent>(s, (JsonTypeInfo<AgeAssuranceEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceEvent)!;
+            return JsonSerializer.Deserialize<Event>(s, (JsonTypeInfo<Event>)SourceGenerationContext.Default.AppBskyAgeassuranceEvent)!;
         }
 
         /// <inheritdoc/>
-        public static bool TryParse(string? s, IFormatProvider? provider, out AgeAssuranceEvent result)
+        public static bool TryParse(string? s, IFormatProvider? provider, out Event result)
         {
-            result = JsonSerializer.Deserialize<AgeAssuranceEvent>(s, (JsonTypeInfo<AgeAssuranceEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceEvent);
+            result = JsonSerializer.Deserialize<Event>(s, (JsonTypeInfo<Event>)SourceGenerationContext.Default.AppBskyAgeassuranceEvent);
             return result != null;
         }
     }

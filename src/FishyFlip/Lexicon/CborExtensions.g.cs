@@ -86,6 +86,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.AspectRatio(obj);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return new Chat.Bsky.Convo.BatchItem(obj);
+                case "app.bsky.ageassurance.begin#BeginInput":
+                    return new App.Bsky.Ageassurance.BeginInput(obj);
                 case "tools.ozone.moderation.defs#blobView":
                     return new Tools.Ozone.Moderation.BlobView(obj);
                 case "app.bsky.graph.block":
@@ -124,6 +126,24 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Sync.Commit(obj);
                 case "com.atproto.repo.defs#commitMeta":
                     return new Com.Atproto.Repo.CommitMeta(obj);
+                case "app.bsky.ageassurance.defs#config":
+                    return new App.Bsky.Ageassurance.Config(obj);
+                case "app.bsky.ageassurance.defs#configRegion":
+                    return new App.Bsky.Ageassurance.ConfigRegion(obj);
+                case "app.bsky.ageassurance.defs#configRegionRuleDefault":
+                    return new App.Bsky.Ageassurance.ConfigRegionRuleDefault(obj);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAccountNewerThan":
+                    return new App.Bsky.Ageassurance.ConfigRegionRuleIfAccountNewerThan(obj);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAccountOlderThan":
+                    return new App.Bsky.Ageassurance.ConfigRegionRuleIfAccountOlderThan(obj);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAssuredOverAge":
+                    return new App.Bsky.Ageassurance.ConfigRegionRuleIfAssuredOverAge(obj);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAssuredUnderAge":
+                    return new App.Bsky.Ageassurance.ConfigRegionRuleIfAssuredUnderAge(obj);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfDeclaredOverAge":
+                    return new App.Bsky.Ageassurance.ConfigRegionRuleIfDeclaredOverAge(obj);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfDeclaredUnderAge":
+                    return new App.Bsky.Ageassurance.ConfigRegionRuleIfDeclaredUnderAge(obj);
                 case "com.atproto.server.confirmEmail#ConfirmEmailInput":
                     return new Com.Atproto.Server.ConfirmEmailInput(obj);
                 case "com.atproto.server.describeServer#contact":
@@ -232,6 +252,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.EmitEventInput(obj);
                 case "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput":
                     return new Com.Atproto.Admin.EnableAccountInvitesInput(obj);
+                case "app.bsky.ageassurance.defs#event":
+                    return new App.Bsky.Ageassurance.Event(obj);
                 case "tools.ozone.safelink.defs#event":
                     return new Tools.Ozone.Safelink.Event(obj);
                 case "tools.ozone.hosting.getAccountHistory#event":
@@ -396,6 +418,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetStarterPacksOutput(obj);
                 case "app.bsky.graph.getStarterPacksWithMembership#GetStarterPacksWithMembershipOutput":
                     return new App.Bsky.Graph.GetStarterPacksWithMembershipOutput(obj);
+                case "app.bsky.ageassurance.getState#GetStateOutput":
+                    return new App.Bsky.Ageassurance.GetStateOutput(obj);
                 case "tools.ozone.moderation.getSubjects#GetSubjectsOutput":
                     return new Tools.Ozone.Moderation.GetSubjectsOutput(obj);
                 case "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput":
@@ -932,6 +956,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackViewBasic(obj);
                 case "app.bsky.graph.getStarterPacksWithMembership#starterPackWithMembership":
                     return new App.Bsky.Graph.StarterPackWithMembership(obj);
+                case "app.bsky.ageassurance.defs#state":
+                    return new App.Bsky.Ageassurance.State(obj);
+                case "app.bsky.ageassurance.defs#stateMetadata":
+                    return new App.Bsky.Ageassurance.StateMetadata(obj);
                 case "app.bsky.actor.status":
                     return new App.Bsky.Actor.Status(obj);
                 case "com.atproto.admin.defs#statusAttr":

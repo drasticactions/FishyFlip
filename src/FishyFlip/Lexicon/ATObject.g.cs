@@ -122,6 +122,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio>)SourceGenerationContext.Default.AppBskyEmbedAspectRatio);
                 case "chat.bsky.convo.sendMessageBatch#batchItem":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.BatchItem>)SourceGenerationContext.Default.ChatBskyConvoBatchItem);
+                case "app.bsky.ageassurance.begin#BeginInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.BeginInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.BeginInput>)SourceGenerationContext.Default.AppBskyAgeassuranceBeginInput);
                 case "tools.ozone.moderation.defs#blobView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.BlobView>)SourceGenerationContext.Default.ToolsOzoneModerationBlobView);
                 case "app.bsky.graph.block":
@@ -160,6 +162,24 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Commit>)SourceGenerationContext.Default.ComAtprotoSyncCommit);
                 case "com.atproto.repo.defs#commitMeta":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.CommitMeta>)SourceGenerationContext.Default.ComAtprotoRepoCommitMeta);
+                case "app.bsky.ageassurance.defs#config":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.Config>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.Config>)SourceGenerationContext.Default.AppBskyAgeassuranceConfig);
+                case "app.bsky.ageassurance.defs#configRegion":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegion>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegion>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegion);
+                case "app.bsky.ageassurance.defs#configRegionRuleDefault":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleDefault>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleDefault>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegionRuleDefault);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAccountNewerThan":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAccountNewerThan>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAccountNewerThan>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegionRuleIfAccountNewerThan);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAccountOlderThan":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAccountOlderThan>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAccountOlderThan>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegionRuleIfAccountOlderThan);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAssuredOverAge":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAssuredOverAge>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAssuredOverAge>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegionRuleIfAssuredOverAge);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfAssuredUnderAge":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAssuredUnderAge>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAssuredUnderAge>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegionRuleIfAssuredUnderAge);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfDeclaredOverAge":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfDeclaredOverAge>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfDeclaredOverAge>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegionRuleIfDeclaredOverAge);
+                case "app.bsky.ageassurance.defs#configRegionRuleIfDeclaredUnderAge":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfDeclaredUnderAge>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfDeclaredUnderAge>)SourceGenerationContext.Default.AppBskyAgeassuranceConfigRegionRuleIfDeclaredUnderAge);
                 case "com.atproto.server.confirmEmail#ConfirmEmailInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Server.ConfirmEmailInput>)SourceGenerationContext.Default.ComAtprotoServerConfirmEmailInput);
                 case "com.atproto.server.describeServer#contact":
@@ -268,6 +288,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.EmitEventInput>)SourceGenerationContext.Default.ToolsOzoneModerationEmitEventInput);
                 case "com.atproto.admin.enableAccountInvites#EnableAccountInvitesInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.EnableAccountInvitesInput>)SourceGenerationContext.Default.ComAtprotoAdminEnableAccountInvitesInput);
+                case "app.bsky.ageassurance.defs#event":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.Event>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.Event>)SourceGenerationContext.Default.AppBskyAgeassuranceEvent);
                 case "tools.ozone.safelink.defs#event":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Safelink.Event>)SourceGenerationContext.Default.ToolsOzoneSafelinkEvent);
                 case "tools.ozone.hosting.getAccountHistory#event":
@@ -432,6 +454,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksOutput>)SourceGenerationContext.Default.AppBskyGraphGetStarterPacksOutput);
                 case "app.bsky.graph.getStarterPacksWithMembership#GetStarterPacksWithMembershipOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetStarterPacksWithMembershipOutput>)SourceGenerationContext.Default.AppBskyGraphGetStarterPacksWithMembershipOutput);
+                case "app.bsky.ageassurance.getState#GetStateOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.GetStateOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.GetStateOutput>)SourceGenerationContext.Default.AppBskyAgeassuranceGetStateOutput);
                 case "tools.ozone.moderation.getSubjects#GetSubjectsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.GetSubjectsOutput>)SourceGenerationContext.Default.ToolsOzoneModerationGetSubjectsOutput);
                 case "com.atproto.admin.getSubjectStatus#GetSubjectStatusOutput":
@@ -968,6 +992,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>)SourceGenerationContext.Default.AppBskyGraphStarterPackViewBasic);
                 case "app.bsky.graph.getStarterPacksWithMembership#starterPackWithMembership":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackWithMembership>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackWithMembership>)SourceGenerationContext.Default.AppBskyGraphStarterPackWithMembership);
+                case "app.bsky.ageassurance.defs#state":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.State>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.State>)SourceGenerationContext.Default.AppBskyAgeassuranceState);
+                case "app.bsky.ageassurance.defs#stateMetadata":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.StateMetadata>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.StateMetadata>)SourceGenerationContext.Default.AppBskyAgeassuranceStateMetadata);
                 case "app.bsky.actor.status":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.Status>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.Status>)SourceGenerationContext.Default.AppBskyActorStatus);
                 case "com.atproto.admin.defs#statusAttr":

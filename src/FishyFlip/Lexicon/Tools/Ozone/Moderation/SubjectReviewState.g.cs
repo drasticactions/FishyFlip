@@ -15,24 +15,24 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Moderation
     {
 
         /// <summary>
-        /// #reviewOpen
+        /// tools.ozone.moderation.defs#reviewOpen
         /// </summary>
-        public const string ReviewOpen = "#reviewOpen";
+        public const string ReviewOpen = "tools.ozone.moderation.defs#reviewOpen";
 
         /// <summary>
-        /// #reviewEscalated
+        /// tools.ozone.moderation.defs#reviewEscalated
         /// </summary>
-        public const string ReviewEscalated = "#reviewEscalated";
+        public const string ReviewEscalated = "tools.ozone.moderation.defs#reviewEscalated";
 
         /// <summary>
-        /// #reviewClosed
+        /// tools.ozone.moderation.defs#reviewClosed
         /// </summary>
-        public const string ReviewClosed = "#reviewClosed";
+        public const string ReviewClosed = "tools.ozone.moderation.defs#reviewClosed";
 
         /// <summary>
-        /// #reviewNone
+        /// tools.ozone.moderation.defs#reviewNone
         /// </summary>
-        public const string ReviewNone = "#reviewNone";
+        public const string ReviewNone = "tools.ozone.moderation.defs#reviewNone";
 
     }
 }

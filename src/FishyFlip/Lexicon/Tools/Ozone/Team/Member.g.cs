@@ -23,10 +23,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <param name="lastUpdatedBy"></param>
         /// <param name="role">
         /// <br/> Known Values: <br/>
-        /// roleAdmin <br/>
-        /// roleModerator <br/>
-        /// roleTriage <br/>
-        /// roleVerifier <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// </param>
         public Member(FishyFlip.Models.ATDid did = default, bool? disabled = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileViewDetailed? profile = default, DateTime? createdAt = default, DateTime? updatedAt = default, string? lastUpdatedBy = default, string role = default)
         {
@@ -112,10 +112,10 @@ namespace FishyFlip.Lexicon.Tools.Ozone.Team
         /// <summary>
         /// Gets or sets the role.
         /// <br/> Known Values: <br/>
-        /// roleAdmin <br/>
-        /// roleModerator <br/>
-        /// roleTriage <br/>
-        /// roleVerifier <br/>
+        /// roleAdmin - Admin role. Highest level of access, can perform all actions. <br/>
+        /// roleModerator - Moderator role. Can perform most actions. <br/>
+        /// roleTriage - Triage role. Mostly intended for monitoring and escalating issues. <br/>
+        /// roleVerifier - Verifier role. Only allowed to issue verifications. <br/>
         /// </summary>
         [JsonPropertyName("role")]
         [JsonRequired]

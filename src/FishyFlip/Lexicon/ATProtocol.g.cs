@@ -20,6 +20,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.App.Bsky.Actor.BlueskyActor Actor => new (this);
 
         /// <summary>
+        /// app.bsky.ageassurance Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.App.Bsky.Ageassurance.BlueskyAgeassurance Ageassurance => new (this);
+
+        /// <summary>
         /// app.bsky.bookmark Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.App.Bsky.Bookmark.BlueskyBookmark Bookmark => new (this);
