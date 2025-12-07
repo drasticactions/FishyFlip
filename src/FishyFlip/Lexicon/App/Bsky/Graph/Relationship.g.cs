@@ -19,11 +19,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// <param name="did"></param>
         /// <param name="following">if the actor follows this DID, this is the AT-URI of the follow record</param>
         /// <param name="followedBy">if the actor is followed by this DID, contains the AT-URI of the follow record</param>
-        public Relationship(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default)
+        /// <param name="blocking">if the actor blocks this DID, this is the AT-URI of the block record</param>
+        /// <param name="blockedBy">if the actor is blocked by this DID, contains the AT-URI of the block record</param>
+        /// <param name="blockingByList">if the actor blocks this DID via a block list, this is the AT-URI of the listblock record</param>
+        /// <param name="blockedByList">if the actor is blocked by this DID via a block list, contains the AT-URI of the listblock record</param>
+        public Relationship(FishyFlip.Models.ATDid did = default, FishyFlip.Models.ATUri? following = default, FishyFlip.Models.ATUri? followedBy = default, FishyFlip.Models.ATUri? blocking = default, FishyFlip.Models.ATUri? blockedBy = default, FishyFlip.Models.ATUri? blockingByList = default, FishyFlip.Models.ATUri? blockedByList = default)
         {
             this.Did = did;
             this.Following = following;
             this.FollowedBy = followedBy;
+            this.Blocking = blocking;
+            this.BlockedBy = blockedBy;
+            this.BlockingByList = blockingByList;
+            this.BlockedByList = blockedByList;
             this.Type = "app.bsky.graph.defs#relationship";
         }
 
@@ -45,6 +53,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             if (obj["following"] is not null) this.Following = obj["following"].ToATUri();
             if (obj["followedBy"] is not null) this.FollowedBy = obj["followedBy"].ToATUri();
+            if (obj["blocking"] is not null) this.Blocking = obj["blocking"].ToATUri();
+            if (obj["blockedBy"] is not null) this.BlockedBy = obj["blockedBy"].ToATUri();
+            if (obj["blockingByList"] is not null) this.BlockingByList = obj["blockingByList"].ToATUri();
+            if (obj["blockedByList"] is not null) this.BlockedByList = obj["blockedByList"].ToATUri();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -73,6 +85,42 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
         public FishyFlip.Models.ATUri? FollowedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the blocking.
+        /// <br/> if the actor blocks this DID, this is the AT-URI of the block record
+        /// </summary>
+        [JsonPropertyName("blocking")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
+        public FishyFlip.Models.ATUri? Blocking { get; set; }
+
+        /// <summary>
+        /// Gets or sets the blockedBy.
+        /// <br/> if the actor is blocked by this DID, contains the AT-URI of the block record
+        /// </summary>
+        [JsonPropertyName("blockedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
+        public FishyFlip.Models.ATUri? BlockedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the blockingByList.
+        /// <br/> if the actor blocks this DID via a block list, this is the AT-URI of the listblock record
+        /// </summary>
+        [JsonPropertyName("blockingByList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
+        public FishyFlip.Models.ATUri? BlockingByList { get; set; }
+
+        /// <summary>
+        /// Gets or sets the blockedByList.
+        /// <br/> if the actor is blocked by this DID via a block list, contains the AT-URI of the listblock record
+        /// </summary>
+        [JsonPropertyName("blockedByList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
+        public FishyFlip.Models.ATUri? BlockedByList { get; set; }
 
         public const string RecordType = "app.bsky.graph.defs#relationship";
 
