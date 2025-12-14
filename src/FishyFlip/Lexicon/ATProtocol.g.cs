@@ -30,6 +30,11 @@ namespace FishyFlip
         public FishyFlip.Lexicon.App.Bsky.Bookmark.BlueskyBookmark Bookmark => new (this);
 
         /// <summary>
+        /// app.bsky.contact Endpoint Group.
+        /// </summary>
+        public FishyFlip.Lexicon.App.Bsky.Contact.BlueskyContact Contact => new (this);
+
+        /// <summary>
         /// app.bsky.feed Endpoint Group.
         /// </summary>
         public FishyFlip.Lexicon.App.Bsky.Feed.BlueskyFeed Feed => new (this);

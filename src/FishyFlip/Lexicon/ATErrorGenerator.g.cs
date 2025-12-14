@@ -74,6 +74,10 @@ namespace FishyFlip.Lexicon
                     return new SetNotFoundError(statusCode, detail);
                 case "InvalidScopeReference":
                     return new InvalidScopeReferenceError(statusCode, detail);
+                case "InvalidDid":
+                    return new InvalidDidError(statusCode, detail);
+                case "InternalError":
+                    return new InternalErrorError(statusCode, detail);
                 case "SubjectHasAction":
                     return new SubjectHasActionError(statusCode, detail);
                 case "DuplicateExternalId":
@@ -102,6 +106,10 @@ namespace FishyFlip.Lexicon
                     return new HostNotFoundError(statusCode, detail);
                 case "UnknownList":
                     return new UnknownListError(statusCode, detail);
+                case "InvalidLimit":
+                    return new InvalidLimitError(statusCode, detail);
+                case "InvalidCursor":
+                    return new InvalidCursorError(statusCode, detail);
                 case "NotFound":
                     return new NotFoundError(statusCode, detail);
                 case "RecordNotFound":
@@ -110,6 +118,10 @@ namespace FishyFlip.Lexicon
                     return new ActorNotFoundError(statusCode, detail);
                 case "BadExpiration":
                     return new BadExpirationError(statusCode, detail);
+                case "InvalidContacts":
+                    return new InvalidContactsError(statusCode, detail);
+                case "TooManyContacts":
+                    return new TooManyContactsError(statusCode, detail);
                 case "HandleNotFound":
                     return new HandleNotFoundError(statusCode, detail);
                 case "DidNotFound":
@@ -124,12 +136,18 @@ namespace FishyFlip.Lexicon
                     return new LexiconNotFoundError(statusCode, detail);
                 case "BadQueryString":
                     return new BadQueryStringError(statusCode, detail);
+                case "RateLimitExceeded":
+                    return new RateLimitExceededError(statusCode, detail);
+                case "InvalidPhone":
+                    return new InvalidPhoneError(statusCode, detail);
                 case "FutureCursor":
                     return new FutureCursorError(statusCode, detail);
                 case "ConsumerTooSlow":
                     return new ConsumerTooSlowError(statusCode, detail);
                 case "TokenRequired":
                     return new TokenRequiredError(statusCode, detail);
+                case "InvalidCode":
+                    return new InvalidCodeError(statusCode, detail);
                 default:
                     return new FishyFlip.Models.ATError(statusCode, detail);
             }
