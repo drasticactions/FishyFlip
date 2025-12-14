@@ -228,6 +228,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.Declaration>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Declaration>)SourceGenerationContext.Default.AppBskyNotificationDeclaration);
                 case "chat.bsky.actor.declaration":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Actor.Declaration>)SourceGenerationContext.Default.ChatBskyActorDeclaration);
+                case "app.bsky.actor.defs#declaredAgePref":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.DeclaredAgePref>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.DeclaredAgePref>)SourceGenerationContext.Default.AppBskyActorDeclaredAgePref);
                 case "com.atproto.repo.applyWrites#delete":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Repo.Delete>)SourceGenerationContext.Default.ComAtprotoRepoDelete);
                 case "com.atproto.admin.deleteAccount#DeleteAccountInput":
@@ -272,6 +274,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Admin.DisableInviteCodesInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Admin.DisableInviteCodesInput>)SourceGenerationContext.Default.ComAtprotoAdminDisableInviteCodesInput);
                 case "app.bsky.feed.postgate#disableRule":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>)SourceGenerationContext.Default.AppBskyFeedDisableRule);
+                case "app.bsky.contact.dismissMatch#DismissMatchInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.DismissMatchInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.DismissMatchInput>)SourceGenerationContext.Default.AppBskyContactDismissMatchInput);
+                case "app.bsky.contact.dismissMatch#DismissMatchOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.DismissMatchOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.DismissMatchOutput>)SourceGenerationContext.Default.AppBskyContactDismissMatchOutput);
                 case "tools.ozone.hosting.getAccountHistory#emailConfirmed":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailConfirmed>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Hosting.EmailConfirmed>)SourceGenerationContext.Default.ToolsOzoneHostingEmailConfirmed);
                 case "tools.ozone.hosting.getAccountHistory#emailUpdated":
@@ -398,6 +404,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetListsWithMembershipOutput>)SourceGenerationContext.Default.AppBskyGraphGetListsWithMembershipOutput);
                 case "chat.bsky.convo.getLog#GetLogOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.GetLogOutput>)SourceGenerationContext.Default.ChatBskyConvoGetLogOutput);
+                case "app.bsky.contact.getMatches#GetMatchesOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.GetMatchesOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.GetMatchesOutput>)SourceGenerationContext.Default.AppBskyContactGetMatchesOutput);
                 case "chat.bsky.moderation.getMessageContext#GetMessageContextOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Moderation.GetMessageContextOutput>)SourceGenerationContext.Default.ChatBskyModerationGetMessageContextOutput);
                 case "chat.bsky.convo.getMessages#GetMessagesOutput":
@@ -480,6 +488,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.GetSuggestionsOutput>)SourceGenerationContext.Default.AppBskyActorGetSuggestionsOutput);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestionsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestionsSkeletonOutput);
+                case "app.bsky.contact.getSyncStatus#GetSyncStatusOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.GetSyncStatusOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.GetSyncStatusOutput>)SourceGenerationContext.Default.AppBskyContactGetSyncStatusOutput);
                 case "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetTaggedSuggestionsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetTaggedSuggestionsOutput);
                 case "app.bsky.feed.getTimeline#GetTimelineOutput":
@@ -518,6 +528,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Embed.Image>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Embed.Image>)SourceGenerationContext.Default.AppBskyEmbedImage);
                 case "tools.ozone.moderation.defs#imageDetails":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.ImageDetails>)SourceGenerationContext.Default.ToolsOzoneModerationImageDetails);
+                case "app.bsky.contact.importContacts#ImportContactsInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.ImportContactsInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.ImportContactsInput>)SourceGenerationContext.Default.AppBskyContactImportContactsInput);
+                case "app.bsky.contact.importContacts#ImportContactsOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.ImportContactsOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.ImportContactsOutput>)SourceGenerationContext.Default.AppBskyContactImportContactsOutput);
                 case "com.atproto.label.subscribeLabels#info":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Label.Info>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Label.Info>)SourceGenerationContext.Default.ComAtprotoLabelInfo);
                 case "com.atproto.sync.subscribeRepos#info":
@@ -642,6 +656,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogRemoveReaction>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogRemoveReaction>)SourceGenerationContext.Default.ChatBskyConvoLogRemoveReaction);
                 case "chat.bsky.convo.defs#logUnmuteConvo":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.LogUnmuteConvo>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.LogUnmuteConvo>)SourceGenerationContext.Default.ChatBskyConvoLogUnmuteConvo);
+                case "app.bsky.contact.defs#matchAndContactIndex":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.MatchAndContactIndex>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.MatchAndContactIndex>)SourceGenerationContext.Default.AppBskyContactMatchAndContactIndex);
                 case "tools.ozone.team.defs#member":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Team.Member>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Team.Member>)SourceGenerationContext.Default.ToolsOzoneTeamMember);
                 case "app.bsky.richtext.facet#mention":
@@ -722,6 +738,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.NotFoundActor>)SourceGenerationContext.Default.AppBskyGraphNotFoundActor);
                 case "app.bsky.feed.defs#notFoundPost":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Feed.NotFoundPost>)SourceGenerationContext.Default.AppBskyFeedNotFoundPost);
+                case "app.bsky.contact.defs#notification":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.Notification>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.Notification>)SourceGenerationContext.Default.AppBskyContactNotification);
                 case "app.bsky.notification.listNotifications#notification":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Notification.Notification>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Notification.Notification>)SourceGenerationContext.Default.AppBskyNotificationNotification);
                 case "app.bsky.actor.defs#nux":
@@ -830,6 +848,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Signature.RelatedAccount>)SourceGenerationContext.Default.ToolsOzoneSignatureRelatedAccount);
                 case "app.bsky.graph.defs#relationship":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.Relationship>)SourceGenerationContext.Default.AppBskyGraphRelationship);
+                case "app.bsky.contact.removeData#RemoveDataInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.RemoveDataInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.RemoveDataInput>)SourceGenerationContext.Default.AppBskyContactRemoveDataInput);
+                case "app.bsky.contact.removeData#RemoveDataOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.RemoveDataOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.RemoveDataOutput>)SourceGenerationContext.Default.AppBskyContactRemoveDataOutput);
                 case "tools.ozone.setting.removeOptions#RemoveOptionsInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Setting.RemoveOptionsInput>)SourceGenerationContext.Default.ToolsOzoneSettingRemoveOptionsInput);
                 case "tools.ozone.setting.removeOptions#RemoveOptionsOutput":
@@ -956,6 +978,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageBatchOutput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageBatchOutput);
                 case "chat.bsky.convo.sendMessage#SendMessageInput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.Chat.Bsky.Convo.SendMessageInput>)SourceGenerationContext.Default.ChatBskyConvoSendMessageInput);
+                case "app.bsky.contact.sendNotification#SendNotificationInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.SendNotificationInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.SendNotificationInput>)SourceGenerationContext.Default.AppBskyContactSendNotificationInput);
+                case "app.bsky.contact.sendNotification#SendNotificationOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.SendNotificationOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.SendNotificationOutput>)SourceGenerationContext.Default.AppBskyContactSendNotificationOutput);
                 case "app.bsky.labeler.service":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Labeler.Service>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Labeler.Service>)SourceGenerationContext.Default.AppBskyLabelerService);
                 case "tools.ozone.server.getConfig#serviceConfig":
@@ -992,6 +1018,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackViewBasic>)SourceGenerationContext.Default.AppBskyGraphStarterPackViewBasic);
                 case "app.bsky.graph.getStarterPacksWithMembership#starterPackWithMembership":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackWithMembership>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.StarterPackWithMembership>)SourceGenerationContext.Default.AppBskyGraphStarterPackWithMembership);
+                case "app.bsky.contact.startPhoneVerification#StartPhoneVerificationInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.StartPhoneVerificationInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.StartPhoneVerificationInput>)SourceGenerationContext.Default.AppBskyContactStartPhoneVerificationInput);
+                case "app.bsky.contact.startPhoneVerification#StartPhoneVerificationOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.StartPhoneVerificationOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.StartPhoneVerificationOutput>)SourceGenerationContext.Default.AppBskyContactStartPhoneVerificationOutput);
                 case "app.bsky.ageassurance.defs#state":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Ageassurance.State>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Ageassurance.State>)SourceGenerationContext.Default.AppBskyAgeassuranceState);
                 case "app.bsky.ageassurance.defs#stateMetadata":
@@ -1018,6 +1048,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Temp.Suggestion>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Temp.Suggestion>)SourceGenerationContext.Default.ComAtprotoTempSuggestion);
                 case "com.atproto.sync.subscribeRepos#sync":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>(data, (JsonTypeInfo<FishyFlip.Lexicon.Com.Atproto.Sync.Sync>)SourceGenerationContext.Default.ComAtprotoSyncSync);
+                case "app.bsky.contact.defs#syncStatus":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.SyncStatus>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.SyncStatus>)SourceGenerationContext.Default.AppBskyContactSyncStatus);
                 case "app.bsky.richtext.facet#tag":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Richtext.Tag>)SourceGenerationContext.Default.AppBskyRichtextTag);
                 case "tools.ozone.moderation.scheduleAction#takedown":
@@ -1130,6 +1162,10 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Actor.VerificationView>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Actor.VerificationView>)SourceGenerationContext.Default.AppBskyActorVerificationView);
                 case "tools.ozone.verification.defs#verificationView":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationView>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Verification.VerificationView>)SourceGenerationContext.Default.ToolsOzoneVerificationVerificationView);
+                case "app.bsky.contact.verifyPhone#VerifyPhoneInput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.VerifyPhoneInput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.VerifyPhoneInput>)SourceGenerationContext.Default.AppBskyContactVerifyPhoneInput);
+                case "app.bsky.contact.verifyPhone#VerifyPhoneOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Contact.VerifyPhoneOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Contact.VerifyPhoneOutput>)SourceGenerationContext.Default.AppBskyContactVerifyPhoneOutput);
                 case "tools.ozone.moderation.defs#videoDetails":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.VideoDetails>)SourceGenerationContext.Default.ToolsOzoneModerationVideoDetails);
                 case "app.bsky.embed.record#viewBlocked":

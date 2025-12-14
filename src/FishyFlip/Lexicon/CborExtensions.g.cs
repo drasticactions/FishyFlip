@@ -192,6 +192,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.Declaration(obj);
                 case "chat.bsky.actor.declaration":
                     return new Chat.Bsky.Actor.Declaration(obj);
+                case "app.bsky.actor.defs#declaredAgePref":
+                    return new App.Bsky.Actor.DeclaredAgePref(obj);
                 case "com.atproto.repo.applyWrites#delete":
                     return new Com.Atproto.Repo.Delete(obj);
                 case "com.atproto.admin.deleteAccount#DeleteAccountInput":
@@ -236,6 +238,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Admin.DisableInviteCodesInput(obj);
                 case "app.bsky.feed.postgate#disableRule":
                     return new App.Bsky.Feed.DisableRule(obj);
+                case "app.bsky.contact.dismissMatch#DismissMatchInput":
+                    return new App.Bsky.Contact.DismissMatchInput(obj);
+                case "app.bsky.contact.dismissMatch#DismissMatchOutput":
+                    return new App.Bsky.Contact.DismissMatchOutput(obj);
                 case "tools.ozone.hosting.getAccountHistory#emailConfirmed":
                     return new Tools.Ozone.Hosting.EmailConfirmed(obj);
                 case "tools.ozone.hosting.getAccountHistory#emailUpdated":
@@ -362,6 +368,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.GetListsWithMembershipOutput(obj);
                 case "chat.bsky.convo.getLog#GetLogOutput":
                     return new Chat.Bsky.Convo.GetLogOutput(obj);
+                case "app.bsky.contact.getMatches#GetMatchesOutput":
+                    return new App.Bsky.Contact.GetMatchesOutput(obj);
                 case "chat.bsky.moderation.getMessageContext#GetMessageContextOutput":
                     return new Chat.Bsky.Moderation.GetMessageContextOutput(obj);
                 case "chat.bsky.convo.getMessages#GetMessagesOutput":
@@ -444,6 +452,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.GetSuggestionsOutput(obj);
                 case "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput":
                     return new App.Bsky.Unspecced.GetSuggestionsSkeletonOutput(obj);
+                case "app.bsky.contact.getSyncStatus#GetSyncStatusOutput":
+                    return new App.Bsky.Contact.GetSyncStatusOutput(obj);
                 case "app.bsky.unspecced.getTaggedSuggestions#GetTaggedSuggestionsOutput":
                     return new App.Bsky.Unspecced.GetTaggedSuggestionsOutput(obj);
                 case "app.bsky.feed.getTimeline#GetTimelineOutput":
@@ -482,6 +492,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Embed.Image(obj);
                 case "tools.ozone.moderation.defs#imageDetails":
                     return new Tools.Ozone.Moderation.ImageDetails(obj);
+                case "app.bsky.contact.importContacts#ImportContactsInput":
+                    return new App.Bsky.Contact.ImportContactsInput(obj);
+                case "app.bsky.contact.importContacts#ImportContactsOutput":
+                    return new App.Bsky.Contact.ImportContactsOutput(obj);
                 case "com.atproto.label.subscribeLabels#info":
                     return new Com.Atproto.Label.Info(obj);
                 case "com.atproto.sync.subscribeRepos#info":
@@ -606,6 +620,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.LogRemoveReaction(obj);
                 case "chat.bsky.convo.defs#logUnmuteConvo":
                     return new Chat.Bsky.Convo.LogUnmuteConvo(obj);
+                case "app.bsky.contact.defs#matchAndContactIndex":
+                    return new App.Bsky.Contact.MatchAndContactIndex(obj);
                 case "tools.ozone.team.defs#member":
                     return new Tools.Ozone.Team.Member(obj);
                 case "app.bsky.richtext.facet#mention":
@@ -686,6 +702,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.NotFoundActor(obj);
                 case "app.bsky.feed.defs#notFoundPost":
                     return new App.Bsky.Feed.NotFoundPost(obj);
+                case "app.bsky.contact.defs#notification":
+                    return new App.Bsky.Contact.Notification(obj);
                 case "app.bsky.notification.listNotifications#notification":
                     return new App.Bsky.Notification.Notification(obj);
                 case "app.bsky.actor.defs#nux":
@@ -794,6 +812,10 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Signature.RelatedAccount(obj);
                 case "app.bsky.graph.defs#relationship":
                     return new App.Bsky.Graph.Relationship(obj);
+                case "app.bsky.contact.removeData#RemoveDataInput":
+                    return new App.Bsky.Contact.RemoveDataInput(obj);
+                case "app.bsky.contact.removeData#RemoveDataOutput":
+                    return new App.Bsky.Contact.RemoveDataOutput(obj);
                 case "tools.ozone.setting.removeOptions#RemoveOptionsInput":
                     return new Tools.Ozone.Setting.RemoveOptionsInput(obj);
                 case "tools.ozone.setting.removeOptions#RemoveOptionsOutput":
@@ -920,6 +942,10 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.SendMessageBatchOutput(obj);
                 case "chat.bsky.convo.sendMessage#SendMessageInput":
                     return new Chat.Bsky.Convo.SendMessageInput(obj);
+                case "app.bsky.contact.sendNotification#SendNotificationInput":
+                    return new App.Bsky.Contact.SendNotificationInput(obj);
+                case "app.bsky.contact.sendNotification#SendNotificationOutput":
+                    return new App.Bsky.Contact.SendNotificationOutput(obj);
                 case "app.bsky.labeler.service":
                     return new App.Bsky.Labeler.Service(obj);
                 case "tools.ozone.server.getConfig#serviceConfig":
@@ -956,6 +982,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.StarterPackViewBasic(obj);
                 case "app.bsky.graph.getStarterPacksWithMembership#starterPackWithMembership":
                     return new App.Bsky.Graph.StarterPackWithMembership(obj);
+                case "app.bsky.contact.startPhoneVerification#StartPhoneVerificationInput":
+                    return new App.Bsky.Contact.StartPhoneVerificationInput(obj);
+                case "app.bsky.contact.startPhoneVerification#StartPhoneVerificationOutput":
+                    return new App.Bsky.Contact.StartPhoneVerificationOutput(obj);
                 case "app.bsky.ageassurance.defs#state":
                     return new App.Bsky.Ageassurance.State(obj);
                 case "app.bsky.ageassurance.defs#stateMetadata":
@@ -982,6 +1012,8 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Temp.Suggestion(obj);
                 case "com.atproto.sync.subscribeRepos#sync":
                     return new Com.Atproto.Sync.Sync(obj);
+                case "app.bsky.contact.defs#syncStatus":
+                    return new App.Bsky.Contact.SyncStatus(obj);
                 case "app.bsky.richtext.facet#tag":
                     return new App.Bsky.Richtext.Tag(obj);
                 case "tools.ozone.moderation.scheduleAction#takedown":
@@ -1094,6 +1126,10 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.VerificationView(obj);
                 case "tools.ozone.verification.defs#verificationView":
                     return new Tools.Ozone.Verification.VerificationView(obj);
+                case "app.bsky.contact.verifyPhone#VerifyPhoneInput":
+                    return new App.Bsky.Contact.VerifyPhoneInput(obj);
+                case "app.bsky.contact.verifyPhone#VerifyPhoneOutput":
+                    return new App.Bsky.Contact.VerifyPhoneOutput(obj);
                 case "tools.ozone.moderation.defs#videoDetails":
                     return new Tools.Ozone.Moderation.VideoDetails(obj);
                 case "app.bsky.embed.record#viewBlocked":

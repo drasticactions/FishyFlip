@@ -96,6 +96,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPref"/> (app.bsky.actor.defs#savedFeedsPref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.SavedFeedsPrefV2"/> (app.bsky.actor.defs#savedFeedsPrefV2) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.PersonalDetailsPref"/> (app.bsky.actor.defs#personalDetailsPref) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.DeclaredAgePref"/> (app.bsky.actor.defs#declaredAgePref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.FeedViewPref"/> (app.bsky.actor.defs#feedViewPref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ThreadViewPref"/> (app.bsky.actor.defs#threadViewPref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.InterestsPref"/> (app.bsky.actor.defs#interestsPref) <br/>
