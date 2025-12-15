@@ -42,7 +42,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.x
+          global-json-file: global.json
 
       - name: Run FishyFlip.Tests
         run: dotnet test src/FishyFlip.Tests/FishyFlip.Tests.csproj -- --report-trx --results-directory ../../dotnet-test-results
