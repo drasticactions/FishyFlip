@@ -18,6 +18,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// <param name="handle"></param>
         /// <param name="did"></param>
         /// <param name="didDoc"></param>
+        /// <param name="email"></param>
+        /// <param name="emailConfirmed"></param>
+        /// <param name="emailAuthFactor"></param>
         /// <param name="active"></param>
         /// <param name="status">Hosting status of the account. If not specified, then assume 'active'.
         /// <br/> Known Values: <br/>
@@ -25,13 +28,16 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// suspended <br/>
         /// deactivated <br/>
         /// </param>
-        public RefreshSessionOutput(string accessJwt = default, string refreshJwt = default, FishyFlip.Models.ATHandle handle = default, FishyFlip.Models.ATDid did = default, FishyFlip.Models.DidDoc? didDoc = default, bool? active = default, string? status = default)
+        public RefreshSessionOutput(string accessJwt = default, string refreshJwt = default, FishyFlip.Models.ATHandle handle = default, FishyFlip.Models.ATDid did = default, FishyFlip.Models.DidDoc? didDoc = default, string? email = default, bool? emailConfirmed = default, bool? emailAuthFactor = default, bool? active = default, string? status = default)
         {
             this.AccessJwt = accessJwt;
             this.RefreshJwt = refreshJwt;
             this.Handle = handle;
             this.Did = did;
             this.DidDoc = didDoc;
+            this.Email = email;
+            this.EmailConfirmed = emailConfirmed;
+            this.EmailAuthFactor = emailAuthFactor;
             this.Active = active;
             this.Status = status;
             this.Type = "com.atproto.server.refreshSession#RefreshSessionOutput";
@@ -57,6 +63,9 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
             if (obj["handle"] is not null) this.Handle = obj["handle"].ToATHandle();
             if (obj["did"] is not null) this.Did = obj["did"].ToATDid();
             // Ignore DidDoc
+            if (obj["email"] is not null) this.Email = obj["email"].AsString();
+            if (obj["emailConfirmed"] is not null) this.EmailConfirmed = obj["emailConfirmed"].AsBoolean();
+            if (obj["emailAuthFactor"] is not null) this.EmailAuthFactor = obj["emailAuthFactor"].AsBoolean();
             if (obj["active"] is not null) this.Active = obj["active"].AsBoolean();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
@@ -98,6 +107,27 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         [JsonPropertyName("didDoc")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Models.DidDoc? DidDoc { get; set; }
+
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Email { get; set; }
+
+        /// <summary>
+        /// Gets or sets the emailConfirmed.
+        /// </summary>
+        [JsonPropertyName("emailConfirmed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? EmailConfirmed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the emailAuthFactor.
+        /// </summary>
+        [JsonPropertyName("emailAuthFactor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? EmailAuthFactor { get; set; }
 
         /// <summary>
         /// Gets or sets the active.

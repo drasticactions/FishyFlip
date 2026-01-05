@@ -179,7 +179,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
 
         /// <summary>
-        /// Delete the current session. Requires auth.
+        /// Delete the current session. Requires auth using the 'refreshJwt' (not the 'accessJwt').
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> DeleteSessionAsync (CancellationToken cancellationToken = default)
@@ -253,6 +256,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Refresh an authentication session. Requires auth using the 'refreshJwt' (not the 'accessJwt').
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<Result<FishyFlip.Lexicon.Com.Atproto.Server.RefreshSessionOutput?>> RefreshSessionAsync (CancellationToken cancellationToken = default)
