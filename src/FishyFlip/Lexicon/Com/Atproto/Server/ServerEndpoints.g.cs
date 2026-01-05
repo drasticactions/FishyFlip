@@ -294,7 +294,10 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
 
 
         /// <summary>
-        /// Delete the current session. Requires auth.
+        /// Delete the current session. Requires auth using the 'refreshJwt' (not the 'accessJwt').
+        /// <br/> Possible Errors: <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
@@ -445,6 +448,8 @@ namespace FishyFlip.Lexicon.Com.Atproto.Server
         /// Refresh an authentication session. Requires auth using the 'refreshJwt' (not the 'accessJwt').
         /// <br/> Possible Errors: <br/>
         /// <see cref="FishyFlip.Lexicon.AccountTakedownError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.InvalidTokenError"/>  <br/>
+        /// <see cref="FishyFlip.Lexicon.ExpiredTokenError"/>  <br/>
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="cancellationToken"></param>
