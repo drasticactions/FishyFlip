@@ -14,9 +14,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetSuggestedUsersOutput"/> class.
         /// </summary>
         /// <param name="actors"></param>
-        public GetSuggestedUsersOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> actors = default)
+        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestedUsersOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> actors = default, long? recId = default)
         {
             this.Actors = actors;
+            this.RecId = recId;
             this.Type = "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput";
         }
 
@@ -36,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetSuggestedUsersOutput(CBORObject obj)
         {
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
+            if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -45,6 +48,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("actors")]
         [JsonRequired]
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Actors { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recId.
+        /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
+        /// </summary>
+        [JsonPropertyName("recId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? RecId { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput";
 
