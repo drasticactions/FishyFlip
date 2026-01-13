@@ -18,6 +18,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Ageassurance
         /// </summary>
         /// <param name="countryCode">The ISO 3166-1 alpha-2 country code this configuration applies to.</param>
         /// <param name="regionCode">The ISO 3166-2 region code this configuration applies to. If omitted, the configuration applies to the entire country.</param>
+        /// <param name="minAccessAge">The minimum age (as a whole integer) required to use Bluesky in this region.</param>
         /// <param name="rules">The ordered list of Age Assurance rules that apply to this region. Rules should be applied in order, and the first matching rule determines the access level granted. The rules array should always include a default rule as the last item.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleDefault"/> (app.bsky.ageassurance.defs#configRegionRuleDefault) <br/>
@@ -28,10 +29,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Ageassurance
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAccountNewerThan"/> (app.bsky.ageassurance.defs#configRegionRuleIfAccountNewerThan) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Ageassurance.ConfigRegionRuleIfAccountOlderThan"/> (app.bsky.ageassurance.defs#configRegionRuleIfAccountOlderThan) <br/>
         /// </param>
-        public ConfigRegion(string countryCode = default, string? regionCode = default, List<ATObject> rules = default)
+        public ConfigRegion(string countryCode = default, string? regionCode = default, long minAccessAge = default, List<ATObject> rules = default)
         {
             this.CountryCode = countryCode;
             this.RegionCode = regionCode;
+            this.MinAccessAge = minAccessAge;
             this.Rules = rules;
             this.Type = "app.bsky.ageassurance.defs#configRegion";
         }
@@ -53,6 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Ageassurance
         {
             if (obj["countryCode"] is not null) this.CountryCode = obj["countryCode"].AsString();
             if (obj["regionCode"] is not null) this.RegionCode = obj["regionCode"].AsString();
+            if (obj["minAccessAge"] is not null) this.MinAccessAge = obj["minAccessAge"].AsInt64Value();
             if (obj["rules"] is not null) this.Rules = obj["rules"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
@@ -72,6 +75,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Ageassurance
         [JsonPropertyName("regionCode")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? RegionCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the minAccessAge.
+        /// <br/> The minimum age (as a whole integer) required to use Bluesky in this region.
+        /// </summary>
+        [JsonPropertyName("minAccessAge")]
+        [JsonRequired]
+        public long MinAccessAge { get; set; }
 
         /// <summary>
         /// Gets or sets the rules.

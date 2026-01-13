@@ -13,6 +13,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <summary>
         /// Initializes a new instance of the <see cref="StatusView"/> class.
         /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="cid"></param>
         /// <param name="status">The status for the account.
         /// <br/> Known Values: <br/>
         /// live - Advertises an account as currently offering live content. <br/>
@@ -24,13 +26,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </param>
         /// <param name="expiresAt">The date when this status will expire. The application might choose to no longer return the status after expiration.</param>
         /// <param name="isActive">True if the status is not expired, false if it is expired. Only present if expiration was set.</param>
-        public StatusView(string status = default, ATObject record = default, FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal? embed = default, DateTime? expiresAt = default, bool? isActive = default)
+        /// <param name="isDisabled">True if the user's go-live access has been disabled by a moderator, false otherwise.</param>
+        public StatusView(FishyFlip.Models.ATUri? uri = default, string? cid = default, string status = default, ATObject record = default, FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal? embed = default, DateTime? expiresAt = default, bool? isActive = default, bool? isDisabled = default)
         {
+            this.Uri = uri;
+            this.Cid = cid;
             this.Status = status;
             this.Record = record;
             this.Embed = embed;
             this.ExpiresAt = expiresAt;
             this.IsActive = isActive;
+            this.IsDisabled = isDisabled;
             this.Type = "app.bsky.actor.defs#statusView";
         }
 
@@ -49,13 +55,31 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// </summary>
         public StatusView(CBORObject obj)
         {
+            if (obj["uri"] is not null) this.Uri = obj["uri"].ToATUri();
+            if (obj["cid"] is not null) this.Cid = obj["cid"].AsString();
             if (obj["status"] is not null) this.Status = obj["status"].AsString();
             if (obj["record"] is not null) this.Record = obj["record"].ToATObject();
             if (obj["embed"] is not null) this.Embed = new FishyFlip.Lexicon.App.Bsky.Embed.ViewExternal(obj["embed"]);
             if (obj["expiresAt"] is not null) this.ExpiresAt = obj["expiresAt"].ToDateTime();
             if (obj["isActive"] is not null) this.IsActive = obj["isActive"].AsBoolean();
+            if (obj["isDisabled"] is not null) this.IsDisabled = obj["isDisabled"].AsBoolean();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
+
+        /// <summary>
+        /// Gets or sets the uri.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
+        public FishyFlip.Models.ATUri? Uri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the cid.
+        /// </summary>
+        [JsonPropertyName("cid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Cid { get; set; }
 
         /// <summary>
         /// Gets or sets the status.
@@ -99,6 +123,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("isActive")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? IsActive { get; set; }
+
+        /// <summary>
+        /// Gets or sets the isDisabled.
+        /// <br/> True if the user's go-live access has been disabled by a moderator, false otherwise.
+        /// </summary>
+        [JsonPropertyName("isDisabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsDisabled { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#statusView";
 

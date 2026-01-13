@@ -14,9 +14,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetSuggestedUsersSkeletonOutput"/> class.
         /// </summary>
         /// <param name="dids"></param>
-        public GetSuggestedUsersSkeletonOutput(List<FishyFlip.Models.ATDid> dids = default)
+        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestedUsersSkeletonOutput(List<FishyFlip.Models.ATDid> dids = default, long? recId = default)
         {
             this.Dids = dids;
+            this.RecId = recId;
             this.Type = "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput";
         }
 
@@ -36,6 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetSuggestedUsersSkeletonOutput(CBORObject obj)
         {
             if (obj["dids"] is not null) this.Dids = obj["dids"].Values.Select(n =>n.ToATDid()!).ToList();
+            if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -45,6 +48,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         [JsonPropertyName("dids")]
         [JsonRequired]
         public List<FishyFlip.Models.ATDid> Dids { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recId.
+        /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
+        /// </summary>
+        [JsonPropertyName("recId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? RecId { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput";
 
