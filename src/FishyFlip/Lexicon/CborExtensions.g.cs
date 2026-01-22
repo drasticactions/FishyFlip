@@ -162,6 +162,10 @@ namespace FishyFlip.Lexicon
                     return new Com.Atproto.Server.CreateAppPasswordInput(obj);
                 case "app.bsky.bookmark.createBookmark#CreateBookmarkInput":
                     return new App.Bsky.Bookmark.CreateBookmarkInput(obj);
+                case "app.bsky.draft.createDraft#CreateDraftInput":
+                    return new App.Bsky.Draft.CreateDraftInput(obj);
+                case "app.bsky.draft.createDraft#CreateDraftOutput":
+                    return new App.Bsky.Draft.CreateDraftOutput(obj);
                 case "com.atproto.server.createInviteCode#CreateInviteCodeInput":
                     return new Com.Atproto.Server.CreateInviteCodeInput(obj);
                 case "com.atproto.server.createInviteCode#CreateInviteCodeOutput":
@@ -192,6 +196,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Notification.Declaration(obj);
                 case "chat.bsky.actor.declaration":
                     return new Chat.Bsky.Actor.Declaration(obj);
+                case "com.germnetwork.declaration":
+                    return new Com.Germnetwork.Declaration(obj);
                 case "app.bsky.actor.defs#declaredAgePref":
                     return new App.Bsky.Actor.DeclaredAgePref(obj);
                 case "com.atproto.repo.applyWrites#delete":
@@ -206,6 +212,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Bookmark.DeleteBookmarkInput(obj);
                 case "chat.bsky.convo.defs#deletedMessageView":
                     return new Chat.Bsky.Convo.DeletedMessageView(obj);
+                case "app.bsky.draft.deleteDraft#DeleteDraftInput":
+                    return new App.Bsky.Draft.DeleteDraftInput(obj);
                 case "tools.ozone.team.deleteMember#DeleteMemberInput":
                     return new Tools.Ozone.Team.DeleteMemberInput(obj);
                 case "chat.bsky.convo.deleteMessageForSelf#DeleteMessageForSelfInput":
@@ -242,6 +250,26 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Contact.DismissMatchInput(obj);
                 case "app.bsky.contact.dismissMatch#DismissMatchOutput":
                     return new App.Bsky.Contact.DismissMatchOutput(obj);
+                case "app.bsky.draft.defs#draft":
+                    return new App.Bsky.Draft.Draft(obj);
+                case "app.bsky.draft.defs#draftEmbedCaption":
+                    return new App.Bsky.Draft.DraftEmbedCaption(obj);
+                case "app.bsky.draft.defs#draftEmbedExternal":
+                    return new App.Bsky.Draft.DraftEmbedExternal(obj);
+                case "app.bsky.draft.defs#draftEmbedImage":
+                    return new App.Bsky.Draft.DraftEmbedImage(obj);
+                case "app.bsky.draft.defs#draftEmbedLocalRef":
+                    return new App.Bsky.Draft.DraftEmbedLocalRef(obj);
+                case "app.bsky.draft.defs#draftEmbedRecord":
+                    return new App.Bsky.Draft.DraftEmbedRecord(obj);
+                case "app.bsky.draft.defs#draftEmbedVideo":
+                    return new App.Bsky.Draft.DraftEmbedVideo(obj);
+                case "app.bsky.draft.defs#draftPost":
+                    return new App.Bsky.Draft.DraftPost(obj);
+                case "app.bsky.draft.defs#draftView":
+                    return new App.Bsky.Draft.DraftView(obj);
+                case "app.bsky.draft.defs#draftWithId":
+                    return new App.Bsky.Draft.DraftWithId(obj);
                 case "tools.ozone.hosting.getAccountHistory#emailConfirmed":
                     return new Tools.Ozone.Hosting.EmailConfirmed(obj);
                 case "tools.ozone.hosting.getAccountHistory#emailUpdated":
@@ -330,6 +358,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.GetConvoForMembersOutput(obj);
                 case "chat.bsky.convo.getConvo#GetConvoOutput":
                     return new Chat.Bsky.Convo.GetConvoOutput(obj);
+                case "app.bsky.draft.getDrafts#GetDraftsOutput":
+                    return new App.Bsky.Draft.GetDraftsOutput(obj);
                 case "app.bsky.feed.getFeedGenerator#GetFeedGeneratorOutput":
                     return new App.Bsky.Feed.GetFeedGeneratorOutput(obj);
                 case "app.bsky.feed.getFeedGenerators#GetFeedGeneratorsOutput":
@@ -598,6 +628,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Graph.ListViewerState(obj);
                 case "app.bsky.graph.getListsWithMembership#listWithMembership":
                     return new App.Bsky.Graph.ListWithMembership(obj);
+                case "app.bsky.actor.defs#liveEventPreferences":
+                    return new App.Bsky.Actor.LiveEventPreferences(obj);
                 case "app.bsky.unspecced.getConfig#liveNowConfig":
                     return new App.Bsky.Unspecced.LiveNowConfig(obj);
                 case "chat.bsky.convo.defs#logAcceptConvo":
@@ -632,6 +664,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.MessageAndReactionView(obj);
                 case "chat.bsky.convo.defs#messageInput":
                     return new Chat.Bsky.Convo.MessageInput(obj);
+                case "com.germnetwork.declaration#messageMe":
+                    return new Com.Germnetwork.MessageMe(obj);
                 case "chat.bsky.convo.defs#messageRef":
                     return new Chat.Bsky.Convo.MessageRef(obj);
                 case "chat.bsky.convo.defs#messageView":
@@ -734,6 +768,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Actor.ProfileAssociatedActivitySubscription(obj);
                 case "app.bsky.actor.defs#profileAssociatedChat":
                     return new App.Bsky.Actor.ProfileAssociatedChat(obj);
+                case "app.bsky.actor.defs#profileAssociatedGerm":
+                    return new App.Bsky.Actor.ProfileAssociatedGerm(obj);
                 case "app.bsky.actor.defs#profileView":
                     return new App.Bsky.Actor.ProfileView(obj);
                 case "app.bsky.actor.defs#profileViewBasic":
@@ -1080,6 +1116,8 @@ namespace FishyFlip.Lexicon
                     return new Chat.Bsky.Convo.UpdateAllReadInput(obj);
                 case "chat.bsky.convo.updateAllRead#UpdateAllReadOutput":
                     return new Chat.Bsky.Convo.UpdateAllReadOutput(obj);
+                case "app.bsky.draft.updateDraft#UpdateDraftInput":
+                    return new App.Bsky.Draft.UpdateDraftInput(obj);
                 case "com.atproto.server.updateEmail#UpdateEmailInput":
                     return new Com.Atproto.Server.UpdateEmailInput(obj);
                 case "com.atproto.identity.updateHandle#UpdateHandleInput":

@@ -106,6 +106,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.LabelersPref"/> (app.bsky.actor.defs#labelersPref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.PostInteractionSettingsPref"/> (app.bsky.actor.defs#postInteractionSettingsPref) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.VerificationPrefs"/> (app.bsky.actor.defs#verificationPrefs) <br/>
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.LiveEventPreferences"/> (app.bsky.actor.defs#liveEventPreferences) <br/>
         /// </param>
         /// <param name="cancellationToken"></param>
         public Task<Result<Success?>> PutPreferencesAsync (List<ATObject> preferences, CancellationToken cancellationToken = default)

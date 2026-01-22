@@ -23,7 +23,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         /// <param name="activitySubscription">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription"/> (app.bsky.actor.defs#profileAssociatedActivitySubscription)
         /// </param>
-        public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? chat = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription? activitySubscription = default)
+        /// <param name="germ">
+        /// <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedGerm"/> (app.bsky.actor.defs#profileAssociatedGerm)
+        /// </param>
+        public ProfileAssociated(long? lists = default, long? feedgens = default, long? starterPacks = default, bool? labeler = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat? chat = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription? activitySubscription = default, FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedGerm? germ = default)
         {
             this.Lists = lists;
             this.Feedgens = feedgens;
@@ -31,6 +34,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             this.Labeler = labeler;
             this.Chat = chat;
             this.ActivitySubscription = activitySubscription;
+            this.Germ = germ;
             this.Type = "app.bsky.actor.defs#profileAssociated";
         }
 
@@ -55,6 +59,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
             if (obj["labeler"] is not null) this.Labeler = obj["labeler"].AsBoolean();
             if (obj["chat"] is not null) this.Chat = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedChat(obj["chat"]);
             if (obj["activitySubscription"] is not null) this.ActivitySubscription = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription(obj["activitySubscription"]);
+            if (obj["germ"] is not null) this.Germ = new FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedGerm(obj["germ"]);
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -101,6 +106,14 @@ namespace FishyFlip.Lexicon.App.Bsky.Actor
         [JsonPropertyName("activitySubscription")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedActivitySubscription? ActivitySubscription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the germ.
+        /// <br/> <see cref="FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedGerm"/> (app.bsky.actor.defs#profileAssociatedGerm)
+        /// </summary>
+        [JsonPropertyName("germ")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FishyFlip.Lexicon.App.Bsky.Actor.ProfileAssociatedGerm? Germ { get; set; }
 
         public const string RecordType = "app.bsky.actor.defs#profileAssociated";
 

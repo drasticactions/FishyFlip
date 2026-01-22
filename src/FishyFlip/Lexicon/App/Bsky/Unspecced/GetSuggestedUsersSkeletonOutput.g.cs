@@ -15,7 +15,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         /// <param name="dids"></param>
         /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
-        public GetSuggestedUsersSkeletonOutput(List<FishyFlip.Models.ATDid> dids = default, long? recId = default)
+        public GetSuggestedUsersSkeletonOutput(List<FishyFlip.Models.ATDid> dids = default, string? recId = default)
         {
             this.Dids = dids;
             this.RecId = recId;
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetSuggestedUsersSkeletonOutput(CBORObject obj)
         {
             if (obj["dids"] is not null) this.Dids = obj["dids"].Values.Select(n =>n.ToATDid()!).ToList();
-            if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
+            if (obj["recId"] is not null) this.RecId = obj["recId"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -55,7 +55,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// </summary>
         [JsonPropertyName("recId")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public long? RecId { get; set; }
+        public string? RecId { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput";
 
