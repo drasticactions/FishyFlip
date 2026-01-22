@@ -62,6 +62,8 @@ namespace FishyFlip.Lexicon
                     return new AccountTakedownError(statusCode, detail);
                 case "UnsupportedCollection":
                     return new UnsupportedCollectionError(statusCode, detail);
+                case "DraftLimitReached":
+                    return new DraftLimitReachedError(statusCode, detail);
                 case "AuthFactorTokenRequired":
                     return new AuthFactorTokenRequiredError(statusCode, detail);
                 case "DuplicateTemplateName":
