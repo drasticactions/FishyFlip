@@ -247,6 +247,7 @@ public class OAuth2SessionManager : ISessionManager
         refreshSessionOutput.RefreshJwt = result.RefreshToken;
         refreshSessionOutput.Did = this.session.Did;
         refreshSessionOutput.DidDoc = this.session.DidDoc;
+
         return refreshSessionOutput;
     }
 
