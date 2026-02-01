@@ -265,9 +265,23 @@ public sealed partial class ATProtocol : IDisposable
     /// <param name="session">The OAuth session.</param>
     /// <param name="clientId">The client ID.</param>
     /// <param name="instanceUrl">Optional. The instance URL. If null, uses https://bsky.social.</param>
+    /// <param name="cancellationToken">Optional. A CancellationToken that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a Result object with the session details, or null if the session could not be created.</returns>
-    public async Task<Result<Session?>> AuthenticateWithOAuth2SessionResultAsync(AuthSession session, string clientId, string? instanceUrl = default)
+    public async Task<Result<Session?>> AuthenticateWithOAuth2SessionResultAsync(AuthSession session, string clientId, string? instanceUrl = default, CancellationToken cancellationToken = default)
     {
+        if (string.IsNullOrEmpty(instanceUrl))
+        {
+            var identifier = session.Session.Did;
+            var (hostUrl, error) = await this.ResolveATIdentifierToHostAddressAsync(identifier, cancellationToken);
+
+            if (error is not null)
+            {
+                return error;
+            }
+
+            instanceUrl = hostUrl ?? throw new OAuth2Exception("Failed to resolve instance URL from ATIdentifier.");
+        }
+
         var oAuth2SessionManager = new OAuth2SessionManager(this);
         this.SessionManager = oAuth2SessionManager;
         if (string.IsNullOrEmpty(session.ProofKey))
@@ -275,7 +289,7 @@ public sealed partial class ATProtocol : IDisposable
             return new ATError(new OAuth2Exception("Proof key is required for OAuth2 sessions."));
         }
 
-        var (session2, error2) = await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl);
+        var (session2, error2) = await oAuth2SessionManager.StartSessionAsync(session, clientId, instanceUrl, cancellationToken);
         if (error2 is not null)
         {
             return error2;
@@ -308,14 +322,15 @@ public sealed partial class ATProtocol : IDisposable
     /// <summary>
     /// Refreshes the current session asynchronously.
     /// </summary>
+    /// <param name="token">Cancellation Token.</param>
     /// <returns><see cref="AuthSession"/>.</returns>
-    public async Task<Result<AuthSession?>> RefreshAuthSessionResultAsync()
+    public async Task<Result<AuthSession?>> RefreshAuthSessionResultAsync(CancellationToken? token = default)
     {
         switch (this.sessionManager)
         {
             case OAuth2SessionManager oAuth2SessionManager:
                 // Refresh the token to make sure it's the most up to date.
-                var (resultOauth, errorOauth) = await oAuth2SessionManager.RefreshSessionAsync();
+                var (resultOauth, errorOauth) = await oAuth2SessionManager.RefreshSessionAsync(token ?? CancellationToken.None);
                 if (errorOauth is not null)
                 {
                     return errorOauth;
@@ -326,7 +341,7 @@ public sealed partial class ATProtocol : IDisposable
                 // The information from RefreshSessionOutput is set in passwordManager.Session,
                 // so we can return the session from password manager, and only worry about
                 // checking for the error.
-                var (_, error) = await passwordManager.RefreshSessionAsync();
+                var (_, error) = await passwordManager.RefreshSessionAsync(token ?? CancellationToken.None);
                 if (error is not null)
                 {
                     return error;
