@@ -19,12 +19,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         /// <param name="aspectRatio">
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio"/> (app.bsky.embed.defs#aspectRatio)
         /// </param>
-        public EmbedVideo(Blob video = default, List<FishyFlip.Lexicon.App.Bsky.Embed.Caption>? captions = default, string? alt = default, FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? aspectRatio = default)
+        /// <param name="presentation">A hint to the client about how to present the video.
+        /// <br/> Known Values: <br/>
+        /// default <br/>
+        /// gif <br/>
+        /// </param>
+        public EmbedVideo(Blob video = default, List<FishyFlip.Lexicon.App.Bsky.Embed.Caption>? captions = default, string? alt = default, FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? aspectRatio = default, string? presentation = default)
         {
             this.Video = video;
             this.Captions = captions;
             this.Alt = alt;
             this.AspectRatio = aspectRatio;
+            this.Presentation = presentation;
             this.Type = "app.bsky.embed.video";
         }
 
@@ -47,6 +53,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
             if (obj["captions"] is not null) this.Captions = obj["captions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Embed.Caption(n)).ToList();
             if (obj["alt"] is not null) this.Alt = obj["alt"].AsString();
             if (obj["aspectRatio"] is not null) this.AspectRatio = new FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio(obj["aspectRatio"]);
+            if (obj["presentation"] is not null) this.Presentation = obj["presentation"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -80,6 +87,17 @@ namespace FishyFlip.Lexicon.App.Bsky.Embed
         [JsonPropertyName("aspectRatio")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FishyFlip.Lexicon.App.Bsky.Embed.AspectRatio? AspectRatio { get; set; }
+
+        /// <summary>
+        /// Gets or sets the presentation.
+        /// <br/> A hint to the client about how to present the video.
+        /// <br/> Known Values: <br/>
+        /// default <br/>
+        /// gif <br/>
+        /// </summary>
+        [JsonPropertyName("presentation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Presentation { get; set; }
 
         public const string RecordType = "app.bsky.embed.video";
 
