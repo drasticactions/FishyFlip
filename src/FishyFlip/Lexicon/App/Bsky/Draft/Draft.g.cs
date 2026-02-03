@@ -16,6 +16,8 @@ namespace FishyFlip.Lexicon.App.Bsky.Draft
         /// <summary>
         /// Initializes a new instance of the <see cref="Draft"/> class.
         /// </summary>
+        /// <param name="deviceId">UUIDv4 identifier of the device that created this draft.</param>
+        /// <param name="deviceName">The device and/or platform on which the draft was created.</param>
         /// <param name="posts">Array of draft posts that compose this draft.</param>
         /// <param name="langs">Indicates human language of posts primary text content.</param>
         /// <param name="postgateEmbeddingRules">Embedding rules for the postgates to be created when this draft is published.
@@ -29,8 +31,10 @@ namespace FishyFlip.Lexicon.App.Bsky.Draft
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.FollowingRule"/> (app.bsky.feed.threadgate#followingRule) <br/>
         /// <see cref="FishyFlip.Lexicon.App.Bsky.Feed.ListRule"/> (app.bsky.feed.threadgate#listRule) <br/>
         /// </param>
-        public Draft(List<FishyFlip.Lexicon.App.Bsky.Draft.DraftPost> posts = default, List<string>? langs = default, List<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>? postgateEmbeddingRules = default, List<ATObject>? threadgateAllow = default)
+        public Draft(string? deviceId = default, string? deviceName = default, List<FishyFlip.Lexicon.App.Bsky.Draft.DraftPost> posts = default, List<string>? langs = default, List<FishyFlip.Lexicon.App.Bsky.Feed.DisableRule>? postgateEmbeddingRules = default, List<ATObject>? threadgateAllow = default)
         {
+            this.DeviceId = deviceId;
+            this.DeviceName = deviceName;
             this.Posts = posts;
             this.Langs = langs;
             this.PostgateEmbeddingRules = postgateEmbeddingRules;
@@ -53,12 +57,30 @@ namespace FishyFlip.Lexicon.App.Bsky.Draft
         /// </summary>
         public Draft(CBORObject obj)
         {
+            if (obj["deviceId"] is not null) this.DeviceId = obj["deviceId"].AsString();
+            if (obj["deviceName"] is not null) this.DeviceName = obj["deviceName"].AsString();
             if (obj["posts"] is not null) this.Posts = obj["posts"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Draft.DraftPost(n)).ToList();
             if (obj["langs"] is not null) this.Langs = obj["langs"].Values.Select(n =>n.AsString()).ToList();
             if (obj["postgateEmbeddingRules"] is not null) this.PostgateEmbeddingRules = obj["postgateEmbeddingRules"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.DisableRule(n)).ToList();
             if (obj["threadgateAllow"] is not null) this.ThreadgateAllow = obj["threadgateAllow"].Values.Select(n =>n.ToATObject()).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
+
+        /// <summary>
+        /// Gets or sets the deviceId.
+        /// <br/> UUIDv4 identifier of the device that created this draft.
+        /// </summary>
+        [JsonPropertyName("deviceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? DeviceId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the deviceName.
+        /// <br/> The device and/or platform on which the draft was created.
+        /// </summary>
+        [JsonPropertyName("deviceName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? DeviceName { get; set; }
 
         /// <summary>
         /// Gets or sets the posts.
