@@ -14,10 +14,12 @@ public class JetStreamATWebSocketRecordEventArgs : EventArgs
     /// </summary>
     /// <param name="record"><see cref="ATWebSocketRecord"/>.</param>
     /// <param name="json">JSON.</param>
-    public JetStreamATWebSocketRecordEventArgs(ATWebSocketRecord record, string json)
+    /// <param name="eventId">An ID that can be used to correlate this parsed record to its original <see cref="JetStreamRawMessageEventArgs"/>.</param>
+    public JetStreamATWebSocketRecordEventArgs(ATWebSocketRecord record, string json, long eventId)
     {
         this.Record = record;
         this.Json = json;
+        this.EventId = eventId;
     }
 
     /// <summary>
@@ -29,4 +31,9 @@ public class JetStreamATWebSocketRecordEventArgs : EventArgs
     /// Gets the JSON representation of the AT WebSocket Record.
     /// </summary>
     public string Json { get; }
+
+    /// <summary>
+    /// Gets an ID that can be used to correlate this parsed record to its original <see cref="JetStreamRawMessageEventArgs"/>.
+    /// </summary>
+    public long EventId { get; }
 }

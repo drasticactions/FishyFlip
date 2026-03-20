@@ -4,6 +4,7 @@
 
 using System;
 using System.Buffers;
+using System.Runtime.InteropServices;
 using FishyFlip.Events;
 using FishyFlip.Lexicon;
 using FishyFlip.Tools.Json;
@@ -28,6 +29,7 @@ public sealed class ATJetStream : IDisposable
     private bool compression;
     private byte[]? dictionary;
     private Decompressor? decompressor;
+    private long lastEventId;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ATJetStream"/> class.
@@ -59,6 +61,11 @@ public sealed class ATJetStream : IDisposable
     /// On AT WebSocket Record Received.
     /// </summary>
     public event EventHandler<JetStreamATWebSocketRecordEventArgs>? OnRecordReceived;
+
+    /// <summary>
+    /// On AT WebSocket Record Error.
+    /// </summary>
+    public event EventHandler<JetStreamATWebSocketRecordErrorEventArgs>? OnRecordError;
 
     /// <inheritdoc/>
     void IDisposable.Dispose()
@@ -280,13 +287,14 @@ public sealed class ATJetStream : IDisposable
                     messageBytes = this.decompressor!.Unwrap(messageBytes);
                 }
 
+                var eventId = Interlocked.Increment(ref this.lastEventId);
 #if NETSTANDARD
                 var message = Encoding.UTF8.GetString(messageBytes.ToArray());
 #else
                 var message = Encoding.UTF8.GetString(messageBytes);
 #endif
-                this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
-                this.options.TaskFactory.StartNew(() => this.HandleMessage(message))
+                this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message, eventId));
+                this.options.TaskFactory.StartNew(() => this.HandleMessage(message, eventId))
                     .FireAndForgetSafeAsync(this.logger);
             }
             catch (OperationCanceledException)
@@ -302,33 +310,32 @@ public sealed class ATJetStream : IDisposable
         this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(webSocket.State));
     }
 
-    private void HandleMessage(string json)
+    private void HandleMessage(string json, long eventId)
     {
-        if (string.IsNullOrEmpty(json))
-        {
-            this.logger?.LogDebug("WSS: Empty message received.");
-            return;
-        }
-
         try
         {
+            if (string.IsNullOrEmpty(json))
+            {
+                throw new ArgumentException("Empty message received.");
+            }
+
             var atWebSocketRecord = JsonSerializer.Deserialize<ATWebSocketRecord>(json, this.sourceGenerationContext.ATWebSocketRecord);
             if (atWebSocketRecord is null)
             {
-                this.logger?.LogError("WSS: Failed to deserialize ATWebSocketRecord.");
-                this.logger?.LogError(json);
-                return;
+                throw new ArgumentException("Deserialized event is null.");
             }
 
-            this.OnRecordReceived?.Invoke(this, new JetStreamATWebSocketRecordEventArgs(atWebSocketRecord, json));
+            this.OnRecordReceived?.Invoke(this, new JetStreamATWebSocketRecordEventArgs(atWebSocketRecord, json, eventId));
         }
         catch (JsonException ex)
         {
+            this.OnRecordError?.Invoke(this, new JetStreamATWebSocketRecordErrorEventArgs(eventId));
             this.logger?.LogError(ex, "WSS: Failed to deserialize ATWebSocketRecord.");
             this.logger?.LogError(json);
         }
         catch (Exception ex)
         {
+            this.OnRecordError?.Invoke(this, new JetStreamATWebSocketRecordErrorEventArgs(eventId));
             this.logger?.LogError(ex, "WSS: An unknown error occurred.");
             this.logger?.LogError(json);
         }
