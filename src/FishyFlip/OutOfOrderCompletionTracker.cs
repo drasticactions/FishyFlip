@@ -61,7 +61,11 @@ namespace FishyFlip
             while (this.eventIdToSeq.TryGetValue(this.lastDefinitelyProcessedEventId + 1, out var seq))
             {
                 this.lastDefinitelyProcessedEventId++;
-                this.lastDefinitelyProcessedSeq = seq;
+                if (seq != null)
+                {
+                    this.lastDefinitelyProcessedSeq = seq;
+                }
+
                 this.eventIdToSeq.Remove(this.lastDefinitelyProcessedEventId);
             }
         }
