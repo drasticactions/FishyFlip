@@ -33,10 +33,9 @@ namespace FishyFlip
         /// To be called when an event is generated but not processed yet. Each call must eventually result in a <see cref="OnEventProcessed"/>.
         /// </summary>
         /// <returns>A sequentially increasing event ID that must be eventually passed to <see cref="OnEventProcessed"/>.</returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public long OnEventGenerated()
         {
-            return ++this.lastGeneratedEventId;
+            return Interlocked.Increment(ref this.lastGeneratedEventId);
         }
 
         /// <summary>
@@ -44,16 +43,18 @@ namespace FishyFlip
         /// </summary>
         /// <param name="eventId">The event ID.</param>
         /// <param name="seq">The firehose cursor of the current entry, if available.</param>
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void OnEventProcessed(long eventId, long? seq)
         {
-            if (eventId <= this.lastDefinitelyProcessedEventId)
+            lock (this)
             {
-                throw new InvalidOperationException("OnEventProcessed was called with an eventId that was already supposedly processed.");
-            }
+                if (eventId <= this.lastDefinitelyProcessedEventId)
+                {
+                    throw new InvalidOperationException("OnEventProcessed was called with an eventId that was already supposedly processed.");
+                }
 
-            this.eventIdToSeq.Add(eventId, seq);
-            this.UpdateLastDefinitelyProcessedEvent();
+                this.eventIdToSeq.Add(eventId, seq);
+                this.UpdateLastDefinitelyProcessedEvent();
+            }
         }
 
         private void UpdateLastDefinitelyProcessedEvent()
