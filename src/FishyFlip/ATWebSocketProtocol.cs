@@ -13,6 +13,7 @@ namespace FishyFlip;
 public sealed class ATWebSocketProtocol : IDisposable
 {
     private readonly TaskFactory taskFactory;
+    private readonly OutOfOrderCompletionTracker outOfOrderCompletionTracker = new();
     private bool subscribedLabels;
     private WebSocketWrapper webSocketWrapper;
     private IReadOnlyList<ICustomATObjectCBORConverter> customConverters;
@@ -72,6 +73,11 @@ public sealed class ATWebSocketProtocol : IDisposable
     /// Gets a value indicating whether ATProtocol is connected.
     /// </summary>
     public bool IsConnected => this.webSocketWrapper.IsConnected;
+
+    /// <summary>
+    /// Gets the last definitely processed firehose cursor.
+    /// </summary>
+    public long? LastDefinitelyProcessedCursor => this.outOfOrderCompletionTracker.LastDefinitelyProcessedSeq;
 
     /// <summary>
     /// Connect to the BlueSky instance via a WebSocket connection.
@@ -205,48 +211,56 @@ public sealed class ATWebSocketProtocol : IDisposable
         }
     }
 
-    private void HandleMessage(ReadOnlySpan<byte> span)
+    private void HandleMessage(ReadOnlySpan<byte> span, long eventId)
     {
-        byte[] byteArray = span.ToArray();
-        if (byteArray.Length == 0)
-        {
-            this.logger?.LogDebug("WSS: ATError reading message. Empty byte array.");
-            return;
-        }
-
-        CBORObject[]? objects = null;
+        long? seq = null;
         try
         {
-            objects = CBORObject.DecodeSequenceFromBytes(byteArray, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
-        }
-        catch (Exception e)
-        {
-            this.logger?.LogError(e, "WSS: ATError reading message.");
-        }
+            byte[] byteArray = span.ToArray();
+            if (byteArray.Length == 0)
+            {
+                this.logger?.LogDebug("WSS: ATError reading message. Empty byte array.");
+                return;
+            }
 
-        if (objects is null)
-        {
-            return;
-        }
+            CBORObject[]? objects = null;
+            try
+            {
+                objects = CBORObject.DecodeSequenceFromBytes(byteArray, new CBOREncodeOptions("useIndefLengthStrings=true;float64=true;allowduplicatekeys=true;allowEmpty=true"));
+            }
+            catch (Exception e)
+            {
+                this.logger?.LogError(e, "WSS: ATError reading message.");
+            }
 
-        if (objects.Length != 2)
-        {
-            return;
-        }
+            if (objects is null)
+            {
+                return;
+            }
 
-        var frameHeader = new FrameHeader(objects[0]);
+            if (objects.Length != 2)
+            {
+                return;
+            }
 
-        if (this.subscribedLabels)
-        {
-            this.HandleLabelMessage(frameHeader, objects[1]);
+            var frameHeader = new FrameHeader(objects[0]);
+
+            if (this.subscribedLabels)
+            {
+                seq = this.HandleLabelMessage(frameHeader, objects[1]);
+            }
+            else
+            {
+                seq = this.HandleRepoMessage(frameHeader, objects[1]);
+            }
         }
-        else
+        finally
         {
-            this.HandleRepoMessage(frameHeader, objects[1]);
+            this.outOfOrderCompletionTracker.OnEventProcessed(eventId, seq);
         }
     }
 
-    private void HandleLabelMessage(FrameHeader header, CBORObject obj)
+    private long? HandleLabelMessage(FrameHeader header, CBORObject obj)
     {
         var message = new SubscribeLabelMessage();
         message.Header = header;
@@ -281,9 +295,10 @@ public sealed class ATWebSocketProtocol : IDisposable
         }
 
         this.OnSubscribedLabelMessage?.Invoke(this, new SubscribedLabelEventArgs(message));
+        return message.Labels?.Seq;
     }
 
-    private void HandleRepoMessage(FrameHeader header, CBORObject obj)
+    private long? HandleRepoMessage(FrameHeader header, CBORObject obj)
     {
         var message = new SubscribeRepoMessage();
         message.Header = header;
@@ -377,15 +392,22 @@ public sealed class ATWebSocketProtocol : IDisposable
         }
 
         this.OnSubscribedRepoMessage?.Invoke(this, new SubscribedRepoEventArgs(message));
+
+        return message.Commit?.Seq;
     }
 
     private Task OnInternalMessageReceived(ReadOnlySequence<byte> message)
     {
         this.OnMessageReceived?.Invoke(this, message);
+        var eventId = this.outOfOrderCompletionTracker.OnEventGenerated();
         if (this.OnRecordReceived is not null || this.OnSubscribedRepoMessage is not null || this.OnSubscribedLabelMessage is not null)
         {
             var newMessage = message.ToArray();
-            this.taskFactory.StartNew(() => this.HandleMessage(newMessage)).FireAndForgetSafeAsync(this.logger);
+            this.taskFactory.StartNew(() => this.HandleMessage(newMessage, eventId)).FireAndForgetSafeAsync(this.logger);
+        }
+        else
+        {
+            this.outOfOrderCompletionTracker.OnEventProcessed(eventId, null);
         }
 
         return Task.CompletedTask;

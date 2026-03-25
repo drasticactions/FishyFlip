@@ -21,6 +21,7 @@ public sealed class ATJetStream : IDisposable
 
     private readonly JsonSerializerOptions jsonSerializerOptions;
     private readonly SourceGenerationContext sourceGenerationContext;
+    private readonly OutOfOrderCompletionTracker outOfOrderCompletionTracker = new();
     private ClientWebSocket client;
     private bool disposedValue;
     private ILogger? logger;
@@ -59,6 +60,11 @@ public sealed class ATJetStream : IDisposable
     /// On AT WebSocket Record Received.
     /// </summary>
     public event EventHandler<JetStreamATWebSocketRecordEventArgs>? OnRecordReceived;
+
+    /// <summary>
+    /// Gets the last definitely processed firehose cursor.
+    /// </summary>
+    public long? LastDefinitelyProcessedCursor => this.outOfOrderCompletionTracker.LastDefinitelyProcessedSeq;
 
     /// <inheritdoc/>
     void IDisposable.Dispose()
@@ -286,7 +292,8 @@ public sealed class ATJetStream : IDisposable
                 var message = Encoding.UTF8.GetString(messageBytes);
 #endif
                 this.OnRawMessageReceived?.Invoke(this, new JetStreamRawMessageEventArgs(message));
-                this.options.TaskFactory.StartNew(() => this.HandleMessage(message))
+                var eventId = this.outOfOrderCompletionTracker.OnEventGenerated();
+                this.options.TaskFactory.StartNew(() => this.HandleMessage(message, eventId))
                     .FireAndForgetSafeAsync(this.logger);
             }
             catch (OperationCanceledException)
@@ -302,35 +309,44 @@ public sealed class ATJetStream : IDisposable
         this.OnConnectionUpdated?.Invoke(this, new SubscriptionConnectionStatusEventArgs(webSocket.State));
     }
 
-    private void HandleMessage(string json)
+    private void HandleMessage(string json, long eventId)
     {
-        if (string.IsNullOrEmpty(json))
-        {
-            this.logger?.LogDebug("WSS: Empty message received.");
-            return;
-        }
-
+        long? seq = null;
         try
         {
-            var atWebSocketRecord = JsonSerializer.Deserialize<ATWebSocketRecord>(json, this.sourceGenerationContext.ATWebSocketRecord);
-            if (atWebSocketRecord is null)
+            if (string.IsNullOrEmpty(json))
             {
-                this.logger?.LogError("WSS: Failed to deserialize ATWebSocketRecord.");
-                this.logger?.LogError(json);
+                this.logger?.LogDebug("WSS: Empty message received.");
                 return;
             }
 
-            this.OnRecordReceived?.Invoke(this, new JetStreamATWebSocketRecordEventArgs(atWebSocketRecord, json));
+            try
+            {
+                var atWebSocketRecord = JsonSerializer.Deserialize<ATWebSocketRecord>(json, this.sourceGenerationContext.ATWebSocketRecord);
+                if (atWebSocketRecord is null)
+                {
+                    this.logger?.LogError("WSS: Failed to deserialize ATWebSocketRecord.");
+                    this.logger?.LogError(json);
+                    return;
+                }
+
+                seq = atWebSocketRecord.TimeUs;
+                this.OnRecordReceived?.Invoke(this, new JetStreamATWebSocketRecordEventArgs(atWebSocketRecord, json));
+            }
+            catch (JsonException ex)
+            {
+                this.logger?.LogError(ex, "WSS: Failed to deserialize ATWebSocketRecord.");
+                this.logger?.LogError(json);
+            }
+            catch (Exception ex)
+            {
+                this.logger?.LogError(ex, "WSS: An unknown error occurred.");
+                this.logger?.LogError(json);
+            }
         }
-        catch (JsonException ex)
+        finally
         {
-            this.logger?.LogError(ex, "WSS: Failed to deserialize ATWebSocketRecord.");
-            this.logger?.LogError(json);
-        }
-        catch (Exception ex)
-        {
-            this.logger?.LogError(ex, "WSS: An unknown error occurred.");
-            this.logger?.LogError(json);
+            this.outOfOrderCompletionTracker.OnEventProcessed(eventId, seq);
         }
     }
 
