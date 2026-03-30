@@ -4,6 +4,10 @@
 
 ![FishyFlip Logo](https://user-images.githubusercontent.com/898335/253740405-4b0ae177-cc49-4c26-b6b0-ab8e835a0e62.png)
 
+# IMPORTANT
+
+FishyFlip is deprecated. I am migrating work to a new library, [CarpaNet](https://drasticactions.github.io/CarpaNet). Please go there for more information.
+
 ### **Version 4.0 Breaking Changes**
 
 Version 4.0 contains several breaking changes from previous versions in order to support new, ATProtocol Lexicon generated, types. Please review [this GitHub issue](https://github.com/drasticactions/FishyFlip/issues/305) for more information about the changes.
