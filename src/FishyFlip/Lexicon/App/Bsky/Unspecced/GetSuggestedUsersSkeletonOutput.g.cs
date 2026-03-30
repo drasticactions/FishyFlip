@@ -14,11 +14,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetSuggestedUsersSkeletonOutput"/> class.
         /// </summary>
         /// <param name="dids"></param>
-        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
-        public GetSuggestedUsersSkeletonOutput(List<FishyFlip.Models.ATDid> dids = default, string? recId = default)
+        /// <param name="recIdStr">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestedUsersSkeletonOutput(List<FishyFlip.Models.ATDid> dids = default, string? recIdStr = default)
         {
             this.Dids = dids;
-            this.RecId = recId;
+            this.RecIdStr = recIdStr;
             this.Type = "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput";
         }
 
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetSuggestedUsersSkeletonOutput(CBORObject obj)
         {
             if (obj["dids"] is not null) this.Dids = obj["dids"].Values.Select(n =>n.ToATDid()!).ToList();
-            if (obj["recId"] is not null) this.RecId = obj["recId"].AsString();
+            if (obj["recIdStr"] is not null) this.RecIdStr = obj["recIdStr"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -50,12 +50,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public List<FishyFlip.Models.ATDid> Dids { get; set; }
 
         /// <summary>
-        /// Gets or sets the recId.
+        /// Gets or sets the recIdStr.
         /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
         /// </summary>
-        [JsonPropertyName("recId")]
+        [JsonPropertyName("recIdStr")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? RecId { get; set; }
+        public string? RecIdStr { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput";
 

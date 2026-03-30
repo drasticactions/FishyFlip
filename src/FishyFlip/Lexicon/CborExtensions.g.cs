@@ -72,6 +72,8 @@ namespace FishyFlip.Lexicon
                     return new Tools.Ozone.Moderation.AgeAssuranceEvent(obj);
                 case "tools.ozone.moderation.defs#ageAssuranceOverrideEvent":
                     return new Tools.Ozone.Moderation.AgeAssuranceOverrideEvent(obj);
+                case "tools.ozone.moderation.defs#ageAssurancePurgeEvent":
+                    return new Tools.Ozone.Moderation.AgeAssurancePurgeEvent(obj);
                 case "app.bsky.unspecced.defs#ageAssuranceState":
                     return new App.Bsky.Unspecced.AgeAssuranceState(obj);
                 case "com.atproto.repo.applyWrites#ApplyWritesInput":
@@ -410,6 +412,8 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput(obj);
                 case "app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton#GetOnboardingSuggestedStarterPacksSkeletonOutput":
                     return new App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput(obj);
+                case "app.bsky.unspecced.getOnboardingSuggestedUsersSkeleton#GetOnboardingSuggestedUsersSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetOnboardingSuggestedUsersSkeletonOutput(obj);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return new App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput(obj);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -470,10 +474,24 @@ namespace FishyFlip.Lexicon
                     return new App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput(obj);
                 case "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput":
                     return new App.Bsky.Graph.GetSuggestedFollowsByActorOutput(obj);
+                case "app.bsky.unspecced.getSuggestedOnboardingUsers#GetSuggestedOnboardingUsersOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedOnboardingUsersOutput(obj);
                 case "app.bsky.unspecced.getSuggestedStarterPacks#GetSuggestedStarterPacksOutput":
                     return new App.Bsky.Unspecced.GetSuggestedStarterPacksOutput(obj);
                 case "app.bsky.unspecced.getSuggestedStarterPacksSkeleton#GetSuggestedStarterPacksSkeletonOutput":
                     return new App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsersForDiscover#GetSuggestedUsersForDiscoverOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersForDiscoverOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsersForDiscoverSkeleton#GetSuggestedUsersForDiscoverSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersForDiscoverSkeletonOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsersForExplore#GetSuggestedUsersForExploreOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersForExploreOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsersForExploreSkeleton#GetSuggestedUsersForExploreSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersForExploreSkeletonOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsersForSeeMore#GetSuggestedUsersForSeeMoreOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreOutput(obj);
+                case "app.bsky.unspecced.getSuggestedUsersForSeeMoreSkeleton#GetSuggestedUsersForSeeMoreSkeletonOutput":
+                    return new App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreSkeletonOutput(obj);
                 case "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput":
                     return new App.Bsky.Unspecced.GetSuggestedUsersOutput(obj);
                 case "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput":

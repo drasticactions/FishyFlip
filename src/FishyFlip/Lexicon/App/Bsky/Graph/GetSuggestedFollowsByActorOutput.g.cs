@@ -14,13 +14,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         /// Initializes a new instance of the <see cref="GetSuggestedFollowsByActorOutput"/> class.
         /// </summary>
         /// <param name="suggestions"></param>
-        /// <param name="isFallback">If true, response has fallen-back to generic results, and is not scoped using relativeToDid</param>
-        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
-        public GetSuggestedFollowsByActorOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> suggestions = default, bool? isFallback = default, long? recId = default)
+        /// <param name="recIdStr">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestedFollowsByActorOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> suggestions = default, string? recIdStr = default)
         {
             this.Suggestions = suggestions;
-            this.IsFallback = isFallback;
-            this.RecId = recId;
+            this.RecIdStr = recIdStr;
             this.Type = "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";
         }
 
@@ -40,8 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public GetSuggestedFollowsByActorOutput(CBORObject obj)
         {
             if (obj["suggestions"] is not null) this.Suggestions = obj["suggestions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
-            if (obj["isFallback"] is not null) this.IsFallback = obj["isFallback"].AsBoolean();
-            if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
+            if (obj["recIdStr"] is not null) this.RecIdStr = obj["recIdStr"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -53,20 +50,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Graph
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Suggestions { get; set; }
 
         /// <summary>
-        /// Gets or sets the isFallback.
-        /// <br/> If true, response has fallen-back to generic results, and is not scoped using relativeToDid
-        /// </summary>
-        [JsonPropertyName("isFallback")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public bool? IsFallback { get; set; } = false;
-
-        /// <summary>
-        /// Gets or sets the recId.
+        /// Gets or sets the recIdStr.
         /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
         /// </summary>
-        [JsonPropertyName("recId")]
+        [JsonPropertyName("recIdStr")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public long? RecId { get; set; }
+        public string? RecIdStr { get; set; }
 
         public const string RecordType = "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput";
 

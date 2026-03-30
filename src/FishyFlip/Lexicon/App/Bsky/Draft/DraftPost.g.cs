@@ -16,7 +16,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Draft
         /// <summary>
         /// Initializes a new instance of the <see cref="DraftPost"/> class.
         /// </summary>
-        /// <param name="text">The primary post content.</param>
+        /// <param name="text">The primary post content. It has a higher limit than post contents to allow storing a larger text that can later be refined into smaller posts.</param>
         /// <param name="labels">Self-label values for this post. Effectively content warnings.
         /// <br/> Union Types: <br/>
         /// <see cref="FishyFlip.Lexicon.Com.Atproto.Label.SelfLabels"/> (com.atproto.label.defs#selfLabels) <br/>
@@ -62,7 +62,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Draft
 
         /// <summary>
         /// Gets or sets the text.
-        /// <br/> The primary post content.
+        /// <br/> The primary post content. It has a higher limit than post contents to allow storing a larger text that can later be refined into smaller posts.
         /// </summary>
         [JsonPropertyName("text")]
         [JsonRequired]

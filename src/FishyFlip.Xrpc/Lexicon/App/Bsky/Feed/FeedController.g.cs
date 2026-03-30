@@ -226,6 +226,7 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Feed
         /// Send information about interactions with feed items back to the feed generator that served them.
         /// </summary>
         /// <param name="interactions"></param>
+        /// <param name="feed"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput"/></returns>
         [HttpPost("/xrpc/app.bsky.feed.sendInteractions")]

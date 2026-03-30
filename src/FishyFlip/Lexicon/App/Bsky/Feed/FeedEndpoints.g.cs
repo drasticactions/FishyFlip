@@ -665,14 +665,16 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         /// <param name="atp"></param>
         /// <param name="interactions"></param>
+        /// <param name="feed"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?"/></returns>
-        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default)
+        public static Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (this FishyFlip.ATProtocol atp, List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, FishyFlip.Models.ATUri? feed = default, CancellationToken cancellationToken = default)
         {
             var endpointUrl = SendInteractions.ToString();
             var headers = new Dictionary<string, string>();
             var inputItem = new SendInteractionsInput();
             inputItem.Interactions = interactions;
+            inputItem.Feed = feed;
             return atp.Post<SendInteractionsInput, FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>(endpointUrl, atp.Options.SourceGenerationContext.AppBskyFeedSendInteractionsInput!, atp.Options.SourceGenerationContext.AppBskyFeedSendInteractionsOutput!, inputItem, cancellationToken, headers);
         }
 
