@@ -108,6 +108,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceEvent);
                 case "tools.ozone.moderation.defs#ageAssuranceOverrideEvent":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssuranceOverrideEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssuranceOverrideEvent);
+                case "tools.ozone.moderation.defs#ageAssurancePurgeEvent":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssurancePurgeEvent>(data, (JsonTypeInfo<FishyFlip.Lexicon.Tools.Ozone.Moderation.AgeAssurancePurgeEvent>)SourceGenerationContext.Default.ToolsOzoneModerationAgeAssurancePurgeEvent);
                 case "app.bsky.unspecced.defs#ageAssuranceState":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.AgeAssuranceState>)SourceGenerationContext.Default.AppBskyUnspeccedAgeAssuranceState);
                 case "com.atproto.repo.applyWrites#ApplyWritesInput":
@@ -446,6 +448,8 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksOutput);
                 case "app.bsky.unspecced.getOnboardingSuggestedStarterPacksSkeleton#GetOnboardingSuggestedStarterPacksSkeletonOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetOnboardingSuggestedStarterPacksSkeletonOutput);
+                case "app.bsky.unspecced.getOnboardingSuggestedUsersSkeleton#GetOnboardingSuggestedUsersSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedUsersSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedUsersSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetOnboardingSuggestedUsersSkeletonOutput);
                 case "app.bsky.unspecced.getPopularFeedGenerators#GetPopularFeedGeneratorsOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetPopularFeedGeneratorsOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetPopularFeedGeneratorsOutput);
                 case "app.bsky.feed.getPosts#GetPostsOutput":
@@ -506,10 +510,24 @@ namespace FishyFlip.Lexicon
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedFeedsSkeletonOutput);
                 case "app.bsky.graph.getSuggestedFollowsByActor#GetSuggestedFollowsByActorOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Graph.GetSuggestedFollowsByActorOutput>)SourceGenerationContext.Default.AppBskyGraphGetSuggestedFollowsByActorOutput);
+                case "app.bsky.unspecced.getSuggestedOnboardingUsers#GetSuggestedOnboardingUsersOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedOnboardingUsersOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedOnboardingUsersOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedOnboardingUsersOutput);
                 case "app.bsky.unspecced.getSuggestedStarterPacks#GetSuggestedStarterPacksOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksOutput);
                 case "app.bsky.unspecced.getSuggestedStarterPacksSkeleton#GetSuggestedStarterPacksSkeletonOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedStarterPacksSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedStarterPacksSkeletonOutput);
+                case "app.bsky.unspecced.getSuggestedUsersForDiscover#GetSuggestedUsersForDiscoverOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersForDiscoverOutput);
+                case "app.bsky.unspecced.getSuggestedUsersForDiscoverSkeleton#GetSuggestedUsersForDiscoverSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersForDiscoverSkeletonOutput);
+                case "app.bsky.unspecced.getSuggestedUsersForExplore#GetSuggestedUsersForExploreOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersForExploreOutput);
+                case "app.bsky.unspecced.getSuggestedUsersForExploreSkeleton#GetSuggestedUsersForExploreSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersForExploreSkeletonOutput);
+                case "app.bsky.unspecced.getSuggestedUsersForSeeMore#GetSuggestedUsersForSeeMoreOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersForSeeMoreOutput);
+                case "app.bsky.unspecced.getSuggestedUsersForSeeMoreSkeleton#GetSuggestedUsersForSeeMoreSkeletonOutput":
+                    return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreSkeletonOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreSkeletonOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersForSeeMoreSkeletonOutput);
                 case "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput":
                     return JsonSerializer.Deserialize<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>(data, (JsonTypeInfo<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>)SourceGenerationContext.Default.AppBskyUnspeccedGetSuggestedUsersOutput);
                 case "app.bsky.unspecced.getSuggestedUsersSkeleton#GetSuggestedUsersSkeletonOutput":

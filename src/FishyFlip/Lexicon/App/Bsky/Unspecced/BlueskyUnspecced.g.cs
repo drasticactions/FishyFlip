@@ -75,6 +75,19 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// Get a skeleton of suggested users for onboarding. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedOnboardingUsers
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedUsersSkeletonOutput?>> GetOnboardingSuggestedUsersSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetOnboardingSuggestedUsersSkeletonAsync(viewer, category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
         /// An unspecced view of globally popular feed generators.
         /// </summary>
         /// <param name="limit"></param>
@@ -149,6 +162,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
 
 
         /// <summary>
+        /// Get a list of suggested users for onboarding
+        /// </summary>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedOnboardingUsersOutput?>> GetSuggestedOnboardingUsersAsync (string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedOnboardingUsersAsync(category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
         /// Get a list of suggested starterpacks
         /// </summary>
         /// <param name="limit"></param>
@@ -180,6 +205,79 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput?>> GetSuggestedUsersAsync (string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
         {
             return atp.GetSuggestedUsersAsync(category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested users for the Discover page
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverOutput?>> GetSuggestedUsersForDiscoverAsync (int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersForDiscoverAsync(limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested users for the Discover page. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsersForDiscover
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverSkeletonOutput?>> GetSuggestedUsersForDiscoverSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersForDiscoverSkeletonAsync(viewer, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested users for the Explore page
+        /// </summary>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreOutput?>> GetSuggestedUsersForExploreAsync (string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersForExploreAsync(category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested users for the Explore page. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsersForExplore
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreSkeletonOutput?>> GetSuggestedUsersForExploreSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersForExploreSkeletonAsync(viewer, category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a list of suggested users for the See More page
+        /// </summary>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreOutput?>> GetSuggestedUsersForSeeMoreAsync (string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersForSeeMoreAsync(category, limit, cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Get a skeleton of suggested users for the See More page. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsersForSeeMore
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreSkeletonOutput?>> GetSuggestedUsersForSeeMoreSkeletonAsync (FishyFlip.Models.ATDid? viewer = default, string? category = default, int? limit = 25, CancellationToken cancellationToken = default)
+        {
+            return atp.GetSuggestedUsersForSeeMoreSkeletonAsync(viewer, category, limit, cancellationToken);
         }
 
 

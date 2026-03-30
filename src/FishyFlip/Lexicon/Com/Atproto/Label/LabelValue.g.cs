@@ -20,11 +20,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public const string Hide = "!hide";
 
         /// <summary>
-        /// !no-promote
-        /// </summary>
-        public const string Nopromote = "!no-promote";
-
-        /// <summary>
         /// !warn
         /// </summary>
         public const string Warn = "!warn";
@@ -33,16 +28,6 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         /// !no-unauthenticated
         /// </summary>
         public const string Nounauthenticated = "!no-unauthenticated";
-
-        /// <summary>
-        /// dmca-violation
-        /// </summary>
-        public const string Dmcaviolation = "dmca-violation";
-
-        /// <summary>
-        /// doxxing
-        /// </summary>
-        public const string Doxxing = "doxxing";
 
         /// <summary>
         /// porn
@@ -60,14 +45,14 @@ namespace FishyFlip.Lexicon.Com.Atproto.Label
         public const string Nudity = "nudity";
 
         /// <summary>
-        /// nsfl
+        /// graphic-media
         /// </summary>
-        public const string Nsfl = "nsfl";
+        public const string Graphicmedia = "graphic-media";
 
         /// <summary>
-        /// gore
+        /// bot
         /// </summary>
-        public const string Gore = "gore";
+        public const string Bot = "bot";
 
     }
 }

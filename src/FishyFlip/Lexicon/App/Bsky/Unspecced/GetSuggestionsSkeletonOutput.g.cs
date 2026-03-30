@@ -16,13 +16,13 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// <param name="cursor"></param>
         /// <param name="actors"></param>
         /// <param name="relativeToDid">DID of the account these suggestions are relative to. If this is returned undefined, suggestions are based on the viewer.</param>
-        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
-        public GetSuggestionsSkeletonOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor> actors = default, FishyFlip.Models.ATDid? relativeToDid = default, long? recId = default)
+        /// <param name="recIdStr">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestionsSkeletonOutput(string? cursor = default, List<FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor> actors = default, FishyFlip.Models.ATDid? relativeToDid = default, string? recIdStr = default)
         {
             this.Cursor = cursor;
             this.Actors = actors;
             this.RelativeToDid = relativeToDid;
-            this.RecId = recId;
+            this.RecIdStr = recIdStr;
             this.Type = "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";
         }
 
@@ -44,7 +44,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
             if (obj["cursor"] is not null) this.Cursor = obj["cursor"].AsString();
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Unspecced.SkeletonSearchActor(n)).ToList();
             if (obj["relativeToDid"] is not null) this.RelativeToDid = obj["relativeToDid"].ToATDid();
-            if (obj["recId"] is not null) this.RecId = obj["recId"].AsInt64Value();
+            if (obj["recIdStr"] is not null) this.RecIdStr = obj["recIdStr"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -72,12 +72,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public FishyFlip.Models.ATDid? RelativeToDid { get; set; }
 
         /// <summary>
-        /// Gets or sets the recId.
+        /// Gets or sets the recIdStr.
         /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
         /// </summary>
-        [JsonPropertyName("recId")]
+        [JsonPropertyName("recIdStr")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public long? RecId { get; set; }
+        public string? RecIdStr { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestionsSkeleton#GetSuggestionsSkeletonOutput";
 

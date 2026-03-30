@@ -51,6 +51,17 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedStarterPacksSkeletonOutput>, ATErrorResult>> GetOnboardingSuggestedStarterPacksSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Get a skeleton of suggested users for onboarding. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedOnboardingUsers
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedUsersSkeletonOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getOnboardingSuggestedUsersSkeleton")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetOnboardingSuggestedUsersSkeletonOutput>, ATErrorResult>> GetOnboardingSuggestedUsersSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// An unspecced view of globally popular feed generators.
         /// </summary>
         /// <param name="limit"></param>
@@ -103,6 +114,16 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedFeedsSkeletonOutput>, ATErrorResult>> GetSuggestedFeedsSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 10, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Get a list of suggested users for onboarding
+        /// </summary>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedOnboardingUsersOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedOnboardingUsers")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedOnboardingUsersOutput>, ATErrorResult>> GetSuggestedOnboardingUsersAsync ([FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get a list of suggested starterpacks
         /// </summary>
         /// <param name="limit"></param>
@@ -130,6 +151,67 @@ namespace FishyFlip.Xrpc.Lexicon.App.Bsky.Unspecced
         /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput"/></returns>
         [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsers")]
         public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersOutput>, ATErrorResult>> GetSuggestedUsersAsync ([FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a list of suggested users for the Discover page
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsersForDiscover")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverOutput>, ATErrorResult>> GetSuggestedUsersForDiscoverAsync ([FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a skeleton of suggested users for the Discover page. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsersForDiscover
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverSkeletonOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsersForDiscoverSkeleton")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForDiscoverSkeletonOutput>, ATErrorResult>> GetSuggestedUsersForDiscoverSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a list of suggested users for the Explore page
+        /// </summary>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsersForExplore")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreOutput>, ATErrorResult>> GetSuggestedUsersForExploreAsync ([FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a skeleton of suggested users for the Explore page. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsersForExplore
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreSkeletonOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsersForExploreSkeleton")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForExploreSkeletonOutput>, ATErrorResult>> GetSuggestedUsersForExploreSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a list of suggested users for the See More page
+        /// </summary>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsersForSeeMore")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreOutput>, ATErrorResult>> GetSuggestedUsersForSeeMoreAsync ([FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a skeleton of suggested users for the See More page. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsersForSeeMore
+        /// </summary>
+        /// <param name="viewer">DID of the account making the request (not included for public/unauthenticated queries).</param>
+        /// <param name="category">Category of users to get suggestions for.</param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Result of <see cref="FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreSkeletonOutput"/></returns>
+        [HttpGet("/xrpc/app.bsky.unspecced.getSuggestedUsersForSeeMoreSkeleton")]
+        public abstract Task<Results<ATResult<FishyFlip.Lexicon.App.Bsky.Unspecced.GetSuggestedUsersForSeeMoreSkeletonOutput>, ATErrorResult>> GetSuggestedUsersForSeeMoreSkeletonAsync ([FromQuery] FishyFlip.Models.ATDid? viewer = default, [FromQuery] string? category = default, [FromQuery] int? limit = 25, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a skeleton of suggested users. Intended to be called and hydrated by app.bsky.unspecced.getSuggestedUsers

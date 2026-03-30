@@ -13,9 +13,10 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageMe"/> class.
         /// </summary>
-        /// <param name="messageMeUrl"></param>
-        /// <param name="showButtonTo">
+        /// <param name="messageMeUrl">A URL to present to an account that does not have its own com.germnetwork.declaration record, must have an empty fragment component, where the app should fill in the fragment component with the DIDs of the two accounts who wish to message each other</param>
+        /// <param name="showButtonTo">The policy of who can message the account, this value is included in the keyPackage, but is duplicated here to allow applications to decide if they should show a 'Message on Germ' button to the viewer.
         /// <br/> Known Values: <br/>
+        /// none <br/>
         /// usersIFollow <br/>
         /// everyone <br/>
         /// </param>
@@ -48,6 +49,7 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
 
         /// <summary>
         /// Gets or sets the messageMeUrl.
+        /// <br/> A URL to present to an account that does not have its own com.germnetwork.declaration record, must have an empty fragment component, where the app should fill in the fragment component with the DIDs of the two accounts who wish to message each other
         /// </summary>
         [JsonPropertyName("messageMeUrl")]
         [JsonRequired]
@@ -55,7 +57,9 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
 
         /// <summary>
         /// Gets or sets the showButtonTo.
+        /// <br/> The policy of who can message the account, this value is included in the keyPackage, but is duplicated here to allow applications to decide if they should show a 'Message on Germ' button to the viewer.
         /// <br/> Known Values: <br/>
+        /// none <br/>
         /// usersIFollow <br/>
         /// everyone <br/>
         /// </summary>

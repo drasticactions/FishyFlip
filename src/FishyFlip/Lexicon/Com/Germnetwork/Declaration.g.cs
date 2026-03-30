@@ -8,7 +8,7 @@
 namespace FishyFlip.Lexicon.Com.Germnetwork
 {
     /// <summary>
-    /// A delegate messaging id
+    /// A declaration of a Germ Network account
     /// </summary>
     public partial class Declaration : ATObject, ICBOREncodable<Declaration>, IJsonEncodable<Declaration>, IParsable<Declaration>
     {
@@ -16,13 +16,13 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
         /// <summary>
         /// Initializes a new instance of the <see cref="Declaration"/> class.
         /// </summary>
-        /// <param name="version"></param>
-        /// <param name="currentKey"></param>
-        /// <param name="messageMe">
+        /// <param name="version">Semver version number, without pre-release or build information, for the format of opaque content</param>
+        /// <param name="currentKey">Opaque value, an ed25519 public key prefixed with a byte enum</param>
+        /// <param name="messageMe">Controls who can message this account
         /// com.germnetwork.defs#messageMe <br/>
         /// </param>
-        /// <param name="keyPackage"></param>
-        /// <param name="continuityProofs"></param>
+        /// <param name="keyPackage">Opaque value, contains MLS KeyPackage(s), and other signature data, and is signed by the currentKey</param>
+        /// <param name="continuityProofs">Array of opaque values to allow for key rolling</param>
         public Declaration(string? version, byte[]? currentKey, FishyFlip.Lexicon.Com.Germnetwork.MessageMe? messageMe = default, byte[]? keyPackage = default, List<byte[]>? continuityProofs = default)
         {
             this.Version = version;
@@ -58,6 +58,7 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
 
         /// <summary>
         /// Gets or sets the version.
+        /// <br/> Semver version number, without pre-release or build information, for the format of opaque content
         /// </summary>
         [JsonPropertyName("version")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -65,6 +66,7 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
 
         /// <summary>
         /// Gets or sets the currentKey.
+        /// <br/> Opaque value, an ed25519 public key prefixed with a byte enum
         /// </summary>
         [JsonPropertyName("currentKey")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -72,6 +74,7 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
 
         /// <summary>
         /// Gets or sets the messageMe.
+        /// <br/> Controls who can message this account
         /// com.germnetwork.defs#messageMe <br/>
         /// </summary>
         [JsonPropertyName("messageMe")]
@@ -80,6 +83,7 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
 
         /// <summary>
         /// Gets or sets the keyPackage.
+        /// <br/> Opaque value, contains MLS KeyPackage(s), and other signature data, and is signed by the currentKey
         /// </summary>
         [JsonPropertyName("keyPackage")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -87,6 +91,7 @@ namespace FishyFlip.Lexicon.Com.Germnetwork
 
         /// <summary>
         /// Gets or sets the continuityProofs.
+        /// <br/> Array of opaque values to allow for key rolling
         /// </summary>
         [JsonPropertyName("continuityProofs")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

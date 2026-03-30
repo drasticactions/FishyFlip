@@ -14,11 +14,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         /// Initializes a new instance of the <see cref="GetSuggestedUsersOutput"/> class.
         /// </summary>
         /// <param name="actors"></param>
-        /// <param name="recId">Snowflake for this recommendation, use when submitting recommendation events.</param>
-        public GetSuggestedUsersOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> actors = default, string? recId = default)
+        /// <param name="recIdStr">Snowflake for this recommendation, use when submitting recommendation events.</param>
+        public GetSuggestedUsersOutput(List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> actors = default, string? recIdStr = default)
         {
             this.Actors = actors;
-            this.RecId = recId;
+            this.RecIdStr = recIdStr;
             this.Type = "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput";
         }
 
@@ -38,7 +38,7 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public GetSuggestedUsersOutput(CBORObject obj)
         {
             if (obj["actors"] is not null) this.Actors = obj["actors"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Actor.ProfileView(n)).ToList();
-            if (obj["recId"] is not null) this.RecId = obj["recId"].AsString();
+            if (obj["recIdStr"] is not null) this.RecIdStr = obj["recIdStr"].AsString();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
 
@@ -50,12 +50,12 @@ namespace FishyFlip.Lexicon.App.Bsky.Unspecced
         public List<FishyFlip.Lexicon.App.Bsky.Actor.ProfileView> Actors { get; set; }
 
         /// <summary>
-        /// Gets or sets the recId.
+        /// Gets or sets the recIdStr.
         /// <br/> Snowflake for this recommendation, use when submitting recommendation events.
         /// </summary>
-        [JsonPropertyName("recId")]
+        [JsonPropertyName("recIdStr")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? RecId { get; set; }
+        public string? RecIdStr { get; set; }
 
         public const string RecordType = "app.bsky.unspecced.getSuggestedUsers#GetSuggestedUsersOutput";
 

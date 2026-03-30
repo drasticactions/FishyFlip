@@ -13,9 +13,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// <summary>
         /// Initializes a new instance of the <see cref="SendInteractionsInput"/> class.
         /// </summary>
+        /// <param name="feed"></param>
         /// <param name="interactions"></param>
-        public SendInteractionsInput(List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions = default)
+        public SendInteractionsInput(FishyFlip.Models.ATUri? feed = default, List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions = default)
         {
+            this.Feed = feed;
             this.Interactions = interactions;
             this.Type = "app.bsky.feed.sendInteractions#SendInteractionsInput";
         }
@@ -35,9 +37,18 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// </summary>
         public SendInteractionsInput(CBORObject obj)
         {
+            if (obj["feed"] is not null) this.Feed = obj["feed"].ToATUri();
             if (obj["interactions"] is not null) this.Interactions = obj["interactions"].Values.Select(n =>new FishyFlip.Lexicon.App.Bsky.Feed.Interaction(n)).ToList();
             if (obj["$type"] is not null) this.Type = obj["$type"].AsString();
         }
+
+        /// <summary>
+        /// Gets or sets the feed.
+        /// </summary>
+        [JsonPropertyName("feed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonConverter(typeof(FishyFlip.Tools.Json.ATUriJsonConverter))]
+        public FishyFlip.Models.ATUri? Feed { get; set; }
 
         /// <summary>
         /// Gets or sets the interactions.

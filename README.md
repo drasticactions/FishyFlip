@@ -6,6 +6,11 @@
 
 FishyFlip is an implementation of [ATProtocol](https://atproto.com/) for .NET, forked from [bluesky-net](https://github.com/dariogriffo/bluesky-net).
 
+
+# IMPORTANT
+
+FishyFlip is deprecated. I am migrating work to a new library, [CarpaNet](https://drasticactions.github.io/CarpaNet). Please go there for more information.
+
 For documentation, check out https://fishyflip.dev
 
 ### Code Flow

@@ -447,10 +447,11 @@ namespace FishyFlip.Lexicon.App.Bsky.Feed
         /// Send information about interactions with feed items back to the feed generator that served them.
         /// </summary>
         /// <param name="interactions"></param>
+        /// <param name="feed"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, CancellationToken cancellationToken = default)
+        public Task<Result<FishyFlip.Lexicon.App.Bsky.Feed.SendInteractionsOutput?>> SendInteractionsAsync (List<FishyFlip.Lexicon.App.Bsky.Feed.Interaction> interactions, FishyFlip.Models.ATUri? feed = default, CancellationToken cancellationToken = default)
         {
-            return atp.SendInteractionsAsync(interactions, cancellationToken);
+            return atp.SendInteractionsAsync(interactions, feed, cancellationToken);
         }
 
     }
