@@ -6,8 +6,8 @@
   <ItemGroup>
     <PackageVersion Include="Xamarin.AndroidX.Browser" Version="1.8.0.8" />
     <PackageVersion Include="CaseConverter" Version="2.0.1" />
-    <PackageVersion Include="Duende.IdentityModel.OidcClient" Version="7.0.1" />
-    <PackageVersion Include="Duende.IdentityModel.OidcClient.Extensions" Version="7.0.1" />
+    <PackageVersion Include="Duende.IdentityModel.OidcClient" Version="7.1.0" />
+    <PackageVersion Include="Duende.IdentityModel.OidcClient.Extensions" Version="7.1.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
